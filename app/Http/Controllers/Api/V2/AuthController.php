@@ -68,7 +68,7 @@ class AuthController extends Controller
 //            $twilio = new Client($sid, $token);
 //            $sms_verification = $twilio->verify->v2->services("VA782c51c282e06385dcd3f16fbad69225")
 //                ->verifications
-//                ->create($user->phonenumber, "sms");
+//                ->create($user->phonenumber, "sms")
 //
 //        }
 
