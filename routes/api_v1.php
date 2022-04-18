@@ -17,20 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 
 Route::post('auth/login/', [AuthController::class, 'login']);
 Route::post('auth/register/', [AuthController::class, 'register']);
+Route::get('auth/verify/{token}', [AuthController::class, 'verify']);
+Route::post('auth/resendVerifyEmail', [AuthController::class, 'resend']);
 
-//Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
-//    return User::all();
-//});
+Route::get('password/find/{token}', [ResetPasswordController::class, 'find']);
+Route::post('password/sendtoken', [ResetPasswordController::class, 'store']);
+Route::post('password/reset',[ResetPasswordController::class, 'resetPassword']);
+
 
 Route::middleware('auth:sanctum')->group(function (){
+
+    Route::get('/logout', [AuthController::class, 'logout']);
+
     Route::get('/getUsers', [UserController::class, 'getUsers']);
     Route::get('/getUser/{id}', [UserController::class, 'getUser']);
     Route::post('/updateUser/{id}', [UserController::class, 'updateUser']);
+
 });

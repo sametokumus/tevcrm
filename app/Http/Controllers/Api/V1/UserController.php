@@ -11,8 +11,7 @@ class UserController extends Controller
         return User::all();
     }
     public function getUser($id){
-        $user = User::whereId($id)->first();
-        return $user->name;
+        return User::whereId($id)->first();
     }
     public function updateUser($id, Request $request){
         $request->validate([
