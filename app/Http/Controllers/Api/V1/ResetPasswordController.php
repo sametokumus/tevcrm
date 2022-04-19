@@ -6,80 +6,86 @@ use App\Models\ResetPassword;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotify;
 use App\Notifications\ResetPasswordSuccess;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Nette\Schema\ValidationException;
 
 class ResetPasswordController extends Controller
 {
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $validator = $request->validate([
-            'email' => 'required|string|email|exists:users'
-        ]);
-//        if ($validator->fails()) {
-//            $message['errors'] = $validator->errors();
-//            return response()->json(['message' => $message, 'code' => 400]);
-//        }
-        $user = User::query()->where('email', $request['email'])->first();
-        if (!$user) {
-            $message['error'] = 'Mail Adresi Bulunamadı';
-            return response()->json(['message' => $message, 'code' => 404]);
+        try {
+            $request->validate([
+                'email' => 'required|string|email|exists:users'
+            ]);
+
+            $user = User::query()->where('email', $request['email'])->first();
+            if (!$user) {
+                throw new \Exception('validation-003');
+            }
+            $resetpassword = ResetPassword::query()->updateOrCreate(
+                [
+                    'email' => $user->email,
+                ],
+                [
+                    'email' => $user->email,
+                    'token' => Str::random(45),
+                ]
+            );
+            if ($user && $resetpassword) {
+                $user->notify(new ResetPasswordNotify($resetpassword->token));
+            }
+            return response()->json(['message' => 'Eposta şifre yenileme linki gönderildi.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Exception $exception){
+            if ($exception->getMessage() == 'validation-003'){
+                return response('Eposta adresi bulunamadı.');
+            }
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
         }
-        $resetpassword = ResetPassword::query()->updateOrCreate(
-            [
-                'email' => $user->email,
-            ],
-            [
-                'email' => $user->email,
-                'token' => Str::random(45),
-            ]
-        );
-        if ($user && $resetpassword) {
-            $user->notify(new ResetPasswordNotify($resetpassword->token));
-        }
-        $message['success'] = 'Email Şifre Yenileme Linki Gönderildi';
-        return response()->json(['message' => $message, 'code' => 201]);
     }
 
     /**
-     * Find Token
-     *
-     * @param[string] token
-     * @return \Illuminate\Http\JsonResponse
-     *
+     * @param $token
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function find($token) {
-        $resetpassword = ResetPassword::query()->where('token', $token)->first();
-        if (!$token) {
-            $message['error'] = 'Token Geçersiz';
-            return response()->json(['message' => $message, 'code' => 404]);
+        try {
+            $resetpassword = ResetPassword::query()->where('token', $token)->first();
+            if (!$token) {
+                throw new \Exception('validation-004');
+            }
+            if (Carbon::parse($resetpassword->created_at)->addMinutes(720)->isPast()) {
+                $resetpassword->delete();
+                throw new \Exception('validation-004');
+            }
+            return response()->json(['message' => 'Başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Exception $exception){
+            if ($exception->getMessage() == 'validation-004'){
+                return response('Token geçersiz.');
+            }
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
         }
-        if (Carbon::parse($resetpassword->created_at)->addMinutes(720)->isPast()) {
-            $resetpassword->delete();
-            $message['error'] = 'Token Geçersiz';
-            return response()->json(['message' => $message, 'code' => 404]);
-        }
-        $message['success'] = 'Başarılı';
-        return response()->json(['resetpassword' => $resetpassword, 'code' => 200]);
     }
 
     /**
-     * ResetPassword Token Store
-     *
-     * @param[string] email
-     * @param[string] password
-     * @param[string] token
-     * @return \Illuminate\Http\JsonResponse
-     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function resetPassword(Request $request) {
 //        $validator = $request->validate([
@@ -91,27 +97,38 @@ class ResetPasswordController extends Controller
 //            $message['errors'] = $validator->errors();
 //            return response()->json(['message' => $message, 'code' => 400]);
 //        }
-        $resetpassword = ResetPassword::query()->updateOrCreate(
-            [
-                'email' => $request->email,
-                'token' => $request->token,
-            ]
-        )->first();
-        if (!$resetpassword) {
-            $message['error'] = 'Mail Adresi Bulunamadı';
-            return response()->json(['message' => $message, 'code' => 404]);
+        try {
+            $resetpassword = ResetPassword::query()->updateOrCreate(
+                [
+                    'email' => $request->email,
+                    'token' => $request->token,
+                ]
+            )->first();
+            if (!$resetpassword) {
+                throw new \Exception('validation-003');
+            }
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
+                throw new \Exception('validation-005');
+            }
+            User::query()->where('email', $request->email)->update([
+                'password' => Hash::make($request->password)
+            ]);
+            ResetPassword::query()->where('email', $request->email)->delete();
+            $user->notify(new ResetPasswordSuccess());
+            return response()->json(['message' => 'Kullanıcı şifresi başarıyla değiştirildi.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Exception $exception){
+            if ($exception->getMessage() == 'validation-003'){
+                return response('Eposta adresi bulunamadı.');
+            }
+            if ($exception->getMessage() == 'validation-005'){
+                return response('Kullanıcı bulunamadı.');
+            }
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
         }
-        $user = User::query()->where('email', $request->email)->first();
-        if (!$user) {
-            $message['error'] = 'Kullanıcı Bulunamadı';
-            return response()->json(['message' => $message, 'code' => 404]);
-        }
-        User::query()->where('email', $request->email)->update([
-            'password' => Hash::make($request->password)
-        ]);
-        ResetPassword::query()->where('email', $request->email)->delete();
-        $user->notify(new ResetPasswordSuccess());
-        $message['success'] = 'Kullanıcı Şifresi Başarıyla Değiştirildi.';
-        return response()->json(['message' => $message, 'code' => 201]);
     }
 }
