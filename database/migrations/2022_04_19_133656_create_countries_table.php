@@ -17,7 +17,8 @@ class CreateCountriesTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('name');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

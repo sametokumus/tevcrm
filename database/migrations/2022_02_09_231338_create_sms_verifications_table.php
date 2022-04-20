@@ -18,7 +18,8 @@ class CreateSmsVerificationsTable extends Migration
             $table->string('contact_number')->unique();
             $table->string('code')->unique();
             $table->boolean('status')->default(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

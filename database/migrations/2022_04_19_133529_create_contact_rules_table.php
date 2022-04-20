@@ -16,10 +16,11 @@ class CreateContactRulesTable extends Migration
         Schema::create('contact_rules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('content');
+            $table->string('description');
             $table->integer('order');
             $table->tinyInteger('active');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

@@ -25,7 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phonenumber',
+        'phone_number',
         'token',
         'active',
     ];
@@ -37,6 +37,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'contact_rule_id',
         'remember_token',
     ];
 
@@ -53,4 +54,11 @@ class User extends Authenticatable
         $this->notify(new AccountVerify($user));
     }
 
+    public function addresses(){
+        return $this->hasMany('App\Models\Address');
+    }
+
+    public function profile(){
+        return $this->hasOne('App\Models\UserProfile');
+    }
 }

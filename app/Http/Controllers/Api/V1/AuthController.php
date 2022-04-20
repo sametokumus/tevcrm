@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Mail\UserWelcome;
+use App\Models\ContactRule;
 use App\Models\User;
+use App\Models\UserContactRule;
+use App\Models\UserDocumentCheck;
+use App\Models\UserProfile;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,19 +21,43 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'user_name' => 'required',
+                'user_name' => 'nullable',
                 'email' => 'required|email',
                 'phone_number' => 'required',
                 'password' => 'required'
             ]);
 
             $userId = User::query()->insertGetId([
-                'user_name' => $request->user_name,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'password' => Hash::make($request->password),
                 'token' => Str::random(60)
             ]);
+
+            $user_contact_rules = $request->user_contact_rules;
+            $user_document_checks = $request->user_document_checks;
+            foreach ($user_contact_rules as $user_contact_rule){
+                UserContactRule::query()->insert([
+                    'user_id' => $userId,
+                    'contact_rule_id' => $user_contact_rule['contact_rule_id'],
+                    'value' => $user_contact_rule['value']
+                ]);
+            }
+            foreach ($user_document_checks as $user_document_check){
+                UserDocumentCheck::query()->insert([
+                    'user_id' => $userId,
+                    'document_id' => $user_document_check['document_id'],
+                    'value' => $user_document_check['value']
+                ]);
+            }
+            $name = $request->name;
+            $surname = $request->surname;
+            UserProfile::query()->insert([
+                'user_id' => $userId,
+                'name' => $name,
+                'surname' => $surname
+            ]);
+
 
             $user = User::query()->whereId($userId)->first();
 
@@ -39,9 +67,9 @@ class AuthController extends Controller
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','error' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ero' => $throwable->getMessage()]);
         }
 
     }

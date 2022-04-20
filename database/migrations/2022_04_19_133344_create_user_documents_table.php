@@ -16,10 +16,12 @@ class CreateUserDocumentsTable extends Migration
         Schema::create('user_documents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('content');
+            $table->longText('description')->nullable();
+            $table->string('short_description');
             $table->integer('order');
             $table->tinyInteger('active');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

@@ -16,9 +16,10 @@ class CreateUserContactRulesTable extends Migration
         Schema::create('user_contact_rules', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->bigInteger('contact_rules_id');
+            $table->bigInteger('contact_rule_id');
             $table->tinyInteger('value');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

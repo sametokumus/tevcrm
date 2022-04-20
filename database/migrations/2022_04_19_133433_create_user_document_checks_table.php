@@ -18,7 +18,8 @@ class CreateUserDocumentChecksTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('document_id');
             $table->tinyInteger('value');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

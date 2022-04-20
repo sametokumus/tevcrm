@@ -25,7 +25,8 @@ class CreateAddressesTable extends Migration
             $table->string('mobile_phone');
             $table->mediumText('comment');
             $table->tinyInteger('active');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

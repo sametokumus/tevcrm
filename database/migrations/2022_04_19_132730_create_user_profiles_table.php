@@ -17,12 +17,14 @@ class CreateUserProfilesTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('name');
-            $table->date('birthday');
-            $table->tinyInteger('gender');
-            $table->string('profile_photo');
-            $table->tinyInteger('tc_citizen');
-            $table->integer('tc_number');
-            $table->timestamps();
+            $table->string('surname');
+            $table->date('birthday')->nullable();
+            $table->tinyInteger('gender')->nullable();
+            $table->string('profile_photo')->nullable();
+            $table->tinyInteger('tc_citizen')->nullable();
+            $table->integer('tc_number')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 
