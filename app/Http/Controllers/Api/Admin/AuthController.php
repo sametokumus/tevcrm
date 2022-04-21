@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -59,10 +59,12 @@ class AuthController extends Controller
                 throw new \Exception('auth-001');
             }
 
-            $admin_token = $admin->createToken('api-token')->plainTextToken;
+            $admin_token = $admin->createToken('api-token', ['role:admin'])->plainTextToken;
             Admin::query()->where('id', $admin->id)->update([
                 'token' => $admin_token
             ]);
+
+            $admin->token = $admin_token;
 
             return response(['message' => 'Başarılı.', 'status' => 'success', 'object' => ['admin' => $admin]]);
         } catch (ValidationException $validationException) {
@@ -80,12 +82,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-            Auth::guard('admin')->logout();
-//            $request->user('admin')->tokens()->delete();
-//            Auth::user()->tokens()->delete();
+            auth()->user()->tokens()->delete();
             return response(['message' => 'Çıkış başarılı.','status' => 'success']);
         } catch (\Exception $exception){
-            return response(['message' => 'Hatalı işlem.','status' => 'error-001','er' => $exception->getMessage()]);
+            return response(['message' => 'Hatalı işlem.','status' => 'error-001']);
         }
     }
 

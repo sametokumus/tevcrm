@@ -88,10 +88,12 @@ class AuthController extends Controller
                 throw new \Exception('auth-001');
             }
 
-            $userToken = $user->createToken('api-token')->plainTextToken;
+            $userToken = $user->createToken('api-token', ['role:user'])->plainTextToken;
             User::query()->where('id', $user->id)->update([
                 'token' => $userToken
             ]);
+
+            $user->token = $userToken;
 
             return  response(['message' => 'Başarılı.','status' => 'success', 'object' => ['user'=>$user]]);
         } catch (ValidationException $validationException) {
