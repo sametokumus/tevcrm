@@ -2,20 +2,31 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Auth\AuthenticationException;
+use Laravel\Sanctum\Exceptions\MissingAbilityException;
 
-class AdminAuthenticate extends Middleware
+class AdminAuthenticate
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @param  \Closure  $next
+     * @param  mixed  ...$abilities
+     * @return \Illuminate\Http\Response
+     *
+     * @throws \Illuminate\Auth\AuthenticationException|\Laravel\Sanctum\Exceptions\MissingAbilityException
      */
-    protected function redirectTo($request)
+    public function handle($request, $next, ...$abilities)
     {
-        if (! $request->expectsJson()) {
-            return route('admin.login');
+        if (! $request->user() || ! $request->user()->currentAccessToken()) {
+            throw new AuthenticationException;
         }
+
+            if ($request->user()->tokenCan('role:user')) {
+                return redirect()->route('auth.login');
+            }
+
+        return $next($request);
     }
 }
