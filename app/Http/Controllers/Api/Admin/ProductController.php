@@ -28,7 +28,7 @@ class ProductController extends Controller
             $product = json_decode($request->product);
             $productArray = $this->objectToArray($product);
 
-            Validator::make($productArray,[
+            Validator::make($productArray, [
                 'brand_id' => 'required|exists:brands,id',
                 'type_id' => 'required|exists:product_types,id',
                 'name' => 'required',
@@ -50,39 +50,21 @@ class ProductController extends Controller
                 'is_free_shipping' => $product->is_free_shipping,
                 'view_all_images' => $product->view_all_images
             ]);
-//
-            $product_documents = $request->product_documents;
 
-//            foreach ($product_documents as $product_document){
-//                if ($product_document->hasFile('product_documents')){
-//                    $rand = uniqid();
-//                    $image = $product_document->file('product_documents');
-//                    $image_name = $rand . "-" . $image->getClientOriginalName();
-//                    $image->move(public_path('/images/Admin/ProductDocument/'), $image_name);
-//                    $image_path = "/images/Admin/ProductDocument/" . $image_name;
-//                    ProductDocument::query()->insert([
-//                        'file' => $image_path,
-//                        'product_id' => $product_id,
-//                    ]);
-//                }
-//            }
+            if($request->hasFile('product_documents')){
+                $file_namess = array();
+                foreach ($request->file('product_documents') as $key => $product_document) {
+                    $rand = uniqid();
+                    $file_name = $rand . "-" . $product_document->getClientOriginalName();
+                    $product_document->move(public_path('/images/ProductDocument/'), $file_name);
+                    $file_path = "/images/ProductDocument/" . $file_name;
+                    array_push($file_namess, $file_path);
 
-            if ($file = $request->file('product_documents')) {
-                $path = $file->move(public_path('/images/Admin/ProductDocument'));
-                $name = $file->getClientOriginalName();
-
-                //store your file into directory and db
-                $save = new ProductDocument();
-                $save->file = $file.$path;
-//                $save->store_path= $path;
-                $save->save();
-
-                return response()->json([
-                    "success" => true,
-                    "message" => "File successfully uploaded",
-                    "file" => $file
-                ]);
-
+                    ProductDocument::query()->insert([
+                        'file' => $file_path,
+                        'product_id' => $product_id,
+                    ]);
+                }
             }
 
             $product_categories = $product->product_categories;
@@ -98,7 +80,9 @@ class ProductController extends Controller
             Tag::query()->insertGetId([
                 'name' => $request->name
             ]);
-            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success','ar' => $product_documents]);
+
+
+            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success','ar' => $count]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
