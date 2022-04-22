@@ -1,11 +1,16 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminUserComments;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
 use \App\Http\Controllers\Api\Admin\AdminPermissionRolesController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Admin\BrandController;
+use App\Http\Controllers\Api\Admin\ProductTypeController;
+use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\ProductDocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +39,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('adminPermission/addAdminPermission', [AdminPermissionController::class, 'addAdminPermission']);
     Route::get('adminPermissionRole/getAdminPermissionRoles', [AdminPermissionRolesController::class, 'getAdminPermissionRoles']);
     Route::post('adminPermissionRole/addAdminPermissionRoles', [AdminPermissionRolesController::class, 'addAdminPermissionRoles']);
+
+    Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
+    Route::post('productType/addProductType', [ProductTypeController::class, 'addProductType']);
+    Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
+    Route::post('product/addProduct', [ProductController::class, 'addProduct']);
+//    Route::post('productDocument/addProductDocument/{product_id}', [ProductDocumentController::class, 'addProductDocument']);
+
+
 
 });
 

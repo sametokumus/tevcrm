@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -10,9 +11,11 @@ use App\Http\Controllers\Api\V1\ContactRulesController;
 use App\Http\Controllers\Api\V1\UserContactRulesController;
 use App\Http\Controllers\Api\V1\UserDocumentController;
 use App\Http\Controllers\Api\V1\UserDocumentChecksController;
-use App\Http\Controllers\Api\V1\CorporateAddressesController;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\V1\BrandController;
+use App\Http\Controllers\Api\V1\ProductTypeController;
+use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\ProductDocumentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -65,5 +68,12 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/userDocuments/getUserDocumentChecksByUserId/{user_id}', [UserDocumentChecksController::class, 'getUserDocumentChecksByUserId']);
     Route::post('/userDocuments/updateUserDocumentChecksByUserId/{user_id}/{document_id}', [UserDocumentChecksController::class, 'updateUserDocumentChecksByUserId']);
+
+
+    Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);
+    Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
+    Route::get('/category/getCategory', [CategoryController::class, 'getCategory']);
+    Route::get('/product/getProduct', [ProductController::class, 'getProduct']);
+    Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
 
 });
