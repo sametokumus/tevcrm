@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+class CreateAdminPermissionRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('admin_permission_roles', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('admin_role_id');
-            $table->string('email')->unique();
-            $table->string('name');
-            $table->string('surname');
-            $table->string('phone_number');
-            $table->string('password');
-            $table->string('token')->nullable()->unique();
+            $table->bigInteger('admin_permission_id');
+            $table->tinyInteger('read')->default(1);
+            $table->tinyInteger('write')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -35,6 +32,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('admin_permission_roles');
     }
 }

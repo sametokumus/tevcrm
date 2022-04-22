@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+class CreateAdminUserCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('admin_user_comments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('admin_role_id');
-            $table->string('email')->unique();
-            $table->string('name');
-            $table->string('surname');
-            $table->string('phone_number');
-            $table->string('password');
-            $table->string('token')->nullable()->unique();
+            $table->bigInteger('admin_id');
+            $table->bigInteger('user_id');
+            $table->mediumText('comment');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -35,6 +31,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('admin_user_comments');
     }
 }

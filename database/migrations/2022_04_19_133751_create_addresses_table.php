@@ -22,9 +22,9 @@ class CreateAddressesTable extends Migration
             $table->string('address_2');
             $table->string('postal_code');
             $table->string('phone');
-            $table->string('mobile_phone');
             $table->mediumText('comment');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('type')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

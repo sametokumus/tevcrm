@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\ContactRulesController;
 use App\Http\Controllers\Api\V1\UserContactRulesController;
 use App\Http\Controllers\Api\V1\UserDocumentController;
 use App\Http\Controllers\Api\V1\UserDocumentChecksController;
+use App\Http\Controllers\Api\V1\CorporateAddressesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/addresses/getAddressesByUserId/{user_id}', [AddressController::class, 'getAddressesByUserId']);
     Route::post('/addresses/addUserAddresses/{user_id}', [AddressController::class, 'addUserAddresses']);
     Route::post('/addresses/updateUserAddresses/{address_id}', [AddressController::class, 'updateUserAddresses']);
+
 
     Route::get('/countries/getCountries', [CountriesController::class, 'getCountries']);
     Route::post('/countries/addCountries', [CountriesController::class, 'addCountries']);

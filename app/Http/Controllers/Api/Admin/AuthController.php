@@ -18,6 +18,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
+                'admin_role_id' => 'required|exists:admin_roles,id',
                 'email' => 'required|email',
                 'name' => 'required',
                 'surname' => 'required',
@@ -27,6 +28,7 @@ class AuthController extends Controller
 
 
             Admin::query()->insert([
+                'admin_role_id' => $request->admin_role_id,
                 'email' => $request->email,
                 'name' => $request->name,
                 'surname' => $request->surname,

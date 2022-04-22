@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Address;
+use App\Models\CorporateAddresses;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +31,14 @@ class AddressController extends Controller
                 'address_1' => 'required',
                 'address_2' => 'required',
                 'postal_code' => 'required',
-                'mobile_phone' => 'required',
-                'active' => 'required'
+                'phone' => 'required',
+                'comment' => 'required',
+                'type' => 'required',
+                'tax_number' => 'required',
+                'tax_office' => 'required',
+                'company_name' => 'required',
             ]);
-            Address::query()->insert([
+            $address_id = Address::query()->insertGetId([
                 'user_id' => $user_id,
                 'city_id' => $request->city_id,
                 'name' => $request->name,
@@ -41,19 +46,26 @@ class AddressController extends Controller
                 'address_2' => $request->address_2,
                 'postal_code' => $request->postal_code,
                 'phone' => $request->phone,
-                'mobile_phone' => $request->mobile_phone,
                 'comment' => $request->comment,
-                'active' => $request->active
+                'type' => $request->type,
             ]);
 
-            return response(['message' => 'Adres ekleme işlemi başarılı.', 'status' => 'success']);
-
+            if ($request->type == 1) {
+                CorporateAddresses::query()->insert([
+                    'address_id' => $address_id,
+                    'tax_number' => $request->tax_number,
+                    'tax_office' => $request->tax_office,
+                    'company_name' => $request->company_name
+                ]);
+                return response(['message' => 'Kurumsal adres ekleme işlemi başarılı.', 'status' => 'success']);
+            }
+            return response(['message' => 'Bireysel adres ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001']);
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 }
