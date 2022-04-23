@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductTags;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -75,14 +76,21 @@ class ProductController extends Controller
                 ]);
             }
 
+            $tags = $product->tags;
+            foreach ($tags as $tag){
+                Tag::query()->updateOrCreate([
+                    'name' => $tag->name
+                ]);
+            }
 
-
-            Tag::query()->insertGetId([
-                'name' => $request->name
-            ]);
-
-
-            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success','ar' => $count]);
+            $product_tags = $product->product_tags;
+            foreach ($product_tags as $product_tag){
+                ProductTags::query()->updateOrCreate([
+                    'tag_id' => $product_tag->tag_id,
+                    'product_id' => $product_tag->product_id
+                ]);
+            }
+            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
