@@ -19,7 +19,7 @@ class UserDocumentChecksController extends Controller
         }
     }
 
-    public function updateUserDocumentChecksByUserId(Request $request,$user_id,$document_id)
+    public function updateUserDocumentChecksByUserId(Request $request,$document_id,$user_id)
     {
         try {
             $request->validate([

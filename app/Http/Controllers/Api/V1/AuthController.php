@@ -27,6 +27,7 @@ class AuthController extends Controller
                 'password' => 'required'
             ]);
 
+            //Önce Kullanıcıyı oluşturuyor
             $userId = User::query()->insertGetId([
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
@@ -34,8 +35,8 @@ class AuthController extends Controller
                 'token' => Str::random(60)
             ]);
 
+            //İletişim Kurallarını oluşturuyor
             $user_contact_rules = $request->user_contact_rules;
-            $user_document_checks = $request->user_document_checks;
             foreach ($user_contact_rules as $user_contact_rule){
                 UserContactRule::query()->insert([
                     'user_id' => $userId,
@@ -43,6 +44,9 @@ class AuthController extends Controller
                     'value' => $user_contact_rule['value']
                 ]);
             }
+
+            //Kullanıcının dökümanlarını ekliyor
+            $user_document_checks = $request->user_document_checks;
             foreach ($user_document_checks as $user_document_check){
                 UserDocumentCheck::query()->insert([
                     'user_id' => $userId,
@@ -50,6 +54,7 @@ class AuthController extends Controller
                     'value' => $user_document_check['value']
                 ]);
             }
+            //Kullanıcı profilini oluşturuyor
             $name = $request->name;
             $surname = $request->surname;
             UserProfile::query()->insert([
@@ -58,9 +63,10 @@ class AuthController extends Controller
                 'surname' => $surname
             ]);
 
-
+            // Oluşturulan kullanıcıyı çekiyor
             $user = User::query()->whereId($userId)->first();
 
+            //Oluşturulan Kullanıcıyı mail yolluyor
             $user->sendApiConfirmAccount($user);
 
             return response(['message' => 'Kullanıcı başarıyla oluşturuldu sisteme giriş için epostanızı kontrol ediniz.','status' => 'success']);

@@ -13,6 +13,7 @@ class UserContactRulesController extends Controller
     {
         try {
             $user_contact_rules = UserContactRule::query()->where('user_id',$user_id)->get();
+
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['user_contact_rules' => $user_contact_rules]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);

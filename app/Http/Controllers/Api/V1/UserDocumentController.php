@@ -46,4 +46,47 @@ class UserDocumentController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001']);
         }
     }
+
+    public function updateUserDocuments(Request $request,$document_id){
+        try {
+            $request->validate([
+                'name' => 'required',
+                'order' => 'required',
+                'short_description' => 'required',
+            ]);
+
+            $user_documents = UserDocument::query()->where('id',$document_id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'short_description' => $request->short_description,
+                'order' => $request->order
+            ]);
+
+            return response(['message' => 'Döküman güncelleme işlemi başarılı.','status' => 'success','object' => ['user_documents' => $user_documents]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteUserDocuments($document_id){
+        try {
+
+            $user_document = UserDocument::query()->where('id',$document_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => 'Döküman silme işlemi başarılı.','status' => 'success','object' => ['user_document' => $user_document]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+
 }

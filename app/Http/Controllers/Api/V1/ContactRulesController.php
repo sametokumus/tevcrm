@@ -46,4 +46,28 @@ class ContactRulesController extends Controller
         }
     }
 
+    public function updateContactRules(Request $request,$id){
+        try {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required'
+            ]);
+
+            $contact_rules = ContactRule::query()->where('id',$id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'order' => $request->order
+            ]);
+
+            return response(['message' => 'Güncelleme işlemi başarılı.','status' => 'success','object' => ['contact_rules' => $contact_rules]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+        }
+    }
+
+
 }

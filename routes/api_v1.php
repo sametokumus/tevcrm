@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\ProductTypeController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProductDocumentController;
+use App\Http\Controllers\Api\V1\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,11 +45,13 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/user/getUsers', [UserController::class, 'getUsers']);
     Route::get('/user/getUser/{id}', [UserController::class, 'getUser']);
-    Route::post('/user/updateUser/{id}', [UserController::class, 'updateUser']);
+    Route::post('/user/updateUser/{user_id}/{document_id}', [UserController::class, 'updateUser']);
+    Route::get('/user/deleteUser/{id}', [UserController::class, 'deleteUser']);
 
     Route::get('/addresses/getAddressesByUserId/{user_id}', [AddressController::class, 'getAddressesByUserId']);
     Route::post('/addresses/addUserAddresses/{user_id}', [AddressController::class, 'addUserAddresses']);
-    Route::post('/addresses/updateUserAddresses/{address_id}', [AddressController::class, 'updateUserAddresses']);
+    Route::post('/addresses/updateUserAddresses/{address_id}/{user_id}', [AddressController::class, 'updateUserAddresses']);
+    Route::get('/addresses/deleteUserAddresses/{address_id}', [AddressController::class, 'deleteUserAddresses']);
 
 
     Route::get('/countries/getCountries', [CountriesController::class, 'getCountries']);
@@ -59,15 +62,19 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/contactRules/getContactRules', [ContactRulesController::class, 'getContactRules']);
     Route::post('/contactRules/addContactRules', [ContactRulesController::class, 'addContactRules']);
+    Route::post('/contactRules/updateContactRules/{id}', [ContactRulesController::class, 'updateContactRules']);
 
     Route::get('/contactRules/getContactRulesByUserId/{user_id}', [UserContactRulesController::class, 'getContactRulesByUserId']);
     Route::post('/contactRules/updateContactRulesByUserId/{user_id}/{contact_rule_id}', [UserContactRulesController::class, 'updateContactRulesByUserId']);
 
     Route::get('/userDocuments/getUserDocuments', [UserDocumentController::class, 'getUserDocuments']);
     Route::post('/userDocuments/addUserDocuments', [UserDocumentController::class, 'addUserDocuments']);
+    Route::post('/userDocuments/updateUserDocuments/{document_id}', [UserDocumentController::class, 'updateUserDocuments']);
+    Route::get('/userDocuments/deleteUserDocuments/{document_id}', [UserDocumentController::class, 'deleteUserDocuments']);
 
     Route::get('/userDocuments/getUserDocumentChecksByUserId/{user_id}', [UserDocumentChecksController::class, 'getUserDocumentChecksByUserId']);
-    Route::post('/userDocuments/updateUserDocumentChecksByUserId/{user_id}/{document_id}', [UserDocumentChecksController::class, 'updateUserDocumentChecksByUserId']);
+    Route::post('/userDocuments/updateUserDocumentChecksByUserId/{document_id}/{user_id}', [UserDocumentChecksController::class, 'updateUserDocumentChecksByUserId']);
+//    Route::post('/userDocuments/deleteUserDocumentsChecksByUserId/{document_id}', [UserDocumentChecksController::class, 'deleteUserDocumentsChecksByUserId']);
 
 
     Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);

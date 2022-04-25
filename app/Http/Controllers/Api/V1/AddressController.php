@@ -68,4 +68,69 @@ class AddressController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
+
+    public function updateUserAddresses(Request $request,$address_id,$user_id){
+        try {
+            $request->validate([
+                'city_id' => 'required|exists:cities,id',
+                'name' => 'required',
+                'address_1' => 'required',
+                'address_2' => 'required',
+                'postal_code' => 'required',
+                'phone' => 'required',
+                'comment' => 'required',
+                'type' => 'required',
+                'tax_number' => 'required',
+                'tax_office' => 'required',
+                'company_name' => 'required',
+            ]);
+
+            $address = Address::query()->where('id',$address_id)->update([
+                'user_id' => $user_id,
+                'city_id' => $request->city_id,
+                'name' => $request->name,
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'postal_code' => $request->postal_code,
+                'phone' => $request->phone,
+                'comment' => $request->comment,
+                'type' => $request->type
+                ]);
+
+            if ($request->type == 1) {
+                CorporateAddresses::query()->where('id',$address_id)->update([
+                    'tax_number' => $request->tax_number,
+                    'tax_office' => $request->tax_office,
+                    'company_name' => $request->company_name
+                ]);
+
+                return response(['message' => 'Kurumsal adres düzenleme işlemi başarılı.', 'status' => 'success']);
+            }
+
+            return response(['message' => 'Adres güncelleme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteUserAddresses($id){
+        try {
+
+            $address = Address::query()->where('id',$id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => 'Adres silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
 }

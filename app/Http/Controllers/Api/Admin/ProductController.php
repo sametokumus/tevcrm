@@ -23,7 +23,7 @@ class ProductController extends Controller
         return @json_decode(json_encode($object), true);
     }
     public function addProduct(Request $request)
-    {
+{
         try {
 
             $product = json_decode($request->product);

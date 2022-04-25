@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response(['message' => 'Kullanıcı başarıyla oluşturuldu sisteme giriş için epostanızı kontrol ediniz.','status' => 'success']);
+            return response(['message' => 'Admin başarıyla oluşturuldu sisteme giriş için epostanızı kontrol ediniz.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {

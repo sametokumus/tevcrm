@@ -5,12 +5,13 @@ use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminUserComments;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
-use \App\Http\Controllers\Api\Admin\AdminPermissionRolesController;
+//use \App\Http\Controllers\Api\Admin\AdminPermissionRolesController;
 use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
-use App\Http\Controllers\Api\Admin\ProductDocumentController;
+use App\Http\Controllers\Api\Admin\AdminController;
+//use App\Http\Controllers\Api\Admin\ProductDocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +32,30 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::post('register', [AuthController::class, 'register'])->name('admin.register');
+
     Route::get('adminUserComment/getAdminUserComment', [AdminUserComments::class, 'getAdminUserComment']);
     Route::post('adminUserComment/addAdminUserComment', [AdminUserComments::class, 'addAdminUserComment']);
+    Route::post('adminUserComment/updateAdminUserComment/{id}', [AdminUserComments::class, 'updateAdminUserComment']);
+    Route::get('adminUserComment/deleteAdminUserComment/{id}', [AdminUserComments::class, 'deleteAdminUserComment']);
+
     Route::get('adminRole/getAdminRole', [AdminRoleController::class, 'getAdminRole']);
     Route::post('adminRole/addAdminRole', [AdminRoleController::class, 'addAdminRole']);
+    Route::post('adminRole/updateAdminRole/{id}/{permission_role_id}', [AdminRoleController::class, 'updateAdminRole']);
+    Route::get('adminRole/deleteAdminRole/{id}/{permission_role_id}', [AdminRoleController::class, 'deleteAdminRole']);
+
+    Route::post('admin/updateAdmin/{id}', [AdminController::class, 'updateAdmin']);
+    Route::get('admin/deleteAdmin/{id}', [AdminController::class, 'deleteAdmin']);
+
+
     Route::get('adminPermission/getAdminPermission', [AdminPermissionController::class, 'getAdminPermission']);
     Route::post('adminPermission/addAdminPermission', [AdminPermissionController::class, 'addAdminPermission']);
-    Route::get('adminPermissionRole/getAdminPermissionRoles', [AdminPermissionRolesController::class, 'getAdminPermissionRoles']);
-    Route::post('adminPermissionRole/addAdminPermissionRoles', [AdminPermissionRolesController::class, 'addAdminPermissionRoles']);
+    Route::post('adminPermission/updateAdminPermission/{id}', [AdminPermissionController::class, 'updateAdminPermission']);
+    Route::get('adminPermission/deleteAdminPermission/{id}', [AdminPermissionController::class, 'deleteAdminPermission']);
+
+//    Route::get('adminPermissionRole/getAdminPermissionRoles', [AdminPermissionRolesController::class, 'getAdminPermissionRoles']);
+//    Route::post('adminPermissionRole/addAdminPermissionRoles', [AdminPermissionRolesController::class, 'addAdminPermissionRoles']);
+//    Route::post('adminPermissionRole/updateAdminPermissionRoles/{id}', [AdminPermissionRolesController::class, 'updateAdminPermissionRoles']);
+//    Route::get('adminPermissionRole/deleteAdminPermissionRoles/{id}', [AdminPermissionRolesController::class, 'deleteAdminPermissionRoles']);
 
     Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
     Route::post('productType/addProductType', [ProductTypeController::class, 'addProductType']);
