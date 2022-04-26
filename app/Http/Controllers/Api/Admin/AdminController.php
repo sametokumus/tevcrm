@@ -11,7 +11,7 @@ use Nette\Schema\ValidationException;
 
 class AdminController extends Controller
 {
-    //test
+
     public function updateAdmin(Request $request,$id){
         try {
             $request->validate([
