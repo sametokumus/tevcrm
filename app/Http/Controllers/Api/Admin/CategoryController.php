@@ -32,4 +32,40 @@ class CategoryController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
         }
     }
+
+    public function updateCategory(Request $request,$id){
+        try {
+            $request->validate([
+                'name' => 'required',
+            ]);
+
+            $address = Category::query()->where('id',$id)->update([
+                'name' => $request->name
+            ]);
+
+            return response(['message' => 'Kategori güncelleme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteCategory($id){
+        try {
+
+            $address = Category::query()->where('id',$id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => 'Kategori silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
 }

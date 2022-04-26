@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\AdminController;
+use App\Http\Controllers\Api\Admin\ProductTabController;
 //use App\Http\Controllers\Api\Admin\ProductDocumentController;
 
 /*
@@ -58,10 +59,24 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 //    Route::get('adminPermissionRole/deleteAdminPermissionRoles/{id}', [AdminPermissionRolesController::class, 'deleteAdminPermissionRoles']);
 
     Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
+    Route::post('brand/updateBrand/{id}', [BrandController::class, 'updateBrand']);
+    Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
+
     Route::post('productType/addProductType', [ProductTypeController::class, 'addProductType']);
+    Route::post('productType/updateProduct/{product_id}', [ProductTypeController::class, 'updateProduct']);
+    Route::get('productType/deleteProductType/{id}', [ProductTypeController::class, 'deleteProductType']);
+
     Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
+    Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
+    Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
+
     Route::post('product/addProduct', [ProductController::class, 'addProduct']);
-//    Route::post('productDocument/addProductDocument/{product_id}', [ProductDocumentController::class, 'addProductDocument']);
+    Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
+    Route::post('product/addProductVariationGroup', [ProductController::class, 'addProductVariationGroup']);
+    Route::post('product/addProductVariation', [ProductController::class, 'addProductVariation']);
+
+    Route::post('productTab/addProductTab', [ProductTabController::class, 'addProductTab']);
+    Route::post('productTab/updateProductTab/{id}', [ProductTabController::class, 'updateProductTab']);
 
 
 
