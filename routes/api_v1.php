@@ -79,7 +79,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 //    Route::post('/userDocuments/deleteUserDocumentsChecksByUserId/{document_id}', [UserDocumentChecksController::class, 'deleteUserDocumentsChecksByUserId']);
 
     Route::post('/cart/addCart', [CartController::class, 'addCart']);
-    Route::post('/cart/updateCart/{id}', [CartController::class, 'updateCart']);
+    Route::post('/cart/updateCartProduct', [CartController::class, 'updateCartProduct']);
 
 
     Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);

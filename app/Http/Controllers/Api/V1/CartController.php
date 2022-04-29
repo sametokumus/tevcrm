@@ -46,10 +46,26 @@ class CartController extends Controller
         }
     }
 
-    public function updateCartProduct(Request $request,$id){
+    public function updateCartProduct(Request $request){
         try {
-            $cart_details = CartDetail::query()->where('id',$id)->first();
+            CartDetail::query()->where('cart_id',$request->cart_id)->where('product_id',$request->product_id)->update([
+                'product_id' => $request->product_id,
+                'cart_id' => $request->cart_id,
+                'quantity' => $request->quantity
+            ]);
+            if ($request->quantity == 0){
+                CartDetail::query()->where('cart_id',$request->cart_id)->where('product_id',$request->product_id)->update([
+                    'active' => 0
+                ]);
+                $cart_product_count = CartDetail::query()->where('cart_id',$request->cart_id)->where('active',1)->count();
+                if ($cart_product_count == 0){
+                    Cart::query()->where('cart_id',$request->cart_id)->update([
+                        'active' => 0
+                    ]);
+                    return response(['message' => 'Sepet silme işlemi başarılı.','status' => 'success']);
+                }
 
+            }
             return response(['message' => 'Sepet güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -59,5 +75,4 @@ class CartController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
         }
     }
-
 }

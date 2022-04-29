@@ -19,7 +19,9 @@ class CreateAddressesTable extends Migration
             $table->bigInteger('city_id');
             $table->bigInteger('country_id');
             $table->bigInteger('district_id');
+            $table->string('title');
             $table->string('name');
+            $table->string('surname');
             $table->string('address_1');
             $table->string('address_2');
             $table->string('postal_code');
