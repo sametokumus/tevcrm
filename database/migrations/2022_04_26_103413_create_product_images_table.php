@@ -17,6 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->id();
             $table->bigInteger('variation_id')->nullable();
             $table->string('name')->nullable();
+            $table->text('image')->nullable();
             $table->tinyInteger('order')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

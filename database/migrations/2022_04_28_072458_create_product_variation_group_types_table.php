@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductVariationGroupsTable extends Migration
+class CreateProductVariationGroupTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateProductVariationGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_variation_groups', function (Blueprint $table) {
+        Schema::create('product_variation_group_types', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->nullable();
-            $table->bigInteger('group_type_id')->nullable();
-            $table->tinyInteger('order')->nullable();
+            $table->string('name');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -31,6 +29,6 @@ class CreateProductVariationGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_variation_groups');
+        Schema::dropIfExists('product_variation_group_types');
     }
 }

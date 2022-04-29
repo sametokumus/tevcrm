@@ -16,7 +16,7 @@ use App\Http\Controllers\Api\V1\ProductTypeController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProductDocumentController;
-use App\Http\Controllers\Api\V1\UserProfileController;
+use App\Http\Controllers\Api\V1\CartController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -75,6 +75,9 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/userDocuments/getUserDocumentChecksByUserId/{user_id}', [UserDocumentChecksController::class, 'getUserDocumentChecksByUserId']);
     Route::post('/userDocuments/updateUserDocumentChecksByUserId/{document_id}/{user_id}', [UserDocumentChecksController::class, 'updateUserDocumentChecksByUserId']);
 //    Route::post('/userDocuments/deleteUserDocumentsChecksByUserId/{document_id}', [UserDocumentChecksController::class, 'deleteUserDocumentsChecksByUserId']);
+
+    Route::post('/cart/addCart', [CartController::class, 'addCart']);
+    Route::post('/cart/updateCart/{id}', [CartController::class, 'updateCart']);
 
 
     Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);

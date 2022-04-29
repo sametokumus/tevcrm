@@ -50,7 +50,7 @@ class AddressController extends Controller
                 'type' => $request->type,
             ]);
 
-            if ($request->type == 1) {
+            if ($request->type == 2) {
                 CorporateAddresses::query()->insert([
                     'address_id' => $address_id,
                     'tax_number' => $request->tax_number,

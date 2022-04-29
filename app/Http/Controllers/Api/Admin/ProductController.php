@@ -11,6 +11,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductDocument;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
+use App\Models\ProductVariationGroupType;
 use App\Models\Tag;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -23,8 +24,9 @@ class ProductController extends Controller
     {
         return @json_decode(json_encode($object), true);
     }
+
     public function addProduct(Request $request)
-{
+    {
         try {
 
             $product = json_decode($request->product);
@@ -53,7 +55,7 @@ class ProductController extends Controller
                 'view_all_images' => $product->view_all_images
             ]);
 
-            if($request->hasFile('product_documents')){
+            if ($request->hasFile('product_documents')) {
                 $file_namess = array();
                 foreach ($request->file('product_documents') as $key => $product_document) {
                     $rand = uniqid();
@@ -70,19 +72,19 @@ class ProductController extends Controller
             }
 
             $product_categories = $product->product_categories;
-            foreach ($product_categories as $product_category){
-                    ProductCategory::query()->insert([
-                        'product_id' => $product_id,
-                        'category_id' => $product_category->category_id
-                    ]);
+            foreach ($product_categories as $product_category) {
+                ProductCategory::query()->insert([
+                    'product_id' => $product_id,
+                    'category_id' => $product_category->category_id
+                ]);
             }
 
             $tags = $product->tags;
-            foreach ($tags as $tag){
-                $tag_row = Tag::query()->where('name',$tag->name)->first();
-                if(isset($tag_row)){
+            foreach ($tags as $tag) {
+                $tag_row = Tag::query()->where('name', $tag->name)->first();
+                if (isset($tag_row)) {
                     $tag_id = $tag_row->id;
-                }else {
+                } else {
                     $tag_id = Tag::query()->insertGetId([
                         'name' => $tag->name
                     ]);
@@ -103,7 +105,8 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProduct(Request $request,$product_id){
+    public function updateProduct(Request $request, $product_id)
+    {
         try {
             $product = json_decode($request->product);
             $productArray = $this->objectToArray($product);
@@ -119,7 +122,7 @@ class ProductController extends Controller
                 'is_free_shipping' => 'required',
                 'view_all_images' => 'required'
             ]);
-            $product_id = Product::query()->where('id',$product_id)->update([
+            Product::query()->where('id', $product_id)->update([
                 'brand_id' => $product->brand_id,
                 'type_id' => $product->type_id,
                 'name' => $product->name,
@@ -131,7 +134,7 @@ class ProductController extends Controller
                 'view_all_images' => $product->view_all_images
             ]);
 
-            if($request->hasFile('product_documents')){
+            if ($request->hasFile('product_documents')) {
                 $file_namess = array();
                 foreach ($request->file('product_documents') as $key => $product_document) {
                     $rand = uniqid();
@@ -140,64 +143,65 @@ class ProductController extends Controller
                     $file_path = "/images/ProductDocument/" . $file_name;
                     array_push($file_namess, $file_path);
 
-                    ProductDocument::query()->where('product_id',$product_id)->update([
+                    ProductDocument::query()->where('product_id', $product_id)->update([
                         'file' => $file_path,
                         'product_id' => $product_id,
                     ]);
                 }
             }
-            ProductCategory::query()->where('product_id',$product_id)->update([
+            ProductCategory::query()->where('product_id', $product_id)->update([
                 'active' => 0
             ]);
 
             $product_categories = $product->product_categories;
-            foreach ($product_categories as $product_category){
-                $pc = ProductCategory::query()->where('product_id', $product_id)->where('category_id',$product_category->category_id)->first();
-                if(isset($pc)){
-                    ProductCategory::query()->where('id',$pc->id)->update([
+            foreach ($product_categories as $product_category) {
+                $pc = ProductCategory::query()->where('product_id', $product_id)->where('category_id', $product_category->category_id)->first();
+                if (isset($pc)) {
+                    ProductCategory::query()->where('id', $pc->id)->update([
                         'product_id' => $product_id,
                         'category_id' => $product_category->category_id,
                         'active' => 1
                     ]);
-                } else{
+                } else {
                     ProductCategory::query()->insert([
                         'product_id' => $product_id,
                         'category_id' => $product_category->category_id
                     ]);
                 }
             }
-            ProductTags::query()->where('product_id',$product_id)->update([
+            ProductTags::query()->where('product_id', $product_id)->update([
                 'active' => 0
             ]);
             $tags = $product->tags;
-            foreach ($tags as $tag){
-                $tag_row = Tag::query()->where('name',$tag->name)->first();
-                if(isset($tag_row)){
+            foreach ($tags as $tag) {
+                $tag_row = Tag::query()->where('name', $tag->name)->first();
+                if (isset($tag_row)) {
                     $tag_id = $tag_row->id;
-                }else {
+                } else {
                     $tag_id = Tag::query()->insertGetId([
                         'name' => $tag->name
                     ]);
                 }
 
-                ProductTags::query()->where('tag_id',$tag_id)->where('product_id',$product_id)->update([
+                ProductTags::query()->where('tag_id', $tag_id)->where('product_id', $product_id)->update([
                     'tag_id' => $tag_id,
                     'product_id' => $product_id,
                     'active' => 1
                 ]);
             }
 
-            return response(['message' => 'Ürün güncelleme işlemi başarılı.','status' => 'success']);
+            return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
         }
     }
 
-    public function addProductVariationGroup(Request $request){
+    public function addProductVariationGroup(Request $request)
+    {
         try {
 
             $request->validate([
@@ -206,11 +210,19 @@ class ProductController extends Controller
                 'order' => 'required',
             ]);
 
-            ProductVariationGroup::query()->insert([
-                'product_id' => $request->product_id,
-                'name' => $request->name,
-                'order' => $request->order
-            ]);
+                $variation_group_type = ProductVariationGroupType::query()->where('name',$request->name)->first();
+                if (isset($variation_group_type)){
+                    $variation_group_type_id = $variation_group_type->id;
+                }else{
+                    $variation_group_type_id = ProductVariationGroupType::query()->insertGetId([
+                        'name' => $request->name
+                    ]);
+                }
+                ProductVariationGroup::query()->insert([
+                    'product_id' => $request->product_id,
+                    'group_type_id' => $variation_group_type_id,
+                    'order' => $request->order
+                ]);
             return response(['message' => 'Ürün varyasyon grubu ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -221,7 +233,44 @@ class ProductController extends Controller
         }
     }
 
-    public function addProductVariation(Request $request){
+    public function updateProductVariationGroup(Request $request, $variation_group_type_id)
+    {
+        try {
+
+            $request->validate([
+                'name' => 'required',
+            ]);
+
+            ProductVariationGroupType::query()->where('id',$variation_group_type_id)->update([
+                'active' => 0
+            ]);
+
+            $variation_group_type = ProductVariationGroupType::query()->where('name',$request->name)->first();
+            if (isset($variation_group_type)){
+                $variation_group_type_id = $variation_group_type->id;
+            }else{
+                $variation_group_type_id = ProductVariationGroupType::query()->insertGetId([
+                    'name' => $request->name
+                ]);
+            }
+            ProductVariationGroup::query()->where('group_type_id',$variation_group_type_id)->update([
+                'product_id' => $request->product_id,
+                'group_type_id' => $variation_group_type_id,
+                'order' => $request->order
+            ]);
+
+            return response(['message' => 'Ürün varyasyon grubu güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function addProductVariation(Request $request)
+    {
         try {
 
             $product_variation = json_decode($request->product_variations);
@@ -242,50 +291,28 @@ class ProductController extends Controller
 //            $product_variations = $product_variation;
 
 //            foreach ($product_variations as $product_variation){
-                $product_variation_id = ProductVariation::query()->insertGetId([
-                    'variation_group_id' => $product_variation->variation_group_id,
-                    'name' => $product_variation->name,
-                    'description' => $product_variation->description,
-                    'sku' => $product_variation->sku,
-                    'regular_price' => $product_variation->regular_price,
-                    'discounted_price' => $product_variation->discounted_price,
-                    'regular_tax' => $product_variation->regular_tax,
-                    'discounted_tax' => $product_variation->discounted_tax
-                ]);
+            $product_variation_id = ProductVariation::query()->insertGetId([
+                'variation_group_id' => $product_variation->variation_group_id,
+                'name' => $product_variation->name,
+                'description' => $product_variation->description,
+                'sku' => $product_variation->sku,
+                'regular_price' => $product_variation->regular_price,
+                'discounted_price' => $product_variation->discounted_price,
+                'regular_tax' => $product_variation->regular_tax,
+                'discounted_tax' => $product_variation->discounted_tax
+            ]);
 
 //            }
             $product_rules = $product_variation->product_rules;
-            foreach ($product_rules as $product_rule){
-                ProductRule::query()->insertGetId([
-                    'variation' => $product_variation_id,
+            foreach ($product_rules as $product_rule) {
+                ProductRule::query()->insert([
+                    'variation_id' => $product_variation_id,
                     'quantity_stock' => $product_rule->quantity_stock,
                     'quantity_min' => $product_rule->quantity_min,
                     'quantity_step' => $product_rule->quantity_step,
                     'status' => $product_rule->status
                 ]);
             }
-
-
-//            $product_rules = $variation->product_rules;
-//            foreach ($product_rules as $product_rule){
-//                ProductRule::query()->insert([
-//                    'variation_id' => $variation_id,
-//                    'quantity_stock' => $product_rule->quantity_stock,
-//                    'quantity_min' => $product_rule->quantity_min,
-//                    'quantity_step' => $product_rule->quantity_step,
-//                    'status' => $product_rule->status
-//
-//                ]);
-//            }
-//            $product_images = $variation->product_images;
-//            foreach ($product_images as $product_image){
-//                ProductImage::query()->insert([
-//                    'variation_id' => $variation_id,
-//                    'name' => $product_image->name,
-//                    'order' => $product_image->order,
-//                ]);
-//
-//            }
 
             return response(['message' => 'Ürün varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -296,5 +323,85 @@ class ProductController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
         }
     }
+
+    public function updateProductVariation(Request $request, $id)
+    {
+        try {
+
+            $request->validate([
+                'variation_group_id' => 'required|exists:product_variations,id',
+                'name' => 'required',
+                'description' => 'required',
+                'sku' => 'required',
+                'regular_price' => 'required',
+                'discounted_price' => 'required',
+                'regular_tax' => 'required',
+                'discounted_tax' => 'required'
+
+            ]);
+
+            ProductVariation::query()->where('id', $id)->update([
+                'variation_group_id' => $request->variation_group_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+                'regular_price' => $request->regular_price,
+                'discounted_price' => $request->discounted_price,
+                'regular_tax' => $request->regular_tax,
+                'discounted_tax' => $request->discounted_tax
+            ]);
+
+//            $product_variation_id = ProductVariation::query()->where('id',$id)->first();
+
+            ProductRule::query()->where('variation_id', $id)->update([
+                'variation_id' => $id,
+                'quantity_stock' => $request->quantity_stock,
+                'quantity_min' => $request->quantity_min,
+                'quantity_step' => $request->quantity_step,
+                'status' => $request->status
+            ]);
+
+            return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function addProductImage(Request $request)
+    {
+        try {
+
+            if ($request->hasFile('product_images')) {
+                $file_namess = array();
+                foreach ($request->file('product_images') as $key => $product_document) {
+                    $rand = uniqid();
+                    $file_name = $rand . "-" . $product_document->getClientOriginalName();
+                    $product_document->move(public_path('/images/ProductImage/'), $file_name);
+                    $file_path = "/images/ProductImage/" . $file_name;
+                    array_push($file_namess, $file_path);
+
+                    ProductImage::query()->insert([
+                        'image' => $file_path,
+                        'variation_id' => $request->variation_id,
+                        'name' => $request->name,
+                        'order' => $request->order,
+                    ]);
+                }
+            }
+
+            return response(['message' => 'Ürün resim ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
 
 }

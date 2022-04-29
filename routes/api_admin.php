@@ -72,8 +72,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('product/addProduct', [ProductController::class, 'addProduct']);
     Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
+
     Route::post('product/addProductVariationGroup', [ProductController::class, 'addProductVariationGroup']);
+    Route::post('product/updateProductVariationGroup/{id}', [ProductController::class, 'updateProductVariationGroup']);
+
     Route::post('product/addProductVariation', [ProductController::class, 'addProductVariation']);
+    Route::post('product/updateProductVariation/{id}', [ProductController::class, 'updateProductVariation']);
+
+    Route::post('product/addProductImage', [ProductController::class, 'addProductImage']);
 
     Route::post('productTab/addProductTab', [ProductTabController::class, 'addProductTab']);
     Route::post('productTab/updateProductTab/{id}', [ProductTabController::class, 'updateProductTab']);
