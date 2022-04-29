@@ -26,22 +26,24 @@ class AddressController extends Controller
     {
         try {
             $request->validate([
+                'country_id' => 'required|exists:countries,id',
                 'city_id' => 'required|exists:cities,id',
+                'district_id' => 'required|exists:districts,id',
+                'title' => 'required',
                 'name' => 'required',
+                'surname' => 'required',
                 'address_1' => 'required',
-                'address_2' => 'required',
-                'postal_code' => 'required',
                 'phone' => 'required',
-                'comment' => 'required',
                 'type' => 'required',
-                'tax_number' => 'required',
-                'tax_office' => 'required',
-                'company_name' => 'required',
             ]);
             $address_id = Address::query()->insertGetId([
                 'user_id' => $user_id,
+                'country_id' => $request->country_id,
                 'city_id' => $request->city_id,
+                'district_id' => $request->district_id,
+                'title' => $request->title,
                 'name' => $request->name,
+                'surname' => $request->surname,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
                 'postal_code' => $request->postal_code,
