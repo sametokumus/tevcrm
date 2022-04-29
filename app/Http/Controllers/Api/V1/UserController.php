@@ -29,13 +29,14 @@ class UserController extends Controller
     public function getUser($id){
         try {
             $user = User::query()->where('id',$id)->first();
-            return response(['message' => 'İşlem Başarılı.','status' => 'success','object' => ['user' => $user]]);
+            $user_profile = UserProfile::query()->where('user_id',$id)->first();
+            return response(['message' => 'İşlem Başarılı.','status' => 'success','object' => ['user' => $user,'user_profile' => $user_profile]]);
         } catch (QueryException $queryException){
             return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
         }
     }
 
-    public function updateUser(Request $request,$user_id,$document_id){
+    public function updateUser(Request $request,$user_id){
         try {
             $profile = json_decode($request->profile);
             $productArray = $this->objectToArray($profile);
@@ -56,7 +57,7 @@ class UserController extends Controller
                 'phone_number' => $profile->phone_number
             ]);
 
-            $user_profile = UserProfile::query()->where('id',$user_id)->update([
+            $user_profile = UserProfile::query()->where('user_id',$user_id)->update([
                 'name' => $profile->name,
                 'surname' => $profile->surname,
                 'birthday' => \Illuminate\Support\Carbon::parse($profile->birthday)->format('Y-m-d'),
@@ -76,7 +77,7 @@ class UserController extends Controller
             }
             $user_document_checks = $profile->user_document_checks;
             foreach ($user_document_checks as $user_document_check){
-                UserDocumentCheck::query()->where('user_id',$user_id)->where('document_id',$document_id)->update([
+                UserDocumentCheck::query()->where('user_id',$user_id)->where('document_id',$user_document_check->document_id)->update([
                     'value' => $user_document_check->value
                 ]);
             }

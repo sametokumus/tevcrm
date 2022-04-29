@@ -45,7 +45,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/user/getUsers', [UserController::class, 'getUsers']);
     Route::get('/user/getUser/{id}', [UserController::class, 'getUser']);
-    Route::post('/user/updateUser/{user_id}/{document_id}', [UserController::class, 'updateUser']);
+    Route::post('/user/updateUser/{user_id}', [UserController::class, 'updateUser']);
     Route::get('/user/deleteUser/{id}', [UserController::class, 'deleteUser']);
 
     Route::get('/addresses/getAddressesByUserId/{user_id}', [AddressController::class, 'getAddressesByUserId']);
@@ -57,7 +57,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/countries/getCountries', [CountriesController::class, 'getCountries']);
     Route::post('/countries/addCountries', [CountriesController::class, 'addCountries']);
 
-    Route::get('/cities/getCities', [CitiesController::class, 'getCities']);
+    Route::get('/cities/getCities/{country_id}', [CitiesController::class, 'getCities']);
+    Route::get('/cities/getDistricts/{city_id}', [CitiesController::class, 'getDistricts']);
     Route::post('/cities/addCities/{country_id}', [CitiesController::class, 'addCities']);
 
     Route::get('/contactRules/getContactRules', [ContactRulesController::class, 'getContactRules']);
