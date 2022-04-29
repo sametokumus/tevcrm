@@ -47,6 +47,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/user/getUser/{id}', [UserController::class, 'getUser']);
     Route::post('/user/updateUser/{user_id}', [UserController::class, 'updateUser']);
     Route::get('/user/deleteUser/{id}', [UserController::class, 'deleteUser']);
+    Route::post('/user/deleteUser/{id}', [UserController::class, 'deleteUser']);
 
     Route::get('/addresses/getAddressesByUserId/{user_id}', [AddressController::class, 'getAddressesByUserId']);
     Route::post('/addresses/addUserAddresses/{user_id}', [AddressController::class, 'addUserAddresses']);
@@ -57,8 +58,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/countries/getCountries', [CountriesController::class, 'getCountries']);
     Route::post('/countries/addCountries', [CountriesController::class, 'addCountries']);
 
-    Route::get('/cities/getCities/{country_id}', [CitiesController::class, 'getCities']);
-    Route::get('/cities/getDistricts/{city_id}', [CitiesController::class, 'getDistricts']);
+    Route::get('/cities/getCitiesByCountryId/{country_id}', [CitiesController::class, 'getCitiesByCountryId']);
+    Route::get('/cities/getDistrictsByCityId/{city_id}', [CitiesController::class, 'getDistrictsByCityId']);
     Route::post('/cities/addCities/{country_id}', [CitiesController::class, 'addCities']);
 
     Route::get('/contactRules/getContactRules', [ContactRulesController::class, 'getContactRules']);

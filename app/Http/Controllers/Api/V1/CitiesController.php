@@ -11,7 +11,7 @@ use Nette\Schema\ValidationException;
 
 class CitiesController extends Controller
 {
-    public function getCities($country_id)
+    public function getCitiesByCountryId($country_id)
     {
         try {
                 $cities = City::query()->where('country_id',$country_id)->get();
@@ -21,7 +21,7 @@ class CitiesController extends Controller
         }
     }
 
-    public function getDistricts($city_id){
+    public function getDistrictsByCityId($city_id){
         try {
             $districts = District::query()->where('city_id',$city_id)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success','districts' => $districts]);
