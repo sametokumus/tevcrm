@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProductDocumentController;
 use App\Http\Controllers\Api\V1\CartController;
+use App\Http\Controllers\Api\V1\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,6 +82,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::post('/cart/addCart', [CartController::class, 'addCart']);
     Route::post('/cart/updateCartProduct', [CartController::class, 'updateCartProduct']);
 
+    Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 
     Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);
     Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
