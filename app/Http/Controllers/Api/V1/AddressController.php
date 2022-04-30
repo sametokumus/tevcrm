@@ -24,6 +24,7 @@ class AddressController extends Controller
                 $address['city'] = City::query()->where('id',$address->city_id)->first();
                 $address['district'] = District::query()->where('id',$address->district_id)->first();
             }
+
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['addresses' => $addresses]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
