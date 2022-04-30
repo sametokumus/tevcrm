@@ -21,8 +21,8 @@ class AddressController extends Controller
             $addresses = Address::query()->where('user_id', $user_id)->where('active',1)->get();
             foreach ($addresses as $address){
                 $address['country'] = Country::query()->where('id',$address->country_id)->first();
-                $address['city'] = City::query()->where('id',$address->city)->first();
-                $address['district'] = District::query()->where('id',$address->district)->first();
+                $address['city'] = City::query()->where('id',$address->city_id)->first();
+                $address['district'] = District::query()->where('id',$address->district_id)->first();
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['addresses' => $addresses]]);
         } catch (QueryException $queryException) {
