@@ -23,10 +23,10 @@ class CreateAddressesTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('address_1');
-            $table->string('address_2');
+            $table->string('address_2')->nullable();
             $table->string('postal_code');
             $table->string('phone');
-            $table->mediumText('comment');
+            $table->mediumText('comment')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('type')->default(1);
             $table->timestamp('created_at')->useCurrent();

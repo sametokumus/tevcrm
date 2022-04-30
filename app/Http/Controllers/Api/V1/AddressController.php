@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Address;
 use App\Models\CorporateAddresses;
+use App\Models\Country;
+use App\Models\District;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,11 @@ class AddressController extends Controller
     {
         try {
             $addresses = Address::query()->where('user_id', $user_id)->where('active',1)->get();
+            foreach ($addresses as $address){
+                $address['country'] = Country::query()->where('id',$address->country_id)->first()->name;
+                $address['city'] = City::query()->where('id',$address->city)->first()->name;
+                $address['district'] = District::query()->where('id',$address->district)->first()->name;
+            }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['addresses' => $addresses]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
