@@ -98,8 +98,12 @@ class AddressController extends Controller
 
             $address = Address::query()->where('id',$address_id)->update([
                 'user_id' => $user_id,
+                'country_id' => $request->country_id,
                 'city_id' => $request->city_id,
+                'district_id' => $request->district_id,
+                'title' => $request->title,
                 'name' => $request->name,
+                'surname' => $request->surname,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
                 'postal_code' => $request->postal_code,
