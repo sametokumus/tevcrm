@@ -134,8 +134,8 @@ class AddressController extends Controller
                 'type' => $request->type
                 ]);
 
-            if ($request->type == 1) {
-                CorporateAddresses::query()->where('id',$address_id)->update([
+            if ($request->type == 2) {
+                CorporateAddresses::query()->where('id',$address_id)->updateOrCreate([
                     'tax_number' => $request->tax_number,
                     'tax_office' => $request->tax_office,
                     'company_name' => $request->company_name
