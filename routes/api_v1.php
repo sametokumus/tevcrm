@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::post('/user/changePassword/{user_id}', [UserController::class, 'changePassword']);
 
     Route::get('/addresses/getAddressesByUserId/{user_id}', [AddressController::class, 'getAddressesByUserId']);
+    Route::get('/addresses/getAddressByUserIdAddress/{user_id}/{address_id}', [AddressController::class, 'getAddressByUserIdAddressId']);
     Route::post('/addresses/addUserAddresses/{user_id}', [AddressController::class, 'addUserAddresses']);
     Route::post('/addresses/updateUserAddresses/{address_id}/{user_id}', [AddressController::class, 'updateUserAddresses']);
     Route::get('/addresses/deleteUserAddresses/{address_id}', [AddressController::class, 'deleteUserAddresses']);

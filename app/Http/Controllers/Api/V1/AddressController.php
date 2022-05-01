@@ -31,6 +31,20 @@ class AddressController extends Controller
         }
     }
 
+    public function getAddressByUserIdAddressId($user_id, $address_id)
+    {
+        try {
+            $address = Address::query()->where('user_id', $user_id)->where('id', $address_id)->where('active',1)->first();
+            $address['country'] = Country::query()->where('id',$address->country_id)->first();
+            $address['city'] = City::query()->where('id',$address->city_id)->first();
+            $address['district'] = District::query()->where('id',$address->district_id)->first();
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['address' => $address]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
     public function addUserAddresses(Request $request,$user_id)
     {
         try {
