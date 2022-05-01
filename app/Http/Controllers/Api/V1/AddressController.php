@@ -102,7 +102,7 @@ class AddressController extends Controller
         }
     }
 
-    public function updateUserAddresses(Request $request,$address_id,$user_id){
+    public function updateUserAddresses(Request $request,$user_id,$address_id){
         try {
             $request->validate([
                 'city_id' => 'required|exists:cities,id',
