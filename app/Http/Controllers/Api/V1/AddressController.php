@@ -113,9 +113,6 @@ class AddressController extends Controller
                 'phone' => 'required',
                 'comment' => 'required',
                 'type' => 'required',
-                'tax_number' => 'required',
-                'tax_office' => 'required',
-                'company_name' => 'required',
             ]);
 
             $address = Address::query()->where('id',$address_id)->update([
