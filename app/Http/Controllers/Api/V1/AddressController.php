@@ -35,6 +35,14 @@ class AddressController extends Controller
     {
         try {
             $address = Address::query()->where('user_id', $user_id)->where('id', $address_id)->where('active',1)->first();
+
+            if($address->type == 2){
+                $corporate_address = CorporateAddresses::query()->where('address_id', $address_id)->first();
+                $address['company_name'] = $corporate_address->company_name;
+                $address['tax_number'] = $corporate_address->tax_number;
+                $address['tax_office'] = $corporate_address->tax_office;
+            }
+
             $address['country'] = Country::query()->where('id',$address->country_id)->first();
             $address['city'] = City::query()->where('id',$address->city_id)->first();
             $address['district'] = District::query()->where('id',$address->district_id)->first();
