@@ -108,10 +108,8 @@ class AddressController extends Controller
                 'city_id' => 'required|exists:cities,id',
                 'name' => 'required',
                 'address_1' => 'required',
-                'address_2' => 'required',
                 'postal_code' => 'required',
                 'phone' => 'required',
-                'comment' => 'required',
                 'type' => 'required',
             ]);
 
