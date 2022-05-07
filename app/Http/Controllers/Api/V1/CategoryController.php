@@ -12,7 +12,11 @@ class CategoryController extends Controller
     public function getCategory()
     {
         try {
-            $categories = Category::query()->where('active',1)->get();
+            $categories = Category::query()->where('parent_id',0)->where('active',1)->get();
+            foreach ($categories as $category){
+                $sub_categories = Category::query()->where('parent_id',$category->id)->where('active',1)->get();
+                $category['sub_categories'] = $sub_categories;
+            }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
