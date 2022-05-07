@@ -12,8 +12,8 @@ class CategoryController extends Controller
     public function getCategory()
     {
         try {
-            $brands = Category::query()->where('active',1)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['brands' => $brands]]);
+            $categories = Category::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
