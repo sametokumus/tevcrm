@@ -18,4 +18,13 @@ class ProductTypeController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+    public function getProductTypeById($type_id)
+    {
+        try {
+            $product_type = ProductType::query()->where('active',1)->where('id',$type_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_type' => $product_type]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
