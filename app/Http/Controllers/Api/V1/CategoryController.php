@@ -31,4 +31,13 @@ class CategoryController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+    public function getCategoryById($category_id)
+    {
+        try {
+            $category = Category::query()->where('id',$category_id)->where('active',1)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['category' => $category]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
