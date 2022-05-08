@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
 
     Route::post('productType/addProductType', [ProductTypeController::class, 'addProductType']);
-    Route::post('productType/updateProduct/{product_id}', [ProductTypeController::class, 'updateProduct']);
+    Route::post('productType/updateProductType/{id}', [ProductTypeController::class, 'updateProductType']);
     Route::get('productType/deleteProductType/{id}', [ProductTypeController::class, 'deleteProductType']);
 
     Route::post('category/addCategory', [CategoryController::class, 'addCategory']);

@@ -35,11 +35,11 @@ class ProductTypeController extends Controller
                 'name' => 'required',
             ]);
 
-            $address = ProductType::query()->where('id',$id)->update([
+            $product_type = ProductType::query()->where('id',$id)->update([
                 'name' => $request->name
             ]);
 
-            return response(['message' => 'Ürün tipi güncelleme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => 'Ürün tipi güncelleme işlemi başarılı.','status' => 'success','object' => ['product_type' => $product_type]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -52,10 +52,10 @@ class ProductTypeController extends Controller
     public function deleteProductType($id){
         try {
 
-            $address = ProductType::query()->where('id',$id)->update([
+            $product_type = ProductType::query()->where('id',$id)->update([
                 'active' => 0,
             ]);
-            return response(['message' => 'Ürün tipi silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => 'Ürün tipi silme işlemi başarılı.','status' => 'success','object' => ['product_type' => $product_type]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
