@@ -37,13 +37,17 @@ class CategoryController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
+                'slug' => 'required',
+                'parent_id' => 'required',
             ]);
 
-            $address = Category::query()->where('id',$id)->update([
-                'name' => $request->name
+            $category = Category::query()->where('id',$id)->update([
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'parent_id' => $request->parent_id
             ]);
 
-            return response(['message' => 'Kategori güncelleme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => 'Kategori güncelleme işlemi başarılı.','status' => 'success','object' => ['category' => $category]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
