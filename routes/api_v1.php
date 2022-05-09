@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProductDocumentController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\ProductTabController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -100,7 +101,11 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/product/getProductVariationGroupTypeById/{id}', [ProductController::class, 'getProductVariationGroupTypeById']);
 
 
-    Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
+    Route::get('/productType/getProductTypes', [ProductTypeController::class, 'getProductTypes']);
     Route::get('/productType/getProductVariationById/{variation_id}', [ProductTypeController::class, 'getProductTypeById']);
+
+    Route::get('/productTab/getProductTab', [ProductTabController::class, 'getProductTab']);
+    Route::get('/productTab/getProductTabById/{tab_id}', [ProductTabController::class, 'getProductTabById']);
+
 
 });

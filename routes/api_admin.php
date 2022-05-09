@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('product/addProduct', [ProductController::class, 'addProduct']);
     Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
+    Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
 
     Route::post('product/addProductVariationGroup', [ProductController::class, 'addProductVariationGroup']);
     Route::post('product/updateProductVariationGroup/{id}', [ProductController::class, 'updateProductVariationGroup']);
@@ -90,8 +91,12 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('orderStatus/addOrderStatus', [OrderStatusController::class, 'addOrderStatus']);
 
+    Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
+    Route::post('product/updateProductTab/{id}', [ProductController::class, 'updateProductTab']);
+
     Route::post('productTab/addProductTab', [ProductTabController::class, 'addProductTab']);
     Route::post('productTab/updateProductTab/{id}', [ProductTabController::class, 'updateProductTab']);
+    Route::get('productTab/deleteProductTab/{id}', [ProductTabController::class, 'deleteProductTab']);
 
 
 

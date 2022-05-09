@@ -17,21 +17,13 @@ class ProductTabController extends Controller
     {
 
         try {
-                $product_tab_row = ProductTab::query()->where('title',$request->title)->first();
 
-                if (isset($product_tab_row)){
-                    $product_tab_id = $product_tab_row->id;
-                }else{
-                    $product_tab_id = ProductTab::query()->insertGetId([
-                        'title' => $request->title
-                    ]);
-                }
-                ProductTabContent::query()->insert([
-                    'product_id' => $request->product_id,
-                    'product_tab_id' => $product_tab_id,
-                    'content_text' => $request->content_text
-                ]);
-
+            $request->validate([
+                'title'=>'required'
+            ]);
+            ProductTab::query()->insert([
+                'title' => $request->title
+            ]);
             return response(['message' => 'Ürün sekmesi ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -44,26 +36,9 @@ class ProductTabController extends Controller
 
     public function updateProductTab(Request $request,$id){
         try {
-            ProductTabContent::query()->where('product_tab_id',$request->product_tab_id)->update([
-                'active' => 0
+            ProductTab::query()->where('id',$id)->update([
+                'title' => $request->title
             ]);
-
-            $product_tab_row = ProductTabContent::query()->where('product_tab_id',$id)->first();
-
-            if (isset($product_tab_row)){
-                ProductTabContent::query()->where('product_tab_id',$product_tab_row->id)->update([
-                    'product_id' => $request->product_id,
-                    'product_tab_id' => $product_tab_row->id,
-                    'content_text' => $request->content_text,
-                    'active' => 1
-                ]);
-            }else{
-                ProductTabContent::query()->insert([
-                    'product_id' => $request->product_id,
-                    'product_tab_id' => $request->product_tab_id,
-                    'content_text' => $request->content_text
-                ]);
-            }
 
             return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -75,5 +50,19 @@ class ProductTabController extends Controller
         }
     }
 
+    public function deleteProductTab($id){
+        try {
+            ProductTab::query()->where('id',$id)->update([
+                'active'=>0
+            ]);
+            return response(['message' => 'Ürün sekmesi silme işlemi başarılı.','status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','ar' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
 
 }
