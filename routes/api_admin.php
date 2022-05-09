@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\ProductTabController;
 use App\Http\Controllers\Api\Admin\OrderStatusController;
 //use App\Http\Controllers\Api\Admin\ProductDocumentController;
+use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,9 +80,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/updateProductVariationGroup/{id}', [ProductController::class, 'updateProductVariationGroup']);
     Route::get('product/deleteProductVariationGroup/{id}', [ProductController::class, 'deleteProductVariationGroup']);
 
-    Route::post('product/addProductVariationGroupType', [ProductController::class, 'addProductVariationGroupType']);
-    Route::post('product/updateProductVariationGroupType/{id}', [ProductController::class, 'updateProductVariationGroupType']);
-    Route::get('product/deleteProductVariationGroupType/{id}', [ProductController::class, 'deleteProductVariationGroupType']);
+    Route::post('productVariationGroupType/addProductVariationGroupType', [ProductVariationGroupTypeController::class, 'addProductVariationGroupType']);
+    Route::post('productVariationGroupType/updateProductVariationGroupType/{id}', [ProductVariationGroupTypeController::class, 'updateProductVariationGroupType']);
+    Route::get('productVariationGroupType/deleteProductVariationGroupType/{id}', [ProductVariationGroupTypeController::class, 'deleteProductVariationGroupType']);
 
     Route::post('product/addProductVariation', [ProductController::class, 'addProductVariation']);
     Route::post('product/updateProductVariation/{id}', [ProductController::class, 'updateProductVariation']);

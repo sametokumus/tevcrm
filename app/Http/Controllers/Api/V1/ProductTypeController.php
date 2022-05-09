@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProductTypeController extends Controller
 {
-    public function getProductType()
+    public function getProductTypes()
     {
         try {
             $product_type = ProductType::query()->where('active',1)->get();

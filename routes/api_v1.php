@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\ProductDocumentController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProductTabController;
+use App\Http\Controllers\Api\V1\ProductVariationGroupTypeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -86,7 +87,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 
-    Route::get('/brand/getBrand', [BrandController::class, 'getBrand']);
+    Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
+    Route::get('/brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
     Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
     Route::get('/productType/getProductTypeById/{type_id}', [ProductTypeController::class, 'getProductTypeById']);
     Route::get('/category/getCategory', [CategoryController::class, 'getCategory']);
@@ -97,8 +99,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
 
 
-    Route::get('/product/getProductVariationGroupTypes', [ProductController::class, 'getProductVariationGroupTypes']);
-    Route::get('/product/getProductVariationGroupTypeById/{id}', [ProductController::class, 'getProductVariationGroupTypeById']);
+    Route::get('/productVariationGroupType/getProductVariationGroupTypes', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypes']);
+    Route::get('/productVariationGroupType/getProductVariationGroupTypeById/{id}', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypeById']);
 
 
     Route::get('/productType/getProductTypes', [ProductTypeController::class, 'getProductTypes']);
