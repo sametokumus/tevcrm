@@ -17,7 +17,6 @@ class CreateOrderStatusHistoriesTable extends Migration
             $table->id();
             $table->bigInteger('status_id');
             $table->bigInteger('order_id');
-            $table->dateTime('date');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

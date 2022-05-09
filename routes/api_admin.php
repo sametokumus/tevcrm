@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\ProductTabController;
+use App\Http\Controllers\Api\Admin\OrderStatusController;
 //use App\Http\Controllers\Api\Admin\ProductDocumentController;
 
 /*
@@ -80,6 +81,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/updateProductVariation/{id}', [ProductController::class, 'updateProductVariation']);
 
     Route::post('product/addProductImage', [ProductController::class, 'addProductImage']);
+
+    Route::post('orderStatus/addOrderStatus', [OrderStatusController::class, 'addOrderStatus']);
 
     Route::post('productTab/addProductTab', [ProductTabController::class, 'addProductTab']);
     Route::post('productTab/updateProductTab/{id}', [ProductTabController::class, 'updateProductTab']);

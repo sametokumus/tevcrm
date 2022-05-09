@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\OrderStatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -61,6 +62,12 @@ class OrderController extends Controller
                     'quantity' => $order_product->quantity
                 ]);
             }
+            $order_status_id = Order::query()->where('order_id',$order_id)->first()->status_id;
+
+            OrderStatusHistory::query()->insert([
+                'order_id' => $order_id,
+                'status_id' => $order_status_id
+            ]);
 
             return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
