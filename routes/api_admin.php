@@ -11,10 +11,11 @@ use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\AdminController;
-use App\Http\Controllers\Api\Admin\ProductTabController;
+use App\Http\Controllers\Api\Admin\TabController;
 use App\Http\Controllers\Api\Admin\OrderStatusController;
 //use App\Http\Controllers\Api\Admin\ProductDocumentController;
 use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
+use App\Http\Controllers\Api\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,11 +113,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
     Route::post('product/updateProductTab/{id}', [ProductController::class, 'updateProductTab']);
 
-    Route::post('productTab/addProductTab', [ProductTabController::class, 'addProductTab']);
-    Route::post('productTab/updateProductTab/{id}', [ProductTabController::class, 'updateProductTab']);
-    Route::get('productTab/deleteProductTab/{id}', [ProductTabController::class, 'deleteProductTab']);
+    Route::post('tab/addTab', [TabController::class, 'addTab']);
+    Route::post('tab/updateTab/{id}', [TabController::class, 'updateTab']);
+    Route::get('tab/deleteTab/{id}', [TabController::class, 'deleteTab']);
 
-
+    Route::post('tag/addTag', [TagController::class, 'addTag']);
+    Route::post('tag/updateTag/{id}', [TagController::class, 'updateTag']);
+    Route::get('tag/deleteTag/{id}', [TagController::class, 'deleteTag']);
 
 });
 

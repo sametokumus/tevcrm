@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
 
-class ProductTabController extends Controller
+class TabController extends Controller
 {
 
-    public function addProductTab(Request $request)
+    public function addTab(Request $request)
     {
 
         try {
@@ -34,7 +34,7 @@ class ProductTabController extends Controller
         }
     }
 
-    public function updateProductTab(Request $request,$id){
+    public function updateTab(Request $request,$id){
         try {
             ProductTab::query()->where('id',$id)->update([
                 'title' => $request->title
@@ -50,7 +50,7 @@ class ProductTabController extends Controller
         }
     }
 
-    public function deleteProductTab($id){
+    public function deleteTab($id){
         try {
             ProductTab::query()->where('id',$id)->update([
                 'active'=>0
