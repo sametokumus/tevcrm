@@ -888,10 +888,6 @@ class ProductController extends Controller
         }
     }
 
-
-
-
-
     public function updateVariationImage(Request $request,$id){
         try {
             $request->validate([
