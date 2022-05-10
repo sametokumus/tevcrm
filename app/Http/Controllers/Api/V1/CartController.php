@@ -75,4 +75,23 @@ class CartController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
         }
     }
+
+    public function getCartById($cart_id){
+        try {
+            $cart = Cart::query()->where('cart_id',$cart_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getUserAllCartById($user_id){
+        try {
+            $user_cart = Cart::query()->where('user_id',$user_id)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['user_cart' => $user_cart]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
 }

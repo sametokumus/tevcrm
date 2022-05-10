@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Admin\OrderStatusController;
 //use App\Http\Controllers\Api\Admin\ProductDocumentController;
 use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\Admin\TagController;
+use App\Http\Controllers\Api\Admin\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +128,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('tag/addTag', [TagController::class, 'addTag']);
     Route::post('tag/updateTag/{id}', [TagController::class, 'updateTag']);
     Route::get('tag/deleteTag/{id}', [TagController::class, 'deleteTag']);
+
+
+    Route::get('cart/getAllCart', [CartController::class, 'getAllCart']);
+
+
 
 });
 

@@ -85,6 +85,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::post('/cart/addCart', [CartController::class, 'addCart']);
     Route::post('/cart/updateCartProduct', [CartController::class, 'updateCartProduct']);
+    Route::get('/cart/getCartById/{cart_id}', [CartController::class, 'getCartById']);
+    Route::get('/cart/getUserAllCartById/{user_id}', [CartController::class, 'getUserAllCartById']);
 
     Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 
