@@ -112,7 +112,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/tab/getTabs', [TabController::class, 'getTabs']);
     Route::get('/tab/getTabById/{tab_id}', [TabController::class, 'getTabById']);
 
-    Route::get('/tab/getTags', [TagController::class, 'getTags']);
-    Route::get('/tab/getTagById/{id}', [TagController::class, 'getTagById']);
+    Route::get('/tag/getTags', [TagController::class, 'getTags']);
+    Route::get('/tag/getTagById/{id}', [TagController::class, 'getTagById']);
 
 });
