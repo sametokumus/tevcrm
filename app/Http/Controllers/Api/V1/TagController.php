@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductTab;
+use App\Models\Tag;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class TagController extends Controller
     public function getTags()
     {
         try {
-            $tags = ProductTab::query()->where('active',1)->get();
+            $tags = Tag::query()->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tags' => $tags]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -21,7 +22,7 @@ class TagController extends Controller
     public function getTagById($id)
     {
         try {
-            $tags = ProductTab::query()->where('active',1)->where('id',$id)->first();
+            $tags = Tag::query()->where('active',1)->where('id',$id)->first();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tags' => $tags]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
