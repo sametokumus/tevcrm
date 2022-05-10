@@ -21,12 +21,12 @@ class TagController extends Controller
         try {
 
             $request->validate([
-                'title'=>'required'
+                'name'=>'required'
             ]);
             Tag::query()->insert([
-                'title' => $request->title
+                'name' => $request->name
             ]);
-            return response(['message' => 'Ürün sekmesi ekleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Etiket ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -39,10 +39,10 @@ class TagController extends Controller
     public function updateTag(Request $request,$id){
         try {
             Tag::query()->where('id',$id)->update([
-                'title' => $request->title
+                'name' => $request->name
             ]);
 
-            return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.','status' => 'success']);
+            return response(['message' => 'Etiket güncelleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -57,7 +57,7 @@ class TagController extends Controller
             Tag::query()->where('id',$id)->update([
                 'active'=>0
             ]);
-            return response(['message' => 'Ürün sekmesi silme işlemi başarılı.','status' => 'success']);
+            return response(['message' => 'Etiket silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {

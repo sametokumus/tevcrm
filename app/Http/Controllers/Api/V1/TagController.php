@@ -7,22 +7,22 @@ use App\Models\ProductTab;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class TabController extends Controller
+class TagController extends Controller
 {
-    public function getTabs()
+    public function getTags()
     {
         try {
-            $tabs = ProductTab::query()->where('active',1)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tabs' => $tabs]]);
+            $tags = ProductTab::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tags' => $tags]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
-    public function getTabById($type_id)
+    public function getTagById($id)
     {
         try {
-            $tabs = ProductTab::query()->where('active',1)->where('id',$type_id)->first();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tabs' => $tabs]]);
+            $tags = ProductTab::query()->where('active',1)->where('id',$id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['tags' => $tags]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
