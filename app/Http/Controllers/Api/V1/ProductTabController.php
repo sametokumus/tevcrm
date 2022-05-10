@@ -21,8 +21,8 @@ class ProductTabController extends Controller
     public function getProductTabById($type_id)
     {
         try {
-            $product_type = ProductTab::query()->where('active',1)->where('id',$type_id)->first();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_type' => $product_type]]);
+            $product_tab = ProductTab::query()->where('active',1)->where('id',$type_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tab' => $product_tab]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
