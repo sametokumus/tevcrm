@@ -31,11 +31,19 @@ class CartController extends Controller
                 ]);
                 $cart_id = Cart::query()->where('id',$added_cart_id)->first()->cart_id;
             }
-            CartDetail::query()->insert([
-                'cart_id' => $cart_id,
-                'product_id' => $request->product_id,
-                'quantity' => $request->quantity
-            ]);
+            $cart_detail = CartDetail::query()->where('cart_id',$cart_id)->where('product_id',$request->product_id)->first();
+            if (isset($cart_detail)){
+                $quantity = $cart_detail->quantity+$request->quantity;
+                CartDetail::query()->where('cart_id',$cart_id)->where('product_id',$request->product_id)->update([
+                    'quantity' => $quantity
+                ]);
+            }else{
+                CartDetail::query()->insert([
+                    'cart_id' => $cart_id,
+                    'product_id' => $request->product_id,
+                    'quantity' => $request->quantity
+                ]);
+            }
             return response(['message' => 'Sepet ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
