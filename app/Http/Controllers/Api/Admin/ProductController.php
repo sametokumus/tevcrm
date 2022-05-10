@@ -522,9 +522,6 @@ class ProductController extends Controller
         }
     }
 
-
-
-
     public function addProduct(Request $request)
     {
         try {
@@ -790,6 +787,150 @@ class ProductController extends Controller
                 'active' => 0
             ]);
             return response(['message' => 'Ürün varyasyon grubu silme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function addVariationAndRule(Request $request){
+        try {
+            $request->validate([
+                'variation_group_id' => 'required',
+                'name' => 'required',
+                'description' => 'required',
+                'sku' => 'required',
+                'regular_price' => 'required',
+                'discounted_price' => 'required',
+                'regular_tax' => 'required',
+                'discounted_tax' => 'required'
+            ]);
+
+            $variation_id = ProductVariation::query()->insertGetId([
+                'variation_group_id' => $request->variation_group_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+                'regular_price' => $request->regular_price,
+                'discounted_price' => $request->discounted_price,
+                'regular_tax' => $request->regular_tax,
+                'discounted_tax' => $request->discounted_tax
+            ]);
+            ProductRule::query()->insert([
+                'variation_id' => $variation_id,
+                'quantity_stock' => $request->quantity_stock,
+                'quantity_min' => $request->quantity_min,
+                'quantity_step' => $request->quantity_step
+            ]);
+            return response(['message' => 'Varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateVariationAndRule(Request $request,$id){
+        try {
+            $request->validate([
+                'variation_group_id' => 'required',
+                'name' => 'required',
+                'description' => 'required',
+                'sku' => 'required',
+                'regular_price' => 'required',
+                'discounted_price' => 'required',
+                'regular_tax' => 'required',
+                'discounted_tax' => 'required'
+            ]);
+
+            ProductVariation::query()->where('id',$id)->update([
+                'variation_group_id' => $request->variation_group_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+                'regular_price' => $request->regular_price,
+                'discounted_price' => $request->discounted_price,
+                'regular_tax' => $request->regular_tax,
+                'discounted_tax' => $request->discounted_tax
+            ]);
+            ProductRule::query()->where('variation_id',$id)->update([
+                'quantity_stock' => $request->quantity_stock,
+                'quantity_min' => $request->quantity_min,
+                'quantity_step' => $request->quantity_step
+            ]);
+            return response(['message' => 'Varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteVariationAndRule($id){
+        try {
+            ProductVariation::query()->where('id',$id)->update([
+                'active' => 0
+            ]);
+            return response(['message' => 'Varyasyon grubu silme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+
+
+
+
+    public function updateVariationImage(Request $request,$id){
+        try {
+            $request->validate([
+                'variation_id' => 'required',
+                'name' => 'required',
+                'image' => 'required',
+            ]);
+            ProductImage::query()->where('id',$id)->update([
+                'variation_id' => $request->variation_id,
+                'name' => $request->name
+            ]);
+            if ($request->hasFile('image')) {
+                $rand = uniqid();
+                $image = $request->file('image');
+                $image_name = $rand . "-" . $image->getClientOriginalName();
+                $image->move(public_path('/images/ProductImage/'), $image_name);
+                $image_path = "/images/ProductImage/" . $image_name;
+
+                ProductImage::query()->where('id', $id)->update([
+                    'image' => $image_path,
+                ]);
+            }
+
+            return response(['message' => 'Varyasyon resim güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteVariationImage($id){
+        try {
+            ProductImage::query()->where('id',$id)->update([
+                'active' => 0
+            ]);
+            return response(['message' => 'Varyasyon resmi silme işlemi başarılı.','status' => 'succcess']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

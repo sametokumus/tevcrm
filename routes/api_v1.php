@@ -96,8 +96,44 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/category/getParentCategory', [CategoryController::class, 'getParentCategory']);
     Route::get('/category/getCategoryById/{category_id}', [CategoryController::class, 'getCategoryById']);
 
+    Route::get('/product/getAllProduct', [ProductController::class, 'getAllProduct']);
+    Route::get('/product/getAllProductById/{id}', [ProductController::class, 'getAllProductById']);
+
     Route::get('/product/getProduct', [ProductController::class, 'getProduct']);
     Route::get('/product/getProductById/{id}', [ProductController::class, 'getProductById']);
+
+    Route::get('/product/getProductTagById/{product_id}', [ProductController::class, 'getProductTagById']);
+    Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
+    Route::get('/product/getProductDocumentById/{product_id}', [ProductController::class, 'getProductDocumentById']);
+    Route::get('/product/getProductVariationGroupById/{product_id}', [ProductController::class, 'getProductVariationGroupById']);
+    Route::get('/product/getProductVariationAndRuleById/{id}', [ProductController::class, 'getProductVariationAndRuleById']);
+    Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
 

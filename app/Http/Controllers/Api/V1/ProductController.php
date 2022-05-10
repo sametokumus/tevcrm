@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function getProduct()
+    public function getAllProduct()
     {
         try {
             $products = Product::query()->where('active',1)->get();
@@ -60,7 +60,7 @@ class ProductController extends Controller
         }
     }
 
-    public function getProductById($id){
+    public function getAllProductById($id){
         try {
             $product = Product::query()->where('id',$id)->where('active',1)->first();
             $brand = Product::query()->where('brand_id',$product->brand_id)->first();
@@ -88,4 +88,102 @@ class ProductController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
+    public function getProduct()
+    {
+        try {
+            $product = Product::all();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductById($id)
+    {
+        try {
+            $product = Product::query()->where('id',$id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductTagById($product_id)
+    {
+        try {
+            $product_tags = ProductTags::query()->where('product_id',$product_id)->get();
+            foreach ($product_tags as $product_tag){
+                $tag_name = Tag::query()->where('id',$product_tag->tag_id)->get();
+                $product_tag['tag'] = $tag_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tags' => $product_tags]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductCategoryById($product_id)
+    {
+        try {
+            $product_categories = ProductCategory::query()->where('product_id',$product_id)->get();
+            foreach ($product_categories as $product_category){
+                $category_name = Tag::query()->where('id',$product_category->category_id)->get();
+                $product_tag['category'] = $category_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_categories' => $product_categories]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductDocumentById($product_id)
+    {
+        try {
+            $product_documents = ProductDocument::query()->where('product_id',$product_id)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_documents' => $product_documents]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductVariationGroupById($product_id)
+    {
+        try {
+            $product_variation_groups = ProductVariationGroup::query()->where('product_id',$product_id)->get();
+            foreach ($product_variation_groups as $product_variation_group){
+                $variation_name = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
+                $product_variation_group['variation'] = $variation_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation_groups' => $product_variation_groups]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductVariationAndRuleById($id)
+    {
+        try {
+            $product_variations = ProductVariation::query()->where('id',$id)->get();
+            foreach ($product_variations as $product_variation){
+                $rule_name = ProductRule::query()->where('variation_id',$product_variation->id)->get();
+                $product_variation['rule'] = $rule_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getVariationImageById($variation_id)
+    {
+        try {
+            $variation_images = ProductImage::query()->where('variation_id',$variation_id)->get();
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['variation_images' => $variation_images]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
 }
