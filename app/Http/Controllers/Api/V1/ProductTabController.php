@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProductTabController extends Controller
 {
-    public function getProductTab()
+    public function getProductTabs()
     {
         try {
             $product_tabs = ProductTab::query()->where('active',1)->get();
