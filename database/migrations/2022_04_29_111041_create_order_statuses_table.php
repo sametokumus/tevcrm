@@ -17,6 +17,7 @@ class CreateOrderStatusesTable extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('is_default')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

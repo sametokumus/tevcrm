@@ -18,7 +18,7 @@ class CreateCarriersTable extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->string('delivery_text');
-            $table->text('logo');
+            $table->string('logo')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

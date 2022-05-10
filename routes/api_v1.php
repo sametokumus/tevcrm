@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\TabController;
 use App\Http\Controllers\Api\V1\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\V1\TagController;
+use App\Http\Controllers\Api\V1\CarrierController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -112,31 +113,6 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
 
 
@@ -152,5 +128,8 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/tag/getTags', [TagController::class, 'getTags']);
     Route::get('/tag/getTagById/{id}', [TagController::class, 'getTagById']);
+
+    Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
+    Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
 
 });

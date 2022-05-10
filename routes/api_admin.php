@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Admin\OrderStatusController;
 use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\Admin\TagController;
 use App\Http\Controllers\Api\Admin\CartController;
+use App\Http\Controllers\Api\Admin\CarrierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('cart/getAllCart', [CartController::class, 'getAllCart']);
+
+    Route::post('carrier/addCarrier', [CarrierController::class, 'addCarrier']);
+    Route::post('carrier/updateCarrier/{id}', [CarrierController::class, 'updateCarrier']);
+    Route::get('carrier/deleteCarrier/{id}', [CarrierController::class, 'deleteCarrier']);
 
 
 

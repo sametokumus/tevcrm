@@ -35,8 +35,8 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_shipping_tax');
             $table->decimal('total');
             $table->decimal('total_tax');
-            $table->tinyInteger('is_partial');
-            $table->tinyInteger('is_paid');
+            $table->tinyInteger('is_partial')->default(0);
+            $table->tinyInteger('is_paid')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

@@ -665,7 +665,7 @@ class ProductController extends Controller
             ProductCategory::query()->where('id',$id)->update([
                 'active' =>0
             ]);
-            return response(['message' => 'Ürün categorisi silme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Ürün kategorisi silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

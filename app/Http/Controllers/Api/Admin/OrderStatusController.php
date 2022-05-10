@@ -29,4 +29,11 @@ class OrderStatusController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'e' => $throwable->getMessage()]);
         }
     }
+
+    public function updateOrderStatus(Request $request,$id){
+
+    }
+    public function deleteOrderStatus($id){
+
+    }
 }
