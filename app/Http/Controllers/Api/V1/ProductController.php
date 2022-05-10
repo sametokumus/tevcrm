@@ -59,4 +59,33 @@ class ProductController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
+    public function getProductById($id){
+        try {
+            $product = Product::query()->where('id',$id)->where('active',1)->first();
+            $brand = Product::query()->where('brand_id',$product->brand_id)->first();
+            $product_type = ProductType::query()->where('id',$product->type_id)->first();
+            $product_document = ProductDocument::query()->where('product_id',$product->id)->first();
+            $product_variation_group = ProductVariationGroup::query()->where('product_id',$product->id)->first();
+            $product_variation_group['name'] = ProductVariationGroupType::query()->where('id',$product_variation_group->group_type_id)->first();
+            $product_variation_group['variations'] = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
+            $variation = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
+            $product_variation_group['images'] = ProductImage::query()->where('variation_id',$variation->id)->first();
+            $product_variation_group['rule'] = ProductRule::query()->where('variation_id',$variation->id)->first();
+            $product_tag = ProductTags::query()->where('product_id',$product->id)->first();
+            $product_tag['name'] = Tag::query()->where('id',$product_tag->tag_id)->first();
+            $product_category = ProductCategory::query()->where('product_id',$product->id)->first();
+            $product_category['categories'] = Category::query()->where('id',$product_category->category_id)->first();
+
+            $product['brand'] = $brand;
+            $product['product_type'] = $product_type;
+            $product['product_document'] = $product_document;
+            $product['variation_group'] = $product_variation_group;
+            $product['product_tag'] = $product_tag;
+            $product['product_category'] = $product_category;
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
