@@ -16,6 +16,7 @@ class CreateProductDocumentsTable extends Migration
         Schema::create('product_documents', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->nullable();
+            $table->string('title')->nullable();
             $table->text('file')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

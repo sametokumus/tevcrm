@@ -72,13 +72,30 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
     Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
 
+    Route::post('product/addFullProduct', [ProductController::class, 'addFullProduct']);
+    Route::post('product/updateFullProduct/{id}', [ProductController::class, 'updateFullProduct']);
+    Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
     Route::post('product/addProduct', [ProductController::class, 'addProduct']);
     Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
-    Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
+
+    Route::post('product/addProductTag', [ProductController::class, 'addProductTag']);
+    Route::get('product/deleteProductTag/{id}', [ProductController::class, 'deleteProductTag']);
+
+    Route::post('product/addProductCategory', [ProductController::class, 'addProductCategory']);
+    Route::get('product/deleteProductCategory/{id}', [ProductController::class, 'deleteProductCategory']);
+
+    Route::post('product/addProductDocument', [ProductController::class, 'addProductDocument']);
+    Route::post('product/updateProductDocument/{id}', [ProductController::class, 'updateProductDocument']);
+    Route::get('product/deleteProductDocument/{id}', [ProductController::class, 'deleteProductDocument']);
 
     Route::post('product/addProductVariationGroup', [ProductController::class, 'addProductVariationGroup']);
     Route::post('product/updateProductVariationGroup/{id}', [ProductController::class, 'updateProductVariationGroup']);
     Route::get('product/deleteProductVariationGroup/{id}', [ProductController::class, 'deleteProductVariationGroup']);
+
+
+    Route::post('product/addFullProductVariationGroup', [ProductController::class, 'addFullProductVariationGroup']);
+    Route::post('product/updateFullProductVariationGroup/{id}', [ProductController::class, 'updateFullProductVariationGroup']);
+    Route::get('product/deleteFullProductVariationGroup/{id}', [ProductController::class, 'deleteFullProductVariationGroup']);
 
     Route::post('productVariationGroupType/addProductVariationGroupType', [ProductVariationGroupTypeController::class, 'addProductVariationGroupType']);
     Route::post('productVariationGroupType/updateProductVariationGroupType/{id}', [ProductVariationGroupTypeController::class, 'updateProductVariationGroupType']);

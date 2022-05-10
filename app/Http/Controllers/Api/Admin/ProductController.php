@@ -28,7 +28,7 @@ class ProductController extends Controller
         return @json_decode(json_encode($object), true);
     }
 
-    public function addProduct(Request $request)
+    public function addFullProduct(Request $request)
     {
         try {
 
@@ -108,7 +108,7 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProduct(Request $request, $product_id)
+    public function updateFullProduct(Request $request, $product_id)
     {
         try {
             $product = json_decode($request->product);
@@ -203,23 +203,24 @@ class ProductController extends Controller
         }
     }
 
-    public function deleteProduct($id){
+    public function deleteProduct($id)
+    {
         try {
 
-            $product = Product::query()->where('id',$id)->update([
+            $product = Product::query()->where('id', $id)->update([
                 'active' => 0
             ]);
-            return response(['message' => 'Ürün silme işlemi başarılı.','status' => 'success','object' => ['product' => $product]]);
+            return response(['message' => 'Ürün silme işlemi başarılı.', 'status' => 'success', 'object' => ['product' => $product]]);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
         }
     }
 
-    public function addProductVariationGroup(Request $request)
+    public function addFullProductVariationGroup(Request $request)
     {
         try {
 
@@ -229,10 +230,10 @@ class ProductController extends Controller
                 'order' => 'required',
             ]);
 
-            $variation_group_type = ProductVariationGroupType::query()->where('name',$request->name)->first();
-            if (isset($variation_group_type)){
+            $variation_group_type = ProductVariationGroupType::query()->where('name', $request->name)->first();
+            if (isset($variation_group_type)) {
                 $variation_group_type_id = $variation_group_type->id;
-            }else{
+            } else {
                 $variation_group_type_id = ProductVariationGroupType::query()->insertGetId([
                     'name' => $request->name
                 ]);
@@ -252,7 +253,7 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProductVariationGroup(Request $request, $variation_group_type_id)
+    public function updateFullProductVariationGroup(Request $request, $variation_group_type_id)
     {
         try {
 
@@ -260,19 +261,19 @@ class ProductController extends Controller
                 'name' => 'required',
             ]);
 
-            ProductVariationGroupType::query()->where('id',$variation_group_type_id)->update([
+            ProductVariationGroupType::query()->where('id', $variation_group_type_id)->update([
                 'active' => 0
             ]);
 
-            $variation_group_type = ProductVariationGroupType::query()->where('name',$request->name)->first();
-            if (isset($variation_group_type)){
+            $variation_group_type = ProductVariationGroupType::query()->where('name', $request->name)->first();
+            if (isset($variation_group_type)) {
                 $variation_group_type_id = $variation_group_type->id;
-            }else{
+            } else {
                 $variation_group_type_id = ProductVariationGroupType::query()->insertGetId([
                     'name' => $request->name
                 ]);
             }
-            ProductVariationGroup::query()->where('group_type_id',$variation_group_type_id)->update([
+            ProductVariationGroup::query()->where('group_type_id', $variation_group_type_id)->update([
                 'product_id' => $request->product_id,
                 'group_type_id' => $variation_group_type_id,
                 'order' => $request->order
@@ -288,11 +289,11 @@ class ProductController extends Controller
         }
     }
 
-    public function deleteProductVariationGroup($variation_group_id)
+    public function deleteFullProductVariationGroup($variation_group_id)
     {
         try {
 
-            ProductVariationGroup::query()->where('id',$variation_group_id)->update([
+            ProductVariationGroup::query()->where('id', $variation_group_id)->update([
                 'active' => 0
             ]);
 
@@ -462,11 +463,11 @@ class ProductController extends Controller
     {
 
         try {
-            $product_tab_row = ProductTab::query()->where('title',$request->title)->first();
+            $product_tab_row = ProductTab::query()->where('title', $request->title)->first();
 
-            if (isset($product_tab_row)){
+            if (isset($product_tab_row)) {
                 $product_tab_id = $product_tab_row->id;
-            }else{
+            } else {
                 $product_tab_id = ProductTab::query()->insertGetId([
                     'title' => $request->title
                 ]);
@@ -487,22 +488,23 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProductTab(Request $request,$id){
+    public function updateProductTab(Request $request, $id)
+    {
         try {
-            ProductTabContent::query()->where('product_tab_id',$request->product_tab_id)->update([
+            ProductTabContent::query()->where('product_tab_id', $request->product_tab_id)->update([
                 'active' => 0
             ]);
 
-            $product_tab_row = ProductTabContent::query()->where('product_tab_id',$id)->first();
+            $product_tab_row = ProductTabContent::query()->where('product_tab_id', $id)->first();
 
-            if (isset($product_tab_row)){
-                ProductTabContent::query()->where('product_tab_id',$product_tab_row->id)->update([
+            if (isset($product_tab_row)) {
+                ProductTabContent::query()->where('product_tab_id', $product_tab_row->id)->update([
                     'product_id' => $request->product_id,
                     'product_tab_id' => $product_tab_row->id,
                     'content_text' => $request->content_text,
                     'active' => 1
                 ]);
-            }else{
+            } else {
                 ProductTabContent::query()->insert([
                     'product_id' => $request->product_id,
                     'product_tab_id' => $request->product_tab_id,
@@ -510,13 +512,290 @@ class ProductController extends Controller
                 ]);
             }
 
-            return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.','status' => 'success']);
+            return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','ar' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'ar' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
+        }
+    }
+
+
+
+
+    public function addProduct(Request $request)
+    {
+        try {
+            $request->validate([
+                'brand_id' => 'required|exists:brands,id',
+                'type_id' => 'required|exists:product_types,id',
+                'name' => 'required',
+                'description' => 'required',
+                'sku' => 'required',
+                'delivery_price' => 'required',
+                'delivery_tax' => 'required',
+                'is_free_shipping' => 'required',
+                'view_all_images' => 'required'
+            ]);
+
+            Product::query()->insert([
+                'brand_id' => $request->brand_id,
+                'type_id' => $request->type_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+                'delivery_price' => $request->delivery_price,
+                'delivery_tax' => $request->delivery_tax,
+                'is_free_shipping' => $request->is_free_shipping,
+                'view_all_images' => $request->view_all_images,
+            ]);
+            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function updateProduct(Request $request,$id)
+    {
+        try {
+            $request->validate([
+                'brand_id' => 'required|exists:brands,id',
+                'type_id' => 'required|exists:product_types,id',
+                'name' => 'required',
+                'description' => 'required',
+                'sku' => 'required',
+                'delivery_price' => 'required',
+                'delivery_tax' => 'required',
+                'is_free_shipping' => 'required',
+                'view_all_images' => 'required'
+            ]);
+
+            Product::query()->where('id',$id)->update([
+                'brand_id' => $request->brand_id,
+                'type_id' => $request->type_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+                'delivery_price' => $request->delivery_price,
+                'delivery_tax' => $request->delivery_tax,
+                'is_free_shipping' => $request->is_free_shipping,
+                'view_all_images' => $request->view_all_images,
+            ]);
+            return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function addProductTag(Request $request)
+    {
+        try {
+            $request->validate([
+                'tag_id' => 'required',
+                'product_id' => 'required',
+            ]);
+
+            ProductTags::query()->insert([
+                'tag_id' => $request->tag_id,
+                'product_id' => $request->product_id
+            ]);
+            return response(['message' => 'Ürün etiketi ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function deleteProductTag($id)
+    {
+        try {
+            ProductTags::query()->where('id',$id)->update([
+                'active' =>0
+            ]);
+            return response(['message' => 'Ürün etiketi silme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function addProductCategory(Request $request)
+    {
+        try {
+            $request->validate([
+                'category_id' => 'required',
+                'product_id' => 'required',
+            ]);
+
+            ProductCategory::query()->insert([
+                'product_id' => $request->product_id,
+                'category_id' => $request->category_id
+            ]);
+            return response(['message' => 'Ürün kategorisi ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function deleteProductCategory($id)
+    {
+        try {
+            ProductCategory::query()->where('id',$id)->update([
+                'active' =>0
+            ]);
+            return response(['message' => 'Ürün categorisi silme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function addProductDocument(Request $request){
+        try {
+            $document_id = ProductDocument::query()->insertGetId([
+                'product_id' => $request->product_id,
+                'title' => $request->title
+            ]);
+            if ($request->hasFile('file')) {
+                $rand = uniqid();
+                $image = $request->file('file');
+                $image_name = $rand . "-" . $image->getClientOriginalName();
+                $image->move(public_path('/images/ProductDocument/'), $image_name);
+                $image_path = "/images/ProductDocument/" . $image_name;
+
+                ProductDocument::query()->where('id', $document_id)->update([
+                    'file' => $image_path,
+                ]);
+            }
+            return response(['message' => 'Ürün dökümanı ekleme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateProductDocument(Request $request,$id){
+        try {
+            ProductDocument::query()->where('id',$id)->update([
+                'product_id' => $request->product_id,
+                'title' => $request->title
+            ]);
+            if ($request->hasFile('file')) {
+                $rand = uniqid();
+                $image = $request->file('file');
+                $image_name = $rand . "-" . $image->getClientOriginalName();
+                $image->move(public_path('/images/ProductDocument/'), $image_name);
+                $image_path = "/images/ProductDocument/" . $image_name;
+
+                ProductDocument::query()->where('id', $id)->update([
+                    'file' => $image_path,
+                ]);
+            }
+            return response(['message' => 'Ürün dökümanı güncelleme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteProductDocument($id)
+    {
+        try {
+            ProductDocument::query()->where('id',$id)->update([
+                'active' => 0
+            ]);
+            return response(['message' => 'Ürün dökümanı silme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
+
+    public function addProductVariationGroup(Request $request){
+        try {
+            ProductVariationGroup::query()->insert([
+                'product_id' => $request->product_id,
+                'group_type_id' => $request->group_type_id,
+                'order' => $request->order
+            ]);
+            return response(['message' => 'Ürün varyasyon grubu ekleme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateProductVariationGroup(Request $request,$id){
+        try {
+            ProductVariationGroup::query()->where('id',$id)->update([
+                'product_id' => $request->product_id,
+                'group_type_id' => $request->group_type_id,
+                'order' => $request->order
+            ]);
+            return response(['message' => 'Ürün varyasyon grubu güncelleme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteProductVariationGroup($id){
+        try {
+            ProductVariationGroup::query()->where('id',$id)->update([
+                'active' => 0
+            ]);
+            return response(['message' => 'Ürün varyasyon grubu silme işlemi başarılı.','status' => 'succcess']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
         }
     }
 
