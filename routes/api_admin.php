@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminUserComments;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
-//use \App\Http\Controllers\Api\Admin\AdminPermissionRolesController;
 use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\ProductTypeController;
 use App\Http\Controllers\Api\Admin\CategoryController;
@@ -13,11 +12,11 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\TabController;
 use App\Http\Controllers\Api\Admin\OrderStatusController;
-//use App\Http\Controllers\Api\Admin\ProductDocumentController;
 use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\Admin\TagController;
 use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CarrierController;
+use App\Http\Controllers\Api\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +117,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/addProductImage', [ProductController::class, 'addProductImage']);
 
     Route::post('orderStatus/addOrderStatus', [OrderStatusController::class, 'addOrderStatus']);
+    Route::post('orderStatus/updateOrderStatus/{id}', [OrderStatusController::class, 'updateOrderStatus']);
+    Route::get('orderStatus/deleteOrderStatus/{id}', [OrderStatusController::class, 'deleteOrderStatus']);
+
+    Route::post('order/updateOrder/{id}', [OrderController::class, 'updateOrder']);
+
 
     Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
     Route::post('product/updateProductTab/{id}', [ProductController::class, 'updateProductTab']);
