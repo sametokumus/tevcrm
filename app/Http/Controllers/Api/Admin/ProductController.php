@@ -538,11 +538,7 @@ class ProductController extends Controller
                 'type_id' => $request->type_id,
                 'name' => $request->name,
                 'description' => $request->description,
-                'sku' => $request->sku,
-                'delivery_price' => $request->delivery_price,
-                'delivery_tax' => $request->delivery_tax,
-                'is_free_shipping' => $request->is_free_shipping,
-                'view_all_images' => $request->view_all_images,
+                'sku' => $request->sku
             ]);
             return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
