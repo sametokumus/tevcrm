@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('sku');
-            $table->decimal('delivery_price');
-            $table->decimal('delivery_tax');
+            $table->decimal('delivery_price')->nullable();
+            $table->decimal('delivery_tax')->nullable();
             $table->tinyInteger('is_free_shipping')->default(0);
             $table->tinyInteger('view_all_images')->default(0);
             $table->tinyInteger('active')->default(1);

@@ -45,10 +45,12 @@ class BrandController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
+                'slug' => 'required',
             ]);
 
             $address = Brand::query()->where('id',$id)->update([
-                'name' => $request->name
+                'name' => $request->name,
+                'slug' => $request->slug
             ]);
 
             if ($request->hasFile('logo')) {
