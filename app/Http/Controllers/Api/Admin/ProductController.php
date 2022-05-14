@@ -533,14 +533,14 @@ class ProductController extends Controller
                 'sku' => 'required'
             ]);
 
-            Product::query()->insert([
+            $product_id = Product::query()->insertGetId([
                 'brand_id' => $request->brand_id,
                 'type_id' => $request->type_id,
                 'name' => $request->name,
                 'description' => $request->description,
                 'sku' => $request->sku
             ]);
-            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
