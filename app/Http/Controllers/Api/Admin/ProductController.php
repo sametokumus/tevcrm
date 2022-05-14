@@ -530,11 +530,7 @@ class ProductController extends Controller
                 'type_id' => 'required|exists:product_types,id',
                 'name' => 'required',
                 'description' => 'required',
-                'sku' => 'required',
-                'delivery_price' => 'required',
-                'delivery_tax' => 'required',
-                'is_free_shipping' => 'required',
-                'view_all_images' => 'required'
+                'sku' => 'required'
             ]);
 
             Product::query()->insert([
