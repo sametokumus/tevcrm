@@ -611,10 +611,10 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProductTag($id)
+    public function deleteProductTag(Request $request)
     {
         try {
-            ProductTags::query()->where('id',$id)->update([
+            ProductTags::query()->where('product_id',$request->product_id)->where('tag_id',$request->tag_id)->update([
                 'active' =>0
             ]);
             return response(['message' => 'Ürün etiketi silme işlemi başarılı.', 'status' => 'success']);
