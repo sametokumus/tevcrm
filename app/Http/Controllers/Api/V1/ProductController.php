@@ -140,7 +140,7 @@ class ProductController extends Controller
     public function getProductDocumentById($product_id)
     {
         try {
-            $product_documents = ProductDocument::query()->where('product_id',$product_id)->get();
+            $product_documents = ProductDocument::query()->where('product_id',$product_id)->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_documents' => $product_documents]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
