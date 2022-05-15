@@ -92,7 +92,7 @@ class ProductController extends Controller
     public function getProduct()
     {
         try {
-            $product = Product::all();
+            $product = Product::query()->where('active', 1);
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
