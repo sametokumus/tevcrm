@@ -461,20 +461,11 @@ class ProductController extends Controller
 
     public function addProductTab(Request $request)
     {
-
         try {
-            $product_tab_row = ProductTab::query()->where('title', $request->title)->first();
 
-            if (isset($product_tab_row)) {
-                $product_tab_id = $product_tab_row->id;
-            } else {
-                $product_tab_id = ProductTab::query()->insertGetId([
-                    'title' => $request->title
-                ]);
-            }
             ProductTabContent::query()->insert([
                 'product_id' => $request->product_id,
-                'product_tab_id' => $product_tab_id,
+                'product_tab_id' => $request->product_tab_id,
                 'content_text' => $request->content_text
             ]);
 
@@ -488,19 +479,15 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProductTab(Request $request, $id)
+    public function updateProductTab(Request $request)
     {
         try {
-            ProductTabContent::query()->where('product_tab_id', $request->product_tab_id)->update([
-                'active' => 0
-            ]);
 
-            $product_tab_row = ProductTabContent::query()->where('product_tab_id', $id)->first();
+
+            $product_tab_row = ProductTabContent::query()->where('product_id',$request->product_id)->where('product_tab_id', $request->product_tab_id)->first();
 
             if (isset($product_tab_row)) {
                 ProductTabContent::query()->where('product_tab_id', $product_tab_row->id)->update([
-                    'product_id' => $request->product_id,
-                    'product_tab_id' => $product_tab_row->id,
                     'content_text' => $request->content_text,
                     'active' => 1
                 ]);
