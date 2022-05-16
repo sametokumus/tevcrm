@@ -10,6 +10,8 @@ use App\Models\ProductCategory;
 use App\Models\ProductDocument;
 use App\Models\ProductImage;
 use App\Models\ProductRule;
+use App\Models\ProductTab;
+use App\Models\ProductTabContent;
 use App\Models\ProductTags;
 use App\Models\ProductType;
 use App\Models\ProductVariation;
@@ -181,6 +183,33 @@ class ProductController extends Controller
             $variation_images = ProductImage::query()->where('variation_id',$variation_id)->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['variation_images' => $variation_images]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductTabsById($product_id)
+    {
+        try {
+            $product_tabs = ProductTabContent::query()->where('product_id',$product_id)->get();
+            foreach ($product_tabs as $product_tab){
+                $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
+                $product_tab['tab'] = $tab;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tabs' => $product_tabs]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getProductTabById($tab_id)
+    {
+        try {
+            $product_tab = ProductTabContent::query()->where('id',$tab_id)->first();
+            $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
+            $product_tab['tab'] = $tab;
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tab' => $product_tab]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
