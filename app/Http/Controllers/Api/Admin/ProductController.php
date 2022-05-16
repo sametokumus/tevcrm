@@ -469,6 +469,7 @@ class ProductController extends Controller
                 'content_text' => $request->content_text
             ]);
 
+
             return response(['message' => 'Ürün sekmesi ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -496,6 +497,7 @@ class ProductController extends Controller
                     'product_id' => $request->product_id,
                     'product_tab_id' => $request->product_tab_id,
                     'content_text' => $request->content_text
+
                 ]);
             }
 
