@@ -510,6 +510,24 @@ class ProductController extends Controller
         }
     }
 
+    public function deleteProductTab($tab_id)
+    {
+        try {
+
+                ProductTabContent::query()->where('id', $tab_id)->update([
+                    'active' => 0
+                ]);
+
+            return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'ar' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
+        }
+    }
+
     public function addProduct(Request $request)
     {
         try {

@@ -125,6 +125,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
     Route::post('product/updateProductTab', [ProductController::class, 'updateProductTab']);
+    Route::get('product/deleteProductTab/{tab_id}', [ProductController::class, 'deleteProductTab']);
 
     Route::post('tab/addTab', [TabController::class, 'addTab']);
     Route::post('tab/updateTab/{id}', [TabController::class, 'updateTab']);
