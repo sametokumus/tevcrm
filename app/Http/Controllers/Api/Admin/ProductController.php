@@ -518,7 +518,7 @@ class ProductController extends Controller
                     'active' => 0
                 ]);
 
-            return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Ürün sekmesi silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

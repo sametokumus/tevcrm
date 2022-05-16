@@ -191,7 +191,7 @@ class ProductController extends Controller
     public function getProductTabsById($product_id)
     {
         try {
-            $product_tabs = ProductTabContent::query()->where('product_id',$product_id)->get();
+            $product_tabs = ProductTabContent::query()->where('product_id',$product_id)->where('active',1)->get();
             foreach ($product_tabs as $product_tab){
                 $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
                 $product_tab['tab'] = $tab;
