@@ -497,7 +497,6 @@ class ProductController extends Controller
                     'product_id' => $request->product_id,
                     'product_tab_id' => $request->product_tab_id,
                     'content_text' => $request->content_text
-
                 ]);
             }
 
