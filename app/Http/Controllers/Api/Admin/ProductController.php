@@ -691,7 +691,7 @@ class ProductController extends Controller
                     'file' => $image_path,
                 ]);
             }
-            return response(['message' => 'Ürün dökümanı ekleme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Ürün dökümanı ekleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -718,7 +718,7 @@ class ProductController extends Controller
                     'file' => $image_path,
                 ]);
             }
-            return response(['message' => 'Ürün dökümanı güncelleme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Ürün dökümanı güncelleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -752,7 +752,7 @@ class ProductController extends Controller
                 'group_type_id' => $request->group_type_id,
                 'order' => $request->order
             ]);
-            return response(['message' => 'Ürün varyasyon grubu ekleme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Ürün varyasyon grubu ekleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -769,7 +769,7 @@ class ProductController extends Controller
                 'group_type_id' => $request->group_type_id,
                 'order' => $request->order
             ]);
-            return response(['message' => 'Ürün varyasyon grubu güncelleme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Ürün varyasyon grubu güncelleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -784,7 +784,7 @@ class ProductController extends Controller
             ProductVariationGroup::query()->where('id',$id)->update([
                 'active' => 0
             ]);
-            return response(['message' => 'Ürün varyasyon grubu silme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Ürün varyasyon grubu silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -876,7 +876,7 @@ class ProductController extends Controller
             ProductVariation::query()->where('id',$id)->update([
                 'active' => 0
             ]);
-            return response(['message' => 'Varyasyon grubu silme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Varyasyon grubu silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -924,7 +924,7 @@ class ProductController extends Controller
             ProductImage::query()->where('id',$id)->update([
                 'active' => 0
             ]);
-            return response(['message' => 'Varyasyon resmi silme işlemi başarılı.','status' => 'succcess']);
+            return response(['message' => 'Varyasyon resmi silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
