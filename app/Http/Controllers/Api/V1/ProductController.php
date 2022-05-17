@@ -154,8 +154,8 @@ class ProductController extends Controller
         try {
             $product_variation_groups = ProductVariationGroup::query()->where('product_id',$product_id)->get();
             foreach ($product_variation_groups as $product_variation_group){
-                $variation_group_type = ProductVariationGroupType::query()->where('id',$product_variation_group->variation_group_id)->first();
-                $product_variation_group['variation_gruop_type'] = $variation_group_type;
+                $variation_group_type = ProductVariationGroupType::query()->where('id',$product_variation_group->group_type_id)->first();
+                $product_variation_group['variation_group_type'] = $variation_group_type;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation_groups' => $product_variation_groups]]);
         } catch (QueryException $queryException) {
