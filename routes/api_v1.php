@@ -109,6 +109,7 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
     Route::get('/product/getProductDocumentById/{product_id}', [ProductController::class, 'getProductDocumentById']);
     Route::get('/product/getProductVariationGroupById/{product_id}', [ProductController::class, 'getProductVariationGroupById']);
+    Route::get('/product/getProductVariationById/{id}', [ProductController::class, 'getProductVariationById']);
     Route::get('/product/getProductVariationsById/{id}', [ProductController::class, 'getProductVariationsById']);
     Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
     Route::get('/product/getProductTabsById/{product_id}', [ProductController::class, 'getProductTabsById']);

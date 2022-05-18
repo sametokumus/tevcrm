@@ -163,6 +163,18 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductVariationById($id)
+    {
+        try {
+            $product_variation = ProductVariation::query()->where('id',$id)->get();
+            $rules = ProductRule::query()->where('variation_id',$id)->get();
+            $product_variation['rule'] = $rules;
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation' => $product_variation]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
     public function getProductVariationsById($id)
     {
         try {
@@ -172,8 +184,8 @@ class ProductController extends Controller
 
 //            $product_variations = ProductVariation::query()->where('id',$id)->get();
             foreach ($product_variations as $product_variation){
-                $rule_name = ProductRule::query()->where('variation_id',$product_variation->id)->get();
-                $product_variation['rule'] = $rule_name;
+                $rules = ProductRule::query()->where('variation_id',$product_variation->id)->get();
+                $product_variation['rule'] = $rules;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
         } catch (QueryException $queryException) {
