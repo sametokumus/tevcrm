@@ -166,7 +166,9 @@ class ProductController extends Controller
     public function getProductVariationsById($id)
     {
         try {
-            $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')->get(['product_variations.*']);
+            $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
+                ->where('product_variation_groups.product_id', $id)
+                ->get(['product_variations.*']);
 
 //            $product_variations = ProductVariation::query()->where('id',$id)->get();
             foreach ($product_variations as $product_variation){
