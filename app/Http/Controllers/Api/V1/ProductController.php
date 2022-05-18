@@ -166,8 +166,8 @@ class ProductController extends Controller
     public function getProductVariationById($id)
     {
         try {
-            $product_variation = ProductVariation::query()->where('id',$id)->get();
-            $rules = ProductRule::query()->where('variation_id',$id)->get();
+            $product_variation = ProductVariation::query()->where('id',$id)->first();
+            $rules = ProductRule::query()->where('variation_id',$id)->first();
             $product_variation['rule'] = $rules;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation' => $product_variation]]);
         } catch (QueryException $queryException) {
@@ -184,7 +184,7 @@ class ProductController extends Controller
 
 //            $product_variations = ProductVariation::query()->where('id',$id)->get();
             foreach ($product_variations as $product_variation){
-                $rules = ProductRule::query()->where('variation_id',$product_variation->id)->get();
+                $rules = ProductRule::query()->where('variation_id',$product_variation->id)->first();
                 $product_variation['rule'] = $rules;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
