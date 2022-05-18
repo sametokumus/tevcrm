@@ -311,46 +311,35 @@ class ProductController extends Controller
     {
         try {
 
-            $product_variation = json_decode($request->product_variations);
-            $productArray = $this->objectToArray($product_variation);
 
-            Validator::make($productArray, [
-                'variation_group_id' => 'required|exists:variation,id',
-                'name' => 'required|exists:products,id',
+            $request->validate([
+                'variation_group_id' => 'required',
+                'name' => 'required',
                 'description' => 'required',
                 'sku' => 'required',
-                'regular_price' => 'required',
-                'discounted_price' => 'required',
-                'regular_tax' => 'required',
-                'discounted_tax' => 'required'
-
             ]);
 
-//            $product_variations = $product_variation;
 
-//            foreach ($product_variations as $product_variation){
-            $product_variation_id = ProductVariation::query()->insertGetId([
-                'variation_group_id' => $product_variation->variation_group_id,
-                'name' => $product_variation->name,
-                'description' => $product_variation->description,
-                'sku' => $product_variation->sku,
-                'regular_price' => $product_variation->regular_price,
-                'discounted_price' => $product_variation->discounted_price,
-                'regular_tax' => $product_variation->regular_tax,
-                'discounted_tax' => $product_variation->discounted_tax
+            $variation_id = ProductVariation::query()->insertGetId([
+                'variation_group_id' => $request->variation_group_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'sku' => $request->sku,
+
             ]);
-
-//            }
-            $product_rules = $product_variation->product_rules;
-            foreach ($product_rules as $product_rule) {
-                ProductRule::query()->insert([
-                    'variation_id' => $product_variation_id,
-                    'quantity_stock' => $product_rule->quantity_stock,
-                    'quantity_min' => $product_rule->quantity_min,
-                    'quantity_step' => $product_rule->quantity_step,
-                    'status' => $product_rule->status
-                ]);
-            }
+            ProductRule::query()->insert([
+                'variation_id' => $variation_id,
+                'quantity_stock' => $request->quantity_stock,
+                'quantity_min' => $request->quantity_min,
+                'quantity_step' => $request->quantity_step,
+                'is_free_shipping' => $request->is_free_shipping,
+                'discounted_rate' => $request->discounted_rate,
+                'tax_rate' => $request->tax_rate,
+                'regular_price' => $request->regular_price,
+                'regular_tax' => $request->regular_tax,
+                'discounted_price' => $request->discounted_price,
+                'discounted_tax' => $request->discounted_tax
+            ]);
 
             return response(['message' => 'Ürün varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -371,11 +360,6 @@ class ProductController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'sku' => 'required',
-                'regular_price' => 'required',
-                'discounted_price' => 'required',
-                'regular_tax' => 'required',
-                'discounted_tax' => 'required'
-
             ]);
 
             ProductVariation::query()->where('id', $id)->update([
@@ -383,10 +367,6 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'sku' => $request->sku,
-                'regular_price' => $request->regular_price,
-                'discounted_price' => $request->discounted_price,
-                'regular_tax' => $request->regular_tax,
-                'discounted_tax' => $request->discounted_tax
             ]);
 
 //            $product_variation_id = ProductVariation::query()->where('id',$id)->first();
@@ -396,7 +376,13 @@ class ProductController extends Controller
                 'quantity_stock' => $request->quantity_stock,
                 'quantity_min' => $request->quantity_min,
                 'quantity_step' => $request->quantity_step,
-                'status' => $request->status
+                'is_free_shipping' => $request->is_free_shipping,
+                'discounted_rate' => $request->discounted_rate,
+                'tax_rate' => $request->tax_rate,
+                'regular_price' => $request->regular_price,
+                'regular_tax' => $request->regular_tax,
+                'discounted_price' => $request->discounted_price,
+                'discounted_tax' => $request->discounted_tax
             ]);
 
             return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
@@ -785,98 +771,6 @@ class ProductController extends Controller
                 'active' => 0
             ]);
             return response(['message' => 'Ürün varyasyon grubu silme işlemi başarılı.','status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function addVariationAndRule(Request $request){
-        try {
-            $request->validate([
-                'variation_group_id' => 'required',
-                'name' => 'required',
-                'description' => 'required',
-                'sku' => 'required',
-                'regular_price' => 'required',
-                'discounted_price' => 'required',
-                'regular_tax' => 'required',
-                'discounted_tax' => 'required'
-            ]);
-
-            $variation_id = ProductVariation::query()->insertGetId([
-                'variation_group_id' => $request->variation_group_id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'sku' => $request->sku,
-                'regular_price' => $request->regular_price,
-                'discounted_price' => $request->discounted_price,
-                'regular_tax' => $request->regular_tax,
-                'discounted_tax' => $request->discounted_tax
-            ]);
-            ProductRule::query()->insert([
-                'variation_id' => $variation_id,
-                'quantity_stock' => $request->quantity_stock,
-                'quantity_min' => $request->quantity_min,
-                'quantity_step' => $request->quantity_step
-            ]);
-            return response(['message' => 'Varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function updateVariationAndRule(Request $request,$id){
-        try {
-            $request->validate([
-                'variation_group_id' => 'required',
-                'name' => 'required',
-                'description' => 'required',
-                'sku' => 'required',
-                'regular_price' => 'required',
-                'discounted_price' => 'required',
-                'regular_tax' => 'required',
-                'discounted_tax' => 'required'
-            ]);
-
-            ProductVariation::query()->where('id',$id)->update([
-                'variation_group_id' => $request->variation_group_id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'sku' => $request->sku,
-                'regular_price' => $request->regular_price,
-                'discounted_price' => $request->discounted_price,
-                'regular_tax' => $request->regular_tax,
-                'discounted_tax' => $request->discounted_tax
-            ]);
-            ProductRule::query()->where('variation_id',$id)->update([
-                'quantity_stock' => $request->quantity_stock,
-                'quantity_min' => $request->quantity_min,
-                'quantity_step' => $request->quantity_step
-            ]);
-            return response(['message' => 'Varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function deleteVariationAndRule($id){
-        try {
-            ProductVariation::query()->where('id',$id)->update([
-                'active' => 0
-            ]);
-            return response(['message' => 'Varyasyon grubu silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

@@ -19,10 +19,6 @@ class CreateProductVariationsTable extends Migration
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->string('sku')->nullable();
-            $table->decimal('regular_price')->nullable();
-            $table->decimal('discounted_price')->nullable();
-            $table->decimal('regular_tax')->nullable();
-            $table->decimal('discounted_tax')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
