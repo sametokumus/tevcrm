@@ -165,7 +165,7 @@ class ProductController extends Controller
 
     public function getProductVariationById($id)
     {
-        try {dfs
+        try {
             $product_variation = ProductVariation::query()->where('id',$id)->get();
             $rules = ProductRule::query()->where('variation_id',$id)->get();
             $product_variation['rule'] = $rules;
