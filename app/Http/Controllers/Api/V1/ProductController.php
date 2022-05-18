@@ -163,7 +163,7 @@ class ProductController extends Controller
         }
     }
 
-    public function getProductVariationAndRuleById($id)
+    public function getProductVariationsById($id)
     {
         try {
             $product_variations = ProductVariation::query()->where('id',$id)->get();
