@@ -418,24 +418,24 @@ class ProductController extends Controller
         try {
 
             if ($request->hasFile('product_images')) {
-                $file_namess = array();
                 foreach ($request->file('product_images') as $key => $product_document) {
                     $rand = uniqid();
                     $file_name = $rand . "-" . $product_document->getClientOriginalName();
                     $product_document->move(public_path('/images/ProductImage/'), $file_name);
                     $file_path = "/images/ProductImage/" . $file_name;
-                    array_push($file_namess, $file_path);
 
                     ProductImage::query()->insert([
                         'image' => $file_path,
                         'variation_id' => $request->variation_id,
                         'name' => $request->name,
-                        'order' => $request->order,
+                        'order' => $request->order
                     ]);
                 }
+                return response(['message' => 'Ürün resim ekleme işlemi başarılı.', 'status' => 'success']);
+
             }
 
-            return response(['message' => 'Ürün resim ekleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Eklenecek ürün görseli bulunamadı.', 'status' => 'files-001']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
