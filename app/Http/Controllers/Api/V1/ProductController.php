@@ -182,11 +182,28 @@ class ProductController extends Controller
                 ->where('product_variation_groups.product_id', $id)
                 ->get(['product_variations.*']);
 
-//            $product_variations = ProductVariation::query()->where('id',$id)->get();
             foreach ($product_variations as $product_variation){
                 $rules = ProductRule::query()->where('variation_id',$product_variation->id)->first();
                 $product_variation['rule'] = $rules;
             }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getVariationsImageById($product_id)
+    {
+        try {
+            $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
+                ->where('product_variation_groups.product_id', $product_id)
+                ->get(['product_variations.*']);
+
+            foreach ($product_variations as $product_variation){
+                $images = ProductImage::query()->where('variation_id',$product_variation->id)->get();
+                $product_variation['images'] = $images;
+            }
+
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
