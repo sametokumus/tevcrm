@@ -197,7 +197,7 @@ class ProductController extends Controller
         try {
             $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
                 ->where('product_variation_groups.product_id', $product_id)
-                ->get(['product_variations.id']);
+                ->get(['product_variations.*']);
 
             foreach ($product_variations as $product_variation){
                 $images = ProductImage::query()->where('variation_id',$product_variation->id)->where('active',1)->get();
