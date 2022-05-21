@@ -65,7 +65,7 @@ class ImportController extends Controller
                         'micro_name' => $import_product->mikro_urun_ad,
                         'micro_sku' => $import_product->mikro_urun_kod,
                         'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agırlik
+                        'weight' => $import_product->agirlik
                     ]);
                     ProductImage::query()->insert([
                         'variation_id' => $variation_id,
