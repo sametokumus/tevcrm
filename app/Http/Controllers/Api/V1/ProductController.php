@@ -101,7 +101,7 @@ class ProductController extends Controller
                 $variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
                 $variation = ProductVariation::query()->where('variation_group_id', $variation_group->id)->first();
                 $product['variation_id'] = $variation->id;
-                $product['image'] = ProductImage::query()-where('variation_id', $variation->id)->first()->image;
+                $product['image'] = ProductImage::query()->where('variation_id', $variation->id)->first()->image;
                 $product['rules'] = ProductRule::query()->where('variation_id', $variation->id)->first();
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
