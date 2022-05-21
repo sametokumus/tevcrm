@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->bigInteger('brand_id');
             $table->bigInteger('type_id');
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->string('short_description')->nullable();
-            $table->string('notes')->nullable();
-            $table->string('sku');
+            $table->text('name');
+            $table->text('description')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('notes')->nullable();
+            $table->text('sku');
             $table->decimal('delivery_price')->nullable();
             $table->decimal('delivery_tax')->nullable();
             $table->tinyInteger('is_free_shipping')->default(0);
