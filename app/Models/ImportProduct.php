@@ -10,25 +10,25 @@ class ImportProduct extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ana_ürün_kod',
-        'alt_ürün_kod',
-        'ana_ürün_ad',
-        'mikro_ürün_ad',
-        'mikro_ürün_kod',
+        'ana_urun_kod',
+        'alt_urun_kod',
+        'ana_urun_ad',
+        'mikro_urun_ad',
+        'mikro_urun_kod',
         'renk',
         'birim',
         'paket_tipi',
         'kmk',
         'marka',
         'arama_kelimeleri',
-        'açıklama',
-        'kısa_açıklama',
+        'aciklama',
+        'kisa_aciklama',
         'notlar',
-        'ağırlık',
-        'seo_başlık',
+        'agirlik',
+        'seo_baslik',
         'seo_kelimeler',
-        'alt_ürün_var',
+        'alt_urun_var',
         'resim',
-        'cins'
+        'cins',
     ];
 }
