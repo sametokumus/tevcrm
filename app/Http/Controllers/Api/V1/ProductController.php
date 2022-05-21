@@ -97,10 +97,12 @@ class ProductController extends Controller
             $products = Product::query()->where('active', 1)->get();
             foreach ($products as $product){
                 $product['brand_name'] = Brand::query()->where('id', $product->brand_id)->first()->name;
+                $product['type_name'] = ProductType::query()->where('id', $product->type_id)->first()->name;
                 $variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
                 $variation = ProductVariation::query()->where('variation_group_id', $variation_group->id)->first();
                 $product['variation_id'] = $variation->id;
                 $product['image'] = ProductImage::query()-where('variation_id', $variation->id)->first()->image;
+                $product['rules'] = ProductRule::query()->where('variation_id', $variation->id)->first();
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
