@@ -226,7 +226,7 @@ class ProductController extends Controller
         try {
             $product_tabs = ProductTabContent::query()->where('product_id',$product_id)->where('active',1)->get();
             foreach ($product_tabs as $product_tab){
-                $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
+                $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();asdasd
                 $product_tab['tab'] = $tab;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tabs' => $product_tabs]]);
