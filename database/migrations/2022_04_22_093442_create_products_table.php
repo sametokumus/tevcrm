@@ -18,7 +18,9 @@ class CreateProductsTable extends Migration
             $table->bigInteger('brand_id');
             $table->bigInteger('type_id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->string('short_description')->nullable();
+            $table->string('notes')->nullable();
             $table->string('sku');
             $table->decimal('delivery_price')->nullable();
             $table->decimal('delivery_tax')->nullable();

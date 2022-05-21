@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Admin\TagController;
 use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CarrierController;
 use App\Http\Controllers\Api\Admin\OrderController;
+use App\Http\Controllers\Api\Admin\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +98,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('product/addFullProductVariationGroup', [ProductController::class, 'addFullProductVariationGroup']);
     Route::post('product/updateFullProductVariationGroup/{id}', [ProductController::class, 'updateFullProductVariationGroup']);
-    Route::get('product/deleteFullProductVariationGroup/{id}', [ProductController::class, 'deleteFullProductVariationGroup']);
+    Route::get('product/deleteFullProductVariationGroup/{}', [ProductController::class, 'deleteFullProductVariationGroup']);
 
     Route::post('productVariationGroupType/addProductVariationGroupType', [ProductVariationGroupTypeController::class, 'addProductVariationGroupType']);
     Route::post('productVariationGroupType/updateProductVariationGroupType/{id}', [ProductVariationGroupTypeController::class, 'updateProductVariationGroupType']);
@@ -123,6 +124,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/updateProductTab', [ProductController::class, 'updateProductTab']);
     Route::get('product/deleteProductTab/{tab_id}', [ProductController::class, 'deleteProductTab']);
 
+    Route::post('productPackageType/addProductPackageType', [ProductController::class, 'addProductPackageType']);
+    Route::post('productPackageType/updateProductPackageType/{id}', [ProductController::class, 'updateProductPackageType']);
+    Route::get('productPackageType/deleteProductPackageType/{id}', [ProductController::class, 'deleteProductPackageType']);
+
+
+    Route::post('productSeo/addProductSeo', [ProductController::class, 'addProductSeo']);
+    Route::get('productSeo/deleteProductSeo/{id}', [ProductController::class, 'deleteProductSeo']);
+
     Route::post('tab/addTab', [TabController::class, 'addTab']);
     Route::post('tab/updateTab/{id}', [TabController::class, 'updateTab']);
     Route::get('tab/deleteTab/{id}', [TabController::class, 'deleteTab']);
@@ -138,6 +147,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('carrier/updateCarrier/{id}', [CarrierController::class, 'updateCarrier']);
     Route::get('carrier/deleteCarrier/{id}', [CarrierController::class, 'deleteCarrier']);
 
+
+    Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
 
 
 });

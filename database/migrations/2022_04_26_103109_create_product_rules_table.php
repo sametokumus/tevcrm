@@ -15,6 +15,11 @@ class CreateProductRulesTable extends Migration
     {
         Schema::create('product_rules', function (Blueprint $table) {
             $table->id();
+            $table->text('micro_name')->nullable();
+            $table->text('micro_sku')->nullable();
+            $table->text('dimensions')->nullable();
+            $table->text('weight')->nullable();
+            $table->bigInteger('package_type_id')->nullable();
             $table->bigInteger('variation_id')->nullable();
             $table->bigInteger('quantity_stock')->nullable();
             $table->bigInteger('quantity_min')->nullable();
