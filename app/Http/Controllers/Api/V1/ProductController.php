@@ -213,7 +213,7 @@ class ProductController extends Controller
     public function getVariationImageById($variation_id)
     {
         try {
-            $variation_images = ProductImage::query()->where('variation_id',$variation_id)->get();
+            $variation_images = ProductImage::query()->where('variation_id',$variation_id)->get();sada
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['variation_images' => $variation_images]]);
         } catch (QueryException $queryException) {
