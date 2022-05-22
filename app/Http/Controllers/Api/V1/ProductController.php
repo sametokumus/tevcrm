@@ -104,6 +104,7 @@ class ProductController extends Controller
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
                 ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+                ->where('active',1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
