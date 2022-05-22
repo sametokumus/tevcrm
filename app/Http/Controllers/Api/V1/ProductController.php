@@ -73,7 +73,7 @@ class ProductController extends Controller
             $product_variation_group['name'] = ProductVariationGroupType::query()->where('id',$product_variation_group->group_type_id)->first();
             $product_variation_group['variations'] = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
             $variation = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
-            $product_variation_group['images'] = ProductImage::query()->where('variation_id',$variation->id)->first();
+            $product_variation_group['images'] = ProductImage::query()->where('variation_id',$variation->id)->get();
             $product_variation_group['rule'] = ProductRule::query()->where('variation_id',$variation->id)->first();
             $product_tags = ProductTags::query()
                 ->leftJoin('tags','tags.id','=','product_tags.tag_id')
