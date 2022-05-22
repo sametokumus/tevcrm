@@ -85,6 +85,13 @@ class ProductController extends Controller
                 ->where('products.id',$id)
                 ->get();
 
+            foreach ($variations as $variation){
+                $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
+                $images = ProductImage::query()->where('variation_id',$variation->id)->get();
+                $variation['rule'] = $rule;
+                $variation['images'] = $images;
+            }
+
             $product_tags = ProductTags::query()
                 ->leftJoin('tags','tags.id','=','product_tags.tag_id')
                 ->selectRaw('tags.*')
@@ -124,7 +131,7 @@ class ProductController extends Controller
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
                 ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
-                ->where('active',1)
+                ->where('products.active',1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
@@ -303,29 +310,19 @@ class ProductController extends Controller
         }
     }
 
-//    public function getBrandByIdProduct($brand_id){
+//    public function getBrandByIdProduct(){
 //        try {
-////            $brands = Brand::query()
-////                ->leftJoin('products','products.brand_id','=','brands.id')
-////                ->selectRaw('brands.*')
-////                ->where('brands.active',1)
-////                ->where('products.brand_id',$brand_id)
-////                ->count();
+//            $brands = Brand::query()->where('active',1)->get();
+//            foreach ($brands as $brand){
+//                $product_count = Product::query()->where('brand_id',$brand->id)->count();
+//                $brand['count'] = $product_count;
 //
-//            $brands = Brand::query()
-//                ->leftJoin('products','products.brand_id','=','brands.id')
-////                ->leftJoin('brands','brands.id','=','products.brand_id')
-////                ->leftJoin('product_types','product_types.id','=','products.type_id')
-////                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
-////                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
-////                ->leftJoin('product_variations','product_variations.id','=','product_variation_groups.id')
-////                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-////                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
-////                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
-////                ->where('products.active',1)
-////                ->where('product_categories.active',1)
-//                ->where('brands.id',$brand_id)
-//                ->count();
+//                $image = Product::query()
+//                    ->leftJoin('brands','brands.id','=','products.brand_id')
+//                    ->leftJoin('product_variation_group_types','product_variation_group_types')
+//                    ->where('brand_id',$brand->id)
+//                    ->get();
+//            }
 //            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['brands' => $brands]]);
 //        } catch (QueryException $queryException) {
 //            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
