@@ -139,7 +139,6 @@ class ProductController extends Controller
 //                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
                 ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_variation_groups.id as xxx')
                 ->where('products.active',1)
-                ->whereNull('product_variation_groups.product_id')
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
