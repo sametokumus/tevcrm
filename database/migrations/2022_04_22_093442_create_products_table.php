@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('is_free_shipping')->default(0);
             $table->tinyInteger('is_campaign')->default(0);
             $table->tinyInteger('view_all_images')->default(0);
+            $table->bigInteger('featured_variation')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

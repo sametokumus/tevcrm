@@ -239,4 +239,16 @@ class ImportController extends Controller
 
         }
     }
+
+    public function productVariationUpdate(){
+        $products = Product::query()->get();
+        foreach ($products as $product){
+            $group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
+            $variation_id = ProductVariation::query()->where('variation_group_id', $group->id)->first()->id;
+            Product::query()->where('id', $product->id)->update([
+               'featured_variation'=>$variation_id
+            ]);
+        }
+        return response(['mesaj' => 'başarılı']);
+    }
 }
