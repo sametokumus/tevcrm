@@ -20,6 +20,7 @@ use App\Models\ProductVariationGroupType;
 use App\Models\Tag;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -94,19 +95,30 @@ class ProductController extends Controller
     public function getProduct()
     {
         try {
-            $products = Product::query()->where('active', 1)->get();
-            foreach ($products as $product){
-                $product['brand_name'] = Brand::query()->where('id', $product->brand_id)->first()->name;
-                $product['type_name'] = ProductType::query()->where('id', $product->type_id)->first()->name;
-                $variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
-                $variation = ProductVariation::query()->where('variation_group_id', $variation_group->id)->first();
-                $product['variation_id'] = $variation->id;
-                $product['image'] = ProductImage::query()->where('variation_id', $variation->id)->first()->image;
-                $product['rules'] = ProductRule::query()->where('variation_id', $variation->id)->first();
-            }
+            $products = Product::query()
+                ->leftJoin('brands','brands.id','=','products.brand_id')
+                ->leftJoin('product_types','product_types.id','=','products.type_id')
+                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
+                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
+                ->leftJoin('product_variations','product_variations.id','=','product_variation_groups.id')
+                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+                ->get();
+//            return $products;
+//            $products = Product::query()->where('active', 1)->get();
+//            foreach ($products as $product){
+//                $product['brand_name'] = Brand::query()->where('id', $product->brand_id)->first()->name;
+//                $product['type_name'] = ProductType::query()->where('id', $product->type_id)->first()->name;
+//                $variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
+//                $variation = ProductVariation::query()->where('variation_group_id', $variation_group->id)->first();
+//                $product['variation_id'] = $variation->id;
+//                $product['image'] = ProductImage::query()->where('variation_id', $variation->id)->first()->image;
+//                $product['rules'] = ProductRule::query()->where('variation_id', $variation->id)->first();
+//            }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         }
     }
 
@@ -187,9 +199,10 @@ class ProductController extends Controller
     public function getProductVariationsById($id)
     {
         try {
-            $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
+            $product_variations = ProductVariationGroup::query()
+                ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
                 ->where('product_variation_groups.product_id', $id)
-                ->get(['product_variations.*']);
+                ->selectRaw('product_variations.*');
 
             foreach ($product_variations as $product_variation){
                 $rules = ProductRule::query()->where('variation_id',$product_variation->id)->first();
@@ -204,9 +217,10 @@ class ProductController extends Controller
     public function getVariationsImageById($product_id)
     {
         try {
-            $product_variations = ProductVariationGroup::join('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
+            $product_variations = ProductVariationGroup::query()
+                ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
                 ->where('product_variation_groups.product_id', $product_id)
-                ->get(['product_variations.*']);
+                ->selectRaw('product_variations.*');
 
             foreach ($product_variations as $product_variation){
                 $images = ProductImage::query()->where('variation_id',$product_variation->id)->where('active',1)->get();
