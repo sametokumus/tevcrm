@@ -124,20 +124,14 @@ class ProductController extends Controller
             $products = Product::query()
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftjoin('product_variation_groups', function($join){
-                    $join->on('product_variation_groups.product_id', '=', 'products.id');
-                })
+                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
 //                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
 //                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
-                ->leftjoin('product_variations', function($join){
-                    $join->on('product_variations.variation_group_id', '=', 'product_variation_groups.id');
-                })
-//                ->leftJoin('product_variations','product_variations.variation_group_id','=','product_variation_groups.id')
 //                ->select(DB::raw('(select id from product_variations where variation_group_id = product_variation_groups.id order by id asc limit 1) as variation_id_xxx'))
-//                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-//                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
-//                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
-                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_variation_groups.id as xxx, product_variations.id as yyy')
+                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+//                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_variation_groups.id as xxx, product_variations.id as yyy')
                 ->where('products.active',1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
