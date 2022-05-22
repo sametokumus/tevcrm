@@ -68,24 +68,32 @@ class ProductController extends Controller
             $product = Product::query()->where('id',$id)->where('active',1)->first();
             $brand = Product::query()->where('brand_id',$product->brand_id)->first();
             $product_type = ProductType::query()->where('id',$product->type_id)->first();
-            $product_document = ProductDocument::query()->where('product_id',$product->id)->first();
+            $product_documents = ProductDocument::query()->where('product_id',$product->id)->where('active',1)->get();
             $product_variation_group = ProductVariationGroup::query()->where('product_id',$product->id)->first();
             $product_variation_group['name'] = ProductVariationGroupType::query()->where('id',$product_variation_group->group_type_id)->first();
             $product_variation_group['variations'] = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
             $variation = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->first();
             $product_variation_group['images'] = ProductImage::query()->where('variation_id',$variation->id)->first();
             $product_variation_group['rule'] = ProductRule::query()->where('variation_id',$variation->id)->first();
-            $product_tag = ProductTags::query()->where('product_id',$product->id)->first();
-            $product_tag['name'] = Tag::query()->where('id',$product_tag->tag_id)->first();
-            $product_category = ProductCategory::query()->where('product_id',$product->id)->first();
-            $product_category['categories'] = Category::query()->where('id',$product_category->category_id)->first();
+            $product_tags = ProductTags::query()
+                ->leftJoin('tags','tags.id','=','product_tags.tag_id')
+                ->selectRaw('tags.*')
+                ->where('product_id',$product->id)
+                ->where('product_tags.active',1)
+                ->get();
+            $product_categories = ProductCategory::query()
+                ->leftJoin('categories','categories.id','=','product_categories.category_id')
+                ->selectRaw('categories.*')
+                ->where('product_id',$product->id)
+                ->where('product_categories.active',1)
+                ->get();
 
             $product['brand'] = $brand;
             $product['product_type'] = $product_type;
-            $product['product_document'] = $product_document;
+            $product['product_documents'] = $product_documents;
             $product['variation_group'] = $product_variation_group;
-            $product['product_tag'] = $product_tag;
-            $product['product_category'] = $product_category;
+            $product['product_tags'] = $product_tags;
+            $product['product_categories'] = $product_categories;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
