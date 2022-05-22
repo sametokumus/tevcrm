@@ -125,7 +125,7 @@ class ProductController extends Controller
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_types','product_types.id','=','products.type_id')
                 ->leftjoin('product_variation_groups', function($join){
-                    $join->on('product_variation_groups.product_id', '=', 'products.id')->get();
+                    $join->on('product_variation_groups.product_id', '=', 'products.id');
                 })
 //                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
 //                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
@@ -139,7 +139,7 @@ class ProductController extends Controller
 //                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
                 ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_variation_groups.id as xxx')
                 ->where('products.active',1)
-
+                ->whereNull('product_variation_groups.product_id')
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
