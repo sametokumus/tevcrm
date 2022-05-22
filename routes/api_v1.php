@@ -107,6 +107,10 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 
     Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController::class, 'getProductsByCategoryId']);
 
+    Route::get('/product/getBrandByIdProduct', [ProductController::class, 'getBrandByIdProduct']);
+
+
+
 
     Route::get('/product/getProductTagById/{product_id}', [ProductController::class, 'getProductTagById']);
     Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
