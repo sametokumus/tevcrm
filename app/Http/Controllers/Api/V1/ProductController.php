@@ -65,7 +65,7 @@ class ProductController extends Controller
     public function getAllProductById($id){
         try {
             $product = Product::query()->where('id',$id)->where('active',1)->first();
-            $brand = Brand::query()->where('id',$id)->first();
+            $brand = Brand::query()->where('id',$product->brand_id)->first();
             $product_type = ProductType::query()->where('id',$product->type_id)->first();
             $product_documents = ProductDocument::query()->where('product_id',$product->id)->where('active',1)->get();
             $product_variation_groups = ProductVariationGroup::query()
