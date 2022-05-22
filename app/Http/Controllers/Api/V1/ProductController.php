@@ -124,6 +124,68 @@ class ProductController extends Controller
         }
     }
 
+    public function getAllProductWithVariationById($product_id, $variation_id){
+        try {
+            $product = Product::query()->where('id',$product_id)->where('active',1)->first();
+            $brand = Brand::query()->where('id',$product->brand_id)->first();
+            $product_type = ProductType::query()->where('id',$product->type_id)->first();
+            $product_documents = ProductDocument::query()->where('product_id',$product->id)->where('active',1)->get();
+            $product_tags = ProductTags::query()
+                ->leftJoin('tags','tags.id','=','product_tags.tag_id')
+                ->selectRaw('tags.*')
+                ->where('product_id',$product->id)
+                ->where('product_tags.active',1)
+                ->get();
+            $product_categories = ProductCategory::query()
+                ->leftJoin('categories','categories.id','=','product_categories.category_id')
+                ->selectRaw('categories.*')
+                ->where('product_id',$product->id)
+                ->where('product_categories.active',1)
+                ->get();
+
+            $product_variation_groups = ProductVariationGroup::query()
+                ->leftJoin('product_variation_group_types','product_variation_group_types.id','=','product_variation_groups.group_type_id')
+                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->selectRaw('product_variation_groups.* , product_variation_group_types.name as type_name')
+                ->where('product_variation_groups.active',1)
+                ->where('products.id',$product_id)
+                ->get();
+            $variations = ProductVariation::query()
+                ->leftJoin('product_variation_groups','product_variation_groups.id','=','product_variations.variation_group_id')
+                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->selectRaw('product_variations.*')
+                ->where('product_variations.active',1)
+                ->where('products.active',1)
+                ->where('products.id',$product_id)
+                ->get();
+
+            foreach ($variations as $variation){
+                $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
+                $images = ProductImage::query()->where('variation_id',$variation->id)->get();
+                $variation['rule'] = $rule;
+                $variation['images'] = $images;
+            }
+
+            $featured_variation = ProductVariation::query()->where('id', $variation_id)->first();
+            $rule = ProductRule::query()->where('variation_id',$variation_id)->first();
+            $images = ProductImage::query()->where('variation_id',$variation_id)->get();
+            $featured_variation['rule'] = $rule;
+            $featured_variation['images'] = $images;
+
+            $product['brand'] = $brand;
+            $product['product_type'] = $product_type;
+            $product['product_documents'] = $product_documents;
+            $product['product_tags'] = $product_tags;
+            $product['product_categories'] = $product_categories;
+            $product['variation_groups'] = $product_variation_groups;
+            $product['variations'] = $variations;
+            $product['featured_variation'] = $featured_variation;
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+        }
+    }
+
     public function getProduct()
     {
         try {
