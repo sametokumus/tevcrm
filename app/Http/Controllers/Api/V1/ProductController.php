@@ -125,7 +125,7 @@ class ProductController extends Controller
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_types','product_types.id','=','products.type_id')
                 ->leftjoin('product_variation_groups', function($join){
-                    $join->on('product_variation_groups.product_id', '=', 'products.id')->first();
+                    $join->on('product_variation_groups.product_id', '=', 'products.id')->get();
                 })
 //                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
 //                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
