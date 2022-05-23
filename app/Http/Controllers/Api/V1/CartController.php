@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\ProductRule;
 use App\Models\ProductVariation;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
@@ -32,19 +33,27 @@ class CartController extends Controller
                 $cart_id = Cart::query()->where('id',$added_cart_id)->first()->cart_id;
             }
             $cart_detail = CartDetail::query()->where('cart_id',$cart_id)->where('product_id',$request->product_id)->first();
+            $rule = ProductRule::query()->where('variation_id',$request->variation_id)->first();
+            if ($rule->discount_rate > 0){
+                $price = $rule->discounted_price;
+            }else{
+                $price = $rule->regular_price;
+            }
             if (isset($cart_detail)){
                 $quantity = $cart_detail->quantity+$request->quantity;
-                CartDetail::query()->where('cart_id',$cart_id)->where('product_id',$request->product_id)->update([
+                CartDetail::query()->where('cart_id',$cart_id)->where('variation_id',$request->variation_id)->where('product_id',$request->product_id)->update([
                     'quantity' => $quantity
                 ]);
             }else{
                 CartDetail::query()->insert([
                     'cart_id' => $cart_id,
                     'product_id' => $request->product_id,
-                    'quantity' => $request->quantity
+                    'variation_id' => $request->variation_id,
+                    'quantity' => $request->quantity,
+                    'price' => $price,
                 ]);
             }
-            return response(['message' => 'Sepet ekleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => 'Sepet ekleme işlemi başarılı.', 'status' => 'success','cart' => $cart_id]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

@@ -17,9 +17,10 @@ class CreateCartDetailsTable extends Migration
             $table->id();
             $table->string('cart_id');
             $table->bigInteger('product_id');
+            $table->bigInteger('variation_id');
             $table->decimal('price')->nullable();
             $table->integer('quantity');
-            $table->tinyInteger('active')->default(0);
+            $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
