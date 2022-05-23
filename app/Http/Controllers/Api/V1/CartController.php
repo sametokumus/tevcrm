@@ -100,15 +100,15 @@ class CartController extends Controller
             $cart = Cart::query()->where('cart_id',$cart_id)->first();
             $cart_details = CartDetail::query()->where('cart_id',$cart->cart_id)->get();
             foreach ($cart_details as $cart_detail){
-                $products = Product::query()->where('id',$cart_detail->product_id)->get();
-                $rule = ProductRule::query()->where('variation_id',$cart_detail->variation_id)->get();
-                $variations = ProductVariation::query()->where('id',$cart_detail->variation_id)->get();
-                $images = ProductImage::query()->where('variation_id',$cart_detail->variation_id)->first();
-                $cart_detail['products'] = $products;
-                $cart_detail['rule'] = $rule;
-                $cart_detail['variations'] = $variations;
-                $cart_detail['images'] = $images;
+                $product = Product::query()->where('id',$cart_detail->product_id)->first();
+                $variation = ProductVariation::query()->where('id',$cart_detail->variation_id)->first();
+                $rule = ProductRule::query()->where('variation_id',$cart_detail->variation_id)->first();
+                $image = ProductImage::query()->where('variation_id',$cart_detail->variation_id)->first();
 
+                $variation['rule'] = $rule;
+                $variation['image'] = $image;
+                $product['variation'] = $variation;
+                $cart_detail['product'] = $product;
             }
             $cart['cart_details'] = $cart_details;
 
