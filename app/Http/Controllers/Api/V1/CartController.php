@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\ProductRule;
 use App\Models\ProductVariation;
 use Faker\Provider\Uuid;
@@ -96,6 +98,20 @@ class CartController extends Controller
     public function getCartById($cart_id){
         try {
             $cart = Cart::query()->where('cart_id',$cart_id)->first();
+            $cart_details = CartDetail::query()->where('cart_id',$cart->cart_id)->get();
+            foreach ($cart_details as $cart_detail){
+                $products = Product::query()->where('id',$cart_detail->product_id)->get();
+                $rule = ProductRule::query()->where('variation_id',$cart_detail->variation_id)->get();
+                $variations = ProductVariation::query()->where('id',$cart_detail->variation_id)->get();
+                $images = ProductImage::query()->where('variation_id',$cart_detail->variation_id)->first();
+                $cart_detail['products'] = $products;
+                $cart_detail['rule'] = $rule;
+                $cart_detail['variations'] = $variations;
+                $cart_detail['images'] = $images;
+
+            }
+            $cart['cart_details'] = $cart_details;
+
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
