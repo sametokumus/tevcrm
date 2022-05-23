@@ -255,8 +255,8 @@ class ProductController extends Controller
         try {
             $product_categories = ProductCategory::query()->where('product_id',$product_id)->get();
             foreach ($product_categories as $product_category){
-                $category_name = Tag::query()->where('id',$product_category->category_id)->get();
-                $product_tag['category'] = $category_name;
+                $category_name = Category::query()->where('id',$product_category->category_id)->get();
+                $product_category['category'] = $category_name;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_categories' => $product_categories]]);
         } catch (QueryException $queryException) {

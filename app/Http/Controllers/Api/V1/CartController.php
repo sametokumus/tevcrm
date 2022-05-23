@@ -19,10 +19,6 @@ class CartController extends Controller
 {
     public function addCart(Request $request){
         try {
-            $request->validate([
-                'user_id' => 'required|exists:users,id',
-            ]);
-
 
             $cart = Cart::query()->where('user_id', $request->user_id)->where('active',1)->first();
             if(isset($cart)){
@@ -34,16 +30,22 @@ class CartController extends Controller
                 ]);
                 $cart_id = Cart::query()->where('id',$added_cart_id)->first()->cart_id;
             }
-            $cart_detail = CartDetail::query()->where('cart_id',$cart_id)->where('product_id',$request->product_id)->first();
             $rule = ProductRule::query()->where('variation_id',$request->variation_id)->first();
             if ($rule->discount_rate > 0){
                 $price = $rule->discounted_price;
             }else{
                 $price = $rule->regular_price;
             }
+            $cart_detail = CartDetail::query()->where('variation_id',$request->variation_id)
+                ->where('cart_id',$cart_id)
+                ->where('product_id',$request->product_id)
+                ->first();
             if (isset($cart_detail)){
                 $quantity = $cart_detail->quantity+$request->quantity;
-                CartDetail::query()->where('cart_id',$cart_id)->where('variation_id',$request->variation_id)->where('product_id',$request->product_id)->update([
+                CartDetail::query()->where('cart_id',$cart_id)
+                    ->where('variation_id',$request->variation_id)
+                    ->where('product_id',$request->product_id)
+                    ->update([
                     'quantity' => $quantity
                 ]);
             }else{
@@ -67,8 +69,12 @@ class CartController extends Controller
 
     public function updateCartProduct(Request $request){
         try {
-            CartDetail::query()->where('cart_id',$request->cart_id)->where('product_id',$request->product_id)->update([
+            CartDetail::query()->where('cart_id',$request->cart_id)
+                ->where('product_id',$request->product_id)
+                ->where('variation_id',$request->variation_id)
+                ->update([
                 'product_id' => $request->product_id,
+                'variation_id' => $request->variation_id,
                 'cart_id' => $request->cart_id,
                 'quantity' => $request->quantity
             ]);
@@ -86,6 +92,24 @@ class CartController extends Controller
 
             }
             return response(['message' => 'Sepet güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteCartProduct(Request $request){
+        try {
+            CartDetail::query()->where('cart_id',$request->cart_id)
+                ->where('product_id',$request->product_id)
+                ->where('variation_id',$request->variation_id)
+                ->update([
+                'active' => 0
+            ]);
+            return response(['message' => 'Sepet silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
