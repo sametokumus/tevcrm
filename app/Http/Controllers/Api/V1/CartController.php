@@ -20,7 +20,7 @@ class CartController extends Controller
     public function addCart(Request $request){
         try {
 
-            if(isset($request->cart_id)){
+            if(!empty($request->cart_id)){
                 $cart_id = $request->cart_id;
             }else{
                 $added_cart_id = Cart::query()->insertGetId([
