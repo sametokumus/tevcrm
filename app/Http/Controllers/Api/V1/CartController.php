@@ -37,6 +37,7 @@ class CartController extends Controller
             $cart_detail = CartDetail::query()->where('variation_id',$request->variation_id)
                 ->where('cart_id',$cart_id)
                 ->where('product_id',$request->product_id)
+                ->where('active',1)
                 ->first();
             if (isset($cart_detail)){
                 $quantity = $cart_detail->quantity+$request->quantity;
