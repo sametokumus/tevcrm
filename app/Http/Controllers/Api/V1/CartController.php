@@ -150,7 +150,7 @@ class CartController extends Controller
                 $variation['image'] = $image;
                 $product['variation'] = $variation;
                 $cart_detail['product'] = $product;
-                if ($rule->discount_price == null){
+                if ($rule->discounted_price == null){
                     $cart_detail_price = $rule->regular_price * $cart_detail->quantity;
                     $cart_detail_tax = $rule->regular_tax * $cart_detail->quantity;
                     $cart_detail_delivery_price = $product->delivery_price * $cart_detail->quantity;
@@ -171,9 +171,9 @@ class CartController extends Controller
 
             }
             $cart['cart_details'] = $cart_details;
-            $cart_detail['total_price'] = $cart_price;
-            $cart_detail['total_tax'] = $cart_tax;
-            $cart_detail['total_delivery'] = $cart_delivery_price;
+            $cart['total_price'] = $cart_price;
+            $cart['total_tax'] = $cart_tax;
+            $cart['total_delivery'] = $cart_delivery_price;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
