@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
@@ -41,7 +42,11 @@ class OrderController extends Controller
                     'is_partial' => $request->is_partial,
                     'is_paid' => $request->is_paid
                 ]);
-
+                $order_cart_id = Order::query()->where('id',$order_id)->first()->cart_id;
+                $user_id = Order::query()->where('id',$order_id)->first()->user_id;
+                Cart::query()->where('cart_id',$order_cart_id)->update([
+                    'user_id' => $user_id
+                ]);
 
             $order_products = json_decode(json_encode($request->order_products));
             foreach ($order_products as $order_product){

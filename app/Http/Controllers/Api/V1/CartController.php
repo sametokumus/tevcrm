@@ -20,12 +20,10 @@ class CartController extends Controller
     public function addCart(Request $request){
         try {
 
-            $cart = Cart::query()->where('user_id', $request->user_id)->where('active',1)->first();
-            if(isset($cart)){
-                $cart_id = $cart->cart_id;
+            if(isset($request->cart_id)){
+                $cart_id = $request->cart_id;
             }else{
                 $added_cart_id = Cart::query()->insertGetId([
-                    'user_id' => $request->user_id,
                     'cart_id' => Uuid::uuid()
                 ]);
                 $cart_id = Cart::query()->where('id',$added_cart_id)->first()->cart_id;
@@ -57,6 +55,13 @@ class CartController extends Controller
                     'price' => $price,
                 ]);
             }
+
+            if (!empty($request->user_id)){
+             Cart::query()->where('cart_id',$cart_id)->update([
+                 'user_id' => $request->user_id
+             ]);
+            }
+
             return response(['message' => 'Sepet ekleme işlemi başarılı.', 'status' => 'success','cart' => $cart_id]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
