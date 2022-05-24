@@ -109,7 +109,15 @@ class CartController extends Controller
                 ->update([
                 'active' => 0
             ]);
-            return response(['message' => 'Sepet silme işlemi başarılı.', 'status' => 'success']);
+            $cart_details = CartDetail::query()->where('cart_id',$request->cart_id)->get();
+            if (isset($cart_details)){
+                return response(['message' => 'Sepet silme işlemi başarılı.', 'status' => 'success', 'cart_status' => true]);
+            }else{
+                Cart::query()->where('cart_id',$request->cart_id)->update([
+                    'active' => 0
+                ]);
+                return response(['message' => 'Sepet silme işlemi başarılı.', 'status' => 'success', 'cart_status' => false]);
+            }
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
