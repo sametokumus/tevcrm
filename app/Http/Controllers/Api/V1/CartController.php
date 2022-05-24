@@ -137,6 +137,9 @@ class CartController extends Controller
         try {
             $cart = Cart::query()->where('cart_id',$cart_id)->first();
             $cart_details = CartDetail::query()->where('cart_id',$cart->cart_id)->where('active',1)->get();
+            $cart_price = 0;
+            $cart_tax = 0;
+            $cart_delivery_price = 0;
             foreach ($cart_details as $cart_detail){
                 $product = Product::query()->where('id',$cart_detail->product_id)->first();
                 $variation = ProductVariation::query()->where('id',$cart_detail->variation_id)->first();
@@ -147,8 +150,30 @@ class CartController extends Controller
                 $variation['image'] = $image;
                 $product['variation'] = $variation;
                 $cart_detail['product'] = $product;
+                if ($rule->discount_price == null){
+                    $cart_detail_price = $rule->regular_price * $cart_detail->quantity;
+                    $cart_detail_tax = $rule->regular_tax * $cart_detail->quantity;
+                    $cart_detail_delivery_price = $product->delivery_price * $cart_detail->quantity;
+                }else{
+                    $cart_detail_price = $rule->discounted_price * $cart_detail->quantity;
+                    $cart_detail_tax = $rule->discounted_tax * $cart_detail->quantity;
+                    $cart_detail_delivery_price = $product->delivery_price * $cart_detail->quantity;
+                }
+                if($product->is_free_shipping == 1){
+                    $cart_detail_delivery_price = 0.00;
+                }
+                $cart_detail['sub_total_price'] = $cart_detail_price;
+                $cart_detail['sub_total_tax'] = $cart_detail_tax;
+                $cart_detail['sub_total_delivery'] = $cart_detail_delivery_price;
+                $cart_price += $cart_detail_price;
+                $cart_tax += $cart_detail_tax;
+                $cart_delivery_price += $cart_detail_delivery_price;
+
             }
             $cart['cart_details'] = $cart_details;
+            $cart_detail['total_price'] = $cart_price;
+            $cart_detail['total_tax'] = $cart_tax;
+            $cart_detail['total_delivery'] = $cart_delivery_price;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
