@@ -190,4 +190,25 @@ class CartController extends Controller
         }
     }
 
+    public function getClearCartById($cart_id){
+        try {
+            CartDetail::query()->where('cart_id', $cart_id)
+                ->update([
+                    'active' => 0
+                ]);
+
+            Cart::query()->where('cart_id', $cart_id)->update([
+                'active' => 0
+            ]);
+            
+            return response(['message' => 'Sepet silme işlemi başarılı.','status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
+        }
+    }
+
 }
