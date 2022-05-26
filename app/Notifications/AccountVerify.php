@@ -70,9 +70,9 @@ class AccountVerify extends AccountVerifyBase implements ShouldQueue
      *
      */
     protected function verificationUrl($notifiable) {
-        return "https://kablocu.wimco.com.tr/hesap-dogrulama/"+$notifiable->token;
-//        return URL::temporarySignedRoute('verification.verify',
-//            Carbon::now()->addMinutes(60), ['token' => $notifiable->token]
-//        );
+//        return "https://kablocu.wimco.com.tr/hesap-dogrulama/"+$notifiable->token;
+        return URL::temporarySignedRoute('verification.verify',
+            Carbon::now()->addMinutes(60), ['token' => $notifiable->token]
+        );
     }
 }
