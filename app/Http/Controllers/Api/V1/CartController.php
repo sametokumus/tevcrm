@@ -172,7 +172,7 @@ class CartController extends Controller
             $cart['total_price'] = $cart_price;
             $cart['total_tax'] = $cart_tax;
 
-            $delivery_price = DeliveryPrice::query()->where('min_value', '>=', $weight)->where('max_value', '<', $weight)->first();
+            $delivery_price = DeliveryPrice::query()->where('min_value', '<=', $weight)->where('max_value', '>', $weight)->first();
             $cart['total_delivery'] = $delivery_price;
             $cart['total_weight'] = $weight;
 
