@@ -84,67 +84,69 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::post('/userDocuments/updateUserDocumentChecksByUserId/{document_id}/{user_id}', [UserDocumentChecksController::class, 'updateUserDocumentChecksByUserId']);
 //    Route::post('/userDocuments/deleteUserDocumentsChecksByUserId/{document_id}', [UserDocumentChecksController::class, 'deleteUserDocumentsChecksByUserId']);
 
-    Route::post('/cart/addCart', [CartController::class, 'addCart']);
-    Route::post('/cart/updateCartProduct', [CartController::class, 'updateCartProduct']);
-    Route::post('/cart/deleteCartProduct', [CartController::class, 'deleteCartProduct']);
-    Route::get('/cart/getCartById/{cart_id}', [CartController::class, 'getCartById']);
-    Route::get('/cart/getUserAllCartById/{user_id}', [CartController::class, 'getUserAllCartById']);
-    Route::get('/cart/getClearCartById/{cart_id}', [CartController::class, 'getClearCartById']);
 
-    Route::post('/order/addOrder',[OrderController::class,'addOrder']);
-
-    Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
-    Route::get('/brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
-    Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
-    Route::get('/productType/getProductTypeById/{type_id}', [ProductTypeController::class, 'getProductTypeById']);
-    Route::get('/category/getCategory', [CategoryController::class, 'getCategory']);
-    Route::get('/category/getParentCategory', [CategoryController::class, 'getParentCategory']);
-    Route::get('/category/getCategoryById/{category_id}', [CategoryController::class, 'getCategoryById']);
-
-    Route::get('/product/getAllProduct', [ProductController::class, 'getAllProduct']);
-    Route::get('/product/getAllProductById/{id}', [ProductController::class, 'getAllProductById']);
-    Route::get('/product/getAllProductWithVariationById/{product_id}/{variation_id}', [ProductController::class, 'getAllProductWithVariationById']);
-
-    Route::get('/product/getProduct', [ProductController::class, 'getProduct']);
-    Route::get('/product/getProductById/{id}', [ProductController::class, 'getProductById']);
-
-    Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController::class, 'getProductsByCategoryId']);
-    Route::get('/product/getProductsBySlug/{slug}', [ProductController::class, 'getProductsBySlug']);
-
-    Route::get('/product/getBrandByIdProduct', [ProductController::class, 'getBrandByIdProduct']);
-
-
-
-
-    Route::get('/product/getProductTagById/{product_id}', [ProductController::class, 'getProductTagById']);
-    Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
-    Route::get('/product/getProductDocumentById/{product_id}', [ProductController::class, 'getProductDocumentById']);
-    Route::get('/product/getProductVariationGroupById/{product_id}', [ProductController::class, 'getProductVariationGroupById']);
-    Route::get('/product/getProductVariationById/{id}', [ProductController::class, 'getProductVariationById']);
-    Route::get('/product/getProductVariationsById/{id}', [ProductController::class, 'getProductVariationsById']);
-    Route::get('/product/getVariationsImageById/{product_id}', [ProductController::class, 'getVariationsImageById']);
-    Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
-    Route::get('/product/getProductTabsById/{product_id}', [ProductController::class, 'getProductTabsById']);
-    Route::get('/product/getProductTabById/{tab_id}', [ProductController::class, 'getProductTabById']);
-
-
-    Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
-
-
-    Route::get('/productVariationGroupType/getProductVariationGroupTypes', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypes']);
-    Route::get('/productVariationGroupType/getProductVariationGroupTypeById/{id}', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypeById']);
-
-
-    Route::get('/productType/getProductTypes', [ProductTypeController::class, 'getProductTypes']);
-    Route::get('/productType/getProductVariationById/{variation_id}', [ProductTypeController::class, 'getProductTypeById']);
-
-    Route::get('/tab/getTabs', [TabController::class, 'getTabs']);
-    Route::get('/tab/getTabById/{tab_id}', [TabController::class, 'getTabById']);
-
-    Route::get('/tag/getTags', [TagController::class, 'getTags']);
-    Route::get('/tag/getTagById/{id}', [TagController::class, 'getTagById']);
-
-    Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
-    Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
 
 });
+
+Route::post('/cart/addCart', [CartController::class, 'addCart']);
+Route::post('/cart/updateCartProduct', [CartController::class, 'updateCartProduct']);
+Route::post('/cart/deleteCartProduct', [CartController::class, 'deleteCartProduct']);
+Route::get('/cart/getCartById/{cart_id}', [CartController::class, 'getCartById']);
+Route::get('/cart/getUserAllCartById/{user_id}', [CartController::class, 'getUserAllCartById']);
+Route::get('/cart/getClearCartById/{cart_id}', [CartController::class, 'getClearCartById']);
+
+Route::post('/order/addOrder',[OrderController::class,'addOrder']);
+
+Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
+Route::get('/brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
+Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);
+Route::get('/productType/getProductTypeById/{type_id}', [ProductTypeController::class, 'getProductTypeById']);
+Route::get('/category/getCategory', [CategoryController::class, 'getCategory']);
+Route::get('/category/getParentCategory', [CategoryController::class, 'getParentCategory']);
+Route::get('/category/getCategoryById/{category_id}', [CategoryController::class, 'getCategoryById']);
+
+Route::get('/product/getAllProduct', [ProductController::class, 'getAllProduct']);
+Route::get('/product/getAllProductById/{id}', [ProductController::class, 'getAllProductById']);
+Route::get('/product/getAllProductWithVariationById/{product_id}/{variation_id}', [ProductController::class, 'getAllProductWithVariationById']);
+
+Route::get('/product/getProduct', [ProductController::class, 'getProduct']);
+Route::get('/product/getProductById/{id}', [ProductController::class, 'getProductById']);
+
+Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController::class, 'getProductsByCategoryId']);
+Route::get('/product/getProductsBySlug/{slug}', [ProductController::class, 'getProductsBySlug']);
+
+Route::get('/product/getBrandByIdProduct', [ProductController::class, 'getBrandByIdProduct']);
+
+
+
+
+Route::get('/product/getProductTagById/{product_id}', [ProductController::class, 'getProductTagById']);
+Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
+Route::get('/product/getProductDocumentById/{product_id}', [ProductController::class, 'getProductDocumentById']);
+Route::get('/product/getProductVariationGroupById/{product_id}', [ProductController::class, 'getProductVariationGroupById']);
+Route::get('/product/getProductVariationById/{id}', [ProductController::class, 'getProductVariationById']);
+Route::get('/product/getProductVariationsById/{id}', [ProductController::class, 'getProductVariationsById']);
+Route::get('/product/getVariationsImageById/{product_id}', [ProductController::class, 'getVariationsImageById']);
+Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
+Route::get('/product/getProductTabsById/{product_id}', [ProductController::class, 'getProductTabsById']);
+Route::get('/product/getProductTabById/{tab_id}', [ProductController::class, 'getProductTabById']);
+
+
+Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
+
+
+Route::get('/productVariationGroupType/getProductVariationGroupTypes', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypes']);
+Route::get('/productVariationGroupType/getProductVariationGroupTypeById/{id}', [ProductVariationGroupTypeController::class, 'getProductVariationGroupTypeById']);
+
+
+Route::get('/productType/getProductTypes', [ProductTypeController::class, 'getProductTypes']);
+Route::get('/productType/getProductVariationById/{variation_id}', [ProductTypeController::class, 'getProductTypeById']);
+
+Route::get('/tab/getTabs', [TabController::class, 'getTabs']);
+Route::get('/tab/getTabById/{tab_id}', [TabController::class, 'getTabById']);
+
+Route::get('/tag/getTags', [TagController::class, 'getTags']);
+Route::get('/tag/getTagById/{id}', [TagController::class, 'getTagById']);
+
+Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
+Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
