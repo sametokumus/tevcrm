@@ -42,7 +42,7 @@ class AccountVerify extends AccountVerifyBase implements ShouldQueue
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable) {
-        $verificationUrl = $this->verificationUrl($notifiable);
+        $verificationUrl = "https://kablocu.wimco.com.tr/hesap-dogrulama/"+$notifiable->token;
         return (new MailMessage)
             ->greeting('Merhaba')
             ->subject('E-Posta Adresinizi Doğrulayın!')
