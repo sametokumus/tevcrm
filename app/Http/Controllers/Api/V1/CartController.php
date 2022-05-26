@@ -174,6 +174,7 @@ class CartController extends Controller
 
             $delivery_price = DeliveryPrice::query()->where('min_value', '>=', $weight)->where('max_value', '<', $weight)->first();
             $cart['total_delivery'] = $delivery_price;
+            $cart['total_weight'] = $weight;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
