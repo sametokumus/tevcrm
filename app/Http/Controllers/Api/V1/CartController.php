@@ -172,8 +172,8 @@ class CartController extends Controller
             $cart['total_price'] = $cart_price;
             $cart['total_tax'] = $cart_tax;
 
-            $cart_delivery_price = DeliveryPrice::query()->where('min_value', '>=', $weight)->where('max_value', '<', $weight)->first()->price;
-            $cart['total_delivery'] = $cart_delivery_price;
+            $delivery_price = DeliveryPrice::query()->where('min_value', '>=', $weight)->where('max_value', '<', $weight)->first();
+            $cart['total_delivery'] = $delivery_price;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
