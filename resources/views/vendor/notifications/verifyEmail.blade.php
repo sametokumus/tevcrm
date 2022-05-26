@@ -23,8 +23,8 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    "Yukarıdaki \":actionText\" butonu ile, yada aşağıdaki URL'i tarayıcınıza yapıştırarak hesabınızı doğrulayabilirsiniz.\n".
+    'Tarayıcı Linki:',
     [
         'actionText' => $actionText,
     ]
