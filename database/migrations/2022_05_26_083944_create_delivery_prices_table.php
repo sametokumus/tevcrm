@@ -16,7 +16,6 @@ class CreateDeliveryPricesTable extends Migration
         Schema::create('delivery_prices', function (Blueprint $table) {
             $table->id();
             $table->decimal('min_value');
-            $table->decimal('test');
             $table->decimal('max_value');
             $table->decimal('price');
             $table->tinyInteger('active')->default(1);
