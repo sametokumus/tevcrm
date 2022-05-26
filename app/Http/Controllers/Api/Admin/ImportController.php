@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ImportProduct;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductRule;
 use App\Models\ProductSeo;
+use App\Models\ProductType;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
 use Illuminate\Http\Request;
@@ -249,6 +251,20 @@ class ImportController extends Controller
                'featured_variation'=>$variation_id
             ]);
         }
+        return response(['mesaj' => 'başarılı']);
+    }
+
+    public function setProductCategory(){
+
+        $products = Product::query()->get();
+        foreach ($products as $product){
+            $type = ProductType::query()->where('id', $product->type_id)->first();
+            ProductCategory::query()->insert([
+                'product_id' => $product->id,
+                'category_id' => $type->cid
+            ]);
+        }
+
         return response(['mesaj' => 'başarılı']);
     }
 }

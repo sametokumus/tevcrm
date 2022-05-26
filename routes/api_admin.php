@@ -151,6 +151,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
     Route::get('excel/addAllProduct', [ImportController::class, 'addAllProduct']);
     Route::get('excel/productVariationUpdate', [ImportController::class, 'productVariationUpdate']);
+    Route::get('excel/setProductCategory', [ImportController::class, 'setProductCategory']);
 
 
 });
