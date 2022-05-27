@@ -133,7 +133,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::query()->where('token', $request['token'])->first();
-            if ($user->hasVerifiedEmail()) {
+            if ($user->hasVerifiedEmail() !== null || $user->hasVerifiedEmail()) {
                 throw new \Exception('validation-002');
             }
             $user->email_verified_at = now();
