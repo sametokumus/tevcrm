@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PriceImports;
+use App\Models\ImportPrice;
 use App\Models\ImportProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -19,21 +21,23 @@ use App\Imports\ProductImport;
 
 class ImportController extends Controller
 {
-    public function productExcelImport(Request $request){
+    public function productExcelImport(Request $request)
+    {
         Excel::import(new ProductImport, $request->file('file'));
         return response(['mesaj' => 'başarılı']);
     }
 
-    public function addAllProduct(){
+    public function addAllProduct()
+    {
         $import_products = ImportProduct::all();
 
-        foreach ($import_products as $import_product){
+        foreach ($import_products as $import_product) {
 
             $hasProduct = Product::query()->where('sku', $import_product->ana_urun_kod)->first();
 
-            if(!isset($hasProduct)){
+            if (!isset($hasProduct)) {
 
-                if ($import_product->marka == '3_2'){
+                if ($import_product->marka == '3_2') {
 
                     $product_id = Product::query()->insertGetId([
                         'sku' => $import_product->ana_urun_kod,
@@ -117,7 +121,7 @@ class ImportController extends Controller
                     ]);
 
 
-                }else{
+                } else {
 
                     $product_id = Product::query()->insertGetId([
                         'sku' => $import_product->ana_urun_kod,
@@ -163,7 +167,7 @@ class ImportController extends Controller
                 }
 
 
-            }else{
+            } else {
 
                 if ($import_product->marka == '3_2') {
 
@@ -190,7 +194,7 @@ class ImportController extends Controller
                     ]);
 
                     $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id+1,
+                        'variation_group_id' => $variation_group_id + 1,
                         'sku' => $import_product->alt_urun_kod,
                         'name' => $import_product->renk,
                         'description' => ''
@@ -209,7 +213,7 @@ class ImportController extends Controller
                         'order' => 1
                     ]);
 
-                }else{
+                } else {
 
                     $variation_group_id = ProductVariationGroup::query()->where('product_id', $hasProduct->id)->first()->id;
 
@@ -238,26 +242,27 @@ class ImportController extends Controller
             }
 
 
-
         }
     }
 
-    public function productVariationUpdate(){
+    public function productVariationUpdate()
+    {
         $products = Product::query()->get();
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $group = ProductVariationGroup::query()->where('product_id', $product->id)->first();
             $variation_id = ProductVariation::query()->where('variation_group_id', $group->id)->first()->id;
             Product::query()->where('id', $product->id)->update([
-               'featured_variation'=>$variation_id
+                'featured_variation' => $variation_id
             ]);
         }
         return response(['mesaj' => 'başarılı']);
     }
 
-    public function setProductCategory(){
+    public function setProductCategory()
+    {
 
         $products = Product::query()->get();
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $type = ProductType::query()->where('id', $product->type_id)->first();
             ProductCategory::query()->insert([
                 'product_id' => $product->id,
@@ -266,5 +271,54 @@ class ImportController extends Controller
         }
 
         return response(['mesaj' => 'başarılı']);
+    }
+
+
+    public function priceExcelImport(Request $request)
+    {
+        Excel::import(new PriceImports(), $request->file('file'));
+    }
+
+    public function addProductPrice()
+    {
+        $import_prices = ImportPrice::all();
+        foreach ($import_prices as $import_price) {
+            $products = Product::query()->where('sku', $import_price->web_servis_kodu)->get();
+            foreach ($products as $product){
+                $product_variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first()->id;
+                $variations = ProductVariation::query()->where('variation_group_id',$product_variation_group)->get();
+                foreach ($variations as $variation){
+
+                    ProductRule::query()->where('variation_id',$variation->id)->update([
+                        'regular_price' => $import_price->fiyati,
+                        'discounted_price' => $import_price->indirimli_fiyati,
+                        'tax_rate' => $import_price->kdv,
+                    ]);
+                    $product_rule = ProductRule::query()->where('variation_id',$variation->id)->first();
+                    $regular_tax = $product_rule->regular_price /100* $product_rule->tax_rate;
+                    $discounted_tax = $product_rule->discounted_price * $product_rule->tax_rate;
+                    ProductRule::query()->where('variation_id',$variation->id)->update([
+                        'regular_tax' => $regular_tax,
+                        'discounted_tax' => $discounted_tax
+                    ]);
+
+                    if ($import_price->yeni_urun_mu == "" || $import_price->indirimli_goster == ""  || $import_price->tanitimli_goster == ""){
+                        Product::query()->where('sku',$import_price->web_servis_kodu)->update([
+                            'is_new' => null,
+                            'is_discounted' => $import_price->indirimli_goster,
+                            'is_featured' => $import_price->tanitimli_goster,
+                            'order' => $import_price->sira_no
+                        ]);
+                    }else{
+                        Product::query()->where('sku',$import_price->web_servis_kodu)->update([
+                            'is_new' => $import_price->yeni_urun_mu,
+                            'is_discounted' => $import_price->indirimli_goster,
+                            'is_featured' => $import_price->tanitimli_goster,
+                            'order' => $import_price->sira_no
+                        ]);
+                    }
+                }
+            }
+        }
     }
 }
