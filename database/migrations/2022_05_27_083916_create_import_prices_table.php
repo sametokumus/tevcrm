@@ -26,6 +26,7 @@ class CreateImportPricesTable extends Migration
             $table->text('indirimli_goster')->nullable();
             $table->text('tanitimli_goster')->nullable();
             $table->text('sira_no')->nullable();
+            $table->text('currency')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

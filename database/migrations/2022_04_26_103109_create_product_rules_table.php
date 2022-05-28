@@ -31,6 +31,7 @@ class CreateProductRulesTable extends Migration
             $table->decimal('regular_tax')->nullable();
             $table->decimal('discounted_price')->nullable();
             $table->decimal('discounted_tax')->nullable();
+            $table->text('currency')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

@@ -18,5 +18,7 @@ class ImportPrice extends Model
         'yeni_urun_mu',
         'indirimli_goster',
         'tanitimli_goster',
-        'sira_no',];
+        'sira_no',
+        'currency',
+        ];
 }

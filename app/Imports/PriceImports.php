@@ -27,7 +27,8 @@ class PriceImports implements ToModel
             'yeni_urun_mu' => $row[7],
             'indirimli_goster' => $row[8],
             'tanitimli_goster' => $row[9],
-            'sira_no' => $row[10]
+            'sira_no' => $row[10],
+            'currency' => $row[11]
         ]);
     }
 }

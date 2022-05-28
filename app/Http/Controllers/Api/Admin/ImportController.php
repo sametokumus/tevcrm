@@ -304,7 +304,7 @@ class ImportController extends Controller
 
                     if ($import_price->yeni_urun_mu == "" || $import_price->indirimli_goster == ""  || $import_price->tanitimli_goster == ""){
                         Product::query()->where('sku',$import_price->web_servis_kodu)->update([
-                            'is_new' => null,
+                            'is_new' => 0,
                             'is_discounted' => $import_price->indirimli_goster,
                             'is_featured' => $import_price->tanitimli_goster,
                             'order' => $import_price->sira_no
