@@ -124,6 +124,7 @@ Route::get('/product/getCampaignProductsByLimit/{limit}', [ProductController::cl
 
 
 
+
 Route::get('/product/getProductTagById/{product_id}', [ProductController::class, 'getProductTagById']);
 Route::get('/product/getProductCategoryById/{product_id}', [ProductController::class, 'getProductCategoryById']);
 Route::get('/product/getProductDocumentById/{product_id}', [ProductController::class, 'getProductDocumentById']);

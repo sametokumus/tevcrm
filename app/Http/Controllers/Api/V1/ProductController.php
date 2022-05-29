@@ -491,6 +491,7 @@ class ProductController extends Controller
                 ->where('products.is_campaign',1)
                 ->limit($limit)
                 ->get();
+
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
