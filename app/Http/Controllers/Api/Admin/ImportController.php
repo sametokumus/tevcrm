@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Imports\PriceImports;
+use App\Models\Brand;
 use App\Models\ImportPrice;
 use App\Models\ImportProduct;
 use App\Models\Product;
@@ -288,19 +289,33 @@ class ImportController extends Controller
                 $product_variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first()->id;
                 $variations = ProductVariation::query()->where('variation_group_id',$product_variation_group)->get();
                 foreach ($variations as $variation){
+                    $brand = Brand::query()->where('id',$product->brand_id)->first();
+                    if($brand->dis == 0){
+                        $regular_tax = $import_price->fiyati / 100 * $import_price->kdv;
+                        $discounted_tax = $import_price->indirimli_fiyati * $import_price->kdv;
+                        ProductRule::query()->where('variation_id',$variation->id)->update([
+                            'discount_rate' => null,
+                            'tax_rate' => $import_price->kdv,
+                            'regular_price' => $import_price->fiyati,
+                            'regular_tax' => $regular_tax,
+                            'discounted_price' => null,
+                            'discounted_tax' => null
+                        ]);
+                    }else{
+                        $regular_tax = $import_price->fiyati / 100 * $import_price->kdv;
+                        $discounted_price = $import_price->fiyati - ($import_price->fiyati / 100 * $brand->dis);
+                        $discounted_tax = $discounted_price * $import_price->kdv;
+                        ProductRule::query()->where('variation_id',$variation->id)->update([
+                            'discount_rate' => $brand->dis,
+                            'tax_rate' => $import_price->kdv,
+                            'regular_price' => $import_price->fiyati,
+                            'regular_tax' => $regular_tax,
+                            'discounted_price' => $discounted_price,
+                            'discounted_tax' => $discounted_tax
+                        ]);
+                    }
 
-                    ProductRule::query()->where('variation_id',$variation->id)->update([
-                        'regular_price' => $import_price->fiyati,
-                        'discounted_price' => $import_price->indirimli_fiyati,
-                        'tax_rate' => $import_price->kdv,
-                    ]);
-                    $product_rule = ProductRule::query()->where('variation_id',$variation->id)->first();
-                    $regular_tax = $product_rule->regular_price /100* $product_rule->tax_rate;
-                    $discounted_tax = $product_rule->discounted_price * $product_rule->tax_rate;
-                    ProductRule::query()->where('variation_id',$variation->id)->update([
-                        'regular_tax' => $regular_tax,
-                        'discounted_tax' => $discounted_tax
-                    ]);
+
 
                     if ($import_price->yeni_urun_mu == "" || $import_price->indirimli_goster == ""  || $import_price->tanitimli_goster == ""){
                         Product::query()->where('sku',$import_price->web_servis_kodu)->update([
