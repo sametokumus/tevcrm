@@ -464,7 +464,7 @@ class ProductController extends Controller
 
     public function getAllCampaignProducts(){
         try {
-            $products = Products::query()
+            $products = Product::query()
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
@@ -481,7 +481,7 @@ class ProductController extends Controller
 
     public function getCampaignProductsByLimit($limit){
         try {
-            $products = Products::query()
+            $products = Product::query()
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
