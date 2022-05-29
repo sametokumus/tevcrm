@@ -288,18 +288,18 @@ class ImportController extends Controller
             foreach ($products as $product){
                 $product_variation_group = ProductVariationGroup::query()->where('product_id', $product->id)->first()->id;
                 $variations = ProductVariation::query()->where('variation_group_id',$product_variation_group)->get();
+                $brand = Brand::query()->where('id',$product->brand_id)->first();
                 foreach ($variations as $variation){
-                    $brand = Brand::query()->where('id',$product->brand_id)->first();
                     if($brand->dis == 0){
                         $regular_tax = $import_price->fiyati / 100 * $import_price->kdv;
-                        $discounted_tax = $import_price->indirimli_fiyati * $import_price->kdv;
                         ProductRule::query()->where('variation_id',$variation->id)->update([
                             'discount_rate' => null,
                             'tax_rate' => $import_price->kdv,
                             'regular_price' => $import_price->fiyati,
                             'regular_tax' => $regular_tax,
                             'discounted_price' => null,
-                            'discounted_tax' => null
+                            'discounted_tax' => null,
+                            'currency' => $import_price->currency
                         ]);
                     }else{
                         $regular_tax = $import_price->fiyati / 100 * $import_price->kdv;
@@ -311,7 +311,8 @@ class ImportController extends Controller
                             'regular_price' => $import_price->fiyati,
                             'regular_tax' => $regular_tax,
                             'discounted_price' => $discounted_price,
-                            'discounted_tax' => $discounted_tax
+                            'discounted_tax' => $discounted_tax,
+                            'currency' => $import_price->currency
                         ]);
                     }
 
