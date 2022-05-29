@@ -252,8 +252,7 @@ class ProductController extends Controller
     public function getProductsByType($slug){
         try {
             $products = ProductType::query()
-                ->leftJoin('products','products.id','=','product_categories.product_id')
-                ->leftJoin('categories','categories.id','=','product_categories.category_id')
+                ->leftJoin('products','products.type_id','=','product_types.id')
                 ->leftJoin('brands','brands.id','=','products.brand_id')
                 ->leftJoin('product_types','product_types.id','=','products.type_id')
                 ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
