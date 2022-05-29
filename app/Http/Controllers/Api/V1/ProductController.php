@@ -233,7 +233,7 @@ class ProductController extends Controller
 
                 $first_id = Category::query()->where('parent_id', $category->id)->first()->id;
 
-                $sub_categories = Category::query()->where('parent_id', $category->id);
+                $sub_categories = Category::query()->where('parent_id', $category->id)->get();
                 $category['sub_categories'] = $sub_categories;
 
                 $products = ProductCategory::query()
