@@ -116,7 +116,7 @@ Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController:
 Route::get('/product/getProductsBySlug/{slug}', [ProductController::class, 'getProductsBySlug']);
 Route::get('/product/getProductsByType/{slug}', [ProductController::class, 'getProductsByType']);
 
-Route::get('/product/getBrandByIdProduct', [ProductController::class, 'getBrandByIdProduct']);
+Route::get('/product/getBrandsWithProductsAndLimit/{limit}', [ProductController::class, 'getBrandsWithProductsAndLimit']);
 
 
 Route::get('/product/getAllCampaignProducts', [ProductController::class, 'getAllCampaignProducts']);

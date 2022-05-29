@@ -417,7 +417,7 @@ class ProductController extends Controller
         }
     }
 
-    public function getBrandByIdProduct(){
+    public function getBrandsWithProductsAndLimit($limit){
         try {
 
             $brands = Brand::query()->where('active',1)->get();
@@ -425,7 +425,7 @@ class ProductController extends Controller
                 $product_count = Product::query()->where('brand_id',$brand->id)->where('active', 1)->count();
                 $brand['count'] = $product_count;
 
-                $products = Product::query()->limit(3)->where('brand_id',$brand->id)->where('active', 1)->get();
+                $products = Product::query()->limit($limit)->where('brand_id',$brand->id)->where('active', 1)->get();
                 foreach ($products as $product){
 
                     $variation = ProductVariation::query()
