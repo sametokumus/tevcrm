@@ -246,7 +246,7 @@ class ProductController extends Controller
                     ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
                     ->where('products.active',1)
                     ->where('product_categories.active',1)
-                    ->where('product_categories.id',$first_id)
+                    ->where('product_categories.category_id',$first_id)
                     ->limit(7)
                     ->get();
 
