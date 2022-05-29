@@ -114,6 +114,7 @@ Route::get('/product/getProductById/{id}', [ProductController::class, 'getProduc
 
 Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController::class, 'getProductsByCategoryId']);
 Route::get('/product/getProductsBySlug/{slug}', [ProductController::class, 'getProductsBySlug']);
+Route::get('/product/getProductsByType/{slug}', [ProductController::class, 'getProductsByType']);
 
 Route::get('/product/getBrandByIdProduct', [ProductController::class, 'getBrandByIdProduct']);
 
