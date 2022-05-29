@@ -247,7 +247,7 @@ class ProductController extends Controller
                     ->where('products.active',1)
                     ->where('product_categories.active',1)
                     ->where('product_categories.category_id',$first_id)
-                    ->limit(7)
+                    ->limit(4)
                     ->get();
 
                 $category['products'] = $products;
