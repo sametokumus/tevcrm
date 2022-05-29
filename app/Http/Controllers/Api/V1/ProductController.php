@@ -268,6 +268,24 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductsByBrand($slug){
+        try {
+            $products = Brand::query()
+                ->leftJoin('products','products.type_id','=','product_types.id')
+                ->leftJoin('product_types','product_types.id','=','products.type_id')
+                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+                ->where('products.active',1)
+                ->where('brands.slug',$slug)
+                ->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+        }
+    }
+
     public function getProductById($id)
     {
         try {
