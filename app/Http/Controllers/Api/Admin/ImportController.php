@@ -314,6 +314,9 @@ class ImportController extends Controller
                             'discounted_tax' => $discounted_tax,
                             'currency' => $import_price->currency
                         ]);
+                        Product::query()->where('id', $product->id)->update([
+                           'is_campaign' => 1
+                        ]);
                     }
 
 
