@@ -231,6 +231,8 @@ class ProductController extends Controller
             $categories = Category::query()->where('parent_id', 0)->get();
             foreach ($categories as $category){
 
+                $first_id = Category::query()->where('parent_id', $category->id)->first()->id;
+
                 $sub_categories = Category::query()->where('parent_id', $category->id);
                 $category['sub_categories'] = $sub_categories;
 
@@ -244,7 +246,7 @@ class ProductController extends Controller
                     ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
                     ->where('products.active',1)
                     ->where('product_categories.active',1)
-                    ->where('product_categories.id',$sub_categories[0]->id)
+                    ->where('product_categories.id',$first_id)
                     ->limit(7)
                     ->get();
 
