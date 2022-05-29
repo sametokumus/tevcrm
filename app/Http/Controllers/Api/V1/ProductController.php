@@ -462,4 +462,21 @@ class ProductController extends Controller
         }
     }
 
+    public function getAllCampaignProducts(){
+        try {
+            $products = Products::query()
+                ->leftJoin('brands','brands.id','=','products.brand_id')
+                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+                ->where('products.active',1)
+                ->where('products.is_campaign',1)
+                ->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+        }
+    }
+
 }
