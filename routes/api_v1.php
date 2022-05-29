@@ -122,6 +122,8 @@ Route::get('/product/getBrandsWithProductsAndLimit/{limit}', [ProductController:
 
 Route::get('/product/getAllCampaignProducts', [ProductController::class, 'getAllCampaignProducts']);
 Route::get('/product/getCampaignProductsByLimit/{limit}', [ProductController::class, 'getCampaignProductsByLimit']);
+Route::get('/product/getFeaturedProducts', [ProductController::class, 'getFeaturedProducts']);
+Route::get('/product/getNewProducts', [ProductController::class, 'getNewProducts']);
 
 
 
