@@ -231,24 +231,28 @@ class ProductController extends Controller
             $categories = Category::query()->where('parent_id', 0)->get();
             foreach ($categories as $category){
 
+                $sub_categories = Category::query()->where('parent_id', $category->id);
+                $category['sub_categories'] = $sub_categories;
+
                 $products = ProductCategory::query()
                     ->leftJoin('products','products.id','=','product_categories.product_id')
                     ->leftJoin('brands','brands.id','=','products.brand_id')
                     ->leftJoin('product_types','product_types.id','=','products.type_id')
-                    ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
-                    ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
-                    ->leftJoin('product_variations','product_variations.id','=','product_variation_groups.id')
+                    ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
                     ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                     ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
                     ->selectRaw('products.* ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
                     ->where('products.active',1)
                     ->where('product_categories.active',1)
-                    ->where('product_categories.id',$category->id)
+                    ->where('product_categories.id',$sub_categories[0]->id)
+                    ->limit(7)
                     ->get();
+
+                $category['products'] = $products;
 
             }
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         }
