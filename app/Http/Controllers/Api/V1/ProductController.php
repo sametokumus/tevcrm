@@ -271,7 +271,7 @@ class ProductController extends Controller
     public function getProductsByBrand($slug){
         try {
             $products = Brand::query()
-                ->leftJoin('products','products.type_id','=','product_types.id')
+                ->leftJoin('products','products.brand_id','=','brands.id')
                 ->leftJoin('product_types','product_types.id','=','products.type_id')
                 ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
