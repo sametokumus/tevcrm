@@ -125,6 +125,7 @@ Route::get('/product/getAllCampaignProducts', [ProductController::class, 'getAll
 Route::get('/product/getCampaignProductsByLimit/{limit}', [ProductController::class, 'getCampaignProductsByLimit']);
 Route::get('/product/getFeaturedProducts', [ProductController::class, 'getFeaturedProducts']);
 Route::get('/product/getNewProducts', [ProductController::class, 'getNewProducts']);
+Route::get('/product/getSimilarProducts/{product_id}', [ProductController::class, 'getSimilarProducts']);
 
 
 
