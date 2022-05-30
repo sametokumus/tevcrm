@@ -78,7 +78,7 @@ class OrderController extends Controller
                     'name' => $product->name,
                     'sku' => $variation->sku,
                     'price' => $cart->price,
-                    'tax' => '',
+                    'tax' => 0,
                     'quantity' => $cart->quantity
                 ]);
             }
