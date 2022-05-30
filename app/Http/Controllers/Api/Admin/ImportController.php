@@ -304,7 +304,7 @@ class ImportController extends Controller
                     }else{
                         $regular_tax = $import_price->fiyati / 100 * $import_price->kdv;
                         $discounted_price = $import_price->fiyati - ($import_price->fiyati / 100 * $brand->dis);
-                        $discounted_tax = $discounted_price * $import_price->kdv;
+                        $discounted_tax = $discounted_price / 100 * $import_price->kdv;
                         ProductRule::query()->where('variation_id',$variation->id)->update([
                             'discount_rate' => $brand->dis,
                             'tax_rate' => $import_price->kdv,
