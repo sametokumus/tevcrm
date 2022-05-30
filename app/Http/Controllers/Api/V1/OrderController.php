@@ -74,7 +74,7 @@ class OrderController extends Controller
                 $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
                 OrderProduct::query()->insert([
                     'order_id' => $order_quid,
-                    'product_id' => $product,
+                    'product_id' => $product->id,
                     'name' => $product->name,
                     'sku' => $variation->sku,
                     'price' => $cart->price,
