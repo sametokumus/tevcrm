@@ -75,6 +75,7 @@ class OrderController extends Controller
                 OrderProduct::query()->insert([
                     'order_id' => $order_quid,
                     'product_id' => $product->id,
+                    'variation_id' => $variation->id,
                     'name' => $product->name,
                     'sku' => $variation->sku,
                     'price' => $cart->price,
