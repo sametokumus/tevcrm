@@ -96,6 +96,8 @@ Route::get('/cart/getUserAllCartById/{user_id}', [CartController::class, 'getUse
 Route::get('/cart/getClearCartById/{cart_id}', [CartController::class, 'getClearCartById']);
 
 Route::post('/order/addOrder',[OrderController::class,'addOrder']);
+Route::get('/order/getOrdersByUserId/{user_id}',[OrderController::class,'getOrdersByUserId']);
+Route::get('/order/getOrderById/{order_id}',[OrderController::class,'getOrderById']);
 
 Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
 Route::get('/brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);

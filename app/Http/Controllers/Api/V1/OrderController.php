@@ -100,4 +100,22 @@ class OrderController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'e' => $throwable->getMessage()]);
         }
     }
+
+    public function getOrdersByUserId($user_id){
+        try {
+            $orders = Order::query()->where('user_id',$user_id)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getOrderById($order_id){
+        try {
+            $orders = Order::query()->where('order_id',$order_id)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
