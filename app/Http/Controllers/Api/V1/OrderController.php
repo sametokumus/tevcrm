@@ -64,7 +64,9 @@ class OrderController extends Controller
                 ]);
 
                 Cart::query()->where('cart_id',$request->cart_id)->update([
-                    'user_id' => $request->user_id
+                    'user_id' => $request->user_id,
+                    'is_order' => 1,
+                    'active' => 0
                 ]);
 
                 $carts = CartDetail::query()->where('cart_id',$request->cart_id)->get();
