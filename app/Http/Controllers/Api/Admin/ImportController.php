@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\NewProducts;
 use App\Imports\PriceImports;
 use App\Models\Brand;
 use App\Models\ImportPrice;
 use App\Models\ImportProduct;
+use App\Models\NewProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
@@ -339,5 +341,26 @@ class ImportController extends Controller
                 }
             }
         }
+    }
+
+    public function newProduct(Request $request){
+        Excel::import(new NewProducts(), $request->file('file'));
+
+    }
+
+    public function postNewProducts(){
+        $new_products = NewProduct::all();
+        foreach ($new_products as $new_product){
+            ProductRule::query()->where('micro_sku',$new_product->micro_urun_kod)->update([
+                'renk' => $new_product->renk
+            ]);
+            $product_rules = ProductRule::all();
+            foreach ($product_rules as $product_rule){
+                ProductVariation::query()->where('id',$product_rule->variation_id)->update([
+                    'name' => $product_rule->renk
+                ]);
+            }
+        }
+        return response(['message' => 'başarılı']);
     }
 }
