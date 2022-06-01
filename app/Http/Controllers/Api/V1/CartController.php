@@ -151,7 +151,7 @@ class CartController extends Controller
                 $variation['image'] = $image;
                 $product['variation'] = $variation;
                 $cart_detail['product'] = $product;
-                if ($rule->discounted_price == null){
+                if ($rule->discounted_price == null || $rule->discount_rate == 0){
                     $cart_detail_price = $rule->regular_price * $cart_detail->quantity;
                     $cart_detail_tax = $rule->regular_tax * $cart_detail->quantity;
                 }else{
