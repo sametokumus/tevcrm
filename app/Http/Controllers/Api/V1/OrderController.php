@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductRule;
 use App\Models\ProductVariation;
+use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -58,12 +59,11 @@ class OrderController extends Controller
                     'shipping_address' => $shipping_address,
                     'billing_address' => $billing_address,
                     'comment' => $request->comment,
-                    'total_discount' => $request->total_discount,
-                    'total_discount_tax' => $request->total_discount_tax,
-                    'total_shipping' => $request->total_shipping,
-                    'total_shipping_tax' => $request->total_shipping_tax,
+                    'shipping_type' => $request->total_discount,
+                    'shipping_price' => $request->total_discount_tax,
+                    'subtotal' => $request->total_shipping,
+                    'tax' => $request->total_shipping_tax,
                     'total' => $request->total,
-                    'total_tax' => $request->total_tax,
                     'is_partial' => $request->is_partial,
                     'is_paid' => $request->is_paid
                 ]);
@@ -73,18 +73,20 @@ class OrderController extends Controller
                     'is_order' => 1,
                     'active' => 0
                 ]);
-
+                $user_discount = User::query()->where('id', $request->user_id)->first()->user_discount;
                 $carts = CartDetail::query()->where('cart_id', $request->cart_id)->get();
                 foreach ($carts as $cart) {
                     $product = Product::query()->where('id', $cart->product_id)->first();
                     $variation = ProductVariation::query()->where('id', $cart->variation_id)->first();
                     $rule = ProductRule::query()->where('variation_id', $variation->id)->first();
                     if ($rule->discounted_price == null || $rule->discount_rate == 0){
-                        $price = $rule->regular_price * $cart->quantity;
-                        $tax = ($rule->regular_price / 100 * $rule->tax_rate) * $cart->quantity;
+                        $price = ($rule->regular_price + ($rule->regular_price / 100) * $user_discount);
+                        $tax = ($price / 100 * $rule->tax_rate);
+                        $total = ($price + $tax) * $request->quantity;
                     }else{
-                        $price = $rule->discounted_price * $cart->quantity;
-                        $tax = ($rule->discounted_price / 100 * $rule->tax_rate) * $cart->quantity;
+                        $price = ($rule->regular_price + ($rule->regular_price / 100) * ($user_discount + $rule->discount_rate));
+                        $tax = ($price / 100 * $rule->tax_rate);
+                        $total = ($price + $tax) * $request->quantity;
                     }
                     OrderProduct::query()->insert([
                         'order_id' => $order_quid,
@@ -92,9 +94,14 @@ class OrderController extends Controller
                         'variation_id' => $variation->id,
                         'name' => $product->name,
                         'sku' => $variation->sku,
-                        'price' => $price,
-                        'tax' => $tax,
-                        'quantity' => $cart->quantity
+                        'regular_price' => $variation->regular_price,
+                        'regular_tax' => $variation->regular_tax,
+                        'discounted_price' => $variation->discounted_price,
+                        'discounted_tax' => $variation->discounted_tax,
+                        'discount_rate' => $variation->discount_rate,
+                        'user_discount' => $user_discount,
+                        'quantity' => $cart->quantity,
+                        'total' => $total
                     ]);
                 }
 

@@ -29,12 +29,11 @@ class CreateOrdersTable extends Migration
             $table->string('invoice_number')->nullable();
             $table->dateTime('invoice_date')->nullable();
             $table->dateTime('shipping_date')->nullable();
-            $table->decimal('total_discount');
-            $table->decimal('total_discount_tax');
-            $table->decimal('total_shipping');
-            $table->decimal('total_shipping_tax');
+            $table->tinyInteger('shipping_type')->nullable()->default(1);
+            $table->decimal('shipping_price');
+            $table->decimal('subtotal');
+            $table->decimal('tax');
             $table->decimal('total');
-            $table->decimal('total_tax');
             $table->tinyInteger('is_partial')->default(0);
             $table->tinyInteger('is_paid')->default(0);
             $table->tinyInteger('active')->default(1);
