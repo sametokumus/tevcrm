@@ -354,12 +354,12 @@ class ImportController extends Controller
             ProductRule::query()->where('micro_sku',$new_product->micro_urun_kod)->update([
                 'renk' => $new_product->renk
             ]);
-            $product_rules = ProductRule::all();
-            foreach ($product_rules as $product_rule){
-                ProductVariation::query()->where('id',$product_rule->variation_id)->update([
-                    'name' => $product_rule->renk
-                ]);
-            }
+        }
+        $product_rules = ProductRule::all();
+        foreach ($product_rules as $product_rule){
+            ProductVariation::query()->where('id',$product_rule->variation_id)->update([
+                'name' => $product_rule->renk
+            ]);
         }
         return response(['message' => 'başarılı']);
     }
