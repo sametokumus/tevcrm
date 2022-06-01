@@ -32,7 +32,6 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('shipping_type')->nullable()->default(1);
             $table->decimal('shipping_price');
             $table->decimal('subtotal');
-            $table->decimal('tax');
             $table->decimal('total');
             $table->tinyInteger('is_partial')->default(0);
             $table->tinyInteger('is_paid')->default(0);
