@@ -59,10 +59,9 @@ class OrderController extends Controller
                     'shipping_address' => $shipping_address,
                     'billing_address' => $billing_address,
                     'comment' => $request->comment,
-                    'shipping_type' => $request->total_discount,
-                    'shipping_price' => $request->total_discount_tax,
-                    'subtotal' => $request->total_shipping,
-                    'tax' => $request->total_shipping_tax,
+                    'shipping_type' => $request->type_id,
+                    'shipping_price' => $request->shipping_price,
+                    'subtotal' => $request->subtotal,
                     'total' => $request->total,
                     'is_partial' => $request->is_partial,
                     'is_paid' => $request->is_paid
