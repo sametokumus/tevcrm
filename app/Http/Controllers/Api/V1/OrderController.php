@@ -59,7 +59,7 @@ class OrderController extends Controller
                     'shipping_address' => $shipping_address,
                     'billing_address' => $billing_address,
                     'comment' => $request->comment,
-                    'shipping_type' => $request->type_id,
+                    'shipping_type' => $request->delivery_type,
                     'shipping_price' => $request->shipping_price,
                     'subtotal' => $request->subtotal,
                     'total' => $request->total,
@@ -79,12 +79,12 @@ class OrderController extends Controller
                     $variation = ProductVariation::query()->where('id', $cart->variation_id)->first();
                     $rule = ProductRule::query()->where('variation_id', $variation->id)->first();
                     if ($rule->discounted_price == null || $rule->discount_rate == 0){
-                        $price = ($rule->regular_price + ($rule->regular_price / 100) * $user_discount);
-                        $tax = ($price / 100 * $rule->tax_rate);
+                        $price = $rule->regular_price - ($rule->regular_price / 100 * $user_discount);
+                        $tax = $price / 100 * $rule->tax_rate;
                         $total = ($price + $tax) * $request->quantity;
                     }else{
-                        $price = ($rule->regular_price + ($rule->regular_price / 100) * ($user_discount + $rule->discount_rate));
-                        $tax = ($price / 100 * $rule->tax_rate);
+                        $price = $rule->regular_price - ($rule->regular_price / 100 * ($user_discount + $rule->discount_rate));
+                        $tax = $price / 100 * $rule->tax_rate;
                         $total = ($price + $tax) * $request->quantity;
                     }
                     OrderProduct::query()->insert([
@@ -98,6 +98,7 @@ class OrderController extends Controller
                         'discounted_price' => $rule->discounted_price,
                         'discounted_tax' => $rule->discounted_tax,
                         'discount_rate' => $rule->discount_rate,
+                        'tax_rate' => $rule->tax_rate,
                         'user_discount' => $user_discount,
                         'quantity' => $cart->quantity,
                         'total' => $total
