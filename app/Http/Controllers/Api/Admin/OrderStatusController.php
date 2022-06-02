@@ -70,7 +70,7 @@ class OrderStatusController extends Controller
     public function getOrderStatuses(){
         try {
            $order_statuses = OrderStatus::query()->where('active',1)->get();
-            return response(['message' => 'İşlem başarılı.', 'status' => 'success','order_statusesers' => $order_statuses]);
+            return response(['message' => 'İşlem başarılı.', 'status' => 'success','order_statuses' => $order_statuses]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
