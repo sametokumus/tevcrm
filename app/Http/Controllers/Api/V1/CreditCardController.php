@@ -17,7 +17,7 @@ class CreditCardController extends Controller
                 $credit_cart = CreditCard::query()->where('id',$credit_cart_installment->credit_cart_id);
                 $credit_cart_installment['installment'] = $credit_cart;
             }
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['credit_carts' => $credit_carts]]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['credit_cart_installments' => $credit_cart_installments]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         }
