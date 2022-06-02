@@ -20,6 +20,7 @@ use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
 
@@ -145,8 +146,11 @@ class OrderController extends Controller
 
     public function getOrderById($order_id){
         try {
-            $orders = Order::query()->where('order_id',$order_id)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
+            $order = Order::query()->where('order_id',$order_id)->first();
+            $order['status_name'] = OrderStatus::query()->where('id', $order->status_id)->first()->name;
+            $order['order_details'] = OrderProduct::query()->where('order_id', $order_id)->get();
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
