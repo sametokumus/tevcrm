@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
@@ -43,13 +44,14 @@ class OrderController extends Controller
                 $shipping = Address::query()->where('id', $shipping_id)->first();
                 $country = Country::query()->where('id', $shipping->country_id)->first();
                 $city = City::query()->where('id', $shipping->city_id)->first();
-                $shipping_address = $shipping->name . " - " . $shipping->surname . " - " . $shipping->address_1 . " - " . $shipping->address_2 . " - " . $shipping->postal_code . " - " . $shipping->phone . " - " . $country->name . " - " . $city->name;
-
+                $district = District::query()->where('id', $shipping->district_id)->first();
+                $shipping_address = $shipping->name . " " . $shipping->surname . " - " . $shipping->address_1 . " " . $shipping->address_2 . " - " . $shipping->postal_code . " - " . $shipping->phone . " - " . $district->name . " / " . $city->name . " / " . $country->name;
 
                 $billing = Address::query()->where('id', $billing_id)->first();
                 $billing_country = Country::query()->where('id', $billing->country_id)->first();
                 $billing_city = City::query()->where('id', $billing->city_id)->first();
-                $billing_address = $billing->name . "-" . $billing->surname . " - " . $billing->address_1 . " - " . $billing->address_2 . " - " . $billing->postal_code . " - " . $billing->phone . " - " . $billing_country->name . " - " . $billing_city->name;
+                $billing_district = District::query()->where('id', $billing->district_id)->first();
+                $billing_address = $billing->name . " " . $billing->surname . " - " . $billing->address_1 . " " . $billing->address_2 . " - " . $billing->postal_code . " - " . $billing->phone . " - " . $billing_district->name . " / " . $billing_city->name . " / " . $billing_country->name;
 
                 $order_id = Order::query()->insertGetId([
                     'order_id' => $order_quid,
@@ -152,7 +154,9 @@ class OrderController extends Controller
             $order['status_name'] = OrderStatus::query()->where('id', $order->status_id)->first()->name;
             $order['carrier_name'] = Carrier::query()->where('id', $order->carrier_id)->first()->name;
             $order['shipping_name'] = ShippingType::query()->where('id', $order->shipping_type)->first()->name;
-            $order['order_details'] = OrderProduct::query()->where('order_id', $order_id)->get();
+            $order_details = OrderProduct::query()->where('order_id', $order_id)->get();
+            $order_details['image'] = ProductImage::query()->where('variation_id', $order_details->variation_id)->first()->image;
+            $order['order_details'] = $order_details;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
         } catch (QueryException $queryException) {
