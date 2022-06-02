@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\V1\TabController;
 use App\Http\Controllers\Api\V1\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\CarrierController;
+use App\Http\Controllers\Api\V1\CreditCardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -163,3 +164,5 @@ Route::get('/tag/getTagById/{id}', [TagController::class, 'getTagById']);
 
 Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
 Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
+
+Route::get('/creditCard/getCreditCarts', [CreditCardController::class, 'getCreditCarts']);
