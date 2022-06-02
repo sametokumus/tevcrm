@@ -125,7 +125,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('/order/getOnGoingOrders',[OrderController::class,'getOnGoingOrders']);
     Route::get('/order/getCompletedOrders',[OrderController::class,'getCompletedOrders']);
     Route::get('order/getOrderStatusHistoriesById/{order_id}', [OrderController::class, 'getOrderStatusHistoriesById']);
-    Route::post('order/getOrderStatusHistoriesById', [OrderController::class, 'getOrderStatusHistoriesById']);
+    Route::post('order/updateOrderStatus', [OrderController::class, 'updateOrderStatus']);
 
     Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
     Route::post('product/updateProductTab', [ProductController::class, 'updateProductTab']);
