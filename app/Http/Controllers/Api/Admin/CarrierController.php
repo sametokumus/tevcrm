@@ -83,4 +83,15 @@ class CarrierController extends Controller
 
     }
 
+    public function getCarriers(){
+        try {
+           $carriers = Carrier::query()->where('active',1)->get();
+            return response(['message' => 'Kargo silme işlemi başarılı.', 'status' => 'success','object' => ['carriers' => $carriers]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
 }

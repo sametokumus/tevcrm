@@ -153,6 +153,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('carrier/addCarrier', [CarrierController::class, 'addCarrier']);
     Route::post('carrier/updateCarrier/{id}', [CarrierController::class, 'updateCarrier']);
     Route::get('carrier/deleteCarrier/{id}', [CarrierController::class, 'deleteCarrier']);
+    Route::get('carrier/getCarriers', [CarrierController::class, 'getCarriers']);
 
 
     Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
