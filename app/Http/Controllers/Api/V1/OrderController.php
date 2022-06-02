@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
 use App\Models\OrderStatusHistory;
+use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductRule;
@@ -165,6 +166,7 @@ class OrderController extends Controller
             $order['status_name'] = OrderStatus::query()->where('id', $order->status_id)->first()->name;
             $order['carrier_name'] = Carrier::query()->where('id', $order->carrier_id)->first()->name;
             $order['shipping_name'] = ShippingType::query()->where('id', $order->shipping_type)->first()->name;
+            $order['payment_name'] = PaymentType::query()->where('id', $order->payment_type)->first()->name;
             $order_details = OrderProduct::query()->where('order_id', $order_id)->get();
             foreach ($order_details as $order_detail){
                 $order_detail['image'] = ProductImage::query()->where('variation_id', $order_detail->variation_id)->first()->image;
