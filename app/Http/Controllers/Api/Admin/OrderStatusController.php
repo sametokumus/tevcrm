@@ -18,6 +18,7 @@ class OrderStatusController extends Controller
             }
             OrderStatus::query()->insert([
                 'name' => $request->name,
+                'run_on' => $request->run_on,
                 'is_default' => $request->is_default
             ]);
 
@@ -36,6 +37,7 @@ class OrderStatusController extends Controller
 
             OrderStatus::query()->where('id',$id)->update([
                 'name' => $request->name,
+                'run_on' => $request->run_on,
                 'is_default' => $request->is_default
             ]);
 

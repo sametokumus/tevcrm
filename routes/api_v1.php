@@ -99,6 +99,9 @@ Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 Route::get('/order/getOrdersByUserId/{user_id}',[OrderController::class,'getOrdersByUserId']);
 Route::get('/order/getOrderById/{order_id}',[OrderController::class,'getOrderById']);
 
+Route::get('/order/getOnGoingOrders',[OrderController::class,'getOnGoingOrders']);
+Route::get('/order/getCompletedOrders',[OrderController::class,'getCompletedOrders']);
+
 Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
 Route::get('/brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
 Route::get('/productType/getProductType', [ProductTypeController::class, 'getProductType']);

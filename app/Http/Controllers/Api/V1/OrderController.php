@@ -165,4 +165,48 @@ class OrderController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
+    public function getOnGoingOrders(){
+        try {
+            $orders = Order::query()
+                ->leftJoin('order_statuses','order_statuses.id','=','orders.status_id')
+                ->where('order_statuses.run_on',1)
+                ->get(['orders.id', 'orders.order_id', 'orders.created_at as order_date', 'orders.total', 'orders.status_id']);
+            foreach ($orders as $order){
+                $product_count = OrderProduct::query()->where('order_id', $order->order_id)->get()->count();
+                $product = OrderProduct::query()->where('order_id', $order->order_id)->first();
+                $product_image = ProductImage::query()->where('variation_id', $product->variation_id)->first()->image;
+                $status_name = OrderStatus::query()->where('id', $order->status_id)->first()->name;
+                $order['product_count'] = $product_count;
+                $order['product_image'] = $product_image;
+                $order['payment_type'] = "Kredi Kartı";
+                $order['status_name'] = $status_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','â' => $queryException->getMessage()]);
+        }
+    }
+
+    public function getCompletedOrders(){
+        try {
+            $orders = Order::query()
+                ->leftJoin('order_statuses','order_statuses.id','=','orders.status_id')
+                ->where('order_statuses.run_on',0)
+                ->get(['orders.id', 'orders.order_id', 'orders.created_at as order_date', 'orders.total', 'orders.status_id']);
+            foreach ($orders as $order){
+                $product_count = OrderProduct::query()->where('order_id', $order->order_id)->get()->count();
+                $product = OrderProduct::query()->where('order_id', $order->order_id)->first();
+                $product_image = ProductImage::query()->where('variation_id', $product->variation_id)->first()->image;
+                $status_name = OrderStatus::query()->where('id', $order->status_id)->first()->name;
+                $order['product_count'] = $product_count;
+                $order['product_image'] = $product_image;
+                $order['payment_type'] = "Kredi Kartı";
+                $order['status_name'] = $status_name;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
