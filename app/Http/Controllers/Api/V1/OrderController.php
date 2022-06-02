@@ -8,6 +8,7 @@ use App\Models\Carrier;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\City;
+use App\Models\CorporateAddresses;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\Order;
@@ -45,7 +46,13 @@ class OrderController extends Controller
                 $country = Country::query()->where('id', $shipping->country_id)->first();
                 $city = City::query()->where('id', $shipping->city_id)->first();
                 $district = District::query()->where('id', $shipping->district_id)->first();
+
                 $shipping_address = $shipping->name . " " . $shipping->surname . " - " . $shipping->address_1 . " " . $shipping->address_2 . " - " . $shipping->postal_code . " - " . $shipping->phone . " - " . $district->name . " / " . $city->name . " / " . $country->name;
+                if ($shipping->type == 2){
+                    $shipping_corporate_address = CorporateAddresses::query()->where('address_id',$shipping_id)->first();
+                    $shipping_address = $shipping_address." - ".$shipping_corporate_address->tax_number." - ".$shipping_corporate_address->tax_office." - ".$shipping_corporate_address->company_name;
+                }
+
 
                 $billing = Address::query()->where('id', $billing_id)->first();
                 $billing_country = Country::query()->where('id', $billing->country_id)->first();
@@ -53,6 +60,10 @@ class OrderController extends Controller
                 $billing_district = District::query()->where('id', $billing->district_id)->first();
                 $billing_address = $billing->name . " " . $billing->surname . " - " . $billing->address_1 . " " . $billing->address_2 . " - " . $billing->postal_code . " - " . $billing->phone . " - " . $billing_district->name . " / " . $billing_city->name . " / " . $billing_country->name;
 
+                if ($shipping->type == 2){
+                    $billing_corporate_address = CorporateAddresses::query()->where('address_id',$billing_id)->first();
+                    $shipping_address = $shipping_address." - ".$billing_corporate_address->tax_number." - ".$billing_corporate_address->tax_office." - ".$billing_corporate_address->company_name;
+                }
                 $order_id = Order::query()->insertGetId([
                     'order_id' => $order_quid,
                     'user_id' => $request->user_id,
