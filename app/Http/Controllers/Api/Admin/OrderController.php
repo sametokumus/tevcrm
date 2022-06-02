@@ -138,4 +138,23 @@ class OrderController extends Controller
         }
     }
 
+    public function updateOrderStatus(Request $request){
+        try {
+            OrderStatusHistory::query()->insert([
+                'order_id' => $request->order_id,
+                'status_id' => $request->status_id
+            ]);
+            Order::query()->where('order_id',$request->order_id)->update([
+                'status_id' => $request->status_id
+            ]);
+            return response(['message' => 'İşlem başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+    }
+
 }
