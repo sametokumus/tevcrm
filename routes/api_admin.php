@@ -119,7 +119,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
-    Route::get('orderStatus/getOrders', [OrderStatusController::class, 'getOrders']);
+    Route::get('orderStatus/getOrderStatuses', [OrderStatusController::class, 'getOrderStatuses']);
     Route::get('orderStatus/getOrderStatusHistoriesById/{order_id}', [OrderStatusController::class, 'getOrderStatusHistoriesById']);
 
     Route::post('order/updateOrder/{id}', [OrderController::class, 'updateOrder']);

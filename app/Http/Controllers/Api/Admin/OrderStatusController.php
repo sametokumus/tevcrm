@@ -67,7 +67,7 @@ class OrderStatusController extends Controller
         }
     }
 
-    public function getOrders(){
+    public function getOrderStatuses(){
         try {
            $orders = OrderStatus::query()->where('active',1)->get();
             return response(['message' => 'İşlem başarılı.', 'status' => 'success','orders' => $orders]);
