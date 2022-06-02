@@ -139,7 +139,7 @@ class OrderController extends Controller
                 $status_name = OrderStatus::query()->where('id', $order->status_id)->first()->name;
                 $order['product_count'] = $product_count;
                 $order['product_image'] = $product_image;
-                $order['payment_type'] = "Kredi Kartı";
+                $order['payment_type'] = $order->payment_type;
                 $order['status_name'] = $status_name;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
