@@ -23,4 +23,15 @@ class CreditCardController extends Controller
         }
     }
 
+    public function getCreditCardById($credit_card_id){
+        try {
+            $credit_card = CreditCard::query()->where('id',$credit_card_id)->first();
+            $credit_card_installment = CreditCardInstallment::query()->where('credit_card_id',$credit_card->id)->get();
+            $credit_card['installment'] = $credit_card_installment;
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['credit_card' => $credit_card]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+        }
+    }
+
 }
