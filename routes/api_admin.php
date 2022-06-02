@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CarrierController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\ImportController;
+use App\Http\Controllers\Api\Admin\ShippingTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,7 +169,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('excel/newProduct', [ImportController::class, 'newProduct']);
     Route::post('excel/postNewProducts', [ImportController::class, 'postNewProducts']);
 
-
+    Route::get('shippingType/getShippingTypes',[ShippingTypeController::class,'getShippingTypes']);
 
 });
 
