@@ -117,16 +117,21 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('orderStatus/addOrderStatus', [OrderStatusController::class, 'addOrderStatus']);
     Route::post('orderStatus/updateOrderStatus/{id}', [OrderStatusController::class, 'updateOrderStatus']);
     Route::get('orderStatus/deleteOrderStatus/{id}', [OrderStatusController::class, 'deleteOrderStatus']);
-
-
-
     Route::get('orderStatus/getOrderStatuses', [OrderStatusController::class, 'getOrderStatuses']);
+
 
     Route::post('order/updateOrder/{id}', [OrderController::class, 'updateOrder']);
     Route::get('/order/getOnGoingOrders',[OrderController::class,'getOnGoingOrders']);
     Route::get('/order/getCompletedOrders',[OrderController::class,'getCompletedOrders']);
     Route::get('order/getOrderStatusHistoriesById/{order_id}', [OrderController::class, 'getOrderStatusHistoriesById']);
     Route::post('order/updateOrderStatus', [OrderController::class, 'updateOrderStatus']);
+
+    Route::post('order/updateOrderInfo/{order_id}', [OrderController::class, 'updateOrderInfo']);
+    Route::post('order/updateOrderShipment/{order_id}', [OrderController::class, 'updateOrderShipment']);
+    Route::post('order/updateOrderBilling/{order_id}', [OrderController::class, 'updateOrderBilling']);
+    Route::post('order/updateOrderShipping/{order_id}', [OrderController::class, 'updateOrderShipping']);
+
+
 
     Route::post('product/addProductTab', [ProductController::class, 'addProductTab']);
     Route::post('product/updateProductTab', [ProductController::class, 'updateProductTab']);
