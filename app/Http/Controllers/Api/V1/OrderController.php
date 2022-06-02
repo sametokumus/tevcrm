@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Carrier;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\City;
@@ -16,6 +17,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductRule;
 use App\Models\ProductVariation;
+use App\Models\ShippingType;
 use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
@@ -148,6 +150,8 @@ class OrderController extends Controller
         try {
             $order = Order::query()->where('order_id',$order_id)->first();
             $order['status_name'] = OrderStatus::query()->where('id', $order->status_id)->first()->name;
+            $order['carrier_name'] = Carrier::query()->where('id', $order->carrier_id)->first()->name;
+            $order['shipping_name'] = ShippingType::query()->where('id', $order->shipping_type)->first()->name;
             $order['order_details'] = OrderProduct::query()->where('order_id', $order_id)->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
