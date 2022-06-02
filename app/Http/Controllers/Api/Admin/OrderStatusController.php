@@ -69,8 +69,8 @@ class OrderStatusController extends Controller
 
     public function getOrderStatuses(){
         try {
-           $orders = OrderStatus::query()->where('active',1)->get();
-            return response(['message' => 'İşlem başarılı.', 'status' => 'success','orders' => $orders]);
+           $order_statuses = OrderStatus::query()->where('active',1)->get();
+            return response(['message' => 'İşlem başarılı.', 'status' => 'success','order_statusesers' => $order_statuses]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -80,16 +80,4 @@ class OrderStatusController extends Controller
         }
     }
 
-    public function getOrderStatusHistoriesById($order_id){
-        try {
-            $order_status_histories = OrderStatusHistory::query()->where('order_id',$order_id)->get();
-            return response(['message' => 'İşlem başarılı.', 'status' => 'success','order_status_histories' => $order_status_histories]);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
 }
