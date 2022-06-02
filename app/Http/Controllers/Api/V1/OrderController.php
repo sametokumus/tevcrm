@@ -155,7 +155,9 @@ class OrderController extends Controller
             $order['carrier_name'] = Carrier::query()->where('id', $order->carrier_id)->first()->name;
             $order['shipping_name'] = ShippingType::query()->where('id', $order->shipping_type)->first()->name;
             $order_details = OrderProduct::query()->where('order_id', $order_id)->get();
-            $order_details['image'] = ProductImage::query()->where('variation_id', $order_details->variation_id)->first()->image;
+            foreach ($order_details as $order_detail){
+                $order_detail['image'] = ProductImage::query()->where('variation_id', $order_detail->variation_id)->first()->image;
+            }
             $order['order_details'] = $order_details;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
