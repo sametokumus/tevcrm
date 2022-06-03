@@ -128,7 +128,7 @@ class OrderController extends Controller
                     'status_id' => $order_status->id
                 ]);
 
-                return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success']);
+                return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['order_id' => $order_quid]]);
             }else{
                 return response(['message' => 'Sepet Bulunamadı.', 'status' => 'cart-001']);
             }
