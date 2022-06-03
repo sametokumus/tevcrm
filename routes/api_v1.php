@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\CarrierController;
 use App\Http\Controllers\Api\V1\CreditCardController;
 use App\Http\Controllers\Api\V1\BankBinPairController;
+use App\Http\Controllers\Api\V1\SearchController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -172,3 +173,4 @@ Route::get('/creditCard/getCreditCardById/{member_no}/{cart_id}', [CreditCardCon
 
 
 Route::get('/bankBinPair/getBankBinPairMemberNo/{prefix_no}', [BankBinPairController::class, 'getBankBinPairMemberNo']);
+Route::post('/search/categoryByIdSearch', [SearchController::class, 'categoryByIdSearch']);
