@@ -166,4 +166,4 @@ Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
 Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
 
 Route::get('/creditCard/getCreditCarts', [CreditCardController::class, 'getCreditCarts']);
-Route::get('/creditCard/getCreditCardById/{credit_card_id}', [CreditCardController::class, 'getCreditCardById']);
+Route::get('/creditCard/getCreditCardById/{credit_card_id}/{cart_id}', [CreditCardController::class, 'getCreditCardById']);
