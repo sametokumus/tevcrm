@@ -16,11 +16,11 @@ class BankBinPairController extends Controller
         try {
             $member_no = BankBinPair::query()->where('prefix_no',$prefix_no)->first()->member_no;
             if (!isset($member_no)){
-                $member_no = 000000;
+                $member_no = 0;
             }
             $card_member = CreditCard::query()->where('member_no',$member_no)->first();
             if (!isset($card_member)){
-                $member_no = 000000;
+                $member_no = 0;
             }
             return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
         } catch (ValidationException $validationException) {

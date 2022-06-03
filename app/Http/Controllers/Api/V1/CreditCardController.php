@@ -29,7 +29,7 @@ class CreditCardController extends Controller
 
     public function getCreditCardById($member_no,$cart_id){
         try {
-            if ($member_no == 000000){
+            if ($member_no == 0){
                 $member_no = 15;
             }
             $credit_card = CreditCard::query()->where('member_no',$member_no)->first();
