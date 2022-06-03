@@ -96,6 +96,7 @@ Route::post('/cart/deleteCartProduct', [CartController::class, 'deleteCartProduc
 Route::get('/cart/getCartById/{cart_id}', [CartController::class, 'getCartById']);
 Route::get('/cart/getUserAllCartById/{user_id}', [CartController::class, 'getUserAllCartById']);
 Route::get('/cart/getClearCartById/{cart_id}', [CartController::class, 'getClearCartById']);
+Route::get('/cart/getUserToCart/{user_id}/{cart_id}', [CartController::class, 'getUserToCart']);
 
 Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 Route::get('/order/getOrdersByUserId/{user_id}',[OrderController::class,'getOrdersByUserId']);

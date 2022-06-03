@@ -212,4 +212,21 @@ class CartController extends Controller
         }
     }
 
+    public function getUserToCart($user_id, $cart_id){
+        try {
+
+            Cart::query()->where('cart_id', $cart_id)->update([
+                'user_id' => $user_id
+            ]);
+
+            return response(['message' => 'Güncelleme işlemi başarılı.','status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
+        }
+    }
+
 }
