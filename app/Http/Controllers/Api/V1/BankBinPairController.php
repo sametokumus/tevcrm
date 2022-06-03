@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\BankBinPair;
+use App\Models\CreditCard;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -15,6 +16,10 @@ class BankBinPairController extends Controller
         try {
             $member_no = BankBinPair::query()->where('prefix_no',$prefix_no)->first()->member_no;
             if (!isset($member_no)){
+                $member_no = 000000;
+            }
+            $card_member = CreditCard::query()->where('member_no',$member_no)->first();
+            if (!isset($card_member)){
                 $member_no = 000000;
             }
             return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
