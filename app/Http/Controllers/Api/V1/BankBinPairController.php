@@ -14,13 +14,17 @@ class BankBinPairController extends Controller
     public function getBankBinPairMemberNo($prefix_no)
     {
         try {
-            $member_no = BankBinPair::query()->where('prefix_no',$prefix_no)->first()->member_no;
-            if (!isset($member_no)){
+            $pair = BankBinPair::query()->where('prefix_no',$prefix_no)->first();
+            if (!isset($pair)){
                 $member_no = 0;
+                return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
+            }else{
+                $member_no = $pair->member_no;
             }
             $card_member = CreditCard::query()->where('member_no',$member_no)->first();
             if (!isset($card_member)){
                 $member_no = 0;
+                return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
             }
             return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
         } catch (ValidationException $validationException) {
