@@ -33,7 +33,7 @@ class SearchController extends Controller
                 ->where('product_categories.active',1)
                 ->where('product_categories.category_id',$request->category_id)
                 ->where('product_seos.search_keywords','like','%'.$request->search_keywords.'%')
-                ->count();
+                ->get();
 
             if ($request->category_id == 0){
                 $products = ProductCategory::query()
@@ -50,7 +50,7 @@ class SearchController extends Controller
                     ->where('products.active',1)
                     ->where('product_categories.active',1)
                     ->where('product_seos.search_keywords','like','%'.$request->search_keywords.'%')
-                    ->count();
+                    ->get();
                 return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
 
             }
