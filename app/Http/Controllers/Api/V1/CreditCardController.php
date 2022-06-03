@@ -27,9 +27,12 @@ class CreditCardController extends Controller
         }
     }
 
-    public function getCreditCardById($credit_card_id,$cart_id){
+    public function getCreditCardById($member_no,$cart_id){
         try {
-            $credit_card = CreditCard::query()->where('id',$credit_card_id)->first();
+            if ($member_no == 000000){
+                $member_no = 15;
+            }
+            $credit_card = CreditCard::query()->where('member_no',$member_no)->first();
             $credit_card_installments = CreditCardInstallment::query()->where('credit_card_id',$credit_card->id)->get();
             foreach ($credit_card_installments as $credit_card_installment){
                 $cart = Cart::query()->where('cart_id',$cart_id)->first();

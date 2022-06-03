@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\V1\ProductVariationGroupTypeController;
 use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\CarrierController;
 use App\Http\Controllers\Api\V1\CreditCardController;
+use App\Http\Controllers\Api\V1\BankBinPairController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -166,4 +167,7 @@ Route::get('/carrier/getCarriers', [CarrierController::class, 'getCarriers']);
 Route::get('/carrier/getCarrierById/{id}', [CarrierController::class, 'getCarrierById']);
 
 Route::get('/creditCard/getCreditCarts', [CreditCardController::class, 'getCreditCarts']);
-Route::get('/creditCard/getCreditCardById/{credit_card_id}/{cart_id}', [CreditCardController::class, 'getCreditCardById']);
+Route::get('/creditCard/getCreditCardById/{member_no}/{cart_id}', [CreditCardController::class, 'getCreditCardById']);
+
+
+Route::get('/bankBinPair/getBankBinPairMemberNo/{prefix_no}', [BankBinPairController::class, 'getBankBinPairMemberNo']);
