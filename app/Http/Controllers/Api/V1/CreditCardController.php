@@ -29,8 +29,10 @@ class CreditCardController extends Controller
 
     public function getCreditCardById($member_no,$cart_id){
         try {
+            $no_bank = 0;
             if ($member_no == 0){
                 $member_no = 15;
+                $no_bank = 1;
             }
             $credit_card = CreditCard::query()->where('member_no',$member_no)->first();
             $credit_card_installments = CreditCardInstallment::query()->where('credit_card_id',$credit_card->id)->get();
@@ -53,6 +55,7 @@ class CreditCardController extends Controller
                 $credit_card_installment['total'] = $total_price + ($total_price / 100 * $product_rule->tax_rate);
             }
             $credit_card['installment'] = $credit_card_installments;
+            $credit_card['no_bank'] = $no_bank;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['credit_card' => $credit_card]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
