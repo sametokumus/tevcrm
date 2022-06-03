@@ -174,3 +174,4 @@ Route::get('/creditCard/getCreditCardById/{member_no}/{cart_id}', [CreditCardCon
 
 Route::get('/bankBinPair/getBankBinPairMemberNo/{prefix_no}', [BankBinPairController::class, 'getBankBinPairMemberNo']);
 Route::post('/search/categoryByIdSearch', [SearchController::class, 'categoryByIdSearch']);
+Route::post('/search/filterProducts', [SearchController::class, 'filterProducts']);
