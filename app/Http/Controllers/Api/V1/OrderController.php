@@ -170,22 +170,6 @@ class OrderController extends Controller
             $order['shipping_name'] = ShippingType::query()->where('id', $order->shipping_type)->first()->name;
             $order['payment_name'] = PaymentType::query()->where('id', $order->payment_type)->first()->name;
             $order_details = OrderProduct::query()->where('order_id', $order_id)->get();
-            foreach ($order_details as $order_detail){
-                $order_detail['image'] = ProductImage::query()->where('variation_id', $order_detail->variation_id)->first()->image;
-            }
-            $order['order_details'] = $order_details;
-
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
-        }
-    }
-
-
-    public function getOrderDetailsById($order_id){
-        try {
-            $order = Order::query()->where('order_id',$order_id)->first();
-            $order_details = OrderProduct::query()->where('order_id',$order->order_id)->where('active',1)->get();
             $order_price = 0;
             $order_tax = 0;
             $weight = 0;
@@ -229,5 +213,6 @@ class OrderController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
 
 }

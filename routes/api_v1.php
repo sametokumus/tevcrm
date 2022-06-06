@@ -102,7 +102,6 @@ Route::get('/cart/getUserToCart/{user_id}/{cart_id}', [CartController::class, 'g
 Route::post('/order/addOrder',[OrderController::class,'addOrder']);
 Route::get('/order/getOrdersByUserId/{user_id}',[OrderController::class,'getOrdersByUserId']);
 Route::get('/order/getOrderById/{order_id}',[OrderController::class,'getOrderById']);
-Route::get('/order/getOrderDetailsById/{order_id}',[OrderController::class,'getOrderDetailsById']);
 
 
 Route::get('/brand/getBrands', [BrandController::class, 'getBrands']);
