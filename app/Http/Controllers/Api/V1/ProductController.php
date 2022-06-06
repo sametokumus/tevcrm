@@ -26,28 +26,28 @@ class ProductController extends Controller
     public function getAllProduct()
     {
         try {
-            $products = Product::query()->where('active',1)->get();
-            foreach ($products as $product){
-                $brands = Product::query()->where('brand_id',$product->brand_id)->get();
-                $product_types = ProductType::query()->where('id',$product->type_id)->get();
-                $product_documents = ProductDocument::query()->where('product_id',$product->id)->get();
-                $product_variation_groups = ProductVariationGroup::query()->where('product_id',$product->id)->get();
-                foreach ($product_variation_groups as $product_variation_group){
-                    $product_variation_group['name'] = ProductVariationGroupType::query()->where('id',$product_variation_group->id)->get();
-                    $product_variation_group['variations'] = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->get();
-                    $variations = ProductVariation::query()->where('variation_group_id',$product_variation_group->id)->get();
-                    foreach ($variations as $variation){
-                        $product_variation_group['images'] = ProductImage::query()->where('variation_id',$variation->id)->get();
-                        $product_variation_group['rule'] = ProductRule::query()->where('variation_id',$variation->id)->get();
+            $products = Product::query()->where('active', 1)->get();
+            foreach ($products as $product) {
+                $brands = Product::query()->where('brand_id', $product->brand_id)->get();
+                $product_types = ProductType::query()->where('id', $product->type_id)->get();
+                $product_documents = ProductDocument::query()->where('product_id', $product->id)->get();
+                $product_variation_groups = ProductVariationGroup::query()->where('product_id', $product->id)->get();
+                foreach ($product_variation_groups as $product_variation_group) {
+                    $product_variation_group['name'] = ProductVariationGroupType::query()->where('id', $product_variation_group->id)->get();
+                    $product_variation_group['variations'] = ProductVariation::query()->where('variation_group_id', $product_variation_group->id)->get();
+                    $variations = ProductVariation::query()->where('variation_group_id', $product_variation_group->id)->get();
+                    foreach ($variations as $variation) {
+                        $product_variation_group['images'] = ProductImage::query()->where('variation_id', $variation->id)->get();
+                        $product_variation_group['rule'] = ProductRule::query()->where('variation_id', $variation->id)->get();
                     }
                 }
-                $product_tags = ProductTags::query()->where('product_id',$product->id)->get();
-                foreach ($product_tags as $product_tag){
-                    $product_tag['name'] = Tag::query()->where('id',$product_tag->tag_id)->first()->name;
+                $product_tags = ProductTags::query()->where('product_id', $product->id)->get();
+                foreach ($product_tags as $product_tag) {
+                    $product_tag['name'] = Tag::query()->where('id', $product_tag->tag_id)->first()->name;
                 }
-                $product_categories = ProductCategory::query()->where('product_id',$product->id)->get();
-                foreach ($product_categories as $product_category){
-                    $product_category['categories'] = Category::query()->where('id',$product_category->category_id)->get();
+                $product_categories = ProductCategory::query()->where('product_id', $product->id)->get();
+                foreach ($product_categories as $product_category) {
+                    $product_category['categories'] = Category::query()->where('id', $product_category->category_id)->get();
                 }
                 $product['brand'] = $brands;
                 $product['product_type'] = $product_types;
@@ -62,52 +62,53 @@ class ProductController extends Controller
         }
     }
 
-    public function getAllProductById($id){
+    public function getAllProductById($id)
+    {
         try {
-            $product = Product::query()->where('id',$id)->where('active',1)->first();
-            $brand = Brand::query()->where('id',$product->brand_id)->first();
-            $product_type = ProductType::query()->where('id',$product->type_id)->first();
-            $product_documents = ProductDocument::query()->where('product_id',$product->id)->where('active',1)->get();
+            $product = Product::query()->where('id', $id)->where('active', 1)->first();
+            $brand = Brand::query()->where('id', $product->brand_id)->first();
+            $product_type = ProductType::query()->where('id', $product->type_id)->first();
+            $product_documents = ProductDocument::query()->where('product_id', $product->id)->where('active', 1)->get();
             $product_tags = ProductTags::query()
-                ->leftJoin('tags','tags.id','=','product_tags.tag_id')
+                ->leftJoin('tags', 'tags.id', '=', 'product_tags.tag_id')
                 ->selectRaw('tags.*')
-                ->where('product_id',$product->id)
-                ->where('product_tags.active',1)
+                ->where('product_id', $product->id)
+                ->where('product_tags.active', 1)
                 ->get();
             $product_categories = ProductCategory::query()
-                ->leftJoin('categories','categories.id','=','product_categories.category_id')
+                ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->selectRaw('categories.*')
-                ->where('product_id',$product->id)
-                ->where('product_categories.active',1)
-                ->where('product_categories.category_id','!=' ,0)
+                ->where('product_id', $product->id)
+                ->where('product_categories.active', 1)
+                ->where('product_categories.category_id', '!=', 0)
                 ->get();
 
             $product_variation_groups = ProductVariationGroup::query()
-                ->leftJoin('product_variation_group_types','product_variation_group_types.id','=','product_variation_groups.group_type_id')
-                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->leftJoin('product_variation_group_types', 'product_variation_group_types.id', '=', 'product_variation_groups.group_type_id')
+                ->leftJoin('products', 'products.id', '=', 'product_variation_groups.product_id')
                 ->selectRaw('product_variation_groups.* , product_variation_group_types.name as type_name')
-                ->where('product_variation_groups.active',1)
-                ->where('products.id',$id)
+                ->where('product_variation_groups.active', 1)
+                ->where('products.id', $id)
                 ->get();
             $variations = ProductVariation::query()
-                ->leftJoin('product_variation_groups','product_variation_groups.id','=','product_variations.variation_group_id')
-                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->leftJoin('product_variation_groups', 'product_variation_groups.id', '=', 'product_variations.variation_group_id')
+                ->leftJoin('products', 'products.id', '=', 'product_variation_groups.product_id')
                 ->selectRaw('product_variations.*')
-                ->where('product_variations.active',1)
-                ->where('products.active',1)
-                ->where('products.id',$id)
+                ->where('product_variations.active', 1)
+                ->where('products.active', 1)
+                ->where('products.id', $id)
                 ->get();
 
-            foreach ($variations as $variation){
-                $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
-                $images = ProductImage::query()->where('variation_id',$variation->id)->get();
+            foreach ($variations as $variation) {
+                $rule = ProductRule::query()->where('variation_id', $variation->id)->first();
+                $images = ProductImage::query()->where('variation_id', $variation->id)->get();
                 $variation['rule'] = $rule;
                 $variation['images'] = $images;
             }
 
             $featured_variation = ProductVariation::query()->where('id', $product->featured_variation)->first();
-            $rule = ProductRule::query()->where('variation_id',$featured_variation->id)->first();
-            $images = ProductImage::query()->where('variation_id',$featured_variation->id)->get();
+            $rule = ProductRule::query()->where('variation_id', $featured_variation->id)->first();
+            $images = ProductImage::query()->where('variation_id', $featured_variation->id)->get();
             $featured_variation['rule'] = $rule;
             $featured_variation['images'] = $images;
 
@@ -121,55 +122,56 @@ class ProductController extends Controller
             $product['featured_variation'] = $featured_variation;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getAllProductWithVariationById($product_id, $variation_id){
+    public function getAllProductWithVariationById($product_id, $variation_id)
+    {
         try {
-            $product = Product::query()->where('id',$product_id)->where('active',1)->first();
-            $brand = Brand::query()->where('id',$product->brand_id)->first();
-            $product_type = ProductType::query()->where('id',$product->type_id)->first();
-            $product_documents = ProductDocument::query()->where('product_id',$product->id)->where('active',1)->get();
+            $product = Product::query()->where('id', $product_id)->where('active', 1)->first();
+            $brand = Brand::query()->where('id', $product->brand_id)->first();
+            $product_type = ProductType::query()->where('id', $product->type_id)->first();
+            $product_documents = ProductDocument::query()->where('product_id', $product->id)->where('active', 1)->get();
             $product_tags = ProductTags::query()
-                ->leftJoin('tags','tags.id','=','product_tags.tag_id')
+                ->leftJoin('tags', 'tags.id', '=', 'product_tags.tag_id')
                 ->selectRaw('tags.*')
-                ->where('product_id',$product->id)
-                ->where('product_tags.active',1)
+                ->where('product_id', $product->id)
+                ->where('product_tags.active', 1)
                 ->get();
             $product_categories = ProductCategory::query()
-                ->leftJoin('categories','categories.id','=','product_categories.category_id')
+                ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->selectRaw('categories.*')
-                ->where('product_id',$product->id)
-                ->where('product_categories.active',1)
+                ->where('product_id', $product->id)
+                ->where('product_categories.active', 1)
                 ->get();
 
             $product_variation_groups = ProductVariationGroup::query()
-                ->leftJoin('product_variation_group_types','product_variation_group_types.id','=','product_variation_groups.group_type_id')
-                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->leftJoin('product_variation_group_types', 'product_variation_group_types.id', '=', 'product_variation_groups.group_type_id')
+                ->leftJoin('products', 'products.id', '=', 'product_variation_groups.product_id')
                 ->selectRaw('product_variation_groups.* , product_variation_group_types.name as type_name')
-                ->where('product_variation_groups.active',1)
-                ->where('products.id',$product_id)
+                ->where('product_variation_groups.active', 1)
+                ->where('products.id', $product_id)
                 ->get();
             $variations = ProductVariation::query()
-                ->leftJoin('product_variation_groups','product_variation_groups.id','=','product_variations.variation_group_id')
-                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->leftJoin('product_variation_groups', 'product_variation_groups.id', '=', 'product_variations.variation_group_id')
+                ->leftJoin('products', 'products.id', '=', 'product_variation_groups.product_id')
                 ->selectRaw('product_variations.*')
-                ->where('product_variations.active',1)
-                ->where('products.active',1)
-                ->where('products.id',$product_id)
+                ->where('product_variations.active', 1)
+                ->where('products.active', 1)
+                ->where('products.id', $product_id)
                 ->get();
 
-            foreach ($variations as $variation){
-                $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
-                $images = ProductImage::query()->where('variation_id',$variation->id)->get();
+            foreach ($variations as $variation) {
+                $rule = ProductRule::query()->where('variation_id', $variation->id)->first();
+                $images = ProductImage::query()->where('variation_id', $variation->id)->get();
                 $variation['rule'] = $rule;
                 $variation['images'] = $images;
             }
 
             $featured_variation = ProductVariation::query()->where('id', $variation_id)->first();
-            $rule = ProductRule::query()->where('variation_id',$variation_id)->first();
-            $images = ProductImage::query()->where('variation_id',$variation_id)->get();
+            $rule = ProductRule::query()->where('variation_id', $variation_id)->first();
+            $images = ProductImage::query()->where('variation_id', $variation_id)->get();
             $featured_variation['rule'] = $rule;
             $featured_variation['images'] = $images;
 
@@ -183,7 +185,7 @@ class ProductController extends Controller
             $product['featured_variation'] = $featured_variation;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
@@ -191,46 +193,48 @@ class ProductController extends Controller
     {
         try {
             $products = Product::query()
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.*, brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
+                ->where('products.active', 1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getProductsByCategoryId($category_id){
+    public function getProductsByCategoryId($category_id)
+    {
         try {
             $products = ProductCategory::query()
-                ->leftJoin('products','products.id','=','product_categories.product_id')
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
+                ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
                 ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
-                ->leftJoin('product_variations','product_variations.id','=','product_variation_groups.id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'product_variation_groups.id')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('product_categories.active',1)
-                ->where('product_categories.category_id',$category_id)
+                ->where('products.active', 1)
+                ->where('product_categories.active', 1)
+                ->where('product_categories.category_id', $category_id)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getProductsWithParentCategory(){
+    public function getProductsWithParentCategory()
+    {
         try {
             $categories = Category::query()->where('parent_id', 0)->get();
-            foreach ($categories as $category){
+            foreach ($categories as $category) {
 
                 $first_id = Category::query()->where('parent_id', $category->id)->first()->id;
 
@@ -238,16 +242,16 @@ class ProductController extends Controller
                 $category['sub_categories'] = $sub_categories;
 
                 $products = ProductCategory::query()
-                    ->leftJoin('products','products.id','=','product_categories.product_id')
-                    ->leftJoin('brands','brands.id','=','products.brand_id')
-                    ->leftJoin('product_types','product_types.id','=','products.type_id')
-                    ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                    ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                    ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                    ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                     ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                    ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                    ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                     ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                    ->where('products.active',1)
-                    ->where('product_categories.active',1)
-                    ->where('product_categories.category_id',$first_id)
+                    ->where('products.active', 1)
+                    ->where('product_categories.active', 1)
+                    ->where('product_categories.category_id', $first_id)
                     ->limit(4)
                     ->get();
 
@@ -257,74 +261,77 @@ class ProductController extends Controller
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getProductsBySlug($slug){
+    public function getProductsBySlug($slug)
+    {
         try {
             $products = ProductCategory::query()
-                ->leftJoin('products','products.id','=','product_categories.product_id')
-                ->leftJoin('categories','categories.id','=','product_categories.category_id')
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variation_groups','product_variation_groups.product_id','=','products.id')
+                ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+                ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
                 ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('product_categories.active',1)
-                ->where('categories.slug',$slug)
+                ->where('products.active', 1)
+                ->where('product_categories.active', 1)
+                ->where('categories.slug', $slug)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getProductsByType($slug){
+    public function getProductsByType($slug)
+    {
         try {
             $products = ProductType::query()
-                ->leftJoin('products','products.type_id','=','product_types.id')
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('products', 'products.type_id', '=', 'product_types.id')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('product_types.active',1)
-                ->where('product_types.slug',$slug)
+                ->where('products.active', 1)
+                ->where('product_types.active', 1)
+                ->where('product_types.slug', $slug)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getProductsByBrand($slug){
+    public function getProductsByBrand($slug)
+    {
         try {
             $products = Brand::query()
-                ->leftJoin('products','products.brand_id','=','brands.id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('products', 'products.brand_id', '=', 'brands.id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('brands.slug',$slug)
+                ->where('products.active', 1)
+                ->where('brands.slug', $slug)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
     public function getProductById($id)
     {
         try {
-            $product = Product::query()->where('id',$id)->first();
+            $product = Product::query()->where('id', $id)->first();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -334,9 +341,9 @@ class ProductController extends Controller
     public function getProductTagById($product_id)
     {
         try {
-            $product_tags = ProductTags::query()->where('product_id',$product_id)->get();
-            foreach ($product_tags as $product_tag){
-                $tag_name = Tag::query()->where('id',$product_tag->tag_id)->get();
+            $product_tags = ProductTags::query()->where('product_id', $product_id)->get();
+            foreach ($product_tags as $product_tag) {
+                $tag_name = Tag::query()->where('id', $product_tag->tag_id)->get();
                 $product_tag['tag'] = $tag_name;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tags' => $product_tags]]);
@@ -348,9 +355,9 @@ class ProductController extends Controller
     public function getProductCategoryById($product_id)
     {
         try {
-            $product_categories = ProductCategory::query()->where('product_id',$product_id)->get();
-            foreach ($product_categories as $product_category){
-                $category_name = Category::query()->where('id',$product_category->category_id)->get();
+            $product_categories = ProductCategory::query()->where('product_id', $product_id)->get();
+            foreach ($product_categories as $product_category) {
+                $category_name = Category::query()->where('id', $product_category->category_id)->get();
                 $product_category['category'] = $category_name;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_categories' => $product_categories]]);
@@ -362,7 +369,7 @@ class ProductController extends Controller
     public function getProductDocumentById($product_id)
     {
         try {
-            $product_documents = ProductDocument::query()->where('product_id',$product_id)->where('active',1)->get();
+            $product_documents = ProductDocument::query()->where('product_id', $product_id)->where('active', 1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_documents' => $product_documents]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -372,9 +379,9 @@ class ProductController extends Controller
     public function getProductVariationGroupById($product_id)
     {
         try {
-            $product_variation_groups = ProductVariationGroup::query()->where('product_id',$product_id)->get();
-            foreach ($product_variation_groups as $product_variation_group){
-                $variation_group_type = ProductVariationGroupType::query()->where('id',$product_variation_group->group_type_id)->first();
+            $product_variation_groups = ProductVariationGroup::query()->where('product_id', $product_id)->get();
+            foreach ($product_variation_groups as $product_variation_group) {
+                $variation_group_type = ProductVariationGroupType::query()->where('id', $product_variation_group->group_type_id)->first();
                 $product_variation_group['variation_group_type'] = $variation_group_type;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation_groups' => $product_variation_groups]]);
@@ -386,8 +393,8 @@ class ProductController extends Controller
     public function getProductVariationById($id)
     {
         try {
-            $product_variation = ProductVariation::query()->where('id',$id)->first();
-            $rules = ProductRule::query()->where('variation_id',$id)->first();
+            $product_variation = ProductVariation::query()->where('id', $id)->first();
+            $rules = ProductRule::query()->where('variation_id', $id)->first();
             $product_variation['rule'] = $rules;
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variation' => $product_variation]]);
         } catch (QueryException $queryException) {
@@ -403,8 +410,8 @@ class ProductController extends Controller
                 ->where('product_variation_groups.product_id', $id)
                 ->selectRaw('product_variations.*');
 
-            foreach ($product_variations as $product_variation){
-                $rules = ProductRule::query()->where('variation_id',$product_variation->id)->first();
+            foreach ($product_variations as $product_variation) {
+                $rules = ProductRule::query()->where('variation_id', $product_variation->id)->first();
                 $product_variation['rule'] = $rules;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_variations' => $product_variations]]);
@@ -421,8 +428,8 @@ class ProductController extends Controller
                 ->where('product_variation_groups.product_id', $product_id)
                 ->selectRaw('product_variations.*');
 
-            foreach ($product_variations as $product_variation){
-                $images = ProductImage::query()->where('variation_id',$product_variation->id)->where('active',1)->get();
+            foreach ($product_variations as $product_variation) {
+                $images = ProductImage::query()->where('variation_id', $product_variation->id)->where('active', 1)->get();
                 $product_variation['images'] = $images;
             }
 
@@ -435,7 +442,7 @@ class ProductController extends Controller
     public function getVariationImageById($variation_id)
     {
         try {
-            $variation_images = ProductImage::query()->where('variation_id',$variation_id)->get();
+            $variation_images = ProductImage::query()->where('variation_id', $variation_id)->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['variation_images' => $variation_images]]);
         } catch (QueryException $queryException) {
@@ -446,9 +453,9 @@ class ProductController extends Controller
     public function getProductTabsById($product_id)
     {
         try {
-            $product_tabs = ProductTabContent::query()->where('product_id',$product_id)->where('active',1)->get();
-            foreach ($product_tabs as $product_tab){
-                $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
+            $product_tabs = ProductTabContent::query()->where('product_id', $product_id)->where('active', 1)->get();
+            foreach ($product_tabs as $product_tab) {
+                $tab = ProductTab::query()->where('id', $product_tab->product_tab_id)->first();
                 $product_tab['tab'] = $tab;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tabs' => $product_tabs]]);
@@ -460,8 +467,8 @@ class ProductController extends Controller
     public function getProductTabById($tab_id)
     {
         try {
-            $product_tab = ProductTabContent::query()->where('id',$tab_id)->first();
-            $tab = ProductTab::query()->where('id',$product_tab->product_tab_id)->first();
+            $product_tab = ProductTabContent::query()->where('id', $tab_id)->first();
+            $tab = ProductTab::query()->where('id', $product_tab->product_tab_id)->first();
             $product_tab['tab'] = $tab;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_tab' => $product_tab]]);
@@ -470,22 +477,23 @@ class ProductController extends Controller
         }
     }
 
-    public function getBrandsWithProductsAndLimit($limit){
+    public function getBrandsWithProductsAndLimit($limit)
+    {
         try {
 
-            $brands = Brand::query()->where('active',1)->get();
-            foreach ($brands as $brand){
-                $product_count = Product::query()->where('brand_id',$brand->id)->where('active', 1)->count();
+            $brands = Brand::query()->where('active', 1)->get();
+            foreach ($brands as $brand) {
+                $product_count = Product::query()->where('brand_id', $brand->id)->where('active', 1)->count();
                 $brand['count'] = $product_count;
 
-                $products = Product::query()->limit($limit)->where('brand_id',$brand->id)->where('active', 1)->get();
-                foreach ($products as $product){
+                $products = Product::query()->limit($limit)->where('brand_id', $brand->id)->where('active', 1)->get();
+                foreach ($products as $product) {
 
                     $variation = ProductVariation::query()
-                        ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                        ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                         ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                         ->selectRaw('product_variations.*, product_rules.*')
-                        ->where('product_variations.id',$product->featured_variation)
+                        ->where('product_variations.id', $product->featured_variation)
                         ->first();
 
 //                    $rule = ProductRule::query()->where('variation_id',$variation->id)->first();
@@ -500,106 +508,139 @@ class ProductController extends Controller
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['brands' => $brands]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getAllCampaignProducts(){
+    public function getAllCampaignProducts()
+    {
         try {
             $products = Product::query()
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('products.is_campaign',1)
+                ->where('products.active', 1)
+                ->where('products.is_campaign', 1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getCampaignProductsByLimit($limit){
+    public function getCampaignProductsByLimit($limit)
+    {
         try {
             $products = Product::query()
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('products.is_campaign',1)
+                ->where('products.active', 1)
+                ->where('products.is_campaign', 1)
                 ->limit($limit)
                 ->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getFeaturedProducts(){
+    public function getFeaturedProducts()
+    {
         try {
             $products = Product::query()
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('products.is_featured',1)
+                ->where('products.active', 1)
+                ->where('products.is_featured', 1)
                 ->limit(7)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getNewProducts(){
+    public function getNewProducts()
+    {
         try {
             $products = Product::query()
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('products.is_new',1)
+                ->where('products.active', 1)
+                ->where('products.is_new', 1)
                 ->limit(7)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
-    public function getSimilarProducts($product_id){
+    public function getSimilarProducts($product_id)
+    {
         try {
             $product_category = ProductCategory::query()->where('product_id', $product_id)->first();
             $products = ProductCategory::query()
-                ->leftJoin('products','products.id','=','product_categories.product_id')
-                ->leftJoin('brands','brands.id','=','products.brand_id')
-                ->leftJoin('product_types','product_types.id','=','products.type_id')
-                ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
+                ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
-                ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
                 ->selectRaw('product_rules.*, products.* ,brands.name as brand_name,product_types.name as type_name')
-                ->where('products.active',1)
-                ->where('product_categories.active',1)
-                ->where('product_categories.category_id',$product_category->category_id)
+                ->where('products.active', 1)
+                ->where('product_categories.active', 1)
+                ->where('product_categories.category_id', $product_category->category_id)
                 ->limit(5)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        }
+    }
+
+    public function getCategoriesByBranId()
+    {
+        try {
+            $brands = Brand::query()->where('active', 1)->get();
+            foreach ($brands as $brand) {
+                $brand_categories = ProductCategory::query()
+                    ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+//                    ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
+                    ->where('products.brand_id',$brand->id)
+                    ->where('product_categories.category_id','!=',0)
+                    ->groupBy('product_categories.category_id')
+                    ->selectRaw('product_categories.category_id')
+                    ->get();
+                $categories = [];
+                foreach ($brand_categories as $brand_category){
+                    $category = Category::query()->where('id',$brand_category->category_id)->first();
+
+                    array_push($categories,$category);
+                }
+                $brand['categories'] = $categories;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['brands' => $brands]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
 }
+
