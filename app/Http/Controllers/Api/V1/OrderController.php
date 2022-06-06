@@ -216,7 +216,7 @@ class OrderController extends Controller
                 $order_tax += $order_detail_tax;
 
             }
-            $order['cart_details'] = $order_details;
+            $order['order_details'] = $order_details;
             $order['total_price'] = $order_price;
             $order['total_tax'] = $order_tax;
 
@@ -224,7 +224,7 @@ class OrderController extends Controller
             $order['total_delivery'] = $delivery_price;
             $order['total_weight'] = $weight;
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $order]]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
