@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Brand;
 use App\Models\Carrier;
 use App\Models\Cart;
 use App\Models\CartDetail;
@@ -175,6 +176,7 @@ class OrderController extends Controller
             $weight = 0;
             foreach ($order_details as $order_detail){
                 $product = Product::query()->where('id',$order_detail->product_id)->first();
+                $brand_name = Brand::query()->where('id',$product->brand_id)->first()->name;
                 $variation = ProductVariation::query()->where('id',$order_detail->variation_id)->first();
                 $rule = ProductRule::query()->where('variation_id',$order_detail->variation_id)->first();
                 $image = ProductImage::query()->where('variation_id',$order_detail->variation_id)->first();
@@ -182,6 +184,7 @@ class OrderController extends Controller
                 $variation['rule'] = $rule;
                 $variation['image'] = $image;
                 $product['variation'] = $variation;
+                $product['brand_name'] = $brand_name;
                 $order_detail['product'] = $product;
                 if ($order_detail->discounted_price == null || $order_detail->discount_rate == 0){
                     $order_detail_price = $order_detail->regular_price * $order_detail->quantity;
