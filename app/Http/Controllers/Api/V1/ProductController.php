@@ -195,7 +195,7 @@ class ProductController extends Controller
                 ->leftJoin('product_variations','product_variations.id','=','products.featured_variation')
                 ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules','product_rules.variation_id','=','product_variations.id')
-                ->selectRaw('products.* ,products.id as product_id ,brands.name as brand_name,product_types.name as type_name, product_rules.*')
+                ->selectRaw('products.* ,products.id, brands.name as brand_name,product_types.name as type_name, product_rules.*')
                 ->where('products.active',1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
