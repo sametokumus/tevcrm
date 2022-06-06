@@ -138,6 +138,7 @@ class ProductController extends Controller
                 ->selectRaw('tags.*')
                 ->where('product_id', $product->id)
                 ->where('product_tags.active', 1)
+                ->where('product_categories.category_id','!=',0)
                 ->get();
             $product_categories = ProductCategory::query()
                 ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
