@@ -10,6 +10,7 @@ use App\Models\CartDetail;
 use App\Models\City;
 use App\Models\CorporateAddresses;
 use App\Models\Country;
+use App\Models\DeliveryPrice;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -175,6 +176,55 @@ class OrderController extends Controller
             $order['order_details'] = $order_details;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+
+    public function getOrderDetailsById($order_id){
+        try {
+            $order = Order::query()->where('order_id',$order_id)->first();
+            $order_details = OrderProduct::query()->where('order_id',$order->order_id)->where('active',1)->get();
+            $order_price = 0;
+            $order_tax = 0;
+            $weight = 0;
+            foreach ($order_details as $order_detail){
+                $product = Product::query()->where('id',$order_detail->product_id)->first();
+                $variation = ProductVariation::query()->where('id',$order_detail->variation_id)->first();
+                $rule = ProductRule::query()->where('variation_id',$order_detail->variation_id)->first();
+                $image = ProductImage::query()->where('variation_id',$order_detail->variation_id)->first();
+
+                $variation['rule'] = $rule;
+                $variation['image'] = $image;
+                $product['variation'] = $variation;
+                $order_detail['product'] = $product;
+                if ($order_detail->discounted_price == null || $order_detail->discount_rate == 0){
+                    $order_detail_price = $order_detail->regular_price * $order_detail->quantity;
+                    $order_detail_tax = $order_detail->regular_tax * $order_detail->quantity;
+                }else{
+                    $order_detail_price = $order_detail->discounted_price * $order_detail->quantity;
+                    $order_detail_tax = $order_detail->discounted_tax * $order_detail->quantity;
+                }
+                $weight = $weight + $rule->weight;
+//                if($product->is_free_shipping == 1){
+//                    $order_detail_delivery_price = 0.00;
+//                }
+                $order_detail['sub_total_price'] = $order_detail_price;
+                $order_detail['sub_total_tax'] = $order_detail_tax;
+                $order_price += $order_detail_price;
+                $order_tax += $order_detail_tax;
+
+            }
+            $order['cart_details'] = $order_details;
+            $order['total_price'] = $order_price;
+            $order['total_tax'] = $order_tax;
+
+            $delivery_price = DeliveryPrice::query()->where('min_value', '<=', $weight)->where('max_value', '>', $weight)->first();
+            $order['total_delivery'] = $delivery_price;
+            $order['total_weight'] = $weight;
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $order]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
