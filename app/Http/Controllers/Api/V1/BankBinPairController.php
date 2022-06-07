@@ -17,7 +17,7 @@ class BankBinPairController extends Controller
             $pair = BankBinPair::query()->where('prefix_no',$prefix_no)->first();
             if (!isset($pair)){
                 $member_no = 0;
-                return response(['message' => 'Sipariş ekleme işlemi başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
+                return response(['message' => 'İşlem başarılı.', 'status' => 'success','object' => ['member_no' => $member_no]]);
             }else{
                 $member_no = $pair->member_no;
             }
