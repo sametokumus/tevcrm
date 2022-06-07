@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\ShippingTypeController;
 use App\Http\Controllers\Api\Admin\CreditCardController;
+use App\Http\Controllers\Api\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,6 +181,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('creditCard/getCreditCards',[CreditCardController::class,'getCreditCards']);
     Route::get('creditCard/getCreditCardById/{card_id}',[CreditCardController::class,'getCreditCardById']);
     Route::post('creditCard/postCreditInstallmentUpdate/{id}',[CreditCardController::class,'postCreditInstallmentUpdate']);
+
+    Route::get('user/getUsers',[UserController::class,'getUsers']);
+
 
 });
 

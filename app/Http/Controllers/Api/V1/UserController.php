@@ -18,14 +18,6 @@ class UserController extends Controller
     {
         return @json_decode(json_encode($object), true);
     }
-    public function getUsers(){
-        try {
-            $users = User::query()->where('active',1)->where('verified',1)->get();
-            return response(['message' => 'İşlem başarılı.','status' => 'success','object' => ['users' => $users]]);
-        } catch (QueryException $queryException){
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
-        }
-    }
 
     public function getUser($id){
         try {
