@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
 use App\Models\OrderStatusHistory;
+use App\Models\Payment;
 use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -214,6 +215,53 @@ class OrderController extends Controller
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function addPayment(Request $request)
+    {
+        try {
+
+            Payment::query()->insert([
+                'order_id' => $request->order_id,
+                'type' => $request->type,
+                'bank_id' => $request->bank_id,
+                'installment' => $request->installment_count
+            ]);
+
+            return response(['message' => 'Ödeme oluşturuldu.', 'status' => 'success']);
+
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'e' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updatePayment(Request $request)
+    {
+        try {
+
+            Payment::query()->where('order_id', $request->order_id)->update([
+                'return_code' => $request->return_code,
+                'response' => $request->response,
+                'transaction_id' => $request->transaction_id,
+                'transaction_date' => $request->transaction_date,
+                'hostrefnum' => $request->hostrefnum,
+                'authcode' => $request->authcode,
+                'is_preauth' => 1
+            ]);
+
+            return response(['message' => 'Ödeme güncellendi.', 'status' => 'success']);
+
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'e' => $throwable->getMessage()]);
         }
     }
 
