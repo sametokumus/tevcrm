@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Admin\CarrierController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\ShippingTypeController;
+use App\Http\Controllers\Api\Admin\CreditCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +176,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('excel/postNewProducts', [ImportController::class, 'postNewProducts']);
 
     Route::get('shippingType/getShippingTypes',[ShippingTypeController::class,'getShippingTypes']);
+
+    Route::get('creditCard/getCreditCards',[CreditCardController::class,'getCreditCards']);
+    Route::get('creditCard/getCreditCardById/{card_id}',[CreditCardController::class,'getCreditCardById']);
+    Route::post('creditCard/postCreditInstallmentUpdate/{id}',[CreditCardController::class,'postCreditInstallmentUpdate']);
 
 });
 
