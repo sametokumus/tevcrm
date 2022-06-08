@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\ProductCategory;
 use App\Models\User;
 use App\Models\UserDocumentCheck;
+use App\Models\UserFavorite;
 use App\Models\UserProfile;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
@@ -115,5 +118,61 @@ class UserController extends Controller
         }
     }
 
+    public function addUserFavorite(Request $request){
+        try {
+                UserFavorite::query()->insert([
+                    'user_id' => $request->user_id,
+                    'product_id' => $request->product_id,
+                    'variation_id' => $request->variation_id
+                ]);
+
+            return response(['message' => 'Favori ürün ekleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','e'=> $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteUserFavorite($id){
+        try {
+
+            $user = UserFavorite::query()->where('id',$id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => 'Favori ürün silme işlemi başarılı.','status' => 'success','object' => ['user' => $user]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getUserFavorites($id){
+        try {
+            $user_favorites = UserFavorite::query()
+                ->leftJoin('products', 'products.id', '=', 'user_favorites.product_id')
+                ->leftJoin('product_categories','product_categories.product_id','=','products.id')
+                ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->select(DB::raw('(select id from product_variation_groups where product_id = user_favorites.product_id order by id asc limit 1) as variation_group'))
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
+                ->select(DB::raw('(select image from product_images where variation_id = user_favorites.variation_id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*, user_favorites.*')
+                ->where('user_favorites.active', 1)
+                ->where('user_favorites.user_id',$id)
+                ->get();
+//            ->where('user_favorites.product_id', '=','products.id')
+            return response(['message' => 'İşlem Başarılı.','status' => 'success','object' => ['user_favorites' => $user_favorites]]);
+        } catch (QueryException $queryException){
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','err' => $queryException->getMessage()]);
+        }
+    }
 
 }
