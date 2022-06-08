@@ -151,6 +151,8 @@ Route::get('/product/getProductTabsById/{product_id}', [ProductController::class
 Route::get('/product/getProductTabById/{tab_id}', [ProductController::class, 'getProductTabById']);
 Route::get('/product/getCategoriesByBranId', [ProductController::class, 'getCategoriesByBranId']);
 
+Route::get('/product/getProductColors', [ProductController::class, 'getProductColors']);
+
 
 Route::get('/productDocument/getProductDocument', [ProductDocumentController::class, 'getProductDocument']);
 

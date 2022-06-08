@@ -67,42 +67,61 @@ class SearchController extends Controller
     public function filterProducts(Request $request){
         try {
             $products = Product::query();
+            $products = $products
+                ->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id');
             if ($request->category_id != ""){
-                $products = $products
-                    ->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id');
-
                 $category_explodes = explode(",","$request->category_id");
-                $products->where(function (Builder $products) use ($category_explodes){
-                    for ($i = 0; $i < (count($category_explodes)-1); $i++){
-                        $products->orWhere('product_categories.category_id', $category_explodes[$i]);
-                    }
-                });
+                $q = '(product_categories.category_id '.'='.$category_explodes[0];
+                for ($i = 1; $i < (count($category_explodes)); $i++){
+                    $q = $q.' OR product_categories.category_id '.'='.$category_explodes[$i];
+                }
+                $q = $q.')';
+                $products->whereRaw($q);
             }
+
+            $products = $products
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id');
 
             if ($request->brand_id != ""){
-                $products = $products
-                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id');
-
                 $brand_explodes = explode(",","$request->brand_id");
-                $products->where(function (Builder $products) use ($brand_explodes){
-                    for ($i = 0; $i < (count($brand_explodes)-1); $i++){
-                        $products->orWhere('products.brand_id', $brand_explodes[$i]);
+                $q = '(products.brand_id '.'='.$brand_explodes[0];
+                    for ($i = 1; $i < (count($brand_explodes)); $i++){
+                        $q = $q.' OR products.brand_id '.'='.$brand_explodes[$i];
                     }
-                });
+                $q = $q.')';
+                $products->whereRaw($q);
             }
+
+            $products = $products
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id');
+
+            if ($request->type_id != ""){
+                $type_explodes = explode(",","$request->type_id");
+                $q = '(products.type_id '.'='.$type_explodes[0];
+                for ($i = 1; $i < (count($type_explodes)); $i++){
+                    $q = $q.' OR products.type_id '.'='.$type_explodes[$i];
+                }
+                $q = $q.')';
+                $products->whereRaw($q);
+            }
+
+            $products = $products
+                ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
+                ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id');
 
             if ($request->color != ""){
-                $products = $products
-                    ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
-                    ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id');
-
                 $color_explodes = explode(",","$request->color");
-                $products->where(function (Builder $products) use ($color_explodes){
-                    for ($i = 0; $i < (count($color_explodes)-1); $i++){
-                        $products->orWhere('product_variations.name', $color_explodes[$i]);
-                    }
-                });
+                $q = '(product_variations.name '.'= \''.$color_explodes[0].'\'';
+                for ($i = 1; $i < (count($color_explodes)); $i++){
+                    $q = $q.' OR product_variations.name '.'= \''.$color_explodes[$i].'\'';
+                }
+                $q = $q.')';
+                $products->whereRaw($q);
             }
+
+            $products = $products
+                ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id');
+            $products = $products->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*');
             $products = $products->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {

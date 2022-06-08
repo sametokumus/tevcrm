@@ -643,5 +643,19 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductColors(){
+        try {
+            $colors = ProductVariationGroup::query()
+                ->leftJoin('products','products.id','=','product_variation_groups.product_id')
+                ->leftJoin('product_variations','product_variations.variation_group_id','=','product_variation_groups.id')
+                ->selectRaw('product_variations.name')
+                ->distinct('product_variations.name')
+                ->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['colors' => $colors]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        }
+    }
+
 }
 
