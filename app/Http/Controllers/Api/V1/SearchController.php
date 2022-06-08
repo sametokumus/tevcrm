@@ -13,6 +13,7 @@ use App\Models\ProductSeo;
 use App\Models\ProductType;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -71,10 +72,11 @@ class SearchController extends Controller
                     ->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id');
 
                 $category_explodes = explode(",","$request->category_id");
-                foreach ($category_explodes as $category_explode){
-                    $products = $products
-                        ->orWhere('product_categories.category_id', $category_explode);
-                }
+                $products->where(function (Builder $products) use ($category_explodes){
+                    for ($i = 0; $i < (count($category_explodes)-1); $i++){
+                        $products->orWhere('product_categories.category_id', $category_explodes[$i]);
+                    }
+                });
             }
 
             if ($request->brand_id != ""){
@@ -82,10 +84,11 @@ class SearchController extends Controller
                     ->leftJoin('brands', 'brands.id', '=', 'products.brand_id');
 
                 $brand_explodes = explode(",","$request->brand_id");
-                foreach ($brand_explodes as $brand_explode){
-                    $products = $products
-                        ->orWhere('products.brand_id', $brand_explode);
-                }
+                $products->where(function (Builder $products) use ($brand_explodes){
+                    for ($i = 0; $i < (count($brand_explodes)-1); $i++){
+                        $products->orWhere('products.brand_id', $brand_explodes[$i]);
+                    }
+                });
             }
 
             if ($request->color != ""){
@@ -94,40 +97,14 @@ class SearchController extends Controller
                     ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id');
 
                 $color_explodes = explode(",","$request->color");
-                foreach ($color_explodes as $color_explode){
-                    $products = $products
-                        ->orWhere('product_variations.name', $color_explode);
-                }
-            }
-
-            $products = $products->get();
-            return $products;
-
-
-            $product_categories = ProductCategory::query()->where('category_id',$request->category_id)->get();
-            foreach ($product_categories as $product_category){
-                $products = Product::query()->where('id',$product_category->product_id)->get();
-                $product_categories = $products;
-                foreach ($products as $product) {
-                    $brand_name = Brand::query()->where('id', $request->brand_id)->first()->name;
-                    $product_types = ProductType::query()->where('id', $product->type_id)->get();
-                    $product_variation_groups = ProductVariationGroup::query()->where('product_id', $product->id)->get();
-                    foreach ($product_variation_groups as $product_variation_group) {
-                        $product_variation = ProductVariation::query()->where('name', $request->color)->first();
-                        $product_images = ProductImage::query()->where('variation_id', $product_variation->id)->get();
-                        $product_rules = ProductRule::query()->where('variation_id', $product_variation->id)->get();
-                        $product['variation_group'] = $product_variation_group;
-                        $product['variation'] = $product_variation;
-                        $product['image'] = $product_images;
-                        $product['product_rules'] = $product_rules;
-
+                $products->where(function (Builder $products) use ($color_explodes){
+                    for ($i = 0; $i < (count($color_explodes)-1); $i++){
+                        $products->orWhere('product_variations.name', $color_explodes[$i]);
                     }
-                }
-                    $product['brand_name'] = $brand_name;
-                    $product['product_types'] = $product_types;
-                }
-                $product_category['products'] = $product;
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_categories' => $product_categories]]);
+                });
+            }
+            $products = $products->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         }
