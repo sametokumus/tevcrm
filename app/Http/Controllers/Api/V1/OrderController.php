@@ -251,7 +251,8 @@ class OrderController extends Controller
                 'transaction_date' => $request->transaction_date,
                 'hostrefnum' => $request->hostrefnum,
                 'authcode' => $request->authcode,
-                'is_preauth' => 1
+                'is_preauth' => 1,
+                'is_paid'=> 1
             ]);
 
             return response(['message' => 'Ödeme güncellendi.', 'status' => 'success']);
