@@ -7,7 +7,10 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
+use App\Models\ProductRule;
 use App\Models\ProductSeo;
+use App\Models\ProductType;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
 use Illuminate\Database\QueryException;
@@ -62,22 +65,68 @@ class SearchController extends Controller
 
     public function filterProducts(Request $request){
         try {
+            $products = Product::query();
+            if ($request->category_id != ""){
+                $products = $products
+                    ->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id');
+
+                $category_explodes = explode(",","$request->category_id");
+                foreach ($category_explodes as $category_explode){
+                    $products = $products
+                        ->orWhere('product_categories.category_id', $category_explode);
+                }
+            }
+
+            if ($request->brand_id != ""){
+                $products = $products
+                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id');
+
+                $brand_explodes = explode(",","$request->brand_id");
+                foreach ($brand_explodes as $brand_explode){
+                    $products = $products
+                        ->orWhere('products.brand_id', $brand_explode);
+                }
+            }
+
+            if ($request->color != ""){
+                $products = $products
+                    ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
+                    ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id');
+
+                $color_explodes = explode(",","$request->color");
+                foreach ($color_explodes as $color_explode){
+                    $products = $products
+                        ->orWhere('product_variations.name', $color_explode);
+                }
+            }
+
+            $products = $products->get();
+            return $products;
+
+
             $product_categories = ProductCategory::query()->where('category_id',$request->category_id)->get();
             foreach ($product_categories as $product_category){
                 $products = Product::query()->where('id',$product_category->product_id)->get();
-                foreach ($products as $product){
-                    $brand_name = Brand::query()->where('id',$request->brand_id)->first()->name;
-                    $product_variation_groups = ProductVariationGroup::query()->where('product_id',$product->id)->get();
-                    foreach ($product_variation_groups as $product_variation_group){
-                        $product_variations = ProductVariation::query()->where('name',$request->color)->first()->name;
+                $product_categories = $products;
+                foreach ($products as $product) {
+                    $brand_name = Brand::query()->where('id', $request->brand_id)->first()->name;
+                    $product_types = ProductType::query()->where('id', $product->type_id)->get();
+                    $product_variation_groups = ProductVariationGroup::query()->where('product_id', $product->id)->get();
+                    foreach ($product_variation_groups as $product_variation_group) {
+                        $product_variation = ProductVariation::query()->where('name', $request->color)->first();
+                        $product_images = ProductImage::query()->where('variation_id', $product_variation->id)->get();
+                        $product_rules = ProductRule::query()->where('variation_id', $product_variation->id)->get();
                         $product['variation_group'] = $product_variation_group;
-                        $product['variation'] = $product_variations;
+                        $product['variation'] = $product_variation;
+                        $product['image'] = $product_images;
+                        $product['product_rules'] = $product_rules;
+
                     }
+                }
                     $product['brand_name'] = $brand_name;
+                    $product['product_types'] = $product_types;
                 }
                 $product_category['products'] = $product;
-            }
-
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product_categories' => $product_categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
