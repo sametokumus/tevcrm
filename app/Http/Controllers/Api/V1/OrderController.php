@@ -254,6 +254,9 @@ class OrderController extends Controller
                 'is_preauth' => 1,
                 'is_paid'=> 1
             ]);
+            Order::query()->where('order_id', $request->order_id)->update([
+               'is_paid' => 1
+            ]);
 
             return response(['message' => 'Ödeme güncellendi.', 'status' => 'success']);
 
