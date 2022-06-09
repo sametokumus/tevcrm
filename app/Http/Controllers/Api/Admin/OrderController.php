@@ -269,4 +269,19 @@ class OrderController extends Controller
         }
     }
 
+    public function updateRefundStatus(Request $request, $order_id){
+        try {
+            OrderRefund::query()->where('order_id',$order_id)->update([
+                'status' => $request->status,
+            ]);
+            return response(['message' => 'İade durumu güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001']);
+        }
+    }
+
 }
