@@ -25,9 +25,11 @@ use App\Models\ProductRule;
 use App\Models\ProductVariation;
 use App\Models\ShippingType;
 use App\Models\User;
+use DateTime;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
@@ -147,16 +149,33 @@ class OrderController extends Controller
 
     public function getOrdersByUserId($user_id){
         try {
-            $orders = Order::query()->where('user_id',$user_id)->get(['id', 'order_id', 'created_at as order_date', 'total', 'status_id']);
+            $orders = Order::query()->where('user_id',$user_id)->get(['id', 'order_id', 'created_at as order_date', 'total', 'status_id','payment_type']);
             foreach ($orders as $order){
                 $product_count = OrderProduct::query()->where('order_id', $order->order_id)->get()->count();
                 $product = OrderProduct::query()->where('order_id', $order->order_id)->first();
                 $product_image = ProductImage::query()->where('variation_id', $product->variation_id)->first()->image;
                 $status_name = OrderStatus::query()->where('id', $order->status_id)->first()->name;
+                $payment_type = PaymentType::query()->where('id',$order->payment_type)->first()->name;
+
                 $order['product_count'] = $product_count;
                 $order['product_image'] = $product_image;
-                $order['payment_type'] = $order->payment_type;
+                $order['payment_type'] = $payment_type;
                 $order['status_name'] = $status_name;
+
+                $created_at = $order->order_date;
+
+                $start = new DateTime($created_at);
+                $end = Carbon::now();
+
+                $interval = $end->diff($start);
+                $final = $interval->format('%a');
+                $order['days'] = $start;
+
+                if ($final <= 15){
+                    $order['is_refundable'] = 1;
+                }else{
+                    $order['is_refundable'] = 0;
+                }
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['orders' => $orders]]);
         } catch (QueryException $queryException) {
