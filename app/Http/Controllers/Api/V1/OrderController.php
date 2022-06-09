@@ -173,7 +173,7 @@ class OrderController extends Controller
 
                 if ($final <= 15){
                     $order['is_refundable'] = 1;
-                    $refund = OrderRefund::query()->where('id',$order->id)->first();
+                    $refund = OrderRefund::query()->where('order_id',$order->id)->first();
                     if (isset($refund)){
                         $order['is_refundable'] = 0;
 
