@@ -17,9 +17,11 @@ use App\Models\ProductSeo;
 use App\Models\ProductType;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductImport;
+use Nette\Schema\ValidationException;
 
 
 class ImportController extends Controller
@@ -362,5 +364,33 @@ class ImportController extends Controller
             ]);
         }
         return response(['message' => 'başarılı']);
+    }
+
+    public function updateProductNew(){
+        try {
+            $search = 'PAMUKKALE';
+            $products = Product::query()->where('name', 'LIKE', '%'.$search.'%')->get();
+            $i = 0;
+            foreach ($products as $product){
+                if($product->brand_id == '3') {
+                    $i++;
+                    $explodes = explode("PAMUKKALE", $product->name);
+//            return $explodes[0];
+                    $new_name = $explodes[0]."ÖZNUR";
+//                return $new_name;
+                    Product::query()->where('id', $product->id)->update([
+                        'name' => $new_name
+                    ]);
+                }
+            }
+            return $products;
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'err' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
+        }
+
     }
 }

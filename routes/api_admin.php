@@ -180,6 +180,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('excel/newProduct', [ImportController::class, 'newProduct']);
     Route::post('excel/postNewProducts', [ImportController::class, 'postNewProducts']);
 
+
+    Route::get('excel/updateProductNew', [ImportController::class, 'updateProductNew']);
+
+
+
     Route::get('shippingType/getShippingTypes',[ShippingTypeController::class,'getShippingTypes']);
 
     Route::get('creditCard/getCreditCards',[CreditCardController::class,'getCreditCards']);
