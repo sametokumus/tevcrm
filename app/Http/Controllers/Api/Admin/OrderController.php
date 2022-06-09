@@ -249,7 +249,7 @@ class OrderController extends Controller
                 ->leftJoin('order_refund_statuses','order_refund_statuses.id','=','order_refunds.status')
                 ->leftJoin('user_profiles','user_profiles.user_id','=','order_refunds.user_id')
                 ->where('order_refunds.active',1)
-                ->selectRaw('order_refunds.*, user_profiles.name, user_profiles.surname')
+                ->selectRaw('order_refunds.*, user_profiles.name, user_profiles.surname,order_refund_statuses.name as status_name')
                 ->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order_refunds' => $order_refunds]]);
