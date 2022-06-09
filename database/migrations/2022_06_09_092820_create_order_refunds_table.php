@@ -15,10 +15,10 @@ class CreateOrderRefundsTable extends Migration
     {
         Schema::create('order_refunds', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('order_id');
-            $table->tinyInteger('user_id');
+            $table->text('order_id');
+            $table->bigInteger('user_id');
             $table->tinyInteger('active')->default(1);
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
