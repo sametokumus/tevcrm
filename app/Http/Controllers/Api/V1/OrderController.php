@@ -15,6 +15,7 @@ use App\Models\DeliveryPrice;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\OrderRefund;
 use App\Models\OrderStatus;
 use App\Models\OrderStatusHistory;
 use App\Models\Payment;
@@ -172,6 +173,11 @@ class OrderController extends Controller
 
                 if ($final <= 15){
                     $order['is_refundable'] = 1;
+                    $refund = OrderRefund::query()->where('order_id',$order->order_id)->first();
+                    if (isset($refund)){
+                        $order['is_refundable'] = 0;
+
+                    }
                 }else{
                     $order['is_refundable'] = 0;
                 }
