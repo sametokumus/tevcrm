@@ -120,11 +120,19 @@ class UserController extends Controller
 
     public function addUserFavorite(Request $request){
         try {
+            $user_favorite = UserFavorite::query()->where('product_id',$request->product_id)->first();
+            if (isset($user_favorite)){
+                UserFavorite::query()->where('product_id',$user_favorite->product_id)->update([
+                    'active' => 0
+                ]);
+            }else{
                 UserFavorite::query()->insert([
                     'user_id' => $request->user_id,
                     'product_id' => $request->product_id,
                     'variation_id' => $request->variation_id
                 ]);
+            }
+
 
             return response(['message' => 'Favori ürün ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -136,21 +144,21 @@ class UserController extends Controller
         }
     }
 
-    public function deleteUserFavorite($id){
-        try {
-
-            $user = UserFavorite::query()->where('id',$id)->update([
-                'active' => 0,
-            ]);
-            return response(['message' => 'Favori ürün silme işlemi başarılı.','status' => 'success','object' => ['user' => $user]]);
-        } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
-        } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
-        }
-    }
+//    public function deleteUserFavorite($id){
+//        try {
+//
+//            $user = UserFavorite::query()->where('id',$id)->update([
+//                'active' => 0,
+//            ]);
+//            return response(['message' => 'Favori ürün silme işlemi başarılı.','status' => 'success','object' => ['user' => $user]]);
+//        } catch (ValidationException $validationException) {
+//            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+//        } catch (QueryException $queryException) {
+//            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+//        } catch (\Throwable $throwable) {
+//            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+//        }
+//    }
 
     public function getUserFavorites($id){
         try {
