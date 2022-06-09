@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Order;
+use App\Models\OrderRefund;
 use App\Models\ProductCategory;
 use App\Models\User;
 use App\Models\UserDocumentCheck;
@@ -183,4 +185,18 @@ class UserController extends Controller
         }
     }
 
+    public function addRefundRequest(Request $request){
+        try {
+                OrderRefund::query()->insert([
+                    'user_id' => $request->user_id,
+                    'order_id' => $request->order_id
+                ]);
+                Order::query()->where('order_id',$request->order_id)->update([
+                    'status_id' => 11
+                ]);
+            return response(['message' => 'İade talebiniz alındı.','status' => 'success']);
+        } catch (QueryException $queryException){
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','err' => $queryException->getMessage()]);
+        }
+    }
 }

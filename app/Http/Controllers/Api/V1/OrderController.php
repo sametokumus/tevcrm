@@ -169,7 +169,6 @@ class OrderController extends Controller
 
                 $interval = $end->diff($start);
                 $final = $interval->format('%a');
-                $order['days'] = $start;
 
                 if ($final <= 15){
                     $order['is_refundable'] = 1;
