@@ -7,6 +7,7 @@ use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderRefund;
+use App\Models\OrderRefundStatus;
 use App\Models\OrderStatus;
 use App\Models\OrderStatusHistory;
 use App\Models\PaymentType;
@@ -246,7 +247,9 @@ class OrderController extends Controller
         try {
             $order_refunds = OrderRefund::query()
                 ->leftJoin('order_refund_statuses','order_refund_statuses.id','=','order_refunds.status')
+                ->leftJoin('user_profiles','user_profiles.user_id','=','order_refunds.user_id')
                 ->where('order_refunds.active',1)
+                ->selectRaw('order_refunds.*, user_profiles.name, user_profiles.surname')
                 ->get();
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order_refunds' => $order_refunds]]);
@@ -254,4 +257,16 @@ class OrderController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','err' => $queryException->getMessage()]);
         }
     }
+
+    public function getOrderRefundStatuses(){
+        try {
+            $order_refund_statuses = OrderRefundStatus::query()
+                ->where('active',1)
+                ->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order_refund_statuses' => $order_refund_statuses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','err' => $queryException->getMessage()]);
+        }
+    }
+
 }

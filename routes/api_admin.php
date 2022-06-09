@@ -134,6 +134,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('order/updateOrderShipping/{order_id}', [OrderController::class, 'updateOrderShipping']);
 
     Route::get('order/getRefundOrders', [OrderController::class, 'getRefundOrders']);
+    Route::get('order/getOrderRefundStatuses', [OrderController::class, 'getOrderRefundStatuses']);
 
 
 
