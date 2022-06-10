@@ -21,7 +21,7 @@ class BrandController extends Controller
 
     public function getBrandById($brand_id){
         try {
-            $brands = Brand::query()->where('id',$brand_id)->where('active',1)->first();
+            $brands = Brand::query()->where('id',$brand_id)->first();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['brands' => $brands]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
