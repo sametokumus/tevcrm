@@ -69,6 +69,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
     Route::post('brand/updateBrand/{id}', [BrandController::class, 'updateBrand']);
     Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
+    Route::get('brand/activeBrand/{id}', [BrandController::class, 'activeBrand']);
+    Route::get('brand/getBrandPassive', [BrandController::class, 'getBrandPassive']);
 
     Route::post('productType/addProductType', [ProductTypeController::class, 'addProductType']);
     Route::post('productType/updateProductType/{id}', [ProductTypeController::class, 'updateProductType']);
