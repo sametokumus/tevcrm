@@ -36,7 +36,7 @@ class SearchController extends Controller
                     ->leftJoin('product_variations', 'product_variations.id', '=', 'product_variation_groups.id')
                     ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                     ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
-                    ->selectRaw('brands.name as brand_name,product_types.name as type_name, product_rules.*,product_seos.*, products.*')
+                    ->selectRaw('brands.name as brand_name,product_types.name as type_name, product_rules.*, products.*')
                     ->where('products.active', 1);
 
                 $q = ' (product_seos.search_keywords LIKE "% ' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . '%" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . ',%" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ',%")';
@@ -55,7 +55,7 @@ class SearchController extends Controller
                     ->leftJoin('product_variations', 'product_variations.id', '=', 'product_variation_groups.id')
                     ->select(DB::raw('(select image from product_images where variation_id = product_variations.id order by id asc limit 1) as image'))
                     ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id')
-                    ->selectRaw('brands.name as brand_name,product_types.name as type_name, product_rules.*,product_seos.*, products.*,product_categories.*')
+                    ->selectRaw('brands.name as brand_name,product_types.name as type_name, product_rules.*, products.*')
                     ->where('products.active', 1)
                     ->where('product_categories.active', 1);
 
@@ -130,6 +130,9 @@ class SearchController extends Controller
                 ->leftJoin('product_rules', 'product_rules.variation_id', '=', 'product_variations.id');
             $products = $products->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*');
             $products = $products->get();
+            foreach ($products as $product){
+                $product['image'] = ProductImage::query()->where('variation_id',$product->featured_variation)->first()->image;
+            }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
