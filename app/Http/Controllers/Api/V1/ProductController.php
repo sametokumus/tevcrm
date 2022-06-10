@@ -409,7 +409,8 @@ class ProductController extends Controller
             $product_variations = ProductVariationGroup::query()
                 ->leftJoin('product_variations', 'product_variations.variation_group_id', '=', 'product_variation_groups.id')
                 ->where('product_variation_groups.product_id', $id)
-                ->selectRaw('product_variations.*');
+                ->selectRaw('product_variations.*')
+                ->get();
 
             foreach ($product_variations as $product_variation) {
                 $rules = ProductRule::query()->where('variation_id', $product_variation->id)->first();
