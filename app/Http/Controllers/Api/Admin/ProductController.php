@@ -966,7 +966,7 @@ class ProductController extends Controller
                         }else{
 
                             $discount_rate = $request->discount_rate;
-                            $discounted_price = $product_rule->regular_price * $discount_rate / 100;
+                            $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
                             ProductRule::query()->where('variation_id', $product_variation->id)->update([
@@ -1005,7 +1005,7 @@ class ProductController extends Controller
                         }else{
 
                             $discount_rate = $request->discount_rate;
-                            $discounted_price = $product_rule->regular_price * $discount_rate / 100;
+                            $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
                             ProductRule::query()->where('variation_id', $product_variation->id)->update([
@@ -1045,7 +1045,7 @@ class ProductController extends Controller
                         }else{
 
                             $discount_rate = $request->discount_rate;
-                            $discounted_price = $product_rule->regular_price * $discount_rate / 100;
+                            $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
                             ProductRule::query()->where('variation_id', $product_variation->id)->update([
