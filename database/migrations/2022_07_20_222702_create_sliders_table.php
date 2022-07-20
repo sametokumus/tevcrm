@@ -17,7 +17,7 @@ class CreateSlidersTable extends Migration
             $table->id();
             $table->text('bg_url');
             $table->text('image_url');
-            $table->text('content');
+            $table->text('content_text');
             $table->integer('order')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
