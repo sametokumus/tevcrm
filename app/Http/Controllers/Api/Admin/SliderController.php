@@ -15,10 +15,10 @@ class SliderController extends Controller
     {
         try {
             $request->validate([
-                'content' => 'required'
+                'content_text' => 'required'
             ]);
             $slider_id = Slider::query()->insertGetId([
-                'content' => $request->content_text,
+                'content_text' => $request->content_text,
                 'order' => $request->order
             ]);
             if ($request->hasFile('bg_url')) {
