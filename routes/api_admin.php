@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\ShippingTypeController;
 use App\Http\Controllers\Api\Admin\CreditCardController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -200,6 +201,12 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('creditCard/getCreditCardInstallmentById/{id}',[CreditCardController::class,'getCreditCardInstallmentById']);
 
     Route::get('user/getUsers',[UserController::class,'getUsers']);
+
+    Route::post('slider/addSlider', [SliderController::class, 'addSlider']);
+//    Route::post('slider/updateSlider/{id}', [SliderController::class, 'updateSlider']);
+//    Route::get('slider/deleteSlider/{id}', [SliderController::class, 'deleteSlider']);
+//    Route::get('slider/activeSlider/{id}', [SliderController::class, 'activeSlider']);
+//    Route::get('slider/getSliderPassive', [SliderController::class, 'getSliderPassive']);
 
 
 });
