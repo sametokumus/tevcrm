@@ -11,7 +11,7 @@ use Nette\Schema\ValidationException;
 class SliderController extends Controller
 {
 
-    public function addBrand(Request $request)
+    public function addSlider(Request $request)
     {
         try {
             $request->validate([
