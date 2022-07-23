@@ -187,5 +187,5 @@ Route::get('/bankBinPair/getBankBinPairMemberNo/{prefix_no}', [BankBinPairContro
 Route::post('/search/categoryByIdSearch', [SearchController::class, 'categoryByIdSearch']);
 Route::post('/search/filterProducts', [SearchController::class, 'filterProducts']);
 
-Route::get('/brand/getSliders', [SliderController::class, 'getSliders']);
-Route::get('/brand/getSliderById/{id}', [SliderController::class, 'getSliderById']);
+Route::get('/slider/getSliders', [SliderController::class, 'getSliders']);
+Route::get('/slider/getSliderById/{id}', [SliderController::class, 'getSliderById']);
