@@ -203,10 +203,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('user/getUsers',[UserController::class,'getUsers']);
 
     Route::post('slider/addSlider', [SliderController::class, 'addSlider']);
-//    Route::post('slider/updateSlider/{id}', [SliderController::class, 'updateSlider']);
-//    Route::get('slider/deleteSlider/{id}', [SliderController::class, 'deleteSlider']);
-//    Route::get('slider/activeSlider/{id}', [SliderController::class, 'activeSlider']);
-//    Route::get('slider/getSliderPassive', [SliderController::class, 'getSliderPassive']);
+    Route::post('slider/updateSlider/{id}', [SliderController::class, 'updateSlider']);
+    Route::get('slider/deleteSlider/{id}', [SliderController::class, 'deleteSlider']);
 
 
 });
