@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Admin\ShippingTypeController;
 use App\Http\Controllers\Api\Admin\CreditCardController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\SliderController;
+use App\Http\Controllers\Api\Admin\SeoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -205,6 +206,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('slider/addSlider', [SliderController::class, 'addSlider']);
     Route::post('slider/updateSlider/{id}', [SliderController::class, 'updateSlider']);
     Route::get('slider/deleteSlider/{id}', [SliderController::class, 'deleteSlider']);
+
+    Route::post('seo/addSeo', [SeoController::class, 'addSeo']);
+    Route::post('seo/updateSeo/{id}', [SeoController::class, 'updateSeo']);
 
 
 });

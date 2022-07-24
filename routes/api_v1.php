@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\V1\CreditCardController;
 use App\Http\Controllers\Api\V1\BankBinPairController;
 use App\Http\Controllers\Api\V1\SearchController;
 use App\Http\Controllers\Api\V1\SliderController;
+use App\Http\Controllers\Api\V1\SeoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -189,3 +190,7 @@ Route::post('/search/filterProducts', [SearchController::class, 'filterProducts'
 
 Route::get('/slider/getSliders', [SliderController::class, 'getSliders']);
 Route::get('/slider/getSliderById/{id}', [SliderController::class, 'getSliderById']);
+
+Route::get('/seo/getSeos', [SeoController::class, 'getSeos']);
+Route::get('/seo/getSeoById/{id}', [SeoController::class, 'getSeoById']);
+
