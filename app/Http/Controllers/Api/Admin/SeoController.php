@@ -40,14 +40,14 @@ class SeoController extends Controller
                 'title' => 'required'
             ]);
 
-            $slider = CustomSeo::query()->where('id',$id)->update([
+            $seo = CustomSeo::query()->where('id',$id)->update([
                 'page' => $request->page,
                 'title' => $request->title,
                 'keywords' => $request->keywords,
                 'description' => $request->description
             ]);
 
-            return response(['message' => 'SEO güncelleme işlemi başarılı.','status' => 'success','object' => ['slider' => $slider]]);
+            return response(['message' => 'SEO güncelleme işlemi başarılı.','status' => 'success','object' => ['seo' => $seo]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {

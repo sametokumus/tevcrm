@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Admin\CreditCardController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SeoController;
+use App\Http\Controllers\Api\Admin\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -209,6 +210,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('seo/addSeo', [SeoController::class, 'addSeo']);
     Route::post('seo/updateSeo/{id}', [SeoController::class, 'updateSeo']);
+
+    Route::post('coupon/addCoupon', [CouponController::class, 'addCoupon']);
+    Route::post('coupon/updateCoupon/{id}', [CouponController::class, 'updateCoupon']);
 
 
 });
