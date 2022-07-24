@@ -210,6 +210,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('seo/addSeo', [SeoController::class, 'addSeo']);
     Route::post('seo/updateSeo/{id}', [SeoController::class, 'updateSeo']);
 
-s
+
 });
 
