@@ -74,4 +74,14 @@ class CouponController extends Controller
             return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
+
+    public function getCoupons()
+    {
+        try {
+            $coupons = Coupons::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupons' => $coupons]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
