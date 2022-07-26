@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
-    public function checkCoupon(Request $request)
+    public function useCoupon(Request $request)
     {
         try {
             $coupon = Coupons::query()->where('active',1)->where('code', $request->code)->first();
@@ -21,8 +21,10 @@ class CouponController extends Controller
                 throw new \Exception('coupon-002');
             }else if ($coupon->user_id != $request->user_id || $coupon->user_id != 0){
                 throw new \Exception('coupon-003');
+            }else {
+
+                return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupon' => $coupon]]);
             }
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupon' => $coupon]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         } catch (\Exception $exception){
