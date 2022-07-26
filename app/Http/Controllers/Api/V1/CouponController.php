@@ -17,7 +17,7 @@ class CouponController extends Controller
 
             if ($coupon->count_of_used >= $coupon->count_of_uses) {
                 throw new \Exception('coupon-001');
-            }else if ($date < $coupon->start_date || $date > $coupon->start_date){
+            }else if ($date < $coupon->start_date || $date > $coupon->end_date){
                 throw new \Exception('coupon-002');
             }else if ($coupon->user_id != $request->user_id || $coupon->user_id != 0){
                 throw new \Exception('coupon-003');
