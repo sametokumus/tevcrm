@@ -19,9 +19,9 @@ class CouponController extends Controller
                 throw new \Exception('coupon-001');
             }else if ($date < $coupon->start_date || $date > $coupon->end_date){
                 throw new \Exception('coupon-002');
-            }else if ($coupon->user_id != $request->user_id || $coupon->user_id != 0){
+            }else if ($coupon->user_id != $request->user_id && $coupon->user_id != 0){
                 throw new \Exception('coupon-003');
-            }else {
+            }else{
 
                 return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupon' => $coupon]]);
             }
