@@ -13,7 +13,7 @@ class DeliveryController extends Controller
     public function syncCitiesToRegionalDelivery()
     {
         try {
-            $cities = City::query()->where('active',1)->get();
+            $cities = City::query()->get();
             foreach ($cities as $city){
                 $delivery_prices = DeliveryPrice::query()->where('active', 1)->get();
                 foreach ($delivery_prices as $delivery_price){
