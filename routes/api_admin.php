@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SeoController;
 use App\Http\Controllers\Api\Admin\CouponController;
+use App\Http\Controllers\Api\Admin\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,6 +215,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('coupon/addCoupon', [CouponController::class, 'addCoupon']);
     Route::post('coupon/updateCoupon/{id}', [CouponController::class, 'updateCoupon']);
     Route::get('coupon/getCoupons', [CouponController::class, 'getCoupons']);
+
+
+    Route::get('delivery/syncCitiesToRegionalDelivery', [DeliveryController::class, 'syncCitiesToRegionalDelivery']);
+
 
 
 });
