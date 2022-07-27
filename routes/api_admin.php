@@ -218,6 +218,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('delivery/syncCitiesToRegionalDelivery', [DeliveryController::class, 'syncCitiesToRegionalDelivery']);
+    Route::get('delivery/resetAllPricesToDefault', [DeliveryController::class, 'resetAllPricesToDefault']);
+    Route::get('delivery/resetPricesToDefaultByCityId/{city_id}', [DeliveryController::class, 'resetPricesToDefaultByCityId']);
+    Route::get('delivery/resetPricesToDefaultByDeliveryPriceId/{delivery_price_id}', [DeliveryController::class, 'resetPricesToDefaultByDeliveryPriceId']);
 
 
 

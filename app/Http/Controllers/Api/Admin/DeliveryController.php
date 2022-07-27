@@ -32,4 +32,44 @@ class DeliveryController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+    public function resetAllPricesToDefault()
+    {
+        try {
+            $delivery_prices = DeliveryPrice::query()->where('active', 1)->get();
+            foreach ($delivery_prices as $delivery_price){
+                RegionalDeliveryPrice::query()->where('delivery_price_id', $delivery_price->id)->update([
+                    'price' => $delivery_price->price
+                ]);
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function resetPricesToDefaultByCityId($city_id)
+    {
+        try {
+            $delivery_prices = DeliveryPrice::query()->where('active', 1)->get();
+            foreach ($delivery_prices as $delivery_price){
+                RegionalDeliveryPrice::query()->where('delivery_price_id', $delivery_price->id)->where('city_id', $city_id)->update([
+                    'price' => $delivery_price->price
+                ]);
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function resetPricesToDefaultByDeliveryPriceId($delivery_price_id)
+    {
+        try {
+            $delivery_price = DeliveryPrice::query()->where('active', 1)->where('id', $delivery_price_id)->get();
+            RegionalDeliveryPrice::query()->where('delivery_price_id', $delivery_price_id)->update([
+                'price' => $delivery_price->price
+            ]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
