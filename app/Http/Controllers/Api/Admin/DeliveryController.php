@@ -63,7 +63,7 @@ class DeliveryController extends Controller
     public function resetPricesToDefaultByDeliveryPriceId($delivery_price_id)
     {
         try {
-            $delivery_price = DeliveryPrice::query()->where('active', 1)->where('id', $delivery_price_id)->get();
+            $delivery_price = DeliveryPrice::query()->where('active', 1)->where('id', $delivery_price_id)->first();
             RegionalDeliveryPrice::query()->where('delivery_price_id', $delivery_price_id)->update([
                 'price' => $delivery_price->price
             ]);
