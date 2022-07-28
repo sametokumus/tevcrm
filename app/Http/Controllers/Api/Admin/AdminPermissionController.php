@@ -24,9 +24,12 @@ class AdminPermissionController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
+                'value' => 'required',
             ]);
             AdminPermission::query()->insert([
                 'name' => $request->name,
+                'value' => $request->value,
+                'order' => $request->order
             ]);
 
             return response(['message' => 'Yetki ekleme işlemi başarılı.', 'status' => 'success']);
@@ -44,10 +47,13 @@ class AdminPermissionController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
+                'value' => 'required',
             ]);
 
             $admin_permission = AdminPermission::query()->where('id',$id)->update([
-                'name' => $request->name
+                'name' => $request->name,
+                'value' => $request->value,
+                'order' => $request->order
             ]);
 
             return response(['message' => 'Yetki güncelleme işlemi başarılı.','status' => 'success','object' => ['admin_permission' => $admin_permission]]);
