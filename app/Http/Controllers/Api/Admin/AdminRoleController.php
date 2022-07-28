@@ -149,7 +149,7 @@ class AdminRoleController extends Controller
 
     public function getAdminRolePermissions($role_id){
         try {
-            $role_permissions = AdminPermissionRole::query()->where('role_id', $role_id)->where('active',1)->get();
+            $role_permissions = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['role_permissions' => $role_permissions]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -157,15 +157,15 @@ class AdminRoleController extends Controller
     }
     public function addAdminRolePermission($role_id, $permission_id){
         try {
-            $check_role_permission = AdminPermissionRole::query()->where('role_id', $role_id)->where('permission_id', $permission_id)->where('active',0)->count();
+            $check_role_permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->where('active',0)->count();
             if($check_role_permission > 0){
-                AdminPermissionRole::query()->where('role_id', $role_id)->where('permission_id', $permission_id)->update([
+                AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->update([
                     'active' => 1
                 ]);
             }else{
                 AdminPermissionRole::query()->insert([
-                    'role_id' => $role_id,
-                    'permission_id' => $permission_id
+                    'admin_role_id' => $role_id,
+                    'admin_permission_id' => $permission_id
                 ]);
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
@@ -175,9 +175,9 @@ class AdminRoleController extends Controller
     }
     public function deleteAdminRolePermission($role_id, $permission_id){
         try {
-            $check_role_permission = AdminPermissionRole::query()->where('role_id', $role_id)->where('permission_id', $permission_id)->where('active',1)->count();
+            $check_role_permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->where('active',1)->count();
             if($check_role_permission > 0){
-                AdminPermissionRole::query()->where('role_id', $role_id)->where('permission_id', $permission_id)->update([
+                AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->update([
                     'active' => 0
                 ]);
             }
