@@ -10,10 +10,10 @@ use Nette\Schema\ValidationException;
 
 class AdminPermissionController extends Controller
 {
-    public function getAdminPermission(){
+    public function getAdminPermissions(){
         try {
-            $admin_permission = AdminPermission::query()->where('active',1)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_permission' => $admin_permission]]);
+            $admin_permissions = AdminPermission::query()->where('active',1)->orderBy('order')->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_permissions' => $admin_permissions]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
