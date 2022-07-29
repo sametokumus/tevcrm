@@ -214,6 +214,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('coupon/addCoupon', [CouponController::class, 'addCoupon']);
     Route::post('coupon/updateCoupon/{id}', [CouponController::class, 'updateCoupon']);
+    Route::get('coupon/deleteCoupon/{id}', [CouponController::class, 'deleteCoupon']);
     Route::get('coupon/getCoupons', [CouponController::class, 'getCoupons']);
     Route::get('coupon/getCouponById/{id}', [CouponController::class, 'getCouponById']);
 
