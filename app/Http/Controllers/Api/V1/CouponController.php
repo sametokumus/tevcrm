@@ -9,6 +9,24 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
+    public function getCoupons()
+    {
+        try {
+            $coupons = Coupons::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupons' => $coupons]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getCouponById($coupon_id){
+        try {
+            $coupon = Coupons::query()->where('id',$coupon_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupon' => $coupon]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
     public function useCoupon(Request $request)
     {
         try {
