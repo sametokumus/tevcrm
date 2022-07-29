@@ -84,4 +84,13 @@ class CouponController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
+    public function getCouponById($coupon_id){
+        try {
+            $coupon = Coupons::query()->where('id',$coupon_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['coupon' => $coupon]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }

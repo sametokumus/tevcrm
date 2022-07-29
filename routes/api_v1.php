@@ -195,7 +195,5 @@ Route::get('/slider/getSliderById/{id}', [SliderController::class, 'getSliderByI
 Route::get('/seo/getSeos', [SeoController::class, 'getSeos']);
 Route::get('/seo/getSeoById/{id}', [SeoController::class, 'getSeoById']);
 
-Route::get('/coupon/getCoupons', [CouponController::class, 'getCoupons']);
-Route::get('/coupon/getCouponById/{id}', [CouponController::class, 'getCouponById']);
 Route::post('/coupon/useCoupon', [CouponController::class, 'useCoupon']);
 
