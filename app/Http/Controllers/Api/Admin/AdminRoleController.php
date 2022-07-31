@@ -17,6 +17,11 @@ class AdminRoleController extends Controller
     public function getAdmins(){
         try {
             $admins = Admin::query()->where('active',1)->get();
+            $admins = Admin::query()
+                ->leftJoin('admin_roles', 'admin_roles.id', '=', 'admins.admin_role_id')
+                ->where('admins.active', 1)
+                ->get(['admins.id', 'admins.admin_role_id', 'admins.name', 'admins.surname', 'admins.phone_number',
+                    'admins.email', 'admin_roles.name as admin_role_name']);
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admins' => $admins]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
