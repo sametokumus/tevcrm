@@ -68,6 +68,7 @@ class AdminRoleController extends Controller
             $request->validate([
                 'admin_role_id' => 'required|exists:admin_roles,id',
                 'email' => 'required',
+                'name' => 'required',
                 'surname' => 'required',
                 'phone_number' => 'required',
             ]);
@@ -75,9 +76,9 @@ class AdminRoleController extends Controller
             $admin = Admin::query()->where('id',$id)->update([
                 'admin_role_id' => $request->admin_role_id,
                 'email' => $request->email,
+                'name' => $request->name,
                 'surname' => $request->surname,
-                'phone_number' => $request->phone_number,
-                'password' => Hash::make($request->password)
+                'phone_number' => $request->phone_number
             ]);
 
             return response(['message' => 'Admin güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);
