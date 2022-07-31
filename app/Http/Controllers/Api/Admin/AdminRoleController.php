@@ -190,7 +190,7 @@ class AdminRoleController extends Controller
     }
     public function addAdminRolePermission($role_id, $permission_id){
         try {
-            $check_role_permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->where('active',0)->count();
+            $check_role_permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->count();
             if($check_role_permission > 0){
                 AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->update([
                     'active' => 1
