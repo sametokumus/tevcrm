@@ -29,7 +29,7 @@ class AdminRoleController extends Controller
     }
     public function getAdminById($id){
         try {
-            $admin = Admin::query()->where('id',$id)->where('active',1)->get();
+            $admin = Admin::query()->where('id',$id)->where('active',1)->first();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin' => $admin]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -116,7 +116,7 @@ class AdminRoleController extends Controller
     }
     public function getAdminRoleById($id){
         try {
-            $admin_role = AdminRole::query()->where('id',$id)->where('active',1)->get();
+            $admin_role = AdminRole::query()->where('id',$id)->where('active',1)->first();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_role' => $admin_role]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
