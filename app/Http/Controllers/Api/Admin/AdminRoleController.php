@@ -13,6 +13,23 @@ use Nette\Schema\ValidationException;
 
 class AdminRoleController extends Controller
 {
+
+    public function getAdmins(){
+        try {
+            $admins = Admin::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admins' => $admins]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function getAdminById($id){
+        try {
+            $admin = Admin::query()->where('id',$id)->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin' => $admin]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
     public function addAdmin(Request $request){
         try {
             $request->validate([
@@ -85,6 +102,14 @@ class AdminRoleController extends Controller
         try {
             $admin_roles = AdminRole::query()->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_roles' => $admin_roles]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function getAdminRoleById($id){
+        try {
+            $admin_role = AdminRole::query()->where('id',$id)->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_role' => $admin_role]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }

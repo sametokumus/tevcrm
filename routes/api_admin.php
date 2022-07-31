@@ -51,11 +51,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('adminUserComment/updateAdminUserComment/{id}', [AdminUserComments::class, 'updateAdminUserComment']);
     Route::get('adminUserComment/deleteAdminUserComment/{id}', [AdminUserComments::class, 'deleteAdminUserComment']);
 
+    Route::get('adminRole/getAdmins', [AdminRoleController::class, 'getAdmins']);
+    Route::get('adminRole/getAdminById/{id}', [AdminRoleController::class, 'getAdminById']);
     Route::post('adminRole/addAdmin', [AdminRoleController::class, 'addAdmin']);
     Route::post('adminRole/updateAdmin/{id}', [AdminRoleController::class, 'updateAdmin']);
     Route::get('adminRole/deleteAdmin/{id}', [AdminRoleController::class, 'deleteAdmin']);
 
     Route::get('adminRole/getAdminRoles', [AdminRoleController::class, 'getAdminRoles']);
+    Route::get('adminRole/getAdminRoleById/{id}', [AdminRoleController::class, 'getAdminRoleById']);
     Route::post('adminRole/addAdminRole', [AdminRoleController::class, 'addAdminRole']);
     Route::post('adminRole/updateAdminRole/{role_id}', [AdminRoleController::class, 'updateAdminRole']);
     Route::get('adminRole/deleteAdminRole/{role_id}', [AdminRoleController::class, 'deleteAdminRole']);
