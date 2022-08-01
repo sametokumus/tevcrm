@@ -16,7 +16,6 @@ class AdminRoleController extends Controller
 
     public function getAdmins(){
         try {
-            $admins = Admin::query()->where('active',1)->get();
             $admins = Admin::query()
                 ->leftJoin('admin_roles', 'admin_roles.id', '=', 'admins.admin_role_id')
                 ->where('admins.active', 1)

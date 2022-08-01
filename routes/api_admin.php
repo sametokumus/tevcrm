@@ -221,7 +221,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('coupon/getCoupons', [CouponController::class, 'getCoupons']);
     Route::get('coupon/getCouponById/{id}', [CouponController::class, 'getCouponById']);
 
-
+    Route::get('delivery/getDeliveryPrices', [DeliveryController::class, 'getDeliveryPrices']);
+    Route::get('delivery/getDeliveryPriceById/{id}', [DeliveryController::class, 'getDeliveryPriceById']);
+    Route::post('delivery/addDeliveryPrice', [DeliveryController::class, 'addDeliveryPrice']);
+    Route::post('delivery/updateDeliveryPrice/{id}', [DeliveryController::class, 'updateDeliveryPrice']);
+    Route::get('delivery/deleteDeliveryPrice/{id}', [DeliveryController::class, 'deleteDeliveryPrice']);
     Route::get('delivery/syncCitiesToRegionalDelivery', [DeliveryController::class, 'syncCitiesToRegionalDelivery']);
     Route::get('delivery/resetAllPricesToDefault', [DeliveryController::class, 'resetAllPricesToDefault']);
     Route::get('delivery/resetPricesToDefaultByCityId/{city_id}', [DeliveryController::class, 'resetPricesToDefaultByCityId']);

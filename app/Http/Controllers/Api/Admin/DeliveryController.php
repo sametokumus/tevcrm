@@ -6,10 +6,90 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\DeliveryPrice;
 use App\Models\RegionalDeliveryPrice;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Nette\Schema\ValidationException;
 
 class DeliveryController extends Controller
 {
+    public function getDeliveryPrices(){
+        try {
+            $delivery_prices = DeliveryPrice::query()->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['delivery_prices' => $delivery_prices]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function getDeliveryPriceById($id){
+        try {
+            $delivery_price = DeliveryPrice::query()->where('id',$id)->where('active',1)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['delivery_price' => $delivery_price]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function addDeliveryPrice(Request $request){
+        try {
+            $request->validate([
+                'min_value' => 'required',
+                'max_value' => 'required',
+                'price' => 'required',
+            ]);
+
+            $delivery_price = DeliveryPrice::query()->insert([
+                'min_value' => $request->min_value,
+                'max_value' => $request->max_value,
+                'price' => $request->price
+            ]);
+
+            return response(['message' => 'Default ücret ekleme işlemi başarılı.','status' => 'success','object' => ['delivery_price' => $delivery_price]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
+    public function updateDeliveryPrice(Request $request,$id){
+        try {
+            $request->validate([
+                'min_value' => 'required',
+                'max_value' => 'required',
+                'price' => 'required',
+            ]);
+
+            $delivery_price = DeliveryPrice::query()->where('id',$id)->update([
+                'min_value' => $request->min_value,
+                'max_value' => $request->max_value,
+                'price' => $request->price
+            ]);
+
+            return response(['message' => 'Default ücret güncelleme işlemi başarılı.','status' => 'success','object' => ['delivery_price' => $delivery_price]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
+    public function deleteDeliveryPrice($id){
+        try {
+
+            $delivery_price = DeliveryPrice::query()->where('id',$id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => 'Default ücret silme işlemi başarılı.','status' => 'success','object' => ['delivery_price' => $delivery_price]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
     public function syncCitiesToRegionalDelivery()
     {
         try {
