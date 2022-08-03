@@ -152,4 +152,12 @@ class DeliveryController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+    public function getRegionalDeliveryPriceByCityId($id){
+        try {
+            $delivery_prices = RegionalDeliveryPrice::query()->where('city_id',$id)->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['delivery_prices' => $delivery_prices]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
 }
