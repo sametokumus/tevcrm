@@ -163,4 +163,24 @@ class DeliveryController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+
+    public function updateRegionalDeliveryPrice(Request $request, $city_id, $delivery_price_id){
+        try {
+            $request->validate([
+                'price' => 'required',
+            ]);
+
+            $delivery_price = RegionalDeliveryPrice::query()->where('city_id',$city_id)->where('delivery_price_id',$delivery_price_id)->update([
+                'price' => $request->price
+            ]);
+
+            return response(['message' => 'Ücret güncelleme işlemi başarılı.','status' => 'success','object' => ['delivery_price' => $delivery_price]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
 }
