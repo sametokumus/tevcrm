@@ -154,8 +154,11 @@ class DeliveryController extends Controller
     }
     public function getRegionalDeliveryPriceByCityId($id){
         try {
-            $delivery_prices = RegionalDeliveryPrice::query()->where('city_id',$id)->where('active',1)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['delivery_prices' => $delivery_prices]]);
+            $regional_delivery_prices = RegionalDeliveryPrice::query()->where('city_id',$id)->where('active',1)->get();
+            foreach ($regional_delivery_prices as $regional_delivery_price){
+                $regional_delivery_price['delivery_price'] = DeliveryPrice::query()->where('id', $regional_delivery_price->delivery_price_id)->first();
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['regional_delivery_prices' => $regional_delivery_prices]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
