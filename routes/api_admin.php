@@ -231,6 +231,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('delivery/resetPricesToDefaultByCityId/{city_id}', [DeliveryController::class, 'resetPricesToDefaultByCityId']);
     Route::get('delivery/resetPricesToDefaultByDeliveryPriceId/{delivery_price_id}', [DeliveryController::class, 'resetPricesToDefaultByDeliveryPriceId']);
     Route::get('delivery/getRegionalDeliveryPriceByCityId/{id}', [DeliveryController::class, 'getRegionalDeliveryPriceByCityId']);
+    Route::get('delivery/getRegionalDeliveryPrice/{city_id}/{delivery_price_id}', [DeliveryController::class, 'getRegionalDeliveryPrice']);
     Route::post('delivery/updateRegionalDeliveryPrice/{city_id}/{delivery_price_id}', [DeliveryController::class, 'updateRegionalDeliveryPrice']);
 
 
