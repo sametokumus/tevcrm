@@ -72,4 +72,37 @@ class CategoryController extends Controller
             return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
+
+    public function updateHomeCategoryBanner(Request $request,$id){
+        try {
+            $request->validate([
+                'title' => 'required'
+            ]);
+
+            $category = Category::query()->where('id',$id)->update([
+                'title' => $request->title,
+                'subtitle' => $request->subtitle,
+                'btn_text' => $request->btn_text,
+                'btn_link' => $request->btn_link
+            ]);
+            if ($request->hasFile('image_url')) {
+                $rand = uniqid();
+                $image = $request->file('image_url');
+                $image_name = $rand . "-" . $image->getClientOriginalName();
+                $image->move(public_path('/images/CategoryBanner/'), $image_name);
+                $image_path = "/images/CategoryBanner/" . $image_name;
+                $category = Category::query()->where('id',$id)->update([
+                    'image' => $image_path
+                ]);
+            }
+
+            return response(['message' => 'Kategori banner güncelleme işlemi başarılı.','status' => 'success','object' => ['category' => $category]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
 }
