@@ -92,7 +92,7 @@ class CategoryController extends Controller
                 $image->move(public_path('/images/CategoryBanner/'), $image_name);
                 $image_path = "/images/CategoryBanner/" . $image_name;
                 $category = Category::query()->where('id',$id)->update([
-                    'image' => $image_path
+                    'image_url' => $image_path
                 ]);
             }
 
