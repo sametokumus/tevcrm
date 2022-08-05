@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\V1\SearchController;
 use App\Http\Controllers\Api\V1\SliderController;
 use App\Http\Controllers\Api\V1\SeoController;
 use App\Http\Controllers\Api\V1\CouponController;
+use App\Http\Controllers\Api\V1\PopupController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -196,4 +197,7 @@ Route::get('/seo/getSeos', [SeoController::class, 'getSeos']);
 Route::get('/seo/getSeoById/{id}', [SeoController::class, 'getSeoById']);
 
 Route::post('/coupon/useCoupon', [CouponController::class, 'useCoupon']);
+
+Route::get('/popup/getPopups', [PopupController::class, 'getPopups']);
+Route::get('/popup/getPopupById/{id}', [PopupController::class, 'getPopupById']);
 

@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SeoController;
 use App\Http\Controllers\Api\Admin\CouponController;
 use App\Http\Controllers\Api\Admin\DeliveryController;
+use App\Http\Controllers\Api\Admin\PopupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -235,7 +236,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('delivery/getRegionalDeliveryPrice/{city_id}/{delivery_price_id}', [DeliveryController::class, 'getRegionalDeliveryPrice']);
     Route::post('delivery/updateRegionalDeliveryPrice/{city_id}/{delivery_price_id}', [DeliveryController::class, 'updateRegionalDeliveryPrice']);
 
-
+    Route::post('popup/addPopup', [PopupController::class, 'addPopup']);
+    Route::post('popup/updatePopup/{id}', [PopupController::class, 'updatePopup']);
+    Route::get('popup/deletePopup/{id}', [PopupController::class, 'deletePopup']);
+    Route::get('popup/changePopupStatus/{id}/{status}', [PopupController::class, 'changePopupStatus']);
 
 });
 
