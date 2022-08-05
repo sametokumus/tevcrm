@@ -17,7 +17,7 @@ class PopupController extends Controller
                 'image_url' => 'required'
             ]);
             Popup::query()->update([
-               'show' => 0
+               'show_form' => 0
             ]);
             $popup_id = Popup::query()->insertGetId([
                 'title' => $request->title,
@@ -93,14 +93,14 @@ class PopupController extends Controller
         try {
             if ($status == 0) {
                 Popup::query()->where('id', $id)->update([
-                    'show' => 0,
+                    'show_form' => 0,
                 ]);
             }else{
                 Popup::query()->update([
                     'active' => 0,
                 ]);
                 Popup::query()->where('id', $id)->update([
-                    'show' => 1,
+                    'show_form' => 1,
                 ]);
             }
             return response(['message' => 'Popup silme işlemi başarılı.','status' => 'success']);
