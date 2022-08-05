@@ -90,7 +90,6 @@ class SliderController extends Controller
             return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
-
     public function deleteSlider($id){
         try {
 
