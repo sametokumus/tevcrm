@@ -101,6 +101,7 @@ class PopupController extends Controller
                 ]);
                 Popup::query()->where('id', $id)->update([
                     'show_form' => 1,
+                    'active' => 1,
                 ]);
             }
             return response(['message' => 'Popup silme işlemi başarılı.','status' => 'success']);
