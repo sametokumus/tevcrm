@@ -20,6 +20,7 @@ class CreatePopupsTable extends Migration
             $table->string('subtitle')->nullable();
             $table->string('description')->nullable();
             $table->tinyInteger('show_form')->default(1);
+            $table->tinyInteger('show_popup')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

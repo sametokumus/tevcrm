@@ -93,18 +93,34 @@ class PopupController extends Controller
         try {
             if ($status == 0) {
                 Popup::query()->where('id', $id)->update([
+                    'show_popup' => 0,
+                ]);
+            }else{
+                Popup::query()->where('id', $id)->update([
+                    'show_popup' => 1
+                ]);
+            }
+            return response(['message' => 'Popup durum işlemi başarılı.','status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+    public function changePopupFormStatus($id, $status){
+        try {
+            if ($status == 0) {
+                Popup::query()->where('id', $id)->update([
                     'show_form' => 0,
                 ]);
             }else{
-                Popup::query()->update([
-                    'active' => 0,
-                ]);
                 Popup::query()->where('id', $id)->update([
-                    'show_form' => 1,
-                    'active' => 1,
+                    'show_form' => 1
                 ]);
             }
-            return response(['message' => 'Popup silme işlemi başarılı.','status' => 'success']);
+            return response(['message' => 'Popup form durum işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
