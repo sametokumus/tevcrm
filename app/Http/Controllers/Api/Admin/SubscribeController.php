@@ -19,6 +19,14 @@ class SubscribeController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
+    public function getSubscriberById($subscriber_id){
+        try {
+            $subscriber = Subscriber::query()->where('id',$subscriber_id)->first();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['subscriber' => $subscriber]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
     public function updateSubscriber(Request $request,$id){
         try {
             $request->validate([

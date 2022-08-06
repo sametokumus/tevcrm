@@ -243,6 +243,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('popup/changePopupStatus/{id}/{status}', [PopupController::class, 'changePopupStatus']);
 
     Route::get('subscribe/getSubscribers', [SubscribeController::class, 'getSubscribers']);
+    Route::get('subscribe/getSubscriberById/{id}', [SubscribeController::class, 'getSubscriberById']);
     Route::post('subscribe/updateSubscriber/{id}', [SubscribeController::class, 'updateSubscriber']);
     Route::get('subscribe/deleteSubscriber/{id}', [SubscribeController::class, 'deleteSubscriber']);
 
