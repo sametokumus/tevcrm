@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\V1\SliderController;
 use App\Http\Controllers\Api\V1\SeoController;
 use App\Http\Controllers\Api\V1\CouponController;
 use App\Http\Controllers\Api\V1\PopupController;
+use App\Http\Controllers\Api\V1\SubscribeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -201,3 +202,4 @@ Route::post('/coupon/useCoupon', [CouponController::class, 'useCoupon']);
 Route::get('/popup/getPopups', [PopupController::class, 'getPopups']);
 Route::get('/popup/getPopupById/{id}', [PopupController::class, 'getPopupById']);
 
+Route::post('/subscribe/addSubscriber', [SubscribeController::class, 'addSubscriber']);

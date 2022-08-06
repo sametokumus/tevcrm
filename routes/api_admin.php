@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Admin\SeoController;
 use App\Http\Controllers\Api\Admin\CouponController;
 use App\Http\Controllers\Api\Admin\DeliveryController;
 use App\Http\Controllers\Api\Admin\PopupController;
+use App\Http\Controllers\Api\Admin\SubscribeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -240,6 +241,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('popup/updatePopup/{id}', [PopupController::class, 'updatePopup']);
     Route::get('popup/deletePopup/{id}', [PopupController::class, 'deletePopup']);
     Route::get('popup/changePopupStatus/{id}/{status}', [PopupController::class, 'changePopupStatus']);
+
+    Route::get('subscribe/getSubscribers', [SubscribeController::class, 'getSubscribers']);
+    Route::post('subscribe/updateSubscriber/{id}', [SubscribeController::class, 'updateSubscriber']);
+    Route::get('subscribe/deleteSubscriber/{id}', [SubscribeController::class, 'deleteSubscriber']);
 
 });
 
