@@ -201,5 +201,6 @@ Route::post('/coupon/useCoupon', [CouponController::class, 'useCoupon']);
 
 Route::get('/popup/getPopups', [PopupController::class, 'getPopups']);
 Route::get('/popup/getPopupById/{id}', [PopupController::class, 'getPopupById']);
+Route::get('/popup/getActivePopup', [PopupController::class, 'getActivePopup']);
 
 Route::post('/subscribe/addSubscriber', [SubscribeController::class, 'addSubscriber']);
