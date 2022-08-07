@@ -31,7 +31,11 @@ class PopupController extends Controller
     public function getActivePopup(){
         try {
             $popup = Popup::query()->where('show_popup',1)->orderByDesc('id')->first();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['popup' => $popup]]);
+            if(isset($popup)){
+                return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['popup' => $popup]]);
+            }else{
+                return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['popup' => 'null']]);
+            }
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
