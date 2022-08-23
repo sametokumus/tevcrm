@@ -551,9 +551,12 @@ class ProductController extends Controller
                 'sku' => $request->sku
             ]);
 
-            $regular_tax = $request->regular_price * $request->tax_rate / 100;
-            $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
-            $discounted_tax = $discounted_price / 100 * $request->tax_rate;
+            $regular_tax = $request->regular_price / (100+$request->tax_rate) * $request->tax_rate;
+
+            if ($request->discount_rate != 0){
+                $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
+                $discounted_tax = $discounted_price / (100+$request->tax_rate) * $request->tax_rate;
+            }
 
             ProductRule::query()->where('id',$product_id)->insert([
                 'product_id' => $product_id,
@@ -608,9 +611,13 @@ class ProductController extends Controller
                 'view_all_images' => $request->view_all_images,
             ]);
 
-            $regular_tax = $request->regular_price * $request->tax_rate / 100;
-            $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
-            $discounted_tax = $discounted_price / 100 * $request->tax_rate;
+
+            $regular_tax = $request->regular_price / (100+$request->tax_rate) * $request->tax_rate;
+            if ($request->discount_rate != 0){
+                $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
+                $discounted_tax = $discounted_price / (100+$request->tax_rate) * $request->tax_rate;
+            }
+
 
             ProductRule::query()->where('id',$id)->update([
                 'product_id' => $id,
