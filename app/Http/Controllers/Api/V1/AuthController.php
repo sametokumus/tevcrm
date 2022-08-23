@@ -69,13 +69,13 @@ class AuthController extends Controller
             //Oluşturulan Kullanıcıyı mail yolluyor
             $user->sendApiConfirmAccount($user);
 
-            return response(['message' => 'Kullanıcı başarıyla oluşturuldu sisteme giriş için epostanızı kontrol ediniz.','status' => 'success']);
+            return response(['message' => __('Kullanıcı başarıyla oluşturuldu sisteme giriş için epostanızı kontrol ediniz.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','error' => $queryException->getMessage()]);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001','error' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ero' => $throwable->getMessage()]);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ero' => $throwable->getMessage()]);
         }
 
     }
@@ -101,16 +101,16 @@ class AuthController extends Controller
 
             $user->token = $userToken;
 
-            return  response(['message' => 'Başarılı.','status' => 'success', 'object' => ['user'=>$user]]);
+            return  response(['message' => __('Başarılı.'),'status' => 'success', 'object' => ['user'=>$user]]);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
         } catch (\Exception $exception){
             if ($exception->getMessage() == 'auth-001'){
-                return response('Eposta veya şifre hatalı.');
+                return response(__('Eposta veya şifre hatalı.'));
             }
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001']);
         }
     }
 
@@ -118,9 +118,9 @@ class AuthController extends Controller
     {
         try {
             auth()->user()->tokens()->delete();
-            return response(['message' => 'Çıkış başarılı.','status' => 'success']);
+            return response(['message' => __('Çıkış başarılı.'),'status' => 'success']);
         } catch (\Exception $exception){
-            return response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return response(['message' => __('Hatalı işlem.'),'status' => 'error-001']);
         }
     }
 
@@ -147,16 +147,16 @@ class AuthController extends Controller
                Mail::queue(new \App\Mail\UserWelcome($user->name, $user->email))->delay($setDelay);
               */
             Mail::queue(new UserWelcome($user->name, $user->email));
-            return response(['message' => 'Kullanıcı epostası doğrulandı.','status' => 'success']);
+            return response(['message' => __('Kullanıcı epostası doğrulandı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
         } catch (\Exception $exception){
             if ($exception->getMessage() == 'validation-002'){
-                return response('Eposta adresi daha önceden doğrulanmış.');
+                return response(__('Eposta adresi daha önceden doğrulanmış.'));
             }
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001']);
         }
 
 
@@ -176,16 +176,16 @@ class AuthController extends Controller
                 throw new \Exception('validation-002');
             }
             $user->sendApiConfirmAccount($user);
-            return response(['message' => 'Yeniden eposta gönderildi.', 'status' => 'success']);
+            return response(['message' => __('Yeniden eposta gönderildi.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
         } catch (\Exception $exception){
             if ($exception->getMessage() == 'validation-002'){
-                return response('Eposta adresi daha önceden doğrulanmış.');
+                return response(__('Eposta adresi daha önceden doğrulanmış.'));
             }
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001']);
         }
     }
 }

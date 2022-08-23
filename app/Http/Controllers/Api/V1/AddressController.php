@@ -25,9 +25,9 @@ class AddressController extends Controller
                 $address['district'] = District::query()->where('id',$address->district_id)->first();
             }
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['addresses' => $addresses]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['addresses' => $addresses]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 
@@ -47,9 +47,9 @@ class AddressController extends Controller
             $address['city'] = City::query()->where('id',$address->city_id)->first();
             $address['district'] = District::query()->where('id',$address->district_id)->first();
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['address' => $address]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['address' => $address]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 
@@ -90,15 +90,15 @@ class AddressController extends Controller
                     'tax_office' => $request->tax_office,
                     'company_name' => $request->company_name
                 ]);
-                return response(['message' => 'Kurumsal adres ekleme işlemi başarılı.', 'status' => 'success']);
+                return response(['message' => __('Kurumsal adres ekleme işlemi başarılı.'), 'status' => 'success']);
             }
-            return response(['message' => 'Bireysel adres ekleme işlemi başarılı.', 'status' => 'success']);
+            return response(['message' => __('Bireysel adres ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001','a' => $throwable->getMessage()]);
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 
@@ -136,16 +136,16 @@ class AddressController extends Controller
                     'company_name' => $request->company_name
                 ]);
 
-                return response(['message' => 'Kurumsal adres düzenleme işlemi başarılı.', 'status' => 'success']);
+                return response(['message' => __('Kurumsal adres düzenleme işlemi başarılı.'), 'status' => 'success']);
             }
 
-            return response(['message' => 'Adres güncelleme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => __('Adres güncelleme işlemi başarılı.'),'status' => 'success','object' => ['address' => $address]]);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 
@@ -155,13 +155,13 @@ class AddressController extends Controller
             $address = Address::query()->where('id',$id)->update([
                 'active' => 0,
             ]);
-            return response(['message' => 'Adres silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => __('Adres silme işlemi başarılı.'),'status' => 'success','object' => ['address' => $address]]);
         } catch (ValidationException $validationException) {
-            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','ar' => $throwable->getMessage()]);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 

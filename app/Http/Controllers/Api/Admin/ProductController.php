@@ -333,24 +333,24 @@ class ProductController extends Controller
                 'sku' => $request->sku,
 
             ]);
-            ProductRule::query()->insert([
-                'variation_id' => $variation_id,
-                'quantity_stock' => $request->quantity_stock,
-                'quantity_min' => $request->quantity_min,
-                'quantity_step' => $request->quantity_step,
-                'is_free_shipping' => $request->is_free_shipping,
-                'discount_rate' => $request->discount_rate,
-                'tax_rate' => $request->tax_rate,
-                'regular_price' => $request->regular_price,
-                'regular_tax' => $request->regular_tax,
-                'discounted_price' => $request->discounted_price,
-                'discounted_tax' => $request->discounted_tax,
-                'micro_name' => $request->micro_name,
-                'micro_sku' => $request->micro_sku,
-                'dimensions' => $request->dimensions,
-                'package_type_id' => $request->package_type_id,
-                'weight' => $request->weight
-            ]);
+//            ProductRule::query()->insert([
+//                'variation_id' => $variation_id,
+//                'quantity_stock' => $request->quantity_stock,
+//                'quantity_min' => $request->quantity_min,
+//                'quantity_step' => $request->quantity_step,
+//                'is_free_shipping' => $request->is_free_shipping,
+//                'discount_rate' => $request->discount_rate,
+//                'tax_rate' => $request->tax_rate,
+//                'regular_price' => $request->regular_price,
+//                'regular_tax' => $request->regular_tax,
+//                'discounted_price' => $request->discounted_price,
+//                'discounted_tax' => $request->discounted_tax,
+//                'micro_name' => $request->micro_name,
+//                'micro_sku' => $request->micro_sku,
+//                'dimensions' => $request->dimensions,
+//                'package_type_id' => $request->package_type_id,
+//                'weight' => $request->weight
+//            ]);
 
             return response(['message' => 'Ürün varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -442,7 +442,7 @@ class ProductController extends Controller
 
                     ProductImage::query()->insert([
                         'image' => $file_path,
-                        'variation_id' => $request->variation_id,
+                        'product_id' => $request->product_id,
                         'name' => $request->name,
                         'order' => $request->order
                     ]);
@@ -550,6 +550,24 @@ class ProductController extends Controller
                 'notes' => $request->notes,
                 'sku' => $request->sku
             ]);
+
+            $regular_tax = $request->regular_price * $request->tax_rate / 100;
+            $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
+            $discounted_tax = $discounted_price / 100 * $request->tax_rate;
+
+            ProductRule::query()->where('id',$product_id)->insert([
+                'product_id' => $product_id,
+                'quantity_stock' => $request->quantity_stock,
+                'is_free_shipping' => $request->is_free_shipping,
+                'discount_rate' => $request->discount_rate,
+                'tax_rate' => $request->tax_rate,
+                'regular_price' => $request->regular_price,
+                'regular_tax' => $regular_tax,
+                'discounted_price' => $discounted_price,
+                'discounted_tax' => $discounted_tax
+            ]);
+
+
             return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -588,6 +606,22 @@ class ProductController extends Controller
                 'delivery_tax' => $request->delivery_tax,
                 'is_free_shipping' => $request->is_free_shipping,
                 'view_all_images' => $request->view_all_images,
+            ]);
+
+            $regular_tax = $request->regular_price * $request->tax_rate / 100;
+            $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
+            $discounted_tax = $discounted_price / 100 * $request->tax_rate;
+
+            ProductRule::query()->where('id',$id)->update([
+                'product_id' => $id,
+                'quantity_stock' => $request->quantity_stock,
+                'is_free_shipping' => $request->is_free_shipping,
+                'discount_rate' => $request->discount_rate,
+                'tax_rate' => $request->tax_rate,
+                'regular_price' => $request->regular_price,
+                'regular_tax' => $regular_tax,
+                'discounted_price' => $discounted_price,
+                'discounted_tax' => $discounted_tax
             ]);
             return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -814,7 +848,7 @@ class ProductController extends Controller
                 'image' => 'required',
             ]);
             ProductImage::query()->where('id', $id)->update([
-                'variation_id' => $request->variation_id,
+                'product_id' => $request->product_id,
                 'name' => $request->name
             ]);
             if ($request->hasFile('image')) {
