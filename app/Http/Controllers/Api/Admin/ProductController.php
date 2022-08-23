@@ -839,7 +839,7 @@ class ProductController extends Controller
         }
     }
 
-    public function updateVariationImage(Request $request, $id)
+    public function updateProductImage(Request $request, $id)
     {
         try {
             $request->validate([
@@ -873,61 +873,13 @@ class ProductController extends Controller
         }
     }
 
-    public function deleteVariationImage($id)
+    public function deleteProductImage($id)
     {
         try {
             ProductImage::query()->where('id', $id)->update([
                 'active' => 0
             ]);
             return response(['message' => 'Varyasyon resmi silme işlemi başarılı.', 'status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function addProductPackageType(Request $request)
-    {
-        try {
-            ProductPackageType::query()->insert([
-                'name' => $request->name
-            ]);
-            return response(['message' => 'Ürün paket tipi ekleme işlemi başarılı.', 'status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function updateProductPackageType(Request $request, $id)
-    {
-        try {
-            ProductPackageType::query()->where('id', $id)->update([
-                'name' => $request->name
-            ]);
-            return response(['message' => 'Ürün paket tipi güncelleme işlemi başarılı.', 'status' => 'success']);
-        } catch (ValidationException $validationException) {
-            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
-        } catch (\Throwable $throwable) {
-            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
-        }
-    }
-
-    public function deleteProductPackageType($id)
-    {
-        try {
-            ProductPackageType::query()->where('id', $id)->update([
-                'active' => 0
-            ]);
-            return response(['message' => 'Ürün paket türü silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
