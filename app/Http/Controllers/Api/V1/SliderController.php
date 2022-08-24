@@ -15,7 +15,7 @@ class SliderController extends Controller
             $sliders = Slider::query()->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['sliders' => $sliders]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
         }
     }
 

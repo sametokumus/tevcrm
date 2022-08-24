@@ -42,7 +42,7 @@ class CreditCardController extends Controller
                 $user_discount = User::query()->where('id',$cart->user_id)->first()->user_discount;
                 $total_price = 0;
                 foreach ($cart_details as $cart_detail){
-                    $product_rule = ProductRule::query()->where('variation_id',$cart_detail->variation_id)->first();
+                    $product_rule = ProductRule::query()->where('product_id',$cart_detail->product_id)->first();
                     if ($product_rule->discount_rate == null || $product_rule->discount_rate == ''){
                         $price = $product_rule->regular_price / 100 * ((($user_discount - $credit_card_installment->discount) * -1) + 100);
                     }else{

@@ -160,7 +160,7 @@ class DeliveryController extends Controller
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['regional_delivery_prices' => $regional_delivery_prices]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
         }
     }
     public function getRegionalDeliveryPrice($city_id, $delivery_price_id){

@@ -203,8 +203,8 @@ class OrderController extends Controller
                 $product = Product::query()->where('id',$order_detail->product_id)->first();
                 $brand_name = Brand::query()->where('id',$product->brand_id)->first()->name;
                 $variation = ProductVariation::query()->where('id',$order_detail->variation_id)->first();
-                $rule = ProductRule::query()->where('variation_id',$order_detail->variation_id)->first();
-                $image = ProductImage::query()->where('variation_id',$order_detail->variation_id)->first();
+                $rule = ProductRule::query()->where('product_id',$order_detail->product_id)->first();
+                $image = ProductImage::query()->where('product_id',$order_detail->product_id)->first();
 
                 $variation['rule'] = $rule;
                 $variation['image'] = $image;
@@ -238,7 +238,7 @@ class OrderController extends Controller
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['order' => $order]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
         }
     }
 

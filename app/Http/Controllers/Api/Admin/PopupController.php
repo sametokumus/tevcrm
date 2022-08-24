@@ -22,7 +22,10 @@ class PopupController extends Controller
             $popup_id = Popup::query()->insertGetId([
                 'title' => $request->title,
                 'subtitle' => $request->subtitle,
-                'description' => $request->description
+                'description' => $request->description,
+//                'show_form' => $request->show_form,
+//                'show_popup' => $request->show_popup
+
             ]);
             if ($request->hasFile('image_url')) {
                 $rand = uniqid();
@@ -65,7 +68,7 @@ class PopupController extends Controller
                     'image_url' => $image_path
                 ]);
             }
-            return response(['message' => 'Popup güncelleme işlemi başarılı.','status' => 'success','object' => ['slider' => $slider]]);
+            return response(['message' => 'Popup güncelleme işlemi başarılı.','status' => 'success','object' => ['popup' => $popup]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {

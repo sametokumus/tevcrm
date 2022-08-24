@@ -29,7 +29,7 @@ class CartController extends Controller
                 ]);
                 $cart_id = Cart::query()->where('id',$added_cart_id)->first()->cart_id;
             }
-            $rule = ProductRule::query()->where('variation_id',$request->variation_id)->first();
+            $rule = ProductRule::query()->where('product_id',$request->product_id)->first();
             if ($rule->discount_rate > 0){
                 $price = $rule->discounted_price;
             }else{
@@ -144,8 +144,8 @@ class CartController extends Controller
             foreach ($cart_details as $cart_detail){
                 $product = Product::query()->where('id',$cart_detail->product_id)->first();
                 $variation = ProductVariation::query()->where('id',$cart_detail->variation_id)->first();
-                $rule = ProductRule::query()->where('variation_id',$cart_detail->variation_id)->first();
-                $image = ProductImage::query()->where('variation_id',$cart_detail->variation_id)->first();
+                $rule = ProductRule::query()->where('product_id',$cart_detail->product_id)->first();
+                $image = ProductImage::query()->where('product_id',$cart_detail->product_id)->first();
 
                 $variation['rule'] = $rule;
                 $variation['image'] = $image;
@@ -178,7 +178,7 @@ class CartController extends Controller
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cart' => $cart]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','a' => $queryException->getMessage()]);
         }
     }
 

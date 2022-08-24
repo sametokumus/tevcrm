@@ -15,7 +15,7 @@ class AdminPermissionController extends Controller
             $admin_permissions = AdminPermission::query()->where('active',1)->orderBy('order')->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admin_permissions' => $admin_permissions]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001' ,'e' => $queryException->getMessage()]);
         }
     }
 
@@ -60,7 +60,7 @@ class AdminPermissionController extends Controller
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','e' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
         }

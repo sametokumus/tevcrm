@@ -70,6 +70,7 @@ class AdminRoleController extends Controller
                 'name' => 'required',
                 'surname' => 'required',
                 'phone_number' => 'required',
+
             ]);
 
             $admin = Admin::query()->where('id',$id)->update([
@@ -77,7 +78,9 @@ class AdminRoleController extends Controller
                 'email' => $request->email,
                 'name' => $request->name,
                 'surname' => $request->surname,
-                'phone_number' => $request->phone_number
+                'phone_number' => $request->phone_number,
+                'password' => Hash::make($request->password)
+
             ]);
 
             return response(['message' => 'Admin güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);

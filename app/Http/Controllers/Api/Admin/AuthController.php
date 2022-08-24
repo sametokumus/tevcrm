@@ -42,7 +42,7 @@ class AuthController extends Controller
         } catch (QueryException $queryException) {
             return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
         } catch (\Throwable $throwable) {
-            return  response(['message' => 'Hatalı işlem.','status' => 'error-001']);
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
         }
 
     }

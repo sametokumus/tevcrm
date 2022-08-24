@@ -704,10 +704,10 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProductCategory(Request $request)
+    public function deleteProductCategory($product_id,$category_id)
     {
         try {
-            ProductCategory::query()->where('product_id', $request->product_id)->where('category_id', $request->category_id)->update([
+            ProductCategory::query()->where('product_id', $product_id)->where('category_id', $category_id)->update([
                 'active' => 0
             ]);
             return response(['message' => 'Ürün kategorisi silme işlemi başarılı.', 'status' => 'success']);
@@ -850,13 +850,13 @@ class ProductController extends Controller
     {
         try {
             $request->validate([
-                'variation_id' => 'required',
+                'product_id' => 'required',
                 'name' => 'required',
-                'image' => 'required',
             ]);
             ProductImage::query()->where('id', $id)->update([
                 'product_id' => $request->product_id,
-                'name' => $request->name
+                'name' => $request->name,
+                'order' => $request->order
             ]);
             if ($request->hasFile('image')) {
                 $rand = uniqid();
@@ -989,7 +989,7 @@ class ProductController extends Controller
                 foreach ($product_variation_groups as $product_variation_group) {
                     $product_variations = ProductVariation::query()->where('variation_group_id', $product_variation_group->id)->get();
                     foreach ($product_variations as $product_variation) {
-                        $product_rule = ProductRule::query()->where('variation_id', $product_variation->id)->first();
+                        $product_rule = ProductRule::query()->where('product_id', $product->id)->first();
 
                         if ($request->discount_rate == 0){
                             $discount_rate = null;
@@ -1001,7 +1001,7 @@ class ProductController extends Controller
                             $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
-                            ProductRule::query()->where('variation_id', $product_variation->id)->update([
+                            ProductRule::query()->where('product_id', $product->id)->update([
                                 'discount_rate' => $discount_rate,
                                 'discounted_price' => $discounted_price,
                                 'discounted_tax' => $discounted_tax
@@ -1029,7 +1029,7 @@ class ProductController extends Controller
                 foreach ($product_variation_groups as $product_variation_group) {
                     $product_variations = ProductVariation::query()->where('variation_group_id', $product_variation_group->id)->get();
                     foreach ($product_variations as $product_variation) {
-                        $product_rule = ProductRule::query()->where('variation_id', $product_variation->id)->first();
+                        $product_rule = ProductRule::query()->where('product_id', $product_category->product_id)->first();
 
                         if ($request->discount_rate == 0){
                             $discount_rate = null;
@@ -1041,7 +1041,7 @@ class ProductController extends Controller
                             $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
-                            ProductRule::query()->where('variation_id', $product_variation->id)->update([
+                            ProductRule::query()->where('product_id', $product_category->product_id)->update([
                                 'discount_rate' => $discount_rate,
                                 'discounted_price' => $discounted_price,
                                 'discounted_tax' => $discounted_tax
