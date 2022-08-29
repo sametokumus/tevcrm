@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\ProductImage;
 use App\Models\ProductPackageType;
 use App\Models\ProductRule;
@@ -546,37 +547,59 @@ class ProductController extends Controller
             $product_id = Product::query()->insertGetId([
                 'brand_id' => $request->brand_id,
                 'type_id' => $request->type_id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'short_description' => $request->short_description,
-                'notes' => $request->notes,
+                'name' => null,
+                'description' => null,
+                'short_description' => null,
+                'notes' => null,
                 'sku' => $request->sku
             ]);
-            $explode = $request->text_content_name.','.$request->text_content_description.','.$request->text_content_short_description.','.$request->text_content_notes;
-            $original_text = explode(",",$explode);
-            foreach ($original_text as $value){
-                TextContent::query()->insert([
-                    'original_text' => $value
-                ]);
-            }
 
-
-
-
-//            $product = Product::query()->where('id',$product_id)->first(['name','description','short_description','notes']);
-//            $original_text = $product->name .','. $product->description.','. $product->short_description.','. $product->notes;
-//            $explodes = explode(",",$original_text);
+//            $full_product = $request->name .'<'.$request->description.'<'.$request->short_description.'<'.$request->notes;
+//            $explodes = explode("<",$full_product);
 //            foreach ($explodes as $explode){
-//                TextContent::query()->insert([
+//               $text_content_id = TextContent::query()->insertGetId([
 //                    'original_text' => $explode
 //                ]);
+//                Translation::query()->insert([
+//                    'text_content_id' => $text_content_id,
+//                    'language_id' => 2,
+//                    'translation' => null
+//                ]);
+//            }
+//            for ($i=1; $i <=4; $i++){
 //
 //            }
 
+//            $full_product = $request->name .'<'.$request->description.'<'.$request->short_description.'<'.$request->notes;
+//            $explodes = explode("<",$full_product);
+//            foreach ($explodes as $explode){
+//                TextContent::query()->insertGetId([
+//                    'original_text' => $explode
+//                ]);
+//            }
+//            $this->ananYani($product_id);
+
+           $name_id = TextContent::query()->insertGetId([
+                'original_text' => $request->name
+            ]);
+            $description_id = TextContent::query()->insertGetId([
+                'original_text' => $request->description
+            ]);
+            $short_description_id = TextContent::query()->insertGetId([
+                'original_text' => $request->short_description
+            ]);
+            $notes_id = TextContent::query()->insertGetId([
+                'original_text' => $request->notes
+            ]);
+            Product::query()->where('id',$product_id)->update([
+                'name'  =>$name_id,
+                'description' => $description_id,
+                'short_description' => $short_description_id,
+                'notes' => $notes_id
+            ]);
 
 
             $regular_tax = $request->regular_price / (100 + $request->tax_rate) * $request->tax_rate;
-
             if ($request->discount_rate != 0) {
                 $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
                 $discounted_tax = $discounted_price / (100 + $request->tax_rate) * $request->tax_rate;
@@ -594,9 +617,6 @@ class ProductController extends Controller
                 'discounted_tax' => $discounted_tax
             ]);
 
-
-
-
             return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
@@ -607,6 +627,48 @@ class ProductController extends Controller
         }
 
     }
+
+    public function addTranslations(Request $request){
+        Translation::query()->insertGetId([
+            'text_content_id' => $request->text_content_id,
+            'language_id' => $request->language_id,
+            'translation' => $request->translation
+        ]);
+
+        return response('başarılı');
+    }
+
+    public function ananYani($product_id){
+        $text_contents = TextContent::query()->get();
+        foreach ($text_contents as $text_content){
+           $translations = Translation::query()->where('text_content_id',$text_content->id)->get();
+            foreach ($translations as $translation){
+                if ($translation->language_id != 2){
+                    $text_contents = TextContent::query()->get();
+                    foreach ($text_contents as $text_content){
+                        Product::query()->where('id',$product_id)->update([
+                            'name' => $text_content->original_text,
+                            'description' => $text_content->original_text,
+                            'short_description' => $text_content->original_text,
+                            'notes' => $text_content->original_text,
+                        ]);
+                    }
+                }else{
+                    Product::query()->where('id',$product_id)->update([
+                        'name' => $translation->translation,
+                        'description' => $translation->translation,
+                        'short_description' => $translation->translation,
+                        'notes' => $translation->translation,
+                    ]);
+                }
+
+            }
+        }
+
+
+        return 'sen anan yani';
+    }
+
 
     public function updateProduct(Request $request, $id)
     {

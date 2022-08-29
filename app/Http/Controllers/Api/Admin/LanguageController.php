@@ -28,12 +28,37 @@ class LanguageController extends Controller
         }
     }
 
+    public function addTextContent(Request $request){
+        TextContent::query()->insert([
+            'original_text' => $request->original_text.'.'
+        ]);
+        return response(['message' => 'Ekleme işlemi başarılı.']);
+    }
+
     public function addTranslations(Request $request){
-            Translation::query()->insert([
-                'text_content_id' => $request->text_content_id,
-                'language_id' => $request->language_id,
-                'translation' => $request->translation
-            ]);
-            return response('başarılı');
+        $translations = Translation::query()->where('active',1)->get();
+        foreach ($translations as $translation){
+            $translation_row = Translation::query()->where('translation',$translation->translation)->first();
+            if (isset($translation_row)){
+                $translationi_id = $translation_row->id;
+            }
+            else{
+                Translation::query()->updateOrCreate([
+                    'text_content_id' => $request->text_content_id,
+                    'language_id' => $request->language_id,
+                    'translation' => $request->translation,
+                ]);
+            }
+        }
+            return response('Dil ekleme işlemi başarılı');
+    }
+
+    public function fitifiti(){
+        $translations = Translation::query()->where('active',1)->get();
+        foreach ($translations as $translation){
+            $text_contents = TextContent::query()->where('id',$translation->text_content_id)->get();
+
+
+        }
     }
 }
