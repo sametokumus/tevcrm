@@ -18,6 +18,8 @@ use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
 use App\Models\ProductVariationGroupType;
 use App\Models\Tag;
+use App\Models\TextContent;
+use App\Models\Translation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -550,15 +552,37 @@ class ProductController extends Controller
                 'notes' => $request->notes,
                 'sku' => $request->sku
             ]);
-
-            $regular_tax = $request->regular_price / (100+$request->tax_rate) * $request->tax_rate;
-
-            if ($request->discount_rate != 0){
-                $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
-                $discounted_tax = $discounted_price / (100+$request->tax_rate) * $request->tax_rate;
+            $explode = $request->text_content_name.','.$request->text_content_description.','.$request->text_content_short_description.','.$request->text_content_notes;
+            $original_text = explode(",",$explode);
+            foreach ($original_text as $value){
+                TextContent::query()->insert([
+                    'original_text' => $value
+                ]);
             }
 
-            ProductRule::query()->where('id',$product_id)->insert([
+
+
+
+//            $product = Product::query()->where('id',$product_id)->first(['name','description','short_description','notes']);
+//            $original_text = $product->name .','. $product->description.','. $product->short_description.','. $product->notes;
+//            $explodes = explode(",",$original_text);
+//            foreach ($explodes as $explode){
+//                TextContent::query()->insert([
+//                    'original_text' => $explode
+//                ]);
+//
+//            }
+
+
+
+            $regular_tax = $request->regular_price / (100 + $request->tax_rate) * $request->tax_rate;
+
+            if ($request->discount_rate != 0) {
+                $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
+                $discounted_tax = $discounted_price / (100 + $request->tax_rate) * $request->tax_rate;
+            }
+
+            ProductRule::query()->where('id', $product_id)->insert([
                 'product_id' => $product_id,
                 'quantity_stock' => $request->quantity_stock,
                 'is_free_shipping' => $request->is_free_shipping,
@@ -569,6 +593,8 @@ class ProductController extends Controller
                 'discounted_price' => $discounted_price,
                 'discounted_tax' => $discounted_tax
             ]);
+
+
 
 
             return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
@@ -612,14 +638,14 @@ class ProductController extends Controller
             ]);
 
 
-            $regular_tax = $request->regular_price / (100+$request->tax_rate) * $request->tax_rate;
-            if ($request->discount_rate != 0){
+            $regular_tax = $request->regular_price / (100 + $request->tax_rate) * $request->tax_rate;
+            if ($request->discount_rate != 0) {
                 $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
-                $discounted_tax = $discounted_price / (100+$request->tax_rate) * $request->tax_rate;
+                $discounted_tax = $discounted_price / (100 + $request->tax_rate) * $request->tax_rate;
             }
 
 
-            ProductRule::query()->where('id',$id)->update([
+            ProductRule::query()->where('id', $id)->update([
                 'product_id' => $id,
                 'quantity_stock' => $request->quantity_stock,
                 'is_free_shipping' => $request->is_free_shipping,
@@ -704,7 +730,7 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProductCategory($product_id,$category_id)
+    public function deleteProductCategory($product_id, $category_id)
     {
         try {
             ProductCategory::query()->where('product_id', $product_id)->where('category_id', $category_id)->update([
@@ -952,21 +978,21 @@ class ProductController extends Controller
                     foreach ($product_variations as $product_variation) {
                         $product_rule = ProductRule::query()->where('variation_id', $product_variation->id)->first();
 
-                        if ($request->discount_rate == 0){
+                        if ($request->discount_rate == 0) {
                             $discount_rate = null;
                             $discounted_price = null;
                             $discounted_tax = null;
-                        }else{
+                        } else {
 
                             $discount_rate = $request->discount_rate;
                             $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
-                            ProductRule::query()->where('variation_id', $product_variation->id)->update([
-                                'discount_rate' => $discount_rate,
-                                'discounted_price' => $discounted_price,
-                                'discounted_tax' => $discounted_tax
-                            ]);
+                        ProductRule::query()->where('variation_id', $product_variation->id)->update([
+                            'discount_rate' => $discount_rate,
+                            'discounted_price' => $discounted_price,
+                            'discounted_tax' => $discounted_tax
+                        ]);
                     }
                 }
             }
@@ -991,21 +1017,21 @@ class ProductController extends Controller
                     foreach ($product_variations as $product_variation) {
                         $product_rule = ProductRule::query()->where('product_id', $product->id)->first();
 
-                        if ($request->discount_rate == 0){
+                        if ($request->discount_rate == 0) {
                             $discount_rate = null;
                             $discounted_price = null;
                             $discounted_tax = null;
-                        }else{
+                        } else {
 
                             $discount_rate = $request->discount_rate;
                             $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
-                            ProductRule::query()->where('product_id', $product->id)->update([
-                                'discount_rate' => $discount_rate,
-                                'discounted_price' => $discounted_price,
-                                'discounted_tax' => $discounted_tax
-                            ]);
+                        ProductRule::query()->where('product_id', $product->id)->update([
+                            'discount_rate' => $discount_rate,
+                            'discounted_price' => $discounted_price,
+                            'discounted_tax' => $discounted_tax
+                        ]);
                     }
                 }
             }
@@ -1031,21 +1057,21 @@ class ProductController extends Controller
                     foreach ($product_variations as $product_variation) {
                         $product_rule = ProductRule::query()->where('product_id', $product_category->product_id)->first();
 
-                        if ($request->discount_rate == 0){
+                        if ($request->discount_rate == 0) {
                             $discount_rate = null;
                             $discounted_price = null;
                             $discounted_tax = null;
-                        }else{
+                        } else {
 
                             $discount_rate = $request->discount_rate;
                             $discounted_price = $product_rule->regular_price / 100 * (100 - $discount_rate);
                             $discounted_tax = $discounted_price / 100 * $product_rule->tax_rate;
                         }
-                            ProductRule::query()->where('product_id', $product_category->product_id)->update([
-                                'discount_rate' => $discount_rate,
-                                'discounted_price' => $discounted_price,
-                                'discounted_tax' => $discounted_tax
-                            ]);
+                        ProductRule::query()->where('product_id', $product_category->product_id)->update([
+                            'discount_rate' => $discount_rate,
+                            'discounted_price' => $discounted_price,
+                            'discounted_tax' => $discounted_tax
+                        ]);
                     }
                 }
             }

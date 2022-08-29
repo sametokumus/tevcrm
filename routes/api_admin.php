@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\Admin\CouponController;
 use App\Http\Controllers\Api\Admin\DeliveryController;
 use App\Http\Controllers\Api\Admin\PopupController;
 use App\Http\Controllers\Api\Admin\SubscribeController;
+use App\Http\Controllers\Api\Admin\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
 
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
+
+    Route::post('language/addLanguage', [LanguageController::class, 'addLanguage']);
+    Route::get('language/addTranslations', [LanguageController::class, 'addTranslations']);
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::post('register', [AuthController::class, 'register'])->name('admin.register');
