@@ -32,6 +32,7 @@ class ProductController extends Controller
             $products = Product::query()->where('active', 1)->get();
             foreach ($products as $product) {
                 $brands = Product::query()->where('brand_id', $product->brand_id)->get();
+                $product_types = ProductType::query()->where('id', $product->type_id)->get();
                 $product_documents = ProductDocument::query()->where('product_id', $product->id)->get();
                 $product_variation_groups = ProductVariationGroup::query()->where('product_id', $product->id)->get();
                 foreach ($product_variation_groups as $product_variation_group) {
@@ -52,6 +53,7 @@ class ProductController extends Controller
                     $product_category['categories'] = Category::query()->where('id', $product_category->category_id)->get();
                 }
                 $product['brand'] = $brands;
+                $product['product_type'] = $product_types;
                 $product['product_documents'] = $product_documents;
                 $product['variation_groups'] = $product_variation_groups;
                 $product['product_tags'] = $product_tags;
@@ -91,6 +93,7 @@ class ProductController extends Controller
 //            $text_content = TextContent::query()->where('id',$product->name)->where('id',$product->description)
 //            ->where('id',$product->short_description)->where('id',$product->notes)->first();
                 $brand = Brand::query()->where('id', $product->brand_id)->first();
+                $product_type = ProductType::query()->where('id', $product->type_id)->first();
                 $product_documents = ProductDocument::query()->where('product_id', $product->id)->where('active', 1)->get();
                 $product_tags = ProductTags::query()
                     ->leftJoin('tags', 'tags.id', '=', 'product_tags.tag_id')
@@ -136,6 +139,7 @@ class ProductController extends Controller
                 $featured_variation['images'] = $images;
 
                 $product['brand'] = $brand;
+                $product['product_type'] = $product_type;
                 $product['product_documents'] = $product_documents;
                 $product['product_tags'] = $product_tags;
                 $product['product_categories'] = $product_categories;
@@ -155,6 +159,7 @@ class ProductController extends Controller
         try {
             $product = Product::query()->where('id', $product_id)->where('active', 1)->first();
             $brand = Brand::query()->where('id', $product->brand_id)->first();
+            $product_type = ProductType::query()->where('id', $product->type_id)->first();
             $product_documents = ProductDocument::query()->where('product_id', $product->id)->where('active', 1)->get();
             $product_tags = ProductTags::query()
                 ->leftJoin('tags', 'tags.id', '=', 'product_tags.tag_id')
@@ -200,6 +205,7 @@ class ProductController extends Controller
             $featured_variation['images'] = $images;
 
             $product['brand'] = $brand;
+            $product['product_type'] = $product_type;
             $product['product_documents'] = $product_documents;
             $product['product_tags'] = $product_tags;
             $product['product_categories'] = $product_categories;
@@ -217,13 +223,13 @@ class ProductController extends Controller
         try {
             $products = Product::query()
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->get();
-
             foreach ($products as $product){
                 $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
                 $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
@@ -242,12 +248,13 @@ class ProductController extends Controller
             $products = ProductCategory::query()
                 ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
                 ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'product_variation_groups.id')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('product_categories.active', 1)
                 ->where('product_categories.category_id', $category_id)
@@ -272,10 +279,11 @@ class ProductController extends Controller
                 $products = ProductCategory::query()
                     ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
                     ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                    ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                     ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                     ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                     ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                    ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                    ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                     ->where('products.active', 1)
                     ->where('product_categories.active', 1)
                     ->where('product_categories.category_id', $first_id)
@@ -299,12 +307,13 @@ class ProductController extends Controller
                 ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
                 ->leftJoin('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
 //                ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
 //                ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('product_categories.active', 1)
                 ->where('categories.slug', $slug)
@@ -340,10 +349,11 @@ class ProductController extends Controller
         try {
             $products = Brand::query()
                 ->leftJoin('products', 'products.brand_id', '=', 'brands.id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('brands.slug', $slug)
                 ->get();
@@ -378,7 +388,7 @@ class ProductController extends Controller
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001','e' => $queryException->getMessage()]);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
 
@@ -564,10 +574,11 @@ class ProductController extends Controller
         try {
             $products = Product::query()
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('products.is_campaign', 1)
                 ->get();
@@ -582,10 +593,11 @@ class ProductController extends Controller
         try {
             $products = Product::query()
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('products.is_campaign', 1)
                 ->limit($limit)
@@ -602,10 +614,11 @@ class ProductController extends Controller
         try {
             $products = Product::query()
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('products.is_featured', 1)
                 ->limit(7)
@@ -621,10 +634,11 @@ class ProductController extends Controller
         try {
             $products = Product::query()
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('products.is_new', 1)
                 ->limit(7)
@@ -642,10 +656,11 @@ class ProductController extends Controller
             $products = ProductCategory::query()
                 ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
                 ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
                 ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
                 ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
-                ->selectRaw('product_rules.*, brands.name as brand_name, products.*')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->where('product_categories.active', 1)
                 ->where('product_categories.category_id', $product_category->category_id)
