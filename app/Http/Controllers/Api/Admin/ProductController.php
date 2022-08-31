@@ -619,13 +619,24 @@ class ProductController extends Controller
             Product::query()->where('id', $id)->update([
                 'brand_id' => $request->brand_id,
                 'type_id' => $request->type_id,
-                'name' => $request->name,
-                'description' => $request->description,
-                'short_description' => $request->short_description,
-                'notes' => $request->notes,
                 'sku' => $request->sku,
                 'is_free_shipping' => $request->is_free_shipping,
                 'view_all_images' => $request->view_all_images,
+            ]);
+
+            $product = Product::query()->where('id', $id)->first();
+
+            TextContent::query()->where('id', $product->name)->update([
+                'original_text' => $request->name
+            ]);
+            TextContent::query()->where('id', $product->description)->update([
+                'original_text' => $request->description
+            ]);
+            TextContent::query()->where('id', $product->short_description)->update([
+                'original_text' => $request->short_description
+            ]);
+            TextContent::query()->where('id', $product->notes)->update([
+                'original_text' => $request->notes
             ]);
 
 
