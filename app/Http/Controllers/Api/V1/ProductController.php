@@ -382,6 +382,10 @@ class ProductController extends Controller
             $languages = Language::query()->where('active', 1)->where('default', '!=', 1)->get();
             foreach ($languages as $language){
                 $translations = array();
+                $translations[$language->name]['name'] = null;
+                $translations[$language->name]['description'] = null;
+                $translations[$language->name]['short_description'] = null;
+                $translations[$language->name]['notes'] = null;
                 $translations[$language->name]['name'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first()->translation;
                 $translations[$language->name]['description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first()->translation;
                 $translations[$language->name]['short_description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first()->translation;
@@ -389,10 +393,7 @@ class ProductController extends Controller
 //                $language['translation'] = $translations;
             }
             $product['translations'] = $translations;
-            $product['name'] = null;
-            $product['description'] = null;
-            $product['short_description'] = null;
-            $product['notes'] = null;
+
             $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
             $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
             $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
