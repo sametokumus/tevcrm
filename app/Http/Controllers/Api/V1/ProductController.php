@@ -382,13 +382,13 @@ class ProductController extends Controller
             $languages = Language::query()->where('active', 1)->where('default', '!=', 1)->get();
             foreach ($languages as $language){
                 $translations = array();
-                $translations['name'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first()->translation;
-                $translations['description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first()->translation;
-                $translations['short_description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first()->translation;
-                $translations['notes'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first()->translation;
-                $language['translation'] = $translations;
+                $translations[$language->name]['name'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first()->translation;
+                $translations[$language->name]['description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first()->translation;
+                $translations[$language->name]['short_description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first()->translation;
+                $translations[$language->name]['notes'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first()->translation;
+//                $language['translation'] = $translations;
             }
-            $product['languages'] = $languages;
+            $product['translations'] = $translations;
 
             $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
             $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
