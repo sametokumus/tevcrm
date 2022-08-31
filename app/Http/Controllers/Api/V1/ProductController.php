@@ -398,7 +398,6 @@ class ProductController extends Controller
                 if($translations_description != null){$translations[$language->name]['description'] = $translations_description->translation;}
                 if($translations_short_description != null){$translations[$language->name]['short_description'] = $translations_short_description->translation;}
                 if($translations_notes != null){$translations[$language->name]['notes'] = $translations_notes->translation;}
-//                $language['translation'] = $translations;
             }
             $product['translations'] = $translations;
 
@@ -406,15 +405,6 @@ class ProductController extends Controller
             $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
             $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
             $product['notes'] = TextContent::query()->where('id', $product['notes'])->first()->original_text;
-
-
-//            $translation_name = Translation::query()->where('text_content_id',$product->name)->get();
-//            $translation_description = Translation::query()->where('text_content_id',$product->description)->get();
-//            $translation_short_description = Translation::query()->where('text_content_id',$product->short_description)->get();
-//            $translation_notes = Translation::query()->where('text_content_id',$product->notes)->get();
-//
-//            $array = [$translation_name,$translation_description,$translation_short_description,$translation_notes];
-//            $product['translation'] = $array;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
