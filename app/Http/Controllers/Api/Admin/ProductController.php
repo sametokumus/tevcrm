@@ -646,6 +646,7 @@ class ProductController extends Controller
                 'discounted_price' => $discounted_price,
                 'discounted_tax' => $discounted_tax
             ]);
+
             return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
