@@ -386,10 +386,16 @@ class ProductController extends Controller
                 $translations[$language->name]['description'] = null;
                 $translations[$language->name]['short_description'] = null;
                 $translations[$language->name]['notes'] = null;
-                $translations[$language->name]['name'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first()->translation;
-                $translations[$language->name]['description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first()->translation;
-                $translations[$language->name]['short_description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first()->translation;
-                $translations[$language->name]['notes'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first()->translation;
+
+                $translations_name = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first();
+                $translations_description = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first();
+                $translations_short_description = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first();
+                $translations_notes = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first();
+
+                if($translations_name != null){$translations[$language->name]['name'] = $translations_name->translation;}
+                if($translations_description != null){$translations[$language->name]['description'] = $translations_description->translation;}
+                if($translations_short_description != null){$translations[$language->name]['short_description'] = $translations_short_description->translation;}
+                if($translations_notes != null){$translations[$language->name]['notes'] = $translations_notes->translation;}
 //                $language['translation'] = $translations;
             }
             $product['translations'] = $translations;
