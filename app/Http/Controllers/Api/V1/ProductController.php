@@ -388,6 +388,7 @@ class ProductController extends Controller
                 $translations['notes'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first()->translation;
                 $language['translation'] = $translations;
             }
+            $product['languages'] = $languages;
 
             $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
             $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
