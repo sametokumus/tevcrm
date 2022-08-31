@@ -376,7 +376,7 @@ class ProductController extends Controller
                 ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
                 ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
-                ->where('id', $id)
+                ->where('products.id', $id)
                 ->first();
 
             $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
