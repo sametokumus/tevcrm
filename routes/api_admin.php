@@ -48,9 +48,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('language/addLanguage', [LanguageController::class, 'addLanguage']);
     Route::post('language/addTranslations/{translation_id}', [LanguageController::class, 'addTranslations']);
-    Route::post('language/addTextContent', [LanguageController::class, 'addTextContent']);
-    Route::get('language/fitifiti', [LanguageController::class, 'fitifiti']);
-    Route::get('language/ananYani/{product_id}', [ProductController::class, 'ananYani']);
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::post('register', [AuthController::class, 'register'])->name('admin.register');

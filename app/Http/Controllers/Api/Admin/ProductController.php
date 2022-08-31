@@ -554,31 +554,6 @@ class ProductController extends Controller
                 'sku' => $request->sku
             ]);
 
-//            $full_product = $request->name .'<'.$request->description.'<'.$request->short_description.'<'.$request->notes;
-//            $explodes = explode("<",$full_product);
-//            foreach ($explodes as $explode){
-//               $text_content_id = TextContent::query()->insertGetId([
-//                    'original_text' => $explode
-//                ]);
-//                Translation::query()->insert([
-//                    'text_content_id' => $text_content_id,
-//                    'language_id' => 2,
-//                    'translation' => null
-//                ]);
-//            }
-//            for ($i=1; $i <=4; $i++){
-//
-//            }
-
-//            $full_product = $request->name .'<'.$request->description.'<'.$request->short_description.'<'.$request->notes;
-//            $explodes = explode("<",$full_product);
-//            foreach ($explodes as $explode){
-//                TextContent::query()->insertGetId([
-//                    'original_text' => $explode
-//                ]);
-//            }
-//            $this->ananYani($product_id);
-
            $name_id = TextContent::query()->insertGetId([
                 'original_text' => $request->name
             ]);
@@ -627,48 +602,6 @@ class ProductController extends Controller
         }
 
     }
-
-    public function addTranslations(Request $request){
-        Translation::query()->insertGetId([
-            'text_content_id' => $request->text_content_id,
-            'language_id' => $request->language_id,
-            'translation' => $request->translation
-        ]);
-
-        return response('başarılı');
-    }
-
-    public function ananYani($product_id){
-        $text_contents = TextContent::query()->get();
-        foreach ($text_contents as $text_content){
-           $translations = Translation::query()->where('text_content_id',$text_content->id)->get();
-            foreach ($translations as $translation){
-                if ($translation->language_id != 2){
-                    $text_contents = TextContent::query()->get();
-                    foreach ($text_contents as $text_content){
-                        Product::query()->where('id',$product_id)->update([
-                            'name' => $text_content->original_text,
-                            'description' => $text_content->original_text,
-                            'short_description' => $text_content->original_text,
-                            'notes' => $text_content->original_text,
-                        ]);
-                    }
-                }else{
-                    Product::query()->where('id',$product_id)->update([
-                        'name' => $translation->translation,
-                        'description' => $translation->translation,
-                        'short_description' => $translation->translation,
-                        'notes' => $translation->translation,
-                    ]);
-                }
-
-            }
-        }
-
-
-        return 'sen anan yani';
-    }
-
 
     public function updateProduct(Request $request, $id)
     {

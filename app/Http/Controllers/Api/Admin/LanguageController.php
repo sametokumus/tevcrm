@@ -28,12 +28,6 @@ class LanguageController extends Controller
         }
     }
 
-    public function addTextContent(Request $request){
-        TextContent::query()->insert([
-            'original_text' => $request->original_text.'.'
-        ]);
-        return response(['message' => 'Ekleme işlemi başarılı.']);
-    }
 
     public function addTranslations(Request $request){
         $translations = Translation::query()->where('active',1)->get();
@@ -53,12 +47,4 @@ class LanguageController extends Controller
             return response('Dil ekleme işlemi başarılı');
     }
 
-    public function fitifiti(){
-        $translations = Translation::query()->where('active',1)->get();
-        foreach ($translations as $translation){
-            $text_contents = TextContent::query()->where('id',$translation->text_content_id)->get();
-
-
-        }
-    }
 }
