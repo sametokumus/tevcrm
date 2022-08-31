@@ -551,7 +551,8 @@ class ProductController extends Controller
                 'description' => null,
                 'short_description' => null,
                 'notes' => null,
-                'sku' => $request->sku
+                'sku' => $request->sku,
+                'is_free_shipping' => $request->is_free_shipping
             ]);
 
            $name_id = TextContent::query()->insertGetId([
@@ -583,7 +584,6 @@ class ProductController extends Controller
             ProductRule::query()->where('id', $product_id)->insert([
                 'product_id' => $product_id,
                 'quantity_stock' => $request->quantity_stock,
-                'is_free_shipping' => $request->is_free_shipping,
                 'discount_rate' => $request->discount_rate,
                 'tax_rate' => $request->tax_rate,
                 'regular_price' => $request->regular_price,

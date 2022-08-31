@@ -24,7 +24,6 @@ class CreateProductRulesTable extends Migration
             $table->bigInteger('quantity_stock')->nullable();
             $table->bigInteger('quantity_min')->nullable();
             $table->bigInteger('quantity_step')->nullable();
-            $table->tinyInteger('is_free_shipping')->nullable();
             $table->decimal('discount_rate')->nullable();
             $table->decimal('tax_rate')->nullable();
             $table->decimal('regular_price')->nullable();
