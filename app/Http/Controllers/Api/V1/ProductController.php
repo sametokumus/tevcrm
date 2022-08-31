@@ -380,8 +380,10 @@ class ProductController extends Controller
                 ->first();
 
             $languages = Language::query()->where('active', 1)->where('default', '!=', 1)->get();
+
+            $translations = array();
+
             foreach ($languages as $language){
-                $translations = array();
                 $translations[$language->name]['name'] = null;
                 $translations[$language->name]['description'] = null;
                 $translations[$language->name]['short_description'] = null;
