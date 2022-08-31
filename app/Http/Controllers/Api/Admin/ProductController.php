@@ -538,7 +538,6 @@ class ProductController extends Controller
         try {
             $request->validate([
                 'brand_id' => 'required|exists:brands,id',
-                'type_id' => 'required|exists:product_types,id',
                 'name' => 'required',
                 'description' => 'required',
                 'sku' => 'required'
@@ -546,7 +545,6 @@ class ProductController extends Controller
 
             $product_id = Product::query()->insertGetId([
                 'brand_id' => $request->brand_id,
-                'type_id' => $request->type_id,
                 'name' => null,
                 'description' => null,
                 'short_description' => null,
@@ -608,7 +606,6 @@ class ProductController extends Controller
         try {
             $request->validate([
                 'brand_id' => 'required|exists:brands,id',
-                'type_id' => 'required|exists:product_types,id',
                 'name' => 'required',
                 'description' => 'required',
                 'sku' => 'required',
@@ -620,7 +617,6 @@ class ProductController extends Controller
 
             Product::query()->where('id', $id)->update([
                 'brand_id' => $request->brand_id,
-                'type_id' => $request->type_id,
                 'name' => $request->name,
                 'description' => $request->description,
                 'short_description' => $request->short_description,
