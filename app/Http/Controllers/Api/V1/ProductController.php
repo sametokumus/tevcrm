@@ -379,19 +379,29 @@ class ProductController extends Controller
                 ->where('products.id', $id)
                 ->first();
 
+            $languages = Language::query()->where('active', 1)->where('default', '!=', 1)->get();
+            foreach ($languages as $language){
+                $translations = array();
+                $translations['name'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['name'])->first()->translation;
+                $translations['description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['description'])->first()->translation;
+                $translations['short_description'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['short_description'])->first()->translation;
+                $translations['notes'] = Translation::query()->where('language_id', $language->id)->where('text_content_id', $product['notes'])->first()->translation;
+                $language['translation'] = $translations;
+            }
+
             $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
             $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
             $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
             $product['notes'] = TextContent::query()->where('id', $product['notes'])->first()->original_text;
 
 
-            $translation_name = Translation::query()->where('text_content_id',$product->name)->get();
-            $translation_description = Translation::query()->where('text_content_id',$product->description)->get();
-            $translation_short_description = Translation::query()->where('text_content_id',$product->short_description)->get();
-            $translation_notes = Translation::query()->where('text_content_id',$product->notes)->get();
-
-            $array = [$translation_name,$translation_description,$translation_short_description,$translation_notes];
-            $product['translation'] = $array;
+//            $translation_name = Translation::query()->where('text_content_id',$product->name)->get();
+//            $translation_description = Translation::query()->where('text_content_id',$product->description)->get();
+//            $translation_short_description = Translation::query()->where('text_content_id',$product->short_description)->get();
+//            $translation_notes = Translation::query()->where('text_content_id',$product->notes)->get();
+//
+//            $array = [$translation_name,$translation_description,$translation_short_description,$translation_notes];
+//            $product['translation'] = $array;
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
