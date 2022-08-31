@@ -368,7 +368,23 @@ class ProductController extends Controller
     public function getProductById($id)
     {
         try {
-            $product = Product::query()->where('id', $id)->first();
+            $product = Product::query()
+                ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
+                ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
+                ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
+                ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
+                ->where('products.active', 1)
+                ->where('id', $id)
+                ->first();
+
+            $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
+            $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
+            $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
+            $product['notes'] = TextContent::query()->where('id', $product['notes'])->first()->original_text;
+
+
             $translation_name = Translation::query()->where('text_content_id',$product->name)->get();
             $translation_description = Translation::query()->where('text_content_id',$product->description)->get();
             $translation_short_description = Translation::query()->where('text_content_id',$product->short_description)->get();
@@ -376,17 +392,6 @@ class ProductController extends Controller
 
             $array = [$translation_name,$translation_description,$translation_short_description,$translation_notes];
             $product['translation'] = $array;
-
-            $product_name = TextContent::query()->where('id',$product->name)->first()->original_text;
-            $product_description = TextContent::query()->where('id',$product->description)->first()->original_text;
-            $product_short_description = TextContent::query()->where('id',$product->short_description)->first()->original_text;
-            $notes = TextContent::query()->where('id',$product->notes)->first()->original_text;
-            $product->name = $product_name;
-            $product->description = $product_description;
-            $product->short_description = $product_short_description;
-            $product->notes = $notes;
-
-
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
