@@ -14,12 +14,10 @@ class ProductTypeController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required',
-                'slug' => 'required'
+                'name' => 'required'
             ]);
             ProductType::query()->insert([
-                'name' => $request->name,
-                'slug' => $request->slug
+                'name' => $request->name
             ]);
             return response(['message' => 'Ürün tipi ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
