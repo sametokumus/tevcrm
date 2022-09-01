@@ -697,10 +697,15 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProductCategory($product_id, $category_id)
+    public function deleteProductCategory(Request $request)
     {
         try {
-            ProductCategory::query()->where('product_id', $product_id)->where('category_id', $category_id)->update([
+            $request->validate([
+                'category_id' => 'required',
+                'product_id' => 'required',
+            ]);
+
+            ProductCategory::query()->where('product_id', $request->product_id)->where('category_id', $request->category_id)->update([
                 'active' => 0
             ]);
             return response(['message' => 'Ürün kategorisi silme işlemi başarılı.', 'status' => 'success']);
