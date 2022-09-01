@@ -536,7 +536,8 @@ class ProductController extends Controller
                 'notes' => $notes_id
             ]);
 
-
+            $discounted_price = null;
+            $discounted_tax = null;
             $regular_tax = $request->regular_price / (100 + $request->tax_rate) * $request->tax_rate;
             if ($request->discount_rate != 0) {
                 $discounted_price = $request->regular_price / 100 * (100 - $request->discount_rate);
