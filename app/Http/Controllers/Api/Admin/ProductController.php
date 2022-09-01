@@ -336,24 +336,7 @@ class ProductController extends Controller
                 'sku' => $request->sku,
 
             ]);
-//            ProductRule::query()->insert([
-//                'variation_id' => $variation_id,
-//                'quantity_stock' => $request->quantity_stock,
-//                'quantity_min' => $request->quantity_min,
-//                'quantity_step' => $request->quantity_step,
-//                'is_free_shipping' => $request->is_free_shipping,
-//                'discount_rate' => $request->discount_rate,
-//                'tax_rate' => $request->tax_rate,
-//                'regular_price' => $request->regular_price,
-//                'regular_tax' => $request->regular_tax,
-//                'discounted_price' => $request->discounted_price,
-//                'discounted_tax' => $request->discounted_tax,
-//                'micro_name' => $request->micro_name,
-//                'micro_sku' => $request->micro_sku,
-//                'dimensions' => $request->dimensions,
-//                'package_type_id' => $request->package_type_id,
-//                'weight' => $request->weight
-//            ]);
+
 
             return response(['message' => 'Ürün varyasyon ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -381,27 +364,6 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'sku' => $request->sku,
-            ]);
-
-//            $product_variation_id = ProductVariation::query()->where('id',$id)->first();
-
-            ProductRule::query()->where('variation_id', $id)->update([
-                'variation_id' => $id,
-                'quantity_stock' => $request->quantity_stock,
-                'quantity_min' => $request->quantity_min,
-                'quantity_step' => $request->quantity_step,
-                'is_free_shipping' => $request->is_free_shipping,
-                'discount_rate' => $request->discount_rate,
-                'tax_rate' => $request->tax_rate,
-                'regular_price' => $request->regular_price,
-                'regular_tax' => $request->regular_tax,
-                'discounted_price' => $request->discounted_price,
-                'discounted_tax' => $request->discounted_tax,
-                'micro_name' => $request->micro_name,
-                'micro_sku' => $request->micro_sku,
-                'dimensions' => $request->dimensions,
-                'package_type_id' => $request->package_type_id,
-                'weight' => $request->weight
             ]);
 
             return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
