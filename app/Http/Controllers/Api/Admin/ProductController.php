@@ -360,10 +360,10 @@ class ProductController extends Controller
 //            ]);
 
             ProductVariation::query()->where('id', $id)->update([
-//                'variation_group_id' => $request->variation_group_id,
+                'variation_group_id' => $request->variation_group_id,
                 'name' => $request->name,
-//                'description' => $request->description,
-//                'sku' => $request->sku
+                'description' => $request->description,
+                'sku' => $request->sku
             ]);
 
             return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
