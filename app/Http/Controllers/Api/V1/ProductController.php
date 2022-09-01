@@ -515,6 +515,20 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductImagesById($product_id)
+    {
+        try {
+            $product = Product::query()->where('id', $product_id)->get();
+            $images = ProductImage::query()->where('product_id', $product_id)->where('active', 1)->get();
+            $product['images'] = $images;
+
+
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['product' => $product]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
     public function getVariationImageById($product_id)
     {
         try {
