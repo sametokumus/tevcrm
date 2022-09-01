@@ -157,7 +157,7 @@ Route::get('/product/getProductVariationById/{id}', [ProductController::class, '
 Route::get('/product/getProductVariationsById/{id}', [ProductController::class, 'getProductVariationsById']);
 Route::get('/product/getProductImagesById/{product_id}', [ProductController::class, 'getProductImagesById']);
 Route::get('/product/getVariationsImageById/{product_id}', [ProductController::class, 'getVariationsImageById']);
-Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);""
+Route::get('/product/getVariationImageById/{variation_id}', [ProductController::class, 'getVariationImageById']);
 Route::get('/product/getProductTabsById/{product_id}', [ProductController::class, 'getProductTabsById']);
 Route::get('/product/getProductTabById/{tab_id}', [ProductController::class, 'getProductTabById']);
 Route::get('/product/getCategoriesByBranId', [ProductController::class, 'getCategoriesByBranId']);
