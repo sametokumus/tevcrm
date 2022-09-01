@@ -518,7 +518,7 @@ class ProductController extends Controller
     public function getProductImagesById($product_id)
     {
         try {
-            $product = Product::query()->where('id', $product_id)->get();
+            $product = Product::query()->where('id', $product_id)->first();
             $images = ProductImage::query()->where('product_id', $product_id)->where('active', 1)->get();
             $product['images'] = $images;
 
