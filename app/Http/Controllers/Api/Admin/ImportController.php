@@ -17,6 +17,7 @@ use App\Models\ProductSeo;
 use App\Models\ProductType;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationGroup;
+use App\Models\TextContent;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -38,213 +39,52 @@ class ImportController extends Controller
 
         foreach ($import_products as $import_product) {
 
-            $hasProduct = Product::query()->where('sku', $import_product->ana_urun_kod)->first();
+            $product_id = Product::query()->insertGetId([
+                'brand_id' => 1,
+                'type_id' => $import_product->type_id,
+                'name' => null,
+                'description' => null,
+                'short_description' => null,
+                'notes' => null,
+                'sku' => $import_product->sku,
+                'is_free_shipping' => 0
+            ]);
 
-            if (!isset($hasProduct)) {
+            $name_id = TextContent::query()->insertGetId([
+                'original_text' => strtoupper($import_product->name)
+            ]);
+            $description_id = TextContent::query()->insertGetId([
+                'original_text' => $import_product->description
+            ]);
+            $short_description_id = TextContent::query()->insertGetId([
+                'original_text' => null
+            ]);
+            $notes_id = TextContent::query()->insertGetId([
+                'original_text' => null
+            ]);
 
-                if ($import_product->marka == '3_2') {
+            Product::query()->where('id',$product_id)->update([
+                'name'  =>$name_id,
+                'description' => $description_id,
+                'short_description' => $short_description_id,
+                'notes' => $notes_id
+            ]);
 
-                    $product_id = Product::query()->insertGetId([
-                        'sku' => $import_product->ana_urun_kod,
-                        'name' => $import_product->ana_urun_ad,
-                        'brand_id' => 3,
-                        'type_id' => $import_product->cins,
-                        'description' => $import_product->aciklama,
-                        'short_description' => $import_product->kisa_aciklama,
-                        'notes' => $import_product->notlar
-                    ]);
-                    ProductSeo::query()->insert([
-                        'product_id' => $product_id,
-                        'title' => $import_product->seo_baslik,
-                        'keywords' => $import_product->seo_kelimeler,
-                        'search_keywords' => $import_product->arama_kelimeleri
-                    ]);
-                    $variation_group_id = ProductVariationGroup::query()->insertGetId([
-                        'group_type_id' => 1,
-                        'product_id' => $product_id,
-                        'order' => 1
-                    ]);
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
+            $discounted_price = null;
+            $discounted_tax = null;
+            $regular_tax = $import_product->regular_price / (100 + 8) * 8;
 
-                    $product_id = Product::query()->insertGetId([
-                        'sku' => $import_product->ana_urun_kod,
-                        'name' => $import_product->ana_urun_ad,
-                        'brand_id' => 2,
-                        'type_id' => $import_product->cins,
-                        'description' => $import_product->aciklama,
-                        'short_description' => $import_product->kisa_aciklama,
-                        'notes' => $import_product->notlar
-                    ]);
-                    ProductSeo::query()->insert([
-                        'product_id' => $product_id,
-                        'title' => $import_product->seo_baslik,
-                        'keywords' => $import_product->seo_kelimeler,
-                        'search_keywords' => $import_product->arama_kelimeleri
-                    ]);
-                    $variation_group_id = ProductVariationGroup::query()->insertGetId([
-                        'group_type_id' => 1,
-                        'product_id' => $product_id,
-                        'order' => 1
-                    ]);
+            ProductRule::query()->where('id', $product_id)->insert([
+                'product_id' => $product_id,
+                'quantity_stock' => $import_product->quantity_stock,
+                'discount_rate' => 0,
+                'tax_rate' => 8,
+                'regular_price' => $import_product->regular_price,
+                'regular_tax' => $regular_tax,
+                'discounted_price' => $discounted_price,
+                'discounted_tax' => $discounted_tax
+            ]);
 
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
-
-
-                } else {
-
-                    $product_id = Product::query()->insertGetId([
-                        'sku' => $import_product->ana_urun_kod,
-                        'name' => $import_product->ana_urun_ad,
-                        'brand_id' => $import_product->marka,
-                        'type_id' => $import_product->cins,
-                        'description' => $import_product->aciklama,
-                        'short_description' => $import_product->kisa_aciklama,
-                        'notes' => $import_product->notlar
-                    ]);
-                    ProductSeo::query()->insert([
-                        'product_id' => $product_id,
-                        'title' => $import_product->seo_baslik,
-                        'keywords' => $import_product->seo_kelimeler,
-                        'search_keywords' => $import_product->arama_kelimeleri
-                    ]);
-                    $variation_group_id = ProductVariationGroup::query()->insertGetId([
-                        'group_type_id' => 1,
-                        'product_id' => $product_id,
-                        'order' => 1
-                    ]);
-
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
-
-                }
-
-
-            } else {
-
-                if ($import_product->marka == '3_2') {
-
-                    $variation_group_id = ProductVariationGroup::query()->where('product_id', $hasProduct->id)->first()->id;
-
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
-
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id + 1,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
-
-                } else {
-
-                    $variation_group_id = ProductVariationGroup::query()->where('product_id', $hasProduct->id)->first()->id;
-
-                    $variation_id = ProductVariation::query()->insertGetId([
-                        'variation_group_id' => $variation_group_id,
-                        'sku' => $import_product->alt_urun_kod,
-                        'name' => $import_product->renk,
-                        'description' => ''
-                    ]);
-                    ProductRule::query()->insert([
-                        'package_type_id' => $import_product->kmk,
-                        'variation_id' => $variation_id,
-                        'micro_name' => $import_product->mikro_urun_ad,
-                        'micro_sku' => $import_product->mikro_urun_kod,
-                        'dimensions' => $import_product->birim,
-                        'weight' => $import_product->agirlik
-                    ]);
-                    ProductImage::query()->insert([
-                        'variation_id' => $variation_id,
-                        'image' => $import_product->resim,
-                        'order' => 1
-                    ]);
-
-                }
-
-            }
 
 
         }
