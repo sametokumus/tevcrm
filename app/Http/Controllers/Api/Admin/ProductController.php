@@ -334,7 +334,7 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'sku' => $request->sku,
-
+                'quantity_stock' => $request->quantity_stock
             ]);
 
 
@@ -363,7 +363,8 @@ class ProductController extends Controller
                 'variation_group_id' => $request->variation_group_id,
                 'name' => $request->name,
                 'description' => $request->description,
-                'sku' => $request->sku
+                'sku' => $request->sku,
+                'quantity_stock' => $request->quantity_stock
             ]);
 
             return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
