@@ -324,7 +324,6 @@ class ProductController extends Controller
             $request->validate([
                 'variation_group_id' => 'required',
                 'name' => 'required',
-                'description' => 'required',
                 'sku' => 'required',
             ]);
 
