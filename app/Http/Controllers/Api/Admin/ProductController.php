@@ -612,7 +612,7 @@ class ProductController extends Controller
             }
 
 
-            ProductRule::query()->where('id', $id)->update([
+            ProductRule::query()->where('product_id', $id)->update([
                 'product_id' => $id,
                 'quantity_stock' => $request->quantity_stock,
                 'discount_rate' => $request->discount_rate,
