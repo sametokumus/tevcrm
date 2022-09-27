@@ -502,7 +502,6 @@ class ProductController extends Controller
                 'brand_id' => 'required|exists:brands,id',
                 'type_id' => 'required|exists:product_types,id',
                 'name' => 'required',
-                'description' => 'required',
                 'sku' => 'required'
             ]);
 
