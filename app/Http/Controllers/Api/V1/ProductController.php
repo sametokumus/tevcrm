@@ -231,13 +231,14 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
 
-//            foreach ($products as $product){
-//                $x1= TextContent::query()->where('id', $product['name'])->first();
-//                $product['name'] = $x1->original_text;
-//                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
-//                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
-//                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
-//            }
+            foreach ($products as $product){
+                $x1= TextContent::query()->where('id', $product['name'])->first();
+                return $x1;
+                $product['name'] = $x1->original_text;
+                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
+                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
+                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
+            }
 
             $xx = TextContent::query()->where('id', $products[0]['name'])->first();
 
