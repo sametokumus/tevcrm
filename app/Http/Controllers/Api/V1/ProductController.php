@@ -23,6 +23,7 @@ use App\Models\Translation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use function PHPUnit\Framework\isNull;
 
 class ProductController extends Controller
@@ -231,11 +232,12 @@ class ProductController extends Controller
                 ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->get();
-//                foreach ($products as $product){
+                foreach ($products as $product){
+                        $product->name = (int)$product->name;
 //                    return $product->name;
 //                    $product_name = TextContent::query()->where('id',39)->first();
 //                    $product['name'] = $product_name->original_text;
-//                }
+                }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
 //                if(is_null($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
