@@ -82,14 +82,18 @@ class ProductController extends Controller
 
             $array = [$translation_name,$translation_description,$translation_short_description,$translation_notes];
             $product['translation'] = $array;
-            $product_name = TextContent::query()->where('id',$product->name)->first()->original_text;
-            $product_description = TextContent::query()->where('id',$product->description)->first()->original_text;
-            $product_short_description = TextContent::query()->where('id',$product->short_description)->first()->original_text;
-            $notes = TextContent::query()->where('id',$product->notes)->first()->original_text;
-            $product->name = $product_name;
-            $product->description = $product_description;
-            $product->short_description = $product_short_description;
-            $product->notes = $notes;
+
+            $product_name = TextContent::query()->where('id',$product->name)->get();
+            if ($product_name->count() > 0){$product['name'] = $product_name[0]['original_text'];}else{$product['name'] = "";}
+
+            $product_description = TextContent::query()->where('id',$product->description)->get();
+            if ($product_description->count() > 0){$product['description'] = $product_description[0]['original_text'];}else{$product['description'] = "";}
+
+            $product_short_description = TextContent::query()->where('id',$product->short_description)->get();
+            if ($product_short_description->count() > 0){$product['short_description'] = $product_short_description[0]['original_text'];}else{$product['short_description'] = "";}
+
+            $product_notes = TextContent::query()->where('id',$product->notes)->get();
+            if ($product_notes->count() > 0){$product['notes'] = $product_notes[0]['original_text'];}else{$product['notes'] = "";}
 
 //            $product_name =
 //            $text_content = TextContent::query()->where('id',$product->name)->where('id',$product->description)
@@ -245,17 +249,6 @@ class ProductController extends Controller
                     $product_notes = TextContent::query()->where('id',$product->notes)->get();
                     if ($product_notes->count() > 0){$product['notes'] = $product_notes[0]['original_text'];}else{$product['notes'] = "";}
                 }
-//            foreach ($products as $product){
-//                $product_name = TextContent::query()->where('id', $product->name)->first();
-//                if(isEmptyOrNullString($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
-//                $product_description = TextContent::query()->where('id', $product->description)->first();
-//                if(isEmptyOrNullString($product_description->original_text)){$product['description'] = "";}else{$product['description'] = $product_description->original_text;}
-//                $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
-//                if(isEmptyOrNullString($product_short_description->original_text)){$product['short_description'] = "";}else{$product['short_description'] = $product_short_description->original_text;}
-//                $product_notes = TextContent::query()->where('id', $product->notes)->first();
-//                if(isEmptyOrNullString($product_notes->original_text)){$product['notes'] = "";}else{$product['notes'] = $product_notes->original_text;}
-//            }
-
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
@@ -397,6 +390,7 @@ class ProductController extends Controller
                 ->where('products.id', $id)
                 ->first();
 
+
             $languages = Language::query()->where('active', 1)->where('default', '!=', 1)->get();
 
             $translations = array();
@@ -419,11 +413,19 @@ class ProductController extends Controller
             }
             $product['translations'] = $translations;
 
-            $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
-            $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
-            $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
-            $product['notes'] = TextContent::query()->where('id', $product['notes'])->first()->original_text;
 
+
+            $product_name = TextContent::query()->where('id',$product->name)->get();
+            if ($product_name->count() > 0){$product['name'] = $product_name[0]['original_text'];}else{$product['name'] = "";}
+
+            $product_description = TextContent::query()->where('id',$product->description)->get();
+            if ($product_description->count() > 0){$product['description'] = $product_description[0]['original_text'];}else{$product['description'] = "";}
+
+            $product_short_description = TextContent::query()->where('id',$product->short_description)->get();
+            if ($product_short_description->count() > 0){$product['short_description'] = $product_short_description[0]['original_text'];}else{$product['short_description'] = "";}
+
+            $product_notes = TextContent::query()->where('id',$product->notes)->get();
+            if ($product_notes->count() > 0){$product['notes'] = $product_notes[0]['original_text'];}else{$product['notes'] = "";}
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $product]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
