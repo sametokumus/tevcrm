@@ -233,12 +233,12 @@ class ProductController extends Controller
 
             $xx = TextContent::query()->where('id', '=', 37)->first()->original_text->toSql();
 
-            foreach ($products as $product){
-                $product['name'] = TextContent::query()->where('id', '=', $product['name'])->first()->original_text;
-                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
-                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
-                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
-            }
+//            foreach ($products as $product){
+//                $product['name'] = TextContent::query()->where('id', '=', $product['name'])->first()->original_text;
+//                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
+//                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
+//                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
+//            }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $xx]]);
         } catch (QueryException $queryException) {
