@@ -234,6 +234,8 @@ class ProductController extends Controller
                 ->get();
                 foreach ($products as $product){
                         $product->name = (int)$product->name;
+                        $product_name = TextContent::query()->where('id',$product->name)->first();
+                        $product['product_name'] = $product_name->original_text;
 //                    return $product->name;
 //                    $product_name = TextContent::query()->where('id',39)->first();
 //                    $product['name'] = $product_name->original_text;
