@@ -233,7 +233,7 @@ class ProductController extends Controller
                 ->get();
 
             foreach ($products as $product){
-                $product_name = TextContent::query()->where('id', $product->name)->first();
+                $product_name = TextContent::query()->where('id', 35)->first();
                 return is_null($product_name->original_text);
                 if(is_null($product_name->original_text)){$product['name'] = $product_name->original_text;}else{$product['name'] = "";}
                 $product_description = TextContent::query()->where('id', $product->description)->first();
