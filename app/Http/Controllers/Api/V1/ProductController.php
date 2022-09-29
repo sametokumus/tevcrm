@@ -232,26 +232,26 @@ class ProductController extends Controller
                 ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->get();
-//                foreach ($products as $product){
+                foreach ($products as $product){
 //                    $product_name_id = (int)$product->name;
-//                    $product_name = TextContent::query()->where('id',$product_name_id)->get();
-//                    if ($product_name->count() > 0){
-//
-//                        $product['name'] = $product_name[0]['original_text'];
-//                    }else{
-//                        $product['name'] = "";
-//                    }
-//                }
-            foreach ($products as $product){
-                $product_name = TextContent::query()->where('id', $product->name)->first();
-                if(isEmptyOrNullString($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
-                $product_description = TextContent::query()->where('id', $product->description)->first();
-                if(isEmptyOrNullString($product_description->original_text)){$product['description'] = "";}else{$product['description'] = $product_description->original_text;}
-                $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
-                if(isEmptyOrNullString($product_short_description->original_text)){$product['short_description'] = "";}else{$product['short_description'] = $product_short_description->original_text;}
-                $product_notes = TextContent::query()->where('id', $product->notes)->first();
-                if(isEmptyOrNullString($product_notes->original_text)){$product['notes'] = "";}else{$product['notes'] = $product_notes->original_text;}
-            }
+                    $product_name = TextContent::query()->where('id',$product->name)->get();
+                    if ($product_name->count() > 0){
+
+                        $product['name'] = $product_name[0]['original_text'];
+                    }else{
+                        $product['name'] = "";
+                    }
+                }
+//            foreach ($products as $product){
+//                $product_name = TextContent::query()->where('id', $product->name)->first();
+//                if(isEmptyOrNullString($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
+//                $product_description = TextContent::query()->where('id', $product->description)->first();
+//                if(isEmptyOrNullString($product_description->original_text)){$product['description'] = "";}else{$product['description'] = $product_description->original_text;}
+//                $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
+//                if(isEmptyOrNullString($product_short_description->original_text)){$product['short_description'] = "";}else{$product['short_description'] = $product_short_description->original_text;}
+//                $product_notes = TextContent::query()->where('id', $product->notes)->first();
+//                if(isEmptyOrNullString($product_notes->original_text)){$product['notes'] = "";}else{$product['notes'] = $product_notes->original_text;}
+//            }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
