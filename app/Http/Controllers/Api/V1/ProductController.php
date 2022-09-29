@@ -232,13 +232,10 @@ class ProductController extends Controller
                 ->get();
 
             foreach ($products as $product){
-                $product_name = TextContent::query()->where('id',$product->name)->first()->id;
-                $product['name_text'] = $product_name;
-//                return $product['name_text'];
-//                $product['name'] = TextContent::query()->where('id', $product->name)->first()->original_text;
-//                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
-//                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
-//                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
+                $product['name'] = TextContent::query()->where('id', $product->name)->first();
+                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first();
+                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first();
+                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first();
             }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
