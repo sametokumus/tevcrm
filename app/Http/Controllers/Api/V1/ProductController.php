@@ -233,13 +233,12 @@ class ProductController extends Controller
 
             foreach ($products as $product){
                 $product_name = TextContent::query()->where('id',$product->name)->first();
-                $dc = json_decode($product_name);
-                $obj = $dc[0];
-                $product['name_text'] = $obj->original_text;
+                $product['name_text'] = $product_name->original_text;
+                return $product['name_text'];
 //                $product['name'] = TextContent::query()->where('id', $product->name)->first()->original_text;
-                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
-                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
-                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
+//                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
+//                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
+//                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
             }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
