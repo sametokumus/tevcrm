@@ -23,6 +23,7 @@ use App\Models\Translation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isNull;
 
 class ProductController extends Controller
 {
@@ -233,13 +234,13 @@ class ProductController extends Controller
 
             foreach ($products as $product){
                 $product_name = TextContent::query()->where('id', $product->name)->first();
-                if($product_name->original_text != null){$product['name'] = $product_name->original_text;}else{$product['name'] = "";}
+                if(!is_null($product_name->original_text)){$product['name'] = $product_name->original_text;}else{$product['name'] = "";}
                 $product_description = TextContent::query()->where('id', $product->description)->first();
-                if($product_description->original_text != null){$product['description'] = $product_description->original_text;}else{$product['description'] = "";}
+                if(!is_null($product_description->original_text)){$product['description'] = $product_description->original_text;}else{$product['description'] = "";}
                 $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
-                if($product_short_description->original_text != null){$product['short_description'] = $product_short_description->original_text;}else{$product['short_description'] = "";}
+                if(!is_null($product_short_description->original_text)){$product['short_description'] = $product_short_description->original_text;}else{$product['short_description'] = "";}
                 $product_notes = TextContent::query()->where('id', $product->notes)->first();
-                if($product_notes->original_text != null){$product['notes'] = $product_notes->original_text;}else{$product['notes'] = "";}
+                if(!is_null($product_notes->original_text)){$product['notes'] = $product_notes->original_text;}else{$product['notes'] = "";}
             }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
