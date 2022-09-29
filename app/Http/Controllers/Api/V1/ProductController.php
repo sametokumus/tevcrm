@@ -240,7 +240,7 @@ class ProductController extends Controller
 //                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
 //            }
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $xx]]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $xx->original_text]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
