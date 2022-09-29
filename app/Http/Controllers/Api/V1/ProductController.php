@@ -235,7 +235,7 @@ class ProductController extends Controller
 
             foreach ($products as $product){
                 $product_name = TextContent::query()->where('id',$product->name)->first();
-                return $product_name->original_text;
+                $product['name_text'] = $product_name->original_text;
 //                $product['name'] = TextContent::query()->where('id', $product->name)->first()->original_text;
                 $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
                 $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first()->original_text;
