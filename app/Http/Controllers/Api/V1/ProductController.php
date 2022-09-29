@@ -232,10 +232,14 @@ class ProductController extends Controller
                 ->get();
 
             foreach ($products as $product){
-                $product['name'] = TextContent::query()->where('id', $product->name)->first();
-                $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first();
-                $product['short_description'] = TextContent::query()->where('id', '=', $product['short_description'])->first();
-                $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first();
+                $product_name = TextContent::query()->where('id', $product->name)->first();
+                if($product_name->original_text != null){$product['name'] = $product_name->original_text;}else{$product['name'] = "";}
+                $product_description = TextContent::query()->where('id', $product->description)->first();
+                if($product_description->original_text != null){$product['description'] = $product_description->original_text;}else{$product['description'] = "";}
+                $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
+                if($product_short_description->original_text != null){$product['short_description'] = $product_short_description->original_text;}else{$product['short_description'] = "";}
+                $product_notes = TextContent::query()->where('id', $product->notes)->first();
+                if($product_notes->original_text != null){$product['notes'] = $product_notes->original_text;}else{$product['notes'] = "";}
             }
 
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
