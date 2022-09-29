@@ -233,14 +233,17 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
                 foreach ($products as $product){
-//                    $product_name_id = (int)$product->name;
                     $product_name = TextContent::query()->where('id',$product->name)->get();
-                    if ($product_name->count() > 0){
+                    if ($product_name->count() > 0){$product['name'] = $product_name[0]['original_text'];}else{$product['name'] = "";}
 
-                        $product['name'] = $product_name[0]['original_text'];
-                    }else{
-                        $product['name'] = "";
-                    }
+                    $product_description = TextContent::query()->where('id',$product->description)->get();
+                    if ($product_description->count() > 0){$product['description'] = $product_description[0]['original_text'];}else{$product['description'] = "";}
+
+                    $product_short_description = TextContent::query()->where('id',$product->short_description)->get();
+                    if ($product_short_description->count() > 0){$product['short_description'] = $product_short_description[0]['original_text'];}else{$product['short_description'] = "";}
+
+                    $product_notes = TextContent::query()->where('id',$product->notes)->get();
+                    if ($product_notes->count() > 0){$product['notes'] = $product_notes[0]['original_text'];}else{$product['notes'] = "";}
                 }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
