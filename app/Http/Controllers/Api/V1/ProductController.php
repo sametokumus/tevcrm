@@ -231,11 +231,11 @@ class ProductController extends Controller
                 ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->get();
-                foreach ($products as $product){
-                    return $product->name;
-                    $product_name = TextContent::query()->where('id',39)->first();
-                    $product['name'] = $product_name->original_text;
-                }
+//                foreach ($products as $product){
+//                    return $product->name;
+//                    $product_name = TextContent::query()->where('id',39)->first();
+//                    $product['name'] = $product_name->original_text;
+//                }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
 //                if(is_null($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
