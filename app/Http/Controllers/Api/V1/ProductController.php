@@ -232,8 +232,7 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
                 foreach ($products as $product){
-                    return $product->name;
-                    $product_name = TextContent::query()->where('id')->toSql();
+                    $product_name = TextContent::query()->where('id',32)->toSql();
                     return $product_name;
                 }
 //            foreach ($products as $product){
