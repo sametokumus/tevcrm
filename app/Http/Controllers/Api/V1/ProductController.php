@@ -231,7 +231,7 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
 
-            $xx = TextContent::query()->where('id', '37')->first();
+            $xx = TextContent::query()->where('id', $products[0]['name'])->first();
 
 //            foreach ($products as $product){
 //                $product['name'] = TextContent::query()->where('id', '=', $product['name'])->first()->original_text;
