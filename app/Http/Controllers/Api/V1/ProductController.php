@@ -235,7 +235,12 @@ class ProductController extends Controller
                 foreach ($products as $product){
                     $product_name_id = (int)$product->name;
                     $product_name = TextContent::query()->where('id',$product_name_id)->get();
-                    $product['name'] = $product_name[0]['original_text'];
+                    if ($product_name->count() > 0){
+
+                        $product['name'] = $product_name[0]['original_text'];
+                    }else{
+                        $product['name'] = "";
+                    }
                 }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
