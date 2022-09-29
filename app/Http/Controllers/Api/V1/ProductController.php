@@ -233,11 +233,8 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
                 foreach ($products as $product){
-                        $product->name = (int)$product->name;
-                        $product_name = TextContent::query()->where('id',"39")->toSql();
-                        return $product_name;
-                        $product['product_name'] = $product_name->original_text;
-//                    return $product->name;
+                        $product_name_id = (int)$product->name;
+                    return $product_name_id;
 //                    $product_name = TextContent::query()->where('id',39)->first();
 //                    $product['name'] = $product_name->original_text;
                 }
