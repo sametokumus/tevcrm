@@ -231,6 +231,8 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
 
+            $xx = TextContent::query()->where('id', '=', 37)->first()->original_text->toSql();
+
             foreach ($products as $product){
                 $product['name'] = TextContent::query()->where('id', '=', $product['name'])->first()->original_text;
                 $product['description'] = TextContent::query()->where('id', '=', $product['description'])->first()->original_text;
@@ -238,7 +240,7 @@ class ProductController extends Controller
                 $product['notes'] = TextContent::query()->where('id', '=', $product['notes'])->first()->original_text;
             }
 
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $xx]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
