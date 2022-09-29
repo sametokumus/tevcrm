@@ -234,8 +234,8 @@ class ProductController extends Controller
 
             foreach ($products as $product){
                 $product_name = TextContent::query()->where('id', 35)->first();
-                return is_null($product_name->original_text);
-                if(is_null($product_name->original_text)){$product['name'] = $product_name->original_text;}else{$product['name'] = "";}
+//                return is_null($product_name->original_text);
+                if(is_null($product_name->original_text)){$product['name'] = "";}else{$product['name'] = $product_name->original_text;}
                 $product_description = TextContent::query()->where('id', $product->description)->first();
                 if(is_null($product_description->original_text)){$product['description'] = $product_description->original_text;}else{$product['description'] = "";}
                 $product_short_description = TextContent::query()->where('id', $product->short_description)->first();
