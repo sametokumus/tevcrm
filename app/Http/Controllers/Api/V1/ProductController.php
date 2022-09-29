@@ -231,8 +231,9 @@ class ProductController extends Controller
                 ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
                 ->where('products.active', 1)
                 ->get();
+            return $products;
                 foreach ($products as $product){
-                    $product['name'] = TextContent::query()->where('id',$product->name)->first()->original_text;
+                    $product['name'] = TextContent::query()->where('id',$product->name)->first();
                 }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
