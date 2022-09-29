@@ -232,7 +232,7 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
                 foreach ($products as $product){
-                    $product_name = TextContent::query()->whereId($product->name)->first();
+                    $product_name = TextContent::query()->where('id',39)->first();
                     $product['name'] = $product_name->original_text;
                 }
 //            foreach ($products as $product){
