@@ -233,10 +233,10 @@ class ProductController extends Controller
                 ->where('products.active', 1)
                 ->get();
                 foreach ($products as $product){
-                        $product_name_id = (int)$product->name;
-                    return $product_name_id;
-//                    $product_name = TextContent::query()->where('id',39)->first();
-//                    $product['name'] = $product_name->original_text;
+                    $product_name_id = (int)$product->name;
+                    $product_name = TextContent::query()->where('id',$product_name_id)->toSql();
+                    return $product_name;
+                    $product['name'] = $product_name->original_text;
                 }
 //            foreach ($products as $product){
 //                $product_name = TextContent::query()->where('id', $product->name)->first();
