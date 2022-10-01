@@ -519,7 +519,7 @@ class ProductController extends Controller
            $name_id = TextContent::query()->insertGetId([
                 'original_text' => $request->name
             ]);
-            $description_id = TextContent::query()>insertGetId([
+            $description_id = TextContent::query()->insertGetId([
                 'original_text' => $request->description
             ]);
             $short_description_id = TextContent::query()->insertGetId([
