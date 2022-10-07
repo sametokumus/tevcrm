@@ -98,7 +98,6 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
 //    Route::post('/userDocuments/deleteUserDocumentsChecksByUserId/{document_id}', [UserDocumentChecksController::class, 'deleteUserDocumentsChecksByUserId']);
 
 
-
 });
 
 Route::post('/cart/addCart', [CartController::class, 'addCart']);
@@ -129,6 +128,7 @@ Route::get('/product/getAllProductById/{id}', [ProductController::class, 'getAll
 Route::get('/product/getAllProductWithVariationById/{product_id}/{variation_id}', [ProductController::class, 'getAllProductWithVariationById']);
 
 Route::get('/product/getProduct', [ProductController::class, 'getProduct']);
+Route::get('/product/getProductByFilter', [ProductController::class, 'getProductByFilter']);
 Route::get('/product/getProductById/{id}', [ProductController::class, 'getProductById']);
 
 Route::get('/product/getProductsByCategoryId/{category_id}', [ProductController::class, 'getProductsByCategoryId']);
