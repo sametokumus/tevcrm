@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Tag;
+use App\Models\TextContent;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -18,9 +20,17 @@ class CategoryController extends Controller
                 'name' => 'required',
                 'slug' => 'required'
             ]);
-           Category::query()->insert([
+           $category_id = Category::query()->insertGetId([
                 'parent_id' => $request->parent_id,
-                'name' => $request->name,
+                'name' => null,
+                'slug' => $request->slug
+            ]);
+           $name_id = TextContent::query()->insertGetId([
+               'original_text' => $request->name
+           ]);
+            Category::query()->where('id',$category_id)->update([
+                'parent_id' => $request->parent_id,
+                'name' => $name_id,
                 'slug' => $request->slug
             ]);
             return response(['message' => 'Kategori ekleme işlemi başarılı.', 'status' => 'success']);
@@ -41,10 +51,15 @@ class CategoryController extends Controller
                 'parent_id' => 'required',
             ]);
 
-            $category = Category::query()->where('id',$id)->update([
-                'name' => $request->name,
+            $category = Category::query()->where('id',$id)->first();
+            Category::query()->where('id',$id)->update([
+                'name' => $category->name,
                 'slug' => $request->slug,
                 'parent_id' => $request->parent_id
+            ]);
+
+            TextContent::query()->where('id',$category->name)->update([
+                'original_text' => $request->name
             ]);
 
             return response(['message' => 'Kategori güncelleme işlemi başarılı.','status' => 'success','object' => ['category' => $category]]);
@@ -60,10 +75,20 @@ class CategoryController extends Controller
     public function deleteCategory($id){
         try {
 
-            $address = Category::query()->where('id',$id)->update([
-                'active' => 0,
+            Category::query()->where('id',$id)->update([
+                'active' => 0
             ]);
-            return response(['message' => 'Kategori silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            $category = Category::query()->where('id',$id)->first();
+            $text_contents = TextContent::query()->where('active',1)->get();
+            foreach ($text_contents as $text_content){
+                if ($category->name == $text_content->id){
+                    TextContent::query()->where('id',$category->name)->update([
+                        'active' => 0
+                    ]);
+                }
+            }
+
+            return response(['message' => 'Kategori silme işlemi başarılı.','status' => 'success','object' => ['address' => $category]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
