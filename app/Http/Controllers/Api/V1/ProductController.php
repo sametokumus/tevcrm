@@ -255,6 +255,57 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductByFilter(Request $request)
+    {
+        try {
+            if ($request->category_id == 0){
+                $products = Product::query()
+                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                    ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                    ->leftJoin('product_variations', 'product_variations.id', '=', 'products.featured_variation')
+                    ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
+                    ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
+                    ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
+                    ->where('products.active', 1);
+
+                if($request->type_id != 0) {
+                    $products = $products->where('type_id', $request->type_id);
+                }
+                $products = $products->get();
+            }else{
+                $products = ProductCategory::query()
+                    ->leftJoin('products', 'products.id', '=', 'product_categories.product_id')
+                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                    ->leftJoin('product_types', 'product_types.id', '=', 'products.type_id')
+                    ->leftJoin('product_variation_groups', 'product_variation_groups.product_id', '=', 'products.id')
+                    ->select(DB::raw('(select id from product_variation_groups where product_id = products.id order by id asc limit 1) as variation_group'))
+                    ->leftJoin('product_variations', 'product_variations.id', '=', 'product_variation_groups.id')
+                    ->select(DB::raw('(select image from product_images where product_id = products.id order by id asc limit 1) as image'))
+                    ->leftJoin('product_rules', 'product_rules.product_id', '=', 'products.id')
+                    ->selectRaw('product_rules.*, brands.name as brand_name,product_types.name as type_name, products.*')
+                    ->where('products.active', 1)
+                    ->where('product_categories.active', 1)
+                    ->where('product_categories.category_id', $request->category_id);
+                if($request->type_id != 0) {
+                    $products = $products->where('type_id', $request->type_id);
+                }
+
+                $products = $products->get();
+            }
+
+
+            foreach ($products as $product){
+                $product['name'] = TextContent::query()->where('id', $product['name'])->first()->original_text;
+                $product['description'] = TextContent::query()->where('id', $product['description'])->first()->original_text;
+                $product['short_description'] = TextContent::query()->where('id', $product['short_description'])->first()->original_text;
+                $product['notes'] = TextContent::query()->where('id', $product['notes'])->first()->original_text;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['products' => $products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        }
+    }
+
     public function getProductsByCategoryId($category_id)
     {
         try {

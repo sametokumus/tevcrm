@@ -331,7 +331,19 @@ class ProductController extends Controller
             $variation_id = ProductVariation::query()->insertGetId([
                 'variation_group_id' => $request->variation_group_id,
                 'name' => $request->name,
-                'description' => $request->description,
+                'description' => null,
+                'sku' => $request->sku,
+                'quantity_stock' => $request->quantity_stock
+            ]);
+
+            $description_id = TextContent::query()->insertGetId([
+                'original_text' => $request->description
+            ]);
+
+            ProductVariation::query()->where('id',$variation_id)->update([
+                'variation_group_id' => $request->variation_group_id,
+                'name' => $request->name,
+                'description' => $description_id,
                 'sku' => $request->sku,
                 'quantity_stock' => $request->quantity_stock
             ]);
@@ -357,13 +369,17 @@ class ProductController extends Controller
 //                'description' => 'required',
 //                'sku' => 'required',
 //            ]);
-
+            $product_variation = ProductVariation::query()->where('id',$id)->first();
             ProductVariation::query()->where('id', $id)->update([
                 'variation_group_id' => $request->variation_group_id,
                 'name' => $request->name,
-                'description' => $request->description,
+                'description' => $product_variation->description,
                 'sku' => $request->sku,
                 'quantity_stock' => $request->quantity_stock
+            ]);
+
+            TextContent::query()->where('id',$product_variation->description)->update([
+                'original_text' => $request->description
             ]);
 
             return response(['message' => 'Ürün varyasyon güncelleme işlemi başarılı.', 'status' => 'success']);
@@ -383,6 +399,15 @@ class ProductController extends Controller
             ProductVariation::query()->where('id', $id)->update([
                 'active' => 0
             ]);
+            $product_variation = ProductVariation::query()->where('id',$id)->first();
+            $text_contents = TextContent::query()->where('active',1)->get();
+            foreach ($text_contents as $text_content){
+                if ($product_variation->description == $text_content->id){
+                    TextContent::query()->where('id',$product_variation->description)->update([
+                        'active' => 0
+                    ]);
+                }
+            }
 
             return response(['message' => 'Ürün varyasyon silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -430,10 +455,20 @@ class ProductController extends Controller
     {
         try {
 
-            ProductTabContent::query()->insert([
+            $product_tab_id = ProductTabContent::query()->insertGetId([
                 'product_id' => $request->product_id,
                 'product_tab_id' => $request->product_tab_id,
-                'content_text' => $request->content_text
+                'content_text' => null
+            ]);
+
+            $content_text_id = TextContent::query()->insertGetId([
+                'original_text' => $request->content_text
+            ]);
+
+            ProductTabContent::query()->where('id',$product_tab_id)->update([
+                'product_id' => $request->product_id,
+                'product_tab_id' => $request->product_tab_id,
+                'content_text' => $content_text_id
             ]);
 
 
@@ -456,16 +491,31 @@ class ProductController extends Controller
 
             if (isset($product_tab_row)) {
                 ProductTabContent::query()->where('product_tab_id', $product_tab_row->id)->update([
-                    'content_text' => $request->content_text,
+                    'content_text' => $product_tab_row->content_text,
                     'active' => 1
                 ]);
+                TextContent::query()->where('id',$product_tab_row->content_text)->update([
+                   'original_text' => $request->content_text
+                ]);
             } else {
-                ProductTabContent::query()->insert([
+                $product_tag = ProductTabContent::query()->insertGetId([
                     'product_id' => $request->product_id,
                     'product_tab_id' => $request->product_tab_id,
-                    'content_text' => $request->content_text
+                    'content_text' => null
+                ]);
+                $content_text_id = TextContent::query()->insertGetId([
+                    'original_text' => $request->content_text
+                ]);
+                ProductTabContent::query()->where('id',$product_tag)->update([
+                    'product_id' => $request->product_id,
+                    'product_tab_id' => $request->product_tab_id,
+                    'content_text' => $content_text_id
                 ]);
             }
+
+//            TextContent::query()->where('id',$product_tab_row->content_text)->update([
+//                'content_text' => $request->content_text
+//            ]);
 
             return response(['message' => 'Ürün sekmesi güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -484,6 +534,15 @@ class ProductController extends Controller
             ProductTabContent::query()->where('id', $tab_id)->update([
                 'active' => 0
             ]);
+            $product_tab_content = ProductTabContent::query()->where('id',$tab_id)->first();
+            $text_contents = TextContent::query()->where('active',1)->get();
+            foreach ($text_contents as $text_content){
+                if ($product_tab_content->content_text == $text_content->id){
+                    TextContent::query()->where('id',$product_tab_content->content_text)->update([
+                        'active' => 0
+                    ]);
+                }
+            }
 
             return response(['message' => 'Ürün sekmesi silme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -577,16 +636,18 @@ class ProductController extends Controller
                 'is_free_shipping' => 'required',
                 'view_all_images' => 'required'
             ]);
-
+            $product = Product::query()->where('id', $id)->first();
             Product::query()->where('id', $id)->update([
                 'brand_id' => $request->brand_id,
                 'type_id' => $request->type_id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'short_description' => $product->short_description,
+                'notes' => $product->notes,
                 'sku' => $request->sku,
-                'is_free_shipping' => $request->is_free_shipping,
-                'view_all_images' => $request->view_all_images,
+                'is_free_shipping' => $request->is_free_shipping
             ]);
 
-            $product = Product::query()->where('id', $id)->first();
 
             TextContent::query()->where('id', $product->name)->update([
                 'original_text' => $request->name
