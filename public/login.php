@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/brand/kablocu-favicon.png" />
 
     <!-- TITLE -->
-    <title>Kablocu - Admin </title>
+    <title>Leni's Technologies</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

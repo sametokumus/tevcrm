@@ -56,7 +56,7 @@ async function fetchDataGet(apiURL, contentType){
 
 	var returnData;
 	var token = sessionStorage.getItem('appToken');
-	var data = await fetch('https://api-kablocu.wimco.com.tr/api'+apiURL, {
+	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
 		method: 'get',
 		headers:{
 			'Content-Type': contentType,
@@ -73,7 +73,7 @@ async function fetchDataPost (apiURL, body, contentType) {
 
 	var returnData;
 	var token = sessionStorage.getItem('appToken');
-	var data = await fetch('https://api-kablocu.wimco.com.tr/api'+apiURL, {
+	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
 		method: 'post',
 		headers:{
 			'Content-Type': contentType,
@@ -98,7 +98,7 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 			callBackFunction(this);
 		}
 	});
-	xhr.open("POST", 'https://api-kablocu.wimco.com.tr/api'+apiURL);
+	xhr.open("POST", 'https://lenis-crm.wimco.com.tr/api'+apiURL);
 	xhr.setRequestHeader("Authorization", 'Bearer '+token);
 	xhr.send(body);
 
