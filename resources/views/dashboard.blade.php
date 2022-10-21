@@ -1,5 +1,5 @@
+@include('include.header')
 <?php
-include('header.php');
 $extra_js='
 <script src="services/dashboard.js"></script>
     <!-- INTERNAL APEXCHART JS -->
@@ -57,4 +57,4 @@ $extra_js='
 
 
 
-<?php include('footer.php'); ?>
+@include('include.footer')

@@ -1,5 +1,5 @@
+@include('include.header')
 <?php
-include('header.php');
 $extra_js='
 <script src="services/admins.js"></script>
 ';
@@ -194,4 +194,4 @@ $extra_js='
     </div>
 </div>
 
-<?php include('footer.php'); ?>
+@include('include.footer')

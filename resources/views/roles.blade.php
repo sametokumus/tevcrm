@@ -1,5 +1,5 @@
+@include('include.header')
 <?php
-include('header.php');
 $extra_js='
 <script src="services/roles.js"></script>
 ';
@@ -164,5 +164,4 @@ $extra_js='
         </div>
     </div>
 </div>
-
-<?php include('footer.php'); ?>
+@include('include.footer')
