@@ -347,96 +347,9 @@ $extra_js="";
                         </svg></div>
                     <ul class="side-menu">
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="dashboard.php"><i
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/dashboard"><i
                                     class="side-menu__icon fe fe-home"></i><span
                                     class="side-menu__label">Dashboard</span></a>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-package"></i><span
-                                    class="side-menu__label">Ürün</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="add-product.php" class="slide-item"> Ürün Ekle</a></li>
-                                <li><a href="select-product.php" class="slide-item"> Ürün Güncelle</a></li>
-                                <!--                                    <li><a href="brands.php" class="slide-item"> Markalar</a></li>-->
-                                <li><a href="product-types.php" class="slide-item"> Tür</a></li>
-                                <li><a href="product-categories.php" class="slide-item"> Kategori</a></li>
-                                <li><a href="product-variation-group-types.php" class="slide-item"> Varyasyon Grupları</a></li>
-                                <li><a href="product-tabs.php" class="slide-item"> Ürün Açıklama Sekmeleri</a></li>
-                                <li><a href="product-tags.php" class="slide-item"> Etiketler</a></li>
-                            </ul>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-package"></i><span
-                                    class="side-menu__label">Sipariş</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="select-orders.php?type=ongoing" class="slide-item"> Aktif Siparişler</a></li>
-                                <li><a href="select-orders.php?type=completed" class="slide-item"> Geçmiş Siparişler</a></li>
-                            </ul>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-users"></i><span
-                                    class="side-menu__label">Kullanıcılar</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="select-users.php?type=all" class="slide-item"> Tüm Kullanıcılar</a></li>
-                                <li><a href="select-users.php?type=1" class="slide-item"> Standart Kullanıcılar</a></li>
-                                <li><a href="select-users.php?type=2" class="slide-item"> Bayi Kullanıcıları</a></li>
-                                <li><a href="user-types.php" class="slide-item"> Kullanıcı Türleri</a></li>
-                                <li><a href="user-type-discounts.php" class="slide-item"> Kullanıcı Türü İskonto</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="select-refunds.php"><i
-                                    class="side-menu__icon fe fe-repeat"></i><span
-                                    class="side-menu__label">İade Talepleri</span></a>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="select-cards.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Ödeme Yöntemleri</span></a>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="brands.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Markalar</span></a>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="group-discounts.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Toplu İskonto Tanımlama</span></a>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="coupons.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Kupon Yönetimi</span></a>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-package"></i><span
-                                    class="side-menu__label">Anasayfa İçerik Yönetimi</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="sliders.php" class="slide-item"> Slider</a></li>
-                                <li><a href="category-banners.php" class="slide-item"> Kategori Banner</a></li>
-                                <li><a href="campaign-product.php" class="slide-item"> Kampanyalı Ürünler</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="seos.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">SEO Yönetimi</span></a>
                         </li>
 
                         <li class="slide">
@@ -450,34 +363,123 @@ $extra_js="";
                             </ul>
                         </li>
 
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-package"></i><span
-                                    class="side-menu__label">Kargo</span><i
-                                    class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="default-delivery.php" class="slide-item"> Default Değerler</a></li>
-                                <li><a href="regional-delivery.php" class="slide-item"> Bölgesel Kargo</a></li>
-                            </ul>
-                        </li>
 
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="popups.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Popup Yönetimi</span></a>
-                        </li>
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i--}}
+{{--                                    class="side-menu__icon fe fe-package"></i><span--}}
+{{--                                    class="side-menu__label">Ürün</span><i--}}
+{{--                                    class="angle fe fe-chevron-right"></i></a>--}}
+{{--                            <ul class="slide-menu">--}}
+{{--                                <li><a href="add-product.php" class="slide-item"> Ürün Ekle</a></li>--}}
+{{--                                <li><a href="select-product.php" class="slide-item"> Ürün Güncelle</a></li>--}}
+{{--                                <!--                                    <li><a href="brands.php" class="slide-item"> Markalar</a></li>-->--}}
+{{--                                <li><a href="product-types.php" class="slide-item"> Tür</a></li>--}}
+{{--                                <li><a href="product-categories.php" class="slide-item"> Kategori</a></li>--}}
+{{--                                <li><a href="product-variation-group-types.php" class="slide-item"> Varyasyon Grupları</a></li>--}}
+{{--                                <li><a href="product-tabs.php" class="slide-item"> Ürün Açıklama Sekmeleri</a></li>--}}
+{{--                                <li><a href="product-tags.php" class="slide-item"> Etiketler</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i--}}
+{{--                                    class="side-menu__icon fe fe-package"></i><span--}}
+{{--                                    class="side-menu__label">Sipariş</span><i--}}
+{{--                                    class="angle fe fe-chevron-right"></i></a>--}}
+{{--                            <ul class="slide-menu">--}}
+{{--                                <li><a href="select-orders.php?type=ongoing" class="slide-item"> Aktif Siparişler</a></li>--}}
+{{--                                <li><a href="select-orders.php?type=completed" class="slide-item"> Geçmiş Siparişler</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i--}}
+{{--                                    class="side-menu__icon fe fe-users"></i><span--}}
+{{--                                    class="side-menu__label">Kullanıcılar</span><i--}}
+{{--                                    class="angle fe fe-chevron-right"></i></a>--}}
+{{--                            <ul class="slide-menu">--}}
+{{--                                <li><a href="select-users.php?type=all" class="slide-item"> Tüm Kullanıcılar</a></li>--}}
+{{--                                <li><a href="select-users.php?type=1" class="slide-item"> Standart Kullanıcılar</a></li>--}}
+{{--                                <li><a href="select-users.php?type=2" class="slide-item"> Bayi Kullanıcıları</a></li>--}}
+{{--                                <li><a href="user-types.php" class="slide-item"> Kullanıcı Türleri</a></li>--}}
+{{--                                <li><a href="user-type-discounts.php" class="slide-item"> Kullanıcı Türü İskonto</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
 
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="subscribers.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Bülten Abonelikleri</span></a>
-                        </li>
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="select-refunds.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-repeat"></i><span--}}
+{{--                                    class="side-menu__label">İade Talepleri</span></a>--}}
+{{--                        </li>--}}
 
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="user-actions.php"><i
-                                    class="side-menu__icon fe fe-check-circle"></i><span
-                                    class="side-menu__label">Kullanıcı Hareketleri</span></a>
-                        </li>
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="select-cards.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Ödeme Yöntemleri</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="brands.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Markalar</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="group-discounts.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Toplu İskonto Tanımlama</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="coupons.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Kupon Yönetimi</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i--}}
+{{--                                    class="side-menu__icon fe fe-package"></i><span--}}
+{{--                                    class="side-menu__label">Anasayfa İçerik Yönetimi</span><i--}}
+{{--                                    class="angle fe fe-chevron-right"></i></a>--}}
+{{--                            <ul class="slide-menu">--}}
+{{--                                <li><a href="sliders.php" class="slide-item"> Slider</a></li>--}}
+{{--                                <li><a href="category-banners.php" class="slide-item"> Kategori Banner</a></li>--}}
+{{--                                <li><a href="campaign-product.php" class="slide-item"> Kampanyalı Ürünler</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="seos.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">SEO Yönetimi</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i--}}
+{{--                                    class="side-menu__icon fe fe-package"></i><span--}}
+{{--                                    class="side-menu__label">Kargo</span><i--}}
+{{--                                    class="angle fe fe-chevron-right"></i></a>--}}
+{{--                            <ul class="slide-menu">--}}
+{{--                                <li><a href="default-delivery.php" class="slide-item"> Default Değerler</a></li>--}}
+{{--                                <li><a href="regional-delivery.php" class="slide-item"> Bölgesel Kargo</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="popups.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Popup Yönetimi</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="subscribers.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Bülten Abonelikleri</span></a>--}}
+{{--                        </li>--}}
+
+{{--                        <li class="slide">--}}
+{{--                            <a class="side-menu__item" data-bs-toggle="slide" href="user-actions.php"><i--}}
+{{--                                    class="side-menu__icon fe fe-check-circle"></i><span--}}
+{{--                                    class="side-menu__label">Kullanıcı Hareketleri</span></a>--}}
+{{--                        </li>--}}
 
                         <!--                            <li class="sub-category">-->
                         <!--                                <h3>UI Kit</h3>-->
