@@ -358,8 +358,8 @@ $extra_js="";
                                     class="side-menu__label">Rol Yönetimi</span><i
                                     class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
-                                <li><a href="admins.php" class="slide-item"> Kullanıcılar</a></li>
-                                <li><a href="roles.php" class="slide-item"> Roller</a></li>
+                                <li><a href="/admins" class="slide-item"> Kullanıcılar</a></li>
+                                <li><a href="/roles" class="slide-item"> Roller</a></li>
                             </ul>
                         </li>
 
