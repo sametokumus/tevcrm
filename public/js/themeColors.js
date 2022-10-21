@@ -429,7 +429,7 @@ function hexToRgba(hexValue, alpha) {
 }
 
 
-myVarVal, myVarVal1, myVarVal2, myVarVal3
+var myVarVal, myVarVal1, myVarVal2, myVarVal3
 
 function names() {
 
