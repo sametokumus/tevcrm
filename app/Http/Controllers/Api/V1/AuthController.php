@@ -101,7 +101,7 @@ class AuthController extends Controller
 
             $user->token = $userToken;
 
-            return  response(['message' => __('Başarılıs.'),'status' => 'success', 'object' => ['user'=>$user]]);
+            return  response(['message' => __('Başarılı.'),'status' => 'success', 'object' => ['user'=>$user]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
