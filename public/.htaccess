@@ -1,21 +1,116 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+RewriteEngine on
 
-    RewriteEngine On
+# Options +FollowSymlinks
+Options -Indexes
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{HTTP_REFERER} 4webmasters\.com [NC]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+RewriteRule .* - [F]
 
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+Redirect /content/docs/STOK-IK-9.pdf /tur/images/publications/600b0d16c762d.pdf
+Redirect /content/docs/STOK-Tarim_TUR.pdf  /tur/images/publications/600461ca2bae2.pdf
+Redirect /tr/biz-kimiz/yonetim /tr/hakkimizda
+Redirect /tr/biz-kimiz/takim /tr/hakkimizda
+Redirect /tr/biz-kimiz/is-modeli /tr/oykumuz
+Redirect /tr/odul-programlari/teknoloji-odulleri /tr/gorunurluk-faaliyetleri
+
+
+
+RewriteEngine on
+
+ErrorDocument 403 /404.php
+ErrorDocument 404 /404.php
+
+
+
+DirectoryIndex login.php
+
+#RewriteRule ^sitemap\.xml/?$ sitemap.php
+RewriteRule    ^404/?$    404.php    [NC,L]
+
+
+RewriteRule    ^login/?$    login.php    [NC,L]
+RewriteRule    ^dashboard/?$    dashboard.php    [NC,L]
+#RewriteRule    ^kayit-ol/?$    register.php    [NC,L]
+#
+#RewriteRule    ^hesabim/?$    my-account.php    [NC,L]
+#RewriteRule    ^bayi-hesabim/?$    my-dealer-account.php    [NC,L]
+
+
+<IfModule mod_deflate.c>
+
+SetOutputFilter DEFLATE
+
+# Don’t compress
+
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+
+#Dealing with proxy servers
+
+<IfModule mod_headers.c>
+
+Header append Vary User-Agent
+
+</IfModule>
+
+</IfModule>
+
+<IfModule mod_headers.c>
+
+Header set Connection keep-alive
+
+</IfModule>
+
+## EXPIRES CACHING ##
+
+<IfModule mod_expires.c>
+
+ExpiresActive On
+
+ExpiresByType image/jpg "access plus 1 year"
+
+ExpiresByType image/jpeg "access plus 1 year"
+
+ExpiresByType image/gif "access plus 1 year"
+
+ExpiresByType image/png "access plus 1 year"
+
+ExpiresByType text/css "access plus 1 month"
+
+ExpiresByType application/pdf "access plus 1 month"
+
+ExpiresByType text/x-javascript "access plus 1 month"
+
+ExpiresByType application/x-shockwave-flash "access plus 1 month"
+
+ExpiresByType image/x-icon "access plus 1 year"
+
+ExpiresDefault "access plus 1 week"
+
+</IfModule>
+
+## EXPIRES CACHING ##
+
+<IfModule mod_deflate.c>
+
+AddOutputFilterByType DEFLATE text/html text/xml text/css text/plain
+
+AddOutputFilterByType DEFLATE image/svg+xml application/xhtml+xml application/xml
+
+AddOutputFilterByType DEFLATE application/rdf+xml application/rss+xml application/atom+xml
+
+AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+
+AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-otf
+
+AddOutputFilterByType DEFLATE font/truetype font/opentype
+
+</IfModule>
+
+<IfModule mod_php5.c>
+    #Session timeout
+    php_value session.cookie_lifetime 3600
+    php_value session.gc_maxlifetime 3600
 </IfModule>
