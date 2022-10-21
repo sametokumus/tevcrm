@@ -7,14 +7,9 @@ RewriteCond %{HTTP_REFERER} 4webmasters\.com [NC]
 
 RewriteRule .* - [F]
 
-Redirect /content/docs/STOK-IK-9.pdf /tur/images/publications/600b0d16c762d.pdf
-Redirect /content/docs/STOK-Tarim_TUR.pdf  /tur/images/publications/600461ca2bae2.pdf
-Redirect /tr/biz-kimiz/yonetim /tr/hakkimizda
-Redirect /tr/biz-kimiz/takim /tr/hakkimizda
-Redirect /tr/biz-kimiz/is-modeli /tr/oykumuz
-Redirect /tr/odul-programlari/teknoloji-odulleri /tr/gorunurluk-faaliyetleri
-
-
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 
 RewriteEngine on
 
