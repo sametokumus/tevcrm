@@ -1,6 +1,6 @@
 (function($) {
     "use strict";
-	
+
 	 $(document).ready(function() {
 
 		 $("#add_role_form").submit(async function( event ) {
@@ -143,7 +143,7 @@ async function initPermissionsToRolePermissionsModal(){
 	}
 }
 
-let clickPermissionItem = async function() {
+clickPermissionItem = async function() {
 	let role_id = document.getElementById('update_role_permissions_id').value;
 	let permission_id = $(this).data('id');
 	let item_id = $(this).attr('id');
