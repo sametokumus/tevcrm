@@ -1,10 +1,10 @@
-const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
 
 $("#attachment").on('change', function(e){
 	for(var i = 0; i < this.files.length; i++){
 		let fileBloc = $('<span/>', {class: 'file-block'}),
 			 fileName = $('<span/>', {class: 'name', text: this.files.item(i).name});
-		
+
 			fileBloc.append('<span class="file-delete"><span>+</span></span>')
 			.append('<span class="file-icon"><i class="fas fa-file"></i></span>')
 			.append(fileName);
