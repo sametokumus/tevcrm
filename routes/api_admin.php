@@ -40,7 +40,7 @@ use App\Http\Controllers\Api\Admin\LanguageController;
 |
 */
 
-//
+
 Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
 
