@@ -1,4 +1,4 @@
-const handleThemeUpdate = (cssVars) => {
+handleThemeUpdate = (cssVars) => {
     const root = document.querySelector(':root');
     const keys = Object.keys(cssVars);
     keys.forEach(key => {
@@ -62,7 +62,7 @@ function dynamicPrimaryColor(primaryColor) {
             const cssPropName9 = `--transparentprimary-${e.target.getAttribute('data-id9')}`;
             handleThemeUpdate({
                 [cssPropName]: e.target.value,
-                // 95 is used as the opacity 0.95  
+                // 95 is used as the opacity 0.95
                 [cssPropName1]: e.target.value + 95,
                 [cssPropName2]: e.target.value,
                 [cssPropName3]: e.target.value,
@@ -118,7 +118,7 @@ function dynamicPrimaryColor(primaryColor) {
         document.querySelector('body')?.classList.remove('bg-img2');
         document.querySelector('body')?.classList.remove('bg-img3');
         document.querySelector('body')?.classList.remove('bg-img4');
-        
+
         localStorage.removeItem('BgImage');
         $('#myonoffswitch1').prop('checked', true);
     })
@@ -129,7 +129,7 @@ function dynamicPrimaryColor(primaryColor) {
     document.querySelector('body')?.classList.remove('bg-img2');
     document.querySelector('body')?.classList.remove('bg-img3');
     document.querySelector('body')?.classList.remove('bg-img4');
-    
+
     localStorage.removeItem('BgImage');
     $('#myonoffswitch2').prop('checked', true);
     })
@@ -140,11 +140,11 @@ function dynamicPrimaryColor(primaryColor) {
     document.querySelector('body')?.classList.remove('bg-img2');
     document.querySelector('body')?.classList.remove('bg-img3');
     document.querySelector('body')?.classList.remove('bg-img4');
-    
+
     localStorage.removeItem('BgImage');
     $('#myonoffswitchTransparent').prop('checked', true);
     })
-        
+
 })();
 
 function localStorageBackup() {
@@ -199,10 +199,10 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add('transparent-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
-		
+
 		$('#myonoffswitchTransparent').prop('checked', true);
 	}
-    
+
     if (localStorage.transparentBgColor) {
         // document.getElementById('transparentBgColorID').value = localStorage.transparentBgColor;
         document.querySelector('html').style.setProperty('--transparent-body', localStorage.transparentBgColor);
@@ -221,7 +221,7 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add(bgImg);
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
-		
+
 		$('#myonoffswitchTransparent').prop('checked', true);
 	}
 }
@@ -265,7 +265,7 @@ function darkPrimaryColor() {
     $('#myonoffswitch8').prop('checked', true);
     checkOptions();
 
-    // removing light theme data 
+    // removing light theme data
     localStorage.removeItem('primaryColor')
     localStorage.removeItem('primaryHoverColor')
     localStorage.removeItem('primaryBorderColor')
@@ -287,7 +287,7 @@ function darkPrimaryColor() {
 }
 
 function transparentPrimaryColor() {
-    
+
     $('#myonoffswitch3').prop('checked', false);
     $('#myonoffswitch6').prop('checked', false);
     $('#myonoffswitch5').prop('checked', false);
@@ -297,7 +297,7 @@ function transparentPrimaryColor() {
     localStorage.setItem('transparentPrimary', userColor);
     localStorage.setItem('transparentprimaryTransparent', userColor + 20);
 
-    // removing light theme data 
+    // removing light theme data
     localStorage.removeItem('darkPrimary');
     localStorage.removeItem('primaryColor')
     localStorage.removeItem('primaryHoverColor')
@@ -331,7 +331,7 @@ function transparentBgImgPrimaryColor() {
 		document.querySelector('body')?.classList.add('bg-img1');
         localStorage.setItem('BgImage', 'bg-img1')
 	}
-    // removing light theme data 
+    // removing light theme data
 	localStorage.removeItem('darkPrimary');
 	localStorage.removeItem('primaryColor')
 	localStorage.removeItem('primaryHoverColor')
@@ -362,7 +362,7 @@ function transparentBgColor() {
     localStorage.removeItem('transparentBgImgPrimary');
 	localStorage.removeItem('transparentBgImgprimaryTransparent');
 
-    // removing light theme data 
+    // removing light theme data
     localStorage.removeItem('darkPrimary');
     localStorage.removeItem('primaryColor')
     localStorage.removeItem('primaryHoverColor')
@@ -390,8 +390,8 @@ function bgImage(e) {
     $('#myonoffswitch8').prop('checked', false);
 	let imgID = e.getAttribute('class');
 	localStorage.setItem('BgImage', imgID);
-    
-    // removing light theme data 
+
+    // removing light theme data
 	localStorage.removeItem('darkPrimary');
 	localStorage.removeItem('primaryColor')
 	localStorage.removeItem('transparentBgColor');
@@ -406,20 +406,20 @@ function bgImage(e) {
 }
 
 // to check the value is hexa or not
-const isValidHex = (hexValue) => /^#([A-Fa-f0-9]{3,4}){1,2}$/.test(hexValue)
+isValidHex = (hexValue) => /^#([A-Fa-f0-9]{3,4}){1,2}$/.test(hexValue)
 
-const getChunksFromString = (st, chunkSize) => st.match(new RegExp(`.{${chunkSize}}`, "g"))
+getChunksFromString = (st, chunkSize) => st.match(new RegExp(`.{${chunkSize}}`, "g"))
     // convert hex value to 256
-const convertHexUnitTo256 = (hexStr) => parseInt(hexStr.repeat(2 / hexStr.length), 16)
+convertHexUnitTo256 = (hexStr) => parseInt(hexStr.repeat(2 / hexStr.length), 16)
     // get alpha value is equla to 1 if there was no value is asigned to alpha in function
-const getAlphafloat = (a, alpha) => {
+getAlphafloat = (a, alpha) => {
         if (typeof a !== "undefined") { return a / 255 }
         if ((typeof alpha != "number") || alpha < 0 || alpha > 1) {
             return 1
         }
         return alpha
     }
-    // convertion of hex code to rgba code 
+    // convertion of hex code to rgba code
 function hexToRgba(hexValue, alpha) {
     if (!isValidHex(hexValue)) { return null }
     const chunkSize = Math.floor((hexValue.length - 1) / 3)
@@ -429,7 +429,7 @@ function hexToRgba(hexValue, alpha) {
 }
 
 
-let myVarVal, myVarVal1, myVarVal2, myVarVal3
+var myVarVal, myVarVal1, myVarVal2, myVarVal3
 
 function names() {
 
@@ -444,7 +444,7 @@ function names() {
     if(document.querySelector('#transactions') !== null){
         index();
     }
-    
+
     let colorData = hexToRgba(myVarVal || "#6c5ffc", 0.1)
     document.querySelector('html').style.setProperty('--primary01', colorData);
 

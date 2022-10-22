@@ -128,8 +128,8 @@ jQuery(function () {
 
 
 
-let slideLeft = document.querySelector(".slide-left");
-let slideRight = document.querySelector(".slide-right");
+slideLeft = document.querySelector(".slide-left");
+slideRight = document.querySelector(".slide-right");
 slideLeft.addEventListener("click", () => {
     slideClick()
 }, true)
@@ -394,7 +394,7 @@ function HorizontalHovermenu() {
 HorizontalHovermenu();
 
 // for Icon-text Menu
-//icontext(); 
+//icontext();
 
 // default layout
 hovermenu();
@@ -428,7 +428,7 @@ function icontext() {
         $('body').removeClass('sidenav-toggled-open');
     });
 
-    //Mobile menu 
+    //Mobile menu
     jQuery(document).ready(function ($) {
         var alterClass = function () {
             var ww = document.body.clientWidth;
