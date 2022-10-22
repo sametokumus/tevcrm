@@ -128,8 +128,8 @@ jQuery(function () {
 
 
 
-slideLeft = document.querySelector(".slide-left");
-slideRight = document.querySelector(".slide-right");
+let slideLeft = document.querySelector(".slide-left");
+let slideRight = document.querySelector(".slide-right");
 slideLeft.addEventListener("click", () => {
     slideClick()
 }, true)

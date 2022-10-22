@@ -1,4 +1,4 @@
-dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
 
 $("#attachment").on('change', function(e){
 	for(var i = 0; i < this.files.length; i++){

@@ -1,4 +1,4 @@
-handleThemeUpdate = (cssVars) => {
+const handleThemeUpdate = (cssVars) => {
     const root = document.querySelector(':root');
     const keys = Object.keys(cssVars);
     keys.forEach(key => {
