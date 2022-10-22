@@ -143,7 +143,7 @@ async function initPermissionsToRolePermissionsModal(){
 	}
 }
 
-clickPermissionItem = async function() {
+let clickPermissionItem = async function() {
 	let role_id = document.getElementById('update_role_permissions_id').value;
 	let permission_id = $(this).data('id');
 	let item_id = $(this).attr('id');
