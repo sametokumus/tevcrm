@@ -18,3 +18,5 @@ Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
 Route::get('/admins', function () { return view('admins'); });
 Route::get('/roles', function () { return view('roles'); });
+Route::get('/customers', function () { return view('customers'); });
+Route::get('/suppliers', function () { return view('suppliers'); });
