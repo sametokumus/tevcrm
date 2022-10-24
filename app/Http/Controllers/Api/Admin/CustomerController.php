@@ -29,7 +29,7 @@ class CustomerController extends Controller
     public function getCustomerById($customer_id)
     {
         try {
-            $customer = Address::query()->where('id', $customer_id)->where('active',1)->first();
+            $customer = Customer::query()->where('id', $customer_id)->where('active',1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['customer' => $customer]]);
         } catch (QueryException $queryException) {

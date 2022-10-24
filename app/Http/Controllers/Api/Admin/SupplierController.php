@@ -27,7 +27,7 @@ class SupplierController extends Controller
     public function getSupplierById($supplier_id)
     {
         try {
-            $supplier = Address::query()->where('id', $supplier_id)->where('active',1)->first();
+            $supplier = Supplier::query()->where('id', $supplier_id)->where('active',1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['supplier' => $supplier]]);
         } catch (QueryException $queryException) {
