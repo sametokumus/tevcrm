@@ -362,6 +362,16 @@ $extra_js="";
                                 <li><a href="/roles" class="slide-item"> Roller</a></li>
                             </ul>
                         </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/customers"><i
+                                    class="side-menu__icon fe fe-home"></i><span
+                                    class="side-menu__label">Müşteriler</span></a>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/suppliers"><i
+                                    class="side-menu__icon fe fe-home"></i><span
+                                    class="side-menu__label">Tedarikçiler</span></a>
+                        </li>
 
 
 {{--                        <li class="slide">--}}
