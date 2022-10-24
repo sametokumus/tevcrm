@@ -7,29 +7,7 @@ use App\Http\Controllers\Api\V1\ResetPasswordController;
 use App\Http\Controllers\Api\V1\AddressController;
 use App\Http\Controllers\Api\V1\CountriesController;
 use App\Http\Controllers\Api\V1\CitiesController;
-use App\Http\Controllers\Api\V1\ContactRulesController;
-use App\Http\Controllers\Api\V1\UserContactRulesController;
-use App\Http\Controllers\Api\V1\UserDocumentController;
-use App\Http\Controllers\Api\V1\UserDocumentChecksController;
-use App\Http\Controllers\Api\V1\BrandController;
-use App\Http\Controllers\Api\V1\ProductTypeController;
-use App\Http\Controllers\Api\V1\CategoryController;
-use App\Http\Controllers\Api\V1\ProductController;
-use App\Http\Controllers\Api\V1\ProductDocumentController;
-use App\Http\Controllers\Api\V1\CartController;
-use App\Http\Controllers\Api\V1\OrderController;
-use App\Http\Controllers\Api\V1\TabController;
-use App\Http\Controllers\Api\V1\ProductVariationGroupTypeController;
-use App\Http\Controllers\Api\V1\TagController;
-use App\Http\Controllers\Api\V1\CarrierController;
-use App\Http\Controllers\Api\V1\CreditCardController;
-use App\Http\Controllers\Api\V1\BankBinPairController;
 use App\Http\Controllers\Api\V1\SearchController;
-use App\Http\Controllers\Api\V1\SliderController;
-use App\Http\Controllers\Api\V1\SeoController;
-use App\Http\Controllers\Api\V1\CouponController;
-use App\Http\Controllers\Api\V1\PopupController;
-use App\Http\Controllers\Api\V1\SubscribeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -80,7 +58,6 @@ Route::middleware(['auth:sanctum', 'type.user'])->group(function (){
     Route::get('/cities/getCitiesByCountryId/{country_id}', [CitiesController::class, 'getCitiesByCountryId']);
     Route::get('/cities/getDistrictsByCityId/{city_id}', [CitiesController::class, 'getDistrictsByCityId']);
     Route::post('/cities/addCities/{country_id}', [CitiesController::class, 'addCities']);
-
 
 
 });

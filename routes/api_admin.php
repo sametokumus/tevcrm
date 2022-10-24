@@ -2,32 +2,12 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Admin\AuthController;
-use App\Http\Controllers\Api\Admin\AdminUserComments;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
-use App\Http\Controllers\Api\Admin\BrandController;
-use App\Http\Controllers\Api\Admin\ProductTypeController;
-use App\Http\Controllers\Api\Admin\CategoryController;
-use App\Http\Controllers\Api\Admin\ProductController;
-use App\Http\Controllers\Api\Admin\AdminController;
-use App\Http\Controllers\Api\Admin\TabController;
-use App\Http\Controllers\Api\Admin\OrderStatusController;
-use App\Http\Controllers\Api\Admin\ProductVariationGroupTypeController;
-use App\Http\Controllers\Api\Admin\TagController;
-use App\Http\Controllers\Api\Admin\CartController;
-use App\Http\Controllers\Api\Admin\CarrierController;
-use App\Http\Controllers\Api\Admin\OrderController;
-use App\Http\Controllers\Api\Admin\ImportController;
-use App\Http\Controllers\Api\Admin\ShippingTypeController;
-use App\Http\Controllers\Api\Admin\CreditCardController;
 use App\Http\Controllers\Api\Admin\UserController;
-use App\Http\Controllers\Api\Admin\SliderController;
-use App\Http\Controllers\Api\Admin\SeoController;
-use App\Http\Controllers\Api\Admin\CouponController;
-use App\Http\Controllers\Api\Admin\DeliveryController;
-use App\Http\Controllers\Api\Admin\PopupController;
-use App\Http\Controllers\Api\Admin\SubscribeController;
-use App\Http\Controllers\Api\Admin\LanguageController;
+use App\Http\Controllers\Api\Admin\ImportController;
+use App\Http\Controllers\Api\Admin\CustomerController;
+use App\Http\Controllers\Api\Admin\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +63,45 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('excel/postNewProducts', [ImportController::class, 'postNewProducts']);
     Route::get('excel/updateProductNew', [ImportController::class, 'updateProductNew']);
 
+
+    //Customer
+    Route::get('customer/getCustomers', [CustomerController::class, 'getCustomers']);
+    Route::get('customer/getCustomerById/{customer_id}', [CustomerController::class, 'getCustomerById']);
+    Route::post('customer/addCustomer', [CustomerController::class, 'addCustomer']);
+    Route::post('customer/updateCustomer/{customer_id}', [CustomerController::class, 'updateCustomer']);
+    Route::get('customer/deleteCustomer/{customer_id}', [CustomerController::class, 'deleteCustomer']);
+
+    Route::get('customer/getCustomerAddresses/{customer_id}', [CustomerController::class, 'getCustomerAddresses']);
+    Route::get('customer/getCustomerAddressById/{address_id}', [CustomerController::class, 'getCustomerAddressById']);
+    Route::post('customer/addCustomerAddress', [CustomerController::class, 'addCustomerAddress']);
+    Route::post('customer/updateCustomerAddress/{address_id}', [CustomerController::class, 'updateCustomerAddress']);
+    Route::get('customer/deleteCustomerAddress/{address_id}', [CustomerController::class, 'deleteCustomerAddress']);
+
+    Route::get('customer/getCustomerContacts/{customer_id}', [CustomerController::class, 'getCustomerContacts']);
+    Route::get('customer/getCustomerContactById/{contact_id}', [CustomerController::class, 'getCustomerContactById']);
+    Route::post('customer/addCustomerContact', [CustomerController::class, 'addCustomerContact']);
+    Route::post('customer/updateCustomerContact/{contact_id}', [CustomerController::class, 'updateCustomerContact']);
+    Route::get('customer/deleteCustomerContact/{contact_id}', [CustomerController::class, 'deleteCustomerContact']);
+
+
+    //Supplier
+    Route::get('supplier/getSuppliers', [SupplierController::class, 'getSuppliers']);
+    Route::get('supplier/getSupplierById/{supplier_id}', [SupplierController::class, 'getSupplierById']);
+    Route::post('supplier/addSupplier', [SupplierController::class, 'addSupplier']);
+    Route::post('supplier/updateSupplier/{supplier_id}', [SupplierController::class, 'updateSupplier']);
+    Route::get('supplier/deleteSupplier/{supplier_id}', [SupplierController::class, 'deleteSupplier']);
+
+    Route::get('supplier/getSupplierAddresses/{supplier_id}', [SupplierController::class, 'getSupplierAddresses']);
+    Route::get('supplier/getSupplierAddressById/{address_id}', [SupplierController::class, 'getSupplierAddressById']);
+    Route::post('supplier/addSupplierAddress', [SupplierController::class, 'addSupplierAddress']);
+    Route::post('supplier/updateSupplierAddress/{address_id}', [SupplierController::class, 'updateSupplierAddress']);
+    Route::get('supplier/deleteSupplierAddress/{address_id}', [SupplierController::class, 'deleteSupplierAddress']);
+
+    Route::get('supplier/getSupplierContacts/{supplier_id}', [SupplierController::class, 'getSupplierContacts']);
+    Route::get('supplier/getSupplierContactById/{contact_id}', [SupplierController::class, 'getSupplierContactById']);
+    Route::post('supplier/addSupplierContact', [SupplierController::class, 'addSupplierContact']);
+    Route::post('supplier/updateSupplierContact/{contact_id}', [SupplierController::class, 'updateSupplierContact']);
+    Route::get('supplier/deleteSupplierContact/{contact_id}', [SupplierController::class, 'deleteSupplierContact']);
 
 
 });
