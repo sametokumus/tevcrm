@@ -18,7 +18,7 @@ class CustomerController extends Controller
     public function getCustomers()
     {
         try {
-            $customers = Customer::query()->where('active',1)->get();
+            $customers = Customer::query()->where('active',1)->toSql();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['customers' => $customers]]);
         } catch (QueryException $queryException) {
