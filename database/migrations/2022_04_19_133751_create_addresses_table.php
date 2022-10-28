@@ -20,6 +20,7 @@ class CreateAddressesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->bigInteger('country_id');
+            $table->bigInteger('state_id');
             $table->bigInteger('city_id');
             $table->string('phone');
             $table->string('fax');

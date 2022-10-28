@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\AdminPermissionController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\CountryController;
+use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\Controllers\Api\Admin\SupplierController;
@@ -56,7 +57,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('countries/getCountries', [CountryController::class, 'getCountries']);
-    Route::get('cities/getCitiesByCountryId/{country_id}', [CityController::class, 'getCitiesByCountryId']);
+    Route::get('cities/getStatesByCountryId/{country_id}', [StateController::class, 'getStatesByCountryId']);
+    Route::get('cities/getCitiesByStateId/{state_id}', [CityController::class, 'getCitiesByStateId']);
 
 
     Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
