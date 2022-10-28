@@ -14,7 +14,7 @@ class CitiesController extends Controller
     public function getCitiesByCountryId($country_id)
     {
         try {
-                $cities = City::query()->where('country_id',$country_id)->get();
+                $cities = City::query()->where('country_id',$country_id)->orderBy('name')->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success','cities' => $cities]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
