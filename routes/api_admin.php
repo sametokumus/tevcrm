@@ -53,6 +53,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
+    Route::get('countries/getCountries', [CountriesController::class, 'getCountries']);
+    Route::get('cities/getCitiesByCountryId/{country_id}', [CitiesController::class, 'getCitiesByCountryId']);
+
+
     Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
     Route::post('excel/priceExcelImport', [ImportController::class, 'priceExcelImport']);
     Route::get('excel/addAllProduct', [ImportController::class, 'addAllProduct']);
