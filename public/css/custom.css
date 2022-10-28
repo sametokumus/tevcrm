@@ -1,7 +1,12 @@
+* {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+}
+
 /* Toast */
 .alert-container {
     border-radius: 0;
-    background-color: #002f2f;
+    background-color: #65c3c3;
     color: #fff;
     border: none;
     position: fixed;
@@ -138,7 +143,7 @@
 }
 
 .dataTables_wrapper .selected {
-    background: #002f2f;
+    background: #65c3c3;
     cursor: pointer;
 }
 .dataTables_length{

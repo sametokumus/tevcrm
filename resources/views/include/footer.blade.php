@@ -501,68 +501,68 @@
                 <ul class="row p-3">
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
-                                    <span class="country-selector"><img alt="" src="images/flags/us_flag.jpg"
+                                    <span class="country-selector"><img alt="" src="/images/flags/us_flag.jpg"
                                                                         class="me-3 language"></span>USA
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/italy_flag.jpg"
+                                                                        src="/images/flags/italy_flag.jpg"
                                                                         class="me-3 language"></span>Italy
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/spain_flag.jpg"
+                                                                        src="/images/flags/spain_flag.jpg"
                                                                         class="me-3 language"></span>Spain
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/india_flag.jpg"
+                                                                        src="/images/flags/india_flag.jpg"
                                                                         class="me-3 language"></span>India
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/french_flag.jpg"
+                                                                        src="/images/flags/french_flag.jpg"
                                                                         class="me-3 language"></span>French
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/russia_flag.jpg"
+                                                                        src="/images/flags/russia_flag.jpg"
                                                                         class="me-3 language"></span>Russia
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/germany_flag.jpg"
+                                                                        src="/images/flags/germany_flag.jpg"
                                                                         class="me-3 language"></span>Germany
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                                                        src="images/flags/argentina.jpg"
+                                                                        src="/images/flags/argentina.jpg"
                                                                         class="me-3 language"></span>Argentina
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                    <span class="country-selector"><img alt="" src="images/flags/malaysia.jpg"
+                                    <span class="country-selector"><img alt="" src="/images/flags/malaysia.jpg"
                                                                         class="me-3 language"></span>Malaysia
                         </a>
                     </li>
                     <li class="col-lg-6 mb-2">
                         <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                    <span class="country-selector"><img alt="" src="images/flags/turkey.jpg"
+                                    <span class="country-selector"><img alt="" src="/images/flags/turkey.jpg"
                                                                         class="me-3 language"></span>Turkey
                         </a>
                     </li>
@@ -578,7 +578,7 @@
     <div class="container">
         <div class="row align-items-center flex-row-reverse">
             <div class="col-md-12 col-sm-12 text-center">
-                Copyright © 2022 <a href="javascript:void(0)">Kablocu</a>. Designed by <span
+                Copyright © 2022 <a href="javascript:void(0)">Leni's Technologies</a>. Designed by <span
                     class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Wimco </a> All rights reserved.
             </div>
         </div>
@@ -600,59 +600,59 @@
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <!-- JQUERY JS -->
-<script src="vendor/jquery.js"></script>
-<script src="vendor/jquery-ui.js"></script>
-<script src="vendor/popper.min.js"></script>
+<script src="/vendor/jquery.js"></script>
+<script src="/vendor/jquery-ui.js"></script>
+<script src="/vendor/popper.min.js"></script>
 
 <!-- BOOTSTRAP JS -->
 <!--    <script src="plugins/bootstrap/js/popper.min.js"></script>-->
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- SPARKLINE JS-->
-<script src="js/jquery.sparkline.min.js"></script>
+<script src="/js/jquery.sparkline.min.js"></script>
 
 <!-- Sticky js -->
-<script src="js/sticky.js"></script>
+<script src="/js/sticky.js"></script>
 
 <!-- INPUT MASK JS-->
-<script src="plugins/input-mask/jquery.mask.min.js"></script>
+<script src="/plugins/input-mask/jquery.mask.min.js"></script>
 
 <!-- INTERNAL SELECT2 JS -->
-<script src="plugins/select2/select2.full.min.js"></script>
-<script src="js/select2.js"></script>
+<script src="/plugins/select2/select2.full.min.js"></script>
+<script src="/js/select2.js"></script>
 
 <!-- SIDE-MENU JS -->
-<script src="plugins/sidemenu/sidemenu.js"></script>
+<script src="/plugins/sidemenu/sidemenu.js"></script>
 
 <!-- SIDEBAR JS -->
-<script src="plugins/sidebar/sidebar.js"></script>
+<script src="/plugins/sidebar/sidebar.js"></script>
 
 <!-- Editor JS -->
-<script src="plugins/tinymce/tinymce.min.js"></script>
-<script src="plugins/tinymce/editor_init.js"></script>
+<script src="/plugins/tinymce/tinymce.min.js"></script>
+<script src="/plugins/tinymce/editor_init.js"></script>
 
 <!-- BOOTSTRAP-DATERANGEPICKER JS -->
-<script src="plugins/bootstrap-daterangepicker/moment.min.js"></script>
-<script src="plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script src="/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 <!-- INTERNAL Bootstrap-Datepicker js-->
-<script src="plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
 <!-- INTERNAL File-Uploads Js-->
-<script src="plugins/fancyuploder/jquery.ui.widget.js"></script>
-<script src="plugins/fancyuploder/jquery.fileupload.js"></script>
-<script src="plugins/fancyuploder/jquery.iframe-transport.js"></script>
-<script src="plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+<script src="/plugins/fancyuploder/jquery.ui.widget.js"></script>
+<script src="/plugins/fancyuploder/jquery.fileupload.js"></script>
+<script src="/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+<script src="/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
 
 <!-- Perfect SCROLLBAR JS-->
-<script src="plugins/p-scroll/perfect-scrollbar.js"></script>
-<script src="plugins/p-scroll/pscroll.js"></script>
-<script src="plugins/p-scroll/pscroll-1.js"></script>
+<script src="/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="/plugins/p-scroll/pscroll.js"></script>
+<script src="/plugins/p-scroll/pscroll-1.js"></script>
 
 <!-- INTERNAL Data tables js-->
-<script src="plugins/datatable/js/jquery.dataTables.min.js"></script>
-<script src="plugins/datatable/js/dataTables.bootstrap5.js"></script>
-<script src="plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="/plugins/datatable/dataTables.responsive.min.js"></script>
 <!--    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>-->
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -664,34 +664,34 @@
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 
 <!-- TIMEPICKER JS -->
-<script src="plugins/time-picker/jquery.timepicker.js"></script>
-<script src="plugins/time-picker/toggles.min.js"></script>
+<script src="/plugins/time-picker/jquery.timepicker.js"></script>
+<script src="/plugins/time-picker/toggles.min.js"></script>
 <!-- DATEPICKER JS -->
-<script src="plugins/date-picker/date-picker.js"></script>
+<script src="/plugins/date-picker/date-picker.js"></script>
 <!-- FORMELEMENTS JS -->
-<script src="js/form-elements.js"></script>
+<script src="/js/form-elements.js"></script>
 
 
 
 
 <!-- VENDOR -->
-<script src="vendor/jquery.toast.min.js"></script>
-<script src="vendor/fileupload.js"></script>
-<script src="vendor/bCrypt.js"></script>
-<script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
+<script src="/vendor/jquery.toast.min.js"></script>
+<script src="/vendor/fileupload.js"></script>
+<script src="/vendor/bCrypt.js"></script>
+<script src="/vendor/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <!-- SERVICE JS -->
-<script src="services/service.js"></script>
+<script src="/services/service.js"></script>
 <?php echo $extra_js; ?>
 
 
 
     <!-- Color Theme js -->
-<script src="js/themeColors.js"></script>
+<script src="/js/themeColors.js"></script>
 
 <!-- CUSTOM JS -->
-<script src="js/custom.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
 

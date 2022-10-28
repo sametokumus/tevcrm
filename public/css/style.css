@@ -97,14 +97,14 @@ License        :   Licensed under ThemeForest License
 /*Transparent variables*/
 /* ###### Bootstrap ###### */
 :root {
-    --primary-bg-color: #002f2f;
+    --primary-bg-color: #65c3c3;
     --primary-bg-hover: #0d3f3f;
-    --primary-bg-border: #002f2f;
+    --primary-bg-border: #65c3c3;
 
     --dark-body: #292e4a;
     --dark-border: #30314e;
-    --dark-primary: #002f2f;
-    --transparent-primary: #002f2f;
+    --dark-primary: #65c3c3;
+    --transparent-primary: #65c3c3;
     --transparent-body: #584cd9;
     --transparent-theme: rgba(0, 0, 0, 0.2);
     --transparent-border: rgba(255, 255, 255, 0.1);
@@ -124,7 +124,7 @@ License        :   Licensed under ThemeForest License
     --white: #ffffff;
     --gray: #6c757d;
     --gray-dark: #343a40;
-    --primary: #002f2f;
+    --primary: #65c3c3;
     --secondary: #6c757d;
     --success: #28a745;
     --info: #17a2b8;
@@ -20786,8 +20786,8 @@ footer .pull-center {
 
 .fc .fc-button-primary {
     color: #fff;
-    background-color: #002f2f;
-    border-color: #002f2f;
+    background-color: #65c3c3;
+    border-color: #65c3c3;
     box-shadow: 0 5px 10px rgba(108, 95, 252, 0.3);
 }
 
@@ -20800,8 +20800,8 @@ footer .pull-center {
 .fc .fc-button-primary:disabled {
     /* not DRY */
     color: #fff;
-    background-color: #002f2f;
-    border-color: #002f2f;
+    background-color: #65c3c3;
+    border-color: #65c3c3;
 }
 
 .fc .fc-button-primary:not(:disabled):active,
@@ -21208,10 +21208,10 @@ a.fc-event:hover {
 .fc-h-event {
     /* allowed to be top-level */
     display: block;
-    border: 1px solid #002f2f;
-    border: 1px solid #002f2f;
-    background-color: #002f2f;
-    background-color: #002f2f;
+    border: 1px solid #65c3c3;
+    border: 1px solid #65c3c3;
+    background-color: #65c3c3;
+    background-color: #65c3c3;
 }
 
 .fc-h-event .fc-event-main {
@@ -21593,8 +21593,8 @@ a.fc-event:hover {
     box-sizing: content-box;
     width: 0;
     height: 0;
-    border: 4px solid #002f2f;
-    border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #002f2f);
+    border: 4px solid #65c3c3;
+    border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #65c3c3);
     border-radius: 4px;
     border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);
 }
@@ -21614,10 +21614,10 @@ a.fc-event:hover {
 .fc-v-event {
     /* allowed to be top-level */
     display: block;
-    border: 1px solid #002f2f;
-    border: 1px solid var(--fc-event-border-color, #002f2f);
-    background-color: #002f2f;
-    background-color: var(--fc-event-bg-color, #002f2f);
+    border: 1px solid #65c3c3;
+    border: 1px solid var(--fc-event-border-color, #65c3c3);
+    background-color: #65c3c3;
+    background-color: var(--fc-event-bg-color, #65c3c3);
     /* resizer (mouse AND touch) */
     /* resizer for MOUSE */
     /* resizer for TOUCH (when event is "selected") */
@@ -22136,7 +22136,7 @@ a.fc-event:hover {
 
 .fc .fc-list-event:hover td {
     background-color: #f6f6fb;
-    color: #002f2f;
+    color: #65c3c3;
 }
 
 .fc .fc-list-event-graphic,
@@ -22150,8 +22150,8 @@ a.fc-event:hover {
     box-sizing: content-box;
     width: 0;
     height: 0;
-    border: 5px solid #002f2f;
-    border: calc(var(--fc-list-event-dot-width, 10px) / 2) solid var(--fc-event-border-color, #002f2f);
+    border: 5px solid #65c3c3;
+    border: calc(var(--fc-list-event-dot-width, 10px) / 2) solid var(--fc-event-border-color, #65c3c3);
     border-radius: 5px;
     border-radius: calc(var(--fc-list-event-dot-width, 10px) / 2);
 }
@@ -22253,7 +22253,7 @@ a.fc-event:hover {
 }
 
 .fc-daygrid-event.fc-event {
-    background: #002f2f;
+    background: #65c3c3;
     color: #fff !important;
 }
 
@@ -22262,7 +22262,7 @@ a.fc-event:hover {
 }
 
 .fc-event {
-    border: 0px solid #002f2f !important;
+    border: 0px solid #65c3c3 !important;
 }
 
 .fc-col-header thead th {

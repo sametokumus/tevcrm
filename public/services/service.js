@@ -146,6 +146,18 @@ function getURLParam(name){
 	return params.get(name);
 }
 
+function getPathVariable(variable) {
+    let path = location.pathname;
+    let parts = path.substr(1).split('/'), value;
+
+    while(parts.length) {
+        if (parts.shift() === variable) value = parts.shift();
+        else parts.shift();
+    }
+
+    return value;
+}
+
 function formatDateASC(date, slicer) {
 	date = new Date(date);
 

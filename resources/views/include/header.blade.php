@@ -27,31 +27,35 @@ $extra_js="";
     <meta name="keywords" content="">
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/brand/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/brand/favicon.png" />
 
     <!-- TITLE -->
     <title>Leni's Technologies</title>
 
     <!-- BOOTSTRAP CSS -->
-    <link id="style" href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="style" href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.min.css">
 
     <!-- STYLE CSS -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
     <!--    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" />-->
     <link href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" />
-    <link href="css/dark-style.css" rel="stylesheet" />
-    <link href="css/transparent-style.css" rel="stylesheet">
-    <link href="css/skin-modes.css" rel="stylesheet" />
-    <link href="css/custom.css" rel="stylesheet" />
+    <link href="/css/dark-style.css" rel="stylesheet" />
+    <link href="/css/transparent-style.css" rel="stylesheet">
+    <link href="/css/skin-modes.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
-    <link href="css/icons.css" rel="stylesheet" />
+    <link href="/css/icons.css" rel="stylesheet" />
 
     <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="colors/color1.css" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="/colors/color1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -59,7 +63,7 @@ $extra_js="";
 
 <!-- GLOBAL-LOADER -->
 <div id="global-loader">
-    <img src="images/loader.svg" class="loader-img" alt="Loader">
+    <img src="/images/loader.svg" class="loader-img" alt="Loader">
 </div>
 <!-- /GLOBAL-LOADER -->
 
@@ -73,7 +77,7 @@ $extra_js="";
                 <div class="d-flex">
                     <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
                     <!-- sidebar-toggle-->
-                    <a class="logo-horizontal " href="dashboard.php">
+                    <a class="logo-horizontal " href="/dashboard">
                         <!--                            <img src="images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">-->
                         <!--                            <img src="images/brand/logo-3.png" class="header-brand-img light-logo1"-->
                         <!--                                 alt="logo">-->
@@ -292,7 +296,7 @@ $extra_js="";
                                     <!-- SIDE-MENU -->
                                     <div class="dropdown d-flex profile-1">
                                         <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                            <img src="images/users/21.jpg" alt="profile-user"
+                                            <img src="/images/users/21.jpg" alt="profile-user"
                                                  class="avatar  profile-user brround cover-image">
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -333,10 +337,10 @@ $extra_js="";
             <div class="app-sidebar">
                 <div class="side-header">
                     <a class="header-brand1" href="dashboard.php">
-                        <img src="images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
-                        <img src="images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
-                        <img src="images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                        <img src="/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
+                        <img src="/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
+                        <img src="/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
                 </div>

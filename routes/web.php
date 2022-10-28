@@ -19,4 +19,6 @@ Route::get('/dashboard', function () { return view('dashboard'); });
 Route::get('/admins', function () { return view('admins'); });
 Route::get('/roles', function () { return view('roles'); });
 Route::get('/customers', function () { return view('customers'); });
+Route::get('/customer-detail/{id}', function () { return view('customer-detail'); });
 Route::get('/suppliers', function () { return view('suppliers'); });
+Route::get('/supplier-detail/{id}', function () { return view('supplier-detail'); });

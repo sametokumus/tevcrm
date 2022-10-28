@@ -6,7 +6,7 @@ $extra_js='
 ?>
 
     <!--app-content open-->
-<div class="main-content app-content mt-0">
+<div class="main-content app-content mt-5">
     <div class="side-app">
 
         <!-- CONTAINER -->
