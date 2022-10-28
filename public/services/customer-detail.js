@@ -214,6 +214,7 @@ async function addAddress(){
         "name": document.getElementById('add_address_name').value,
         "address": document.getElementById('add_address_address').value,
         "country_id": document.getElementById('add_address_country').value,
+        "state_id": document.getElementById('add_address_state').value,
         "city_id": document.getElementById('add_address_city').value,
         "phone": document.getElementById('add_address_phone').value,
         "fax": document.getElementById('add_address_fax').value
@@ -234,6 +235,7 @@ async function openUpdateAddressModal(address_id){
     document.getElementById('update_address_address').value = address.address;
     document.getElementById('update_address_country').value = address.country_id;
     document.getElementById('update_address_city').value = address.city_id;
+    document.getElementById('update_address_state').value = address.state_id;
     document.getElementById('update_address_phone').value = address.phone;
     document.getElementById('update_address_fax').value = address.fax;
 }
@@ -245,6 +247,7 @@ async function updateAddress(){
         "name": document.getElementById('add_address_name').value,
         "address": document.getElementById('add_address_address').value,
         "country_id": document.getElementById('add_address_country').value,
+        "state_id": document.getElementById('add_address_state').value,
         "city_id": document.getElementById('add_address_city').value,
         "phone": document.getElementById('add_address_phone').value,
         "fax": document.getElementById('add_address_fax').value

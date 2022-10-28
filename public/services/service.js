@@ -360,6 +360,24 @@ async function getDistrictsAddSelectAutoUpdate(cityId, selectId){
 
 /* SERVICE FUNCTIONS */
 
+async function serviceGetCountries() {
+	const data = await fetchDataGet('/admin/countries/getCountries', 'application/json');
+	if (data.status == "success") {
+		return data;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+
+async function serviceGetStatesByCountryId(countryId) {
+	const data = await fetchDataGet('/admin/states/getCitiesByCountryId/' + countryId, 'application/json');
+	if (data.status == "success") {
+		return data;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+
 async function serviceGetCitiesByCountryId(countryId) {
 	const data = await fetchDataGet('/v1/cities/getCitiesByCountryId/' + countryId, 'application/json');
 	if (data.status == "success") {

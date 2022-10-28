@@ -140,6 +140,14 @@ $extra_js='
                         </div>
                     </div>
                     <div class="row mb-4">
+                        <label class="col-md-3 form-label">Bölge :</label>
+                        <div class="col-md-9">
+                            <select name="type" class="form-control form-select" id="add_address_state" required>
+                                <option>Şehir Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
                         <label class="col-md-3 form-label">Şehir :</label>
                         <div class="col-md-9">
                             <select name="type" class="form-control form-select" id="add_address_city" required>
@@ -201,6 +209,14 @@ $extra_js='
                         <div class="col-md-9">
                             <select name="brand" class="form-control form-select" id="update_address_country" required>
                                 <option>Ülke Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Bölge :</label>
+                        <div class="col-md-9">
+                            <select name="type" class="form-control form-select" id="update_address_state" required>
+                                <option>Bölge Seçiniz</option>
                             </select>
                         </div>
                     </div>
