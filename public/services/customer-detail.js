@@ -53,6 +53,7 @@
 		// initProduct();
         initCustomer();
         initCustomerAddresses();
+        initCustomerContacts();
 	});
 
 })(window.jQuery);
@@ -155,6 +156,7 @@ async function addAddress(){
     let returned = await servicePostAddCustomerAddress(formData);
     if(returned){
         $("#add_address_form").trigger("reset");
+        $('#addAddressModal').modal('hide');
         initCustomerAddresses();
     }
 }
@@ -165,10 +167,10 @@ async function openUpdateAddressModal(address_id){
     let address = data.address;
 
     await getCountriesAddSelectId('update_address_country');
-    document.getElementById('update_address_country').addEventListener('change', () => {getStatesAddSelectIdWithParent('update_address_state', 'update_address_country');}, false);
+    document.getElementById('update_address_country').addEventListener('change', () => {getStatesAddSelectIdWithParent('update_address_state', 'update_address_country'); $('#update_address_city option').remove();}, false);
 
     await getStatesAddSelectId('update_address_state', address.country_id);
-    document.getElementById('update_address_country').addEventListener('change', () => {getCitiesAddSelectIdWithParent('update_address_city', 'update_address_state');}, false);
+    document.getElementById('update_address_state').addEventListener('change', () => {getCitiesAddSelectIdWithParent('update_address_city', 'update_address_state');}, false);
 
     await getCitiesAddSelectId('update_address_city', address.state_id);
 
@@ -185,24 +187,121 @@ async function updateAddress(){
     let customer_id = getPathVariable('customer-detail');
     let formData = JSON.stringify({
         "customer_id": customer_id,
-        "name": document.getElementById('add_address_name').value,
-        "address": document.getElementById('add_address_address').value,
-        "country_id": document.getElementById('add_address_country').value,
-        "state_id": document.getElementById('add_address_state').value,
-        "city_id": document.getElementById('add_address_city').value,
-        "phone": document.getElementById('add_address_phone').value,
-        "fax": document.getElementById('add_address_fax').value
+        "name": document.getElementById('update_address_name').value,
+        "address": document.getElementById('update_address_address').value,
+        "country_id": document.getElementById('update_address_country').value,
+        "state_id": document.getElementById('update_address_state').value,
+        "city_id": document.getElementById('update_address_city').value,
+        "phone": document.getElementById('update_address_phone').value,
+        "fax": document.getElementById('update_address_fax').value
     });
-
+    console.log(formData)
     let returned = await servicePostUpdateCustomerAddress(address_id, formData);
     if(returned){
         $("#update_address_form").trigger("reset");
+        $('#updateAddressModal').modal('hide');
+        initCustomerAddresses();
+    }
+}
+async function deleteAddress(address_id){
+    let returned = await serviceGetDeleteCustomerAddress(address_id);
+    if(returned){
         initCustomerAddresses();
     }
 }
 
+
+async function initCustomerContacts(){
+    let customer_id = getPathVariable('customer-detail');
+    let data = await serviceGetCustomerContacts(customer_id);
+    $("#contacts-datatable").dataTable().fnDestroy();
+    $('#contacts-datatable tbody > tr').remove();
+
+    console.log(data)
+    $.each(data.contacts, function (i, contact) {
+        let userItem = '<tr>\n' +
+            '              <td>'+ contact.id +'</td>\n' +
+            '              <td>'+ contact.title +'</td>\n' +
+            '              <td>'+ contact.name +'</td>\n' +
+            '              <td>'+ contact.phone +'</td>\n' +
+            '              <td>'+ contact.email +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button class="btn btn-sm btn-primary" onclick="openUpdateContactModal('+ contact.id +')"><span class="fe fe-edit"></span> Düzenle</button>\n' +
+            '                      <button class="btn btn-sm btn-danger" onclick="deleteContact('+ contact.id +')"><span class="fe fe-trash-2"></span> Sil</button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+        $('#contacts-datatable tbody').append(userItem);
+    });
+    $('#contacts-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf'],
+        pageLength : 20,
+        language: {
+            url: "/services/Turkish.json"
+        },
+        order: [[0, 'asc']],
+    });
+}
 async function openAddContactModal(){
     $('#addContactModal').modal('show');
+}
+async function addContact(){
+    let customer_id = getPathVariable('customer-detail');
+    let formData = JSON.stringify({
+        "customer_id": customer_id,
+        "title": document.getElementById('add_contact_title').value,
+        "name": document.getElementById('add_contact_name').value,
+        "phone": document.getElementById('add_contact_phone').value,
+        "email": document.getElementById('add_contact_email').value
+    });
+
+    let returned = await servicePostAddCustomerContact(formData);
+    if(returned){
+        $("#add_contact_form").trigger("reset");
+        $('#addContactModal').modal('hide');
+        initCustomerContacts();
+    }
+}
+async function openUpdateContactModal(contact_id){
+    $('#updateContactModal').modal('show');
+    document.getElementById('update_contact_id').value = contact_id;
+    let data = await serviceGetCustomerContactById(contact_id);
+    let contact = data.contact;
+
+    document.getElementById('update_contact_title').value = contact.title;
+    document.getElementById('update_contact_name').value = contact.name;
+    document.getElementById('update_contact_phone').value = contact.phone;
+    document.getElementById('update_contact_email').value = contact.email;
+}
+async function updateContact(){
+    let contact_id = document.getElementById('update_contact_id').value;
+    let customer_id = getPathVariable('customer-detail');
+    let formData = JSON.stringify({
+        "customer_id": customer_id,
+        "title": document.getElementById('update_contact_title').value,
+        "name": document.getElementById('update_contact_name').value,
+        "phone": document.getElementById('update_contact_phone').value,
+        "email": document.getElementById('update_contact_email').value
+    });
+    let returned = await servicePostUpdateCustomerContact(contact_id, formData);
+    if(returned){
+        $("#update_contact_form").trigger("reset");
+        $('#updateContactModal').modal('hide');
+        initCustomerContacts();
+    }
+}
+async function deleteContact(contact_id){
+    let returned = await serviceGetDeleteCustomerContact(contact_id);
+    if(returned){
+        initCustomerContacts();
+    }
 }
 
 

@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\CustomerContact;
+use App\Models\State;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -98,6 +99,12 @@ class CustomerController extends Controller
         try {
             $addresses = Address::query()->where('type_id',$customer_id)->where('type',1)->where('active',1)->get();
 
+            foreach ($addresses as $address){
+                $address['country'] = Country::query()->where('id', $address->country_id)->first()->name;
+                $address['state'] = State::query()->where('id', $address->state_id)->first()->name;
+                $address['city'] = City::query()->where('id', $address->city_id)->first()->name;
+            }
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['addresses' => $addresses]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
@@ -108,6 +115,9 @@ class CustomerController extends Controller
     {
         try {
             $address = Address::query()->where('id',$address_id)->where('type',1)->where('active',1)->first();
+            $address['country'] = Country::query()->where('id', $address->country_id)->first()->name;
+            $address['state'] = State::query()->where('id', $address->state_id)->first()->name;
+            $address['city'] = City::query()->where('id', $address->city_id)->first()->name;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['address' => $address]]);
         } catch (QueryException $queryException) {
