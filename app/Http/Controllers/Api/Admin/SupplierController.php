@@ -48,7 +48,7 @@ class SupplierController extends Controller
                 'name' => $request->name
             ]);
 
-            return response(['message' => __('Müşteri ekleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Tedarikçi ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -68,7 +68,7 @@ class SupplierController extends Controller
                 'name' => $request->name
             ]);
 
-            return response(['message' => __('Müşteri güncelleme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Tedarikçi güncelleme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -84,7 +84,7 @@ class SupplierController extends Controller
             Supplier::query()->where('id',$supplier_id)->update([
                 'active' => 0,
             ]);
-            return response(['message' => __('Müşteri silme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Tedarikçi silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {

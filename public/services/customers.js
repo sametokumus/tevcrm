@@ -2,7 +2,10 @@
     "use strict";
 
 	$(document).ready(function() {
-
+        $('#add_customer_form').submit(function (e){
+            e.preventDefault();
+            addCustomer();
+        });
 	});
 
 	$(window).load( function() {
@@ -53,4 +56,15 @@ async function initCustomers(){
 	});
 }
 
+async function addCustomer(){
+    let customer_name = document.getElementById('add_customer_name').value;
+    let formData = JSON.stringify({
+        "name": customer_name
+    });
 
+    let returned = await servicePostAddCustomer(formData);
+    if(returned){
+        $("#add_customer_form").trigger("reset");
+        initCustomers();
+    }
+}

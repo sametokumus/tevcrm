@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="/services/customer-detail.js"></script>
+<script src="/services/supplier-detail.js"></script>
 ';
 ?>
 
@@ -14,13 +14,13 @@ $extra_js='
 
             <!-- PAGE-HEADER -->
             <div class="page-header">
-                <h1 class="page-title" id="customer-name">
+                <h1 class="page-title" id="supplier-name">
 
                 </h1>
                 <div>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Müşteri</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tedarikçi</li>
                     </ol>
                 </div>
             </div>
@@ -109,13 +109,13 @@ $extra_js='
 
 
 
-<div class="modal fade" id="updateCustomerModal" tabindex="-1" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="updateSupplierModal" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
-            <form method="post" action="#" id="update_customer_form">
+            <form method="post" action="#" id="update_supplier_form">
                 <div class="modal-header">
-                    <h5 class="modal-title">Müşteri Güncelle</h5>
+                    <h5 class="modal-title">Tedarikçi Güncelle</h5>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -123,10 +123,10 @@ $extra_js='
                 <div class="modal-body">
 
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Müşteri Adı :</label>
+                        <label class="col-md-3 form-label">Tedarikçi Adı :</label>
                         <div class="col-md-9">
-                            <input type="hidden" class="form-control" id="update_customer_id" required>
-                            <input type="text" class="form-control" id="update_customer_name" required>
+                            <input type="hidden" class="form-control" id="update_supplier_id" required>
+                            <input type="text" class="form-control" id="update_supplier_name" required>
                         </div>
                     </div>
 

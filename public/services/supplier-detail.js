@@ -7,9 +7,9 @@
         $("#add_contact_email").inputmask("email");
         $("#update_contact_email").inputmask("email");
 
-        $('#update_customer_form').submit(function (e){
+        $('#update_supplier_form').submit(function (e){
             e.preventDefault();
-            updateCustomer();
+            updateSupplier();
         });
 
 		$('#add_address_form').submit(function (e){
@@ -42,9 +42,9 @@
 		checkLogin();
 		checkRole();
 		// initProduct();
-        initCustomer();
-        initCustomerAddresses();
-        initCustomerContacts();
+        initSupplier();
+        initSupplierAddresses();
+        initSupplierContacts();
 	});
 
 })(window.jQuery);
@@ -53,45 +53,45 @@ function checkRole(){
 	return true;
 }
 
-async function initCustomer(){
-    let customer_id = getPathVariable('customer-detail');
-    let data = await serviceGetCustomerById(customer_id);
-    let customer = data.customer;
-    let customer_name =  customer.name + '\n' +
+async function initSupplier(){
+    let supplier_id = getPathVariable('supplier-detail');
+    let data = await serviceGetSupplierById(supplier_id);
+    let supplier = data.supplier;
+    let supplier_name =  supplier.name + '\n' +
         '                    <div class="d-inline-block m-3">\n' +
-        '                        <button onclick="openCustomerModal();" class="btn btn-sm btn-default"><span class="fe fe-edit"></span></button>\n' +
+        '                        <button onclick="openSupplierModal();" class="btn btn-sm btn-default"><span class="fe fe-edit"></span></button>\n' +
         '                    </div>';
 
-    $('#customer-name').html('');
-    $('#customer-name').append(customer_name);
+    $('#supplier-name').html('');
+    $('#supplier-name').append(supplier_name);
 }
-async function openCustomerModal(){
-    let customer_id = getPathVariable('customer-detail');
-    let data = await serviceGetCustomerById(customer_id);
-    let customer = data.customer;
-    document.getElementById('update_customer_id').value = customer.id;
-    document.getElementById('update_customer_name').value = customer.name;
+async function openSupplierModal(){
+    let supplier_id = getPathVariable('supplier-detail');
+    let data = await serviceGetSupplierById(supplier_id);
+    let supplier = data.supplier;
+    document.getElementById('update_supplier_id').value = supplier.id;
+    document.getElementById('update_supplier_name').value = supplier.name;
 
-    $('#updateCustomerModal').modal('show');
+    $('#updateSupplierModal').modal('show');
 }
-async function updateCustomer(){
-    let customer_id = document.getElementById('update_customer_id').value;
-    let customer_name = document.getElementById('update_customer_name').value;
+async function updateSupplier(){
+    let supplier_id = document.getElementById('update_supplier_id').value;
+    let supplier_name = document.getElementById('update_supplier_name').value;
     let formData = JSON.stringify({
-        "name": customer_name
+        "name": supplier_name
     });
 
-    let returned = await servicePostUpdateCustomer(customer_id, formData);
+    let returned = await servicePostUpdateSupplier(supplier_id, formData);
     if(returned){
-        $("#update_customer_form").trigger("reset");
-        $('#updateCustomerModal').modal('hide');
-        initCustomer();
+        $("#update_supplier_form").trigger("reset");
+        $('#updateSupplierModal').modal('hide');
+        initSupplier();
     }
 }
 
-async function initCustomerAddresses(){
-    let customer_id = getPathVariable('customer-detail');
-    let data = await serviceGetCustomerAddresses(customer_id);
+async function initSupplierAddresses(){
+    let supplier_id = getPathVariable('supplier-detail');
+    let data = await serviceGetSupplierAddresses(supplier_id);
     $("#address-datatable").dataTable().fnDestroy();
     $('#address-datatable tbody > tr').remove();
 
@@ -138,9 +138,9 @@ async function openAddAddressModal(){
 
 }
 async function addAddress(){
-    let customer_id = getPathVariable('customer-detail');
+    let supplier_id = getPathVariable('supplier-detail');
     let formData = JSON.stringify({
-        "customer_id": customer_id,
+        "supplier_id": supplier_id,
         "name": document.getElementById('add_address_name').value,
         "address": document.getElementById('add_address_address').value,
         "country_id": document.getElementById('add_address_country').value,
@@ -150,17 +150,17 @@ async function addAddress(){
         "fax": document.getElementById('add_address_fax').value
     });
 
-    let returned = await servicePostAddCustomerAddress(formData);
+    let returned = await servicePostAddSupplierAddress(formData);
     if(returned){
         $("#add_address_form").trigger("reset");
         $('#addAddressModal').modal('hide');
-        initCustomerAddresses();
+        initSupplierAddresses();
     }
 }
 async function openUpdateAddressModal(address_id){
     $('#updateAddressModal').modal('show');
     document.getElementById('update_address_id').value = address_id;
-    let data = await serviceGetCustomerAddressById(address_id);
+    let data = await serviceGetSupplierAddressById(address_id);
     let address = data.address;
 
     await getCountriesAddSelectId('update_address_country');
@@ -181,9 +181,9 @@ async function openUpdateAddressModal(address_id){
 }
 async function updateAddress(){
     let address_id = document.getElementById('update_address_id').value;
-    let customer_id = getPathVariable('customer-detail');
+    let supplier_id = getPathVariable('supplier-detail');
     let formData = JSON.stringify({
-        "customer_id": customer_id,
+        "supplier_id": supplier_id,
         "name": document.getElementById('update_address_name').value,
         "address": document.getElementById('update_address_address').value,
         "country_id": document.getElementById('update_address_country').value,
@@ -193,24 +193,24 @@ async function updateAddress(){
         "fax": document.getElementById('update_address_fax').value
     });
     console.log(formData)
-    let returned = await servicePostUpdateCustomerAddress(address_id, formData);
+    let returned = await servicePostUpdateSupplierAddress(address_id, formData);
     if(returned){
         $("#update_address_form").trigger("reset");
         $('#updateAddressModal').modal('hide');
-        initCustomerAddresses();
+        initSupplierAddresses();
     }
 }
 async function deleteAddress(address_id){
-    let returned = await serviceGetDeleteCustomerAddress(address_id);
+    let returned = await serviceGetDeleteSupplierAddress(address_id);
     if(returned){
-        initCustomerAddresses();
+        initSupplierAddresses();
     }
 }
 
 
-async function initCustomerContacts(){
-    let customer_id = getPathVariable('customer-detail');
-    let data = await serviceGetCustomerContacts(customer_id);
+async function initSupplierContacts(){
+    let supplier_id = getPathVariable('supplier-detail');
+    let data = await serviceGetSupplierContacts(supplier_id);
     $("#contacts-datatable").dataTable().fnDestroy();
     $('#contacts-datatable tbody > tr').remove();
 
@@ -250,26 +250,26 @@ async function openAddContactModal(){
     $('#addContactModal').modal('show');
 }
 async function addContact(){
-    let customer_id = getPathVariable('customer-detail');
+    let supplier_id = getPathVariable('supplier-detail');
     let formData = JSON.stringify({
-        "customer_id": customer_id,
+        "supplier_id": supplier_id,
         "title": document.getElementById('add_contact_title').value,
         "name": document.getElementById('add_contact_name').value,
         "phone": document.getElementById('add_contact_phone').value,
         "email": document.getElementById('add_contact_email').value
     });
 
-    let returned = await servicePostAddCustomerContact(formData);
+    let returned = await servicePostAddSupplierContact(formData);
     if(returned){
         $("#add_contact_form").trigger("reset");
         $('#addContactModal').modal('hide');
-        initCustomerContacts();
+        initSupplierContacts();
     }
 }
 async function openUpdateContactModal(contact_id){
     $('#updateContactModal').modal('show');
     document.getElementById('update_contact_id').value = contact_id;
-    let data = await serviceGetCustomerContactById(contact_id);
+    let data = await serviceGetSupplierContactById(contact_id);
     let contact = data.contact;
 
     document.getElementById('update_contact_title').value = contact.title;
@@ -279,25 +279,25 @@ async function openUpdateContactModal(contact_id){
 }
 async function updateContact(){
     let contact_id = document.getElementById('update_contact_id').value;
-    let customer_id = getPathVariable('customer-detail');
+    let supplier_id = getPathVariable('supplier-detail');
     let formData = JSON.stringify({
-        "customer_id": customer_id,
+        "supplier_id": supplier_id,
         "title": document.getElementById('update_contact_title').value,
         "name": document.getElementById('update_contact_name').value,
         "phone": document.getElementById('update_contact_phone').value,
         "email": document.getElementById('update_contact_email').value
     });
-    let returned = await servicePostUpdateCustomerContact(contact_id, formData);
+    let returned = await servicePostUpdateSupplierContact(contact_id, formData);
     if(returned){
         $("#update_contact_form").trigger("reset");
         $('#updateContactModal').modal('hide');
-        initCustomerContacts();
+        initSupplierContacts();
     }
 }
 async function deleteContact(contact_id){
-    let returned = await serviceGetDeleteCustomerContact(contact_id);
+    let returned = await serviceGetDeleteSupplierContact(contact_id);
     if(returned){
-        initCustomerContacts();
+        initSupplierContacts();
     }
 }
 

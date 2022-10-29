@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/customers.js"></script>
+<script src="services/suppliers.js"></script>
 ';
 ?>
 
@@ -12,22 +12,20 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
-
-
-            <form method="post" action="#" id="add_customer_form">
+            <form method="post" action="#" id="add_supplier_form">
 
                 <!-- ROW-1 OPEN -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">Müşteri Ekle</div>
+                                <div class="card-title">Tedarikçi Ekle</div>
                             </div>
                             <div class="card-body">
                                 <div class="row mb-4">
-                                    <label class="col-md-3 form-label">Müşteri Adı :</label>
+                                    <label class="col-md-3 form-label">Tedarikçi Adı :</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="add_customer_name" required>
+                                        <input type="text" class="form-control" id="add_supplier_name" required>
                                     </div>
                                 </div>
 
@@ -53,15 +51,15 @@ $extra_js='
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Müşteriler</h3>
+                            <h3 class="card-title">Tedarikçiler</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="customer-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                <table id="supplier-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
                                     <thead>
                                     <tr>
                                         <th class="border-bottom-0" data-priority="1">#</th>
-                                        <th class="border-bottom-0" data-priority="2">Müşteri Adı</th>
+                                        <th class="border-bottom-0" data-priority="2">Tedarikçi Adı</th>
                                         <th class="border-bottom-0">İşlem</th>
                                     </tr>
                                     </thead>
