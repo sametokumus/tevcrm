@@ -664,7 +664,7 @@
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 
 <!-- TIMEPICKER JS -->
-<script src="/plugins/time-picker/jquery.timepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script src="/plugins/time-picker/toggles.min.js"></script>
 <!-- DATEPICKER JS -->
 <script src="/plugins/date-picker/date-picker.js"></script>

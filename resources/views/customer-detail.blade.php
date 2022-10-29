@@ -41,6 +41,36 @@ $extra_js='
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
+                            <h3 class="card-title">Görüşmeler</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="appointments-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-bottom-0" data-priority="1">#</th>
+                                        <th class="border-bottom-0" data-priority="2">Görüşmeye Giden Personel</th>
+                                        <th class="border-bottom-0">Firma Yetkilisi</th>
+                                        <th class="border-bottom-0">Tarih</th>
+                                        <th class="border-bottom-0">İşlem</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Row -->
+
+            <!-- Row -->
+            <div class="row row-sm">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
                             <h3 class="card-title">Adresler</h3>
                         </div>
                         <div class="card-body">
@@ -154,53 +184,43 @@ $extra_js='
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Adres Adı :</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="add_address_name" required>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label class="col-md-3 form-label">Adres :</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="add_address_address" required>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label class="col-md-3 form-label">Ülke :</label>
-                        <div class="col-md-9">
-                            <select name="brand" class="form-control form-select" id="add_address_country" required>
-                                <option>Ülke Seçiniz</option>
+                        <label class="col-md-4 form-label">Konum :</label>
+                        <div class="col-md-8">
+                            <select name="brand" class="form-control form-select" id="add_appointment_address" required>
+                                <option>Adres Seçiniz</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Bölge :</label>
-                        <div class="col-md-9">
-                            <select name="type" class="form-control form-select" id="add_address_state">
-                                <option>Şehir Seçiniz</option>
+                        <label class="col-md-4 form-label">Görüşülen Kişi :</label>
+                        <div class="col-md-8">
+                            <select name="type" class="form-control form-select" id="add_appointment_contact" required>
+                                <option>Yetkili Seçiniz</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Şehir :</label>
-                        <div class="col-md-9">
-                            <select name="type" class="form-control form-select" id="add_address_city">
-                                <option>Şehir Seçiniz</option>
-                            </select>
+                        <label class="col-md-4 form-label">Tarih :</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-calendar tx-14 lh-0 op-6"></i>
+                                </div>
+                                <input class="form-control fc-datepicker" id="add_appointment_date" type="text">
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Telefon :</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="add_address_phone" required>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label class="col-md-3 form-label">Faks :</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="add_address_fax" required>
+                        <label class="col-md-4 form-label">Saat :</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-clock-o tx-16 lh-0 op-6"></i>
+                                </div>
+                                <!-- input-group-text -->
+                                <input class="form-control tpBasic" id="add_appointment_time" type="text">
+                            </div>
                         </div>
                     </div>
 

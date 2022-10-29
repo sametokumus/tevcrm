@@ -22,6 +22,11 @@
 			addContact();
 		});
 
+		$('#add_appointment_form').submit(function (e){
+			e.preventDefault();
+			addAppointment();
+		});
+
 		$('#update_address_form').submit(function (e){
 			e.preventDefault();
 			updateAddress();
@@ -45,6 +50,7 @@
         initCustomer();
         initCustomerAddresses();
         initCustomerContacts();
+        initAppointments();
 	});
 
 })(window.jQuery);
@@ -102,7 +108,8 @@ async function initCustomerAddresses(){
     $("#address-datatable").dataTable().fnDestroy();
     $('#address-datatable tbody > tr').remove();
 
-    console.log(data)
+    $('#add_appointment_address option').remove();
+
     $.each(data.addresses, function (i, address) {
         let userItem = '<tr>\n' +
             '              <td>'+ address.id +'</td>\n' +
@@ -121,6 +128,9 @@ async function initCustomerAddresses(){
             '              </td>\n' +
             '          </tr>';
         $('#address-datatable tbody').append(userItem);
+
+        let optionRow = '<option value="'+address.id+'">'+address.name+'</option>';
+        $('#add_appointment_address').append(optionRow);
     });
     $('#address-datatable').DataTable({
         responsive: true,
@@ -219,9 +229,10 @@ async function initCustomerContacts(){
     let customer_id = getPathVariable('customer-detail');
     let data = await serviceGetCustomerContacts(customer_id);
     $("#contacts-datatable").dataTable().fnDestroy();
-    $('#contacts-datatable tbody > tr').remove();
+    $('#contacts-datatable tbody > tr').remove()
 
-    console.log(data)
+    $('#add_appointment_contact option').remove();
+
     $.each(data.contacts, function (i, contact) {
         let userItem = '<tr>\n' +
             '              <td>'+ contact.id +'</td>\n' +
@@ -237,6 +248,9 @@ async function initCustomerContacts(){
             '              </td>\n' +
             '          </tr>';
         $('#contacts-datatable tbody').append(userItem);
+
+        let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
+        $('#add_appointment_contact').append(optionRow);
     });
     $('#contacts-datatable').DataTable({
         responsive: true,
@@ -305,6 +319,67 @@ async function deleteContact(contact_id){
     let returned = await serviceGetDeleteCustomerContact(contact_id);
     if(returned){
         initCustomerContacts();
+    }
+}
+
+
+async function initAppointments(){
+    let customer_id = getPathVariable('customer-detail');
+    let data = await serviceGetAppointments(customer_id);
+    $("#appointments-datatable").dataTable().fnDestroy();
+    $('#appointments-datatable tbody > tr').remove()
+
+    $('#add_appointment_contact option').remove();
+
+    $.each(data.appointments, function (i, appointment) {
+        let userItem = '<tr>\n' +
+            '              <td>'+ appointment.id +'</td>\n' +
+            '              <td>'+ appointment.staff +'</td>\n' +
+            '              <td>'+ appointment.contact +'</td>\n' +
+            '              <td>'+ appointment.date +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button class="btn btn-sm btn-primary" onclick="openUpdateAppointmentModal('+ appointment.id +')"><span class="fe fe-edit"></span> Düzenle</button>\n' +
+            '                      <button class="btn btn-sm btn-danger" onclick="deleteAppointment('+ appointment.id +')"><span class="fe fe-trash-2"></span> Sil</button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+        $('#appointments-datatable tbody').append(userItem);
+    });
+    $('#appointments-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf'],
+        pageLength : 20,
+        language: {
+            url: "/services/Turkish.json"
+        },
+        order: [[0, 'asc']],
+    });
+}
+async function openAddAppointmentModal(){
+    $('#addAppointmentModal').modal('show');
+}
+async function addAppointment(){
+    let customer_id = getPathVariable('customer-detail');
+    let staff_id = sessionStorage.getItem('userId');
+    let date = formatDateDESC(document.getElementById('add_appointment_date').value, "-", "/") + " " + document.getElementById('add_appointment_time').value + ":00";
+    let formData = JSON.stringify({
+        "customer_id": customer_id,
+        "address_id": document.getElementById('add_appointment_address').value,
+        "contact_id": document.getElementById('add_appointment_contact').value,
+        "staff_id": staff_id,
+        "date": date
+    });
+    let returned = await servicePostAddAppointment(formData);
+    if(returned){
+        $("#add_appointment_form").trigger("reset");
+        $('#addAppointmentModal').modal('hide');
+        initAppointments();
     }
 }
 

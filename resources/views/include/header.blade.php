@@ -46,6 +46,8 @@ $extra_js="";
     <link href="/css/skin-modes.css" rel="stylesheet" />
     <link href="/css/custom.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
 
     <!--- FONT-ICONS CSS -->
     <link href="/css/icons.css" rel="stylesheet" />

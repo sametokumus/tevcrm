@@ -817,3 +817,50 @@ async function serviceGetDeleteSupplierContact(id) {
         return false;
     }
 }
+
+async function serviceGetAppointments(id) {
+    const data = await fetchDataGet('/admin/customer/getAppointments/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetAppointmentById(id) {
+    const data = await fetchDataGet('/admin/customer/getAppointmentById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddAppointment(formData) {
+    const data = await fetchDataPost('/admin/customer/addAppointment', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateAppointment(id, formData) {
+    const data = await fetchDataPost('/admin/customer/updateAppointment/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteAppointment(id) {
+    const data = await fetchDataGet('/admin/customer/deleteAppointment/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Admin;
 use App\Models\Appointment;
 use App\Models\City;
 use App\Models\Country;
@@ -310,6 +311,12 @@ class CustomerController extends Controller
     {
         try {
             $appointments = Appointment::query()->where('customer_id',$customer_id)->where('active',1)->get();
+            foreach ($appointments as $appointment){
+                $staff = Admin::query()->where('id', $appointment->staff_id)->first();
+                $appointment['staff'] = $staff->name." ".$staff->surname;
+                $appointment['address'] = Address::query()->where('id', $appointment->address_id)->first()->name;
+                $appointment['contact'] = CustomerContact::query()->where('id', $appointment->contact_id)->first()->name;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['appointments' => $appointments]]);
         } catch (QueryException $queryException) {
@@ -321,6 +328,10 @@ class CustomerController extends Controller
     {
         try {
             $appointment = Appointment::query()->where('id',$appointment_id)->where('active',1)->first();
+            $staff = Admin::query()->where('id', $appointment->staff_id)->first();
+            $appointment['staff'] = $staff->name." ".$staff->surname;
+            $appointment['address'] = Address::query()->where('id', $appointment->address_id)->first()->name;
+            $appointment['contact'] = CustomerContact::query()->where('id', $appointment->contact_id)->first()->name;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['appointment' => $appointment]]);
         } catch (QueryException $queryException) {
