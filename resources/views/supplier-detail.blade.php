@@ -29,6 +29,7 @@ $extra_js='
                     <div class="btn-list">
                         <button class="btn btn-primary" onclick="openAddAddressModal();"><span class="fe fe-plus"></span> Adres Ekle</button>
                         <button class="btn btn-primary" onclick="openAddContactModal();"><span class="fe fe-plus"></span> Yetkili Ekle</button>
+                        <button class="btn btn-danger" onclick="deleteSupplier();"><span class="fe fe-trash-2"></span> Tedarikçiyi Sil</button>
                     </div>
                 </div>
             </div>

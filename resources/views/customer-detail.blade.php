@@ -27,8 +27,10 @@ $extra_js='
             <div class="row mb-6">
                 <div class="header-nav">
                     <div class="btn-list">
+                        <button class="btn btn-gray-dark" onclick="openAddAppointmentModal();"><span class="fe fe-plus"></span> Görüşme Oluştur</button>
                         <button class="btn btn-primary" onclick="openAddAddressModal();"><span class="fe fe-plus"></span> Adres Ekle</button>
                         <button class="btn btn-primary" onclick="openAddContactModal();"><span class="fe fe-plus"></span> Yetkili Ekle</button>
+                        <button class="btn btn-danger" onclick="deleteCustomer();"><span class="fe fe-trash-2"></span> Müşteriyi Sil</button>
                     </div>
                 </div>
             </div>
@@ -127,6 +129,78 @@ $extra_js='
                         <div class="col-md-9">
                             <input type="hidden" class="form-control" id="update_customer_id" required>
                             <input type="text" class="form-control" id="update_customer_name" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addAppointmentModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <form method="post" action="#" id="add_appointment_form">
+                <div class="modal-header">
+                    <h5 class="modal-title">Görüşme Oluştur</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Adres Adı :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="add_address_name" required>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Adres :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="add_address_address" required>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Ülke :</label>
+                        <div class="col-md-9">
+                            <select name="brand" class="form-control form-select" id="add_address_country" required>
+                                <option>Ülke Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Bölge :</label>
+                        <div class="col-md-9">
+                            <select name="type" class="form-control form-select" id="add_address_state">
+                                <option>Şehir Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Şehir :</label>
+                        <div class="col-md-9">
+                            <select name="type" class="form-control form-select" id="add_address_city">
+                                <option>Şehir Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Telefon :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="add_address_phone" required>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Faks :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="add_address_fax" required>
                         </div>
                     </div>
 

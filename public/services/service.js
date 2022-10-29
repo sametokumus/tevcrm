@@ -5,17 +5,7 @@
 
 		createSession();
 		if(sessionStorage.getItem('userLogin') == null || sessionStorage.getItem('userLogin') == 'false'){
-			$('#login-bar').append('<a href="giris-yap" class="d-lg-show login"><i class="w-icon-account"></i>Giriş Yap!</a>\n' +
-				'                        <span class="delimiter d-lg-show">/</span>\n' +
-				'                        <a href="kayit-ol" class="ml-0 d-lg-show login">Kayıt Ol!</a>');
-		}else{
-			if(sessionStorage.getItem('userType') == 1){
-				$('#login-bar').append('<a href="hesabim" class="d-lg-show mr-4">Hesabım</a>\n' +
-					'                        <a href="#" class="d-lg-show navbar-logout">Çıkış Yap</a>');
-			}else if(sessionStorage.getItem('userType') == 2){
-				$('#login-bar').append('<a href="bayi-hesabim" class="d-lg-show mr-4">Hesabım</a>\n' +
-					'                        <a href="#" class="d-lg-show navbar-logout">Çıkış Yap</a>');
-			}
+            // window.location.href = "/login";
 		}
 
 		$('.navbar-logout').click(function(event){
@@ -130,6 +120,14 @@ function removeSession () {
 	sessionStorage.removeItem('userId');
 	sessionStorage.removeItem('userEmail');
 	sessionStorage.removeItem('appToken');
+}
+
+function getSession () {
+    console.log(sessionStorage.getItem('userLogin'));
+    console.log(sessionStorage.getItem('userRole'));
+    console.log(sessionStorage.getItem('userId'));
+    console.log(sessionStorage.getItem('userEmail'));
+    console.log(sessionStorage.getItem('appToken'));
 }
 
 function getQueryString(param){

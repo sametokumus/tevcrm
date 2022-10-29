@@ -88,6 +88,13 @@ async function updateCustomer(){
         initCustomer();
     }
 }
+async function deleteCustomer(){
+    let customer_id = getPathVariable('customer-detail');
+    let returned = await serviceGetDeleteCustomer(customer_id);
+    if(returned){
+        window.location.href = "/customers";
+    }
+}
 
 async function initCustomerAddresses(){
     let customer_id = getPathVariable('customer-detail');

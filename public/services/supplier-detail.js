@@ -88,6 +88,13 @@ async function updateSupplier(){
         initSupplier();
     }
 }
+async function deleteSupplier(){
+    let supplier_id = getPathVariable('supplier-detail');
+    let returned = await serviceGetDeleteSupplier(supplier_id);
+    if(returned){
+        window.location.href = "/suppliers";
+    }
+}
 
 async function initSupplierAddresses(){
     let supplier_id = getPathVariable('supplier-detail');
