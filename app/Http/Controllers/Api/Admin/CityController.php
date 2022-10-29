@@ -13,7 +13,7 @@ class CityController extends Controller
     {
         try {
             $cities = City::query()->where('state_id',$state_id)->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success','cities' => $cities]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['cities' => $cities]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }

@@ -41,81 +41,12 @@
 			updateContact();
 		});
 
-		$('#update_product_seo_form').submit(function (e){
-			e.preventDefault();
-			updateProductSeo();
-		});
 
-		$('#add_product_document_form').submit(function (e){
-			e.preventDefault();
-			addProductDocument();
-		});
 
-		$('#add_product_tab_form').submit(function (e){
-			e.preventDefault();
-			addProductTab();
-		});
-
-		$('#add_tab_form').submit(function (e){
-			e.preventDefault();
-			addTab();
-		});
-
-		$('#select_product_tab_form').submit(function (e){
-			e.preventDefault();
-			$('#updateProductTabModal').modal('show');
-			initUpdateProductTabModal(document.getElementById('select_product_tab_name').value);
-		});
-
-		$('#updateProductTabModal').submit(function (e){
-			e.preventDefault();
-			updateProductTab();
-		});
-
-		$('#add_product_variation_group_form').submit(function (e){
-			e.preventDefault();
-			addProductVariationGroup();
-		});
-
-		$('#add_product_variation_form').submit(function (e){
-			e.preventDefault();
-			addProductVariation();
-		});
-
-		$('#update_product_variation_form').submit(function (e){
-			e.preventDefault();
-			updateProductVariation();
-		});
-
-		$('#delete_product_variation_form').submit(function (e){
-			e.preventDefault();
-			deleteProductVariation();
-		});
-
-		$('#add_product_variation_image_form').submit(function (e){
-			e.preventDefault();
-			addProductVariationImage();
-		});
-
-		$('#update_product_featured_variation_form').submit(function (e){
-			e.preventDefault();
-			let variation_id = document.getElementById('select_product_featured_variation').value;
-			updateProductFeaturedVariation(variation_id);
-		});
-
-		// $('#is_free_shipping').click(function (e){
-		// 	if($(this).prop('checked') == true){
-		// 		$('#delivery_price').attr('disabled', 'disabled');
-		// 		$('#delivery_tax').attr('disabled', 'disabled');
-		// 	}else{
-		// 		$('#delivery_price').removeAttr('disabled');
-		// 		$('#delivery_tax').removeAttr('disabled');
-		// 	}
-		// });
 
 	});
 
-	$(window).load( function() {
+	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
@@ -206,6 +137,7 @@ async function initCustomerAddresses(){
 }
 async function openAddAddressModal(){
     $('#addAddressModal').modal('show');
+    await getCountriesAddSelectId('add_address_country');
 }
 async function addAddress(){
     let customer_id = getPathVariable('customer-detail');
@@ -231,6 +163,15 @@ async function openUpdateAddressModal(address_id){
     document.getElementById('update_address_id').value = address_id;
     let data = await serviceGetCustomerAddressById(address_id);
     let address = data.address;
+
+    await getCountriesAddSelectId('update_address_country');
+    document.getElementById('update_address_country').addEventListener('change', () => {getStatesAddSelectIdWithParent('update_address_state', 'update_address_country');}, false);
+
+    await getStatesAddSelectId('update_address_state', address.country_id);
+    document.getElementById('update_address_country').addEventListener('change', () => {getCitiesAddSelectIdWithParent('update_address_city', 'update_address_state');}, false);
+
+    await getCitiesAddSelectId('update_address_city', address.state_id);
+
     document.getElementById('update_address_name').value = address.name;
     document.getElementById('update_address_address').value = address.address;
     document.getElementById('update_address_country').value = address.country_id;

@@ -332,30 +332,49 @@ async function checkLogin () {
 		}
 	}
 }
-async function getCitiesAddSelectId(selectId){
-	let data = await serviceGetCitiesByCountryId(1);
+
+async function getCountriesAddSelectId(selectId){
+    let data = await serviceGetCountries();
+    $('#'+selectId+' option').remove();
+    $.each(data.countries, function(i, country){
+        let optionRow = '<option value="'+country.id+'">'+country.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+async function getStatesAddSelectId(selectId, countryId){
+    let data = await serviceGetStatesByCountryId(countryId);
+    $('#'+selectId+' option').remove();
+    $.each(data.states, function(i, state){
+        let optionRow = '<option value="'+state.id+'">'+state.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}async function getStatesAddSelectIdWithParent(selectId, parentSelectId){
+    let countryId = document.getElementById(parentSelectId).value;
+    let data = await serviceGetStatesByCountryId(countryId);
+    $('#'+selectId+' option').remove();
+    $.each(data.states, function(i, state){
+        let optionRow = '<option value="'+state.id+'">'+state.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+async function getCitiesAddSelectId(selectId, stateId){
+	let data = await serviceGetCitiesByStateId(stateId);
+    $('#'+selectId+' option').remove();
 	$.each(data.cities, function(i, city){
 		var optionRow = '<option value="'+city.id+'">'+city.name+'</option>';
 		$('#'+selectId).append(optionRow);
 	});
 }
-async function getDistrictsAddSelect(parentSelectId, selectId){
-	let cityId = document.getElementById(parentSelectId).value;
-	let data = await serviceGetDistrictsByCityId(cityId);
-	$('#'+selectId+' option').remove();
-	$.each(data.districts, function(i, district){
-		var optionRow = '<option value="'+district.id+'">'+district.name+'</option>';
+async function getCitiesAddSelectIdWithParent(selectId, parentSelectId){
+    let stateId = document.getElementById(parentSelectId).value;
+	let data = await serviceGetCitiesByStateId(stateId);
+    $('#'+selectId+' option').remove();
+	$.each(data.cities, function(i, city){
+		var optionRow = '<option value="'+city.id+'">'+city.name+'</option>';
 		$('#'+selectId).append(optionRow);
 	});
 }
-async function getDistrictsAddSelectAutoUpdate(cityId, selectId){
-	let data = await serviceGetDistrictsByCityId(cityId);
-	$('#'+selectId+' option').remove();
-	$.each(data.districts, function(i, district){
-		var optionRow = '<option value="'+district.id+'">'+district.name+'</option>';
-		$('#'+selectId).append(optionRow);
-	});
-}
+
 
 
 /* SERVICE FUNCTIONS */
@@ -363,25 +382,25 @@ async function getDistrictsAddSelectAutoUpdate(cityId, selectId){
 async function serviceGetCountries() {
 	const data = await fetchDataGet('/admin/countries/getCountries', 'application/json');
 	if (data.status == "success") {
-		return data;
+		return data.object;
 	} else {
 		showAlert('İstek Başarısız.');
 	}
 }
 
 async function serviceGetStatesByCountryId(countryId) {
-	const data = await fetchDataGet('/admin/states/getCitiesByCountryId/' + countryId, 'application/json');
+	const data = await fetchDataGet('/admin/states/getStatesByCountryId/' + countryId, 'application/json');
 	if (data.status == "success") {
-		return data;
+		return data.object;
 	} else {
 		showAlert('İstek Başarısız.');
 	}
 }
 
-async function serviceGetCitiesByCountryId(countryId) {
-	const data = await fetchDataGet('/v1/cities/getCitiesByCountryId/' + countryId, 'application/json');
+async function serviceGetCitiesByStateId(stateId) {
+	const data = await fetchDataGet('/admin/cities/getCitiesByStateId/' + stateId, 'application/json');
 	if (data.status == "success") {
-		return data;
+		return data.object;
 	} else {
 		showAlert('İstek Başarısız.');
 	}

@@ -14,7 +14,7 @@ class StateController extends Controller
     {
         try {
             $states = State::query()->where('country_id',$country_id)->orderBy('name')->get();
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success','states' => $states]);
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['states' => $states]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
