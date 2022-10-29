@@ -85,6 +85,12 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('customer/updateCustomerAddress/{address_id}', [CustomerController::class, 'updateCustomerAddress']);
     Route::get('customer/deleteCustomerAddress/{address_id}', [CustomerController::class, 'deleteCustomerAddress']);
 
+    Route::get('customer/getAppointments/{customer_id}', [CustomerController::class, 'getAppointments']);
+    Route::get('customer/getAppointmentById/{appointment_id}', [CustomerController::class, 'getAppointmentById']);
+    Route::post('customer/addAppointment', [CustomerController::class, 'addAppointment']);
+    Route::post('customer/updateAppointment/{appointment_id}', [CustomerController::class, 'updateAppointment']);
+    Route::get('customer/deleteAppointment/{appointment_id}', [CustomerController::class, 'deleteAppointment']);
+
     Route::get('customer/getCustomerContacts/{customer_id}', [CustomerController::class, 'getCustomerContacts']);
     Route::get('customer/getCustomerContactById/{contact_id}', [CustomerController::class, 'getCustomerContactById']);
     Route::post('customer/addCustomerContact', [CustomerController::class, 'addCustomerContact']);

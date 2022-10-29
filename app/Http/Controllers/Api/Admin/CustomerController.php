@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Appointment;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Customer;
@@ -296,6 +297,101 @@ class CustomerController extends Controller
                 'active' => 0,
             ]);
             return response(['message' => __('Yetkili silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getAppointments($customer_id)
+    {
+        try {
+            $appointments = Appointment::query()->where('customer_id',$customer_id)->where('active',1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['appointments' => $appointments]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getAppointmentById($appointment_id)
+    {
+        try {
+            $appointment = Appointment::query()->where('id',$appointment_id)->where('active',1)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['appointment' => $appointment]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addAppointment(Request $request)
+    {
+        try {
+            $request->validate([
+                'customer_id' => 'required',
+                'address_id' => 'required',
+                'contact_id' => 'required',
+                'staff_id' => 'required',
+                'date' => 'required',
+            ]);
+            Appointment::query()->insert([
+                'customer_id' => $request->customer_id,
+                'address_id' => $request->address_id,
+                'contact_id' => $request->contact_id,
+                'staff_id' => $request->staff_id,
+                'date' => $request->date
+            ]);
+
+            return response(['message' => __('Randevu oluşturma işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateAppointment(Request $request, $appointment_id)
+    {
+        try {
+            $request->validate([
+                'customer_id' => 'required',
+                'address_id' => 'required',
+                'contact_id' => 'required',
+                'staff_id' => 'required',
+                'date' => 'required',
+            ]);
+            Appointment::query()->where('id', $appointment_id)->update([
+                'customer_id' => $request->customer_id,
+                'address_id' => $request->address_id,
+                'contact_id' => $request->contact_id,
+                'staff_id' => $request->staff_id,
+                'date' => $request->date,
+                'notes' => $request->notes
+            ]);
+
+            return response(['message' => __('Randevu güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteAppointment($appointment_id){
+        try {
+
+            Appointment::query()->where('id',$appointment_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Randevu silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
