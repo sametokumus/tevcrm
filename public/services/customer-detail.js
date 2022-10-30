@@ -37,6 +37,11 @@
 			updateContact();
 		});
 
+		$('#update_appointment_form').submit(function (e){
+			e.preventDefault();
+			updateAppointment();
+		});
+
 
 
 
@@ -109,6 +114,7 @@ async function initCustomerAddresses(){
     $('#address-datatable tbody > tr').remove();
 
     $('#add_appointment_address option').remove();
+    $('#update_appointment_address option').remove();
 
     $.each(data.addresses, function (i, address) {
         let userItem = '<tr>\n' +
@@ -131,6 +137,7 @@ async function initCustomerAddresses(){
 
         let optionRow = '<option value="'+address.id+'">'+address.name+'</option>';
         $('#add_appointment_address').append(optionRow);
+        $('#update_appointment_address').append(optionRow);
     });
     $('#address-datatable').DataTable({
         responsive: true,
@@ -232,6 +239,7 @@ async function initCustomerContacts(){
     $('#contacts-datatable tbody > tr').remove()
 
     $('#add_appointment_contact option').remove();
+    $('#update_appointment_contact option').remove();
 
     $.each(data.contacts, function (i, contact) {
         let userItem = '<tr>\n' +
@@ -251,6 +259,7 @@ async function initCustomerContacts(){
 
         let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
         $('#add_appointment_contact').append(optionRow);
+        $('#update_appointment_contact').append(optionRow);
     });
     $('#contacts-datatable').DataTable({
         responsive: true,
@@ -336,7 +345,7 @@ async function initAppointments(){
             '              <td>'+ appointment.id +'</td>\n' +
             '              <td>'+ appointment.staff +'</td>\n' +
             '              <td>'+ appointment.contact +'</td>\n' +
-            '              <td>'+ appointment.date +'</td>\n' +
+            '              <td>'+ formatDateAndTimeDESC(appointment.date, "/") +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button class="btn btn-sm btn-primary" onclick="openUpdateAppointmentModal('+ appointment.id +')"><span class="fe fe-edit"></span> Düzenle</button>\n' +
@@ -358,7 +367,7 @@ async function initAppointments(){
         language: {
             url: "/services/Turkish.json"
         },
-        order: [[0, 'asc']],
+        order: [[0, 'desc']],
     });
 }
 async function openAddAppointmentModal(){
@@ -379,6 +388,44 @@ async function addAppointment(){
     if(returned){
         $("#add_appointment_form").trigger("reset");
         $('#addAppointmentModal').modal('hide');
+        initAppointments();
+    }
+}
+async function openUpdateAppointmentModal(appointment_id){
+    $('#updateAppointmentModal').modal('show');
+    document.getElementById('update_appointment_id').value = appointment_id;
+    let data = await serviceGetAppointmentById(appointment_id);
+    let appointment = data.appointment;
+
+    document.getElementById('update_appointment_customer').value = appointment.customer_id;
+    document.getElementById('update_appointment_staff').value = appointment.staff_id;
+    document.getElementById('update_appointment_address').value = appointment.address_id;
+    document.getElementById('update_appointment_contact').value = appointment.contact_id;
+    document.getElementById('update_appointment_notes').value = appointment.notes;
+    document.getElementById('update_appointment_date').value = formatDateASC(appointment.date, "/");
+    document.getElementById('update_appointment_time').value = formatTime(appointment.date);
+}
+async function updateAppointment(){
+    let appointment_id = document.getElementById('update_appointment_id').value;
+    let date = formatDateDESC(document.getElementById('update_appointment_date').value, "-", "/") + " " + document.getElementById('update_appointment_time').value + ":00";
+    let formData = JSON.stringify({
+        "customer_id": document.getElementById('update_appointment_customer').value,
+        "staff_id": document.getElementById('update_appointment_staff').value,
+        "address_id": document.getElementById('update_appointment_address').value,
+        "contact_id": document.getElementById('update_appointment_contact').value,
+        "date": date,
+        "notes": document.getElementById('update_appointment_notes').value,
+    });
+    let returned = await servicePostUpdateAppointment(appointment_id, formData);
+    if(returned){
+        $("#update_appointment_form").trigger("reset");
+        $('#updateAppointmentModal').modal('hide');
+        initAppointments();
+    }
+}
+async function deleteAppointment(appointment_id){
+    let returned = await serviceGetDeleteAppointment(appointment_id);
+    if(returned){
         initAppointments();
     }
 }

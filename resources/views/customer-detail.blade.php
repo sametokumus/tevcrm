@@ -234,6 +234,77 @@ $extra_js='
         </div>
     </div>
 </div>
+<div class="modal fade" id="updateAppointmentModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <form method="post" action="#" id="update_appointment_form">
+                <div class="modal-header">
+                    <h5 class="modal-title">Görüşme Düzenle</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <label class="col-md-4 form-label">Konum :</label>
+                        <div class="col-md-8">
+                            <input type="hidden" class="form-control" id="update_appointment_id" required>
+                            <input type="hidden" class="form-control" id="update_appointment_customer" required>
+                            <input type="hidden" class="form-control" id="update_appointment_staff" required>
+                            <select name="brand" class="form-control form-select" id="update_appointment_address" required>
+                                <option>Adres Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-4 form-label">Görüşülen Kişi :</label>
+                        <div class="col-md-8">
+                            <select name="type" class="form-control form-select" id="update_appointment_contact" required>
+                                <option>Yetkili Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-4 form-label">Tarih :</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-calendar tx-14 lh-0 op-6"></i>
+                                </div>
+                                <input class="form-control fc-datepicker" id="update_appointment_date" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-4 form-label">Saat :</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-clock-o tx-16 lh-0 op-6"></i>
+                                </div>
+                                <!-- input-group-text -->
+                                <input class="form-control tpBasic" id="update_appointment_time" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-4 form-label">Görüşme Notu :</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="update_appointment_notes"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="addAddressModal" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
