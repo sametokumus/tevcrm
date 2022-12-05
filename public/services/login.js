@@ -1,22 +1,22 @@
 (function($) {
     "use strict";
-	
+
 	 $(document).ready(function() {
-		 
+
 		 $(":input").inputmask();
 		 $("#login_email").inputmask("email");
-		 
-		 
+
+
 		 $( "#login_form" ).submit(function( event ) {
 		 	event.preventDefault();
 			let userEmail = document.getElementById('login_email').value;
 			let userPass = document.getElementById('login_password').value;
-			
+
 			let formData = JSON.stringify({
 				"email": userEmail,
 				"password": userPass
 			});
-			 
+
 			fetchDataPost('/admin/login', formData, 'application/json').then(data=>{
 
 				if(data.status == "success"){
@@ -35,7 +35,7 @@
 								sessionStorage.setItem('userLogin',newhash);
 
 								var rel = getURLParam('rel');
-								console.log(__userInfo.user_type)
+								// console.log(__userInfo.user_type)
 								if(rel != null && rel=="xxx"){
 									window.location.href = "xxx?id=";
 								}else{
@@ -54,9 +54,9 @@
 					showAlert(data.message);
 				}
 			});
-			
+
 		 });
-		 
+
 	});
 
 })(window.jQuery);
