@@ -6,12 +6,53 @@ $extra_js='
 ?>
 
     <!--app-content open-->
-<div class="main-content app-content mt-5">
+<div class="main-content app-content">
     <div class="side-app">
 
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="page-header">
+                        Müşteriler
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group float-end">
+                        <button type="button" class="btn btn-outline-secondary">Müşteri Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body">
+                            <div class="row gx-0 align-items-center">
+                                <div class="col-md-3">
+                                    <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" />
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Firma</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- arrow -->
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             <form method="post" action="#" id="add_customer_form">

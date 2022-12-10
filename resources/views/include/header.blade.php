@@ -26,6 +26,7 @@ $extra_js="";
 
     <link href="css/vendor.min.css" rel="stylesheet"/>
     <link href="css/app.min.css" rel="stylesheet"/>
+    <link href="css/customize.css" rel="stylesheet"/>
 
 
     <link href="plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet"/>
@@ -253,6 +254,18 @@ $extra_js="";
                     <a href="index-2.html" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-cpu"></i></span>
                         <span class="menu-text">Dashboard</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/customers" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Müşteriler</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/suppliers" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Tedarikçiler</span>
                     </a>
                 </div>
                 <div class="menu-item">

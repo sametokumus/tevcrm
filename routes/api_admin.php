@@ -121,14 +121,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     //Company
-    Route::get('customer/getCompanies', [CompanyController::class, 'getCompanies']);
-    Route::get('customer/getPotentialCustomers', [CompanyController::class, 'getPotentialCustomers']);
-    Route::get('customer/getCustomers', [CompanyController::class, 'getCustomers']);
-    Route::get('customer/getSuppliers', [CompanyController::class, 'getSuppliers']);
-    Route::get('customer/getCompanyById/{company_id}', [CompanyController::class, 'getCompanyById']);
-    Route::post('customer/addCompany', [CompanyController::class, 'addCompany']);
-    Route::post('customer/updateCompany/{company_id}', [CompanyController::class, 'updateCompany']);
-    Route::get('customer/deleteCompany/{company_id}', [CompanyController::class, 'deleteCompany']);
+    Route::get('company/getCompanies', [CompanyController::class, 'getCompanies']);
+    Route::get('company/getPotentialCustomers', [CompanyController::class, 'getPotentialCustomers']);
+    Route::get('company/getCustomers', [CompanyController::class, 'getCustomers']);
+    Route::get('company/getSuppliers', [CompanyController::class, 'getSuppliers']);
+    Route::get('company/getCompanyById/{company_id}', [CompanyController::class, 'getCompanyById']);
+    Route::post('company/addCompany', [CompanyController::class, 'addCompany']);
+    Route::post('company/updateCompany/{company_id}', [CompanyController::class, 'updateCompany']);
+    Route::get('company/deleteCompany/{company_id}', [CompanyController::class, 'deleteCompany']);
 
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);

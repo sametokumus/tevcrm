@@ -24,6 +24,7 @@ function checkRole(){
 
 async function initCustomers(){
 	let data = await serviceGetCustomers();
+    console.log(data)
 	$("#customer-datatable").dataTable().fnDestroy();
 	$('#customer-datatable tbody > tr').remove();
 

@@ -536,16 +536,40 @@ async function serviceGetAdminPermissions() {
 	}
 }
 
-async function serviceGetCustomers() {
-	const data = await fetchDataGet('/admin/customer/getCustomers', 'application/json');
+async function serviceGetCompanies() {
+	const data = await fetchDataGet('/admin/company/getCompanies', 'application/json');
 	if (data.status == "success") {
 		return data.object;
 	} else {
 		showAlert('İstek Başarısız.');
 	}
 }
-async function serviceGetCustomerById(id) {
-	const data = await fetchDataGet('/admin/customer/getCustomerById/' + id, 'application/json');
+async function serviceGetPotentialCustomers() {
+    const data = await fetchDataGet('/admin/company/getPotentialCustomers', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetCustomers() {
+	const data = await fetchDataGet('/admin/company/getCustomers', 'application/json');
+	if (data.status == "success") {
+		return data.object;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+async function serviceGetSuppliers() {
+    const data = await fetchDataGet('/admin/company/getSuppliers', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetCompanyById(id) {
+	const data = await fetchDataGet('/admin/company/getCompanyById/' + id, 'application/json');
 	if (data.status == "success") {
 		return data.object;
 	} else {
@@ -583,108 +607,7 @@ async function serviceGetDeleteCustomer(id) {
 	}
 }
 
-async function serviceGetCustomerAddresses(id) {
-	const data = await fetchDataGet('/admin/customer/getCustomerAddresses/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function serviceGetCustomerAddressById(id) {
-	const data = await fetchDataGet('/admin/customer/getCustomerAddressById/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function servicePostAddCustomerAddress(formData) {
-	const data = await fetchDataPost('/admin/customer/addCustomerAddress', formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function servicePostUpdateCustomerAddress(id, formData) {
-	const data = await fetchDataPost('/admin/customer/updateCustomerAddress/' + id, formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function serviceGetDeleteCustomerAddress(id) {
-	const data = await fetchDataGet('/admin/customer/deleteCustomerAddress/' + id, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
 
-async function serviceGetCustomerContacts(id) {
-	const data = await fetchDataGet('/admin/customer/getCustomerContacts/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function serviceGetCustomerContactById(id) {
-	const data = await fetchDataGet('/admin/customer/getCustomerContactById/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function servicePostAddCustomerContact(formData) {
-	const data = await fetchDataPost('/admin/customer/addCustomerContact', formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function servicePostUpdateCustomerContact(id, formData) {
-	const data = await fetchDataPost('/admin/customer/updateCustomerContact/' + id, formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function serviceGetDeleteCustomerContact(id) {
-	const data = await fetchDataGet('/admin/customer/deleteCustomerContact/' + id, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-
-async function serviceGetSuppliers() {
-	const data = await fetchDataGet('/admin/supplier/getSuppliers', 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
 async function serviceGetSupplierById(id) {
 	const data = await fetchDataGet('/admin/supplier/getSupplierById/' + id, 'application/json');
 	if (data.status == "success") {
