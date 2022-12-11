@@ -20,13 +20,13 @@ $extra_js='
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group float-end">
-                        <button type="button" class="btn btn-outline-secondary">Müşteri Ekle</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Firma Ekle</button>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row" id="company-grid">
+                <div class="col-md-4 grid-item">
                     <div class="card border-theme mb-3">
                         <div class="card-body">
                             <div class="row gx-0 align-items-center">
@@ -122,6 +122,70 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
+
+<div class="modal modal-cover fade" id="addCompanyModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">FİRMA EKLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_company_form">
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="add_company_is_potential_customer" />
+                            <label class="form-check-label" for="add_company_is_potential_customer">Potansiyel Müşteri</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="add_company_is_customer" />
+                            <label class="form-check-label" for="add_company_is_customer">Müşteri</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="add_company_is_supplier" />
+                            <label class="form-check-label" for="add_company_is_supplier">Tedarikçi</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <input type="text" class="form-control" id="add_company_name" placeholder="Firma Adı" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_email" placeholder="Eposta" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_website" placeholder="Website" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_phone" placeholder="Telefon" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_fax" placeholder="Faks" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <input type="text" class="form-control" id="add_company_address" placeholder="Adres" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_tax_office" placeholder="Vergi Dairesi" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" id="add_company_tax_number" placeholder="Vergi Numarası" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Logo</label>
+                        <input type="file" class="form-control" id="add_company_logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-theme">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 @include('include.footer')

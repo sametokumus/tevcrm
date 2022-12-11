@@ -576,28 +576,16 @@ async function serviceGetCompanyById(id) {
 		showAlert('İstek Başarısız.');
 	}
 }
-async function servicePostAddCustomer(formData) {
-	const data = await fetchDataPost('/admin/customer/addCustomer', formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
+
+async function servicePostAddCompany(formData) {
+    await xhrDataPost('/admin/company/addCompany', formData, addCompanyCallback);
 }
-async function servicePostUpdateCustomer(id, formData) {
-	const data = await fetchDataPost('/admin/customer/updateCustomer/' + id, formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
+
+async function servicePostUpdateCompany(id, formData) {
+    await xhrDataPost('/admin/company/updateCompany/' + id, formData, updateCompanyCallback);
 }
-async function serviceGetDeleteCustomer(id) {
-	const data = await fetchDataGet('/admin/customer/deleteCustomer/' + id, 'application/json');
+async function serviceGetDeleteCompany(id) {
+	const data = await fetchDataGet('/admin/company/deleteCompany/' + id, 'application/json');
 	if (data.status == "success") {
 		showAlert(data.message);
 		return true;
