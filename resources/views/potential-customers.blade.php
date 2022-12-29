@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/customers.js"></script>
+<script src="services/potential-customers.js"></script>
 ';
 ?>
 
@@ -15,7 +15,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-6">
                     <h1 class="page-header">
-                        Müşteriler
+                        Potansiyel Müşteriler
                     </h1>
                 </div>
                 <div class="col-md-6">

@@ -1,73 +1,194 @@
 (function($) {
     "use strict";
 
-	$(document).ready(function() {
-
-        $('#add_supplier_form').submit(function (e){
+    $(document).ready(function() {
+        $('#add_company_form').submit(function (e){
             e.preventDefault();
-            addSupplier();
+            addCompany();
         });
-	});
 
-	$(window).load( function() {
+        $('#add_company_is_potential_customer').click(function (e){
+            if(document.getElementById('add_company_is_potential_customer').checked){
+                document.getElementById('add_company_is_customer').checked = false;
+            }
+        });
 
-		checkLogin();
-		checkRole();
-        initSuppliers();
+        $('#add_company_is_customer').click(function (e){
+            if(document.getElementById('add_company_is_customer').checked){
+                document.getElementById('add_company_is_potential_customer').checked = false;
+            }
+        });
 
-	});
+        $('#update_company_form').submit(function (e){
+            e.preventDefault();
+            updateCompany();
+        });
+
+        $('#update_company_is_potential_customer').click(function (e){
+            if(document.getElementById('update_company_is_potential_customer').checked){
+                document.getElementById('update_company_is_customer').checked = false;
+            }
+        });
+
+        $('#update_company_is_customer').click(function (e){
+            if(document.getElementById('update_company_is_customer').checked){
+                document.getElementById('update_company_is_potential_customer').checked = false;
+            }
+        });
+    });
+
+    $(window).load( function() {
+
+        checkLogin();
+        checkRole();
+        initCompanies();
+
+    });
 
 })(window.jQuery);
 
 function checkRole(){
-	return true;
+    return true;
 }
+async function initCompanies(){
+    let data = await serviceGetSuppliers();
+    $('#company-grid .grid-item').remove();
 
-async function initSuppliers(){
-	let data = await serviceGetSuppliers();
-	$("#supplier-datatable").dataTable().fnDestroy();
-	$('#supplier-datatable tbody > tr').remove();
-
-	console.log(data)
-	$.each(data.suppliers, function (i, supplier) {
-		let userItem = '<tr>\n' +
-			'              <td>'+ supplier.id +'</td>\n' +
-			'              <td>'+ supplier.name +'</td>\n' +
-			'              <td>\n' +
-			'                  <div class="btn-list">\n' +
-			'                      <a href="supplier-detail/'+ supplier.id +'" class="btn btn-sm btn-primary"><span class="fe fe-edit"> Tedarikçi Bilgileri</span></a>\n' +
-			'                  </div>\n' +
-			'              </td>\n' +
-			'          </tr>';
-		$('#supplier-datatable tbody').append(userItem);
-	});
-	$('#supplier-datatable').DataTable({
-		responsive: true,
-		columnDefs: [
-			{ responsivePriority: 1, targets: 0 },
-			{ responsivePriority: 2, targets: -1 }
-		],
-		dom: 'Bfrtip',
-		buttons: ['excel', 'pdf'],
-		pageLength : 20,
-		language: {
-			url: "services/Turkish.json"
-		},
-		order: [[0, 'asc']],
-	});
-}
-
-
-async function addSupplier(){
-    let supplier_name = document.getElementById('add_supplier_name').value;
-    let formData = JSON.stringify({
-        "name": supplier_name
+    $.each(data.companies, function (i, company) {
+        let logo = "img/company/empty.jpg";
+        if (company.logo != null){logo = "https://lenis-crm.wimco.com.tr"+company.logo;}
+        let item = '<div class="col-md-4 grid-item">\n' +
+            '           <div class="card border-theme mb-3">\n' +
+            '               <div class="card-body">\n' +
+            '                   <div class="row gx-0 align-items-center">\n' +
+            '                       <div class="col-md-4">\n' +
+            '                           <img src="'+ logo +'" alt="" class="card-img rounded-0" />\n' +
+            '                       </div>\n' +
+            '                       <div class="col-md-8">\n' +
+            '                           <div class="card-body">\n' +
+            '                               <h5 class="card-title">'+ company.name +'</h5>\n' +
+            '                               <p class="card-text">Eposta: '+ company.email +'</p>\n' +
+            '                               <p class="card-text">Telefon: '+ company.phone +'</p>\n' +
+            '                               <p class="card-text">Faks: '+ company.fax +'</p>\n' +
+            '                               <a href="company-detail/'+ company.id +'" class="btn btn-outline-secondary btn-sm mt-2"">İncele</a>\n' +
+            '                               <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyModal(\''+ company.id +'\');">Düzenle</button>\n' +
+            '                           </div>\n' +
+            '                       </div>\n' +
+            '                   </div>\n' +
+            '               </div>\n' +
+            '               <div class="card-arrow">\n' +
+            '                   <div class="card-arrow-top-left"></div>\n' +
+            '                   <div class="card-arrow-top-right"></div>\n' +
+            '                   <div class="card-arrow-bottom-left"></div>\n' +
+            '                   <div class="card-arrow-bottom-right"></div>\n' +
+            '               </div>\n' +
+            '           </div>\n' +
+            '       </div>';
+        $('#company-grid').append(item);
     });
 
-    let returned = await servicePostAddSupplier(formData);
-    if(returned){
-        $("#add_supplier_form").trigger("reset");
-        initSuppliers();
+}
+async function addCompanyCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#add_company_form").trigger("reset");
+    $("#addCompanyModal").modal('hide');
+    initCompanies();
+}
+async function addCompany(){
+    let isPotential = 0;
+    let isCustomer = 0;
+    let isSupplier = 0;
+    if(document.getElementById('add_company_is_potential_customer').checked){
+        isPotential = 1;
     }
+    console.log(isPotential)
+    if(document.getElementById('add_company_is_customer').checked){
+        isCustomer = 1;
+    }
+    if(document.getElementById('add_company_is_supplier').checked){
+        isSupplier = 1;
+    }
+    let formData = new FormData();
+    formData.append('name', document.getElementById('add_company_name').value);
+    formData.append('email', document.getElementById('add_company_email').value);
+    formData.append('website', document.getElementById('add_company_website').value);
+    formData.append('phone', document.getElementById('add_company_phone').value);
+    formData.append('fax', document.getElementById('add_company_fax').value);
+    formData.append('address', document.getElementById('add_company_address').value);
+    formData.append('tax_office', document.getElementById('add_company_tax_office').value);
+    formData.append('tax_number', document.getElementById('add_company_tax_number').value);
+    formData.append('is_potential_customer', isPotential);
+    formData.append('is_customer', isCustomer);
+    formData.append('is_supplier', isSupplier);
+    formData.append('logo', document.getElementById('add_company_logo').files[0]);
+    console.log(formData);
+
+    await servicePostAddCompany(formData);
 }
 
+async function openUpdateCompanyModal(company_id){
+    $("#updateCompanyModal").modal('show');
+    await initUpdateCompanyModal(company_id);
+}
+async function initUpdateCompanyModal(company_id){
+    document.getElementById('update_company_form').reset();
+    document.getElementById('update_company_id').value = company_id;
+    let data = await serviceGetCompanyById(company_id);
+    let company = data.company;
+    console.log(company)
+    document.getElementById('update_company_name').value = company.name;
+    document.getElementById('update_company_email').value = company.email;
+    document.getElementById('update_company_website').value = company.website;
+    document.getElementById('update_company_phone').value = company.phone;
+    document.getElementById('update_company_fax').value = company.fax;
+    document.getElementById('update_company_address').value = company.address;
+    document.getElementById('update_company_tax_office').value = company.tax_office;
+    document.getElementById('update_company_tax_number').value = company.tax_number;
+    $('#update_company_current_logo').attr('href', company.logo);
+    if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
+    if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
+    if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
+}
+async function updateCompanyCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_company_form").trigger("reset");
+    $("#updateCompanyModal").modal('hide');
+    initCompanies();
+}
+async function updateCompany(){
+    let isPotential = 0;
+    let isCustomer = 0;
+    let isSupplier = 0;
+    if(document.getElementById('update_company_is_potential_customer').checked){
+        isPotential = 1;
+    }
+    console.log(isPotential)
+    if(document.getElementById('update_company_is_customer').checked){
+        isCustomer = 1;
+    }
+    if(document.getElementById('update_company_is_supplier').checked){
+        isSupplier = 1;
+    }
+    let formData = new FormData();
+    formData.append('name', document.getElementById('update_company_name').value);
+    formData.append('website', document.getElementById('update_company_email').value);
+    formData.append('email', document.getElementById('update_company_website').value);
+    formData.append('phone', document.getElementById('update_company_phone').value);
+    formData.append('fax', document.getElementById('update_company_fax').value);
+    formData.append('address', document.getElementById('update_company_address').value);
+    formData.append('tax_office', document.getElementById('update_company_tax_office').value);
+    formData.append('tax_number', document.getElementById('update_company_tax_number').value);
+    formData.append('is_potential_customer', isPotential);
+    formData.append('is_customer', isCustomer);
+    formData.append('is_supplier', isSupplier);
+    formData.append('logo', document.getElementById('update_company_logo').files[0]);
+    console.log(formData);
+
+    await servicePostUpdateCompany(formData);
+}

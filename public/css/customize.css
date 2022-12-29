@@ -1,7 +1,17 @@
-/*.card-body {*/
-/*    flex: 1 1 auto;*/
-/*    padding: 0.5rem 1rem;*/
-/*}*/
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.5rem 1rem;
+}
 .card-text{
     margin-bottom: .1rem;
+}
+.nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link{
+    padding: 1rem 1rem;
+}
+
+select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }

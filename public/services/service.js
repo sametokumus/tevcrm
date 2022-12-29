@@ -331,6 +331,15 @@ async function checkLogin () {
 	}
 }
 
+async function getEmployeesAddSelectId(companyId, selectId){
+    let data = await serviceGetEmployeesByCompanyId(companyId);
+    $('#'+selectId+' option').remove();
+    $.each(data.employees, function(i, employee){
+        let optionRow = '<option value="'+employee.id+'">'+employee.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
     $('#'+selectId+' option').remove();
@@ -594,6 +603,47 @@ async function serviceGetDeleteCompany(id) {
 		return false;
 	}
 }
+
+
+async function serviceGetEmployeesByCompanyId(id) {
+    const data = await fetchDataGet('/admin/employee/getEmployeesByCompanyId/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetEmployeeById(id) {
+    const data = await fetchDataGet('/admin/employee/getEmployeeById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddEmployee(formData) {
+    await xhrDataPost('/admin/employee/addEmployee', formData, addEmployeeCallback);
+}
+
+async function servicePostUpdateEmployee(id, formData) {
+    await xhrDataPost('/admin/employee/updateEmployee/' + id, formData, updateEmployeeCallback);
+}
+async function serviceGetDeleteEmployee(id) {
+    const data = await fetchDataGet('/admin/employee/deleteEmployee/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostAddNote(formData) {
+    await xhrDataPost('/admin/note/addNote', formData, addNoteCallback);
+}
+
+
 
 
 async function serviceGetSupplierById(id) {

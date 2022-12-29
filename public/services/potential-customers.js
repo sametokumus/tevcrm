@@ -51,7 +51,7 @@ function checkRole(){
 	return true;
 }
 async function initCompanies(){
-	let data = await serviceGetCustomers();
+	let data = await serviceGetPotentialCustomers();
 	$('#company-grid .grid-item').remove();
 
 	$.each(data.companies, function (i, company) {

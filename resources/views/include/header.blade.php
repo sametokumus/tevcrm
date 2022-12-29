@@ -24,6 +24,7 @@ $extra_js="";
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
+    <base href="http://127.0.0.1:8000/">
     <link href="css/vendor.min.css" rel="stylesheet"/>
     <link href="css/app.min.css" rel="stylesheet"/>
     <link href="css/customize.css" rel="stylesheet"/>
@@ -61,9 +62,9 @@ $extra_js="";
         <div class="brand">
             <a href="#" class="brand-logo">
 <span class="brand-img">
-<span class="brand-img-text text-theme">H</span>
+<span class="brand-img-text text-theme">S</span>
 </span>
-                <span class="brand-text">HUD ADMIN</span>
+                <span class="brand-text">CRM DASH</span>
             </a>
         </div>
 
@@ -249,13 +250,20 @@ $extra_js="";
         <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
 
             <div class="menu">
-                <div class="menu-header">Navigation</div>
+                <div class="menu-header">Haber Kaynağı</div>
                 <div class="menu-item active">
                     <a href="index-2.html" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-cpu"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a href="/customers" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-columns-gap"></i></span>
+                        <span class="menu-text">Haber Kaynağı</span>
+                    </a>
+                </div>
+                <div class="menu-header">Navigation</div>
                 <div class="menu-item">
                     <a href="/customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
@@ -266,6 +274,12 @@ $extra_js="";
                     <a href="/suppliers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Tedarikçiler</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/potential-customers" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Potansiyel Müşteriler</span>
                     </a>
                 </div>
                 <div class="menu-item">

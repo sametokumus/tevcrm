@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Activity;
-use App\Models\ActivityTask;
-use App\Models\ActivityType;
 use App\Models\Company;
+use App\Models\Admin;
 use App\Models\Employee;
 use App\Models\Note;
 use Illuminate\Database\QueryException;
@@ -21,8 +19,10 @@ class NoteController extends Controller
         try {
             $notes = Note::query()->where('active',1)->get();
             foreach ($notes as $note){
-                $note['company'] = Company::query()->where('id', $note->company_id)->where('active', 1)->first();
-                $note['employee'] = Employee::query()->where('id', $note->employee_id)->where('active', 1)->first();
+                $note['company'] = Company::query()->where('id', $note->company_id)->first();
+                $note['employee'] = Employee::query()->where('id', $note->employee_id)->first();
+                $admin = Admin::query()->where('id', $note->user_id)->first();
+                $note['user_name'] = $admin->name.' '.$admin->surname;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['notes' => $notes]]);
@@ -36,8 +36,10 @@ class NoteController extends Controller
         try {
             $notes = Note::query()->where('active',1)->where('company_id', $company_id)->get();
             foreach ($notes as $note){
-                $note['company'] = Company::query()->where('id', $note->company_id)->where('active', 1)->first();
-                $note['employee'] = Employee::query()->where('id', $note->employee_id)->where('active', 1)->first();
+                $note['company'] = Company::query()->where('id', $note->company_id)->first();
+                $note['employee'] = Employee::query()->where('id', $note->employee_id)->first();
+                $admin = Admin::query()->where('id', $note->user_id)->first();
+                $note['user_name'] = $admin->name.' '.$admin->surname;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['notes' => $notes]]);
@@ -50,8 +52,10 @@ class NoteController extends Controller
     {
         try {
             $note = Note::query()->where('id', $note_id)->where('active',1)->first();
-            $note['company'] = Company::query()->where('id', $note->company_id)->where('active', 1)->first();
-            $note['employee'] = Employee::query()->where('id', $note->employee_id)->where('active', 1)->first();
+            $note['company'] = Company::query()->where('id', $note->company_id)->first();
+            $note['employee'] = Employee::query()->where('id', $note->employee_id)->first();
+            $admin = Admin::query()->where('id', $note->user_id)->first();
+            $note['user_name'] = $admin->name.' '.$admin->surname;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['note' => $note]]);
         } catch (QueryException $queryException) {
@@ -63,11 +67,13 @@ class NoteController extends Controller
     {
         try {
             $request->validate([
+                'user_id' => 'required',
                 'description' => 'required',
                 'company_id' => 'required',
                 'employee_id' => 'required',
             ]);
             $note_id = Note::query()->insertGetId([
+                'user_id' => $request->user_id,
                 'description' => $request->description,
                 'company_id' => $request->company_id,
                 'employee_id' => $request->employee_id,
@@ -96,13 +102,14 @@ class NoteController extends Controller
     public function updateNote(Request $request,$note_id){
         try {
             $request->validate([
-
+                'user_id' => 'required',
                 'description' => 'required',
                 'company_id' => 'required',
                 'employee_id' => 'required',
             ]);
 
             Note::query()->where('id', $note_id)->update([
+                'user_id' => $request->user_id,
                 'description' => $request->description,
                 'company_id' => $request->company_id,
                 'employee_id' => $request->employee_id,
