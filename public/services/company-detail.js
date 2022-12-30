@@ -202,6 +202,7 @@ async function openAddCompanyNoteModal(){
 }
 async function addNoteCallback(xhttp){
     let jsonData = await xhttp.responseText;
+    console.log(jsonData)
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)

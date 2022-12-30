@@ -161,11 +161,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('activity/deleteActivityType/{type_id}', [ActivityController::class, 'deleteActivityType']);
 
     //Note
-    Route::get('activity/getNotes', [NoteController::class, 'getNotes']);
-    Route::get('activity/getNotesByCompanyId/{company_id}', [NoteController::class, 'getNotesByCompanyId']);
-    Route::get('activity/getNoteById/{note_id}', [NoteController::class, 'getNoteById']);
-    Route::post('activity/addNote', [NoteController::class, 'addNote']);
-    Route::post('activity/updateNote/{note_id}', [NoteController::class, 'updateNote']);
-    Route::get('activity/deleteNote/{note_id}', [NoteController::class, 'deleteNote']);
+    Route::get('note/getNotes', [NoteController::class, 'getNotes']);
+    Route::get('note/getNotesByCompanyId/{company_id}', [NoteController::class, 'getNotesByCompanyId']);
+    Route::get('note/getNoteById/{note_id}', [NoteController::class, 'getNoteById']);
+    Route::post('note/addNote', [NoteController::class, 'addNote']);
+    Route::post('note/updateNote/{note_id}', [NoteController::class, 'updateNote']);
+    Route::get('note/deleteNote/{note_id}', [NoteController::class, 'deleteNote']);
 });
 
