@@ -22,7 +22,7 @@ $extra_js='
             </div>
 
             <div class="row" id="company-detail-group">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <ul class="nav nav-tabs nav-tabs-v2">
                         <li class="nav-item me-1"><a href="#company-detail" class="nav-link active" data-bs-toggle="tab">Firma Bilgileri</a></li>
                         <li class="nav-item me-1"><a href="#company-employees" class="nav-link" data-bs-toggle="tab">Yetkililer</a></li>
@@ -114,6 +114,10 @@ $extra_js='
                                     </div>
                                 </div>
                             </div>
+                            <div id="note-list">
+
+                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="company-activities">
                             <div class="row mb-3">

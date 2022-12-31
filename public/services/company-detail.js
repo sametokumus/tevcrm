@@ -49,6 +49,7 @@
         let company_id = getPathVariable('company-detail');
         initCompany(company_id);
         initEmployees();
+        initNotes()
 
     });
 
@@ -195,6 +196,39 @@ async function deleteEmployee(employee_id){
 
 
 
+async function initNotes(){
+    let company_id = getPathVariable('company-detail');
+    let data = await serviceGetNotesByCompanyId(company_id);
+    $('#note-list .list-item').remove();
+
+    $.each(data.notes, function (i, note) {
+        let image = '';
+        if(note.image != null && note.image != ''){
+            image = '<div class="card-body">\n' +
+            '            <img src="https://lenis-crm.wimco.com.tr/'+ note.image +'" alt="" class="card-img-top" />\n' +
+            '        </div>';
+        }
+        let updated_at = "";
+        if (note.updated_at != null){
+            updated_at = "Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/");
+        }
+
+        let item = '<div class="row mb-3 note-list-item">\n' +
+            '           <div class="col-md-4">\n' +
+            '               <div class="card mb-3">\n' +
+            '                   '+ image +'\n' +
+            '                   <div class="card-body">\n' +
+            '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
+            '                       <p class="card-text fw-600">'+ note.description +'</p>\n' +
+            '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' ('+ updated_at +')</small></p>\n' +
+            '                   </div>\n' +
+            '               </div>\n' +
+            '           </div>\n' +
+            '       </div>';
+        $('#note-list').append(item);
+    });
+
+}
 async function openAddCompanyNoteModal(){
     let company_id = getPathVariable('company-detail');
     getEmployeesAddSelectId(company_id, 'add_note_employee');
@@ -208,7 +242,7 @@ async function addNoteCallback(xhttp){
     console.log(obj)
     $("#add_note_form").trigger("reset");
     $("#addCompanyNoteModal").modal('hide');
-    // initNotes();
+    initNotes();
 }
 async function addNote(){
     let company_id = getPathVariable('company-detail');

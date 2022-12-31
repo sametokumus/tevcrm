@@ -639,8 +639,37 @@ async function serviceGetDeleteEmployee(id) {
     }
 }
 
+async function serviceGetNotesByCompanyId(id) {
+    const data = await fetchDataGet('/admin/note/getNotesByCompanyId/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetNoteById(id) {
+    const data = await fetchDataGet('/admin/note/getNoteById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function servicePostAddNote(formData) {
     await xhrDataPost('/admin/note/addNote', formData, addNoteCallback);
+}
+async function servicePostUpdateNote(id, formData) {
+    await xhrDataPost('/admin/note/updateNote/' + id, formData, updateEmployeeCallback);
+}
+async function serviceGetDeleteNote(id) {
+    const data = await fetchDataGet('/admin/note/deleteNote/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
 }
 
 
