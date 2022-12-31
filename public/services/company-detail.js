@@ -210,7 +210,7 @@ async function initNotes(){
         }
         let updated_at = "";
         if (note.updated_at != null){
-            updated_at = "Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/");
+            updated_at = "(Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/") + ")";
         }
 
         let item = '<div class="row mb-3 note-list-item">\n' +
@@ -220,7 +220,7 @@ async function initNotes(){
             '                   <div class="card-body">\n' +
             '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
             '                       <p class="card-text fw-600">'+ note.description +'</p>\n' +
-            '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' ('+ updated_at +')</small></p>\n' +
+            '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' '+ updated_at +'</small></p>\n' +
             '                   </div>\n' +
             '               </div>\n' +
             '           </div>\n' +

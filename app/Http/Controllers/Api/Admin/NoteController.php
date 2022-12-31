@@ -34,7 +34,7 @@ class NoteController extends Controller
     public function getNotesByCompanyId($company_id)
     {
         try {
-            $notes = Note::query()->where('active',1)->where('company_id', $company_id)->orderByDesc('created_at', 'updated_at')->get();
+            $notes = Note::query()->where('active',1)->where('company_id', $company_id)->orderByDesc('updated_at')->orderByDesc('created_at')->get();
             foreach ($notes as $note){
                 $note['company'] = Company::query()->where('id', $note->company_id)->first();
                 $note['employee'] = Employee::query()->where('id', $note->employee_id)->first();
