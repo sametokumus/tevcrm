@@ -86,7 +86,7 @@ class ActivityController extends Controller
             foreach ($request->tasks as $task){
                 ActivityTask::query()->insertGetId([
                     'activity_id' => $activity_id,
-                    'title' => $task->title,
+                    'title' => $task,
                 ]);
             }
 
