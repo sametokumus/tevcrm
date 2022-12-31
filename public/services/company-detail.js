@@ -38,6 +38,10 @@
             e.preventDefault();
             addNote();
         });
+        $('#update_note_form').submit(function (e){
+            e.preventDefault();
+            updateNote();
+        });
 
 
     });
@@ -199,9 +203,11 @@ async function deleteEmployee(employee_id){
 async function initNotes(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetNotesByCompanyId(company_id);
-    $('#note-list .list-item').remove();
+    $('#note-list .note-list-item').remove();
+    let logged_user_id = sessionStorage.getItem('userId');
 
     $.each(data.notes, function (i, note) {
+        console.log(note)
         let image = '';
         if(note.image != null && note.image != ''){
             image = '<div class="card-body">\n' +
@@ -213,14 +219,27 @@ async function initNotes(){
             updated_at = "(Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/") + ")";
         }
 
+        let actions = "";
+        if (logged_user_id == note.user_id){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyNoteModal(\''+ note.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteNote(\''+ note.id +'\');">Sil</button>\n';
+        }
+
         let item = '<div class="row mb-3 note-list-item">\n' +
             '           <div class="col-md-4">\n' +
             '               <div class="card mb-3">\n' +
             '                   '+ image +'\n' +
             '                   <div class="card-body">\n' +
             '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
-            '                       <p class="card-text fw-600">'+ note.description +'</p>\n' +
+            '                       <p class="card-text fw-500">'+ note.description +'</p>\n' +
             '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' '+ updated_at +'</small></p>\n' +
+            '                       '+ actions +
+            '                   </div>\n' +
+            '                   <div class="card-arrow">\n' +
+            '                       <div class="card-arrow-top-left"></div>\n' +
+            '                       <div class="card-arrow-top-right"></div>\n' +
+            '                       <div class="card-arrow-bottom-left"></div>\n' +
+            '                       <div class="card-arrow-bottom-right"></div>\n' +
             '                   </div>\n' +
             '               </div>\n' +
             '           </div>\n' +
@@ -236,7 +255,6 @@ async function openAddCompanyNoteModal(){
 }
 async function addNoteCallback(xhttp){
     let jsonData = await xhttp.responseText;
-    console.log(jsonData)
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
@@ -257,149 +275,168 @@ async function addNote(){
 
     await servicePostAddNote(formData);
 }
+async function openUpdateCompanyNoteModal(note_id){
+    let company_id = getPathVariable('company-detail');
+    getEmployeesAddSelectId(company_id, 'update_note_employee');
+    $("#updateCompanyNoteModal").modal('show');
+    initUpdateCompanyNoteModal(note_id)
+}
+async function initUpdateCompanyNoteModal(note_id){
+    document.getElementById('update_note_form').reset();
+    document.getElementById('update_note_id').value = note_id;
+    let data = await serviceGetNoteById(note_id);
+    let note = data.note;
+    document.getElementById('update_note_description').value = note.description;
+    document.getElementById('update_note_employee').value = note.employee_id;
+    $('#update_note_current_image').attr('href', note.image);
+}
+async function updateNoteCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_note_form").trigger("reset");
+    $("#updateCompanyNoteModal").modal('hide');
+    initNotes();
+}
+async function updateNote(){
+    let company_id = getPathVariable('company-detail');
+    let user_id = sessionStorage.getItem('userId');
+    let formData = new FormData();
+    formData.append('user_id', user_id);
+    formData.append('company_id', company_id);
+    formData.append('description', document.getElementById('update_note_description').value);
+    formData.append('employee_id', document.getElementById('update_note_employee').value);
+    formData.append('image', document.getElementById('update_note_image').files[0]);
 
+    await servicePostUpdateNote(document.getElementById('update_note_id').value, formData);
+}
+async function deleteNote(note_id){
+    let returned = await serviceGetDeleteNote(note_id);
+    if(returned){
+        initNotes();
+    }
+}
 
+async function initActivities(){
+    let company_id = getPathVariable('company-detail');
+    let data = await serviceGetActivitiesByCompanyId(company_id);
+    $('#note-list .note-list-item').remove();
+    let logged_user_id = sessionStorage.getItem('userId');
 
+    $.each(data.notes, function (i, note) {
+        console.log(note)
+        let image = '';
+        if(note.image != null && note.image != ''){
+            image = '<div class="card-body">\n' +
+                '            <img src="https://lenis-crm.wimco.com.tr/'+ note.image +'" alt="" class="card-img-top" />\n' +
+                '        </div>';
+        }
+        let updated_at = "";
+        if (note.updated_at != null){
+            updated_at = "(Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/") + ")";
+        }
 
-async function initCompanies(){
-    let data = await serviceGetPotentialCustomers();
-    $('#company-grid .grid-item').remove();
+        let actions = "";
+        if (logged_user_id == note.user_id){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyActivityModal(\''+ note.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteActivity(\''+ note.id +'\');">Sil</button>\n';
+        }
 
-    $.each(data.companies, function (i, company) {
-        let logo = "img/company/empty.jpg";
-        if (company.logo != null){logo = "https://lenis-crm.wimco.com.tr"+company.logo;}
-        let item = '<div class="col-md-4 grid-item">\n' +
-            '           <div class="card border-theme mb-3">\n' +
-            '               <div class="card-body">\n' +
-            '                   <div class="row gx-0 align-items-center">\n' +
-            '                       <div class="col-md-4">\n' +
-            '                           <img src="'+ logo +'" alt="" class="card-img rounded-0" />\n' +
-            '                       </div>\n' +
-            '                       <div class="col-md-8">\n' +
-            '                           <div class="card-body">\n' +
-            '                               <h5 class="card-title">'+ company.name +'</h5>\n' +
-            '                               <p class="card-text">Eposta: '+ company.email +'</p>\n' +
-            '                               <p class="card-text">Telefon: '+ company.phone +'</p>\n' +
-            '                               <p class="card-text">Faks: '+ company.fax +'</p>\n' +
-            '                               <a href="company-detail/'+ company.id +'" class="btn btn-outline-secondary btn-sm mt-2"">İncele</a>\n' +
-            '                               <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyModal(\''+ company.id +'\');">Düzenle</button>\n' +
-            '                           </div>\n' +
-            '                       </div>\n' +
+        let item = '<div class="row mb-3 note-list-item">\n' +
+            '           <div class="col-md-4">\n' +
+            '               <div class="card mb-3">\n' +
+            '                   '+ image +'\n' +
+            '                   <div class="card-body">\n' +
+            '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
+            '                       <p class="card-text fw-500">'+ note.description +'</p>\n' +
+            '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' '+ updated_at +'</small></p>\n' +
+            '                       '+ actions +
             '                   </div>\n' +
-            '               </div>\n' +
-            '               <div class="card-arrow">\n' +
-            '                   <div class="card-arrow-top-left"></div>\n' +
-            '                   <div class="card-arrow-top-right"></div>\n' +
-            '                   <div class="card-arrow-bottom-left"></div>\n' +
-            '                   <div class="card-arrow-bottom-right"></div>\n' +
+            '                   <div class="card-arrow">\n' +
+            '                       <div class="card-arrow-top-left"></div>\n' +
+            '                       <div class="card-arrow-top-right"></div>\n' +
+            '                       <div class="card-arrow-bottom-left"></div>\n' +
+            '                       <div class="card-arrow-bottom-right"></div>\n' +
+            '                   </div>\n' +
             '               </div>\n' +
             '           </div>\n' +
             '       </div>';
-        $('#company-grid').append(item);
+        $('#note-list').append(item);
     });
 
 }
-async function addCompanyCallback(xhttp){
+async function openAddCompanyActivityModal(){
+    let company_id = getPathVariable('company-detail');
+    getEmployeesAddSelectId(company_id, 'add_activity_employee');
+    getActivityTypesAddSelectId('add_activity_type');
+    $("#addCompanyActivityModal").modal('show');
+}
+async function addActivityCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
-    $("#add_company_form").trigger("reset");
-    $("#addCompanyModal").modal('hide');
-    initCompanies();
+    $("#add_note_form").trigger("reset");
+    $("#addCompanyActivityModal").modal('hide');
+    initActivities();
 }
-async function addCompany(){
-    let isPotential = 0;
-    let isCustomer = 0;
-    let isSupplier = 0;
-    if(document.getElementById('add_company_is_potential_customer').checked){
-        isPotential = 1;
-    }
-    console.log(isPotential)
-    if(document.getElementById('add_company_is_customer').checked){
-        isCustomer = 1;
-    }
-    if(document.getElementById('add_company_is_supplier').checked){
-        isSupplier = 1;
-    }
+async function addActivity(){
+    let company_id = getPathVariable('company-detail');
+    let user_id = sessionStorage.getItem('userId');
     let formData = new FormData();
-    formData.append('name', document.getElementById('add_company_name').value);
-    formData.append('website', document.getElementById('add_company_email').value);
-    formData.append('email', document.getElementById('add_company_website').value);
-    formData.append('phone', document.getElementById('add_company_phone').value);
-    formData.append('fax', document.getElementById('add_company_fax').value);
-    formData.append('address', document.getElementById('add_company_address').value);
-    formData.append('tax_office', document.getElementById('add_company_tax_office').value);
-    formData.append('tax_number', document.getElementById('add_company_tax_number').value);
-    formData.append('is_potential_customer', isPotential);
-    formData.append('is_customer', isCustomer);
-    formData.append('is_supplier', isSupplier);
-    formData.append('logo', document.getElementById('add_company_logo').files[0]);
+    formData.append('user_id', user_id);
+    formData.append('company_id', company_id);
+    formData.append('description', document.getElementById('add_note_description').value);
+    formData.append('employee_id', document.getElementById('add_note_employee').value);
+    formData.append('image', document.getElementById('add_note_image').files[0]);
     console.log(formData);
 
-    await servicePostAddCompany(formData);
+    await servicePostAddActivity(formData);
 }
-
-async function openUpdateCompanyModal(company_id){
-    $("#updateCompanyModal").modal('show');
-    await initUpdateCompanyModal(company_id);
+async function openUpdateCompanyActivityModal(note_id){
+    let company_id = getPathVariable('company-detail');
+    getEmployeesAddSelectId(company_id, 'update_note_employee');
+    $("#updateCompanyActivityModal").modal('show');
+    initUpdateCompanyActivityModal(note_id)
 }
-async function initUpdateCompanyModal(company_id){
-    document.getElementById('update_company_form').reset();
-    document.getElementById('update_company_id').value = company_id;
-    let data = await serviceGetCompanyById(company_id);
-    let company = data.company;
-    console.log(company)
-    document.getElementById('update_company_name').value = company.name;
-    document.getElementById('update_company_email').value = company.email;
-    document.getElementById('update_company_website').value = company.website;
-    document.getElementById('update_company_phone').value = company.phone;
-    document.getElementById('update_company_fax').value = company.fax;
-    document.getElementById('update_company_address').value = company.address;
-    document.getElementById('update_company_tax_office').value = company.tax_office;
-    document.getElementById('update_company_tax_number').value = company.tax_number;
-    $('#update_company_current_logo').attr('href', company.logo);
-    if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
-    if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
-    if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
+async function initUpdateCompanyActivityModal(note_id){
+    document.getElementById('update_note_form').reset();
+    document.getElementById('update_note_id').value = note_id;
+    let data = await serviceGetActivityById(note_id);
+    let note = data.note;
+    document.getElementById('update_note_description').value = note.description;
+    document.getElementById('update_note_employee').value = note.employee_id;
+    $('#update_note_current_image').attr('href', note.image);
 }
-async function updateCompanyCallback(xhttp){
+async function updateActivityCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
-    $("#update_company_form").trigger("reset");
-    $("#updateCompanyModal").modal('hide');
-    initCompanies();
+    $("#update_note_form").trigger("reset");
+    $("#updateCompanyActivityModal").modal('hide');
+    initActivities();
 }
-async function updateCompany(){
-    let isPotential = 0;
-    let isCustomer = 0;
-    let isSupplier = 0;
-    if(document.getElementById('update_company_is_potential_customer').checked){
-        isPotential = 1;
-    }
-    console.log(isPotential)
-    if(document.getElementById('update_company_is_customer').checked){
-        isCustomer = 1;
-    }
-    if(document.getElementById('update_company_is_supplier').checked){
-        isSupplier = 1;
-    }
+async function updateActivity(){
+    let company_id = getPathVariable('company-detail');
+    let user_id = sessionStorage.getItem('userId');
     let formData = new FormData();
-    formData.append('name', document.getElementById('update_company_name').value);
-    formData.append('website', document.getElementById('update_company_email').value);
-    formData.append('email', document.getElementById('update_company_website').value);
-    formData.append('phone', document.getElementById('update_company_phone').value);
-    formData.append('fax', document.getElementById('update_company_fax').value);
-    formData.append('address', document.getElementById('update_company_address').value);
-    formData.append('tax_office', document.getElementById('update_company_tax_office').value);
-    formData.append('tax_number', document.getElementById('update_company_tax_number').value);
-    formData.append('is_potential_customer', isPotential);
-    formData.append('is_customer', isCustomer);
-    formData.append('is_supplier', isSupplier);
-    formData.append('logo', document.getElementById('update_company_logo').files[0]);
-    console.log(formData);
+    formData.append('user_id', user_id);
+    formData.append('company_id', company_id);
+    formData.append('description', document.getElementById('update_note_description').value);
+    formData.append('employee_id', document.getElementById('update_note_employee').value);
+    formData.append('image', document.getElementById('update_note_image').files[0]);
 
-    await servicePostUpdateCompany(formData);
+    await servicePostUpdateActivity(document.getElementById('update_note_id').value, formData);
 }
+async function deleteActivity(note_id){
+    let returned = await serviceGetDeleteActivity(note_id);
+    if(returned){
+        initActivities();
+    }
+}
+
+
+
+

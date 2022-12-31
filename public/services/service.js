@@ -340,6 +340,15 @@ async function getEmployeesAddSelectId(companyId, selectId){
     });
 }
 
+async function getActivityTypesAddSelectId(selectId){
+    let data = await serviceGetActivityTypes();
+    $('#'+selectId+' option').remove();
+    $.each(data.activity_types, function(i, activity_type){
+        let optionRow = '<option value="'+activity_type.id+'">'+activity_type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
     $('#'+selectId+' option').remove();
@@ -659,7 +668,7 @@ async function servicePostAddNote(formData) {
     await xhrDataPost('/admin/note/addNote', formData, addNoteCallback);
 }
 async function servicePostUpdateNote(id, formData) {
-    await xhrDataPost('/admin/note/updateNote/' + id, formData, updateEmployeeCallback);
+    await xhrDataPost('/admin/note/updateNote/' + id, formData, updateNoteCallback);
 }
 async function serviceGetDeleteNote(id) {
     const data = await fetchDataGet('/admin/note/deleteNote/' + id, 'application/json');
@@ -672,66 +681,24 @@ async function serviceGetDeleteNote(id) {
     }
 }
 
-
-
-
-async function serviceGetSupplierById(id) {
-	const data = await fetchDataGet('/admin/supplier/getSupplierById/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function servicePostAddSupplier(formData) {
-	const data = await fetchDataPost('/admin/supplier/addSupplier', formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function servicePostUpdateSupplier(id, formData) {
-	const data = await fetchDataPost('/admin/supplier/updateSupplier/' + id, formData, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-async function serviceGetDeleteSupplier(id) {
-	const data = await fetchDataGet('/admin/supplier/deleteSupplier/' + id, 'application/json');
-	if (data.status == "success") {
-		showAlert(data.message);
-		return true;
-	} else {
-		showAlert('İstek Başarısız.');
-		return false;
-	}
-}
-
-async function serviceGetSupplierAddresses(id) {
-    const data = await fetchDataGet('/admin/supplier/getSupplierAddresses/' + id, 'application/json');
+async function serviceGetActivityTypes() {
+    const data = await fetchDataGet('/admin/activity/getActivityTypes', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
     }
 }
-async function serviceGetSupplierAddressById(id) {
-    const data = await fetchDataGet('/admin/supplier/getSupplierAddressById/' + id, 'application/json');
+async function serviceGetActivityTypeById(id) {
+    const data = await fetchDataGet('/admin/activity/getActivityTypeById/' + id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
     }
 }
-async function servicePostAddSupplierAddress(formData) {
-    const data = await fetchDataPost('/admin/supplier/addSupplierAddress', formData, 'application/json');
+async function servicePostAddActivityType(formData) {
+    const data = await fetchDataPost('/admin/activity/addActivityType', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -740,8 +707,8 @@ async function servicePostAddSupplierAddress(formData) {
         return false;
     }
 }
-async function servicePostUpdateSupplierAddress(id, formData) {
-    const data = await fetchDataPost('/admin/supplier/updateSupplierAddress/' + id, formData, 'application/json');
+async function servicePostUpdateActivityType(id, formData) {
+    const data = await fetchDataPost('/admin/activity/updateActivityType/' + id, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -750,102 +717,8 @@ async function servicePostUpdateSupplierAddress(id, formData) {
         return false;
     }
 }
-async function serviceGetDeleteSupplierAddress(id) {
-    const data = await fetchDataGet('/admin/supplier/deleteSupplierAddress/' + id, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-
-async function serviceGetSupplierContacts(id) {
-    const data = await fetchDataGet('/admin/supplier/getSupplierContacts/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function serviceGetSupplierContactById(id) {
-    const data = await fetchDataGet('/admin/supplier/getSupplierContactById/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function servicePostAddSupplierContact(formData) {
-    const data = await fetchDataPost('/admin/supplier/addSupplierContact', formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-async function servicePostUpdateSupplierContact(id, formData) {
-    const data = await fetchDataPost('/admin/supplier/updateSupplierContact/' + id, formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-async function serviceGetDeleteSupplierContact(id) {
-    const data = await fetchDataGet('/admin/supplier/deleteSupplierContact/' + id, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-
-async function serviceGetAppointments(id) {
-    const data = await fetchDataGet('/admin/customer/getAppointments/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function serviceGetAppointmentById(id) {
-    const data = await fetchDataGet('/admin/customer/getAppointmentById/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function servicePostAddAppointment(formData) {
-    const data = await fetchDataPost('/admin/customer/addAppointment', formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-async function servicePostUpdateAppointment(id, formData) {
-    const data = await fetchDataPost('/admin/customer/updateAppointment/' + id, formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-async function serviceGetDeleteAppointment(id) {
-    const data = await fetchDataGet('/admin/customer/deleteAppointment/' + id, 'application/json');
+async function serviceGetDeleteActivityType(id) {
+    const data = await fetchDataGet('/admin/activity/deleteActivityType/' + id, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;

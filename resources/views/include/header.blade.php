@@ -27,6 +27,11 @@ $extra_js="";
     <base href="http://127.0.0.1:8000/">
     <link href="css/vendor.min.css" rel="stylesheet"/>
     <link href="css/app.min.css" rel="stylesheet"/>
+    <!-- required css -->
+    <link href="plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+
     <link href="css/customize.css" rel="stylesheet"/>
 
 
@@ -550,6 +555,15 @@ $extra_js="";
                     <a href="helper.html" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Helper</span>
+                    </a>
+                </div>
+
+
+                <div class="menu-header">S-CRM</div>
+                <div class="menu-item">
+                    <a href="/settings" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gear"></i></span>
+                        <span class="menu-text">Ayarlar</span>
                     </a>
                 </div>
             </div>

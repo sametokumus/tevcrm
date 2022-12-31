@@ -123,7 +123,7 @@ $extra_js='
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="btn-group float-end">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Aktivite Ekle</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyActivityModal();">Aktivite Ekle</button>
                                     </div>
                                 </div>
                             </div>
@@ -368,6 +368,88 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Görsel</label>
                             <input type="file" class="form-control" id="add_note_image" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal modal-cover fade" id="updateCompanyNoteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">NOT GÜNCELLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_note_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Notunuz</label>
+                            <textarea class="form-control" rows="3" id="update_note_description" placeholder="Not" required></textarea>
+                            <input type="hidden" class="form-control" id="update_note_id" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Firma Yetkilisi</label>
+                            <select class="form-control" id="update_note_employee">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Görsel <a href="#" id="update_note_current_image" target="_blank">'i görüntülemek için tıklayınız...</a></label>
+                            <input type="file" class="form-control" id="update_note_image" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-cover fade" id="addCompanyActivityModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AKTİVİTE EKLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_activity_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Aktivite Türü</label>
+                            <select class="form-control" id="add_activity_type">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Yapılacak Aktivite</label>
+                            <input type="text" class="form-control" id="add_activity_title">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" rows="3" id="add_activity_description"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Firma Yetkilisi</label>
+                            <select class="form-control" id="add_activity_employee">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3">Görev Ekle +</button></label>
+                        </div>
+                        <div id="add-activity-tasks-body">
+
                         </div>
                     </div>
                 </div>

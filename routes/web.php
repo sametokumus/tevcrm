@@ -22,3 +22,8 @@ Route::get('/potential-customers', function () { return view('potential-customer
 Route::get('/customers', function () { return view('customers'); });
 Route::get('/suppliers', function () { return view('suppliers'); });
 Route::get('/company-detail/{id}', function () { return view('company-detail'); });
+
+
+
+
+Route::get('/settings', function () { return view('settings'); });

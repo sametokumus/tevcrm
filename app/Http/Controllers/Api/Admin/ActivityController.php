@@ -83,6 +83,14 @@ class ActivityController extends Controller
                 'end' => $request->end,
             ]);
 
+            foreach ($request->tasks as $task){
+                ActivityTask::query()->insertGetId([
+                    'activity_id' => $activity_id,
+                    'title' => $task->title,
+                ]);
+            }
+
+
             return response(['message' => __('Aktivite ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['activity_id' => $activity_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
