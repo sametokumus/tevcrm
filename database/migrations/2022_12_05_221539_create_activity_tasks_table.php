@@ -16,7 +16,7 @@ class CreateActivityTasksTable extends Migration
         Schema::create('activity_tasks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('activity_id');
-            $table->bigInteger('title');
+            $table->text('title');
             $table->tinyInteger('is_completed')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
