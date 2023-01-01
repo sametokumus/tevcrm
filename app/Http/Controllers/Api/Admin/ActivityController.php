@@ -123,9 +123,9 @@ class ActivityController extends Controller
 
 
             foreach ($request->tasks as $task){
-                $task_row = ActivityTask::query()->where('id', $task->task_id)->count();
+                $task_row = ActivityTask::query()->where('id', $task['task_id'])->count();
                 if ($task_row > 0){
-                    ActivityTask::query()->where('id',)->update([
+                    ActivityTask::query()->where('id', $task['task_id'])->update([
                         'title' => $task['title'],
                     ]);
                 }else {
