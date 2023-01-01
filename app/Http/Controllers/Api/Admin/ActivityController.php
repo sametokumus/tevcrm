@@ -126,12 +126,12 @@ class ActivityController extends Controller
                 $task_row = ActivityTask::query()->where('id', $task->task_id)->count();
                 if ($task_row > 0){
                     ActivityTask::query()->where('id',)->update([
-                        'title' => $task->title,
+                        'title' => $task['title'],
                     ]);
                 }else {
                     ActivityTask::query()->insert([
                         'activity_id' => $activity_id,
-                        'title' => $task,
+                        'title' => $task['title'],
                     ]);
                 }
             }
