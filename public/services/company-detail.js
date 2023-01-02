@@ -415,15 +415,6 @@ async function openAddCompanyActivityModal(){
     getActivityTypesAddSelectId('add_activity_type_id');
     $("#addCompanyActivityModal").modal('show');
 }
-async function addActivityCallback(xhttp){
-    let jsonData = await xhttp.responseText;
-    const obj = JSON.parse(jsonData);
-    showAlert(obj.message);
-    console.log(obj)
-    $("#add_note_form").trigger("reset");
-    $("#addCompanyActivityModal").modal('hide');
-    initActivities();
-}
 async function addActivity(){
     let company_id = getPathVariable('company-detail');
     let user_id = sessionStorage.getItem('userId');
@@ -434,16 +425,11 @@ async function addActivity(){
         let title = document.getElementById('add_activity_new_task_'+i).innerText;
         let is_completed = 0;
         let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
-        // let item = '{"task_id": '+ parseInt(task_id) +',"title": '+ title +',"is_completed": '+ parseInt(is_completed) +'}';
         let item = {
             "task_id": parseInt(task_id),
             "title": title,
             "is_completed": parseInt(is_completed)
         }
-        // if (i = task_count){
-        //     item += ",";
-        // }
-        // tasks += item;
         tasks.push(item);
     }
 
@@ -451,7 +437,7 @@ async function addActivity(){
     let end = document.getElementById('add_activity_end_date').value + " " + document.getElementById('add_activity_end_time').value + ":00";
 
     let formData = JSON.stringify({
-        "user_id": user_id,
+        "user_id": parseInt(user_id),
         "type_id": document.getElementById('add_activity_type_id').value,
         "title": document.getElementById('add_activity_title').value,
         "description": document.getElementById('add_activity_description').value,
@@ -464,7 +450,12 @@ async function addActivity(){
 
     console.log(formData);
 
-    // await servicePostAddActivity(formData);
+    let returned = await servicePostAddActivity(formData);
+    if (returned){
+        $("#add_activity_form").trigger("reset");
+        $("#addCompanyActivityModal").modal('hide');
+        // initActivities();
+    }
 }
 async function openUpdateCompanyActivityModal(note_id){
     let company_id = getPathVariable('company-detail');

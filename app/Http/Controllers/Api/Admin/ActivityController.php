@@ -74,6 +74,7 @@ class ActivityController extends Controller
                 'employee_id' => 'required',
             ]);
             $activity_id = Activity::query()->insertGetId([
+                'user_id' => $request->user_id,
                 'type_id' => $request->type_id,
                 'title' => $request->title,
                 'description' => $request->description,
