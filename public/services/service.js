@@ -727,3 +727,14 @@ async function serviceGetDeleteActivityType(id) {
         return false;
     }
 }
+
+async function servicePostAddActivity(formData) {
+    const data = await fetchDataPost('/admin/activity/addActivity', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

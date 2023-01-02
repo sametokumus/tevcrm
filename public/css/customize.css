@@ -15,3 +15,16 @@ select option {
     color: #fff;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
+.form-control{
+    padding: .375rem .75rem !important;
+}
+.form-control.input-sm {
+    padding: 0.2rem 0.75rem !important;
+}
+.datepicker.datepicker-dropdown {
+    width: 18.75rem;
+    padding: 0.375rem 0.75rem 0.75rem;
+    z-index: 1065!important;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}

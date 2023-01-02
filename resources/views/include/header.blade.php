@@ -31,6 +31,10 @@ $extra_js="";
     <link href="plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
     <link href="plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+    <link href="plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+
+
 
     <link href="css/customize.css" rel="stylesheet"/>
 

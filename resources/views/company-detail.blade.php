@@ -427,7 +427,7 @@ $extra_js='
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Aktivite Türü</label>
-                            <select class="form-control" id="add_activity_type">
+                            <select class="form-control" id="add_activity_type_id">
 
                             </select>
                         </div>
@@ -441,15 +441,52 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Firma Yetkilisi</label>
-                            <select class="form-control" id="add_activity_employee">
+                            <select class="form-control" id="add_activity_employee_id">
 
                             </select>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3">Görev Ekle +</button></label>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Başlangıç</label>
+                            <input type="text" class="form-control datepicker" id="add_activity_start_date" placeholder="dd-mm-yyyy" />
                         </div>
-                        <div id="add-activity-tasks-body">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="add_activity_start_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Bitiş</label>
+                            <input type="text" class="form-control datepicker" id="add_activity_end_date" placeholder="dd-mm-yyyy" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="add_activity_end_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3" id="add-activity-new-task-btn">Görev Ekle +</button></label>
+                        </div>
+                        <div id="add-activity-tasks-body" class="d-none mb-3">
 
+                        </div>
+                        <div id="add-activity-new-tasks-body" class="mb-3">
+                            <input type="hidden" id="add-activity-new-task-count" value="0">
+                        </div>
+                        <div class="row mb-3 d-none" id="add-activity-new-tasks-input">
+                            <div class="col-md-4 mb-3">
+                                <input type="text" class="form-control input-sm" id="add-activity-task" placeholder="Yeni Görev" />
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <button type="button" class="btn btn-default btn-sm" id="add-activity-task-button">Ekle</button>
+                            </div>
                         </div>
                     </div>
                 </div>

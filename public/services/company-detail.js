@@ -3,6 +3,7 @@
 
     $(document).ready(function() {
 
+
         $('#update_company_form').submit(function (e){
             e.preventDefault();
             updateCompany();
@@ -44,6 +45,38 @@
         });
 
 
+
+        $('#add_activity_form').submit(function (e){
+            e.preventDefault();
+            addActivity();
+        });
+        $('#update_activity_form').submit(function (e){
+            e.preventDefault();
+            updateActivity();
+        });
+
+        $('#add-activity-new-task-btn').click(function (){
+           $('#add-activity-new-tasks-input').removeClass('d-none');
+        });
+
+        $('#add-activity-task-button').click(function (){
+           let task = document.getElementById('add-activity-task').value;
+           if (task == ''){
+               alert('Lütfen görev için içerik ekleyiniz.')
+           }else{
+               let count = document.getElementById('add-activity-new-task-count').value;
+               count = parseInt(count) + 1;
+               document.getElementById('add-activity-new-task-count').value = count;
+               let checkInput = '<div class="form-check">\n' +
+                   '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="0" id="add_activity_new_task_'+ count +'" />\n' +
+                   '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'">'+ task +'</label>\n' +
+                   '             </div>';
+               $('#add-activity-new-tasks-body').append(checkInput);
+               document.getElementById('add-activity-task').value = '';
+               $('#add-activity-new-tasks-input').addClass('d-none');
+           }
+        });
+
     });
 
     $(window).load( function() {
@@ -53,11 +86,21 @@
         let company_id = getPathVariable('company-detail');
         initCompany(company_id);
         initEmployees();
-        initNotes()
+        initNotes();
+
 
     });
 
 })(window.jQuery);
+
+$('.datepicker').datepicker({
+    autoclose: true,
+    format: 'dd-mm-yyyy'
+});
+$('.timepicker').timepicker({
+    minuteStep: 15,
+    showMeridian: false
+});
 
 function checkRole(){
     return true;
@@ -368,8 +411,8 @@ async function initActivities(){
 }
 async function openAddCompanyActivityModal(){
     let company_id = getPathVariable('company-detail');
-    getEmployeesAddSelectId(company_id, 'add_activity_employee');
-    getActivityTypesAddSelectId('add_activity_type');
+    getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
+    getActivityTypesAddSelectId('add_activity_type_id');
     $("#addCompanyActivityModal").modal('show');
 }
 async function addActivityCallback(xhttp){
@@ -384,15 +427,44 @@ async function addActivityCallback(xhttp){
 async function addActivity(){
     let company_id = getPathVariable('company-detail');
     let user_id = sessionStorage.getItem('userId');
-    let formData = new FormData();
-    formData.append('user_id', user_id);
-    formData.append('company_id', company_id);
-    formData.append('description', document.getElementById('add_note_description').value);
-    formData.append('employee_id', document.getElementById('add_note_employee').value);
-    formData.append('image', document.getElementById('add_note_image').files[0]);
+
+    let task_count = document.getElementById('add-activity-new-task-count').value;
+    let tasks = [];
+    for (let i = 1; i <= task_count; i++) {
+        let title = document.getElementById('add_activity_new_task_'+i).innerText;
+        let is_completed = 0;
+        let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
+        // let item = '{"task_id": '+ parseInt(task_id) +',"title": '+ title +',"is_completed": '+ parseInt(is_completed) +'}';
+        let item = {
+            "task_id": parseInt(task_id),
+            "title": title,
+            "is_completed": parseInt(is_completed)
+        }
+        // if (i = task_count){
+        //     item += ",";
+        // }
+        // tasks += item;
+        tasks.push(item);
+    }
+
+    let start = document.getElementById('add_activity_start_date').value + " " + document.getElementById('add_activity_start_time').value + ":00";
+    let end = document.getElementById('add_activity_end_date').value + " " + document.getElementById('add_activity_end_time').value + ":00";
+
+    let formData = JSON.stringify({
+        "user_id": user_id,
+        "type_id": document.getElementById('add_activity_type_id').value,
+        "title": document.getElementById('add_activity_title').value,
+        "description": document.getElementById('add_activity_description').value,
+        "company_id": company_id,
+        "employee_id": document.getElementById('add_activity_employee_id').value,
+        "start": formatDateAndTime(start, "-"),
+        "end": formatDateAndTime(end, "-"),
+        "tasks": tasks
+    });
+
     console.log(formData);
 
-    await servicePostAddActivity(formData);
+    // await servicePostAddActivity(formData);
 }
 async function openUpdateCompanyActivityModal(note_id){
     let company_id = getPathVariable('company-detail');
