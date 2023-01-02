@@ -69,7 +69,7 @@
                document.getElementById('add-activity-new-task-count').value = count;
                let checkInput = '<div class="form-check">\n' +
                    '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="0" id="add_activity_new_task_'+ count +'" />\n' +
-                   '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'">'+ task +'</label>\n' +
+                   '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'" id="add_activity_new_task_'+ count +'_label">'+ task +'</label>\n' +
                    '             </div>';
                $('#add-activity-new-tasks-body').append(checkInput);
                document.getElementById('add-activity-task').value = '';
@@ -93,14 +93,7 @@
 
 })(window.jQuery);
 
-$('.datepicker').datepicker({
-    autoclose: true,
-    format: 'dd-mm-yyyy'
-});
-$('.timepicker').timepicker({
-    minuteStep: 15,
-    showMeridian: false
-});
+
 
 function checkRole(){
     return true;
@@ -133,7 +126,7 @@ async function initEmployees(){
     $.each(data.employees, function (i, employee) {
         let photo = "img/employee/empty.jpg";
         if (employee.photo != null){photo = "https://lenis-crm.wimco.com.tr"+employee.photo;}
-        let item = '<div class="col-md-6 grid-item">\n' +
+        let item = '<div class="col-md-4 grid-item">\n' +
             '           <div class="card border-theme mb-3">\n' +
             '               <div class="card-body">\n' +
             '                   <div class="row gx-0 align-items-center">\n' +
@@ -165,8 +158,6 @@ async function initEmployees(){
     });
 
 }
-
-
 async function addEmployeeCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
@@ -364,48 +355,28 @@ async function deleteNote(note_id){
 async function initActivities(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetActivitiesByCompanyId(company_id);
-    $('#note-list .note-list-item').remove();
+    $('#datatableActivities tbody tr').remove();
     let logged_user_id = sessionStorage.getItem('userId');
 
-    $.each(data.notes, function (i, note) {
-        console.log(note)
-        let image = '';
-        if(note.image != null && note.image != ''){
-            image = '<div class="card-body">\n' +
-                '            <img src="https://lenis-crm.wimco.com.tr/'+ note.image +'" alt="" class="card-img-top" />\n' +
-                '        </div>';
-        }
-        let updated_at = "";
-        if (note.updated_at != null){
-            updated_at = "(Son güncelleme: " + formatDateAndTimeDESC(note.updated_at, "/") + ")";
-        }
+    $.each(data.activities, function (i, activity) {
 
         let actions = "";
-        if (logged_user_id == note.user_id){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyActivityModal(\''+ note.id +'\');">Düzenle</button>\n' +
-                '      <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteActivity(\''+ note.id +'\');">Sil</button>\n';
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateActivityModal(\''+ activity.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteActivity(\''+ activity.id +'\');">Sil</button>\n';
         }
 
-        let item = '<div class="row mb-3 note-list-item">\n' +
-            '           <div class="col-md-4">\n' +
-            '               <div class="card mb-3">\n' +
-            '                   '+ image +'\n' +
-            '                   <div class="card-body">\n' +
-            '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
-            '                       <p class="card-text fw-500">'+ note.description +'</p>\n' +
-            '                       <p class="card-text"><small>Oluşturulma: '+ formatDateAndTimeDESC(note.created_at, "/") +' '+ updated_at +'</small></p>\n' +
-            '                       '+ actions +
-            '                   </div>\n' +
-            '                   <div class="card-arrow">\n' +
-            '                       <div class="card-arrow-top-left"></div>\n' +
-            '                       <div class="card-arrow-top-right"></div>\n' +
-            '                       <div class="card-arrow-bottom-left"></div>\n' +
-            '                       <div class="card-arrow-bottom-right"></div>\n' +
-            '                   </div>\n' +
-            '               </div>\n' +
-            '           </div>\n' +
-            '       </div>';
-        $('#note-list').append(item);
+        let item = '<tr>\n' +
+            '           <th scope="row">'+ activity.id +'</th>\n' +
+            '           <td>'+ activity.type.name +'</td>\n' +
+            '           <td>'+ activity.title +'</td>\n' +
+            '           <td>'+ activity.employee.name +'</td>\n' +
+            '           <td>'+ formatDateAndTimeDESC(activity.start) +'</td>\n' +
+            '           <td>'+ formatDateAndTimeDESC(activity.end) +'</td>\n' +
+            '           <td>'+ activity.task_count +' görev ('+ activity.completed_task_count +' tamamlanan)</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#datatableActivities tbody').append(item);
     });
 
 }
@@ -422,7 +393,7 @@ async function addActivity(){
     let task_count = document.getElementById('add-activity-new-task-count').value;
     let tasks = [];
     for (let i = 1; i <= task_count; i++) {
-        let title = document.getElementById('add_activity_new_task_'+i).innerText;
+        let title = document.getElementById('add_activity_new_task_'+i+'_label').textContent;
         let is_completed = 0;
         let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
         let item = {
@@ -455,6 +426,8 @@ async function addActivity(){
         $("#add_activity_form").trigger("reset");
         $("#addCompanyActivityModal").modal('hide');
         // initActivities();
+    }else{
+        alert("Hata Oluştu");
     }
 }
 async function openUpdateCompanyActivityModal(note_id){

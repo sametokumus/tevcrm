@@ -728,6 +728,22 @@ async function serviceGetDeleteActivityType(id) {
     }
 }
 
+async function serviceGetActivitiesByCompanyId(id) {
+    const data = await fetchDataGet('/admin/activity/getActivitiesByCompanyId/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetActivityById(id) {
+    const data = await fetchDataGet('/admin/activity/getActivityById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function servicePostAddActivity(formData) {
     const data = await fetchDataPost('/admin/activity/addActivity', formData, 'application/json');
     if (data.status == "success") {

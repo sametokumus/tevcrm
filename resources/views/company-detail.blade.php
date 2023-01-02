@@ -2,6 +2,16 @@
 <?php
 $extra_js='
 <script src="services/company-detail.js"></script>
+<script>
+$(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy"
+});
+$(".timepicker").timepicker({
+    minuteStep: 15,
+    showMeridian: false
+});
+</script>
 ';
 ?>
 
@@ -125,6 +135,28 @@ $extra_js='
                                     <div class="btn-group float-end">
                                         <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyActivityModal();">Aktivite Ekle</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <table id="datatableActivities" class="table text-nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tür</th>
+                                            <th scope="col">Başlık</th>
+                                            <th scope="col">Firma Yetkilisi</th>
+                                            <th scope="col">Başlangıç</th>
+                                            <th scope="col">Bitiş</th>
+                                            <th scope="col">Alt Görev</th>
+                                            <th scope="col">İşlemler</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

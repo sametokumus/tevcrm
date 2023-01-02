@@ -24,6 +24,8 @@ class ActivityController extends Controller
                 $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
                 $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
                 $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
+                $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
+                $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -41,6 +43,8 @@ class ActivityController extends Controller
                 $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
                 $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
                 $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
+                $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
+                $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -57,6 +61,8 @@ class ActivityController extends Controller
             $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
             $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
             $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
+            $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
+            $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activity' => $activity]]);
         } catch (QueryException $queryException) {
