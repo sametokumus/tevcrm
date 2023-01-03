@@ -77,6 +77,14 @@
            }
         });
 
+        $('#update-activity-new-task-btn').click(function (){
+           $('#update-activity-new-tasks-input').removeClass('d-none');
+        });
+
+        $('#update-activity-task-button').click(function (){
+           updateActivityNewTask();
+        });
+
     });
 
     $(window).load( function() {
@@ -87,7 +95,7 @@
         initCompany(company_id);
         initEmployees();
         initNotes();
-
+        initActivities();
 
     });
 
@@ -362,7 +370,7 @@ async function initActivities(){
 
         let actions = "";
         if (true){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateActivityModal(\''+ activity.id +'\');">Düzenle</button>\n' +
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateCompanyActivityModal(\''+ activity.id +'\');">Düzenle</button>\n' +
                 '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteActivity(\''+ activity.id +'\');">Sil</button>\n';
         }
 
@@ -371,8 +379,8 @@ async function initActivities(){
             '           <td>'+ activity.type.name +'</td>\n' +
             '           <td>'+ activity.title +'</td>\n' +
             '           <td>'+ activity.employee.name +'</td>\n' +
-            '           <td>'+ formatDateAndTimeDESC(activity.start) +'</td>\n' +
-            '           <td>'+ formatDateAndTimeDESC(activity.end) +'</td>\n' +
+            '           <td>'+ formatDateAndTimeDESC(activity.start, "/") +'</td>\n' +
+            '           <td>'+ formatDateAndTimeDESC(activity.end, "/") +'</td>\n' +
             '           <td>'+ activity.task_count +' görev ('+ activity.completed_task_count +' tamamlanan)</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
@@ -430,20 +438,45 @@ async function addActivity(){
         alert("Hata Oluştu");
     }
 }
-async function openUpdateCompanyActivityModal(note_id){
+async function openUpdateCompanyActivityModal(activity_id){
     let company_id = getPathVariable('company-detail');
-    getEmployeesAddSelectId(company_id, 'update_note_employee');
+    getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
+    getActivityTypesAddSelectId('update_activity_type_id');
     $("#updateCompanyActivityModal").modal('show');
-    initUpdateCompanyActivityModal(note_id)
+    initUpdateCompanyActivityModal(activity_id)
 }
-async function initUpdateCompanyActivityModal(note_id){
-    document.getElementById('update_note_form').reset();
-    document.getElementById('update_note_id').value = note_id;
-    let data = await serviceGetActivityById(note_id);
-    let note = data.note;
-    document.getElementById('update_note_description').value = note.description;
-    document.getElementById('update_note_employee').value = note.employee_id;
-    $('#update_note_current_image').attr('href', note.image);
+async function initUpdateCompanyActivityModal(activity_id){
+    document.getElementById('update_activity_form').reset();
+    $('#update-activity-tasks-body .form-check').remove();
+    document.getElementById('update_activity_id').value = activity_id;
+    let data = await serviceGetActivityById(activity_id);
+    let activity = data.activity;
+    document.getElementById('update_activity_type_id').value = activity.type_id;
+    document.getElementById('update_activity_title').value = activity.title;
+    document.getElementById('update_activity_description').value = activity.description;
+    document.getElementById('update_activity_employee_id').value = activity.employee_id;
+    document.getElementById('update_activity_start_date').value = formatDateASC(activity.start, "-");
+    document.getElementById('update_activity_start_time').value = formatTime(activity.start);
+    document.getElementById('update_activity_end_date').value = formatDateASC(activity.end, "-");
+    document.getElementById('update_activity_end_time').value = formatTime(activity.end);
+
+    let count = 0;
+    $.each(activity.tasks, function (i, task) {
+        count += 1;
+        let is_completed = '';
+        let task_status = 1;
+        if (task.is_completed == 1){
+            is_completed = 'checked';
+            task_status = 0;
+        }
+        let checkInput = '<div class="form-check" id="form-check-'+ task.id +'">\n' +
+            '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="'+ task.id +'" id="update_activity_task_'+ count +'" '+ is_completed +' onclick="changeTaskStatus(this, '+ task.id +' ,'+ task_status +')" />\n' +
+            '                 <label class="form-check-label" for="add_activity_task_'+ count +'" id="add_activity_task_'+ count +'_label">'+ task.title +'</label>\n' +
+            '                 (<a href="#" onclick="deleteActivityTask(event, '+ task.id +');">Görevi Sil</a>)\n' +
+            '             </div>';
+        $('#update-activity-tasks-body').append(checkInput);
+    });
+    document.getElementById('update-activity-task-count').value = count;
 }
 async function updateActivityCallback(xhttp){
     let jsonData = await xhttp.responseText;
@@ -457,22 +490,90 @@ async function updateActivityCallback(xhttp){
 async function updateActivity(){
     let company_id = getPathVariable('company-detail');
     let user_id = sessionStorage.getItem('userId');
-    let formData = new FormData();
-    formData.append('user_id', user_id);
-    formData.append('company_id', company_id);
-    formData.append('description', document.getElementById('update_note_description').value);
-    formData.append('employee_id', document.getElementById('update_note_employee').value);
-    formData.append('image', document.getElementById('update_note_image').files[0]);
+    let activity_id = document.getElementById('update_activity_id').value;
 
-    await servicePostUpdateActivity(document.getElementById('update_note_id').value, formData);
+    let start = document.getElementById('update_activity_start_date').value + " " + document.getElementById('update_activity_start_time').value + ":00";
+    let end = document.getElementById('update_activity_end_date').value + " " + document.getElementById('update_activity_end_time').value + ":00";
+
+    let formData = JSON.stringify({
+        "user_id": parseInt(user_id),
+        "type_id": document.getElementById('update_activity_type_id').value,
+        "title": document.getElementById('update_activity_title').value,
+        "description": document.getElementById('update_activity_description').value,
+        "company_id": company_id,
+        "employee_id": document.getElementById('update_activity_employee_id').value,
+        "start": formatDateAndTime(start, "-"),
+        "end": formatDateAndTime(end, "-")
+    });
+    console.log(formData)
+    let returned = await servicePostUpdateActivity(formData, activity_id);
+    if (returned){
+        $("#update_activity_form").trigger("reset");
+        $("#updateCompanyActivityModal").modal('hide');
+        initActivities();
+    }else{
+        alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    }
 }
-async function deleteActivity(note_id){
-    let returned = await serviceGetDeleteActivity(note_id);
+async function deleteActivity(activity_id){
+    let returned = await serviceGetDeleteActivity(activity_id);
     if(returned){
         initActivities();
     }
 }
+async function deleteActivityTask(event, task_id){
+    event.preventDefault();
+    console.log(task_id)
+    let returned = await serviceGetDeleteActivityTask(task_id);
+    if(returned){
+        $('#form-check-'+task_id).remove();
+    }
+}
+async function changeTaskStatus(element, task_id, task_status){
+    $(element).attr('disabled', 'disabled');
+    let returned;
+    let new_status;
+    if (task_status == 0){
+        returned = await serviceGetUnCompleteActivityTask(task_id);
+        new_status = 1;
+    }else{
+        returned = await serviceGetCompleteActivityTask(task_id);
+        new_status = 0;
+    }
+    if(returned){
+        $(element).attr('onclick', "changeTaskStatus(this, '"+ task_id + "' ,'"+ new_status +"')");
+        $(element).removeAttr('disabled');
+    }
+}
+async function updateActivityNewTask(){
+    let task = document.getElementById('update-activity-task').value;
+    if (task == ''){
+        alert('Lütfen görev için içerik ekleyiniz.')
+    }else{
 
+        let formData = JSON.stringify({
+            "activity_id": parseInt(document.getElementById('update_activity_id').value),
+            "title": task
+        });
+
+        let returned = await servicePostAddActivityTask(formData);
+        if (returned == false) {
+            alert('Görev eklenirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+        }else{
+            let count = document.getElementById('update-activity-task-count').value;
+            count = parseInt(count) + 1;
+            document.getElementById('update-activity-task-count').value = count;
+            let checkInput = '<div class="form-check" id="form-check-'+ returned.task_id +'">\n' +
+                '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="'+ returned.task_id +'" id="update_activity_task_'+ count +'" onclick="changeTaskStatus(this, '+ returned.task_id +', 1)" />\n' +
+                '                 <label class="form-check-label" for="add_activity_task_'+ count +'" id="add_activity_task_'+ count +'_label">'+ task +'</label>\n' +
+                '                 (<a href="#" onclick="deleteActivityTask(event, '+ returned.task_id +');">Görevi Sil</a>)\n' +
+                '             </div>';
+            $('#update-activity-tasks-body').append(checkInput);
+            document.getElementById('update-activity-task').value = '';
+            $('#update-activity-new-tasks-input').addClass('d-none');
+        }
+    }
+}
 
 
 

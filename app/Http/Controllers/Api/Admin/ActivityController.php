@@ -119,6 +119,7 @@ class ActivityController extends Controller
             ]);
 
             Activity::query()->where('id', $activity_id)->update([
+                'user_id' => $request->user_id,
                 'type_id' => $request->type_id,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -127,22 +128,6 @@ class ActivityController extends Controller
                 'start' => $request->start,
                 'end' => $request->end,
             ]);
-
-
-
-            foreach ($request->tasks as $task){
-                $task_row = ActivityTask::query()->where('id', $task['task_id'])->count();
-                if ($task_row > 0){
-                    ActivityTask::query()->where('id', $task['task_id'])->update([
-                        'title' => $task['title'],
-                    ]);
-                }else {
-                    ActivityTask::query()->insert([
-                        'activity_id' => $activity_id,
-                        'title' => $task['title'],
-                    ]);
-                }
-            }
 
             return response(['message' => __('Aktivite güncelleme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {

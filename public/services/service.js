@@ -754,3 +754,63 @@ async function servicePostAddActivity(formData) {
         return false;
     }
 }
+async function servicePostUpdateActivity(formData, id) {
+    const data = await fetchDataPost('/admin/activity/updateActivity/'+ id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteActivity(id) {
+    const data = await fetchDataGet('/admin/activity/deleteActivity/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteActivityTask(id) {
+    const data = await fetchDataGet('/admin/activity/deleteActivityTask/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetCompleteActivityTask(id) {
+    const data = await fetchDataGet('/admin/activity/completeActivityTask/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetUnCompleteActivityTask(id) {
+    const data = await fetchDataGet('/admin/activity/unCompleteActivityTask/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostAddActivityTask(formData) {
+    const data = await fetchDataPost('/admin/activity/addActivityTask', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
