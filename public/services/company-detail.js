@@ -505,7 +505,6 @@ async function updateActivity(){
         "start": formatDateAndTime(start, "-"),
         "end": formatDateAndTime(end, "-")
     });
-    console.log(formData)
     let returned = await servicePostUpdateActivity(formData, activity_id);
     if (returned){
         $("#update_activity_form").trigger("reset");
