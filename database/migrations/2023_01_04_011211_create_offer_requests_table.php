@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerContactsTable extends Migration
+class CreateOfferRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCustomerContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_contacts', function (Blueprint $table) {
+        Schema::create('offer_requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id');
-            $table->string('title');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('request_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('authorized_personnel');
+            $table->bigInteger('company_id');
+            $table->bigInteger('company_employee_id');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -33,6 +33,6 @@ class CreateCustomerContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_contacts');
+        Schema::dropIfExists('offer_requests');
     }
 }

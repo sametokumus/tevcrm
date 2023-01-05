@@ -16,8 +16,7 @@ class CreateOfferProductsTable extends Migration
         Schema::create('offer_products', function (Blueprint $table) {
             $table->id();
             $table->string('offer_id');
-            $table->string('ref_code')->nullable();
-            $table->string('product_name')->nullable();
+            $table->string('product_id');
             $table->integer('quantity')->nullable();
             $table->decimal('pcs_price',10,2, false)->nullable();
             $table->decimal('total_price',10,2, false)->nullable();

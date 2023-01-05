@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppointmentsTable extends Migration
+class CreateOfferRequestProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAppointmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('offer_request_products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id');
-            $table->bigInteger('address_id');
-            $table->bigInteger('contact_id');
-            $table->bigInteger('staff_id');
-            $table->dateTime('date')->nullable();
-            $table->string('notes')->nullable();
+            $table->string('request_id');
+            $table->string('product_id');
+            $table->integer('quantity')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -34,6 +31,6 @@ class CreateAppointmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('offer_request_products');
     }
 }
