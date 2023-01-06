@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
-use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Admin\OfferRequestController;
 use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\StateController;
@@ -122,5 +122,15 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('note/addNote', [NoteController::class, 'addNote']);
     Route::post('note/updateNote/{note_id}', [NoteController::class, 'updateNote']);
     Route::get('note/deleteNote/{note_id}', [NoteController::class, 'deleteNote']);
+
+
+    //OfferRequest
+    Route::get('offerRequest/getOfferRequests', [OfferRequestController::class, 'getOfferRequests']);
+    Route::get('offerRequest/getOfferRequestById/{offer_request_id}', [OfferRequestController::class, 'getOfferRequestById']);
+    Route::post('offerRequest/addOfferRequest', [OfferRequestController::class, 'addOfferRequest']);
+    Route::post('offerRequest/updateOfferRequest/{request_id}', [OfferRequestController::class, 'updateOfferRequest']);
+    Route::post('offerRequest/addProductToOfferRequest/{request_id}', [OfferRequestController::class, 'addProductToOfferRequest']);
+    Route::get('offerRequest/deleteProductToOfferRequest/{request_product_id}', [OfferRequestController::class, 'deleteProductToOfferRequest']);
+
 });
 

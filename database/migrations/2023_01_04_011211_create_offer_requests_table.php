@@ -17,9 +17,9 @@ class CreateOfferRequestsTable extends Migration
             $table->id();
             $table->string('request_id');
             $table->bigInteger('user_id');
-            $table->bigInteger('authorized_personnel');
+            $table->bigInteger('authorized_personnel_id')->nullable();
             $table->bigInteger('company_id');
-            $table->bigInteger('company_employee_id');
+            $table->bigInteger('company_employee_id')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
