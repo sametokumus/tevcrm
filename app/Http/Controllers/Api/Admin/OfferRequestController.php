@@ -71,22 +71,22 @@ class OfferRequestController extends Controller
                 'company_employee_id' => $request->company_employee_id,
             ]);
 
-            foreach ($request->products as $product){
-                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
-                if ($has_product) {
-                    $product_id = $has_product->id;
-                }else{
-                    $product_id = Product::query()->insertGetId([
-                        'ref_code' => $product['ref_code'],
-                        'product_name' => $product['product_name'],
-                    ]);
-                }
-                OfferRequestProduct::query()->insert([
-                    'request_id' => $request_id,
-                    'product_id' => $product_id,
-                    'quantity' => $product['quantity']
-                ]);
-            }
+//            foreach ($request->products as $product){
+//                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
+//                if ($has_product) {
+//                    $product_id = $has_product->id;
+//                }else{
+//                    $product_id = Product::query()->insertGetId([
+//                        'ref_code' => $product['ref_code'],
+//                        'product_name' => $product['product_name'],
+//                    ]);
+//                }
+//                OfferRequestProduct::query()->insert([
+//                    'request_id' => $request_id,
+//                    'product_id' => $product_id,
+//                    'quantity' => $product['quantity']
+//                ]);
+//            }
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {
