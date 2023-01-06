@@ -59,7 +59,6 @@ class OfferRequestController extends Controller
         try {
             $request->validate([
                 'user_id' => 'required',
-                'product_name' => 'required',
                 'company_id' => 'required',
             ]);
             $request_id = Uuid::uuid();
