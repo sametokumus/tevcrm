@@ -37,7 +37,7 @@ class OfferRequestController extends Controller
     {
         try {
             $offer_request = OfferRequest::query()->where('request_id',$offer_request_id)->where('active',1)->first();
-            $offer_request_products = OfferRequestProduct::query()->where('request_id', $offer_request->requset_id)->where('active', 1)->get();
+            $offer_request_products = OfferRequestProduct::query()->where('request_id', $offer_request_id)->where('active', 1)->get();
             foreach ($offer_request_products as $offer_request_product){
                 $product = Product::query()->where('id', $offer_request_product->product_id)->first();
                 $offer_request_product['ref_code'] = $product->ref_code;
@@ -126,7 +126,7 @@ class OfferRequestController extends Controller
     {
         try {
             $request->validate([
-                'ref_code' => 'required',
+//                'ref_code' => 'required',
             ]);
 
             foreach ($request->products as $product){

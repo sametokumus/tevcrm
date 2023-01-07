@@ -814,3 +814,61 @@ async function servicePostAddActivityTask(formData) {
         return false;
     }
 }
+
+
+async function serviceGetOfferRequests() {
+    const data = await fetchDataGet('/admin/offerRequest/getOfferRequests', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetOfferRequestById(id) {
+    const data = await fetchDataGet('/admin/offerRequest/getOfferRequestById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddOfferRequest(formData) {
+    const data = await fetchDataPost('/admin/offerRequest/addOfferRequest', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateOfferRequest(id, formData) {
+    const data = await fetchDataPost('/admin/offerRequest/updateOfferRequest/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostAddProductToOfferRequest(id, formData) {
+    const data = await fetchDataPost('/admin/offerRequest/addProductToOfferRequest/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteProductToOfferRequest(id) {
+    const data = await fetchDataGet('/admin/offerRequest/deleteProductToOfferRequest/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
