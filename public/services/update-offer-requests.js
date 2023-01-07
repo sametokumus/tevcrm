@@ -79,7 +79,7 @@ async function deleteProductRow(item_id){
 }
 
 async function initOfferRequest(){
-    let request_id = getPathVariable('offer-request')
+    let request_id = getPathVariable('offer-request');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
 
@@ -110,38 +110,27 @@ async function initOfferRequest(){
 
 async function updateOfferRequest(){
     let user_id = sessionStorage.getItem('userId');
+    let request_id = getPathVariable('offer-request');
 
-    let products = [];
-    let table = document.getElementById("offer-request-products-body");
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        let item = {
-            "ref_code": row.cells[0].innerText,
-            "product_name": row.cells[1].innerText,
-            "quantity": parseInt(row.cells[2].innerText)
-        }
-        products.push(item);
-    }
-
-    let personnel = document.getElementById('add_offer_request_authorized_personnel').value;
+    let personnel = document.getElementById('update_offer_request_authorized_personnel').value;
     if (personnel == 0){personnel = null;}
-    let company = document.getElementById('add_offer_request_company').value;
+    let company = document.getElementById('update_offer_request_company').value;
     if (company == 0){company = null;}
-    let employee = document.getElementById('add_offer_request_company_employee').value;
+    let employee = document.getElementById('update_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
         "authorized_personnel_id": personnel,
         "company_id": company,
-        "company_employee_id": employee,
-        "products": products
+        "company_employee_id": employee
     });
 
     console.log(formData);
 
-    let returned = await servicePostAddOfferRequest(formData);
+    let returned = await servicePostUpdateOfferRequest(request_id, formData);
     if (returned){
-        window.location = '/offer-requests';
+        window.location.reload();
     }else{
         alert("Hata Oluştu");
     }
