@@ -3,15 +3,9 @@
 
 	$(document).ready(function() {
 
-		$('#add_offer_request_form').submit(function (e){
+		$('#update_offer_request_form').submit(function (e){
 			e.preventDefault();
-            let x = document.getElementById("offer-request-products-body").rows.length;
-            if (x > 0) {
-                addOfferRequest();
-            }else{
-                alert('Ürün giriniz');
-                return false;
-            }
+            updateOfferRequest();
 		});
 
         $('#add_offer_request_product_button').click(function (e){
@@ -27,11 +21,12 @@
         });
 	});
 
-	$(window).load( function() {
+	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
-		initPage();
+		await initPage();
+        await initOfferRequest();
 
 	});
 
@@ -72,28 +67,48 @@ async function addProductToTable(refcode, product_name, quantity){
 }
 
 async function deleteProductRow(item_id){
-    $('#productRow' + item_id).remove();
-    let count = document.getElementById('add_offer_request_product_count').value;
-    count = parseInt(count) - 1;
-    document.getElementById('add_offer_request_product_count').value = count;
+    let returned = serviceGetDeleteProductToOfferRequest(item_id);
+    if (returned) {
+        $('#productRow' + item_id).remove();
+    }else{
+        alert("Ürün silinemedi");
+    }
+    // let count = document.getElementById('add_offer_request_product_count').value;
+    // count = parseInt(count) - 1;
+    // document.getElementById('add_offer_request_product_count').value = count;
 }
 
 async function initOfferRequest(){
-    let user_id = sessionStorage.getItem('userId');
     let request_id = getPathVariable('offer-request')
     let data = await serviceGetOfferRequestById(request_id);
+    let offer_request = data.offer_request;
 
-    let personnel = document.getElementById('add_offer_request_authorized_personnel').value;
-    if (personnel == 0){personnel = null;}
-    let company = document.getElementById('add_offer_request_company').value;
-    if (company == 0){company = null;}
-    let employee = document.getElementById('add_offer_request_company_employee').value;
-    if (employee == 0){employee = null;}
+    document.getElementById('update_offer_request_id').value = request_id;
+    document.getElementById('update_offer_request_authorized_personnel').value = offer_request.authorized_personnel_id;
+    document.getElementById('update_offer_request_company').value = offer_request.company_id;
+    document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
+    if (offer_request.company_id != null && offer_request.company_id != 0) {
+        await initEmployeeSelect();
+        document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
+    }
 
+    $.each(offer_request.products, function (i, product) {
+        let item = '<tr id="productRow' + product.id + '">\n' +
+            '           <td>' + product.ref_code + '</td>\n' +
+            '           <td>' + product.product_name + '</td>\n' +
+            '           <td>' + product.quantity + '</td>\n' +
+            '           <td>\n' +
+            '               <div class="btn-list">\n' +
+            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
+            '       </tr>';
+        $('#offer-request-products tbody').append(item);
+    });
 }
 
-async function addOfferRequest(){
+async function updateOfferRequest(){
     let user_id = sessionStorage.getItem('userId');
 
     let products = [];

@@ -24,7 +24,7 @@ $extra_js='
                 <div class="row">
 
                     <div class="col-md-8">
-                        <div class="card border-theme mb-3">
+                        <div class="card border-theme mb-3 d-none">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">

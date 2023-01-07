@@ -102,10 +102,8 @@ class OfferRequestController extends Controller
         try {
             $request->validate([
                 'user_id' => 'required',
-                'title' => 'required',
-                'company_id' => 'required',
             ]);
-            OfferRequest::query()->where($request_id)->update([
+            OfferRequest::query()->where('request_id', $request_id)->update([
                 'user_id' => $request->user_id,
                 'authorized_personnel_id' => $request->authorized_personnel_id,
                 'company_id' => $request->company_id,
