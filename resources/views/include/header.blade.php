@@ -32,6 +32,10 @@ $extra_js="";
     <link href="plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
     <link href="plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" />
+    <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
+
     <link href="plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
@@ -273,7 +277,14 @@ $extra_js="";
                         <span class="menu-text">Haber Kaynağı</span>
                     </a>
                 </div>
-                <div class="menu-header">Navigation</div>
+                <div class="menu-header">Talep Yönetimi</div>
+                <div class="menu-item">
+                    <a href="/offer-requests" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Talepler</span>
+                    </a>
+                </div>
+                <div class="menu-header">Firma Yönetimi</div>
                 <div class="menu-item">
                     <a href="/customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>

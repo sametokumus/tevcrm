@@ -22,6 +22,9 @@ Route::get('/potential-customers', function () { return view('potential-customer
 Route::get('/customers', function () { return view('customers'); });
 Route::get('/suppliers', function () { return view('suppliers'); });
 Route::get('/company-detail/{id}', function () { return view('company-detail'); });
+Route::get('/offer-requests', function () { return view('offer-requests'); });
+Route::get('/offer-request', function () { return view('add-offer-request'); });
+Route::get('/offer-request/{id}', function () { return view('update-offer-request'); });
 
 
 

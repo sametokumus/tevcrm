@@ -331,6 +331,26 @@ async function checkLogin () {
 	}
 }
 
+async function getAdminsAddSelectId(selectId){
+    let data = await serviceGetAdmins();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Yetkili Seçiniz</option>');
+    $.each(data.admins, function(i, admin){
+        let optionRow = '<option value="'+admin.id+'">'+admin.name+' '+admin.surname+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
+async function getCompaniesAddSelectId(selectId){
+    let data = await serviceGetCompanies();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    $.each(data.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getEmployeesAddSelectId(companyId, selectId){
     let data = await serviceGetEmployeesByCompanyId(companyId);
     $('#'+selectId+' option').remove();
