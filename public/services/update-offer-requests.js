@@ -43,7 +43,7 @@ async function initPage(){
 
 async function initEmployeeSelect(){
     let company_id = document.getElementById('update_offer_request_company').value;
-    getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
+    await getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
 }
 
 async function addProductToTable(refcode, product_name, quantity){
@@ -82,6 +82,7 @@ async function initOfferRequest(){
     let request_id = getPathVariable('offer-request');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
+    console.log(offer_request)
 
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_authorized_personnel').value = offer_request.authorized_personnel_id;

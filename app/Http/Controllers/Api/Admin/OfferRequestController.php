@@ -110,7 +110,7 @@ class OfferRequestController extends Controller
                 'company_employee_id' => $request->company_employee_id,
             ]);
 
-            return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
+            return response(['message' => __('Talep güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
