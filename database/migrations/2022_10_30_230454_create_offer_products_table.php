@@ -16,10 +16,12 @@ class CreateOfferProductsTable extends Migration
         Schema::create('offer_products', function (Blueprint $table) {
             $table->id();
             $table->string('offer_id');
-            $table->string('product_id');
-            $table->integer('quantity')->nullable();
+            $table->bigInteger('request_product_id');
+            $table->integer('quantity');
             $table->decimal('pcs_price',10,2, false)->nullable();
             $table->decimal('total_price',10,2, false)->nullable();
+            $table->decimal('discount_rate',10,2, false)->nullable();
+            $table->decimal('discounted_price',10,2, false)->nullable();
             $table->string('package_type')->nullable();
             $table->string('date_code')->nullable();
             $table->text('comment')->nullable();
