@@ -127,24 +127,22 @@ class OfferRequestController extends Controller
 //                'ref_code' => 'required',
             ]);
 
-            foreach ($request->products as $product){
-                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
+                $has_product = Product::query()->where('ref_code', $request->ref_code)->where('active', 1)->first();
                 if ($has_product) {
                     $product_id = $has_product->id;
                 }else{
                     $product_id = Product::query()->insertGetId([
-                        'ref_code' => $product['ref_code'],
-                        'product_name' => $product['product_name'],
+                        'ref_code' => $request->ref_code,
+                        'product_name' => $request->product_name,
                     ]);
                 }
-                OfferRequestProduct::query()->insert([
+                $rp_id = OfferRequestProduct::query()->insertGetId([
                     'request_id' => $request_id,
                     'product_id' => $product_id,
-                    'quantity' => $product['quantity']
+                    'quantity' => $request->quantity
                 ]);
-            }
 
-            return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
+            return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['product_id' => $rp_id]]);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

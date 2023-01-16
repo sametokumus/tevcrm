@@ -47,23 +47,41 @@ async function initEmployeeSelect(){
 }
 
 async function addProductToTable(refcode, product_name, quantity){
-    let count = document.getElementById('add_offer_request_product_count').value;
-    count = parseInt(count) + 1;
-    document.getElementById('add_offer_request_product_count').value = count;
-    let item = '<tr id="productRow'+ count +'">\n' +
-        '           <td>'+ refcode +'</td>\n' +
-        '           <td>'+ product_name +'</td>\n' +
-        '           <td>'+ quantity +'</td>\n' +
-        '           <td>\n' +
-        '               <div class="btn-list">\n' +
-        '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
-        '               </div>\n' +
-        '           </td>\n' +
-        '       </tr>';
-    $('#offer-request-products tbody').append(item);
-    document.getElementById('add_offer_request_product_refcode').value = "";
-    document.getElementById('add_offer_request_product_name').value = "";
-    document.getElementById('add_offer_request_product_quantity').value = "0";
+
+    let request_id = getPathVariable('offer-request');
+    let formData = JSON.stringify({
+        "ref_code": refcode,
+        "product_name": product_name,
+        "quantity": quantity
+    });
+
+    console.log(formData);
+
+    let data = await servicePostAddProductToOfferRequest(request_id, formData);
+    if (data.status == "success") {
+        let product_id = data.object.product_id;
+
+        let count = document.getElementById('update_offer_request_product_count').value;
+        count = parseInt(count) + 1;
+        document.getElementById('update_offer_request_product_count').value = count;
+        let item = '<tr id="productRow'+ product_id +'">\n' +
+            '           <td>'+ refcode +'</td>\n' +
+            '           <td>'+ product_name +'</td>\n' +
+            '           <td>'+ quantity +'</td>\n' +
+            '           <td>\n' +
+            '               <div class="btn-list">\n' +
+            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ product_id +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
+            '       </tr>';
+        $('#offer-request-products tbody').append(item);
+        document.getElementById('add_offer_request_product_refcode').value = "";
+        document.getElementById('add_offer_request_product_name').value = "";
+        document.getElementById('add_offer_request_product_quantity').value = "0";
+
+    }else{
+        alert("Hata Oluştu");
+    }
 }
 
 async function deleteProductRow(item_id){

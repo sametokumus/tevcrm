@@ -876,7 +876,7 @@ async function servicePostAddProductToOfferRequest(id, formData) {
     const data = await fetchDataPost('/admin/offerRequest/addProductToOfferRequest/' + id, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
-        return true;
+        return data;
     } else {
         showAlert('İstek Başarısız.');
         return false;
