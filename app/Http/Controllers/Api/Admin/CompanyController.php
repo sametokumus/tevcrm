@@ -116,7 +116,7 @@ class CompanyController extends Controller
 //                'phone' => 'required',
 //                'address' => 'required',
 //            ]);
-            return $request;
+            return $request->is_potential_customer;
             Company::query()->where('id', $company_id)->update([
                 'name' => $request->name,
                 'website' => $request->website,

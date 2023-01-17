@@ -141,7 +141,6 @@ async function updateCompany(){
     if(document.getElementById('update_company_is_potential_customer').checked){
         isPotential = "1";
     }
-    console.log(isPotential)
     if(document.getElementById('update_company_is_customer').checked){
         isCustomer = "1";
     }
