@@ -116,7 +116,6 @@ class CompanyController extends Controller
                 'phone' => 'required',
                 'address' => 'required',
             ]);
-return 1;
             $sql = Company::query()->where('id', $company_id)->update([
                 'name' => $request->name,
                 'website' => $request->website,
@@ -129,7 +128,7 @@ return 1;
                 'is_potential_customer' => $request->is_potential_customer,
                 'is_customer' => $request->is_customer,
                 'is_supplier' => $request->is_supplier
-            ])->toSql();
+            ]);
             return $sql;
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
