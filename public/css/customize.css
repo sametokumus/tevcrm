@@ -52,3 +52,7 @@ div.dataTables_wrapper div.dt-buttons button {
     background: transparent !important;
     border-color: #798e98 !important;
 }
+
+table tr.selected{
+    background-color: rgba(255,255,255,.2);
+}

@@ -39,6 +39,7 @@ async function initOfferRequests(){
 			'              <td>\n' +
 			'                  <div class="btn-list">\n' +
 			'                      <a href="offer-request/'+ offer_request.request_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
+			'                      <a href="offer/'+ offer_request.request_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklifler</span></a>\n' +
 			'                  </div>\n' +
 			'              </td>\n' +
 			'          </tr>';
