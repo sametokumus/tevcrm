@@ -190,5 +190,6 @@ async function updateCompany(){
     formData.append('logo', document.getElementById('update_company_logo').files[0]);
     console.log(formData);
 
-    await servicePostUpdateCompany(formData);
+    let company_id = document.getElementById('update_company_id').value;
+    await servicePostUpdateCompany(company_id, formData);
 }
