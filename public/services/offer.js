@@ -63,6 +63,7 @@ async function initOfferRequest(){
 
     $.each(offer_request.products, function (i, product) {
         let item = '<tr id="productRow' + product.id + '">\n' +
+            '           <td>' + product.id + '</td>\n' +
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
@@ -101,18 +102,40 @@ async function initOfferRequest(){
 }
 
 async function addOffer(){
-    let supplier = document.getElementById('add_offer_company').value;
     let request_id = getPathVariable('offer');
-    let tasks = [];
-    for (let i = 1; i <= task_count; i++) {
-        let title = document.getElementById('add_activity_new_task_'+i+'_label').textContent;
-        let is_completed = 0;
-        let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
-        let item = {
-            "task_id": parseInt(task_id),
-            "title": title,
-            "is_completed": parseInt(is_completed)
+    let supplier_id = document.getElementById('add_offer_company').value;
+    let table = $('#offer-request-products').DataTable();
+    let rows = table.rows({ selected: true } );
+
+    let products = [];
+    if (rows.count() === 0){
+        alert("Öncelikle seçim yapmalısınız.");
+        $('#addOfferModal').modal('hide');
+        $("#add_offer_form").trigger("reset");
+    }else {
+        rows.every(function (rowIdx, tableLoop, rowLoop) {
+            let item = {
+                "request_product_id": this.data()[0]
+            }
+            products.push(item);
+        });
+
+        let formData = JSON.stringify({
+            "request_id": request_id,
+            "supplier_id": supplier_id,
+            "products": products
+        });
+
+        console.log(formData);
+
+        let returned = await servicePostAddOffer(formData);
+        if (returned){
+            $("#add_offer_form").trigger("reset");
+            $('#addOfferModal').modal('hide');
+            // initOffers();
+        }else{
+            alert("Hata Oluştu");
         }
-        tasks.push(item);
+
     }
 }

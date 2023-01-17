@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
 use App\Http\Controllers\Api\Admin\OfferRequestController;
+use App\Http\Controllers\Api\Admin\OfferController;
 use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\StateController;
@@ -131,6 +132,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('offerRequest/updateOfferRequest/{request_id}', [OfferRequestController::class, 'updateOfferRequest']);
     Route::post('offerRequest/addProductToOfferRequest/{request_id}', [OfferRequestController::class, 'addProductToOfferRequest']);
     Route::get('offerRequest/deleteProductToOfferRequest/{request_product_id}', [OfferRequestController::class, 'deleteProductToOfferRequest']);
+
+
+    //Offer
+    Route::post('offer/addOffer', [OfferController::class, 'addOffer']);
 
 });
 

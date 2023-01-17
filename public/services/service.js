@@ -902,3 +902,15 @@ async function serviceGetDeleteProductToOfferRequest(id) {
         return false;
     }
 }
+
+
+async function servicePostAddOffer(formData) {
+    const data = await fetchDataPost('/admin/offer/addOffer', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
