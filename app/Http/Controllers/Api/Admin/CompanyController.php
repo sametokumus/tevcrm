@@ -110,13 +110,12 @@ class CompanyController extends Controller
 
     public function updateCompany(Request $request,$company_id){
         try {
-//            $request->validate([
-//                'name' => 'required',
-//                'email' => 'required',
-//                'phone' => 'required',
-//                'address' => 'required',
-//            ]);
-            return $request->is_potential_customer;
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+            ]);
             Company::query()->where('id', $company_id)->update([
                 'name' => $request->name,
                 'website' => $request->website,

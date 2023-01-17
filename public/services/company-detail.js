@@ -127,6 +127,7 @@ async function initCompany(company_id){
 }
 async function updateCompanyCallback(xhttp){
     let jsonData = await xhttp.responseText;
+    console.log(jsonData)
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
@@ -135,17 +136,17 @@ async function updateCompanyCallback(xhttp){
     initCompany(company_id);
 }
 async function updateCompany(){
-    let isPotential = "0";
-    let isCustomer = "0";
-    let isSupplier = "0";
+    let isPotential = 0;
+    let isCustomer = 0;
+    let isSupplier = 0;
     if(document.getElementById('update_company_is_potential_customer').checked){
-        isPotential = "1";
+        isPotential = 1;
     }
     if(document.getElementById('update_company_is_customer').checked){
-        isCustomer = "1";
+        isCustomer = 1;
     }
     if(document.getElementById('update_company_is_supplier').checked){
-        isSupplier = "1";
+        isSupplier = 1;
     }
     let formData = new FormData();
     formData.append('name', document.getElementById('update_company_name').value);
@@ -164,7 +165,8 @@ async function updateCompany(){
         console.log(pair[0]+ ', ' + pair[1]);
     }
 
-    await servicePostUpdateCompany(formData);
+    let company_id = getPathVariable('company-detail');
+    await servicePostUpdateCompany(company_id, formData);
 }
 
 async function initEmployees(){

@@ -162,18 +162,18 @@ async function updateCompanyCallback(xhttp){
     initCompanies();
 }
 async function updateCompany(){
-    let isPotential = "0";
-    let isCustomer = "0";
-    let isSupplier = "0";
+    let isPotential = 0;
+    let isCustomer = 0;
+    let isSupplier = 0;
     if(document.getElementById('update_company_is_potential_customer').checked){
-        isPotential = "1";
+        isPotential = 1;
     }
     console.log(isPotential)
     if(document.getElementById('update_company_is_customer').checked){
-        isCustomer = "1";
+        isCustomer = 1;
     }
     if(document.getElementById('update_company_is_supplier').checked){
-        isSupplier = "1";
+        isSupplier = 1;
     }
     let formData = new FormData();
     formData.append('name', document.getElementById('update_company_name').value);
