@@ -177,8 +177,8 @@ async function updateCompany(){
     }
     let formData = new FormData();
     formData.append('name', document.getElementById('update_company_name').value);
-    formData.append('website', document.getElementById('update_company_email').value);
-    formData.append('email', document.getElementById('update_company_website').value);
+    formData.append('website', document.getElementById('update_company_website').value);
+    formData.append('email', document.getElementById('update_company_email').value);
     formData.append('phone', document.getElementById('update_company_phone').value);
     formData.append('fax', document.getElementById('update_company_fax').value);
     formData.append('address', document.getElementById('update_company_address').value);

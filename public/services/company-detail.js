@@ -125,6 +125,48 @@ async function initCompany(company_id){
     if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
     if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
 }
+async function updateCompanyCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_company_form").trigger("reset");
+    let company_id = getPathVariable('company-detail');
+    initCompany(company_id);
+}
+async function updateCompany(){
+    let isPotential = "0";
+    let isCustomer = "0";
+    let isSupplier = "0";
+    if(document.getElementById('update_company_is_potential_customer').checked){
+        isPotential = "1";
+    }
+    console.log(isPotential)
+    if(document.getElementById('update_company_is_customer').checked){
+        isCustomer = "1";
+    }
+    if(document.getElementById('update_company_is_supplier').checked){
+        isSupplier = "1";
+    }
+    let formData = new FormData();
+    formData.append('name', document.getElementById('update_company_name').value);
+    formData.append('website', document.getElementById('update_company_website').value);
+    formData.append('email', document.getElementById('update_company_email').value);
+    formData.append('phone', document.getElementById('update_company_phone').value);
+    formData.append('fax', document.getElementById('update_company_fax').value);
+    formData.append('address', document.getElementById('update_company_address').value);
+    formData.append('tax_office', document.getElementById('update_company_tax_office').value);
+    formData.append('tax_number', document.getElementById('update_company_tax_number').value);
+    formData.append('is_potential_customer', isPotential);
+    formData.append('is_customer', isCustomer);
+    formData.append('is_supplier', isSupplier);
+    formData.append('logo', document.getElementById('update_company_logo').files[0]);
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]);
+    }
+
+    await servicePostUpdateCompany(formData);
+}
 
 async function initEmployees(){
     let company_id = getPathVariable('company-detail');

@@ -162,23 +162,23 @@ async function updateCompanyCallback(xhttp){
     initCompanies();
 }
 async function updateCompany(){
-    let isPotential = 0;
-    let isCustomer = 0;
-    let isSupplier = 0;
+    let isPotential = "0";
+    let isCustomer = "0";
+    let isSupplier = "0";
     if(document.getElementById('update_company_is_potential_customer').checked){
-        isPotential = 1;
+        isPotential = "1";
     }
     console.log(isPotential)
     if(document.getElementById('update_company_is_customer').checked){
-        isCustomer = 1;
+        isCustomer = "1";
     }
     if(document.getElementById('update_company_is_supplier').checked){
-        isSupplier = 1;
+        isSupplier = "1";
     }
     let formData = new FormData();
     formData.append('name', document.getElementById('update_company_name').value);
-    formData.append('website', document.getElementById('update_company_email').value);
-    formData.append('email', document.getElementById('update_company_website').value);
+    formData.append('website', document.getElementById('update_company_website').value);
+    formData.append('email', document.getElementById('update_company_email').value);
     formData.append('phone', document.getElementById('update_company_phone').value);
     formData.append('fax', document.getElementById('update_company_fax').value);
     formData.append('address', document.getElementById('update_company_address').value);
