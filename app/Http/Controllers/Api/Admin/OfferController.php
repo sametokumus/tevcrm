@@ -21,7 +21,7 @@ class OfferController extends Controller
     public function getOffersByRequestId($request_id)
     {
         try {
-            $offers = OfferRequest::query()
+            $offers = Offer::query()
                 ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
                 ->selectRaw('offers.*, companies.name as company_name')
                 ->where('offers.request_id',$request_id)
@@ -41,7 +41,7 @@ class OfferController extends Controller
     public function getOfferById($offer_id)
     {
         try {
-            $offer = OfferRequest::query()
+            $offer = Offer::query()
                 ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
                 ->selectRaw('offers.*, companies.name as company_name')
                 ->where('offers.offer_id',$offer_id)
