@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Company;
+use App\Models\Employee;
 use App\Models\Offer;
 use App\Models\OfferProduct;
+use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use Faker\Provider\Uuid;
@@ -15,6 +18,44 @@ use Nette\Schema\ValidationException;
 
 class OfferController extends Controller
 {
+    public function getOffersByRequestId($request_id)
+    {
+        try {
+            $offers = OfferRequest::query()
+                ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                ->selectRaw('offers.*, companies.name as company_name')
+                ->where('offers.request_id',$request_id)
+                ->where('offers.active',1)
+                ->get();
+
+            foreach ($offers as $offer){
+                $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getOfferById($offer_id)
+    {
+        try {
+            $offer = OfferRequest::query()
+                ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                ->selectRaw('offers.*, companies.name as company_name')
+                ->where('offers.offer_id',$offer_id)
+                ->where('offers.active',1)
+                ->first();
+
+            $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer' => $offer]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function addOffer(Request $request)
     {
         try {

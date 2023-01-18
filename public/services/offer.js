@@ -130,6 +130,7 @@ async function addOffer(){
 
         let returned = await servicePostAddOffer(formData);
         if (returned){
+            $('#offer-request-products-body tr').removeClass('selected');
             $("#add_offer_form").trigger("reset");
             $('#addOfferModal').modal('hide');
             // initOffers();
