@@ -26,11 +26,11 @@ class OfferController extends Controller
                 ->selectRaw('offers.*, companies.name as company_name')
                 ->where('offers.request_id',$request_id)
                 ->where('offers.active',1)
-                ->get();
+                ->toSql();
 
-            foreach ($offers as $offer){
-                $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
-            }
+//            foreach ($offers as $offer){
+//                $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
+//            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
         } catch (QueryException $queryException) {
