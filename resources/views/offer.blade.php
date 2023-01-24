@@ -67,9 +67,9 @@ $extra_js='
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0">Ref. Code</th>
-                                    <th class="border-bottom-0">Ürün Adı</th>
-                                    <th class="border-bottom-0">Adet</th>
+                                    <th class="border-bottom-0">Teklif Kodu</th>
+                                    <th class="border-bottom-0">Tedarikçi Firma</th>
+                                    <th class="border-bottom-0">Ürün Adeti</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
@@ -110,7 +110,6 @@ $extra_js='
 
                             </select>
                         </div>
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -118,6 +117,41 @@ $extra_js='
                     <button type="submit" class="btn btn-outline-theme">Kaydet</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-cover fade" id="offerDetailModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TEKLİF DETAYI</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-12 mb-3">
+                        <table id="offer-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
+                            <thead>
+                            <tr>
+                                <th class="border-bottom-0">ID</th>
+                                <th class="border-bottom-0">Teklif Kodu</th>
+                                <th class="border-bottom-0">Tedarikçi Firma</th>
+                                <th class="border-bottom-0">Ürün Adeti</th>
+                                <th class="border-bottom-0"></th>
+                            </tr>
+                            </thead>
+                            <tbody id="offer-detail-body">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+            </div>
         </div>
     </div>
 </div>

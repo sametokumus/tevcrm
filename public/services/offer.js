@@ -27,6 +27,7 @@
 		checkRole();
 		// await initPage();
         await initOfferRequest();
+        await initOffers();
 
 	});
 
@@ -139,4 +140,56 @@ async function addOffer(){
         }
 
     }
+}
+
+async function initOffers(){
+    let request_id = getPathVariable('offer');
+    let data = await serviceGetOffersByRequestId(request_id);
+    let offers = data.offers;
+    console.log(offers)
+
+    $("#offers").dataTable().fnDestroy();
+    $('#offers tbody > tr').remove();
+
+    $.each(offers, function (i, offer) {
+        let item = '<tr id="offerRow' + offer.id + '">\n' +
+            '           <td>' + offer.id + '</td>\n' +
+            '           <td>' + offer.offer_id + '</td>\n' +
+            '           <td>' + offer.company_name + '</td>\n' +
+            '           <td>' + offer.product_count + '</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button onclick="openOfferDetailModal(' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '       </tr>';
+        $('#offers tbody').append(item);
+    });
+
+    $('#offers').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'excel',
+            'pdf'
+        ],
+        pageLength : 20,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[0, 'desc']]
+    });
+}
+
+async function openOfferDetailModal(offer_id){
+    $("#offerDetailModal").modal('show');
+    await initOfferDetailModal(offer_id);
+}
+
+async function initOfferDetailModal(offer_id){
+
 }
