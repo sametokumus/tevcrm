@@ -904,6 +904,24 @@ async function serviceGetDeleteProductToOfferRequest(id) {
 }
 
 
+
+
+async function serviceGetOffersByRequestId(id) {
+    const data = await fetchDataGet('/admin/offer/getOffersByRequestId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetOfferById(id) {
+    const data = await fetchDataGet('/admin/offer/getOfferById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function servicePostAddOffer(formData) {
     const data = await fetchDataPost('/admin/offer/addOffer', formData, 'application/json');
     if (data.status == "success") {

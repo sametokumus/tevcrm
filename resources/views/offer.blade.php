@@ -20,36 +20,74 @@ $extra_js='
                 </div>
             </div>
 
+            <div class="row">
 
-                <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+                            <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                <thead>
+                                <tr>
+                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">Ref. Code</th>
+                                    <th class="border-bottom-0">Ürün Adı</th>
+                                    <th class="border-bottom-0">Adet</th>
+                                </tr>
+                                </thead>
+                                <tbody id="offer-request-products-body">
 
-                    <div class="col-md-12">
-                        <div class="card border-theme mb-3">
-                            <div class="card-body p-3">
-                                <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom">
-                                    <thead>
-                                    <tr>
-                                        <th class="border-bottom-0">ID</th>
-                                        <th class="border-bottom-0">Ref. Code</th>
-                                        <th class="border-bottom-0">Ürün Adı</th>
-                                        <th class="border-bottom-0">Adet</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="offer-request-products-body">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-arrow">
-                                <div class="card-arrow-top-left"></div>
-                                <div class="card-arrow-top-right"></div>
-                                <div class="card-arrow-bottom-left"></div>
-                                <div class="card-arrow-bottom-right"></div>
-                            </div>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
                         </div>
                     </div>
-
                 </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        Teklifler
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+                            <table id="offers" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                <thead>
+                                <tr>
+                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">Ref. Code</th>
+                                    <th class="border-bottom-0">Ürün Adı</th>
+                                    <th class="border-bottom-0">Adet</th>
+                                    <th class="border-bottom-0"></th>
+                                </tr>
+                                </thead>
+                                <tbody id="offers-body">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <!-- CONTAINER END -->
     </div>

@@ -30,6 +30,7 @@ class OfferController extends Controller
 
             foreach ($offers as $offer){
                 $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
+                $offer['products'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
