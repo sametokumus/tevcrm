@@ -54,7 +54,7 @@ class OfferController extends Controller
             foreach ($products as $product){
                 $product_detail = Product::query()->where('id', $product->request_product_id)->first();
                 $product['ref_code'] = $product_detail->ref_code;
-                $product['name'] = $product_detail->name;
+                $product['product_name'] = $product_detail->product_name;
             }
 
             $offer['products'] = $products;
