@@ -57,6 +57,30 @@ table tr.selected{
     background-color: rgba(255,255,255,.2);
 }
 
+
+
+/* OFFER PRINT */
+#offer-print #logo img{
+    width: 120px;
+}
+#offer-print .contact-col{
+    margin-top: 100px;
+}
+#offer-print .logo-header{
+    text-align: right;
+}
+#offer-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#offer-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
 @media print {
     .no-print {
         display: none !important;

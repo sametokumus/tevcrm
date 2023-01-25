@@ -50,6 +50,7 @@ class OfferController extends Controller
                 ->first();
 
             $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
+            $offer['company'] = Company::query()->where('id', $offer->supplier_id)->first();
             $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
             foreach ($products as $product){
                 $product_detail = Product::query()->where('id', $product->request_product_id)->first();

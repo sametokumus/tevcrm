@@ -40,10 +40,22 @@ function checkRole(){
 }
 
 async function initContact(id){
+    let offer_id = getPathVariable('offer-print');
+
     let data = await serviceGetContactById(id);
     let contact = data.contact;
 
     $('#offer-print #logo').append('<img src="/'+ contact.logo +'">');
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = dd + '/' + mm + '/' + yyyy;
+    $('#offer-print .logo-header .date').append('Tarih: '+ today);
+    $('#offer-print .logo-header .offer-id').append(offer_id);
+
+    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
 }
 
 async function initPage(){
