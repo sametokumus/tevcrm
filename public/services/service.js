@@ -234,7 +234,7 @@ function formatDateAndTimeDESC(date, slicer) {
 
 function checkNull(data){
 	if (data == null){
-        return "-";
+        return "";
     }else {
         return data;
     }

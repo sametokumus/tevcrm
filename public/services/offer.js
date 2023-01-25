@@ -3,6 +3,14 @@
 
 	$(document).ready(function() {
 
+        $(":input").inputmask();
+        $("#add_offer_product_pcs_price").maskMoney({thousands:''});
+        $("#add_offer_product_total_price").maskMoney({thousands:''});
+        $("#add_offer_product_discounted_price").maskMoney({thousands:''});
+        $("#update_offer_product_pcs_price").maskMoney({thousands:''});
+        $("#update_offer_product_total_price").maskMoney({thousands:''});
+        $("#update_offer_product_discounted_price").maskMoney({thousands:''});
+
 		$('#add_offer_form').submit(function (e){
 			e.preventDefault();
             addOffer();
@@ -18,6 +26,11 @@
                 return false;
             }
             addProductToTable(refcode, product_name, quantity);
+        });
+
+        $('#update_offer_product_form').submit(function (e){
+            e.preventDefault();
+            updateOfferProduct();
         });
 	});
 
@@ -133,7 +146,7 @@ async function addOffer(){
             $('#offer-request-products-body tr').removeClass('selected');
             $("#add_offer_form").trigger("reset");
             $('#addOfferModal').modal('hide');
-            // initOffers();
+            initOffers();
         }else{
             alert("Hata Oluştu");
         }
@@ -243,7 +256,56 @@ async function openUpdateOfferProductModal(offer_id, product_id){
 }
 
 async function initUpdateOfferProductModal(offer_id, product_id){
+    let data = await serviceGetOfferProductById(offer_id, product_id);
+    let product = data.product;
+
     document.getElementById('update_offer_id').value = offer_id;
     document.getElementById('update_offer_product_id').value = product_id;
-    let product = await serviceGetOfferProductById(offer_id, product_id);
+
+    document.getElementById('update_offer_product_ref_code').value = product.product_detail.ref_code;
+    document.getElementById('update_offer_product_product_name').value = product.product_detail.product_name;
+    document.getElementById('update_offer_product_date_code').value = checkNull(product.date_code);
+    document.getElementById('update_offer_product_package_type').value = checkNull(product.package_type);
+    document.getElementById('update_offer_product_quantity').value = checkNull(product.quantity);
+    document.getElementById('update_offer_product_pcs_price').value = checkNull(product.pcs_price);
+    document.getElementById('update_offer_product_total_price').value = checkNull(product.total_price);
+    document.getElementById('update_offer_product_discount_rate').value = checkNull(product.discount_rate);
+    document.getElementById('update_offer_product_discounted_price').value = checkNull(product.discounted_price);
+}
+
+async function updateOfferProduct(){
+    let offer_id = document.getElementById('update_offer_id').value;
+    let product_id = document.getElementById('update_offer_product_id').value;
+    let ref_code = document.getElementById('update_offer_product_ref_code').value;
+    let product_name = document.getElementById('update_offer_product_product_name').value;
+    let date_code = document.getElementById('update_offer_product_date_code').value;
+    let package_type = document.getElementById('update_offer_product_package_type').value;
+    let quantity = document.getElementById('update_offer_product_quantity').value;
+    let pcs_price = document.getElementById('update_offer_product_pcs_price').value;
+    let total_price = document.getElementById('update_offer_product_total_price').value;
+    let discount_rate = document.getElementById('update_offer_product_discount_rate').value;
+    let discounted_price = document.getElementById('update_offer_product_discounted_price').value;
+
+    let formData = JSON.stringify({
+        "ref_code": ref_code,
+        "product_name": product_name,
+        "date_code": date_code,
+        "package_type": package_type,
+        "quantity": quantity,
+        "pcs_price": pcs_price,
+        "total_price": total_price,
+        "discount_rate": discount_rate,
+        "discounted_price": discounted_price
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostUpdateOfferProduct(formData, offer_id, product_id);
+    if (returned){
+        $("#update_offer_product_form").trigger("reset");
+        $('#updateOfferProductModal').modal('hide');
+        await initOfferDetailModal(offer_id);
+    }else{
+        alert("Hata Oluştu");
+    }
 }

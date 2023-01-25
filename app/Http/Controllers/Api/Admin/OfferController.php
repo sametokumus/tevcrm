@@ -154,8 +154,8 @@ class OfferController extends Controller
     {
         try {
             $request->validate([
-                'offer_id' => 'required',
-                'product_id' => 'required',
+                'ref_code' => 'required',
+                'product_name' => 'required',
             ]);
 
             OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->update([

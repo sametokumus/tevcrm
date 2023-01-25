@@ -27,6 +27,8 @@
 <script src="plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 
+<script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 <script src="services/service.js"></script>
 <?php echo $extra_js; ?>

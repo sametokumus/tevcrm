@@ -202,13 +202,17 @@ $extra_js='
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Ref. Code</label>
-                            <input type="text" class="form-control" id="update_offer_product_refcode" readonly>
+                            <input type="text" class="form-control" id="update_offer_product_ref_code" readonly>
                             <input type="hidden" class="form-control" id="update_offer_product_id">
                             <input type="hidden" class="form-control" id="update_offer_id">
                         </div>
                         <div class="col-md-12 mb-3">
+                            <label class="form-label">Ürün Adı</label>
+                            <input type="text" class="form-control" id="update_offer_product_product_name" readonly>
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Date Code</label>
-                            <input type="text" class="form-control" id="update_offer_product_datecode">
+                            <input type="text" class="form-control" id="update_offer_product_date_code">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Paketleme</label>
