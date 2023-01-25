@@ -940,6 +940,34 @@ async function servicePostAddOffer(formData) {
         return false;
     }
 }
+async function serviceGetOfferProductById(offer_id, product_id) {
+    const data = await fetchDataGet('/admin/offer/getOfferProductById/' + offer_id + '/' + product_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddOfferProduct(formData, offer_id) {
+    const data = await fetchDataPost('/admin/offer/addOfferProduct', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateOfferProduct(formData, offer_id, product_id) {
+    const data = await fetchDataPost('/admin/offer/updateOfferProduct', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 

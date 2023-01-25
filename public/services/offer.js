@@ -211,7 +211,7 @@ async function initOfferDetailModal(offer_id){
             '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button onclick="openOfferDetailModal(' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
+            '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Güncelle</span></button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
@@ -235,4 +235,15 @@ async function initOfferDetailModal(offer_id){
         },
         order: [[0, 'desc']]
     });
+}
+
+async function openUpdateOfferProductModal(offer_id, product_id){
+    $("#updateOfferProductModal").modal('show');
+    await initUpdateOfferProductModal(offer_id, product_id);
+}
+
+async function initUpdateOfferProductModal(offer_id, product_id){
+    document.getElementById('update_offer_id').value = offer_id;
+    document.getElementById('update_offer_product_id').value = product_id;
+    let product = await serviceGetOfferProductById(offer_id, product_id);
 }

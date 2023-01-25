@@ -64,7 +64,7 @@ table tr.selected{
     width: 120px;
 }
 #offer-print .contact-col{
-    margin-top: 100px;
+    margin-top: 70px;
 }
 #offer-print .logo-header{
     text-align: right;
@@ -80,6 +80,11 @@ table tr.selected{
     font-weight: 400;
 }
 
+#offer-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
 
 @media print {
     .no-print {
@@ -91,4 +96,15 @@ table tr.selected{
     .pace{
         display: none;
     }
+}
+
+
+.modal-backdrop.show:nth-of-type(even) {
+    z-index: 1061 !important;
+}
+#updateOfferProductModal.show{
+    z-index: 1062 !important;
+}
+#addOfferProductModal.show{
+    z-index: 1062 !important;
 }
