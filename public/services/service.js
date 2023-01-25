@@ -949,7 +949,7 @@ async function serviceGetOfferProductById(offer_id, product_id) {
     }
 }
 async function servicePostAddOfferProduct(formData, offer_id) {
-    const data = await fetchDataPost('/admin/offer/addOfferProduct', formData, 'application/json');
+    const data = await fetchDataPost('/admin/offer/addOfferProduct/' + offer_id, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -959,7 +959,7 @@ async function servicePostAddOfferProduct(formData, offer_id) {
     }
 }
 async function servicePostUpdateOfferProduct(formData, offer_id, product_id) {
-    const data = await fetchDataPost('/admin/offer/updateOfferProduct', formData, 'application/json');
+    const data = await fetchDataPost('/admin/offer/updateOfferProduct/' + offer_id + '/' + product_id, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;

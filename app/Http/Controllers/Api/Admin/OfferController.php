@@ -118,29 +118,39 @@ class OfferController extends Controller
     {
         try {
             $request->validate([
-                'request_id' => 'required',
-                'supplier_id' => 'required',
+                'ref_code' => 'required',
+                'product_name' => 'required',
             ]);
-            $offer_id = Uuid::uuid();
-            Offer::query()->insertGetId([
-                'request_id' => $request->request_id,
-                'offer_id' => $offer_id,
-                'supplier_id' => $request->supplier_id
-            ]);
+            $request_id = Offer::query()->where('offer_id', $offer_id)->first()->request_id;
 
-            foreach ($request->products as $product){
-                $has_product = OfferProduct::query()->where('request_product_id', $product['request_product_id'])->where('active', 1)->first();
-                if (!$has_product) {
-                    $request_product = OfferRequestProduct::query()->where('id', $product['request_product_id'])->first();
-                    OfferProduct::query()->insert([
-                        'offer_id' => $offer_id,
-                        'request_product_id' => $product['request_product_id'],
-                        'quantity' => $request_product['quantity']
-                    ]);
-                }
+            $has_product = Product::query()->where('ref_code', $request->ref_code)->where('active', 1)->first();
+            if ($has_product) {
+                $product_id = $has_product->id;
+            }else{
+                $product_id = Product::query()->insertGetId([
+                    'ref_code' => $request->ref_code,
+                    'product_name' => $request->product_name,
+                ]);
             }
+            $request_product_id = OfferRequestProduct::query()->insertGetId([
+                'request_id' => $request_id,
+                'product_id' => $product_id,
+                'quantity' => $request->quantity
+            ]);
 
-            return response(['message' => __('Teklif ekleme işlemi başarılı.'), 'status' => 'success']);
+            OfferProduct::query()->insert([
+                'offer_id' => $offer_id,
+                'request_product_id' => $request_product_id,
+                'quantity' => $request->quantity,
+                'pcs_price' => $request->pcs_price,
+                'total_price' => $request->total_price,
+                'discount_rate' => $request->discount_rate,
+                'discounted_price' => $request->discounted_price,
+                'package_type' => $request->package_type,
+                'date_code' => $request->date_code
+            ]);
+
+            return response(['message' => __('Teklif ürün ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

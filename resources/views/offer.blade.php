@@ -129,6 +129,7 @@ $extra_js='
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="offer-detail-modal-offer-id">
                 <div class="row mb-4">
                     <div class="col-md-12 mb-3">
                         <table id="offer-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
@@ -167,17 +168,47 @@ $extra_js='
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">TEKLİF FİRMA SEÇİMİ</h5>
+                <h5 class="modal-title">TEKLİF ÜRÜN EKLEME</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="add_offer_form">
+            <form method="post" action="#" id="add_offer_product_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Tedarikçi</label>
-                            <select class="form-control" id="add_offer_company">
-
-                            </select>
+                            <label class="form-label">Ref. Code</label>
+                            <input type="text" class="form-control" id="add_offer_product_ref_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Ürün Adı</label>
+                            <input type="text" class="form-control" id="add_offer_product_product_name">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Date Code</label>
+                            <input type="text" class="form-control" id="add_offer_product_date_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Paketleme</label>
+                            <input type="text" class="form-control" id="add_offer_product_package_type">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Adet</label>
+                            <input type="text" class="form-control" id="add_offer_product_quantity">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Birim Fiyat</label>
+                            <input type="text" class="form-control" id="add_offer_product_pcs_price">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Toplam Fiyat</label>
+                            <input type="text" class="form-control" id="add_offer_product_total_price">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">İndirim Oranı</label>
+                            <input type="text" class="form-control" id="add_offer_product_discount_rate" placeholder="%">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">İndirimli Fiyat</label>
+                            <input type="text" class="form-control" id="add_offer_product_discounted_price">
                         </div>
                     </div>
                 </div>

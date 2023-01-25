@@ -28,6 +28,11 @@
             addProductToTable(refcode, product_name, quantity);
         });
 
+        $('#add_offer_product_form').submit(function (e){
+            e.preventDefault();
+            addOfferProduct();
+        });
+
         $('#update_offer_product_form').submit(function (e){
             e.preventDefault();
             updateOfferProduct();
@@ -204,6 +209,7 @@ async function openOfferDetailModal(offer_id){
 
 async function initOfferDetailModal(offer_id){
     console.log(offer_id)
+    document.getElementById('offer-detail-modal-offer-id').value = offer_id;
     let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
     console.log(offer)
@@ -239,8 +245,14 @@ async function initOfferDetailModal(offer_id){
         ],
         dom: 'Bfrtip',
         buttons: [
-            'excel',
-            'pdf'
+            {
+                text: 'Teklife Yeni Ürün Ekle',
+                action: function ( e, dt, node, config ) {
+                    openAddOfferProductModal();
+                }
+            }
+            // 'excel',
+            // 'pdf'
         ],
         pageLength : 20,
         language: {
@@ -304,6 +316,46 @@ async function updateOfferProduct(){
     if (returned){
         $("#update_offer_product_form").trigger("reset");
         $('#updateOfferProductModal').modal('hide');
+        await initOfferDetailModal(offer_id);
+    }else{
+        alert("Hata Oluştu");
+    }
+}
+
+async function openAddOfferProductModal(){
+    $("#addOfferProductModal").modal('show');
+}
+
+async function addOfferProduct(){
+    let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
+    let ref_code = document.getElementById('add_offer_product_ref_code').value;
+    let product_name = document.getElementById('add_offer_product_product_name').value;
+    let date_code = document.getElementById('add_offer_product_date_code').value;
+    let package_type = document.getElementById('add_offer_product_package_type').value;
+    let quantity = document.getElementById('add_offer_product_quantity').value;
+    let pcs_price = document.getElementById('add_offer_product_pcs_price').value;
+    let total_price = document.getElementById('add_offer_product_total_price').value;
+    let discount_rate = document.getElementById('add_offer_product_discount_rate').value;
+    let discounted_price = document.getElementById('add_offer_product_discounted_price').value;
+
+    let formData = JSON.stringify({
+        "ref_code": ref_code,
+        "product_name": product_name,
+        "date_code": date_code,
+        "package_type": package_type,
+        "quantity": quantity,
+        "pcs_price": pcs_price,
+        "total_price": total_price,
+        "discount_rate": discount_rate,
+        "discounted_price": discounted_price
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostAddOfferProduct(formData, offer_id);
+    if (returned){
+        $("#add_offer_product_form").trigger("reset");
+        $('#addOfferProductModal').modal('hide');
         await initOfferDetailModal(offer_id);
     }else{
         alert("Hata Oluştu");
