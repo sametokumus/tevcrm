@@ -82,7 +82,7 @@ class OfferController extends Controller
             ]);
 
             foreach ($request->products as $product){
-                $has_product = OfferProduct::query()->where('request_product_id', $product['request_product_id'])->where('active', 1)->first();
+                $has_product = OfferProduct::query()->where('offer_id', $offer_id)->where('request_product_id', $product['request_product_id'])->where('active', 1)->first();
                 if (!$has_product) {
                     $request_product = OfferRequestProduct::query()->where('id', $product['request_product_id'])->first();
                     OfferProduct::query()->insert([
