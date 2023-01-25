@@ -122,7 +122,7 @@ $extra_js='
 </div>
 
 <div class="modal modal-cover fade" id="offerDetailModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">TEKLİF DETAYI</h5>
@@ -135,9 +135,14 @@ $extra_js='
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">ID</th>
-                                <th class="border-bottom-0">Teklif Kodu</th>
-                                <th class="border-bottom-0">Tedarikçi Firma</th>
-                                <th class="border-bottom-0">Ürün Adeti</th>
+                                <th class="border-bottom-0">Ref. Code</th>
+                                <th class="border-bottom-0">DC</th>
+                                <th class="border-bottom-0">Paketleme</th>
+                                <th class="border-bottom-0">Adet</th>
+                                <th class="border-bottom-0">Birim Fiyat</th>
+                                <th class="border-bottom-0">Toplam Fiyat</th>
+                                <th class="border-bottom-0">İndirim Oranı</th>
+                                <th class="border-bottom-0">İndirimli Fiyat</th>
                                 <th class="border-bottom-0"></th>
                             </tr>
                             </thead>

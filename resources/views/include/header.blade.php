@@ -51,7 +51,7 @@ $extra_js="";
 
 <div id="app" class="app">
 
-    <div id="header" class="app-header">
+    <div id="header" class="app-header no-print">
 
         <div class="desktop-toggler">
             <button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed"

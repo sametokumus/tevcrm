@@ -232,6 +232,14 @@ function formatDateAndTimeDESC(date, slicer) {
 	return day + slicer + month + slicer + year + ' ' + hour + ':' + minute;
 }
 
+function checkNull(data){
+	if (data == null){
+        return "-";
+    }else {
+        return data;
+    }
+}
+
 function cryptText(text){
 	var cText = text.charAt(0);
 	for(let i=2; i<=text.length; i++){

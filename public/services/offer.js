@@ -57,7 +57,6 @@ async function initOfferRequest(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
-    console.log(offer_request)
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
@@ -146,7 +145,6 @@ async function initOffers(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
-    console.log(offers)
 
     $("#offers").dataTable().fnDestroy();
     $('#offers tbody > tr').remove();
@@ -159,7 +157,7 @@ async function initOffers(){
             '           <td>' + offer.product_count + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button onclick="openOfferDetailModal(' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
+            '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
@@ -191,5 +189,49 @@ async function openOfferDetailModal(offer_id){
 }
 
 async function initOfferDetailModal(offer_id){
+    console.log(offer_id)
+    let data = await serviceGetOfferById(offer_id);
+    let offer = data.offer;
+    console.log(offer)
 
+    $("#offer-detail").dataTable().fnDestroy();
+    $('#offer-detail tbody > tr').remove();
+
+    $.each(offer.products, function (i, product) {
+        let item = '<tr id="productRow' + product.id + '">\n' +
+            '           <td>' + product.id + '</td>\n' +
+            '           <td>' + checkNull(product.ref_code) + '</td>\n' +
+            '           <td>' + checkNull(product.date_code) + '</td>\n' +
+            '           <td>' + checkNull(product.package_type) + '</td>\n' +
+            '           <td>' + checkNull(product.quantity) + '</td>\n' +
+            '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
+            '           <td>' + checkNull(product.total_price) + '</td>\n' +
+            '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
+            '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button onclick="openOfferDetailModal(' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '       </tr>';
+        $('#offer-detail tbody').append(item);
+    });
+
+    $('#offer-detail').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'excel',
+            'pdf'
+        ],
+        pageLength : 20,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[0, 'desc']]
+    });
 }
