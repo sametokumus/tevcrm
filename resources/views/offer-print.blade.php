@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/offer.js"></script>
+<script src="services/offer-print.js"></script>
 ';
 ?>
 
@@ -17,12 +17,12 @@ $extra_js='
 
                     <div class="wrapper">
                         <!-- Main content -->
-                        <section class="offer-print print-color">
+                        <section id="offer-print" class="print-color">
                             <!-- title row -->
                             <div class="row">
                                 <div class="col-12">
                                     <h2 class="page-header">
-                                        <i class="fas fa-globe"></i> AdminLTE, Inc.
+                                        <div id="logo"></div>
                                         <small class="float-right">Date: 2/10/2014</small>
                                     </h2>
                                 </div>
@@ -160,7 +160,7 @@ $extra_js='
                     <!-- ./wrapper -->
                     <!-- Page specific script -->
                     <script>
-                        window.addEventListener("load", window.print());
+                        // window.addEventListener("load", window.print());
                     </script>
 
                 </div>

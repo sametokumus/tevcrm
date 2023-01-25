@@ -25,9 +25,11 @@
 
 		checkLogin();
 		checkRole();
-		// await initPage();
-        await initOfferRequest();
-        await initOffers();
+		// // await initPage();
+        // await initOfferRequest();
+        // await initOffers();
+
+        await initContact(1);
 
 	});
 
@@ -35,6 +37,13 @@
 
 function checkRole(){
 	return true;
+}
+
+async function initContact(id){
+    let data = await serviceGetContactById(id);
+    let contact = data.contact;
+
+    $('#offer-print #logo').append('<img src="/'+ contact.logo +'">');
 }
 
 async function initPage(){

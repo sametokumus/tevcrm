@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\EmployeeController;
 use App\Http\Controllers\Api\Admin\ActivityController;
 use App\Http\Controllers\Api\Admin\NoteController;
+use App\Http\Controllers\Api\Admin\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('offer/getOffersByRequestId/{request_id}', [OfferController::class, 'getOffersByRequestId']);
     Route::get('offer/getOfferById/{offer_id}', [OfferController::class, 'getOfferById']);
     Route::post('offer/addOffer', [OfferController::class, 'addOffer']);
+
+
+    //Contact
+    Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);
 
 });
 

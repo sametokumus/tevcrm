@@ -940,3 +940,14 @@ async function servicePostAddOffer(formData) {
         return false;
     }
 }
+
+
+
+async function serviceGetContactById(id) {
+    const data = await fetchDataGet('/admin/contact/getContactById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
