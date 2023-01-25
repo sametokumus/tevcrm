@@ -107,7 +107,8 @@ class OfferController extends Controller
     {
         try {
             $product = OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->first();
-            $product['product_detail'] = Product::query()->where('id', $product->request_product_id)->first();
+            $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
+            $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['product' => $product]]);
         } catch (QueryException $queryException) {
