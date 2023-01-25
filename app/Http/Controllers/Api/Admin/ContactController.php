@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Offer;
-use App\Models\OfferProduct;
-use App\Models\Product;
+use App\Models\Contact;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
