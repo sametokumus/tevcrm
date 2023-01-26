@@ -920,6 +920,16 @@ async function serviceGetDeleteProductToOfferRequest(id) {
         return false;
     }
 }
+async function serviceGetOfferRequestsByCompanyId(id) {
+    const data = await fetchDataGet('/admin/offerRequest/getOfferRequestsByCompanyId/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 

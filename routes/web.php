@@ -30,6 +30,7 @@ Route::get('/offer-print/{id}', function () { return view('offer-print'); });
 
 
 Route::get('/sw-1', function () { return view('sw-step1'); });
+Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
 
 
 
