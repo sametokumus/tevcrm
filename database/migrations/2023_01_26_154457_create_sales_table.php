@@ -17,7 +17,6 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->string('sale_id');
             $table->string('request_id');
-            $table->string('offer_id');
             $table->bigInteger('customer_id')->default(0);
             $table->bigInteger('status_id')->default(1);
             $table->tinyInteger('active')->default(1);
