@@ -113,7 +113,10 @@ class OfferController extends Controller
     {
         try {
             $product = OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->first();
+            $offer = Offer::query()->where('offer_id', $offer_id)->first();
             $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
+            $product['company_name'] = Company::query()->where('id', $offer->supplier_id)->name;
+            $product['request_quantity'] = $offer_request_product['quantity'];
             $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['product' => $product]]);
