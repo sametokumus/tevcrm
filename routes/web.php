@@ -29,6 +29,9 @@ Route::get('/offer/{id}', function () { return view('offer'); });
 Route::get('/offer-print/{id}', function () { return view('offer-print'); });
 
 
+Route::get('/sw-1', function () { return view('sw-step1'); });
+
+
 
 
 Route::get('/settings', function () { return view('settings'); });

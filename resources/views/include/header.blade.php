@@ -284,6 +284,12 @@ $extra_js="";
                         <span class="menu-text">Talepler</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a href="/sw-1" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Teklif Oluştur</span>
+                    </a>
+                </div>
                 <div class="menu-header">Firma Yönetimi</div>
                 <div class="menu-item">
                     <a href="/customers" class="menu-link">

@@ -133,6 +133,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('offerRequest/updateOfferRequest/{request_id}', [OfferRequestController::class, 'updateOfferRequest']);
     Route::post('offerRequest/addProductToOfferRequest/{request_id}', [OfferRequestController::class, 'addProductToOfferRequest']);
     Route::get('offerRequest/deleteProductToOfferRequest/{request_product_id}', [OfferRequestController::class, 'deleteProductToOfferRequest']);
+    Route::get('offerRequest/getOfferRequestsByCompanyId/{company_id}', [OfferRequestController::class, 'getOfferRequestsByCompanyId']);
 
 
     //Offer

@@ -2,50 +2,13 @@
     "use strict";
 
 	$(document).ready(function() {
-
-        $(":input").inputmask();
-        $("#add_offer_product_pcs_price").maskMoney({thousands:''});
-        $("#add_offer_product_total_price").maskMoney({thousands:''});
-        $("#add_offer_product_discounted_price").maskMoney({thousands:''});
-        $("#update_offer_product_pcs_price").maskMoney({thousands:''});
-        $("#update_offer_product_total_price").maskMoney({thousands:''});
-        $("#update_offer_product_discounted_price").maskMoney({thousands:''});
-
-		$('#add_offer_form').submit(function (e){
-			e.preventDefault();
-            addOffer();
-		});
-
-        $('#add_offer_request_product_button').click(function (e){
-            e.preventDefault();
-            let refcode = document.getElementById('add_offer_request_product_refcode').value;
-            let product_name = document.getElementById('add_offer_request_product_name').value;
-            let quantity = document.getElementById('add_offer_request_product_quantity').value;
-            if (refcode == '' || product_name == '' || quantity == "0"){
-                alert('Formu Doldurunuz');
-                return false;
-            }
-            addProductToTable(refcode, product_name, quantity);
-        });
-
-        $('#add_offer_product_form').submit(function (e){
-            e.preventDefault();
-            addOfferProduct();
-        });
-
-        $('#update_offer_product_form').submit(function (e){
-            e.preventDefault();
-            updateOfferProduct();
-        });
 	});
 
 	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
-		// await initPage();
-        await initOfferRequest();
-        await initOffers();
+		await initPage();
 
 	});
 
@@ -56,8 +19,7 @@ function checkRole(){
 }
 
 async function initPage(){
-    await getAdminsAddSelectId('update_offer_request_authorized_personnel');
-    await getCompaniesAddSelectId('update_offer_request_company');
+    await getCustomersAddSelectId('select_sales_company');
 }
 
 async function initEmployeeSelect(){
