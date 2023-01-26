@@ -35,6 +35,7 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
                 '           <td>' + checkNull(product.date_code) + '</td>\n' +
                 '           <td>' + checkNull(product.package_type) + '</td>\n' +
+                '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
                 '           <td>' + checkNull(product.quantity) + '</td>\n' +
                 '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
                 '           <td>' + checkNull(product.total_price) + '</td>\n' +
@@ -71,6 +72,6 @@ async function initOfferDetail(){
         language: {
             url: "services/Turkish.json"
         },
-        order: [[0, 'desc']]
+        order: [[0, 'asc']]
     });
 }
