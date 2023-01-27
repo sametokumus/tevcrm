@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Admin\EmployeeController;
 use App\Http\Controllers\Api\Admin\ActivityController;
 use App\Http\Controllers\Api\Admin\NoteController;
 use App\Http\Controllers\Api\Admin\ContactController;
+use App\Http\Controllers\Api\Admin\SaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('offer/getOfferProductById/{offer_id}/{product_id}', [OfferController::class, 'getOfferProductById']);
     Route::post('offer/addOfferProduct/{offer_id}', [OfferController::class, 'addOfferProduct']);
     Route::post('offer/updateOfferProduct/{offer_id}/{product_id}', [OfferController::class, 'updateOfferProduct']);
+
+
+    //Sale
+    Route::post('sale/addSale', [SaleController::class, 'addSale']);
 
 
     //Contact

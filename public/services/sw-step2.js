@@ -31,6 +31,9 @@ async function initOfferDetail(){
         $.each(offer.products, function (i, product) {
             let item = '<tr id="productRow' + product.id + '">\n' +
                 '           <td>' + product.id + '</td>\n' +
+                '           <td class="d-none">' + offer.offer_id + '</td>\n' +
+                '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
+                '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
                 '           <td>' + offer.company_name + '</td>\n' +
                 '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
                 '           <td>' + checkNull(product.date_code) + '</td>\n' +
@@ -43,7 +46,7 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
-                '                      <button onclick="addSaleTableProduct(\''+ offer.offer_id +'\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
+                '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
                 '                  </div>\n' +
                 '              </td>\n' +
                 '       </tr>';
@@ -59,14 +62,6 @@ async function initOfferDetail(){
         ],
         dom: 'Bfrtip',
         buttons: [
-            {
-                text: 'Teklife Yeni Ürün Ekle',
-                action: function ( e, dt, node, config ) {
-                    openAddOfferProductModal();
-                }
-            }
-            // 'excel',
-            // 'pdf'
         ],
         pageLength : 20,
         language: {
@@ -74,35 +69,6 @@ async function initOfferDetail(){
         },
         order: [[0, 'asc']]
     });
-}
-
-async function addSaleTableProduct(offer_id, product_id){
-    let data = await serviceGetOfferProductById(offer_id, product_id);
-    let product = data.product;
-    console.log(data)
-
-    $("#sales-detail").dataTable().fnDestroy();
-
-    let item = '<tr id="productRow' + product.id + '">\n' +
-        '           <td>' + product.id + '</td>\n' +
-        '           <td>' + offer.company_name + '</td>\n' +
-        '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
-        '           <td>' + checkNull(product.date_code) + '</td>\n' +
-        '           <td>' + checkNull(product.package_type) + '</td>\n' +
-        '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
-        '           <td>' + checkNull(product.quantity) + '</td>\n' +
-        '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-        '           <td>' + checkNull(product.total_price) + '</td>\n' +
-        '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-        '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
-        '              <td>\n' +
-        '                  <div class="btn-list">\n' +
-        '                      <button onclick="addSaleTableProduct(\''+ offer_id +'\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
-        '                  </div>\n' +
-        '              </td>\n' +
-        '       </tr>';
-    $('#sales-detail tbody').append(item);
-
     $('#sales-detail').DataTable({
         responsive: true,
         columnDefs: [
@@ -112,13 +78,11 @@ async function addSaleTableProduct(offer_id, product_id){
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Teklife Yeni Ürün Ekle',
+                text: 'Teklif Oluştur',
                 action: function ( e, dt, node, config ) {
-                    openAddOfferProductModal();
+                    addSale();
                 }
             }
-            // 'excel',
-            // 'pdf'
         ],
         pageLength : 20,
         language: {
@@ -126,4 +90,81 @@ async function addSaleTableProduct(offer_id, product_id){
         },
         order: [[0, 'asc']]
     });
+}
+
+
+
+async function addSaleTableProduct(el){
+    let tableSales = $("#sales-detail").DataTable();
+    let tableOffer = $("#offer-detail").DataTable();
+    $(el).attr('onclick','addOfferTableProduct(this);');
+    $(el).text('Tekliften Çıkar');
+    let row = tableOffer.row( $(el).parents('tr') );
+    let rowNode = row.node();
+    row.remove();
+
+    tableSales
+        .row.add( rowNode )
+        .draw();
+}
+
+async function addOfferTableProduct(el){
+    let tableSales = $("#sales-detail").DataTable();
+    let tableOffer = $("#offer-detail").DataTable();
+    $(el).attr('onclick','addSaleTableProduct(this);');
+    $(el).text('Teklife Ekle');
+    let row = tableSales.row( $(el).parents('tr') );
+    let rowNode = row.node();
+    row.remove();
+
+    tableOffer
+        .row.add( rowNode )
+        .draw();
+}
+
+async function addSale(){
+    let request_id = getPathVariable('sw-2');
+    let table = $('#sales-detail').DataTable();
+    let rows = table.rows();
+
+    let offers = [];
+    if (rows.count() === 0){
+        alert("Öncelikle seçim yapmalısınız.");
+    }else {
+        rows.every(function (rowIdx, tableLoop, rowLoop) {
+            let item = {
+                "offer_product_id": this.data()[0],
+                "offer_id": this.data()[1],
+                "product_id": this.data()[2],
+                "supplier_id": this.data()[3],
+                "date_code": this.data()[6],
+                "package_type": this.data()[7],
+                "request_quantity": this.data()[8],
+                "offer_quantity": this.data()[9],
+                "pcs_price": this.data()[10],
+                "total_price": this.data()[11],
+                "discount_rate": this.data()[12],
+                "discounted_price": this.data()[13],
+            }
+            offers.push(item);
+        });
+
+        let formData = JSON.stringify({
+            "request_id": request_id,
+            "offers": offers
+        });
+
+        console.log(formData);
+
+        // let returned = await servicePostAddOffer(formData);
+        // if (returned){
+        //     $('#offer-request-products-body tr').removeClass('selected');
+        //     $("#add_offer_form").trigger("reset");
+        //     $('#addOfferModal').modal('hide');
+        //     initOffers();
+        // }else{
+        //     alert("Hata Oluştu");
+        // }
+
+    }
 }
