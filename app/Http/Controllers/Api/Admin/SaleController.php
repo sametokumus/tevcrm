@@ -35,18 +35,18 @@ class SaleController extends Controller
             foreach ($request->offers as $offer){
                 SaleOffer::query()->insert([
                     'sale_id' => $sale_id,
-                    'offer_id' => $offer->offer_id,
-                    'offer_product_id' => $offer->offer_product_id,
-                    'product_id' => $offer->product_id,
-                    'supplier_id' => $offer->supplier_id,
-                    'date_code' => $offer->date_code,
-                    'package_type' => $offer->package_type,
-                    'request_quantity' => $offer->request_quantity,
-                    'offer_quantity' => $offer->offer_quantity,
-                    'pcs_price' => $offer->pcs_price,
-                    'total_price' => $offer->total_price,
-                    'discount_rate' => $offer->discount_rate,
-                    'discounted_price' => $offer->discounted_price,
+                    'offer_id' => $offer['offer_id'],
+                    'offer_product_id' => $offer['offer_product_id'],
+                    'product_id' => $offer['product_id'],
+                    'supplier_id' => $offer['supplier_id'],
+                    'date_code' => $offer['date_code'],
+                    'package_type' => $offer['package_type'],
+                    'request_quantity' => $offer['request_quantity'],
+                    'offer_quantity' => $offer['offer_quantity'],
+                    'pcs_price' => $offer['pcs_price'],
+                    'total_price' => $offer['total_price'],
+                    'discount_rate' => $offer['discount_rate'],
+                    'discounted_price' => $offer['discounted_price'],
                 ]);
             }
 
