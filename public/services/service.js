@@ -999,3 +999,16 @@ async function serviceGetContactById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+
+
+async function servicePostAddSale(formData) {
+    const data = await fetchDataPost('/admin/sale/addSale', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

@@ -156,15 +156,12 @@ async function addSale(){
 
         console.log(formData);
 
-        // let returned = await servicePostAddOffer(formData);
-        // if (returned){
-        //     $('#offer-request-products-body tr').removeClass('selected');
-        //     $("#add_offer_form").trigger("reset");
-        //     $('#addOfferModal').modal('hide');
-        //     initOffers();
-        // }else{
-        //     alert("Hata Oluştu");
-        // }
+        let data = await servicePostAddSale(formData);
+        if (data.status == "success") {
+            window.location.href = "/sw-3/" + data.object.sale_id;
+        }else{
+            alert("Hata Oluştu");
+        }
 
     }
 }
