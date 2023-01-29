@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
+use App\Models\Sale;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -86,6 +87,14 @@ class OfferRequestController extends Controller
                     'quantity' => $product['quantity']
                 ]);
             }
+
+            $sale_id = Uuid::uuid();
+            Sale::query()->insert([
+                'sale_id' => $sale_id,
+                'request_id' => $request->request_id,
+                'customer_id' => $request->company_id,
+                'status_id' => 1
+            ]);
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {

@@ -23,13 +23,9 @@ class SaleController extends Controller
             $request->validate([
                 'request_id' => 'required',
             ]);
-            $sale_id = Uuid::uuid();
-            $customer_id = OfferRequest::query()->where('request_id', $request->request_id)->first()->company_id;
-            Sale::query()->insert([
-                'sale_id' => $sale_id,
-                'request_id' => $request->request_id,
-                'customer_id' => $customer_id,
-                'status_id' => 1
+            $sale_id = Sale::query()->where('request_id', $request->request_id)->first()->sale_id;
+            Sale::query()->where('sale_id', $sale_id)->update([
+                'status_id' => 3
             ]);
 
             foreach ($request->offers as $offer){

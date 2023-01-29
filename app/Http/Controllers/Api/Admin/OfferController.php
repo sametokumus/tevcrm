@@ -11,6 +11,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
+use App\Models\Sale;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -97,6 +98,13 @@ class OfferController extends Controller
                         'quantity' => $request_product['quantity']
                     ]);
                 }
+            }
+
+            $sale_status = Sale::query()->where('request_id', $request->request_id)->first()->status_id;
+            if ($sale_status == 1){
+                Sale::query()->where('request_id', $request->request_id)->update([
+                    'status_id' => 2
+                ]);
             }
 
             return response(['message' => __('Teklif ekleme işlemi başarılı.'), 'status' => 'success']);
