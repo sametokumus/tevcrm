@@ -109,7 +109,7 @@ class OfferController extends Controller
                 ]);
                 StatusHistory::query()->insert([
                     'sale_id' => $sale->sale_id,
-                    'status_id' => 1,
+                    'status_id' => 2,
                     'user_id' => $request->user_id,
                 ]);
             }
