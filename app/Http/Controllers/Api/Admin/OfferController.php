@@ -12,6 +12,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\StatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -83,6 +84,7 @@ class OfferController extends Controller
             ]);
             $offer_id = Uuid::uuid();
             Offer::query()->insertGetId([
+                'user_id' => $request->user_id,
                 'request_id' => $request->request_id,
                 'offer_id' => $offer_id,
                 'supplier_id' => $request->supplier_id
@@ -100,10 +102,15 @@ class OfferController extends Controller
                 }
             }
 
-            $sale_status = Sale::query()->where('request_id', $request->request_id)->first()->status_id;
-            if ($sale_status == 1){
+            $sale = Sale::query()->where('request_id', $request->request_id)->first();
+            if ($sale->status_id == 1){
                 Sale::query()->where('request_id', $request->request_id)->update([
                     'status_id' => 2
+                ]);
+                StatusHistory::query()->insert([
+                    'sale_id' => $sale->sale_id,
+                    'status_id' => 1,
+                    'user_id' => $request->user_id,
                 ]);
             }
 

@@ -10,6 +10,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\StatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -94,6 +95,11 @@ class OfferRequestController extends Controller
                 'request_id' => $request->request_id,
                 'customer_id' => $request->company_id,
                 'status_id' => 1
+            ]);
+            StatusHistory::query()->insert([
+                'sale_id' => $sale_id,
+                'status_id' => 1,
+                'user_id' => $request->user_id,
             ]);
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);

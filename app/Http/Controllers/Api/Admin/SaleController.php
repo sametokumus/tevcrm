@@ -9,6 +9,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\StatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -25,7 +26,13 @@ class SaleController extends Controller
             ]);
             $sale_id = Sale::query()->where('request_id', $request->request_id)->first()->sale_id;
             Sale::query()->where('sale_id', $sale_id)->update([
-                'status_id' => 3
+                'status_id' => 4
+            ]);
+
+            StatusHistory::query()->insert([
+                'sale_id' => $sale_id,
+                'status_id' => 1,
+                'user_id' => $request->user_id,
             ]);
 
             foreach ($request->offers as $offer){

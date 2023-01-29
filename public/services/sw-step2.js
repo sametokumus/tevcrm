@@ -123,6 +123,7 @@ async function addOfferTableProduct(el){
 }
 
 async function addSale(){
+    let user_id = sessionStorage.getItem('userId');
     let request_id = getPathVariable('sw-2');
     let table = $('#sales-detail').DataTable();
     let rows = table.rows();
@@ -150,6 +151,7 @@ async function addSale(){
         });
 
         let formData = JSON.stringify({
+            "user_id": parseInt(user_id),
             "request_id": request_id,
             "offers": offers
         });

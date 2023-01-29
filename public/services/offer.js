@@ -120,6 +120,7 @@ async function initOfferRequest(){
 }
 
 async function addOffer(){
+    let user_id = sessionStorage.getItem('userId');
     let request_id = getPathVariable('offer');
     let supplier_id = document.getElementById('add_offer_company').value;
     let table = $('#offer-request-products').DataTable();
@@ -139,6 +140,7 @@ async function addOffer(){
         });
 
         let formData = JSON.stringify({
+            "user_id": parseInt(user_id),
             "request_id": request_id,
             "supplier_id": supplier_id,
             "products": products
