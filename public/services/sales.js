@@ -33,10 +33,12 @@ async function initSales(){
 			'              <td>'+ sale.id +'</td>\n' +
 			'              <td>'+ sale.sale_id +'</td>\n' +
 			'              <td>'+ sale.request.authorized_personnel.name +' '+ sale.request.authorized_personnel.surname +'</td>\n' +
-			'              <td>'+ sale.request.customer.name +'</td>\n' +
-			'              <td>'+ sale.request.customer_employee.name +'</td>\n' +
+			'              <td>'+ sale.request.company.name +'</td>\n' +
+			'              <td>'+ sale.request.company_employee.name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ sale.status_name +'</td>\n' +
+			'              <td>'+ formatDateAndTimeDESC(sale.created_at, "/") +'</td>\n' +
+			'              <td>'+ formatDateAndTimeDESC(sale.created_at, "/") +'</td>\n' +
 			'              <td>\n' +
 			'                  <div class="btn-list">\n' +
 			'                      <a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
@@ -50,7 +52,11 @@ async function initSales(){
 		responsive: true,
 		columnDefs: [
 			{ responsivePriority: 1, targets: 0 },
-			{ responsivePriority: 2, targets: -1 }
+			{ responsivePriority: 2, targets: -1 },
+			{ responsivePriority: 3, targets: 6 },
+			{ responsivePriority: 4, targets: 7 },
+			{ responsivePriority: 5, targets: 8 },
+			{ responsivePriority: 6, targets: 1 }
 		],
 		dom: 'Bfrtip',
 		buttons: [

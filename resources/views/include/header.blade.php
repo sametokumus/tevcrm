@@ -279,6 +279,12 @@ $extra_js="";
                 </div>
                 <div class="menu-header">Satış Yönetimi</div>
                 <div class="menu-item">
+                    <a href="/sales" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Satışlar</span>
+                    </a>
+                </div>
+                <div class="menu-item">
                     <a href="/offer-requests" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Talepler</span>

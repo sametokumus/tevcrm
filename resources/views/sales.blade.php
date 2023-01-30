@@ -25,11 +25,13 @@ $extra_js='
                 <tr>
                     <th class="border-bottom-0" data-priority="1">ID</th>
                     <th class="border-bottom-0">Satış Kodu</th>
-                    <th class="border-bottom-0">Yetkili Satış Temsilcisi</th>
+                    <th class="border-bottom-0">Satış Temsilcisi</th>
                     <th class="border-bottom-0">Firma</th>
                     <th class="border-bottom-0">Firma Yetkilisi</th>
                     <th class="border-bottom-0">Ürün Adedi</th>
                     <th class="border-bottom-0">Durum</th>
+                    <th class="border-bottom-0">Talep Tarihi</th>
+                    <th class="border-bottom-0">Son Güncelleme</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>

@@ -186,7 +186,20 @@ class OfferRequestController extends Controller
     public function getOfferRequestsByCompanyId($company_id)
     {
         try {
-            $offer_requests = OfferRequest::query()->where('company_id',$company_id)->where('active',1)->get();
+            $sales = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->get();
+
+            $offer_requests = OfferRequest::query()
+                ->leftJoin('sales', 'sales.request_id', '=', 'offer_requests.request_id')
+                ->selectRaw('offer_requests.*')
+                ->where('sales.status_id',3)
+                ->where('offer_requests.company_id',$company_id)
+                ->where('offer_requests.active',1)
+                ->where('sales.active',1)
+                ->get();
             foreach ($offer_requests as $offer_request){
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
