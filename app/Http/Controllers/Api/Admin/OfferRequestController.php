@@ -186,12 +186,6 @@ class OfferRequestController extends Controller
     public function getOfferRequestsByCompanyId($company_id)
     {
         try {
-            $sales = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name')
-                ->where('sales.active',1)
-                ->get();
-
             $offer_requests = OfferRequest::query()
                 ->leftJoin('sales', 'sales.request_id', '=', 'offer_requests.request_id')
                 ->selectRaw('offer_requests.*')
