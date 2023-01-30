@@ -23,7 +23,7 @@ class SaleController extends Controller
     {
         try {
             $sales = Sale::query()
-                ->leftJoin('statuses', 'stasuses.id', '=', 'sales.status_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->leftJoin('companies', 'companies.id', '=', 'sales.customer_id')
                 ->selectRaw('sales.*, companies.name as customer_name, statuses.name as status_name')
                 ->where('sales.active',1)
@@ -39,7 +39,7 @@ class SaleController extends Controller
     {
         try {
             $sales = Sale::query()
-                ->leftJoin('statuses', 'stasuses.id', '=', 'sales.status_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->leftJoin('companies', 'companies.id', '=', 'sales.customer_id')
                 ->selectRaw('sales.*, companies.name as customer_name, statuses.name as status_name')
                 ->where('sales.active',1)
