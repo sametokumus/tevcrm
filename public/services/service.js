@@ -1002,6 +1002,24 @@ async function serviceGetContactById(id) {
 
 
 
+async function serviceGetSales() {
+    const data = await fetchDataGet('/admin/sale/getSales', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetSaleById(id) {
+    const data = await fetchDataGet('/admin/sale/getSaleById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function servicePostAddSale(formData) {
     const data = await fetchDataPost('/admin/sale/addSale', formData, 'application/json');
     if (data.status == "success") {
