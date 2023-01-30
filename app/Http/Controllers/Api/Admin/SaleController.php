@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\StatusHistory;
@@ -17,6 +18,39 @@ use Nette\Schema\ValidationException;
 
 class SaleController extends Controller
 {
+
+    public function getSales()
+    {
+        try {
+            $sales = Sale::query()
+                ->leftJoin('statuses', 'stasuses.id', '=', 'sales.status_id')
+                ->leftJoin('companies', 'companies.id', '=', 'sales.customer_id')
+                ->selectRaw('sales.*, companies.name as customer_name, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getSaleById($sale_id)
+    {
+        try {
+            $sales = Sale::query()
+                ->leftJoin('statuses', 'stasuses.id', '=', 'sales.status_id')
+                ->leftJoin('companies', 'companies.id', '=', 'sales.customer_id')
+                ->selectRaw('sales.*, companies.name as customer_name, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
     public function addSale(Request $request)
     {

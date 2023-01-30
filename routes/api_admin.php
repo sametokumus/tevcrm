@@ -147,6 +147,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     //Sale
+    Route::get('sale/getSales', [OfferController::class, 'getSales']);
+    Route::get('sale/getSaleById/{sale_id}', [OfferController::class, 'getSaleById']);
     Route::post('sale/addSale', [SaleController::class, 'addSale']);
 
 
