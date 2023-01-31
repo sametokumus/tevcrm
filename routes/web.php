@@ -32,6 +32,7 @@ Route::get('/sales', function () { return view('sales'); });
 
 Route::get('/sw-1', function () { return view('sw-step1'); });
 Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
+Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
 
 
 
