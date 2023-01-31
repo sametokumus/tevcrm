@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Admin\ActivityController;
 use App\Http\Controllers\Api\Admin\NoteController;
 use App\Http\Controllers\Api\Admin\ContactController;
 use App\Http\Controllers\Api\Admin\SaleController;
+use App\Http\Controllers\Api\Admin\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,10 +151,15 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
     Route::get('sale/getSaleById/{sale_id}', [SaleController::class, 'getSaleById']);
     Route::post('sale/addSale', [SaleController::class, 'addSale']);
+    Route::post('sale/updateSaleStatus', [StatusController::class, 'updateSaleStatus']);
 
 
     //Contact
     Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);
+
+
+    //Status
+    Route::get('status/getStatuses', [StatusController::class, 'getStatuses']);
 
 });
 

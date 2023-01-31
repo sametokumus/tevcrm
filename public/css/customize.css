@@ -108,3 +108,9 @@ table tr.selected{
 #addOfferProductModal.show{
     z-index: 1062 !important;
 }
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 0rem 0.5rem;
+    font-size: 12px;
+    border-radius: 2px;
+}

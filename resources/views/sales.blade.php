@@ -46,4 +46,37 @@ $extra_js='
 </div>
 <!--app-content close-->
 
+<div class="modal fade" id="updateStatusModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <form method="post" action="#" id="update_status_form">
+                <div class="modal-header">
+                    <h5 class="modal-title">Durum Güncelle</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Durum :</label>
+                        <div class="col-md-9">
+                            <input type="hidden" class="form-control" id="update_sale_id" required>
+                            <select name="update_sale_status" id="update_sale_status" class="form-control form-control-md" required>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
 @include('include.footer')

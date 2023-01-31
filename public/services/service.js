@@ -1030,3 +1030,25 @@ async function servicePostAddSale(formData) {
         return false;
     }
 }
+
+async function servicePostUpdateSaleStatus(formData) {
+    const data = await fetchDataPost('/admin/sale/updateSaleStatus', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+
+async function serviceGetStatuses() {
+    const data = await fetchDataGet('/admin/status/getStatuses', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
