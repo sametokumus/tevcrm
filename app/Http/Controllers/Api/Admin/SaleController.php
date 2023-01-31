@@ -67,6 +67,7 @@ class SaleController extends Controller
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
             }
             $sale['sale_offers'] = $sale_offers;
 
