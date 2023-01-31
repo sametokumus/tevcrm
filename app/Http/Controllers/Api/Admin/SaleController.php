@@ -64,6 +64,10 @@ class SaleController extends Controller
             $sale['request'] = $offer_request;
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+            foreach ($sale_offers as $sale_offer){
+                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+            }
             $sale['sale_offers'] = $sale_offers;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);

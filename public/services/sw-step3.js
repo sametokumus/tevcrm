@@ -19,41 +19,40 @@ function checkRole(){
 }
 
 async function initOfferDetail(){
-    let request_id = getPathVariable('sw-2');
-    console.log(request_id)
-    let data = await serviceGetOffersByRequestId(request_id);
+    let sale_id = getPathVariable('sw-3');
+    console.log(sale_id)
+    let data = await serviceGetSaleById(sale_id);
+    let sale = data.sale;
 
-    if (data.offer_status) {
-        let offers = data.offers;
+    if (sale.status_id == 4) {
+        let offers = sale.sale_offers;
         console.log(offers)
         $("#offer-detail").dataTable().fnDestroy();
         $('#offer-detail tbody > tr').remove();
 
         $.each(offers, function (i, offer) {
-            $.each(offer.products, function (i, product) {
-                let item = '<tr id="productRow' + product.id + '">\n' +
-                    '           <td>' + product.id + '</td>\n' +
-                    '           <td class="d-none">' + offer.offer_id + '</td>\n' +
-                    '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
-                    '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
-                    '           <td>' + offer.company_name + '</td>\n' +
-                    '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
-                    '           <td>' + checkNull(product.date_code) + '</td>\n' +
-                    '           <td>' + checkNull(product.package_type) + '</td>\n' +
-                    '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
-                    '           <td>' + checkNull(product.quantity) + '</td>\n' +
-                    '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-                    '           <td>' + checkNull(product.total_price) + '</td>\n' +
-                    '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-                    '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
-                    '              <td>\n' +
-                    '                  <div class="btn-list">\n' +
-                    '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
-                    '                  </div>\n' +
-                    '              </td>\n' +
-                    '       </tr>';
-                $('#offer-detail tbody').append(item);
-            });
+            let item = '<tr id="productRow' + offer.offer_product_id + '">\n' +
+                '           <td>' + offer.offer_product_id + '</td>\n' +
+                '           <td class="d-none">' + offer.offer_id + '</td>\n' +
+                '           <td class="d-none">' + offer.product_id + '</td>\n' +
+                '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
+                '           <td>' + offer.company_name + '</td>\n' +
+                '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
+                '           <td>' + checkNull(product.date_code) + '</td>\n' +
+                '           <td>' + checkNull(product.package_type) + '</td>\n' +
+                '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
+                '           <td>' + checkNull(product.quantity) + '</td>\n' +
+                '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
+                '           <td>' + checkNull(product.total_price) + '</td>\n' +
+                '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
+                '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
+                '              <td>\n' +
+                '                  <div class="btn-list">\n' +
+                '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
+                '                  </div>\n' +
+                '              </td>\n' +
+                '       </tr>';
+            $('#offer-detail tbody').append(item);
         });
 
         $('#offer-detail').DataTable({
@@ -92,7 +91,7 @@ async function initOfferDetail(){
             order: [[0, 'asc']]
         });
     }else{
-        if(data.status_id < 3){
+        if(data.status_id < 4){
             alert('Bu sipariş teklif oluşturmaya hazır değildir.');
         }else{
             alert('Bu sipariş için daha önce bir teklif oluşturulmuştur.');
