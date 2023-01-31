@@ -51,11 +51,13 @@ class OfferController extends Controller
 
                 $offer_status = false;
                 $status_id = $sale->status_id;
+                $offers = [];
 
             }else{
 
                 $offer_status = false;
                 $status_id = $sale->status_id;
+                $offers = [];
 
             }
 
