@@ -1020,11 +1020,42 @@ async function serviceGetSaleById(id) {
     }
 }
 
+async function serviceGetSaleOfferById(id) {
+    const data = await fetchDataGet('/admin/sale/getSaleOfferById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function servicePostAddSale(formData) {
     const data = await fetchDataPost('/admin/sale/addSale', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostAddSaleOfferPrice(formData) {
+    const data = await fetchDataPost('/admin/sale/addSaleOfferPrice', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateSaleOfferPrice(formData) {
+    const data = await fetchDataPost('/admin/sale/updateSaleOfferPrice', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
     } else {
         showAlert('İstek Başarısız.');
         return false;

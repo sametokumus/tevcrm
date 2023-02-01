@@ -28,6 +28,7 @@ class CreateSaleOffersTable extends Migration
             $table->decimal('total_price',10,2, false)->nullable();
             $table->decimal('discount_rate',10,2, false)->nullable();
             $table->decimal('discounted_price',10,2, false)->nullable();
+            $table->decimal('offer_price',10,2, false)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

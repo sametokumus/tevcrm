@@ -1,7 +1,22 @@
 (function($) {
     "use strict";
 
+    $(":input").inputmask();
+    $("#add_offer_price_price").maskMoney({thousands:''});
+    $("#update_offer_price_price").maskMoney({thousands:''});
+
 	$(document).ready(function() {
+
+        $('#add_offer_price_form').submit(function (e){
+            e.preventDefault();
+            addSaleOfferPrice();
+        });
+
+        $('#update_offer_price_form').submit(function (e){
+            e.preventDefault();
+            updateSaleOfferPrice();
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -27,47 +42,41 @@ async function initOfferDetail(){
     if (sale.status_id == 4) {
         let offers = sale.sale_offers;
         console.log(offers)
-        $("#offer-detail").dataTable().fnDestroy();
-        $('#offer-detail tbody > tr').remove();
+        $("#sales-detail").dataTable().fnDestroy();
+        $('#sales-detail tbody > tr').remove();
 
         $.each(offers, function (i, offer) {
+
+            let btn_list = "";
+            if (offer.offer_price == null){
+                btn_list = '<button type="button" onclick="openAddOfferPriceModal(\''+ offer.offer_id +'\', '+ offer.offer_product_id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Fiyatı Ekle</span></button>';
+            }else{
+                btn_list = '<button type="button" onclick="openUpdateOfferPriceModal(\''+ offer.offer_id +'\', '+ offer.offer_product_id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Fiyatı Güncelle</span></button>';
+            }
+
             let item = '<tr id="productRow' + offer.offer_product_id + '">\n' +
                 '           <td>' + offer.offer_product_id + '</td>\n' +
                 '           <td class="d-none">' + offer.offer_id + '</td>\n' +
                 '           <td class="d-none">' + offer.product_id + '</td>\n' +
                 '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
-                '           <td>' + offer.company_name + '</td>\n' +
-                '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
-                '           <td>' + checkNull(product.date_code) + '</td>\n' +
-                '           <td>' + checkNull(product.package_type) + '</td>\n' +
-                '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
-                '           <td>' + checkNull(product.quantity) + '</td>\n' +
-                '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-                '           <td>' + checkNull(product.total_price) + '</td>\n' +
-                '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-                '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
-                '              <td>\n' +
-                '                  <div class="btn-list">\n' +
-                '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
-                '                  </div>\n' +
-                '              </td>\n' +
+                '           <td>' + offer.supplier_name + '</td>\n' +
+                '           <td>' + checkNull(offer.product_ref_code) + '</td>\n' +
+                '           <td>' + checkNull(offer.date_code) + '</td>\n' +
+                '           <td>' + checkNull(offer.package_type) + '</td>\n' +
+                '           <td>' + checkNull(offer.request_quantity) + '</td>\n' +
+                '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
+                '           <td>' + checkNull(offer.pcs_price) + '</td>\n' +
+                '           <td>' + checkNull(offer.total_price) + '</td>\n' +
+                '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
+                '           <td>' + checkNull(offer.discounted_price) + '</td>\n' +
+                '           <td>' + checkNull(offer.offer_price) + '</td>\n' +
+                '           <td>\n' +
+                '               <div class="btn-list">\n' +
+                '                   '+ btn_list +'\n' +
+                '               </div>\n' +
+                '           </td>\n' +
                 '       </tr>';
-            $('#offer-detail tbody').append(item);
-        });
-
-        $('#offer-detail').DataTable({
-            responsive: true,
-            columnDefs: [
-                {responsivePriority: 1, targets: 0},
-                {responsivePriority: 2, targets: -1}
-            ],
-            dom: 'Bfrtip',
-            buttons: [],
-            pageLength: 20,
-            language: {
-                url: "services/Turkish.json"
-            },
-            order: [[0, 'asc']]
+            $('#sales-detail tbody').append(item);
         });
         $('#sales-detail').DataTable({
             responsive: true,
@@ -77,12 +86,7 @@ async function initOfferDetail(){
             ],
             dom: 'Bfrtip',
             buttons: [
-                {
-                    text: 'Teklif Oluştur',
-                    action: function (e, dt, node, config) {
-                        addSale();
-                    }
-                }
+
             ],
             pageLength: 20,
             language: {
@@ -99,78 +103,75 @@ async function initOfferDetail(){
     }
 }
 
-
-
-async function addSaleTableProduct(el){
-    let tableSales = $("#sales-detail").DataTable();
-    let tableOffer = $("#offer-detail").DataTable();
-    $(el).attr('onclick','addOfferTableProduct(this);');
-    $(el).text('Tekliften Çıkar');
-    let row = tableOffer.row( $(el).parents('tr') );
-    let rowNode = row.node();
-    row.remove();
-
-    tableSales
-        .row.add( rowNode )
-        .draw();
+async function openAddOfferPriceModal(offer_id, offer_product_id){
+    $("#addOfferPriceModal").modal('show');
+    document.getElementById('add_offer_price_offer_id').value = offer_id;
+    document.getElementById('add_offer_price_offer_product_id').value = offer_product_id;
 }
 
-async function addOfferTableProduct(el){
-    let tableSales = $("#sales-detail").DataTable();
-    let tableOffer = $("#offer-detail").DataTable();
-    $(el).attr('onclick','addSaleTableProduct(this);');
-    $(el).text('Teklife Ekle');
-    let row = tableSales.row( $(el).parents('tr') );
-    let rowNode = row.node();
-    row.remove();
-
-    tableOffer
-        .row.add( rowNode )
-        .draw();
+async function openUpdateOfferPriceModal(offer_id, offer_product_id){
+    $("#updateOfferPriceModal").modal('show');
+    await initUpdateOfferPriceModal(offer_id, offer_product_id);
 }
 
-async function addSale(){
+async function initUpdateOfferPriceModal(offer_id, offer_product_id){
+    document.getElementById('update_offer_price_offer_id').value = offer_id;
+    document.getElementById('update_offer_price_offer_product_id').value = offer_product_id;
+    let data = await serviceGetSaleOfferById(offer_product_id);
+    let sale_offer = data.sale_offer;
+    document.getElementById('update_offer_price_price').value = sale_offer.offer_price;
+}
+
+async function addSaleOfferPrice(){
     let user_id = sessionStorage.getItem('userId');
-    let request_id = getPathVariable('sw-2');
-    let table = $('#sales-detail').DataTable();
-    let rows = table.rows();
+    let sale_id = getPathVariable('sw-3');
+    let offer_id = document.getElementById('add_offer_price_offer_id').value;
+    let offer_product_id = document.getElementById('add_offer_price_offer_product_id').value;
+    let price = document.getElementById('add_offer_price_price').value;
 
-    let offers = [];
-    if (rows.count() === 0){
-        alert("Öncelikle seçim yapmalısınız.");
-    }else {
-        rows.every(function (rowIdx, tableLoop, rowLoop) {
-            let item = {
-                "offer_product_id": this.data()[0],
-                "offer_id": this.data()[1],
-                "product_id": this.data()[2],
-                "supplier_id": this.data()[3],
-                "date_code": this.data()[6],
-                "package_type": this.data()[7],
-                "request_quantity": this.data()[8],
-                "offer_quantity": this.data()[9],
-                "pcs_price": this.data()[10],
-                "total_price": this.data()[11],
-                "discount_rate": this.data()[12],
-                "discounted_price": this.data()[13],
-            }
-            offers.push(item);
-        });
+    let formData = JSON.stringify({
+        "user_id": user_id,
+        "sale_id": sale_id,
+        "offer_id": offer_id,
+        "offer_product_id": offer_product_id,
+        "price": price
+    });
 
-        let formData = JSON.stringify({
-            "user_id": parseInt(user_id),
-            "request_id": request_id,
-            "offers": offers
-        });
+    console.log(formData);
 
-        console.log(formData);
+    let returned = await servicePostAddSaleOfferPrice(formData);
+    if (returned) {
+        $("#add_offer_price_form").trigger("reset");
+        $('#addOfferPriceModal').modal('hide');
+        await initOfferDetail();
+    }else{
+        alert("Hata Oluştu");
+    }
+}
 
-        let data = await servicePostAddSale(formData);
-        if (data.status == "success") {
-            window.location.href = "/sw-3/" + data.object.sale_id;
-        }else{
-            alert("Hata Oluştu");
-        }
+async function updateSaleOfferPrice(){
+    let user_id = sessionStorage.getItem('userId');
+    let sale_id = getPathVariable('sw-3');
+    let offer_id = document.getElementById('update_offer_price_offer_id').value;
+    let offer_product_id = document.getElementById('update_offer_price_offer_product_id').value;
+    let price = document.getElementById('update_offer_price_price').value;
 
+    let formData = JSON.stringify({
+        "user_id": user_id,
+        "sale_id": sale_id,
+        "offer_id": offer_id,
+        "offer_product_id": offer_product_id,
+        "price": price
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostUpdateSaleOfferPrice(formData);
+    if (returned) {
+        $("#update_offer_price_form").trigger("reset");
+        $('#updateOfferPriceModal').modal('hide');
+        await initOfferDetail();
+    }else{
+        alert("Hata Oluştu");
     }
 }

@@ -143,4 +143,78 @@ class SaleController extends Controller
         }
     }
 
+    public function getSaleOfferById($offer_product_id)
+    {
+        try {
+            $sale_offer = SaleOffer::query()->where('id',$offer_product_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale_offer' => $sale_offer]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addSaleOfferPrice(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'user_id' => 'required',
+                'offer_id' => 'required',
+                'offer_product_id' => 'required',
+                'price' => 'required',
+            ]);
+            SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('offer_product_id', $request->offer_product_id)->update([
+                'offer_price' => $request->price
+            ]);
+
+            $offer_check = SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_price', null)->count();
+            if ($offer_check == 0) {
+                Sale::query()->where('sale_id', $request->sale_id)->update([
+                    'status_id' => 5
+                ]);
+
+                StatusHistory::query()->insert([
+                    'sale_id' => $request->sale_id,
+                    'status_id' => 5,
+                    'user_id' => $request->user_id,
+                ]);
+            }
+
+
+
+            return response(['message' => __('Satış fiyatı ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateSaleOfferPrice(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'user_id' => 'required',
+                'offer_id' => 'required',
+                'offer_product_id' => 'required',
+                'price' => 'required',
+            ]);
+            SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('offer_product_id', $request->offer_product_id)->update([
+                'offer_price' => $request->price
+            ]);
+
+            return response(['message' => __('Satış fiyatı güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
 }
