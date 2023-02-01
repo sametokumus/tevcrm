@@ -39,7 +39,7 @@ async function initOfferDetail(){
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
 
-    if (sale.status_id == 4) {
+    if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
         console.log(offers)
         $("#sales-detail").dataTable().fnDestroy();
@@ -95,11 +95,7 @@ async function initOfferDetail(){
             order: [[0, 'asc']]
         });
     }else{
-        if(data.status_id < 4){
-            alert('Bu sipariş teklif oluşturmaya hazır değildir.');
-        }else{
-            alert('Bu sipariş için daha önce bir teklif oluşturulmuştur.');
-        }
+        alert('Bu sipariş teklif oluşturmaya hazır değildir.');
     }
 }
 
@@ -118,6 +114,7 @@ async function initUpdateOfferPriceModal(offer_id, offer_product_id){
     document.getElementById('update_offer_price_offer_id').value = offer_id;
     document.getElementById('update_offer_price_offer_product_id').value = offer_product_id;
     let data = await serviceGetSaleOfferById(offer_product_id);
+    console.log(data)
     let sale_offer = data.sale_offer;
     document.getElementById('update_offer_price_price').value = sale_offer.offer_price;
 }

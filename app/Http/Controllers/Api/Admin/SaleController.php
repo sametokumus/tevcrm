@@ -146,7 +146,7 @@ class SaleController extends Controller
     public function getSaleOfferById($offer_product_id)
     {
         try {
-            $sale_offer = SaleOffer::query()->where('id',$offer_product_id)->first();
+            $sale_offer = SaleOffer::query()->where('offer_product_id',$offer_product_id)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale_offer' => $sale_offer]]);
         } catch (QueryException $queryException) {
