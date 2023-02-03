@@ -24,7 +24,7 @@ class OfferController extends Controller
     {
         try {
             $sale = Sale::query()->where('request_id', $request_id)->where('active', 1)->first();
-            if ($sale->status_id == 3) {
+            if ($sale->status_id == 3 || $sale->status_id == 2) {
 
                 $offers = Offer::query()
                     ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')

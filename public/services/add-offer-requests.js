@@ -111,7 +111,7 @@ async function addOfferRequest(){
 
     let returned = await servicePostAddOfferRequest(formData);
     if (returned){
-        window.location = '/offer-requests';
+        window.location = '/sales';
     }else{
         alert("Hata Oluştu");
     }

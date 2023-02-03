@@ -149,6 +149,7 @@ async function addOffer(){
         console.log(formData);
 
         let returned = await servicePostAddOffer(formData);
+        console.log(returned)
         if (returned){
             $('#offer-request-products-body tr').removeClass('selected');
             $("#add_offer_form").trigger("reset");
