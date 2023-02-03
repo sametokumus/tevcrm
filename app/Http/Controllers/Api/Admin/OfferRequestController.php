@@ -92,7 +92,7 @@ class OfferRequestController extends Controller
             $sale_id = Uuid::uuid();
             Sale::query()->insert([
                 'sale_id' => $sale_id,
-                'request_id' => $request->request_id,
+                'request_id' => $request_id,
                 'customer_id' => $request->company_id,
                 'status_id' => 1
             ]);
