@@ -259,7 +259,7 @@ class SaleController extends Controller
                 'sale_id' => 'required',
                 'quote_id' => 'required',
             ]);
-            Quote::query()->where('quote_id', $request->quote_id)->update([
+            Quote::query()->where('id', $request->quote_id)->update([
                 'payment_term' => $request->payment_term,
                 'lead_time' => $request->lead_time,
                 'delivery_term' => $request->delivery_term,
