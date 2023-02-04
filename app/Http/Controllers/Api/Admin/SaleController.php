@@ -179,6 +179,17 @@ class SaleController extends Controller
                     'status_id' => 5,
                     'user_id' => $request->user_id,
                 ]);
+
+                $sale_offers = SaleOffer::query()->where('sale_id', $request->sale_id)->get();
+                $sub_total = 0;
+                foreach ($sale_offers as $sale_offer){
+                    $sub_total += $sale_offer->offer_price;
+                }
+                Sale::query()->where('sale_id', $request->sale_id)->update([
+                    'sub_total' => $sub_total
+                ]);
+
+
             }
 
 
