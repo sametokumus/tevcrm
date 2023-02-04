@@ -229,7 +229,7 @@ class SaleController extends Controller
         }
     }
 
-    public function getQuoteById($sale_id)
+    public function getQuoteBySaleId($sale_id)
     {
         try {
 
