@@ -46,19 +46,15 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal fade" id="updateStatusModal" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal modal-cover fade" id="updateStatusModal">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+            <div class="modal-header">
+                <h5 class="modal-title">DURUM GÜNCELLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
             <form method="post" action="#" id="update_status_form">
-                <div class="modal-header">
-                    <h5 class="modal-title">Durum Güncelle</h5>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
                 <div class="modal-body">
-
                     <div class="row mb-4">
                         <label class="col-md-3 form-label">Durum :</label>
                         <div class="col-md-9">
@@ -68,13 +64,11 @@ $extra_js='
                             </select>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="submit" class="btn btn-theme">Kaydet</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

@@ -32,7 +32,7 @@ async function initSales(){
 	$.each(data.sales, function (i, sale) {
         let updated_at = "-";
         if (sale.updated_at != null){
-            updated_at = formatDateAndTime(sale.updated_at, "/");
+            updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
         }
         let status_class = "";
         let btn_list = '';
@@ -77,7 +77,7 @@ async function initSales(){
                 '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
                 '           </button>\n' +
                 '           <a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Satış Detayı</span></a>\n' +
-                '           <a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> PDF</span></a>\n' +
+                '           <a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Quatotion PDF</span></a>\n' +
                 '       </div>';
         }else{
             status_class = "border-theme text-theme";

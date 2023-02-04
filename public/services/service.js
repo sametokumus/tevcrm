@@ -1073,6 +1073,19 @@ async function servicePostUpdateSaleStatus(formData) {
     }
 }
 
+async function serviceGetQuoteBySaleId(id) {
+    const data = await fetchDataGet('/admin/sale/getQuoteBySaleId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+
+
+
+
 
 
 async function serviceGetStatuses() {

@@ -11,6 +11,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
+use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\StatusHistory;
@@ -225,6 +226,26 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getQuoteById($sale_id)
+    {
+        try {
+
+            $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
+            if ($quote_count == 0){
+                $quote_id = Uuid::uuid();
+                Quote::query()->insert([
+                    'quote_id' => $quote_id,
+                    'sale_id' => $sale_id
+                ]);
+            }
+            $quote = Quote::query()->where('sale_id', $sale_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['quote' => $quote]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 

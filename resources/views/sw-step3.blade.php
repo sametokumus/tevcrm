@@ -36,13 +36,6 @@ $extra_js='
                                 <div class="nav-text">Fiyat Güncelleme</div>
                             </a>
                         </div>
-                        <div class="nav-item col">
-                            <a class="nav-link disabled" href="#">
-                                <div class="nav-dot"></div>
-                                <div class="nav-title">Adım 4</div>
-                                <div class="nav-text">Proforma Görüntüleme</div>
-                            </a>
-                        </div>
                     </nav>
                 </div>
             </div>

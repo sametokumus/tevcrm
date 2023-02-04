@@ -105,9 +105,7 @@ $extra_js='
             <form method="post" action="#" id="update_role_form">
                 <div class="modal-header">
                     <h5 class="modal-title">Rol Güncelle</h5>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -137,9 +135,7 @@ $extra_js='
             <form method="post" action="#" id="update_role_permissions_form">
                 <div class="modal-header">
                     <h5 class="modal-title">Yetkileri Güncelle</h5>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 

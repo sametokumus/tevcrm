@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesTable extends Migration
+class CreateQuotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
+            $table->string('quote_id');
             $table->string('sale_id');
-            $table->string('request_id');
-            $table->bigInteger('customer_id')->default(0);
-            $table->bigInteger('status_id')->default(1);
-            $table->decimal('sub_total',10,2, false)->nullable();
-            $table->decimal('freight',10,2, false)->nullable();
-            $table->decimal('vat',10,2, false)->nullable();
-            $table->decimal('vat_rate',10,2, false)->nullable();
-            $table->decimal('grand_total',10,2, false)->nullable();
+            $table->string('payment_term')->nullable();
+            $table->string('lead_time')->nullable();
+            $table->string('delivery_term')->nullable();
+            $table->string('country_of_destination')->nullable();
+            $table->string('note')->nullable();
+            $table->string('bank_detail')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
@@ -37,6 +36,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('quotes');
     }
 }

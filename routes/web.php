@@ -26,7 +26,6 @@ Route::get('/offer-requests', function () { return view('offer-requests'); });
 Route::get('/offer-request', function () { return view('add-offer-request'); });
 Route::get('/offer-request/{id}', function () { return view('update-offer-request'); });
 Route::get('/offer/{id}', function () { return view('offer'); });
-Route::get('/offer-print/{id}', function () { return view('offer-print'); });
 Route::get('/sales', function () { return view('sales'); });
 
 
@@ -35,6 +34,8 @@ Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
 Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
 
 
+Route::get('/offer-print/{offer_id}', function () { return view('offer-print'); });
+Route::get('/quote-print/{sale_id}', function () { return view('quote-print'); });
 
 
 Route::get('/settings', function () { return view('settings'); });

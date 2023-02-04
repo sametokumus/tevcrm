@@ -155,6 +155,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getSaleOfferById/{offer_product_id}', [SaleController::class, 'getSaleOfferById']);
     Route::post('sale/addSaleOfferPrice', [SaleController::class, 'addSaleOfferPrice']);
     Route::post('sale/updateSaleOfferPrice', [SaleController::class, 'updateSaleOfferPrice']);
+    Route::get('sale/getQuoteBySaleId/{sale_id}', [SaleController::class, 'getQuoteBySaleId']);
 
 
     //Contact
