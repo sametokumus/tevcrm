@@ -242,10 +242,67 @@ class SaleController extends Controller
                 ]);
             }
             $quote = Quote::query()->where('sale_id', $sale_id)->first();
+            $sale = Sale::query()->where('sale_id', $sale_id)->first();
+            $quote['freight'] = $sale->freight;
+            $quote['vat_rate'] = $sale->vat_rate;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['quote' => $quote]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function updateQuote(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'quote_id' => 'required',
+            ]);
+            Quote::query()->where('quote_id', $request->quote_id)->update([
+                'payment_term' => $request->payment_term,
+                'lead_time' => $request->lead_time,
+                'delivery_term' => $request->delivery_term,
+                'country_of_destination' => $request->country_of_destination,
+                'note' => $request->note
+            ]);
+            $sale = Sale::query()->where('sale_id', $request->sale_id)->first();
+            $grand_total = null;
+            if ($request->vat_rate == ""){
+                $vat_rate = null;
+                $vat = null;
+                if ($request->freight == ""){
+                    $freight = null;
+                }else{
+                    $freight = $request->freight;
+                    $grand_total = $sale->sub_total + $freight;
+                }
+            }else{
+                $vat_rate = $request->vat_rate;
+                $vat = $sale->sub_total / 100 * $vat_rate;
+                $grand_total = $sale->sub_total + $vat;
+                if ($request->freight == ""){
+                    $freight = null;
+                }else{
+                    $freight = $request->freight;
+                    $grand_total = $sale->sub_total + $vat + $freight;
+                }
+            }
+
+            Sale::query()->where('sale_id', $request->sale_id)->update([
+                'vat' => $vat,
+                'vat_rate' => $vat_rate,
+                'freight' => $freight,
+                'grand_total' => $grand_total
+            ]);
+
+            return response(['message' => __('Bilgi güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 

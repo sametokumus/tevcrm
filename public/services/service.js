@@ -1082,7 +1082,16 @@ async function serviceGetQuoteBySaleId(id) {
     }
 }
 
-
+async function servicePostUpdateQuote(formData) {
+    const data = await fetchDataPost('/admin/sale/updateQuote', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 
