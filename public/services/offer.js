@@ -287,6 +287,7 @@ async function initUpdateOfferProductModal(offer_id, product_id){
     document.getElementById('update_offer_product_total_price').value = checkNull(product.total_price);
     document.getElementById('update_offer_product_discount_rate').value = checkNull(product.discount_rate);
     document.getElementById('update_offer_product_discounted_price').value = checkNull(product.discounted_price);
+    document.getElementById('update_offer_product_vat_rate').value = checkNull(product.vat_rate);
 }
 
 async function updateOfferProduct(){
