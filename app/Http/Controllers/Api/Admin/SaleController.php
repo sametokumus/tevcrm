@@ -184,11 +184,18 @@ class SaleController extends Controller
 
                 $sale_offers = SaleOffer::query()->where('sale_id', $request->sale_id)->get();
                 $sub_total = 0;
+                $vat = 0;
                 foreach ($sale_offers as $sale_offer){
                     $sub_total += $sale_offer->offer_price;
+                    if ($sale_offer->discounted_price != null && $sale_offer->discounted_price != "" && $sale_offer->discounted_price != 0){
+                        $vat += $sale_offer->discounted_price / 100 * $sale_offer->vat_rate;
+                    }else{
+                        $vat += $sale_offer->total_price / 100 * $sale_offer->vat_rate;
+                    }
                 }
                 Sale::query()->where('sale_id', $request->sale_id)->update([
-                    'sub_total' => $sub_total
+                    'sub_total' => $sub_total,
+                    'vat' => $vat
                 ]);
 
 

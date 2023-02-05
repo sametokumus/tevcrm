@@ -69,6 +69,7 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(offer.total_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
                 '           <td>' + checkNull(offer.discounted_price) + '</td>\n' +
+                '           <td>' + checkNull(offer.vat_rate) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_price) + '</td>\n' +
                 '           <td>\n' +
                 '               <div class="btn-list">\n' +
@@ -79,7 +80,7 @@ async function initOfferDetail(){
             $('#sales-detail tbody').append(item);
         });
         $('#sales-detail').DataTable({
-            responsive: true,
+            responsive: false,
             columnDefs: [
                 {responsivePriority: 1, targets: 0},
                 {responsivePriority: 2, targets: -1}
