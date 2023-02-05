@@ -115,7 +115,6 @@ async function initUpdateQuoteModal(){
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
     document.getElementById('update_quote_freight').value = checkNull(quote.freight);
-    document.getElementById('update_quote_vat_rate').value = checkNull(quote.vat_rate);
     document.getElementById('update_quote_note').value = checkNull(quote.note);
 }
 
@@ -127,7 +126,6 @@ async function updateQuote(){
     let delivery_term = document.getElementById('update_quote_delivery_term').value;
     let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
     let freight = document.getElementById('update_quote_freight').value;
-    let vat_rate = document.getElementById('update_quote_vat_rate').value;
     let note = document.getElementById('update_quote_note').value;
 
     let formData = JSON.stringify({
@@ -138,7 +136,6 @@ async function updateQuote(){
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
         "freight": freight,
-        "vat_rate": vat_rate,
         "note": note
     });
 

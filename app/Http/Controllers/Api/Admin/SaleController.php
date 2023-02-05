@@ -187,21 +187,13 @@ class SaleController extends Controller
                 $vat = 0;
                 foreach ($sale_offers as $sale_offer){
                     $sub_total += $sale_offer->offer_price;
-                    if ($sale_offer->discounted_price != null && $sale_offer->discounted_price != "" && $sale_offer->discounted_price != 0){
-                        $vat += $sale_offer->discounted_price / 100 * $sale_offer->vat_rate;
-                    }else{
-                        $vat += $sale_offer->total_price / 100 * $sale_offer->vat_rate;
-                    }
+                    $vat += $sale_offer->offer_price / 100 * $sale_offer->vat_rate;
                 }
                 Sale::query()->where('sale_id', $request->sale_id)->update([
                     'sub_total' => $sub_total,
                     'vat' => $vat
                 ]);
-
-
             }
-
-
 
             return response(['message' => __('Satış fiyatı ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -252,7 +244,6 @@ class SaleController extends Controller
             $quote = Quote::query()->where('sale_id', $sale_id)->first();
             $sale = Sale::query()->where('sale_id', $sale_id)->first();
             $quote['freight'] = $sale->freight;
-            $quote['vat_rate'] = $sale->vat_rate;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['quote' => $quote]]);
         } catch (QueryException $queryException) {
@@ -276,30 +267,15 @@ class SaleController extends Controller
             ]);
             $sale = Sale::query()->where('sale_id', $request->sale_id)->first();
             $grand_total = null;
-            if ($request->vat_rate == ""){
-                $vat_rate = null;
-                $vat = null;
-                if ($request->freight == ""){
-                    $freight = null;
-                }else{
-                    $freight = $request->freight;
-                    $grand_total = $sale->sub_total + $freight;
-                }
+            if ($request->freight == ""){
+                $freight = null;
+                $grand_total = $sale->sub_total + $sale->vat;
             }else{
-                $vat_rate = $request->vat_rate;
-                $vat = $sale->sub_total / 100 * $vat_rate;
-                $grand_total = $sale->sub_total + $vat;
-                if ($request->freight == ""){
-                    $freight = null;
-                }else{
-                    $freight = $request->freight;
-                    $grand_total = $sale->sub_total + $vat + $freight;
-                }
+                $freight = $request->freight;
+                $grand_total = $sale->sub_total + $sale->vat + $freight;
             }
 
             Sale::query()->where('sale_id', $request->sale_id)->update([
-                'vat' => $vat,
-                'vat_rate' => $vat_rate,
                 'freight' => $freight,
                 'grand_total' => $grand_total
             ]);

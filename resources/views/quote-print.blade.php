@@ -162,10 +162,6 @@ $extra_js='
                             <input type="text" class="form-control" id="update_quote_freight">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Vat Rate</label>
-                            <input type="text" class="form-control" id="update_quote_vat_rate">
-                        </div>
-                        <div class="col-md-12 mb-3">
                             <label class="form-label">Note</label>
                             <textarea class="form-control" id="update_quote_note"></textarea>
                         </div>
