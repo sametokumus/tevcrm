@@ -21,8 +21,8 @@
 
         let sale_id = getPathVariable('quote-print');
         await initContact(sale_id);
-        await initSale(sale_id);
-        await initQuote(sale_id);
+        // await initSale(sale_id);
+        // await initQuote(sale_id);
 	});
 
 })(window.jQuery);

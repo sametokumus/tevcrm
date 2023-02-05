@@ -36,6 +36,7 @@ Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
 
 Route::get('/offer-print/{offer_id}', function () { return view('offer-print'); });
 Route::get('/quote-print/{sale_id}', function () { return view('quote-print'); });
+Route::get('/purchasing-order-print/{sale_id}', function () { return view('purchasing-order-print'); });
 
 
 Route::get('/settings', function () { return view('settings'); });

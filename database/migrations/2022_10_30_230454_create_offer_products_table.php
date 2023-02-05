@@ -22,6 +22,7 @@ class CreateOfferProductsTable extends Migration
             $table->decimal('total_price',10,2, false)->nullable();
             $table->decimal('discount_rate',10,2, false)->nullable();
             $table->decimal('discounted_price',10,2, false)->nullable();
+            $table->decimal('vat_rate',10,2, false)->nullable();
             $table->string('package_type')->nullable();
             $table->string('date_code')->nullable();
             $table->text('comment')->nullable();

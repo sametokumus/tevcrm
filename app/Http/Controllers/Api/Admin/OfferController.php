@@ -193,7 +193,8 @@ class OfferController extends Controller
                 'discount_rate' => $request->discount_rate,
                 'discounted_price' => $request->discounted_price,
                 'package_type' => $request->package_type,
-                'date_code' => $request->date_code
+                'date_code' => $request->date_code,
+                'vat_rate' => $request->vat_rate
             ]);
 
             return response(['message' => __('Teklif ürün ekleme işlemi başarılı.'), 'status' => 'success']);
@@ -221,7 +222,8 @@ class OfferController extends Controller
                 'discount_rate' => $request->discount_rate,
                 'discounted_price' => $request->discounted_price,
                 'package_type' => $request->package_type,
-                'date_code' => $request->date_code
+                'date_code' => $request->date_code,
+                'vat_rate' => $request->vat_rate
             ]);
 
             return response(['message' => __('Teklif ürün güncelleme işlemi başarılı.'), 'status' => 'success']);

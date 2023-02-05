@@ -34,62 +34,42 @@ async function initSales(){
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
         }
-        let status_class = "";
-        let btn_list = '';
+        let status_class = "border-theme text-theme";
+        let btn_list = '<div class="btn-list">\n';
+        btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
+            '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
+            '        </button>\n';
         if (sale.status_id == 1){
             status_class = "border-danger text-danger";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-                '           <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Tedarikçi Teklifi Oluştur</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
+                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Tedarikçi Teklifi Oluştur</span></a>\n';
         }else if (sale.status_id == 2){
             status_class = "border-warning text-warning";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-                '           <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Tedarikçi Tekliflerini Güncelle</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
+                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Tedarikçi Tekliflerini Güncelle</span></a>\n';
         }else if (sale.status_id == 3){
             status_class = "border-primary text-primary";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-primary"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-primary"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n';
         }else if (sale.status_id == 4){
             status_class = "border-yellow text-yellow";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow"><span class="fe fe-edit"> Fiyatları Güncelle</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow"><span class="fe fe-edit"> Fiyatları Güncelle</span></a>\n';
         }else if (sale.status_id == 5){
             status_class = "border-success text-success";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Satış Detayı</span></a>\n' +
-                '           <a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Quatotion PDF</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Satış Detayı</span></a>\n';
         }else{
-            status_class = "border-theme text-theme";
-            btn_list = '<div class="btn-list">\n' +
-                '           <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-                '               <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-                '           </button>\n' +
-                '           <a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Satış Detayı</span></a>\n' +
-                '           <a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> PDF</span></a>\n' +
-                '       </div>';
+            btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Satış Detayı</span></a>\n';
         }
 
+        if (sale.status_id >= 5 && sale.status_id <= 6){
+            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Quatotion PDF</span></a>\n';
+        }else if (sale.status_id >= 6 && sale.status_id <= 12){
+            btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Purchasing Order PDF</span></a>\n';
+            btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Proforma Invoice PDF</span></a>\n';
+        }else if (sale.status_id >= 13 && sale.status_id <= 20){
+            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Invoice PDF</span></a>\n';
+        }
+
+        btn_list += '</div>';
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';
 
         let saleItem = '<tr>\n' +

@@ -231,6 +231,7 @@ async function initOfferDetailModal(offer_id){
             '           <td>' + checkNull(product.total_price) + '</td>\n' +
             '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
             '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
+            '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Güncelle</span></button>\n' +
@@ -241,7 +242,7 @@ async function initOfferDetailModal(offer_id){
     });
 
     $('#offer-detail').DataTable({
-        responsive: true,
+        responsive: false,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
@@ -300,6 +301,7 @@ async function updateOfferProduct(){
     let total_price = document.getElementById('update_offer_product_total_price').value;
     let discount_rate = document.getElementById('update_offer_product_discount_rate').value;
     let discounted_price = document.getElementById('update_offer_product_discounted_price').value;
+    let vat_rate = document.getElementById('update_offer_product_vat_rate').value;
 
     let formData = JSON.stringify({
         "ref_code": ref_code,
@@ -310,7 +312,8 @@ async function updateOfferProduct(){
         "pcs_price": pcs_price,
         "total_price": total_price,
         "discount_rate": discount_rate,
-        "discounted_price": discounted_price
+        "discounted_price": discounted_price,
+        "vat_rate": vat_rate
     });
 
     console.log(formData);
@@ -340,6 +343,7 @@ async function addOfferProduct(){
     let total_price = document.getElementById('add_offer_product_total_price').value;
     let discount_rate = document.getElementById('add_offer_product_discount_rate').value;
     let discounted_price = document.getElementById('add_offer_product_discounted_price').value;
+    let vat_rate = document.getElementById('add_offer_product_vat_rate').value;
 
     let formData = JSON.stringify({
         "ref_code": ref_code,
@@ -350,7 +354,8 @@ async function addOfferProduct(){
         "pcs_price": pcs_price,
         "total_price": total_price,
         "discount_rate": discount_rate,
-        "discounted_price": discounted_price
+        "discounted_price": discounted_price,
+        "vat_rate": vat_rate
     });
 
     console.log(formData);
