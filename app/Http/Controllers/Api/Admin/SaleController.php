@@ -70,7 +70,7 @@ class SaleController extends Controller
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
                 $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
                 $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
-                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,",",".");
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
             }
             $sale['sale_offers'] = $sale_offers;
 
