@@ -65,7 +65,7 @@ async function initSale(sale_id){
 
     $('#sub_total td').text(checkNull(sale.sub_total));
     $('#freight td').text(checkNull(sale.freight));
-    $('#vat td').text(checkNull(sale.vat) + ' (' + checkNull(sale.vat_rate) + '%)');
+    $('#vat td').text(checkNull(sale.vat));
     $('#grand_total td').text(checkNull(sale.grand_total));
 
 
@@ -76,8 +76,8 @@ async function initSale(sale_id){
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.offer_quantity) + '</td>\n' +
-            '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-            '           <td>' + checkNull(product.total_price) + '</td>\n' +
+            '           <td>' + checkNull(product.offer_pcs_price) + '</td>\n' +
+            '           <td>' + checkNull(product.offer_price) + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
@@ -92,10 +92,7 @@ async function initQuote(sale_id){
     document.getElementById('lead_time').innerHTML = '<b>Lead Time :</b> '+ checkNull(quote.lead_time);
     document.getElementById('delivery_term').innerHTML = '<b>Delivery Terms :</b> '+ checkNull(quote.delivery_term);
     document.getElementById('country_of_destination').innerHTML = '<b>Country of Destination :</b> '+ checkNull(quote.country_of_destination);
-
     document.getElementById('note').innerHTML = checkNull(quote.note);
-    // $('#note').innerHTML(checkNull(quote.note));
-
 }
 
 async function openUpdateQuoteModal(){
