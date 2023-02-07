@@ -89,8 +89,8 @@ class OfferController extends Controller
                 $product['ref_code'] = $product_detail->ref_code;
                 $product['product_name'] = $product_detail->product_name;
                 $vat = $product->total_price / 100 * $product->vat_rate;
-                $product['vat'] = $vat;
-                $product['grand_total'] = $product->total_price + $vat;
+                $product['vat'] = number_format($vat, 2,".","");
+                $product['grand_total'] = number_format($product->total_price + $vat, 2,".","");
 
                 $offer_sub_total += $product->total_price;
                 $offer_vat += $vat;

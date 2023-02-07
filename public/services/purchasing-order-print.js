@@ -90,11 +90,11 @@ async function initOffer(offer_id){
 
     $.each(offer.products, function (i, product) {
         let item = '<tr>\n' +
-            '           <td>' + checkNull(product.quantity) + '</td>\n' +
             '           <td>' + checkNull(product.ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td></td>\n' +
-            '           <td></td>\n' +
+            '           <td>' + checkNull(product.quantity) + '</td>\n' +
+            '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
+            '           <td>' + checkNull(product.total_price) + '</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
     });
