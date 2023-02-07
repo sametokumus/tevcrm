@@ -80,14 +80,27 @@ class OfferController extends Controller
             $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
             $offer['company'] = Company::query()->where('id', $offer->supplier_id)->first();
             $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+            $offer_sub_total = 0;
+            $offer_vat = 0;
+            $offer_grand_total = 0;
             foreach ($products as $product){
                 $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
                 $product_detail = Product::query()->where('id', $offer_request_product->product_id)->first();
                 $product['ref_code'] = $product_detail->ref_code;
                 $product['product_name'] = $product_detail->product_name;
+                $vat = $product->total_price / 100 * $product->vat_rate;
+                $product['vat'] = $vat;
+                $product['grand_total'] = $product->total_price + $vat;
+
+                $offer_sub_total += $product->total_price;
+                $offer_vat += $vat;
+                $offer_grand_total += $product->total_price + $vat;
             }
 
             $offer['products'] = $products;
+            $offer['sub_total'] = number_format($offer_sub_total, 2,".","");
+            $offer['vat'] = number_format($offer_vat, 2,".","");
+            $offer['grand_total'] = number_format($offer_grand_total, 2,".","");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer' => $offer]]);
         } catch (QueryException $queryException) {

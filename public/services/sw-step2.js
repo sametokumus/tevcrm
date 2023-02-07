@@ -132,7 +132,7 @@ async function addOfferTableProduct(el){
 }
 
 async function addSale(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let request_id = getPathVariable('sw-2');
     let table = $('#sales-detail').DataTable();
     let rows = table.rows();

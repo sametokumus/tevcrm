@@ -113,6 +113,33 @@ table tr.selected{
 }
 
 
+/* PURCHASING ORDER PRINT */
+#purchasing-order-print #logo img{
+    width: 120px;
+}
+#purchasing-order-print .contact-col{
+    margin-top: 40px;
+}
+#purchasing-order-print .logo-header{
+    text-align: right;
+}
+#purchasing-order-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#purchasing-order-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#purchasing-order-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+
 @media print {
     .no-print {
         display: none !important;

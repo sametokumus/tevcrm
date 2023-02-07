@@ -4,7 +4,7 @@
 	$(document).ready(function() {
 
 		createSession();
-		if(sessionStorage.getItem('userLogin') == null || sessionStorage.getItem('userLogin') == 'false'){
+		if(localStorage.getItem('userLogin') == null || localStorage.getItem('userLogin') == 'false'){
             // window.location.href = "/login";
 		}
 
@@ -45,7 +45,7 @@
 async function fetchDataGet(apiURL, contentType){
 
 	var returnData;
-	var token = sessionStorage.getItem('appToken');
+	var token = localStorage.getItem('appToken');
 	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
 		method: 'get',
 		headers:{
@@ -62,7 +62,7 @@ async function fetchDataGet(apiURL, contentType){
 async function fetchDataPost (apiURL, body, contentType) {
 
 	var returnData;
-	var token = sessionStorage.getItem('appToken');
+	var token = localStorage.getItem('appToken');
 	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
 		method: 'post',
 		headers:{
@@ -80,7 +80,7 @@ async function fetchDataPost (apiURL, body, contentType) {
 function xhrDataPost (apiURL, body, callBackFunction) {
 
 	let xhr = new XMLHttpRequest();
-	var token = sessionStorage.getItem('appToken');
+	var token = localStorage.getItem('appToken');
 	var returnData;
 	xhr.timeout = 5000;
 	xhr.addEventListener("readystatechange", function() {
@@ -108,26 +108,26 @@ function showAlert(message){
 }
 
 async function createSession () {
-	var userLogin = await sessionStorage.getItem('userLogin');
+	var userLogin = await localStorage.getItem('userLogin');
 	if(userLogin == null){
-		sessionStorage.setItem('userLogin','false');
+		localStorage.setItem('userLogin','false');
 	}
 }
 
 function removeSession () {
-	sessionStorage.setItem('userLogin','false');
-	sessionStorage.removeItem('userRole');
-	sessionStorage.removeItem('userId');
-	sessionStorage.removeItem('userEmail');
-	sessionStorage.removeItem('appToken');
+	localStorage.setItem('userLogin','false');
+	localStorage.removeItem('userRole');
+	localStorage.removeItem('userId');
+	localStorage.removeItem('userEmail');
+	localStorage.removeItem('appToken');
 }
 
 function getSession () {
-    console.log(sessionStorage.getItem('userLogin'));
-    console.log(sessionStorage.getItem('userRole'));
-    console.log(sessionStorage.getItem('userId'));
-    console.log(sessionStorage.getItem('userEmail'));
-    console.log(sessionStorage.getItem('appToken'));
+    console.log(localStorage.getItem('userLogin'));
+    console.log(localStorage.getItem('userRole'));
+    console.log(localStorage.getItem('userId'));
+    console.log(localStorage.getItem('userEmail'));
+    console.log(localStorage.getItem('appToken'));
 }
 
 function getQueryString(param){
@@ -310,15 +310,16 @@ function changeDecimalToCommas(price) {
 /* SERVICE INIT DATA FUNCTIONS */
 
 async function checkLogin () {
-	var userLogin = await sessionStorage.getItem('userLogin');
+    // localStorage.setItem('userLogin', 'true');
+	var userLogin = await localStorage.getItem('userLogin');
 	if(userLogin == null || userLogin == 'false'){
 		window.location.href = "login";
 	}else{
 		//verify bcrypt
-		var userRole = sessionStorage.getItem('userRole');
-		var userId = sessionStorage.getItem('userId');
-		var userEmail = sessionStorage.getItem('userEmail');
-		var userLogin = sessionStorage.getItem('userLogin');
+		var userRole = localStorage.getItem('userRole');
+		var userId = localStorage.getItem('userId');
+		var userEmail = localStorage.getItem('userEmail');
+		var userLogin = localStorage.getItem('userLogin');
 		var hash = userRole+userId+userEmail;
 
 

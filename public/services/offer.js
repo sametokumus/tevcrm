@@ -120,7 +120,7 @@ async function initOfferRequest(){
 }
 
 async function addOffer(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let request_id = getPathVariable('offer');
     let supplier_id = document.getElementById('add_offer_company').value;
     let table = $('#offer-request-products').DataTable();

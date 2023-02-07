@@ -128,7 +128,7 @@ async function initOfferRequest(){
 }
 
 async function updateOfferRequest(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let request_id = getPathVariable('offer-request');
 
     let personnel = document.getElementById('update_offer_request_authorized_personnel').value;

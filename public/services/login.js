@@ -23,16 +23,16 @@
 					let __userInfo = data.object.admin;
 
 						console.log(__userInfo);
-						sessionStorage.setItem('userRole',__userInfo.admin_role_id);
-						sessionStorage.setItem('userId',__userInfo.id);
-						sessionStorage.setItem('userEmail',__userInfo.email);
-						sessionStorage.setItem('appToken',__userInfo.token);
+						localStorage.setItem('userRole',__userInfo.admin_role_id);
+						localStorage.setItem('userId',__userInfo.id);
+						localStorage.setItem('userEmail',__userInfo.email);
+						localStorage.setItem('appToken',__userInfo.token);
 
 						try{
 							var hash = __userInfo.admin_role_id.toString()+(__userInfo.id).toString()+__userInfo.email;
 							var salt = gensalt(5);
 							function result(newhash){
-								sessionStorage.setItem('userLogin',newhash);
+								localStorage.setItem('userLogin',newhash);
 
 								var rel = getURLParam('rel');
 								// console.log(__userInfo.user_type)

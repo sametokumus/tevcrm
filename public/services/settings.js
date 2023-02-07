@@ -34,7 +34,7 @@ async function initActivityTypes(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetActivityTypes();
     $('#datatableActivityTypes tbody tr').remove();
-    let logged_user_id = sessionStorage.getItem('userId');
+    let logged_user_id = localStorage.getItem('userId');
 
     $.each(data.activity_types, function (i, activity_type) {
 

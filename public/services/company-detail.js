@@ -289,7 +289,7 @@ async function initNotes(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetNotesByCompanyId(company_id);
     $('#note-list .note-list-item').remove();
-    let logged_user_id = sessionStorage.getItem('userId');
+    let logged_user_id = localStorage.getItem('userId');
 
     $.each(data.notes, function (i, note) {
         console.log(note)
@@ -349,7 +349,7 @@ async function addNoteCallback(xhttp){
 }
 async function addNote(){
     let company_id = getPathVariable('company-detail');
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let formData = new FormData();
     formData.append('user_id', user_id);
     formData.append('company_id', company_id);
@@ -386,7 +386,7 @@ async function updateNoteCallback(xhttp){
 }
 async function updateNote(){
     let company_id = getPathVariable('company-detail');
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let formData = new FormData();
     formData.append('user_id', user_id);
     formData.append('company_id', company_id);
@@ -407,7 +407,7 @@ async function initActivities(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetActivitiesByCompanyId(company_id);
     $('#datatableActivities tbody tr').remove();
-    let logged_user_id = sessionStorage.getItem('userId');
+    let logged_user_id = localStorage.getItem('userId');
 
     $.each(data.activities, function (i, activity) {
 
@@ -439,7 +439,7 @@ async function openAddCompanyActivityModal(){
 }
 async function addActivity(){
     let company_id = getPathVariable('company-detail');
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
 
     let task_count = document.getElementById('add-activity-new-task-count').value;
     let tasks = [];
@@ -532,7 +532,7 @@ async function updateActivityCallback(xhttp){
 }
 async function updateActivity(){
     let company_id = getPathVariable('company-detail');
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let activity_id = document.getElementById('update_activity_id').value;
 
     let start = document.getElementById('update_activity_start_date').value + " " + document.getElementById('update_activity_start_time').value + ":00";

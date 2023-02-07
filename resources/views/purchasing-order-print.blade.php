@@ -12,12 +12,26 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
+            <div class="row justify-content-center no-print">
+                <div class="col-md-7">
+                    <form method="post" action="#" id="select_offer_form">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <select onchange="changeOffer();" name="select_offer" class="form-control form-select" id="select_offer" required>
+                                    <option value="0">Teklif Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-md-7">
 
                     <div class="wrapper">
                         <!-- Main content -->
-                        <section id="quote-print" class="print-color">
+                        <section id="purchasing-order-print" class="print-color">
                             <!-- title row -->
                             <div class="row">
                                 <div class="col-6">
@@ -46,15 +60,12 @@ $extra_js='
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 buyer-col">
-{{--                                    <h6>Supplier</h6>--}}
+                                <div class="col-sm-6 supplier-col">
+                                    <h6>Supplier</h6>
                                     <address>
-                                        <span id="buyer_name"></span><br>
-                                        <span id="buyer_address"></span><br>
+                                        <span id="supplier_name"></span><br>
+                                        <span id="supplier_address"></span><br>
                                         <span id="payment_term"></span><br>
-                                        <span id="lead_time"></span><br>
-                                        <span id="delivery_term"></span><br>
-                                        <span id="country_of_destination"></span><br>
                                     </address>
                                 </div>
                             </div>
@@ -63,7 +74,7 @@ $extra_js='
                             <!-- Table row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">
-                                    <table id="sale-detail" class="table table-striped">
+                                    <table id="offer-detail" class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th>Ref. Code</th>

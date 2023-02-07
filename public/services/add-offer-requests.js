@@ -79,7 +79,7 @@ async function deleteProductRow(item_id){
 }
 
 async function addOfferRequest(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
 
     let products = [];
     let table = document.getElementById("offer-request-products-body");

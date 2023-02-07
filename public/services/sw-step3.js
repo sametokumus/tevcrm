@@ -121,7 +121,7 @@ async function initUpdateOfferPriceModal(offer_id, offer_product_id){
 }
 
 async function addSaleOfferPrice(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let sale_id = getPathVariable('sw-3');
     let offer_id = document.getElementById('add_offer_price_offer_id').value;
     let offer_product_id = document.getElementById('add_offer_price_offer_product_id').value;
@@ -148,7 +148,7 @@ async function addSaleOfferPrice(){
 }
 
 async function updateSaleOfferPrice(){
-    let user_id = sessionStorage.getItem('userId');
+    let user_id = localStorage.getItem('userId');
     let sale_id = getPathVariable('sw-3');
     let offer_id = document.getElementById('update_offer_price_offer_id').value;
     let offer_product_id = document.getElementById('update_offer_price_offer_product_id').value;
