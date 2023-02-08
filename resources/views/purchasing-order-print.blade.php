@@ -65,7 +65,7 @@ $extra_js='
                                     <address>
                                         <span id="supplier_name"></span><br>
                                         <span id="supplier_address"></span><br>
-                                        <span id="payment_term"></span><br>
+                                        <span id="payment_term">Payment Terms: </span><br>
                                     </address>
                                 </div>
                             </div>
@@ -99,10 +99,6 @@ $extra_js='
                                         <table class="table">
                                             <tr id="sub_total">
                                                 <th>SUB TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="freight">
-                                                <th>FREIGHT</th>
                                                 <td></td>
                                             </tr>
                                             <tr id="vat">

@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Admin\NoteController;
 use App\Http\Controllers\Api\Admin\ContactController;
 use App\Http\Controllers\Api\Admin\SaleController;
 use App\Http\Controllers\Api\Admin\StatusController;
+use App\Http\Controllers\Api\Admin\OwnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/updateSaleOfferPrice', [SaleController::class, 'updateSaleOfferPrice']);
     Route::get('sale/getQuoteBySaleId/{sale_id}', [SaleController::class, 'getQuoteBySaleId']);
     Route::post('sale/updateQuote', [SaleController::class, 'updateQuote']);
+
+    //Owner
+    Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);
+    Route::get('owner/getBankInfoById/{info_id}', [OwnerController::class, 'getBankInfoById']);
+    Route::post('owner/addBankInfo', [OwnerController::class, 'addBankInfo']);
+    Route::post('owner/updateBankInfo', [OwnerController::class, 'updateBankInfo']);
+    Route::get('owner/deleteBankInfo/{info_id}', [OwnerController::class, 'deleteBankInfo']);
 
 
     //Contact

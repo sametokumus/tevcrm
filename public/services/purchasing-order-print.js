@@ -99,6 +99,10 @@ async function initOffer(offer_id){
         $('#offer-detail tbody').append(item);
     });
 
+    $('#sub_total td').text(checkNull(offer.sub_total));
+    $('#vat td').text(checkNull(offer.vat));
+    $('#grand_total td').text(checkNull(offer.grand_total));
+
 }
 
 
