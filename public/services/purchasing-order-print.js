@@ -39,6 +39,12 @@ function printOffer(){
 async function changeOffer(){
     let offer_id = document.getElementById('select_offer').value;
     if(offer_id == 0){
+        document.getElementById('supplier_name').innerHTML = "";
+        document.getElementById('supplier_address').innerHTML = "";
+        $('#sub_total td').text("");
+        $('#vat td').text("");
+        $('#grand_total td').text("");
+        $('#offer-detail tbody > tr').remove();
         return false;
     }else{
         await initOffer(offer_id);

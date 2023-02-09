@@ -129,7 +129,7 @@ async function initBankInfos(){
     });
 }
 async function openAddBankInfoModal(){
-    $("#addActivityTypeModal").modal('show');
+    $("#addBankInfoModal").modal('show');
 }
 async function addBankInfo(){
     let formData = JSON.stringify({
