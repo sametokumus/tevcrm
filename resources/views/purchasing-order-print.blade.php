@@ -118,10 +118,16 @@ $extra_js='
 
                                     </p>
                                 </div>
+                                <div class="col-md-12">
+                                    <p style="margin-top: 15px; margin-bottom: 0;">Bank Details:</p>
+                                    <p id="bank-details" class="text-muted">
+
+                                    </p>
+                                </div>
                             </div>
                         </section>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 d-none" id="print-buttons">
                                 <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                             </div>

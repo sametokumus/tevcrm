@@ -45,9 +45,13 @@ async function changeOffer(){
         $('#vat td').text("");
         $('#grand_total td').text("");
         $('#offer-detail tbody > tr').remove();
+
+
+        $('#print-buttons').addClass('d-none');
         return false;
     }else{
         await initOffer(offer_id);
+        $('#print-buttons').removeClass('d-none');
     }
 }
 

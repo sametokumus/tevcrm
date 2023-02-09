@@ -166,6 +166,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('owner/updateBankInfo', [OwnerController::class, 'updateBankInfo']);
     Route::get('owner/deleteBankInfo/{info_id}', [OwnerController::class, 'deleteBankInfo']);
 
+    //Purchasing Order Detail
+    Route::get('sale/getPurchasingOrderDetailById/{info_id}', [SaleController::class, 'getPurchasingOrderDetailById']);
+    Route::post('sale/addPurchasingOrderDetail', [SaleController::class, 'addPurchasingOrderDetail']);
+    Route::post('sale/updatePurchasingOrderDetail', [SaleController::class, 'updatePurchasingOrderDetail']);
+
 
     //Contact
     Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);
