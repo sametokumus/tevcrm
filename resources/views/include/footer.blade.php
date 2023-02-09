@@ -29,7 +29,12 @@
 
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-
+<script src="plugins/summernote/dist/summernote-lite.min.js"></script>
+<script>
+    $('.summernote').summernote({
+        height: 200
+    });
+</script>
 <script src="services/service.js"></script>
 <?php echo $extra_js; ?>
 

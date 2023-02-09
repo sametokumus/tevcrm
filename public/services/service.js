@@ -1106,3 +1106,56 @@ async function serviceGetStatuses() {
         showAlert('İstek Başarısız.');
     }
 }
+
+
+
+async function serviceGetBankInfos() {
+    const data = await fetchDataGet('/admin/owner/getBankInfos', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetBankInfoById(id) {
+    const data = await fetchDataGet('/admin/owner/getBankInfoById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddBankInfo(formData) {
+    const data = await fetchDataPost('/admin/owner/addBankInfo', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateBankInfo(formData) {
+    const data = await fetchDataPost('/admin/owner/updateBankInfo', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetDeleteBankInfo(id) {
+    const data = await fetchDataGet('/admin/owner/deleteBankInfo/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

@@ -15,7 +15,8 @@ class CreateOwnerBankInfosTable extends Migration
     {
         Schema::create('owner_bank_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('detail')->nullable();
+            $table->string('name')->nullable();
+            $table->text('detail')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

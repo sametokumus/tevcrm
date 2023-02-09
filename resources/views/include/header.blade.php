@@ -39,6 +39,7 @@ $extra_js="";
     <link href="plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 
+    <link href="plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
 
 
     <link href="css/customize.css" rel="stylesheet"/>

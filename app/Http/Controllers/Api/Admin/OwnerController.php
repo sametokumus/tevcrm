@@ -45,9 +45,11 @@ class OwnerController extends Controller
     {
         try {
             $request->validate([
+                'name' => 'required',
                 'detail' => 'required',
             ]);
             OwnerBankInfo::query()->insert([
+                'name' => $request->name,
                 'detail' => $request->detail
             ]);
 
@@ -67,8 +69,10 @@ class OwnerController extends Controller
             $request->validate([
                 'info_id' => 'required',
                 'detail' => 'required',
+                'name' => 'required',
             ]);
             OwnerBankInfo::query()->where('id', $request->info_id)->update([
+                'name' => $request->name,
                 'detail' => $request->detail
             ]);
 
