@@ -169,9 +169,11 @@ class SaleController extends Controller
                 'offer_id' => 'required',
                 'offer_product_id' => 'required',
                 'price' => 'required',
+                'currency' => 'required',
             ]);
             SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('offer_product_id', $request->offer_product_id)->update([
-                'offer_price' => $request->price
+                'offer_price' => $request->price,
+                'offer_currency' => $request->currency
             ]);
 
             $offer_check = SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_price', null)->count();
@@ -218,9 +220,11 @@ class SaleController extends Controller
                 'offer_id' => 'required',
                 'offer_product_id' => 'required',
                 'price' => 'required',
+                'currency' => 'required',
             ]);
             SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('offer_product_id', $request->offer_product_id)->update([
-                'offer_price' => $request->price
+                'offer_price' => $request->price,
+                'offer_currency' => $request->currency
             ]);
 
             return response(['message' => __('Satış fiyatı güncelleme işlemi başarılı.'), 'status' => 'success']);

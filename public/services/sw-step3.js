@@ -70,7 +70,9 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
                 '           <td>' + checkNull(offer.discounted_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.vat_rate) + '</td>\n' +
+                '           <td>' + checkNull(offer.currency) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_price) + '</td>\n' +
+                '           <td>' + checkNull(offer.offer_currency) + '</td>\n' +
                 '           <td>\n' +
                 '               <div class="btn-list">\n' +
                 '                   '+ btn_list +'\n' +
@@ -126,13 +128,15 @@ async function addSaleOfferPrice(){
     let offer_id = document.getElementById('add_offer_price_offer_id').value;
     let offer_product_id = document.getElementById('add_offer_price_offer_product_id').value;
     let price = document.getElementById('add_offer_price_price').value;
+    let currency = document.getElementById('add_offer_price_currency').value;
 
     let formData = JSON.stringify({
         "user_id": user_id,
         "sale_id": sale_id,
         "offer_id": offer_id,
         "offer_product_id": offer_product_id,
-        "price": price
+        "price": price,
+        "currency": currency
     });
 
     console.log(formData);

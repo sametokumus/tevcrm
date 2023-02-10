@@ -31,6 +31,7 @@ class CreateSaleOffersTable extends Migration
             $table->decimal('vat_rate',10,2, false)->nullable();
             $table->string('currency')->nullable();
             $table->decimal('offer_price',10,2, false)->nullable();
+            $table->string('offer_currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

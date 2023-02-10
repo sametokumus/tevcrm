@@ -53,7 +53,7 @@ $extra_js='
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
-                            <table id="sales-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
+                            <table id="sales-detail" class="table table-bordered table-striped key-buttons border-bottom">
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0">ID</th>
@@ -71,7 +71,9 @@ $extra_js='
                                     <th class="border-bottom-0">İndirim Oranı</th>
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
+                                    <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0">Teklif Fiyatı</th>
+                                    <th class="border-bottom-0">Teklif Para Birimi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
@@ -113,6 +115,15 @@ $extra_js='
                             <input type="text" class="form-control" id="add_offer_price_price">
                             <input type="hidden" class="form-control" id="add_offer_price_offer_id">
                             <input type="hidden" class="form-control" id="add_offer_price_offer_product_id">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="add_offer_price_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
                         </div>
                     </div>
                 </div>
