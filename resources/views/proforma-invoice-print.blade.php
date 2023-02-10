@@ -137,7 +137,7 @@ $extra_js='
                         </section>
                         <div class="row">
                             <div class="col-12 mt-3">
-                                <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
+                                <button onclick="openUpdateDetailModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                             </div>
                             <div class="col-md-12 mt-3">
@@ -155,40 +155,27 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal modal-cover fade" id="updateQuoteModal">
+<div class="modal modal-cover fade" id="updateDetailModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">BİLGİ GÜNCELLEME</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="update_quote_form">
+            <form method="post" action="#" id="update_detail_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <input type="hidden" class="form-control" id="update_quote_id">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Payment Terms</label>
-                            <input type="text" class="form-control" id="update_quote_payment_term">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Lead Time</label>
-                            <input type="text" class="form-control" id="update_quote_lead_time">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Delivery Terms</label>
-                            <input type="text" class="form-control" id="update_quote_delivery_term">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Country of Destination</label>
-                            <input type="text" class="form-control" id="update_quote_country_of_destination">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Freight Price</label>
-                            <input type="text" class="form-control" id="update_quote_freight">
+                            <input type="text" class="form-control" id="update_sale_payment_term">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Note</label>
-                            <textarea class="form-control" id="update_quote_note"></textarea>
+                            <textarea name="text" class="summernote" id="update_sale_note" title="Contents"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Shipping Price</label>
+                            <input type="text" class="form-control" id="update_sale_shipping_price">
                         </div>
                     </div>
                 </div>

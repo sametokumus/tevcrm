@@ -1203,17 +1203,6 @@ async function serviceGetProformaInvoiceDetailById(id) {
     }
 }
 
-async function servicePostAddProformaInvoiceDetail(formData) {
-    const data = await fetchDataPost('/admin/sale/addProformaInvoiceDetail', formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-
 async function servicePostUpdateProformaInvoiceDetail(formData) {
     const data = await fetchDataPost('/admin/sale/updateProformaInvoiceDetail', formData, 'application/json');
     if (data.status == "success") {

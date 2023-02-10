@@ -4,12 +4,11 @@
     $(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_quote_freight").maskMoney({thousands:''});
-        $("#update_quote_vat_rate").maskMoney({thousands:''});
+        $("#update_sale_shipping_price").maskMoney({thousands:''});
 
-        $('#update_quote_form').submit(function (e){
+        $('#update_detail_form').submit(function (e){
             e.preventDefault();
-            updateQuote();
+            updateDetail();
         });
 
     });
@@ -86,69 +85,66 @@ async function initSale(sale_id){
     $('#freight td').text(checkNull(sale.freight));
     $('#vat td').text(checkNull(sale.vat) + ' ' + currency);
     $('#grand_total td').text(checkNull(sale.grand_total) + ' ' + currency);
-    $('#shipping td').text(checkNull(sale.shipping) + ' ' + currency);
+    $('#shipping td').text(checkNull(sale.shipping_price) + ' ' + currency);
     $('#grand_total_with_shipping td').text(checkNull(sale.grand_total_with_shipping) + ' ' + currency);
+
+
+    document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
 }
 
 async function initDetail(sale_id){
     let data = await serviceGetProformaInvoiceDetailById(sale_id);
-    console.log(data)
     let detail = data.proforma_invoice_detail;
 
-    document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> '+ checkNull(detail.payment_term);
-    document.getElementById('note').innerHTML = checkNull(detail.note);
+    if (detail != null) {
+        document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> ' + checkNull(detail.sale.shipping);
+        document.getElementById('note').innerHTML = checkNull(detail.note);
+    }
 }
 
-async function openUpdateQuoteModal(){
-    $("#updateQuoteModal").modal('show');
-    await initUpdateQuoteModal();
+async function openUpdateDetailModal(){
+    $("#updateDetailModal").modal('show');
+    await initUpdateDetailModal();
 }
 
-async function initUpdateQuoteModal(){
-    let sale_id = getPathVariable('quote-print');
-    let data = await serviceGetQuoteBySaleId(sale_id);
-    let quote = data.quote;
-    console.log(quote)
+async function initUpdateDetailModal(){
+    let sale_id = getPathVariable('proforma-invoice-print');
+    let data = await serviceGetProformaInvoiceDetailById(sale_id);
+    let detail = data.proforma_invoice_detail;
+    console.log(detail)
 
-    document.getElementById('update_quote_id').value = quote.id;
-    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
-    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
-    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
-    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
-    document.getElementById('update_quote_freight').value = checkNull(quote.freight);
-    document.getElementById('update_quote_note').value = checkNull(quote.note);
+    if (detail != null) {
+        document.getElementById('update_sale_payment_term').value = checkNull(detail.payment_term);
+        $('#update_sale_note').summernote('code', checkNull(detail.note));
+    }
 }
 
-async function updateQuote(){
-    let sale_id = getPathVariable('quote-print');
-    let quote_id = document.getElementById('update_quote_id').value;
-    let payment_term = document.getElementById('update_quote_payment_term').value;
-    let lead_time = document.getElementById('update_quote_lead_time').value;
-    let delivery_term = document.getElementById('update_quote_delivery_term').value;
-    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
-    let freight = document.getElementById('update_quote_freight').value;
-    let note = document.getElementById('update_quote_note').value;
+async function updateDetail(){
+    let sale_id = getPathVariable('proforma-invoice-print');
+    let payment_term = document.getElementById('update_sale_payment_term').value;
+    let note = $('#update_sale_note').summernote('code');
+    let shipping_price = document.getElementById('update_sale_shipping_price').value;
 
     let formData = JSON.stringify({
         "sale_id": sale_id,
-        "quote_id": quote_id,
         "payment_term": payment_term,
-        "lead_time": lead_time,
-        "delivery_term": delivery_term,
-        "country_of_destination": country_of_destination,
-        "freight": freight,
         "note": note
     });
+    let returned1 = await servicePostUpdateProformaInvoiceDetail(formData);
 
-    console.log(formData);
+    let formData2 = JSON.stringify({
+        "sale_id": sale_id,
+        "shipping_price": shipping_price
+    });
+    let returned2 = await servicePostUpdateShippingPrice(formData2);
 
-    let returned = await servicePostUpdateQuote(formData);
-    if (returned){
-        $("#update_quote_form").trigger("reset");
-        $('#updateQuoteModal').modal('hide');
+
+    if (returned1 && returned2){
+        $("#update_detail_form").trigger("reset");
+        $('#updateDetailModal').modal('hide');
         await initSale(sale_id);
-        await initQuote(sale_id);
+        await initDetail(sale_id);
     }else{
         alert("Hata Oluştu");
     }

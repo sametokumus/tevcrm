@@ -174,7 +174,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Proforma Invoice Detail
     Route::get('sale/getProformaInvoiceDetailById/{sale_id}', [SaleController::class, 'getProformaInvoiceDetailById']);
-    Route::post('sale/addProformaInvoiceDetail', [SaleController::class, 'addProformaInvoiceDetail']);
     Route::post('sale/updateProformaInvoiceDetail', [SaleController::class, 'updateProformaInvoiceDetail']);
 
 
