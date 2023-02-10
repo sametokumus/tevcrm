@@ -153,6 +153,7 @@ class SaleController extends Controller
     {
         try {
             $sale_offer = SaleOffer::query()->where('offer_product_id',$offer_product_id)->first();
+            $sale_offer['company'] = Company::query()->where('id', $sale_offer->supplier_id)->where('active', 1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale_offer' => $sale_offer]]);
         } catch (QueryException $queryException) {

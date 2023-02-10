@@ -120,6 +120,7 @@ async function initUpdateOfferPriceModal(offer_id, offer_product_id){
     console.log(data)
     let sale_offer = data.sale_offer;
     document.getElementById('update_offer_price_price').value = sale_offer.offer_price;
+    document.getElementById('update_offer_price_currency').value = sale_offer.offer_currency;
 }
 
 async function addSaleOfferPrice(){
@@ -157,13 +158,15 @@ async function updateSaleOfferPrice(){
     let offer_id = document.getElementById('update_offer_price_offer_id').value;
     let offer_product_id = document.getElementById('update_offer_price_offer_product_id').value;
     let price = document.getElementById('update_offer_price_price').value;
+    let currency = document.getElementById('update_offer_price_currency').value;
 
     let formData = JSON.stringify({
         "user_id": user_id,
         "sale_id": sale_id,
         "offer_id": offer_id,
         "offer_product_id": offer_product_id,
-        "price": price
+        "price": price,
+        "currency": currency
     });
 
     console.log(formData);

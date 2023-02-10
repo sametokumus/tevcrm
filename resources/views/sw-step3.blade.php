@@ -152,6 +152,15 @@ $extra_js='
                             <input type="hidden" class="form-control" id="update_offer_price_offer_id">
                             <input type="hidden" class="form-control" id="update_offer_price_offer_product_id">
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="update_offer_price_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
