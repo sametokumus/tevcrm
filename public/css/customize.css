@@ -139,6 +139,23 @@ table tr.selected{
     margin-bottom: 60px;
 }
 
+#purchasing-order-print #note *{
+    margin: 0;
+}
+
+
+#bank-details table{
+    width: 100% !important;
+    margin-top: 10px;
+    border: 1px solid #aaaaaa;
+}
+#bank-details table tr{
+    border-bottom: 1px solid #aaaaaa;
+}
+#bank-details table td{
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    padding: 5px 10px;
+}
 
 @media print {
     .no-print {
@@ -149,6 +166,18 @@ table tr.selected{
     }
     .pace{
         display: none;
+    }
+    #note *{
+        font-size: 12px;
+    }
+    table{
+        margin: 0 !important;
+    }
+    table td{
+        border: 1px solid rgba(0,0,0,.5);
+    }
+    #bank-details table td{
+        border: 1px solid rgba(0,0,0,.5);
     }
 }
 

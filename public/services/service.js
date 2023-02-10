@@ -1159,3 +1159,36 @@ async function serviceGetDeleteBankInfo(id) {
         return false;
     }
 }
+
+
+
+async function serviceGetPurchasingOrderDetailById(id) {
+    const data = await fetchDataGet('/admin/sale/getPurchasingOrderDetailById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddPurchasingOrderDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/addPurchasingOrderDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdatePurchasingOrderDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/updatePurchasingOrderDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

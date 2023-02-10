@@ -26,6 +26,7 @@ class CreateOfferProductsTable extends Migration
             $table->string('package_type')->nullable();
             $table->string('date_code')->nullable();
             $table->text('comment')->nullable();
+            $table->string('currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

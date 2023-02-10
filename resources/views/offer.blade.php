@@ -145,6 +145,7 @@ $extra_js='
                                 <th class="border-bottom-0">İndirim Oranı</th>
                                 <th class="border-bottom-0">İndirimli Fiyat</th>
                                 <th class="border-bottom-0">Vergi Oranı</th>
+                                <th class="border-bottom-0">Para Birimi</th>
                                 <th class="border-bottom-0"></th>
                             </tr>
                             </thead>
@@ -215,6 +216,15 @@ $extra_js='
                             <label class="form-label">Vergi Oranı</label>
                             <input type="text" class="form-control" id="add_offer_product_vat_rate">
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="add_offer_product_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -277,6 +287,15 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Vergi Oranı</label>
                             <input type="text" class="form-control" id="update_offer_product_vat_rate">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="update_offer_product_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
                         </div>
                     </div>
                 </div>

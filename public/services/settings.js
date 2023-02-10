@@ -133,8 +133,8 @@ async function openAddBankInfoModal(){
 }
 async function addBankInfo(){
     let formData = JSON.stringify({
-        "name":document.getElementById('add_bank_info_name').value,
-        "detail":document.getElementById('add_bank_info_detail').value
+        "name": document.getElementById('add_bank_info_name').value,
+        "detail": $('#add_bank_info_detail').summernote('code')
     });
 
     let returned = await servicePostAddBankInfo(formData);

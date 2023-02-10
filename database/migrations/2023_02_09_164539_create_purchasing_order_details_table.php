@@ -17,7 +17,7 @@ class CreatePurchasingOrderDetailsTable extends Migration
             $table->id();
             $table->string('offer_id');
             $table->string('sale_id');
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
