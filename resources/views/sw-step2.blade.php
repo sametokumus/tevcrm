@@ -71,6 +71,7 @@ $extra_js='
                                     <th class="border-bottom-0">İndirim Oranı</th>
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
+                                    <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
@@ -121,6 +122,7 @@ $extra_js='
                                     <th class="border-bottom-0">İndirim Oranı</th>
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
+                                    <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>

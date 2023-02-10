@@ -47,6 +47,7 @@ async function initOfferDetail(){
                     '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
                     '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
                     '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
+                    '           <td>' + checkNull(product.currency) + '</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
                     '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
@@ -156,6 +157,7 @@ async function addSale(){
                 "discount_rate": this.data()[12],
                 "discounted_price": this.data()[13],
                 "vat_rate": this.data()[14],
+                "currency": this.data()[15],
             }
             offers.push(item);
         });
