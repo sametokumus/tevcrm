@@ -1192,3 +1192,46 @@ async function servicePostUpdatePurchasingOrderDetail(formData) {
         return false;
     }
 }
+
+
+async function serviceGetProformaInvoiceDetailById(id) {
+    const data = await fetchDataGet('/admin/sale/getProformaInvoiceDetailById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddProformaInvoiceDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/addProformaInvoiceDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateProformaInvoiceDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/updateProformaInvoiceDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateShippingPrice(formData) {
+    const data = await fetchDataPost('/admin/sale/updateShippingPrice', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

@@ -158,6 +158,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/updateSaleOfferPrice', [SaleController::class, 'updateSaleOfferPrice']);
     Route::get('sale/getQuoteBySaleId/{sale_id}', [SaleController::class, 'getQuoteBySaleId']);
     Route::post('sale/updateQuote', [SaleController::class, 'updateQuote']);
+    Route::post('sale/updateShippingPrice', [SaleController::class, 'updateShippingPrice']);
 
     //Owner
     Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);
@@ -170,6 +171,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getPurchasingOrderDetailById/{offer_id}', [SaleController::class, 'getPurchasingOrderDetailById']);
     Route::post('sale/addPurchasingOrderDetail', [SaleController::class, 'addPurchasingOrderDetail']);
     Route::post('sale/updatePurchasingOrderDetail', [SaleController::class, 'updatePurchasingOrderDetail']);
+
+    //Proforma Invoice Detail
+    Route::get('sale/getProformaInvoiceDetailById/{sale_id}', [SaleController::class, 'getProformaInvoiceDetailById']);
+    Route::post('sale/addProformaInvoiceDetail', [SaleController::class, 'addProformaInvoiceDetail']);
+    Route::post('sale/updateProformaInvoiceDetail', [SaleController::class, 'updateProformaInvoiceDetail']);
 
 
     //Contact

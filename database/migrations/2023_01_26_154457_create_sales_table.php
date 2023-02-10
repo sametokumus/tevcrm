@@ -24,6 +24,8 @@ class CreateSalesTable extends Migration
             $table->decimal('vat',10,2, false)->nullable();
             $table->decimal('vat_rate',10,2, false)->nullable();
             $table->decimal('grand_total',10,2, false)->nullable();
+            $table->decimal('shipping_price',10,2, false)->nullable();
+            $table->decimal('grand_total_with_shipping',10,2, false)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

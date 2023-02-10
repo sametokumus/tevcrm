@@ -147,14 +147,30 @@ table tr.selected{
 #bank-details table{
     width: 100% !important;
     margin-top: 10px;
-    border: 1px solid #aaaaaa;
+    font-size: 12px;
 }
 #bank-details table tr{
-    border-bottom: 1px solid #aaaaaa;
 }
 #bank-details table td{
-    border: 1px solid rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 5px 10px;
+}
+
+.company-signature .name{
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+
+.company-signature .signature,
+.customer-signature .signature{
+    width: auto;
+    height: 50px;
+}
+.customer-signature .name{
+    height: 20px;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 @media print {
@@ -174,10 +190,10 @@ table tr.selected{
         margin: 0 !important;
     }
     table td{
-        border: 1px solid rgba(0,0,0,.5);
+        border: 1px solid rgba(0,0,0,.3);
     }
     #bank-details table td{
-        border: 1px solid rgba(0,0,0,.5);
+        border: 1px solid rgba(0,0,0,.3);
     }
 }
 

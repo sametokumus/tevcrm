@@ -11,6 +11,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
+use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
 use App\Models\Quote;
 use App\Models\Sale;
@@ -347,6 +348,83 @@ class SaleController extends Controller
             ]);
 
             return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getProformaInvoiceDetailById($sale_id)
+    {
+        try {
+            $proforma_invoice_detail = ProformaInvoiceDetails::query()->where('sale_id', $sale_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['proforma_invoice_detail' => $proforma_invoice_detail]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addProformaInvoiceDetail(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+            ]);
+            ProformaInvoiceDetails::query()->insert([
+                'sale_id' => $request->sale_id,
+                'payment_term' => $request->payment_term,
+                'note' => $request->note
+            ]);
+
+            return response(['message' => __('Detay ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateProformaInvoiceDetail(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+            ]);
+            ProformaInvoiceDetails::query()->where('sale_id', $request->sale_id)->update([
+                'note' => $request->note,
+                'payment_term' => $request->payment_term,
+            ]);
+
+            return response(['message' => __('Detay güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateShippingPrice(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+            ]);
+            $sale = Sale::query()->where('sale_id', $request->sale_id)->first();
+            $grand_total_with_shipping = $sale->grand_total + $request->shipping_price;
+            Sale::query()->where('sale_id', $request->sale_id)->update([
+                'shipping_price' => $request->shipping_price,
+                'grand_total_with_shipping' => $grand_total_with_shipping,
+            ]);
+
+            return response(['message' => __('Detay güncelleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

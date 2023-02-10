@@ -58,12 +58,12 @@ async function changeOffer(){
     $('#note *').remove();
     $('#bank-details *').remove();
 
-    let offer_product_id = document.getElementById('select_offer').value;
-    if(offer_product_id == 0){
+    let offer_id = document.getElementById('select_offer').value;
+    if(offer_id == 0){
         $('#print-buttons').addClass('d-none');
         return false;
     }else{
-        await initOffer(offer_product_id);
+        await initOffer(offer_id);
         $('#print-buttons').removeClass('d-none');
     }
 }
@@ -73,7 +73,7 @@ async function initOfferSelect(sale_id){
     let sale = data.sale;
 
     $.each(sale.sale_offers, function (i, offer) {
-        let item = '<option value="'+ offer.offer_product_id +'">'+ offer.supplier_name +' - '+ offer.offer_id +'</option>';
+        let item = '<option value="'+ offer.offer_id +'">'+ offer.supplier_name +' - '+ offer.offer_id +'</option>';
         $('#select_offer').append(item);
     });
 
@@ -98,9 +98,8 @@ async function initContact(sale_id){
 
 }
 
-async function initOffer(offer_product_id){
-    let data = await serviceGetSaleOfferById(offer_product_id);
-    console.log(data)
+async function initOffer(offer_id){
+    let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
     let company = offer.company;
     console.log(offer);
@@ -111,21 +110,22 @@ async function initOffer(offer_product_id){
     // document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> '+ checkNull(quote.payment_term);
 
     $('#offer-detail tbody > tr').remove();
-
+    let currency = "";
     $.each(offer.products, function (i, product) {
+        currency = product.currency;
         let item = '<tr>\n' +
             '           <td>' + checkNull(product.ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.quantity) + '</td>\n' +
-            '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-            '           <td>' + checkNull(product.total_price) + '</td>\n' +
+            '           <td>' + checkNull(product.pcs_price) + ' '+ product.currency +'</td>\n' +
+            '           <td>' + checkNull(product.total_price) + ' '+ product.currency +'</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
     });
 
-    $('#sub_total td').text(checkNull(offer.sub_total));
-    $('#vat td').text(checkNull(offer.vat));
-    $('#grand_total td').text(checkNull(offer.grand_total));
+    $('#sub_total td').text(checkNull(offer.sub_total) + ' ' + currency);
+    $('#vat td').text(checkNull(offer.vat) + ' ' + currency);
+    $('#grand_total td').text(checkNull(offer.grand_total) + ' ' + currency);
 
     $('#addNoteBtn').addClass('d-none');
     $('#updateNoteBtn').addClass('d-none');
