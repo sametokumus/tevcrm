@@ -18,7 +18,7 @@
         checkLogin();
         checkRole();
 
-        let sale_id = getPathVariable('proforma-invoice-print');
+        let sale_id = getPathVariable('invoice-print');
         await initContact(sale_id);
         await initSale(sale_id);
         await initDetail(sale_id);
@@ -109,7 +109,7 @@ async function openUpdateDetailModal(){
 }
 
 async function initUpdateDetailModal(){
-    let sale_id = getPathVariable('proforma-invoice-print');
+    let sale_id = getPathVariable('invoice-print');
     let data = await serviceGetProformaInvoiceDetailById(sale_id);
     let detail = data.proforma_invoice_detail;
     console.log(detail)
@@ -121,7 +121,7 @@ async function initUpdateDetailModal(){
 }
 
 async function updateDetail(){
-    let sale_id = getPathVariable('proforma-invoice-print');
+    let sale_id = getPathVariable('invoice-print');
     let payment_term = document.getElementById('update_sale_payment_term').value;
     let note = $('#update_sale_note').summernote('code');
     let shipping_price = document.getElementById('update_sale_shipping_price').value;

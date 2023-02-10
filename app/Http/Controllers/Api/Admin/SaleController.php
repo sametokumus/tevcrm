@@ -135,9 +135,16 @@ class SaleController extends Controller
             $request->validate([
                 'sale_id' => 'required',
                 'status_id' => 'required',
+                'user_id' => 'required',
             ]);
             Sale::query()->where('sale_id', $request->sale_id)->update([
                 'status_id' => $request->status_id,
+            ]);
+
+            StatusHistory::query()->insert([
+                'sale_id' => $request->sale_id,
+                'status_id' => $request->status_id,
+                'user_id' => $request->user_id,
             ]);
 
             return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success']);

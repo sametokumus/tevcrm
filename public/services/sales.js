@@ -124,9 +124,11 @@ function openStatusModal(sale_id, status_id){
 async function updateStatus(){
     let status_id = document.getElementById('update_sale_status').value;
     let sale_id = document.getElementById('update_sale_id').value;
+    let user_id = localStorage.getItem('userId');
     let formData = JSON.stringify({
         "sale_id": sale_id,
-        "status_id": status_id
+        "status_id": status_id,
+        "user_id": user_id
     });
     let returned = await servicePostUpdateSaleStatus(formData);
     if(returned){

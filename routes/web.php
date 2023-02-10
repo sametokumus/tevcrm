@@ -38,6 +38,7 @@ Route::get('/offer-print/{offer_id}', function () { return view('offer-print'); 
 Route::get('/quote-print/{sale_id}', function () { return view('quote-print'); });
 Route::get('/purchasing-order-print/{sale_id}', function () { return view('purchasing-order-print'); });
 Route::get('/proforma-invoice-print/{sale_id}', function () { return view('proforma-invoice-print'); });
+Route::get('/invoice-print/{sale_id}', function () { return view('invoice-print'); });
 
 
 Route::get('/settings', function () { return view('settings'); });
