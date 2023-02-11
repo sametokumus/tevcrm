@@ -19,9 +19,9 @@ class NewsFeedController extends Controller
     {
         try {
             $actions = StatusHistory::query()
-                ->select(['sale_id', 'max(id) as id'])
+                ->select(DB::raw('sale_id, max(id) as id'))
                 ->groupBy('sale_id')
-                ->orderBy('id')
+                ->orderByDesc('id')
                 ->limit(5)
                 ->toSql();
 
