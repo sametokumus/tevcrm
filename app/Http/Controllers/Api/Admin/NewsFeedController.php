@@ -23,7 +23,7 @@ class NewsFeedController extends Controller
                 ->groupBy('sale_id')
                 ->orderBy('id')
                 ->limit(5)
-                ->get();
+                ->toSql();
 
 //            $sales = Sale::query()
 //                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
