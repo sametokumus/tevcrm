@@ -19,7 +19,7 @@ class NewsFeedController extends Controller
     {
         try {
             $actions = StatusHistory::query()
-                ->select(DB::raw('sale_id, max(id) as id'))
+                ->selectRaw('sale_id, max(id) as id')
                 ->groupBy('sale_id')
                 ->orderByDesc('id')
                 ->limit(5)
