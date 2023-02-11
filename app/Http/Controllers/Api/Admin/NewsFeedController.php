@@ -9,7 +9,9 @@ use App\Models\Employee;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Sale;
+use App\Models\Status;
 use App\Models\StatusHistory;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -22,23 +24,25 @@ class NewsFeedController extends Controller
                 ->selectRaw('sale_id, max(id) as id')
                 ->groupBy('sale_id')
                 ->orderByDesc('id')
-                ->limit(5)
+                ->limit(20)
                 ->get();
 
-//            $sales = Sale::query()
-//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-//                ->selectRaw('sales.*, statuses.name as status_name')
-//                ->where('sales.active',1)
-//                ->get();
-//
-//            foreach ($sales as $sale) {
-//                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
-//                $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
-//                $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-//                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-//                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
-//                $sale['request'] = $offer_request;
-//            }
+            foreach ($actions as $action){
+                $last_status = StatusHistory::query()->where('id', $action->id)->first();
+                $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
+                $admin = User::query()->where('id', $last_status->user_id)->first();
+                $last_status['user_name'] = $admin->name." ".$admin->surname;
+                $sale = Sale::query()->where('sale_id', $action->sale_id)->first();
+                $customer = Company::query()->where('id', $sale->customer_id)->first();
+                $sale['customer_name'] = $customer->name;
+                $previous_status = StatusHistory::query()->where('id', '!=' ,$action->id)->where('sale_id', $action->sale_id)->orderByDesc('id')->first();
+                $previous_status['status_name'] = Status::query()->where('id', $previous_status->status_id)->first()->name;
+
+                $action['last_status'] = $last_status;
+                $action['previous_status'] = $previous_status;
+                $action['sale'] = $sale;
+
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['actions' => $actions]]);
         } catch (QueryException $queryException) {
