@@ -1225,8 +1225,28 @@ async function servicePostUpdateShippingPrice(formData) {
     }
 }
 
+
+
 async function serviceGetSaleHistoryActions() {
     const data = await fetchDataGet('/admin/newsFeed/getSaleHistoryActions', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetTopRequestedProducts() {
+    const data = await fetchDataGet('/admin/newsFeed/getTopRequestedProducts', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetSaleStats() {
+    const data = await fetchDataGet('/admin/newsFeed/getSaleStats', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

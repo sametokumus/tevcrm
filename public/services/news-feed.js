@@ -11,6 +11,8 @@
 		checkLogin();
         checkRole();
         await initSaleHistory();
+        await initTopRequestedProducts();
+        await initSaleStats();
 
 	});
 
@@ -52,4 +54,43 @@ async function initSaleHistory(){
 
         $('#sales-history-table tbody').append(item);
     });
+}
+
+async function initTopRequestedProducts(){
+    let data = await serviceGetTopRequestedProducts();
+    let products = data.products;
+
+    $('#top-products-table tbody tr').remove();
+
+    $.each(products, function (i, product) {
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ product.product_detail.ref_code +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   '+ product.product_detail.product_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
+            '       </tr>';
+
+        $('#top-products-table tbody').append(item);
+    });
+}
+
+async function initSaleStats(){
+    let data = await serviceGetSaleStats();
+    let stats = data.stats;
+
+    $('#total-request').text(stats.total_request);
+    $('#total-sale').text(stats.total_sale);
+    $('#active-sale').text(stats.active_sale);
+    $('#total-product').text(stats.total_product);
+
+
 }

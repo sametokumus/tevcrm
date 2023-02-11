@@ -71,4 +71,20 @@ class NewsFeedController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+
+    public function getSaleStats()
+    {
+        try {
+            $stats = array();
+
+            $stats['total_request'] = Sale::query()->get()->count();
+            $stats['total_sale'] = Sale::query()->where('status_id', '>=', 7)->where('status_id', '<=', 20)->get()->count();
+            $stats['active_sale'] = Sale::query()->where('status_id', '>=', 1)->where('status_id', '<=', 17)->get()->count();
+            $stats['total_product'] = Product::query()->get()->count();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['stats' => $stats]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }

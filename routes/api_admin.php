@@ -189,6 +189,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //News Feed
     Route::get('newsFeed/getSaleHistoryActions', [NewsFeedController::class, 'getSaleHistoryActions']);
     Route::get('newsFeed/getTopRequestedProducts', [NewsFeedController::class, 'getTopRequestedProducts']);
+    Route::get('newsFeed/getSaleStats', [NewsFeedController::class, 'getSaleStats']);
 
 });
 
