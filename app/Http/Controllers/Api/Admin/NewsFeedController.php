@@ -62,7 +62,7 @@ class NewsFeedController extends Controller
                 ->get();
 
             foreach ($products as $product){
-                $product_detail = Product::query()->where('id', $product->id)->first();
+                $product_detail = Product::query()->where('id', $product->product_id)->first();
                 $product['product_detail'] = $product_detail;
             }
 
