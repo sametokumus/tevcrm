@@ -6,7 +6,7 @@ $extra_js='
 ?>
 
     <!--app-content open-->
-<div class="main-content app-content">
+<div class="main-content app-content printable">
     <div class="side-app">
 
         <!-- CONTAINER -->

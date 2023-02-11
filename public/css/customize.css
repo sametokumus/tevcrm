@@ -176,19 +176,19 @@ table tr.selected{
 .p-md-50{
     padding: 50px !important;
 }
-.print-color * {
+.printable .print-color * {
     color: #000 !important;
 }
-#note *{
+.printable #note *{
     font-size: 12px;
 }
-table{
+.printable table{
     margin: 0 !important;
 }
-table td{
+.printable table td{
     border: 1px solid rgba(0,0,0,.3);
 }
-#bank-details table td{
+.printable #bank-details table td{
     border: 1px solid rgba(0,0,0,.3);
 }
 

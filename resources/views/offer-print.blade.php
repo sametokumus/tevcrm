@@ -10,7 +10,7 @@ $extra_js='
     <div class="side-app">
 
         <!-- CONTAINER -->
-        <div class="main-container container-fluid">
+        <div class="main-container container-fluid printable">
 
             <div class="row justify-content-center">
                 <div class="col-md-7">
