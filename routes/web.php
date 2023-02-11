@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () { return view('login'); });
 Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
+Route::get('/news-feed', function () { return view('news-feed'); });
 Route::get('/admins', function () { return view('admins'); });
 Route::get('/roles', function () { return view('roles'); });
 Route::get('/potential-customers', function () { return view('potential-customers'); });

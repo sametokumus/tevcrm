@@ -267,13 +267,13 @@ $extra_js="";
             <div class="menu">
                 <div class="menu-header">Haber Kaynağı</div>
                 <div class="menu-item active">
-                    <a href="/" class="menu-link">
+                    <a href="/dashboard" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-cpu"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="/" class="menu-link">
+                    <a href="/news-feed" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-columns-gap"></i></span>
                         <span class="menu-text">Haber Kaynağı</span>
                     </a>

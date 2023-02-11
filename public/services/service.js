@@ -1224,3 +1224,12 @@ async function servicePostUpdateShippingPrice(formData) {
         return false;
     }
 }
+
+async function serviceGetSaleHistoryActions() {
+    const data = await fetchDataGet('/admin/newsFeed/getSaleHistoryActions', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

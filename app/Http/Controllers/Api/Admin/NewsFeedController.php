@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Status;
 use App\Models\StatusHistory;
@@ -45,6 +46,27 @@ class NewsFeedController extends Controller
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['actions' => $actions]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getTopRequestedProducts()
+    {
+        try {
+            $products = OfferRequestProduct::query()
+                ->selectRaw('product_id, sum(quantity) as total_quantity')
+                ->groupBy('product_id')
+                ->orderByDesc('total_quantity')
+                ->limit(20)
+                ->get();
+
+            foreach ($products as $product){
+                $product_detail = Product::query()->where('id', $product->id)->first();
+                $product['product_detail'] = $product_detail;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
