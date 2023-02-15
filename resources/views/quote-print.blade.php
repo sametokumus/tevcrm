@@ -13,7 +13,7 @@ $extra_js='
         <div class="main-container container-fluid">
 
             <div class="row justify-content-center">
-                <div class="col-md-7">
+                <div class="col-md-7 bg-white p-md-50">
 
                     <div class="wrapper">
                         <!-- Main content -->
