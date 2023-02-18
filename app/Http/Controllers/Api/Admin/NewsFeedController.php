@@ -37,7 +37,11 @@ class NewsFeedController extends Controller
                 $customer = Company::query()->where('id', $sale->customer_id)->first();
                 $sale['customer_name'] = $customer->name;
                 $previous_status = StatusHistory::query()->where('id', '!=' ,$action->id)->where('sale_id', $action->sale_id)->orderByDesc('id')->first();
-                $previous_status['status_name'] = Status::query()->where('id', $previous_status->status_id)->first()->name;
+                if (!empty($previous_status)) {
+                    $previous_status['status_name'] = Status::query()->where('id', $previous_status->status_id)->first()->name;
+                }else{
+                    $previous_status['status_name'] = "-";
+                }
 
                 $action['last_status'] = $last_status;
                 $action['previous_status'] = $previous_status;
