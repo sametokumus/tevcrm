@@ -236,3 +236,15 @@ table tr.selected{
     font-size: 12px;
     border-radius: 2px;
 }
+
+#sales-datatable {
+    white-space: nowrap;
+}
+@media only screen and (max-width: 1500px) {
+    #sales-datatable {
+        white-space: normal;
+    }
+    #sales-datatable .btn {
+        margin-bottom: 5px;
+    }
+}

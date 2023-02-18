@@ -265,21 +265,27 @@ $extra_js="";
         <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
 
             <div class="menu">
+                @if( Request::segment(1) != 'dashboard' )
+                <div class="p-3 d-flex align-items-center">
+                    <a href="javascript:window.history.back();" class="btn btn-outline-default text-nowrap px-3 rounded-pill"><i class="fa fa-arrow-left me-1 ms-n1"></i> Önceki Sayfa</a>
+                </div>
+                @endif
+
                 <div class="menu-header">Haber Kaynağı</div>
-                <div class="menu-item active">
+                <div class="menu-item @if( Request::segment(1)== 'dashboard' ) active @endif">
                     <a href="/dashboard" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-cpu"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'news-feed' ) active @endif">
                     <a href="/news-feed" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-columns-gap"></i></span>
                         <span class="menu-text">Haber Kaynağı</span>
                     </a>
                 </div>
                 <div class="menu-header">Satış Yönetimi</div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'sales' ) active @endif">
                     <a href="/sales" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Satışlar</span>
@@ -304,19 +310,19 @@ $extra_js="";
 {{--                    </a>--}}
 {{--                </div>--}}
                 <div class="menu-header">Firma Yönetimi</div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'customers' ) active @endif">
                     <a href="/customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Müşteriler</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'suppliers' ) active @endif">
                     <a href="/suppliers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Tedarikçiler</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'potential-customers' ) active @endif">
                     <a href="/potential-customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Potansiyel Müşteriler</span>
@@ -597,7 +603,7 @@ $extra_js="";
 
 
                 <div class="menu-header">S-CRM</div>
-                <div class="menu-item">
+                <div class="menu-item @if( Request::segment(1)== 'settings' ) active @endif">
                     <a href="/settings" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Ayarlar</span>

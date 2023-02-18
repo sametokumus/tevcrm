@@ -42,11 +42,11 @@ async function initSales(){
         if (sale.status_id == 1){
             status_class = "border-danger text-danger";
             btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Tedarikçi Teklifi Oluştur</span></a>\n';
+                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> RFQ Oluştur</span></a>\n';
         }else if (sale.status_id == 2){
             status_class = "border-warning text-warning";
             btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Tedarikçi Tekliflerini Güncelle</span></a>\n';
+                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> RFQ Güncelle</span></a>\n';
         }else if (sale.status_id == 3){
             status_class = "border-primary text-primary";
             btn_list += '<a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-primary"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n';
@@ -70,7 +70,7 @@ async function initSales(){
         }
 
         btn_list += '</div>';
-        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';
+        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';
 
         let saleItem = '<tr>\n' +
 			'              <td>'+ sale.id +'</td>\n' +

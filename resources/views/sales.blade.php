@@ -20,7 +20,7 @@ $extra_js='
                 </div>
             </div>
 
-            <table id="sales-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+            <table id="sales-datatable" class="table table-bordered key-buttons border-bottom">
                 <thead>
                 <tr>
                     <th class="border-bottom-0" data-priority="1">ID</th>

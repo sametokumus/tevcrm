@@ -16,6 +16,8 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('period')->nullable();
+            $table->string('action')->nullable();
             $table->tinyInteger('sequence')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

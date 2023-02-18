@@ -15,7 +15,7 @@ class StatusController extends Controller
     public function getStatuses()
     {
         try {
-            $statuses = Status::query()->where('active',1)->get();
+            $statuses = Status::query()->where('active',1)->orderBy('sequence')->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['statuses' => $statuses]]);
         } catch (QueryException $queryException) {

@@ -179,7 +179,7 @@ async function initOffers(){
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
-            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Order Request PDF</span></a>\n' +
+            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';

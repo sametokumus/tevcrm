@@ -54,7 +54,7 @@ $extra_js='
                         </div>
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
-                                <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                <table id="offer-request-products" class="table table-bordered key-buttons border-bottom">
                                     <thead>
                                     <tr>
                                         <th class="border-bottom-0">Ref. Code</th>
@@ -91,13 +91,13 @@ $extra_js='
                                             </select>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label">Firma</label>
+                                            <label class="form-label">Müşteri</label>
                                             <select class="form-control" id="update_offer_request_company" onchange="initEmployeeSelect();">
 
                                             </select>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label">Firma Yetkilisi</label>
+                                            <label class="form-label">Müşteri Yetkilisi</label>
                                             <select class="form-control" id="update_offer_request_company_employee">
 
                                             </select>

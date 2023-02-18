@@ -53,7 +53,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Teklifler
+                        RFQ's
                     </h1>
                 </div>
             </div>

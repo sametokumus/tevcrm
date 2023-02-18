@@ -4,7 +4,23 @@
 	$(document).ready(function() {
         $('#add_company_form').submit(function (e){
             e.preventDefault();
-            addCompany();
+            let isPotential = false;
+            let isCustomer = false;
+            let isSupplier = false;
+            if(document.getElementById('add_company_is_potential_customer').checked){
+                isPotential = true;
+            }
+            if(document.getElementById('add_company_is_customer').checked){
+                isCustomer = true;
+            }
+            if(document.getElementById('add_company_is_supplier').checked){
+                isSupplier = true;
+            }
+            if (isPotential || isCustomer || isSupplier) {
+                addCompany();
+            }else{
+                alert('Firma türü seçimi zorunludur.')
+            }
         });
 
         $('#add_company_is_potential_customer').click(function (e){

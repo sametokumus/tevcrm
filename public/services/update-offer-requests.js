@@ -113,9 +113,14 @@ async function initOfferRequest(){
     }
 
     $.each(offer_request.products, function (i, product) {
+        let product_name = product.product_name;
+        if (product_name.length > 30){
+            // product_name = product_name.substring(0, 30) + "...";
+        }
+
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + product.ref_code + '</td>\n' +
-            '           <td>' + product.product_name + '</td>\n' +
+            '           <td>' + product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
