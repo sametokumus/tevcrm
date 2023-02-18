@@ -16,6 +16,7 @@ use App\Models\PurchasingOrderDetails;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\Status;
 use App\Models\StatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
@@ -41,6 +42,32 @@ class SaleController extends Controller
                 $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
                 $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
                 $sale['request'] = $offer_request;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getActiveSales()
+    {
+        try {
+            $sales = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('statuses.period','continue')
+                ->get();
+
+            foreach ($sales as $sale) {
+                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+                $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+                $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+                $sale['request'] = $offer_request;
+                $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
