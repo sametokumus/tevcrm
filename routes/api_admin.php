@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Admin\SaleController;
 use App\Http\Controllers\Api\Admin\StatusController;
 use App\Http\Controllers\Api\Admin\OwnerController;
 use App\Http\Controllers\Api\Admin\NewsFeedController;
+use App\Http\Controllers\Api\Admin\MeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,6 +186,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Status
     Route::get('status/getStatuses', [StatusController::class, 'getStatuses']);
+
+    //Measurement
+    Route::get('measurement/getMeasurements', [MeasurementController::class, 'getMeasurements']);
 
 
     //News Feed

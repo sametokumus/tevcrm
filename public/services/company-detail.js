@@ -535,9 +535,8 @@ async function updateActivity(){
     let user_id = localStorage.getItem('userId');
     let activity_id = document.getElementById('update_activity_id').value;
 
-    let start = document.getElementById('update_activity_start_date').value + " " + document.getElementById('update_activity_start_time').value + ":00";
-    let end = document.getElementById('update_activity_end_date').value + " " + document.getElementById('update_activity_end_time').value + ":00";
-
+    let start = formatDateDESC(document.getElementById('update_activity_start_date').value, "-", "-") + " " + document.getElementById('update_activity_start_time').value + ":00";
+    let end = formatDateDESC(document.getElementById('update_activity_end_date').value, "-", "-")  + " " + document.getElementById('update_activity_end_time').value + ":00";
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
         "type_id": document.getElementById('update_activity_type_id').value,
@@ -545,8 +544,8 @@ async function updateActivity(){
         "description": document.getElementById('update_activity_description').value,
         "company_id": company_id,
         "employee_id": document.getElementById('update_activity_employee_id').value,
-        "start": formatDateAndTime(start, "-"),
-        "end": formatDateAndTime(end, "-")
+        "start": start,
+        "end": end
     });
     let returned = await servicePostUpdateActivity(formData, activity_id);
     if (returned){

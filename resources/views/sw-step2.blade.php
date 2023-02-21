@@ -16,21 +16,21 @@ $extra_js='
                 <div class="col-md-12">
                     <nav class="nav nav-wizards-3 mb-2">
                         <div class="nav-item col">
-                            <a class="nav-link completed" href="/sw-1">
+                            <a class="nav-link completed">
                                 <div class="nav-dot"></div>
                                 <div class="nav-title">Adım 1</div>
                                 <div class="nav-text">Firma / İstek Seçimi</div>
                             </a>
                         </div>
                         <div class="nav-item col">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active">
                                 <div class="nav-dot"></div>
                                 <div class="nav-title">Adım 2</div>
                                 <div class="nav-text">Teklif Oluşturma</div>
                             </a>
                         </div>
                         <div class="nav-item col">
-                            <a class="nav-link disabled" href="#">
+                            <a class="nav-link disabled">
                                 <div class="nav-dot"></div>
                                 <div class="nav-title">Adım 3</div>
                                 <div class="nav-text">Fiyat Güncelleme</div>

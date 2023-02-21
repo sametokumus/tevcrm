@@ -4,7 +4,7 @@
     $(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_sale_shipping_price").maskMoney({thousands:''});
+        $("#update_sale_shipping_price").maskMoney({thousands:'.', decimal:','});
 
         $('#update_detail_form').submit(function (e){
             e.preventDefault();
@@ -74,8 +74,8 @@ async function initSale(sale_id){
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.offer_quantity) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_pcs_price) + ' '+ product.currency +'</td>\n' +
-            '           <td>' + checkNull(product.offer_price) + ' '+ product.currency +'</td>\n' +
+            '           <td>' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ product.currency +'</td>\n' +
+            '           <td>' + changeCommasToDecimal(product.offer_price) + ' '+ product.currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });

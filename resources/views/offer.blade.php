@@ -53,7 +53,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        RFQ's
+                        Quotation Request's
                     </h1>
                 </div>
             </div>
@@ -69,7 +69,7 @@ $extra_js='
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0">Teklif Kodu</th>
                                     <th class="border-bottom-0">Tedarikçi Firma</th>
-                                    <th class="border-bottom-0">Ürün Adeti</th>
+                                    <th class="border-bottom-0">Teklife Eklenen Ürün</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
@@ -98,7 +98,7 @@ $extra_js='
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">TEKLİF FİRMA SEÇİMİ</h5>
+                <h5 class="modal-title">TEKLİF ALMAK İÇİN FİRMA SEÇİMİ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="post" action="#" id="add_offer_form">
@@ -290,7 +290,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="update_offer_product_currency">
+                            <select class="form-control" id="update_offer_product_currency" required>
                                 <option value="TRY">TRY</option>
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>

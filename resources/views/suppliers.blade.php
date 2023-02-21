@@ -25,7 +25,7 @@ $extra_js='
                 </div>
             </div>
 
-            <div class="row" id="company-grid">
+            <div class="row " id="company-grid">
             </div>
 
         </div>

@@ -4,12 +4,12 @@
 	$(document).ready(function() {
 
         $(":input").inputmask();
-        $("#add_offer_product_pcs_price").maskMoney({thousands:''});
-        $("#add_offer_product_total_price").maskMoney({thousands:''});
-        $("#add_offer_product_discounted_price").maskMoney({thousands:''});
-        $("#update_offer_product_pcs_price").maskMoney({thousands:''});
-        $("#update_offer_product_total_price").maskMoney({thousands:''});
-        $("#update_offer_product_discounted_price").maskMoney({thousands:''});
+        $("#add_offer_product_pcs_price").maskMoney({thousands:'.', decimal:','});
+        $("#add_offer_product_total_price").maskMoney({thousands:'.', decimal:','});
+        $("#add_offer_product_discounted_price").maskMoney({thousands:'.', decimal:','});
+        $("#update_offer_product_pcs_price").maskMoney({thousands:'.', decimal:','});
+        $("#update_offer_product_total_price").maskMoney({thousands:'.', decimal:','});
+        $("#update_offer_product_discounted_price").maskMoney({thousands:'.', decimal:','});
 
 		$('#add_offer_form').submit(function (e){
 			e.preventDefault();
@@ -98,7 +98,7 @@ async function initOfferRequest(){
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Seçili Ürünler ile Teklif Oluştur',
+                text: 'Seçili Ürünler için Teklif İste',
                 action: function ( e, dt, node, config ) {
                     openAddOfferModal(productDatatable.rows( { selected: true } ));
                 }
@@ -179,7 +179,7 @@ async function initOffers(){
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Detayı</span></button>\n' +
-            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
+            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Quotation Request PDF</span></a>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';

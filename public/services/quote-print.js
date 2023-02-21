@@ -4,8 +4,8 @@
 	$(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_quote_freight").maskMoney({thousands:''});
-        $("#update_quote_vat_rate").maskMoney({thousands:''});
+        $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_vat_rate").maskMoney({thousands:'.', decimal:','});
 
 		$('#update_quote_form').submit(function (e){
 			e.preventDefault();
@@ -63,10 +63,10 @@ async function initSale(sale_id){
     document.getElementById('buyer_name').innerHTML = '<b>Buyer :</b> '+ company.name;
     document.getElementById('buyer_address').innerHTML = '<b>Address :</b> '+ company.address;
 
-    $('#sub_total td').text(checkNull(sale.sub_total));
-    $('#freight td').text(checkNull(sale.freight));
-    $('#vat td').text(checkNull(sale.vat));
-    $('#grand_total td').text(checkNull(sale.grand_total));
+    $('#sub_total td').text(changeCommasToDecimal(sale.sub_total));
+    $('#freight td').text(changeCommasToDecimal(sale.freight));
+    $('#vat td').text(changeCommasToDecimal(sale.vat));
+    $('#grand_total td').text(changeCommasToDecimal(sale.grand_total));
 
 
     $('#sale-detail tbody > tr').remove();
@@ -76,8 +76,8 @@ async function initSale(sale_id){
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.offer_quantity) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_pcs_price) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_price) + '</td>\n' +
+            '           <td>' + changeCommasToDecimal(product.offer_pcs_price) + '</td>\n' +
+            '           <td>' + changeCommasToDecimal(product.offer_price) + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
@@ -132,7 +132,7 @@ async function updateQuote(){
         "lead_time": lead_time,
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
-        "freight": freight,
+        "freight": changePriceToDecimal(freight),
         "note": note
     });
 

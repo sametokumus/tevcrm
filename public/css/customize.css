@@ -248,3 +248,7 @@ table tr.selected{
         margin-bottom: 5px;
     }
 }
+
+#company-grid .grid-item{
+    display: inline-grid;
+}

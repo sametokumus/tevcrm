@@ -4,7 +4,7 @@
     $(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_sale_shipping_price").maskMoney({thousands:''});
+        $("#update_sale_shipping_price").maskMoney({thousands:'.', decimal:','});
 
         $('#update_detail_form').submit(function (e){
             e.preventDefault();

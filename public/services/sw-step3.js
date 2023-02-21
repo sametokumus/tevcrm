@@ -2,8 +2,8 @@
     "use strict";
 
     $(":input").inputmask();
-    $("#add_offer_price_price").maskMoney({thousands:''});
-    $("#update_offer_price_price").maskMoney({thousands:''});
+    $("#add_offer_price_price").maskMoney({thousands:'.', decimal:','});
+    $("#update_offer_price_price").maskMoney({thousands:'.', decimal:','});
 
 	$(document).ready(function() {
 
@@ -65,13 +65,13 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(offer.package_type) + '</td>\n' +
                 '           <td>' + checkNull(offer.request_quantity) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
-                '           <td>' + checkNull(offer.pcs_price) + '</td>\n' +
-                '           <td>' + checkNull(offer.total_price) + '</td>\n' +
+                '           <td>' + changeCommasToDecimal(offer.pcs_price) + '</td>\n' +
+                '           <td>' + changeCommasToDecimal(offer.total_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
-                '           <td>' + checkNull(offer.discounted_price) + '</td>\n' +
+                '           <td>' + changeCommasToDecimal(offer.discounted_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.vat_rate) + '</td>\n' +
                 '           <td>' + checkNull(offer.currency) + '</td>\n' +
-                '           <td>' + checkNull(offer.offer_price) + '</td>\n' +
+                '           <td>' + changeCommasToDecimal(offer.offer_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_currency) + '</td>\n' +
                 '           <td>\n' +
                 '               <div class="btn-list">\n' +
@@ -136,7 +136,7 @@ async function addSaleOfferPrice(){
         "sale_id": sale_id,
         "offer_id": offer_id,
         "offer_product_id": offer_product_id,
-        "price": price,
+        "price": changePriceToDecimal(price),
         "currency": currency
     });
 

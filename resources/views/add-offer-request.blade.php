@@ -89,13 +89,13 @@ $extra_js='
                                         </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label">Firma</label>
+                                        <label class="form-label">Müşteri</label>
                                         <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
 
                                         </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label">Firma Yetkilisi</label>
+                                        <label class="form-label">Müşteri Yetkilisi</label>
                                         <select class="form-control" id="add_offer_request_company_employee">
 
                                         </select>

@@ -4,8 +4,8 @@
 	$(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_quote_freight").maskMoney({thousands:''});
-        $("#update_quote_vat_rate").maskMoney({thousands:''});
+        $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_vat_rate").maskMoney({thousands:'.', decimal:','});
 
 		$('#update_quote_form').submit(function (e){
 			e.preventDefault();

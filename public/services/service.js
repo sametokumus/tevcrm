@@ -292,11 +292,15 @@ function changePriceToDecimal(price){
 	return price;
 }
 function changeCommasToDecimal(price) {
-	var parts = price.toString().split(".");
-	const numberPart = parts[0];
-	const decimalPart = parts[1];
-	const thousands = /\B(?=(\d{3})+(?!\d))/g;
-	return numberPart.replace(thousands, ".") + (decimalPart ? "," + decimalPart : "");
+    if (price == null){
+       return "";
+    }else {
+        var parts = price.toString().split(".");
+        const numberPart = parts[0];
+        const decimalPart = parts[1];
+        const thousands = /\B(?=(\d{3})+(?!\d))/g;
+        return numberPart.replace(thousands, ".") + (decimalPart ? "," + decimalPart : "");
+    }
 }
 function changeDecimalToCommas(price) {
 	var parts = price.toString().split(",");
@@ -1005,6 +1009,15 @@ async function serviceGetContactById(id) {
 
 async function serviceGetSales() {
     const data = await fetchDataGet('/admin/sale/getSales', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetActiveSales() {
+    const data = await fetchDataGet('/admin/sale/getActiveSales', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
