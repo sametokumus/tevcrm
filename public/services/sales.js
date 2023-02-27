@@ -7,6 +7,10 @@
 			e.preventDefault();
             updateStatus();
 		});
+		$('#add_cancel_note_form').submit(function (e){
+			e.preventDefault();
+            addCancelNote();
+		});
 	});
 
 	$(window).load( function() {
@@ -67,35 +71,6 @@ async function initSales(){
             btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Proforma INV. PDF</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">INV. PDF</a>\n';
         }
-        // if (sale.status_id == 1){
-        //     status_class = "border-danger text-danger";
-        //     btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-        //         '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger"><span class="fe fe-edit"> RFQ Oluştur</span></a>\n';
-        // }else if (sale.status_id == 2){
-        //     status_class = "border-warning text-warning";
-        //     btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-pink"><span class="fe fe-edit"> Talebi Güncelle</span></a>\n' +
-        //         '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink"><span class="fe fe-edit"> RFQ Güncelle</span></a>\n';
-        // }else if (sale.status_id == 3){
-        //     status_class = "border-primary text-primary";
-        //     btn_list += '<a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n';
-        // }else if (sale.status_id == 4){
-        //     status_class = "border-yellow text-yellow";
-        //     btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow"><span class="fe fe-edit"> Fiyatları Güncelle</span></a>\n';
-        // }else if (sale.status_id == 5){
-        //     status_class = "border-success text-success";
-        //     btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Satış Detayı</span></a>\n';
-        // }else{
-        //     btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Satış Detayı</span></a>\n';
-        // }
-        //
-        // if (sale.status_id >= 5 && sale.status_id <= 6){
-        //     btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Quatotion PDF</span></a>\n';
-        // }else if (sale.status_id >= 6 && sale.status_id <= 12){
-        //     btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Purchasing Order PDF</span></a>\n';
-        //     btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Proforma Invoice PDF</span></a>\n';
-        // }else if (sale.status_id >= 13 && sale.status_id <= 20){
-        //     btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-success"><span class="fe fe-edit"> Invoice PDF</span></a>\n';
-        // }
 
         btn_list += '</div>';
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';
@@ -167,11 +142,18 @@ async function updateStatus(){
         "status_id": status_id,
         "user_id": user_id
     });
-    let returned = await servicePostUpdateSaleStatus(formData);
-    if(returned){
-        $("#update_status_form").trigger("reset");
-        $('#updateStatusModal').modal('hide');
-        initSales();
+    let data = await servicePostUpdateSaleStatus(formData);
+    if(data.status == "success"){
+        if (data.object.period == "cancelled"){
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            $('#addCancelNoteModal').modal('show');
+            document.getElementById('cancel_sale_id').value = sale_id;
+        }else {
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            initSales();
+        }
     }
 }
 async function initStatusModal(sale_id, status_id){
@@ -185,4 +167,20 @@ async function initStatusModal(sale_id, status_id){
         $('#update_sale_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
     });
     document.getElementById('update_sale_id').value = sale_id;
+}
+async function addCancelNote(){
+    let sale_id = document.getElementById('cancel_sale_id').value;
+    let user_id = localStorage.getItem('userId');
+    let note = tinymce.get('cancel_sale_note').getContent();
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "user_id": user_id,
+        "note": note
+    });
+    let returned = await servicePostAddCancelSaleNote(formData);
+    if(returned){
+        $("#add_cancel_note_form").trigger("reset");
+        $('#addCancelNoteModal').modal('hide');
+        initSales();
+    }
 }

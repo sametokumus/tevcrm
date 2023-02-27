@@ -65,22 +65,22 @@ $extra_js='
                         <input type="text" class="form-control" id="add_company_email" placeholder="Eposta" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" id="add_company_website" placeholder="Website" required>
+                        <input type="text" class="form-control" id="add_company_website" placeholder="Website">
                     </div>
                     <div class="col-md-6 mb-3">
                         <input type="text" class="form-control" id="add_company_phone" placeholder="Telefon" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" id="add_company_fax" placeholder="Faks" required>
+                        <input type="text" class="form-control" id="add_company_fax" placeholder="Faks">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <input type="text" class="form-control" id="add_company_address" placeholder="Adres" required>
+                        <input type="text" class="form-control" id="add_company_address" placeholder="Adres">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" id="add_company_tax_office" placeholder="Vergi Dairesi" required>
+                        <input type="text" class="form-control" id="add_company_tax_office" placeholder="Vergi Dairesi">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" id="add_company_tax_number" placeholder="Vergi Numarası" required>
+                        <input type="text" class="form-control" id="add_company_tax_number" placeholder="Vergi Numarası">
                     </div>
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Logo</label>

@@ -1080,6 +1080,17 @@ async function servicePostUpdateSaleStatus(formData) {
     const data = await fetchDataPost('/admin/sale/updateSaleStatus', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostAddCancelSaleNote(formData) {
+    const data = await fetchDataPost('/admin/sale/addCancelSaleNote', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
         return true;
     } else {
         showAlert('İstek Başarısız.');

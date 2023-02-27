@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\CancelNote;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Offer;
@@ -173,8 +174,34 @@ class SaleController extends Controller
                 'status_id' => $request->status_id,
                 'user_id' => $request->user_id,
             ]);
+            $status = Status::query()->where('id', $request->status_id)->first();
 
-            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['period' => $status->period]]);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function addCancelSaleNote(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'user_id' => 'required',
+                'note' => 'required',
+            ]);
+
+            CancelNote::query()->insert([
+                'sale_id' => $request->sale_id,
+                'user_id' => $request->user_id,
+                'note' => $request->note,
+            ]);
+
+            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

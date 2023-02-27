@@ -74,4 +74,29 @@ $extra_js='
     </div>
 </div>
 
+<div class="modal modal-cover fade" id="addCancelNoteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">İPTAL SEBEBİ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_cancel_note_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Açıklama :</label>
+                        <div class="col-md-9">
+                            <input type="hidden" class="form-control" id="cancel_sale_id" required>
+                            <textarea class="tinyMce" id="cancel_sale_note"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @include('include.footer')
