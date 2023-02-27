@@ -162,6 +162,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getQuoteBySaleId/{sale_id}', [SaleController::class, 'getQuoteBySaleId']);
     Route::post('sale/updateQuote', [SaleController::class, 'updateQuote']);
     Route::post('sale/updateShippingPrice', [SaleController::class, 'updateShippingPrice']);
+    Route::post('sale/addCancelSaleNote', [SaleController::class, 'addCancelSaleNote']);
 
     //Owner
     Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);

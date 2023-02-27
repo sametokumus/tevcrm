@@ -171,7 +171,7 @@ async function initStatusModal(sale_id, status_id){
 async function addCancelNote(){
     let sale_id = document.getElementById('cancel_sale_id').value;
     let user_id = localStorage.getItem('userId');
-    let note = tinymce.get('cancel_sale_note').getContent();
+    let note = document.getElementById('cancel_sale_note').value;
     let formData = JSON.stringify({
         "sale_id": sale_id,
         "user_id": user_id,

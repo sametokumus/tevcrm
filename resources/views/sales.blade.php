@@ -87,7 +87,7 @@ $extra_js='
                         <label class="col-md-3 form-label">Açıklama :</label>
                         <div class="col-md-9">
                             <input type="hidden" class="form-control" id="cancel_sale_id" required>
-                            <textarea class="tinyMce" id="cancel_sale_note"></textarea>
+                            <textarea class="form-control" rows="3" id="cancel_sale_note" placeholder="Not" required=""></textarea>
                         </div>
                     </div>
                 </div>
