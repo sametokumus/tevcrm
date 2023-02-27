@@ -24,6 +24,9 @@ class CreateCompaniesTable extends Migration
             $table->string('address')->nullable();
             $table->string('tax_office')->nullable();
             $table->string('tax_number')->nullable();
+            $table->text('linkedin')->nullable();
+            $table->text('skype')->nullable();
+            $table->text('online')->nullable();
             $table->tinyInteger('is_potential_customer')->default(0);
             $table->tinyInteger('is_customer')->default(0);
             $table->tinyInteger('is_supplier')->default(0);

@@ -160,6 +160,9 @@ async function updateCompany(){
     formData.append('is_potential_customer', isPotential);
     formData.append('is_customer', isCustomer);
     formData.append('is_supplier', isSupplier);
+    formData.append('linkedin', document.getElementById('update_company_linkedin').value);
+    formData.append('skype', document.getElementById('update_company_skype').value);
+    formData.append('online', document.getElementById('update_company_online').value);
     formData.append('logo', document.getElementById('update_company_logo').files[0]);
     for (var pair of formData.entries()) {
         console.log(pair[0]+ ', ' + pair[1]);

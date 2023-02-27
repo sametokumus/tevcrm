@@ -60,7 +60,7 @@ $(".timepicker").timepicker({
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Website</label>
-                                        <input type="text" class="form-control" id="update_company_website" placeholder="Website" required>
+                                        <input type="text" class="form-control" id="update_company_website" placeholder="Website">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Telefon</label>
@@ -68,19 +68,31 @@ $(".timepicker").timepicker({
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Faks</label>
-                                        <input type="text" class="form-control" id="update_company_fax" placeholder="Faks" required>
+                                        <input type="text" class="form-control" id="update_company_fax" placeholder="Faks">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Adres</label>
-                                        <input type="text" class="form-control" id="update_company_address" placeholder="Adres" required>
+                                        <input type="text" class="form-control" id="update_company_address" placeholder="Adres">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Vergi Dairesi</label>
-                                        <input type="text" class="form-control" id="update_company_tax_office" placeholder="Vergi Dairesi" required>
+                                        <input type="text" class="form-control" id="update_company_tax_office" placeholder="Vergi Dairesi">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Vergi Numarası</label>
-                                        <input type="text" class="form-control" id="update_company_tax_number" placeholder="Vergi Numarası" required>
+                                        <input type="text" class="form-control" id="update_company_tax_number" placeholder="Vergi Numarası">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">LinkedIn</label>
+                                        <input type="text" class="form-control" id="update_company_linkedin" placeholder="LinkedIn">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Skype</label>
+                                        <input type="text" class="form-control" id="update_company_skype" placeholder="Skype">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Diğer</label>
+                                        <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Logo <a href="#" id="update_company_current_logo" target="_blank">'yu görüntülemek için tıklayınız...</a></label>

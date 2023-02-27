@@ -72,7 +72,6 @@ class CompanyController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'phone' => 'required',
-                'address' => 'required',
             ]);
             $company_id = Company::query()->insertGetId([
                 'name' => $request->name,
@@ -85,7 +84,10 @@ class CompanyController extends Controller
                 'tax_number' => $request->tax_number,
                 'is_potential_customer' => $request->is_potential_customer,
                 'is_customer' => $request->is_customer,
-                'is_supplier' => $request->is_supplier
+                'is_supplier' => $request->is_supplier,
+                'linkedin' => $request->linkedin,
+                'skype' => $request->skype,
+                'online' => $request->online
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
@@ -114,7 +116,6 @@ class CompanyController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'phone' => 'required',
-                'address' => 'required',
             ]);
             Company::query()->where('id', $company_id)->update([
                 'name' => $request->name,
@@ -127,7 +128,10 @@ class CompanyController extends Controller
                 'tax_number' => $request->tax_number,
                 'is_potential_customer' => $request->is_potential_customer,
                 'is_customer' => $request->is_customer,
-                'is_supplier' => $request->is_supplier
+                'is_supplier' => $request->is_supplier,
+                'linkedin' => $request->linkedin,
+                'skype' => $request->skype,
+                'online' => $request->online
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
