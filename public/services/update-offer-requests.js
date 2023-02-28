@@ -13,11 +13,12 @@
             let refcode = document.getElementById('add_offer_request_product_refcode').value;
             let product_name = document.getElementById('add_offer_request_product_name').value;
             let quantity = document.getElementById('add_offer_request_product_quantity').value;
+            let measurement = document.getElementById('add_offer_request_product_measurement').value;
             if (refcode == '' || product_name == '' || quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            addProductToTable(refcode, product_name, quantity);
+            addProductToTable(refcode, product_name, quantity, measurement);
         });
 	});
 
@@ -39,6 +40,7 @@ function checkRole(){
 async function initPage(){
     await getAdminsAddSelectId('update_offer_request_authorized_personnel');
     await getCompaniesAddSelectId('update_offer_request_company');
+    await getMeasurementsAddSelectId('add_offer_request_product_measurement');
 }
 
 async function initEmployeeSelect(){
@@ -46,13 +48,14 @@ async function initEmployeeSelect(){
     await getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
 }
 
-async function addProductToTable(refcode, product_name, quantity){
+async function addProductToTable(refcode, product_name, quantity, measurement){
 
     let request_id = getPathVariable('offer-request');
     let formData = JSON.stringify({
         "ref_code": refcode,
         "product_name": product_name,
-        "quantity": quantity
+        "quantity": quantity,
+        "measurement": measurement
     });
 
     console.log(formData);
@@ -68,6 +71,7 @@ async function addProductToTable(refcode, product_name, quantity){
             '           <td>'+ refcode +'</td>\n' +
             '           <td>'+ product_name +'</td>\n' +
             '           <td>'+ quantity +'</td>\n' +
+            '           <td>'+ measurement +'</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ product_id +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -78,6 +82,7 @@ async function addProductToTable(refcode, product_name, quantity){
         document.getElementById('add_offer_request_product_refcode').value = "";
         document.getElementById('add_offer_request_product_name').value = "";
         document.getElementById('add_offer_request_product_quantity').value = "0";
+        document.getElementById('add_offer_request_product_measurement').value = "adet";
 
     }else{
         alert("Hata Oluştu");
@@ -122,6 +127,7 @@ async function initOfferRequest(){
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
+            '           <td>' + product.measurement_name + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +

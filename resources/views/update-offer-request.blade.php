@@ -40,6 +40,12 @@ $extra_js='
                                         <input type="number" class="form-control" id="add_offer_request_product_quantity" value="0">
                                     </div>
                                     <div class="col-md-2 mb-3">
+                                        <label class="form-label">Birim</label>
+                                        <select class="form-control" id="add_offer_request_product_measurement">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-outline-theme w-100" id="add_offer_request_product_button">Ekle</button>
                                     </div>
@@ -59,7 +65,8 @@ $extra_js='
                                     <tr>
                                         <th class="border-bottom-0">Ref. Code</th>
                                         <th class="border-bottom-0">Ürün Adı</th>
-                                        <th class="border-bottom-0">Adet</th>
+                                        <th class="border-bottom-0">Miktar</th>
+                                        <th class="border-bottom-0">Birim</th>
                                         <th class="border-bottom-0"></th>
                                     </tr>
                                     </thead>

@@ -156,10 +156,13 @@ class OfferRequestController extends Controller
                         'product_name' => $request->product_name,
                     ]);
                 }
+
+                $measurement = Measurement::query()->where('name', $request->measurement)->where('active', 1)->first();
                 $rp_id = OfferRequestProduct::query()->insertGetId([
                     'request_id' => $request_id,
                     'product_id' => $product_id,
-                    'quantity' => $request->quantity
+                    'quantity' => $request->quantity,
+                    'measurement_id' => $measurement->id
                 ]);
 
             return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['product_id' => $rp_id]]);
