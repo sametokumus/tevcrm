@@ -41,6 +41,7 @@ class OfferController extends Controller
                         $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
                         $product['request_quantity'] = $offer_request_product['quantity'];
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
+                        $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
                     }
                     $offer['products'] = $products;
                 }

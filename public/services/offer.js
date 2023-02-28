@@ -315,11 +315,11 @@ async function updateOfferProduct(){
         "date_code": date_code,
         "package_type": package_type,
         "quantity": quantity,
-        "pcs_price": pcs_price,
-        "total_price": total_price,
-        "discount_rate": discount_rate,
-        "discounted_price": discounted_price,
-        "vat_rate": vat_rate,
+        "pcs_price": changePriceToDecimal(pcs_price),
+        "total_price": changePriceToDecimal(total_price),
+        "discount_rate": changePriceToDecimal(discount_rate),
+        "discounted_price": changePriceToDecimal(discounted_price),
+        "vat_rate": changePriceToDecimal(vat_rate),
         "currency": currency
     });
 
