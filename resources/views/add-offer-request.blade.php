@@ -63,6 +63,7 @@ $extra_js='
                                 <table id="offer-request-products" class="table table-bordered key-buttons border-bottom">
                                     <thead>
                                     <tr>
+                                        <th class="border-bottom-0">Sıra</th>
                                         <th class="border-bottom-0">Ref. Code</th>
                                         <th class="border-bottom-0">Ürün Adı</th>
                                         <th class="border-bottom-0">Miktar</th>

@@ -113,7 +113,7 @@ async function initOfferRequest(){
         language: {
             url: "services/Turkish.json"
         },
-        order: [[0, 'desc']],
+        order: [[0, 'asc']],
         select: {
             style: 'multi'
         }
@@ -265,7 +265,7 @@ async function initOfferDetailModal(offer_id){
         language: {
             url: "services/Turkish.json"
         },
-        order: [[0, 'desc']]
+        order: [[0, 'asc']]
     });
 }
 

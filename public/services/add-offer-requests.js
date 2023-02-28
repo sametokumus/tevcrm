@@ -58,6 +58,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement){
     count = parseInt(count) + 1;
     document.getElementById('add_offer_request_product_count').value = count;
     let item = '<tr id="productRow'+ count +'">\n' +
+        '           <td>'+ count +'</td>\n' +
         '           <td>'+ refcode +'</td>\n' +
         '           <td>'+ product_name +'</td>\n' +
         '           <td>'+ quantity +'</td>\n' +
@@ -89,10 +90,10 @@ async function addOfferRequest(){
     let table = document.getElementById("offer-request-products-body");
     for (let i = 0, row; row = table.rows[i]; i++) {
         let item = {
-            "ref_code": row.cells[0].innerText,
-            "product_name": row.cells[1].innerText,
-            "quantity": parseInt(row.cells[2].innerText),
-            "measurement": row.cells[3].innerText
+            "ref_code": row.cells[1].innerText,
+            "product_name": row.cells[2].innerText,
+            "quantity": parseInt(row.cells[3].innerText),
+            "measurement": row.cells[4].innerText
         }
         products.push(item);
     }

@@ -166,7 +166,7 @@ async function updateSaleOfferPrice(){
         "sale_id": sale_id,
         "offer_id": offer_id,
         "offer_product_id": offer_product_id,
-        "price": price,
+        "price": changePriceToDecimal(price),
         "currency": currency
     });
 
