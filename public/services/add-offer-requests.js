@@ -92,7 +92,7 @@ async function addOfferRequest(){
             "ref_code": row.cells[0].innerText,
             "product_name": row.cells[1].innerText,
             "quantity": parseInt(row.cells[2].innerText),
-            "measurement": parseInt(row.cells[3].innerText)
+            "measurement": row.cells[3].innerText
         }
         products.push(item);
     }

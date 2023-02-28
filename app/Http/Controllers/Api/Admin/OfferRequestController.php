@@ -45,6 +45,8 @@ class OfferRequestController extends Controller
                 $product = Product::query()->where('id', $offer_request_product->product_id)->first();
                 $offer_request_product['ref_code'] = $product->ref_code;
                 $offer_request_product['product_name'] = $product->product_name;
+                $measurement = Measurement::query()->where('id', $offer_request_product->measurement_id)->first();
+                $offer_request_product['measurement_name'] = $measurement->name;
             }
             $offer_request['products'] = $offer_request_products;
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
