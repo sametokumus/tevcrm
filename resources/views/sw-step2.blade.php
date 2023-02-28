@@ -10,7 +10,7 @@ $extra_js='
     <div class="side-app">
 
         <!-- CONTAINER -->
-        <div class="main-container container-fluid">
+        <div class="main-container container-fluid overflow-auto">
 
             <div class="row">
                 <div class="col-md-12">

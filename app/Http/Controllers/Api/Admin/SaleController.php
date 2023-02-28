@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\CancelNote;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Measurement;
 use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
@@ -128,6 +129,7 @@ class SaleController extends Controller
             ]);
 
             foreach ($request->offers as $offer){
+                $measurement = Measurement::query()->where('name', $offer['measurement'])->where('active', 1)->first();
                 SaleOffer::query()->insert([
                     'sale_id' => $sale_id,
                     'offer_id' => $offer['offer_id'],
@@ -138,6 +140,7 @@ class SaleController extends Controller
                     'package_type' => $offer['package_type'],
                     'request_quantity' => $offer['request_quantity'],
                     'offer_quantity' => $offer['offer_quantity'],
+                    'measurement_id' => $measurement->id,
                     'pcs_price' => $offer['pcs_price'],
                     'total_price' => $offer['total_price'],
                     'discount_rate' => $offer['discount_rate'],

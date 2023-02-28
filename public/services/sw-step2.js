@@ -60,7 +60,7 @@ async function initOfferDetail(){
         });
 
         $('#offer-detail').DataTable({
-            responsive: true,
+            responsive: false,
             columnDefs: [
                 {responsivePriority: 1, targets: 0},
                 {responsivePriority: 2, targets: -1}
@@ -74,7 +74,7 @@ async function initOfferDetail(){
             order: [[0, 'asc']]
         });
         $('#sales-detail').DataTable({
-            responsive: true,
+            responsive: false,
             columnDefs: [
                 {responsivePriority: 1, targets: 0},
                 {responsivePriority: 2, targets: -1}
@@ -153,12 +153,13 @@ async function addSale(){
                 "package_type": this.data()[7],
                 "request_quantity": this.data()[8],
                 "offer_quantity": this.data()[9],
-                "pcs_price": this.data()[10],
-                "total_price": this.data()[11],
-                "discount_rate": this.data()[12],
-                "discounted_price": this.data()[13],
-                "vat_rate": this.data()[14],
-                "currency": this.data()[15],
+                "measurement": this.data()[10],
+                "pcs_price": this.data()[11],
+                "total_price": this.data()[12],
+                "discount_rate": this.data()[13],
+                "discounted_price": this.data()[14],
+                "vat_rate": this.data()[15],
+                "currency": this.data()[16],
             }
             offers.push(item);
         });
