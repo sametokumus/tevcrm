@@ -393,6 +393,15 @@ async function getEmployeesAddSelectId(companyId, selectId){
     });
 }
 
+async function getMeasurementsAddSelectId(selectId){
+    let data = await serviceGetMeasurements();
+    $('#'+selectId+' option').remove();
+    $.each(data.measurements, function(i, measurement){
+        let optionRow = '<option value="'+measurement.name+'">'+measurement.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getActivityTypesAddSelectId(selectId){
     let data = await serviceGetActivityTypes();
     $('#'+selectId+' option').remove();
@@ -1124,6 +1133,14 @@ async function servicePostUpdateQuote(formData) {
 
 async function serviceGetStatuses() {
     const data = await fetchDataGet('/admin/status/getStatuses', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetMeasurements() {
+    const data = await fetchDataGet('/admin/measurement/getMeasurements', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

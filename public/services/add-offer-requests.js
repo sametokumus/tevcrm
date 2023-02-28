@@ -19,11 +19,12 @@
             let refcode = document.getElementById('add_offer_request_product_refcode').value;
             let product_name = document.getElementById('add_offer_request_product_name').value;
             let quantity = document.getElementById('add_offer_request_product_quantity').value;
+            let measurement = document.getElementById('add_offer_request_product_measurement').value;
             if (refcode == '' || product_name == '' || quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            addProductToTable(refcode, product_name, quantity);
+            addProductToTable(refcode, product_name, quantity, measurement);
         });
 	});
 
@@ -44,6 +45,7 @@ function checkRole(){
 async function initPage(){
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getCompaniesAddSelectId('add_offer_request_company');
+    await getMeasurementsAddSelectId('add_offer_request_product_measurement');
 }
 
 async function initEmployeeSelect(){
@@ -51,7 +53,7 @@ async function initEmployeeSelect(){
     getEmployeesAddSelectId(company_id, 'add_offer_request_company_employee');
 }
 
-async function addProductToTable(refcode, product_name, quantity){
+async function addProductToTable(refcode, product_name, quantity, measurement){
     let count = document.getElementById('add_offer_request_product_count').value;
     count = parseInt(count) + 1;
     document.getElementById('add_offer_request_product_count').value = count;
@@ -59,6 +61,7 @@ async function addProductToTable(refcode, product_name, quantity){
         '           <td>'+ refcode +'</td>\n' +
         '           <td>'+ product_name +'</td>\n' +
         '           <td>'+ quantity +'</td>\n' +
+        '           <td>'+ measurement +'</td>\n' +
         '           <td>\n' +
         '               <div class="btn-list">\n' +
         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -69,6 +72,7 @@ async function addProductToTable(refcode, product_name, quantity){
     document.getElementById('add_offer_request_product_refcode').value = "";
     document.getElementById('add_offer_request_product_name').value = "";
     document.getElementById('add_offer_request_product_quantity').value = "0";
+    document.getElementById('add_offer_request_product_measurement').value = "adet";
 }
 
 async function deleteProductRow(item_id){
@@ -87,7 +91,8 @@ async function addOfferRequest(){
         let item = {
             "ref_code": row.cells[0].innerText,
             "product_name": row.cells[1].innerText,
-            "quantity": parseInt(row.cells[2].innerText)
+            "quantity": parseInt(row.cells[2].innerText),
+            "measurement": parseInt(row.cells[3].innerText)
         }
         products.push(item);
     }

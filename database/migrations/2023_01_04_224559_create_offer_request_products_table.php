@@ -18,6 +18,7 @@ class CreateOfferRequestProductsTable extends Migration
             $table->string('request_id');
             $table->string('product_id');
             $table->integer('quantity')->nullable();
+            $table->integer('measurement_id')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

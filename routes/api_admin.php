@@ -190,6 +190,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Measurement
     Route::get('measurement/getMeasurements', [MeasurementController::class, 'getMeasurements']);
+    Route::get('measurement/getMeasurementById/{id}', [MeasurementController::class, 'getMeasurementById']);
 
 
     //News Feed

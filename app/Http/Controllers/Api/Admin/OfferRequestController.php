@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Measurement;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
@@ -82,10 +83,12 @@ class OfferRequestController extends Controller
                         'product_name' => $product['product_name'],
                     ]);
                 }
+                $measurement = Measurement::query()->where('name', $product['measurement'])->where('active', 1)->first();
                 OfferRequestProduct::query()->insert([
                     'request_id' => $request_id,
                     'product_id' => $product_id,
-                    'quantity' => $product['quantity']
+                    'quantity' => $product['quantity'],
+                    'measurement_id' => $measurement->id
                 ]);
             }
 
