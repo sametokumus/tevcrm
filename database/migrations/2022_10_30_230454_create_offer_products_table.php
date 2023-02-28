@@ -18,6 +18,7 @@ class CreateOfferProductsTable extends Migration
             $table->string('offer_id');
             $table->bigInteger('request_product_id');
             $table->integer('quantity');
+            $table->integer('measurement_id')->default(0);
             $table->decimal('pcs_price',10,2, false)->nullable();
             $table->decimal('total_price',10,2, false)->nullable();
             $table->decimal('discount_rate',10,2, false)->nullable();

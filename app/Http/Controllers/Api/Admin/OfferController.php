@@ -130,7 +130,8 @@ class OfferController extends Controller
                     OfferProduct::query()->insert([
                         'offer_id' => $offer_id,
                         'request_product_id' => $product['request_product_id'],
-                        'quantity' => $request_product['quantity']
+                        'quantity' => $request_product['quantity'],
+                        'measurement_id' => $request_product['measurement_id']
                     ]);
                 }
             }

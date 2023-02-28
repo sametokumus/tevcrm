@@ -31,7 +31,8 @@ $extra_js='
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">Ürün Adı</th>
-                                    <th class="border-bottom-0">Adet</th>
+                                    <th class="border-bottom-0">Miktar</th>
+                                    <th class="border-bottom-0">Birim</th>
                                 </tr>
                                 </thead>
                                 <tbody id="offer-request-products-body">
@@ -53,7 +54,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Quotation Request's
+                        RFQ's
                     </h1>
                 </div>
             </div>

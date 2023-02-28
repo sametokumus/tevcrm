@@ -85,6 +85,7 @@ async function initOfferRequest(){
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
+            '           <td>' + product.measurement_name + '</td>\n' +
             '       </tr>';
         $('#offer-request-products tbody').append(item);
     });
