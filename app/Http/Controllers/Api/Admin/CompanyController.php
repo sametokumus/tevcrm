@@ -87,7 +87,8 @@ class CompanyController extends Controller
                 'is_supplier' => $request->is_supplier,
                 'linkedin' => $request->linkedin,
                 'skype' => $request->skype,
-                'online' => $request->online
+                'online' => $request->online,
+                'registration_number' => $request->registration_number
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
@@ -131,7 +132,8 @@ class CompanyController extends Controller
                 'is_supplier' => $request->is_supplier,
                 'linkedin' => $request->linkedin,
                 'skype' => $request->skype,
-                'online' => $request->online
+                'online' => $request->online,
+                'registration_number' => $request->registration_number
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
