@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Measurement;
 use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
@@ -95,6 +96,7 @@ class OfferController extends Controller
                 $offer_sub_total += $product->total_price;
                 $offer_vat += $vat;
                 $offer_grand_total += $product->total_price + $vat;
+                $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
             }
 
             $offer['products'] = $products;
@@ -167,6 +169,7 @@ class OfferController extends Controller
             $product['company_name'] = Company::query()->where('id', $offer->supplier_id)->first()->name;
             $product['request_quantity'] = $offer_request_product['quantity'];
             $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
+            $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['product' => $product]]);
         } catch (QueryException $queryException) {
