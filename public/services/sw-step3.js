@@ -65,6 +65,7 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(offer.package_type) + '</td>\n' +
                 '           <td>' + checkNull(offer.request_quantity) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
+                '           <td>' + checkNull(offer.measurement_name) + '</td>\n' +
                 '           <td>' + changeCommasToDecimal(offer.pcs_price) + '</td>\n' +
                 '           <td>' + changeCommasToDecimal(offer.total_price) + '</td>\n' +
                 '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
