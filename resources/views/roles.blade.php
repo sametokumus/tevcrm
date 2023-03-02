@@ -116,7 +116,7 @@ $extra_js='
                 <div class="modal-body">
                     <div class="row mb-4">
                         <input type="hidden" class="form-control" id="update_role_permissions_id" required>
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <div class="form-group">
                                 <label class="form-label">Yetkiler</label>
                                 <div class="selectgroup selectgroup-pills" id="admin_permissions">
@@ -124,7 +124,7 @@ $extra_js='
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <div class="form-group">
                                 <label class="form-label">Sipariş Durumu Yetkileri</label>
                                 <div class="selectgroup selectgroup-pills" id="admin_status_permissions">

@@ -117,12 +117,20 @@ async function initRoleModal(role_id){
 
 async function initRolePermissionsModal(role_id){
 	await initPermissionsToRolePermissionsModal();
+    await initStatusesToRolePermissionsModal();
 	let data = await serviceGetAdminRolePermissions(role_id);
 	console.log(data)
 	document.getElementById('update_role_permissions_id').value = role_id;
 	$.each(data.role_permissions, function (i, role_permission) {
 		console.log('#admin_permission_'+ role_permission.admin_permission_id);
 		document.getElementById('admin_permission_'+ role_permission.admin_permission_id).checked = true;
+	});
+	let data2 = await serviceGetAdminRoleStatuses(role_id);
+	console.log(data2)
+	document.getElementById('update_role_permissions_id').value = role_id;
+	$.each(data2.role_statuses, function (i, role_status) {
+		console.log('#admin_status_permission_'+ role_status.status_id);
+		document.getElementById('admin_status_permission_'+ role_status.status_id).checked = true;
 	});
 
 }
@@ -131,10 +139,6 @@ async function initPermissionsToRolePermissionsModal(){
 	$('#admin_permissions div.form-check').remove();
 	let data = await serviceGetAdminPermissions();
 	$.each(data.admin_permissions, function (i, permission) {
-		// let permissionItem = '<label class="selectgroup-item">\n' +
-		// 	'                     <input type="checkbox" data-id="'+ permission.id +'" id="admin_permission_'+ permission.id +'" value="'+ permission.name +'" class="selectgroup-input admin_permission_inputs">\n' +
-		// 	'                     <span class="selectgroup-button">'+ permission.name +'</span>\n' +
-		// 	'                 </label>';
 		let permissionItem = '<div class="form-check form-switch">\n' +
             '                     <input type="checkbox" data-id="'+ permission.id +'" id="admin_permission_'+ permission.id +'" value="'+ permission.name +'" class="form-check-input admin_permission_inputs">\n' +
             '                     <label class="form-check-label" for="admin_permission_'+ permission.id +'">'+ permission.name +'</label>\n' +
@@ -144,6 +148,22 @@ async function initPermissionsToRolePermissionsModal(){
 	let items = document.getElementsByClassName("admin_permission_inputs");
 	for (let i = 0; i < items.length; i++) {
 		items[i].addEventListener('click', clickPermissionItem, false);
+	}
+}
+
+async function initStatusesToRolePermissionsModal(){
+	$('#admin_status_permissions div.form-check').remove();
+	let data = await serviceGetStatuses();
+	$.each(data.statuses, function (i, status) {
+		let permissionItem = '<div class="form-check form-switch">\n' +
+            '                     <input type="checkbox" data-id="'+ status.id +'" id="admin_status_permission_'+ status.id +'" value="'+ status.name +'" class="form-check-input admin_status_permission_inputs">\n' +
+            '                     <label class="form-check-label" for="admin_status_permission_'+ status.id +'">'+ status.name +'</label>\n' +
+            '                 </div>';
+		$('#admin_status_permissions').append(permissionItem);
+	});
+	let items = document.getElementsByClassName("admin_status_permission_inputs");
+	for (let i = 0; i < items.length; i++) {
+		items[i].addEventListener('click', clickStatusPermissionItem, false);
 	}
 }
 
@@ -157,6 +177,19 @@ let clickPermissionItem = async function() {
 		await serviceGetAddAdminRolePermission(role_id, permission_id);
 	}else{
 		await serviceGetDeleteAdminRolePermission(role_id, permission_id);
+	}
+};
+
+let clickStatusPermissionItem = async function() {
+	let role_id = document.getElementById('update_role_permissions_id').value;
+	let status_id = $(this).data('id');
+	let item_id = $(this).attr('id');
+	let isChecked = document.getElementById(item_id).checked;
+	console.log(isChecked, role_id, permission_id);
+	if(isChecked){
+		await serviceGetAddAdminRoleStatus(role_id, status_id);
+	}else{
+		await serviceGetDeleteAdminRoleStatus(role_id, status_id);
 	}
 };
 

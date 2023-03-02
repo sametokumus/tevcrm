@@ -607,6 +607,35 @@ async function serviceGetDeleteAdminRolePermission(role_id, permission_id) {
 	}
 }
 
+async function serviceGetAdminRoleStatuses(role_id) {
+    const data = await fetchDataGet('/admin/adminRole/getAdminRoleStatuses/' + role_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetAddAdminRoleStatus(role_id, status_id) {
+    const data = await fetchDataGet('/admin/adminRole/addAdminRoleStatus/' + role_id + '/' + status_id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteAdminRoleStatus(role_id, status_id) {
+    const data = await fetchDataGet('/admin/adminRole/deleteAdminRoleStatus/' + role_id + '/' + status_id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 async function serviceGetAdminPermissions() {
 	const data = await fetchDataGet('/admin/adminPermission/getAdminPermissions', 'application/json');
 	if (data.status == "success") {
