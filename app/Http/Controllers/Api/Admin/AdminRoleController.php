@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminPermissionRole;
 use App\Models\AdminRole;
+use App\Models\AdminStatusRole;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -213,6 +214,46 @@ class AdminRoleController extends Controller
             $check_role_permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->where('active',1)->count();
             if($check_role_permission > 0){
                 AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->update([
+                    'active' => 0
+                ]);
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
+    public function getAdminRoleStatuses($role_id){
+        try {
+            $role_statuses = AdminStatusRole::query()->where('admin_role_id', $role_id)->where('active',1)->get();
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['role_statuses' => $role_statuses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function addAdminRoleStatus($role_id, $status_id){
+        try {
+            $check_role_status = AdminStatusRole::query()->where('admin_role_id', $role_id)->where('status_id', $status_id)->count();
+            if($check_role_status > 0){
+                AdminStatusRole::query()->where('admin_role_id', $role_id)->where('status_id', $status_id)->update([
+                    'active' => 1
+                ]);
+            }else{
+                AdminStatusRole::query()->insert([
+                    'admin_role_id' => $role_id,
+                    'status_id' => $status_id
+                ]);
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function deleteAdminRoleStatus($role_id, $status_id){
+        try {
+            $check_role_status = AdminStatusRole::query()->where('admin_role_id', $role_id)->where('status_id', $status_id)->where('active',1)->count();
+            if($check_role_status > 0){
+                AdminStatusRole::query()->where('admin_role_id', $role_id)->where('status_id', $status_id)->update([
                     'active' => 0
                 ]);
             }

@@ -57,6 +57,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('adminRole/addAdminRolePermission/{role_id}/{permission_id}', [AdminRoleController::class, 'addAdminRolePermission']);
     Route::get('adminRole/deleteAdminRolePermission/{role_id}/{permission_id}', [AdminRoleController::class, 'deleteAdminRolePermission']);
 
+    Route::get('adminRole/getAdminRoleStatuses/{role_id}', [AdminRoleController::class, 'getAdminRoleStatuses']);
+    Route::get('adminRole/addAdminRoleStatus/{role_id}/{status_id}', [AdminRoleController::class, 'addAdminRoleStatus']);
+    Route::get('adminRole/deleteAdminRoleStatus/{role_id}/{status_id}', [AdminRoleController::class, 'deleteAdminRoleStatus']);
+
     Route::get('adminPermission/getAdminPermissions', [AdminPermissionController::class, 'getAdminPermissions']);
     Route::post('adminPermission/addAdminPermission', [AdminPermissionController::class, 'addAdminPermission']);
     Route::post('adminPermission/updateAdminPermission/{id}', [AdminPermissionController::class, 'updateAdminPermission']);
