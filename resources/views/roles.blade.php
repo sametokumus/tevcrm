@@ -5,38 +5,28 @@ $extra_js='
 ';
 ?>
 
-
-
     <!--app-content open-->
-<div class="main-content app-content mt-0">
+<div class="main-content app-content">
     <div class="side-app">
 
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
-            <!-- PAGE-HEADER -->
-            <div class="page-header">
-                <h1 class="page-title">Admin Rolleri</h1>
-                <div>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Admin Rolleri</li>
-                    </ol>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="page-header">
+                        Rol Ekle
+                    </h3>
                 </div>
             </div>
-            <!-- PAGE-HEADER END -->
 
-            <form method="post" action="#" id="add_role_form">
 
-                <!-- ROW-1 OPEN -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">Admin Rol Oluştur</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body">
+                            <form method="post" action="#" id="add_role_form">
+                                <div class="row p-3">
                                     <div class="col-md-12">
                                         <div class="row mb-4">
                                             <label class="col-md-3 form-label">Rol Adı :</label>
@@ -45,52 +35,44 @@ $extra_js='
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </div>
-                            <div class="card-footer">
-                                <!--Row-->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary">Oluştur</button>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Kaydet</button>
                                     </div>
                                 </div>
-                                <!--End Row-->
-                            </div>
+                            </form>
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
                         </div>
                     </div>
                 </div>
-                <!-- /ROW-1 CLOSED -->
 
-            </form>
+            </div>
 
-            <!-- Row -->
-            <div class="row row-sm">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Mevcut Hesaplar</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="role-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
-                                    <thead>
-                                    <tr>
-                                        <th class="border-bottom-0" data-priority="1">ID</th>
-                                        <th class="border-bottom-0">Ad</th>
-                                        <th class="border-bottom-0" data-priority="2">İşlemler</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3 class="page-header">
+                        Roller
+                    </h3>
                 </div>
             </div>
-            <!-- End Row -->
+
+            <table id="role-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                <thead>
+                <tr>
+                    <th class="border-bottom-0" data-priority="1">ID</th>
+                    <th class="border-bottom-0">Ad</th>
+                    <th class="border-bottom-0" data-priority="2">İşlemler</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
 
         </div>
         <!-- CONTAINER END -->
@@ -98,17 +80,15 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal fade" id="updateRoleModal" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal modal-cover fade" id="updateRoleModal">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+            <div class="modal-header">
+                <h5 class="modal-title">Rol Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
             <form method="post" action="#" id="update_role_form">
-                <div class="modal-header">
-                    <h5 class="modal-title">Rol Güncelle</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
                 <div class="modal-body">
-
                     <div class="row mb-4">
                         <label class="col-md-3 form-label">Rol Adı :</label>
                         <div class="col-md-9">
@@ -116,48 +96,50 @@ $extra_js='
                             <input type="hidden" class="form-control" id="update_role_id" required>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="submit" class="btn btn-theme">Kaydet</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="updateRolePermissionsModal" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal modal-cover fade" id="updateRolePermissionsModal">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+            <div class="modal-header">
+                <h5 class="modal-title">Yetkileri Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
             <form method="post" action="#" id="update_role_permissions_form">
-                <div class="modal-header">
-                    <h5 class="modal-title">Yetkileri Güncelle</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
                 <div class="modal-body">
-
                     <div class="row mb-4">
                         <input type="hidden" class="form-control" id="update_role_permissions_id" required>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label">Yetkiler</label>
+                                <div class="selectgroup selectgroup-pills" id="admin_permissions">
 
-                        <div class="form-group">
-                            <label class="form-label">Yetkiler</label>
-                            <div class="selectgroup selectgroup-pills" id="admin_permissions">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label">Sipariş Durumu Yetkileri</label>
+                                <div class="selectgroup selectgroup-pills" id="admin_status_permissions">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="modal-footer">
-                    <!--                        <button class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>-->
-                    <!--                        <button type="submit" class="btn btn-primary">Kaydet</button>-->
-                </div>
+{{--                <div class="modal-footer">--}}
+{{--                    <button type="submit" class="btn btn-theme">Kaydet</button>--}}
+{{--                </div>--}}
             </form>
-
         </div>
     </div>
 </div>
+
 @include('include.footer')

@@ -128,13 +128,17 @@ async function initRolePermissionsModal(role_id){
 }
 
 async function initPermissionsToRolePermissionsModal(){
-	$('#admin_permissions label').remove();
+	$('#admin_permissions div.form-check').remove();
 	let data = await serviceGetAdminPermissions();
 	$.each(data.admin_permissions, function (i, permission) {
-		let permissionItem = '<label class="selectgroup-item">\n' +
-			'                     <input type="checkbox" data-id="'+ permission.id +'" id="admin_permission_'+ permission.id +'" value="'+ permission.name +'" class="selectgroup-input admin_permission_inputs">\n' +
-			'                     <span class="selectgroup-button">'+ permission.name +'</span>\n' +
-			'                 </label>';
+		// let permissionItem = '<label class="selectgroup-item">\n' +
+		// 	'                     <input type="checkbox" data-id="'+ permission.id +'" id="admin_permission_'+ permission.id +'" value="'+ permission.name +'" class="selectgroup-input admin_permission_inputs">\n' +
+		// 	'                     <span class="selectgroup-button">'+ permission.name +'</span>\n' +
+		// 	'                 </label>';
+		let permissionItem = '<div class="form-check form-switch">\n' +
+            '                     <input type="checkbox" data-id="'+ permission.id +'" id="admin_permission_'+ permission.id +'" value="'+ permission.name +'" class="form-check-input admin_permission_inputs">\n' +
+            '                     <label class="form-check-label" for="admin_permission_'+ permission.id +'">'+ permission.name +'</label>\n' +
+            '                 </div>';
 		$('#admin_permissions').append(permissionItem);
 	});
 	let items = document.getElementsByClassName("admin_permission_inputs");

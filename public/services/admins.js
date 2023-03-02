@@ -1,6 +1,6 @@
 (function($) {
     "use strict";
-	
+
 	 $(document).ready(function() {
 
 		 $("#add_admin_form").submit(async function( event ) {
@@ -100,7 +100,7 @@ async function initAdminsTable(){
 			'              <td>'+ admin.phone_number +'</td>\n' +
 			'              <td>\n' +
 			'                  <div class="btn-list">\n' +
-			'                      <button id="bEdit" type="button" class="btn btn-sm btn-primary" onclick="openAdminModal(\''+ admin.id +'\')">\n' +
+			'                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAdminModal(\''+ admin.id +'\')">\n' +
 			'                          <span class="fe fe-edit"> </span> Düzenle\n' +
 			'                      </button>\n' +
 			'                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteAdmin(\''+ admin.id +'\')">\n' +
