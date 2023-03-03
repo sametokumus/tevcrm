@@ -98,6 +98,7 @@ class OfferRequestController extends Controller
             Sale::query()->insert([
                 'sale_id' => $sale_id,
                 'request_id' => $request_id,
+                'owner_id' => $request->owner_id,
                 'customer_id' => $request->company_id,
                 'status_id' => 1
             ]);
@@ -128,6 +129,9 @@ class OfferRequestController extends Controller
                 'authorized_personnel_id' => $request->authorized_personnel_id,
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
+            ]);
+            Sale::query()->where('request_id', $request_id)->update([
+                'owner_id' => $request->owner_id,
             ]);
 
             return response(['message' => __('Talep güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);

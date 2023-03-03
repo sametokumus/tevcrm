@@ -32,8 +32,9 @@ class SaleController extends Controller
     {
         try {
             $sales = Sale::query()
+                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name')
+                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
                 ->where('sales.active',1)
                 ->get();
 
@@ -56,8 +57,9 @@ class SaleController extends Controller
     {
         try {
             $sales = Sale::query()
+                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name')
+                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
                 ->where('sales.active',1)
                 ->where('statuses.period','continue')
                 ->get();

@@ -358,8 +358,8 @@ async function getOwnersAddSelectId(selectId){
     let data = await serviceGetContacts();
     $('#'+selectId+' option').remove();
     $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
-    $.each(data.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+    $.each(data.contacts, function(i, contact){
+        let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }
@@ -367,7 +367,7 @@ async function getOwnersAddSelectId(selectId){
 async function getCompaniesAddSelectId(selectId){
     let data = await serviceGetCompanies();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    $('#'+selectId).append('<option value="0">Müşteri Seçiniz</option>');
     $.each(data.companies, function(i, company){
         let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -1044,6 +1044,14 @@ async function servicePostUpdateOfferProduct(formData, offer_id, product_id) {
 
 
 
+async function serviceGetContacts() {
+    const data = await fetchDataGet('/admin/contact/getContacts', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function serviceGetContactById(id) {
     const data = await fetchDataGet('/admin/contact/getContactById/' + id, 'application/json');
     if (data.status == "success") {

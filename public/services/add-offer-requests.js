@@ -43,6 +43,7 @@ function checkRole(){
 }
 
 async function initPage(){
+    await getOwnersAddSelectId('add_offer_request_owner');
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getCompaniesAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
@@ -109,6 +110,7 @@ async function addOfferRequest(){
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
+        "owner_id": owner,
         "authorized_personnel_id": personnel,
         "company_id": company,
         "company_employee_id": employee,

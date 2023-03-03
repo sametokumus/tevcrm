@@ -91,6 +91,12 @@ $extra_js='
                                 <input type="hidden" class="form-control" id="add_offer_request_product_count" value="0">
                                 <div class="row p-3">
                                     <div class="col-md-12 mb-3">
+                                        <label class="form-label">Talep Gelen Firma</label>
+                                        <select class="form-control" id="add_offer_request_owner">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">Yetkili Satış Temsilcisi</label>
                                         <select class="form-control" id="add_offer_request_authorized_personnel">
 
