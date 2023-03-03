@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
 use App\Models\Quote;
+use App\Models\RfqDetails;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\Status;
@@ -297,6 +298,45 @@ class SaleController extends Controller
             ]);
 
             return response(['message' => __('Satış fiyatı güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getRfqDetailById($offer_id)
+    {
+        try {
+            $rfq_detail = RfqDetails::query()->where('offer_id', $offer_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['rfq_detail' => $rfq_detail]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function updateRfqDetail(Request $request)
+    {
+        try {
+            $request->validate([
+                'offer_id' => 'required',
+            ]);
+            $count = RfqDetails::query()->where('offer_id', $request->offer_id)->count();
+            if ($count == 0){
+                RfqDetails::query()->insert([
+                    'offer_id' => $request->offer_id,
+                    'note' => $request->note,
+                ]);
+            }else {
+                RfqDetails::query()->where('offer_id', $request->offer_id)->update([
+                    'note' => $request->note,
+                ]);
+            }
+
+            return response(['message' => __('Detay güncelleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

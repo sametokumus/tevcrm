@@ -84,8 +84,8 @@ async function initSales(){
             }
         }
         let saleItem = '<tr>\n' +
-			'              <td>'+ sale.id +'</td>\n' +
-			'              <td>'+ sale.sale_id +'</td>\n' +
+            '              <td>'+ (i+1)+'</td>\n' +
+			'              <td>'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
 			'              <td>'+ sale.request.authorized_personnel.name +' '+ sale.request.authorized_personnel.surname +'</td>\n' +
 			'              <td>'+ sale.request.company.name +'</td>\n' +
 			'              <td>'+ sale.request.company_employee.name +'</td>\n' +
