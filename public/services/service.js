@@ -1365,7 +1365,7 @@ async function serviceGetSaleStats() {
 async function serviceGetLanguage(lang) {
     const data = await fetchDataGet('/admin/language/changeLanguage/' + lang, 'application/json');
     if (data.status == "success") {
-        return true;
+        return data;
     } else {
         showAlert('İstek Başarısız.');
         return false;

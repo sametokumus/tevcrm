@@ -17,7 +17,7 @@ $extra_js='
                 <div class="col-md-7">
                     <label class="form-label">Firma</label>
                     <select class="form-control" id="update_company_country">
-                        <option>sadsad</option>
+                        <option>{{__('Anasayfa')}} {{ \Illuminate\Support\Facades\App::getLocale() }}</option>
                     </select>
                 </div>
             </div>

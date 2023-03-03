@@ -54,6 +54,9 @@ async function initOffer(offer_id){
     let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
     let company = offer.company;
+
+    let x = await serviceGetLanguage(company.country_lang);
+    console.log(x)
     console.log(offer);
 
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>Phone: '+ company.phone +'<br>Email: '+ company.email +'');

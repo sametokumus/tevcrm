@@ -21,7 +21,7 @@ class LanguageController extends Controller
             App::setLocale($language_key);
             session()->put('locale', $language_key);
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['locale' => App::getLocale()]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
