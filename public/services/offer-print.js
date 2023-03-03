@@ -57,8 +57,8 @@ async function initContact(contact_id, offer_id){
     today = dd + '/' + mm + '/' + yyyy;
 
     $('#offer-print .logo-header .date').text('Date: '+ today);
-
-    $('#offer-print .contact-col address').text('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
+    $('#offer-print .contact-col address').text('');
+    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
 
 }
 
@@ -70,7 +70,7 @@ async function initOffer(offer_id){
     console.log(offer);
 
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');
-    $('#offer-print .logo-header .offer-id').append(short_code+'-'+off);
+    $('#offer-print .logo-header .offer-id').append(short_code+'-RFQ'+offer.global_id);
 
     $('#offer-detail tbody > tr').remove();
 
