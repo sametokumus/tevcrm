@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +45,10 @@ Route::get('/invoice-print/{sale_id}', function () { return view('invoice-print'
 
 
 Route::get('/settings', function () { return view('settings'); });
+
+
+Route::post('/lang', function(Request $request) {
+    $locale = $request->input('lang');
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+});

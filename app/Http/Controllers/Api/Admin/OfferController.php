@@ -79,6 +79,7 @@ class OfferController extends Controller
                 ->where('offers.active',1)
                 ->first();
 
+            $offer['global_id'] = Sale::query()->where('request_id', $offer->request_id)->first()->id;
             $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
             $offer['company'] = Company::query()
                 ->leftJoin('countries', 'countries.id', '=', 'companies.country_id')

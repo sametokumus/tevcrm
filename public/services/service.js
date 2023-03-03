@@ -40,6 +40,25 @@
 
 })(window.jQuery);
 
+$(function() {
+    // Listen for the language dropdown change event
+    $('select#lang').change(function() {
+        var lang = $(this).val();
+        // Make an Ajax request to change the language
+        $.ajax({
+            url: '/lang',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: { lang: lang },
+            success: function(data) {
+                // Reload the page to apply the new locale
+                location.reload();
+            }
+        });
+    });
+});
 
 
 async function fetchDataGet(apiURL, contentType){

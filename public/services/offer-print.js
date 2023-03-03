@@ -19,9 +19,12 @@
         await initContact(1, offer_id);
         await initOffer(offer_id);
         await initDetail(offer_id);
+        await getOwnersAddSelectId('owners');
+        document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
+let short_code;
 
 function checkRole(){
 	return true;
@@ -31,11 +34,20 @@ function printOffer(){
 	window.print();
 }
 
+async function changeOwner(){
+	let owner = document.getElementById('owners').value;
+    let offer_id = getPathVariable('offer-print');
+    await initContact(owner, offer_id);
+}
+
 async function initContact(contact_id, offer_id){
 
     let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
+    console.log(contact)
+    short_code = contact.short_code;
 
+    $('#offer-print #logo img').remove();
     $('#offer-print #logo').append('<img src="'+ contact.logo +'">');
 
     let today = new Date();
@@ -43,23 +55,22 @@ async function initContact(contact_id, offer_id){
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
     today = dd + '/' + mm + '/' + yyyy;
-    $('#offer-print .logo-header .date').append('Date: '+ today);
-    $('#offer-print .logo-header .offer-id').append(offer_id);
 
-    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
+    $('#offer-print .logo-header .date').text('Date: '+ today);
+
+    $('#offer-print .contact-col address').text('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
 
 }
 
 async function initOffer(offer_id){
+
     let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
     let company = offer.company;
-
-    let x = await serviceGetLanguage(company.country_lang);
-    console.log(x)
     console.log(offer);
 
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');
+    $('#offer-print .logo-header .offer-id').append(short_code+'-'+off);
 
     $('#offer-detail tbody > tr').remove();
 

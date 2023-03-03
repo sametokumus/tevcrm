@@ -39,6 +39,7 @@
         height: 200
     });
 </script>
+<script src="messages.js"></script>
 <script src="services/service.js"></script>
 <?php echo $extra_js; ?>
 

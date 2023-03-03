@@ -23,6 +23,8 @@ $extra_js="";
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
+    <meta name="current-locale" content="{{ app()->getLocale() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 {{--    <base href="http://127.0.0.1:8000/">--}}
     <base href="/">
