@@ -59,7 +59,7 @@ async function initOffer(offer_id){
     console.log(x)
     console.log(offer);
 
-    $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>Phone: '+ company.phone +'<br>Email: '+ company.email +'');
+    $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');
 
     $('#offer-detail tbody > tr').remove();
 

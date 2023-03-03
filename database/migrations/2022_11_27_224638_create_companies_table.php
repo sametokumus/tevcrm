@@ -22,7 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('address')->nullable();
-            $table->bigInteger('country_id')->nullable();
+            $table->bigInteger('country_id')->nullable()->default(218);
             $table->string('tax_office')->nullable();
             $table->string('tax_number')->nullable();
             $table->text('linkedin')->nullable();
