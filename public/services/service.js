@@ -354,6 +354,16 @@ async function getAdminsAddSelectId(selectId){
     });
 }
 
+async function getOwnersAddSelectId(selectId){
+    let data = await serviceGetContacts();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    $.each(data.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCompaniesAddSelectId(selectId){
     let data = await serviceGetCompanies();
     $('#'+selectId+' option').remove();

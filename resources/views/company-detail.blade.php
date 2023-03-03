@@ -74,7 +74,13 @@ $(".timepicker").timepicker({
                                         <label class="form-label">Adres</label>
                                         <input type="text" class="form-control" id="update_company_address" placeholder="Adres">
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ülke</label>
+                                        <select class="form-control" id="update_company_country">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Registration Number</label>
                                         <input type="text" class="form-control" id="update_company_registration_number" placeholder="Registration Number">
                                     </div>

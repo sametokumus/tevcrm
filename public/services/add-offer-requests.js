@@ -98,6 +98,8 @@ async function addOfferRequest(){
         products.push(item);
     }
 
+    let owner = document.getElementById('add_offer_request_owner').value;
+    if (owner == 0){owner = null;}
     let personnel = document.getElementById('add_offer_request_authorized_personnel').value;
     if (personnel == 0){personnel = null;}
     let company = document.getElementById('add_offer_request_company').value;

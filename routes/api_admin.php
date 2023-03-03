@@ -186,6 +186,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     //Contact
+    Route::get('contact/getContacts', [ContactController::class, 'getContacts']);
     Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);
 
 

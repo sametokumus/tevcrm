@@ -17,6 +17,7 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->string('sale_id');
             $table->string('request_id');
+            $table->bigInteger('owner_id')->default(1);
             $table->bigInteger('customer_id')->default(0);
             $table->bigInteger('status_id')->default(1);
             $table->decimal('sub_total',10,2, false)->nullable();

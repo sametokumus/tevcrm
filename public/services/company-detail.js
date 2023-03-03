@@ -107,6 +107,8 @@ function checkRole(){
     return true;
 }
 async function initCompany(company_id){
+    await getCountriesAddSelectId('update_company_country');
+
     document.getElementById('update_company_form').reset();
     document.getElementById('update_company_id').value = company_id;
     let data = await serviceGetCompanyById(company_id);
@@ -118,6 +120,7 @@ async function initCompany(company_id){
     document.getElementById('update_company_phone').value = company.phone;
     document.getElementById('update_company_fax').value = company.fax;
     document.getElementById('update_company_address').value = company.address;
+    document.getElementById('update_company_country').value = company.country_id;
     document.getElementById('update_company_tax_office').value = company.tax_office;
     document.getElementById('update_company_tax_number').value = company.tax_number;
     document.getElementById('update_company_linkedin').value = company.linkedin;
@@ -159,6 +162,7 @@ async function updateCompany(){
     formData.append('phone', document.getElementById('update_company_phone').value);
     formData.append('fax', document.getElementById('update_company_fax').value);
     formData.append('address', document.getElementById('update_company_address').value);
+    formData.append('country', document.getElementById('update_company_country').value);
     formData.append('tax_office', document.getElementById('update_company_tax_office').value);
     formData.append('tax_number', document.getElementById('update_company_tax_number').value);
     formData.append('is_potential_customer', isPotential);

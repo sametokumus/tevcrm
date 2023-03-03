@@ -30,6 +30,10 @@
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="plugins/summernote/dist/summernote-lite.min.js"></script>
+<script src="plugins/select-picker/dist/picker.min.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
+<script src="plugins/highlight.js/highlight.min.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
+<script src="js/demo/highlightjs.demo.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
+<script src="js/demo/form-plugins.demo.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
 <script>
     $('.summernote').summernote({
         height: 200

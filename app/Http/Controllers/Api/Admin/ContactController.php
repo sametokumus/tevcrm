@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
 
+    public function getContacts()
+    {
+        try {
+            $contacts= Contact::query()->where('active', 1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['contacts' => $contacts]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getContactById($contact_id)
     {
         try {

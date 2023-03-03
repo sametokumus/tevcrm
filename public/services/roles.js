@@ -119,14 +119,12 @@ async function initRolePermissionsModal(role_id){
 	await initPermissionsToRolePermissionsModal();
     await initStatusesToRolePermissionsModal();
 	let data = await serviceGetAdminRolePermissions(role_id);
-	console.log(data)
 	document.getElementById('update_role_permissions_id').value = role_id;
 	$.each(data.role_permissions, function (i, role_permission) {
 		console.log('#admin_permission_'+ role_permission.admin_permission_id);
 		document.getElementById('admin_permission_'+ role_permission.admin_permission_id).checked = true;
 	});
 	let data2 = await serviceGetAdminRoleStatuses(role_id);
-	console.log(data2)
 	document.getElementById('update_role_permissions_id').value = role_id;
 	$.each(data2.role_statuses, function (i, role_status) {
 		console.log('#admin_status_permission_'+ role_status.status_id);
@@ -172,7 +170,6 @@ let clickPermissionItem = async function() {
 	let permission_id = $(this).data('id');
 	let item_id = $(this).attr('id');
 	let isChecked = document.getElementById(item_id).checked;
-	console.log(isChecked, role_id, permission_id);
 	if(isChecked){
 		await serviceGetAddAdminRolePermission(role_id, permission_id);
 	}else{
@@ -185,7 +182,6 @@ let clickStatusPermissionItem = async function() {
 	let status_id = $(this).data('id');
 	let item_id = $(this).attr('id');
 	let isChecked = document.getElementById(item_id).checked;
-	console.log(isChecked, role_id, permission_id);
 	if(isChecked){
 		await serviceGetAddAdminRoleStatus(role_id, status_id);
 	}else{
