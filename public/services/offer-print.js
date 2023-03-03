@@ -3,6 +3,11 @@
 
 	$(document).ready(function() {
 
+        $('#update_detail_form').submit(function (e){
+            e.preventDefault();
+            updateDetail();
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -11,8 +16,9 @@
 		checkRole();
 
         let offer_id = getPathVariable('offer-print');
-        await initContact(offer_id);
+        await initContact(1, offer_id);
         await initOffer(offer_id);
+        await initDetail(offer_id);
 	});
 
 })(window.jQuery);
@@ -25,9 +31,9 @@ function printOffer(){
 	window.print();
 }
 
-async function initContact(offer_id){
+async function initContact(contact_id, offer_id){
 
-    let data = await serviceGetContactById(1);
+    let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
 
     $('#offer-print #logo').append('<img src="'+ contact.logo +'">');
@@ -65,4 +71,48 @@ async function initOffer(offer_id){
         $('#offer-detail tbody').append(item);
     });
 
+}
+
+async function initDetail(offer_id){
+    let data = await serviceGetRfqDetailById(offer_id);
+    let detail = data.rfq_detail;
+
+    if (detail != null) {
+        document.getElementById('note').innerHTML = checkNull(detail.note);
+    }
+}
+
+async function openUpdateDetailModal(){
+    $("#updateDetailModal").modal('show');
+    await initUpdateDetailModal();
+}
+
+async function initUpdateDetailModal(){
+    let offer_id = getPathVariable('offer-print');
+    let data = await serviceGetRfqDetailById(offer_id);
+    let detail = data.rfq_detail;
+    console.log(detail)
+
+    if (detail != null) {
+        $('#update_offer_note').summernote('code', checkNull(detail.note));
+    }
+}
+
+async function updateDetail(){
+    let offer_id = getPathVariable('offer-print');
+    let note = $('#update_offer_note').summernote('code');
+
+    let formData = JSON.stringify({
+        "offer_id": offer_id,
+        "note": note
+    });
+    let returned = await servicePostUpdateRfqDetail(formData);
+
+    if (returned){
+        $("#update_detail_form").trigger("reset");
+        $('#updateDetailModal').modal('hide');
+        await initDetail(offer_id);
+    }else{
+        alert("Hata Oluştu");
+    }
 }

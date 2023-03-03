@@ -80,7 +80,12 @@ class OfferController extends Controller
                 ->first();
 
             $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
-            $offer['company'] = Company::query()->where('id', $offer->supplier_id)->first();
+            $offer['company'] = Company::query()
+                ->leftJoin('countries', 'countries.id', '=', 'companies.country_id')
+                ->selectRaw('companies.*, countries.lang as country_lang')
+                ->where('companies.id', $offer->supplier_id)
+                ->first();
+
             $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
             $offer_sub_total = 0;
             $offer_vat = 0;

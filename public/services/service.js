@@ -1132,6 +1132,26 @@ async function servicePostUpdateSaleOfferPrice(formData) {
     }
 }
 
+async function serviceGetRfqDetailById(id) {
+    const data = await fetchDataGet('/admin/sale/getRfqDetailById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostUpdateRfqDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/updateRfqDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 async function servicePostUpdateSaleStatus(formData) {
     const data = await fetchDataPost('/admin/sale/updateSaleStatus', formData, 'application/json');
     if (data.status == "success") {
@@ -1339,5 +1359,15 @@ async function serviceGetSaleStats() {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetLanguage(lang) {
+    const data = await fetchDataGet('/admin/language/changeLanguage/' + lang, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }

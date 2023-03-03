@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Admin\StatusController;
 use App\Http\Controllers\Api\Admin\OwnerController;
 use App\Http\Controllers\Api\Admin\NewsFeedController;
 use App\Http\Controllers\Api\Admin\MeasurementController;
+use App\Http\Controllers\Api\Admin\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ use App\Http\Controllers\Api\Admin\MeasurementController;
 */
 
 //
+Route::get('language/changeLanguage/{language_key}',[LanguageController::class,'language']);
+//Route::get('',[LanguageController::class,'emptyLanguage'])->name('front.emptyLanguage');
+
 Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
 
