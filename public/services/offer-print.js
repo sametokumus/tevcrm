@@ -52,6 +52,9 @@ async function initContact(contact_id, offer_id){
     $('#offer-print #logo img').remove();
     $('#offer-print #logo').append('<img src="'+ contact.logo +'">');
 
+    $('#print-footer img').remove();
+    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">">');
+
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

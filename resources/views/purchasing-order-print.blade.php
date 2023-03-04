@@ -12,6 +12,26 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid printable">
 
+            <div class="row justify-content-center mb-3 no-print">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Dil</label>
+                            <select class="form-control" id="lang">
+                                <option value="tr" @if(app()->getLocale() == 'tr') selected="selected" @endif>Türkçe</option>
+                                <option value="en" @if(app()->getLocale() == 'en') selected="selected" @endif>English</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="owners" onchange="changeOwner();">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row justify-content-center no-print">
                 <div class="col-md-7">
                     <form method="post" action="#" id="select_offer_form">
@@ -55,17 +75,17 @@ $extra_js='
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1 class="page-header">
-                                        Purchasing Order
+                                        {{__('Purchasing Order')}}
                                     </h1>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 supplier-col">
-                                    <h6>Supplier</h6>
+                                    <h6>{{__('Supplier')}}</h6>
                                     <address>
                                         <span id="supplier_name"></span><br>
                                         <span id="supplier_address"></span><br>
-                                        <span id="payment_term">Payment Terms: </span><br>
+                                        <span id="payment_term"><b>{{__('Payment Terms')}}:</b> </span><br>
                                     </address>
                                 </div>
                             </div>
@@ -77,11 +97,12 @@ $extra_js='
                                     <table id="offer-detail" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Ref. Code</th>
-                                            <th>Product Name</th>
-                                            <th>Quantity</th>
-                                            <th>Pcs. Price</th>
-                                            <th>Total Price</th>
+                                            <th>#</th>
+                                            <th>{{__('Ref. Code')}}</th>
+                                            <th>{{__('Product Name')}}</th>
+                                            <th>{{__('Qty')}}</th>
+                                            <th>{{__('Pcs. Price')}}</th>
+                                            <th>{{__('Total Price')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -94,29 +115,9 @@ $extra_js='
                             <!-- /.row -->
 
                             <div class="row">
-                                <div class="col-6 offset-6">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr id="sub_total">
-                                                <th>SUB TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="vat">
-                                                <th>VAT</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="grand_total">
-                                                <th>GRAND TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
                                     <p style="margin-top: 15px; margin-bottom: 0;">
-                                        Note:
+                                        {{__('Note')}}:
                                         <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
                                         <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
                                     </p>
@@ -128,25 +129,25 @@ $extra_js='
                             <div class="row mt-4">
                                 <div class="col-5">
                                     <div class="company-signature text-center">
-                                        <h6 class="title">Authorised Signature</h6>
-                                        <img src="img/owner/signature.jpg" alt="" class="signature">
-                                        <p class="name">Nazmi Serdar Selli</p>
-                                        <p class="info">Name Surname / Signature</p>
+                                        <h6 class="title">{{__('Authorised Signature')}}</h6>
+                                        <img src="#" alt="" id="signature" class="signature">
+                                        <p class="name"></p>
+                                        <p class="info">{{__('Name Surname')}} / {{__('Signature')}}</p>
                                     </div>
                                 </div>
                                 <div class="col-5 offset-2">
                                     <div class="customer-signature text-center">
-                                        <h6 class="title">Supplier Confirmation</h6>
+                                        <h6 class="title">{{__('Supplier Confirmation')}}</h6>
                                         <div class="signature"></div>
                                         <p class="name"></p>
-                                        <p class="info">Name Surname / Signature / Date</p>
+                                        <p class="info">{{__('Name Surname')}} / {{__('Signature')}} / {{__('Date')}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="margin-top: 15px; margin-bottom: 0;">
-                                        Bank Details:
+                                        {{__('Bank Details:')}}
                                         <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>
                                     </p>
                                     <div id="bank-details" class="text-muted">
@@ -155,12 +156,16 @@ $extra_js='
                                 </div>
                             </div>
                         </section>
-                        <div class="row mt-2">
+                        <div class="row">
                             <div class="col-12 d-none" id="print-buttons">
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                             </div>
+                        </div>
+                        <div class="row mt-2">
                             <div class="col-md-12 mt-3">
-                                <img src="img/owner/printable-footer.jpg" alt="" class="w-100">
+                                <div id="print-footer">
+
+                                </div>
                             </div>
                         </div>
                     </div>

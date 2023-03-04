@@ -113,6 +113,13 @@ $extra_js='
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12 mt-3">
+                                <div id="print-footer">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

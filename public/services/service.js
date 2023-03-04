@@ -37,6 +37,8 @@
 	});
 
 
+    let lng = $('meta[name="current-locale"]').attr('content');
+    Lang.setLocale(lng);
 
 })(window.jQuery);
 
@@ -45,6 +47,9 @@ $(function() {
     $('select#lang').change(function() {
         var lang = $(this).val();
         // Make an Ajax request to change the language
+        Lang.setLocale(lang);
+        console.log(lang)
+
         $.ajax({
             url: '/lang',
             type: 'POST',

@@ -61,7 +61,7 @@ $extra_js='
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1 class="page-header">
-                                        {{__('Order For Request')}}
+                                        {{__('Offer')}}
                                     </h1>
                                 </div>
                             </div>
@@ -104,30 +104,8 @@ $extra_js='
                             <!-- /.row -->
 
                             <div class="row">
-                                <div class="col-6 offset-6">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr id="sub_total">
-                                                <th>SUB TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="freight">
-                                                <th>FREIGHT</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="vat">
-                                                <th>VAT</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="grand_total">
-                                                <th>GRAND TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
-                                    <p style="margin-top: 15px; margin-bottom: 0;">Note:</p>
+                                    <p style="margin-top: 15px; margin-bottom: 0;">{{__('Note')}}:</p>
                                     <p id="note" class="text-muted">
 
                                     </p>
@@ -138,6 +116,13 @@ $extra_js='
                             <div class="col-12">
                                 <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12 mt-3">
+                                <div id="print-footer">
+
+                                </div>
                             </div>
                         </div>
                     </div>

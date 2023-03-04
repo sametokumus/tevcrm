@@ -31,13 +31,14 @@
 
         let sale_id = getPathVariable('purchasing-order-print');
         await initOfferSelect(sale_id);
-        await initContact(sale_id);
+        await initContact(1, sale_id);
         await initBankInfoSelect();
-        // await initSale(sale_id);
-        // await initQuote(sale_id);
+        await getOwnersAddSelectId('owners');
+        document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
+let short_code;
 
 function checkRole(){
 	return true;
@@ -45,6 +46,14 @@ function checkRole(){
 
 function printOffer(){
 	window.print();
+}
+
+async function changeOwner(){
+    let owner = document.getElementById('owners').value;
+    let sale_id = getPathVariable('purchasing-order-print');
+    await initOfferSelect(sale_id);
+    await initContact(owner, sale_id);
+    await initBankInfoSelect();
 }
 
 async function changeOffer(){
@@ -79,22 +88,30 @@ async function initOfferSelect(sale_id){
 
 }
 
-async function initContact(sale_id){
+async function initContact(contact_id, sale_id){
 
-    let data = await serviceGetContactById(1);
+    let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
+    short_code = contact.short_code;
 
+    $('#purchasing-order-print #logo img').remove();
     $('#purchasing-order-print #logo').append('<img src="'+ contact.logo +'">');
+
+    $('#print-footer img').remove();
+    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">">');
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
     today = dd + '/' + mm + '/' + yyyy;
-    $('#purchasing-order-print .logo-header .date').append('Date: '+ today);
-    $('#purchasing-order-print .logo-header .offer-id').append(sale_id);
+    $('#purchasing-order-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
+    // $('#purchasing-order-print .logo-header .offer-id').append(sale_id);
+    $('.company-signature .name').text(contact.authorized_name);
+    document.getElementById('signature').src = contact.signature;
 
-    $('#purchasing-order-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>Registration No:</b> '+ contact.registration_no +'<br><b>Address</b><br>'+ contact.address +'<br><b>Phone:</b> '+ contact.phone +'<br><b>Email:</b> '+ contact.email +'');
+    $('#purchasing-order-print .contact-col address').text('');
+    $('#purchasing-order-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 
 }
 
@@ -106,14 +123,18 @@ async function initOffer(offer_id){
 
     // $('#purchasing-order-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>Phone: '+ company.phone +'<br>Email: '+ company.email +'');
     document.getElementById('supplier_name').innerHTML = checkNull(company.name);
-    document.getElementById('supplier_address').innerHTML = '<b>Address :</b> '+ checkNull(company.address);
+    document.getElementById('supplier_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ checkNull(company.address);
     // document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> '+ checkNull(quote.payment_term);
+
+
+    $('#purchasing-order-print .logo-header .offer-id').text(short_code+'-PO-'+offer.global_id);
 
     $('#offer-detail tbody > tr').remove();
     let currency = "";
     $.each(offer.products, function (i, product) {
         currency = product.currency;
         let item = '<tr>\n' +
+            '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.quantity) + '</td>\n' +
@@ -123,9 +144,30 @@ async function initOffer(offer_id){
         $('#offer-detail tbody').append(item);
     });
 
-    $('#sub_total td').text(checkNull(offer.sub_total) + ' ' + currency);
-    $('#vat td').text(checkNull(offer.vat) + ' ' + currency);
-    $('#grand_total td').text(checkNull(offer.grand_total) + ' ' + currency);
+    if (offer.sub_total != null) {
+        let item = '<tr>\n' +
+            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
+            '           <td>' + checkNull(offer.sub_total) + ' '+ currency +'</td>\n' +
+            '       </tr>';
+        $('#offer-detail tbody').append(item);
+    }
+
+    if (offer.vat != null) {
+        let item = '<tr>\n' +
+            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+            '           <td>' + checkNull(offer.vat) + ' '+ currency +'</td>\n' +
+            '       </tr>';
+        $('#offer-detail tbody').append(item);
+    }
+
+    if (offer.grand_total != null) {
+        let item = '<tr>\n' +
+            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+            '           <td>' + checkNull(offer.grand_total) + ' '+ currency +'</td>\n' +
+            '       </tr>';
+        $('#offer-detail tbody').append(item);
+    }
+
 
     $('#addNoteBtn').addClass('d-none');
     $('#updateNoteBtn').addClass('d-none');
@@ -152,7 +194,6 @@ async function addNote(){
         "offer_id": offer_id,
         "note": note
     });
-    console.log(formData)
     let returned = await servicePostAddPurchasingOrderDetail(formData);
     if (returned){
         $("#add_note_form").trigger("reset");
@@ -181,7 +222,6 @@ async function updateNote(){
         "offer_id": offer_id,
         "note": note
     });
-    console.log(formData)
     let returned = await servicePostUpdatePurchasingOrderDetail(formData);
     if (returned){
         $("#update_note_form").trigger("reset");
