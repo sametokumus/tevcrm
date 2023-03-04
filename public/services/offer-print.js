@@ -11,7 +11,6 @@
 	});
 
 	$(window).load(async function() {
-
 		checkLogin();
 		checkRole();
 
@@ -38,9 +37,12 @@ async function changeOwner(){
 	let owner = document.getElementById('owners').value;
     let offer_id = getPathVariable('offer-print');
     await initContact(owner, offer_id);
+    await initOffer(offer_id);
 }
 
 async function initContact(contact_id, offer_id){
+
+
 
     let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
@@ -56,9 +58,10 @@ async function initContact(contact_id, offer_id){
     let yyyy = today.getFullYear();
     today = dd + '/' + mm + '/' + yyyy;
 
-    $('#offer-print .logo-header .date').text('Date: '+ today);
+
+    $('#offer-print .logo-header .date').append(today);
     $('#offer-print .contact-col address').text('');
-    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>Phone: '+ contact.phone +'<br>Email: '+ contact.email +'');
+    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>'+ contact.phone +'<br>'+ contact.email +'');
 
 }
 
@@ -69,16 +72,18 @@ async function initOffer(offer_id){
     let company = offer.company;
     console.log(offer);
 
+    $('#offer-print .supplier-col address').text('');
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');
-    $('#offer-print .logo-header .offer-id').append(short_code+'-RFQ'+offer.global_id);
+    $('#offer-print .logo-header .offer-id').text(short_code+'-RFQ-'+offer.global_id);
 
     $('#offer-detail tbody > tr').remove();
 
     $.each(offer.products, function (i, product) {
         let item = '<tr>\n' +
-            '           <td>' + checkNull(product.quantity) + '</td>\n' +
+            '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
+            '           <td>' + checkNull(product.quantity) + ' (' + checkNull(product.measurement_name) + ')</td>\n' +
             '           <td></td>\n' +
             '           <td></td>\n' +
             '       </tr>';

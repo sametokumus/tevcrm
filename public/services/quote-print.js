@@ -20,9 +20,11 @@
 		checkRole();
 
         let sale_id = getPathVariable('quote-print');
-        await initContact(sale_id);
+        await initContact(1, sale_id);
         await initSale(sale_id);
         await initQuote(sale_id);
+        await getOwnersAddSelectId('owners');
+        document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
@@ -35,9 +37,16 @@ function printOffer(){
 	window.print();
 }
 
-async function initContact(sale_id){
+async function changeOwner(){
+    let owner = document.getElementById('owners').value;
+    let sale_id = getPathVariable('quote-print');
+    await initContact(owner, sale_id);
+    await initSale(sale_id);
+}
 
-    let data = await serviceGetContactById(1);
+async function initContact(contact_id, sale_id){
+
+    let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
 
     $('#quote-print #logo').append('<img src="'+ contact.logo +'">');
@@ -60,7 +69,8 @@ async function initSale(sale_id){
     let sale = data.sale;
     let company = sale.request.company;
 
-    document.getElementById('buyer_name').innerHTML = '<b>Buyer :</b> '+ company.name;
+    // var Lang = new Lang();
+    document.getElementById('buyer_name').innerHTML = '<b>'+ new Lang.get("strings.Customer", 'tr') +' :</b> '+ company.name;
     document.getElementById('buyer_address').innerHTML = '<b>Address :</b> '+ company.address;
 
     $('#sub_total td').text(changeCommasToDecimal(sale.sub_total));
@@ -73,6 +83,7 @@ async function initSale(sale_id){
 
     $.each(sale.sale_offers, function (i, product) {
         let item = '<tr>\n' +
+            '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
             '           <td>' + checkNull(product.offer_quantity) + ' (' + checkNull(product.measurement_name) + ')</td>\n' +

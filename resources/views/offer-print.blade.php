@@ -43,15 +43,24 @@ $extra_js='
 
                             <!-- title row -->
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <div class="contact-col">
 {{--                                        <h6>Supplier</h6>--}}
                                         <address>
 
                                         </address>
                                     </div>
+                                    <h1 class="page-header">
+                                        {{__('Request For Quotation')}}
+                                    </h1>
+                                    <div class="supplier-col">
+                                        <h6>{{__('Supplier')}}</h6>
+                                        <address>
+
+                                        </address>
+                                    </div>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-6">
                                     <h2 class="logo-header">
                                         <div id="logo"></div>
                                         <small class="date"></small>
@@ -60,23 +69,6 @@ $extra_js='
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- info row -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1 class="page-header">
-                                        Request for Quotation
-                                    </h1>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 supplier-col">
-                                    <h6>Supplier</h6>
-                                    <address>
-
-                                    </address>
-                                </div>
-                            </div>
-                            <!-- /.row -->
 
                             <!-- Table row -->
                             <div class="row">
@@ -84,11 +76,12 @@ $extra_js='
                                     <table id="offer-detail" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Qty</th>
-                                            <th>Ref. Code</th>
-                                            <th>Product Name</th>
-                                            <th>Pcs. Price</th>
-                                            <th>Total Price</th>
+                                            <th>#</th>
+                                            <th>{{__('Ref. Code')}}</th>
+                                            <th>{{__('Product Name')}}</th>
+                                            <th>{{__('Qty')}}</th>
+                                            <th>{{__('Pcs. Price')}}</th>
+                                            <th>{{__('Total Price')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

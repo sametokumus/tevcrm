@@ -12,6 +12,26 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
+            <div class="row justify-content-center mb-3 no-print">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Dil</label>
+                            <select class="form-control" id="lang">
+                                <option value="tr" @if(app()->getLocale() == 'tr') selected="selected" @endif>Türkçe</option>
+                                <option value="en" @if(app()->getLocale() == 'en') selected="selected" @endif>English</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="owners" onchange="changeOwner();">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-md-7 bg-white p-md-50">
 
@@ -22,7 +42,7 @@ $extra_js='
                             <div class="row">
                                 <div class="col-6">
                                     <div class="contact-col">
-                                        <h6>Supplier</h6>
+                                        <h6>{{__('Supplier')}}</h6>
                                         <address>
 
                                         </address>
@@ -41,7 +61,7 @@ $extra_js='
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1 class="page-header">
-                                        Quote
+                                        {{__('Order For Request')}}
                                     </h1>
                                 </div>
                             </div>
@@ -66,11 +86,12 @@ $extra_js='
                                     <table id="sale-detail" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Ref. Code</th>
-                                            <th>Product Name</th>
-                                            <th>Quantity</th>
-                                            <th>Pcs. Price</th>
-                                            <th>Total Price</th>
+                                            <th>#</th>
+                                            <th>{{__('Ref. Code')}}</th>
+                                            <th>{{__('Product Name')}}</th>
+                                            <th>{{__('Qty')}}</th>
+                                            <th>{{__('Pcs. Price')}}</th>
+                                            <th>{{__('Total Price')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
