@@ -1,8 +1,6 @@
 <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade no-print"><i class="fa fa-arrow-up"></i></a>
 
 
-
-
 </div>
 
 
