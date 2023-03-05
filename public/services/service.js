@@ -1324,6 +1324,39 @@ async function servicePostUpdatePurchasingOrderDetail(formData) {
 }
 
 
+
+async function serviceGetOrderConfirmationDetailById(id) {
+    const data = await fetchDataGet('/admin/sale/getOrderConfirmationDetailById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddOrderConfirmationDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/addOrderConfirmationDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateOrderConfirmationDetail(formData) {
+    const data = await fetchDataPost('/admin/sale/updateOrderConfirmationDetail', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
 async function serviceGetProformaInvoiceDetailById(id) {
     const data = await fetchDataGet('/admin/sale/getProformaInvoiceDetailById/' + id, 'application/json');
     if (data.status == "success") {

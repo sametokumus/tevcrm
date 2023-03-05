@@ -12,6 +12,16 @@
             updateQuote();
         });
 
+        $('#add_note_form').submit(function (e){
+            e.preventDefault();
+            addNote();
+        });
+
+        $('#update_note_form').submit(function (e){
+            e.preventDefault();
+            updateNote();
+        });
+
     });
 
     $(window).load(async function() {
@@ -21,6 +31,7 @@
         let sale_id = getPathVariable('order-confirmation-print');
         await initContact(1, sale_id);
         await initSale(sale_id);
+        await initBankInfoSelect();
         await getOwnersAddSelectId('owners');
         document.getElementById('owners').value = 1;
     });
@@ -53,7 +64,7 @@ async function initContact(contact_id, sale_id){
     $('#order-confirmation-print #logo').append('<img src="'+ contact.logo +'">');
 
     $('#print-footer img').remove();
-    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">">');
+    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -62,6 +73,8 @@ async function initContact(contact_id, sale_id){
     today = dd + '/' + mm + '/' + yyyy;
     $('#order-confirmation-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
     // $('#order-confirmation-print .logo-header .offer-id').append(sale_id);
+    $('.company-signature .name').text(contact.authorized_name);
+    document.getElementById('signature').src = contact.signature;
 
     $('#order-confirmation-print .contact-col address').text('');
     $('#order-confirmation-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
@@ -129,4 +142,77 @@ async function initSale(sale_id){
         $('#sale-detail tbody').append(item);
     }
 
+}
+
+async function openAddNoteModal(){
+    $("#addNoteModal").modal('show');
+}
+async function addNote(){
+    let sale_id = getPathVariable('order-confirmation-print');
+    let note = $('#add_order_confirmation_note').summernote('code');
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "note": note
+    });
+    let returned = await servicePostAddOrderConfirmationDetail(formData);
+    if (returned){
+        $("#add_note_form").trigger("reset");
+        $("#addNoteModal").modal('hide');
+        initSale(sale_id);
+    }
+}
+
+async function openUpdateNoteModal(){
+    $("#updateNoteModal").modal('show');
+    await initUpdateNoteModal();
+}
+async function initUpdateNoteModal(){
+    $("#updateNoteModal").modal('show');
+    let sale_id = getPathVariable('order-confirmation-print');
+    let data = await serviceGetOrderConfirmationDetailById(sale_id);
+    let order_confirmation_detail = data.order_confirmation_detail;
+    $('#update_order_confirmation_note').summernote('code', order_confirmation_detail.note);
+}
+async function updateNote(){
+    let sale_id = getPathVariable('order-confirmation-print');
+    let note = $('#update_purchasing_order_note').summernote('code');
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "note": note
+    });
+    let returned = await servicePostUpdateOrderConfirmationDetail(formData);
+    if (returned){
+        $("#update_note_form").trigger("reset");
+        $('#note *').remove();
+        $("#updateNoteModal").modal('hide');
+        initSale(sale_id);
+    }
+}
+
+async function initBankInfoSelect(){
+    let data = await serviceGetBankInfos();
+    let bank_infos = data.bank_infos;
+
+    $.each(bank_infos, function (i, info) {
+        let item = '<option value="'+ info.id +'">'+ info.name +'</option>';
+        $('#select_bank_info').append(item);
+    });
+
+}
+async function openAddBankInfoModal(){
+    $("#addBankInfoModal").modal('show');
+}
+async function changeBankInfo(){
+    $('#bank-details *').remove();
+
+    let bank_id = document.getElementById('select_bank_info').value;
+    if(bank_id == 0){
+        return false;
+    }else{
+        let data = await serviceGetBankInfoById(bank_id);
+        let info = data.bank_info;
+        $('#bank-details').append(info.detail);
+    }
+
+    $("#addBankInfoModal").modal('hide');
 }

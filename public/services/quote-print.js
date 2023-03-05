@@ -57,7 +57,7 @@ async function initContact(contact_id, sale_id){
     $('#quote-print #logo').append('<img src="'+ contact.logo +'">');
 
     $('#print-footer img').remove();
-    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">">');
+    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');

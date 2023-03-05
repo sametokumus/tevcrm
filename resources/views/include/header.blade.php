@@ -96,7 +96,7 @@ $extra_js="";
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
-                    <a class="dropdown-item d-flex align-items-center" href="#">PROFILE <i
+                    <a class="dropdown-item d-flex align-items-center" href="#">Profilim <i
                             class="bi bi-person-circle ms-auto text-theme fs-16px my-n1"></i></a>
 {{--                    <a class="dropdown-item d-flex align-items-center" href="#">INBOX <i--}}
 {{--                            class="bi bi-envelope ms-auto text-theme fs-16px my-n1"></i></a>--}}
@@ -105,7 +105,7 @@ $extra_js="";
 {{--                    <a class="dropdown-item d-flex align-items-center" href="#">SETTINGS <i--}}
 {{--                            class="bi bi-gear ms-auto text-theme fs-16px my-n1"></i></a>--}}
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item d-flex align-items-center navbar-logout" href="#">LOGOUT <i
+                    <a class="dropdown-item d-flex align-items-center navbar-logout" href="#">Çıkış <i
                             class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
                 </div>
             </div>

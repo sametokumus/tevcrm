@@ -22,13 +22,16 @@
     "Sub Total" : "Sub Total",
     "Freight" : "Freight",
     "Vat" : "Vat",
+    "Shipping" : "Shipping",
     "Grand Total" : "Grand Total",
     "Purchasing Order" : "Purchasing Order",
+    "Order Confirmation" : "Order Confirmation",
     "Bank Details" : "Bank Details",
     "Authorised Signature" : "Authorised Signature",
     "Supplier Confirmation" : "Supplier Confirmation",
+    "Customer Confirmation" : "Customer Confirmation",
     "Name Surname" : "Name Surname",
     "Signature" : "Signature",
-    "" : "",
-    "" : ""
+    "Proforma Invoice" : "Proforma Invoice",
+    "Invoice" : "Invoice"
 }

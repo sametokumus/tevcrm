@@ -22,13 +22,16 @@
     "Sub Total" : "Ara Toplam",
     "Freight" : "Navlun",
     "Vat" : "KDV",
+    "Shipping" : "Kargo Bedeli",
     "Grand Total" : "Toplam",
     "Purchasing Order" : "Sipariş",
+    "Order Confirmation" : "Sipariş Onayı",
     "Bank Details" : "Banka Bilgileri",
     "Authorised Signature" : "Yetkili İmza",
     "Supplier Confirmation" : "Tedarikçi Onayı",
+    "Customer Confirmation" : "Müşteri Onayı",
     "Name Surname" : "Ad Soyad",
     "Signature" : "İmza",
-    "" : "",
-    "" : ""
+    "Proforma Invoice" : "Proforma Fatura",
+    "Invoice" : "Fatura"
 }

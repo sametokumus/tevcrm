@@ -12,6 +12,26 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid printable">
 
+            <div class="row justify-content-center mb-3 no-print">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Dil</label>
+                            <select class="form-control" id="lang">
+                                <option value="tr" @if(app()->getLocale() == 'tr') selected="selected" @endif>Türkçe</option>
+                                <option value="en" @if(app()->getLocale() == 'en') selected="selected" @endif>English</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="owners" onchange="changeOwner();">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-md-7 bg-white p-md-50">
 
@@ -22,9 +42,23 @@ $extra_js='
                             <div class="row">
                                 <div class="col-6">
                                     <div class="contact-col">
-                                        <h6>Supplier</h6>
+{{--                                        <h6>{{__('Supplier')}}</h6>--}}
                                         <address>
 
+                                        </address>
+                                    </div>
+                                    <h1 class="page-header">
+                                        {{__('Invoice')}}
+                                    </h1>
+                                    <div class="buyer-col">
+                                        <h6>{{__('Customer')}}</h6>
+                                        <address>
+                                            <span id="buyer_name"></span><br>
+                                            <span id="buyer_registration_number"></span><br>
+                                            <span id="buyer_address"></span><br>
+                                            <span id="buyer_phone"></span><br>
+                                            <span id="buyer_email"></span><br>
+                                            <span id="payment_term"></span><br>
                                         </address>
                                     </div>
                                 </div>
@@ -38,24 +72,6 @@ $extra_js='
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1 class="page-header">
-                                        Invoice
-                                    </h1>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 buyer-col">
-                                    <h6>Customer</h6>
-                                    <address>
-                                        <span id="buyer_name"></span><br>
-                                        <span id="buyer_address"></span><br>
-                                        <span id="payment_term"></span><br>
-                                    </address>
-                                </div>
-                            </div>
-                            <!-- /.row -->
 
                             <!-- Table row -->
                             <div class="row">
@@ -63,11 +79,12 @@ $extra_js='
                                     <table id="sale-detail" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Ref. Code</th>
-                                            <th>Product Name</th>
-                                            <th>Quantity</th>
-                                            <th>Pcs. Price</th>
-                                            <th>Total Price</th>
+                                            <th>#</th>
+                                            <th>{{__('Ref. Code')}}</th>
+                                            <th>{{__('Product Name')}}</th>
+                                            <th>{{__('Qty')}}</th>
+                                            <th>{{__('Pcs. Price')}}</th>
+                                            <th>{{__('Total Price')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -80,41 +97,9 @@ $extra_js='
                             <!-- /.row -->
 
                             <div class="row">
-                                <div class="col-6 offset-6">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr id="sub_total">
-                                                <th>SUB TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="freight">
-                                                <th>FREIGHT</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="vat">
-                                                <th>VAT</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="grand_total">
-                                                <th>SUB TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="shipping">
-                                                <th>SHIPPING</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr id="grand_total_with_shipping">
-                                                <th>GRAND TOTAL</th>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
                                     <p style="margin-top: 15px; margin-bottom: 0;">
-                                        Note:
+                                        {{__('Note')}}:
                                         <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
                                         <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
                                     </p>
@@ -126,7 +111,7 @@ $extra_js='
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="margin-top: 15px; margin-bottom: 0;">
-                                        Bank Details:
+                                        {{__('Bank Details')}}:
                                         <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>
                                     </p>
                                     <div id="bank-details" class="text-muted">
@@ -141,7 +126,9 @@ $extra_js='
                                 <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <img src="img/owner/printable-footer.jpg" alt="" class="w-100">
+                                <div id="print-footer">
+
+                                </div>
                             </div>
                         </div>
                     </div>
