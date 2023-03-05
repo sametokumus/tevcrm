@@ -30,10 +30,8 @@
 	});
 
 
-	$(window).load( function() {
-
-		checkLogin();
-
+	$(window).on('load',function() {
+		// checkLogin();
 	});
 
 

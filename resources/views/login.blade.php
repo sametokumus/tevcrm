@@ -53,6 +53,7 @@
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
 
 <!-- SERVICE JS -->
+<script src="messages.js"></script>
 <script src="services/service.js"></script>
 <script src="services/login.js"></script>
 
