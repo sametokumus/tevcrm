@@ -72,7 +72,7 @@ class AuthController extends Controller
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         } catch (\Exception $exception) {
             if ($exception->getMessage() == 'auth-001') {
                 return response(['message' => 'Eposta veya şifre hatalı.', 'status' => 'auth-001']);
