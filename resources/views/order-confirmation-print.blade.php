@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/quote-print.js"></script>
+<script src="services/order-confirmation-print.js"></script>
 ';
 ?>
 
@@ -37,28 +37,25 @@ $extra_js='
 
                     <div class="wrapper">
                         <!-- Main content -->
-                        <section id="quote-print" class="print-color">
+                        <section id="order-confirmation-print" class="print-color">
                             <!-- title row -->
                             <div class="row">
                                 <div class="col-6">
                                     <div class="contact-col">
-                                        <h6>{{__('Supplier')}}</h6>
                                         <address>
 
                                         </address>
                                     </div>
                                     <h1 class="page-header">
-                                        {{__('Offer')}}
+                                        {{__('Order Confirmation')}}
                                     </h1>
-                                    <div class="col-sm-6 buyer-col">
-                                        {{--                                    <h6>Supplier</h6>--}}
+                                    <div class="buyer-col">
                                         <address>
                                             <span id="buyer_name"></span><br>
+                                            <span id="buyer_registration_number"></span><br>
                                             <span id="buyer_address"></span><br>
-                                            <span id="payment_term"></span><br>
-                                            <span id="lead_time"></span><br>
-                                            <span id="delivery_term"></span><br>
-                                            <span id="country_of_destination"></span><br>
+                                            <span id="buyer_phone"></span><br>
+                                            <span id="buyer_email"></span><br>
                                         </address>
                                     </div>
                                 </div>

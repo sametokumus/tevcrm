@@ -65,7 +65,7 @@ table tr.selected{
 
 /* OFFER PRINT */
 #offer-print #logo img{
-    width: 120px;
+    width: 180px;
 }
 #offer-print .contact-col{
     margin-top: 30px;
@@ -92,7 +92,7 @@ table tr.selected{
 
 /* QUOTE PRINT */
 #quote-print #logo img{
-    width: 120px;
+    width: 180px;
 }
 #quote-print .contact-col{
     margin-top: 40px;
@@ -119,7 +119,7 @@ table tr.selected{
 
 /* PURCHASING ORDER PRINT */
 #purchasing-order-print #logo img{
-    width: 120px;
+    width: 180px;
 }
 #purchasing-order-print .contact-col{
     margin-top: 40px;
@@ -148,12 +148,45 @@ table tr.selected{
 }
 
 
+/* ORDER CONFIRMATION PRINT */
+#order-confirmation-print #logo img{
+    width: 180px;
+}
+#order-confirmation-print .contact-col{
+    margin-top: 40px;
+}
+#order-confirmation-print .logo-header{
+    text-align: right;
+}
+#order-confirmation-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#order-confirmation-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#order-confirmation-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+#order-confirmation-print #note *{
+    margin: 0;
+}
+
+
 #bank-details table{
     width: 100% !important;
     margin-top: 10px;
     font-size: 12px;
 }
 #bank-details table tr{
+    font-size: 10px;
+    font-weight: 300;
 }
 #bank-details table td{
     border: 1px solid rgba(255, 255, 255, 0.3);

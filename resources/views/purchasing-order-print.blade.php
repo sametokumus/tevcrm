@@ -61,6 +61,17 @@ $extra_js='
 
                                         </address>
                                     </div>
+                                    <h1 class="page-header">
+                                        {{__('Purchasing Order')}}
+                                    </h1>
+                                    <div class="supplier-col">
+                                        <h6>{{__('Supplier')}}</h6>
+                                        <address>
+                                            <span id="supplier_name"></span><br>
+                                            <span id="supplier_address"></span><br>
+                                            <span id="payment_term"><b>{{__('Payment Terms')}}:</b> </span><br>
+                                        </address>
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <h2 class="logo-header">
@@ -72,24 +83,6 @@ $extra_js='
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1 class="page-header">
-                                        {{__('Purchasing Order')}}
-                                    </h1>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 supplier-col">
-                                    <h6>{{__('Supplier')}}</h6>
-                                    <address>
-                                        <span id="supplier_name"></span><br>
-                                        <span id="supplier_address"></span><br>
-                                        <span id="payment_term"><b>{{__('Payment Terms')}}:</b> </span><br>
-                                    </address>
-                                </div>
-                            </div>
-                            <!-- /.row -->
 
                             <!-- Table row -->
                             <div class="row">
