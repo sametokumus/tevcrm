@@ -9,7 +9,6 @@
 
 		 $( "#login_form" ).submit(function( event ) {
 		 	event.preventDefault();
-             alert('sdas')
 			let userEmail = document.getElementById('login_email').value;
 			let userPass = document.getElementById('login_password').value;
 
@@ -17,14 +16,11 @@
 				"email": userEmail,
 				"password": userPass
 			});
-             console.log(formData)
 
 			fetchDataPost('/admin/login', formData, 'application/json').then(data=>{
-                console.log(data)
 				if(data.status == "success"){
 					let __userInfo = data.object.admin;
 
-						console.log(__userInfo);
 						localStorage.setItem('userRole',__userInfo.admin_role_id);
 						localStorage.setItem('userId',__userInfo.id);
 						localStorage.setItem('userEmail',__userInfo.email);
@@ -37,12 +33,10 @@
 								localStorage.setItem('userLogin',newhash);
 
 								var rel = getURLParam('rel');
-                                console.log(rel)
-								// console.log(__userInfo.user_type)
 								if(rel != null && rel=="xxx"){
 									window.location.href = "xxx?id=";
 								}else{
-									window.location.href = "dashboard";
+									window.location.href = "news-feed";
 								}
 							}
 							hashpw(hash, salt, result, function() {});
