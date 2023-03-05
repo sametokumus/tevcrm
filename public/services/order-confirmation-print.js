@@ -21,7 +21,6 @@
         let sale_id = getPathVariable('order-confirmation-print');
         await initContact(1, sale_id);
         await initSale(sale_id);
-        await initQuote(sale_id);
         await getOwnersAddSelectId('owners');
         document.getElementById('owners').value = 1;
     });
@@ -130,69 +129,4 @@ async function initSale(sale_id){
         $('#sale-detail tbody').append(item);
     }
 
-}
-
-async function initQuote(sale_id){
-    let data = await serviceGetQuoteBySaleId(sale_id);
-    let quote = data.quote;
-
-    document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(quote.payment_term);
-    document.getElementById('lead_time').innerHTML = '<b>'+ Lang.get("strings.Lead Time") +' :</b> '+ checkNull(quote.lead_time);
-    document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
-    document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
-    document.getElementById('note').innerHTML = checkNull(quote.note);
-}
-
-async function openUpdateQuoteModal(){
-    $("#updateQuoteModal").modal('show');
-    await initUpdateQuoteModal();
-}
-
-async function initUpdateQuoteModal(){
-    let sale_id = getPathVariable('order-confirmation-print');
-    let data = await serviceGetQuoteBySaleId(sale_id);
-    let quote = data.quote;
-    console.log(quote)
-
-    document.getElementById('update_quote_id').value = quote.id;
-    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
-    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
-    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
-    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
-    document.getElementById('update_quote_freight').value = checkNull(quote.freight);
-    document.getElementById('update_quote_note').value = checkNull(quote.note);
-}
-
-async function updateQuote(){
-    let sale_id = getPathVariable('order-confirmation-print');
-    let quote_id = document.getElementById('update_quote_id').value;
-    let payment_term = document.getElementById('update_quote_payment_term').value;
-    let lead_time = document.getElementById('update_quote_lead_time').value;
-    let delivery_term = document.getElementById('update_quote_delivery_term').value;
-    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
-    let freight = document.getElementById('update_quote_freight').value;
-    let note = document.getElementById('update_quote_note').value;
-
-    let formData = JSON.stringify({
-        "sale_id": sale_id,
-        "quote_id": quote_id,
-        "payment_term": payment_term,
-        "lead_time": lead_time,
-        "delivery_term": delivery_term,
-        "country_of_destination": country_of_destination,
-        "freight": changePriceToDecimal(freight),
-        "note": note
-    });
-
-    console.log(formData);
-
-    let returned = await servicePostUpdateQuote(formData);
-    if (returned){
-        $("#update_quote_form").trigger("reset");
-        $('#updateQuoteModal').modal('hide');
-        await initSale(sale_id);
-        await initQuote(sale_id);
-    }else{
-        alert("Hata Oluştu");
-    }
 }

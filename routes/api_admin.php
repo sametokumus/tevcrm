@@ -186,6 +186,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/addPurchasingOrderDetail', [SaleController::class, 'addPurchasingOrderDetail']);
     Route::post('sale/updatePurchasingOrderDetail', [SaleController::class, 'updatePurchasingOrderDetail']);
 
+    //Order Confirmation Detail
+    Route::get('sale/getOrderConfirmationDetailById/{sale_id}', [SaleController::class, 'getOrderConfirmationDetailById']);
+    Route::post('sale/addOrderConfirmationDetail', [SaleController::class, 'addOrderConfirmationDetail']);
+    Route::post('sale/updateOrderConfirmationDetail', [SaleController::class, 'updateOrderConfirmationDetail']);
+
     //Proforma Invoice Detail
     Route::get('sale/getProformaInvoiceDetailById/{sale_id}', [SaleController::class, 'getProformaInvoiceDetailById']);
     Route::post('sale/updateProformaInvoiceDetail', [SaleController::class, 'updateProformaInvoiceDetail']);

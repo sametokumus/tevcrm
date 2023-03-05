@@ -12,6 +12,7 @@ use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\OrderConfirmationDetail;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -451,6 +452,60 @@ class SaleController extends Controller
                 'note' => 'required',
             ]);
             PurchasingOrderDetails::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->update([
+                'note' => $request->note
+            ]);
+
+            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getOrderConfirmationDetailById($sale_id)
+    {
+        try {
+            $order_confirmation_detail = OrderConfirmationDetail::query()->where('sale_id', $sale_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['order_confirmation_detail' => $order_confirmation_detail]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addOrderConfirmationDetail(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'note' => 'required',
+            ]);
+            OrderConfirmationDetail::query()->insert([
+                'sale_id' => $request->sale_id,
+                'note' => $request->note
+            ]);
+
+            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateOrderConfirmationDetail(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'note' => 'required',
+            ]);
+            OrderConfirmationDetail::query()->where('sale_id', $request->sale_id)->update([
                 'note' => $request->note
             ]);
 
