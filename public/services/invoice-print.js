@@ -94,7 +94,7 @@ async function initSale(sale_id){
             '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_quantity) + '</td>\n' +
+            '           <td>' + checkNull(product.offer_quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td>' + checkNull(product.offer_pcs_price) + ' '+ product.currency +'</td>\n' +
             '           <td>' + checkNull(product.offer_price) + ' '+ product.currency +'</td>\n' +
             '       </tr>';

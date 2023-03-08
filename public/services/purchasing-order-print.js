@@ -137,7 +137,7 @@ async function initOffer(offer_id){
             '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.quantity) + '</td>\n' +
+            '           <td>' + checkNull(product.quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td>' + checkNull(product.pcs_price) + ' '+ product.currency +'</td>\n' +
             '           <td>' + checkNull(product.total_price) + ' '+ product.currency +'</td>\n' +
             '       </tr>';

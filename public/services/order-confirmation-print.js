@@ -103,7 +103,7 @@ async function initSale(sale_id){
             '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_quantity) + ' (' + checkNull(product.measurement_name) + ')</td>\n' +
+            '           <td>' + checkNull(product.offer_quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td>' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
             '           <td>' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
             '       </tr>';
