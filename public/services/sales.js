@@ -34,6 +34,7 @@ async function initSales(){
 
 	console.log(data)
 	$.each(data.sales, function (i, sale) {
+        console.log(sale)
         let updated_at = "-";
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
@@ -83,12 +84,17 @@ async function initSales(){
                 price = sale.grand_total;
             }
         }
+        let employee_name = '';
+        if (sale.request.company_employee != null){
+            employee_name = sale.request.company_employee.name;
+        }
+
         let saleItem = '<tr>\n' +
             '              <td>'+ (i+1)+'</td>\n' +
 			'              <td>'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
 			'              <td>'+ sale.request.authorized_personnel.name +' '+ sale.request.authorized_personnel.surname +'</td>\n' +
 			'              <td>'+ sale.request.company.name +'</td>\n' +
-			'              <td>'+ sale.request.company_employee.name +'</td>\n' +
+			'              <td>'+ employee_name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
