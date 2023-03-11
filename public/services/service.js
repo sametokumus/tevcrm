@@ -1429,7 +1429,7 @@ async function serviceGetLanguage(lang) {
 
 
 async function serviceGetBrands() {
-    const data = await fetchDataGet('/v1/brand/getBrands', 'application/json');
+    const data = await fetchDataGet('/admin/brand/getBrands', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -1438,7 +1438,7 @@ async function serviceGetBrands() {
 }
 
 async function serviceGetBrandById(brandId) {
-    const data = await fetchDataGet('/v1/brand/getBrandById/' + brandId, 'application/json');
+    const data = await fetchDataGet('/admin/brand/getBrandById/' + brandId, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

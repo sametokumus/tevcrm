@@ -31,7 +31,7 @@ $extra_js='
                                 <div class="row p-3">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Marka Adı</label>
-                                        <input type="text" class="form-control" id="add_brand_name">
+                                        <input type="text" class="form-control" id="brand_name">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">&nbsp;</label>

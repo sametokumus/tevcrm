@@ -221,6 +221,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
     Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
     Route::post('brand/updateBrand', [BrandController::class, 'updateBrand']);
-    Route::get('brand/deleteBrand/{id}', [OwnBrandControllererController::class, 'deleteBrand']);
+    Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
 });
 
