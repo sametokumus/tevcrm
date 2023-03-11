@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Measurement;
@@ -94,7 +95,7 @@ class OfferRequestController extends Controller
                     if ($has_category){
                         $category_id = $has_category->id;
                     }else{
-                        $category_id = Brand::query()->insertGetId([
+                        $category_id = Category::query()->insertGetId([
                            'parent_id' => 0,
                            'name' => $product['category']
                         ]);

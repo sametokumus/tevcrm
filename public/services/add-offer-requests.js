@@ -29,7 +29,7 @@
                 return false;
             }
             console.log(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
-            // addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
+            addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
         });
 	});
 
