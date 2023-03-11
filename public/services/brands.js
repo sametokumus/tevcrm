@@ -106,6 +106,7 @@ async function initBrandModal(brand_id){
 	let data = await serviceGetBrandById(brand_id);
 	let brand = data.brands;
 	document.getElementById('update_brand_id').value = brand.id;
+    document.getElementById('update_brand_name').value = brand.name;
 }
 
 async function deleteBrand(brand_id){

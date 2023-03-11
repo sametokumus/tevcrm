@@ -69,4 +69,30 @@ $extra_js='
 </div>
 <!--app-content close-->
 
+<div class="modal modal-cover fade" id="updateBrandModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">MARKA GÜNCELLEME</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_brand_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <input type="hidden" class="form-control" id="update_brand_id">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Marka Adı</label>
+                            <input type="text" class="form-control" id="update_brand_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @include('include.footer')
