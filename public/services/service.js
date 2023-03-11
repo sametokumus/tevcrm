@@ -1464,3 +1464,65 @@ async function serviceGetDeleteBrand(brandId) {
         return false;
     }
 }
+
+
+
+async function serviceGetCategories() {
+    const data = await fetchDataGet('/admin/category/getCategory', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCategoryById(category_id) {
+    const data = await fetchDataGet('/admin/category/getCategoryById/' + category_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetParentCategories() {
+    const data = await fetchDataGet('/admin/category/getParentCategory', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddCategory(formData) {
+    const data = await fetchDataPost('/admin/category/addCategory', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateCategory(formData, category_id) {
+    const data = await fetchDataPost('/admin/category/updateCategory/' + category_id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetDeleteCategory(categoryId) {
+    const data = await fetchDataGet('/admin/category/deleteCategory/' + categoryId, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

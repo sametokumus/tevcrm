@@ -222,5 +222,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
     Route::post('brand/updateBrand/{id}', [BrandController::class, 'updateBrand']);
     Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
+
+    //Category
+    Route::get('category/getCategory', [CategoryController::class, 'getCategory']);
+    Route::get('category/getCategoryById/{id}', [CategoryController::class, 'getCategoryById']);
+    Route::get('category/getParentCategory', [CategoryController::class, 'getParentCategory']);
+    Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
+    Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
+    Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
 });
 

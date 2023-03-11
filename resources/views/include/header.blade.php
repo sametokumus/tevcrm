@@ -201,7 +201,13 @@ $extra_js="";
                 <div class="menu-item @if( Request::segment(1)== 'brands' ) active @endif">
                     <a href="/brands" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
-                        <span class="menu-text">Ayarlar</span>
+                        <span class="menu-text">Markalar</span>
+                    </a>
+                </div>
+                <div class="menu-item @if( Request::segment(1)== 'categories' ) active @endif">
+                    <a href="/categories" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gear"></i></span>
+                        <span class="menu-text">Ürün Grupları</span>
                     </a>
                 </div>
 

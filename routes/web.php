@@ -48,6 +48,7 @@ Route::get('/invoice-print/{sale_id}', function () { return view('invoice-print'
 Route::get('/settings', function () { return view('settings'); });
 
 Route::get('/brands', function () { return view('brands'); });
+Route::get('/categories', function () { return view('categories'); });
 
 
 Route::post('/lang', function(Request $request) {

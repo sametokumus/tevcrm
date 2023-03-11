@@ -1,0 +1,131 @@
+(function($) {
+    "use strict";
+
+    $(document).ready(function() {
+
+        $('#add_category_form').submit(function (e){
+            e.preventDefault();
+            addCategory();
+        });
+        $('#update_category_form').submit(function (e){
+            e.preventDefault();
+            updateCategory();
+        });
+
+    });
+
+    $(window).load( function() {
+
+        checkLogin();
+        checkRole();
+        initParentCategoryList();
+        initCategoryView();
+
+    });
+
+})(window.jQuery);
+
+function checkRole(){
+    return true;
+}
+
+function openCategoryModal(category_id){
+    $('#updateCategoryModal').modal('show');
+    initCategoryModal(category_id);
+}
+async function initParentCategoryList(){
+    $('#parent_category option').remove();
+    $('#update_parent_category option').remove();
+    $('#parent_category').append('<option value="0">Ana Kategori Olarak Ekle</option>');
+    $('#update_parent_category').append('<option value="0">Ana Kategori Olarak Ekle</option>');
+    let data = await serviceGetParentCategories();
+    $.each(data.categories, function (i, category) {
+        var categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
+
+        $('#parent_category').append(categoryItem);
+        $('#update_parent_category').append(categoryItem);
+
+    });
+}
+async function initCategoryView(){
+    $('#category_view > li').remove();
+    let data = await serviceGetCategories();
+    $.each(data.categories, function (i, category) {
+        if ((category.sub_categories.length == 0)){
+            let categoryItem = '<li>'+ category.name +
+                '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
+                '</li>';
+            $('#category_view').append(categoryItem);
+        }else{
+            let categoryItem = '<li>'+ category.name +'\n' +
+                '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
+                '               	<ul>';
+            $.each(category.sub_categories, function (i, sub_category) {
+                categoryItem = categoryItem + '<li>'+ sub_category.name +
+                    '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ sub_category.id +'\')">Sil</a>' +
+                    '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ sub_category.id +'\')">Güncelle</a>' +
+                    '</li>';
+            });
+            categoryItem = categoryItem + '</ul>\n' +
+                '       </li>';
+            $('#category_view').append(categoryItem);
+        }
+    });
+    $('#category_view').treed();
+}
+async function initCategoryModal(category_id){
+    let data = await serviceGetCategoryById(category_id);
+    let category = data.category;
+    document.getElementById('update_parent_category').value = category.parent_id;
+    document.getElementById('update_category_id').value = category.id;
+    document.getElementById('update_category_name').value = category.name;
+    document.getElementById('update_category_slug').value = category.slug;
+}
+
+
+
+async function addCategory(){
+    let parent_id = document.getElementById('parent_category').value;
+    let category_name = document.getElementById('category_name').value;
+    let category_slug = document.getElementById('category_slug').value;
+    let formData = JSON.stringify({
+        "parent_id": parent_id,
+        "name": category_name,
+        "slug": category_slug
+    });
+    let returned = await servicePostAddCategory(formData);
+    if(returned){
+        $("#add_category_form").trigger("reset");
+        initParentCategoryList();
+        initCategoryView();
+    }
+}
+async function updateCategory(){
+    let parent_id = document.getElementById('update_parent_category').value;
+    let category_id = document.getElementById('update_category_id').value;
+    let category_name = document.getElementById('update_category_name').value;
+    let category_slug = document.getElementById('update_category_slug').value;
+    let formData = JSON.stringify({
+        "parent_id": parent_id,
+        "name": category_name,
+        "slug": category_slug
+    });
+    console.log(formData)
+    let returned = await servicePostUpdateCategory(formData, category_id);
+    console.log(returned)
+    if(returned){
+        $("#update_category_form").trigger("reset");
+        $('#updateCategoryModal').modal('hide');
+        initParentCategoryList();
+        initCategoryView();
+    }
+}
+async function deleteCategory(categoryId){
+    let returned = await serviceGetDeleteCategory(categoryId);
+    if(returned){
+        initParentCategoryList();
+        initCategoryView();
+    }
+}
