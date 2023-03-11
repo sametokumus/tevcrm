@@ -23,12 +23,55 @@ $extra_js='
             <form method="post" action="#" id="add_offer_request_form">
                 <div class="row">
 
-                    <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="card border-theme mb-3">
+                            <div class="card-body">
+                                <input type="hidden" class="form-control" id="add_offer_request_product_count" value="0">
+                                <div class="row p-3">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Talep Gelen Firma</label>
+                                        <select class="form-control" id="add_offer_request_owner">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Yetkili Satış Temsilcisi</label>
+                                        <select class="form-control" id="add_offer_request_authorized_personnel">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Müşteri</label>
+                                        <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Müşteri Yetkilisi</label>
+                                        <select class="form-control" id="add_offer_request_company_employee">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="position: relative; z-index: 9999;">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">Ref. Code</label>
+                                        <label class="form-label">Üretici Parça Numarası (Ref. Code)</label>
                                         <input type="text" class="form-control" id="add_offer_request_product_refcode">
                                     </div>
                                     <div class="col-md-5 mb-3">
@@ -37,13 +80,29 @@ $extra_js='
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Miktar</label>
-                                        <input type="number" class="form-control" id="add_offer_request_product_quantity" value="0">
+                                        <input type="number" class="form-control" id="add_offer_request_product_quantity" value="1" min="1">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Birim</label>
                                         <select class="form-control" id="add_offer_request_product_measurement">
 
                                         </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Marka</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_brand" />
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_product_category" />
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Müşteri Stok Kodu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Firma Stok Kodu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">&nbsp;</label>
@@ -58,6 +117,9 @@ $extra_js='
                                 <div class="card-arrow-bottom-right"></div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
                                 <table id="offer-request-products" class="table table-bordered key-buttons border-bottom">
@@ -75,49 +137,6 @@ $extra_js='
 
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="card-arrow">
-                                <div class="card-arrow-top-left"></div>
-                                <div class="card-arrow-top-right"></div>
-                                <div class="card-arrow-bottom-left"></div>
-                                <div class="card-arrow-bottom-right"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card border-theme mb-3">
-                            <div class="card-body">
-                                <input type="hidden" class="form-control" id="add_offer_request_product_count" value="0">
-                                <div class="row p-3">
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Talep Gelen Firma</label>
-                                        <select class="form-control" id="add_offer_request_owner">
-
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Yetkili Satış Temsilcisi</label>
-                                        <select class="form-control" id="add_offer_request_authorized_personnel">
-
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Müşteri</label>
-                                        <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
-
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Müşteri Yetkilisi</label>
-                                        <select class="form-control" id="add_offer_request_company_employee">
-
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <button type="submit" class="btn btn-theme w-100">Kaydet</button>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-arrow">
                                 <div class="card-arrow-top-left"></div>

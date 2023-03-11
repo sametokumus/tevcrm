@@ -97,6 +97,9 @@ async function initContact(contact_id, sale_id){
     $('#purchasing-order-print #logo img').remove();
     $('#purchasing-order-print #logo').append('<img src="'+ contact.logo +'">');
 
+    if (contact_id == 1){
+        $('#print-footer').addClass('lenis-footer');
+    }
     $('#print-footer img').remove();
     $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
@@ -134,19 +137,20 @@ async function initOffer(offer_id){
     $.each(offer.products, function (i, product) {
         currency = product.currency;
         let item = '<tr>\n' +
-            '           <td>' + (i+1) + '</td>\n' +
-            '           <td>' + checkNull(product.ref_code) + '</td>\n' +
-            '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td>' + checkNull(product.pcs_price) + ' '+ product.currency +'</td>\n' +
-            '           <td>' + checkNull(product.total_price) + ' '+ product.currency +'</td>\n' +
+            '           <td class="text-center">' + (i+1) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.ref_code) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.quantity) + '</td>\n' +
+            '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.pcs_price) + ' '+ product.currency +'</td>\n' +
+            '           <td class="text-center">' + checkNull(product.total_price) + ' '+ product.currency +'</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
     });
 
     if (offer.sub_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
             '           <td>' + checkNull(offer.sub_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
@@ -154,7 +158,7 @@ async function initOffer(offer_id){
 
     if (offer.vat != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
             '           <td>' + checkNull(offer.vat) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
@@ -162,7 +166,7 @@ async function initOffer(offer_id){
 
     if (offer.grand_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
             '           <td>' + checkNull(offer.grand_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);

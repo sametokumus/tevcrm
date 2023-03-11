@@ -21,6 +21,8 @@ use App\Http\Controllers\Api\Admin\OwnerController;
 use App\Http\Controllers\Api\Admin\NewsFeedController;
 use App\Http\Controllers\Api\Admin\MeasurementController;
 use App\Http\Controllers\Api\Admin\LanguageController;
+use App\Http\Controllers\Api\Admin\BrandController;
+use App\Http\Controllers\Api\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,5 +216,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('newsFeed/getTopRequestedProducts', [NewsFeedController::class, 'getTopRequestedProducts']);
     Route::get('newsFeed/getSaleStats', [NewsFeedController::class, 'getSaleStats']);
 
+    //Brand
+    Route::get('brand/getBrands', [BrandController::class, 'getBrands']);
+    Route::get('brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
+    Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
+    Route::post('brand/updateBrand', [BrandController::class, 'updateBrand']);
+    Route::get('brand/deleteBrand/{id}', [OwnBrandControllererController::class, 'deleteBrand']);
 });
 

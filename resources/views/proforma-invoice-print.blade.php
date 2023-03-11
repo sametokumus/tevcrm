@@ -79,12 +79,13 @@ $extra_js='
                                     <table id="sale-detail" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>{{__('Ref. Code')}}</th>
-                                            <th>{{__('Product Name')}}</th>
-                                            <th>{{__('Qty')}}</th>
-                                            <th>{{__('Pcs. Price')}}</th>
-                                            <th>{{__('Total Price')}}</th>
+                                            <th class="text-center">N#</th>
+                                            <th class="text-center">{{__('Ref. Code')}}</th>
+                                            <th class="text-center">{{__('Product Name')}}</th>
+                                            <th class="text-center">{{__('Qty')}}</th>
+                                            <th class="text-center">{{__('Unit')}}</th>
+                                            <th class="text-center">{{__('Unit Price')}}</th>
+                                            <th class="text-center">{{__('Total Price')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

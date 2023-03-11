@@ -56,6 +56,9 @@ async function initContact(contact_id, sale_id){
     $('#quote-print #logo img').remove();
     $('#quote-print #logo').append('<img src="'+ contact.logo +'">');
 
+    if (contact_id == 1){
+        $('#print-footer').addClass('lenis-footer');
+    }
     $('#print-footer img').remove();
     $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
@@ -88,44 +91,45 @@ async function initSale(sale_id){
     $.each(sale.sale_offers, function (i, product) {
         currency = product.currency;
         let item = '<tr>\n' +
-            '           <td>' + (i+1) + '</td>\n' +
-            '           <td>' + checkNull(product.product_ref_code) + '</td>\n' +
-            '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.offer_quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
-            '           <td>' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + (i+1) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.quantity) + '</td>\n' +
+            '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
 
     if (sale.sub_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.freight != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.vat != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.grand_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="5" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.grand_total) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+            '           <td class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }

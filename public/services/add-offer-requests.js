@@ -47,6 +47,20 @@ async function initPage(){
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getCompaniesAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
+    $('#add_offer_request_brand').typeahead({
+        source: [
+            { id: '1', name: 'ActionScript' },
+            { id: '2', name: 'AppleScript' }
+        ],
+        autoSelect: true
+    });
+    $('#add_offer_request_product_category').typeahead({
+        source: [
+            { id: '1', name: 'ActionScript' },
+            { id: '2', name: 'AppleScript' }
+        ],
+        autoSelect: true
+    });
 }
 
 async function initEmployeeSelect(){

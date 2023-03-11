@@ -1,6 +1,6 @@
 (function($) {
     "use strict";
-	
+
 	 $(document).ready(function() {
 
 		 $("#add_brand_form").submit(function( event ) {
@@ -8,8 +8,6 @@
 
 			 var formData = new FormData();
 			 formData.append('name', document.getElementById('brand_name').value);
-			 formData.append('slug', document.getElementById('brand_slug').value);
-			 formData.append('logo', document.getElementById('brand_logo').files[0]);
 
 			 servicePostAddBrand(formData);
 
@@ -21,8 +19,6 @@
 			 let brand_id = document.getElementById('update_brand_id').value;
 			 var formData = new FormData();
 			 formData.append('name', document.getElementById('update_brand_name').value);
-			 formData.append('slug', document.getElementById('update_brand_slug').value);
-			 formData.append('logo', document.getElementById('update_brand_logo').files[0]);
 
 			 servicePostUpdateBrand(brand_id, formData);
 
@@ -73,37 +69,14 @@ async function initBrandView(){
 	$.each(data.brands, function (i, brand) {
 		let typeItem = '<tr>\n' +
 			'              <td>'+ brand.id +'</td>\n' +
-			'              <td><img src="https://api-kablocu.wimco.com.tr'+ brand.logo +'" style="width: 50px;"></td>\n' +
 			'              <td>'+ brand.name +'</td>\n' +
-			'              <td>'+ brand.slug +'</td>\n' +
 			'              <td>\n' +
 			'                  <div class="btn-list">\n' +
 			'                      <button id="bEdit" type="button" class="btn btn-sm btn-primary" onclick="openBrandModal(\''+ brand.id +'\')">\n' +
 			'                          <span class="fe fe-edit"> </span> Düzenle\n' +
 			'                      </button>\n' +
 			'                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ brand.id +'\')">\n' +
-			'                          <span class="fe fe-trash-2"> </span> Marka ve Ürünleri Pasif Hale Getir\n' +
-			'                      </button>\n' +
-			'                  </div>\n' +
-			'              </td>\n' +
-			'          </tr>';
-		$('#brand-datatable tbody').append(typeItem);
-	});
-
-	let data2 = await serviceGetDeletedBrands();
-	$.each(data2.brands, function (i, brand) {
-		let typeItem = '<tr>\n' +
-			'              <td>'+ brand.id +'</td>\n' +
-			'              <td><img src="https://api-kablocu.wimco.com.tr'+ brand.logo +'" style="width: 50px;"></td>\n' +
-			'              <td>'+ brand.name +'</td>\n' +
-			'              <td>'+ brand.slug +'</td>\n' +
-			'              <td>\n' +
-			'                  <div class="btn-list">\n' +
-			'                      <button id="bEdit" type="button" class="btn btn-sm btn-primary" onclick="openBrandModal(\''+ brand.id +'\')">\n' +
-			'                          <span class="fe fe-edit"> </span> Düzenle\n' +
-			'                      </button>\n' +
-			'                      <button id="bDel" type="button" class="btn  btn-sm btn-warning" onclick="activateBrand(\''+ brand.id +'\')">\n' +
-			'                          <span class="fe fe-trash-2"> </span> Marka ve Ürünleri Aktif Hale Getir\n' +
+			'                          <span class="fe fe-trash-2"> </span> Sil\n' +
 			'                      </button>\n' +
 			'                  </div>\n' +
 			'              </td>\n' +
@@ -133,19 +106,10 @@ async function initBrandModal(brand_id){
 	let data = await serviceGetBrandById(brand_id);
 	let brand = data.brands;
 	document.getElementById('update_brand_id').value = brand.id;
-	document.getElementById('update_brand_name').value = brand.name;
-	document.getElementById('update_brand_slug').value = brand.slug;
 }
 
 async function deleteBrand(brand_id){
 	let returned = await serviceGetDeleteBrand(brand_id);
-	if(returned){
-		initBrandView();
-	}
-}
-
-async function activateBrand(brand_id){
-	let returned = await serviceGetActivateBrand(brand_id);
 	if(returned){
 		initBrandView();
 	}

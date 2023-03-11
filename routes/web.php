@@ -47,6 +47,8 @@ Route::get('/invoice-print/{sale_id}', function () { return view('invoice-print'
 
 Route::get('/settings', function () { return view('settings'); });
 
+Route::get('/brands', function () { return view('brands'); });
+
 
 Route::post('/lang', function(Request $request) {
     $locale = $request->input('lang');

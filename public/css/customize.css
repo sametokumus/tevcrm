@@ -289,3 +289,25 @@ table tr.selected{
 #company-grid .grid-item{
     display: inline-grid;
 }
+
+@media print {
+    @page {
+        margin-bottom: 50px;
+        padding-bottom: 200px;
+    }
+
+    #print-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+        border-top: 1px solid #ccc;
+    }
+    #print-footer.lenis-footer{
+        height: 120px;
+    }
+}

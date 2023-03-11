@@ -1426,3 +1426,41 @@ async function serviceGetLanguage(lang) {
         return false;
     }
 }
+
+
+async function serviceGetBrands() {
+    const data = await fetchDataGet('/v1/brand/getBrands', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetBrandById(brandId) {
+    const data = await fetchDataGet('/v1/brand/getBrandById/' + brandId, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddBrand(formData) {
+    await xhrDataPost('/admin/brand/addBrand', formData, addBrandCallback);
+}
+
+async function servicePostUpdateBrand(brandId, formData) {
+    await xhrDataPost('/admin/brand/updateBrand/' + brandId, formData, updateBrandCallback);
+}
+
+async function serviceGetDeleteBrand(brandId) {
+    const data = await fetchDataGet('/admin/brand/deleteBrand/' + brandId, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

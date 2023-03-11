@@ -52,8 +52,11 @@ async function initContact(contact_id, offer_id){
     $('#offer-print #logo img').remove();
     $('#offer-print #logo').append('<img src="'+ contact.logo +'">');
 
+    if (contact_id == 1){
+        $('#print-footer').addClass('lenis-footer');
+    }
     $('#print-footer img').remove();
-    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">">');
+    $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -62,7 +65,7 @@ async function initContact(contact_id, offer_id){
     today = dd + '/' + mm + '/' + yyyy;
 
 
-    $('#offer-print .logo-header .date').append(today);
+    $('#offer-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
     $('#offer-print .contact-col address').text('');
     $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>'+ contact.phone +'<br>'+ contact.email +'');
 
@@ -83,12 +86,13 @@ async function initOffer(offer_id){
 
     $.each(offer.products, function (i, product) {
         let item = '<tr>\n' +
-            '           <td>' + (i+1) + '</td>\n' +
-            '           <td>' + checkNull(product.ref_code) + '</td>\n' +
-            '           <td>' + checkNull(product.product_name) + '</td>\n' +
-            '           <td>' + checkNull(product.quantity) + ' ' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td></td>\n' +
-            '           <td></td>\n' +
+            '           <td class="text-center">' + (i+1) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.ref_code) + '</td>\n' +
+            '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.quantity) + '</td>\n' +
+            '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
+            '           <td class="text-center"></td>\n' +
+            '           <td class="text-center"></td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
     });
