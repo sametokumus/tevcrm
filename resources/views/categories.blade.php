@@ -56,18 +56,15 @@ $extra_js='
                 </div>
             </form>
 
-            <table id="brand-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
-                <thead>
-                <tr>
-                    <th class="border-bottom-0" data-priority="1">ID</th>
-                    <th class="border-bottom-0">Marka</th>
-                    <th class="border-bottom-0" data-priority="2">İşlem</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="row">
+                <!-- col -->
+                <div class="col-lg-4">
+                    <ul id="category_view">
 
-                </tbody>
-            </table>
+                    </ul>
+                </div>
+                <!-- /col -->
+            </div>
 
         </div>
         <!-- CONTAINER END -->
@@ -75,20 +72,28 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal modal-cover fade" id="updateBrandModal">
+<div class="modal modal-cover fade" id="updateCategoryModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">MARKA GÜNCELLEME</h5>
+                <h5 class="modal-title">ÜRÜN GRUBU GÜNCELLEME</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="update_brand_form">
+            <form method="post" action="#" id="update_category_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <input type="hidden" class="form-control" id="update_brand_id">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Marka Adı</label>
-                            <input type="text" class="form-control" id="update_brand_name">
+                        <label class="col-md-3 form-label">Ana Kategori :</label>
+                        <div class="col-md-9">
+                            <select name="update_parent_category" class="form-control form-select" id="update_parent_category" required>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Adı :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="update_category_name" required>
+                            <input type="hidden" class="form-control" id="update_category_id" required>
                         </div>
                     </div>
                 </div>

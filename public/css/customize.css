@@ -311,3 +311,8 @@ table tr.selected{
         height: 120px;
     }
 }
+
+#category_view li{
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .75);
+}

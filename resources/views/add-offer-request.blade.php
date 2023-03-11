@@ -70,41 +70,41 @@ $extra_js='
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Firma Stok Kodu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_owner_stock_code" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Müşteri Stok Kodu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">Üretici Parça Numarası (Ref. Code)</label>
                                         <input type="text" class="form-control" id="add_offer_request_product_refcode">
                                     </div>
-                                    <div class="col-md-5 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Ürün Adı</label>
                                         <input type="text" class="form-control" id="add_offer_request_product_name">
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Miktar</label>
                                         <input type="number" class="form-control" id="add_offer_request_product_quantity" value="1" min="1">
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Birim</label>
                                         <select class="form-control" id="add_offer_request_product_measurement">
 
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">Marka</label>
                                         <input type="text" value="" class="form-control" id="add_offer_request_brand" />
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">Ürün Grubu</label>
                                         <input type="text" value="" class="form-control" id="add_offer_request_product_category" />
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Müşteri Stok Kodu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Firma Stok Kodu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
-                                    </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-outline-theme w-100" id="add_offer_request_product_button">Ekle</button>
                                     </div>
@@ -125,11 +125,15 @@ $extra_js='
                                 <table id="offer-request-products" class="table table-bordered key-buttons border-bottom">
                                     <thead>
                                     <tr>
-                                        <th class="border-bottom-0">Sıra</th>
+                                        <th class="border-bottom-0">N#</th>
+                                        <th class="border-bottom-0">Firma Stok Kodu</th>
+                                        <th class="border-bottom-0">Müşteri Stok Kodu</th>
                                         <th class="border-bottom-0">Ref. Code</th>
                                         <th class="border-bottom-0">Ürün Adı</th>
                                         <th class="border-bottom-0">Miktar</th>
                                         <th class="border-bottom-0">Birim</th>
+                                        <th class="border-bottom-0">Marka</th>
+                                        <th class="border-bottom-0">Ürün Grubu</th>
                                         <th class="border-bottom-0"></th>
                                     </tr>
                                     </thead>

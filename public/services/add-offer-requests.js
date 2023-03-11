@@ -20,11 +20,16 @@
             let product_name = document.getElementById('add_offer_request_product_name').value;
             let quantity = document.getElementById('add_offer_request_product_quantity').value;
             let measurement = document.getElementById('add_offer_request_product_measurement').value;
+            let brand = document.getElementById('add_offer_request_brand').value;
+            let category = document.getElementById('add_offer_request_product_category').value;
+            let cust_stock = document.getElementById('add_offer_request_customer_stock_code').value;
+            let own_stock = document.getElementById('add_offer_request_owner_stock_code').value;
             if (refcode == '' || product_name == '' || quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            addProductToTable(refcode, product_name, quantity, measurement);
+            console.log(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
+            // addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
         });
 	});
 
@@ -47,18 +52,39 @@ async function initPage(){
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getCompaniesAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
+    let data1 = await serviceGetBrands();
+    let brands = [];
+    $.each(data1.brands, function (i, brand) {
+        let item = {
+            "id": brand.id,
+            "name": brand.name
+        }
+        brands.push(item);
+    });
     $('#add_offer_request_brand').typeahead({
-        source: [
-            { id: '1', name: 'ActionScript' },
-            { id: '2', name: 'AppleScript' }
-        ],
+        source: brands,
         autoSelect: true
     });
+    let data2 = await serviceGetCategories();
+    console.log(data2)
+    let categories = [];
+    $.each(data2.categories, function (i, category) {
+        let item = {
+            "id": category.id,
+            "name": category.name
+        }
+        categories.push(item);
+        $.each(category.sub_categories, function (i, sub_category) {
+            let item = {
+                "id": sub_category.id,
+                "name": sub_category.name
+            }
+            categories.push(item);
+        });
+    });
+    console.log(categories)
     $('#add_offer_request_product_category').typeahead({
-        source: [
-            { id: '1', name: 'ActionScript' },
-            { id: '2', name: 'AppleScript' }
-        ],
+        source: categories,
         autoSelect: true
     });
 }
@@ -68,16 +94,21 @@ async function initEmployeeSelect(){
     getEmployeesAddSelectId(company_id, 'add_offer_request_company_employee');
 }
 
-async function addProductToTable(refcode, product_name, quantity, measurement){
+async function addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock){
+
     let count = document.getElementById('add_offer_request_product_count').value;
     count = parseInt(count) + 1;
     document.getElementById('add_offer_request_product_count').value = count;
     let item = '<tr id="productRow'+ count +'">\n' +
         '           <td>'+ count +'</td>\n' +
+        '           <td>'+ own_stock +'</td>\n' +
+        '           <td>'+ cust_stock +'</td>\n' +
         '           <td>'+ refcode +'</td>\n' +
         '           <td>'+ product_name +'</td>\n' +
         '           <td>'+ quantity +'</td>\n' +
         '           <td>'+ measurement +'</td>\n' +
+        '           <td>'+ brand +'</td>\n' +
+        '           <td>'+ category +'</td>\n' +
         '           <td>\n' +
         '               <div class="btn-list">\n' +
         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -105,10 +136,14 @@ async function addOfferRequest(){
     let table = document.getElementById("offer-request-products-body");
     for (let i = 0, row; row = table.rows[i]; i++) {
         let item = {
-            "ref_code": row.cells[1].innerText,
-            "product_name": row.cells[2].innerText,
-            "quantity": parseInt(row.cells[3].innerText),
-            "measurement": row.cells[4].innerText
+            "owner_stock_code": row.cells[1].innerText,
+            "customer_stock_code": row.cells[2].innerText,
+            "ref_code": row.cells[3].innerText,
+            "product_name": row.cells[4].innerText,
+            "quantity": parseInt(row.cells[5].innerText),
+            "measurement": row.cells[6].innerText,
+            "brand": row.cells[7].innerText,
+            "category": row.cells[8].innerText
         }
         products.push(item);
     }

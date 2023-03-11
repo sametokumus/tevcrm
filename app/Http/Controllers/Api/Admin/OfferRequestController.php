@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Brand;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Measurement;
@@ -76,21 +77,73 @@ class OfferRequestController extends Controller
             ]);
 
             foreach ($request->products as $product){
-                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
-                if ($has_product) {
-                    $product_id = $has_product->id;
+                $brand_id = 0;
+                if ($product['brand'] != ''){
+                    $has_brand = Brand::query()->where('name', $product['brand'])->first();
+                    if ($has_brand){
+                        $brand_id = $has_brand->id;
+                    }else{
+                        $brand_id = Brand::query()->insertGetId([
+                           'name' => $product['brand']
+                        ]);
+                    }
+                }
+                $category_id = 0;
+                if ($product['category'] != ''){
+                    $has_category = Brand::query()->where('name', $product['category'])->first();
+                    if ($has_category){
+                        $category_id = $has_category->id;
+                    }else{
+                        $category_id = Brand::query()->insertGetId([
+                           'parent_id' => 0,
+                           'name' => $product['category']
+                        ]);
+                    }
+                }
+
+
+                if ($product['owner_stock_code'] != ''){
+
+                    $has_product = Product::query()->where('stock_code', $product['owner_stock_code'])->where('active', 1)->first();
+                    if ($has_product) {
+                        $product_id = $has_product->id;
+                    }else{
+                        $product_id = Product::query()->insertGetId([
+                            'brand_id' => $brand_id,
+                            'category_id' => $category_id,
+                            'ref_code' => $product['ref_code'],
+                            'product_name' => $product['product_name'],
+                            'stock_code' => $product['owner_stock_code'],
+                        ]);
+                    }
+
                 }else{
+
                     $product_id = Product::query()->insertGetId([
+                        'brand_id' => $brand_id,
+                        'category_id' => $category_id,
                         'ref_code' => $product['ref_code'],
                         'product_name' => $product['product_name'],
                     ]);
+
                 }
+
+//                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
+//                if ($has_product) {
+//                    $product_id = $has_product->id;
+//                }else{
+//                    $product_id = Product::query()->insertGetId([
+//                        'ref_code' => $product['ref_code'],
+//                        'product_name' => $product['product_name'],
+//                    ]);
+//                }
                 $measurement = Measurement::query()->where('name', $product['measurement'])->where('active', 1)->first();
                 OfferRequestProduct::query()->insert([
                     'request_id' => $request_id,
                     'product_id' => $product_id,
                     'quantity' => $product['quantity'],
-                    'measurement_id' => $measurement->id
+                    'measurement_id' => $measurement->id,
+                    'customer_stock_code' => $product['owner_stock_code'],
                 ]);
             }
 

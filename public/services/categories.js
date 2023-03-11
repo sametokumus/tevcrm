@@ -36,8 +36,8 @@ function openCategoryModal(category_id){
 async function initParentCategoryList(){
     $('#parent_category option').remove();
     $('#update_parent_category option').remove();
-    $('#parent_category').append('<option value="0">Ana Kategori Olarak Ekle</option>');
-    $('#update_parent_category').append('<option value="0">Ana Kategori Olarak Ekle</option>');
+    $('#parent_category').append('<option value="0">Ana Grup Olarak Ekle</option>');
+    $('#update_parent_category').append('<option value="0">Ana Grup Olarak Ekle</option>');
     let data = await serviceGetParentCategories();
     $.each(data.categories, function (i, category) {
         var categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
@@ -53,19 +53,19 @@ async function initCategoryView(){
     $.each(data.categories, function (i, category) {
         if ((category.sub_categories.length == 0)){
             let categoryItem = '<li>'+ category.name +
-                '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
-                '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
                 '</li>';
             $('#category_view').append(categoryItem);
         }else{
             let categoryItem = '<li>'+ category.name +'\n' +
-                '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
-                '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
+                '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
                 '               	<ul>';
             $.each(category.sub_categories, function (i, sub_category) {
                 categoryItem = categoryItem + '<li>'+ sub_category.name +
-                    '	<a href="javascript:void(0)" class="btn btn-default btn-sm float-end" onclick="deleteCategory(\''+ sub_category.id +'\')">Sil</a>' +
-                    '	<a href="javascript:void(0)" class="btn btn-primary btn-sm float-end mx-2" onclick="openCategoryModal(\''+ sub_category.id +'\')">Güncelle</a>' +
+                    '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ sub_category.id +'\')">Sil</a>' +
+                    '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ sub_category.id +'\')">Güncelle</a>' +
                     '</li>';
             });
             categoryItem = categoryItem + '</ul>\n' +
@@ -81,7 +81,6 @@ async function initCategoryModal(category_id){
     document.getElementById('update_parent_category').value = category.parent_id;
     document.getElementById('update_category_id').value = category.id;
     document.getElementById('update_category_name').value = category.name;
-    document.getElementById('update_category_slug').value = category.slug;
 }
 
 
@@ -89,11 +88,9 @@ async function initCategoryModal(category_id){
 async function addCategory(){
     let parent_id = document.getElementById('parent_category').value;
     let category_name = document.getElementById('category_name').value;
-    let category_slug = document.getElementById('category_slug').value;
     let formData = JSON.stringify({
         "parent_id": parent_id,
-        "name": category_name,
-        "slug": category_slug
+        "name": category_name
     });
     let returned = await servicePostAddCategory(formData);
     if(returned){
@@ -106,11 +103,9 @@ async function updateCategory(){
     let parent_id = document.getElementById('update_parent_category').value;
     let category_id = document.getElementById('update_category_id').value;
     let category_name = document.getElementById('update_category_name').value;
-    let category_slug = document.getElementById('update_category_slug').value;
     let formData = JSON.stringify({
         "parent_id": parent_id,
-        "name": category_name,
-        "slug": category_slug
+        "name": category_name
     });
     console.log(formData)
     let returned = await servicePostUpdateCategory(formData, category_id);
