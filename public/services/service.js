@@ -1526,3 +1526,20 @@ async function serviceGetDeleteCategory(categoryId) {
         return false;
     }
 }
+
+async function serviceGetProducts() {
+    const data = await fetchDataGet('/admin/product/getProducts', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetProductById(id) {
+    const data = await fetchDataGet('/admin/product/getProductById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

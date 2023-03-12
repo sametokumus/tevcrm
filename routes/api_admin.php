@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Admin\MeasurementController;
 use App\Http\Controllers\Api\Admin\LanguageController;
 use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,6 +216,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('newsFeed/getSaleHistoryActions', [NewsFeedController::class, 'getSaleHistoryActions']);
     Route::get('newsFeed/getTopRequestedProducts', [NewsFeedController::class, 'getTopRequestedProducts']);
     Route::get('newsFeed/getSaleStats', [NewsFeedController::class, 'getSaleStats']);
+
+    //Product
+    Route::get('product/getProducts', [ProductController::class, 'getProducts']);
+    Route::get('product/getProductById/{id}', [ProductController::class, 'getProductById']);
+    Route::post('product/addProduct', [ProductController::class, 'addProduct']);
+    Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
+    Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
 
     //Brand
     Route::get('brand/getBrands', [BrandController::class, 'getBrands']);

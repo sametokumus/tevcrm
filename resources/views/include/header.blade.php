@@ -198,6 +198,12 @@ $extra_js="";
 
 
                 <div class="menu-header">Ürünler</div>
+                <div class="menu-item @if( Request::segment(1)== 'products' ) active @endif">
+                    <a href="/products" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gear"></i></span>
+                        <span class="menu-text">Ürünler</span>
+                    </a>
+                </div>
                 <div class="menu-item @if( Request::segment(1)== 'brands' ) active @endif">
                     <a href="/brands" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
