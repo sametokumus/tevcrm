@@ -484,6 +484,27 @@ async function getCitiesAddSelectIdWithParent(selectId, parentSelectId){
 		$('#'+selectId).append(optionRow);
 	});
 }
+async function getBrandsAddSelectId(selectId){
+    let data = await serviceGetBrands();
+    $('#'+selectId+' option').remove();
+    $.each(data.brands, function(i, brand){
+        var optionRow = '<option value="'+brand.id+'">'+brand.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+async function getCategoriesAddSelectId(selectId){
+    let data = await serviceGetCategories();
+    $('#'+selectId+' option').remove();
+    $.each(data.categories, function(i, category){
+        var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#'+selectId).append(optionRow);
+        $.each(category.sub_categories, function(i, category2){
+            var optionRow = '<option value="'+category2.id+'">'+category2.name+'</option>';
+            $('#'+selectId).append(optionRow);
+
+        });
+    });
+}
 
 
 
@@ -1541,5 +1562,38 @@ async function serviceGetProductById(id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddProduct(formData) {
+    const data = await fetchDataPost('/admin/product/addProduct', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateProduct(formData, id) {
+    const data = await fetchDataPost('/admin/product/updateProduct/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetDeleteProduct(id) {
+    const data = await fetchDataGet('/admin/product/deleteProduct/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }

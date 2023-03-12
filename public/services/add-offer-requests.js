@@ -24,7 +24,7 @@
             let category = document.getElementById('add_offer_request_product_category').value;
             let cust_stock = document.getElementById('add_offer_request_customer_stock_code').value;
             let own_stock = document.getElementById('add_offer_request_owner_stock_code').value;
-            if (refcode == '' || product_name == '' || quantity == "0"){
+            if (quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }

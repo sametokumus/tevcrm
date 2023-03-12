@@ -144,7 +144,7 @@ class OfferRequestController extends Controller
                     'product_id' => $product_id,
                     'quantity' => $product['quantity'],
                     'measurement_id' => $measurement->id,
-                    'customer_stock_code' => $product['owner_stock_code'],
+                    'customer_stock_code' => $product['customer_stock_code'],
                 ]);
             }
 
