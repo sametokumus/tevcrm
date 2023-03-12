@@ -34,5 +34,8 @@
     "Name Surname" : "Ad Soyad",
     "Signature" : "İmza",
     "Proforma Invoice" : "Proforma Fatura",
-    "Invoice" : "Fatura"
+    "Invoice" : "Fatura",
+    "Stock" : "Stok",
+    "Week" : "Hafta",
+    "Day" : "Gün"
 }

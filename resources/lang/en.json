@@ -34,5 +34,8 @@
     "Name Surname" : "Name Surname",
     "Signature" : "Signature",
     "Proforma Invoice" : "Proforma Invoice",
-    "Invoice" : "Invoice"
+    "Invoice" : "Invoice",
+    "Stock" : "Stock",
+    "Week" : "Week",
+    "Day" : "Day"
 }

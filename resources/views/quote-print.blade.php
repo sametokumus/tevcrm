@@ -82,6 +82,7 @@ $extra_js='
                                             <th class="text-center">N#</th>
                                             <th class="text-center">{{__('Ref. Code')}}</th>
                                             <th class="text-center">{{__('Product Name')}}</th>
+                                            <th class="text-center">{{__('Lead Time')}}</th>
                                             <th class="text-center">{{__('Qty')}}</th>
                                             <th class="text-center">{{__('Unit')}}</th>
                                             <th class="text-center">{{__('Unit Price')}}</th>

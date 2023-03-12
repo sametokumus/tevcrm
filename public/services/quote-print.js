@@ -90,11 +90,23 @@ async function initSale(sale_id){
     let currency = '';
     $.each(sale.sale_offers, function (i, product) {
         currency = product.currency;
+        let lead_time = checkNull(product.lead_time);
+        if (lead_time != ''){
+            if (lead_time == 1){
+                lead_time = Lang.get("strings.Stock");
+            }else if (parseInt(lead_time)%7 == 0){
+                lead_time = (parseInt(lead_time)/7) + ' ' + Lang.get("strings.Week");
+            }else{
+                lead_time = lead_time + ' ' + Lang.get("strings.Day");
+            }
+        }
+
         let item = '<tr>\n' +
             '           <td class="text-center">' + (i+1) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
-            '           <td class="text-center">' + checkNull(product.quantity) + '</td>\n' +
+            '           <td class="text-center">' + lead_time + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.offer_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
@@ -104,7 +116,7 @@ async function initSale(sale_id){
 
     if (sale.sub_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
+            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
@@ -112,7 +124,7 @@ async function initSale(sale_id){
 
     if (sale.freight != null) {
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
+            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
@@ -120,7 +132,7 @@ async function initSale(sale_id){
 
     if (sale.vat != null) {
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
@@ -128,7 +140,7 @@ async function initSale(sale_id){
 
     if (sale.grand_total != null) {
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);

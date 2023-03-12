@@ -324,6 +324,27 @@ table tr.selected{
 #offer-print .page-header{
     font-size: 28px;
 }
+#quote-print *{
+    font-size: 13px;
+}
+
+#quote-print .page-header{
+    font-size: 28px;
+}
+#order-confirmation-print *{
+    font-size: 13px;
+}
+
+#order-confirmation-print .page-header{
+    font-size: 28px;
+}
+#purchasing-order-print *{
+    font-size: 13px;
+}
+
+#purchasing-order-print .page-header{
+    font-size: 28px;
+}
 .logo-header #logo{
     margin-bottom: 10px;
 }
