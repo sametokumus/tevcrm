@@ -129,7 +129,7 @@ $extra_js='
                 <h5 class="modal-title">TEKLİF DETAYI</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body overflow-auto">
                 <input type="hidden" id="offer-detail-modal-offer-id">
                 <div class="row mb-4">
                     <div class="col-md-12 mb-3">
@@ -148,6 +148,7 @@ $extra_js='
                                 <th class="border-bottom-0">İndirimli Fiyat</th>
                                 <th class="border-bottom-0">Vergi Oranı</th>
                                 <th class="border-bottom-0">Para Birimi</th>
+                                <th class="border-bottom-0">Teslimat Süresi</th>
                                 <th class="border-bottom-0"></th>
                             </tr>
                             </thead>
@@ -157,10 +158,6 @@ $extra_js='
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                <button type="submit" class="btn btn-outline-theme">Kaydet</button>
             </div>
         </div>
     </div>
@@ -226,6 +223,10 @@ $extra_js='
                                 <option value="USD">USD</option>
                                 <option value="GBP">GBP</option>
                             </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Teslimat Süresi (Gün)</label>
+                            <input type="text" class="form-control" id="add_offer_product_lead_time">
                         </div>
                     </div>
                 </div>
@@ -298,6 +299,10 @@ $extra_js='
                                 <option value="USD">USD</option>
                                 <option value="GBP">GBP</option>
                             </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Teslimat Süresi (Gün)</label>
+                            <input type="text" class="form-control" id="update_offer_product_lead_time">
                         </div>
                     </div>
                 </div>
