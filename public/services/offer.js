@@ -287,11 +287,11 @@ async function initUpdateOfferProductModal(offer_id, product_id){
     document.getElementById('update_offer_product_date_code').value = checkNull(product.date_code);
     document.getElementById('update_offer_product_package_type').value = checkNull(product.package_type);
     document.getElementById('update_offer_product_quantity').value = checkNull(product.quantity);
-    document.getElementById('update_offer_product_pcs_price').value = checkNull(product.pcs_price);
-    document.getElementById('update_offer_product_total_price').value = checkNull(product.total_price);
-    document.getElementById('update_offer_product_discount_rate').value = checkNull(product.discount_rate);
-    document.getElementById('update_offer_product_discounted_price').value = checkNull(product.discounted_price);
-    document.getElementById('update_offer_product_vat_rate').value = checkNull(product.vat_rate);
+    document.getElementById('update_offer_product_pcs_price').value = checkNull(changeCommasToDecimal(product.pcs_price));
+    document.getElementById('update_offer_product_total_price').value = checkNull(changeCommasToDecimal(product.total_price));
+    document.getElementById('update_offer_product_discount_rate').value = checkNull(changeCommasToDecimal(product.discount_rate));
+    document.getElementById('update_offer_product_discounted_price').value = checkNull(changeCommasToDecimal(product.discounted_price));
+    document.getElementById('update_offer_product_vat_rate').value = checkNull(changeCommasToDecimal(product.vat_rate));
     document.getElementById('update_offer_product_currency').value = checkNull(product.currency);
     document.getElementById('update_offer_product_lead_time').value = checkNull(product.lead_time);
 }

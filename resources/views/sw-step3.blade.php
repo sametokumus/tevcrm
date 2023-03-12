@@ -64,6 +64,7 @@ $extra_js='
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">DC</th>
                                     <th class="border-bottom-0">Paketleme</th>
+                                    <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">İstek Miktar</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
                                     <th class="border-bottom-0">Birim</th>

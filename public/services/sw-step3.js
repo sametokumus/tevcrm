@@ -63,6 +63,7 @@ async function initOfferDetail(){
                 '           <td>' + checkNull(offer.product_ref_code) + '</td>\n' +
                 '           <td>' + checkNull(offer.date_code) + '</td>\n' +
                 '           <td>' + checkNull(offer.package_type) + '</td>\n' +
+                '           <td>' + checkNull(offer.lead_time) + '</td>\n' +
                 '           <td>' + checkNull(offer.request_quantity) + '</td>\n' +
                 '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
                 '           <td>' + checkNull(offer.measurement_name) + '</td>\n' +

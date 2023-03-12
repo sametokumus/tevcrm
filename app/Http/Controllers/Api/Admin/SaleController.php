@@ -152,6 +152,7 @@ class SaleController extends Controller
                     'discounted_price' => $offer['discounted_price'],
                     'vat_rate' => $offer['vat_rate'],
                     'currency' => $offer['currency'],
+                    'lead_time' => $offer['lead_time'],
                 ]);
             }
 

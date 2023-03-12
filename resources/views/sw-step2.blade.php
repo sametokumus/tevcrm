@@ -10,7 +10,7 @@ $extra_js='
     <div class="side-app">
 
         <!-- CONTAINER -->
-        <div class="main-container container-fluid overflow-auto">
+        <div class="main-container container-fluid">
 
             <div class="row">
                 <div class="col-md-12">
@@ -52,7 +52,7 @@ $extra_js='
 
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
-                        <div class="card-body p-3">
+                        <div class="card-body p-3 overflow-auto">
                             <table id="sales-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
                                 <tr>
@@ -73,6 +73,7 @@ $extra_js='
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
                                     <th class="border-bottom-0">Para Birimi</th>
+                                    <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
@@ -104,7 +105,7 @@ $extra_js='
 
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
-                        <div class="card-body p-3">
+                        <div class="card-body p-3 overflow-auto">
                             <table id="offer-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
                                 <tr>
@@ -125,6 +126,7 @@ $extra_js='
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
                                     <th class="border-bottom-0">Para Birimi</th>
+                                    <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>

@@ -316,3 +316,14 @@ table tr.selected{
     padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, .75);
 }
+
+#offer-print *{
+    font-size: 13px;
+}
+
+#offer-print .page-header{
+    font-size: 28px;
+}
+.logo-header #logo{
+    margin-bottom: 10px;
+}

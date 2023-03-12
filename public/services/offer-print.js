@@ -93,6 +93,7 @@ async function initOffer(offer_id){
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td class="text-center"></td>\n' +
             '           <td class="text-center"></td>\n' +
+            '           <td class="text-center"></td>\n' +
             '       </tr>';
         $('#offer-detail tbody').append(item);
     });
