@@ -618,7 +618,6 @@ class SaleController extends Controller
             $actions = StatusHistory::query()
                 ->orderByDesc('id')
                 ->where('sale_id', $sale_id)
-                ->limit(20)
                 ->get();
 
             foreach ($actions as $action){
