@@ -98,17 +98,16 @@ async function initSaleSuppliers(sale_id){
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ action.sale.customer_name +'\n' +
+            '                   '+ offer.supplier.name +'\n' +
             '               </span>\n' +
             '           </td>\n' +
-            '           <td><small>'+ last_time +'</small></td>\n' +
+            '           <td><small>'+ offer.supplier.website +'</small></td>\n' +
+            '           <td><small>'+ offer.supplier.email +'</small></td>\n' +
+            '           <td><small>'+ offer.supplier.phone +'</small></td>\n' +
+            '           <td><small>'+ offer.product_count +' Ürün</small></td>\n' +
+            '           <td><small>'+ offer.total_price +' '+ offer.currency +'+KDV</small></td>\n' +
             '           <td>\n' +
-            '               <span class="badge bg-white bg-opacity-25 rounded-0 pt-5px" style="min-height: 18px">'+ action.previous_status.status_name +'</span>\n' +
-            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
-            '               <span class="badge bg-theme text-theme-900 rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <a href="/sale-detail/'+ action.sale_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
+            '               <a href="/company-detail/'+ offer.supplier_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
             '           </td>\n' +
             '       </tr>';
 

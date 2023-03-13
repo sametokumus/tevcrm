@@ -662,6 +662,8 @@ class SaleController extends Controller
             foreach ($offers as $offer){
                 $supplier = Company::query()->where('id', $offer->supplier_id)->first();
                 $offer['supplier'] = $supplier;
+                $currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
+                $offer['currency'] = $currency;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
