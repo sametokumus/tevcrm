@@ -1598,8 +1598,17 @@ async function serviceGetDeleteProduct(id) {
     }
 }
 
-async function serviceGetSaleDetailInfo() {
-    const data = await fetchDataGet('/admin/sale/getSaleDetailInfo', 'application/json');
+async function serviceGetSaleDetailInfo(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleDetailInfo/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetSaleStatusHistory(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleStatusHistory/' + sale_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

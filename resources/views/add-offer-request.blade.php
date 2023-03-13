@@ -52,9 +52,6 @@ $extra_js='
 
                                         </select>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <button type="submit" class="btn btn-theme w-100">Kaydet</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card-arrow">
@@ -141,6 +138,24 @@ $extra_js='
 
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card border-theme mb-3">
+                            <div class="card-body">
+                                <div class="row p-3">
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Talep Oluştur ve Devam Et</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-arrow">
                                 <div class="card-arrow-top-left"></div>

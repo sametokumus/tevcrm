@@ -118,7 +118,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
     $('#offer-request-products tbody').append(item);
     document.getElementById('add_offer_request_product_refcode').value = "";
     document.getElementById('add_offer_request_product_name').value = "";
-    document.getElementById('add_offer_request_product_quantity').value = "0";
+    document.getElementById('add_offer_request_product_quantity').value = "1";
     document.getElementById('add_offer_request_product_measurement').value = "adet";
 }
 

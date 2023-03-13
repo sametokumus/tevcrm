@@ -22,6 +22,7 @@ use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\Status;
 use App\Models\StatusHistory;
+use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -607,6 +608,43 @@ class SaleController extends Controller
             $sale['total_product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->sum('offer_quantity');
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getSaleStatusHistory($sale_id)
+    {
+        try {
+            $actions = StatusHistory::query()
+                ->selectRaw('sale_id, max(id) as id')
+                ->groupBy('sale_id')
+                ->orderByDesc('id')
+                ->where('sale_id', $sale_id)
+                ->limit(20)
+                ->get();
+
+            foreach ($actions as $action){
+                $last_status = StatusHistory::query()->where('id', $action->id)->first();
+                $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
+                $admin = User::query()->where('id', $last_status->user_id)->first();
+                $last_status['user_name'] = $admin->name." ".$admin->surname;
+                $sale = Sale::query()->where('sale_id', $action->sale_id)->first();
+                $customer = Company::query()->where('id', $sale->customer_id)->first();
+                $sale['customer_name'] = $customer->name;
+                $previous_status = StatusHistory::query()->where('id', '!=' ,$action->id)->where('sale_id', $action->sale_id)->orderByDesc('id')->first();
+                if (!empty($previous_status)) {
+                    $previous_status['status_name'] = Status::query()->where('id', $previous_status->status_id)->first()->name;
+                }else{
+                    $previous_status['status_name'] = "-";
+                }
+
+                $action['last_status'] = $last_status;
+                $action['previous_status'] = $previous_status;
+                $action['sale'] = $sale;
+
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['actions' => $actions]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }

@@ -20,11 +20,12 @@ $extra_js='
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Müşteri</span>
-                        <h2 id="customer-name"></h2>
+                        <h3 id="customer-name"></h3>
                         <div id="customer-employee"></div>
+                        <div id="owner-employee"></div>
                     </div>
                     <div class="opacity-5">
-                        <i class="fa fa-shopping-bag fa-4x"></i>
+                        <i class="fa fa-gem fa-4x"></i>
                     </div>
                 </div>
 
@@ -44,25 +45,16 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM TALEP</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                    <div class="flex-fill">
+                        <span class="flex-grow-1 fw-600 fs-12px">Toplam Satış Tutarı</span>
+                        <h3 id="total-price"></h3>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
                     </div>
-
-
-                    <div class="row align-items-center mb-2">
-                        <div class="col-7">
-                            <h3 class="mb-0" id="total-request"></h3>
-                        </div>
-                        <div class="col-5">
-                            <div class="mt-n2" data-render="apexchart" data-type="bar" data-title="Visitors"
-                                 data-height="30"></div>
-                        </div>
+                    <div class="opacity-5">
+                        <i class="fa fa-wallet fa-4x"></i>
                     </div>
-
                 </div>
 
 
@@ -77,30 +69,20 @@ $extra_js='
 
         </div>
 
-
         <div class="col-xl-3 col-lg-6">
 
             <div class="card mb-3">
 
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM SİPARİŞ</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                    <div class="flex-fill">
+                        <span class="flex-grow-1 fw-600 fs-12px">Ürün</span>
+                        <h3 id="product-count"></h3>
+                        <div id="product-total-count"></div>
+                        <div>&nbsp;</div>
                     </div>
-
-
-                    <div class="row align-items-center mb-2">
-                        <div class="col-7">
-                            <h3 class="mb-0" id="total-sale"></h3>
-                        </div>
-                        <div class="col-5">
-                            <div class="mt-n2" data-render="apexchart" data-type="line" data-title="Visitors"
-                                 data-height="30"></div>
-                        </div>
+                    <div class="opacity-5">
+                        <i class="fa fa-people-carry fa-4x"></i>
                     </div>
-
                 </div>
 
 
@@ -115,70 +97,20 @@ $extra_js='
 
         </div>
 
-
         <div class="col-xl-3 col-lg-6">
 
             <div class="card mb-3">
 
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">AKTİF İŞLEM</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                    <div class="flex-fill">
+                        <span class="flex-grow-1 fw-600 fs-12px">Talep Tarihi</span>
+                        <h3 id="sale-date"></h3>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
                     </div>
-
-
-                    <div class="row align-items-center mb-2">
-                        <div class="col-7">
-                            <h3 class="mb-0" id="active-sale"></h3>
-                        </div>
-                        <div class="col-5">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="pie" data-title="Visitors"
-                                 data-height="45"></div>
-                        </div>
+                    <div class="opacity-5">
+                        <i class="fa fa-calendar-day fa-4x"></i>
                     </div>
-
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM ÜRÜN</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2">
-                        <div class="col-7">
-                            <h3 class="mb-0" id="total-product"></h3>
-                        </div>
-                        <div class="col-5">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="donut" data-title="Visitors"
-                                 data-height="45"></div>
-                        </div>
-                    </div>
-
-
                 </div>
 
 
@@ -230,14 +162,14 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">LATEST SALES HISTORY</span>
+                        <span class="flex-grow-1">SİPARİŞ SÜRECİ</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
                     <div class="table-responsive">
-                        <table id="sales-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                        <table id="status-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                             <tbody>
 
                             </tbody>

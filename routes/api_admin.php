@@ -200,6 +200,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Sale Detail
     Route::get('sale/getSaleDetailInfo/{sale_id}', [SaleController::class, 'getSaleDetailInfo']);
+    Route::get('sale/getSaleStatusHistory/{sale_id}', [SaleController::class, 'getSaleStatusHistory']);
 
 
     //Contact
