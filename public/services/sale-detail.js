@@ -25,6 +25,7 @@ function checkRole(){
 
 async function initSaleHistory(){
     let data = await serviceGetSaleStatusHistory();
+    console.log(data)
     let actions = data.actions;
 
     $('#sales-history-table tbody tr').remove();
