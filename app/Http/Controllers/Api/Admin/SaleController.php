@@ -621,6 +621,7 @@ class SaleController extends Controller
                 ->where('sale_id', $sale_id)
                 ->get();
 
+            $previous_status = 0;
             foreach ($actions as $action){
                 $last_status = StatusHistory::query()->where('id', $action->id)->first();
                 $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
@@ -629,15 +630,16 @@ class SaleController extends Controller
                 $sale = Sale::query()->where('sale_id', $action->sale_id)->first();
                 $customer = Company::query()->where('id', $sale->customer_id)->first();
                 $sale['customer_name'] = $customer->name;
-                $previous_status = StatusHistory::query()->where('id', '!=' ,$action->id)->where('sale_id', $action->sale_id)->orderByDesc('id')->first();
+                $previous_status = StatusHistory::query()->where('id', '<' ,$action->id)->where('sale_id', $action->sale_id)->orderByDesc('id')->first();
                 if (!empty($previous_status)) {
                     $previous_status['status_name'] = Status::query()->where('id', $previous_status->status_id)->first()->name;
+                    $action['previous_status'] = $previous_status;
                 }else{
                     $previous_status['status_name'] = "-";
+                    $action['previous_status'] = 0;
                 }
 
                 $action['last_status'] = $last_status;
-                $action['previous_status'] = $previous_status;
                 $action['sale'] = $sale;
 
             }
