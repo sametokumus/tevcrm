@@ -625,7 +625,7 @@ class SaleController extends Controller
             foreach ($actions as $action){
                 $last_status = StatusHistory::query()->where('id', $action->id)->first();
                 $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
-                $admin = User::query()->where('id', $last_status->user_id)->first();
+                $admin = Admin::query()->where('id', $last_status->user_id)->first();
                 $last_status['user_name'] = $admin->name." ".$admin->surname;
                 $sale = Sale::query()->where('sale_id', $action->sale_id)->first();
                 $customer = Company::query()->where('id', $sale->customer_id)->first();
