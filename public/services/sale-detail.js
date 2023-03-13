@@ -13,7 +13,7 @@
         let sale_id = getPathVariable('sale-detail');
         await initSaleStats(sale_id);
         await initSaleHistory(sale_id);
-        // await initTopRequestedProducts();
+        await initSaleSuppliers(sale_id);
 
     });
 
@@ -59,33 +59,6 @@ async function initSaleHistory(sale_id){
     });
 }
 
-async function initTopRequestedProducts(){
-    let data = await serviceGetTopRequestedProducts();
-    let products = data.products;
-
-    $('#top-products-table tbody tr').remove();
-
-    $.each(products, function (i, product) {
-
-        let item = '<tr>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ product.product_detail.ref_code +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   '+ product.product_detail.product_name +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
-            '       </tr>';
-
-        $('#top-products-table tbody').append(item);
-    });
-}
-
 async function initSaleStats(sale_id){
     let data = await serviceGetSaleDetailInfo(sale_id);
     let sale = data.sale;
@@ -111,4 +84,34 @@ async function initSaleStats(sale_id){
     // $('#total-product').text(stats.total_product);
 
 
+}
+
+async function initSaleSuppliers(sale_id){
+    let data = await serviceGetSaleSuppliers(sale_id);
+    let offers = data.offers;
+    console.log(offers)
+    $('#suppliers-table tbody tr').remove();
+
+    $.each(offers, function (i, offer) {
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ action.sale.customer_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ last_time +'</small></td>\n' +
+            '           <td>\n' +
+            '               <span class="badge bg-white bg-opacity-25 rounded-0 pt-5px" style="min-height: 18px">'+ action.previous_status.status_name +'</span>\n' +
+            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
+            '               <span class="badge bg-theme text-theme-900 rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <a href="/sale-detail/'+ action.sale_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
+            '           </td>\n' +
+            '       </tr>';
+
+        $('#suppliers tbody').append(item);
+    });
 }

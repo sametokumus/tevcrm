@@ -649,5 +649,25 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getSaleSuppliers($sale_id)
+    {
+        try {
+            $offers = SaleOffer::query()
+                ->selectRaw('sale_offers.supplier_id, SUM(total_price) as total_price, COUNT(supplier_id) as product_count')
+                ->groupBy('sale_offers.supplier_id')
+                ->orderBy('sale_offers.supplier_id')
+                ->where('sale_id', $sale_id)
+                ->get();
+
+            foreach ($offers as $offer){
+                $supplier = Company::query()->where('id', $offer->supplier_id)->first();
+                $offer['supplier'] = $supplier;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 }

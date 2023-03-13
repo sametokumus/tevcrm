@@ -133,12 +133,19 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">NEWS FEED</span>
+                        <span class="flex-grow-1">TEDARİKÇİLER</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
+                    <div class="table-responsive">
+                        <table id="suppliers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 

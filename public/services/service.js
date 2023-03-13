@@ -1615,3 +1615,12 @@ async function serviceGetSaleStatusHistory(sale_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetSaleSuppliers(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleSuppliers/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
