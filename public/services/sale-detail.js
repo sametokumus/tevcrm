@@ -12,7 +12,7 @@
         checkRole();
         let sale_id = getPathVariable('sale-detail');
         await initSaleStats(sale_id);
-        await initSaleHistory();
+        await initSaleHistory(sale_id);
         // await initTopRequestedProducts();
 
     });
@@ -23,12 +23,12 @@ function checkRole(){
     return true;
 }
 
-async function initSaleHistory(){
-    let data = await serviceGetSaleStatusHistory();
+async function initSaleHistory(sale_id){
+    let data = await serviceGetSaleStatusHistory(sale_id);
     console.log(data)
     let actions = data.actions;
 
-    $('#sales-history-table tbody tr').remove();
+    $('#status-history-table tbody tr').remove();
 
     $.each(actions, function (i, action) {
         let last_time = formatDateAndTimeDESC(action.sale.created_at, "/");
@@ -54,7 +54,7 @@ async function initSaleHistory(){
             '           </td>\n' +
             '       </tr>';
 
-        $('#sales-history-table tbody').append(item);
+        $('#status-history-table tbody').append(item);
     });
 }
 

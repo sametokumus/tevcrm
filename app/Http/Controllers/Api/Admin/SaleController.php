@@ -616,6 +616,7 @@ class SaleController extends Controller
     {
         try {
             $actions = StatusHistory::query()
+                ->selectRaw('sale_id, max(id) as id')
                 ->orderByDesc('id')
                 ->where('sale_id', $sale_id)
                 ->get();
