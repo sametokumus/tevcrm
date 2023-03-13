@@ -236,10 +236,6 @@ class OfferController extends Controller
     public function updateOfferProduct(Request $request, $offer_id, $product_id)
     {
         try {
-            $request->validate([
-                'ref_code' => 'required',
-                'product_name' => 'required',
-            ]);
 
             OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->update([
                 'quantity' => $request->quantity,

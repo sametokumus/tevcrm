@@ -348,3 +348,7 @@ table tr.selected{
 .logo-header #logo{
     margin-bottom: 10px;
 }
+
+#sales-datatable td span.badge{
+    cursor: pointer;
+}
