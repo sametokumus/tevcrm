@@ -88,11 +88,15 @@ async function initSales(){
         if (sale.request.company_employee != null){
             employee_name = sale.request.company_employee.name;
         }
+        let authorized_name = '';
+        if (sale.request.authorized_personnel != null){
+            authorized_name = sale.request.authorized_personnel.name + ' ' + sale.request.authorized_personnel.surname;
+        }
 
         let saleItem = '<tr>\n' +
             '              <td>'+ (i+1)+'</td>\n' +
 			'              <td>'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
-			'              <td>'+ sale.request.authorized_personnel.name +' '+ sale.request.authorized_personnel.surname +'</td>\n' +
+			'              <td>'+ authorized_name +'</td>\n' +
 			'              <td>'+ sale.request.company.name +'</td>\n' +
 			'              <td>'+ employee_name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
