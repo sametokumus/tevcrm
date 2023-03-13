@@ -111,6 +111,6 @@ async function initSaleSuppliers(sale_id){
             '           </td>\n' +
             '       </tr>';
 
-        $('#suppliers tbody').append(item);
+        $('#suppliers-table tbody').append(item);
     });
 }

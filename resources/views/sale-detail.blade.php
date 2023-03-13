@@ -195,37 +195,6 @@ $extra_js='
 
             </div>
 
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOP REQUESTED PRODUCTS</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="table-responsive">
-                        <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
         </div>
 
     </div>
