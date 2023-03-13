@@ -30,6 +30,7 @@ Route::get('/offer-request', function () { return view('add-offer-request'); });
 Route::get('/offer-request/{id}', function () { return view('update-offer-request'); });
 Route::get('/offer/{id}', function () { return view('offer'); });
 Route::get('/sales', function () { return view('sales'); });
+Route::get('/sale-detail/{sale_id}', function () { return view('sale-detail'); });
 
 
 Route::get('/sw-1', function () { return view('sw-step1'); });

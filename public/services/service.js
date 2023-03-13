@@ -1597,3 +1597,12 @@ async function serviceGetDeleteProduct(id) {
         return false;
     }
 }
+
+async function serviceGetSaleDetailInfo() {
+    const data = await fetchDataGet('/admin/sale/getSaleDetailInfo', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
