@@ -51,6 +51,7 @@
 
 })(window.jQuery);
 let short_code;
+let global_id;
 
 function checkRole(){
 	return true;
@@ -124,6 +125,7 @@ async function initOfferRequest(){
     let data2 = await serviceGetContactById(offer_request.owner_id);
     let contact = data2.contact;
     short_code = contact.short_code;
+    global_id = offer_request.global_id;
 }
 
 async function addOffer(){
@@ -179,9 +181,16 @@ async function initOffers(){
     $('#offers tbody > tr').remove();
 
     $.each(offers, function (i, offer) {
-        let item = '<tr id="offerRow' + offer.id + '">\n' +
+        let bg_color = '';
+        if (offer.products != null){
+            if (offer.products[0].total_price != null){
+                bg_color = 'bg-secondary';
+            }
+        }
+
+        let item = '<tr id="offerRow' + offer.id + '" class="'+ bg_color +'">\n' +
             '           <td>' + offer.id + '</td>\n' +
-            '           <td>' + offer.offer_id + '</td>\n' +
+            '           <td>' + short_code + '-RFQ-' + global_id + '</td>\n' +
             '           <td>' + offer.company_name + '</td>\n' +
             '           <td>' + offer.product_count + '</td>\n' +
             '              <td>\n' +
@@ -206,10 +215,11 @@ async function initOffers(){
             'pdf'
         ],
         pageLength : 20,
+        scrollX: true,
         language: {
             url: "services/Turkish.json"
         },
-        order: [[0, 'desc']]
+        order: [[0, 'asc']]
     });
 }
 

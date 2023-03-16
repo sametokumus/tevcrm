@@ -35,16 +35,32 @@ function openCategoryModal(category_id){
 }
 async function initParentCategoryList(){
     $('#parent_category option').remove();
-    $('#update_parent_category option').remove();
     $('#parent_category').append('<option value="0">Ana Grup Olarak Ekle</option>');
-    $('#update_parent_category').append('<option value="0">Ana Grup Olarak Ekle</option>');
-    let data = await serviceGetParentCategories();
+    let data = await serviceGetCategoriesByParentId(0);
     $.each(data.categories, function (i, category) {
-        var categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
+        let categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
 
         $('#parent_category').append(categoryItem);
-        $('#update_parent_category').append(categoryItem);
+    });
+}
+async function changeParentCategory(){
+    let parent_id = document.getElementById('parent_category').value;
+    console.log(parent_id)
+    if (parent_id == 0){
+        $('.sub_category').addClass('d-none');
+    }else{
+        $('.sub_category').removeClass('d-none');
+        await initSubCategoryList(parent_id);
+    }
+}
+async function initSubCategoryList(parent_id){
+    $('#parent_category option').remove();
+    $('#parent_category').append('<option value="0">2. Seviye Alt Grup Olarak Ekle</option>');
+    let data = await serviceGetCategoriesByParentId(parent_id);
+    $.each(data.categories, function (i, category) {
+        let categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
 
+        $('#sub_category').append(categoryItem);
     });
 }
 async function initCategoryView(){
@@ -73,7 +89,7 @@ async function initCategoryView(){
             $('#category_view').append(categoryItem);
         }
     });
-    $('#category_view').treed();
+    // $('#category_view').treed();
 }
 async function initCategoryModal(category_id){
     let data = await serviceGetCategoryById(category_id);

@@ -51,7 +51,7 @@ async function initSales(){
         }else if (sale.status.action == "rfq-update"){
             status_class = "border-pink text-pink";
             btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-pink">Talebi Güncelle</a>\n' +
-                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">RFQ Güncelle</a>\n';
+                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Gir</a>\n';
         }else if (sale.status.action == "offer"){
             status_class = "border-warning text-warning";
             btn_list += '<a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-warning">Teklif Oluştur</a>\n';

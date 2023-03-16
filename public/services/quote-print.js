@@ -22,11 +22,8 @@
 		checkRole();
 
         let sale_id = getPathVariable('quote-print');
-        await initContact(1, sale_id);
         await initSale(sale_id);
         await initQuote(sale_id);
-        await getOwnersAddSelectId('owners');
-        document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
@@ -79,6 +76,11 @@ async function initSale(sale_id){
     let data = await serviceGetSaleById(sale_id);
     console.log(data);
     let sale = data.sale;
+
+    await initContact(sale.owner_id, sale_id);
+    // await getOwnersAddSelectId('owners');
+    // document.getElementById('owners').value = 1;
+
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
     document.getElementById('buyer_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ company.address;
@@ -105,45 +107,51 @@ async function initSale(sale_id){
             '           <td class="text-center">' + (i+1) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
-            '           <td class="text-center">' + lead_time + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.offer_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center text-nowrap">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center text-nowrap">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
 
     if (sale.sub_total != null) {
+        let text = Lang.get("strings.Sub Total");
+        if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
+            text = Lang.get("strings.Grand Total");
+        }
         let item = '<tr>\n' +
-            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + text + '</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.freight != null) {
         let item = '<tr>\n' +
-            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
-    if (sale.vat != null) {
+    if (sale.vat != null && sale.vat != '0.00') {
         let item = '<tr>\n' +
-            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.grand_total != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="7" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
+        if (sale.vat == null && sale.vat == '0.00' && sale.freight == null) {
+            let item = '<tr>\n' +
+                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
+                '       </tr>';
+            $('#sale-detail tbody').append(item);
+        }
     }
 
 }
@@ -153,7 +161,7 @@ async function initQuote(sale_id){
     let quote = data.quote;
 
     document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(quote.payment_term);
-    document.getElementById('lead_time').innerHTML = '<b>'+ Lang.get("strings.Lead Time") +' :</b> '+ checkNull(quote.lead_time);
+    document.getElementById('lead_time').innerHTML = '<b>'+ Lang.get("strings.Insurance") +' :</b> '+ checkNull(quote.lead_time);
     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
     document.getElementById('note').innerHTML = checkNull(quote.note);
@@ -168,7 +176,6 @@ async function initUpdateQuoteModal(){
     let sale_id = getPathVariable('quote-print');
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
-    console.log(quote)
 
     document.getElementById('update_quote_id').value = quote.id;
     document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
@@ -200,7 +207,6 @@ async function updateQuote(){
         "note": note
     });
 
-    console.log(formData);
 
     let returned = await servicePostUpdateQuote(formData);
     if (returned){

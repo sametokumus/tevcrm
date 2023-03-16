@@ -239,7 +239,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Category
     Route::get('category/getCategory', [CategoryController::class, 'getCategory']);
     Route::get('category/getCategoryById/{id}', [CategoryController::class, 'getCategoryById']);
-    Route::get('category/getParentCategory', [CategoryController::class, 'getParentCategory']);
+    Route::get('category/getCategoryByParentId/{parent_id}', [CategoryController::class, 'getCategoryByParentId']);
     Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
     Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
     Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);

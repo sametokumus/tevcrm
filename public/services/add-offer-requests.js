@@ -50,7 +50,7 @@ function checkRole(){
 async function initPage(){
     await getOwnersAddSelectId('add_offer_request_owner');
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
-    await getCompaniesAddSelectId('add_offer_request_company');
+    await getCustomersAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
     let data1 = await serviceGetBrands();
     let brands = [];

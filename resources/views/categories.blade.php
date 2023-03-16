@@ -29,13 +29,19 @@ $extra_js='
                             </div>
                             <div class="card-body">
                                 <div class="row p-3">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Ana Grup</label>
-                                        <select name="parent_category" class="form-control form-select select2" id="parent_category" required>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Ana Grup (1. Seviye)</label>
+                                        <select name="parent_category" class="form-control form-select select2" id="parent_category" onchange="changeParentCategory();" required>
 
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3 sub_category d-none">
+                                        <label class="form-label">Alt Grup (2. Seviye)</label>
+                                        <select name="sub_category" class="form-control form-select select2" id="sub_category" required>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">Adı</label>
                                         <input type="text" class="form-control" id="category_name">
                                     </div>

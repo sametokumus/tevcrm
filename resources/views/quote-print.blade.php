@@ -82,11 +82,11 @@ $extra_js='
                                             <th class="text-center">N#</th>
                                             <th class="text-center">{{__('Ref. Code')}}</th>
                                             <th class="text-center">{{__('Product Name')}}</th>
-                                            <th class="text-center">{{__('Lead Time')}}</th>
                                             <th class="text-center">{{__('Qty')}}</th>
                                             <th class="text-center">{{__('Unit')}}</th>
                                             <th class="text-center">{{__('Unit Price')}}</th>
                                             <th class="text-center">{{__('Total Price')}}</th>
+                                            <th class="text-center">{{__('Lead Time')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -147,7 +147,7 @@ $extra_js='
                             <input type="text" class="form-control" id="update_quote_payment_term">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Lead Time</label>
+                            <label class="form-label">Insurance</label>
                             <input type="text" class="form-control" id="update_quote_lead_time">
                         </div>
                         <div class="col-md-12 mb-3">

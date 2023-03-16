@@ -23,10 +23,10 @@ class CategoryController extends Controller
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }
     }
-    public function getParentCategory()
+    public function getCategoryByParentId($parent_id)
     {
         try {
-            $categories = Category::query()->where('parent_id',0)->where('active',1)->get();
+            $categories = Category::query()->where('parent_id',$parent_id)->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -65,13 +65,11 @@ class CategoryController extends Controller
     public function updateCategory(Request $request,$id){
         try {
             $request->validate([
-                'name' => 'required',
-                'parent_id' => 'required',
+                'name' => 'required'
             ]);
 
             $category = Category::query()->where('id',$id)->update([
-                'name' => $request->name,
-                'parent_id' => $request->parent_id
+                'name' => $request->name
             ]);
 
             return response(['message' => 'Kategori güncelleme işlemi başarılı.','status' => 'success','object' => ['category' => $category]]);

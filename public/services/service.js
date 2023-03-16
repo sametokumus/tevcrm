@@ -1506,8 +1506,8 @@ async function serviceGetCategoryById(category_id) {
     }
 }
 
-async function serviceGetParentCategories() {
-    const data = await fetchDataGet('/admin/category/getParentCategory', 'application/json');
+async function serviceGetCategoriesByParentId(parent_id) {
+    const data = await fetchDataGet('/admin/category/getCategoryByParentId/' + parent_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
