@@ -121,8 +121,9 @@ async function initOfferRequest(){
         }
     });
 
-    let data2 = await serviceGetContactById(contact_id);
+    let data2 = await serviceGetContactById(offer_request.owner_id);
     let contact = data2.contact;
+    short_code = contact.short_code;
 }
 
 async function addOffer(){
