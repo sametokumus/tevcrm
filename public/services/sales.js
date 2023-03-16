@@ -132,6 +132,7 @@ async function initSales(){
             }
         ],
 		pageLength : 20,
+        scrollX: true,
 		language: {
 			url: "services/Turkish.json"
 		},

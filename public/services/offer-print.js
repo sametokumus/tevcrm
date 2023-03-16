@@ -15,11 +15,8 @@
 		checkRole();
 
         let offer_id = getPathVariable('offer-print');
-        await initContact(1, offer_id);
         await initOffer(offer_id);
         await initDetail(offer_id);
-        await getOwnersAddSelectId('owners');
-        document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
@@ -77,6 +74,10 @@ async function initOffer(offer_id){
     let offer = data.offer;
     let company = offer.company;
     console.log(offer);
+
+    await initContact(3, offer_id);
+    await getOwnersAddSelectId('owners');
+    document.getElementById('owners').value = 3;
 
     $('#offer-print .supplier-col address').text('');
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');

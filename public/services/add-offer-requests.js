@@ -120,6 +120,8 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
     document.getElementById('add_offer_request_product_name').value = "";
     document.getElementById('add_offer_request_product_quantity').value = "1";
     document.getElementById('add_offer_request_product_measurement').value = "adet";
+    document.getElementById('add_offer_request_owner_stock_code').value = "";
+    document.getElementById('add_offer_request_customer_stock_code').value = "";
 }
 
 async function deleteProductRow(item_id){
