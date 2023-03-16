@@ -50,6 +50,7 @@
 	});
 
 })(window.jQuery);
+let short_code;
 
 function checkRole(){
 	return true;
@@ -75,6 +76,7 @@ async function initOfferRequest(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
+    console.log(data)
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
@@ -118,6 +120,9 @@ async function initOfferRequest(){
             style: 'multi'
         }
     });
+
+    let data2 = await serviceGetContactById(contact_id);
+    let contact = data2.contact;
 }
 
 async function addOffer(){
@@ -167,6 +172,7 @@ async function initOffers(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
+    console.log(offers)
 
     $("#offers").dataTable().fnDestroy();
     $('#offers tbody > tr').remove();
@@ -229,16 +235,16 @@ async function initOfferDetailModal(offer_id){
             '           <td>' + checkNull(product.package_type) + '</td>\n' +
             '           <td>' + checkNull(product.quantity) + '</td>\n' +
             '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-            '           <td>' + checkNull(product.total_price) + '</td>\n' +
+            '           <td>' + changeCommasToDecimal(checkNull(product.pcs_price)) + '</td>\n' +
+            '           <td>' + changeCommasToDecimal(checkNull(product.total_price)) + '</td>\n' +
             '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-            '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
+            '           <td>' + changeCommasToDecimal(checkNull(product.discounted_price)) + '</td>\n' +
             '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
             '           <td>' + checkNull(product.currency) + '</td>\n' +
             '           <td>' + checkNull(product.lead_time) + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Güncelle</span></button>\n' +
+            '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Fiyatı Gir</span></button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
@@ -263,6 +269,7 @@ async function initOfferDetailModal(offer_id){
             // 'pdf'
         ],
         pageLength : 20,
+        scrollX: true,
         language: {
             url: "services/Turkish.json"
         },

@@ -40,7 +40,6 @@ async function changeOwner(){
 async function initContact(contact_id, offer_id){
 
 
-
     let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
     console.log(contact)
@@ -75,9 +74,9 @@ async function initOffer(offer_id){
     let company = offer.company;
     console.log(offer);
 
-    await initContact(3, offer_id);
-    await getOwnersAddSelectId('owners');
-    document.getElementById('owners').value = 3;
+    await initContact(offer.owner_id, offer_id);
+    // await getOwnersAddSelectId('owners');
+    // document.getElementById('owners').value = 3;
 
     $('#offer-print .supplier-col address').text('');
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');

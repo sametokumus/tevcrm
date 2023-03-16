@@ -55,6 +55,8 @@ class OfferRequestController extends Controller
             $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
             $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
+            $offer_request['owner_id'] = Sale::query()->where('request_id', $offer_request_id)->first()->owner_id;
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_request' => $offer_request]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
