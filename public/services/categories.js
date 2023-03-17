@@ -72,7 +72,7 @@ async function initCategoryView(){
 
     $.each(data.categories, function (i, category) {
         let typeItem = '<tr class="bg-gray-700">\n' +
-            '              <td>'+ category.id +'</td>\n' +
+            '              <td>'+ (i+1) +'</td>\n' +
             '              <td>'+ category.name +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
@@ -86,9 +86,9 @@ async function initCategoryView(){
             '              </td>\n' +
             '          </tr>';
 
-        $.each(category.sub_categories, function (i, sub_category) {
+        $.each(category.sub_categories, function (j, sub_category) {
             typeItem += '<tr class="bg-gray-600">\n' +
-                '              <td>--->>> '+ sub_category.id +'</td>\n' +
+                '              <td>--->>> '+ (i+1)+'.'+(j+1) +'</td>\n' +
                 '              <td>'+ sub_category.name +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
@@ -102,9 +102,9 @@ async function initCategoryView(){
                 '              </td>\n' +
                 '          </tr>';
 
-            $.each(sub_category.sub_categories, function (i, thr_sub_category) {
+            $.each(sub_category.sub_categories, function (k, thr_sub_category) {
                 typeItem += '<tr>\n' +
-                    '              <td>------>>>>>> '+ thr_sub_category.id +'</td>\n' +
+                    '              <td>------>>>>>> '+ (i+1)+'.'+(j+1)+'.'+(k+1) +'</td>\n' +
                     '              <td>'+ thr_sub_category.name +'</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
