@@ -34,6 +34,7 @@ function openCategoryModal(category_id){
     initCategoryModal(category_id);
 }
 async function initParentCategoryList(){
+    $('.sub_category').addClass('d-none');
     $('#parent_category option').remove();
     $('#parent_category').append('<option value="0">Ana Grup Olarak Ekle</option>');
     let data = await serviceGetCategoriesByParentId(0);
@@ -54,8 +55,8 @@ async function changeParentCategory(){
     }
 }
 async function initSubCategoryList(parent_id){
-    $('#parent_category option').remove();
-    $('#parent_category').append('<option value="0">2. Seviye Alt Grup Olarak Ekle</option>');
+    $('#sub_category option').remove();
+    $('#sub_category').append('<option value="0">2. Seviye Alt Grup Olarak Ekle</option>');
     let data = await serviceGetCategoriesByParentId(parent_id);
     $.each(data.categories, function (i, category) {
         let categoryItem = '<option value="'+ category.id +'">'+ category.name +'</option>';
@@ -90,11 +91,83 @@ async function initCategoryView(){
         }
     });
     // $('#category_view').treed();
+
+
+    $("#category-datatable").dataTable().fnDestroy();
+    $('#category-datatable tbody > tr').remove();
+
+    $.each(data.categories, function (i, category) {
+        let typeItem = '<tr class="bg-gray-700">\n' +
+            '              <td>'+ category.id +'</td>\n' +
+            '              <td>'+ category.name +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ category.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Düzenle\n' +
+            '                      </button>\n' +
+            '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ category.id +'\')">\n' +
+            '                          <span class="fe fe-trash-2"> </span> Sil\n' +
+            '                      </button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+
+        $.each(category.sub_categories, function (i, sub_category) {
+            typeItem += '<tr>\n' +
+                '              <td>--->>> '+ sub_category.id +'</td>\n' +
+                '              <td>'+ sub_category.name +'</td>\n' +
+                '              <td>\n' +
+                '                  <div class="btn-list">\n' +
+                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ sub_category.id +'\')">\n' +
+                '                          <span class="fe fe-edit"> </span> Düzenle\n' +
+                '                      </button>\n' +
+                '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ sub_category.id +'\')">\n' +
+                '                          <span class="fe fe-trash-2"> </span> Sil\n' +
+                '                      </button>\n' +
+                '                  </div>\n' +
+                '              </td>\n' +
+                '          </tr>';
+
+            $.each(sub_categories.sub_categories, function (i, thr_sub_category) {
+                typeItem += '<tr>\n' +
+                    '              <td>--->>> '+ thr_sub_category.id +'</td>\n' +
+                    '              <td>'+ thr_sub_category.name +'</td>\n' +
+                    '              <td>\n' +
+                    '                  <div class="btn-list">\n' +
+                    '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ thr_sub_category.id +'\')">\n' +
+                    '                          <span class="fe fe-edit"> </span> Düzenle\n' +
+                    '                      </button>\n' +
+                    '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ thr_sub_category.id +'\')">\n' +
+                    '                          <span class="fe fe-trash-2"> </span> Sil\n' +
+                    '                      </button>\n' +
+                    '                  </div>\n' +
+                    '              </td>\n' +
+                    '          </tr>';
+            });
+
+        });
+
+        $('#category-datatable tbody').append(typeItem);
+    });
+
+    $('#category-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf'],
+        pageLength : 20,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false
+    });
 }
 async function initCategoryModal(category_id){
     let data = await serviceGetCategoryById(category_id);
     let category = data.category;
-    document.getElementById('update_parent_category').value = category.parent_id;
     document.getElementById('update_category_id').value = category.id;
     document.getElementById('update_category_name').value = category.name;
 }
@@ -102,7 +175,14 @@ async function initCategoryModal(category_id){
 
 
 async function addCategory(){
-    let parent_id = document.getElementById('parent_category').value;
+    let parent_id = 0;
+    if (document.getElementById('parent_category').value != 0){
+        if (document.getElementById('sub_category').value != 0){
+            parent_id = document.getElementById('sub_category').value;
+        }else{
+            parent_id = document.getElementById('parent_category').value;
+        }
+    }
     let category_name = document.getElementById('category_name').value;
     let formData = JSON.stringify({
         "parent_id": parent_id,
@@ -116,11 +196,9 @@ async function addCategory(){
     }
 }
 async function updateCategory(){
-    let parent_id = document.getElementById('update_parent_category').value;
     let category_id = document.getElementById('update_category_id').value;
     let category_name = document.getElementById('update_category_name').value;
     let formData = JSON.stringify({
-        "parent_id": parent_id,
         "name": category_name
     });
     console.log(formData)

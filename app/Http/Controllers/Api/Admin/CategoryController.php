@@ -16,6 +16,12 @@ class CategoryController extends Controller
             $categories = Category::query()->where('parent_id',0)->where('active',1)->get();
             foreach ($categories as $category){
                 $sub_categories = Category::query()->where('parent_id',$category->id)->where('active',1)->get();
+
+                foreach ($sub_categories as $category2){
+                    $sub_categories2 = Category::query()->where('parent_id',$category2->id)->where('active',1)->get();
+                    $category2['sub_categories'] = $sub_categories2;
+                }
+
                 $category['sub_categories'] = $sub_categories;
             }
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);

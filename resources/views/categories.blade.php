@@ -37,7 +37,7 @@ $extra_js='
                                     </div>
                                     <div class="col-md-12 mb-3 sub_category d-none">
                                         <label class="form-label">Alt Grup (2. Seviye)</label>
-                                        <select name="sub_category" class="form-control form-select select2" id="sub_category" required>
+                                        <select name="sub_category" class="form-control form-select select2" id="sub_category" >
 
                                         </select>
                                     </div>
@@ -64,7 +64,21 @@ $extra_js='
 
             <div class="row">
                 <!-- col -->
-                <div class="col-lg-4">
+                <div class="col-lg-6">
+
+                    <table id="category-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                        <thead>
+                        <tr>
+                            <th class="border-bottom-0" data-priority="1">ID</th>
+                            <th class="border-bottom-0">Marka</th>
+                            <th class="border-bottom-0" data-priority="2">İşlem</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
                     <ul id="category_view">
 
                     </ul>
@@ -87,14 +101,6 @@ $extra_js='
             </div>
             <form method="post" action="#" id="update_category_form">
                 <div class="modal-body">
-                    <div class="row mb-4">
-                        <label class="col-md-3 form-label">Ana Kategori :</label>
-                        <div class="col-md-9">
-                            <select name="update_parent_category" class="form-control form-select" id="update_parent_category" required>
-
-                            </select>
-                        </div>
-                    </div>
                     <div class="row mb-4">
                         <label class="col-md-3 form-label">Adı :</label>
                         <div class="col-md-9">
