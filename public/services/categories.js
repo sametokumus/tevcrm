@@ -65,34 +65,8 @@ async function initSubCategoryList(parent_id){
     });
 }
 async function initCategoryView(){
-    $('#category_view > li').remove();
+
     let data = await serviceGetCategories();
-    $.each(data.categories, function (i, category) {
-        if ((category.sub_categories.length == 0)){
-            let categoryItem = '<li>'+ category.name +
-                '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
-                '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
-                '</li>';
-            $('#category_view').append(categoryItem);
-        }else{
-            let categoryItem = '<li>'+ category.name +'\n' +
-                '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ category.id +'\')">Sil</a>' +
-                '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ category.id +'\')">Güncelle</a>' +
-                '               	<ul>';
-            $.each(category.sub_categories, function (i, sub_category) {
-                categoryItem = categoryItem + '<li>'+ sub_category.name +
-                    '	<a href="javascript:void(0)" class="btn btn-danger btn-sm float-end" onclick="deleteCategory(\''+ sub_category.id +'\')">Sil</a>' +
-                    '	<a href="javascript:void(0)" class="btn btn-theme btn-sm float-end mx-2" onclick="openCategoryModal(\''+ sub_category.id +'\')">Güncelle</a>' +
-                    '</li>';
-            });
-            categoryItem = categoryItem + '</ul>\n' +
-                '       </li>';
-            $('#category_view').append(categoryItem);
-        }
-    });
-    // $('#category_view').treed();
-
-
     $("#category-datatable").dataTable().fnDestroy();
     $('#category-datatable tbody > tr').remove();
 
@@ -102,10 +76,10 @@ async function initCategoryView(){
             '              <td>'+ category.name +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ category.id +'\')">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openCategoryModal(\''+ category.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Düzenle\n' +
             '                      </button>\n' +
-            '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ category.id +'\')">\n' +
+            '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteCategory(\''+ category.id +'\')">\n' +
             '                          <span class="fe fe-trash-2"> </span> Sil\n' +
             '                      </button>\n' +
             '                  </div>\n' +
@@ -113,31 +87,31 @@ async function initCategoryView(){
             '          </tr>';
 
         $.each(category.sub_categories, function (i, sub_category) {
-            typeItem += '<tr>\n' +
+            typeItem += '<tr class="bg-gray-600">\n' +
                 '              <td>--->>> '+ sub_category.id +'</td>\n' +
                 '              <td>'+ sub_category.name +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
-                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ sub_category.id +'\')">\n' +
+                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openCategoryModal(\''+ sub_category.id +'\')">\n' +
                 '                          <span class="fe fe-edit"> </span> Düzenle\n' +
                 '                      </button>\n' +
-                '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ sub_category.id +'\')">\n' +
+                '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteCategory(\''+ sub_category.id +'\')">\n' +
                 '                          <span class="fe fe-trash-2"> </span> Sil\n' +
                 '                      </button>\n' +
                 '                  </div>\n' +
                 '              </td>\n' +
                 '          </tr>';
 
-            $.each(sub_categories.sub_categories, function (i, thr_sub_category) {
+            $.each(sub_category.sub_categories, function (i, thr_sub_category) {
                 typeItem += '<tr>\n' +
-                    '              <td>--->>> '+ thr_sub_category.id +'</td>\n' +
+                    '              <td>------>>>>>> '+ thr_sub_category.id +'</td>\n' +
                     '              <td>'+ thr_sub_category.name +'</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
-                    '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openBrandModal(\''+ thr_sub_category.id +'\')">\n' +
+                    '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openCategoryModal(\''+ thr_sub_category.id +'\')">\n' +
                     '                          <span class="fe fe-edit"> </span> Düzenle\n' +
                     '                      </button>\n' +
-                    '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteBrand(\''+ thr_sub_category.id +'\')">\n' +
+                    '                      <button id="bDel" type="button" class="btn  btn-sm btn-danger" onclick="deleteCategory(\''+ thr_sub_category.id +'\')">\n' +
                     '                          <span class="fe fe-trash-2"> </span> Sil\n' +
                     '                      </button>\n' +
                     '                  </div>\n' +
