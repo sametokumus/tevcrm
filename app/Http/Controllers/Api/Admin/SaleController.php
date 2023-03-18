@@ -256,14 +256,17 @@ class SaleController extends Controller
                 ->where('companies.id', $offer->supplier_id)
                 ->first();
 
-            $products = array();
-            $sale_offers = SaleOffer::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+            $products = SaleOffer::query()
+                ->leftJoin('offer_products', 'offer_products.id', '=', 'sale_offers.offer_product_id')
+                ->selectRaw('offer_products.*')
+                ->where('sale_offers.offer_id', $offer->offer_id)
+                ->where('sale_offers.active', 1)
+                ->get();
+
             $offer_sub_total = 0;
             $offer_vat = 0;
             $offer_grand_total = 0;
-            foreach ($sale_offers as $sale_offer){
-                $product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
-
+            foreach ($products as $product){
                 $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
                 $product_detail = Product::query()->where('id', $offer_request_product->product_id)->first();
                 $product['ref_code'] = $product_detail->ref_code;
@@ -276,8 +279,6 @@ class SaleController extends Controller
                 $offer_vat += $vat;
                 $offer_grand_total += $product->total_price + $vat;
                 $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
-
-                array_push($products, $product);
             }
 
             $offer['products'] = $products;

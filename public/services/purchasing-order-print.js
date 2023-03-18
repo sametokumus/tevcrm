@@ -124,6 +124,7 @@ async function initContact(contact_id, sale_id){
 
 async function initOffer(offer_id){
     let data = await serviceGetSaleOffersByOfferId(offer_id);
+    console.log(data)
     let offer = data.offer;
     let company = offer.company;
     console.log(offer);
