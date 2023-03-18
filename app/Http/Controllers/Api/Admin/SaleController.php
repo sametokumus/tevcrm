@@ -253,7 +253,7 @@ class SaleController extends Controller
                 'offer_currency' => $request->currency
             ]);
 
-            $offer_check = SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_price', null)->count();
+            $offer_check = SaleOffer::query()->where('sale_id', $request->sale_id)->where('active', 1)->where('offer_price', null)->count();
             if ($offer_check == 0) {
                 Sale::query()->where('sale_id', $request->sale_id)->update([
                     'status_id' => 5
