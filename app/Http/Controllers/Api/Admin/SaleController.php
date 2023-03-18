@@ -240,26 +240,28 @@ class SaleController extends Controller
     public function getSaleOffersByOfferId($offer_id)
     {
         try {
-            $offer = SaleOffer::query()
+            $offer = Offer::query()
                 ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
                 ->selectRaw('offers.*, companies.name as company_name')
                 ->where('offers.offer_id',$offer_id)
                 ->where('offers.active',1)
                 ->first();
 
-            $offer['global_id'] = Sale::query()->where('sale_id', $offer->sale_id)->first()->id;
-            $offer['owner_id'] = Sale::query()->where('sale_id', $offer->sale_id)->first()->owner_id;
-            $offer['product_count'] = SaleOffer::query()->where('offer_id', $offer_id)->where('active', 1)->count();
+            $offer['global_id'] = Sale::query()->where('request_id', $offer->request_id)->first()->id;
+            $offer['owner_id'] = Sale::query()->where('request_id', $offer->request_id)->first()->owner_id;
+            $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
             $offer['company'] = Company::query()
                 ->leftJoin('countries', 'countries.id', '=', 'companies.country_id')
                 ->selectRaw('companies.*, countries.lang as country_lang')
                 ->where('companies.id', $offer->supplier_id)
                 ->first();
 
+
             $products = SaleOffer::query()
                 ->leftJoin('offer_products', 'offer_products.id', '=', 'sale_offers.offer_product_id')
                 ->selectRaw('offer_products.*')
-                ->where('sale_offers.offer_id', $offer->offer_id)
+                ->where('offer_products.offer_id', $offer->offer_id)
+                ->where('offer_products.active', 1)
                 ->where('sale_offers.active', 1)
                 ->get();
 
