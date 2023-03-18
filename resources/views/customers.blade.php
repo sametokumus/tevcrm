@@ -25,8 +25,21 @@ $extra_js='
                 </div>
             </div>
 
-            <div class="row" id="company-grid">
-            </div>
+            <table id="company-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                <thead>
+                <tr>
+                    <th class="border-bottom-0" data-priority="1">ID</th>
+                    <th class="border-bottom-0">Müşteri</th>
+                    <th class="border-bottom-0">Eposta</th>
+                    <th class="border-bottom-0">Telefon</th>
+                    <th class="border-bottom-0">Faks</th>
+                    <th class="border-bottom-0" data-priority="2">İşlem</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
 
         </div>
         <!-- CONTAINER END -->

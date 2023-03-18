@@ -68,40 +68,43 @@ function checkRole(){
 }
 async function initCompanies(){
 	let data = await serviceGetCustomers();
-	$('#company-grid .grid-item').remove();
+    $("#company-datatable").dataTable().fnDestroy();
+    $('#company-datatable tbody > tr').remove();
 
-	$.each(data.companies, function (i, company) {
-        let logo = "img/company/empty.jpg";
-        if (company.logo != null){logo = "https://lenis-crm.wimco.com.tr"+company.logo;}
-		let item = '<div class="col-md-4 grid-item">\n' +
-            '           <div class="card border-theme mb-3">\n' +
-            '               <div class="card-body">\n' +
-            '                   <div class="row gx-0 align-items-center">\n' +
-            '                       <div class="col-md-4">\n' +
-            '                           <img src="'+ logo +'" alt="" class="card-img rounded-0" />\n' +
-            '                       </div>\n' +
-            '                       <div class="col-md-8">\n' +
-            '                           <div class="card-body">\n' +
-            '                               <h5 class="card-title">'+ company.name +'</h5>\n' +
-            '                               <p class="card-text">Eposta: '+ company.email +'</p>\n' +
-            '                               <p class="card-text">Telefon: '+ company.phone +'</p>\n' +
-            '                               <p class="card-text">Faks: '+ company.fax +'</p>\n' +
-            '                               <a href="company-detail/'+ company.id +'" class="btn btn-outline-secondary btn-sm mt-2"">İncele</a>\n' +
-            '                               <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyModal(\''+ company.id +'\');">Düzenle</button>\n' +
-            '                           </div>\n' +
-            '                       </div>\n' +
-            '                   </div>\n' +
-            '               </div>\n' +
-            '               <div class="card-arrow">\n' +
-            '                   <div class="card-arrow-top-left"></div>\n' +
-            '                   <div class="card-arrow-top-right"></div>\n' +
-            '                   <div class="card-arrow-bottom-left"></div>\n' +
-            '                   <div class="card-arrow-bottom-right"></div>\n' +
-            '               </div>\n' +
-            '           </div>\n' +
-            '       </div>';
-		$('#company-grid').append(item);
-	});
+    $.each(data.companies, function (i, company) {
+        let typeItem = '<tr>\n' +
+            '              <td>'+ company.id +'</td>\n' +
+            '              <td>'+ company.name +'</td>\n' +
+            '              <td>'+ checkNull(company.email) +'</td>\n' +
+            '              <td>'+ checkNull(company.phone) +'</td>\n' +
+            '              <td>'+ checkNull(company.fax) +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateCompanyModal(\''+ company.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Hızlı Düzenle\n' +
+            '                      </button>\n' +
+            '                      <a href="company-detail/'+ company.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
+            '                          <span class="fe fe-search"> </span> Detaylı İncele\n' +
+            '                      </a>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+        $('#company-datatable tbody').append(typeItem);
+    });
+
+    $('#company-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf'],
+        pageLength : 20,
+        language: {
+            url: "services/Turkish.json"
+        }
+    });
 
 }
 async function addCompanyCallback(xhttp){

@@ -134,6 +134,10 @@ class SaleController extends Controller
                 'user_id' => $request->user_id,
             ]);
 
+            SaleOffer::query()->where('sale_id', $sale_id)->update([
+                'active' => 0
+            ]);
+
             foreach ($request->offers as $offer){
                 $measurement = Measurement::query()->where('name', $offer['measurement'])->where('active', 1)->first();
                 SaleOffer::query()->insert([
