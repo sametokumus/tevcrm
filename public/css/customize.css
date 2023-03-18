@@ -196,13 +196,24 @@ table tr.selected{
 .company-signature .name{
     margin: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-top: -10px;
+    font-weight: 800;
+}
+
+.company-signature #signature{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    height: 70px;
+    width: 220px;
+    margin: auto;
 }
 
 
 .company-signature .signature,
 .customer-signature .signature{
     width: auto;
-    height: 50px;
+    height: 60px;
 }
 .customer-signature .name{
     height: 20px;

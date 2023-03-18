@@ -237,6 +237,60 @@ class SaleController extends Controller
         }
     }
 
+    public function getSaleOffersByOfferId($offer_id)
+    {
+        try {
+            $offer = SaleOffer::query()
+                ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                ->selectRaw('offers.*, companies.name as company_name')
+                ->where('offers.offer_id',$offer_id)
+                ->where('offers.active',1)
+                ->first();
+
+            $offer['global_id'] = Sale::query()->where('sale_id', $offer->sale_id)->first()->id;
+            $offer['owner_id'] = Sale::query()->where('sale_id', $offer->sale_id)->first()->owner_id;
+            $offer['product_count'] = SaleOffer::query()->where('offer_id', $offer_id)->where('active', 1)->count();
+            $offer['company'] = Company::query()
+                ->leftJoin('countries', 'countries.id', '=', 'companies.country_id')
+                ->selectRaw('companies.*, countries.lang as country_lang')
+                ->where('companies.id', $offer->supplier_id)
+                ->first();
+
+            $products = array();
+            $sale_offers = SaleOffer::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+            $offer_sub_total = 0;
+            $offer_vat = 0;
+            $offer_grand_total = 0;
+            foreach ($sale_offers as $sale_offer){
+                $product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+
+                $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
+                $product_detail = Product::query()->where('id', $offer_request_product->product_id)->first();
+                $product['ref_code'] = $product_detail->ref_code;
+                $product['product_name'] = $product_detail->product_name;
+                $vat = $product->total_price / 100 * $product->vat_rate;
+                $product['vat'] = number_format($vat, 2,".","");
+                $product['grand_total'] = number_format($product->total_price + $vat, 2,".","");
+
+                $offer_sub_total += $product->total_price;
+                $offer_vat += $vat;
+                $offer_grand_total += $product->total_price + $vat;
+                $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+
+                array_push($products, $product);
+            }
+
+            $offer['products'] = $products;
+            $offer['sub_total'] = number_format($offer_sub_total, 2,".","");
+            $offer['vat'] = number_format($offer_vat, 2,".","");
+            $offer['grand_total'] = number_format($offer_grand_total, 2,".","");
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer' => $offer]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function addSaleOfferPrice(Request $request)
     {
         try {

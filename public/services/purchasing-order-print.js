@@ -31,10 +31,10 @@
 
         let sale_id = getPathVariable('purchasing-order-print');
         await initOfferSelect(sale_id);
-        await initContact(1, sale_id);
         await initBankInfoSelect();
-        await getOwnersAddSelectId('owners');
-        document.getElementById('owners').value = 1;
+        // await initContact(1, sale_id);
+        // await getOwnersAddSelectId('owners');
+        // document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
@@ -80,6 +80,9 @@ async function changeOffer(){
 async function initOfferSelect(sale_id){
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
+    await initContact(sale.owner_id, sale_id);
+
+    console.log(sale)
 
     $.each(sale.sale_offers, function (i, offer) {
         let item = '<option value="'+ offer.offer_id +'">'+ offer.supplier_name +' - '+ offer.offer_id +'</option>';
@@ -111,7 +114,8 @@ async function initContact(contact_id, sale_id){
     $('#purchasing-order-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
     // $('#purchasing-order-print .logo-header .offer-id').append(sale_id);
     $('.company-signature .name').text(contact.authorized_name);
-    document.getElementById('signature').src = contact.signature;
+    // document.getElementById('signature').src = contact.signature;
+    document.getElementById('signature').style.backgroundImage = "url('"+contact.signature+"')";
 
     $('#purchasing-order-print .contact-col address').text('');
     $('#purchasing-order-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
@@ -119,7 +123,7 @@ async function initContact(contact_id, sale_id){
 }
 
 async function initOffer(offer_id){
-    let data = await serviceGetOfferById(offer_id);
+    let data = await serviceGetSaleOffersByOfferId(offer_id);
     let offer = data.offer;
     let company = offer.company;
     console.log(offer);

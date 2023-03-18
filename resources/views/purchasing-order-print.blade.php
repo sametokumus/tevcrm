@@ -15,14 +15,14 @@ $extra_js='
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-md-7">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <label class="form-label">Dil</label>
                             <select class="form-control" id="lang">
                                 <option value="tr" @if(app()->getLocale() == 'tr') selected="selected" @endif>Türkçe</option>
                                 <option value="en" @if(app()->getLocale() == 'en') selected="selected" @endif>English</option>
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 d-none">
                             <label class="form-label">Firma</label>
                             <select class="form-control" id="owners" onchange="changeOwner();">
 
@@ -124,7 +124,8 @@ $extra_js='
                                 <div class="col-5">
                                     <div class="company-signature text-center">
                                         <h6 class="title">{{__('Authorised Signature')}}</h6>
-                                        <img src="#" alt="" id="signature" class="signature">
+                                        {{--                                        <img src="#" alt="" id="signature" class="signature">--}}
+                                        <div id="signature"></div>
                                         <p class="name"></p>
                                         <p class="info">{{__('Name Surname')}} / {{__('Signature')}}</p>
                                     </div>

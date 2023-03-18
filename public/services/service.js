@@ -1142,6 +1142,15 @@ async function serviceGetSaleOfferById(id) {
     }
 }
 
+async function serviceGetSaleOffersByOfferId(id) {
+    const data = await fetchDataGet('/admin/sale/getSaleOffersByOfferId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function servicePostAddSale(formData) {
     const data = await fetchDataPost('/admin/sale/addSale', formData, 'application/json');
     if (data.status == "success") {

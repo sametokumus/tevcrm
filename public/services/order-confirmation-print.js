@@ -29,11 +29,9 @@
         checkRole();
 
         let sale_id = getPathVariable('order-confirmation-print');
-        await initContact(1, sale_id);
+        // await initContact(1, sale_id);
         await initSale(sale_id);
         await initBankInfoSelect();
-        await getOwnersAddSelectId('owners');
-        document.getElementById('owners').value = 1;
     });
 
 })(window.jQuery);
@@ -77,7 +75,7 @@ async function initContact(contact_id, sale_id){
     $('#order-confirmation-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
     // $('#order-confirmation-print .logo-header .offer-id').append(sale_id);
     $('.company-signature .name').text(contact.authorized_name);
-    document.getElementById('signature').src = contact.signature;
+    document.getElementById('signature').style.backgroundImage = "url('"+contact.signature+"')";
 
     $('#order-confirmation-print .contact-col address').text('');
     $('#order-confirmation-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
@@ -88,6 +86,7 @@ async function initSale(sale_id){
     let data = await serviceGetSaleById(sale_id);
     console.log(data);
     let sale = data.sale;
+    await initContact(sale.owner_id, sale_id);
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
     document.getElementById('buyer_registration_number').innerHTML = '<b>'+ Lang.get("strings.Registration No") +' :</b> '+ checkNull(company.registration_number);
@@ -101,7 +100,17 @@ async function initSale(sale_id){
 
     let currency = '';
     $.each(sale.sale_offers, function (i, product) {
-        currency = product.currency;
+        currency = product.offer_currency;
+        let lead_time = checkNull(product.lead_time);
+        if (lead_time != ''){
+            if (lead_time == 1){
+                lead_time = Lang.get("strings.Stock");
+            }else if (parseInt(lead_time)%7 == 0){
+                lead_time = (parseInt(lead_time)/7) + ' ' + Lang.get("strings.Week");
+            }else{
+                lead_time = lead_time + ' ' + Lang.get("strings.Day");
+            }
+        }
         let item = '<tr>\n' +
             '           <td class="text-center">' + (i+1) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
@@ -110,14 +119,19 @@ async function initSale(sale_id){
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + lead_time + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
 
     if (sale.sub_total != null) {
+        let text = Lang.get("strings.Sub Total");
+        if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
+            text = Lang.get("strings.Grand Total");
+        }
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Sub Total") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + text + '</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
@@ -125,25 +139,27 @@ async function initSale(sale_id){
     if (sale.freight != null) {
         let item = '<tr>\n' +
             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
-    if (sale.vat != null) {
+    if (sale.vat != null && sale.vat != '0.00') {
         let item = '<tr>\n' +
             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
+            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
 
     if (sale.grand_total != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(sale.grand_total) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
+        if (sale.vat == null && sale.vat == '0.00' && sale.freight == null) {
+            let item = '<tr>\n' +
+                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
+                '       </tr>';
+            $('#sale-detail tbody').append(item);
+        }
     }
 
 }
