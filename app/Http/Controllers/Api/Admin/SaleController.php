@@ -265,7 +265,7 @@ class SaleController extends Controller
                     'user_id' => $request->user_id,
                 ]);
 
-                $sale_offers = SaleOffer::query()->where('sale_id', $request->sale_id)->get();
+                $sale_offers = SaleOffer::query()->where('sale_id', $request->sale_id)->where('active', 1)->get();
                 $sub_total = 0;
                 $vat = 0;
                 foreach ($sale_offers as $sale_offer){
