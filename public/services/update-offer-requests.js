@@ -15,15 +15,17 @@
             let quantity = document.getElementById('update_offer_request_product_quantity').value;
             let measurement = document.getElementById('update_offer_request_product_measurement').value;
             let brand = document.getElementById('update_offer_request_brand').value;
-            let category = document.getElementById('update_offer_request_product_category').value;
+            let category1 = document.getElementById('update_offer_request_product_category_1').value;
+            let category2 = document.getElementById('update_offer_request_product_category_2').value;
+            let category3 = document.getElementById('update_offer_request_product_category_3').value;
             let cust_stock = document.getElementById('update_offer_request_customer_stock_code').value;
             let own_stock = document.getElementById('update_offer_request_owner_stock_code').value;
-            if (refcode == '' || product_name == '' || quantity == "0"){
+            if (quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            console.log(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
-            addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
+            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
+            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
         });
 	});
 
@@ -96,32 +98,53 @@ async function initThirdCategory(){
 
 async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock){
 
-    let count = document.getElementById('update_offer_request_product_count').value;
-    count = parseInt(count) + 1;
-    document.getElementById('update_offer_request_product_count').value = count;
-    let item = '<tr id="productRow'+ count +'">\n' +
-        '           <td>'+ count +'</td>\n' +
-        '           <td>'+ own_stock +'</td>\n' +
-        '           <td>'+ cust_stock +'</td>\n' +
-        '           <td>'+ refcode +'</td>\n' +
-        '           <td>'+ product_name +'</td>\n' +
-        '           <td>'+ quantity +'</td>\n' +
-        '           <td>'+ measurement +'</td>\n' +
-        '           <td>'+ brand +'</td>\n' +
-        '           <td>'+ category3 +'</td>\n' +
-        '           <td>\n' +
-        '               <div class="btn-list">\n' +
-        '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
-        '               </div>\n' +
-        '           </td>\n' +
-        '       </tr>';
-    $('#offer-request-products tbody').append(item);
-    document.getElementById('update_offer_request_product_refcode').value = "";
-    document.getElementById('update_offer_request_product_name').value = "";
-    document.getElementById('update_offer_request_product_quantity').value = "1";
-    document.getElementById('update_offer_request_product_measurement').value = "adet";
-    document.getElementById('update_offer_request_owner_stock_code').value = "";
-    document.getElementById('update_offer_request_customer_stock_code').value = "";
+    let formData = JSON.stringify({
+        "owner_stock_code": own_stock,
+        "customer_stock_code": cust_stock,
+        "ref_code": refcode,
+        "product_name": product_name,
+        "quantity": quantity,
+        "measurement": measurement,
+        "brand": brand,
+        "category": category3
+    });
+    console.log(formData)
+    let request_id = getPathVariable('offer-request');
+
+    let returned = await servicePostAddProductToOfferRequest(request_id, formData);
+    if (returned){
+
+        let count = document.getElementById('update_offer_request_product_count').value;
+        count = parseInt(count) + 1;
+        document.getElementById('update_offer_request_product_count').value = count;
+        let item = '<tr id="productRow'+ count +'">\n' +
+            '           <td>'+ count +'</td>\n' +
+            '           <td>'+ own_stock +'</td>\n' +
+            '           <td>'+ cust_stock +'</td>\n' +
+            '           <td>'+ refcode +'</td>\n' +
+            '           <td>'+ product_name +'</td>\n' +
+            '           <td>'+ quantity +'</td>\n' +
+            '           <td>'+ measurement +'</td>\n' +
+            '           <td>'+ brand +'</td>\n' +
+            '           <td>'+ category3 +'</td>\n' +
+            '           <td>\n' +
+            '               <div class="btn-list">\n' +
+            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
+            '       </tr>';
+        $('#offer-request-products tbody').append(item);
+        document.getElementById('update_offer_request_product_refcode').value = "";
+        document.getElementById('update_offer_request_product_name').value = "";
+        document.getElementById('update_offer_request_product_quantity').value = "1";
+        document.getElementById('update_offer_request_product_measurement').value = "adet";
+        document.getElementById('update_offer_request_owner_stock_code').value = "";
+        document.getElementById('update_offer_request_customer_stock_code').value = "";
+
+    }else{
+        alert("Hata Oluştu");
+    }
+
 }
 
 async function deleteProductRow(item_id){
@@ -154,15 +177,17 @@ async function initOfferRequest(){
     }
 
     $.each(offer_request.products, function (i, product) {
-        let product_name = product.product_name;
-
 
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + (i+1) + '</td>\n' +
+            '           <td>' + product.product.stock_code + '</td>\n' +
+            '           <td>' + checkNull(product.customer_stock_code) + '</td>\n' +
             '           <td>' + product.ref_code + '</td>\n' +
-            '           <td>' + product_name + '</td>\n' +
+            '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>' + product.measurement_name + '</td>\n' +
+            '           <td>' + product.product.brand_id + '</td>\n' +
+            '           <td>' + product.product.category_id + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -177,6 +202,8 @@ async function updateOfferRequest(){
     let user_id = localStorage.getItem('userId');
     let request_id = getPathVariable('offer-request');
 
+    let owner = document.getElementById('update_offer_request_owner').value;
+    if (owner == 0){owner = null;}
     let personnel = document.getElementById('update_offer_request_authorized_personnel').value;
     if (personnel == 0){personnel = null;}
     let company = document.getElementById('update_offer_request_company').value;
@@ -188,7 +215,8 @@ async function updateOfferRequest(){
         "user_id": parseInt(user_id),
         "authorized_personnel_id": personnel,
         "company_id": company,
-        "company_employee_id": employee
+        "company_employee_id": employee,
+        "owner_id": owner
     });
 
     console.log(formData);

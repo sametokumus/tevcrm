@@ -169,7 +169,7 @@ $extra_js='
                             <div class="card-body">
                                 <div class="row p-3">
                                     <div class="col-md-12 mb-3">
-                                        <button type="submit" class="btn btn-theme w-100">Talep Oluştur ve Devam Et</button>
+                                        <button type="submit" class="btn btn-theme w-100">Talebi Güncelle ve Devam Et</button>
                                     </div>
                                 </div>
                             </div>

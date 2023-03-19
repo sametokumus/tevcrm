@@ -121,15 +121,6 @@ class OfferRequestController extends Controller
 
                 }
 
-//                $has_product = Product::query()->where('ref_code', $product['ref_code'])->where('active', 1)->first();
-//                if ($has_product) {
-//                    $product_id = $has_product->id;
-//                }else{
-//                    $product_id = Product::query()->insertGetId([
-//                        'ref_code' => $product['ref_code'],
-//                        'product_name' => $product['product_name'],
-//                    ]);
-//                }
                 $measurement = Measurement::query()->where('name', $product['measurement'])->where('active', 1)->first();
                 OfferRequestProduct::query()->insert([
                     'request_id' => $request_id,
@@ -197,23 +188,53 @@ class OfferRequestController extends Controller
 //                'ref_code' => 'required',
             ]);
 
-                $has_product = Product::query()->where('ref_code', $request->ref_code)->where('active', 1)->first();
+            $brand_id = 0;
+            if ($request->brand != ''){
+                $has_brand = Brand::query()->where('name', $request->brand)->first();
+                if ($has_brand){
+                    $brand_id = $has_brand->id;
+                }else{
+                    $brand_id = Brand::query()->insertGetId([
+                        'name' => $request->brand
+                    ]);
+                }
+            }
+
+
+            if ($request->owner_stock_code != ''){
+
+                $has_product = Product::query()->where('stock_code', $request->owner_stock_code)->where('active', 1)->first();
                 if ($has_product) {
                     $product_id = $has_product->id;
                 }else{
                     $product_id = Product::query()->insertGetId([
+                        'brand_id' => $brand_id,
+                        'category_id' => $request->category,
                         'ref_code' => $request->ref_code,
                         'product_name' => $request->product_name,
+                        'stock_code' => $request->owner_stock_code,
                     ]);
                 }
 
-                $measurement = Measurement::query()->where('name', $request->measurement)->where('active', 1)->first();
-                $rp_id = OfferRequestProduct::query()->insertGetId([
-                    'request_id' => $request_id,
-                    'product_id' => $product_id,
-                    'quantity' => $request->quantity,
-                    'measurement_id' => $measurement->id
+            }else{
+
+                $product_id = Product::query()->insertGetId([
+                    'brand_id' => $brand_id,
+                    'category_id' => $request->category,
+                    'ref_code' => $request->ref_code,
+                    'product_name' => $request->product_name,
                 ]);
+
+            }
+
+            $measurement = Measurement::query()->where('name', $request->measurement)->where('active', 1)->first();
+            OfferRequestProduct::query()->insert([
+                'request_id' => $request_id,
+                'product_id' => $product_id,
+                'quantity' => $request->quantity,
+                'measurement_id' => $measurement->id,
+                'customer_stock_code' => $request->customer_stock_code,
+            ]);
 
             return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['product_id' => $rp_id]]);
         } catch (ValidationException $validationException) {
