@@ -434,6 +434,16 @@ async function getMeasurementsAddSelectId(selectId){
     });
 }
 
+async function getParentCategoriesAddSelectId(selectId){
+    let data = await serviceGetCategories();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Kategori Seçiniz</option>');
+    $.each(data.categories, function(i, category){
+        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getActivityTypesAddSelectId(selectId){
     let data = await serviceGetActivityTypes();
     $('#'+selectId+' option').remove();

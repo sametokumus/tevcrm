@@ -21,15 +21,17 @@
             let quantity = document.getElementById('add_offer_request_product_quantity').value;
             let measurement = document.getElementById('add_offer_request_product_measurement').value;
             let brand = document.getElementById('add_offer_request_brand').value;
-            let category = document.getElementById('add_offer_request_product_category').value;
+            let category1 = document.getElementById('add_offer_request_product_category_1').value;
+            let category2 = document.getElementById('add_offer_request_product_category_2').value;
+            let category3 = document.getElementById('add_offer_request_product_category_3').value;
             let cust_stock = document.getElementById('add_offer_request_customer_stock_code').value;
             let own_stock = document.getElementById('add_offer_request_owner_stock_code').value;
             if (quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            console.log(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
-            addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock);
+            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
+            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
         });
 	});
 
@@ -52,6 +54,7 @@ async function initPage(){
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getCustomersAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
+    await getParentCategoriesAddSelectId('add_offer_request_product_category_1');
     let data1 = await serviceGetBrands();
     let brands = [];
     $.each(data1.brands, function (i, brand) {
@@ -65,28 +68,6 @@ async function initPage(){
         source: brands,
         autoSelect: true
     });
-    let data2 = await serviceGetCategories();
-    console.log(data2)
-    let categories = [];
-    $.each(data2.categories, function (i, category) {
-        let item = {
-            "id": category.id,
-            "name": category.name
-        }
-        categories.push(item);
-        $.each(category.sub_categories, function (i, sub_category) {
-            let item = {
-                "id": sub_category.id,
-                "name": sub_category.name
-            }
-            categories.push(item);
-        });
-    });
-    console.log(categories)
-    $('#add_offer_request_product_category').typeahead({
-        source: categories,
-        autoSelect: true
-    });
 }
 
 async function initEmployeeSelect(){
@@ -94,7 +75,32 @@ async function initEmployeeSelect(){
     getEmployeesAddSelectId(company_id, 'add_offer_request_company_employee');
 }
 
-async function addProductToTable(refcode, product_name, quantity, measurement, brand, category, cust_stock, own_stock){
+async function initSecondCategory(){
+    let parent_id = document.getElementById('add_offer_request_product_category_1').value;
+    $('#add_offer_request_product_category_2 option').remove();
+    $('#add_offer_request_product_category_3 option').remove();
+
+    let data = await serviceGetCategoriesByParentId(parent_id);
+    $('#add_offer_request_product_category_2').append('<option value="0">Kategori Seçiniz</option>');
+    $.each(data.categories, function(i, category){
+        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#add_offer_request_product_category_2').append(optionRow);
+    });
+}
+
+async function initThirdCategory(){
+    let parent_id = document.getElementById('add_offer_request_product_category_2').value;
+    $('#add_offer_request_product_category_3 option').remove();
+
+    let data = await serviceGetCategoriesByParentId(parent_id);
+    $('#add_offer_request_product_category_3').append('<option value="0">Kategori Seçiniz</option>');
+    $.each(data.categories, function(i, category){
+        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#add_offer_request_product_category_3').append(optionRow);
+    });
+}
+
+async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock){
 
     let count = document.getElementById('add_offer_request_product_count').value;
     count = parseInt(count) + 1;
@@ -108,7 +114,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         '           <td>'+ quantity +'</td>\n' +
         '           <td>'+ measurement +'</td>\n' +
         '           <td>'+ brand +'</td>\n' +
-        '           <td>'+ category +'</td>\n' +
+        '           <td>'+ category3 +'</td>\n' +
         '           <td>\n' +
         '               <div class="btn-list">\n' +
         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +

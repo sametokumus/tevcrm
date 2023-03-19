@@ -93,17 +93,31 @@ $extra_js='
 
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Marka</label>
                                         <input type="text" value="" class="form-control" id="add_offer_request_brand" />
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Ürün Grubu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_product_category" />
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (1. Seviye)</label>
+                                        <select class="form-control" id="add_offer_request_product_category_1" onchange="initSecondCategory();">
+
+                                        </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (2. Seviye)</label>
+                                        <select class="form-control" id="add_offer_request_product_category_2" onchange="initThirdCategory();">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (3. Seviye)</label>
+                                        <select class="form-control" id="add_offer_request_product_category_3">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">&nbsp;</label>
-                                        <button type="button" class="btn btn-outline-theme w-100" id="add_offer_request_product_button">Ekle</button>
+                                        <button type="button" class="btn btn-outline-theme w-100" id="add_offer_request_product_button">Ürünü Talep Listesine Ekle</button>
                                     </div>
                                 </div>
                             </div>

@@ -49,6 +49,7 @@ class OfferRequestController extends Controller
                 $offer_request_product['product_name'] = $product->product_name;
                 $measurement = Measurement::query()->where('id', $offer_request_product->measurement_id)->first();
                 $offer_request_product['measurement_name'] = $measurement->name;
+                $offer_request_product['product'] = $product;
             }
             $offer_request['products'] = $offer_request_products;
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
@@ -92,18 +93,6 @@ class OfferRequestController extends Controller
                         ]);
                     }
                 }
-                $category_id = 0;
-                if ($product['category'] != ''){
-                    $has_category = Brand::query()->where('name', $product['category'])->first();
-                    if ($has_category){
-                        $category_id = $has_category->id;
-                    }else{
-                        $category_id = Category::query()->insertGetId([
-                           'parent_id' => 0,
-                           'name' => $product['category']
-                        ]);
-                    }
-                }
 
 
                 if ($product['owner_stock_code'] != ''){
@@ -114,7 +103,7 @@ class OfferRequestController extends Controller
                     }else{
                         $product_id = Product::query()->insertGetId([
                             'brand_id' => $brand_id,
-                            'category_id' => $category_id,
+                            'category_id' => $product['category'],
                             'ref_code' => $product['ref_code'],
                             'product_name' => $product['product_name'],
                             'stock_code' => $product['owner_stock_code'],
@@ -125,7 +114,7 @@ class OfferRequestController extends Controller
 
                     $product_id = Product::query()->insertGetId([
                         'brand_id' => $brand_id,
-                        'category_id' => $category_id,
+                        'category_id' => $product['category'],
                         'ref_code' => $product['ref_code'],
                         'product_name' => $product['product_name'],
                     ]);

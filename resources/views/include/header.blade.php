@@ -152,6 +152,12 @@ $extra_js="";
                     </a>
                 </div>
                 <div class="menu-header">Satış Yönetimi</div>
+                <div class="menu-item @if( Request::segment(1)== 'offer-request' ) active @endif">
+                    <a href="/offer-request" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Talep Oluştur</span>
+                    </a>
+                </div>
                 <div class="menu-item @if( Request::segment(1)== 'sales' ) active @endif">
                     <a href="/sales" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
@@ -164,12 +170,7 @@ $extra_js="";
 {{--                        <span class="menu-text">Talepler</span>--}}
 {{--                    </a>--}}
 {{--                </div>--}}
-{{--                <div class="menu-item">--}}
-{{--                    <a href="/offer-request" class="menu-link">--}}
-{{--                        <span class="menu-icon"><i class="bi bi-gem"></i></span>--}}
-{{--                        <span class="menu-text">Talep Oluştur</span>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+
 {{--                <div class="menu-item">--}}
 {{--                    <a href="/sw-1" class="menu-link">--}}
 {{--                        <span class="menu-icon"><i class="bi bi-gem"></i></span>--}}

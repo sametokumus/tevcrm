@@ -20,45 +20,41 @@ $extra_js='
                 </div>
             </div>
 
+            <form method="post" action="#" id="update_offer_request_form">
 
                 <div class="row">
 
                     <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body">
-                                <form method="post" action="#" id="update_offer_request_form">
                                     <input type="hidden" class="form-control" id="update_offer_request_product_count" value="0">
                                     <input type="hidden" class="form-control" id="update_offer_request_id">
                                     <div class="row p-3">
                                         <div class="col-md-3 mb-3">
                                             <label class="form-label">Talep Gelen Firma</label>
-                                            <select class="form-control" id="add_offer_request_owner">
+                                            <select class="form-control" id="update_offer_request_owner">
 
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="form-label">Yetkili Satış Temsilcisi</label>
-                                            <select class="form-control" id="add_offer_request_authorized_personnel">
+                                            <select class="form-control" id="update_offer_request_authorized_personnel">
 
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="form-label">Müşteri</label>
-                                            <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
+                                            <select class="form-control" id="update_offer_request_company" onchange="initEmployeeSelect();">
 
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="form-label">Müşteri Yetkilisi</label>
-                                            <select class="form-control" id="add_offer_request_company_employee">
+                                            <select class="form-control" id="update_offer_request_company_employee">
 
                                             </select>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <button type="submit" class="btn btn-theme w-100">Kaydet</button>
-                                        </div>
                                     </div>
-                                </form>
                             </div>
                             <div class="card-arrow">
                                 <div class="card-arrow-top-left"></div>
@@ -75,41 +71,55 @@ $extra_js='
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Firma Stok Kodu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_owner_stock_code" />
+                                        <input type="text" value="" class="form-control" id="update_offer_request_owner_stock_code" />
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Müşteri Stok Kodu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_customer_stock_code" />
+                                        <input type="text" value="" class="form-control" id="update_offer_request_customer_stock_code" />
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Üretici Parça Numarası (Ref. Code)</label>
-                                        <input type="text" class="form-control" id="add_offer_request_product_refcode">
+                                        <input type="text" class="form-control" id="update_offer_request_product_refcode">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Ürün Adı</label>
-                                        <input type="text" class="form-control" id="add_offer_request_product_name">
+                                        <input type="text" class="form-control" id="update_offer_request_product_name">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Miktar</label>
-                                        <input type="number" class="form-control" id="add_offer_request_product_quantity" value="1" min="1">
+                                        <input type="number" class="form-control" id="update_offer_request_product_quantity" value="1" min="1">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Birim</label>
-                                        <select class="form-control" id="add_offer_request_product_measurement">
+                                        <select class="form-control" id="update_offer_request_product_measurement">
 
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Marka</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_brand" />
+                                        <input type="text" value="" class="form-control" id="update_offer_request_brand" />
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Ürün Grubu</label>
-                                        <input type="text" value="" class="form-control" id="add_offer_request_product_category" />
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (1. Seviye)</label>
+                                        <select class="form-control" id="update_offer_request_product_category_1" onchange="initSecondCategory();">
+
+                                        </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (2. Seviye)</label>
+                                        <select class="form-control" id="update_offer_request_product_category_2" onchange="initThirdCategory();">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Ürün Grubu (3. Seviye)</label>
+                                        <select class="form-control" id="update_offer_request_product_category_3">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">&nbsp;</label>
-                                        <button type="button" class="btn btn-outline-theme w-100" id="add_offer_request_product_button">Ekle</button>
+                                        <button type="button" class="btn btn-outline-theme w-100" id="update_offer_request_product_button">Ürünü Talep Listesine Ekle</button>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +164,27 @@ $extra_js='
                         </div>
                     </div>
 
+                    <div class="col-md-12">
+                        <div class="card border-theme mb-3">
+                            <div class="card-body">
+                                <div class="row p-3">
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Talep Oluştur ve Devam Et</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+            </form>
         </div>
         <!-- CONTAINER END -->
     </div>
