@@ -236,7 +236,7 @@ class OfferRequestController extends Controller
                 'customer_stock_code' => $request->customer_stock_code,
             ]);
 
-            return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['product_id' => $rp_id]]);
+            return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
