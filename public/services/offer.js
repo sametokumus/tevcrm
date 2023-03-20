@@ -230,6 +230,15 @@ async function openOfferDetailModal(offer_id){
     $("#offerDetailModal").modal('show');
     await initOfferDetailModal(offer_id);
 }
+
+function initMaskMoney() {
+    $('input[id^="DTE_Field_pcs_price"]').maskMoney({thousands:'.', decimal:','});
+    $('input[id^="DTE_Field_total_price"]').maskMoney({thousands:'.', decimal:','});
+    $('input[id^="DTE_Field_discount_rate"]').maskMoney({thousands:'.', decimal:','});
+    $('input[id^="DTE_Field_discounted_price"]').maskMoney({thousands:'.', decimal:','});
+    $('input[id^="DTE_Field_vat_rate"]').maskMoney({thousands:'.', decimal:','});
+}
+
 let editor;
 let table;
 // Activate an inline edit on click of a table cell
@@ -238,10 +247,8 @@ $('#offer-detail').on( 'click', 'tbody td.row-edit', function (e) {
         submitTrigger: -1,
         submitHtml: '<i class="fas fa-lg fa-fw me-2 fa-save"/>'
     } );
+    initMaskMoney();
 } );
-$("#offer-detail").on("click", "tbody td:nth-child(7)", function() {
-    editor.field("pcs_price").input().inputmask();
-});
 
 async function initOfferDetailModal(offer_id){
     console.log(offer_id)
@@ -252,76 +259,58 @@ async function initOfferDetailModal(offer_id){
 
     $("#offer-detail").dataTable().fnDestroy();
     $('#offer-detail tbody > tr').remove();
-    //
-    // $.each(offer.products, function (i, product) {
-    //     let item = '<tr id="productRow' + product.id + '">\n' +
-    //         '           <td>' + product.id + '</td>\n' +
-    //         '           <td>' + checkNull(product.ref_code) + '</td>\n' +
-    //         '           <td>' + checkNull(product.date_code) + '</td>\n' +
-    //         '           <td>' + checkNull(product.package_type) + '</td>\n' +
-    //         '           <td>' + checkNull(product.quantity) + '</td>\n' +
-    //         '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
-    //         '           <td>' + changeCommasToDecimal(checkNull(product.pcs_price)) + '</td>\n' +
-    //         '           <td>' + changeCommasToDecimal(checkNull(product.total_price)) + '</td>\n' +
-    //         '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-    //         '           <td>' + changeCommasToDecimal(checkNull(product.discounted_price)) + '</td>\n' +
-    //         '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
-    //         '           <td>' + checkNull(product.currency) + '</td>\n' +
-    //         '           <td>' + checkNull(product.lead_time) + '</td>\n' +
-    //         '              <td>\n' +
-    //         '                  <div class="btn-list">\n' +
-    //         '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Fiyatı Gir</span></button>\n' +
-    //         '                  </div>\n' +
-    //         '              </td>\n' +
-    //         '       </tr>';
-    //     $('#offer-detail tbody').append(item);
-    // });
-
-    // $('#offer-detail').DataTable({
-    //     responsive: false,
-    //     columnDefs: [
-    //         { responsivePriority: 1, targets: 0 },
-    //         { responsivePriority: 2, targets: -1 }
-    //     ],
-    //     dom: 'Bfrtip',
-    //     // buttons: [
-    //     //     {
-    //     //         text: 'Teklife Yeni Ürün Ekle',
-    //     //         action: function ( e, dt, node, config ) {
-    //     //             openAddOfferProductModal();
-    //     //         }
-    //     //     }
-    //     //     // 'excel',
-    //     //     // 'pdf'
-    //     // ],
-    //     pageLength : 20,
-    //     scrollX: true,
-    //     language: {
-    //         url: "services/Turkish.json"
-    //     },
-    //     order: [[0, 'asc']]
-    // });
 
     editor = new $.fn.dataTable.Editor( {
         data: offer.products,
         table: "#offer-detail",
         idSrc: "id",
         fields: [ {
+            name: "id",
+            type: "readonly",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            name: "date_code",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            name: "package_type",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            name: "quantity",
+            attr: {
+                class: 'form-control'
+            }
+        },{
             name: "pcs_price",
-            type: "num-fmt",
-            def: "",
-            fieldInfo: "Enter the price of the item in dollars and cents.",
-            mask: "$9,999.99",
-            unmask: function (data) {
-                return data.replace(/[\$,]/g, ''); // remove dollar sign and comma separators
-            },
-            set: function (data) {
-                this.val("$" + Inputmask.format(data, { mask: "$9,999.99" })); // add dollar sign and comma separators
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            name: "total_price",
+            type: "readonly",
+            attr: {
+                class: 'form-control'
             }
         }, {
-            name: "discount_rate"
+            name: "discount_rate",
+            attr: {
+                class: 'form-control'
+            }
         }, {
-            name: "vat_rate"
+            name: "discounted_price",
+            attr: {
+                class: 'form-control'
+            }
+        }, {
+            name: "vat_rate",
+            attr: {
+                class: 'form-control'
+            }
         }, {
             name: "currency",
             type: "select",
@@ -330,28 +319,82 @@ async function initOfferDetailModal(offer_id){
                 { value: 'EUR', label: 'EUR' },
                 { value: 'USD', label: 'USD' },
                 { value: 'GBP', label: 'GBP' }
-            ]
+            ],
+            attr: {
+                class: 'form-control'
+            }
         }, {
             name: "lead_time",
-            type: "text",
-            validate: {
-                number: true
+            attr: {
+                class: 'form-control'
             }
         }
         ]
     } );
 
-    editor.on('preSubmit', function(e, data, action) {
+    editor.on('preSubmit', async function(e, data, action) {
         if (action !== 'remove') {
-            let fieldData = editor.field('currency').val();
-            console.log(fieldData)
-            if (!fieldData) {
-                editor.field('first_name').error('First Name is required');
-                return false;
+            let id = editor.field('id').val();
+            let date_code = editor.field('date_code').val();
+            let package_type = editor.field('package_type').val();
+            let quantity = editor.field('quantity').val();
+            let pcs_price = editor.field('pcs_price').val();
+            let total_price = editor.field('total_price').val();
+            let discount_rate = editor.field('discount_rate').val();
+            let discounted_price = editor.field('discounted_price').val();
+            let vat_rate = editor.field('vat_rate').val();
+            let currency = editor.field('currency').val();
+            let lead_time = editor.field('lead_time').val();
+
+            let formData = JSON.stringify({
+                "id": id,
+                "date_code": date_code,
+                "package_type": package_type,
+                "quantity": quantity,
+                "pcs_price": changePriceToDecimal(pcs_price),
+                "total_price": changePriceToDecimal(total_price),
+                "discount_rate": changePriceToDecimal(discount_rate),
+                "discounted_price": changePriceToDecimal(discounted_price),
+                "vat_rate": changePriceToDecimal(vat_rate),
+                "currency": currency,
+                "lead_time": lead_time
+            });
+
+            console.log(formData);
+
+            let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
+            let returned = await servicePostUpdateOfferProduct(formData, offer_id, product_id);
+            if (returned){
+                await initOfferDetailModal(offer_id);
+            }else{
+                alert("Hata Oluştu");
             }
+
+
+            // if (!fieldData) {
+            //     editor.field('first_name').error('First Name is required');
+            //     return false;
+            // }
 
             // Submit the edited row data
             editor.submit();
+        }
+    });
+    $( editor.field( 'pcs_price' ).input() ).on( 'keyup', function (e){
+        let quantity = editor.field('quantity').val();
+        let pcs_price = editor.field('pcs_price').val();
+        if (pcs_price != ''){
+            let total_price = quantity * parseFloat(changePriceToDecimal(pcs_price));
+            document.getElementById('DTE_Field_total_price').value = changeCommasToDecimal(total_price.toFixed(2));
+        }
+    });
+    $( editor.field( 'discount_rate' ).input() ).on( 'keyup', function (e){
+        let total_price = editor.field('total_price').val();
+        let pcs_price = editor.field('pcs_price').val();
+        let discount_rate = editor.field('discount_rate').val();
+        if (pcs_price != '' && total_price != '' && discount_rate != ''){
+            let discounted_price = parseFloat(changePriceToDecimal(total_price)) - (parseFloat(changePriceToDecimal(total_price)) / 100 * parseFloat(changePriceToDecimal(discount_rate)));
+            document.getElementById('DTE_Field_discounted_price').value = changeCommasToDecimal(discounted_price.toFixed(2));
         }
     });
 
