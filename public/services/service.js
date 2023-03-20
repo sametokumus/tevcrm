@@ -1085,7 +1085,7 @@ async function servicePostAddOfferProduct(formData, offer_id) {
     }
 }
 async function servicePostUpdateOfferProduct(formData, product_id) {
-    const data = await fetchDataPost('/admin/offer/updateOfferProduct/' + product_id, formData, 'application/json');
+    const data = await fetchDataPost('/admin/offer/updateOfferProduct/' + offer_id + '/' + product_id, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;
