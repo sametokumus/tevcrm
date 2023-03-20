@@ -363,3 +363,9 @@ table tr.selected{
 #sales-datatable td span.badge{
     cursor: pointer;
 }
+
+
+/*DTE*/
+.DTE_Field label{
+    display: none;
+}

@@ -164,6 +164,9 @@ async function addOffer(){
             $("#add_offer_form").trigger("reset");
             $('#addOfferModal').modal('hide');
             initOffers();
+
+            let products = $('#offer-request-products').DataTable();
+            products.rows().deselect();
         }else{
             alert("Hata Oluştu");
         }
@@ -227,6 +230,18 @@ async function openOfferDetailModal(offer_id){
     $("#offerDetailModal").modal('show');
     await initOfferDetailModal(offer_id);
 }
+let editor;
+let table;
+// Activate an inline edit on click of a table cell
+$('#offer-detail').on( 'click', 'tbody td.row-edit', function (e) {
+    editor.inline( table.cells(this.parentNode, '*').nodes(), {
+        submitTrigger: -1,
+        submitHtml: '<i class="fas fa-lg fa-fw me-2 fa-save"/>'
+    } );
+} );
+$("#offer-detail").on("click", "tbody td:nth-child(7)", function() {
+    editor.field("pcs_price").input().inputmask();
+});
 
 async function initOfferDetailModal(offer_id){
     console.log(offer_id)
@@ -237,55 +252,139 @@ async function initOfferDetailModal(offer_id){
 
     $("#offer-detail").dataTable().fnDestroy();
     $('#offer-detail tbody > tr').remove();
+    //
+    // $.each(offer.products, function (i, product) {
+    //     let item = '<tr id="productRow' + product.id + '">\n' +
+    //         '           <td>' + product.id + '</td>\n' +
+    //         '           <td>' + checkNull(product.ref_code) + '</td>\n' +
+    //         '           <td>' + checkNull(product.date_code) + '</td>\n' +
+    //         '           <td>' + checkNull(product.package_type) + '</td>\n' +
+    //         '           <td>' + checkNull(product.quantity) + '</td>\n' +
+    //         '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
+    //         '           <td>' + changeCommasToDecimal(checkNull(product.pcs_price)) + '</td>\n' +
+    //         '           <td>' + changeCommasToDecimal(checkNull(product.total_price)) + '</td>\n' +
+    //         '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
+    //         '           <td>' + changeCommasToDecimal(checkNull(product.discounted_price)) + '</td>\n' +
+    //         '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
+    //         '           <td>' + checkNull(product.currency) + '</td>\n' +
+    //         '           <td>' + checkNull(product.lead_time) + '</td>\n' +
+    //         '              <td>\n' +
+    //         '                  <div class="btn-list">\n' +
+    //         '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Fiyatı Gir</span></button>\n' +
+    //         '                  </div>\n' +
+    //         '              </td>\n' +
+    //         '       </tr>';
+    //     $('#offer-detail tbody').append(item);
+    // });
 
-    $.each(offer.products, function (i, product) {
-        let item = '<tr id="productRow' + product.id + '">\n' +
-            '           <td>' + product.id + '</td>\n' +
-            '           <td>' + checkNull(product.ref_code) + '</td>\n' +
-            '           <td>' + checkNull(product.date_code) + '</td>\n' +
-            '           <td>' + checkNull(product.package_type) + '</td>\n' +
-            '           <td>' + checkNull(product.quantity) + '</td>\n' +
-            '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(checkNull(product.pcs_price)) + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(checkNull(product.total_price)) + '</td>\n' +
-            '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-            '           <td>' + changeCommasToDecimal(checkNull(product.discounted_price)) + '</td>\n' +
-            '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
-            '           <td>' + checkNull(product.currency) + '</td>\n' +
-            '           <td>' + checkNull(product.lead_time) + '</td>\n' +
-            '              <td>\n' +
-            '                  <div class="btn-list">\n' +
-            '                      <button onclick="openUpdateOfferProductModal(\'' + offer_id + '\', '+ product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Fiyatı Gir</span></button>\n' +
-            '                  </div>\n' +
-            '              </td>\n' +
-            '       </tr>';
-        $('#offer-detail tbody').append(item);
-    });
+    // $('#offer-detail').DataTable({
+    //     responsive: false,
+    //     columnDefs: [
+    //         { responsivePriority: 1, targets: 0 },
+    //         { responsivePriority: 2, targets: -1 }
+    //     ],
+    //     dom: 'Bfrtip',
+    //     // buttons: [
+    //     //     {
+    //     //         text: 'Teklife Yeni Ürün Ekle',
+    //     //         action: function ( e, dt, node, config ) {
+    //     //             openAddOfferProductModal();
+    //     //         }
+    //     //     }
+    //     //     // 'excel',
+    //     //     // 'pdf'
+    //     // ],
+    //     pageLength : 20,
+    //     scrollX: true,
+    //     language: {
+    //         url: "services/Turkish.json"
+    //     },
+    //     order: [[0, 'asc']]
+    // });
 
-    $('#offer-detail').DataTable({
-        responsive: false,
-        columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
-        ],
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                text: 'Teklife Yeni Ürün Ekle',
-                action: function ( e, dt, node, config ) {
-                    openAddOfferProductModal();
-                }
+    editor = new $.fn.dataTable.Editor( {
+        data: offer.products,
+        table: "#offer-detail",
+        idSrc: "id",
+        fields: [ {
+            name: "pcs_price",
+            type: "num-fmt",
+            def: "",
+            fieldInfo: "Enter the price of the item in dollars and cents.",
+            mask: "$9,999.99",
+            unmask: function (data) {
+                return data.replace(/[\$,]/g, ''); // remove dollar sign and comma separators
+            },
+            set: function (data) {
+                this.val("$" + Inputmask.format(data, { mask: "$9,999.99" })); // add dollar sign and comma separators
             }
-            // 'excel',
-            // 'pdf'
-        ],
-        pageLength : 20,
-        scrollX: true,
-        language: {
-            url: "services/Turkish.json"
-        },
-        order: [[0, 'asc']]
+        }, {
+            name: "discount_rate"
+        }, {
+            name: "vat_rate"
+        }, {
+            name: "currency",
+            type: "select",
+            options: [
+                { value: 'TRY', label: 'TRY' },
+                { value: 'EUR', label: 'EUR' },
+                { value: 'USD', label: 'USD' },
+                { value: 'GBP', label: 'GBP' }
+            ]
+        }, {
+            name: "lead_time",
+            type: "text",
+            validate: {
+                number: true
+            }
+        }
+        ]
+    } );
+
+    editor.on('preSubmit', function(e, data, action) {
+        if (action !== 'remove') {
+            let fieldData = editor.field('currency').val();
+            console.log(fieldData)
+            if (!fieldData) {
+                editor.field('first_name').error('First Name is required');
+                return false;
+            }
+
+            // Submit the edited row data
+            editor.submit();
+        }
     });
+
+    table = $('#offer-detail').DataTable( {
+        dom: "Bfrtip",
+        data: offer.products,
+        columns: [
+            { data: "id", editable: false },
+            { data: "ref_code" },
+            { data: "date_code" },
+            { data: "package_type" },
+            { data: "quantity" },
+            { data: "measurement_name" },
+            { data: "pcs_price" },
+            { data: "total_price" },
+            { data: "discount_rate" },
+            { data: "discounted_price" },
+            { data: "vat_rate" },
+            { data: "currency" },
+            { data: "lead_time" },
+            {
+                data: null,
+                defaultContent: '<i class="fas fa-lg fa-fw me-2 fa-edit"/>',
+                className: 'row-edit dt-center',
+                orderable: false
+            },
+        ],
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+    } );
+
 }
 
 async function openUpdateOfferProductModal(offer_id, product_id){

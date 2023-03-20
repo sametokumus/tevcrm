@@ -123,7 +123,7 @@ $extra_js='
 </div>
 
 <div class="modal modal-cover fade" id="offerDetailModal">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">TEKLİF DETAYI</h5>
