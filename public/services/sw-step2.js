@@ -31,6 +31,14 @@ async function initOfferDetail(){
 
         $.each(offers, function (i, offer) {
             $.each(offer.products, function (i, product) {
+                let cheap_fast = '';
+                if (product.cheapest){
+                    cheap_fast += '<span class="badge border border-yellow text-yellow px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
+                }
+                if (product.fastest){
+                    cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
+                }
+
                 let item = '<tr id="productRow' + product.id + '">\n' +
                     '           <td>' + product.id + '</td>\n' +
                     '              <td>\n' +
@@ -38,7 +46,7 @@ async function initOfferDetail(){
                     '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
                     '                  </div>\n' +
                     '              </td>\n' +
-                    '           <td>'+ product.cheapest + ' & ' + product.fastest +'</td>\n' +
+                    '           <td>'+ cheap_fast +'</td>\n' +
                     '           <td class="d-none">' + offer.offer_id + '</td>\n' +
                     '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
                     '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
@@ -150,21 +158,21 @@ async function addSale(){
         rows.every(function (rowIdx, tableLoop, rowLoop) {
             let item = {
                 "offer_product_id": this.data()[0],
-                "offer_id": this.data()[1],
-                "product_id": this.data()[2],
-                "supplier_id": this.data()[3],
-                "date_code": this.data()[6],
-                "package_type": this.data()[7],
-                "request_quantity": this.data()[8],
-                "offer_quantity": this.data()[9],
-                "measurement": this.data()[10],
-                "pcs_price": this.data()[11],
-                "total_price": this.data()[12],
-                "discount_rate": this.data()[13],
-                "discounted_price": this.data()[14],
-                "vat_rate": this.data()[15],
-                "currency": this.data()[16],
-                "lead_time": this.data()[17],
+                "offer_id": this.data()[3],
+                "product_id": this.data()[4],
+                "supplier_id": this.data()[5],
+                "lead_time": this.data()[8],
+                "measurement": this.data()[9],
+                "pcs_price": this.data()[10],
+                "total_price": this.data()[11],
+                "discount_rate": this.data()[12],
+                "discounted_price": this.data()[13],
+                "vat_rate": this.data()[14],
+                "currency": this.data()[15],
+                "date_code": this.data()[16],
+                "package_type": this.data()[17],
+                "request_quantity": this.data()[18],
+                "offer_quantity": this.data()[19],
             }
             offers.push(item);
         });
