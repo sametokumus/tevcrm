@@ -42,6 +42,33 @@ class OfferController extends Controller
                         $product['request_quantity'] = $offer_request_product['quantity'];
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+
+                        $fastest = OfferProduct::query()
+                            ->leftJoin('offers', 'offers.id', '=', 'offer_products.offer_id')
+                            ->selectRaw('offer_products.*')
+                            ->where('offer_products.request_product_id', $product->request_product_id)
+                            ->where('offer_products.lead_time', '<', $product->lead_time)
+                            ->where('offers.request_id', $request_id)
+                            ->count();
+                        if ($fastest > 0){
+                            $product['fastest'] = false;
+                        }else{
+                            $product['fastest'] = true;
+                        }
+
+                        $cheapest = OfferProduct::query()
+                            ->leftJoin('offers', 'offers.id', '=', 'offer_products.offer_id')
+                            ->selectRaw('offer_products.*')
+                            ->where('offer_products.request_product_id', $product->request_product_id)
+                            ->where('offer_products.total_price', '<', $product->total_price)
+                            ->where('offers.request_id', $request_id)
+                            ->count();
+                        if ($cheapest > 0){
+                            $product['cheapest'] = false;
+                        }else{
+                            $product['cheapest'] = true;
+                        }
+
                     }
                     $offer['products'] = $products;
                 }
@@ -49,7 +76,7 @@ class OfferController extends Controller
                 $offer_status = true;
                 $status_id = $sale->status_id;
 
-            }else if ($sale->status_id < 3){
+            }else if ($sale->status_id < 2){
 
                 $offer_status = false;
                 $status_id = $sale->status_id;

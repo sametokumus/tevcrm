@@ -363,7 +363,7 @@ async function initOfferDetailModal(offer_id){
             console.log(formData);
 
             let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
-            let returned = await servicePostUpdateOfferProduct(formData, offer_id, product_id);
+            let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
             if (returned){
                 await initOfferDetailModal(offer_id);
             }else{
@@ -392,7 +392,7 @@ async function initOfferDetailModal(offer_id){
         let total_price = editor.field('total_price').val();
         let pcs_price = editor.field('pcs_price').val();
         let discount_rate = editor.field('discount_rate').val();
-        if (pcs_price != '' && total_price != '' && discount_rate != ''){
+        if (pcs_price != '' && total_price != '' && discount_rate != '' && discount_rate != '0,00'){
             let discounted_price = parseFloat(changePriceToDecimal(total_price)) - (parseFloat(changePriceToDecimal(total_price)) / 100 * parseFloat(changePriceToDecimal(discount_rate)));
             document.getElementById('DTE_Field_discounted_price').value = changeCommasToDecimal(discounted_price.toFixed(2));
         }
