@@ -142,6 +142,12 @@ class OfferController extends Controller
                 $offer_vat += $vat;
                 $offer_grand_total += $product->total_price + $vat;
                 $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+
+                $product->discount_rate = number_format($product->discount_rate, 2,",",".");
+                $product->discounted_price = number_format($product->discounted_price, 2,",",".");
+                $product->grand_total = number_format($product->grand_total, 2,",",".");
+                $product->pcs_price = number_format($product->pcs_price, 2,",",".");
+                $product->discount_rate = number_format($product->discount_rate, 2,",",".");
             }
 
             $offer['products'] = $products;
