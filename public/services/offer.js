@@ -378,9 +378,9 @@ async function initOfferDetailModal(offer_id){
         let pcs_price = editor.field('pcs_price').val();
         let discount_rate = editor.field('discount_rate').val();
         if (pcs_price != '' && total_price != '' && discount_rate != '' && discount_rate != '0,00'){
-            let discounted_price = parseFloat(total_price) - (parseFloat(total_price) / 100 * parseFloat(changePriceToDecimal(discount_rate)));
-            console.log(parseFloat(total_price), pcs_price, parseFloat(changePriceToDecimal(discount_rate)), discounted_price)
-            document.getElementById('DTE_Field_discounted_price').value = discounted_price.toFixed(2);
+            let discounted_price = parseFloat(changePriceToDecimal(total_price)) - (parseFloat(changePriceToDecimal(total_price)) / 100 * parseFloat(changePriceToDecimal(discount_rate)));
+            console.log(parseFloat(changePriceToDecimal(total_price)), pcs_price, parseFloat(changePriceToDecimal(discount_rate)), discounted_price)
+            document.getElementById('DTE_Field_discounted_price').value = changeCommasToDecimal(discounted_price);
         }
     });
 
