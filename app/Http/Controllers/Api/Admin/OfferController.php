@@ -46,6 +46,7 @@ class OfferController extends Controller
                         $fastest = OfferProduct::query()
                             ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
                             ->selectRaw('offer_products.*')
+                            ->where('offer_products.lead_time', '!=', null)
                             ->where('offer_products.request_product_id', $product->request_product_id)
                             ->where('offer_products.lead_time', '<', $product->lead_time)
                             ->where('offers.request_id', $request_id)
