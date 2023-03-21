@@ -141,7 +141,7 @@ class OfferController extends Controller
                 $product->discounted_price = number_format($product->discounted_price, 2,",",".");
                 $product->grand_total = number_format($product->grand_total, 2,",",".");
                 $product->pcs_price = number_format($product->pcs_price, 2,",",".");
-                $product->discount_rate = number_format($product->discount_rate, 2,",",".");
+                $product->vat_rate = number_format($product->vat_rate, 2,",",".");
             }
 
             $offer['products'] = $products;
