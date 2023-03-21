@@ -38,6 +38,7 @@ async function initOfferDetail(){
                     '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
                     '                  </div>\n' +
                     '              </td>\n' +
+                    '           <td></td>\n' +
                     '           <td class="d-none">' + offer.offer_id + '</td>\n' +
                     '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
                     '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
