@@ -100,7 +100,7 @@ class OfferController extends Controller
 
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers, 'saasdsada' => $fastest]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
