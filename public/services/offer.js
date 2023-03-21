@@ -43,7 +43,6 @@
 
 		checkLogin();
 		checkRole();
-		// await initPage();
         await initOfferRequest();
         await initOffers();
 
@@ -55,11 +54,6 @@ let global_id;
 
 function checkRole(){
 	return true;
-}
-
-async function initPage(){
-    await getAdminsAddSelectId('update_offer_request_authorized_personnel');
-    await getCompaniesAddSelectId('update_offer_request_company');
 }
 
 async function initEmployeeSelect(){
@@ -177,6 +171,7 @@ async function initOffers(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
+    console.log(offers)
 
     $("#offers").dataTable().fnDestroy();
     $('#offers tbody > tr').remove();

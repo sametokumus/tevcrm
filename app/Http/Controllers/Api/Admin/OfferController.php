@@ -34,6 +34,13 @@ class OfferController extends Controller
                     ->where('offers.active', 1)
                     ->get();
 
+                $offerssql = Offer::query()
+                    ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                    ->selectRaw('offers.*, companies.name as company_name')
+                    ->where('offers.request_id', $request_id)
+                    ->where('offers.active', 1)
+                    ->toSql();
+
                 foreach ($offers as $offer) {
                     $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
                     $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
@@ -100,7 +107,7 @@ class OfferController extends Controller
 
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers, 'offerssql' => $offerssql]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
