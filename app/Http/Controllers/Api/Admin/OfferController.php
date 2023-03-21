@@ -60,19 +60,24 @@ class OfferController extends Controller
                         }else{
                             $product['fastest'] = false;
                         }
-//
-//                        $cheapest = OfferProduct::query()
-//                            ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-//                            ->selectRaw('offer_products.*')
-//                            ->where('offer_products.request_product_id', $product->request_product_id)
-//                            ->where('offer_products.total_price', '<', $product->total_price)
-//                            ->where('offers.request_id', $request_id)
-//                            ->count();
-//                        if ($cheapest > 0){
-//                            $product['cheapest'] = false;
-//                        }else{
-//                            $product['cheapest'] = true;
-//                        }
+
+                        if ($product->total_price != null){
+                            $cheapest = OfferProduct::query()
+                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                                ->selectRaw('offer_products.*')
+                                ->where('offer_products.total_price', '!=', null)
+                                ->where('offer_products.request_product_id', $product->request_product_id)
+                                ->where('offer_products.total_price', '<', $product->total_price)
+                                ->where('offers.request_id', $request_id)
+                                ->count();
+                            if ($cheapest > 0){
+                                $product['cheapest'] = false;
+                            }else{
+                                $product['cheapest'] = true;
+                            }
+                        }else{
+                            $product['cheapest'] = false;
+                        }
 
                     }
                     $offer['products'] = $products;
