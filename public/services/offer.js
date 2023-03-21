@@ -77,7 +77,6 @@ async function initOfferRequest(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
-    console.log(data)
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
@@ -178,7 +177,6 @@ async function initOffers(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
-    console.log(offers)
 
     $("#offers").dataTable().fnDestroy();
     $('#offers tbody > tr').remove();
@@ -360,8 +358,6 @@ async function initOfferDetailModal(offer_id){
                 "lead_time": lead_time
             });
 
-            console.log(formData);
-
             let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
             let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
             if (returned){
@@ -369,12 +365,6 @@ async function initOfferDetailModal(offer_id){
             }else{
                 alert("Hata Oluştu");
             }
-
-
-            // if (!fieldData) {
-            //     editor.field('first_name').error('First Name is required');
-            //     return false;
-            // }
 
             // Submit the edited row data
             editor.submit();

@@ -53,7 +53,7 @@ $extra_js='
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
-                            <table id="sales-detail" class="table table-bordered table-striped key-buttons border-bottom">
+                            <table id="sales-detail" class="table table-bordered key-buttons border-bottom">
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0">ID</th>
@@ -76,6 +76,7 @@ $extra_js='
                                     <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0">Teklif Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Para Birimi</th>
+                                    <th class="border-bottom-0">Teklif Teslimat Süresi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
