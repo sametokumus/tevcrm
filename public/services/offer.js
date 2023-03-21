@@ -106,6 +106,7 @@ async function initOfferRequest(){
             // 'pdf'
         ],
         pageLength : 20,
+        scrollX: true,
         language: {
             url: "services/Turkish.json"
         },
