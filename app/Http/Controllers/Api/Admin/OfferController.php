@@ -43,13 +43,13 @@ class OfferController extends Controller
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
 
-//                        $fastest = OfferProduct::query()
-//                            ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-//                            ->selectRaw('offer_products.*')
-//                            ->where('offer_products.request_product_id', $product->request_product_id)
-//                            ->where('offer_products.lead_time', '<', $product->lead_time)
-//                            ->where('offers.request_id', $request_id)
-//                            ->count();
+                        $fastest = OfferProduct::query()
+                            ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                            ->selectRaw('offer_products.*')
+                            ->where('offer_products.request_product_id', $product->request_product_id)
+                            ->where('offer_products.lead_time', '<', $product->lead_time)
+                            ->where('offers.request_id', $request_id)
+                            ->toSql();
 //                        if ($fastest > 0){
 //                            $product['fastest'] = false;
 //                        }else{
@@ -90,7 +90,7 @@ class OfferController extends Controller
 
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers, 'saasdsada' => $fastest]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
