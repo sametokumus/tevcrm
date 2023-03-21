@@ -413,6 +413,10 @@ async function initOfferDetailModal(offer_id){
             style: 'os',
             selector: 'td:first-child'
         },
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
     } );
 
 }

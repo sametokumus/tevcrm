@@ -298,38 +298,40 @@ class SaleController extends Controller
     {
         try {
             $request->validate([
-                'sale_id' => 'required',
+                'id' => 'required',
                 'user_id' => 'required',
-                'offer_id' => 'required',
-                'offer_product_id' => 'required',
-                'price' => 'required',
-                'currency' => 'required',
             ]);
-            SaleOffer::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('offer_product_id', $request->offer_product_id)->update([
-                'offer_price' => $request->price,
-                'offer_currency' => $request->currency
+            $sale_offer_detail = SaleOffer::query()->where('id', $request->id)->first();
+            $sale_id = $sale_offer_detail->sale_id;
+            $offer_id = $sale_offer_detail->offer_id;
+            $offer_product_id = $sale_offer_detail->offer_product_id;
+
+            SaleOffer::query()->where('id', $request->id)->update([
+                'offer_price' => $request->offer_price,
+                'offer_currency' => $request->offer_currency,
+                'offer_lead_time' => $request->offer_lead_time
             ]);
 
-            $offer_check = SaleOffer::query()->where('sale_id', $request->sale_id)->where('active', 1)->where('offer_price', null)->count();
+            $offer_check = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->where('offer_price', null)->count();
             if ($offer_check == 0) {
-                Sale::query()->where('sale_id', $request->sale_id)->update([
+                Sale::query()->where('sale_id', $sale_id)->update([
                     'status_id' => 5
                 ]);
 
                 StatusHistory::query()->insert([
-                    'sale_id' => $request->sale_id,
+                    'sale_id' => $sale_id,
                     'status_id' => 5,
                     'user_id' => $request->user_id,
                 ]);
 
-                $sale_offers = SaleOffer::query()->where('sale_id', $request->sale_id)->where('active', 1)->get();
+                $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
                 $sub_total = 0;
                 $vat = 0;
                 foreach ($sale_offers as $sale_offer){
                     $sub_total += $sale_offer->offer_price;
                     $vat += $sale_offer->offer_price / 100 * $sale_offer->vat_rate;
                 }
-                Sale::query()->where('sale_id', $request->sale_id)->update([
+                Sale::query()->where('sale_id', $sale_id)->update([
                     'sub_total' => $sub_total,
                     'vat' => $vat
                 ]);

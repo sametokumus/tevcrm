@@ -121,9 +121,9 @@ async function initOfferDetail(){
         editor = new $.fn.dataTable.Editor( {
             data: offers,
             table: "#sales-detail",
-            idSrc: "offer_product_id",
+            idSrc: "id",
             fields: [ {
-                name: "offer_product_id",
+                name: "id",
                 type: "readonly",
                 attr: {
                     class: 'form-control'
@@ -155,40 +155,27 @@ async function initOfferDetail(){
         } );
 
         editor.on('preSubmit', async function(e, data, action) {
+            console.log(1)
             if (action !== 'remove') {
+                let user_id = localStorage.getItem('userId');
                 let id = editor.field('id').val();
-                let date_code = editor.field('date_code').val();
-                let package_type = editor.field('package_type').val();
-                let quantity = editor.field('quantity').val();
-                let pcs_price = editor.field('pcs_price').val();
-                let total_price = editor.field('total_price').val();
-                let discount_rate = editor.field('discount_rate').val();
-                let discounted_price = editor.field('discounted_price').val();
-                let vat_rate = editor.field('vat_rate').val();
-                let currency = editor.field('currency').val();
-                let lead_time = editor.field('lead_time').val();
+                let offer_price = editor.field('offer_price').val();
+                let offer_currency = editor.field('offer_currency').val();
+                let offer_lead_time = editor.field('offer_lead_time').val();
 
                 let formData = JSON.stringify({
                     "id": id,
-                    "date_code": date_code,
-                    "package_type": package_type,
-                    "quantity": quantity,
-                    "pcs_price": changePriceToDecimal(pcs_price),
-                    "total_price": changePriceToDecimal(total_price),
-                    "discount_rate": changePriceToDecimal(discount_rate),
-                    "discounted_price": changePriceToDecimal(discounted_price),
-                    "vat_rate": changePriceToDecimal(vat_rate),
-                    "currency": currency,
-                    "lead_time": lead_time
+                    "user_id": user_id,
+                    "offer_price": changePriceToDecimal(offer_price),
+                    "offer_currency": offer_currency,
+                    "offer_lead_time": offer_lead_time
                 });
 
-                // let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
-                // let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
-                // if (returned){
-                //     await initOfferDetailModal(offer_id);
-                // }else{
-                //     alert("Hata Oluştu");
-                // }
+                let returned = await servicePostAddSaleOfferPrice(formData);
+                if (returned) {
+                }else{
+                    alert("Hata Oluştu");
+                }
 
                 // Submit the edited row data
                 editor.submit();
@@ -199,7 +186,7 @@ async function initOfferDetail(){
             dom: "Bfrtip",
             data: offers,
             columns: [
-                { data: "offer_product_id", editable: false },
+                { data: "id", editable: false },
                 { data: "offer_id", visible: false },
                 { data: "product_id", visible: false },
                 { data: "supplier_id", visible: false },
@@ -232,6 +219,21 @@ async function initOfferDetail(){
                 selector: 'td:first-child'
             },
             scrollX: true,
+            buttons: [
+                {
+                    text: 'Seçili Ürünler için Teklif İste',
+                    action: function ( e, dt, node, config ) {
+                        openAddOfferModal(productDatatable.rows( { selected: true } ));
+                    }
+                },
+                'selectAll',
+                'selectNone',
+                // 'excel',
+                // 'pdf'
+            ],
+            language: {
+                url: "services/Turkish.json"
+            },
         } );
 
 
