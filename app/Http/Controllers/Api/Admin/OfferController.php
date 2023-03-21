@@ -43,19 +43,23 @@ class OfferController extends Controller
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
 
-                        $fastest = OfferProduct::query()
-                            ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-                            ->selectRaw('offer_products.*')
-                            ->where('offer_products.lead_time', '!=', null)
-                            ->where('offer_products.request_product_id', $product->request_product_id)
-                            ->where('offer_products.lead_time', '<', $product->lead_time)
-                            ->where('offers.request_id', $request_id)
-                            ->toSql();
-//                        if ($fastest > 0){
-//                            $product['fastest'] = false;
-//                        }else{
-//                            $product['fastest'] = true;
-//                        }
+                        if ($product->lead_time != null){
+                            $fastest = OfferProduct::query()
+                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                                ->selectRaw('offer_products.*')
+                                ->where('offer_products.lead_time', '!=', null)
+                                ->where('offer_products.request_product_id', $product->request_product_id)
+                                ->where('offer_products.lead_time', '<', $product->lead_time)
+                                ->where('offers.request_id', $request_id)
+                                ->toSql();
+                            if ($fastest > 0){
+                                $product['fastest'] = false;
+                            }else{
+                                $product['fastest'] = true;
+                            }
+                        }else{
+                            $product['fastest'] = false;
+                        }
 //
 //                        $cheapest = OfferProduct::query()
 //                            ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
