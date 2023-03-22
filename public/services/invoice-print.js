@@ -19,12 +19,12 @@
         checkRole();
 
         let sale_id = getPathVariable('invoice-print');
-        await initContact(1, sale_id);
+        // await initContact(1, sale_id);
         await initSale(sale_id);
         await initDetail(sale_id);
         await initBankInfoSelect();
-        await getOwnersAddSelectId('owners');
-        document.getElementById('owners').value = 1;
+        // await getOwnersAddSelectId('owners');
+        // document.getElementById('owners').value = 1;
     });
 
 })(window.jQuery);
@@ -79,6 +79,7 @@ async function initSale(sale_id){
     let data = await serviceGetSaleById(sale_id);
     console.log(data);
     let sale = data.sale;
+    await initContact(sale.owner_id, sale_id);
     let company = sale.request.company;
 
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;

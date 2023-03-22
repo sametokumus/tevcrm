@@ -42,7 +42,7 @@ $extra_js='
                             <div class="row">
                                 <div class="col-6">
                                     <div class="contact-col">
-                                        <h6>{{__('Supplier')}}</h6>
+{{--                                        <h6>{{__('Supplier')}}</h6>--}}
                                         <address>
 
                                         </address>

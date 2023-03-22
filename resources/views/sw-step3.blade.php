@@ -103,6 +103,48 @@ $extra_js='
 </div>
 <!--app-content close-->
 
+<div class="modal modal-cover fade" id="addBatchProcessModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color: #202b36;">
+            <div class="modal-header">
+                <h5 class="modal-title">TOPLU İŞLEM</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_batch_process_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Kar Oranı</label>
+                            <input type="text" class="form-control" id="add_batch_offer_profit_rate" placeholder="% olarak hesaplanır (Örn: 20 giriniz)">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teslimat Süresi</label>
+                            <input type="text" class="form-control" id="add_batch_offer_lead_time">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="add_batch_offer_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Para Birimi Dönüşüm Oranı</label>
+                            <input type="text" class="form-control" id="add_batch_offer_currency_change" value="1,00">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal modal-cover fade" id="addOfferPriceModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

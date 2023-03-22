@@ -4,6 +4,7 @@
     $(":input").inputmask();
     $("#add_offer_price_price").maskMoney({thousands:'.', decimal:','});
     $("#update_offer_price_price").maskMoney({thousands:'.', decimal:','});
+    $("#add_batch_offer_currency_change").maskMoney({thousands:'.', decimal:','});
 
 	$(document).ready(function() {
 
@@ -15,6 +16,11 @@
         $('#update_offer_price_form').submit(function (e){
             e.preventDefault();
             updateSaleOfferPrice();
+        });
+
+        $('#add_batch_process_form').submit(function (e){
+            e.preventDefault();
+            addOfferBatchProcess();
         });
 
 	});
@@ -59,64 +65,6 @@ async function initOfferDetail(){
         console.log(offers)
         $("#sales-detail").dataTable().fnDestroy();
         $('#sales-detail tbody > tr').remove();
-
-        // $.each(offers, function (i, offer) {
-        //
-        //     let btn_list = "";
-        //     if (offer.offer_price == null){
-        //         btn_list = '<button type="button" onclick="openAddOfferPriceModal(\''+ offer.offer_id +'\', '+ offer.offer_product_id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Fiyatı Ekle</span></button>';
-        //     }else{
-        //         btn_list = '<button type="button" onclick="openUpdateOfferPriceModal(\''+ offer.offer_id +'\', '+ offer.offer_product_id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Fiyatı Güncelle</span></button>';
-        //     }
-        //
-        //     let item = '<tr id="productRow' + offer.offer_product_id + '">\n' +
-        //         '           <td>' + offer.offer_product_id + '</td>\n' +
-        //         '           <td class="d-none">' + offer.offer_id + '</td>\n' +
-        //         '           <td class="d-none">' + offer.product_id + '</td>\n' +
-        //         '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
-        //         '           <td>' + offer.supplier_name + '</td>\n' +
-        //         '           <td>' + checkNull(offer.product_ref_code) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.date_code) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.package_type) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.lead_time) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.request_quantity) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.measurement_name) + '</td>\n' +
-        //         '           <td>' + changeCommasToDecimal(offer.pcs_price) + '</td>\n' +
-        //         '           <td>' + changeCommasToDecimal(offer.total_price) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.discount_rate) + '</td>\n' +
-        //         '           <td>' + changeCommasToDecimal(offer.discounted_price) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.vat_rate) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.currency) + '</td>\n' +
-        //         '           <td>' + changeCommasToDecimal(offer.offer_price) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.offer_currency) + '</td>\n' +
-        //         '           <td>' + checkNull(offer.offer_lead_time) + '</td>\n' +
-        //         '           <td>\n' +
-        //         '               <div class="btn-list">\n' +
-        //         '                   '+ btn_list +'\n' +
-        //         '               </div>\n' +
-        //         '           </td>\n' +
-        //         '       </tr>';
-        //     $('#sales-detail tbody').append(item);
-        // });
-        // $('#sales-detail').DataTable({
-        //     responsive: false,
-        //     columnDefs: [
-        //         {responsivePriority: 1, targets: 0},
-        //         {responsivePriority: 2, targets: -1}
-        //     ],
-        //     dom: 'Bfrtip',
-        //     buttons: [
-        //
-        //     ],
-        //     pageLength: 20,
-        //     scrollX: true,
-        //     language: {
-        //         url: "services/Turkish.json"
-        //     },
-        //     order: [[0, 'asc']]
-        // });
-
 
         editor = new $.fn.dataTable.Editor( {
             data: offers,
@@ -221,9 +169,9 @@ async function initOfferDetail(){
             scrollX: true,
             buttons: [
                 {
-                    text: 'Seçili Ürünler için Teklif İste',
+                    text: 'Seçili Ürünler için Toplu İşlem Uygula',
                     action: function ( e, dt, node, config ) {
-                        openAddOfferModal(productDatatable.rows( { selected: true } ));
+                        openAddBatchProcessModal(table.rows( { selected: true } ));
                     }
                 },
                 'selectAll',
@@ -234,6 +182,9 @@ async function initOfferDetail(){
             language: {
                 url: "services/Turkish.json"
             },
+            select: {
+                style: 'multi'
+            }
         } );
 
 
@@ -241,6 +192,74 @@ async function initOfferDetail(){
         alert('Bu sipariş teklif oluşturmaya hazır değildir.');
     }
 }
+
+async function openAddBatchProcessModal(){
+    $("#addBatchProcessModal").modal('show');
+    $('.modal-backdrop').css('background-color', 'transparent');
+}
+
+async function addOfferBatchProcess(){
+    let user_id = localStorage.getItem('userId');
+    let rows = table.rows({ selected: true } ).data();
+
+    if (rows.count() === 0){
+        alert("Öncelikle seçim yapmalısınız.");
+        $('#addBatchProcessModal').modal('hide');
+        $("#add_batch_process_form").trigger("reset");
+    }else {
+        let success = true;
+        $.each(rows, async function (i, row) {
+
+            let id = row.id;
+            let profit_rate = document.getElementById('add_batch_offer_profit_rate').value;
+            let offer_currency = document.getElementById('add_batch_offer_currency').value;
+            let offer_currency_change = document.getElementById('add_batch_offer_currency_change').value;
+            let offer_lead_time = document.getElementById('add_batch_offer_lead_time').value;
+            let total_price = row.total_price;
+            let discounted_price = row.discounted_price;
+
+            let price = total_price;
+            if (discounted_price != '' && discounted_price != null){
+                price = discounted_price;
+            }
+
+            let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
+            offer_price = offer_price + (offer_price / 100 * profit_rate);
+
+            let formData = JSON.stringify({
+                "id": id,
+                "user_id": user_id,
+                "offer_price": offer_price,
+                "offer_currency": offer_currency,
+                "offer_lead_time": offer_lead_time
+            });
+            console.log(formData)
+
+            let returned = await servicePostAddSaleOfferPrice(formData);
+            if (returned) {
+            }else{
+                success = false;
+            }
+
+        });
+
+        if (success) {
+            $('#addBatchProcessModal').modal('hide');
+            $("#add_batch_process_form").trigger("reset");
+            initOfferDetail()
+        }else{
+            alert("Hata Oluştu");
+        }
+
+    }
+}
+
+
+
+
+
+
+
 
 async function openAddOfferPriceModal(offer_id, offer_product_id){
     $("#addOfferPriceModal").modal('show');

@@ -15,19 +15,19 @@ $extra_js='
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-md-7">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <label class="form-label">Dil</label>
                             <select class="form-control" id="lang">
                                 <option value="tr" @if(app()->getLocale() == 'tr') selected="selected" @endif>Türkçe</option>
                                 <option value="en" @if(app()->getLocale() == 'en') selected="selected" @endif>English</option>
                             </select>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label">Firma</label>
-                            <select class="form-control" id="owners" onchange="changeOwner();">
+{{--                        <div class="col-6">--}}
+{{--                            <label class="form-label">Firma</label>--}}
+{{--                            <select class="form-control" id="owners" onchange="changeOwner();">--}}
 
-                            </select>
-                        </div>
+{{--                            </select>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
