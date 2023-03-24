@@ -101,7 +101,7 @@ async function initSale(sale_id){
     let currency = '';
     $.each(sale.sale_offers, function (i, product) {
         currency = product.offer_currency;
-        let lead_time = checkNull(product.lead_time);
+        let lead_time = checkNull(product.offer_lead_time);
         if (lead_time != ''){
             if (lead_time == 1){
                 lead_time = Lang.get("strings.Stock");
@@ -119,7 +119,7 @@ async function initSale(sale_id){
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
             '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
-            '           <td class="text-center">' + lead_time + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });

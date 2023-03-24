@@ -62,6 +62,7 @@ $extra_js='
                                     <th class="border-bottom-0 d-none">Supplier ID</th>
                                     <th class="border-bottom-0">Tedarikçi</th>
                                     <th class="border-bottom-0">Ref. Code</th>
+                                    <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">DC</th>
                                     <th class="border-bottom-0">Paketleme</th>
                                     <th class="border-bottom-0">Teslimat Süresi</th>

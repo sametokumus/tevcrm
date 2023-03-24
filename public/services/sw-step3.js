@@ -129,7 +129,7 @@ async function initOfferDetail(){
                 editor.submit();
             }
         });
-
+        console.log(offers)
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
             data: offers,
@@ -140,6 +140,7 @@ async function initOfferDetail(){
                 { data: "supplier_id", visible: false },
                 { data: "supplier_name" },
                 { data: "product_ref_code" },
+                { data: "product_name" },
                 { data: "date_code" },
                 { data: "package_type" },
                 { data: "lead_time" },

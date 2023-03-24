@@ -93,7 +93,7 @@ async function initSale(sale_id){
     $.each(sale.sale_offers, function (i, product) {
         console.log(product)
         currency = product.offer_currency;
-        let lead_time = checkNull(product.lead_time);
+        let lead_time = checkNull(product.offer_lead_time);
         if (lead_time != ''){
             if (lead_time == 1){
                 lead_time = Lang.get("strings.Stock");

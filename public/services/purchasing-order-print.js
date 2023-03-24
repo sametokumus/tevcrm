@@ -85,7 +85,7 @@ async function initOfferSelect(sale_id){
     console.log(sale)
 
     $.each(sale.sale_offers, function (i, offer) {
-        let item = '<option value="'+ offer.offer_id +'">'+ offer.supplier_name +' - '+ offer.offer_id +'</option>';
+        let item = '<option value="'+ offer.offer_id +'">'+ offer.supplier_name +'</option>';
         $('#select_offer').append(item);
     });
 
