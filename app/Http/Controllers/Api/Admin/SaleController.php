@@ -149,8 +149,6 @@ class SaleController extends Controller
                     'offer_product_id' => $offer['offer_product_id'],
                     'product_id' => $offer['product_id'],
                     'supplier_id' => $offer['supplier_id'],
-                    'date_code' => $offer['date_code'],
-                    'package_type' => $offer['package_type'],
                     'request_quantity' => $offer['request_quantity'],
                     'offer_quantity' => $offer['offer_quantity'],
                     'measurement_id' => $measurement->id,
