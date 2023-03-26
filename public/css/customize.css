@@ -178,6 +178,9 @@ table tr.selected{
     margin: 0;
 }
 
+#bank-details p{
+    margin-bottom: 5px;
+}
 
 #bank-details table{
     width: 100% !important;
