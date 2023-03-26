@@ -51,7 +51,7 @@ class OfferController extends Controller
                                 ->where('offer_products.request_product_id', $product->request_product_id)
                                 ->where('offer_products.lead_time', '<', $product->lead_time)
                                 ->where('offers.request_id', $request_id)
-                                ->toSql();
+                                ->count();
                             if ($fastest > 0){
                                 $product['fastest'] = false;
                             }else{
