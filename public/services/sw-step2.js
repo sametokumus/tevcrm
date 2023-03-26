@@ -160,19 +160,20 @@ async function addSale(){
                 "offer_id": this.data()[3],
                 "product_id": this.data()[4],
                 "supplier_id": this.data()[5],
-                "lead_time": this.data()[6],
-                "measurement": this.data()[7],
-                "pcs_price": this.data()[8],
-                "total_price": this.data()[9],
-                "discount_rate": this.data()[10],
-                "discounted_price": this.data()[11],
-                "vat_rate": this.data()[12],
-                "currency": this.data()[13],
-                "request_quantity": this.data()[14],
-                "offer_quantity": this.data()[15],
+                "lead_time": this.data()[9],
+                "measurement": this.data()[10],
+                "pcs_price": this.data()[11],
+                "total_price": this.data()[12],
+                "discount_rate": this.data()[13],
+                "discounted_price": this.data()[14],
+                "vat_rate": this.data()[15],
+                "currency": this.data()[16],
+                "request_quantity": this.data()[17],
+                "offer_quantity": this.data()[18],
             }
             offers.push(item);
         });
+        console.log(offers)
 
         let formData = JSON.stringify({
             "user_id": parseInt(user_id),
