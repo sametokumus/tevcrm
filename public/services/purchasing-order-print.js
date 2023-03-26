@@ -139,7 +139,7 @@ async function initOffer(offer_id){
     // $('#purchasing-order-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>Phone: '+ company.phone +'<br>Email: '+ company.email +'');
     document.getElementById('supplier_name').innerHTML = checkNull(company.name);
     document.getElementById('supplier_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ checkNull(company.address);
-    // document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> '+ checkNull(quote.payment_term);
+    document.getElementById('payment_term').innerHTML = '<b>Payment Terms :</b> '+ checkNull(quote.payment_term);
 
 
     $('#purchasing-order-print .logo-header .offer-id').text(short_code+'-PO-'+offer.global_id);
