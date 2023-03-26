@@ -240,6 +240,10 @@ table tr.selected{
     border: 1px solid rgba(0,0,0,.3);
 }
 
+.printable table td.border-0{
+    border: 0px;
+}
+
 @media print {
     .p-md-50{
         padding: 0px !important;
@@ -303,8 +307,8 @@ table tr.selected{
 
 @media print {
     @page {
-        margin-bottom: 50px;
-        padding-bottom: 200px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     #print-footer {
@@ -312,15 +316,25 @@ table tr.selected{
         bottom: 0;
         left: 0;
         right: 0;
-        height: 50px;
+        height: 30px;
         text-align: center;
         font-size: 14px;
         color: #999;
         border-top: 1px solid #ccc;
     }
     #print-footer.lenis-footer{
-        height: 120px;
+        height: 150px;
     }
+
+    div.footer-spacer {
+        height: 15mm;
+    }
+
+    div.footer-spacer.lenis-spacer {
+        height: 35mm;
+    }
+
+
 }
 
 #category_view li{

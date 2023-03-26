@@ -86,7 +86,15 @@ async function initOfferSelect(sale_id){
 
     $.each(sale.sale_offers, function (i, offer) {
         let item = '<option value="'+ offer.offer_id +'">'+ offer.supplier_name +'</option>';
-        $('#select_offer').append(item);
+
+        let options = document.querySelectorAll('select#select_offer option');
+        let control = false;
+        options.forEach(option => {
+            if (option.value == offer.offer_id){control = true;}
+        });
+        if (!control) {
+            $('#select_offer').append(item);
+        }
     });
 
 }
@@ -102,6 +110,7 @@ async function initContact(contact_id, sale_id){
 
     if (contact_id == 1){
         $('#print-footer').addClass('lenis-footer');
+        $('.footer-spacer').addClass('lenis-spacer');
     }
     $('#print-footer img').remove();
     $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');

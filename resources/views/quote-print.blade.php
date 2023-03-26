@@ -35,92 +35,116 @@ $extra_js='
             <div class="row justify-content-center">
                 <div class="col-md-7 bg-white p-md-50">
 
+
+
                     <div class="wrapper">
-                        <!-- Main content -->
-                        <section id="quote-print" class="print-color">
-                            <!-- title row -->
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="contact-col">
-{{--                                        <h6>{{__('Supplier')}}</h6>--}}
-                                        <address>
 
-                                        </address>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td class="border-0">
+
+                                    <!-- Main content -->
+                                    <section id="quote-print" class="print-color">
+                                        <!-- title row -->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="contact-col">
+            {{--                                        <h6>{{__('Supplier')}}</h6>--}}
+                                                    <address>
+
+                                                    </address>
+                                                </div>
+                                                <h1 class="page-header">
+                                                    {{__('Offer')}}
+                                                </h1>
+                                                <div class="col-sm-6 buyer-col">
+                                                    {{--                                    <h6>Supplier</h6>--}}
+                                                    <address>
+                                                        <span id="buyer_name"></span><br>
+                                                        <span id="buyer_address"></span><br>
+                                                        <span id="payment_term"></span><br>
+                                                        <span id="lead_time"></span><br>
+                                                        <span id="delivery_term"></span><br>
+                                                        <span id="country_of_destination"></span><br>
+                                                    </address>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h2 class="logo-header">
+                                                    <div id="logo"></div>
+                                                    <small class="date"></small>
+                                                    <div class="offer-id"></div>
+                                                </h2>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- info row -->
+
+                                        <!-- Table row -->
+                                        <div class="row">
+                                            <div class="col-12 table-responsive">
+                                                <table id="sale-detail" class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center">N#</th>
+                                                        <th class="text-center">{{__('Ref. Code')}}</th>
+                                                        <th class="text-center">{{__('Product Name')}}</th>
+                                                        <th class="text-center">{{__('Qty')}}</th>
+                                                        <th class="text-center">{{__('Unit')}}</th>
+                                                        <th class="text-center">{{__('Unit Price')}}</th>
+                                                        <th class="text-center">{{__('Total Price')}}</th>
+                                                        <th class="text-center">{{__('Lead Time')}}</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p style="margin-top: 15px; margin-bottom: 0;">{{__('Note')}}:</p>
+                                                <p id="note" class="text-muted">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
+                                            <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
+                                        </div>
                                     </div>
-                                    <h1 class="page-header">
-                                        {{__('Offer')}}
-                                    </h1>
-                                    <div class="col-sm-6 buyer-col">
-                                        {{--                                    <h6>Supplier</h6>--}}
-                                        <address>
-                                            <span id="buyer_name"></span><br>
-                                            <span id="buyer_address"></span><br>
-                                            <span id="payment_term"></span><br>
-                                            <span id="lead_time"></span><br>
-                                            <span id="delivery_term"></span><br>
-                                            <span id="country_of_destination"></span><br>
-                                        </address>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12 mt-3 ">
+                                            <div id="print-footer">
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <h2 class="logo-header">
-                                        <div id="logo"></div>
-                                        <small class="date"></small>
-                                        <div class="offer-id"></div>
-                                    </h2>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- info row -->
 
-                            <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table id="sale-detail" class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th class="text-center">N#</th>
-                                            <th class="text-center">{{__('Ref. Code')}}</th>
-                                            <th class="text-center">{{__('Product Name')}}</th>
-                                            <th class="text-center">{{__('Qty')}}</th>
-                                            <th class="text-center">{{__('Unit')}}</th>
-                                            <th class="text-center">{{__('Unit Price')}}</th>
-                                            <th class="text-center">{{__('Total Price')}}</th>
-                                            <th class="text-center">{{__('Lead Time')}}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+                                </td>
+                            </tr>
+                            </tbody>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p style="margin-top: 15px; margin-bottom: 0;">{{__('Note')}}:</p>
-                                    <p id="note" class="text-muted">
-
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="row">
-                            <div class="col-12">
-                                <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
-                                <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12 mt-3">
-                                <div id="print-footer">
-
-                                </div>
-                            </div>
-                        </div>
+                            <tfoot>
+                            <tr>
+                                <td class="border-0">
+                                    <div class="footer-spacer"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
+
+
 
                 </div>
             </div>
