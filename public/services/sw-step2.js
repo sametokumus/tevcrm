@@ -51,6 +51,7 @@ async function initOfferDetail(){
                     '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
                     '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
                     '           <td>' + offer.company_name + '</td>\n' +
+                    '           <td>' + checkNull(product.product_detail.product_name) + '</td>\n' +
                     '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
                     '           <td>' + checkNull(product.lead_time) + '</td>\n' +
                     '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
@@ -60,8 +61,6 @@ async function initOfferDetail(){
                     '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
                     '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
                     '           <td>' + checkNull(product.currency) + '</td>\n' +
-                    '           <td>' + checkNull(product.date_code) + '</td>\n' +
-                    '           <td>' + checkNull(product.package_type) + '</td>\n' +
                     '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
                     '           <td>' + checkNull(product.quantity) + '</td>\n' +
                     '       </tr>';
