@@ -64,6 +64,7 @@ $extra_js='
                                     <th class="border-bottom-0 d-none">Supplier ID</th>
                                     <th class="border-bottom-0">Tedarikçi</th>
                                     <th class="border-bottom-0">Ref. Code</th>
+                                    <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">Birim</th>
                                     <th class="border-bottom-0">Birim Fiyat</th>
@@ -72,8 +73,6 @@ $extra_js='
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
                                     <th class="border-bottom-0">Para Birimi</th>
-                                    <th class="border-bottom-0">DC</th>
-                                    <th class="border-bottom-0">Paketleme</th>
                                     <th class="border-bottom-0">İstek Miktar</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
                                 </tr>
