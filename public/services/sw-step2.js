@@ -76,7 +76,7 @@ async function initOfferDetail(){
             ],
             dom: 'Bfrtip',
             buttons: [],
-            pageLength: 20,
+            pageLength: -1,
             scrollX: true,
             language: {
                 url: "services/Turkish.json"
@@ -98,7 +98,7 @@ async function initOfferDetail(){
                     }
                 }
             ],
-            pageLength: 20,
+            pageLength: -1,
             scrollX: true,
             language: {
                 url: "services/Turkish.json"
