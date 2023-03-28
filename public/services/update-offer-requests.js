@@ -175,6 +175,8 @@ async function initOfferRequest(){
     document.getElementById('update_offer_request_authorized_personnel').value = checkNull(offer_request.authorized_personnel_id);
     document.getElementById('update_offer_request_purchasing_staff').value = checkNull(offer_request.purchasing_staff_id);
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
+    document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
+    document.getElementById('update_offer_request_company_request_code').value = offer_request.company_request_code;
     document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
     if (offer_request.company_id != null && offer_request.company_id != 0) {
@@ -186,15 +188,15 @@ async function initOfferRequest(){
 
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + (i+1) + '</td>\n' +
-            '           <td>' + product.product.stock_code + '</td>\n' +
+            '           <td>' + checkNull(product.product.stock_code) + '</td>\n' +
             '           <td>' + checkNull(product.customer_stock_code) + '</td>\n' +
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>' + product.measurement_name + '</td>\n' +
             '           <td>' + product.product.brand_id + '</td>\n' +
-            '           <td>' + product.product.category_id + '</td>\n' +
-            '           <td>' + product.note + '</td>\n' +
+            '           <td>' + checkNull(product.product.category_id) + '</td>\n' +
+            '           <td>' + checkNull(product.note) + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -219,6 +221,7 @@ async function updateOfferRequest(){
     if (company == 0){company = null;}
     let employee = document.getElementById('update_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
+    let request_code = document.getElementById('add_offer_request_company_request_code').value;
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
@@ -226,6 +229,7 @@ async function updateOfferRequest(){
         "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
+        "company_request_code": request_code,
         "owner_id": owner
     });
 

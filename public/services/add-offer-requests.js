@@ -171,6 +171,7 @@ async function addOfferRequest(){
     if (company == 0){company = null;}
     let employee = document.getElementById('add_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
+    let request_code = document.getElementById('add_offer_request_company_request_code').value;
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
@@ -179,6 +180,7 @@ async function addOfferRequest(){
         "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
+        "company_request_code": request_code,
         "products": products
     });
 

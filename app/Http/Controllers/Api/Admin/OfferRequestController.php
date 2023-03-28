@@ -82,6 +82,7 @@ class OfferRequestController extends Controller
                 'purchasing_staff_id' => $request->purchasing_staff_id,
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
+                'company_request_code' => $request->company_request_code,
             ]);
 
             foreach ($request->products as $product){
@@ -171,6 +172,7 @@ class OfferRequestController extends Controller
                 'purchasing_staff_id' => $request->purchasing_staff_id,
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
+                'company_request_code' => $request->company_request_code,
             ]);
             Sale::query()->where('request_id', $request_id)->update([
                 'owner_id' => $request->owner_id,

@@ -46,17 +46,21 @@ $extra_js='
 
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label class="form-label">Müşteri</label>
                                         <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
 
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label class="form-label">Müşteri Yetkilisi</label>
                                         <select class="form-control" id="add_offer_request_company_employee">
 
                                         </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Müşteri Talep Kodu</label>
+                                        <input type="text" value="" class="form-control" id="add_offer_request_company_request_code" />
                                     </div>
                                 </div>
                             </div>
