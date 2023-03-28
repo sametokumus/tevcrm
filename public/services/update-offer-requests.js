@@ -20,12 +20,13 @@
             let category3 = document.getElementById('update_offer_request_product_category_3').value;
             let cust_stock = document.getElementById('update_offer_request_customer_stock_code').value;
             let own_stock = document.getElementById('update_offer_request_owner_stock_code').value;
+            let note = document.getElementById('update_offer_request_note').value;
             if (quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
-            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
+            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
+            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
         });
 	});
 
@@ -47,6 +48,7 @@ function checkRole(){
 async function initPage(){
     await getOwnersAddSelectId('update_offer_request_owner');
     await getAdminsAddSelectId('update_offer_request_authorized_personnel');
+    await getAdminsAddSelectId('update_offer_request_purchasing_staff');
     await getCustomersAddSelectId('update_offer_request_company');
     await getMeasurementsAddSelectId('update_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('update_offer_request_product_category_1');
@@ -96,7 +98,7 @@ async function initThirdCategory(){
     });
 }
 
-async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock){
+async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note){
 
     let formData = JSON.stringify({
         "owner_stock_code": own_stock,
@@ -106,7 +108,8 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         "quantity": quantity,
         "measurement": measurement,
         "brand": brand,
-        "category": category3
+        "category": category3,
+        "note": note
     });
     console.log(formData)
     let request_id = getPathVariable('offer-request');
@@ -127,6 +130,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
             '           <td>'+ measurement +'</td>\n' +
             '           <td>'+ brand +'</td>\n' +
             '           <td>'+ category3 +'</td>\n' +
+            '           <td>'+ note +'</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -140,6 +144,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         document.getElementById('update_offer_request_product_measurement').value = "adet";
         document.getElementById('update_offer_request_owner_stock_code').value = "";
         document.getElementById('update_offer_request_customer_stock_code').value = "";
+        document.getElementById('update_offer_request_note').value = "";
 
     }else{
         alert("Hata Oluştu");
@@ -168,6 +173,7 @@ async function initOfferRequest(){
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_owner').value = offer_request.owner_id;
     document.getElementById('update_offer_request_authorized_personnel').value = checkNull(offer_request.authorized_personnel_id);
+    document.getElementById('update_offer_request_purchasing_staff').value = checkNull(offer_request.purchasing_staff_id);
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
     document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
@@ -188,6 +194,7 @@ async function initOfferRequest(){
             '           <td>' + product.measurement_name + '</td>\n' +
             '           <td>' + product.product.brand_id + '</td>\n' +
             '           <td>' + product.product.category_id + '</td>\n' +
+            '           <td>' + product.note + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -206,6 +213,8 @@ async function updateOfferRequest(){
     if (owner == 0){owner = null;}
     let personnel = document.getElementById('update_offer_request_authorized_personnel').value;
     if (personnel == 0){personnel = null;}
+    let purchasing = document.getElementById('update_offer_request_purchasing_staff').value;
+    if (purchasing == 0){purchasing = null;}
     let company = document.getElementById('update_offer_request_company').value;
     if (company == 0){company = null;}
     let employee = document.getElementById('update_offer_request_company_employee').value;
@@ -214,6 +223,7 @@ async function updateOfferRequest(){
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
         "authorized_personnel_id": personnel,
+        "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
         "owner_id": owner

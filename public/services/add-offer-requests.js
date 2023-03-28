@@ -26,12 +26,13 @@
             let category3 = document.getElementById('add_offer_request_product_category_3').value;
             let cust_stock = document.getElementById('add_offer_request_customer_stock_code').value;
             let own_stock = document.getElementById('add_offer_request_owner_stock_code').value;
+            let note = document.getElementById('add_offer_request_note').value;
             if (quantity == "0"){
                 alert('Formu Doldurunuz');
                 return false;
             }
-            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
-            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock);
+            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
+            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
         });
 	});
 
@@ -52,6 +53,7 @@ function checkRole(){
 async function initPage(){
     await getOwnersAddSelectId('add_offer_request_owner');
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
+    await getAdminsAddSelectId('add_offer_request_purchasing_staff');
     await getCustomersAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('add_offer_request_product_category_1');
@@ -100,7 +102,7 @@ async function initThirdCategory(){
     });
 }
 
-async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock){
+async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note){
 
     let count = document.getElementById('add_offer_request_product_count').value;
     count = parseInt(count) + 1;
@@ -115,6 +117,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         '           <td>'+ measurement +'</td>\n' +
         '           <td>'+ brand +'</td>\n' +
         '           <td>'+ category3 +'</td>\n' +
+        '           <td>'+ note +'</td>\n' +
         '           <td>\n' +
         '               <div class="btn-list">\n' +
         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
@@ -128,6 +131,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
     document.getElementById('add_offer_request_product_measurement').value = "adet";
     document.getElementById('add_offer_request_owner_stock_code').value = "";
     document.getElementById('add_offer_request_customer_stock_code').value = "";
+    document.getElementById('add_offer_request_note').value = "";
 }
 
 async function deleteProductRow(item_id){
@@ -151,7 +155,8 @@ async function addOfferRequest(){
             "quantity": parseInt(row.cells[5].innerText),
             "measurement": row.cells[6].innerText,
             "brand": row.cells[7].innerText,
-            "category": row.cells[8].innerText
+            "category": row.cells[8].innerText,
+            "note": row.cells[9].innerText
         }
         products.push(item);
     }
@@ -160,6 +165,8 @@ async function addOfferRequest(){
     if (owner == 0){owner = null;}
     let personnel = document.getElementById('add_offer_request_authorized_personnel').value;
     if (personnel == 0){personnel = null;}
+    let purchasing = document.getElementById('add_offer_request_purchasing_staff').value;
+    if (purchasing == 0){purchasing = null;}
     let company = document.getElementById('add_offer_request_company').value;
     if (company == 0){company = null;}
     let employee = document.getElementById('add_offer_request_company_employee').value;
@@ -169,6 +176,7 @@ async function addOfferRequest(){
         "user_id": parseInt(user_id),
         "owner_id": owner,
         "authorized_personnel_id": personnel,
+        "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
         "products": products

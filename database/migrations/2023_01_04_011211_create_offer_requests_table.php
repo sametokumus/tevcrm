@@ -18,6 +18,7 @@ class CreateOfferRequestsTable extends Migration
             $table->string('request_id');
             $table->bigInteger('user_id');
             $table->bigInteger('authorized_personnel_id')->nullable();
+            $table->bigInteger('purchasing_staff_id')->nullable();
             $table->bigInteger('company_id');
             $table->bigInteger('company_employee_id')->nullable();
             $table->tinyInteger('active')->default(1);

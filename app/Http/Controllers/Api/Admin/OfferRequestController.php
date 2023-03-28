@@ -28,6 +28,7 @@ class OfferRequestController extends Controller
             foreach ($offer_requests as $offer_request){
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+                $offer_request['purchasing_staff'] = Admin::query()->where('id', $offer_request->purchasing_staff_id)->where('active', 1)->first();
                 $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
                 $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
             }
@@ -53,6 +54,7 @@ class OfferRequestController extends Controller
             }
             $offer_request['products'] = $offer_request_products;
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+            $offer_request['purchasing_staff'] = Admin::query()->where('id', $offer_request->purchasing_staff_id)->where('active', 1)->first();
             $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
             $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
@@ -77,6 +79,7 @@ class OfferRequestController extends Controller
                 'request_id' => $request_id,
                 'user_id' => $request->user_id,
                 'authorized_personnel_id' => $request->authorized_personnel_id,
+                'purchasing_staff_id' => $request->purchasing_staff_id,
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
             ]);
@@ -128,6 +131,7 @@ class OfferRequestController extends Controller
                     'quantity' => $product['quantity'],
                     'measurement_id' => $measurement->id,
                     'customer_stock_code' => $product['customer_stock_code'],
+                    'note' => $product['note'],
                 ]);
             }
 
@@ -164,6 +168,7 @@ class OfferRequestController extends Controller
             OfferRequest::query()->where('request_id', $request_id)->update([
                 'user_id' => $request->user_id,
                 'authorized_personnel_id' => $request->authorized_personnel_id,
+                'purchasing_staff_id' => $request->purchasing_staff_id,
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
             ]);
@@ -234,6 +239,7 @@ class OfferRequestController extends Controller
                 'quantity' => $request->quantity,
                 'measurement_id' => $measurement->id,
                 'customer_stock_code' => $request->customer_stock_code,
+                'note' => $request->note
             ]);
 
             return response(['message' => __('Talep ürün ekleme işlemi başarılı.'), 'status' => 'success']);

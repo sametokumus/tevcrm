@@ -30,15 +30,21 @@ $extra_js='
                                     <input type="hidden" class="form-control" id="update_offer_request_product_count" value="0">
                                     <input type="hidden" class="form-control" id="update_offer_request_id">
                                     <div class="row p-3">
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label class="form-label">Talep Gelen Firma</label>
                                             <select class="form-control" id="update_offer_request_owner">
 
                                             </select>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label class="form-label">Yetkili Satış Temsilcisi</label>
                                             <select class="form-control" id="update_offer_request_authorized_personnel">
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">Satın Alma Sorumlusu</label>
+                                            <select class="form-control" id="update_offer_request_purchasing_staff">
 
                                             </select>
                                         </div>
@@ -118,6 +124,10 @@ $extra_js='
                                         </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
+                                        <label class="form-label">Satın Alma Notu</label>
+                                        <input type="text" class="form-control" id="update_offer_request_note">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-outline-theme w-100" id="update_offer_request_product_button">Ürünü Talep Listesine Ekle</button>
                                     </div>
@@ -147,6 +157,7 @@ $extra_js='
                                         <th class="border-bottom-0">Birim</th>
                                         <th class="border-bottom-0">Marka</th>
                                         <th class="border-bottom-0">Ürün Grubu</th>
+                                        <th class="border-bottom-0">Not</th>
                                         <th class="border-bottom-0"></th>
                                     </tr>
                                     </thead>
