@@ -107,8 +107,7 @@ $extra_js='
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Tedarikçi</label>
-                            <select class="form-control" id="add_offer_company">
-
+                            <select name="add_offer_company[]" class="form-control form-select select2" multiple="multiple" id="add_offer_company" required>
                             </select>
                         </div>
                     </div>

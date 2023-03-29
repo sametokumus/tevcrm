@@ -125,9 +125,15 @@ async function initOfferRequest(){
 async function addOffer(){
     let user_id = localStorage.getItem('userId');
     let request_id = getPathVariable('offer');
-    let supplier_id = document.getElementById('add_offer_company').value;
+    // let supplier_id = document.getElementById('add_offer_company').value;
     let table = $('#offer-request-products').DataTable();
     let rows = table.rows({ selected: true } );
+
+    let suppliers = [];
+    let supplier_objs = $('#add_offer_company').find(':selected');
+    for (let i = 0; i < supplier_objs.length; i++) {
+        suppliers.push(supplier_objs[i].value);
+    }
 
     let products = [];
     if (rows.count() === 0){
@@ -142,17 +148,22 @@ async function addOffer(){
             products.push(item);
         });
 
-        let formData = JSON.stringify({
-            "user_id": parseInt(user_id),
-            "request_id": request_id,
-            "supplier_id": supplier_id,
-            "products": products
-        });
+        let returned = true;
+        for (const supplier of suppliers) {
 
-        console.log(formData);
+            let formData = JSON.stringify({
+                "user_id": parseInt(user_id),
+                "request_id": request_id,
+                "supplier_id": supplier,
+                "products": products
+            });
 
-        let returned = await servicePostAddOffer(formData);
-        console.log(returned)
+
+            let rt = await servicePostAddOffer(formData);
+            if (!rt){returned = false;}
+        }
+
+
         if (returned){
             $('#offer-request-products-body tr').removeClass('selected');
             $("#add_offer_form").trigger("reset");

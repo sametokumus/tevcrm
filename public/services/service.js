@@ -332,6 +332,24 @@ function changeDecimalToCommas(price) {
 	return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
 }
 
+// Select2
+$('.select2').select2({
+    minimumResultsForSearch: Infinity,
+    width: '100%'
+});
+
+// Select2 by showing the search
+$('.select2-show-search').select2({
+    minimumResultsForSearch: '',
+    width: '100%'
+});
+
+$('.select2').on('click', () => {
+    let selectField = document.querySelectorAll('.select2-search__field')
+    selectField.forEach((element, index) => {
+        element.focus();
+    })
+});
 
 /* SERVICE INIT DATA FUNCTIONS */
 
@@ -399,7 +417,7 @@ async function getCompaniesAddSelectId(selectId){
 async function getSuppliersAddSelectId(selectId){
     let data = await serviceGetSuppliers();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    // $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
     $.each(data.companies, function(i, company){
         let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -411,6 +429,21 @@ async function getCustomersAddSelectId(selectId){
     $('#'+selectId+' option').remove();
     $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
     $.each(data.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
+async function getCustomersAndPotentialsAddSelectId(selectId){
+    let data = await serviceGetCustomers();
+    let data2 = await serviceGetPotentialCustomers();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    $.each(data.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+    $.each(data2.companies, function(i, company){
         let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
         $('#'+selectId).append(optionRow);
     });

@@ -54,7 +54,7 @@ async function initPage(){
     await getOwnersAddSelectId('add_offer_request_owner');
     await getAdminsAddSelectId('add_offer_request_authorized_personnel');
     await getAdminsAddSelectId('add_offer_request_purchasing_staff');
-    await getCustomersAddSelectId('add_offer_request_company');
+    await getCustomersAndPotentialsAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('add_offer_request_product_category_1');
     let data1 = await serviceGetBrands();
@@ -120,6 +120,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         '           <td>'+ note +'</td>\n' +
         '           <td>\n' +
         '               <div class="btn-list">\n' +
+        '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="updateProductRow('+ count +');"><span class="fe fe-trash-2"> Düzenle</span></button>\n' +
         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
         '               </div>\n' +
         '           </td>\n' +
@@ -131,10 +132,35 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
     document.getElementById('add_offer_request_product_measurement').value = "adet";
     document.getElementById('add_offer_request_owner_stock_code').value = "";
     document.getElementById('add_offer_request_customer_stock_code').value = "";
+    document.getElementById('add_offer_request_brand').value = "";
     document.getElementById('add_offer_request_note').value = "";
 }
 
 async function deleteProductRow(item_id){
+    $('#productRow' + item_id).remove();
+    let count = document.getElementById('add_offer_request_product_count').value;
+    count = parseInt(count) - 1;
+    document.getElementById('add_offer_request_product_count').value = count;
+}
+async function updateProductRow(item_id){
+    const table = document.getElementById("offer-request-products");
+    const row = table.querySelector("#productRow"+item_id);
+    const cells = row.cells;
+    const cellData = [];
+    for (let i = 0; i < cells.length; i++) {
+        cellData.push(cells[i].textContent);
+    }
+
+    document.getElementById('add_offer_request_product_refcode').value = cellData[3];
+    document.getElementById('add_offer_request_product_name').value = cellData[4];
+    document.getElementById('add_offer_request_product_quantity').value = cellData[5];
+    document.getElementById('add_offer_request_product_measurement').value = cellData[6];
+    document.getElementById('add_offer_request_brand').value = cellData[7];
+    document.getElementById('add_offer_request_customer_stock_code').value = cellData[2];
+    document.getElementById('add_offer_request_owner_stock_code').value = cellData[1];
+    document.getElementById('add_offer_request_note').value = cellData[9];
+
+
     $('#productRow' + item_id).remove();
     let count = document.getElementById('add_offer_request_product_count').value;
     count = parseInt(count) - 1;

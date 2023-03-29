@@ -386,3 +386,29 @@ table tr.selected{
 .DTE_Field label{
     display: none;
 }
+
+.select2-container{
+    z-index: 9999;
+}
+.select2-dropdown{
+    background: #666;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.select2-container--default .select2-selection--multiple{
+    background-color: transparent;
+}
+.select2-container--default .select2-selection--multiple{
+    border: 1px solid rgba(255,255,255,.3);
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border: 1px solid rgba(255,255,255,.3);
+}
+.select2-search__field{
+    color: #aaaaaa;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: #666666;
+    border: 1px solid #666666;
+}
+

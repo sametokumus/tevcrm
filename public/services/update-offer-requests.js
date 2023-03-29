@@ -49,7 +49,7 @@ async function initPage(){
     await getOwnersAddSelectId('update_offer_request_owner');
     await getAdminsAddSelectId('update_offer_request_authorized_personnel');
     await getAdminsAddSelectId('update_offer_request_purchasing_staff');
-    await getCustomersAddSelectId('update_offer_request_company');
+    await getCustomersAndPotentialsAddSelectId('update_offer_request_company');
     await getMeasurementsAddSelectId('update_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('update_offer_request_product_category_1');
     let data1 = await serviceGetBrands();
@@ -133,6 +133,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
             '           <td>'+ note +'</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
+            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="updateProductRow('+ count +');"><span class="fe fe-trash-2"> Düzenle</span></button>\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
             '               </div>\n' +
             '           </td>\n' +
@@ -144,6 +145,7 @@ async function addProductToTable(refcode, product_name, quantity, measurement, b
         document.getElementById('update_offer_request_product_measurement').value = "adet";
         document.getElementById('update_offer_request_owner_stock_code').value = "";
         document.getElementById('update_offer_request_customer_stock_code').value = "";
+        document.getElementById('update_offer_request_customer_brand').value = "";
         document.getElementById('update_offer_request_note').value = "";
 
     }else{
@@ -159,9 +161,30 @@ async function deleteProductRow(item_id){
     }else{
         alert("Ürün silinemedi");
     }
-    // let count = document.getElementById('update_offer_request_product_count').value;
-    // count = parseInt(count) - 1;
-    // document.getElementById('update_offer_request_product_count').value = count;
+}
+async function updateProductRow(item_id){
+    let returned = serviceGetDeleteProductToOfferRequest(item_id);
+    if (returned) {
+        const table = document.getElementById("offer-request-products");
+        const row = table.querySelector("#productRow"+item_id);
+        const cells = row.cells;
+        const cellData = [];
+        for (let i = 0; i < cells.length; i++) {
+            cellData.push(cells[i].textContent);
+        }
+
+        document.getElementById('update_offer_request_product_refcode').value = cellData[3];
+        document.getElementById('update_offer_request_product_name').value = cellData[4];
+        document.getElementById('update_offer_request_product_quantity').value = cellData[5];
+        document.getElementById('update_offer_request_product_measurement').value = cellData[6];
+        document.getElementById('update_offer_request_brand').value = cellData[7];
+        document.getElementById('update_offer_request_customer_stock_code').value = cellData[2];
+        document.getElementById('update_offer_request_owner_stock_code').value = cellData[1];
+        document.getElementById('update_offer_request_note').value = cellData[9];
+        $('#productRow' + item_id).remove();
+    }else{
+        alert("Ürün silinemedi");
+    }
 }
 
 async function initOfferRequest(){
@@ -177,6 +200,7 @@ async function initOfferRequest(){
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
     document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
     document.getElementById('update_offer_request_company_request_code').value = offer_request.company_request_code;
+    document.getElementById('update_offer_request_note').value = offer_request.note;
     document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
     if (offer_request.company_id != null && offer_request.company_id != 0) {
@@ -199,6 +223,7 @@ async function initOfferRequest(){
             '           <td>' + checkNull(product.note) + '</td>\n' +
             '           <td>\n' +
             '               <div class="btn-list">\n' +
+            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="updateProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Düzenle</span></button>\n' +
             '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
             '               </div>\n' +
             '           </td>\n' +
@@ -221,7 +246,7 @@ async function updateOfferRequest(){
     if (company == 0){company = null;}
     let employee = document.getElementById('update_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
-    let request_code = document.getElementById('add_offer_request_company_request_code').value;
+    let request_code = document.getElementById('update_offer_request_company_request_code').value;
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
