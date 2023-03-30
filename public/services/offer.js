@@ -66,18 +66,32 @@ async function openAddOfferModal(){
     await getSuppliersAddSelectId('add_offer_company');
 }
 
+async function openOfferRequestNoteModal(note){
+    $("#offerRequestNoteModal").modal('show');
+    document.getElementById('show_offer_request_note').textContent = note;
+}
 
 async function initOfferRequest(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
+    console.log(offer_request)
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
 
     $.each(offer_request.products, function (i, product) {
+        let note = '';
+        if (product.note != null && product.note != ''){
+            note = '<div class="btn-list">\n' +
+                '       <button onclick="openOfferRequestNoteModal(\'' + product.note + '\');" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Sipariş Notu</span></button>\n' +
+                '   </div>';
+        }
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + product.id + '</td>\n' +
+            '              <td>\n' +
+            '                  '+ note +'\n' +
+            '              </td>\n' +
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
@@ -190,9 +204,11 @@ async function initOffers(){
 
     $.each(offers, function (i, offer) {
         let bg_color = '';
+        let btn_text = 'Fiyatları Gir';
         if (offer.products != null){
             if (offer.products[0].total_price != null){
                 bg_color = 'bg-secondary';
+                btn_text = 'Fiyatları Güncelle';
             }
         }
 
@@ -203,7 +219,7 @@ async function initOffers(){
             '           <td>' + offer.product_count + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Fiyatları Gir</span></button>\n' +
+            '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
             '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
             '                  </div>\n' +
             '              </td>\n' +
@@ -261,6 +277,7 @@ async function initOfferDetailModal(offer_id){
     let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
     console.log(offer)
+    document.getElementById('offer_detail_show_supplier_name').textContent = offer.company_name;
 
     $("#offer-detail").dataTable().fnDestroy();
     $('#offer-detail tbody > tr').remove();
@@ -369,6 +386,7 @@ async function initOfferDetailModal(offer_id){
             let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
             if (returned){
                 await initOfferDetailModal(offer_id);
+                await initOffers();
             }else{
                 alert("Hata Oluştu");
             }
@@ -404,15 +422,15 @@ async function initOfferDetailModal(offer_id){
             { data: "ref_code" },
             { data: "date_code" },
             { data: "package_type" },
-            { data: "quantity" },
+            { data: "quantity", className:  "row-edit" },
             { data: "measurement_name" },
-            { data: "pcs_price" },
-            { data: "total_price" },
-            { data: "discount_rate" },
-            { data: "discounted_price" },
-            { data: "vat_rate" },
-            { data: "currency" },
-            { data: "lead_time" },
+            { data: "pcs_price", className:  "row-edit" },
+            { data: "total_price", className:  "row-edit" },
+            { data: "discount_rate", className:  "row-edit" },
+            { data: "discounted_price", className:  "row-edit" },
+            { data: "vat_rate", className:  "row-edit" },
+            { data: "currency", className:  "row-edit" },
+            { data: "lead_time", className:  "row-edit" },
             {
                 data: null,
                 defaultContent: '<i class="fas fa-lg fa-fw me-2 fa-edit"/>',

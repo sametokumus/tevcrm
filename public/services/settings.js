@@ -21,6 +21,24 @@
             updateBankInfo();
         });
 
+        $('#add_payment_term_form').submit(function (e){
+            e.preventDefault();
+            addPaymentTerm();
+        });
+        $('#update_payment_term_form').submit(function (e){
+            e.preventDefault();
+            updatePaymentTerm();
+        });
+
+        $('#add_delivery_term_form').submit(function (e){
+            e.preventDefault();
+            addDeliveryTerm();
+        });
+        $('#update_delivery_term_form').submit(function (e){
+            e.preventDefault();
+            updateDeliveryTerm();
+        });
+
     });
 
     $(window).load( function() {
@@ -174,5 +192,145 @@ async function deleteBankInfo(bank_info_id){
     let returned = await serviceGetDeleteBankInfo(bank_info_id);
     if(returned){
         initBankInfos();
+    }
+}
+
+
+async function initPaymentTerms(){
+    let company_id = getPathVariable('company-detail');
+    let data = await serviceGetPaymentTerms();
+    $('#datatablePaymentTerms tbody tr').remove();
+    let logged_user_id = localStorage.getItem('userId');
+
+    $.each(data.payment_terms, function (i, payment_term) {
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdatePaymentTermModal(\''+ payment_term.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deletePaymentTerm(\''+ payment_term.id +'\');">Sil</button>\n';
+        }
+
+        let item = '<tr>\n' +
+            '           <th scope="row">'+ payment_term.id +'</th>\n' +
+            '           <td>'+ payment_term.name +'</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#datatablePaymentTerms tbody').append(item);
+    });
+
+}
+async function openAddPaymentTermModal(){
+    $("#addPaymentTermModal").modal('show');
+}
+async function addPaymentTerm(){
+    let formData = JSON.stringify({
+        "name":document.getElementById('add_payment_term_name').value
+    });
+
+    let returned = await servicePostAddPaymentTerm(formData);
+    if (returned){
+        $("#add_payment_term_form").trigger("reset");
+        $("#addPaymentTermModal").modal('hide');
+        initPaymentTerms();
+    }
+}
+async function openUpdatePaymentTermModal(payment_term_id){
+    let company_id = getPathVariable('company-detail');
+    $("#updatePaymentTermModal").modal('show');
+    initUpdatePaymentTermModal(payment_term_id)
+}
+async function initUpdatePaymentTermModal(payment_term_id){
+    document.getElementById('update_payment_term_form').reset();
+    document.getElementById('update_payment_term_id').value = payment_term_id;
+    let data = await serviceGetPaymentTermById(payment_term_id);
+    let payment_term = data.payment_term;
+    document.getElementById('update_payment_term_name').value = payment_term.name;
+}
+async function updatePaymentTerm(){
+    let formData = JSON.stringify({
+        "name":document.getElementById('update_payment_term_name').value
+    });
+
+    let returned = await servicePostUpdatePaymentTerm(document.getElementById('update_payment_term_id').value, formData);
+    if (returned){
+        $("#update_payment_term_form").trigger("reset");
+        $("#updatePaymentTermModal").modal('hide');
+        initPaymentTerms();
+    }
+}
+async function deletePaymentTerm(payment_term_id){
+    let returned = await serviceGetDeletePaymentTerm(payment_term_id);
+    if(returned){
+        initPaymentTerms();
+    }
+}
+
+
+async function initDeliveryTerms(){
+    let company_id = getPathVariable('company-detail');
+    let data = await serviceGetDeliveryTerms();
+    $('#datatableDeliveryTerms tbody tr').remove();
+    let logged_user_id = localStorage.getItem('userId');
+
+    $.each(data.delivery_terms, function (i, delivery_term) {
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateDeliveryTermModal(\''+ delivery_term.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteDeliveryTerm(\''+ delivery_term.id +'\');">Sil</button>\n';
+        }
+
+        let item = '<tr>\n' +
+            '           <th scope="row">'+ delivery_term.id +'</th>\n' +
+            '           <td>'+ delivery_term.name +'</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#datatableDeliveryTerms tbody').append(item);
+    });
+
+}
+async function openAddDeliveryTermModal(){
+    $("#addDeliveryTermModal").modal('show');
+}
+async function addDeliveryTerm(){
+    let formData = JSON.stringify({
+        "name":document.getElementById('add_delivery_term_name').value
+    });
+
+    let returned = await servicePostAddDeliveryTerm(formData);
+    if (returned){
+        $("#add_delivery_term_form").trigger("reset");
+        $("#addDeliveryTermModal").modal('hide');
+        initDeliveryTerms();
+    }
+}
+async function openUpdateDeliveryTermModal(delivery_term_id){
+    let company_id = getPathVariable('company-detail');
+    $("#updateDeliveryTermModal").modal('show');
+    initUpdateDeliveryTermModal(delivery_term_id)
+}
+async function initUpdateDeliveryTermModal(delivery_term_id){
+    document.getElementById('update_delivery_term_form').reset();
+    document.getElementById('update_delivery_term_id').value = delivery_term_id;
+    let data = await serviceGetDeliveryTermById(delivery_term_id);
+    let delivery_term = data.delivery_term;
+    document.getElementById('update_delivery_term_name').value = delivery_term.name;
+}
+async function updateDeliveryTerm(){
+    let formData = JSON.stringify({
+        "name":document.getElementById('update_delivery_term_name').value
+    });
+
+    let returned = await servicePostUpdateDeliveryTerm(document.getElementById('update_delivery_term_id').value, formData);
+    if (returned){
+        $("#update_delivery_term_form").trigger("reset");
+        $("#updateDeliveryTermModal").modal('hide');
+        initDeliveryTerms();
+    }
+}
+async function deleteDeliveryTerm(delivery_term_id){
+    let returned = await serviceGetDeleteDeliveryTerm(delivery_term_id);
+    if(returned){
+        initDeliveryTerms();
     }
 }

@@ -29,6 +29,7 @@ $extra_js='
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">Sipariş Notu</th>
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Miktar</th>
@@ -95,6 +96,26 @@ $extra_js='
 </div>
 <!--app-content close-->
 
+<div class="modal modal-cover fade" id="offerRequestNoteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SİPARİŞ NOTU</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <p id="show_offer_request_note"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal modal-cover fade" id="addOfferModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -125,7 +146,7 @@ $extra_js='
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">TEKLİF DETAYI</h5>
+                <h5 class="modal-title">TEKLİF DETAYI (<span class="text-uppercase" id="offer_detail_show_supplier_name"> </span>)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body overflow-auto">

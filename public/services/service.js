@@ -486,6 +486,24 @@ async function getActivityTypesAddSelectId(selectId){
     });
 }
 
+async function getPaymentTermsAddSelectId(selectId){
+    let data = await serviceGetPaymentTerms();
+    $('#'+selectId+' option').remove();
+    $.each(data.payment_terms, function(i, payment_term){
+        let optionRow = '<option value="'+payment_term.name+'">'+payment_term.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
+async function getDeliveryTermsAddSelectId(selectId){
+    let data = await serviceGetDeliveryTerms();
+    $('#'+selectId+' option').remove();
+    $.each(data.delivery_terms, function(i, delivery_term){
+        let optionRow = '<option value="'+delivery_term.name+'">'+delivery_term.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
     $('#'+selectId+' option').remove();
@@ -1674,5 +1692,102 @@ async function serviceGetSaleSuppliers(sale_id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+
+
+async function serviceGetPaymentTerms() {
+    const data = await fetchDataGet('/admin/setting/getPaymentTerms', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetPaymentTermById(id) {
+    const data = await fetchDataGet('/admin/setting/getPaymentTermById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddPaymentTerm(formData) {
+    const data = await fetchDataPost('/admin/setting/addPaymentTerm', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdatePaymentTerm(id, formData) {
+    const data = await fetchDataPost('/admin/setting/updatePaymentTerm/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeletePaymentTerm(id) {
+    const data = await fetchDataGet('/admin/setting/deletePaymentTerm/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+async function serviceGetDeliveryTerms() {
+    const data = await fetchDataGet('/admin/setting/getDeliveryTerms', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetDeliveryTermById(id) {
+    const data = await fetchDataGet('/admin/setting/getDeliveryTermById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddDeliveryTerm(formData) {
+    const data = await fetchDataPost('/admin/setting/addDeliveryTerm', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateDeliveryTerm(id, formData) {
+    const data = await fetchDataPost('/admin/setting/updateDeliveryTerm/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteDeliveryTerm(id) {
+    const data = await fetchDataGet('/admin/setting/deleteDeliveryTerm/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }

@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\Admin\LanguageController;
 use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,5 +245,21 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
     Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
     Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
+
+
+    //Payment Terms
+    Route::get('setting/getPaymentTerms', [SettingController::class, 'getPaymentTerms']);
+    Route::get('setting/getPaymentTermById/{type_id}', [SettingController::class, 'getPaymentTermById']);
+    Route::post('setting/addPaymentTerm', [SettingController::class, 'addPaymentTerm']);
+    Route::post('setting/updatePaymentTerm/{type_id}', [SettingController::class, 'updatePaymentTerm']);
+    Route::get('setting/deletePaymentTerm/{type_id}', [SettingController::class, 'deletePaymentTerm']);
+
+
+    //Delivery Terms
+    Route::get('setting/getDeliveryTerms', [SettingController::class, 'getDeliveryTerms']);
+    Route::get('setting/getDeliveryTermById/{type_id}', [SettingController::class, 'getDeliveryTermById']);
+    Route::post('setting/addDeliveryTerm', [SettingController::class, 'addDeliveryTerm']);
+    Route::post('setting/updateDeliveryTerm/{type_id}', [SettingController::class, 'updateDeliveryTerm']);
+    Route::get('setting/deleteDeliveryTerm/{type_id}', [SettingController::class, 'deleteDeliveryTerm']);
 });
 
