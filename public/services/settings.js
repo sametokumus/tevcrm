@@ -47,6 +47,8 @@
         checkRole();
         initBankInfos();
         initActivityTypes();
+        initPaymentTerms();
+        initDeliveryTerms();
 
     });
 
