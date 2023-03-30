@@ -29,6 +29,7 @@ class CreateCompaniesTable extends Migration
             $table->text('skype')->nullable();
             $table->text('online')->nullable();
             $table->string('registration_number')->nullable();
+            $table->string('payment_term')->nullable();
             $table->tinyInteger('is_potential_customer')->default(0);
             $table->tinyInteger('is_customer')->default(0);
             $table->tinyInteger('is_supplier')->default(0);

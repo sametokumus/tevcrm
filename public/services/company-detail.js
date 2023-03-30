@@ -108,6 +108,7 @@ function checkRole(){
 }
 async function initCompany(company_id){
     await getCountriesAddSelectId('update_company_country');
+    await getPaymentTermsAddSelectId('update_company_payment_term');
 
     document.getElementById('update_company_form').reset();
     document.getElementById('update_company_id').value = company_id;
@@ -127,6 +128,7 @@ async function initCompany(company_id){
     document.getElementById('update_company_skype').value = company.skype;
     document.getElementById('update_company_online').value = company.online;
     document.getElementById('update_company_registration_number').value = company.registration_number;
+    document.getElementById('update_company_payment_term').value = company.payment_term;
     $('#update_company_current_logo').attr('href', company.logo);
     if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
     if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
@@ -172,6 +174,7 @@ async function updateCompany(){
     formData.append('skype', document.getElementById('update_company_skype').value);
     formData.append('online', document.getElementById('update_company_online').value);
     formData.append('registration_number', document.getElementById('update_company_registration_number').value);
+    formData.append('payment_term', document.getElementById('update_company_payment_term').value);
     formData.append('logo', document.getElementById('update_company_logo').files[0]);
     for (var pair of formData.entries()) {
         console.log(pair[0]+ ', ' + pair[1]);

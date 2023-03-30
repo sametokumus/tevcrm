@@ -89,7 +89,8 @@ class CompanyController extends Controller
                 'linkedin' => $request->linkedin,
                 'skype' => $request->skype,
                 'online' => $request->online,
-                'registration_number' => $request->registration_number
+                'registration_number' => $request->registration_number,
+                'payment_term' => $request->payment_term
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
@@ -135,7 +136,8 @@ class CompanyController extends Controller
                 'linkedin' => $request->linkedin,
                 'skype' => $request->skype,
                 'online' => $request->online,
-                'registration_number' => $request->registration_number
+                'registration_number' => $request->registration_number,
+                'payment_term' => $request->payment_term
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();

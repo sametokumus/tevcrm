@@ -100,7 +100,13 @@ $(".timepicker").timepicker({
                                         <label class="form-label">Skype</label>
                                         <input type="text" class="form-control" id="update_company_skype" placeholder="Skype">
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Payment Term</label>
+                                        <select class="form-control" id="update_company_payment_term">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Diğer</label>
                                         <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
                                     </div>
