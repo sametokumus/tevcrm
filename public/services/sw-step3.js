@@ -129,7 +129,6 @@ async function initOfferDetail(){
                 editor.submit();
             }
         });
-        console.log(offers)
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
             data: offers,
