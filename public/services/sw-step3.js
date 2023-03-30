@@ -148,11 +148,35 @@ async function initOfferDetail(){
                 { data: "measurement_name" },
                 { data: "pcs_price" },
                 { data: "total_price" },
-                { data: "discount_rate" },
-                { data: "discounted_price" },
-                { data: "vat_rate" },
+                { data: "discount_rate",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0.00') {
+                            return '';
+                        }
+                        return data;
+                    }  },
+                { data: "discounted_price",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return data;
+                    } },
+                { data: "vat_rate",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0.00') {
+                            return '';
+                        }
+                        return data;
+                    }  },
                 { data: "currency" },
-                { data: "offer_price", className:  "row-edit" },
+                { data: "offer_price", className:  "row-edit",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return data;
+                    }  },
                 { data: "offer_currency", className:  "row-edit" },
                 { data: "offer_lead_time", className:  "row-edit" },
                 {
@@ -218,8 +242,10 @@ async function addOfferBatchProcess(){
             let total_price = row.total_price;
             let discounted_price = row.discounted_price;
 
+            console.log(total_price, discounted_price);
+
             let price = total_price;
-            if (discounted_price != '' && discounted_price != null){
+            if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
                 price = discounted_price;
             }
 
@@ -236,17 +262,18 @@ async function addOfferBatchProcess(){
             console.log(formData)
 
             let returned = await servicePostAddSaleOfferPrice(formData);
+            console.log(returned)
             if (returned) {
             }else{
                 success = false;
             }
 
         });
-
+        console.log(success)
         if (success) {
             $('#addBatchProcessModal').modal('hide');
             $("#add_batch_process_form").trigger("reset");
-            initOfferDetail()
+            await initOfferDetail()
         }else{
             alert("Hata Oluştu");
         }
