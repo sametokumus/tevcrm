@@ -205,10 +205,12 @@ async function initOffers(){
     $.each(offers, function (i, offer) {
         let bg_color = '';
         let btn_text = 'Fiyatları Gir';
+        let btn_class = 'btn-theme';
         if (offer.products != null){
             if (offer.products[0].total_price != null){
                 bg_color = 'bg-secondary';
                 btn_text = 'Fiyatları Güncelle';
+                btn_class = 'btn-dark';
             }
         }
 
@@ -219,7 +221,7 @@ async function initOffers(){
             '           <td>' + offer.product_count + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
+            '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm '+ btn_class +'"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
             '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
             '                  </div>\n' +
             '              </td>\n' +
