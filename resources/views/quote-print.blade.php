@@ -13,7 +13,7 @@ $extra_js='
         <div class="main-container container-fluid">
 
             <div class="row justify-content-center mb-3 no-print">
-                <div class="col-md-7">
+                <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-12">
                             <label class="form-label">Dil</label>
@@ -33,7 +33,7 @@ $extra_js='
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-7 bg-white p-md-50">
+                <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
 
 
 
@@ -48,7 +48,7 @@ $extra_js='
                                     <section id="quote-print" class="print-color">
                                         <!-- title row -->
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-7">
                                                 <div class="contact-col">
             {{--                                        <h6>{{__('Supplier')}}</h6>--}}
                                                     <address>
@@ -58,7 +58,7 @@ $extra_js='
                                                 <h1 class="page-header">
                                                     {{__('Offer')}}
                                                 </h1>
-                                                <div class="col-sm-6 buyer-col">
+                                                <div class="col-sm-12 buyer-col">
                                                     {{--                                    <h6>Supplier</h6>--}}
                                                     <address>
                                                         <span id="buyer_name"></span><br>
@@ -70,7 +70,7 @@ $extra_js='
                                                     </address>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-5">
                                                 <h2 class="logo-header">
                                                     <div id="logo"></div>
                                                     <small class="date"></small>
@@ -108,10 +108,10 @@ $extra_js='
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <p style="margin-top: 15px; margin-bottom: 0;">{{__('Note')}}:</p>
-                                                <p id="note" class="text-muted">
+                                                <p style="margin-top: 15px; margin-bottom: 0;"><strong>{{__('Note')}}:</strong></p>
+                                                <div id="note" class="text-muted">
 
-                                                </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -167,8 +167,10 @@ $extra_js='
                     <div class="row mb-4">
                         <input type="hidden" class="form-control" id="update_quote_id">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Payment Terms</label>
-                            <input type="text" class="form-control" id="update_quote_payment_term">
+                            <label class="form-label">Payment Term</label>
+                            <select class="form-control" id="update_quote_payment_term">
+
+                            </select>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Insurance</label>
@@ -176,7 +178,9 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Delivery Terms</label>
-                            <input type="text" class="form-control" id="update_quote_delivery_term">
+                            <select class="form-control" id="update_quote_delivery_term">
+
+                            </select>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Country of Destination</label>
@@ -188,7 +192,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Note</label>
-                            <textarea class="form-control" id="update_quote_note"></textarea>
+                            <textarea name="text" class="summernote" id="update_quote_note" title="Contents"></textarea>
                         </div>
                     </div>
                 </div>

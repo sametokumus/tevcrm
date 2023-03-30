@@ -82,9 +82,14 @@ async function initSale(sale_id){
     // await getOwnersAddSelectId('owners');
     // document.getElementById('owners').value = 1;
 
+    await getPaymentTermsAddSelectId('update_quote_payment_term');
+    await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
     document.getElementById('buyer_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ company.address;
+    document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(company.payment_term);
+    document.getElementById('update_quote_payment_term').value = checkNull(company.payment_term);
 
     $('#quote-print .logo-header .offer-id').text(short_code+'-OFR-'+sale.id);
 
@@ -147,7 +152,7 @@ async function initSale(sale_id){
     }
 
     if (sale.grand_total != null) {
-        if (sale.vat == null && sale.vat == '0.00' && sale.freight == null) {
+        if ((sale.vat != null && sale.vat != '0.00') || sale.freight != null) {
             let item = '<tr>\n' +
                 '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
                 '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
@@ -161,8 +166,10 @@ async function initSale(sale_id){
 async function initQuote(sale_id){
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
-
-    document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(quote.payment_term);
+    if (checkNull(quote.payment_term) != '') {
+        document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
+        document.getElementById('update_quote_payment_term').value = quote.payment_term;
+    }
     document.getElementById('lead_time').innerHTML = '<b>'+ Lang.get("strings.Insurance") +' :</b> '+ checkNull(quote.lead_time);
     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
@@ -185,7 +192,7 @@ async function initUpdateQuoteModal(){
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
     document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
-    document.getElementById('update_quote_note').value = checkNull(quote.note);
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
 }
 
 async function updateQuote(){

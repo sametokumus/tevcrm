@@ -180,6 +180,7 @@ table tr.selected{
 
 #bank-details p{
     margin-bottom: 5px;
+    line-height: 13px;
 }
 
 #bank-details table{
@@ -232,6 +233,11 @@ table tr.selected{
 }
 .printable #note *{
     font-size: 12px;
+    margin-bottom: 0;
+}
+.printable #note p{
+    margin-bottom: 0;
+    line-height: 13px;
 }
 .printable table{
     margin: 0 !important;

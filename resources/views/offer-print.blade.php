@@ -14,7 +14,7 @@ $extra_js='
 
 
             <div class="row justify-content-center mb-3 no-print">
-                <div class="col-md-7">
+                <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-12">
                             <label class="form-label">Dil</label>
@@ -34,7 +34,7 @@ $extra_js='
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-7 bg-white p-md-50">
+                <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
 
                     <div class="wrapper">
 
@@ -103,7 +103,7 @@ $extra_js='
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    Note:
+                                                    <strong><strong>{{__('Note')}}:</strong></strong>
                                                     <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
                                                     <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
                                                 </p>

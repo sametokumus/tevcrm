@@ -192,7 +192,7 @@ async function initOffer(offer_id){
     }
 
     if (offer.grand_total != null) {
-        if (offer.vat == null && offer.vat == '0.00') {
+        if (offer.vat != null && offer.vat != '0.00') {
             let item = '<tr>\n' +
                 '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
                 '           <td colspan="2" class="text-center">' + changeCommasToDecimal(offer.grand_total) + ' ' + currency + '</td>\n' +
@@ -206,6 +206,8 @@ async function initOffer(offer_id){
     $('#updateNoteBtn').addClass('d-none');
     let data2 = await serviceGetPurchasingOrderDetailById(offer_id);
     let purchasing_order_detail = data2.purchasing_order_detail;
+    console.log('dsfds')
+    console.log(purchasing_order_detail)
     if (purchasing_order_detail == null){
         $('#addNoteBtn').removeClass('d-none');
     }else{

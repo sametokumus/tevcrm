@@ -13,7 +13,7 @@ $extra_js='
         <div class="main-container container-fluid">
 
             <div class="row justify-content-center mb-3 no-print">
-                <div class="col-md-7">
+                <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-12">
                             <label class="form-label">Dil</label>
@@ -33,7 +33,7 @@ $extra_js='
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-7 bg-white p-md-50">
+                <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
 
                     <div class="wrapper">
 
@@ -104,8 +104,8 @@ $extra_js='
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    {{__('Note')}}:
-                                                    <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
+                                                    <strong>{{__('Note')}}:</strong>
+                                                    <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddNoteModal();">Not Ekle</button>
                                                     <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
                                                 </p>
                                                 <div id="note" class="text-muted">
@@ -135,7 +135,7 @@ $extra_js='
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    {{__('Bank Details:')}}
+                                                    <strong>{{__('Bank Details:')}}</strong>
                                                     <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>
                                                 </p>
                                                 <div id="bank-details" class="text-muted">
