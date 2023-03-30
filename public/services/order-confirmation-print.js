@@ -4,13 +4,6 @@
     $(document).ready(function() {
 
         $(":input").inputmask();
-        $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
-        $("#update_quote_vat_rate").maskMoney({thousands:'.', decimal:','});
-
-        $('#update_quote_form').submit(function (e){
-            e.preventDefault();
-            updateQuote();
-        });
 
         $('#add_note_form').submit(function (e){
             e.preventDefault();
@@ -118,8 +111,8 @@ async function initSale(sale_id){
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.offer_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
-            '           <td class="text-center">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center text-nowrap">' + changeCommasToDecimal(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center text-nowrap">' + changeCommasToDecimal(product.offer_price) + ' '+ currency +'</td>\n' +
             '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
@@ -161,6 +154,20 @@ async function initSale(sale_id){
                 '       </tr>';
             $('#sale-detail tbody').append(item);
         }
+    }
+
+
+    $('#addNoteBtn').addClass('d-none');
+    $('#updateNoteBtn').addClass('d-none');
+    let data2 = await serviceGetOrderConfirmationDetailById(sale_id);
+    console.log(data2)
+    let order_confirmation_detail = data2.order_confirmation_detail;
+    console.log(order_confirmation_detail)
+    if (order_confirmation_detail == null){
+        $('#addNoteBtn').removeClass('d-none');
+    }else{
+        $('#updateNoteBtn').removeClass('d-none');
+        $('#note').append(order_confirmation_detail.note);
     }
 
 }
