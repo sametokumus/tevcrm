@@ -45,8 +45,8 @@ class ContactController extends Controller
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'registration_no' => $request->fax,
-                'short_code' => $request->country
+                'registration_no' => $request->registration_no,
+                'short_code' => $request->short_code
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();

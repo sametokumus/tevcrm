@@ -1170,9 +1170,10 @@ async function servicePostUpdateContact(formData) {
 async function serviceGetDeleteContact(id) {
     const data = await fetchDataGet('/admin/contact/deleteContact/' + id, 'application/json');
     if (data.status == "success") {
-        return data.object;
+        return true;
     } else {
         showAlert('İstek Başarısız.');
+        return false;
     }
 }
 
