@@ -1164,6 +1164,17 @@ async function serviceGetContactById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function servicePostUpdateContact(formData) {
+    await xhrDataPost('/admin/contact/updateContact', formData, updateContactCallback);
+}
+async function serviceGetDeleteContact(id) {
+    const data = await fetchDataGet('/admin/contact/deleteContact/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 
 

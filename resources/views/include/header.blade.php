@@ -228,6 +228,12 @@ $extra_js="";
                         <span class="menu-text">Ayarlar</span>
                     </a>
                 </div>
+                <div class="menu-item @if( Request::segment(1)== 'contacts' ) active @endif">
+                    <a href="/contacts" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gear"></i></span>
+                        <span class="menu-text">Firma Bilgileri</span>
+                    </a>
+                </div>
                 <div class="menu-item has-sub @if( Request::segment(1)== 'teams' || Request::segment(1)== 'roles' ) active @endif">
                     <a href="#" class="menu-link">
                         <span class="menu-icon">

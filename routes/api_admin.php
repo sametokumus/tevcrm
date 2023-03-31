@@ -209,6 +209,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Contact
     Route::get('contact/getContacts', [ContactController::class, 'getContacts']);
     Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);
+    Route::post('contact/updateContact', [ContactController::class, 'updateContact']);
+    Route::get('contact/deleteContact/{contact_id}', [ContactController::class, 'deleteContact']);
 
 
     //Status
