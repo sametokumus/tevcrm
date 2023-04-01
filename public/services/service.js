@@ -438,7 +438,7 @@ async function getCustomersAndPotentialsAddSelectId(selectId){
     let data = await serviceGetCustomers();
     let data2 = await serviceGetPotentialCustomers();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    // $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
     $.each(data.companies, function(i, company){
         let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
         $('#'+selectId).append(optionRow);

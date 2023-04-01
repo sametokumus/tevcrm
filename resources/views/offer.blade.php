@@ -158,8 +158,9 @@ $extra_js='
                             <tr>
                                 <th class="border-bottom-0">ID</th>
                                 <th class="border-bottom-0">Ref. Code</th>
-                                <th class="border-bottom-0">DC</th>
-                                <th class="border-bottom-0">Paketleme</th>
+                                <th class="border-bottom-0">Ürün Adı</th>
+                                <th class="border-bottom-0 d-none">DC</th>
+                                <th class="border-bottom-0 d-none">Paketleme</th>
                                 <th class="border-bottom-0">Miktar</th>
                                 <th class="border-bottom-0">Birim</th>
                                 <th class="border-bottom-0">Birim Fiyat</th>

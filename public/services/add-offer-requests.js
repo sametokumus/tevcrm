@@ -70,6 +70,10 @@ async function initPage(){
         source: brands,
         autoSelect: true
     });
+    $(".add_offer_request_company_select").select2({
+        placeholder: "Müşteri Seçiniz"
+    });
+
 }
 
 async function initEmployeeSelect(){

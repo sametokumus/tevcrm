@@ -48,8 +48,7 @@ $extra_js='
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Müşteri</label>
-                                        <select class="form-control" id="add_offer_request_company" onchange="initEmployeeSelect();">
-
+                                        <select name="add_offer_request_company[]" class="form-control form-select add_offer_request_company_select" id="add_offer_request_company" onchange="initEmployeeSelect();" required>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">

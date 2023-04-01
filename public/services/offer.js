@@ -422,8 +422,9 @@ async function initOfferDetailModal(offer_id){
         columns: [
             { data: "id", editable: false },
             { data: "ref_code" },
-            { data: "date_code" },
-            { data: "package_type" },
+            { data: "product_name" },
+            { data: "date_code", visible: false },
+            { data: "package_type", visible: false },
             { data: "quantity", className:  "row-edit" },
             { data: "measurement_name" },
             { data: "pcs_price", className:  "row-edit" },
