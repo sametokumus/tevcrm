@@ -120,7 +120,7 @@ async function initAdminsTable(){
 		],
 		dom: 'Bfrtip',
 		buttons: ['excel', 'pdf'],
-		pageLength : 20,
+		pageLength : -1,
 		language: {
 			url: "services/Turkish.json"
 		}

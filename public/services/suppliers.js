@@ -86,6 +86,9 @@ async function initCompanies(){
             '                      <a href="company-detail/'+ company.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
             '                          <span class="fe fe-search"> </span> Detaylı İncele\n' +
             '                      </a>\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCompany(\''+ company.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Sil\n' +
+            '                      </button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '          </tr>';
@@ -100,7 +103,7 @@ async function initCompanies(){
         ],
         dom: 'Bfrtip',
         buttons: ['excel', 'pdf'],
-        pageLength : 20,
+        pageLength : -1,
         language: {
             url: "services/Turkish.json"
         }
@@ -210,4 +213,12 @@ async function updateCompany(){
 
     let company_id = document.getElementById('update_company_id').value;
     await servicePostUpdateCompany(company_id, formData);
+}
+
+
+async function deleteCompany(company_id){
+    let returned = await serviceGetDeleteCompany(company_id);
+    if(returned){
+        initCompanies();
+    }
 }

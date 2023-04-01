@@ -131,7 +131,7 @@ async function initSales(){
                 }
             }
         ],
-		pageLength : 20,
+		pageLength : -1,
         scrollX: true,
 		language: {
 			url: "services/Turkish.json"

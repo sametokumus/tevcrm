@@ -1,6 +1,6 @@
 (function($) {
     "use strict";
-	
+
 	$(document).ready(function() {
 
 		$('#update_status_form').submit(function (e){
@@ -68,7 +68,7 @@ async function initUsers(){
 		],
 		dom: 'Bfrtip',
 		buttons: ['excel', 'pdf'],
-		pageLength : 20,
+		pageLength : -1,
 		language: {
 			url: "services/Turkish.json"
 		},

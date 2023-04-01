@@ -119,7 +119,7 @@ async function initOfferRequest(){
             // 'excel',
             // 'pdf'
         ],
-        pageLength : 20,
+        pageLength : -1,
         scrollX: true,
         language: {
             url: "services/Turkish.json"
@@ -240,7 +240,7 @@ async function initOffers(){
             'excel',
             'pdf'
         ],
-        pageLength : 20,
+        pageLength : -1,
         scrollX: true,
         language: {
             url: "services/Turkish.json"
