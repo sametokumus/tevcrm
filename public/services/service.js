@@ -1216,6 +1216,16 @@ async function serviceGetSaleById(id) {
     }
 }
 
+async function serviceGetApproveOfferBySaleId(id) {
+    let user_id = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/sale/getApproveOfferBySaleId/' + id + '/' + user_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 async function serviceGetSaleOfferById(id) {
     const data = await fetchDataGet('/admin/sale/getSaleOfferById/' + id, 'application/json');
     if (data.status == "success") {

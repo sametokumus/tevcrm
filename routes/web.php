@@ -37,6 +37,7 @@ Route::get('/sale-detail/{sale_id}', function () { return view('sale-detail'); }
 Route::get('/sw-1', function () { return view('sw-step1'); });
 Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
 Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
+Route::get('/sw-4/{sale_id}', function () { return view('sw-step4'); });
 
 
 Route::get('/offer-print/{offer_id}', function () { return view('offer-print'); });

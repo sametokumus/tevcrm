@@ -58,6 +58,9 @@ async function initSales(){
         }else if (sale.status.action == "offer-update"){
             status_class = "border-yellow text-yellow";
             btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Fiyatları Güncelle</a>\n';
+        }else if (sale.status.action == "admin-conf"){
+            status_class = "border-yellow text-yellow";
+            btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
         }else if (sale.status.action == "quote"){
             status_class = "border-lime text-lime";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';

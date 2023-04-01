@@ -222,18 +222,76 @@ async function openAddBatchProcessModal(){
     $('.modal-backdrop').css('background-color', 'transparent');
 }
 
+// async function addOfferBatchProcess(){
+//     let user_id = localStorage.getItem('userId');
+//     let rows = table.rows({ selected: true } ).data();
+//
+//     if (rows.count() === 0){
+//         alert("Öncelikle seçim yapmalısınız.");
+//         $('#addBatchProcessModal').modal('hide');
+//         $("#add_batch_process_form").trigger("reset");
+//     }else {
+//         let success = true;
+//         $.each(rows, async function (i, row) {
+//
+//             let id = row.id;
+//             let profit_rate = document.getElementById('add_batch_offer_profit_rate').value;
+//             let offer_currency = document.getElementById('add_batch_offer_currency').value;
+//             let offer_currency_change = document.getElementById('add_batch_offer_currency_change').value;
+//             let offer_lead_time = document.getElementById('add_batch_offer_lead_time').value;
+//             let total_price = row.total_price;
+//             let discounted_price = row.discounted_price;
+//
+//             console.log(total_price, discounted_price);
+//
+//             let price = total_price;
+//             if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
+//                 price = discounted_price;
+//             }
+//
+//             let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
+//             offer_price = offer_price + (offer_price / 100 * profit_rate);
+//
+//             let formData = JSON.stringify({
+//                 "id": id,
+//                 "user_id": user_id,
+//                 "offer_price": offer_price,
+//                 "offer_currency": offer_currency,
+//                 "offer_lead_time": offer_lead_time
+//             });
+//             console.log(formData)
+//
+//             let returned = await servicePostAddSaleOfferPrice(formData);
+//             console.log(returned)
+//             if (returned) {
+//             }else{
+//                 success = false;
+//             }
+//
+//         });
+//         console.log(success)
+//         if (success) {
+//             $('#addBatchProcessModal').modal('hide');
+//             $("#add_batch_process_form").trigger("reset");
+//             await initOfferDetail()
+//         }else{
+//             alert("Hata Oluştu");
+//         }
+//
+//     }
+// }
+
 async function addOfferBatchProcess(){
     let user_id = localStorage.getItem('userId');
-    let rows = table.rows({ selected: true } ).data();
+    let rows = Array.from(table.rows({ selected: true }).data());
 
-    if (rows.count() === 0){
+
+    if (rows.length === 0){
         alert("Öncelikle seçim yapmalısınız.");
         $('#addBatchProcessModal').modal('hide');
         $("#add_batch_process_form").trigger("reset");
     }else {
-        let success = true;
-        $.each(rows, async function (i, row) {
-
+        let promises = rows.map(async (row) => {
             let id = row.id;
             let profit_rate = document.getElementById('add_batch_offer_profit_rate').value;
             let offer_currency = document.getElementById('add_batch_offer_currency').value;
@@ -263,20 +321,21 @@ async function addOfferBatchProcess(){
 
             let returned = await servicePostAddSaleOfferPrice(formData);
             console.log(returned)
-            if (returned) {
-            }else{
-                success = false;
-            }
 
+            return returned;
         });
-        console.log(success)
+
+        let results = await Promise.all(promises);
+
+        let success = results.every(result => result);
         if (success) {
             $('#addBatchProcessModal').modal('hide');
             $("#add_batch_process_form").trigger("reset");
             await initOfferDetail()
-        }else{
+        } else {
             alert("Hata Oluştu");
         }
+
 
     }
 }

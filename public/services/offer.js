@@ -331,11 +331,6 @@ async function initOfferDetailModal(offer_id){
                 class: 'form-control'
             }
         }, {
-            name: "vat_rate",
-            attr: {
-                class: 'form-control'
-            }
-        }, {
             name: "currency",
             type: "select",
             options: [
@@ -359,27 +354,24 @@ async function initOfferDetailModal(offer_id){
     editor.on('preSubmit', async function(e, data, action) {
         if (action !== 'remove') {
             let id = editor.field('id').val();
-            let date_code = editor.field('date_code').val();
-            let package_type = editor.field('package_type').val();
             let quantity = editor.field('quantity').val();
             let pcs_price = editor.field('pcs_price').val();
             let total_price = editor.field('total_price').val();
             let discount_rate = editor.field('discount_rate').val();
             let discounted_price = editor.field('discounted_price').val();
-            let vat_rate = editor.field('vat_rate').val();
             let currency = editor.field('currency').val();
             let lead_time = editor.field('lead_time').val();
 
             let formData = JSON.stringify({
                 "id": id,
-                "date_code": date_code,
-                "package_type": package_type,
+                "date_code": "",
+                "package_type": "",
                 "quantity": quantity,
                 "pcs_price": changePriceToDecimal(pcs_price),
                 "total_price": changePriceToDecimal(total_price),
                 "discount_rate": changePriceToDecimal(discount_rate),
                 "discounted_price": changePriceToDecimal(discounted_price),
-                "vat_rate": changePriceToDecimal(vat_rate),
+                "vat_rate": "",
                 "currency": currency,
                 "lead_time": lead_time
             });
@@ -423,15 +415,12 @@ async function initOfferDetailModal(offer_id){
             { data: "id", editable: false },
             { data: "ref_code" },
             { data: "product_name" },
-            { data: "date_code", visible: false },
-            { data: "package_type", visible: false },
             { data: "quantity", className:  "row-edit" },
             { data: "measurement_name" },
             { data: "pcs_price", className:  "row-edit" },
             { data: "total_price", className:  "row-edit" },
             { data: "discount_rate", className:  "row-edit" },
             { data: "discounted_price", className:  "row-edit" },
-            { data: "vat_rate", className:  "row-edit" },
             { data: "currency", className:  "row-edit" },
             { data: "lead_time", className:  "row-edit" },
             {

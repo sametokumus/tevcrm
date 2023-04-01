@@ -121,6 +121,27 @@ class SaleController extends Controller
         }
     }
 
+    public function getApproveOfferBySaleId($sale_id, $user_id)
+    {
+        try {
+            Sale::query()->where('sale_id', $sale_id)->update([
+                'status_id' => 26
+            ]);
+
+            StatusHistory::query()->insert([
+                'sale_id' => $sale_id,
+                'status_id' => 26,
+                'user_id' => $user_id,
+            ]);
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function addSale(Request $request)
     {
         try {
