@@ -53,6 +53,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('adminRole/getAdminById/{id}', [AdminRoleController::class, 'getAdminById']);
     Route::post('adminRole/addAdmin', [AdminRoleController::class, 'addAdmin']);
     Route::post('adminRole/updateAdmin/{id}', [AdminRoleController::class, 'updateAdmin']);
+    Route::post('adminRole/updateUser/{id}', [AdminRoleController::class, 'updateUser']);
     Route::get('adminRole/deleteAdmin/{id}', [AdminRoleController::class, 'deleteAdmin']);
 
     Route::get('adminRole/getAdminRoles', [AdminRoleController::class, 'getAdminRoles']);

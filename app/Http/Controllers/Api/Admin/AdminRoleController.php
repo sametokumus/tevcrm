@@ -93,6 +93,38 @@ class AdminRoleController extends Controller
             return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
         }
     }
+    public function updateUser(Request $request,$id){
+        try {
+            $request->validate([
+                'email' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
+                'phone_number' => 'required',
+
+            ]);
+
+            $admin = Admin::query()->where('id',$id)->update([
+                'email' => $request->email,
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'phone_number' => $request->phone_number
+            ]);
+
+            if ($request->password != "") {
+                $admin = Admin::query()->where('id', $id)->update([
+                    'password' => Hash::make($request->password)
+                ]);
+            }
+
+            return response(['message' => 'Hesap güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
     public function deleteAdmin($id){
         try {
 

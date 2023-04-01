@@ -20,6 +20,7 @@ Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
 Route::get('/news-feed', function () { return view('news-feed'); });
 Route::get('/teams', function () { return view('admins'); });
+Route::get('/my-account', function () { return view('account'); });
 Route::get('/roles', function () { return view('roles'); });
 Route::get('/potential-customers', function () { return view('potential-customers'); });
 Route::get('/customers', function () { return view('customers'); });
