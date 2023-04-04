@@ -20,12 +20,12 @@ $extra_js='
                 </div>
             </div>
 
-            <table id="sales-datatable" class="table table-bordered key-buttons border-bottom">
+            <table id="sales-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
-                    <th class="border-bottom-0" data-priority="1">ID</th>
-                    <th class="border-bottom-0">Satış Kodu</th>
-                    <th class="border-bottom-0">Satış Temsilcisi</th>
+                    <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
+                    <th class="border-bottom-0 bg-dark">Satış Kodu</th>
+                    <th class="border-bottom-0 bg-dark">Satış Temsilcisi</th>
                     <th class="border-bottom-0">Müşteri</th>
                     <th class="border-bottom-0">Müşteri Yetkilisi</th>
                     <th class="border-bottom-0">Ürün Adedi</th>

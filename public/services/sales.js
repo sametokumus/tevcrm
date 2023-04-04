@@ -97,9 +97,9 @@ async function initSales(){
         }
 
         let saleItem = '<tr>\n' +
-            '              <td>'+ (i+1)+'</td>\n' +
-			'              <td>'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
-			'              <td>'+ authorized_name +'</td>\n' +
+            '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
+			'              <td class="bg-dark">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
+			'              <td class="bg-dark">'+ authorized_name +'</td>\n' +
 			'              <td>'+ sale.request.company.name +'</td>\n' +
 			'              <td>'+ employee_name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
@@ -140,6 +140,9 @@ async function initSales(){
 			url: "services/Turkish.json"
 		},
 		order: [[0, 'desc']],
+        fixedColumns: {
+        left: 3
+        }
 	});
 }
 

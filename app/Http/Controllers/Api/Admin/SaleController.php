@@ -27,6 +27,7 @@ use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
+use Carbon\Carbon;
 
 class SaleController extends Controller
 {
@@ -75,6 +76,23 @@ class SaleController extends Controller
                 $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
                 $sale['request'] = $offer_request;
                 $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
+                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
+                $sale['currency'] = '';
+                if ($sale_offer){
+                    if ($sale_offer->currency != '' && $sale_offer->currency != null){
+                        $sale['currency'] = $sale_offer->currency;
+                    }
+                }
+                $current_time = Carbon::now();
+                if ($sale->updated_at != null){
+                    $updated_at = Carbon::parse($sale->updated_at);
+                }else{
+                    $updated_at = Carbon::parse($sale->created_at);
+                }
+
+                $difference = $updated_at->diffForHumans($current_time);
+                $sale['diff_last_day'] = $difference;
+
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
