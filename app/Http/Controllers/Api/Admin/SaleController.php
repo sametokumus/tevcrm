@@ -134,7 +134,9 @@ class SaleController extends Controller
                         $sale['currency'] = $sale_offer->offer_currency;
                     }
                 }
-
+                if (!extension_loaded('datetime')) {
+                    dl('datetime.so');
+                }
                 $timezone = new DateTimeZone('Etc/GMT-3');
                 $current_time = Carbon::now($timezone);
                 if ($sale->updated_at != null){
