@@ -449,9 +449,34 @@ async function getCustomersAndPotentialsAddSelectId(selectId){
     });
 }
 
+async function getCustomersAndPotentialsAddSelectIdWithZero(selectId){
+    let data = await serviceGetCustomers();
+    let data2 = await serviceGetPotentialCustomers();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Müşteri Seçiniz</option>');
+    $.each(data.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+    $.each(data2.companies, function(i, company){
+        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getEmployeesAddSelectId(companyId, selectId){
     let data = await serviceGetEmployeesByCompanyId(companyId);
     $('#'+selectId+' option').remove();
+    $.each(data.employees, function(i, employee){
+        let optionRow = '<option value="'+employee.id+'">'+employee.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
+async function getEmployeesAddSelectIdWithZero(companyId, selectId){
+    let data = await serviceGetEmployeesByCompanyId(companyId);
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Yetkili Seçiniz</option>');
     $.each(data.employees, function(i, employee){
         let optionRow = '<option value="'+employee.id+'">'+employee.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -1204,6 +1229,17 @@ async function serviceGetActiveSales() {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostFilterSales(formData) {
+    const data = await fetchDataPost('/admin/sale/getFilteredSales', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }
 

@@ -57,6 +57,12 @@ div.dataTables_wrapper div.dt-buttons button {
     border-color: #798e98 !important;
 }
 
+div.dataTables_wrapper div.dt-buttons button.btn.btn-theme {
+    color: #000 !important;
+    background-color: #3cd2a5 !important;
+    border-color: #3cd2a5 !important;
+}
+
 table tr.selected{
     background-color: rgba(255,255,255,.2);
 }
@@ -433,4 +439,9 @@ table tr.selected{
     border-radius: 4px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     height: 35px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: rgba(255,255,255,.75);
+    line-height: 20px;
 }

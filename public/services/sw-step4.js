@@ -109,6 +109,7 @@ async function initOfferDetail(){
             buttons: [
                 {
                     text: 'Teklifi Onayla',
+                    className: 'btn btn-theme',
                     action: function ( e, dt, node, config ) {
                         approveOffer();
                     }

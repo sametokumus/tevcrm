@@ -91,6 +91,7 @@ async function initBrandView(){
 			{ responsivePriority: 2, targets: -1 }
 		],
 		dom: 'Bfrtip',
+        paging: false,
 		buttons: ['excel', 'pdf'],
 		pageLength : -1,
 		language: {

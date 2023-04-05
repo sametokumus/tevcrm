@@ -11,13 +11,27 @@
 			e.preventDefault();
             addCancelNote();
 		});
+		$('#sale_filter_form').submit(async function (e){
+			e.preventDefault();
+            await initFilter();
+            await initSales();
+		});
 	});
 
-	$(window).load( function() {
+	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
-        initSales();
+
+        localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
+        localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
+        localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
+        localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
+        localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
+        localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_owner').value);
+
+        await initFilter();
+        await initSales();
 
 	});
 
@@ -27,14 +41,56 @@ function checkRole(){
 	return true;
 }
 
+async function initFilter() {
+    await getOwnersAddSelectId('sale_filter_owner');
+    await getAdminsAddSelectId('sale_filter_authorized_personnel');
+    await getAdminsAddSelectId('sale_filter_purchasing_staff');
+    await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
+
+    let data = await serviceGetStatuses();
+    console.log(data)
+    let statuses = data.statuses;
+    $('#sale_filter_status option').remove();
+    $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
+    $.each(statuses, function (i, status){
+        $('#sale_filter_status').append('<option value="'+ status.id +'">'+ status.name +'</option>');
+    });
+
+
+}
+
+async function initEmployeeSelect(){
+    let company_id = document.getElementById('sale_filter_company').value;
+    getEmployeesAddSelectIdWithZero(company_id, 'sale_filter_company_employee');
+}
+
 async function initSales(){
-	let data = await serviceGetActiveSales();
+    let filter_status = localStorage.getItem('sale_filter_status');
+    console.log(filter_status)
+    if (filter_status == true){
+        let owner = localStorage.getItem('sale_filter_owner');
+        let authorized_personnel = localStorage.getItem('sale_filter_authorized_personnel');
+        let purchasing_staff = localStorage.getItem('sale_filter_purchasing_staff');
+        let company = localStorage.getItem('sale_filter_company');
+        let company_employee = localStorage.getItem('sale_filter_company_employee');
+        let status = localStorage.getItem('sale_filter_status');
+        let formData = JSON.stringify({
+            "owner": owner,
+            "authorized_personnel": authorized_personnel,
+            "purchasing_staff": purchasing_staff,
+            "company": company,
+            "company_employee": company_employee,
+            "status": status
+        });
+        let data = await servicePostFilterSales(formData);
+    }else{
+        let data = await serviceGetActiveSales();
+    }
+
 	$("#sales-datatable").dataTable().fnDestroy();
 	$('#sales-datatable tbody > tr').remove();
 
-	console.log(data)
 	$.each(data.sales, function (i, sale) {
-        console.log(sale)
         let updated_at = "-";
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
@@ -104,9 +160,11 @@ async function initSales(){
 			'              <td>'+ employee_name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
+			'              <td>'+ sale.currency +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
 			'              <td>'+ formatDateAndTimeDESC(sale.created_at, "/") +'</td>\n' +
 			'              <td>'+ updated_at +'</td>\n' +
+			'              <td>'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
 			'              </td>\n' +
@@ -124,17 +182,18 @@ async function initSales(){
 			{ responsivePriority: 6, targets: 1 }
 		],
 		dom: 'Bfrtip',
+        paging: false,
 		buttons: [
             'excel',
             'pdf',
             {
                 text: 'Talep Oluştur',
+                className: 'btn btn-theme',
                 action: function ( e, dt, node, config ) {
                     window.location = '/offer-request';
                 }
             }
         ],
-		pageLength : -1,
         scrollX: true,
 		language: {
 			url: "services/Turkish.json"
