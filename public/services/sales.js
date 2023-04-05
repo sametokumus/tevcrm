@@ -156,8 +156,8 @@ async function initSales(){
         let saleItem = '<tr>\n' +
             '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
+            '              <td class="bg-dark">'+ sale.request.company.name +'</td>\n' +
 			'              <td class="bg-dark">'+ authorized_name +'</td>\n' +
-			'              <td>'+ sale.request.company.name +'</td>\n' +
 			'              <td>'+ employee_name +'</td>\n' +
 			'              <td>'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
@@ -175,12 +175,15 @@ async function initSales(){
 	$('#sales-datatable').DataTable({
 		responsive: false,
 		columnDefs: [
-			{ responsivePriority: 1, targets: 0 },
-			{ responsivePriority: 2, targets: -1 },
-			{ responsivePriority: 3, targets: 6 },
-			{ responsivePriority: 4, targets: 7 },
-			{ responsivePriority: 5, targets: 8 },
-			{ responsivePriority: 6, targets: 1 }
+            {
+                targets: 2,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 30 ?
+                        data.substr(0, 30) + '...' :
+                        data;
+                }
+            }
 		],
 		dom: 'Bfrtip',
         paging: false,
@@ -201,7 +204,7 @@ async function initSales(){
 		},
 		order: [[0, 'desc']],
         fixedColumns: {
-        left: 3
+        left: 4
         }
 	});
 }

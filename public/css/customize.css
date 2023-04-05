@@ -445,3 +445,9 @@ table tr.selected{
     color: rgba(255,255,255,.75);
     line-height: 20px;
 }
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -90,8 +90,8 @@ $extra_js='
                 <tr>
                     <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
                     <th class="border-bottom-0 bg-dark">Satış Kodu</th>
+                    <th class="border-bottom-0 bg-dark">Müşteri</th>
                     <th class="border-bottom-0 bg-dark">Satış Temsilcisi</th>
-                    <th class="border-bottom-0">Müşteri</th>
                     <th class="border-bottom-0">Müşteri Yetkilisi</th>
                     <th class="border-bottom-0">Ürün Adedi</th>
                     <th class="border-bottom-0">Teklif Fiyatı</th>
