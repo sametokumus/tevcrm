@@ -89,12 +89,13 @@ class SaleController extends Controller
                     }
                 }
 
-                $timezone = new DateTimeZone('Etc/GMT-3');
-                $current_time = Carbon::now($timezone);
+                $current_time = Carbon::now();
                 if ($sale->updated_at != null){
-                    $updated_at = Carbon::parse($sale->updated_at, $timezone);
+                    $updated_at = Carbon::parse($sale->updated_at);
+                    $updated_at = $updated_at->subHours(3);
                 }else{
-                    $updated_at = Carbon::parse($sale->created_at, $timezone);
+                    $updated_at = Carbon::parse($sale->created_at);
+                    $updated_at = $updated_at->subHours(3);
                 }
 
                 $difference = $updated_at->diffForHumans($current_time);
@@ -134,15 +135,14 @@ class SaleController extends Controller
                         $sale['currency'] = $sale_offer->offer_currency;
                     }
                 }
-                if (!extension_loaded('datetime')) {
-                    dl('datetime.so');
-                }
-                $timezone = new DateTimeZone('Etc/GMT-3');
-                $current_time = Carbon::now($timezone);
+
+                $current_time = Carbon::now();
                 if ($sale->updated_at != null){
-                    $updated_at = Carbon::parse($sale->updated_at, $timezone);
+                    $updated_at = Carbon::parse($sale->updated_at);
+                    $updated_at = $updated_at->subHours(3);
                 }else{
-                    $updated_at = Carbon::parse($sale->created_at, $timezone);
+                    $updated_at = Carbon::parse($sale->created_at);
+                    $updated_at = $updated_at->subHours(3);
                 }
 
                 $difference = $updated_at->diffForHumans($current_time);
