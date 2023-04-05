@@ -67,6 +67,7 @@ async function initEmployeeSelect(){
 async function initSales(){
     let filter_status = localStorage.getItem('sale_filter_status');
     console.log(filter_status)
+    let data;
     if (filter_status == true){
         let owner = localStorage.getItem('sale_filter_owner');
         let authorized_personnel = localStorage.getItem('sale_filter_authorized_personnel');
@@ -82,9 +83,9 @@ async function initSales(){
             "company_employee": company_employee,
             "status": status
         });
-        let data = await servicePostFilterSales(formData);
+        data = await servicePostFilterSales(formData);
     }else{
-        let data = await serviceGetActiveSales();
+        data = await serviceGetActiveSales();
     }
 
 	$("#sales-datatable").dataTable().fnDestroy();
