@@ -13,6 +13,13 @@
 		});
 		$('#sale_filter_form').submit(async function (e){
 			e.preventDefault();
+            await localStorage.setItem('sale_filter', 'true');
+            localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
+            localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
+            localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
+            localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
+            localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
+            localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_status').value);
             await initFilter();
             await initSales();
 		});
@@ -23,14 +30,8 @@
 		checkLogin();
 		checkRole();
 
-        localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
-        localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
-        localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
-        localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
-        localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
-        localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_owner').value);
-
         await initFilter();
+        console.log('---------')
         await initSales();
 
 	});
@@ -56,6 +57,17 @@ async function initFilter() {
         $('#sale_filter_status').append('<option value="'+ status.id +'">'+ status.name +'</option>');
     });
 
+    let filter = localStorage.getItem('sale_filter');
+    console.log(filter)
+    if (filter == 'true'){
+        document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
+        document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
+        document.getElementById('sale_filter_purchasing_staff').value = localStorage.getItem('sale_filter_purchasing_staff');
+        document.getElementById('sale_filter_company').value = localStorage.getItem('sale_filter_company');
+        document.getElementById('sale_filter_company_employee').value = localStorage.getItem('sale_filter_company_employee');
+        document.getElementById('sale_filter_status').value = localStorage.getItem('sale_filter_status');
+    }
+
 
 }
 
@@ -65,10 +77,10 @@ async function initEmployeeSelect(){
 }
 
 async function initSales(){
-    let filter_status = localStorage.getItem('sale_filter_status');
-    console.log(filter_status)
+    let filter = localStorage.getItem('sale_filter');
+    console.log(filter)
     let data;
-    if (filter_status == true){
+    if (filter == 'true'){
         let owner = localStorage.getItem('sale_filter_owner');
         let authorized_personnel = localStorage.getItem('sale_filter_authorized_personnel');
         let purchasing_staff = localStorage.getItem('sale_filter_purchasing_staff');
@@ -83,11 +95,13 @@ async function initSales(){
             "company_employee": company_employee,
             "status": status
         });
+        console.log(formData)
         data = await servicePostFilterSales(formData);
+        console.log(data)
     }else{
         data = await serviceGetActiveSales();
     }
-
+    console.log(data)
 	$("#sales-datatable").dataTable().fnDestroy();
 	$('#sales-datatable tbody > tr').remove();
 
