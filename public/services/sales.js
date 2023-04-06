@@ -57,6 +57,9 @@ async function initFilter() {
 
     let filter = localStorage.getItem('sale_filter');
     if (filter == 'true'){
+
+        getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
+
         document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
         document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
         document.getElementById('sale_filter_purchasing_staff').value = localStorage.getItem('sale_filter_purchasing_staff');

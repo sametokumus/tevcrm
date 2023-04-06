@@ -86,7 +86,7 @@ class SaleController extends Controller
                 $sales = $sales->where('offer_requests.company_id', $request->company);
             }
 
-            if ($request->company_employee != ''){
+            if ($request->company_employee != '' && $request->company_employee != 0){
                 $sales = $sales->where('offer_requests.company_employee_id', $request->company_employee);
             }
 
