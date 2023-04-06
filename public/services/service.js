@@ -1236,7 +1236,7 @@ async function servicePostFilterSales(formData) {
     const data = await fetchDataPost('/admin/sale/getFilteredSales', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
-        return data;
+        return data.object;
     } else {
         showAlert('İstek Başarısız.');
         return false;

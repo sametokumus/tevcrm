@@ -63,10 +63,31 @@ class SaleController extends Controller
             $sales = Sale::query()
                 ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
                 ->where('sales.active',1);
 
             if ($request->owner != 0){
                 $sales = $sales->where('sales.owner_id', $request->owner);
+            }
+
+            if ($request->status != 0){
+                $sales = $sales->where('sales.status_id', $request->status);
+            }
+
+            if ($request->authorized_personnel != 0){
+                $sales = $sales->where('offer_requests.authorized_personnel_id', $request->authorized_personnel);
+            }
+
+            if ($request->purchasing_staff != 0){
+                $sales = $sales->where('offer_requests.purchasing_staff_id', $request->purchasing_staff);
+            }
+
+            if ($request->company != 0){
+                $sales = $sales->where('offer_requests.company_id', $request->company);
+            }
+
+            if ($request->company_employee != ''){
+                $sales = $sales->where('offer_requests.company_employee_id', $request->company_employee);
             }
 
             $sales = $sales

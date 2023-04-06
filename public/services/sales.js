@@ -31,7 +31,6 @@
 		checkRole();
 
         await initFilter();
-        console.log('---------')
         await initSales();
 
 	});
@@ -49,7 +48,6 @@ async function initFilter() {
     await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
 
     let data = await serviceGetStatuses();
-    console.log(data)
     let statuses = data.statuses;
     $('#sale_filter_status option').remove();
     $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
@@ -58,7 +56,6 @@ async function initFilter() {
     });
 
     let filter = localStorage.getItem('sale_filter');
-    console.log(filter)
     if (filter == 'true'){
         document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
         document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
@@ -78,7 +75,6 @@ async function initEmployeeSelect(){
 
 async function initSales(){
     let filter = localStorage.getItem('sale_filter');
-    console.log(filter)
     let data;
     if (filter == 'true'){
         let owner = localStorage.getItem('sale_filter_owner');
@@ -97,7 +93,6 @@ async function initSales(){
         });
         console.log(formData)
         data = await servicePostFilterSales(formData);
-        console.log(data)
     }else{
         data = await serviceGetActiveSales();
     }
@@ -252,7 +247,6 @@ async function updateStatus(){
 }
 async function initStatusModal(sale_id, status_id){
     let data = await serviceGetStatuses();
-    console.log(data)
     let statuses = data.statuses;
     $('#update_sale_status option').remove();
     $.each(statuses, function (i, status){
