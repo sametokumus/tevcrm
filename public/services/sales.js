@@ -58,7 +58,7 @@ async function initFilter() {
     let filter = localStorage.getItem('sale_filter');
     if (filter == 'true'){
 
-        getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
+        await getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
 
         document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
         document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
@@ -69,6 +69,20 @@ async function initFilter() {
     }
 
 
+}
+
+async function removeFilter(){
+    localStorage.setItem('sale_filter', 'false');
+    localStorage.removeItem('sale_filter_owner');
+    localStorage.removeItem('sale_filter_authorized_personnel');
+    localStorage.removeItem('sale_filter_purchasing_staff');
+    localStorage.removeItem('sale_filter_company');
+    localStorage.removeItem('sale_filter_company_employee');
+    localStorage.removeItem('sale_filter_status');
+    $('#sale_filter_company_employee option').remove();
+
+    initFilter();
+    initSales();
 }
 
 async function initEmployeeSelect(){

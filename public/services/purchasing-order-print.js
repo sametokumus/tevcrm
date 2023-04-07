@@ -33,8 +33,6 @@
         await initOfferSelect(sale_id);
         await initBankInfoSelect();
         // await initContact(1, sale_id);
-        // await getOwnersAddSelectId('owners');
-        // document.getElementById('owners').value = 1;
 	});
 
 })(window.jQuery);
@@ -51,9 +49,9 @@ function printOffer(){
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('purchasing-order-print');
-    await initOfferSelect(sale_id);
+    // await initOfferSelect(sale_id);
     await initContact(owner, sale_id);
-    await initBankInfoSelect();
+    // await initBankInfoSelect();
 }
 
 async function changeOffer(){
@@ -81,6 +79,8 @@ async function initOfferSelect(sale_id){
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
     await initContact(sale.owner_id, sale_id);
+    await getOwnersAddSelectId('owners');
+    document.getElementById('owners').value = sale.owner_id;
 
     console.log(sale)
 

@@ -12,10 +12,15 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid overflow-auto">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <h1 class="page-header">
                         Filtreleme
                     </h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group float-end">
+                        <button type="button" class="btn btn-outline-danger" onclick="removeFilter();">Filtreyi Kaldır</button>
+                    </div>
                 </div>
             </div>
 

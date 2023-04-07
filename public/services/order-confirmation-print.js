@@ -42,7 +42,6 @@ async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('order-confirmation-print');
     await initContact(owner, sale_id);
-    await initSale(sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -81,6 +80,10 @@ async function initSale(sale_id){
     console.log(data);
     let sale = data.sale;
     await initContact(sale.owner_id, sale_id);
+
+    await getOwnersAddSelectId('owners');
+    document.getElementById('owners').value = sale.owner_id;
+
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
     document.getElementById('buyer_registration_number').innerHTML = '<b>'+ Lang.get("strings.Registration No") +' :</b> '+ checkNull(company.registration_number);

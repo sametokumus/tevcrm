@@ -34,7 +34,6 @@ async function changeOwner(){
 	let owner = document.getElementById('owners').value;
     let offer_id = getPathVariable('offer-print');
     await initContact(owner, offer_id);
-    await initOffer(offer_id);
 }
 
 async function initContact(contact_id, offer_id){
@@ -76,8 +75,8 @@ async function initOffer(offer_id){
     console.log(offer);
 
     await initContact(offer.owner_id, offer_id);
-    // await getOwnersAddSelectId('owners');
-    // document.getElementById('owners').value = 3;
+    await getOwnersAddSelectId('owners');
+    document.getElementById('owners').value = offer.owner_id;
 
     $('#offer-print .supplier-col address').text('');
     $('#offer-print .supplier-col address').append('<strong>'+ company.name +'</strong><br>'+ company.address +'<br>'+ company.phone +'<br>'+ company.email +'');

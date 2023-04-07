@@ -41,7 +41,6 @@ async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('quote-print');
     await initContact(owner, sale_id);
-    await initSale(sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -79,8 +78,8 @@ async function initSale(sale_id){
     let sale = data.sale;
 
     await initContact(sale.owner_id, sale_id);
-    // await getOwnersAddSelectId('owners');
-    // document.getElementById('owners').value = 1;
+    await getOwnersAddSelectId('owners');
+    document.getElementById('owners').value = sale.owner_id;
 
     await getPaymentTermsAddSelectId('update_quote_payment_term');
     await getDeliveryTermsAddSelectId('update_quote_delivery_term');
