@@ -854,4 +854,35 @@ class SaleController extends Controller
         }
     }
 
+
+    public function removeCancelledSales()
+    {
+        try {
+            $sales = Sale::query()->where('status_id', 25)->get();
+
+            foreach ($sales as $sale){
+
+                CancelNote::query()->where('sale_id', $sale->sale_id)->delete();
+                OrderConfirmationDetail::query()->where('sale_id', $sale->sale_id)->delete();
+                PurchasingOrderDetails::query()->where('sale_id', $sale->sale_id)->delete();
+
+                $offer = Offer::query()->where('request_id', $sale->request_id)->first();
+                OfferProduct::query()->where('offer_id', $offer->offer_id)->delete();
+                RfqDetails::query()->where('offer_id', $offer->offer_id)->delete();
+                Offer::query()->where('request_id', $sale->request_id)->delete();
+
+                OfferRequestProduct::query()->where('request_id', $sale->request_id)->delete();
+                OfferRequest::query()->where('request_id', $sale->request_id)->delete();
+
+                SaleOffer::query()->where('sale_id', $sale->sale_id)->delete();
+                Sale::query()->where('id', $sale->id)->delete();
+
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
 }

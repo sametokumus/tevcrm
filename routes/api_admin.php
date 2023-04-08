@@ -182,6 +182,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getRfqDetailById/{offer_id}', [SaleController::class, 'getRfqDetailById']);
     Route::post('sale/updateRfqDetail', [SaleController::class, 'updateRfqDetail']);
 
+    Route::get('sale/removeCancelledSales', [SaleController::class, 'removeCancelledSales']);
+
     //Owner
     Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);
     Route::get('owner/getBankInfoById/{info_id}', [OwnerController::class, 'getBankInfoById']);
