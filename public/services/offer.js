@@ -84,7 +84,7 @@ async function initOfferRequest(){
         let note = '';
         if (product.note != null && product.note != ''){
             note = '<div class="btn-list">\n' +
-                '       <button onclick="openOfferRequestNoteModal(\'' + product.note + '\');" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Sipariş Notu</span></button>\n' +
+                '       <button onclick="openOfferRequestNoteModal(\'' + product.note + '\');" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Satın Alma Notu</span></button>\n' +
                 '   </div>';
         }
         let item = '<tr id="productRow' + product.id + '">\n' +
@@ -103,8 +103,9 @@ async function initOfferRequest(){
     let productDatatable = $('#offer-request-products').DataTable({
         responsive: true,
         columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 1, width: '40px', targets: 0 },
+            { responsivePriority: 2, targets: -1 },
+            { width: '100px', targets: 1 }
         ],
         dom: 'Bfrtip',
         buttons: [
@@ -119,7 +120,7 @@ async function initOfferRequest(){
             // 'excel',
             // 'pdf'
         ],
-        pageLength : -1,
+        paging : false,
         scrollX: true,
         language: {
             url: "services/Turkish.json"
@@ -215,7 +216,7 @@ async function initOffers(){
         }
 
         let item = '<tr id="offerRow' + offer.id + '" class="'+ bg_color +'">\n' +
-            '           <td>' + offer.id + '</td>\n' +
+            '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + short_code + '-RFQ-' + global_id + '</td>\n' +
             '           <td>' + offer.company_name + '</td>\n' +
             '           <td>' + offer.product_count + '</td>\n' +
@@ -230,17 +231,18 @@ async function initOffers(){
     });
 
     $('#offers').DataTable({
-        responsive: true,
+        responsive: false,
         columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 1, width: '40px', targets: 0 },
+            { responsivePriority: 2, targets: -1 },
+            { width: '100px', targets: 3 }
         ],
         dom: 'Bfrtip',
         buttons: [
             'excel',
             'pdf'
         ],
-        pageLength : -1,
+        paging: false,
         scrollX: true,
         language: {
             url: "services/Turkish.json"

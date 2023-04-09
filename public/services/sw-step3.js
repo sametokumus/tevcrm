@@ -41,6 +41,7 @@ function checkRole(){
 
 function initMaskMoney() {
     $('input[id^="DTE_Field_offer_price"]').maskMoney({thousands:'.', decimal:','});
+    $('input[id^="DTE_Field_offer_pcs_price"]').maskMoney({thousands:'.', decimal:','});
 }
 
 let table;
@@ -77,7 +78,19 @@ async function initOfferDetail(){
                     class: 'form-control'
                 }
             },{
+                name: "offer_quantity",
+                type: "readonly",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                name: "offer_pcs_price",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
                 name: "offer_price",
+                type: "readonly",
                 attr: {
                     class: 'form-control'
                 }
@@ -101,6 +114,14 @@ async function initOfferDetail(){
             }
             ]
         } );
+        $( editor.field( 'offer_pcs_price' ).input() ).on( 'keyup', function (e){
+            let quantity = editor.field('offer_quantity').val();
+            let pcs_price = editor.field('offer_pcs_price').val();
+            if (pcs_price != ''){
+                let total_price = quantity * parseFloat(changePriceToDecimal(pcs_price));
+                document.getElementById('DTE_Field_offer_price').value = changeCommasToDecimal(total_price.toFixed(2));
+            }
+        });
 
         editor.on('preSubmit', async function(e, data, action) {
             console.log(1)
@@ -132,7 +153,11 @@ async function initOfferDetail(){
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
             data: offers,
-            columns: [
+            columns: [{
+                title: 'N#',
+                data: null,
+                render: (data, type, row, meta) => (meta.row + 1)
+            },
                 { data: "id", editable: false },
                 { data: "offer_id", visible: false },
                 { data: "product_id", visible: false },
@@ -170,6 +195,13 @@ async function initOfferDetail(){
                         return data;
                     }  },
                 { data: "currency" },
+                { data: "offer_pcs_price", className:  "row-edit",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return data;
+                    }  },
                 { data: "offer_price", className:  "row-edit",
                     render: function (data, type, row) {
                         if (type === 'display' && data === '0,00') {
@@ -206,6 +238,7 @@ async function initOfferDetail(){
             language: {
                 url: "services/Turkish.json"
             },
+            paging: false,
             select: {
                 style: 'multi'
             }
@@ -222,64 +255,6 @@ async function openAddBatchProcessModal(){
     $('.modal-backdrop').css('background-color', 'transparent');
 }
 
-// async function addOfferBatchProcess(){
-//     let user_id = localStorage.getItem('userId');
-//     let rows = table.rows({ selected: true } ).data();
-//
-//     if (rows.count() === 0){
-//         alert("Öncelikle seçim yapmalısınız.");
-//         $('#addBatchProcessModal').modal('hide');
-//         $("#add_batch_process_form").trigger("reset");
-//     }else {
-//         let success = true;
-//         $.each(rows, async function (i, row) {
-//
-//             let id = row.id;
-//             let profit_rate = document.getElementById('add_batch_offer_profit_rate').value;
-//             let offer_currency = document.getElementById('add_batch_offer_currency').value;
-//             let offer_currency_change = document.getElementById('add_batch_offer_currency_change').value;
-//             let offer_lead_time = document.getElementById('add_batch_offer_lead_time').value;
-//             let total_price = row.total_price;
-//             let discounted_price = row.discounted_price;
-//
-//             console.log(total_price, discounted_price);
-//
-//             let price = total_price;
-//             if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
-//                 price = discounted_price;
-//             }
-//
-//             let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
-//             offer_price = offer_price + (offer_price / 100 * profit_rate);
-//
-//             let formData = JSON.stringify({
-//                 "id": id,
-//                 "user_id": user_id,
-//                 "offer_price": offer_price,
-//                 "offer_currency": offer_currency,
-//                 "offer_lead_time": offer_lead_time
-//             });
-//             console.log(formData)
-//
-//             let returned = await servicePostAddSaleOfferPrice(formData);
-//             console.log(returned)
-//             if (returned) {
-//             }else{
-//                 success = false;
-//             }
-//
-//         });
-//         console.log(success)
-//         if (success) {
-//             $('#addBatchProcessModal').modal('hide');
-//             $("#add_batch_process_form").trigger("reset");
-//             await initOfferDetail()
-//         }else{
-//             alert("Hata Oluştu");
-//         }
-//
-//     }
-// }
 
 async function addOfferBatchProcess(){
     let user_id = localStorage.getItem('userId');
@@ -343,85 +318,3 @@ async function addOfferBatchProcess(){
 
 
 
-
-
-
-
-async function openAddOfferPriceModal(offer_id, offer_product_id){
-    $("#addOfferPriceModal").modal('show');
-    document.getElementById('add_offer_price_offer_id').value = offer_id;
-    document.getElementById('add_offer_price_offer_product_id').value = offer_product_id;
-}
-
-async function openUpdateOfferPriceModal(offer_id, offer_product_id){
-    $("#updateOfferPriceModal").modal('show');
-    await initUpdateOfferPriceModal(offer_id, offer_product_id);
-}
-
-async function initUpdateOfferPriceModal(offer_id, offer_product_id){
-    document.getElementById('update_offer_price_offer_id').value = offer_id;
-    document.getElementById('update_offer_price_offer_product_id').value = offer_product_id;
-    let data = await serviceGetSaleOfferById(offer_product_id);
-    console.log(data)
-    let sale_offer = data.sale_offer;
-    document.getElementById('update_offer_price_price').value = sale_offer.offer_price;
-    document.getElementById('update_offer_price_currency').value = sale_offer.offer_currency;
-}
-
-async function addSaleOfferPrice(){
-    let user_id = localStorage.getItem('userId');
-    let sale_id = getPathVariable('sw-3');
-    let offer_id = document.getElementById('add_offer_price_offer_id').value;
-    let offer_product_id = document.getElementById('add_offer_price_offer_product_id').value;
-    let price = document.getElementById('add_offer_price_price').value;
-    let currency = document.getElementById('add_offer_price_currency').value;
-
-    let formData = JSON.stringify({
-        "user_id": user_id,
-        "sale_id": sale_id,
-        "offer_id": offer_id,
-        "offer_product_id": offer_product_id,
-        "price": changePriceToDecimal(price),
-        "currency": currency
-    });
-
-    console.log(formData);
-
-    let returned = await servicePostAddSaleOfferPrice(formData);
-    if (returned) {
-        $("#add_offer_price_form").trigger("reset");
-        $('#addOfferPriceModal').modal('hide');
-        await initOfferDetail();
-    }else{
-        alert("Hata Oluştu");
-    }
-}
-
-async function updateSaleOfferPrice(){
-    let user_id = localStorage.getItem('userId');
-    let sale_id = getPathVariable('sw-3');
-    let offer_id = document.getElementById('update_offer_price_offer_id').value;
-    let offer_product_id = document.getElementById('update_offer_price_offer_product_id').value;
-    let price = document.getElementById('update_offer_price_price').value;
-    let currency = document.getElementById('update_offer_price_currency').value;
-
-    let formData = JSON.stringify({
-        "user_id": user_id,
-        "sale_id": sale_id,
-        "offer_id": offer_id,
-        "offer_product_id": offer_product_id,
-        "price": changePriceToDecimal(price),
-        "currency": currency
-    });
-
-    console.log(formData);
-
-    let returned = await servicePostUpdateSaleOfferPrice(formData);
-    if (returned) {
-        $("#update_offer_price_form").trigger("reset");
-        $('#updateOfferPriceModal').modal('hide');
-        await initOfferDetail();
-    }else{
-        alert("Hata Oluştu");
-    }
-}

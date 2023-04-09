@@ -228,7 +228,7 @@ async function initSales(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		order: [[0, 'desc']],
+		order: [[11, 'desc']],
         fixedColumns: {
         left: 4
         }

@@ -24,6 +24,7 @@
 						localStorage.setItem('userRole',__userInfo.admin_role_id);
 						localStorage.setItem('userId',__userInfo.id);
 						localStorage.setItem('userEmail',__userInfo.email);
+						localStorage.setItem('userName',__userInfo.name + ' ' + __userInfo.surname);
 						localStorage.setItem('appToken',__userInfo.token);
 
 						try{

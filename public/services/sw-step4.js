@@ -8,19 +8,9 @@
 
 	$(document).ready(function() {
 
-        $('#add_offer_price_form').submit(function (e){
+        $('#add_reject_offer_note_form').submit(function (e){
             e.preventDefault();
-            addSaleOfferPrice();
-        });
-
-        $('#update_offer_price_form').submit(function (e){
-            e.preventDefault();
-            updateSaleOfferPrice();
-        });
-
-        $('#add_batch_process_form').submit(function (e){
-            e.preventDefault();
-            addOfferBatchProcess();
+            rejectOffer();
         });
 
 	});
@@ -56,7 +46,11 @@ async function initOfferDetail(){
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
             data: offers,
-            columns: [
+            columns: [{
+                title: 'N#',
+                data: null,
+                render: (data, type, row, meta) => (meta.row + 1)
+                },
                 { data: "id", editable: false },
                 { data: "offer_id", visible: false },
                 { data: "product_id", visible: false },
@@ -106,12 +100,19 @@ async function initOfferDetail(){
             ],
             select: false,
             scrollX: true,
+            paging: false,
             buttons: [
                 {
                     text: 'Teklifi Onayla',
                     className: 'btn btn-theme',
                     action: function ( e, dt, node, config ) {
                         approveOffer();
+                    }
+                },{
+                    text: 'Teklifi Reddet',
+                    className: 'btn btn-danger',
+                    action: function ( e, dt, node, config ) {
+                        openRejectOfferModal();
                     }
                 },
                 // 'selectAll',
@@ -136,6 +137,39 @@ async function approveOffer() {
     let returned = await serviceGetApproveOfferBySaleId(sale_id);
     if (returned){
         window.location.href = "/sales";
+    }else{
+        alert("Hata Oluştu")
+    }
+}
+
+async function openRejectOfferModal() {
+    $("#addRejectOfferNoteModal").modal('show');
+}
+
+async function rejectOffer() {
+    let sale_id = getPathVariable('sw-4');
+    let user_id = localStorage.getItem('userId');
+    console.log(sale_id)
+    let returned = await serviceGetRejectOfferBySaleId(sale_id);
+    if (returned){
+;
+        let note = document.getElementById('add_sale_note_description').value;
+
+        let formData = JSON.stringify({
+            "sale_id": sale_id,
+            "user_id": user_id,
+            "note": note
+        });
+
+
+        let returned2 = await servicePostAddSaleNote(formData);
+        if (returned2){
+
+            window.location.href = "/sales";
+        }else{
+            alert("Not Eklerken Hata Oluştu")
+        }
+
     }else{
         alert("Hata Oluştu")
     }

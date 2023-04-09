@@ -19,6 +19,7 @@ use App\Models\PurchasingOrderDetails;
 use App\Models\Quote;
 use App\Models\RfqDetails;
 use App\Models\Sale;
+use App\Models\SaleNote;
 use App\Models\SaleOffer;
 use App\Models\Status;
 use App\Models\StatusHistory;
@@ -225,6 +226,27 @@ class SaleController extends Controller
             StatusHistory::query()->insert([
                 'sale_id' => $sale_id,
                 'status_id' => 26,
+                'user_id' => $user_id,
+            ]);
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getRejectOfferBySaleId($sale_id, $user_id)
+    {
+        try {
+            Sale::query()->where('sale_id', $sale_id)->update([
+                'status_id' => 27
+            ]);
+
+            StatusHistory::query()->insert([
+                'sale_id' => $sale_id,
+                'status_id' => 27,
                 'user_id' => $user_id,
             ]);
 
@@ -882,6 +904,45 @@ class SaleController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+
+
+
+
+    public function getSaleNotes($sale_id)
+    {
+        try {
+            $sale_notes = SaleNote::query()->where('sale_id', $sale_id)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale_notes' => $sale_notes]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function addSaleNote(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+                'user_id' => 'required',
+                'note' => 'required',
+            ]);
+
+            SaleNote::query()->insert([
+                'sale_id' => $request->sale_id,
+                'user_id' => $request->user_id,
+                'note' => $request->note,
+            ]);
+
+            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 

@@ -28,9 +28,10 @@ async function initOfferDetail(){
         console.log(offers)
         $("#offer-detail").dataTable().fnDestroy();
         $('#offer-detail tbody > tr').remove();
-
+        let rowNo = 0;
         $.each(offers, function (i, offer) {
-            $.each(offer.products, function (i, product) {
+            $.each(offer.products, function (j, product) {
+                rowNo ++;
                 let cheap_fast = '';
                 if (product.cheapest){
                     cheap_fast += '<span class="badge border border-yellow text-yellow px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
@@ -40,6 +41,7 @@ async function initOfferDetail(){
                 }
 
                 let item = '<tr id="productRow' + product.id + '">\n' +
+                    '           <td>' + rowNo + '</td>\n' +
                     '           <td>' + product.id + '</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
@@ -76,7 +78,7 @@ async function initOfferDetail(){
             ],
             dom: 'Bfrtip',
             buttons: [],
-            pageLength: -1,
+            paging: false,
             scrollX: true,
             language: {
                 url: "services/Turkish.json"
@@ -98,7 +100,7 @@ async function initOfferDetail(){
                     }
                 }
             ],
-            pageLength: -1,
+            paging: false,
             scrollX: true,
             language: {
                 url: "services/Turkish.json"
@@ -156,20 +158,20 @@ async function addSale(){
     }else {
         rows.every(function (rowIdx, tableLoop, rowLoop) {
             let item = {
-                "offer_product_id": this.data()[0],
-                "offer_id": this.data()[3],
-                "product_id": this.data()[4],
-                "supplier_id": this.data()[5],
-                "lead_time": this.data()[9],
-                "measurement": this.data()[10],
-                "pcs_price": this.data()[11],
-                "total_price": this.data()[12],
-                "discount_rate": this.data()[13],
-                "discounted_price": this.data()[14],
-                "vat_rate": this.data()[15],
+                "offer_product_id": this.data()[1],
+                "offer_id": this.data()[4],
+                "product_id": this.data()[5],
+                "supplier_id": this.data()[6],
+                "lead_time": this.data()[10],
+                "measurement": this.data()[11],
+                "pcs_price": this.data()[12],
+                "total_price": this.data()[13],
+                "discount_rate": this.data()[14],
+                "discounted_price": this.data()[15],
+                "vat_rate": this.data()[16],
                 "currency": this.data()[16],
-                "request_quantity": this.data()[17],
-                "offer_quantity": this.data()[18],
+                "request_quantity": this.data()[18],
+                "offer_quantity": this.data()[19],
             }
             offers.push(item);
         });

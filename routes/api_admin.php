@@ -169,6 +169,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/getFilteredSales', [SaleController::class, 'getFilteredSales']);
     Route::get('sale/getSaleById/{sale_id}', [SaleController::class, 'getSaleById']);
     Route::get('sale/getApproveOfferBySaleId/{sale_id}/{user_id}', [SaleController::class, 'getApproveOfferBySaleId']);
+    Route::get('sale/getRejectOfferBySaleId/{sale_id}/{user_id}', [SaleController::class, 'getRejectOfferBySaleId']);
     Route::post('sale/addSale', [SaleController::class, 'addSale']);
     Route::post('sale/updateSaleStatus', [SaleController::class, 'updateSaleStatus']);
     Route::get('sale/getSaleOfferById/{offer_product_id}', [SaleController::class, 'getSaleOfferById']);
@@ -183,6 +184,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/updateRfqDetail', [SaleController::class, 'updateRfqDetail']);
 
     Route::get('sale/removeCancelledSales', [SaleController::class, 'removeCancelledSales']);
+
+
+    Route::get('sale/getSaleNotes/{sale_id}', [SaleController::class, 'getSaleNotes']);
+    Route::post('sale/addSaleNote', [SaleController::class, 'addSaleNote']);
 
     //Owner
     Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);

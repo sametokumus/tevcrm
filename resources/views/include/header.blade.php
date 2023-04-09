@@ -78,11 +78,8 @@ $extra_js="";
 
 
         <div class="brand">
-            <a href="#" class="brand-logo">
-                <span class="brand-img">
-                    <span class="brand-img-text text-theme">S</span>
-                </span>
-                <span class="brand-text">CRM DASH</span>
+            <a href="/" class="brand-logo">
+                <img src="/img/logo/semy-light.png" class="img-responsive brand-img">
             </a>
         </div>
 
@@ -92,12 +89,13 @@ $extra_js="";
             <div class="menu-item dropdown dropdown-mobile-full">
                 <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
                     <div class="menu-link">
-                        <div class="menu-icon"><i class="bi bi-person-circle nav-icon"></i></div>
+                        <div class="menu-icon"><i class="bi bi-people nav-icon"></i></div>
+                        <div class="menu-text d-sm-block d-none mx-2" id="header_user_name"></div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
                     <a class="dropdown-item d-flex align-items-center" href="/my-account">Profilim <i
-                            class="bi bi-person-circle ms-auto text-theme fs-16px my-n1"></i></a>
+                            class="bi bi-people ms-auto text-theme fs-16px my-n1"></i></a>
 {{--                    <a class="dropdown-item d-flex align-items-center" href="#">INBOX <i--}}
 {{--                            class="bi bi-envelope ms-auto text-theme fs-16px my-n1"></i></a>--}}
 {{--                    <a class="dropdown-item d-flex align-items-center" href="#">CALENDAR <i--}}

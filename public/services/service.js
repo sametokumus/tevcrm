@@ -32,6 +32,7 @@
 
 	$(window).on('load',function() {
 		// checkLogin();
+        $('#header_user_name').text(localStorage.getItem('userName'));
 	});
 
 
@@ -1262,6 +1263,16 @@ async function serviceGetApproveOfferBySaleId(id) {
     }
 }
 
+async function serviceGetRejectOfferBySaleId(id) {
+    let user_id = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/sale/getRejectOfferBySaleId/' + id + '/' + user_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 async function serviceGetSaleOfferById(id) {
     const data = await fetchDataGet('/admin/sale/getSaleOfferById/' + id, 'application/json');
     if (data.status == "success") {
@@ -1366,6 +1377,27 @@ async function serviceGetQuoteBySaleId(id) {
 
 async function servicePostUpdateQuote(formData) {
     const data = await fetchDataPost('/admin/sale/updateQuote', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+
+async function serviceGetSaleNotes(id) {
+    const data = await fetchDataGet('/admin/sale/getSaleNotes/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddSaleNote(formData) {
+    const data = await fetchDataPost('/admin/sale/addSaleNote', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;

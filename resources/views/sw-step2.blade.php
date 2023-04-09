@@ -56,6 +56,7 @@ $extra_js='
                             <table id="sales-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
                                 <tr>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0"></th>
                                     <th class="border-bottom-0">En Ucuz, En Hızlı</th>
@@ -109,6 +110,7 @@ $extra_js='
                             <table id="offer-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
                                 <tr>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0"></th>
                                     <th class="border-bottom-0">En Ucuz, En Hızlı</th>

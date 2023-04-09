@@ -63,6 +63,7 @@ $extra_js='
                             <table id="sales-detail" class="table table-bordered key-buttons border-bottom">
                                 <thead>
                                 <tr>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0 d-none">Offer ID</th>
                                     <th class="border-bottom-0 d-none">Product ID</th>
@@ -110,108 +111,19 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal modal-cover fade" id="addBatchProcessModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="background-color: #202b36;">
-            <div class="modal-header">
-                <h5 class="modal-title">TOPLU İŞLEM</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_batch_process_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Kar Oranı</label>
-                            <input type="text" class="form-control" id="add_batch_offer_profit_rate" placeholder="% olarak hesaplanır (Örn: 20 giriniz)">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Teslimat Süresi</label>
-                            <input type="text" class="form-control" id="add_batch_offer_lead_time">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="add_batch_offer_currency">
-                                <option value="TRY">TRY</option>
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                                <option value="GBP">GBP</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Para Birimi Dönüşüm Oranı</label>
-                            <input type="text" class="form-control" id="add_batch_offer_currency_change" value="1,00">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addOfferPriceModal">
+<div class="modal modal-cover fade" id="addRejectOfferNoteModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">TEKLİF FİYAT EKLEME</h5>
+                <h5 class="modal-title">TEKLİFİN REDDEDİLME NEDENİ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="add_offer_price_form">
+            <form method="post" action="#" id="add_reject_offer_note_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Fiyat</label>
-                            <input type="text" class="form-control" id="add_offer_price_price">
-                            <input type="hidden" class="form-control" id="add_offer_price_offer_id">
-                            <input type="hidden" class="form-control" id="add_offer_price_offer_product_id">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="add_offer_price_currency">
-                                <option value="TRY">TRY</option>
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                                <option value="GBP">GBP</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="updateOfferPriceModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">TEKLİF FİYAT GÜNCELLEME</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_offer_price_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Fiyat</label>
-                            <input type="text" class="form-control" id="update_offer_price_price">
-                            <input type="hidden" class="form-control" id="update_offer_price_offer_id">
-                            <input type="hidden" class="form-control" id="update_offer_price_offer_product_id">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="update_offer_price_currency">
-                                <option value="TRY">TRY</option>
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                                <option value="GBP">GBP</option>
-                            </select>
+                            <label class="form-label">Notunuz</label>
+                            <textarea name="text" class="summernote" id="add_sale_note_description" title="Contents"></textarea>
                         </div>
                     </div>
                 </div>

@@ -56,6 +56,7 @@ $extra_js='
                             <table id="sales-detail" class="table table-bordered key-buttons border-bottom">
                                 <thead>
                                 <tr>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0 d-none">Offer ID</th>
                                     <th class="border-bottom-0 d-none">Product ID</th>
@@ -75,6 +76,7 @@ $extra_js='
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
                                     <th class="border-bottom-0">Para Birimi</th>
+                                    <th class="border-bottom-0">Teklif Birim Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Para Birimi</th>
                                     <th class="border-bottom-0">Teklif Teslimat Süresi</th>

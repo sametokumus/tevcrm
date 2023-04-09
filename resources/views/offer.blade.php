@@ -25,11 +25,11 @@ $extra_js='
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
-                            <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom">
+                            <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom w-100">
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0">Sipariş Notu</th>
+                                    <th class="border-bottom-0">Satın Alma Notu</th>
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Miktar</th>
@@ -65,13 +65,13 @@ $extra_js='
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
-                            <table id="offers" class="table table-bordered text-nowrap key-buttons border-bottom">
+                            <table id="offers" class="table table-bordered text-nowrap key-buttons border-bottom w-100">
                                 <thead>
                                 <tr>
-                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">Teklif Kodu</th>
                                     <th class="border-bottom-0">Tedarikçi Firma</th>
-                                    <th class="border-bottom-0">Teklife Eklenen Ürün</th>
+                                    <th class="border-bottom-0">Ürün Kalemi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>

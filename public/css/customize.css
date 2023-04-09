@@ -58,9 +58,15 @@ div.dataTables_wrapper div.dt-buttons button {
 }
 
 div.dataTables_wrapper div.dt-buttons button.btn.btn-theme {
-    color: #000 !important;
+    color: rgba(0,0,0,.75) !important;
     background-color: #3cd2a5 !important;
     border-color: #3cd2a5 !important;
+}
+
+div.dataTables_wrapper div.dt-buttons button.btn.btn-danger {
+    color: rgba(255,255,255,.75) !important;
+    background-color: #ff6060 !important;
+    border-color: #ff6060 !important;
 }
 
 table tr.selected{
@@ -450,4 +456,13 @@ table tr.selected{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.app-header .brand .brand-logo .brand-img{
+    width: auto;
+    height: 40px;
+    background: none;
+}
+.dtfc-fixed-left{
+    z-index: 1;
 }
