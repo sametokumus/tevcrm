@@ -171,4 +171,43 @@ $extra_js='
     </div>
 </div>
 
+<div class="modal modal-cover fade" id="addSaleNoteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SİPARİŞ NOTU</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+                <div class="modal-body">
+                    <form method="post" action="#" id="add_sale_note_form">
+                        <div class="row mb-4">
+                            <div class="col-md-12 mb-3">
+                                <input type="hidden" class="form-control" id="add_note_sale_id" required>
+                                <label class="form-label">Notunuz</label>
+                                <textarea name="text" class="summernote" id="add_sale_note_description" title="Contents"></textarea>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row mt-5">
+                        <h4>Sipariş Notları</h4>
+                        <div class="table-responsive">
+                            <table id="sales-notes-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                </div>
+        </div>
+    </div>
+</div>
+
 @include('include.footer')

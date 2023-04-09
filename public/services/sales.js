@@ -30,8 +30,8 @@
 		checkLogin();
 		checkRole();
 
-        await initFilter();
-        await initSales();
+        initFilter();
+        initSales();
 
 	});
 
@@ -127,6 +127,13 @@ async function initSales(){
         btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
             '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
             '        </button>\n';
+
+        btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
+
+        btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-warning" onclick="openSaleNoteModal(\''+ sale.sale_id +'\')">\n' +
+            '           <span class="fe fe-refresh-cw"> Not\n' +
+            '        </button>\n';
+
         if (sale.status.action == "rfq"){
             status_class = "border-danger text-danger";
             btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
@@ -153,7 +160,6 @@ async function initSales(){
             btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">PO PDF</a>\n';
         }else if (sale.status.action == "inv"){
             status_class = "border-indigo text-indigo";
-            btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
 
             btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Proforma INV. PDF</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">INV. PDF</a>\n';
@@ -288,4 +294,40 @@ async function addCancelNote(){
         $('#addCancelNoteModal').modal('hide');
         initSales();
     }
+}
+
+function openSaleNoteModal(sale_id){
+    $('#addSaleNoteModal').modal('show');
+    document.getElementById('add_note_sale_id').value = sale_id;
+
+    let data = serviceGetSaleNotes(sale_id);
+    $('#sales-notes-table tbody tr').remove();
+
+    $.each(data.sale_notes, function (i, note) {
+        let last_time = formatDateAndTimeDESC(action.sale.created_at, "/");
+        if (action.sale.updated_at != null){
+            last_time = formatDateAndTimeDESC(action.sale.updated_at, "/");
+        }
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ action.sale.customer_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ last_time +'</small></td>\n' +
+            '           <td>\n' +
+            '               <span class="badge bg-white bg-opacity-25 rounded-0 pt-5px" style="min-height: 18px">'+ action.previous_status.status_name +'</span>\n' +
+            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
+            '               <span class="badge bg-theme text-theme-900 rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <a href="/sale-detail/'+ action.sale_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
+            '           </td>\n' +
+            '       </tr>';
+
+        $('#sales-history-table tbody').append(item);
+    });
+
 }
