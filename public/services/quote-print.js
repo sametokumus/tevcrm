@@ -90,6 +90,12 @@ async function initSale(sale_id){
     document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(company.payment_term);
     document.getElementById('update_quote_payment_term').value = checkNull(company.payment_term);
 
+    if (checkNull(sale.request.company_request_code) != '') {
+        document.getElementById('company_request_code').innerHTML = '<b>' + Lang.get("strings.Request Code") + ' :</b> ' + sale.request.company_request_code;
+    }else{
+        $('$company_request_code').addClass('d-none');
+    }
+
     $('#quote-print .logo-header .offer-id').text(short_code+'-OFR-'+sale.id);
 
     $('#sale-detail tbody > tr').remove();
@@ -165,6 +171,7 @@ async function initSale(sale_id){
 async function initQuote(sale_id){
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
+
     if (checkNull(quote.payment_term) != '') {
         document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
         document.getElementById('update_quote_payment_term').value = quote.payment_term;

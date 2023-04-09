@@ -7,6 +7,10 @@
 			e.preventDefault();
             updateStatus();
 		});
+		$('#add_sale_note_form').submit(function (e){
+			e.preventDefault();
+            addSaleNote();
+		});
 		$('#add_cancel_note_form').submit(function (e){
 			e.preventDefault();
             addCancelNote();
@@ -296,38 +300,48 @@ async function addCancelNote(){
     }
 }
 
-function openSaleNoteModal(sale_id){
+async function openSaleNoteModal(sale_id){
     $('#addSaleNoteModal').modal('show');
     document.getElementById('add_note_sale_id').value = sale_id;
 
-    let data = serviceGetSaleNotes(sale_id);
+    let data = await serviceGetSaleNotes(sale_id);
+    console.log(data)
+
     $('#sales-notes-table tbody tr').remove();
 
     $.each(data.sale_notes, function (i, note) {
-        let last_time = formatDateAndTimeDESC(action.sale.created_at, "/");
-        if (action.sale.updated_at != null){
-            last_time = formatDateAndTimeDESC(action.sale.updated_at, "/");
-        }
 
         let item = '<tr>\n' +
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ action.sale.customer_name +'\n' +
+            '                   '+ note.user_name +'\n' +
             '               </span>\n' +
             '           </td>\n' +
-            '           <td><small>'+ last_time +'</small></td>\n' +
-            '           <td>\n' +
-            '               <span class="badge bg-white bg-opacity-25 rounded-0 pt-5px" style="min-height: 18px">'+ action.previous_status.status_name +'</span>\n' +
-            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
-            '               <span class="badge bg-theme text-theme-900 rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <a href="/sale-detail/'+ action.sale_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
-            '           </td>\n' +
+            '           <td>'+ note.note +'</td>\n' +
             '       </tr>';
 
-        $('#sales-history-table tbody').append(item);
+        $('#sales-notes-table tbody').append(item);
     });
 
+}
+async function addSaleNote() {
+    let user_id = localStorage.getItem('userId');
+    let sale_id = document.getElementById('add_note_sale_id').value;
+    let note = document.getElementById('add_sale_note_description').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "user_id": user_id,
+        "note": note
+    });
+
+
+    let returned = await servicePostAddSaleNote(formData);
+    if (returned){
+        showAlert("Note Eklendi");
+        $('#addSaleNoteModal').modal('hide');
+    }else{
+        alert("Not Eklerken Hata Oluştu")
+    }
 }

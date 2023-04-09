@@ -124,7 +124,9 @@ async function initContact(contact_id, sale_id){
     // $('#purchasing-order-print .logo-header .offer-id').append(sale_id);
     $('.company-signature .name').text(contact.authorized_name);
     // document.getElementById('signature').src = contact.signature;
-    document.getElementById('signature').style.backgroundImage = "url('"+contact.signature+"')";
+    $('.company-signature #signature img').remove();
+    $('.company-signature #signature').append('<img src="'+ contact.signature +'" style="height: 70px; width: auto;" >');
+    // document.getElementById('signature').style.backgroundImage = "url('"+contact.signature+"')";
 
     $('#purchasing-order-print .contact-col address').text('');
     $('#purchasing-order-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');

@@ -38,5 +38,6 @@
     "Stock" : "Stock",
     "Week" : "Week",
     "Day" : "Day",
-    "Insurance" : "Insurance"
+    "Insurance" : "Insurance",
+    "Request Code" : "Request Code"
 }

@@ -152,7 +152,7 @@ async function rejectOffer() {
     console.log(sale_id)
     let returned = await serviceGetRejectOfferBySaleId(sale_id);
     if (returned){
-;
+
         let note = document.getElementById('add_sale_note_description').value;
 
         let formData = JSON.stringify({

@@ -3,11 +3,21 @@
 
 </div>
 
+<!-- Start of Toast Message -->
+<div class="alert-container">
+    <div class="alert">
+
+    </div>
+</div>
+<!-- End of Toast Message -->
+
 
 <script src="js/vendor.min.js"></script>
 <script src="js/app.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
 
+<script src="vendor/popper.min.js"></script>
 
 <!-- required js -->
 <script src="plugins/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -32,6 +42,7 @@
 <script src="plugins/bootstrap-3-typeahead/bootstrap3-typeahead.js"></script>
 
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
+<script src="vendor/jquery.toast.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="plugins/summernote/dist/summernote-lite.min.js"></script>
 <script src="plugins/select-picker/dist/picker.min.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
@@ -41,7 +52,7 @@
 <script src="js/demo/form-plugins.demo.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
 <script>
     $('.summernote').summernote({
-        height: 200
+        height: 150
     });
 </script>
 <script src="messages.js"></script>

@@ -2,6 +2,7 @@
     "use strict";
 
     $(":input").inputmask();
+    $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
     $("#add_offer_price_price").maskMoney({thousands:'.', decimal:','});
     $("#update_offer_price_price").maskMoney({thousands:'.', decimal:','});
     $("#add_batch_offer_currency_change").maskMoney({thousands:'.', decimal:','});
@@ -23,6 +24,11 @@
             addOfferBatchProcess();
         });
 
+        $('#update_quote_form').submit(function (e){
+            e.preventDefault();
+            updateQuote();
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -30,6 +36,12 @@
 		checkLogin();
 		checkRole();
 		await initOfferDetail();
+
+
+        await getPaymentTermsAddSelectId('update_quote_payment_term');
+        await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+
+        await initQuote();
 
 	});
 
@@ -317,4 +329,45 @@ async function addOfferBatchProcess(){
 
 
 
+async function initQuote(){
+    let sale_id = getPathVariable('sw-3');
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
 
+    document.getElementById('update_quote_id').value = quote.id;
+    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
+    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
+    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
+    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
+}
+async function updateQuote(){
+    let sale_id = getPathVariable('sw-3');
+    let quote_id = document.getElementById('update_quote_id').value;
+    let payment_term = document.getElementById('update_quote_payment_term').value;
+    let lead_time = document.getElementById('update_quote_lead_time').value;
+    let delivery_term = document.getElementById('update_quote_delivery_term').value;
+    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
+    let freight = document.getElementById('update_quote_freight').value;
+    let note = document.getElementById('update_quote_note').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "quote_id": quote_id,
+        "payment_term": payment_term,
+        "lead_time": lead_time,
+        "delivery_term": delivery_term,
+        "country_of_destination": country_of_destination,
+        "freight": changePriceToDecimal(freight),
+        "note": note
+    });
+
+
+    let returned = await servicePostUpdateQuote(formData);
+    if (returned){
+        showAlert("Bilgiler Kaydedildi.")
+    }else{
+        alert("Hata Oluştu");
+    }
+}

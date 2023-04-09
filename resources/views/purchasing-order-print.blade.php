@@ -75,7 +75,7 @@ $extra_js='
                                                     <address>
                                                         <span id="supplier_name"></span><br>
                                                         <span id="supplier_address"></span><br>
-                                                        <span id="payment_term"><b>{{__('Payment Terms')}}:</b> </span><br>
+{{--                                                        <span id="payment_term"><b>{{__('Payment Terms')}}:</b> </span><br>--}}
                                                     </address>
                                                 </div>
                                             </div>

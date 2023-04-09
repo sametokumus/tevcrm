@@ -99,6 +99,64 @@ $extra_js='
 
             </div>
 
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
+                            <form method="post" action="#" id="update_quote_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Teklif Detayları
+                                    </h5>
+                                    <input type="hidden" class="form-control" id="update_quote_id">
+                                    <div class="col-sm-6 mb-3">
+                                        <label class="form-label">Payment Term</label>
+                                        <select class="form-control" id="update_quote_payment_term">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <label class="form-label">Delivery Terms</label>
+                                        <select class="form-control" id="update_quote_delivery_term">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Insurance</label>
+                                        <input type="text" class="form-control" id="update_quote_lead_time">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Country of Destination</label>
+                                        <input type="text" class="form-control" id="update_quote_country_of_destination">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Freight Price</label>
+                                        <input type="text" class="form-control" id="update_quote_freight">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Note</label>
+                                        <textarea name="text" class="summernote" id="update_quote_note" title="Contents"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-outline-theme d-block w-100">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
 
         </div>
         <!-- CONTAINER END -->

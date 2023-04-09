@@ -63,7 +63,7 @@ $extra_js='
                                                         <span id="buyer_registration_number"></span><br>
                                                         <span id="buyer_address"></span><br>
                                                         <span id="buyer_phone"></span><br>
-                                                        <span id="buyer_email"></span><br>
+                                                        <span id="buyer_email" class="d-block"></span><br>
                                                         <span id="payment_term"></span><br>
                                                     </address>
                                                 </div>

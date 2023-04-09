@@ -62,7 +62,8 @@ $extra_js='
                                                     {{--                                    <h6>Supplier</h6>--}}
                                                     <address>
                                                         <span id="buyer_name"></span><br>
-                                                        <span id="buyer_address"></span><br>
+                                                        <span id="buyer_address" class="d-block"></span><br>
+                                                        <span id="company_request_code"></span><br>
                                                         <span id="payment_term"></span><br>
                                                         <span id="lead_time"></span><br>
                                                         <span id="delivery_term"></span><br>
