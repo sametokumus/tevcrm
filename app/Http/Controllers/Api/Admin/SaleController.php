@@ -925,7 +925,7 @@ class SaleController extends Controller
             $sale_notes = SaleNote::query()->where('sale_id', $sale_id)->get();
             foreach ($sale_notes as $sale_note){
                 $user = Admin::query()->where('id', $sale_note->user_id)->first();
-                $sale_note['user_name'] = $user->name + ' ' + $user->surname;
+                $sale_note['user_name'] = $user->name.' '.$user->surname;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale_notes' => $sale_notes]]);
