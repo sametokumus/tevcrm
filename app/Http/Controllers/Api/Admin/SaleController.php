@@ -44,6 +44,8 @@ class SaleController extends Controller
                 ->get();
 
             foreach ($sales as $sale) {
+                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->first();
@@ -96,6 +98,8 @@ class SaleController extends Controller
                 ->get();
 
             foreach ($sales as $sale) {
+                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
@@ -143,6 +147,8 @@ class SaleController extends Controller
                 ->get();
 
             foreach ($sales as $sale) {
+                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
@@ -187,6 +193,8 @@ class SaleController extends Controller
                 ->where('sales.active',1)
                 ->where('sales.sale_id',$sale_id)
                 ->first();
+
+            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
