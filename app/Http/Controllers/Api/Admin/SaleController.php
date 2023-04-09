@@ -117,11 +117,13 @@ class SaleController extends Controller
 
                 $current_time = Carbon::now();
                 if ($sale->updated_at != null){
-                    $updated_at = Carbon::parse($sale->updated_at);
-                    $updated_at = $updated_at->subHours(3);
+                    $updated_at = $sale->updated_at;
+//                    $updated_at = Carbon::parse($sale->updated_at);
+//                    $updated_at = $updated_at->subHours(3);
                 }else{
-                    $updated_at = Carbon::parse($sale->created_at);
-                    $updated_at = $updated_at->subHours(3);
+                    $updated_at = $sale->created_at;
+//                    $updated_at = Carbon::parse($sale->created_at);
+//                    $updated_at = $updated_at->subHours(3);
                 }
 
                 $difference = $updated_at->diffForHumans($current_time);
