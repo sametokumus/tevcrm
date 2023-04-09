@@ -52,6 +52,28 @@ class SaleController extends Controller
                 $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
                 $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
                 $sale['request'] = $offer_request;
+                $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
+                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
+                $sale['currency'] = '';
+                if ($sale_offer){
+                    if ($sale_offer->offer_currency != '' && $sale_offer->offer_currency != null){
+                        $sale['currency'] = $sale_offer->offer_currency;
+                    }
+                }
+
+                $current_time = Carbon::now();
+                if ($sale->updated_at != null){
+                    $updated_at = $sale->updated_at;
+//                    $updated_at = Carbon::parse($sale->updated_at);
+//                    $updated_at = $updated_at->subHours(3);
+                }else{
+                    $updated_at = $sale->created_at;
+//                    $updated_at = Carbon::parse($sale->created_at);
+//                    $updated_at = $updated_at->subHours(3);
+                }
+
+                $difference = $updated_at->diffForHumans($current_time);
+                $sale['diff_last_day'] = $difference;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
@@ -168,11 +190,13 @@ class SaleController extends Controller
 
                 $current_time = Carbon::now();
                 if ($sale->updated_at != null){
-                    $updated_at = Carbon::parse($sale->updated_at);
-                    $updated_at = $updated_at->subHours(3);
+                    $updated_at = $sale->updated_at;
+//                    $updated_at = Carbon::parse($sale->updated_at);
+//                    $updated_at = $updated_at->subHours(3);
                 }else{
-                    $updated_at = Carbon::parse($sale->created_at);
-                    $updated_at = $updated_at->subHours(3);
+                    $updated_at = $sale->created_at;
+//                    $updated_at = Carbon::parse($sale->created_at);
+//                    $updated_at = $updated_at->subHours(3);
                 }
 
                 $difference = $updated_at->diffForHumans($current_time);
