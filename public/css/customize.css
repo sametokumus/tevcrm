@@ -295,7 +295,7 @@ table tr.selected{
 
 
 .modal-backdrop.show:nth-of-type(even) {
-    z-index: 1061 !important;
+    z-index: 1054 !important;
 }
 #updateOfferProductModal.show{
     z-index: 1062 !important;
