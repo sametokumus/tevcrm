@@ -70,7 +70,14 @@ async function initContact(contact_id, sale_id){
     // $('#quote-print .logo-header .offer-id').append(sale_id);
 
     $('#quote-print .contact-col address').text('');
-    $('#quote-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
+
+    $('#quote-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>');
+    if (contact.registration_no != '') {
+        $('#quote-print .contact-col address').append('<b>' + Lang.get("strings.Registration No") + ' :</b> ' + contact.registration_no + '<br>');
+    }
+    $('#quote-print .contact-col address').append('<b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br>');
+    $('#quote-print .contact-col address').append('<b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br>');
+    $('#quote-print .contact-col address').append('<b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 
 }
 
@@ -84,7 +91,12 @@ async function initSale(sale_id){
     let company = sale.request.company;
 
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
-    document.getElementById('buyer_registration_number').innerHTML = '<b>'+ Lang.get("strings.Registration No") +' :</b> '+ checkNull(company.registration_number);
+    if (checkNull(company.registration_number) != '') {
+        document.getElementById('buyer_registration_number').innerHTML = '<b>'+ Lang.get("strings.Registration No") +' :</b> '+ checkNull(company.registration_number);
+    }else{
+        $('#buyer_registration_number').addClass('d-none');
+        $('.buyer-col br:first').remove();
+    }
     document.getElementById('buyer_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ company.address;
     document.getElementById('buyer_phone').innerHTML = '<b>'+ Lang.get("strings.Phone") +' :</b> '+ company.phone;
     document.getElementById('buyer_email').innerHTML = '<b>'+ Lang.get("strings.Email") +' :</b> '+ company.email;
@@ -94,7 +106,7 @@ async function initSale(sale_id){
     $('#sale-detail tbody > tr').remove();
 
     $.each(sale.sale_offers, function (i, product) {
-        currency = product.currency;
+        currency = product.offer_currency;
         let lead_time = checkNull(product.offer_lead_time);
         if (lead_time != ''){
             if (lead_time == 1){
@@ -111,15 +123,15 @@ async function initSale(sale_id){
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.offer_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_pcs_price) + ' '+ product.currency +'</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_price) + ' '+ product.currency +'</td>\n' +
+            '           <td class="text-center">' + checkNull(product.offer_pcs_price) + ' '+ product.offer_currency +'</td>\n' +
+            '           <td class="text-center">' + checkNull(product.offer_price) + ' '+ product.offer_currency +'</td>\n' +
             '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
     document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
-    if (sale.sub_total != null) {
+    if (sale.sub_total != null && ((sale.vat != null && sale.vat != '0.00') || sale.freight != null )) {
         let text = Lang.get("strings.Sub Total");
         if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
             text = Lang.get("strings.Grand Total");

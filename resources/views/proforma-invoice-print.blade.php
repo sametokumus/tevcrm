@@ -57,7 +57,7 @@ $extra_js='
                                                     {{__('Proforma Invoice')}}
                                                 </h1>
                                                 <div class="buyer-col">
-                                                    <h6>{{__('Customer')}}</h6>
+{{--                                                    <h6>{{__('Customer')}}</h6>--}}
                                                     <address>
                                                         <span id="buyer_name"></span><br>
                                                         <span id="buyer_registration_number"></span><br>
