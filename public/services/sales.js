@@ -160,6 +160,9 @@ async function initSales(){
             status_class = "border-yellow text-yellow";
             btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
         }else if (sale.status.action == "quote"){
+            status_class = "border-lime text-lime";
+            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
+        }else if (sale.status.action == "admin-conf-success"){
             status_class = "border-default text-default";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
         }else if (sale.status.action == "oc-po"){
