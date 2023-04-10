@@ -93,7 +93,7 @@ async function initSale(sale_id){
     if (checkNull(sale.request.company_request_code) != '') {
         document.getElementById('company_request_code').innerHTML = '<b>' + Lang.get("strings.Request Code") + ' :</b> ' + sale.request.company_request_code;
     }else{
-        $('$company_request_code').addClass('d-none');
+        $('#company_request_code').addClass('d-none');
     }
 
     $('#quote-print .logo-header .offer-id').text(short_code+'-OFR-'+sale.id);
