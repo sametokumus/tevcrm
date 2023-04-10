@@ -134,7 +134,11 @@ async function initSales(){
 
         btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
 
-        btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-warning" onclick="openSaleNoteModal(\''+ sale.sale_id +'\')">\n' +
+        let noteClass = 'btn-warning';
+        if (sale.sale_notes.length != 0){
+            noteClass = 'btn-danger pulse-button';
+        }
+        btn_list += '<button id="bDel" type="button" class="btn btn-sm '+ noteClass +'" onclick="openSaleNoteModal(\''+ sale.sale_id +'\')">\n' +
             '           <span class="fe fe-refresh-cw"> Not\n' +
             '        </button>\n';
 

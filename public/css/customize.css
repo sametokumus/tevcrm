@@ -494,3 +494,28 @@ table tr.selected{
     opacity: 1;
     border: none;
 }
+
+
+.pulse-button {
+    cursor: pointer;
+    box-shadow: 0 0 0 0 #ff9f0c;
+    -webkit-animation: pulse 1.5s infinite;
+
+}
+.pulse-button:hover {
+    -webkit-animation: none;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        transform: scale(.9);
+    }
+    70% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 50px rgba(255, 159, 12, 1);
+    }
+    100% {
+        transform: scale(.9);
+        box-shadow: 0 0 0 0 rgba(255, 159, 12, 1);
+    }
+}
