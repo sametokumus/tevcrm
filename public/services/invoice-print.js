@@ -131,7 +131,7 @@ async function initSale(sale_id){
     });
     document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
-    if (sale.sub_total != null && ((sale.vat != null && sale.vat != '0.00') || sale.freight != null )) {
+    if (sale.sub_total != null) {
         let text = Lang.get("strings.Sub Total");
         if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
             text = Lang.get("strings.Grand Total");
