@@ -178,11 +178,13 @@ async function initSale(sale_id){
     }
 
     if (sale.grand_total_with_shipping != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
+        if (sale.shipping_price != null) {
+            let item = '<tr>\n' +
+                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +
+                '       </tr>';
+            $('#sale-detail tbody').append(item);
+        }
     }
 
 }

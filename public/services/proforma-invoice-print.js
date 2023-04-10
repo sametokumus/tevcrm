@@ -131,7 +131,7 @@ async function initSale(sale_id){
     });
     document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
-    if (sale.sub_total != null && ((sale.vat != null && sale.vat != '0.00') || sale.freight != null )) {
+    if (sale.sub_total != null) {
         let text = Lang.get("strings.Sub Total");
         if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
             text = Lang.get("strings.Grand Total");
@@ -178,11 +178,13 @@ async function initSale(sale_id){
     }
 
     if (sale.grand_total_with_shipping != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
+        if (sale.shipping_price != null) {
+            let item = '<tr>\n' +
+                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +
+                '       </tr>';
+            $('#sale-detail tbody').append(item);
+        }
     }
 
 }
