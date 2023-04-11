@@ -21,9 +21,10 @@ class CreateContactsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('logo')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('footer')->nullable();
+            $table->string('signature')->nullable();
             $table->string('registration_no')->nullable();
+            $table->string('registration_office')->nullable();
             $table->string('short_code')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

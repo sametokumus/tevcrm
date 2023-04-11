@@ -53,11 +53,15 @@ $(".timepicker").timepicker({
                                         <label class="form-label">Adres</label>
                                         <input type="text" class="form-control" id="update_contact_address" placeholder="Adres">
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Registration Number</label>
-                                        <input type="text" class="form-control" id="update_contact_registration_no" placeholder="Registration Number">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Vergi No</label>
+                                        <input type="text" class="form-control" id="update_contact_registration_no" placeholder="Vergi No">
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Vergi Dairesi</label>
+                                        <input type="text" class="form-control" id="update_contact_registration_office" placeholder="Vergi Dairesi">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">Kısa Kod</label>
                                         <input type="text" class="form-control" id="update_contact_short_code" placeholder="Kısa Kod">
                                     </div>

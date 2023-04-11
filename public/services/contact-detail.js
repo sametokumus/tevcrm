@@ -42,6 +42,7 @@ async function initContact(contact_id){
     document.getElementById('update_contact_phone').value = contact.phone;
     document.getElementById('update_contact_address').value = contact.address;
     document.getElementById('update_contact_registration_no').value = contact.registration_no;
+    document.getElementById('update_contact_registration_office').value = contact.registration_office;
     document.getElementById('update_contact_short_code').value = contact.short_code;
     $('#update_contact_current_logo').attr('href', contact.logo);
     $('#update_contact_current_footer').attr('href', contact.footer);
@@ -68,6 +69,7 @@ async function updateContact(){
     formData.append('phone', document.getElementById('update_contact_phone').value);
     formData.append('address', document.getElementById('update_contact_address').value);
     formData.append('registration_no', document.getElementById('update_contact_registration_no').value);
+    formData.append('registration_office', document.getElementById('update_contact_registration_office').value);
     formData.append('short_code', document.getElementById('update_contact_short_code').value);
     formData.append('logo', document.getElementById('update_contact_logo').files[0]);
     formData.append('footer', document.getElementById('update_contact_footer').files[0]);

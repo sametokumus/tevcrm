@@ -46,6 +46,7 @@ class ContactController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'registration_no' => $request->registration_no,
+                'registration_office' => $request->registration_office,
                 'short_code' => $request->short_code
             ]);
             if ($request->hasFile('logo')) {
