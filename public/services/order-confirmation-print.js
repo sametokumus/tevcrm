@@ -73,8 +73,17 @@ async function initContact(contact_id, sale_id){
     // document.getElementById('signature').style.backgroundImage = "url('"+contact.signature+"')";
 
     $('#order-confirmation-print .contact-col address').text('');
-    $('#order-confirmation-print .contact-col address').append('<strong>'+ contact.name +'</strong><br><b>'+ Lang.get("strings.Registration No") +' :</b> '+ contact.registration_no +'<br><b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br><b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br><b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 
+    $('#order-confirmation-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>');
+    if (contact.registration_no != '') {
+        $('#order-confirmation-print .contact-col address').append('<b>' + Lang.get("strings.Registration No") + ' :</b> ' + contact.registration_no + '&nbsp;&nbsp;&nbsp;');
+    }
+    if (contact.registration_office != '') {
+        $('#order-confirmation-print .contact-col address').append('<b>' + Lang.get("strings.Registration Office") + ' :</b> ' + contact.registration_office + '<br>');
+    }
+    $('#order-confirmation-print .contact-col address').append('<b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br>');
+    $('#order-confirmation-print .contact-col address').append('<b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br>');
+    $('#order-confirmation-print .contact-col address').append('<b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 }
 
 async function initSale(sale_id){
