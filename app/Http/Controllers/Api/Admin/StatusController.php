@@ -29,11 +29,11 @@ class StatusController extends Controller
             $admin = Admin::query()->where('id', $user_id)->first();
             $statuses = Status::query()
                 ->leftJoin('admin_status_roles', 'admin_status_roles.status_id', '=', 'statuses.id')
-                ->where('active',1)
+                ->where('statuses.active',1)
                 ->where('admin_status_roles.admin_role_id', $admin->admin_role_id)
                 ->where('admin_status_roles.active',1)
                 ->orderBy('sequence')
-                ->get();
+                ->get('statuses.*');
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['statuses' => $statuses]]);
         } catch (QueryException $queryException) {
