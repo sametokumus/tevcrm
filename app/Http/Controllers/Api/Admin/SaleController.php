@@ -93,7 +93,8 @@ class SaleController extends Controller
                 ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
                 ->leftJoin('admin_status_roles', 'admin_status_roles.status_id', '=', 'sales.status_id')
                 ->where('sales.active',1)
-                ->where('admin_status_roles.admin_role_id', $admin->admin_role_id);
+                ->where('admin_status_roles.admin_role_id', $admin->admin_role_id)
+                ->where('admin_status_roles.active',1);
 
             if ($request->owner != 0){
                 $sales = $sales->where('sales.owner_id', $request->owner);
@@ -176,6 +177,7 @@ class SaleController extends Controller
                 ->where('sales.active',1)
                 ->where('statuses.period','continue')
                 ->where('admin_status_roles.admin_role_id', $admin->admin_role_id)
+                ->where('admin_status_roles.active',1)
                 ->get();
 
             foreach ($sales as $sale) {
