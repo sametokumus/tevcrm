@@ -1225,7 +1225,8 @@ async function serviceGetSales() {
 }
 
 async function serviceGetActiveSales() {
-    const data = await fetchDataGet('/admin/sale/getActiveSales', 'application/json');
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/sale/getActiveSales/'+ userId, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -1234,7 +1235,8 @@ async function serviceGetActiveSales() {
 }
 
 async function servicePostFilterSales(formData) {
-    const data = await fetchDataPost('/admin/sale/getFilteredSales', formData, 'application/json');
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataPost('/admin/sale/getFilteredSales/'+ userId, formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return data.object;
