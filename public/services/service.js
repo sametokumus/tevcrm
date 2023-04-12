@@ -1421,6 +1421,15 @@ async function serviceGetStatuses() {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetAuthorizeStatuses() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/status/getAuthorizeStatuses/'+ userId, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function serviceGetMeasurements() {
     const data = await fetchDataGet('/admin/measurement/getMeasurements', 'application/json');
     if (data.status == "success") {

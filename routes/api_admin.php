@@ -225,6 +225,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Status
     Route::get('status/getStatuses', [StatusController::class, 'getStatuses']);
+    Route::get('status/getAuthorizeStatuses/{user_id}', [StatusController::class, 'getAuthorizeStatuses']);
 
     //Measurement
     Route::get('measurement/getMeasurements', [MeasurementController::class, 'getMeasurements']);
