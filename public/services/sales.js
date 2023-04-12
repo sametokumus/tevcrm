@@ -51,7 +51,7 @@ async function initFilter() {
     await getAdminsAddSelectId('sale_filter_purchasing_staff');
     await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
 
-    let data = await serviceGetAuthorizeStatuses();
+    let data = await serviceGetStatuses();
     let statuses = data.statuses;
     $('#sale_filter_status option').remove();
     $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
@@ -280,7 +280,7 @@ async function updateStatus(){
     }
 }
 async function initStatusModal(sale_id, status_id){
-    let data = await serviceGetAuthorizeStatuses();
+    let data = await serviceGetStatuses();
     let statuses = data.statuses;
     $('#update_sale_status option').remove();
     $.each(statuses, function (i, status){
