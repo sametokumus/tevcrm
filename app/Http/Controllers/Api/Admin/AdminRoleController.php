@@ -220,8 +220,9 @@ class AdminRoleController extends Controller
             $role_permissions = AdminPermissionRole::query()
                 ->leftJoin('admin_permissions', 'admin_permissions.id', '=', 'admin_permission_roles.admin_permission_id')
                 ->selectRaw('admin_permission_roles.*, admin_permissions.value as permission_key')
-                ->where('admin_role_id', $role_id)
-                ->where('active',1)->toSql();
+                ->where('admin_permission_roles.admin_role_id', $role_id)
+                ->where('admin_permission_roles.active',1)
+                ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['role_permissions' => $role_permissions]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
