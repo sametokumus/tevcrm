@@ -127,58 +127,58 @@ $extra_js="";
                 @endif
 
                 <div class="menu-header">Haber Kaynağı</div>
-                <div class="menu-item @if( Request::segment(1)== 'dashboard' ) active @endif">
+                <div id="nav-dashboard" class="d-none menu-item @if( Request::segment(1)== 'dashboard' ) active @endif">
                     <a href="/dashboard" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-cpu"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'news-feed' ) active @endif">
+                <div id="nav-news-feed" class="d-none menu-item @if( Request::segment(1)== 'news-feed' ) active @endif">
                     <a href="/news-feed" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-columns-gap"></i></span>
                         <span class="menu-text">Haber Kaynağı</span>
                     </a>
                 </div>
                 <div class="menu-header">Satış Yönetimi</div>
-                <div class="menu-item @if( Request::segment(1)== 'offer-request' ) active @endif">
+                <div id="nav-new-request" class="d-none menu-item @if( Request::segment(1)== 'offer-request' ) active @endif">
                     <a href="/offer-request" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Talep Oluştur</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'sales' ) active @endif">
+                <div id="nav-sales" class="d-none menu-item @if( Request::segment(1)== 'sales' ) active @endif">
                     <a href="/sales" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Satışlar</span>
                     </a>
                 </div>
-{{--                <div class="menu-item">--}}
+{{--                <div class="d-none menu-item">--}}
 {{--                    <a href="/offer-requests" class="menu-link">--}}
 {{--                        <span class="menu-icon"><i class="bi bi-gem"></i></span>--}}
 {{--                        <span class="menu-text">Talepler</span>--}}
 {{--                    </a>--}}
 {{--                </div>--}}
 
-{{--                <div class="menu-item">--}}
+{{--                <div class="d-none menu-item">--}}
 {{--                    <a href="/sw-1" class="menu-link">--}}
 {{--                        <span class="menu-icon"><i class="bi bi-gem"></i></span>--}}
 {{--                        <span class="menu-text">Teklif Oluştur</span>--}}
 {{--                    </a>--}}
 {{--                </div>--}}
                 <div class="menu-header">Firma Yönetimi</div>
-                <div class="menu-item @if( Request::segment(1)== 'customers' ) active @endif">
+                <div id="nav-customers" class="d-none menu-item @if( Request::segment(1)== 'customers' ) active @endif">
                     <a href="/customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Müşteriler</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'suppliers' ) active @endif">
+                <div id="nav-suppliers" class="d-none menu-item @if( Request::segment(1)== 'suppliers' ) active @endif">
                     <a href="/suppliers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Tedarikçiler</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'potential-customers' ) active @endif">
+                <div id="nav-potential-customers" class="d-none menu-item @if( Request::segment(1)== 'potential-customers' ) active @endif">
                     <a href="/potential-customers" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Potansiyel Müşteriler</span>
@@ -187,19 +187,19 @@ $extra_js="";
 
 
                 <div class="menu-header">Ürünler</div>
-                <div class="menu-item @if( Request::segment(1)== 'products' ) active @endif">
+                <div id="nav-products" class="d-none menu-item @if( Request::segment(1)== 'products' ) active @endif">
                     <a href="/products" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Ürünler</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'brands' ) active @endif">
+                <div id="nav-brands" class="d-none menu-item @if( Request::segment(1)== 'brands' ) active @endif">
                     <a href="/brands" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Markalar</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'categories' ) active @endif">
+                <div id="nav-product-groups" class="d-none menu-item @if( Request::segment(1)== 'categories' ) active @endif">
                     <a href="/categories" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Ürün Grupları</span>
@@ -208,20 +208,20 @@ $extra_js="";
 
 
 
-                <div class="menu-header">S-CRM</div>
-                <div class="menu-item @if( Request::segment(1)== 'settings' ) active @endif">
+                <div class="menu-header">Ayarlar</div>
+                <div id="nav-settings" class="d-none menu-item @if( Request::segment(1)== 'settings' ) active @endif">
                     <a href="/settings" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Ayarlar</span>
                     </a>
                 </div>
-                <div class="menu-item @if( Request::segment(1)== 'contacts' ) active @endif">
+                <div id="nav-contact-infos" class="d-none menu-item @if( Request::segment(1)== 'contacts' ) active @endif">
                     <a href="/contacts" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Firma Bilgileri</span>
                     </a>
                 </div>
-                <div class="menu-item has-sub @if( Request::segment(1)== 'teams' || Request::segment(1)== 'roles' ) active @endif">
+                <div id="nav-role-management" class="d-none menu-item has-sub @if( Request::segment(1)== 'teams' || Request::segment(1)== 'roles' ) active @endif">
                     <a href="#" class="menu-link">
                         <span class="menu-icon">
                         <i class="bi bi-person-circle"></i>

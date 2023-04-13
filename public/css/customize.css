@@ -519,3 +519,19 @@ table tr.selected{
         box-shadow: 0 0 0 0 rgba(255, 159, 12, 1);
     }
 }
+
+.table tr.disabled {
+    opacity: .5;
+}
+
+.table tr.disabled span.badge{
+    pointer-events: none;
+}
+
+.table tr.disabled button.btn{
+    pointer-events: none;
+}
+
+.table tr.disabled a.btn{
+    pointer-events: none;
+}

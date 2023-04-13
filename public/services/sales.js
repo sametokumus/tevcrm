@@ -195,8 +195,12 @@ async function initSales(){
         if (sale.request.authorized_personnel != null){
             authorized_name = sale.request.authorized_personnel.name + ' ' + sale.request.authorized_personnel.surname;
         }
+        let authorization = '';
+        if (sale.authorization == 0){
+            authorization = 'class="disabled"';
+        }
 
-        let saleItem = '<tr class="disabled">\n' +
+        let saleItem = '<tr '+ authorization +'>\n' +
             '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
             '              <td class="bg-dark">'+ sale.request.company.name +'</td>\n' +

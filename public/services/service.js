@@ -30,9 +30,11 @@
 	});
 
 
-	$(window).on('load',function() {
+	$(window).on('load',async function() {
 		// checkLogin();
         $('#header_user_name').text(localStorage.getItem('userName'));
+
+        await createNavbar();
 	});
 
 
@@ -353,6 +355,13 @@ $('.select2').on('click', () => {
 });
 
 /* SERVICE INIT DATA FUNCTIONS */
+
+async function createNavbar(){
+   let user_role = await localStorage.getItem('userRole');
+    console.log(user_role)
+    let data = await serviceGetAdminRolePermissions(user_role);
+    console.log(data)
+}
 
 async function checkLogin () {
     // localStorage.setItem('userLogin', 'true');
