@@ -196,7 +196,7 @@ async function initSales(){
             authorized_name = sale.request.authorized_personnel.name + ' ' + sale.request.authorized_personnel.surname;
         }
 
-        let saleItem = '<tr>\n' +
+        let saleItem = '<tr class="disabled">\n' +
             '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
             '              <td class="bg-dark">'+ sale.request.company.name +'</td>\n' +

@@ -182,7 +182,7 @@ $extra_js='
 
                     <div class="row mb-3">
                         <div class="table-responsive">
-                            <table id="sales-notes-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <table id="sales-notes-table" class="table table-striped table-borderless mb-2px small">
                                 <tbody>
 
                                 </tbody>

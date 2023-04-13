@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
 use App\Models\Company;
 use App\Models\Employee;
@@ -175,6 +176,14 @@ class SaleController extends Controller
                 ->get();
 
             foreach ($sales as $sale) {
+
+                $status_role = AdminStatusRole::query()->where('admin_role_id', $admin->admin_role_id)->where('status_id', $sale->status_id)->where('active', 1)->count();
+                if ($status_role > 0){
+                    $sale['authorization'] = 1;
+                }else{
+                    $sale['authorization'] = 0;
+                }
+
                 $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
 
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
