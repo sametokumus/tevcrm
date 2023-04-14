@@ -313,7 +313,13 @@ class SaleController extends Controller
             ]);
             $sale_id = Sale::query()->where('request_id', $request->request_id)->first()->sale_id;
             Sale::query()->where('sale_id', $sale_id)->update([
-                'status_id' => 4
+                'status_id' => 4,
+                'sub_total' => null,
+                'freight' => null,
+                'vat' => null,
+                'grand_total' => null,
+                'shipping_price' => null,
+                'grand_total_with_shipping' => null
             ]);
 
             StatusHistory::query()->insert([
