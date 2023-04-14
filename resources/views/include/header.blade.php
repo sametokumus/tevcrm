@@ -78,8 +78,8 @@ $extra_js="";
 
 
         <div class="brand">
-            <a href="/" class="brand-logo">
-                <img src="/img/logo/semy-light.png" class="img-responsive brand-img">
+            <a href="/news-feed" class="brand-logo">
+                <img src="/img/logo/semy-light2.png" class="img-responsive brand-img">
             </a>
         </div>
 
