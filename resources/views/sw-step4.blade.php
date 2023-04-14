@@ -91,6 +91,13 @@ $extra_js='
                                 <tbody id="sales-detail-body">
 
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="11" class="border-bottom-0"></th>
+                                    <th colspan="6" class="border-bottom-0"></th>
+                                    <th colspan="6" class="border-bottom-0"></th>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <div class="card-arrow">

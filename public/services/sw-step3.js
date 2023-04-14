@@ -136,7 +136,6 @@ async function initOfferDetail(){
         });
 
         editor.on('preSubmit', async function(e, data, action) {
-            console.log(1)
             if (action !== 'remove') {
                 let user_id = localStorage.getItem('userId');
                 let id = editor.field('id').val();
@@ -158,7 +157,10 @@ async function initOfferDetail(){
                     alert("Hata Oluştu");
                 }
 
+                // alert("asdsa")
+                // await initSaleTableFooter();
                 // Submit the edited row data
+
                 editor.submit();
             }
         });
@@ -260,6 +262,8 @@ async function initOfferDetail(){
     }else{
         alert('Bu sipariş teklif oluşturmaya hazır değildir.');
     }
+
+    await initSaleTableFooter();
 }
 
 async function openAddBatchProcessModal(){
@@ -370,4 +374,35 @@ async function updateQuote(){
     }else{
         alert("Hata Oluştu");
     }
+}
+
+
+async function initSaleTableFooter(){
+    let tableSales = $("#sales-detail").DataTable();
+    let supplier_total = 0;
+    let offer_total = 0;
+    tableSales.rows().every(function() {
+        let data = this.data();
+        console.log(data)
+        if (data.discounted_price == '' || data.discounted_price == '0,00'){
+            supplier_total += parseFloat(changePriceToDecimal(data.total_price));
+        }else{
+            supplier_total += parseFloat(changePriceToDecimal(data.discounted_price));
+        }
+        if (data.offer_price == '' || data.offer_price == '0,00'){
+        }else{
+            offer_total += parseFloat(changePriceToDecimal(data.offer_price));
+        }
+
+    });
+
+    let profit = 100 * (offer_total - supplier_total) / supplier_total;
+
+    $("#sales-detail tfoot tr").remove();
+    let footer = '<tr>\n' +
+        '             <th colspan="6" class="border-bottom-0">Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total) +'</th>\n' +
+        '             <th colspan="6" class="border-bottom-0">Satış Fiyatı: '+ changeDecimalToPrice(offer_total) +'</th>\n' +
+        '             <th colspan="6" class="border-bottom-0">Kar Oranı: '+ changeDecimalToPrice(profit) +'</th>\n' +
+        '         </tr>';
+    $("#sales-detail tfoot").append(footer);
 }

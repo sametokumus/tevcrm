@@ -311,10 +311,27 @@ function xmlToJson(xml) {
 	return obj;
 };
 
-function changePriceToDecimal(price){
-	price = price.replace(".", "");
-	price = price.replace(",", ".");
-	return price;
+function changePriceToDecimal(str) {
+    if (typeof str === 'string') {
+        str = str.replace(/\./g, '');
+        str = str.replace(',', '.');
+    }
+    return str;
+}
+function changeDecimalToPrice(num) {
+    // Convert the number to a string with a fixed number of decimal places
+    const str = num.toFixed(2);
+
+    // Replace the decimal separator with a comma
+    const strWithComma = str.replace('.', ',');
+
+    // Replace the thousands separator with a dot
+    const parts = strWithComma.split(',');
+    const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const decimalPart = parts[1];
+
+    // Combine the integer and decimal parts with a comma separator
+    return integerPart + ',' + decimalPart;
 }
 function changeCommasToDecimal(price) {
     if (price == null){

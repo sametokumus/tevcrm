@@ -45,6 +45,7 @@ async function initOfferDetail(){
 
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
+            footer: true,
             data: offers,
             columns: [{
                 title: 'N#',
@@ -114,14 +115,32 @@ async function initOfferDetail(){
                     action: function ( e, dt, node, config ) {
                         openRejectOfferModal();
                     }
-                },
-                // 'selectAll',
-                // 'selectNone',
-                // 'excel',
-                // 'pdf'
+                }
             ],
             language: {
                 url: "services/Turkish.json"
+            },
+            footerCallback: function (row, data, start, end, display) {
+                let api = this.api();
+                console.log(data)
+                let supplier_total = 0;
+                let offer_total = 0;
+                $.each(data, function (i, offer) {
+                    console.log(offer)
+                    if (offer.discounted_price == null || offer.discounted_price == "0,00"){
+                        supplier_total += parseFloat(changePriceToDecimal(offer.total_price.toString()));
+                    }else{
+                        supplier_total += parseFloat(changePriceToDecimal(offer.discounted_price.toString()));
+                    }
+
+                    offer_total += parseFloat(changePriceToDecimal(offer.offer_price.toString()));
+                });
+                let profit = 100 * (offer_total - supplier_total) / supplier_total;
+
+                $(api.column(0).footer()).html('Tedarikçi Fiyatı: ' + changeDecimalToPrice(supplier_total));
+                $(api.column(11).footer()).html('Teklif Fiyatı: ' + changeDecimalToPrice(offer_total));
+                $(api.column(17).footer()).html('Kar Oranı: ' + changeDecimalToPrice(profit));
+
             }
         } );
 

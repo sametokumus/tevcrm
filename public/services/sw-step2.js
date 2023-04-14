@@ -57,10 +57,10 @@ async function initOfferDetail(){
                     '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
                     '           <td>' + checkNull(product.lead_time) + '</td>\n' +
                     '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
-                    '           <td>' + checkNull(product.pcs_price) + '</td>\n' +
-                    '           <td>' + checkNull(product.total_price) + '</td>\n' +
+                    '           <td>' + changeCommasToDecimal(product.pcs_price) + '</td>\n' +
+                    '           <td>' + changeCommasToDecimal(product.total_price) + '</td>\n' +
                     '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-                    '           <td>' + checkNull(product.discounted_price) + '</td>\n' +
+                    '           <td>' + changeCommasToDecimal(product.discounted_price) + '</td>\n' +
                     '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
                     '           <td>' + checkNull(product.currency) + '</td>\n' +
                     '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
@@ -130,6 +130,26 @@ async function addSaleTableProduct(el){
     tableSales
         .row.add( rowNode )
         .draw();
+    await initSaleTableFooter();
+}
+
+async function initSaleTableFooter(){
+    let tableSales = $("#sales-detail").DataTable();
+    let total = 0;
+    tableSales.rows().every(function() {
+        let data = this.data();
+        if (data[15] == ''){
+            total += parseFloat(changePriceToDecimal(data[13]));
+        }else{
+            total += parseFloat(changePriceToDecimal(data[15]));
+        }
+    });
+
+    $("#sales-detail tfoot tr").remove();
+    let footer = '<tr>\n' +
+        '             <th colspan="20" class="border-bottom-0">Tedarik Fiyatı: '+ changeDecimalToPrice(total) +'</th>\n' +
+        '         </tr>';
+    $("#sales-detail tfoot").append(footer);
 }
 
 async function addOfferTableProduct(el){
@@ -144,6 +164,7 @@ async function addOfferTableProduct(el){
     tableOffer
         .row.add( rowNode )
         .draw();
+    await initSaleTableFooter();
 }
 
 async function addSale(){
@@ -164,10 +185,10 @@ async function addSale(){
                 "supplier_id": this.data()[6],
                 "lead_time": this.data()[10],
                 "measurement": this.data()[11],
-                "pcs_price": this.data()[12],
-                "total_price": this.data()[13],
+                "pcs_price": changePriceToDecimal(this.data()[12]),
+                "total_price": changePriceToDecimal(this.data()[13]),
                 "discount_rate": this.data()[14],
-                "discounted_price": this.data()[15],
+                "discounted_price": changePriceToDecimal(this.data()[15]),
                 "vat_rate": this.data()[16],
                 "currency": this.data()[16],
                 "request_quantity": this.data()[18],

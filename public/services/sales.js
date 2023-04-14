@@ -219,6 +219,7 @@ async function initSales(){
 			'          </tr>';
 		$('#sales-datatable tbody').append(saleItem);
 	});
+
 	$('#sales-datatable').DataTable({
 		responsive: false,
 		columnDefs: [
