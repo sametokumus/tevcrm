@@ -519,9 +519,12 @@ class SaleController extends Controller
                     $sub_total += $sale_offer->offer_price;
                     $vat += $sale_offer->offer_price / 100 * $sale_offer->vat_rate;
                 }
+
+                $grand_total = $sub_total + $vat;
                 Sale::query()->where('sale_id', $sale_id)->update([
                     'sub_total' => $sub_total,
-                    'vat' => $vat
+                    'vat' => $vat,
+                    'grand_total' => $grand_total
                 ]);
             }
 

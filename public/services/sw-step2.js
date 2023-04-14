@@ -190,7 +190,7 @@ async function addSale(){
                 "discount_rate": this.data()[14],
                 "discounted_price": changePriceToDecimal(this.data()[15]),
                 "vat_rate": this.data()[16],
-                "currency": this.data()[16],
+                "currency": this.data()[17],
                 "request_quantity": this.data()[18],
                 "offer_quantity": this.data()[19],
             }

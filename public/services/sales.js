@@ -168,7 +168,10 @@ async function initSales(){
         }else if (sale.status.action == "oc-po"){
             status_class = "border-green text-green";
             btn_list += '<a href="order-confirmation-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Order Conf. PDF</a>\n';
-            btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">PO PDF</a>\n';
+            let role = localStorage.getItem('userRole');
+            if (role == 1 || role == 2 || role == 3){
+                btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Supp. PO PDF</a>\n';
+            }
         }else if (sale.status.action == "inv"){
             status_class = "border-indigo text-indigo";
 
