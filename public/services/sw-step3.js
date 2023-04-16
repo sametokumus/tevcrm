@@ -410,7 +410,7 @@ async function initSaleTableFooter(){
     if (profit_rate <= 0) {
         footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: -';
     }else{
-        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: ' + changeDecimalToPrice(profit_rate);
+        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: %' + changeDecimalToPrice(profit_rate);
     }
     $("#sales-detail tfoot tr").remove();
     $(".dataTables_scrollFootInner tfoot tr").remove();

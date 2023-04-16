@@ -152,7 +152,7 @@ async function initOfferDetail(){
                 if (profit_rate <= 0) {
                     footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: -';
                 }else{
-                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: ' + changeDecimalToPrice(profit_rate);
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: %' + changeDecimalToPrice(profit_rate);
                 }
 
                 $(api.column(0).footer()).html(footer_text);
