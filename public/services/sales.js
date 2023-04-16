@@ -176,12 +176,12 @@ async function initSales(){
             status_class = "border-indigo text-indigo";
 
             btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Proforma INV. PDF</a>\n';
-            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Comm. Inv. PDF</a>\n';
+            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Commercia Inv. PDF</a>\n';
         }else if (sale.status.action == "pl-inv"){
             status_class = "border-indigo text-indigo";
 
             btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
-            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Comm. Inv. PDF</a>\n';
+            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Commercia Inv. PDF</a>\n';
         }
 
         btn_list += '</div>';
@@ -258,7 +258,7 @@ async function initSales(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		order: [[11, 'desc']],
+		order: [[10, 'desc']],
         fixedColumns: {
         left: 4
         }
@@ -293,7 +293,7 @@ async function updateStatus(){
     }
 }
 async function initStatusModal(sale_id, status_id){
-    let data = await serviceGetStatuses();
+    let data = await serviceGetChangeableStatuses();
     let statuses = data.statuses;
     $('#update_sale_status option').remove();
     $.each(statuses, function (i, status){

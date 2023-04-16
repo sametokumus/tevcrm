@@ -21,8 +21,10 @@ function checkRole(){
 async function initOfferDetail(){
     let request_id = getPathVariable('sw-2');
     console.log(request_id)
-    let data = await serviceGetOffersByRequestId(request_id);
+    let data_c = await serviceGetOfferRequestById(request_id);
+    $('#sw_customer_name').text(data_c.offer_request.company.name);
 
+    let data = await serviceGetOffersByRequestId(request_id);
     if (data.offer_status) {
         let offers = data.offers;
         console.log(offers)

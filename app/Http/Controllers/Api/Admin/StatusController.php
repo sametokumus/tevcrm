@@ -40,4 +40,14 @@ class StatusController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getChangeableStatuses()
+    {
+        try {
+            $statuses = Status::query()->where('active',1)->where('change_list',1)->orderBy('sequence')->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['statuses' => $statuses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }

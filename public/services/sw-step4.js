@@ -36,6 +36,8 @@ async function initOfferDetail(){
     console.log(sale_id)
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
+    console.log(sale)
+    $('#sw_customer_name').text(sale.request.company.name);
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
@@ -135,11 +137,25 @@ async function initOfferDetail(){
 
                     offer_total += parseFloat(changePriceToDecimal(offer.offer_price.toString()));
                 });
-                let profit = 100 * (offer_total - supplier_total) / supplier_total;
 
-                $(api.column(0).footer()).html('Tedarikçi Fiyatı: ' + changeDecimalToPrice(supplier_total));
-                $(api.column(11).footer()).html('Teklif Fiyatı: ' + changeDecimalToPrice(offer_total));
-                $(api.column(17).footer()).html('Kar Oranı: ' + changeDecimalToPrice(profit));
+                let profit = offer_total - supplier_total;
+                let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
+                let footer_text = '';
+                footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total);
+                footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Satış Fiyatı: '+ changeDecimalToPrice(offer_total);
+
+                if (profit <= 0) {
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: -';
+                }else{
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: ' + changeDecimalToPrice(profit);
+                }
+                if (profit_rate <= 0) {
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: -';
+                }else{
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: ' + changeDecimalToPrice(profit_rate);
+                }
+
+                $(api.column(0).footer()).html(footer_text);
 
             }
         } );

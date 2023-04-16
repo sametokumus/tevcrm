@@ -603,6 +603,8 @@ async function getCitiesAddSelectIdWithParent(selectId, parentSelectId){
 async function getBrandsAddSelectId(selectId){
     let data = await serviceGetBrands();
     $('#'+selectId+' option').remove();
+    var optionRow = '<option value="">Marka Seçiniz</option>';
+    $('#'+selectId).append(optionRow);
     $.each(data.brands, function(i, brand){
         var optionRow = '<option value="'+brand.id+'">'+brand.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -611,6 +613,8 @@ async function getBrandsAddSelectId(selectId){
 async function getCategoriesAddSelectId(selectId){
     let data = await serviceGetCategories();
     $('#'+selectId+' option').remove();
+    var optionRow = '<option value="">Ürün Grubu Seçiniz</option>';
+    $('#'+selectId).append(optionRow);
     $.each(data.categories, function(i, category){
         var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -1450,9 +1454,9 @@ async function serviceGetStatuses() {
         showAlert('İstek Başarısız.');
     }
 }
-async function serviceGetAuthorizeStatuses() {
+async function serviceGetChangeableStatuses() {
     let userId = localStorage.getItem('userId');
-    const data = await fetchDataGet('/admin/status/getAuthorizeStatuses/'+ userId, 'application/json');
+    const data = await fetchDataGet('/admin/status/getChangeableStatuses', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

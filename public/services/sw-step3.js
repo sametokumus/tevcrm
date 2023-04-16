@@ -72,10 +72,10 @@ async function initOfferDetail(){
     console.log(sale_id)
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
+    $('#sw_customer_name').text(sale.request.company.name);
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
-        console.log(offers)
         $("#sales-detail").dataTable().fnDestroy();
         $('#sales-detail tbody > tr').remove();
 
@@ -157,12 +157,13 @@ async function initOfferDetail(){
                     alert("Hata Oluştu");
                 }
 
-                // alert("asdsa")
-                // await initSaleTableFooter();
                 // Submit the edited row data
-
                 editor.submit();
             }
+        });
+        editor.on('submitSuccess', async function() {
+            // Reload the DataTable
+            await initSaleTableFooter();
         });
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
@@ -383,7 +384,6 @@ async function initSaleTableFooter(){
     let offer_total = 0;
     tableSales.rows().every(function() {
         let data = this.data();
-        console.log(data)
         if (data.discounted_price == '' || data.discounted_price == '0,00'){
             supplier_total += parseFloat(changePriceToDecimal(data.total_price));
         }else{
@@ -396,13 +396,26 @@ async function initSaleTableFooter(){
 
     });
 
-    let profit = 100 * (offer_total - supplier_total) / supplier_total;
+    let profit = offer_total - supplier_total;
+    let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
+    let footer_text = '';
+    footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total);
+    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Satış Fiyatı: '+ changeDecimalToPrice(offer_total);
 
+    if (profit <= 0) {
+        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: -';
+    }else{
+        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: ' + changeDecimalToPrice(profit);
+    }
+    if (profit_rate <= 0) {
+        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: -';
+    }else{
+        footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: ' + changeDecimalToPrice(profit_rate);
+    }
     $("#sales-detail tfoot tr").remove();
+    $(".dataTables_scrollFootInner tfoot tr").remove();
     let footer = '<tr>\n' +
-        '             <th colspan="6" class="border-bottom-0">Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total) +'</th>\n' +
-        '             <th colspan="6" class="border-bottom-0">Satış Fiyatı: '+ changeDecimalToPrice(offer_total) +'</th>\n' +
-        '             <th colspan="6" class="border-bottom-0">Kar Oranı: '+ changeDecimalToPrice(profit) +'</th>\n' +
+        '             <th colspan="20" class="border-bottom-0">'+ footer_text +'</th>\n' +
         '         </tr>';
     $("#sales-detail tfoot").append(footer);
 }

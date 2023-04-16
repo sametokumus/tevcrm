@@ -43,7 +43,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Müşteri Teklifi
+                        Müşteri Teklifi (<span id="sw_customer_name"></span>)
                     </h1>
                 </div>
             </div>
@@ -88,9 +88,7 @@ $extra_js='
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th colspan="6" class="border-bottom-0"></th>
-                                    <th colspan="6" class="border-bottom-0"></th>
-                                    <th colspan="6" class="border-bottom-0"></th>
+                                    <th colspan="18" class="border-bottom-0"></th>
                                 </tr>
                                 </tfoot>
                             </table>
