@@ -263,18 +263,30 @@ class SaleController extends Controller
         }
     }
 
-    public function getApproveOfferBySaleId($sale_id, $user_id)
+    public function getApproveOfferBySaleId($sale_id, $user_id, $revize)
     {
         try {
-            Sale::query()->where('sale_id', $sale_id)->update([
-                'status_id' => 26
-            ]);
+            if ($revize == 0) {
+                Sale::query()->where('sale_id', $sale_id)->update([
+                    'status_id' => 26
+                ]);
 
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 26,
-                'user_id' => $user_id,
-            ]);
+                StatusHistory::query()->insert([
+                    'sale_id' => $sale_id,
+                    'status_id' => 26,
+                    'user_id' => $user_id,
+                ]);
+            }elseif ($revize == 1){
+                Sale::query()->where('sale_id', $sale_id)->update([
+                    'status_id' => 32
+                ]);
+
+                StatusHistory::query()->insert([
+                    'sale_id' => $sale_id,
+                    'status_id' => 32,
+                    'user_id' => $user_id,
+                ]);
+            }
 
 
 
@@ -284,18 +296,30 @@ class SaleController extends Controller
         }
     }
 
-    public function getRejectOfferBySaleId($sale_id, $user_id)
+    public function getRejectOfferBySaleId($sale_id, $user_id, $revize)
     {
         try {
-            Sale::query()->where('sale_id', $sale_id)->update([
-                'status_id' => 27
-            ]);
+            if ($revize == 0) {
+                Sale::query()->where('sale_id', $sale_id)->update([
+                    'status_id' => 27
+                ]);
 
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 27,
-                'user_id' => $user_id,
-            ]);
+                StatusHistory::query()->insert([
+                    'sale_id' => $sale_id,
+                    'status_id' => 27,
+                    'user_id' => $user_id,
+                ]);
+            }elseif ($revize == 1){
+                Sale::query()->where('sale_id', $sale_id)->update([
+                    'status_id' => 33
+                ]);
+
+                StatusHistory::query()->insert([
+                    'sale_id' => $sale_id,
+                    'status_id' => 33,
+                    'user_id' => $user_id,
+                ]);
+            }
 
 
 

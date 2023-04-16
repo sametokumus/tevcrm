@@ -1288,9 +1288,9 @@ async function serviceGetSaleById(id) {
     }
 }
 
-async function serviceGetApproveOfferBySaleId(id) {
+async function serviceGetApproveOfferBySaleId(id, revize) {
     let user_id = localStorage.getItem('userId');
-    const data = await fetchDataGet('/admin/sale/getApproveOfferBySaleId/' + id + '/' + user_id, 'application/json');
+    const data = await fetchDataGet('/admin/sale/getApproveOfferBySaleId/' + id + '/' + user_id + '/' + revize, 'application/json');
     if (data.status == "success") {
         return true;
     } else {
@@ -1298,9 +1298,9 @@ async function serviceGetApproveOfferBySaleId(id) {
     }
 }
 
-async function serviceGetRejectOfferBySaleId(id) {
+async function serviceGetRejectOfferBySaleId(id, revize) {
     let user_id = localStorage.getItem('userId');
-    const data = await fetchDataGet('/admin/sale/getRejectOfferBySaleId/' + id + '/' + user_id, 'application/json');
+    const data = await fetchDataGet('/admin/sale/getRejectOfferBySaleId/' + id + '/' + user_id + '/' + revize, 'application/json');
     if (data.status == "success") {
         return true;
     } else {

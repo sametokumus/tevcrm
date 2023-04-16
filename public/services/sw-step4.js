@@ -28,12 +28,15 @@
 function checkRole(){
 	return true;
 }
-
+let revize = 0;
 let table;
 
 async function initOfferDetail(){
     let sale_id = getPathVariable('sw-4');
-    console.log(sale_id)
+    if (sale_id == undefined){
+        sale_id = getPathVariable('sw-4-rev');
+        revize = 1;
+    }
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
     console.log(sale)
@@ -169,7 +172,7 @@ async function initOfferDetail(){
 async function approveOffer() {
     let sale_id = getPathVariable('sw-4');
     console.log(sale_id)
-    let returned = await serviceGetApproveOfferBySaleId(sale_id);
+    let returned = await serviceGetApproveOfferBySaleId(sale_id, revize);
     if (returned){
         window.location.href = "/sales";
     }else{
@@ -185,7 +188,7 @@ async function rejectOffer() {
     let sale_id = getPathVariable('sw-4');
     let user_id = localStorage.getItem('userId');
     console.log(sale_id)
-    let returned = await serviceGetRejectOfferBySaleId(sale_id);
+    let returned = await serviceGetRejectOfferBySaleId(sale_id, revize);
     if (returned){
 
         let note = document.getElementById('add_sale_note_description').value;
