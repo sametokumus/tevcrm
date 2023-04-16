@@ -276,7 +276,7 @@ class SaleController extends Controller
                     'status_id' => 26,
                     'user_id' => $user_id,
                 ]);
-            }elseif ($revize == 1){
+            }else if ($revize == 1){
                 Sale::query()->where('sale_id', $sale_id)->update([
                     'status_id' => 32
                 ]);
@@ -286,6 +286,8 @@ class SaleController extends Controller
                     'status_id' => 32,
                     'user_id' => $user_id,
                 ]);
+            }else{
+                return response(['message' => __('Hatalı işlem.'), 'status' => 'query-001']);
             }
 
 
@@ -309,7 +311,7 @@ class SaleController extends Controller
                     'status_id' => 27,
                     'user_id' => $user_id,
                 ]);
-            }elseif ($revize == 1){
+            }else if ($revize == 1){
                 Sale::query()->where('sale_id', $sale_id)->update([
                     'status_id' => 33
                 ]);
@@ -319,6 +321,8 @@ class SaleController extends Controller
                     'status_id' => 33,
                     'user_id' => $user_id,
                 ]);
+            }else{
+                return response(['message' => __('Hatalı işlem.'), 'status' => 'query-001']);
             }
 
 
