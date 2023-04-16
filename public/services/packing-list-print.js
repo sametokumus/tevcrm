@@ -18,11 +18,11 @@
         checkLogin();
         checkRole();
 
-        let sale_id = getPathVariable('proforma-invoice-print');
+        let sale_id = getPathVariable('packing-list-print');
         // await initContact(1, sale_id);
         await initSale(sale_id);
         await initDetail(sale_id);
-        await initBankInfoSelect();
+        // await initBankInfoSelect();
         // await getOwnersAddSelectId('owners');
         // document.getElementById('owners').value = 1;
     });
@@ -106,7 +106,7 @@ async function initSale(sale_id){
     document.getElementById('buyer_phone').innerHTML = '<b>'+ Lang.get("strings.Phone") +' :</b> '+ company.phone;
     document.getElementById('buyer_email').innerHTML = '<b>'+ Lang.get("strings.Email") +' :</b> '+ company.email;
 
-    $('#quote-print .logo-header .offer-id').text(short_code+'-PI-'+sale.id);
+    $('#quote-print .logo-header .offer-id').text(short_code+'-PL-'+sale.id);
 
     $('#sale-detail tbody > tr').remove();
 
@@ -128,69 +128,66 @@ async function initSale(sale_id){
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.request_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_pcs_price) + ' '+ product.offer_currency +'</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_price) + ' '+ product.offer_currency +'</td>\n' +
-            '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
     document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
-    if (sale.sub_total != null) {
-        let text = Lang.get("strings.Sub Total");
-        if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
-            text = Lang.get("strings.Grand Total");
-        }
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + text + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
-    }
-
-    if (sale.freight != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
-    }
-
-    if (sale.vat != null && sale.vat != '0.00') {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
-    }
-
-    if (sale.grand_total != null) {
-        if ((sale.vat != null && sale.vat != '0.00') || sale.freight != null) {
-            let item = '<tr>\n' +
-                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
-                '       </tr>';
-            $('#sale-detail tbody').append(item);
-        }
-    }
-
-    if (sale.shipping_price != null) {
-        let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Shipping") + '</td>\n' +
-            '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.shipping_price) + ' '+ currency +'</td>\n' +
-            '       </tr>';
-        $('#sale-detail tbody').append(item);
-    }
-
-    if (sale.grand_total_with_shipping != null) {
-        if (sale.shipping_price != null) {
-            let item = '<tr>\n' +
-                '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-                '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +
-                '       </tr>';
-            $('#sale-detail tbody').append(item);
-        }
-    }
+    // if (sale.sub_total != null) {
+    //     let text = Lang.get("strings.Sub Total");
+    //     if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
+    //         text = Lang.get("strings.Grand Total");
+    //     }
+    //     let item = '<tr>\n' +
+    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + text + '</td>\n' +
+    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
+    //         '       </tr>';
+    //     $('#sale-detail tbody').append(item);
+    // }
+    //
+    // if (sale.freight != null) {
+    //     let item = '<tr>\n' +
+    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
+    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
+    //         '       </tr>';
+    //     $('#sale-detail tbody').append(item);
+    // }
+    //
+    // if (sale.vat != null && sale.vat != '0.00') {
+    //     let item = '<tr>\n' +
+    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
+    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
+    //         '       </tr>';
+    //     $('#sale-detail tbody').append(item);
+    // }
+    //
+    // if (sale.grand_total != null) {
+    //     if ((sale.vat != null && sale.vat != '0.00') || sale.freight != null) {
+    //         let item = '<tr>\n' +
+    //             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+    //             '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
+    //             '       </tr>';
+    //         $('#sale-detail tbody').append(item);
+    //     }
+    // }
+    //
+    // if (sale.shipping_price != null) {
+    //     let item = '<tr>\n' +
+    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Shipping") + '</td>\n' +
+    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.shipping_price) + ' '+ currency +'</td>\n' +
+    //         '       </tr>';
+    //     $('#sale-detail tbody').append(item);
+    // }
+    //
+    // if (sale.grand_total_with_shipping != null) {
+    //     if (sale.shipping_price != null) {
+    //         let item = '<tr>\n' +
+    //             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
+    //             '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +
+    //             '       </tr>';
+    //         $('#sale-detail tbody').append(item);
+    //     }
+    // }
 
 }
 

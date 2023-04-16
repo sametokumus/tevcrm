@@ -66,7 +66,7 @@ async function initProducts(){
     });
 
     $('#product-datatable').DataTable({
-        responsive: true,
+        responsive: false,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
@@ -82,7 +82,8 @@ async function initProducts(){
                 }
             }
         ],
-        pageLength : -1,
+        paging: false,
+        scrollX: true,
         language: {
             url: "services/Turkish.json"
         },

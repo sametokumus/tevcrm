@@ -45,9 +45,9 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     {
         try {
-            $request->validate([
-                'stock_code' => 'required'
-            ]);
+//            $request->validate([
+//                'stock_code' => 'required'
+//            ]);
 
             $product_id = Product::query()->insertGetId([
                 'brand_id' => $request->brand_id,
@@ -71,9 +71,9 @@ class ProductController extends Controller
     public function updateProduct(Request $request, $id)
     {
         try {
-            $request->validate([
-                'stock_code' => 'required'
-            ]);
+//            $request->validate([
+//                'stock_code' => 'required'
+//            ]);
 
             Product::query()->where('id', $id)->update([
                 'brand_id' => $request->brand_id,

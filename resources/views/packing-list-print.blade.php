@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/invoice-print.js"></script>
+<script src="services/packing-list-print.js"></script>
 ';
 ?>
 
@@ -54,7 +54,7 @@ $extra_js='
                                                     </address>
                                                 </div>
                                                 <h1 class="page-header">
-                                                    {{__('Invoice')}}
+                                                    {{__('Packing List')}}
                                                 </h1>
                                                 <div class="buyer-col">
 {{--                                                    <h6>{{__('Customer')}}</h6>--}}
@@ -90,9 +90,6 @@ $extra_js='
                                                         <th class="text-center">{{__('Product Name')}}</th>
                                                         <th class="text-center">{{__('Qty')}}</th>
                                                         <th class="text-center">{{__('Unit')}}</th>
-                                                        <th class="text-center">{{__('Unit Price')}}</th>
-                                                        <th class="text-center">{{__('Total Price')}}</th>
-{{--                                                        <th class="text-center">{{__('Lead Time')}}</th>--}}
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -104,33 +101,33 @@ $extra_js='
                                         </div>
                                         <!-- /.row -->
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    <strong>{{__('Note')}}:</strong>
-                                                    <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
-                                                    <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
-                                                </p>
-                                                <div id="note" class="text-muted">
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-md-12">--}}
+{{--                                                <p style="margin-top: 15px; margin-bottom: 0;">--}}
+{{--                                                    <strong>{{__('Note:')}}</strong>--}}
+{{--                                                    <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>--}}
+{{--                                                    <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>--}}
+{{--                                                </p>--}}
+{{--                                                <div id="note" class="text-muted">--}}
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    <strong>{{__('Bank Details')}}:</strong>
-                                                    <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>
-                                                </p>
-                                                <div id="bank-details" class="text-muted">
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-md-12">--}}
+{{--                                                <p style="margin-top: 15px; margin-bottom: 0;">--}}
+{{--                                                    <strong>{{__('Bank Details:')}}</strong>--}}
+{{--                                                    <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>--}}
+{{--                                                </p>--}}
+{{--                                                <div id="bank-details" class="text-muted">--}}
 
-                                                </div>
-                                            </div>
-                                        </div>
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </section>
                                     <div class="row">
                                         <div class="col-12 mt-3">
-                                            <button onclick="openUpdateDetailModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
+{{--                                            <button onclick="openUpdateDetailModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>--}}
                                             <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                                         </div>
                                         <div class="col-md-12 mt-3">
@@ -139,7 +136,6 @@ $extra_js='
                                             </div>
                                         </div>
                                     </div>
-
 
                                 </td>
                             </tr>

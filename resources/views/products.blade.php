@@ -61,7 +61,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Stok Miktarı</label>
-                            <input type="text" class="form-control" id="add_product_stock_quantity">
+                            <input type="number" class="form-control" id="add_product_stock_quantity" value="0">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Ref. Code</label>

@@ -62,8 +62,21 @@ async function initContact(contact_id, offer_id){
 
 
     $('#offer-print .logo-header .date').text(Lang.get("strings.Date") +': '+ today);
+
     $('#offer-print .contact-col address').text('');
-    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>'+ contact.address +'<br>'+ contact.phone +'<br>'+ contact.email +'');
+
+    $('#offer-print .contact-col address').append('<strong>'+ contact.name +'</strong><br>');
+    if (contact.registration_no != '') {
+        $('#offer-print .contact-col address').append('<b>' + Lang.get("strings.Registration No") + ' :</b> ' + contact.registration_no + '&nbsp;&nbsp;&nbsp;');
+    }
+    let lang = Lang.getLocale();
+    if (contact.registration_office != '' && lang != 'en') {
+        $('#offer-print .contact-col address').append('<b>' + Lang.get("strings.Registration Office") + ' :</b> ' + contact.registration_office);
+    }
+    $('#offer-print .contact-col address').append('<br>');
+    $('#offer-print .contact-col address').append('<b>'+ Lang.get("strings.Address") +'</b><br>'+ contact.address +'<br>');
+    $('#offer-print .contact-col address').append('<b>'+ Lang.get("strings.Phone") +':</b> '+ contact.phone +'<br>');
+    $('#offer-print .contact-col address').append('<b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 
 }
 
