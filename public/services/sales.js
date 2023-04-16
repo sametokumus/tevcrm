@@ -188,6 +188,8 @@ async function initSales(){
 
             btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Commercia Inv. PDF</a>\n';
+        }else if (sale.status.action == "admin-conf-failed" || sale.status.action == "admin-rev-conf-failed"){
+            status_class = "border-default text-default";
         }
 
         btn_list += '</div>';
