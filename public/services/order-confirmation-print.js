@@ -4,6 +4,13 @@
     $(document).ready(function() {
 
         $(":input").inputmask();
+        $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_vat_rate").maskMoney({thousands:'.', decimal:','});
+
+        $('#update_quote_form').submit(function (e){
+            e.preventDefault();
+            updateQuote();
+        });
 
         $('#add_note_form').submit(function (e){
             e.preventDefault();
@@ -24,6 +31,7 @@
         let sale_id = getPathVariable('order-confirmation-print');
         // await initContact(1, sale_id);
         await initSale(sale_id);
+        await initQuote(sale_id);
         await initBankInfoSelect();
     });
 
@@ -97,12 +105,15 @@ async function initSale(sale_id){
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
 
+    await getPaymentTermsAddSelectId('update_quote_payment_term');
+    await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
-    document.getElementById('buyer_registration_number').innerHTML = '<b>'+ Lang.get("strings.Registration No") +' :</b> '+ checkNull(company.registration_number);
     document.getElementById('buyer_address').innerHTML = '<b>'+ Lang.get("strings.Address") +' :</b> '+ company.address;
-    document.getElementById('buyer_phone').innerHTML = '<b>'+ Lang.get("strings.Phone") +' :</b> '+ company.phone;
-    document.getElementById('buyer_email').innerHTML = '<b>'+ Lang.get("strings.Email") +' :</b> '+ company.email;
+    document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> '+ checkNull(company.payment_term);
+    document.getElementById('update_quote_payment_term').value = checkNull(company.payment_term);
+
 
     $('#order-confirmation-print .logo-header .offer-id').text(short_code+'-OC-'+sale.id);
 
@@ -260,4 +271,83 @@ async function changeBankInfo(){
     }
 
     $("#addBankInfoModal").modal('hide');
+}
+
+
+async function initQuote(sale_id){
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
+
+    if (checkNull(quote.payment_term) != '') {
+        document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
+        document.getElementById('update_quote_payment_term').value = quote.payment_term;
+    }
+    if (checkNull(quote.lead_time) != '') {
+        document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
+    }else{
+        $('#lead_time').addClass('d-none');
+    }
+    if (checkNull(quote.delivery_term) != '') {
+        document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
+    }else{
+        $('#delivery_term').addClass('d-none');
+    }
+    if (checkNull(quote.country_of_destination) != '') {
+        document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
+    }else{
+        $('#country_of_destination').addClass('d-none');
+    }
+    document.getElementById('note').innerHTML = checkNull(quote.note);
+}
+
+async function openUpdateQuoteModal(){
+    $("#updateQuoteModal").modal('show');
+    await initUpdateQuoteModal();
+}
+
+async function initUpdateQuoteModal(){
+    let sale_id = getPathVariable('order-confirmation-print');
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
+
+    document.getElementById('update_quote_id').value = quote.id;
+    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
+    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
+    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
+    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
+}
+
+async function updateQuote(){
+    let sale_id = getPathVariable('order-confirmation-print');
+    let quote_id = document.getElementById('update_quote_id').value;
+    let payment_term = document.getElementById('update_quote_payment_term').value;
+    let lead_time = document.getElementById('update_quote_lead_time').value;
+    let delivery_term = document.getElementById('update_quote_delivery_term').value;
+    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
+    let freight = document.getElementById('update_quote_freight').value;
+    let note = document.getElementById('update_quote_note').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "quote_id": quote_id,
+        "payment_term": payment_term,
+        "lead_time": lead_time,
+        "delivery_term": delivery_term,
+        "country_of_destination": country_of_destination,
+        "freight": changePriceToDecimal(freight),
+        "note": note
+    });
+
+
+    let returned = await servicePostUpdateQuote(formData);
+    if (returned){
+        $("#update_quote_form").trigger("reset");
+        $('#updateQuoteModal').modal('hide');
+        await initSale(sale_id);
+        await initQuote(sale_id);
+    }else{
+        alert("Hata Oluştu");
+    }
 }

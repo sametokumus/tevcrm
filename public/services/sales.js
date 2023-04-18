@@ -164,13 +164,13 @@ async function initSales(){
             btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
         }else if (sale.status.action == "admin-conf-success"){
             status_class = "border-default text-default";
-            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Rv. Quatotion PDF</a>\n';
+            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
         }else if (sale.status.action == "admin-rev-conf"){
             status_class = "border-yellow text-yellow";
             btn_list += '<a href="sw-4-rev/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Revize Teklifi Onayla</a>\n';
         }else if (sale.status.action == "admin-rev-conf-success"){
             status_class = "border-default text-default";
-            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
+            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Rv. Quatotion PDF</a>\n';
         }else if (sale.status.action == "oc-po"){
             status_class = "border-green text-green";
             btn_list += '<a href="order-confirmation-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Order Conf. PDF</a>\n';
@@ -367,8 +367,10 @@ async function addSaleNote() {
 
     let returned = await servicePostAddSaleNote(formData);
     if (returned){
-        showAlert("Note Eklendi");
+        showAlert("Not Eklendi");
         $('#addSaleNoteModal').modal('hide');
+        $('#add_sale_note_description').summernote('reset', true);
+        document.getElementById('add_sale_note_id').value = '';
     }else{
         alert("Not Eklerken Hata Oluştu")
     }

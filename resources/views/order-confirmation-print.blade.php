@@ -57,11 +57,12 @@ $extra_js='
                                                 </h1>
                                                 <div class="buyer-col">
                                                     <address>
-                                                        <span id="buyer_name"></span><br>
-                                                        <span id="buyer_registration_number"></span><br>
-                                                        <span id="buyer_address"></span><br>
-                                                        <span id="buyer_phone"></span><br>
-                                                        <span id="buyer_email"></span><br>
+                                                        <span id="buyer_name" class="d-block"></span>
+                                                        <span id="buyer_address" class="d-block"></span><br>
+                                                        <span id="payment_term" class="d-block"></span>
+                                                        <span id="lead_time" class="d-block"></span>
+                                                        <span id="delivery_term" class="d-block"></span>
+                                                        <span id="country_of_destination" class="d-block"></span>
                                                     </address>
                                                 </div>
                                             </div>
@@ -146,6 +147,7 @@ $extra_js='
                                     </section>
                                     <div class="row">
                                         <div class="col-12">
+                                            <button onclick="openUpdateQuoteModal();" class="btn btn-theme btn-block w-100 mb-2 no-print">Bilgileri Güncelle</button>
                                             <button onclick="printOffer();" class="btn btn-theme btn-block w-100 no-print">Yazdır</button>
                                         </div>
                                     </div>
@@ -180,6 +182,55 @@ $extra_js='
 </div>
 <!--app-content close-->
 
+<div class="modal modal-cover fade" id="updateQuoteModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">BİLGİ GÜNCELLEME</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_quote_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <input type="hidden" class="form-control" id="update_quote_id">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Payment Term</label>
+                            <select class="form-control" id="update_quote_payment_term">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Insurance</label>
+                            <input type="text" class="form-control" id="update_quote_lead_time">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Delivery Terms</label>
+                            <select class="form-control" id="update_quote_delivery_term">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Country of Destination</label>
+                            <input type="text" class="form-control" id="update_quote_country_of_destination">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Freight Price</label>
+                            <input type="text" class="form-control" id="update_quote_freight">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Note</label>
+                            <textarea name="text" class="summernote" id="update_quote_note" title="Contents"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal modal-cover fade" id="addNoteModal">
     <div class="modal-dialog modal-lg">
