@@ -126,7 +126,7 @@ class OfferRequestController extends Controller
 
                 }
 
-                $measurement = Measurement::query()->where('name', $product['measurement'])->where('active', 1)->first();
+                $measurement = Measurement::query()->where('name_tr', $product['measurement'])->where('active', 1)->first();
                 OfferRequestProduct::query()->insert([
                     'request_id' => $request_id,
                     'product_id' => $product_id,
@@ -235,7 +235,7 @@ class OfferRequestController extends Controller
 
             }
 
-            $measurement = Measurement::query()->where('name', $request->measurement)->where('active', 1)->first();
+            $measurement = Measurement::query()->where('name_tr', $request->measurement)->where('active', 1)->first();
             OfferRequestProduct::query()->insert([
                 'request_id' => $request_id,
                 'product_id' => $product_id,

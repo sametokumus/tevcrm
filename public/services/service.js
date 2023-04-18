@@ -530,7 +530,7 @@ async function getMeasurementsAddSelectId(selectId){
     let data = await serviceGetMeasurements();
     $('#'+selectId+' option').remove();
     $.each(data.measurements, function(i, measurement){
-        let optionRow = '<option value="'+measurement.name+'">'+measurement.name+'</option>';
+        let optionRow = '<option value="'+measurement.name_tr+'">'+measurement.name_tr+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }

@@ -362,7 +362,7 @@ class SaleController extends Controller
             ]);
 
             foreach ($request->offers as $offer){
-                $measurement = Measurement::query()->where('name', $offer['measurement'])->where('active', 1)->first();
+                $measurement = Measurement::query()->where('name_tr', $offer['measurement'])->where('active', 1)->first();
                 SaleOffer::query()->insert([
                     'sale_id' => $sale_id,
                     'offer_id' => $offer['offer_id'],
