@@ -1122,8 +1122,7 @@ async function serviceGetOfferRequestById(id) {
 async function servicePostAddOfferRequest(formData) {
     const data = await fetchDataPost('/admin/offerRequest/addOfferRequest', formData, 'application/json');
     if (data.status == "success") {
-        showAlert(data.message);
-        return true;
+        return data;
     } else {
         showAlert('İstek Başarısız.');
         return false;
