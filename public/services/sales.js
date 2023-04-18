@@ -122,7 +122,7 @@ async function initSales(){
 	$('#sales-datatable tbody > tr').remove();
 
 	$.each(data.sales, function (i, sale) {
-        let updated_at = formatDateAndTimeDESC(sale.created_at, "/");
+        let updated_at = formatDateAndTimeDESC2(sale.created_at, "/");
         // let updated_at = sale.created_at;
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
@@ -227,7 +227,7 @@ async function initSales(){
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
 			'              <td>'+ sale.currency +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
-			'              <td>'+ formatDateAndTimeDESC(sale.created_at, "/") +'</td>\n' +
+			'              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
 			'              <td>'+ updated_at +'</td>\n' +
 			'              <td>'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
