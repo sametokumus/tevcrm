@@ -35,6 +35,7 @@
 <script src="https://cdn.datatables.net/fixedcolumns/4.2.2/js/dataTables.fixedColumns.min.js"></script>
 <script src="plugins/datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>

@@ -122,7 +122,8 @@ async function initSales(){
 	$('#sales-datatable tbody > tr').remove();
 
 	$.each(data.sales, function (i, sale) {
-        let updated_at = "-";
+        let updated_at = formatDateAndTimeDESC(sale.created_at, "/");
+        // let updated_at = sale.created_at;
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
         }
@@ -246,6 +247,13 @@ async function initSales(){
                     return type === 'display' && data.length > 30 ?
                         data.substr(0, 30) + '...' :
                         data;
+                }
+            },
+            {
+                type: 'date',
+                targets: 10,
+                render: function(data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
             }
 		],
