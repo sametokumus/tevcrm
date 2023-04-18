@@ -41,7 +41,8 @@ class OfferController extends Controller
                         $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
                         $product['request_quantity'] = $offer_request_product['quantity'];
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
-                        $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+                        $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+                        $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
 
                         if ($product->lead_time != null){
                             $fastest = OfferProduct::query()
@@ -135,7 +136,8 @@ class OfferController extends Controller
                 $offer_sub_total += $product->total_price;
                 $offer_vat += $vat;
                 $offer_grand_total += $product->total_price + $vat;
-                $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+                $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+                $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
 
                 $product->discount_rate = number_format($product->discount_rate, 2,",",".");
                 $product->discounted_price = number_format($product->discounted_price, 2,",",".");
@@ -215,7 +217,8 @@ class OfferController extends Controller
             $product['company_name'] = Company::query()->where('id', $offer->supplier_id)->first()->name;
             $product['request_quantity'] = $offer_request_product['quantity'];
             $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
-            $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+            $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+            $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['product' => $product]]);
         } catch (QueryException $queryException) {

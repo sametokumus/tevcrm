@@ -253,7 +253,8 @@ class SaleController extends Controller
                 $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
                 $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
                 $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
-                $sale_offer['measurement_name'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name;
+                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
             }
             $sale['sale_offers'] = $sale_offers;
 
@@ -502,7 +503,8 @@ class SaleController extends Controller
                 $offer_sub_total += $product->total_price;
                 $offer_vat += $vat;
                 $offer_grand_total += $product->total_price + $vat;
-                $product['measurement_name'] = Measurement::query()->where('id', $product->measurement_id)->first()->name;
+                $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+                $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
             }
 
             $offer['products'] = $products;

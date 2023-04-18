@@ -87,6 +87,12 @@ async function initOfferRequest(){
                 '       <button onclick="openOfferRequestNoteModal(\'' + product.note + '\');" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Satın Alma Notu</span></button>\n' +
                 '   </div>';
         }
+        let measurement_name = '';
+        if (Lang.getLocale() == 'tr'){
+            measurement_name = product.measurement_name_tr;
+        }else{
+            measurement_name = product.measurement_name_en;
+        }
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + product.id + '</td>\n' +
             '              <td>\n' +
@@ -95,7 +101,7 @@ async function initOfferRequest(){
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
-            '           <td>' + product.measurement_name + '</td>\n' +
+            '           <td>' + checkNull(measurement_name) + '</td>\n' +
             '       </tr>';
         $('#offer-request-products tbody').append(item);
     });

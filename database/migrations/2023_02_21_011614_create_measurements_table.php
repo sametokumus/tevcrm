@@ -15,7 +15,8 @@ class CreateMeasurementsTable extends Migration
     {
         Schema::create('measurements', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_tr');
+            $table->string('name_en');
             $table->tinyInteger('sequence')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

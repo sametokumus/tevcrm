@@ -42,6 +42,12 @@ async function initOfferDetail(){
                     cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
                 }
 
+                let measurement_name = '';
+                if (Lang.getLocale() == 'tr'){
+                    measurement_name = product.measurement_name_tr;
+                }else{
+                    measurement_name = product.measurement_name_en;
+                }
                 let item = '<tr id="productRow' + product.id + '">\n' +
                     '           <td>' + rowNo + '</td>\n' +
                     '           <td>' + product.id + '</td>\n' +
@@ -58,7 +64,7 @@ async function initOfferDetail(){
                     '           <td>' + checkNull(product.product_detail.product_name) + '</td>\n' +
                     '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
                     '           <td>' + checkNull(product.lead_time) + '</td>\n' +
-                    '           <td>' + checkNull(product.measurement_name) + '</td>\n' +
+                    '           <td>' + checkNull(measurement_name) + '</td>\n' +
                     '           <td>' + changeCommasToDecimal(product.pcs_price) + '</td>\n' +
                     '           <td>' + changeCommasToDecimal(product.total_price) + '</td>\n' +
                     '           <td>' + checkNull(product.discount_rate) + '</td>\n' +

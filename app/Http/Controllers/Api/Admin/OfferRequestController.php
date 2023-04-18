@@ -49,7 +49,8 @@ class OfferRequestController extends Controller
                 $offer_request_product['ref_code'] = $product->ref_code;
                 $offer_request_product['product_name'] = $product->product_name;
                 $measurement = Measurement::query()->where('id', $offer_request_product->measurement_id)->first();
-                $offer_request_product['measurement_name'] = $measurement->name;
+                $offer_request_product['measurement_name_tr'] = $measurement->name_tr;
+                $offer_request_product['measurement_name_en'] = $measurement->name_en;
                 $offer_request_product['product'] = $product;
             }
             $offer_request['products'] = $offer_request_products;

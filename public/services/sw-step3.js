@@ -185,7 +185,7 @@ async function initOfferDetail(){
                 { data: "lead_time" },
                 { data: "request_quantity" },
                 { data: "offer_quantity" },
-                { data: "measurement_name" },
+                { data: "measurement_name_tr" },
                 { data: "pcs_price" },
                 { data: "total_price" },
                 { data: "discount_rate",

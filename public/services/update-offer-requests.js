@@ -210,6 +210,12 @@ async function initOfferRequest(){
 
     $.each(offer_request.products, function (i, product) {
 
+        let measurement_name = '';
+        if (Lang.getLocale() == 'tr'){
+            measurement_name = product.measurement_name_tr;
+        }else{
+            measurement_name = product.measurement_name_en;
+        }
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + (i+1) + '</td>\n' +
             '           <td>' + checkNull(product.product.stock_code) + '</td>\n' +
@@ -217,7 +223,7 @@ async function initOfferRequest(){
             '           <td>' + product.ref_code + '</td>\n' +
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
-            '           <td>' + product.measurement_name + '</td>\n' +
+            '           <td>' + checkNull(measurement_name) + '</td>\n' +
             '           <td>' + product.product.brand_id + '</td>\n' +
             '           <td>' + checkNull(product.product.category_id) + '</td>\n' +
             '           <td>' + checkNull(product.note) + '</td>\n' +

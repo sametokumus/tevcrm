@@ -122,12 +122,18 @@ async function initSale(sale_id){
                 lead_time = lead_time + ' ' + Lang.get("strings.Day");
             }
         }
+        let measurement_name = '';
+        if (Lang.getLocale() == 'tr'){
+            measurement_name = product.measurement_name_tr;
+        }else{
+            measurement_name = product.measurement_name_en;
+        }
         let item = '<tr>\n' +
             '           <td class="text-center">' + (i+1) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.request_quantity) + '</td>\n' +
-            '           <td class="text-center text-capitalize">' + checkNull(product.measurement_name) + '</td>\n' +
+            '           <td class="text-center text-capitalize">' + checkNull(measurement_name) + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
