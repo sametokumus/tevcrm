@@ -424,7 +424,7 @@ async function initOfferDetailModal(offer_id){
             { data: "ref_code" },
             { data: "product_name" },
             { data: "quantity", className:  "row-edit" },
-            { data: "measurement_name" },
+            { data: "measurement_name_tr" },
             { data: "pcs_price", className:  "row-edit" },
             { data: "total_price", className:  "row-edit" },
             { data: "discount_rate", className:  "row-edit" },
