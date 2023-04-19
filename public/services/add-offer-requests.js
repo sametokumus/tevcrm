@@ -5,7 +5,13 @@
 
 		$('#add_offer_request_form').submit(function (e){
 			e.preventDefault();
-            addOfferRequest();
+            let x = document.getElementById("offer-request-products-body").rows.length;
+            if (x > 0) {
+                addOfferRequest();
+            }else{
+                alert('Ürün giriniz');
+                return false;
+            }
 		});
 
         $('#add_offer_request_product_button').click(function (e){
@@ -168,6 +174,23 @@ async function updateProductRow(item_id){
 async function addOfferRequest(){
     let user_id = localStorage.getItem('userId');
 
+    let products = [];
+    let table = document.getElementById("offer-request-products-body");
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        let item = {
+            "owner_stock_code": row.cells[1].innerText,
+            "customer_stock_code": row.cells[2].innerText,
+            "ref_code": row.cells[3].innerText,
+            "product_name": row.cells[4].innerText,
+            "quantity": parseInt(row.cells[5].innerText),
+            "measurement": row.cells[6].innerText,
+            "brand": row.cells[7].innerText,
+            "category": row.cells[8].innerText,
+            "note": row.cells[9].innerText
+        }
+        products.push(item);
+    }
+
     let owner = document.getElementById('add_offer_request_owner').value;
     if (owner == 0){owner = null;}
     let personnel = document.getElementById('add_offer_request_authorized_personnel').value;
@@ -187,14 +210,15 @@ async function addOfferRequest(){
         "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
-        "company_request_code": request_code
+        "company_request_code": request_code,
+        "products": products
     });
 
     console.log(formData);
 
-    let data = await servicePostAddOfferRequest(formData);
-    if (data.status == "success"){
-        window.location = '/offer-request-products/'+ data.object.request_id;
+    let returned = await servicePostAddOfferRequest(formData);
+    if (returned){
+        window.location = '/sales';
     }else{
         alert("Hata Oluştu");
     }
