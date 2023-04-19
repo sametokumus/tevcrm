@@ -214,7 +214,7 @@ async function initOfferRequest(){
         if (Lang.getLocale() == 'tr'){
             measurement_name = product.measurement_name_tr;
         }else{
-            measurement_name = product.measurement_name_en;
+            measurement_name = product.measurement_name_tr;
         }
         let item = '<tr id="productRow' + product.id + '">\n' +
             '           <td>' + (i+1) + '</td>\n' +
