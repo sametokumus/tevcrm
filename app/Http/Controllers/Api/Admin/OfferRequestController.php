@@ -46,6 +46,10 @@ class OfferRequestController extends Controller
             $offer_request_products = OfferRequestProduct::query()->where('request_id', $offer_request_id)->where('active', 1)->get();
             foreach ($offer_request_products as $offer_request_product){
                 $product = Product::query()->where('id', $offer_request_product->product_id)->first();
+                $product['brand_name'] = "";
+                if ($product->brand_id != null && $product->brand_id != 0){
+                    $product['brand_name'] = Brand::query()->where('id', $product->brand_id)->first()->name;
+                }
                 $offer_request_product['ref_code'] = $product->ref_code;
                 $offer_request_product['product_name'] = $product->product_name;
                 $measurement = Measurement::query()->where('id', $offer_request_product->measurement_id)->first();

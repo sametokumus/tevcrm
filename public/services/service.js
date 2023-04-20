@@ -1130,6 +1130,7 @@ async function servicePostAddOfferRequest(formData) {
 }
 async function servicePostUpdateOfferRequest(id, formData) {
     const data = await fetchDataPost('/admin/offerRequest/updateOfferRequest/' + id, formData, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         showAlert(data.message);
         return true;

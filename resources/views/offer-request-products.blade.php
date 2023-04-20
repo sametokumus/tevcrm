@@ -82,21 +82,23 @@ $extra_js='
                     <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
-                                <table id="offer-request-products" class="table table-bordered key-buttons border-bottom">
-                                    <thead>
-                                    <tr>
-                                        <th class="border-bottom-0">Firma Stok Kodu</th>
-                                        <th class="border-bottom-0">Müşteri Stok Kodu</th>
-                                        <th class="border-bottom-0">Ref. Code</th>
-                                        <th class="border-bottom-0">Ürün Adı</th>
-                                        <th class="border-bottom-0">Miktar</th>
-                                        <th class="border-bottom-0">Birim</th>
-                                        <th class="border-bottom-0">Marka</th>
-                                        <th class="border-bottom-0">Ürün Grubu</th>
-                                        <th class="border-bottom-0">Not</th>
-                                        <th class="border-bottom-0"></th>
-                                    </tr>
-                                    </thead>
+                                <table id="offer-request-products" class="table table-bordered key-buttons border-bottom w-100">
+{{--                                    <thead>--}}
+{{--                                    <tr>--}}
+{{--                                        <th class="border-bottom-0">N#</th>--}}
+{{--                                        <th class="border-bottom-0">ID</th>--}}
+{{--                                        <th class="border-bottom-0">Firma Stok Kodu</th>--}}
+{{--                                        <th class="border-bottom-0">Müşteri Stok Kodu</th>--}}
+{{--                                        <th class="border-bottom-0">Ref. Code</th>--}}
+{{--                                        <th class="border-bottom-0">Ürün Adı</th>--}}
+{{--                                        <th class="border-bottom-0">Miktar</th>--}}
+{{--                                        <th class="border-bottom-0">Birim</th>--}}
+{{--                                        <th class="border-bottom-0">Marka</th>--}}
+{{--                                        <th class="border-bottom-0">Ürün Grubu</th>--}}
+{{--                                        <th class="border-bottom-0">Satın Alma Notu</th>--}}
+{{--                                        <th class="border-bottom-0"></th>--}}
+{{--                                    </tr>--}}
+{{--                                    </thead>--}}
                                     <tbody id="offer-request-products-body">
 
                                     </tbody>

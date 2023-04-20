@@ -70,7 +70,7 @@ async function initPage(){
 
 async function initEmployeeSelect(){
     let company_id = document.getElementById('update_offer_request_company').value;
-    getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
+    await getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
 }
 
 async function initSecondCategory(){
@@ -210,44 +210,13 @@ async function initOfferRequest(){
         document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
     }
 
-
-
-    // $.each(offer_request.products, function (i, product) {
-    //
-    //     let measurement_name = '';
-    //     if (Lang.getLocale() == 'tr'){
-    //         measurement_name = product.measurement_name_tr;
-    //     }else{
-    //         measurement_name = product.measurement_name_en;
-    //     }
-    //     let item = '<tr id="productRow' + product.id + '">\n' +
-    //         '           <td>' + (i+1) + '</td>\n' +
-    //         '           <td>' + checkNull(product.product.stock_code) + '</td>\n' +
-    //         '           <td>' + checkNull(product.customer_stock_code) + '</td>\n' +
-    //         '           <td>' + product.ref_code + '</td>\n' +
-    //         '           <td>' + product.product_name + '</td>\n' +
-    //         '           <td>' + product.quantity + '</td>\n' +
-    //         '           <td>' + checkNull(measurement_name) + '</td>\n' +
-    //         '           <td>' + product.product.brand_id + '</td>\n' +
-    //         '           <td>' + checkNull(product.product.category_id) + '</td>\n' +
-    //         '           <td>' + checkNull(product.note) + '</td>\n' +
-    //         '           <td>\n' +
-    //         '               <div class="btn-list">\n' +
-    //         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="updateProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Düzenle</span></button>\n' +
-    //         '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow(' + product.id + ');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
-    //         '               </div>\n' +
-    //         '           </td>\n' +
-    //         '       </tr>';
-    //     $('#offer-request-products tbody').append(item);
-    // });
-
-
+    await initOfferRequestProducts(offer_request.products);
 
 }
 
 async function updateOfferRequest(){
     let user_id = localStorage.getItem('userId');
-    let request_id = getPathVariable('offer-request');
+    let request_id = getPathVariable('offer-request-products');
 
     let owner = document.getElementById('update_offer_request_owner').value;
     if (owner == 0){owner = null;}
@@ -271,18 +240,217 @@ async function updateOfferRequest(){
         "owner_id": owner
     });
 
-    console.log(formData);
-
+    console.log(request_id)
     let returned = await servicePostUpdateOfferRequest(request_id, formData);
     if (returned){
-        window.location.reload();
+        // window.location.reload();
     }else{
         alert("Hata Oluştu");
     }
 }
 
-// async function initOfferRequestProducts(products){
-//     if (offer_request.products.length > 0){
-//         await initOfferRequestProducts(offer_request.products);
-//     }
-// }
+
+
+
+
+
+
+let editor;
+let table;
+// Activate an inline edit on click of a table cell
+$('#offer-request-products').on( 'click', 'tbody td.row-edit', function (e) {
+    editor.inline( table.cells(this.parentNode, '*').nodes(), {
+        submitTrigger: -1,
+        submitHtml: '<i class="fas fa-lg fa-fw me-2 fa-save"/>'
+    } );
+} );
+$('#offer-request-products').on('draw.dt', function() {
+    table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+        var data = this.data();
+        data.auto_increment = rowIdx + 1;
+        $(this.node()).find('td:eq(0)').html(data.auto_increment);
+    });
+});
+
+let measurementOptions = [];
+(async function() {
+    let data = await serviceGetMeasurements();
+    measurementOptions = data.measurements.map(function(item) {
+        return { value: item.id, label: item.name_tr };
+    });
+})();
+
+async function initOfferRequestProducts(products){
+
+        // $("#offer-request-products").dataTable().fnDestroy();
+        // $('#offer-request-products tbody > tr').remove();
+
+        editor = new $.fn.dataTable.Editor( {
+            i18n: {
+                create: {
+                    title: 'Add new product' // Set the title for the add new row popup
+                }
+            },
+            data: products,
+            table: "#offer-request-products",
+            idSrc: "id",
+            fields: [ {
+                label: "ID",
+                name: "id",
+                type: "readonly",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                label: "Firma Stok Kodu",
+                name: "product.stock_code",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                label: "Müşteri Stok Kodu",
+                name: "customer_stock_code",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                label: "Ref. Code",
+                name: "ref_code",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                label: "Ürün Adı",
+                name: "product_name",
+                attr: {
+                    class: 'form-control'
+                }
+            },{
+                label: "Adet",
+                name: "quantity",
+                type: "readonly",
+                attr: {
+                    class: 'form-control'
+                }
+            }, {
+                label: "Birim",
+                name: "measurement_name_tr",
+                attr: {
+                    class: 'form-control'
+                },
+                type: "select",
+                options: measurementOptions
+            }, {
+                label: "Marka",
+                name: "product.brand_id",
+                attr: {
+                    class: 'form-control'
+                }
+            }, {
+                label: "Ürün Grubu",
+                name: "product.category_id",
+                attr: {
+                    class: 'form-control'
+                }
+            }, {
+                label: "Satın Alma Notu",
+                name: "note",
+                attr: {
+                    class: 'form-control'
+                }
+            }
+            ]
+        } );
+
+        editor.on('preSubmit', async function(e, data, action) {
+            if (action !== 'remove') {
+                // let id = editor.field('id').val();
+                // let quantity = editor.field('quantity').val();
+                // let pcs_price = editor.field('pcs_price').val();
+                // let total_price = editor.field('total_price').val();
+                // let discount_rate = editor.field('discount_rate').val();
+                // let discounted_price = editor.field('discounted_price').val();
+                // let currency = editor.field('currency').val();
+                // let lead_time = editor.field('lead_time').val();
+                //
+                // let formData = JSON.stringify({
+                //     "id": id,
+                //     "date_code": "",
+                //     "package_type": "",
+                //     "quantity": quantity,
+                //     "pcs_price": changePriceToDecimal(pcs_price),
+                //     "total_price": changePriceToDecimal(total_price),
+                //     "discount_rate": changePriceToDecimal(discount_rate),
+                //     "discounted_price": changePriceToDecimal(discounted_price),
+                //     "vat_rate": "",
+                //     "currency": currency,
+                //     "lead_time": lead_time
+                // });
+                //
+                // let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
+                // let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
+                // if (returned){
+                //     await initOfferDetailModal(offer_id);
+                //     await initOffers();
+                // }else{
+                //     alert("Hata Oluştu");
+                // }
+
+                // Submit the edited row data
+                editor.submit();
+            }
+        });
+        // editor.field('measurement_name_tr').options(async function(callback) {
+        //     let data = await serviceGetMeasurements();
+        //     var options = data.measurements.map(function(item) {
+        //         return { value: item.id, label: item.name_tr };
+        //     });
+        //     callback(options);
+        // });
+
+        table = $('#offer-request-products').DataTable( {
+            dom: "Bfrtip",
+            data: products,
+            columns: [
+                { data: null, title:"N#", editable: false },
+                { data: "id", title:"ID", editable: false },
+                { data: "product.stock_code",title: "Firma Stok Kodu", className:  "row-edit" },
+                { data: "customer_stock_code", title: "Müşteri Stok Kodu" },
+                { data: "ref_code", title: "Ref. Code" },
+                { data: "product_name", title: "Ürün Adı" },
+                { data: "quantity", title: "Miktar" },
+                { data: "measurement_name_tr", title: "Birim" },
+                { data: "product.brand_id", title: "Marka", editable: false },
+                { data: "product.category_id", title: "Ürün Grubu", editable: false },
+                { data: "note", title: "Satın Alma Notu" },
+                {
+                    data: null,
+                    title: "",
+                    defaultContent: '<i class="fas fa-lg fa-fw me-2 fa-edit"/>',
+                    className: 'row-edit dt-center',
+                    orderable: false
+                },
+            ],
+            createdRow: function(row, data, dataIndex) {
+                $(row).find('td:eq(0)').html(dataIndex+1);
+            },
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            sortable: false,
+            scrollX: true,
+            paging: false,
+            language: {
+                url: "services/Turkish.json"
+            },
+            buttons: [
+                { extend: "create", editor: editor, text: "Yeni Ürün Ekle", className: "btn btn-theme" },
+                { extend: "edit",   editor: editor, text: "Düzenle", className: "btn btn-warning" },
+                { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" }
+            ],
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+            },
+        } );
+}

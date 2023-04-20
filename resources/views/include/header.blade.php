@@ -37,6 +37,7 @@ $extra_js="";
 
     <link href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" />
     <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
+    <link href="plugins/datatables.net/extensions/Editor/css/editor.dataTables.min.css" rel="stylesheet" />
 
     <link href="plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
