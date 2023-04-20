@@ -63,6 +63,12 @@ div.dataTables_wrapper div.dt-buttons button.btn.btn-theme {
     border-color: #3cd2a5 !important;
 }
 
+div.dataTables_wrapper div.dt-buttons button.btn.btn-warning {
+    color: rgba(255,255,255,.75) !important;
+    background-color: #ff9f0c !important;
+    border-color: #ff9f0c !important;
+}
+
 div.dataTables_wrapper div.dt-buttons button.btn.btn-danger {
     color: rgba(255,255,255,.75) !important;
     background-color: #ff6060 !important;
@@ -401,9 +407,9 @@ table tr.selected{
 
 
 /*DTE*/
-.DTE_Field label{
-    display: none;
-}
+/*.DTE_Field label{*/
+/*    display: none;*/
+/*}*/
 
 .select2-container{
     z-index: 9999;
@@ -535,3 +541,53 @@ table tr.selected{
 .table tr.disabled a.btn{
     pointer-events: none;
 }
+
+
+/* DTE Lightbox */
+div.DTED_Lightbox_Wrapper div.DTED_Lightbox_Container div.DTED_Lightbox_Content_Wrapper div.DTED_Lightbox_Content div.DTE div.DTE_Body_Content{
+    background-color: rgba(28,38,47,.95);
+}
+div.DTE div.DTE_Footer{
+    background-color: rgba(28,38,47,1);
+    border: none;
+}
+
+div.DTE div.DTE_Header{
+    background-color: rgba(28,38,47,1);
+    border: none;
+}
+
+div.DTED_Lightbox_Wrapper div.DTED_Lightbox_Container div.DTED_Lightbox_Content_Wrapper div.DTED_Lightbox_Content div.DTED_Lightbox_Close:after{
+    color: rgba(255,255,255,.75);
+}
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:active,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:focus,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:active:focus{
+    background-color: var(--bs-theme);
+    border: none;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+    color: #000;
+}
+
+div.DTE_Field input, div.DTE_Field textarea{
+    background-color: inherit;
+}
+div.DTE_Field input:focus, div.DTE_Field textarea:focus{
+    background-color: inherit;
+}
+div.DTE_Body div.DTE_Body_Content div.DTE_Field:hover {
+    background-color: transparent;
+    border: none;
+}
+div.DTE_Field select{
+    background: transparent;
+}
+
+
+
+
+
+
