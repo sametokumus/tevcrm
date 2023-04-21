@@ -34,7 +34,8 @@
 
 		checkLogin();
 		checkRole();
-		await initPage();
+        await initOfferRequestProducts();
+        await initPage();
         await initOfferRequest();
 
 	});
@@ -210,7 +211,6 @@ async function initOfferRequest(){
         document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
     }
 
-    await initOfferRequestProducts(offer_request.products);
 
 }
 
@@ -276,21 +276,32 @@ let measurementOptions = [];
 (async function() {
     let data = await serviceGetMeasurements();
     measurementOptions = data.measurements.map(function(item) {
-        return { value: item.id, label: item.name_tr };
+        return { value: item.name_tr, label: item.name_tr };
     });
 })();
+let categoryOptions = [];
+(async function (){
+    let data = await serviceGetCategories();
+    console.log(data)
 
-async function initOfferRequestProducts(products){
+    $.each(data.categories, function(i, category){
+        $.each(category.sub_categories, function(i, category2){
+            $.each(category2.sub_categories, function(i, category3){
+                let val = { value: category3.id, label: category.name + "--->>>" + category2.name + "--->>>" + category3.name };
+                categoryOptions.push(val);
+            });
+        });
+    });
 
-        // $("#offer-request-products").dataTable().fnDestroy();
-        // $('#offer-request-products tbody > tr').remove();
+})();
+
+async function initOfferRequestProducts(){
+
+    let request_id = getPathVariable('offer-request-products');
+    let data = await serviceGetOfferRequestProductsById(request_id);
+    let products = data.offer_request_products;
 
         editor = new $.fn.dataTable.Editor( {
-            i18n: {
-                create: {
-                    title: 'Add new product' // Set the title for the add new row popup
-                }
-            },
             data: products,
             table: "#offer-request-products",
             idSrc: "id",
@@ -328,7 +339,6 @@ async function initOfferRequestProducts(products){
             },{
                 label: "Adet",
                 name: "quantity",
-                type: "readonly",
                 attr: {
                     class: 'form-control'
                 }
@@ -342,7 +352,7 @@ async function initOfferRequestProducts(products){
                 options: measurementOptions
             }, {
                 label: "Marka",
-                name: "product.brand_id",
+                name: "product.brand_name",
                 attr: {
                     class: 'form-control'
                 }
@@ -351,7 +361,9 @@ async function initOfferRequestProducts(products){
                 name: "product.category_id",
                 attr: {
                     class: 'form-control'
-                }
+                },
+                type: "select",
+                options: categoryOptions
             }, {
                 label: "Satın Alma Notu",
                 name: "note",
@@ -400,13 +412,6 @@ async function initOfferRequestProducts(products){
                 editor.submit();
             }
         });
-        // editor.field('measurement_name_tr').options(async function(callback) {
-        //     let data = await serviceGetMeasurements();
-        //     var options = data.measurements.map(function(item) {
-        //         return { value: item.id, label: item.name_tr };
-        //     });
-        //     callback(options);
-        // });
 
         table = $('#offer-request-products').DataTable( {
             dom: "Bfrtip",
@@ -420,7 +425,7 @@ async function initOfferRequestProducts(products){
                 { data: "product_name", title: "Ürün Adı" },
                 { data: "quantity", title: "Miktar" },
                 { data: "measurement_name_tr", title: "Birim" },
-                { data: "product.brand_id", title: "Marka", editable: false },
+                { data: "product.brand_name", title: "Marka", editable: false },
                 { data: "product.category_id", title: "Ürün Grubu", editable: false },
                 { data: "note", title: "Satın Alma Notu" },
                 {
@@ -441,11 +446,13 @@ async function initOfferRequestProducts(products){
             sortable: false,
             scrollX: true,
             paging: false,
-            language: {
-                url: "services/Turkish.json"
-            },
             buttons: [
-                { extend: "create", editor: editor, text: "Yeni Ürün Ekle", className: "btn btn-theme" },
+                {
+                    extend: "create",
+                    editor: editor,
+                    text: "Yeni Ürün Ekle",
+                    className: "btn btn-theme"
+                },
                 { extend: "edit",   editor: editor, text: "Düzenle", className: "btn btn-warning" },
                 { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" }
             ],

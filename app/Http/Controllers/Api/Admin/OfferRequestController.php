@@ -72,6 +72,30 @@ class OfferRequestController extends Controller
         }
     }
 
+    public function getOfferRequestProductsById($offer_request_id)
+    {
+        try {
+            $offer_request_products = OfferRequestProduct::query()->where('request_id', $offer_request_id)->where('active', 1)->get();
+            foreach ($offer_request_products as $offer_request_product){
+                $product = Product::query()->where('id', $offer_request_product->product_id)->first();
+                $product['brand_name'] = "";
+                if ($product->brand_id != null && $product->brand_id != 0){
+                    $product['brand_name'] = Brand::query()->where('id', $product->brand_id)->first()->name;
+                }
+                $offer_request_product['ref_code'] = $product->ref_code;
+                $offer_request_product['product_name'] = $product->product_name;
+                $measurement = Measurement::query()->where('id', $offer_request_product->measurement_id)->first();
+                $offer_request_product['measurement_name_tr'] = $measurement->name_tr;
+                $offer_request_product['measurement_name_en'] = $measurement->name_en;
+                $offer_request_product['product'] = $product;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_request_products' => $offer_request_products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function addOfferRequestOld(Request $request)
     {
         try {
@@ -98,7 +122,7 @@ class OfferRequestController extends Controller
                         $brand_id = $has_brand->id;
                     }else{
                         $brand_id = Brand::query()->insertGetId([
-                           'name' => $product['brand']
+                            'name' => $product['brand']
                         ]);
                     }
                 }
