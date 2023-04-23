@@ -65,7 +65,7 @@ $extra_js='
                                                 <input type="text" value="" class="form-control" id="update_offer_request_company_request_code" />
                                             </div>
                                             <div class="col-md-12 mb-3">
-                                                <button type="submit" class="btn btn-theme w-100">Talebi Güncelle</button>
+                                                <button type="submit" class="btn btn-theme w-100">Talep Bilgilerini Güncelle</button>
                                             </div>
                                         </div>
                                 </div>

@@ -8,32 +8,14 @@
             updateOfferRequest();
 		});
 
-        $('#update_offer_request_product_button').click(function (e){
-            e.preventDefault();
-            let refcode = document.getElementById('update_offer_request_product_refcode').value;
-            let product_name = document.getElementById('update_offer_request_product_name').value;
-            let quantity = document.getElementById('update_offer_request_product_quantity').value;
-            let measurement = document.getElementById('update_offer_request_product_measurement').value;
-            let brand = document.getElementById('update_offer_request_brand').value;
-            let category1 = document.getElementById('update_offer_request_product_category_1').value;
-            let category2 = document.getElementById('update_offer_request_product_category_2').value;
-            let category3 = document.getElementById('update_offer_request_product_category_3').value;
-            let cust_stock = document.getElementById('update_offer_request_customer_stock_code').value;
-            let own_stock = document.getElementById('update_offer_request_owner_stock_code').value;
-            let note = document.getElementById('update_offer_request_note').value;
-            if (quantity == "0"){
-                alert('Formu Doldurunuz');
-                return false;
-            }
-            console.log(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
-            addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note);
-        });
 	});
 
 	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
+        await setCategoryOptions();
+        await setMeasurementOptions();
         await initOfferRequestProducts();
         await initPage();
         await initOfferRequest();
@@ -73,121 +55,6 @@ async function initEmployeeSelect(){
     let company_id = document.getElementById('update_offer_request_company').value;
     await getEmployeesAddSelectId(company_id, 'update_offer_request_company_employee');
 }
-
-async function initSecondCategory(){
-    let parent_id = document.getElementById('update_offer_request_product_category_1').value;
-    $('#update_offer_request_product_category_2 option').remove();
-    $('#update_offer_request_product_category_3 option').remove();
-
-    let data = await serviceGetCategoriesByParentId(parent_id);
-    $('#update_offer_request_product_category_2').append('<option value="0">Kategori Seçiniz</option>');
-    $.each(data.categories, function(i, category){
-        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
-        $('#update_offer_request_product_category_2').append(optionRow);
-    });
-}
-
-async function initThirdCategory(){
-    let parent_id = document.getElementById('update_offer_request_product_category_2').value;
-    $('#update_offer_request_product_category_3 option').remove();
-
-    let data = await serviceGetCategoriesByParentId(parent_id);
-    $('#update_offer_request_product_category_3').append('<option value="0">Kategori Seçiniz</option>');
-    $.each(data.categories, function(i, category){
-        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
-        $('#update_offer_request_product_category_3').append(optionRow);
-    });
-}
-
-async function addProductToTable(refcode, product_name, quantity, measurement, brand, category1, category2, category3, cust_stock, own_stock, note){
-
-    let formData = JSON.stringify({
-        "owner_stock_code": own_stock,
-        "customer_stock_code": cust_stock,
-        "ref_code": refcode,
-        "product_name": product_name,
-        "quantity": quantity,
-        "measurement": measurement,
-        "brand": brand,
-        "category": category3,
-        "note": note
-    });
-    console.log(formData)
-    let request_id = getPathVariable('offer-request');
-
-    let returned = await servicePostAddProductToOfferRequest(request_id, formData);
-    if (returned){
-
-        let count = document.getElementById('update_offer_request_product_count').value;
-        count = parseInt(count) + 1;
-        document.getElementById('update_offer_request_product_count').value = count;
-        let item = '<tr id="productRow'+ count +'">\n' +
-            '           <td>'+ count +'</td>\n' +
-            '           <td>'+ own_stock +'</td>\n' +
-            '           <td>'+ cust_stock +'</td>\n' +
-            '           <td>'+ refcode +'</td>\n' +
-            '           <td>'+ product_name +'</td>\n' +
-            '           <td>'+ quantity +'</td>\n' +
-            '           <td>'+ measurement +'</td>\n' +
-            '           <td>'+ brand +'</td>\n' +
-            '           <td>'+ category3 +'</td>\n' +
-            '           <td>'+ note +'</td>\n' +
-            '           <td>\n' +
-            '               <div class="btn-list">\n' +
-            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="updateProductRow('+ count +');"><span class="fe fe-trash-2"> Düzenle</span></button>\n' +
-            '                   <button type="button" class="btn btn-sm btn-outline-theme" onclick="deleteProductRow('+ count +');"><span class="fe fe-trash-2"> Sil</span></button>\n' +
-            '               </div>\n' +
-            '           </td>\n' +
-            '       </tr>';
-        $('#offer-request-products tbody').append(item);
-        document.getElementById('update_offer_request_product_refcode').value = "";
-        document.getElementById('update_offer_request_product_name').value = "";
-        document.getElementById('update_offer_request_product_quantity').value = "1";
-        document.getElementById('update_offer_request_product_measurement').value = "adet";
-        document.getElementById('update_offer_request_owner_stock_code').value = "";
-        document.getElementById('update_offer_request_customer_stock_code').value = "";
-        document.getElementById('update_offer_request_customer_brand').value = "";
-        document.getElementById('update_offer_request_note').value = "";
-
-    }else{
-        alert("Hata Oluştu");
-    }
-
-}
-
-async function deleteProductRow(item_id){
-    let returned = serviceGetDeleteProductToOfferRequest(item_id);
-    if (returned) {
-        $('#productRow' + item_id).remove();
-    }else{
-        alert("Ürün silinemedi");
-    }
-}
-async function updateProductRow(item_id){
-    let returned = serviceGetDeleteProductToOfferRequest(item_id);
-    if (returned) {
-        const table = document.getElementById("offer-request-products");
-        const row = table.querySelector("#productRow"+item_id);
-        const cells = row.cells;
-        const cellData = [];
-        for (let i = 0; i < cells.length; i++) {
-            cellData.push(cells[i].textContent);
-        }
-
-        document.getElementById('update_offer_request_product_refcode').value = cellData[3];
-        document.getElementById('update_offer_request_product_name').value = cellData[4];
-        document.getElementById('update_offer_request_product_quantity').value = cellData[5];
-        document.getElementById('update_offer_request_product_measurement').value = cellData[6];
-        document.getElementById('update_offer_request_brand').value = cellData[7];
-        document.getElementById('update_offer_request_customer_stock_code').value = cellData[2];
-        document.getElementById('update_offer_request_owner_stock_code').value = cellData[1];
-        document.getElementById('update_offer_request_note').value = cellData[9];
-        $('#productRow' + item_id).remove();
-    }else{
-        alert("Ürün silinemedi");
-    }
-}
-
 
 
 
@@ -253,8 +120,6 @@ async function updateOfferRequest(){
 
 
 
-
-
 let editor;
 let table;
 // Activate an inline edit on click of a table cell
@@ -273,14 +138,14 @@ $('#offer-request-products').on('draw.dt', function() {
 });
 
 let measurementOptions = [];
-(async function() {
+async function setMeasurementOptions() {
     let data = await serviceGetMeasurements();
     measurementOptions = data.measurements.map(function(item) {
         return { value: item.name_tr, label: item.name_tr };
     });
-})();
+};
 let categoryOptions = [];
-(async function (){
+async function setCategoryOptions (){
     let data = await serviceGetCategories();
     console.log(data)
 
@@ -293,7 +158,7 @@ let categoryOptions = [];
         });
     });
 
-})();
+};
 
 async function initOfferRequestProducts(){
 
@@ -451,13 +316,58 @@ async function initOfferRequestProducts(){
                     extend: "create",
                     editor: editor,
                     text: "Yeni Ürün Ekle",
-                    className: "btn btn-theme"
+                    className: "btn btn-yellow"
                 },
                 { extend: "edit",   editor: editor, text: "Düzenle", className: "btn btn-warning" },
-                { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" }
+                { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" },
+                {
+                    text: 'Ürünleri Kaydet',
+                    className: "btn btn-theme",
+                    action: function ( e, dt, node, config ) {
+                        if (table.rows().count() === 0){
+                            alert("Öncelikle ürün girmeniz gerekmektedir.")
+                        }else {
+                            addRequestProducts(table.rows());
+                        }
+                    }
+                }
             ],
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
             },
         } );
+}
+
+async function addRequestProducts(rows){
+    let products = [];
+    let table = document.getElementById("offer-request-products-body");
+    for (let i = 0, row; row = rows[i]; i++) {
+        let item = {
+            "sequence": row.cells[0].innerText,
+            "id": row.cells[1].innerText,
+            "owner_stock_code": row.cells[2].innerText,
+            "customer_stock_code": row.cells[3].innerText,
+            "ref_code": row.cells[4].innerText,
+            "product_name": row.cells[5].innerText,
+            "quantity": parseInt(row.cells[6].innerText),
+            "measurement": row.cells[7].innerText,
+            "brand": row.cells[8].innerText,
+            "category": row.cells[9].innerText,
+            "note": row.cells[10].innerText
+        }
+        products.push(item);
+    }
+
+    let formData = JSON.stringify({
+        "products": products
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostOfferRequestProducts(formData);
+    if (returned){
+        // await initOfferRequestProducts();
+    }else{
+        alert("Hata Oluştu");
+    }
 }
