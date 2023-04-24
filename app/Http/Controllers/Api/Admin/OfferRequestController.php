@@ -96,7 +96,7 @@ class OfferRequestController extends Controller
         }
     }
 
-    public function addOfferRequestOld(Request $request)
+    public function addOfferRequest(Request $request)
     {
         try {
             $request->validate([
@@ -189,37 +189,64 @@ class OfferRequestController extends Controller
         }
     }
 
-    public function offerRequestProducts(Request $request)
+    public function offerRequestProducts(Request $request, $request_id)
     {
         try {
             $request->validate([
                 'user_id' => 'required',
                 'company_id' => 'required',
             ]);
-            $request_id = Uuid::uuid();
-            OfferRequest::query()->insertGetId([
-                'request_id' => $request_id,
-                'user_id' => $request->user_id,
-                'authorized_personnel_id' => $request->authorized_personnel_id,
-                'purchasing_staff_id' => $request->purchasing_staff_id,
-                'company_id' => $request->company_id,
-                'company_employee_id' => $request->company_employee_id,
-                'company_request_code' => $request->company_request_code,
-            ]);
 
-            $sale_id = Uuid::uuid();
-            Sale::query()->insert([
-                'sale_id' => $sale_id,
-                'request_id' => $request_id,
-                'owner_id' => $request->owner_id,
-                'customer_id' => $request->company_id,
-                'status_id' => 1
-            ]);
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 1,
-                'user_id' => $request->user_id,
-            ]);
+            foreach ($request->products as $product){
+
+                $brand_id = 0;
+                if ($product['brand'] != ''){
+                    $has_brand = Brand::query()->where('name', $product['brand'])->first();
+                    if ($has_brand){
+                        $brand_id = $has_brand->id;
+                    }else{
+                        $brand_id = Brand::query()->insertGetId([
+                            'name' => $product['brand']
+                        ]);
+                    }
+                }
+
+                if ($product['owner_stock_code'] != ''){
+
+                    $has_product = Product::query()->where('stock_code', $product['owner_stock_code'])->where('active', 1)->first();
+                    if ($has_product) {
+                        $product_id = $has_product->id;
+                    }else{
+                        $product_id = Product::query()->insertGetId([
+                            'brand_id' => $brand_id,
+                            'category_id' => $product['category'],
+                            'ref_code' => $product['ref_code'],
+                            'product_name' => $product['product_name'],
+                            'stock_code' => $product['owner_stock_code'],
+                        ]);
+                    }
+
+                }else{
+
+                    $product_id = Product::query()->insertGetId([
+                        'brand_id' => $brand_id,
+                        'category_id' => $product['category'],
+                        'ref_code' => $product['ref_code'],
+                        'product_name' => $product['product_name'],
+                    ]);
+
+                }
+
+                $measurement = Measurement::query()->where('name_tr', $product['measurement'])->where('active', 1)->first();
+                OfferRequestProduct::query()->insert([
+                    'request_id' => $request_id,
+                    'product_id' => $product_id,
+                    'quantity' => $product['quantity'],
+                    'measurement_id' => $measurement->id,
+                    'customer_stock_code' => $product['customer_stock_code'],
+                    'note' => $product['note'],
+                ]);
+            }
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {
@@ -231,7 +258,7 @@ class OfferRequestController extends Controller
         }
     }
 
-    public function addOfferRequest(Request $request)
+    public function createOfferRequest(Request $request)
     {
         try {
             $request->validate([

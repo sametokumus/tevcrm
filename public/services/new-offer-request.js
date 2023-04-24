@@ -192,7 +192,7 @@ async function addOfferRequest(){
 
     console.log(formData);
 
-    let data = await servicePostAddOfferRequest(formData);
+    let data = await servicePostCreateOfferRequest(formData);
     if (data.status == "success"){
         window.location = '/offer-request-products/'+ data.object.request_id;
     }else{

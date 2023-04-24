@@ -1127,6 +1127,15 @@ async function serviceGetOfferRequestProductsById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function servicePostCreateOfferRequest(formData) {
+    const data = await fetchDataPost('/admin/offerRequest/createOfferRequest', formData, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 async function servicePostAddOfferRequest(formData) {
     const data = await fetchDataPost('/admin/offerRequest/addOfferRequest', formData, 'application/json');
     if (data.status == "success") {

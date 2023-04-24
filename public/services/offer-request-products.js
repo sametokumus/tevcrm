@@ -327,7 +327,7 @@ async function initOfferRequestProducts(){
                         if (table.rows().count() === 0){
                             alert("Öncelikle ürün girmeniz gerekmektedir.")
                         }else {
-                            addRequestProducts(table.rows());
+                            addRequestProducts();
                         }
                     }
                 }
@@ -338,10 +338,11 @@ async function initOfferRequestProducts(){
         } );
 }
 
-async function addRequestProducts(rows){
+async function addRequestProducts(){
     let products = [];
     let table = document.getElementById("offer-request-products-body");
-    for (let i = 0, row; row = rows[i]; i++) {
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        console.log(row)
         let item = {
             "sequence": row.cells[0].innerText,
             "id": row.cells[1].innerText,
