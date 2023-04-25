@@ -7,10 +7,46 @@
 			e.preventDefault();
             updateOfferRequest();
 		});
-		$('#import_data_form').submit(function (e){
-			e.preventDefault();
-            alert('sadsa')
-		});
+        $('#import_data_form').submit(function (e){
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            // Use SheetJS to read the uploaded Excel file
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let data = e.target.result;
+                let workbook = XLSX.read(data, { type: 'binary' });
+                let sheet_name_list = workbook.SheetNames;
+                let sheet_name = sheet_name_list[0]; // assume the first sheet is the one we want
+                let worksheet = workbook.Sheets[sheet_name];
+
+                // Convert the worksheet data to JSON
+                let json_data = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                console.log(json_data)
+                // Remove the header row from the data (optional)
+                json_data.splice(0, 1);
+
+                json_data.forEach(function(obj) {
+                    console.log(obj)
+                    table.row.add({
+                        "id": "",
+                        "product.stock_code": obj[0],
+                        "customer_stock_code": obj[1],
+                        "ref_code": obj[2],
+                        "product_name": obj[3],
+                        "quantity": obj[4],
+                        "measurement_name_tr": obj[5],
+                        "product.brand_name": "",
+                        "product.category_id": "",
+                        "note": obj[6]
+                    }).draw();
+
+                });
+
+            };
+            reader.readAsBinaryString(formData.get('import_file'));
+        });
 
 
 	});

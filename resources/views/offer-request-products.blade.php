@@ -82,7 +82,7 @@ $extra_js='
                     <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
-                                <form action="#" method="post" id="import_data_form" style="">
+                                <form action="#" method="post" id="import_data_form" enctype="multipart/form-data" style="">
                                     <input type="file" name="import_file" id="import_file" onchange="$('#import_submit_btn').click();">
                                     <button id="import_submit_btn" type="submit">import</button>
                                 </form>
