@@ -92,6 +92,8 @@ class OfferRequestController extends Controller
                 $offer_request_product['measurement_name_en'] = $measurement->name_en;
                 $offer_request_product['product'] = $product;
                 $offer_request_product['product_stock_code'] = $product->stock_code;
+                $offer_request_product['product_brand_name'] = $product->brand_name;
+                $offer_request_product['product_category_id'] = $product->category_id;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_request_products' => $offer_request_products]]);

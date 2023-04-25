@@ -31,14 +31,14 @@
                     console.log(obj)
                     table.row.add({
                         "id": "",
-                        "product.stock_code": obj[0],
+                        "product_stock_code": obj[0],
                         "customer_stock_code": obj[1],
                         "ref_code": obj[2],
                         "product_name": obj[3],
                         "quantity": obj[4],
                         "measurement_name_tr": obj[5],
-                        "product.brand_name": "",
-                        "product.category_id": "",
+                        "product_brand_name": "",
+                        "product_category_id": "",
                         "note": obj[6]
                     }).draw();
 
@@ -222,7 +222,7 @@ async function initOfferRequestProducts(){
                 }
             },{
                 label: "Firma Stok Kodu",
-                name: "product.stock_code",
+                name: "product_stock_code",
                 attr: {
                     class: 'form-control'
                 }
@@ -260,13 +260,13 @@ async function initOfferRequestProducts(){
                 options: measurementOptions
             }, {
                 label: "Marka",
-                name: "product.brand_name",
+                name: "product_brand_name",
                 attr: {
                     class: 'form-control'
                 }
             }, {
                 label: "Ürün Grubu",
-                name: "product.category_id",
+                name: "product_category_id",
                 attr: {
                     class: 'form-control'
                 },
@@ -327,14 +327,14 @@ async function initOfferRequestProducts(){
             columns: [
                 { data: null, title:"N#", editable: false },
                 { data: "id", title:"ID", editable: false },
-                { data: "product.stock_code",title: "Firma Stok Kodu", className:  "row-edit" },
+                { data: "product_stock_code",title: "Firma Stok Kodu", className:  "row-edit" },
                 { data: "customer_stock_code", title: "Müşteri Stok Kodu", className:  "row-edit" },
                 { data: "ref_code", title: "Ref. Code", className:  "row-edit" },
                 { data: "product_name", title: "Ürün Adı", className:  "row-edit" },
                 { data: "quantity", title: "Miktar", className:  "row-edit" },
                 { data: "measurement_name_tr", title: "Birim", className:  "row-edit" },
-                { data: "product.brand_name", title: "Marka", editable: false },
-                { data: "product.category_id", title: "Ürün Grubu", editable: false },
+                { data: "product_brand_name", title: "Marka", editable: false },
+                { data: "product_category_id", title: "Ürün Grubu", editable: false },
                 { data: "note", title: "Satın Alma Notu", className:  "row-edit" },
                 {
                     data: null,
