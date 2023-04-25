@@ -63,6 +63,7 @@ async function initOfferRequest(){
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
     console.log(offer_request)
+    let sale_global_id = offer_request;
 
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_owner').value = offer_request.owner_id;
@@ -330,6 +331,20 @@ async function initOfferRequestProducts(){
                             addRequestProducts();
                         }
                     }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel olarak kaydet',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+                        filename: function() {
+                            var date = new Date();
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1;
+                            var year = date.getFullYear();
+                            return 'my_datatable_export_' + year + '-' + month + '-' + day;
+                        }
+                    }
                 }
             ],
             language: {
@@ -368,6 +383,8 @@ async function addRequestProducts(){
 
     let returned = await servicePostOfferRequestProducts(formData, request_id);
     if (returned){
+        $("#offer-request-products").dataTable().fnDestroy();
+        $('#offer-request-products tbody > tr').remove();
         await initOfferRequestProducts();
     }else{
         alert("Hata Oluştu");

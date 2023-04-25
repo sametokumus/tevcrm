@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\OfferRequest;
@@ -64,7 +65,9 @@ class OfferRequestController extends Controller
             $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
             $offer_request['global_id'] = Sale::query()->where('request_id', $offer_request_id)->first()->id;
-            $offer_request['owner_id'] = Sale::query()->where('request_id', $offer_request_id)->first()->owner_id;
+            $owner_id = Sale::query()->where('request_id', $offer_request_id)->first()->owner_id;
+            $offer_request['owner_id'] = $owner_id;
+            $offer_request['owner'] = Contact::query()->where('id', $owner_id)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_request' => $offer_request]]);
         } catch (QueryException $queryException) {

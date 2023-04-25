@@ -29,6 +29,7 @@ $extra_js='
                                 <div class="card-body">
                                         <input type="hidden" class="form-control" id="update_offer_request_product_count" value="0">
                                         <input type="hidden" class="form-control" id="update_offer_request_id">
+                                        <input type="hidden" class="form-control" id="sale_global_id">
                                         <div class="row p-3">
                                             <div class="col-md-2 mb-3">
                                                 <label class="form-label">Talep Gelen Firma</label>
