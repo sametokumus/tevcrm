@@ -192,10 +192,10 @@ class OfferRequestController extends Controller
     public function offerRequestProducts(Request $request, $request_id)
     {
         try {
-            $request->validate([
-                'user_id' => 'required',
-                'company_id' => 'required',
-            ]);
+//            $request->validate([
+//                'user_id' => 'required',
+//                'company_id' => 'required',
+//            ]);
 
             foreach ($request->products as $product){
 
