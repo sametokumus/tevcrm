@@ -15,7 +15,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Talep Oluştur
+                        Talep Oluştur (<span id="title_sale_global_id"> </span>)
                     </h1>
                 </div>
             </div>
@@ -29,7 +29,6 @@ $extra_js='
                                 <div class="card-body">
                                         <input type="hidden" class="form-control" id="update_offer_request_product_count" value="0">
                                         <input type="hidden" class="form-control" id="update_offer_request_id">
-                                        <input type="hidden" class="form-control" id="sale_global_id">
                                         <div class="row p-3">
                                             <div class="col-md-2 mb-3">
                                                 <label class="form-label">Talep Gelen Firma</label>
@@ -83,23 +82,12 @@ $extra_js='
                     <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
+                                <form action="#" method="post" id="import_data_form" style="">
+                                    <input type="file" name="import_file" id="import_file" onchange="$('#import_submit_btn').click();">
+                                    <button id="import_submit_btn" type="submit">import</button>
+                                </form>
                                 <table id="offer-request-products" class="table table-bordered key-buttons border-bottom w-100">
-{{--                                    <thead>--}}
-{{--                                    <tr>--}}
-{{--                                        <th class="border-bottom-0">N#</th>--}}
-{{--                                        <th class="border-bottom-0">ID</th>--}}
-{{--                                        <th class="border-bottom-0">Firma Stok Kodu</th>--}}
-{{--                                        <th class="border-bottom-0">Müşteri Stok Kodu</th>--}}
-{{--                                        <th class="border-bottom-0">Ref. Code</th>--}}
-{{--                                        <th class="border-bottom-0">Ürün Adı</th>--}}
-{{--                                        <th class="border-bottom-0">Miktar</th>--}}
-{{--                                        <th class="border-bottom-0">Birim</th>--}}
-{{--                                        <th class="border-bottom-0">Marka</th>--}}
-{{--                                        <th class="border-bottom-0">Ürün Grubu</th>--}}
-{{--                                        <th class="border-bottom-0">Satın Alma Notu</th>--}}
-{{--                                        <th class="border-bottom-0"></th>--}}
-{{--                                    </tr>--}}
-{{--                                    </thead>--}}
+
                                     <tbody id="offer-request-products-body">
 
                                     </tbody>

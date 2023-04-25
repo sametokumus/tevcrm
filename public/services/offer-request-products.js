@@ -7,6 +7,11 @@
 			e.preventDefault();
             updateOfferRequest();
 		});
+		$('#import_data_form').submit(function (e){
+			e.preventDefault();
+            alert('sadsa')
+		});
+
 
 	});
 
@@ -57,13 +62,14 @@ async function initEmployeeSelect(){
 }
 
 
-
+let sale_global_id;
 async function initOfferRequest(){
     let request_id = getPathVariable('offer-request-products');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
     console.log(offer_request)
-    let sale_global_id = offer_request;
+    sale_global_id = offer_request.owner.short_code + "-" + offer_request.global_id;
+    $('#title_sale_global_id').text(sale_global_id);
 
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_owner').value = offer_request.owner_id;
@@ -286,14 +292,14 @@ async function initOfferRequestProducts(){
                 { data: null, title:"N#", editable: false },
                 { data: "id", title:"ID", editable: false },
                 { data: "product.stock_code",title: "Firma Stok Kodu", className:  "row-edit" },
-                { data: "customer_stock_code", title: "Müşteri Stok Kodu" },
-                { data: "ref_code", title: "Ref. Code" },
-                { data: "product_name", title: "Ürün Adı" },
-                { data: "quantity", title: "Miktar" },
-                { data: "measurement_name_tr", title: "Birim" },
+                { data: "customer_stock_code", title: "Müşteri Stok Kodu", className:  "row-edit" },
+                { data: "ref_code", title: "Ref. Code", className:  "row-edit" },
+                { data: "product_name", title: "Ürün Adı", className:  "row-edit" },
+                { data: "quantity", title: "Miktar", className:  "row-edit" },
+                { data: "measurement_name_tr", title: "Birim", className:  "row-edit" },
                 { data: "product.brand_name", title: "Marka", editable: false },
                 { data: "product.category_id", title: "Ürün Grubu", editable: false },
-                { data: "note", title: "Satın Alma Notu" },
+                { data: "note", title: "Satın Alma Notu", className:  "row-edit" },
                 {
                     data: null,
                     title: "",
@@ -335,15 +341,19 @@ async function initOfferRequestProducts(){
                 {
                     extend: 'excelHtml5',
                     text: 'Excel olarak kaydet',
+                    title: function() {
+                        return 'REQUEST-' + sale_global_id;
+                    },
                     exportOptions: {
-                        columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-                        filename: function() {
-                            var date = new Date();
-                            var day = date.getDate();
-                            var month = date.getMonth() + 1;
-                            var year = date.getFullYear();
-                            return 'my_datatable_export_' + year + '-' + month + '-' + day;
-                        }
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    }
+                },
+                {
+                    text: 'Ürünleri Excel\'den aktar',
+                    action: function(){
+                        var fileSelector = document.getElementById('import_file');
+                        fileSelector.click();
+                        return false;
                     }
                 }
             ],

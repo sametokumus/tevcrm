@@ -200,6 +200,9 @@ class OfferRequestController extends Controller
 //                'company_id' => 'required',
 //            ]);
 
+            OfferRequestProduct::query()->where('request_id', $request_id)->update([
+                'active' => 0
+            ]);
             foreach ($request->products as $product){
 
                 $brand_id = 0;
@@ -263,6 +266,7 @@ class OfferRequestController extends Controller
                         'customer_stock_code' => $product['customer_stock_code'],
                         'note' => $product['note'],
                         'sequence' => $product['sequence'],
+                        'active' => 1
                     ]);
 
                 }
