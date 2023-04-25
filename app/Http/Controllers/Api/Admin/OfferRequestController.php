@@ -238,14 +238,34 @@ class OfferRequestController extends Controller
                 }
 
                 $measurement = Measurement::query()->where('name_tr', $product['measurement'])->where('active', 1)->first();
-                OfferRequestProduct::query()->insert([
-                    'request_id' => $request_id,
-                    'product_id' => $product_id,
-                    'quantity' => $product['quantity'],
-                    'measurement_id' => $measurement->id,
-                    'customer_stock_code' => $product['customer_stock_code'],
-                    'note' => $product['note'],
-                ]);
+
+                if ($product['id'] == ""){
+
+                    OfferRequestProduct::query()->insert([
+                        'request_id' => $request_id,
+                        'product_id' => $product_id,
+                        'quantity' => $product['quantity'],
+                        'measurement_id' => $measurement->id,
+                        'customer_stock_code' => $product['customer_stock_code'],
+                        'note' => $product['note'],
+                        'sequence' => $product['sequence'],
+                    ]);
+
+                }else{
+
+                    OfferRequestProduct::query()->where('request_id', $request_id)->where('id', $product['id'])->update([
+                        'product_id' => $product_id,
+                        'quantity' => $product['quantity'],
+                        'measurement_id' => $measurement->id,
+                        'customer_stock_code' => $product['customer_stock_code'],
+                        'note' => $product['note'],
+                        'sequence' => $product['sequence'],
+                    ]);
+
+                }
+
+
+
             }
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);

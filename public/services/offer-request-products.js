@@ -339,6 +339,7 @@ async function initOfferRequestProducts(){
 }
 
 async function addRequestProducts(){
+    let request_id = getPathVariable('offer-request-products');
     let products = [];
     let table = document.getElementById("offer-request-products-body");
     for (let i = 0, row; row = table.rows[i]; i++) {
@@ -365,9 +366,9 @@ async function addRequestProducts(){
 
     console.log(formData);
 
-    let returned = await servicePostOfferRequestProducts(formData);
+    let returned = await servicePostOfferRequestProducts(formData, request_id);
     if (returned){
-        // await initOfferRequestProducts();
+        await initOfferRequestProducts();
     }else{
         alert("Hata Oluştu");
     }

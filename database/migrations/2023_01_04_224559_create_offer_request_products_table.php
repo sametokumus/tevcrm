@@ -21,6 +21,7 @@ class CreateOfferRequestProductsTable extends Migration
             $table->integer('measurement_id')->default(0);
             $table->string('customer_stock_code')->nullable();
             $table->text('note')->nullable();
+            $table->bigInteger('sequence')->default(1);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

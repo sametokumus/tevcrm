@@ -1145,8 +1145,8 @@ async function servicePostAddOfferRequest(formData) {
         return false;
     }
 }
-async function servicePostOfferRequestProducts(formData) {
-    const data = await fetchDataPost('/admin/offerRequest/offerRequestProducts', formData, 'application/json');
+async function servicePostOfferRequestProducts(formData, id) {
+    const data = await fetchDataPost('/admin/offerRequest/offerRequestProducts/' + id, formData, 'application/json');
     if (data.status == "success") {
         return data;
     } else {
