@@ -43,7 +43,7 @@
                     }).draw();
 
                 });
-
+                document.getElementById("import_data_form").reset();
             };
             reader.readAsBinaryString(formData.get('import_file'));
         });
