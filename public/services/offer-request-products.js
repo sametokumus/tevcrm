@@ -191,7 +191,8 @@ let categoryOptions = [];
 async function setCategoryOptions (){
     let data = await serviceGetCategories();
     console.log(data)
-
+    let val = { value: "", label: "" };
+    categoryOptions.push(val);
     $.each(data.categories, function(i, category){
         $.each(category.sub_categories, function(i, category2){
             $.each(category2.sub_categories, function(i, category3){
@@ -327,15 +328,15 @@ async function initOfferRequestProducts(){
             columns: [
                 { data: null, title:"N#", editable: false },
                 { data: "id", title:"ID", editable: false },
-                { data: "product_stock_code",title: "Firma Stok Kodu", className:  "row-edit" },
-                { data: "customer_stock_code", title: "Müşteri Stok Kodu", className:  "row-edit" },
-                { data: "ref_code", title: "Ref. Code", className:  "row-edit" },
-                { data: "product_name", title: "Ürün Adı", className:  "row-edit" },
-                { data: "quantity", title: "Miktar", className:  "row-edit" },
-                { data: "measurement_name_tr", title: "Birim", className:  "row-edit" },
+                { data: "product_stock_code",title: "Firma Stok Kodu", className:  "row-edit" , defaultContent: ""},
+                { data: "customer_stock_code", title: "Müşteri Stok Kodu", className:  "row-edit" , defaultContent: ""},
+                { data: "ref_code", title: "Ref. Code", className:  "row-edit" , defaultContent: ""},
+                { data: "product_name", title: "Ürün Adı", className:  "row-edit" , defaultContent: ""},
+                { data: "quantity", title: "Miktar", className:  "row-edit" , defaultContent: "1"},
+                { data: "measurement_name_tr", title: "Birim", className:  "row-edit", defaultContent: "" },
                 { data: "product_brand_name", title: "Marka", editable: false },
                 { data: "product_category_id", title: "Ürün Grubu", editable: false },
-                { data: "note", title: "Satın Alma Notu", className:  "row-edit" },
+                { data: "note", title: "Satın Alma Notu", className:  "row-edit", defaultContent: "" },
                 {
                     data: null,
                     title: "",
@@ -428,6 +429,7 @@ async function addRequestProducts(){
     console.log(formData);
 
     let returned = await servicePostOfferRequestProducts(formData, request_id);
+    console.log(returned)
     if (returned){
         $("#offer-request-products").dataTable().fnDestroy();
         $('#offer-request-products tbody > tr').remove();
