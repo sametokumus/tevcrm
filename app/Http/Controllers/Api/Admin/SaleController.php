@@ -1050,4 +1050,43 @@ class SaleController extends Controller
         }
     }
 
+    public function getCheckSaleCurrencyLog($request_id)
+    {
+        try {
+            $sale = Sale::query()->where('request_id', $request_id)->first();
+            if ($sale->usd_rate != null && $sale->eur_rate != null && $sale->gbp_rate != null && $sale->currency != null){
+                return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => true]]);
+            }else{
+                return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => false]]);
+            }
+
+//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $currency_log]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function addSaleCurrencyLog(Request $request, $request_id)
+    {
+        try {
+            $request->validate([
+                'request_id' => 'required',
+            ]);
+
+            Sale::query()->where('request_id', $request_id)->update([
+                'usd_rate' => $request->usd_rate,
+                'eur_rate' => $request->eur_rate,
+                'gbp_rate' => $request->gbp_rate,
+                'currency' => $request->currency,
+            ]);
+
+            return response(['message' => __('Kur ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
 }
