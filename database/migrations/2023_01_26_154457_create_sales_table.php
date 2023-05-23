@@ -29,6 +29,7 @@ class CreateSalesTable extends Migration
             $table->decimal('grand_total_with_shipping',10,2, false)->nullable();
             $table->decimal('usd_rate',10,2, false)->nullable();
             $table->decimal('eur_rate',10,2, false)->nullable();
+            $table->decimal('gbp_rate',10,2, false)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

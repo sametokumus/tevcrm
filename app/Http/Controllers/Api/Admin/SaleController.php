@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
 use App\Models\Company;
+use App\Models\CurrencyLog;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\Offer;
@@ -1033,6 +1034,19 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+
+
+    public function getLastCurrencyLog()
+    {
+        try {
+            $currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $currency_log]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 
