@@ -1068,9 +1068,9 @@ class SaleController extends Controller
     public function addSaleCurrencyLog(Request $request, $request_id)
     {
         try {
-            $request->validate([
-                'request_id' => 'required',
-            ]);
+//            $request->validate([
+//                'request_id' => 'required',
+//            ]);
 
             Sale::query()->where('request_id', $request_id)->update([
                 'usd_rate' => $request->usd_rate,
