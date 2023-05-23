@@ -40,9 +40,11 @@ class OfferController extends Controller
                     foreach ($products as $product) {
                         $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
                         $product['request_quantity'] = $offer_request_product['quantity'];
+                        $product['sequence'] = $offer_request_product['sequence'];
+                        $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
-                        $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
+
 
                         if ($product->lead_time != null){
                             $fastest = OfferProduct::query()
