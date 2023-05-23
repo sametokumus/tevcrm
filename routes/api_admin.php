@@ -195,6 +195,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getLastCurrencyLog', [SaleController::class, 'getLastCurrencyLog']);
     Route::get('sale/getCheckSaleCurrencyLog/{request_id}', [SaleController::class, 'getCheckSaleCurrencyLog']);
     Route::post('sale/addSaleCurrencyLog/{request_id}', [SaleController::class, 'addSaleCurrencyLog']);
+    Route::get('sale/getSaleByRequestId/{request_id}', [SaleController::class, 'getSaleByRequestId']);
 
     //Owner
     Route::get('owner/getBankInfos', [OwnerController::class, 'getBankInfos']);

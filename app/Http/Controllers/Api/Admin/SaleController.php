@@ -1089,4 +1089,15 @@ class SaleController extends Controller
         }
     }
 
+    public function getSaleByRequestId($request_id)
+    {
+        try {
+            $sale = Sale::query()->where('request_id', $request_id)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
 }
