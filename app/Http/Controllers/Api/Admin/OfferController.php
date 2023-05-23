@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
@@ -44,6 +45,14 @@ class OfferController extends Controller
                         $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+
+                        $convertible_price = $product->total_price;
+                        if ($product->discount_rate > 0){
+                            $convertible_price = $product->discounted_price;
+                        }
+
+                        $product['target_currency'] = $sale->currency;
+                        $product['target_price'] = CurrencyHelper::ChangePrice($product->currency, $sale->currency, $convertible_price, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
 
 
                         if ($product->lead_time != null){
