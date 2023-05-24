@@ -101,7 +101,8 @@ class OfferController extends Controller
                             ->get();
 
                         foreach ($offers2 as $offer) {
-                            foreach ($products as $product2) {
+                            $products2 = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+                            foreach ($products2 as $product2) {
                                 $convertible_price1 = $product->total_price;
                                 if ($product->discount_rate > 0) {
                                     $convertible_price1 = $product->discounted_price;
