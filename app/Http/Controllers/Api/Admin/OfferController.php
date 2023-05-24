@@ -46,15 +46,6 @@ class OfferController extends Controller
                         $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
                         $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
 
-                        $convertible_price = $product->total_price;
-                        if ($product->discount_rate > 0){
-                            $convertible_price = $product->discounted_price;
-                        }
-
-                        $product['target_currency'] = $sale->currency;
-                        $product['target_price'] = CurrencyHelper::ChangePrice($product->currency, $sale->currency, $convertible_price, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
-
-
                         if ($product->lead_time != null){
                             $fastest = OfferProduct::query()
                                 ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
@@ -73,60 +64,26 @@ class OfferController extends Controller
                             $product['fastest'] = false;
                         }
 
-//                        if ($product->total_price != null){
-//                            $cheapest = OfferProduct::query()
-//                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-//                                ->selectRaw('offer_products.*')
-//                                ->where('offer_products.total_price', '!=', null)
-//                                ->where('offer_products.request_product_id', $product->request_product_id)
-//                                ->where('offer_products.total_price', '<', $product->total_price)
-//                                ->where('offers.request_id', $request_id)
-//                                ->count();
-//                            if ($cheapest > 0){
-//                                $product['cheapest'] = false;
-//                            }else{
-//                                $product['cheapest'] = true;
-//                            }
-//                        }else{
-//                            $product['cheapest'] = false;
-//                        }
+                        if ($product->converted_price != null){
+                            $cheapest = OfferProduct::query()
+                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                                ->selectRaw('offer_products.*')
+                                ->where('offer_products.total_price', '!=', null)
+                                ->where('offer_products.request_product_id', $product->request_product_id)
+                                ->where('offer_products.converted_price', '<', $product->converted_price)
+                                ->where('offers.request_id', $request_id)
+                                ->count();
+                            if ($cheapest > 0){
+                                $product['cheapest'] = false;
+                            }else{
+                                $product['cheapest'] = true;
+                            }
+                        }else{
+                            $product['cheapest'] = false;
+                        }
 
-//                        $product['cheapest'] = true;
-//
-//                        $offers2 = Offer::query()
-//                            ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
-//                            ->selectRaw('offers.*, companies.name as company_name')
-//                            ->where('offers.request_id', $request_id)
-//                            ->where('offers.active', 1)
-//                            ->get();
-//
-//                        foreach ($offers2 as $offer) {
-//                            $products2 = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
-//                            foreach ($products2 as $product2) {
-//                                $convertible_price1 = $product->total_price;
-//                                if ($product->discount_rate > 0) {
-//                                    $convertible_price1 = $product->discounted_price;
-//                                }
-//                                $convertible_price2 = $product2->total_price;
-//                                if ($product2->discount_rate > 0) {
-//                                    $convertible_price2 = $product2->discounted_price;
-//                                }
-//
-//                                $target1 = CurrencyHelper::ChangePrice($product->currency, $sale->currency, $convertible_price1, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
-//                                $target2 = CurrencyHelper::ChangePrice($product2->currency, $sale->currency, $convertible_price2, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
-//
-//                                if ($target1 < $target2 && $product->request_product_id == $product2->request_product_id) {
-//                                    $product['cheapest'] = false;
-//                                }
-//                            }
-//                        }
 
                     }
-
-
-
-
-
 
                     $offer['products'] = $products;
                 }
