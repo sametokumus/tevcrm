@@ -258,6 +258,10 @@ class SaleController extends Controller
                 $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
                 $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
 
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                $sale_offer['sequence'] = $request_product->sequence;
+
             }
             $sale['sale_offers'] = $sale_offers;
 
