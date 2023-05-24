@@ -97,18 +97,28 @@ class OfferController extends Controller
 
                     foreach ($products as $product1) {
 
-                            $product['cheapest'] = true;
+                        $product['cheapest'] = true;
+
+                        $offers2 = Offer::query()
+                            ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                            ->selectRaw('offers.*, companies.name as company_name')
+                            ->where('offers.request_id', $request_id)
+                            ->where('offers.active', 1)
+                            ->get();
+
+                        foreach ($offers2 as $offer) {
                             foreach ($products as $product2) {
                                 $convertible_price2 = $product2->total_price;
-                                if ($product2->discount_rate > 0){
+                                if ($product2->discount_rate > 0) {
                                     $convertible_price2 = $product2->discounted_price;
                                 }
                                 $target2 = CurrencyHelper::ChangePrice($product2->currency, $sale->currency, $convertible_price2, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
 
-                                if ($product1['target_price'] < $target2 && $product1->request_product_id == $product2->request_product_id ){
+                                if ($product1['target_price'] < $target2 && $product1->request_product_id == $product2->request_product_id) {
                                     $product1['cheapest'] = false;
                                 }
                             }
+                        }
 
                     }
 
