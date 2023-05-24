@@ -257,6 +257,7 @@ class SaleController extends Controller
                 $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
                 $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
                 $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
             }
             $sale['sale_offers'] = $sale_offers;
 
