@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminStatusRole;
@@ -1078,6 +1079,41 @@ class SaleController extends Controller
                 'gbp_rate' => $request->gbp_rate,
                 'currency' => $request->currency,
             ]);
+
+
+            $offers = Offer::query()
+                ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                ->selectRaw('offers.*, companies.name as company_name')
+                ->where('offers.request_id', $request_id)
+                ->where('offers.active', 1)
+                ->get();
+
+            foreach ($offers as $offer) {
+                $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+                foreach ($products as $product) {
+
+                    $convertible_price = $product->total_price;
+                    if ($product->discount_rate > 0){
+                        $convertible_price = $product->discounted_price;
+                    }
+
+                    $supply_price = CurrencyHelper::ChangePrice($product->currency, $request->currency, $convertible_price, $request->eur_rate, $request->usd_rate, $request->gbp_rate);
+
+                    OfferProduct::query()->where('id', $product->id)->update([
+                        'converted_price' => $supply_price,
+                        'converted_currency' => $request->currency
+                    ]);
+
+                }
+
+
+
+
+
+
+                $offer['products'] = $products;
+            }
+
 
             return response(['message' => __('Kur ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {

@@ -29,6 +29,8 @@ class CreateOfferProductsTable extends Migration
             $table->text('comment')->nullable();
             $table->string('currency')->nullable();
             $table->integer('lead_time')->nullable();
+            $table->decimal('converted_price',10,2, false)->nullable();
+            $table->string('converted_currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
