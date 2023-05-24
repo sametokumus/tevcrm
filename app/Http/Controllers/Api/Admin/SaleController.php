@@ -1169,10 +1169,9 @@ class SaleController extends Controller
                 ->where('active', 1)
                 ->whereNotIn('id', function ($query) {
                     $query->select('sale_offer_id')
-                        ->from('packing_lists');
+                        ->from('packing_list_products');
                 })
-                ->toSql();
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale_offers]]);
+                ->get();
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
