@@ -383,6 +383,8 @@ class SaleController extends Controller
                     'vat_rate' => $offer['vat_rate'],
                     'currency' => $offer['currency'],
                     'lead_time' => $offer['lead_time'],
+                    'sale_price' => $offer['converted_price'],
+                    'sale_currency' => $offer['converted_currency'],
                 ]);
             }
 
