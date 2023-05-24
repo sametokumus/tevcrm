@@ -17,6 +17,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
 use App\Models\PackingList;
+use App\Models\PackingListProduct;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -1269,7 +1270,7 @@ class SaleController extends Controller
             ]);
 
             foreach ($request->packing_list as $offer){
-                SaleOffer::query()->insert([
+                PackingListProduct::query()->insert([
                     'packing_list_id' => $packing_list_id,
                     'sale_offer_id' => $offer['sale_offer_id'],
                 ]);
