@@ -16,6 +16,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
+use App\Models\PackingList;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -1250,6 +1251,37 @@ class SaleController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addPackingList(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+            ]);
+
+            $packing_list_id = Uuid::uuid();
+
+            PackingList::query()->insert([
+                'packing_list_id' => $packing_list_id,
+                'sale_id' => $request->sale_id,
+            ]);
+
+            foreach ($request->packing_list as $offer){
+                SaleOffer::query()->insert([
+                    'packing_list_id' => $packing_list_id,
+                    'sale_offer_id' => $offer['sale_offer_id'],
+                ]);
+            }
+
+            return response(['message' => __('Gönderi listesi oluşturma işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 

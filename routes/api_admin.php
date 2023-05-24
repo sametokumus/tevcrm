@@ -189,6 +189,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/removeCancelledSales', [SaleController::class, 'removeCancelledSales']);
 
     Route::get('sale/getPackingableProductsBySaleId/{sale_id}', [SaleController::class, 'getPackingableProductsBySaleId']);
+    Route::post('sale/addPackingList', [SaleController::class, 'addPackingList']);
 
 
     Route::get('sale/getSaleNotes/{sale_id}', [SaleController::class, 'getSaleNotes']);

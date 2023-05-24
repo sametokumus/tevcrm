@@ -15,7 +15,7 @@ class CreatePackingListsTable extends Migration
     {
         Schema::create('packing_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('packinng_list_id');
+            $table->string('packing_list_id');
             $table->string('sale_id');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
