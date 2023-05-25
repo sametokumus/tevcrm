@@ -1219,13 +1219,16 @@ class SaleController extends Controller
         }
     }
 
-    public function getPackingListProductsBySaleIdAndPackingListId($sale_id, $packing_list_id)
+    public function getPackingListProductsById($packing_list_id)
     {
         try {
+            $packing_list = PackingList::query()->where('packing_list_id', $packing_list_id)->first();
+
+
             $sale = Sale::query()
                 ->selectRaw('sales.*')
                 ->where('sales.active',1)
-                ->where('sales.sale_id',$sale_id)
+                ->where('sales.sale_id',$packing_list->sale_id)
                 ->first();
 
 
@@ -1243,10 +1246,6 @@ class SaleController extends Controller
             $sale_offers = SaleOffer::query()
                 ->where('sale_id', $sale->sale_id)
                 ->where('active', 1)
-                ->whereNotIn('id', function ($query) {
-                    $query->select('sale_offer_id')
-                        ->from('packing_list_products');
-                })
                 ->get();
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
