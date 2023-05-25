@@ -1200,6 +1200,25 @@ class SaleController extends Controller
         }
     }
 
+    public function getPackingListsBySaleId($sale_id)
+    {
+        try {
+            $packing_lists = PackingList::query()
+                ->where('active',1)
+                ->where('sale_id',$sale_id)
+                ->get();
+
+            foreach ($packing_lists as $packing_list) {
+                $packing_list['count'] = PackingListProduct::query()->where('packing_list_id', $packing_list->packing_list_id)->count();
+            }
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['packing_lists' => $packing_lists]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getPackingListProductsBySaleIdAndPackingListId($sale_id, $packing_list_id)
     {
         try {
