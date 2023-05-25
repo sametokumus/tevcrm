@@ -1247,6 +1247,7 @@ class SaleController extends Controller
                 ->join('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
                 ->selectRaw('sale_offers.*')
                 ->where('sale_offers.sale_id', $sale->sale_id)
+                ->where('packing_list_products.packing_list_id', $packing_list_id)
                 ->where('sale_offers.active', 1)
                 ->get();
             foreach ($sale_offers as $sale_offer){
