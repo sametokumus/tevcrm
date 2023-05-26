@@ -94,6 +94,7 @@ async function initOfferRequest(){
             measurement_name = product.measurement_name_tr;
         }
         let item = '<tr id="productRow' + product.id + '">\n' +
+            '           <td>' + product.sequence + '</td>\n' +
             '           <td>' + product.id + '</td>\n' +
             '              <td>\n' +
             '                  '+ note +'\n' +
@@ -164,7 +165,7 @@ async function addOffer(){
     }else {
         rows.every(function (rowIdx, tableLoop, rowLoop) {
             let item = {
-                "request_product_id": this.data()[0]
+                "request_product_id": this.data()[1]
             }
             products.push(item);
         });

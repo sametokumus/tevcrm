@@ -54,8 +54,7 @@ async function initOfferDetail(){
             data: offers,
             columns: [{
                 title: 'N#',
-                data: null,
-                render: (data, type, row, meta) => (meta.row + 1)
+                data: "sequence"
                 },
                 { data: "id", editable: false },
                 { data: "offer_id", visible: false },
@@ -94,6 +93,20 @@ async function initOfferDetail(){
                         return data;
                     }  },
                 { data: "currency" },
+                { data: "sale_price",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return changeCommasToDecimal(data);
+                    }  },
+                { data: "offer_pcs_price", className:  "row-edit",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return data;
+                    }  },
                 { data: "offer_price", className:  "row-edit",
                     render: function (data, type, row) {
                         if (type === 'display' && data === '0,00') {

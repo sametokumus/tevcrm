@@ -75,7 +75,8 @@ $extra_js='
                                     <th class="border-bottom-0">İndirim Oranı</th>
                                     <th class="border-bottom-0">İndirimli Fiyat</th>
                                     <th class="border-bottom-0">Vergi Oranı</th>
-                                    <th class="border-bottom-0">Para Birimi</th>
+                                    <th class="border-bottom-0">Tedarik Para Birimi</th>
+                                    <th class="border-bottom-0">Tedarik Fiyatı (Satış para birimi cinsinden)</th>
                                     <th class="border-bottom-0">Teklif Birim Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Para Birimi</th>
@@ -187,19 +188,19 @@ $extra_js='
                             <label class="form-label">Teslimat Süresi</label>
                             <input type="text" class="form-control" id="add_batch_offer_lead_time">
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="add_batch_offer_currency">
-                                <option value="TRY">TRY</option>
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                                <option value="GBP">GBP</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Para Birimi Dönüşüm Oranı</label>
-                            <input type="text" class="form-control" id="add_batch_offer_currency_change" value="1,00">
-                        </div>
+{{--                        <div class="col-md-6 mb-3">--}}
+{{--                            <label class="form-label">Para Birimi</label>--}}
+{{--                            <select class="form-control" id="add_batch_offer_currency">--}}
+{{--                                <option value="TRY">TRY</option>--}}
+{{--                                <option value="EUR">EUR</option>--}}
+{{--                                <option value="USD">USD</option>--}}
+{{--                                <option value="GBP">GBP</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-6 mb-3">--}}
+{{--                            <label class="form-label">Para Birimi Dönüşüm Oranı</label>--}}
+{{--                            <input type="text" class="form-control" id="add_batch_offer_currency_change" value="1,00">--}}
+{{--                        </div>--}}
                     </div>
                 </div>
                 <div class="modal-footer">

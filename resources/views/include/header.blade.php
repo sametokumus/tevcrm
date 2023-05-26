@@ -142,7 +142,7 @@ $extra_js="";
                 </div>
                 <div class="menu-header">Satış Yönetimi</div>
                 <div id="nav-new-request" class="d-none menu-item @if( Request::segment(1)== 'offer-request' ) active @endif">
-                    <a href="/offer-request" class="menu-link">
+                    <a href="/new-offer-request" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Talep Oluştur</span>
                     </a>

@@ -129,7 +129,7 @@ async function initSale(sale_id){
             measurement_name = product.measurement_name_en;
         }
         let item = '<tr>\n' +
-            '           <td class="text-center">' + (i+1) + '</td>\n' +
+            '           <td class="text-center">' + sale.sequence + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.request_quantity) + '</td>\n' +

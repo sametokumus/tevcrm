@@ -28,6 +28,7 @@ $extra_js='
                             <table id="offer-request-products" class="table table-bordered text-nowrap key-buttons border-bottom w-100">
                                 <thead>
                                 <tr>
+                                    <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0">Satın Alma Notu</th>
                                     <th class="border-bottom-0">Ref. Code</th>

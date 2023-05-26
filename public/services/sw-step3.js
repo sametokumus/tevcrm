@@ -72,6 +72,7 @@ async function initOfferDetail(){
     console.log(sale_id)
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
+    console.log(sale)
     $('#sw_customer_name').text(sale.request.company.name);
 
     if (sale.status_id >= 4) {
@@ -108,13 +109,7 @@ async function initOfferDetail(){
                 }
             }, {
                 name: "offer_currency",
-                type: "select",
-                options: [
-                    { value: 'TRY', label: 'TRY' },
-                    { value: 'EUR', label: 'EUR' },
-                    { value: 'USD', label: 'USD' },
-                    { value: 'GBP', label: 'GBP' }
-                ],
+                type: "readonly",
                 attr: {
                     class: 'form-control'
                 }
@@ -165,13 +160,13 @@ async function initOfferDetail(){
             // Reload the DataTable
             await initSaleTableFooter();
         });
+        console.log(offers)
         table = $('#sales-detail').DataTable( {
             dom: "Bfrtip",
             data: offers,
             columns: [{
                 title: 'N#',
-                data: null,
-                render: (data, type, row, meta) => (meta.row + 1)
+                data: "sequence"
             },
                 { data: "id", editable: false },
                 { data: "offer_id", visible: false },
@@ -210,6 +205,13 @@ async function initOfferDetail(){
                         return data;
                     }  },
                 { data: "currency" },
+                { data: "sale_price",
+                    render: function (data, type, row) {
+                        if (type === 'display' && data === '0,00') {
+                            return '';
+                        }
+                        return changeCommasToDecimal(data);
+                    }  },
                 { data: "offer_pcs_price", className:  "row-edit",
                     render: function (data, type, row) {
                         if (type === 'display' && data === '0,00') {
@@ -224,7 +226,10 @@ async function initOfferDetail(){
                         }
                         return data;
                     }  },
-                { data: "offer_currency", className:  "row-edit" },
+                { data: "offer_currency", className:  "row-edit", editable: false,
+                    render: function (data, type, row) {
+                        return sale.currency;
+                    } },
                 { data: "offer_lead_time", className:  "row-edit" },
                 {
                     data: null,
@@ -284,35 +289,34 @@ async function addOfferBatchProcess(){
         $("#add_batch_process_form").trigger("reset");
     }else {
         let promises = rows.map(async (row) => {
+            console.log(row)
             let id = row.id;
+            console.log(id)
             let profit_rate = document.getElementById('add_batch_offer_profit_rate').value;
-            let offer_currency = document.getElementById('add_batch_offer_currency').value;
-            let offer_currency_change = document.getElementById('add_batch_offer_currency_change').value;
+            // let offer_currency = document.getElementById('add_batch_offer_currency').value;
+            // let offer_currency_change = document.getElementById('add_batch_offer_currency_change').value;
             let offer_lead_time = document.getElementById('add_batch_offer_lead_time').value;
-            let total_price = row.total_price;
-            let discounted_price = row.discounted_price;
+            // let total_price = row.total_price;
+            // let discounted_price = row.discounted_price;
 
-            console.log(total_price, discounted_price);
+            let price = row.sale_price;
+            // if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
+            //     price = discounted_price;
+            // }
 
-            let price = total_price;
-            if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
-                price = discounted_price;
-            }
-
-            let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
+            // let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
+            let offer_price = parseFloat(price);
             offer_price = offer_price + (offer_price / 100 * profit_rate);
 
             let formData = JSON.stringify({
                 "id": id,
                 "user_id": user_id,
                 "offer_price": offer_price,
-                "offer_currency": offer_currency,
+                "offer_currency": row.sale_currency,
                 "offer_lead_time": offer_lead_time
             });
             console.log(formData)
-
             let returned = await servicePostAddSaleOfferPrice(formData);
-            console.log(returned)
 
             return returned;
         });

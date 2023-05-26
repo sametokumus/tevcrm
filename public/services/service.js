@@ -1482,6 +1482,42 @@ async function servicePostAddSaleNote(formData) {
 }
 
 
+async function serviceGetLastCurrencyLog() {
+    const data = await fetchDataGet('/admin/sale/getLastCurrencyLog', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetCheckSaleCurrencyLog(request_id) {
+    const data = await fetchDataGet('/admin/sale/getCheckSaleCurrencyLog/'+ request_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddSaleCurrencyLog(formData, request_id) {
+    const data = await fetchDataPost('/admin/sale/addSaleCurrencyLog/'+ request_id, formData, 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetSaleByRequestId(request_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleByRequestId/'+ request_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 
 
 
@@ -1877,6 +1913,54 @@ async function serviceGetSaleSuppliers(sale_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+
+
+async function servicePostAddPackingList(formData) {
+    const data = await fetchDataPost('/admin/sale/addPackingList', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetPackingableProductsBySaleId(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getPackingableProductsBySaleId/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetPackingListsBySaleId(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getPackingListsBySaleId/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetPackingListProductsById(packing_list_id) {
+    const data = await fetchDataGet('/admin/sale/getPackingListProductsById/' + packing_list_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+
+
+
+
+
+
+
 
 
 

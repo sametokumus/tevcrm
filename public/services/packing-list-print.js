@@ -18,13 +18,8 @@
         checkLogin();
         checkRole();
 
-        let sale_id = getPathVariable('packing-list-print');
-        // await initContact(1, sale_id);
-        await initSale(sale_id);
-        await initDetail(sale_id);
-        // await initBankInfoSelect();
-        // await getOwnersAddSelectId('owners');
-        // document.getElementById('owners').value = 1;
+        let packing_list_id = getPathVariable('packing-list-print');
+        await initSale(packing_list_id);
     });
 
 })(window.jQuery);
@@ -86,11 +81,12 @@ async function initContact(contact_id, sale_id){
     $('#quote-print .contact-col address').append('<b>'+ Lang.get("strings.Email") +':</b> '+ contact.email +'');
 }
 
-async function initSale(sale_id){
-    let data = await serviceGetSaleById(sale_id);
+async function initSale(packing_list_id){
+    let data = await serviceGetPackingListProductsById(packing_list_id);
     console.log(data);
     let sale = data.sale;
-    await initContact(sale.owner_id, sale_id);
+    await initContact(sale.owner_id, sale.sale_id);
+    await initDetail(sale.sale_id);
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
     let company = sale.request.company;

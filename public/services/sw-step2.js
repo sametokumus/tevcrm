@@ -2,13 +2,24 @@
     "use strict";
 
 	$(document).ready(function() {
+        $(":input").inputmask();
+        $("#update_currency_rate_usd").maskMoney({thousands:'.', decimal:','});
+        $("#update_currency_rate_eur").maskMoney({thousands:'.', decimal:','});
+        $("#update_currency_rate_gbp").maskMoney({thousands:'.', decimal:','});
+
+        $('#update_currency_rate_form').submit(function (e){
+            e.preventDefault();
+            updateCurrencyRate();
+        });
 	});
 
 	$(window).load(async function() {
 
 		checkLogin();
 		checkRole();
-		await initOfferDetail();
+        await checkCurrencyLog();
+        await initRequestDetail();
+        await initSaleDetail();
 
 	});
 
@@ -18,16 +29,89 @@ function checkRole(){
 	return true;
 }
 
-async function initOfferDetail(){
+async function initRequestDetail(){
     let request_id = getPathVariable('sw-2');
-    console.log(request_id)
-    let data_c = await serviceGetOfferRequestById(request_id);
-    $('#sw_customer_name').text(data_c.offer_request.company.name);
+    let data = await serviceGetOfferRequestById(request_id);
+    $('#sw_customer_name').text(data.offer_request.company.name);
+}
+async function initSaleDetail(){
+    let request_id = getPathVariable('sw-2');
+    let data = await serviceGetSaleByRequestId(request_id);
+    let sale = data.sale;
 
+    if (sale.currency != null){
+        document.getElementById('update_currency_rate_currency').value = sale.currency;
+    }
+    if (sale.usd_rate != null){
+        document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
+    }
+    if (sale.eur_rate != null){
+        document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
+    }
+    if (sale.gbp_rate != null){
+        document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(sale.gbp_rate);
+    }
+}
+
+async function checkCurrencyLog(){
+    let request_id = getPathVariable('sw-2');
+    let data = await serviceGetCheckSaleCurrencyLog(request_id);
+    if (data.has_currency == true){
+        await initOfferDetail();
+    }else{
+        await initEmptyTables();
+    }
+}
+
+async function initEmptyTables(){
+    $('#offer-detail').DataTable({
+        responsive: false,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1}
+        ],
+        dom: 'Bfrtip',
+        buttons: [],
+        paging: false,
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[0, 'asc']]
+    });
+    $('#sales-detail').DataTable({
+        responsive: false,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1}
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Teklif Oluştur',
+                action: function (e, dt, node, config) {
+                    addSale();
+                }
+            }
+        ],
+        paging: false,
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[0, 'asc']]
+    });
+}
+
+async function initOfferDetail(){
+
+    let request_id = getPathVariable('sw-2');
     let data = await serviceGetOffersByRequestId(request_id);
+    console.log(data)
     if (data.offer_status) {
         let offers = data.offers;
         console.log(offers)
+        $("#sales-detail").dataTable().fnDestroy();
         $("#offer-detail").dataTable().fnDestroy();
         $('#offer-detail tbody > tr').remove();
         let rowNo = 0;
@@ -49,7 +133,7 @@ async function initOfferDetail(){
                     measurement_name = product.measurement_name_tr;
                 }
                 let item = '<tr id="productRow' + product.id + '">\n' +
-                    '           <td>' + rowNo + '</td>\n' +
+                    '           <td>' + product.sequence + '</td>\n' +
                     '           <td>' + product.id + '</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
@@ -73,6 +157,8 @@ async function initOfferDetail(){
                     '           <td>' + checkNull(product.currency) + '</td>\n' +
                     '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
                     '           <td>' + checkNull(product.quantity) + '</td>\n' +
+                    '           <td class="d-none">' + changeCommasToDecimal(product.converted_price) + '</td>\n' +
+                    '           <td class="d-none">' + product.converted_currency + '</td>\n' +
                     '       </tr>';
                 $('#offer-detail tbody').append(item);
             });
@@ -144,18 +230,21 @@ async function addSaleTableProduct(el){
 async function initSaleTableFooter(){
     let tableSales = $("#sales-detail").DataTable();
     let total = 0;
+    let currency = '';
     tableSales.rows().every(function() {
         let data = this.data();
-        if (data[15] == ''){
-            total += parseFloat(changePriceToDecimal(data[13]));
-        }else{
-            total += parseFloat(changePriceToDecimal(data[15]));
-        }
+        // if (data[15] == ''){
+        //     total += parseFloat(changePriceToDecimal(data[13]));
+        // }else{
+        //     total += parseFloat(changePriceToDecimal(data[15]));
+        // }
+        total += parseFloat(changePriceToDecimal(data[20]));
+        currency = data[21];
     });
 
     $("#sales-detail tfoot tr").remove();
     let footer = '<tr>\n' +
-        '             <th colspan="20" class="border-bottom-0">Tedarik Fiyatı: '+ changeDecimalToPrice(total) +'</th>\n' +
+        '             <th colspan="22" class="border-bottom-0">Satış Para Birimi Cinsinden Tedarik Fiyatı: '+ changeDecimalToPrice(total) +' '+ currency +'</th>\n' +
         '         </tr>';
     $("#sales-detail tfoot").append(footer);
 }
@@ -201,6 +290,8 @@ async function addSale(){
                 "currency": this.data()[17],
                 "request_quantity": this.data()[18],
                 "offer_quantity": this.data()[19],
+                "converted_price": changePriceToDecimal(this.data()[20]),
+                "converted_currency": this.data()[21],
             }
             offers.push(item);
         });
@@ -215,11 +306,39 @@ async function addSale(){
         console.log(formData);
 
         let data = await servicePostAddSale(formData);
+        console.log(data)
         if (data.status == "success") {
             window.location.href = "/sw-3/" + data.object.sale_id;
         }else{
             alert("Hata Oluştu");
         }
 
+    }
+}
+
+async function getCurrencyLog(){
+    let data = await serviceGetLastCurrencyLog();
+    let log = data.currency_log;
+    document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(log.usd);
+    document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(log.eur);
+    document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(log.gbp);
+}
+async function updateCurrencyRate() {
+    let request_id = getPathVariable('sw-2');
+    console.log(request_id)
+
+    let formData = JSON.stringify({
+        "currency": document.getElementById('update_currency_rate_currency').value,
+        "usd_rate": changePriceToDecimal(document.getElementById('update_currency_rate_usd').value),
+        "eur_rate": changePriceToDecimal(document.getElementById('update_currency_rate_eur').value),
+        "gbp_rate": changePriceToDecimal(document.getElementById('update_currency_rate_gbp').value)
+    });
+    console.log(formData)
+
+    let returned = await servicePostAddSaleCurrencyLog(formData, request_id);
+    if (returned){
+        await checkCurrencyLog();
+    }else{
+        alert("Kur Eklerken Hata Oluştu")
     }
 }

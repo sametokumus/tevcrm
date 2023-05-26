@@ -43,6 +43,63 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
+                        Döviz Kurları
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <form method="post" action="#" id="update_currency_rate_form">
+                        <div class="card border-theme mb-3">
+                            <div class="card-body">
+                                <div class="row p-3">
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Satış Para Birimi</label>
+                                        <select class="form-control" id="update_currency_rate_currency">
+                                            <option value="TRY">TRY</option>
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="GBP">GBP</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">1 TL Karşılığı Dolar Kuru</label>
+                                        <input type="text" value="" class="form-control" id="update_currency_rate_usd" required />
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">1 TL Karşılığı Euro Kuru</label>
+                                        <input type="text" value="" class="form-control" id="update_currency_rate_eur" required />
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">1 TL Karşılığı Sterlin Kuru</label>
+                                        <input type="text" value="" class="form-control" id="update_currency_rate_gbp" required />
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-theme w-100">Döviz Kurunu Onayla</button>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="button" class="btn btn-warning w-100" onclick="getCurrencyLog();">Güncel Döviz Kurunu Getir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
                         Müşteri Teklifi (<span id="sw_customer_name"></span>)
                     </h1>
                 </div>
@@ -76,6 +133,8 @@ $extra_js='
                                     <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0">İstek Miktar</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
+                                    <th class="border-bottom-0 d-none">Converted Price</th>
+                                    <th class="border-bottom-0 d-none">Converted Currency</th>
                                 </tr>
                                 </thead>
                                 <tbody id="sales-detail-body">
@@ -135,6 +194,8 @@ $extra_js='
                                     <th class="border-bottom-0">Para Birimi</th>
                                     <th class="border-bottom-0">İstek Miktar</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
+                                    <th class="border-bottom-0 d-none">Converted Price</th>
+                                    <th class="border-bottom-0 d-none">Converted Currency</th>
                                 </tr>
                                 </thead>
                                 <tbody id="offer-detail-body">

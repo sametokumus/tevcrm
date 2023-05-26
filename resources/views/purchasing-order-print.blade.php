@@ -149,7 +149,7 @@ $extra_js='
 {{--                                        <div class="row">--}}
 {{--                                            <div class="col-md-12">--}}
 {{--                                                <p style="margin-top: 15px; margin-bottom: 0;">--}}
-{{--                                                    <strong>{{__('Bank Details:')}}</strong>--}}
+{{--                                                    <strong>{{__('Bank Details')}}:</strong>--}}
 {{--                                                    <button type="button" class="btn btn-outline-secondary btn-sm no-print" onclick="openAddBankInfoModal();">Banka Bilgisi Ekle</button>--}}
 {{--                                                </p>--}}
 {{--                                                <div id="bank-details" class="text-muted">--}}
