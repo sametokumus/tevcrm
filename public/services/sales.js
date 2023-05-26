@@ -145,11 +145,11 @@ async function initSales(){
 
         if (sale.status.action == "rfq"){
             status_class = "border-danger text-danger";
-            btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
+            btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger">RFQ Oluştur</a>\n';
         }else if (sale.status.action == "rfq-update"){
             status_class = "border-pink text-pink";
-            btn_list += '<a href="offer-request/'+ sale.request_id +'" class="btn btn-sm btn-pink">Talebi Güncelle</a>\n' +
+            btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-pink">Talebi Güncelle</a>\n' +
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Gir</a>\n';
         }else if (sale.status.action == "offer"){
             status_class = "border-warning text-warning";
@@ -187,7 +187,8 @@ async function initSales(){
         }else if (sale.status.action == "pl-inv"){
             status_class = "border-indigo text-indigo";
 
-            btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
+            // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
+            btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
         }else if (sale.status.action == "admin-conf-failed" || sale.status.action == "admin-rev-conf-failed"){
             status_class = "border-default text-default";
@@ -266,7 +267,7 @@ async function initSales(){
                 text: 'Talep Oluştur',
                 className: 'btn btn-theme',
                 action: function ( e, dt, node, config ) {
-                    window.location = '/offer-request';
+                    window.location = '/new-offer-request';
                 }
             }
         ],
