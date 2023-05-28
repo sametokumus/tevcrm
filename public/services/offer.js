@@ -132,7 +132,7 @@ async function initOfferRequest(){
             {
                 text: 'Seçili Ürün Adını Değiştir',
                 action: function ( e, dt, node, config ) {
-                    openUpdateProductName(productDatatable.rows( { selected: true } ));
+                    openUpdateProductNameModal(productDatatable.rows( { selected: true } ));
                 }
             },
             // 'excel',
