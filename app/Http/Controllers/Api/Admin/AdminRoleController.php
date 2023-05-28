@@ -300,4 +300,20 @@ class AdminRoleController extends Controller
         }
     }
 
+
+
+    public function getCheckAdminRolePermission($admin_id, $permission_id){
+        try {
+            $role_id = Admin::query()->where('id', $admin_id)->first()->admin_role_id;
+            $permission = AdminPermissionRole::query()->where('admin_role_id', $role_id)->where('admin_permission_id', $permission_id)->where('active', 1)->count();
+            if ($permission > 0){
+                return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['permission' => true]]);
+            }else{
+                return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['permission' => false]]);
+            }
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+
 }

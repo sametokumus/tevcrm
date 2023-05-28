@@ -246,9 +246,7 @@ function formatDateAndTime(date, slicer) {
 }
 
 function formatDateAndTimeDESC(date, slicer) {
-    console.log(date)
 	date = new Date(date);
-    console.log(date)
 	var day = ('0' + date.getDate()).slice(-2);
 	var month = ('0' + (date.getMonth() + 1)).slice(-2);
 	var year = date.getFullYear();
@@ -776,6 +774,14 @@ async function serviceGetDeleteAdminRole(id) {
 
 async function serviceGetAdminRolePermissions(role_id) {
 	const data = await fetchDataGet('/admin/adminRole/getAdminRolePermissions/' + role_id, 'application/json');
+	if (data.status == "success") {
+		return data.object;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+async function serviceGetCheckAdminRolePermission(admin_id, permission_id) {
+	const data = await fetchDataGet('/admin/adminRole/getCheckAdminRolePermission/' + admin_id + '/' + permission_id, 'application/json');
 	if (data.status == "success") {
 		return data.object;
 	} else {

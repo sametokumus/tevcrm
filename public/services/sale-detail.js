@@ -87,30 +87,42 @@ async function initSaleStats(sale_id){
 }
 
 async function initSaleSuppliers(sale_id){
-    let data = await serviceGetSaleSuppliers(sale_id);
-    let offers = data.offers;
-    console.log(offers)
-    $('#suppliers-table tbody tr').remove();
+    let admin_id = await localStorage.getItem('userId');
+    let control = await serviceGetCheckAdminRolePermission(admin_id, 6);
 
-    $.each(offers, function (i, offer) {
+    if (control.permission) {
+        let data = await serviceGetSaleSuppliers(sale_id);
+        let offers = data.offers;
+        console.log(offers)
+        $('#suppliers-table tbody tr').remove();
 
+        $.each(offers, function (i, offer) {
+
+            let item = '<tr>\n' +
+                '           <td>\n' +
+                '               <span class="d-flex align-items-center">\n' +
+                '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+                '                   ' + offer.supplier.name + '\n' +
+                '               </span>\n' +
+                '           </td>\n' +
+                '           <td><small>' + offer.supplier.website + '</small></td>\n' +
+                '           <td><small>' + offer.supplier.email + '</small></td>\n' +
+                '           <td><small>' + offer.supplier.phone + '</small></td>\n' +
+                '           <td><small>' + offer.product_count + ' Ürün</small></td>\n' +
+                '           <td><small>' + offer.total_price + ' ' + offer.currency + '+KDV</small></td>\n' +
+                '           <td>\n' +
+                '               <a href="/company-detail/' + offer.supplier_id + '" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
+                '           </td>\n' +
+                '       </tr>';
+
+            $('#suppliers-table tbody').append(item);
+        });
+    }else{
+        $('#suppliers-table tbody tr').remove();
         let item = '<tr>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ offer.supplier.name +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td><small>'+ offer.supplier.website +'</small></td>\n' +
-            '           <td><small>'+ offer.supplier.email +'</small></td>\n' +
-            '           <td><small>'+ offer.supplier.phone +'</small></td>\n' +
-            '           <td><small>'+ offer.product_count +' Ürün</small></td>\n' +
-            '           <td><small>'+ offer.total_price +' '+ offer.currency +'+KDV</small></td>\n' +
-            '           <td>\n' +
-            '               <a href="/company-detail/'+ offer.supplier_id +'" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
-            '           </td>\n' +
+            '           <td colspan="7">Görüntüleme yetkini bulunmamaktadır.</td>\n' +
             '       </tr>';
 
         $('#suppliers-table tbody').append(item);
-    });
+    }
 }

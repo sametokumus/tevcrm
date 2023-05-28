@@ -108,6 +108,7 @@ async function initOfferRequest(){
             '           <td>' + product.product_name + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>' + checkNull(measurement_name) + '</td>\n' +
+            '           <td class="d-none">' + product.product.id + '</td>\n' +
             '       </tr>';
         $('#offer-request-products tbody').append(item);
     });
@@ -592,7 +593,7 @@ async function openUpdateProductNameModal(){
 
         let product_id;
         rows.every(function (rowIdx, tableLoop, rowLoop) {
-            product_id = this.data()[1];
+            product_id = this.data()[7];
         });
 
         document.getElementById('update_product_name_id').value = product_id;

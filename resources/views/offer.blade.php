@@ -35,6 +35,7 @@ $extra_js='
                                     <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Miktar</th>
                                     <th class="border-bottom-0">Birim</th>
+                                    <th class="border-bottom-0 d-none">Product ID</th>
                                 </tr>
                                 </thead>
                                 <tbody id="offer-request-products-body">
@@ -154,7 +155,7 @@ $extra_js='
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Ref. Code</label>
+                            <label class="form-label">Ürün Adı</label>
                             <input type="text" class="form-control" id="update_product_name">
                             <input type="hidden" class="form-control" id="update_product_name_id">
                         </div>
