@@ -110,4 +110,25 @@ class ProductController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
         }
     }
+
+    public function updateProductName(Request $request, $id)
+    {
+        try {
+//            $request->validate([
+//                'stock_code' => 'required'
+//            ]);
+
+            Product::query()->where('id', $id)->update([
+                'product_name' => $request->product_name
+            ]);
+            return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
+        }
+
+    }
 }

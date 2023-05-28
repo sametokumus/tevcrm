@@ -1887,6 +1887,17 @@ async function serviceGetDeleteProduct(id) {
     }
 }
 
+async function servicePostUpdateProductName(formData, id) {
+    const data = await fetchDataPost('/admin/product/updateProductName/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 async function serviceGetSaleDetailInfo(sale_id) {
     const data = await fetchDataGet('/admin/sale/getSaleDetailInfo/' + sale_id, 'application/json');
     if (data.status == "success") {

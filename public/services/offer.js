@@ -11,6 +11,11 @@
         $("#update_offer_product_total_price").maskMoney({thousands:'.', decimal:','});
         $("#update_offer_product_discounted_price").maskMoney({thousands:'.', decimal:','});
 
+		$('#update_product_name_form').submit(function (e){
+			e.preventDefault();
+            updateProductName();
+		});
+
 		$('#add_offer_form').submit(function (e){
 			e.preventDefault();
             addOffer();
@@ -124,6 +129,12 @@ async function initOfferRequest(){
             },
             'selectAll',
             'selectNone',
+            {
+                text: 'Seçili Ürün Adını Değiştir',
+                action: function ( e, dt, node, config ) {
+                    openUpdateProductName(productDatatable.rows( { selected: true } ));
+                }
+            },
             // 'excel',
             // 'pdf'
         ],
@@ -563,5 +574,59 @@ async function addOfferProduct(){
         await initOfferDetailModal(offer_id);
     }else{
         alert("Hata Oluştu");
+    }
+}
+
+
+async function openUpdateProductNameModal(){
+
+    let table = $('#offer-request-products').DataTable();
+    let rows = table.rows({ selected: true } );
+
+    if (rows.count() === 0){
+        alert("Öncelikle seçim yapmalısınız.");
+    }else if(rows.count() > 1){
+        alert("Tek bir satır seçmeniz gerekmektedir.");
+    }else {
+        $("#updateProductNameModal").modal('show');
+
+        let product_id;
+        rows.every(function (rowIdx, tableLoop, rowLoop) {
+            product_id = this.data()[1];
+        });
+
+        document.getElementById('update_product_name_id').value = product_id;
+
+
+
+    }
+}
+
+
+async function updateProductName(){
+    let product_name = document.getElementById('update_product_name').value;
+    if (product_name != ''){
+
+        let product_id = document.getElementById('update_product_name_id').value;
+        let formData = JSON.stringify({
+            "product_name": product_name
+        });
+
+        console.log(formData);
+        let returned = await servicePostUpdateProductName(formData, product_id);
+        if (returned){
+            $('#offer-request-products-body tr').removeClass('selected');
+            $("#update_product_name_form").trigger("reset");
+            $('#updateProductNameModal').modal('hide');
+            initOfferRequest();
+
+            let products = $('#offer-request-products').DataTable();
+            products.rows().deselect();
+        }else{
+            alert("Hata Oluştu");
+        }
+
+    }else{
+        alert('Geçerli bir isim giriniz.');
     }
 }
