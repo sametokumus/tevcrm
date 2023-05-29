@@ -1506,7 +1506,6 @@ async function serviceGetCheckSaleCurrencyLog(request_id) {
 }
 async function servicePostAddSaleCurrencyLog(formData, request_id) {
     const data = await fetchDataPost('/admin/sale/addSaleCurrencyLog/'+ request_id, formData, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -1520,6 +1519,33 @@ async function serviceGetSaleByRequestId(request_id) {
     if (data.status == "success") {
         return data.object;
     } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetCurrencyLogs() {
+    const data = await fetchDataGet('/admin/sale/getCurrencyLogs', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddCurrencyLog(formData) {
+    const data = await fetchDataPost('/admin/sale/addCurrencyLog', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteCurrencyLog(log_id) {
+    const data = await fetchDataGet('/admin/sale/deleteCurrencyLog/'+ log_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
         showAlert('İstek Başarısız.');
     }
 }

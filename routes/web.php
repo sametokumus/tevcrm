@@ -54,7 +54,8 @@ Route::get('/packing-list-print/{sale_id}', function () { return view('packing-l
 
 
 Route::get('/settings', function () { return view('settings'); });
-Route::get('/contacts', function () { return view('contacts'); });
+Route::get('/currency-logs', function () { return view('currency-logs'); });
+Route::get('/offer-request', function () { return view('add-offer-request'); });
 Route::get('/contact-detail/{id}', function () { return view('contact-detail'); });
 
 Route::get('/products', function () { return view('products'); });
