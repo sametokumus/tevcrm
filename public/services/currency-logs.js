@@ -51,7 +51,7 @@ async function initCurrencyLogs(){
         $('#currency-datatable tbody').append(typeItem);
     });
 
-    $('#currency-datatable-datatable').DataTable({
+    $('#currency-datatable').DataTable({
         responsive: true,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
@@ -63,6 +63,7 @@ async function initCurrencyLogs(){
         language: {
             url: "services/Turkish.json"
         },
+        orderable: true,
         order: [[0, 'desc']],
     });
 
@@ -74,9 +75,9 @@ async function addCurrencyLog() {
     let gbp = document.getElementById('add_currency_log_gbp').value;
 
     let formData = JSON.stringify({
-        "usd": usd,
-        "eur": eur,
-        "gbp": gbp
+        "usd": changePriceToDecimal(usd),
+        "eur": changePriceToDecimal(eur),
+        "gbp": changePriceToDecimal(gbp)
     });
 
 
