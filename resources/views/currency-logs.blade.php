@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/contacts.js"></script>
+<script src="services/currency-logs.js"></script>
 ';
 ?>
 
@@ -15,7 +15,51 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Firma
+                        Yeni Kayıt Oluştur
+                    </h1>
+                </div>
+            </div>
+
+            <form method="post" action="#" id="add_currency_log_form">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card border-theme mb-3">
+                            <div class="card-body">
+                                <div class="row p-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">USD</label>
+                                        <input class="form-control" id="add_currency_log_usd">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">EUR</label>
+                                        <input class="form-control" id="add_currency_log_eur">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">GBP</label>
+                                        <input class="form-control" id="add_currency_log_gbp">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Kur Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        Döviz Geçmişi
                     </h1>
                 </div>
             </div>

@@ -2,54 +2,15 @@
     "use strict";
 
 	$(document).ready(function() {
-        $('#add_company_form').submit(function (e){
+
+        $(":input").inputmask();
+        $("#add_currency_log_usd").maskMoney({thousands:'.', decimal:','});
+        $("#add_currency_log_eur").maskMoney({thousands:'.', decimal:','});
+        $("#add_currency_log_gbp").maskMoney({thousands:'.', decimal:','});
+
+        $('#add_currency_log_form').submit(function (e){
             e.preventDefault();
-            let isPotential = false;
-            let isCustomer = false;
-            let isSupplier = false;
-            if(document.getElementById('add_company_is_potential_customer').checked){
-                isPotential = true;
-            }
-            if(document.getElementById('add_company_is_customer').checked){
-                isCustomer = true;
-            }
-            if(document.getElementById('add_company_is_supplier').checked){
-                isSupplier = true;
-            }
-            if (isPotential || isCustomer || isSupplier) {
-                addCompany();
-            }else{
-                alert('Firma türü seçimi zorunludur.')
-            }
-        });
-
-        $('#add_company_is_potential_customer').click(function (e){
-            if(document.getElementById('add_company_is_potential_customer').checked){
-                document.getElementById('add_company_is_customer').checked = false;
-            }
-        });
-
-        $('#add_company_is_customer').click(function (e){
-            if(document.getElementById('add_company_is_customer').checked){
-                document.getElementById('add_company_is_potential_customer').checked = false;
-            }
-        });
-
-        $('#update_company_form').submit(function (e){
-            e.preventDefault();
-            updateCompany();
-        });
-
-        $('#update_company_is_potential_customer').click(function (e){
-            if(document.getElementById('update_company_is_potential_customer').checked){
-                document.getElementById('update_company_is_customer').checked = false;
-            }
-        });
-
-        $('#update_company_is_customer').click(function (e){
-            if(document.getElementById('update_company_is_customer').checked){
-                document.getElementById('update_company_is_potential_customer').checked = false;
-            }
+            addCurrencyLog();
         });
 	});
 
@@ -81,7 +42,7 @@ async function initCurrencyLogs(){
             '              <td>'+ changeCommasToDecimal(currency_log.gbp) +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCurrencyLog(\''+ contact.id +'\')">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCurrencyLog(\''+ currency_log.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Sil\n' +
             '                      </button>\n' +
             '                  </div>\n' +
@@ -101,15 +62,36 @@ async function initCurrencyLogs(){
         pageLength : -1,
         language: {
             url: "services/Turkish.json"
-        }
+        },
+        order: [[0, 'desc']],
     });
 
 }
 
+async function addCurrencyLog() {
+    let usd = document.getElementById('add_currency_log_usd').value;
+    let eur = document.getElementById('add_currency_log_eur').value;
+    let gbp = document.getElementById('add_currency_log_gbp').value;
 
-async function deleteContact(contact_id){
-    let returned = await serviceGetDeleteContact(contact_id);
+    let formData = JSON.stringify({
+        "usd": usd,
+        "eur": eur,
+        "gbp": gbp
+    });
+
+
+    let returned = await servicePostAddCurrencyLog(formData);
+    if (returned){
+        initCurrencyLogs();
+    }else{
+        alert("Kur Eklerken Hata Oluştu")
+    }
+}
+
+
+async function deleteCurrencyLog(log_id){
+    let returned = await serviceGetDeleteCurrencyLog(log_id);
     if(returned){
-        initContacts();
+        initCurrencyLogs();
     }
 }
