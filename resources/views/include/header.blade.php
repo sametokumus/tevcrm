@@ -222,7 +222,7 @@ $extra_js="";
                         <span class="menu-text">Firma Bilgileri</span>
                     </a>
                 </div>
-                <div id="nav-currency-logs" class="d-none menu-item @if( Request::segment(1)== 'currency-logs' ) active @endif">
+                <div id="nav-currency-logs" class="menu-item @if( Request::segment(1)== 'currency-logs' ) active @endif">
                     <a href="/currency-logs" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Döviz Geçmişi</span>
