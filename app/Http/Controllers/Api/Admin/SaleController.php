@@ -1154,9 +1154,9 @@ class SaleController extends Controller
 //            ]);
 
             CurrencyLog::query()->insert([
-                'usd_rate' => $request->usd_rate,
-                'eur_rate' => $request->eur_rate,
-                'gbp_rate' => $request->gbp_rate,
+                'usd' => $request->usd,
+                'eur' => $request->eur,
+                'gbp' => $request->gbp,
                 'day' => Carbon::now()->format('Y-m-d'),
             ]);
 

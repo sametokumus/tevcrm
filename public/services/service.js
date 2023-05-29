@@ -1532,6 +1532,7 @@ async function serviceGetCurrencyLogs() {
 }
 async function servicePostAddCurrencyLog(formData) {
     const data = await fetchDataPost('/admin/sale/addCurrencyLog', formData, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         showAlert(data.message);
         return true;
