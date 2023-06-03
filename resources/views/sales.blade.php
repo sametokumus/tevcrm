@@ -12,15 +12,10 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid overflow-auto">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h1 class="page-header">
                         Filtreleme
                     </h1>
-                </div>
-                <div class="col-md-6">
-                    <div class="btn-group float-end">
-                        <button type="button" class="btn btn-outline-danger" onclick="removeFilter();">Filtreyi Kaldır</button>
-                    </div>
                 </div>
             </div>
 
@@ -65,8 +60,11 @@ $extra_js='
                                         <select class="form-control" id="sale_filter_status">
                                         </select>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Filtrele</button>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <button type="button" class="btn btn-outline-danger w-100" onclick="removeFilter();">Filtreyi Kaldır</button>
                                     </div>
                                 </div>
                             </div>

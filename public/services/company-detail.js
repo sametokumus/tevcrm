@@ -191,7 +191,7 @@ async function initEmployees(){
 
     $.each(data.employees, function (i, employee) {
         let photo = "img/employee/empty.jpg";
-        if (employee.photo != null){photo = "https://lenis-crm.wimco.com.tr"+employee.photo;}
+        if (employee.photo != null){photo = api_url + employee.photo;}
         let item = '<div class="col-md-4 grid-item">\n' +
             '           <div class="card border-theme mb-3">\n' +
             '               <div class="card-body">\n' +
@@ -311,7 +311,7 @@ async function initNotes(){
         let image = '';
         if(note.image != null && note.image != ''){
             image = '<div class="card-body">\n' +
-            '            <img src="https://lenis-crm.wimco.com.tr/'+ note.image +'" alt="" class="card-img-top" />\n' +
+            '            <img src="'+ api_url + '/'+ note.image +'" alt="" class="card-img-top" />\n' +
             '        </div>';
         }
         let updated_at = "";

@@ -56,6 +56,8 @@ class ProductController extends Controller
                 'product_name' => $request->product_name,
                 'stock_code' => $request->stock_code,
                 'stock_quantity' => $request->stock_quantity,
+                'date_code' => $request->date_code,
+                'price' => $request->price,
             ]);
             return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
         } catch (ValidationException $validationException) {
@@ -82,6 +84,8 @@ class ProductController extends Controller
                 'product_name' => $request->product_name,
                 'stock_code' => $request->stock_code,
                 'stock_quantity' => $request->stock_quantity,
+                'date_code' => $request->date_code,
+                'price' => $request->price,
             ]);
             return response(['message' => 'Ürün güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {

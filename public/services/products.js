@@ -2,6 +2,9 @@
     "use strict";
 
 	 $(document).ready(function() {
+         $(":input").inputmask();
+         $("#add_product_price").maskMoney({thousands:'.', decimal:','});
+         $("#update_product_price").maskMoney({thousands:'.', decimal:','});
 
 		 $("#add_product_form").submit(function( event ) {
 			 event.preventDefault();
@@ -43,14 +46,23 @@ async function initProducts(){
 
     let data = await serviceGetProducts();
     $.each(data.products, function (i, product) {
+        let price = '';
+        if (product.price != null){
+            price = product.price * product.stock_quantity;
+        }
+
         let typeItem = '<tr>\n' +
+            '              <td>'+ formatDateASC(product.created_at, '.') +'</td>\n' +
             '              <td>'+ product.id +'</td>\n' +
-            '              <td>'+ checkNull(product.stock_code) +'</td>\n' +
-            '              <td>'+ checkNull(product.ref_code) +'</td>\n' +
             '              <td>'+ checkNull(product.product_name) +'</td>\n' +
+            '              <td>'+ checkNull(product.ref_code) +'</td>\n' +
+            '              <td>'+ checkNull(product.date_code) +'</td>\n' +
+            '              <td>'+ checkNull(product.stock_code) +'</td>\n' +
             '              <td>'+ checkNull(product.brand_name) +'</td>\n' +
             '              <td>'+ checkNull(product.category_name) +'</td>\n' +
             '              <td>'+ product.stock_quantity +'</td>\n' +
+            '              <td>'+ checkNull(changePriceToDecimal(product.price)) +'</td>\n' +
+            '              <td>'+ changePriceToDecimal(price) +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateProductModal(\''+ product.id +'\')">\n' +
@@ -69,7 +81,16 @@ async function initProducts(){
         responsive: false,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 2, targets: -1 },
+            {
+                targets: 2,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 70 ?
+                        data.substr(0, 70) + '...' :
+                        data;
+                }
+            }
         ],
         dom: 'Bfrtip',
         buttons: [
@@ -82,7 +103,7 @@ async function initProducts(){
                 }
             }
         ],
-        paging: false,
+        pageLength : 15,
         scrollX: true,
         language: {
             url: "services/Turkish.json"
@@ -99,6 +120,8 @@ function openAddProductModal(){
 }
 
 async function addProduct(){
+    let price = document.getElementById('add_product_price').value;
+    let date_code = document.getElementById('add_product_date_code').value;
     let stock_code = document.getElementById('add_product_stock_code').value;
     let stock_quantity = document.getElementById('add_product_stock_quantity').value;
     let ref_code = document.getElementById('add_product_ref_code').value;
@@ -106,10 +129,12 @@ async function addProduct(){
     let brand_id = document.getElementById('add_product_brand').value;
     let category_id = document.getElementById('add_product_category').value;
     let formData = JSON.stringify({
+        "date_code": date_code,
         "stock_code": stock_code,
         "stock_quantity": stock_quantity,
         "ref_code": ref_code,
         "product_name": product_name,
+        "price": changePriceToDecimal(price),
         "brand_id": brand_id,
         "category_id": category_id
     });
@@ -137,10 +162,14 @@ async function initUpdateProductModal(product_id){
     document.getElementById('update_product_name').value = product.product_name;
     document.getElementById('update_product_brand').value = product.brand_id;
     document.getElementById('update_product_category').value = product.category_id;
+    document.getElementById('update_product_date_code').value = product.date_code;
+    document.getElementById('update_product_price').value = changeCommasToDecimal(product.price);
 
 }
 
 async function updateProduct(){
+    let price = document.getElementById('update_product_price').value;
+    let date_code = document.getElementById('update_product_date_code').value;
     let product_id = document.getElementById('update_product_id').value;
     let stock_code = document.getElementById('update_product_stock_code').value;
     let stock_quantity = document.getElementById('update_product_stock_quantity').value;
@@ -154,7 +183,9 @@ async function updateProduct(){
         "ref_code": ref_code,
         "product_name": product_name,
         "brand_id": brand_id,
-        "category_id": category_id
+        "category_id": category_id,
+        "date_code": date_code,
+        "price": price
     });
     let returned = await servicePostUpdateProduct(formData, product_id);
     if(returned){

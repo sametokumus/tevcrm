@@ -21,16 +21,25 @@ $extra_js='
             </div>
 
 
+            <h6><a href="img/sample-product-import.xlsx" class="fw-400 text-white-50">Örnek Import dökümanını buradan indirebilirsiniz</a></h6>
+            <form action="#" method="post" id="import_data_form" enctype="multipart/form-data" style="display: none;">
+                <input type="file" name="import_file" id="import_file" onchange="$('#import_submit_btn').click();">
+                <button id="import_submit_btn" type="submit">import</button>
+            </form>
             <table id="product-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
+                    <th class="border-bottom-0">Tarih</th>
                     <th class="border-bottom-0" data-priority="1">ID</th>
+                    <th class="border-bottom-0">Ürün Adı (Açıklama)</th>
+                    <th class="border-bottom-0">Üretici Firma Numarası</th>
+                    <th class="border-bottom-0">Üretim Yılı</th>
                     <th class="border-bottom-0">Stok Kodu</th>
-                    <th class="border-bottom-0">Ref. Code</th>
-                    <th class="border-bottom-0">Ürün Adı</th>
-                    <th class="border-bottom-0">Marka</th>
+                    <th class="border-bottom-0">Marka (Üretici)</th>
                     <th class="border-bottom-0">Ürün Grubu</th>
-                    <th class="border-bottom-0">Stok Miktarı</th>
+                    <th class="border-bottom-0">Adet</th>
+                    <th class="border-bottom-0">Adet Fiyatı</th>
+                    <th class="border-bottom-0">Toplam</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>
@@ -56,6 +65,18 @@ $extra_js='
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
+                            <label class="form-label">Ürün Adı</label>
+                            <input type="text" class="form-control" id="add_product_name">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Üretici Firma Numarası</label>
+                            <input type="text" class="form-control" id="add_product_ref_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Üretim Yılı</label>
+                            <input type="text" class="form-control" id="add_product_date_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Stok Kodu</label>
                             <input type="text" class="form-control" id="add_product_stock_code">
                         </div>
@@ -64,12 +85,8 @@ $extra_js='
                             <input type="number" class="form-control" id="add_product_stock_quantity" value="0">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Ref. Code</label>
-                            <input type="text" class="form-control" id="add_product_ref_code">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Ürün Adı</label>
-                            <input type="text" class="form-control" id="add_product_name">
+                            <label class="form-label">Birim Fiyat</label>
+                            <input type="text" class="form-control" id="add_product_price">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Marka</label>
@@ -105,20 +122,28 @@ $extra_js='
                         <input type="hidden" class="form-control" id="update_product_id">
 
                         <div class="col-md-12 mb-3">
+                            <label class="form-label">Ürün Adı</label>
+                            <input type="text" class="form-control" id="update_product_name">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Üretici Firma Numarası</label>
+                            <input type="text" class="form-control" id="update_product_ref_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Üretim Yılı</label>
+                            <input type="text" class="form-control" id="update_product_date_code">
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Stok Kodu</label>
                             <input type="text" class="form-control" id="update_product_stock_code">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Stok Miktarı</label>
-                            <input type="text" class="form-control" id="update_product_stock_quantity">
+                            <input type="number" class="form-control" id="update_product_stock_quantity">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Ref. Code</label>
-                            <input type="text" class="form-control" id="update_product_ref_code">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Ürün Adı</label>
-                            <input type="text" class="form-control" id="update_product_name">
+                            <label class="form-label">Birim Fiyat</label>
+                            <input type="text" class="form-control" id="update_product_price">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Marka</label>

@@ -43,6 +43,8 @@
 
 })(window.jQuery);
 
+const api_url = 'https://lenis-crm.wimco.com.tr';
+
 $(function() {
     // Listen for the language dropdown change event
     $('select#lang').change(function() {
@@ -71,7 +73,7 @@ async function fetchDataGet(apiURL, contentType){
 
 	var returnData;
 	var token = localStorage.getItem('appToken');
-	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
+	var data = await fetch(api_url + '/api'+apiURL, {
 		method: 'get',
 		headers:{
 			'Content-Type': contentType,
@@ -88,7 +90,7 @@ async function fetchDataPost (apiURL, body, contentType) {
 
 	var returnData;
 	var token = localStorage.getItem('appToken');
-	var data = await fetch('https://lenis-crm.wimco.com.tr/api'+apiURL, {
+	var data = await fetch(api_url + '/api'+apiURL, {
 		method: 'post',
 		headers:{
 			'Content-Type': contentType,
@@ -113,7 +115,7 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 			callBackFunction(this);
 		}
 	});
-	xhr.open("POST", 'https://lenis-crm.wimco.com.tr/api'+apiURL);
+	xhr.open("POST", api_url + '/api'+apiURL);
 	xhr.setRequestHeader("Authorization", 'Bearer '+token);
 	xhr.send(body);
 
