@@ -15,6 +15,7 @@ use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\StatusHistory;
+use Carbon\Carbon;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -295,6 +296,16 @@ class OfferRequestController extends Controller
                 'user_id' => 'required',
                 'company_id' => 'required',
             ]);
+
+            $created_at = Carbon::now()->format('Y-m-d H:i:s');
+            if ($request->date != ''){
+                $date = Carbon::parse($request->date);
+                $timeToAdd = '00:00:00'; // Specify the time you want to add
+
+                $dateTime = $date->format('Y-m-d') . ' ' . $timeToAdd;
+                $created_at = Carbon::parse($dateTime);
+            }
+
             $request_id = Uuid::uuid();
             OfferRequest::query()->insertGetId([
                 'request_id' => $request_id,
@@ -304,6 +315,7 @@ class OfferRequestController extends Controller
                 'company_id' => $request->company_id,
                 'company_employee_id' => $request->company_employee_id,
                 'company_request_code' => $request->company_request_code,
+                'created_at' => $created_at,
             ]);
 
             $sale_id = Uuid::uuid();
@@ -312,12 +324,14 @@ class OfferRequestController extends Controller
                 'request_id' => $request_id,
                 'owner_id' => $request->owner_id,
                 'customer_id' => $request->company_id,
-                'status_id' => 1
+                'status_id' => 1,
+                'created_at' => $created_at,
             ]);
             StatusHistory::query()->insert([
                 'sale_id' => $sale_id,
                 'status_id' => 1,
                 'user_id' => $request->user_id,
+                'created_at' => $created_at,
             ]);
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);

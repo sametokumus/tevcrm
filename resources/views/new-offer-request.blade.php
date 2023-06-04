@@ -2,6 +2,12 @@
 <?php
 $extra_js='
 <script src="services/new-offer-request.js"></script>
+<script>
+$(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy"
+});
+</script>
 ';
 ?>
 
@@ -46,20 +52,24 @@ $extra_js='
 
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Müşteri</label>
                                         <select name="add_offer_request_company[]" class="form-control form-select add_offer_request_company_select" id="add_offer_request_company" onchange="initEmployeeSelect();" required>
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Müşteri Yetkilisi</label>
                                         <select class="form-control" id="add_offer_request_company_employee">
 
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="form-label">Müşteri Talep Kodu</label>
                                         <input type="text" value="" class="form-control" id="add_offer_request_company_request_code" />
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Talep Tarihi</label>
+                                        <input type="text" class="form-control datepicker" id="add_offer_request_date" placeholder="dd-mm-yyyy" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Talep Oluştur ve Devam Et</button>

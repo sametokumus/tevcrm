@@ -179,7 +179,11 @@ async function addOfferRequest(){
     let employee = document.getElementById('add_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
     let request_code = document.getElementById('add_offer_request_company_request_code').value;
+    let date = document.getElementById('add_offer_request_date').value;
 
+    if (date != ''){
+        date = formatDateDESC(date, '-', '-');
+    }
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
         "owner_id": owner,
@@ -187,7 +191,8 @@ async function addOfferRequest(){
         "purchasing_staff_id": purchasing,
         "company_id": company,
         "company_employee_id": employee,
-        "company_request_code": request_code
+        "company_request_code": request_code,
+        "date": date
     });
 
     console.log(formData);
