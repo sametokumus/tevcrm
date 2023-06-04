@@ -95,10 +95,8 @@ async function initProducts(){
 
     let data = await serviceGetProducts();
     $.each(data.products, function (i, product) {
-        console.log(product)
         let price = '';
         if (product.price != 'null' && product.stock_quantity != 0){
-            console.log('xcxc')
             price = product.price * product.stock_quantity;
             price = changeCommasToDecimal(parseFloat(price).toFixed(2));
         }
@@ -177,7 +175,7 @@ async function initProducts(){
         language: {
             url: "services/Turkish.json"
         },
-        order: [[0, 'desc']],
+        order: [[1, 'desc']],
     });
 
 
