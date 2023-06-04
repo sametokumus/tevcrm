@@ -1888,6 +1888,17 @@ async function serviceGetProductById(id) {
     }
 }
 
+async function servicePostAddImportedProducts(formData) {
+    const data = await fetchDataPost('/admin/product/addImportedProducts', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 async function servicePostAddProduct(formData) {
     const data = await fetchDataPost('/admin/product/addProduct', formData, 'application/json');
     if (data.status == "success") {

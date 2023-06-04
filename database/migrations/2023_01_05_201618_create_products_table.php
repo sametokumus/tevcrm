@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('date_code')->nullable();
             $table->bigInteger('stock_quantity')->default(0);
             $table->decimal('price',10,2, false)->nullable();
+            $table->string('currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
