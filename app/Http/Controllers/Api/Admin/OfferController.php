@@ -296,6 +296,13 @@ class OfferController extends Controller
                 'lead_time' => $request->lead_time
             ]);
 
+            $offer_product = OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->first();
+            $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+            Product::query()->where('id', $request_product->product_id)->update([
+                'product_name' => $request->product_name
+            ]);
+
+
             return response(['message' => __('Teklif ürün güncelleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);

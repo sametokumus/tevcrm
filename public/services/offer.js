@@ -316,6 +316,11 @@ async function initOfferDetailModal(offer_id){
                 class: 'form-control'
             }
         },{
+            name: "product_name",
+            attr: {
+                class: 'form-control'
+            }
+        },{
             name: "date_code",
             attr: {
                 class: 'form-control'
@@ -375,6 +380,7 @@ async function initOfferDetailModal(offer_id){
     editor.on('preSubmit', async function(e, data, action) {
         if (action !== 'remove') {
             let id = editor.field('id').val();
+            let product_name = editor.field('product_name').val();
             let quantity = editor.field('quantity').val();
             let pcs_price = editor.field('pcs_price').val();
             let total_price = editor.field('total_price').val();
@@ -387,6 +393,7 @@ async function initOfferDetailModal(offer_id){
                 "id": id,
                 "date_code": "",
                 "package_type": "",
+                "product_name": product_name,
                 "quantity": quantity,
                 "pcs_price": changePriceToDecimal(pcs_price),
                 "total_price": changePriceToDecimal(total_price),
