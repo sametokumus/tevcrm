@@ -28,11 +28,20 @@ class OfferController extends Controller
             $sale = Sale::query()->where('request_id', $request_id)->where('active', 1)->first();
             if ($sale->status_id <= 3) {
 
-                $offers = Offer::query()
+                $companies = Offer::query()
                     ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
                     ->selectRaw('companies.id as company_id, companies.name as company_name')
                     ->where('offers.request_id', $request_id)
                     ->where('offers.active', 1)
+                    ->distinct()
+                    ->get();
+
+                $products = Offer::query()
+                    ->leftJoin('offer_products', 'offer_products.offer_id', '=', 'offers.offer_id')
+                    ->selectRaw('offer_products.request_product_id')
+                    ->where('offers.request_id', $request_id)
+                    ->where('offers.active', 1)
+                    ->where('offer_products.active', 1)
                     ->distinct()
                     ->get();
 
@@ -96,18 +105,24 @@ class OfferController extends Controller
 //                    $offer['products'] = $products;
 //                }
 
-                $offer_status = true;
-                $status_id = $sale->status_id;
+
+                $object = [
+                    'offer_status' => true,
+                    'status_id' => $sale->status_id,
+                    'products' => $products,
+                    'companies' => $companies
+                ];
 
             }else{
-
-                $offer_status = false;
-                $status_id = $sale->status_id;
-                $offers = [];
-
+                $object = [
+                    'offer_status' => false,
+                    'status_id' => $sale->status_id,
+                    'products' => [],
+                    'companies' => []
+                ];
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => $object]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
