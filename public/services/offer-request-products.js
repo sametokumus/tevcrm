@@ -99,11 +99,13 @@ async function initEmployeeSelect(){
 
 
 let sale_global_id;
+let sale_id;
 async function initOfferRequest(){
     let request_id = getPathVariable('offer-request-products');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
     console.log(offer_request)
+    sale_id = offer_request.sale_id;
     sale_global_id = offer_request.owner.short_code + "-" + offer_request.global_id;
     $('#title_sale_global_id').text(sale_global_id);
 

@@ -66,6 +66,7 @@ class OfferRequestController extends Controller
             $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
             $offer_request['global_id'] = Sale::query()->where('request_id', $offer_request_id)->first()->id;
+            $offer_request['sale_id'] = Sale::query()->where('request_id', $offer_request_id)->first()->sale_id;
             $owner_id = Sale::query()->where('request_id', $offer_request_id)->first()->owner_id;
             $offer_request['owner_id'] = $owner_id;
             $offer_request['owner'] = Contact::query()->where('id', $owner_id)->first();
