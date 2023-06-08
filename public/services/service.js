@@ -639,6 +639,19 @@ async function getCategoriesAddSelectId(selectId){
     });
 }
 
+async function fastChangeStatus(status_id, sale_id){
+    let user_id = localStorage.getItem('userId');
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "status_id": status_id,
+        "user_id": user_id
+    });
+    let data = await servicePostUpdateSaleStatus(formData);
+    if(data.status == "success"){
+        window.location.href = '/sales';
+    }
+}
+
 
 
 /* SERVICE FUNCTIONS */

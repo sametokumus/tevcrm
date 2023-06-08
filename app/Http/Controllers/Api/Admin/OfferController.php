@@ -22,6 +22,89 @@ use Nette\Schema\ValidationException;
 
 class OfferController extends Controller
 {
+    public function getNewOffersByRequestId($request_id)
+    {
+        try {
+            $sale = Sale::query()->where('request_id', $request_id)->where('active', 1)->first();
+            if ($sale->status_id <= 3) {
+
+                $offers = Offer::query()
+                    ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                    ->selectRaw('offers.*, companies.name as company_name')
+                    ->where('offers.request_id', $request_id)
+                    ->where('offers.active', 1)
+                    ->toSql();
+
+//                foreach ($offers as $offer) {
+//                    $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
+//                    $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+//                    foreach ($products as $product) {
+//                        $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
+//                        $product['request_quantity'] = $offer_request_product['quantity'];
+//                        $product['sequence'] = $offer_request_product['sequence'];
+//                        $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
+//                        $product['product_detail'] = Product::query()->where('id', $offer_request_product->product_id)->first();
+//                        $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
+//
+//                        if ($product->lead_time != null){
+//                            $fastest = OfferProduct::query()
+//                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+//                                ->selectRaw('offer_products.*')
+//                                ->where('offer_products.lead_time', '!=', null)
+//                                ->where('offer_products.request_product_id', $product->request_product_id)
+//                                ->where('offer_products.lead_time', '<', $product->lead_time)
+//                                ->where('offers.request_id', $request_id)
+//                                ->count();
+//                            if ($fastest > 0){
+//                                $product['fastest'] = false;
+//                            }else{
+//                                $product['fastest'] = true;
+//                            }
+//                        }else{
+//                            $product['fastest'] = false;
+//                        }
+//
+//                        if ($product->converted_price != null){
+//                            $cheapest = OfferProduct::query()
+//                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+//                                ->selectRaw('offer_products.*')
+//                                ->where('offer_products.total_price', '!=', null)
+//                                ->where('offer_products.request_product_id', $product->request_product_id)
+//                                ->where('offer_products.converted_price', '<', $product->converted_price)
+//                                ->where('offers.request_id', $request_id)
+//                                ->count();
+//                            if ($cheapest > 0){
+//                                $product['cheapest'] = false;
+//                            }else{
+//                                $product['cheapest'] = true;
+//                            }
+//                        }else{
+//                            $product['cheapest'] = false;
+//                        }
+//
+//
+//                    }
+//
+//                    $offer['products'] = $products;
+//                }
+
+                $offer_status = true;
+                $status_id = $sale->status_id;
+
+            }else{
+
+                $offer_status = false;
+                $status_id = $sale->status_id;
+                $offers = [];
+
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getOffersByRequestId($request_id)
     {
         try {

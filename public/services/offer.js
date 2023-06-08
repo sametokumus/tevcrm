@@ -56,9 +56,14 @@
 })(window.jQuery);
 let short_code;
 let global_id;
+let sale_id;
 
 function checkRole(){
 	return true;
+}
+
+async function changeStatus(){
+    fastChangeStatus(3, sale_id);
 }
 
 async function initEmployeeSelect(){
@@ -81,6 +86,8 @@ async function initOfferRequest(){
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
     console.log(offer_request)
+
+    sale_id = offer_request.sale_id;
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
@@ -442,7 +449,7 @@ async function initOfferDetailModal(offer_id){
         columns: [
             { data: "id", editable: false },
             { data: "ref_code" },
-            { data: "product_name" },
+            { data: "product_name", className:  "row-edit" },
             { data: "quantity", className:  "row-edit" },
             { data: "measurement_name_tr" },
             { data: "pcs_price", className:  "row-edit" },

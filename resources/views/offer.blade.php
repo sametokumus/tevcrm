@@ -13,10 +13,16 @@ $extra_js='
         <div class="main-container container-fluid">
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <h1 class="page-header">
                         Talep
                     </h1>
+                </div>
+                <div class="col-md-4">
+                    <div class="btn-group float-end">
+                        <b>Sipariş Durumunu Değiştir: &nbsp;</b>
+                        <button type="button" class="btn btn-sm btn-pink" onclick="changeStatus();">Tedarikçi Fiyatları Girildi</button>
+                    </div>
                 </div>
             </div>
 
