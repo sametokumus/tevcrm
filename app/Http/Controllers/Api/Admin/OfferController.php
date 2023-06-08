@@ -45,6 +45,13 @@ class OfferController extends Controller
                     ->distinct()
                     ->get();
 
+                foreach ($products as $product){
+                    $offer_request_product = OfferRequestProduct::query()->where('id', $product->request_product_id)->first();
+                    $product['request_quantity'] = $offer_request_product['quantity'];
+                    $product['sequence'] = $offer_request_product['sequence'];
+                    $product['product_name'] = Product::query()->where('id', $offer_request_product->product_id)->first()->product_name;
+                }
+
 //                $offers = Offer::query()
 //                    ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
 //                    ->selectRaw('offers.*, companies.name as company_name')
