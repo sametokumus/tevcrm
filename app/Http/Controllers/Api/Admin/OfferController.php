@@ -30,10 +30,18 @@ class OfferController extends Controller
 
                 $offers = Offer::query()
                     ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
-                    ->selectRaw('offers.*, companies.name as company_name')
+                    ->selectRaw('companies.id as company_id, companies.name as company_name')
                     ->where('offers.request_id', $request_id)
                     ->where('offers.active', 1)
-                    ->toSql();
+                    ->distinct()
+                    ->get();
+
+//                $offers = Offer::query()
+//                    ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+//                    ->selectRaw('offers.*, companies.name as company_name')
+//                    ->where('offers.request_id', $request_id)
+//                    ->where('offers.active', 1)
+//                    ->toSql();
 
 //                foreach ($offers as $offer) {
 //                    $offer['product_count'] = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->count();
