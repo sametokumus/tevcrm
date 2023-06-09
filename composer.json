@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "mariuzzo/laravel-js-localization": "^1.10",
-        "twilio/sdk": "^6.33"
+        "twilio/sdk": "^6.33",
+      "ext-simplexml": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

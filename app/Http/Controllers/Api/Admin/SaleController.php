@@ -29,9 +29,14 @@ use App\Models\SaleOffer;
 use App\Models\Status;
 use App\Models\StatusHistory;
 use App\Models\User;
+use App\Models\UserContactRule;
+use App\Models\UserDocumentCheck;
+use App\Models\UserProfile;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Nette\Schema\ValidationException;
 use Carbon\Carbon;
 
@@ -1057,6 +1062,43 @@ class SaleController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $currency_log]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getLiveCurrencyLog()
+    {
+        try {
+
+            $dovizKur = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
+            if(empty($dovizKur)){
+                throw new \Exception('currency-001');
+            }
+
+            $eur_rate = $dovizKur->Currency[3]->ForexSelling;
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $eur_rate]]);
+
+//            return
+//                "
+//	Tarih &#x21E8; {$dovizKur['Tarih']}<br>
+//	Bülten &#x21E8; {$dovizKur['Bulten_No']}<br>
+//	Isim(Döviz Adı) &#x21E8; {$dovizKur->Currency[$dovizTuru]->Isim} <br>
+//    CurrencyName(Döviz Cinsi) &#x21E8;	 {$dovizKur->Currency[$dovizTuru]->CurrencyName}<br>
+//    ForexBuying(Döviz Alış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->ForexBuying}<br>
+//    ForexSelling(Döviz Satış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->ForexSelling}<br>
+//    BanknoteBuying(Efektif Alış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->BanknoteBuying}<br>
+//    BanknoteSelling(Efektif Satış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->BanknoteSelling}<br>";
+
+
+            return response(['message' => 'İşlem başarılı.','status' => 'success']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001','error' => $queryException->getMessage()]);
+        } catch (\Exception $exception){
+            if ($exception->getMessage() == 'currency-001'){
+                return  response(['message' => 'Anlık bir hata nedeniyle döviz kuru alınamadı.Lütfen tekrar deneyiniz.','status' => 'currency-001']);
+            }
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001', 'err' => $exception->getMessage()]);
         }
     }
 

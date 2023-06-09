@@ -140,7 +140,7 @@ async function initOfferDetail(){
                     '           <td>' + product.id + '</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
-                    '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
+                    '                      <button type="button" id="sale_btn_'+ product.id +'" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
                     '                  </div>\n' +
                     '              </td>\n' +
                     '           <td>'+ cheap_fast +'</td>\n' +
@@ -229,16 +229,13 @@ async function initNewOfferDetail(){
     let head_second = '';
 
     $.each(companies, function (i, company) {
-        head_first += '<th colspan="9" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
-        head_second += '<th class="border-bottom-0">ID</th>\n' +
-            '           <th class="border-bottom-0"></th>\n' +
-            '           <th class="border-bottom-0">En Ucuz, En Hızlı</th>\n' +
-            '           <th class="border-bottom-0">Birim Fiyat</th>\n' +
-            '           <th class="border-bottom-0">Toplam Fiyat</th>\n' +
-            '           <th class="border-bottom-0">Para Birimi</th>\n' +
-            '           <th class="border-bottom-0">İstek Miktar</th>\n' +
-            '           <th class="border-bottom-0">Teklif Miktar</th>\n' +
-            '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">Teslimat Süresi</th>';
+        head_first += '<th colspan="6" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
+        head_second += '<th class="border-bottom-0"></th>\n' +
+            '           <th class="border-bottom-0">Ucuz, Hızlı</th>\n' +
+            '           <th class="border-bottom-0">Birim</th>\n' +
+            '           <th class="border-bottom-0">Toplam</th>\n' +
+            '           <th class="border-bottom-0">Miktar</th>\n' +
+            '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">T. Süresi</th>';
     });
 
     let head = '<tr>\n' +
@@ -253,61 +250,42 @@ async function initNewOfferDetail(){
     $.each(products, function (i, product) {
         let item = '<tr>';
 
-        item += '   <td>' + checkNull(product.sequence) + '</td>\n' +
-        '           <td>' + checkNull(product.product_name) + '</td>\n';
+        item += '   <td class="bg-dark">' + checkNull(product.sequence) + '</td>\n' +
+        '           <td class="bg-dark" style="border-right-width: 5px; border-right-color: #fff;">' + checkNull(product.product_name) + '</td>\n';
+
+        $.each(product.companies, function (i, company) {
+            if (company.offer_product == null){
+                item += '   <td></td>\n' +
+                    '       <td></td>\n' +
+                    '       <td></td>\n' +
+                    '       <td></td>\n' +
+                    '       <td></td>\n' +
+                    '       <td style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
+            }else{
+                let cheap_fast = '';
+                if (company.offer_product.cheapest){
+                    cheap_fast += '<span class="badge border border-yellow text-yellow px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
+                }
+                if (company.offer_product.fastest){
+                    cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
+                }
+
+                item += '   <td>\n' +
+                    '           <div class="btn-list">\n' +
+                    '               <button type="button" onclick="triggerOfferButton('+ company.offer_product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
+                    '           </div>\n' +
+                    '       </td>\n' +
+                    '       <td>' + cheap_fast + '</td>\n' +
+                    '       <td>' + changeCommasToDecimal(company.offer_product.pcs_price) + checkNull(company.offer_product.currency) + '</td>\n' +
+                    '       <td>' + changeCommasToDecimal(company.offer_product.total_price) + checkNull(company.offer_product.currency) + '</td>\n' +
+                    '       <td>RQ:' + checkNull(product.request_quantity) + ' - OQ:' + checkNull(company.offer_product.quantity) + '</td>\n' +
+                    '       <td style="border-right-width: 5px; border-right-color: #fff;">' + checkNull(company.offer_product.lead_time) + '</td>\n';
+            }
+        });
 
         item += '</tr>';
         $('#new-offer-detail tbody').append(item);
     });
-
-        // $.each(offers, function (i, offer) {
-        //     $.each(offer.products, function (j, product) {
-        //         rowNo ++;
-        //         let cheap_fast = '';
-        //         if (product.cheapest){
-        //             cheap_fast += '<span class="badge border border-yellow text-yellow px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
-        //         }
-        //         if (product.fastest){
-        //             cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
-        //         }
-        //
-        //         let measurement_name = '';
-        //         if (Lang.getLocale() == 'tr'){
-        //             measurement_name = product.measurement_name_tr;
-        //         }else{
-        //             measurement_name = product.measurement_name_tr;
-        //         }
-        //         let item = '<tr id="productRow' + product.id + '">\n' +
-        //             '           <td>' + product.sequence + '</td>\n' +
-        //             '           <td>' + product.id + '</td>\n' +
-        //             '              <td>\n' +
-        //             '                  <div class="btn-list">\n' +
-        //             '                      <button type="button" onclick="addSaleTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
-        //             '                  </div>\n' +
-        //             '              </td>\n' +
-        //             '           <td>'+ cheap_fast +'</td>\n' +
-        //             '           <td class="d-none">' + offer.offer_id + '</td>\n' +
-        //             '           <td class="d-none">' + product.product_detail.id + '</td>\n' +
-        //             '           <td class="d-none">' + offer.supplier_id + '</td>\n' +
-        //             '           <td>' + offer.company_name + '</td>\n' +
-        //             '           <td>' + checkNull(product.product_detail.product_name) + '</td>\n' +
-        //             '           <td>' + checkNull(product.product_detail.ref_code) + '</td>\n' +
-        //             '           <td>' + checkNull(product.lead_time) + '</td>\n' +
-        //             '           <td>' + checkNull(measurement_name) + '</td>\n' +
-        //             '           <td>' + changeCommasToDecimal(product.pcs_price) + '</td>\n' +
-        //             '           <td>' + changeCommasToDecimal(product.total_price) + '</td>\n' +
-        //             '           <td>' + checkNull(product.discount_rate) + '</td>\n' +
-        //             '           <td>' + changeCommasToDecimal(product.discounted_price) + '</td>\n' +
-        //             '           <td>' + checkNull(product.vat_rate) + '</td>\n' +
-        //             '           <td>' + checkNull(product.currency) + '</td>\n' +
-        //             '           <td>' + checkNull(product.request_quantity) + '</td>\n' +
-        //             '           <td>' + checkNull(product.quantity) + '</td>\n' +
-        //             '           <td class="d-none">' + changeCommasToDecimal(product.converted_price) + '</td>\n' +
-        //             '           <td class="d-none">' + product.converted_currency + '</td>\n' +
-        //             '       </tr>';
-        //         $('#offer-detail tbody').append(item);
-        //     });
-        // });
 
     $('#new-offer-detail').DataTable({
         responsive: false,
@@ -326,7 +304,9 @@ async function initNewOfferDetail(){
 }
 
 
-
+function triggerOfferButton(id){
+    $('#sale_btn_'+id).click();
+}
 
 
 

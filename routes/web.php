@@ -56,6 +56,7 @@ Route::get('/packing-list-print/{sale_id}', function () { return view('packing-l
 
 Route::get('/settings', function () { return view('settings'); });
 Route::get('/currency-logs', function () { return view('currency-logs'); });
+Route::get('sale/getLiveCurrencyLog', [\App\Http\Controllers\Api\Admin\SaleController::class, 'getLiveCurrencyLog']);
 Route::get('/offer-request', function () { return view('add-offer-request'); });
 Route::get('/contact-detail/{id}', function () { return view('contact-detail'); });
 
