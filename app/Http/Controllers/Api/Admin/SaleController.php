@@ -1069,15 +1069,29 @@ class SaleController extends Controller
     {
         try {
 
-            $dovizKur = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
-            if(empty($dovizKur)){
-                throw new \Exception('currency-001');
+            $xml = null;
+            $url = 'https://www.tcmb.gov.tr/kurlar/today.xml';
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $data = curl_exec($ch);
+
+            if ($data !== false) {
+                $xml = simplexml_load_string($data);
             }
 
-            $eur_rate = $dovizKur->Currency[3]->ForexSelling;
+            curl_close($ch);
+
+//            $dovizKur = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
+//            if(empty($dovizKur)){
+//                throw new \Exception('currency-001');
+//            }
+//
+//            $eur_rate = $dovizKur->Currency[3]->ForexSelling;
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $eur_rate]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $xml]]);
 
 //            return
 //                "
