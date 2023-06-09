@@ -39,8 +39,11 @@ $extra_js='
                                         <label class="form-label">GBP</label>
                                         <input class="form-control" id="add_currency_log_gbp">
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Kur Ekle</button>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <button type="button" class="btn btn-warning w-100" onclick="getLiveCurrencyLog();">TCMB Güncel Kur Sorgula</button>
                                     </div>
                                 </div>
                             </div>

@@ -96,3 +96,9 @@ async function deleteCurrencyLog(log_id){
         initCurrencyLogs();
     }
 }
+async function getLiveCurrencyLog(){
+    let returned = await serviceGetLiveCurrencyLog();
+    if(returned){
+        initCurrencyLogs();
+    }
+}

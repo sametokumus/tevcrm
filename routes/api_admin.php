@@ -43,6 +43,7 @@ Route::get('language/changeLanguage/{language_key}',[LanguageController::class,'
 
 Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
+Route::get('sale/getLiveCurrencyLog', [SaleController::class, 'getLiveCurrencyLog']);
 
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
