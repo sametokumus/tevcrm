@@ -36,7 +36,7 @@ class OfferController extends Controller
                     ->distinct()
                     ->get();
 
-                $companies2 = $companies;
+
 
                 $products = Offer::query()
                     ->leftJoin('offer_products', 'offer_products.offer_id', '=', 'offers.offer_id')
@@ -53,6 +53,7 @@ class OfferController extends Controller
                     $product['sequence'] = $offer_request_product['sequence'];
                     $product['product_name'] = Product::query()->where('id', $offer_request_product->product_id)->first()->product_name;
 
+                    $companies2 = $companies;
                     foreach ($companies2 as $company){
                         $offer_product = Offer::query()
                             ->leftJoin('offer_products', 'offer_products.offer_id', '=', 'offers.offer_id')
