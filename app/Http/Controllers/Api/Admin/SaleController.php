@@ -1088,21 +1088,15 @@ class SaleController extends Controller
             }
 
             $eur_rate = $xml->Currency[3]->ForexSelling;
+            $usd_rate = $xml->Currency[0]->ForexSelling;
+            $gbp_rate = $xml->Currency[4]->ForexSelling;
 
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['currency_log' => $eur_rate]]);
-
-//            return
-//                "
-//	Tarih &#x21E8; {$dovizKur['Tarih']}<br>
-//	Bülten &#x21E8; {$dovizKur['Bulten_No']}<br>
-//	Isim(Döviz Adı) &#x21E8; {$dovizKur->Currency[$dovizTuru]->Isim} <br>
-//    CurrencyName(Döviz Cinsi) &#x21E8;	 {$dovizKur->Currency[$dovizTuru]->CurrencyName}<br>
-//    ForexBuying(Döviz Alış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->ForexBuying}<br>
-//    ForexSelling(Döviz Satış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->ForexSelling}<br>
-//    BanknoteBuying(Efektif Alış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->BanknoteBuying}<br>
-//    BanknoteSelling(Efektif Satış) &#x21E8; {$dovizKur->Currency[$dovizTuru]->BanknoteSelling}<br>";
-
+            CurrencyLog::query()->insert([
+                'usd' => $usd_rate,
+                'eur' => $eur_rate,
+                'gbp' => $gbp_rate,
+                'day' => Carbon::now()->format('Y-m-d'),
+            ]);
 
             return response(['message' => 'İşlem başarılı.','status' => 'success']);
         } catch (QueryException $queryException) {
