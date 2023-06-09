@@ -54,9 +54,9 @@ class OfferController extends Controller
                     foreach ($companies as $company){
                         $offer_product = Offer::query()
                             ->leftJoin('offer_products', 'offer_products.offer_id', '=', 'offers.offer_id')
-                            ->selectRaw('offer_products.request_product_id')
+                            ->selectRaw('offer_products.*')
                             ->where('offers.request_id', $request_id)
-                            ->where('offers.supplier_id', $company->supplier_id)
+                            ->where('offers.supplier_id', $company->company_id)
                             ->where('offer_products.request_product_id', $product->request_product_id)
                             ->where('offers.active', 1)
                             ->where('offer_products.active', 1)
