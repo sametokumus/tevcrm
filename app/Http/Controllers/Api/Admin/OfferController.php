@@ -104,7 +104,7 @@ class OfferController extends Controller
                         $company['offer_product'] = $offer_product;
                     }
 
-                    $product['companies'] = $companies;
+                    $product['companies'] = $companies2;
 
                 }
 
