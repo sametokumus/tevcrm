@@ -71,41 +71,43 @@ class OfferController extends Controller
                             ->where('offer_products.active', 1)
                             ->first();
 
-//                        if ($offer_product->lead_time != null){
-//                            $fastest = OfferProduct::query()
-//                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-//                                ->selectRaw('offer_products.*')
-//                                ->where('offer_products.lead_time', '!=', null)
-//                                ->where('offer_products.request_product_id', $offer_product->request_product_id)
-//                                ->where('offer_products.lead_time', '<', $offer_product->lead_time)
-//                                ->where('offers.request_id', $request_id)
-//                                ->count();
-//                            if ($fastest > 0){
-//                                $offer_product['fastest'] = false;
-//                            }else{
-//                                $offer_product['fastest'] = true;
-//                            }
-//                        }else{
-//                            $offer_product['fastest'] = false;
-//                        }
-//
-//                        if ($offer_product->converted_price != null){
-//                            $cheapest = OfferProduct::query()
-//                                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
-//                                ->selectRaw('offer_products.*')
-//                                ->where('offer_products.total_price', '!=', null)
-//                                ->where('offer_products.request_product_id', $offer_product->request_product_id)
-//                                ->where('offer_products.converted_price', '<', $offer_product->converted_price)
-//                                ->where('offers.request_id', $request_id)
-//                                ->count();
-//                            if ($cheapest > 0){
-//                                $offer_product['cheapest'] = false;
-//                            }else{
-//                                $offer_product['cheapest'] = true;
-//                            }
-//                        }else{
-//                            $offer_product['cheapest'] = false;
-//                        }
+                        if ($offer_product) {
+                            if ($offer_product->lead_time != null) {
+                                $fastest = OfferProduct::query()
+                                    ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                                    ->selectRaw('offer_products.*')
+                                    ->where('offer_products.lead_time', '!=', null)
+                                    ->where('offer_products.request_product_id', $offer_product->request_product_id)
+                                    ->where('offer_products.lead_time', '<', $offer_product->lead_time)
+                                    ->where('offers.request_id', $request_id)
+                                    ->count();
+                                if ($fastest > 0) {
+                                    $offer_product['fastest'] = false;
+                                } else {
+                                    $offer_product['fastest'] = true;
+                                }
+                            } else {
+                                $offer_product['fastest'] = false;
+                            }
+
+                            if ($offer_product->converted_price != null) {
+                                $cheapest = OfferProduct::query()
+                                    ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                                    ->selectRaw('offer_products.*')
+                                    ->where('offer_products.total_price', '!=', null)
+                                    ->where('offer_products.request_product_id', $offer_product->request_product_id)
+                                    ->where('offer_products.converted_price', '<', $offer_product->converted_price)
+                                    ->where('offers.request_id', $request_id)
+                                    ->count();
+                                if ($cheapest > 0) {
+                                    $offer_product['cheapest'] = false;
+                                } else {
+                                    $offer_product['cheapest'] = true;
+                                }
+                            } else {
+                                $offer_product['cheapest'] = false;
+                            }
+                        }
 
                         $company['offer_product'] = $offer_product;
                     }
