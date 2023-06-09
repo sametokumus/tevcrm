@@ -173,32 +173,7 @@ $extra_js='
                         <div class="card-body p-3 overflow-auto">
                             <table id="new-offer-detail" class="table table-bordered text-nowrap key-buttons border-bottom">
                                 <thead>
-                                <tr>
-                                    <th rowspan="2" class="border-bottom-0 bg-dark">N#</th>
-                                    <th rowspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>
-                                    <th colspan="9" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Tedarikçi 1</th>
-                                    <th colspan="9" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Tedarikçi 2</th>
-                                </tr>
-                                <tr>
-                                    <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0"></th>
-                                    <th class="border-bottom-0">En Ucuz, En Hızlı</th>
-                                    <th class="border-bottom-0">Birim Fiyat</th>
-                                    <th class="border-bottom-0">Toplam Fiyat</th>
-                                    <th class="border-bottom-0">Para Birimi</th>
-                                    <th class="border-bottom-0">İstek Miktar</th>
-                                    <th class="border-bottom-0">Teklif Miktar</th>
-                                    <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">Teslimat Süresi</th>
-                                    <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0"></th>
-                                    <th class="border-bottom-0">En Ucuz, En Hızlı</th>
-                                    <th class="border-bottom-0">Birim Fiyat</th>
-                                    <th class="border-bottom-0">Toplam Fiyat</th>
-                                    <th class="border-bottom-0">Para Birimi</th>
-                                    <th class="border-bottom-0">İstek Miktar</th>
-                                    <th class="border-bottom-0">Teklif Miktar</th>
-                                    <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">Teslimat Süresi</th>
-                                </tr>
+
                                 </thead>
                                 <tbody>
 

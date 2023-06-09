@@ -59,6 +59,7 @@ async function checkCurrencyLog(){
     let request_id = getPathVariable('sw-2-new');
     let data = await serviceGetCheckSaleCurrencyLog(request_id);
     if (data.has_currency == true){
+        await initNewOfferDetail();
         await initOfferDetail();
     }else{
         await initEmptyTables();
@@ -215,14 +216,50 @@ async function initOfferDetail(){
 async function initNewOfferDetail(){
 
     let request_id = getPathVariable('sw-2-new');
-    let data = await serviceGetOffersByRequestId(request_id);
+    let data = await serviceGetNewOffersByRequestId(request_id);
     console.log(data)
 
-        let offers = data.offers;
-        console.log(offers)
-        $("#new-offer-detail").dataTable().fnDestroy();
-        $('#new-offer-detail tbody > tr').remove();
-        let rowNo = 0;
+    let products = data.products;
+    let companies = data.companies;
+    // $("#new-offer-detail").dataTable().fnDestroy();
+    $('#new-offer-detail tbody > tr').remove();
+
+    let head_first = '<th rowspan="2" class="border-bottom-0 bg-dark">N#</th>\n' +
+        '             <th rowspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>';
+    let head_second = '';
+
+    $.each(companies, function (i, company) {
+        head_first += '<th colspan="9" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
+        head_second += '<th class="border-bottom-0">ID</th>\n' +
+            '           <th class="border-bottom-0"></th>\n' +
+            '           <th class="border-bottom-0">En Ucuz, En Hızlı</th>\n' +
+            '           <th class="border-bottom-0">Birim Fiyat</th>\n' +
+            '           <th class="border-bottom-0">Toplam Fiyat</th>\n' +
+            '           <th class="border-bottom-0">Para Birimi</th>\n' +
+            '           <th class="border-bottom-0">İstek Miktar</th>\n' +
+            '           <th class="border-bottom-0">Teklif Miktar</th>\n' +
+            '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">Teslimat Süresi</th>';
+    });
+
+    let head = '<tr>\n' +
+        '           '+ head_first +
+        '       </tr>\n' +
+        '       <tr>\n' +
+        '           '+ head_second +
+        '       </tr>';
+
+    $('#new-offer-detail thead').append(head);
+
+    $.each(products, function (i, product) {
+        let item = '<tr>';
+
+        item += '   <td>' + checkNull(product.sequence) + '</td>\n' +
+        '           <td>' + checkNull(product.product_name) + '</td>\n';
+
+        item += '</tr>';
+        $('#new-offer-detail tbody').append(item);
+    });
+
         // $.each(offers, function (i, offer) {
         //     $.each(offer.products, function (j, product) {
         //         rowNo ++;

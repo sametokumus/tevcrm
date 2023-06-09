@@ -1220,6 +1220,14 @@ async function serviceGetOfferRequestsByCompanyId(id) {
 
 
 
+async function serviceGetNewOffersByRequestId(id) {
+    const data = await fetchDataGet('/admin/offer/getNewOffersByRequestId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function serviceGetOffersByRequestId(id) {
     const data = await fetchDataGet('/admin/offer/getOffersByRequestId/' + id, 'application/json');
     if (data.status == "success") {
