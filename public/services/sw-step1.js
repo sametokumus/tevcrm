@@ -49,7 +49,7 @@ async function initOfferRequests(company_id){
             '              <td>'+ offer_request.product_count +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <a href="sw-2/'+ offer_request.request_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n' +
+            '                      <a href="sw-2-new/'+ offer_request.request_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklif Oluştur</span></a>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '          </tr>';

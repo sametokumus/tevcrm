@@ -153,7 +153,7 @@ async function initSales(){
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Gir</a>\n';
         }else if (sale.status.action == "offer"){
             status_class = "border-warning text-warning";
-            btn_list += '<a href="sw-2/'+ sale.request_id +'" class="btn btn-sm btn-warning">Teklif Oluştur</a>\n';
+            btn_list += '<a href="sw-2-new/'+ sale.request_id +'" class="btn btn-sm btn-warning">Teklif Oluştur</a>\n';
         }else if (sale.status.action == "offer-update"){
             status_class = "border-yellow text-yellow";
             btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Fiyatları Güncelle</a>\n';
