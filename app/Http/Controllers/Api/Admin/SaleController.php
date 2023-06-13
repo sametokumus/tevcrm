@@ -521,6 +521,8 @@ class SaleController extends Controller
                 $offer_grand_total += $product->total_price + $vat;
                 $product['measurement_name_tr'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_tr;
                 $product['measurement_name_en'] = Measurement::query()->where('id', $product->measurement_id)->first()->name_en;
+
+                $product['sequence'] = $offer_request_product->sequence;
             }
 
             $offer['products'] = $products;
