@@ -105,7 +105,11 @@ async function initOfferRequest(){
         }else{
             measurement_name = product.measurement_name_tr;
         }
-        let item = '<tr id="productRow' + product.id + '" class="bg-secondary">\n' +
+        let classname= '';
+        if (product.is_offered == 1){
+            classname= 'bg-secondary';
+        }
+        let item = '<tr id="productRow' + product.id + '" class="'+ classname +'">\n' +
             '           <td>' + product.sequence + '</td>\n' +
             '           <td>' + product.id + '</td>\n' +
             '              <td>\n' +
@@ -210,6 +214,7 @@ async function addOffer(){
             $("#add_offer_form").trigger("reset");
             $('#addOfferModal').modal('hide');
             await initOffers();
+            await initOfferRequest();
 
             let products = $('#offer-request-products').DataTable();
             products.rows().deselect();
@@ -652,5 +657,6 @@ async function deleteOffer(offer_id){
     let returned = await serviceGetDeleteOffer(offer_id);
     if(returned){
         await initOffers();
+        await initOfferRequest();
     }
 }
