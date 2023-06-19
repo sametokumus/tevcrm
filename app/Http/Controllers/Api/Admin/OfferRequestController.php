@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\Measurement;
+use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
@@ -58,6 +59,15 @@ class OfferRequestController extends Controller
                 $offer_request_product['measurement_name_tr'] = $measurement->name_tr;
                 $offer_request_product['measurement_name_en'] = $measurement->name_en;
                 $offer_request_product['product'] = $product;
+
+
+                $count = OfferProduct::query()->where('request_product_id', $offer_request_product->id)->where('active', 1)->count();
+                if ($count > 0){
+                    $offer_request_product['is_offered'] = 1;
+                }else{
+                    $offer_request_product['is_offered'] = 0;
+                }
+
             }
             $offer_request['products'] = $offer_request_products;
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();

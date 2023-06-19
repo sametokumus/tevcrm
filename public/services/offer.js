@@ -105,7 +105,7 @@ async function initOfferRequest(){
         }else{
             measurement_name = product.measurement_name_tr;
         }
-        let item = '<tr id="productRow' + product.id + '">\n' +
+        let item = '<tr id="productRow' + product.id + '" class="bg-secondary">\n' +
             '           <td>' + product.sequence + '</td>\n' +
             '           <td>' + product.id + '</td>\n' +
             '              <td>\n' +
