@@ -209,7 +209,7 @@ async function addOffer(){
             $('#offer-request-products-body tr').removeClass('selected');
             $("#add_offer_form").trigger("reset");
             $('#addOfferModal').modal('hide');
-            initOffers();
+            await initOffers();
 
             let products = $('#offer-request-products').DataTable();
             products.rows().deselect();
@@ -250,6 +250,7 @@ async function initOffers(){
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm '+ btn_class +'"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
             '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
+            '                      <button onclick="deleteOffer(\'' + offer.offer_id + '\');" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Sil</span></button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
@@ -643,5 +644,13 @@ async function updateProductName(){
 
     }else{
         alert('Geçerli bir isim giriniz.');
+    }
+}
+
+
+async function deleteOffer(offer_id){
+    let returned = await serviceGetDeleteOffer(offer_id);
+    if(returned){
+        await initOffers();
     }
 }

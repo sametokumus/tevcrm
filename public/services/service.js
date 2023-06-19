@@ -1282,7 +1282,16 @@ async function servicePostUpdateOfferProduct(formData, offer_id, product_id) {
         return false;
     }
 }
-
+async function serviceGetDeleteOffer(id) {
+    const data = await fetchDataGet('/admin/offer/deleteOffer/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 async function serviceGetContacts() {

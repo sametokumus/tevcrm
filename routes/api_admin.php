@@ -167,6 +167,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('offer/getOfferProductById/{offer_id}/{product_id}', [OfferController::class, 'getOfferProductById']);
     Route::post('offer/addOfferProduct/{offer_id}', [OfferController::class, 'addOfferProduct']);
     Route::post('offer/updateOfferProduct/{offer_id}/{product_id}', [OfferController::class, 'updateOfferProduct']);
+    Route::get('offer/deleteOffer/{offer_id}', [OfferController::class, 'deleteOffer']);
 
 
     //Sale
