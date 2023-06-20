@@ -1395,6 +1395,7 @@ class SaleController extends Controller
                 PackingListProduct::query()->insert([
                     'packing_list_id' => $packing_list_id,
                     'sale_offer_id' => $offer['sale_offer_id'],
+                    'quantity' => $offer['quantity'],
                 ]);
             }
 
