@@ -6,9 +6,9 @@
         $(":input").inputmask();
         $("#update_sale_shipping_price").maskMoney({thousands:'.', decimal:','});
 
-        $('#update_detail_form').submit(function (e){
+        $('#update_note_form').submit(function (e){
             e.preventDefault();
-            updateDetail();
+            updateNote();
         });
 
     });
@@ -86,7 +86,6 @@ async function initSale(packing_list_id){
     console.log(data);
     let sale = data.sale;
     await initContact(sale.owner_id, sale.sale_id);
-    await initDetail(sale.sale_id);
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
     let company = sale.request.company;
@@ -128,154 +127,36 @@ async function initSale(packing_list_id){
             '           <td class="text-center">' + (i+1) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_ref_code) + '</td>\n' +
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
-            '           <td class="text-center">' + checkNull(product.request_quantity) + '</td>\n' +
+            '           <td class="text-center">' + checkNull(product.packing_count) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(measurement_name) + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
     });
-    document.getElementById('update_sale_shipping_price').value = checkNull(sale.shipping_price);
 
-    // if (sale.sub_total != null) {
-    //     let text = Lang.get("strings.Sub Total");
-    //     if ((sale.vat == null || sale.vat == '0.00') && sale.freight == null){
-    //         text = Lang.get("strings.Grand Total");
-    //     }
-    //     let item = '<tr>\n' +
-    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + text + '</td>\n' +
-    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.sub_total) + ' '+ currency +'</td>\n' +
-    //         '       </tr>';
-    //     $('#sale-detail tbody').append(item);
-    // }
-    //
-    // if (sale.freight != null) {
-    //     let item = '<tr>\n' +
-    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Freight") + '</td>\n' +
-    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.freight) + ' '+ currency +'</td>\n' +
-    //         '       </tr>';
-    //     $('#sale-detail tbody').append(item);
-    // }
-    //
-    // if (sale.vat != null && sale.vat != '0.00') {
-    //     let item = '<tr>\n' +
-    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
-    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.vat) + ' '+ currency +'</td>\n' +
-    //         '       </tr>';
-    //     $('#sale-detail tbody').append(item);
-    // }
-    //
-    // if (sale.grand_total != null) {
-    //     if ((sale.vat != null && sale.vat != '0.00') || sale.freight != null) {
-    //         let item = '<tr>\n' +
-    //             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-    //             '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
-    //             '       </tr>';
-    //         $('#sale-detail tbody').append(item);
-    //     }
-    // }
-    //
-    // if (sale.shipping_price != null) {
-    //     let item = '<tr>\n' +
-    //         '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Shipping") + '</td>\n' +
-    //         '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.shipping_price) + ' '+ currency +'</td>\n' +
-    //         '       </tr>';
-    //     $('#sale-detail tbody').append(item);
-    // }
-    //
-    // if (sale.grand_total_with_shipping != null) {
-    //     if (sale.shipping_price != null) {
-    //         let item = '<tr>\n' +
-    //             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
-    //             '           <td colspan="2" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +
-    //             '       </tr>';
-    //         $('#sale-detail tbody').append(item);
-    //     }
-    // }
 
-}
-
-async function initDetail(sale_id){
-    let data = await serviceGetProformaInvoiceDetailById(sale_id);
-    let detail = data.proforma_invoice_detail;
-
-    if (detail != null) {
-        document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
-        document.getElementById('note').innerHTML = checkNull(detail.note);
+    if (sale.packing_note == null){
+    }else{
+        $('#note').append(sale.packing_note);
+        $('#update_packing_note').summernote('code', sale.packing_note);
     }
+
 }
 
-async function openUpdateDetailModal(){
-    $("#updateDetailModal").modal('show');
-    await initUpdateDetailModal();
+async function openUpdateNoteModal(){
+    $("#updateNoteModal").modal('show');
 }
-
-async function initUpdateDetailModal(){
-    let sale_id = getPathVariable('proforma-invoice-print');
-    let data = await serviceGetProformaInvoiceDetailById(sale_id);
-    let detail = data.proforma_invoice_detail;
-    console.log(detail)
-
-    if (detail != null) {
-        document.getElementById('update_sale_payment_term').value = checkNull(detail.payment_term);
-        $('#update_sale_note').summernote('code', checkNull(detail.note));
-    }
-}
-
-async function updateDetail(){
-    let sale_id = getPathVariable('proforma-invoice-print');
-    let payment_term = document.getElementById('update_sale_payment_term').value;
-    let note = $('#update_sale_note').summernote('code');
-    let shipping_price = document.getElementById('update_sale_shipping_price').value;
-
+async function updateNote(){
+    let packing_list_id = getPathVariable('packing-list-print');
+    let note = $('#update_packing_note').summernote('code');
     let formData = JSON.stringify({
-        "sale_id": sale_id,
-        "payment_term": payment_term,
+        "packing_list_id": packing_list_id,
         "note": note
     });
-    let returned1 = await servicePostUpdateProformaInvoiceDetail(formData);
-
-    let formData2 = JSON.stringify({
-        "sale_id": sale_id,
-        "shipping_price": changePriceToDecimal(shipping_price)
-    });
-    let returned2 = await servicePostUpdateShippingPrice(formData2);
-
-
-    if (returned1 && returned2){
-        $("#update_detail_form").trigger("reset");
-        $('#updateDetailModal').modal('hide');
-        await initSale(sale_id);
-        await initDetail(sale_id);
-    }else{
-        alert("Hata Oluştu");
+    let returned = await servicePostUpdatePackingNote(formData);
+    if (returned){
+        $("#update_note_form").trigger("reset");
+        $('#note *').remove();
+        $("#updateNoteModal").modal('hide');
+        initSale(packing_list_id);
     }
-}
-
-
-
-async function initBankInfoSelect(){
-    let data = await serviceGetBankInfos();
-    let bank_infos = data.bank_infos;
-
-    $.each(bank_infos, function (i, info) {
-        let item = '<option value="'+ info.id +'">'+ info.name +'</option>';
-        $('#select_bank_info').append(item);
-    });
-
-}
-async function openAddBankInfoModal(){
-    $("#addBankInfoModal").modal('show');
-}
-async function changeBankInfo(){
-    $('#bank-details *').remove();
-
-    let bank_id = document.getElementById('select_bank_info').value;
-    if(bank_id == 0){
-        return false;
-    }else{
-        let data = await serviceGetBankInfoById(bank_id);
-        let info = data.bank_info;
-        $('#bank-details').append(info.detail);
-    }
-
-    $("#addBankInfoModal").modal('hide');
 }

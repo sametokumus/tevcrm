@@ -2050,8 +2050,27 @@ async function serviceGetPackingListProductsById(packing_list_id) {
     }
 }
 
+async function serviceGetDeletePackingList(id) {
+    const data = await fetchDataGet('/admin/sale/deletePackingList/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
-
+async function servicePostUpdatePackingNote(formData) {
+    const data = await fetchDataPost('/admin/sale/updatePackingListNote', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 

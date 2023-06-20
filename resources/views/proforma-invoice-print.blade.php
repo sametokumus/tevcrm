@@ -107,7 +107,7 @@ $extra_js='
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p style="margin-top: 15px; margin-bottom: 0;">
-                                                    <strong>{{__('Note:')}}</strong>
+                                                    <strong>{{__('Note')}}:</strong>
                                                     <button id="addNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openAddNoteModal();">Not Ekle</button>
                                                     <button id="updateNoteBtn" type="button" class="btn btn-outline-secondary btn-sm no-print d-none" onclick="openUpdateNoteModal();">Not Güncelle</button>
                                                 </p>

@@ -17,6 +17,7 @@ class CreatePackingListProductsTable extends Migration
             $table->id();
             $table->string('packing_list_id');
             $table->string('sale_offer_id');
+            $table->bigInteger('quantity');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

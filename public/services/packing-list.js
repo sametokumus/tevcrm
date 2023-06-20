@@ -11,6 +11,10 @@
             e.preventDefault();
             updateCurrencyRate();
         });
+        $('#add_product_count_form').submit(function (e){
+            e.preventDefault();
+            addProductCountToTable();
+        });
 	});
 
 	$(window).load(async function() {
@@ -41,18 +45,25 @@ async function initOfferDetail(){
         $('#packingable-list-detail tbody > tr').remove();
 
         $.each(offers, function (i, offer) {
+            let btn = '';
+            if (offer.offer_quantity != offer.packing_count){
+                btn = '<button type="button" onclick="addPackingListTableProduct(this, ' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Listeye Ekle</span></button>';
+            }
                 let item = '<tr id="productRow' + offer.id + '">\n' +
                     '           <td>' + offer.sequence + '</td>\n' +
                     '           <td>' + offer.id + '</td>\n' +
                     '              <td>\n' +
                     '                  <div class="btn-list">\n' +
-                    '                      <button type="button" onclick="addPackingListTableProduct(this);" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Listeye Ekle</span></button>\n' +
+                    '                      '+ btn +'\n' +
+                    // '                      <button type="button" onclick="openAddProductCountModal(' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Listeye Ekle</span></button>\n' +
                     '                  </div>\n' +
                     '              </td>\n' +
                     '           <td>' + checkNull(offer.product_name) + '</td>\n' +
                     '           <td>' + checkNull(offer.product_ref_code) + '</td>\n' +
                     '           <td>' + checkNull(offer.offer_lead_time) + '</td>\n' +
                     '           <td>' + checkNull(offer.offer_quantity) + '</td>\n' +
+                    '           <td>' + offer.packing_count + '</td>\n' +
+                    '           <td class="d-none"></td>\n' +
                     '       </tr>';
                 $('#packingable-list-detail tbody').append(item);
         });
@@ -97,12 +108,19 @@ async function initOfferDetail(){
 
 }
 
+async function addProductCountToTable(){
+    let id = document.getElementById('add_product_id').value;
+    let count = document.getElementById('add_product_count').value;
+    console.log(id, count)
+    $('#productRow'+id+' td:last-child').text(count);
+    $("#addProductCountModal").modal('hide');
+    $("#add_product_count_form").trigger('reset');
+}
 
-
-async function addPackingListTableProduct(el){
+async function addPackingListTableProduct(el, id){
     let tablePackingList = $("#packing-list-detail").DataTable();
     let tablePackingableList = $("#packingable-list-detail").DataTable();
-    $(el).attr('onclick','removePackingListTableProduct(this);');
+    $(el).attr('onclick','removePackingListTableProduct(this,'+ id +');');
     $(el).text('Listeden Çıkar');
     let row = tablePackingableList.row( $(el).parents('tr') );
     let rowNode = row.node();
@@ -111,12 +129,17 @@ async function addPackingListTableProduct(el){
     tablePackingList
         .row.add( rowNode )
         .draw();
+
+
+    $("#addProductCountModal").modal('show');
+    $('.modal-backdrop').css('background-color', 'transparent');
+    document.getElementById('add_product_id').value = id;
 }
 
-async function removePackingListTableProduct(el){
+async function removePackingListTableProduct(el, id){
     let tablePackingList = $("#packing-list-detail").DataTable();
     let tablePackingableList = $("#packingable-list-detail").DataTable();
-    $(el).attr('onclick','addPackingListTableProduct(this);');
+    $(el).attr('onclick','addPackingListTableProduct(this, '+ id +');');
     $(el).text('Listeye Ekle');
     let row = tablePackingList.row( $(el).parents('tr') );
     let rowNode = row.node();
@@ -140,6 +163,7 @@ async function addPackingList(){
         rows.every(function (rowIdx, tableLoop, rowLoop) {
             let item = {
                 "sale_offer_id": this.data()[1],
+                "quantity": $('#productRow'+this.data()[1] + ' td:last-child').text(),
             }
             packing_list.push(item);
         });
@@ -155,7 +179,6 @@ async function addPackingList(){
 
         // let data = await servicePostAddSale(formData);
         let data = await servicePostAddPackingList(formData);
-        console.log(data)
         if (data) {
             window.location.reload();
         }else{
@@ -183,6 +206,7 @@ async function initPackingLists(){
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <a href="packing-list-print/'+ packing_list.packing_list_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n' +
+            '                      <button onclick="deletePackingList(\''+ packing_list.packing_list_id +'\')" class="btn btn-sm btn-danger">Sil</button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
@@ -206,3 +230,11 @@ async function initPackingLists(){
 
 }
 
+
+async function deletePackingList(packing_list_id){
+    let returned = await serviceGetDeletePackingList(packing_list_id);
+    if(returned){
+        await initPackingLists();
+        await initOfferDetail();
+    }
+}

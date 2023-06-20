@@ -72,6 +72,8 @@ $extra_js='
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
+                                    <th class="border-bottom-0 d-none">Gönderilen Adet</th>
+                                    <th class="border-bottom-0">Gönderi Adedi</th>
                                 </tr>
                                 </thead>
                                 <tbody id="sales-detail-body">
@@ -113,6 +115,8 @@ $extra_js='
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
+                                    <th class="border-bottom-0">Gönderilen Adet</th>
+                                    <th class="border-bottom-0 d-none">Gönderi Adedi</th>
                                 </tr>
                                 </thead>
                                 <tbody id="offer-detail-body">
@@ -137,5 +141,31 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
+
+<div class="modal modal-cover fade" id="addProductCountModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="background-color: #202b36;">
+            <div class="modal-header">
+                <h5 class="modal-title">Gönderi Adedi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_product_count_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Gönderi Adedi</label>
+                            <input type="number" class="form-control" id="add_product_count">
+                            <input type="hidden" class="form-control" id="add_product_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @include('include.footer')

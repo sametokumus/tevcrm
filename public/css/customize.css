@@ -593,7 +593,12 @@ div.DTE_Field select{
 }
 
 
-
+#packing-list-detail tr td{
+    display: table-cell !important;
+}
+#packing-list-detail tr td:nth-child(8){
+    display: none !important;
+}
 
 
 
