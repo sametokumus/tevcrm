@@ -1409,4 +1409,24 @@ class SaleController extends Controller
         }
     }
 
+    public function deletePackingList($packing_list_id){
+        try {
+
+            PackingList::query()->where('packing_list_id',$packing_list_id)->update([
+                'active' => 0,
+            ]);
+
+            PackingListProduct::query()->where('packing_list_id',$packing_list_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Gönderi listesi silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
 }
