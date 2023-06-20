@@ -1290,6 +1290,8 @@ class SaleController extends Controller
                 $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
                 $sale_offer['sequence'] = $request_product->sequence;
 
+                $sale_offer['packing_count'] = PackingListProduct::query()->where('active', 1)->where('sale_offer_id', $sale_offer->id)->sum('quantity');
+
             }
             $sale['sale_offers'] = $sale_offers;
 
