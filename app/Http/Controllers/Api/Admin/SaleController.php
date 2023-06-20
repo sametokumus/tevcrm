@@ -1335,6 +1335,7 @@ class SaleController extends Controller
 
             $sale['status_name'] = Status::query()->where('id', $sale->status_id)->first()->name;
             $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+            $sale['packing_note'] = $packing_list->note;
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
