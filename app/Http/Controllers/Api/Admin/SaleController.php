@@ -1268,10 +1268,10 @@ class SaleController extends Controller
             $sale_offers = SaleOffer::query()
                 ->where('sale_id', $sale->sale_id)
                 ->where('active', 1)
-                ->whereNotIn('id', function ($query) {
-                    $query->select('sale_offer_id')
-                        ->from('packing_list_products');
-                })
+//                ->whereNotIn('id', function ($query) {
+//                    $query->select('sale_offer_id')
+//                        ->from('packing_list_products');
+//                })
                 ->get();
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
