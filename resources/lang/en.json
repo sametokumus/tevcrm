@@ -4,7 +4,7 @@
     "Customer" : "Customer",
     "Company" : "Company",
     "Qty" : "Qty",
-    "Ref. Code" : "MPN",
+    "Ref. Code" : "Product Code",
     "Date Code" : "Date Code",
     "Product Name" : "Product Name",
     "Unit" : "Unit",
