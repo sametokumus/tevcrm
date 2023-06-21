@@ -173,6 +173,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Sale
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
     Route::get('sale/getActiveSales/{user_id}', [SaleController::class, 'getActiveSales']);
+    Route::get('sale/getCancelledSales/{user_id}', [SaleController::class, 'getCancelledSales']);
     Route::post('sale/getFilteredSales/{user_id}', [SaleController::class, 'getFilteredSales']);
     Route::get('sale/getSaleById/{sale_id}', [SaleController::class, 'getSaleById']);
     Route::get('sale/getApproveOfferBySaleId/{sale_id}/{user_id}/{revize}', [SaleController::class, 'getApproveOfferBySaleId']);
