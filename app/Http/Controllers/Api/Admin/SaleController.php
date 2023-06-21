@@ -256,6 +256,13 @@ class SaleController extends Controller
 
                 $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
 
+
+                $cancel = CancelNote::query()->where('sale_id', $sale->sale_id)->first();
+                $sale['cancel_note'] = '';
+                if ($cancel){
+                    $sale['cancel_note'] = $cancel->note;
+                }
+
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
@@ -284,12 +291,6 @@ class SaleController extends Controller
 
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
-
-                $cancel = CancelNote::query()->where('sale_id', $sale->sale_id)->first();
-                $sale['cancel_note'] = '';
-                if ($cancel){
-                    $sale['cancel_note'] = $cancel->note;
-                }
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
