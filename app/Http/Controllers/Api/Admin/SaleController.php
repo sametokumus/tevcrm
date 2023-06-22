@@ -1183,7 +1183,7 @@ class SaleController extends Controller
         try {
             $sale = Sale::query()->where('request_id', $request_id)->first();
             if ($sale->usd_rate != null && $sale->eur_rate != null && $sale->gbp_rate != null && $sale->currency != null){
-                return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => true, 'sale_currency' => $sale->currency]]);
+                return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => true, 'sale' => $sale]]);
             }else{
                 return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => false]]);
             }
