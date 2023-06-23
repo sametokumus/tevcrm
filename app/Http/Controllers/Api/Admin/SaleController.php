@@ -202,13 +202,13 @@ class SaleController extends Controller
                 $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
                 $sale['request'] = $offer_request;
                 $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
-                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
-                $sale['currency'] = '';
-                if ($sale_offer){
-                    if ($sale_offer->offer_currency != '' && $sale_offer->offer_currency != null){
-                        $sale['currency'] = $sale_offer->offer_currency;
-                    }
-                }
+//                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
+//                $sale['currency'] = '';
+//                if ($sale_offer){
+//                    if ($sale_offer->offer_currency != '' && $sale_offer->offer_currency != null){
+//                        $sale['currency'] = $sale_offer->offer_currency;
+//                    }
+//                }
 
                 $current_time = Carbon::now();
                 if ($sale->updated_at != null){
