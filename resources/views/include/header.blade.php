@@ -153,6 +153,12 @@ $extra_js="";
                         <span class="menu-text">Satışlar</span>
                     </a>
                 </div>
+                <div id="nav-sales-cancelled" class="d-none menu-item @if( Request::segment(1)== 'sales-cancelled' ) active @endif">
+                    <a href="/sales-cancelled" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">İptal Edilen Satışlar</span>
+                    </a>
+                </div>
 {{--                <div class="d-none menu-item">--}}
 {{--                    <a href="/offer-requests" class="menu-link">--}}
 {{--                        <span class="menu-icon"><i class="bi bi-gem"></i></span>--}}
@@ -222,7 +228,7 @@ $extra_js="";
                         <span class="menu-text">Firma Bilgileri</span>
                     </a>
                 </div>
-                <div id="nav-currency-logs" class="menu-item @if( Request::segment(1)== 'currency-logs' ) active @endif">
+                <div id="nav-currency-logs" class="d-none menu-item @if( Request::segment(1)== 'currency-logs' ) active @endif">
                     <a href="/currency-logs" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gear"></i></span>
                         <span class="menu-text">Döviz Geçmişi</span>

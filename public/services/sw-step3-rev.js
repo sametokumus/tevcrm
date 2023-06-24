@@ -52,8 +52,8 @@ function checkRole(){
 }
 
 async function changeStatus(){
-    let sale_id = getPathVariable('sw-3');
-    fastChangeStatus(5, sale_id);
+    let sale_id = getPathVariable('sw-3-rev');
+    fastChangeStatus(11, sale_id);
 }
 
 function initMaskMoney() {
@@ -73,7 +73,7 @@ $('#sales-detail').on( 'click', 'tbody td.row-edit', function (e) {
 } );
 
 async function initOfferDetail(){
-    let sale_id = getPathVariable('sw-3');
+    let sale_id = getPathVariable('sw-3-rev');
     console.log(sale_id)
     let data = await serviceGetSaleById(sale_id);
     let sale = data.sale;
@@ -344,7 +344,7 @@ async function addOfferBatchProcess(){
 
 
 async function initQuote(){
-    let sale_id = getPathVariable('sw-3');
+    let sale_id = getPathVariable('sw-3-rev');
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
 
@@ -357,7 +357,7 @@ async function initQuote(){
     $('#update_quote_note').summernote('code', checkNull(quote.note));
 }
 async function updateQuote(){
-    let sale_id = getPathVariable('sw-3');
+    let sale_id = getPathVariable('sw-3-rev');
     let quote_id = document.getElementById('update_quote_id').value;
     let payment_term = document.getElementById('update_quote_payment_term').value;
     let lead_time = document.getElementById('update_quote_lead_time').value;

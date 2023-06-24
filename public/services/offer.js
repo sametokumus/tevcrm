@@ -107,7 +107,7 @@ async function initOfferRequest(){
         }
         let classname= '';
         if (product.is_offered == 1){
-            classname= 'bg-secondary';
+            classname= 'bg-success bg-opacity-50';
         }
         let item = '<tr id="productRow' + product.id + '" class="'+ classname +'">\n' +
             '           <td>' + product.sequence + '</td>\n' +
@@ -475,6 +475,7 @@ async function initOfferDetailModal(offer_id){
             style: 'os',
             selector: 'td:first-child'
         },
+        paging : false,
         scrollX: true,
         language: {
             url: "services/Turkish.json"

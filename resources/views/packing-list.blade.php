@@ -73,6 +73,7 @@ $extra_js='
                                     <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
                                     <th class="border-bottom-0 d-none">Gönderilen Adet</th>
+                                    <th class="border-bottom-0 d-none">Kalan Adet</th>
                                     <th class="border-bottom-0">Gönderi Adedi</th>
                                 </tr>
                                 </thead>
@@ -116,6 +117,7 @@ $extra_js='
                                     <th class="border-bottom-0">Teslimat Süresi</th>
                                     <th class="border-bottom-0">Teklif Miktar</th>
                                     <th class="border-bottom-0">Gönderilen Adet</th>
+                                    <th class="border-bottom-0">Kalan Adet</th>
                                     <th class="border-bottom-0 d-none">Gönderi Adedi</th>
                                 </tr>
                                 </thead>

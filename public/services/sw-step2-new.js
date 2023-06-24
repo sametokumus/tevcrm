@@ -26,6 +26,7 @@
 	});
 
 })(window.jQuery);
+let sale_currency;
 
 function checkRole(){
 	return true;
@@ -58,7 +59,15 @@ async function initSaleDetail(){
 async function checkCurrencyLog(){
     let request_id = getPathVariable('sw-2-new');
     let data = await serviceGetCheckSaleCurrencyLog(request_id);
+    console.log(data)
     if (data.has_currency == true){
+        let sale = data.sale;
+        sale_currency = sale.currency;
+        document.getElementById('update_currency_rate_currency').value = sale_currency;
+        document.getElementById('update_currency_rate_usd').value = sale.usd_rate;
+        document.getElementById('update_currency_rate_eur').value = sale.eur_rate;
+        document.getElementById('update_currency_rate_gbp').value = sale.gbp_rate;
+
         await initNewOfferDetail();
         await initOfferDetail();
     }else{
@@ -111,7 +120,7 @@ async function initOfferDetail(){
     let request_id = getPathVariable('sw-2-new');
     let data = await serviceGetOffersByRequestId(request_id);
     console.log(data)
-    if (data.offer_status) {
+
         let offers = data.offers;
         console.log(offers)
         $("#sales-detail").dataTable().fnDestroy();
@@ -204,13 +213,7 @@ async function initOfferDetail(){
             },
             order: [[0, 'asc']]
         });
-    }else{
-        if(data.status_id < 3){
-            alert('Bu sipariş teklif oluşturmaya hazır değildir.');
-        }else{
-            alert('Bu sipariş için daha önce bir teklif oluşturulmuştur.');
-        }
-    }
+
 }
 
 async function initNewOfferDetail(){
@@ -228,6 +231,9 @@ async function initNewOfferDetail(){
         '             <th rowspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>';
     let head_second = '';
 
+
+    let total_row = '<tr>';
+    total_row += '<td colspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
     $.each(companies, function (i, company) {
         head_first += '<th colspan="6" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
         head_second += '<th class="border-bottom-0"></th>\n' +
@@ -236,6 +242,11 @@ async function initNewOfferDetail(){
             '           <th class="border-bottom-0">Toplam</th>\n' +
             '           <th class="border-bottom-0">Miktar</th>\n' +
             '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">T. Süresi</th>';
+
+
+        let footer_text = '';
+        footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(company.supply_price) + ' ' + sale_currency;
+        total_row += '<td colspan="6" class="border-bottom-0 fw-bold" style="border-right-width: 5px; border-right-color: #fff;">'+ footer_text +'</td>\n';
     });
 
     let head = '<tr>\n' +
@@ -277,15 +288,20 @@ async function initNewOfferDetail(){
                     '       </td>\n' +
                     '       <td>' + cheap_fast + '</td>\n' +
                     '       <td>' + changeCommasToDecimal(company.offer_product.pcs_price) + checkNull(company.offer_product.currency) + '</td>\n' +
-                    '       <td>' + changeCommasToDecimal(company.offer_product.total_price) + checkNull(company.offer_product.currency) + '</td>\n' +
+                    '       <td>' + changeCommasToDecimal(company.offer_product.total_price) + checkNull(company.offer_product.currency) + ' (' + changeCommasToDecimal(company.offer_product.converted_price) + checkNull(company.offer_product.converted_currency) + ')</td>\n' +
                     '       <td>RQ:' + checkNull(product.request_quantity) + ' - OQ:' + checkNull(company.offer_product.quantity) + '</td>\n' +
                     '       <td style="border-right-width: 5px; border-right-color: #fff;">' + checkNull(company.offer_product.lead_time) + '</td>\n';
+
             }
         });
 
         item += '</tr>';
         $('#new-offer-detail tbody').append(item);
+
     });
+
+    total_row += '</tr>';
+    $("#new-offer-detail tfoot").append(total_row);
 
     $('#new-offer-detail').DataTable({
         responsive: false,

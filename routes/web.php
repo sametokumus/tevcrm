@@ -33,6 +33,7 @@ Route::get('/offer-request-products/{id}', function () { return view('offer-requ
 Route::get('/offer-request/{id}', function () { return view('update-offer-request'); });
 Route::get('/offer/{id}', function () { return view('offer'); });
 Route::get('/sales', function () { return view('sales'); });
+Route::get('/sales-cancelled', function () { return view('sales-cancelled'); });
 Route::get('/sale-detail/{sale_id}', function () { return view('sale-detail'); });
 Route::get('/packing-list/{sale_id}', function () { return view('packing-list'); });
 
@@ -41,6 +42,7 @@ Route::get('/sw-1', function () { return view('sw-step1'); });
 Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
 Route::get('/sw-2-new/{request_id}', function () { return view('sw-step2-new'); });
 Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
+Route::get('/sw-3-rev/{sale_id}', function () { return view('sw-step3-rev'); });
 Route::get('/sw-4/{sale_id}', function () { return view('sw-step4'); });
 Route::get('/sw-4-rev/{sale_id}', function () { return view('sw-step4'); });
 
@@ -57,6 +59,7 @@ Route::get('/packing-list-print/{sale_id}', function () { return view('packing-l
 Route::get('/settings', function () { return view('settings'); });
 Route::get('/currency-logs', function () { return view('currency-logs'); });
 Route::get('/offer-request', function () { return view('add-offer-request'); });
+Route::get('/contacts', function () { return view('contacts'); });
 Route::get('/contact-detail/{id}', function () { return view('contact-detail'); });
 
 Route::get('/products', function () { return view('products'); });

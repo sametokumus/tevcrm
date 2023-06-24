@@ -114,7 +114,10 @@ async function initOfferDetail(){
                         }
                         return data;
                     }  },
-                { data: "offer_currency", className:  "row-edit" },
+                { data: "offer_currency", className:  "row-edit", editable: false,
+                    render: function (data, type, row) {
+                        return sale.currency;
+                    } },
                 { data: "offer_lead_time", className:  "row-edit" },
             ],
             select: false,
@@ -143,27 +146,33 @@ async function initOfferDetail(){
                 console.log(data)
                 let supplier_total = 0;
                 let offer_total = 0;
+                let sale_currency;
                 $.each(data, function (i, offer) {
                     console.log(offer)
-                    if (offer.discounted_price == null || offer.discounted_price == "0,00"){
-                        supplier_total += parseFloat(changePriceToDecimal(offer.total_price.toString()));
-                    }else{
-                        supplier_total += parseFloat(changePriceToDecimal(offer.discounted_price.toString()));
-                    }
+                    // if (offer.discounted_price == null || offer.discounted_price == "0,00"){
+                    //     supplier_total += parseFloat(changePriceToDecimal(offer.total_price.toString()));
+                    // }else{
+                    //     supplier_total += parseFloat(changePriceToDecimal(offer.discounted_price.toString()));
+                    // }
+                    supplier_total += parseFloat(offer.sale_price);
 
-                    offer_total += parseFloat(changePriceToDecimal(offer.offer_price.toString()));
+                    if (offer.offer_price == '' || offer.offer_price == '0,00'){
+                    }else{
+                        offer_total += parseFloat(changePriceToDecimal(offer.offer_price));
+                    }
+                    sale_currency = offer.sale_currency;
                 });
 
                 let profit = offer_total - supplier_total;
                 let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
                 let footer_text = '';
-                footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total);
-                footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Satış Fiyatı: '+ changeDecimalToPrice(offer_total);
+                footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(supplier_total) + ' ' + sale_currency;
+                footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Satış Fiyatı: '+ changeDecimalToPrice(offer_total) + ' ' + sale_currency;
 
                 if (profit <= 0) {
                     footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: -';
                 }else{
-                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: ' + changeDecimalToPrice(profit);
+                    footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar: ' + changeDecimalToPrice(profit) + ' ' + sale_currency;
                 }
                 if (profit_rate <= 0) {
                     footer_text += '&nbsp;&nbsp; | &nbsp;&nbsp;Kar Oranı: -';

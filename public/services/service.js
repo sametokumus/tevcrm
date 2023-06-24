@@ -1168,6 +1168,7 @@ async function servicePostAddOfferRequest(formData) {
 }
 async function servicePostOfferRequestProducts(formData, id) {
     const data = await fetchDataPost('/admin/offerRequest/offerRequestProducts/' + id, formData, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return data;
     } else {
@@ -1344,6 +1345,16 @@ async function serviceGetActiveSales() {
     }
 }
 
+async function serviceGetCancelledSales() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/sale/getCancelledSales/'+ userId, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function servicePostFilterSales(formData) {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataPost('/admin/sale/getFilteredSales/'+ userId, formData, 'application/json');
@@ -1408,6 +1419,16 @@ async function servicePostAddSale(formData) {
     if (data.status == "success") {
         showAlert(data.message);
         return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteSale(id) {
+    const data = await fetchDataGet('/admin/sale/deleteSale/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
     } else {
         showAlert('İstek Başarısız.');
         return false;

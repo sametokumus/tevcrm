@@ -178,6 +178,7 @@ $extra_js='
                                 <tbody>
 
                                 </tbody>
+                                <tfoot></tfoot>
                             </table>
                         </div>
                         <div class="card-arrow">

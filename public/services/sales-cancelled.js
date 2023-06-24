@@ -15,18 +15,6 @@
 			e.preventDefault();
             addCancelNote();
 		});
-		$('#sale_filter_form').submit(async function (e){
-			e.preventDefault();
-            await localStorage.setItem('sale_filter', 'true');
-            localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
-            localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
-            localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
-            localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
-            localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
-            localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_status').value);
-            await initFilter();
-            await initSales();
-		});
 	});
 
 	$(window).load(async function() {
@@ -34,7 +22,6 @@
 		checkLogin();
 		checkRole();
 
-        initFilter();
         initSales();
 
 	});
@@ -45,78 +32,8 @@ function checkRole(){
 	return true;
 }
 
-async function initFilter() {
-    await getOwnersAddSelectId('sale_filter_owner');
-    await getAdminsAddSelectId('sale_filter_authorized_personnel');
-    await getAdminsAddSelectId('sale_filter_purchasing_staff');
-    await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
-
-    let data = await serviceGetStatuses();
-    let statuses = data.statuses;
-    $('#sale_filter_status option').remove();
-    $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
-    $.each(statuses, function (i, status){
-        $('#sale_filter_status').append('<option value="'+ status.id +'">'+ status.name +'</option>');
-    });
-
-    let filter = localStorage.getItem('sale_filter');
-    if (filter == 'true'){
-
-        await getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
-
-        document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
-        document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
-        document.getElementById('sale_filter_purchasing_staff').value = localStorage.getItem('sale_filter_purchasing_staff');
-        document.getElementById('sale_filter_company').value = localStorage.getItem('sale_filter_company');
-        document.getElementById('sale_filter_company_employee').value = localStorage.getItem('sale_filter_company_employee');
-        document.getElementById('sale_filter_status').value = localStorage.getItem('sale_filter_status');
-    }
-
-
-}
-
-async function removeFilter(){
-    localStorage.setItem('sale_filter', 'false');
-    localStorage.removeItem('sale_filter_owner');
-    localStorage.removeItem('sale_filter_authorized_personnel');
-    localStorage.removeItem('sale_filter_purchasing_staff');
-    localStorage.removeItem('sale_filter_company');
-    localStorage.removeItem('sale_filter_company_employee');
-    localStorage.removeItem('sale_filter_status');
-    $('#sale_filter_company_employee option').remove();
-
-    initFilter();
-    initSales();
-}
-
-async function initEmployeeSelect(){
-    let company_id = document.getElementById('sale_filter_company').value;
-    getEmployeesAddSelectIdWithZero(company_id, 'sale_filter_company_employee');
-}
-
 async function initSales(){
-    let filter = localStorage.getItem('sale_filter');
-    let data;
-    if (filter == 'true'){
-        let owner = localStorage.getItem('sale_filter_owner');
-        let authorized_personnel = localStorage.getItem('sale_filter_authorized_personnel');
-        let purchasing_staff = localStorage.getItem('sale_filter_purchasing_staff');
-        let company = localStorage.getItem('sale_filter_company');
-        let company_employee = localStorage.getItem('sale_filter_company_employee');
-        let status = localStorage.getItem('sale_filter_status');
-        let formData = JSON.stringify({
-            "owner": owner,
-            "authorized_personnel": authorized_personnel,
-            "purchasing_staff": purchasing_staff,
-            "company": company,
-            "company_employee": company_employee,
-            "status": status
-        });
-        console.log(formData)
-        data = await servicePostFilterSales(formData);
-    }else{
-        data = await serviceGetActiveSales();
-    }
+    let data = await serviceGetCancelledSales();
     console.log(data)
 	$("#sales-datatable").dataTable().fnDestroy();
 	$('#sales-datatable tbody > tr').remove();
@@ -165,9 +82,6 @@ async function initSales(){
         }else if (sale.status.action == "quote"){
             status_class = "border-lime text-lime";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
-        }else if (sale.status.action == "offer-rev"){
-            status_class = "border-warning text-warning";
-            btn_list += '<a href="sw-3-rev/'+ sale.sale_id +'" class="btn btn-sm btn-warning">Teklifi Revize Et</a>\n';
         }else if (sale.status.action == "admin-conf"){
             status_class = "border-yellow text-yellow";
             btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
@@ -232,10 +146,11 @@ async function initSales(){
             '              <td class="bg-dark">'+ sale.request.company.name +'</td>\n' +
 			'              <td class="bg-dark">'+ authorized_name +'</td>\n' +
 			'              <td>'+ employee_name +'</td>\n' +
-			'              <td>'+ sale.request.product_count +'</td>\n' +
+			'              <td class="d-none">'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
-			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
-			'              <td>'+ status +'</td>\n' +
+            '              <td>'+ checkNull(sale.currency) +'</td>\n' +
+			'              <td class="d-none">'+ status +'</td>\n' +
+			'              <td>'+ sale.cancel_note +'</td>\n' +
 			'              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
 			'              <td>'+ updated_at +'</td>\n' +
 			'              <td>'+ sale.diff_last_day +'</td>\n' +
@@ -260,7 +175,7 @@ async function initSales(){
             },
             {
                 type: 'date',
-                targets: 10,
+                targets: 11,
                 render: function(data, type, row) {
                     return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
@@ -392,6 +307,7 @@ async function addSaleNote() {
         alert("Not Eklerken Hata Oluştu")
     }
 }
+
 
 async function deleteSale(sale_id){
     let returned = await serviceGetDeleteSale(sale_id);

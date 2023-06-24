@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/sw-step3.js"></script>
+<script src="services/sw-step3-rev.js"></script>
 ';
 ?>
 
@@ -49,7 +49,7 @@ $extra_js='
                 <div class="col-md-4">
                     <div class="btn-group float-end">
                         <b>Sipariş Durumunu Değiştir: &nbsp;</b>
-                        <button type="button" class="btn btn-sm btn-pink" onclick="changeStatus();">Yönetici Onayına Gönder</button>
+                        <button type="button" class="btn btn-sm btn-pink" onclick="changeStatus();">Revize Teklifi Yönetici Onayına Gönder</button>
                     </div>
                 </div>
             </div>
