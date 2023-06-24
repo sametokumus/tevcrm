@@ -46,37 +46,8 @@ class SaleController extends Controller
     public function deleteSale($sale_id)
     {
         try {
-            $sale = Sale::query()->where('sale_id', $sale_id)->first();
 
-            CancelNote::query()->where('sale_id', $sale->sale_id)->update([
-                'active' => 0
-            ]);
-            OrderConfirmationDetail::query()->where('sale_id', $sale->sale_id)->update([
-                'active' => 0
-            ]);
-            PurchasingOrderDetails::query()->where('sale_id', $sale->sale_id)->update([
-                'active' => 0
-            ]);
-
-            $offer = Offer::query()->where('request_id', $sale->request_id)->first();
-            OfferProduct::query()->where('offer_id', $offer->offer_id)->update([
-                'active' => 0
-            ]);
-            RfqDetails::query()->where('offer_id', $offer->offer_id)->update([
-                'active' => 0
-            ]);
-            Offer::query()->where('request_id', $sale->request_id)->update([
-                'active' => 0
-            ]);
-
-            OfferRequestProduct::query()->where('request_id', $sale->request_id)->update([
-                'active' => 0
-            ]);
-            OfferRequest::query()->where('request_id', $sale->request_id)->update([
-                'active' => 0
-            ]);
-
-            SaleOffer::query()->where('sale_id', $sale->sale_id)->update([
+            SaleOffer::query()->where('sale_id', $sale_id)->update([
                 'active' => 0
             ]);
             Sale::query()->where('sale_id', $sale_id)->update([
