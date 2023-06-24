@@ -160,7 +160,6 @@ class OfferController extends Controller
     {
         try {
             $sale = Sale::query()->where('request_id', $request_id)->where('active', 1)->first();
-            if ($sale->status_id <= 3) {
 
                 $offers = Offer::query()
                     ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
@@ -225,13 +224,7 @@ class OfferController extends Controller
                 $offer_status = true;
                 $status_id = $sale->status_id;
 
-            }else{
 
-                $offer_status = false;
-                $status_id = $sale->status_id;
-                $offers = [];
-
-            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_status' => $offer_status, 'status_id' => $status_id, 'offers' => $offers]]);
         } catch (QueryException $queryException) {
