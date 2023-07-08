@@ -170,7 +170,7 @@ async function initProducts(){
                 }
             }
         ],
-        pageLength : 15,
+        pageLength : 30,
         scrollX: true,
         language: {
             url: "services/Turkish.json"

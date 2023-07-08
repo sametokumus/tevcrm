@@ -181,7 +181,8 @@ $extra_js='
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">TEKLİF DETAYI (<span class="text-uppercase" id="offer_detail_show_supplier_name"> </span>)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close d-none" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn btn-sm btn-pink" onclick="$('.btn-close').click();">Fiyatlar Girildi</button>
             </div>
             <div class="modal-body overflow-auto">
                 <input type="hidden" id="offer-detail-modal-offer-id">

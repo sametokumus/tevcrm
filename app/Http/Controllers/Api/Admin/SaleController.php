@@ -198,8 +198,12 @@ class SaleController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
                 ->where('sales.active',1)
-                ->where('statuses.period','continue')
+//                ->where('statuses.period','continue')
+                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved')")
                 ->get();
+
+            $q = ' (product_seos.search_keywords LIKE "% ' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . '%" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . ',%" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ',%")';
+            $products = $products->whereRaw($q);
 
             foreach ($sales as $sale) {
 

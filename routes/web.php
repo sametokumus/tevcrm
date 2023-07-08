@@ -34,6 +34,7 @@ Route::get('/offer-request/{id}', function () { return view('update-offer-reques
 Route::get('/offer/{id}', function () { return view('offer'); });
 Route::get('/sales', function () { return view('sales'); });
 Route::get('/sales-cancelled', function () { return view('sales-cancelled'); });
+Route::get('/approved-sales', function () { return view('approved-sales'); });
 Route::get('/sale-detail/{sale_id}', function () { return view('sale-detail'); });
 Route::get('/packing-list/{sale_id}', function () { return view('packing-list'); });
 

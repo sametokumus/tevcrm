@@ -20,7 +20,7 @@ $extra_js='
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group float-end">
-                        <a href="#" id="go-supplier-price" class="btn btn-pink">Tedarikçi Fiyatları Gir</a>
+                        <a href="/sales" id="go-supplier-price" class="btn btn-pink">Talebi Satın Almaya Gönder</a>
 {{--                        <button type="button" class="btn btn-outline-theme" onclick="removeFilter();">Filtreyi Kaldır</button>--}}
                     </div>
                 </div>

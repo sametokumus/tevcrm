@@ -108,7 +108,7 @@ async function initOfferRequest(){
     sale_id = offer_request.sale_id;
     sale_global_id = offer_request.owner.short_code + "-" + offer_request.global_id;
     $('#title_sale_global_id').text(sale_global_id);
-    $('#go-supplier-price').attr('href', '/offer/'+request_id);
+    // $('#go-supplier-price').attr('href', '/offer/'+request_id);
 
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_owner').value = offer_request.owner_id;

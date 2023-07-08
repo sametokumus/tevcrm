@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/sales.js"></script>
+<script src="services/approved-sales.js"></script>
 ';
 ?>
 
