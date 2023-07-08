@@ -202,8 +202,8 @@ class SaleController extends Controller
                 ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved')")
                 ->get();
 
-            $q = ' (product_seos.search_keywords LIKE "% ' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . '%" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . ',%" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ',%")';
-            $products = $products->whereRaw($q);
+//            $q = ' (product_seos.search_keywords LIKE "% ' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ' %" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . '%" OR product_seos.search_keywords LIKE "% ' . $request->search_keywords . ',%" OR product_seos.search_keywords LIKE "%' . $request->search_keywords . ',%")';
+//            $products = $products->whereRaw($q);
 
             foreach ($sales as $sale) {
 
