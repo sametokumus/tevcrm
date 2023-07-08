@@ -99,7 +99,7 @@ async function initEmployeeSelect(){
 }
 
 async function initSales(){
-    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+    // $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
     let filter = localStorage.getItem('sale_filter');
     let data;
