@@ -1345,6 +1345,16 @@ async function serviceGetActiveSales() {
     }
 }
 
+async function serviceGetApprovedSales() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/sale/getApprovedSales/'+ userId, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetCancelledSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/sale/getCancelledSales/'+ userId, 'application/json');

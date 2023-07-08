@@ -19,18 +19,6 @@
 			e.preventDefault();
             addCancelNote();
 		});
-		$('#sale_filter_form').submit(async function (e){
-			e.preventDefault();
-            await localStorage.setItem('sale_filter', 'true');
-            localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
-            localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
-            localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
-            localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
-            localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
-            localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_status').value);
-            await initFilter();
-            await initSales();
-		});
 	});
 
 	$(window).load(async function() {
@@ -38,7 +26,6 @@
 		checkLogin();
 		checkRole();
 
-        initFilter();
         initSales();
 
 	});
@@ -49,80 +36,14 @@ function checkRole(){
 	return true;
 }
 
-async function initFilter() {
-    await getOwnersAddSelectId('sale_filter_owner');
-    await getAdminsAddSelectId('sale_filter_authorized_personnel');
-    await getAdminsAddSelectId('sale_filter_purchasing_staff');
-    await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
-
-    let data = await serviceGetStatuses();
-    let statuses = data.statuses;
-    $('#sale_filter_status option').remove();
-    $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
-    $.each(statuses, function (i, status){
-        $('#sale_filter_status').append('<option value="'+ status.id +'">'+ status.name +'</option>');
-    });
-
-    let filter = localStorage.getItem('sale_filter');
-    if (filter == 'true'){
-
-        await getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
-
-        document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
-        document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
-        document.getElementById('sale_filter_purchasing_staff').value = localStorage.getItem('sale_filter_purchasing_staff');
-        document.getElementById('sale_filter_company').value = localStorage.getItem('sale_filter_company');
-        document.getElementById('sale_filter_company_employee').value = localStorage.getItem('sale_filter_company_employee');
-        document.getElementById('sale_filter_status').value = localStorage.getItem('sale_filter_status');
-    }
-
-
-}
-
-async function removeFilter(){
-    localStorage.setItem('sale_filter', 'false');
-    localStorage.removeItem('sale_filter_owner');
-    localStorage.removeItem('sale_filter_authorized_personnel');
-    localStorage.removeItem('sale_filter_purchasing_staff');
-    localStorage.removeItem('sale_filter_company');
-    localStorage.removeItem('sale_filter_company_employee');
-    localStorage.removeItem('sale_filter_status');
-    $('#sale_filter_company_employee option').remove();
-
-    initFilter();
-    initSales();
-}
-
 async function initEmployeeSelect(){
     let company_id = document.getElementById('sale_filter_company').value;
     getEmployeesAddSelectIdWithZero(company_id, 'sale_filter_company_employee');
 }
 
 async function initSales(){
-    $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
-    let filter = localStorage.getItem('sale_filter');
-    let data;
-    if (filter == 'true'){
-        let owner = localStorage.getItem('sale_filter_owner');
-        let authorized_personnel = localStorage.getItem('sale_filter_authorized_personnel');
-        let purchasing_staff = localStorage.getItem('sale_filter_purchasing_staff');
-        let company = localStorage.getItem('sale_filter_company');
-        let company_employee = localStorage.getItem('sale_filter_company_employee');
-        let status = localStorage.getItem('sale_filter_status');
-        let formData = JSON.stringify({
-            "owner": owner,
-            "authorized_personnel": authorized_personnel,
-            "purchasing_staff": purchasing_staff,
-            "company": company,
-            "company_employee": company_employee,
-            "status": status
-        });
-        console.log(formData)
-        data = await servicePostFilterSales(formData);
-    }else{
-        data = await serviceGetActiveSales();
-    }
+    let data = await serviceGetApprovedSales();
     console.log(data)
 	$("#sales-datatable").dataTable().fnDestroy();
 	$('#sales-datatable tbody > tr').remove();
