@@ -159,7 +159,7 @@ $extra_js="";
                         <span class="menu-text">İptal Edilen Satışlar</span>
                     </a>
                 </div>
-                <div id="nav-sales-approved" class="d-none menu-item @if( Request::segment(1)== 'approved-sales' ) active @endif">
+                <div id="nav-approved-sales" class="d-none menu-item @if( Request::segment(1)== 'approved-sales' ) active @endif">
                     <a href="/approved-sales" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
                         <span class="menu-text">Onaylanan Satışlar</span>
