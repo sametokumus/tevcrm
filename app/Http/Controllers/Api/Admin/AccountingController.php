@@ -31,8 +31,7 @@ class AccountingController extends Controller
 //                ->where('statuses.period','approved')
                 ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                 ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
-                ->toSql();
-            return $sales;
+                ->get();
 
             foreach ($sales as $sale) {
 
