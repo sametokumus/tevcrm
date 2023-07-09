@@ -205,6 +205,11 @@ function formatDateZeroASC(date, slicer, splitter) {
 	return day + slicer + month + slicer + year;
 }
 
+function formatDateSplit(date, slicer, splitter) {
+	let dates = date.split(splitter);
+	return dates[0] + slicer + dates[1] + slicer + dates[2];
+}
+
 function formatDateDESC(date, slicer) {
 	date = new Date(date);
 
@@ -2275,6 +2280,15 @@ async function serviceGetCompletedAccountingSales() {
 }
 async function serviceGetAccountingPayments(sale_id) {
     const data = await fetchDataGet('/admin/accounting/getAccountingPayments/'+ sale_id, 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetAccountingPaymentById(payment_id) {
+    const data = await fetchDataGet('/admin/accounting/getAccountingPaymentById/'+ payment_id, 'application/json');
     console.log(data)
     if (data.status == "success") {
         return data.object;

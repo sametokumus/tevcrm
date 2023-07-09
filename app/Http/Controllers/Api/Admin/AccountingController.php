@@ -253,6 +253,22 @@ class AccountingController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getAccountingPaymentById($payment_id)
+    {
+        try {
+                $payment = SaleTransactionPayment::query()
+                    ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
+                    ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
+                    ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method')
+                    ->where('sale_transaction_payments.payment_id', $payment_id)
+                    ->where('sale_transaction_payments.active', 1)
+                    ->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['payment' => $payment]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
     public function addAccountingPayment(Request $request)
     {
         try {

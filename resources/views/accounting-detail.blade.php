@@ -6,6 +6,16 @@ $extra_js='
 <script src="plugins/apexcharts/dist/apexcharts.min.js"></script>
 <script src="js/demo/dashboard.demo.js"></script>
 <script src="services/accounting-detail.js"></script>
+<script>
+$(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy"
+});
+$(".timepicker").timepicker({
+    minuteStep: 15,
+    showMeridian: false
+});
+</script>
 ';
 ?>
 
@@ -175,13 +185,13 @@ $extra_js='
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">İPTAL SEBEBİ</h5>
+                    <h5 class="modal-title">Ödeme Ekle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form method="post" action="#" id="add_payment_form">
                     <div class="modal-body">
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Açıklama :</label>
+                            <label class="col-md-3 form-label">Ödeme Türü :</label>
                             <div class="col-md-9">
                                 <input type="hidden" class="form-control" id="add_payment_sale_id" required>
                                 <select class="form-control" id="add_payment_payment_type">
@@ -189,9 +199,70 @@ $extra_js='
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Açıklama :</label>
+                            <label class="col-md-3 form-label">Ödeme Yöntemi :</label>
                             <div class="col-md-9">
                                 <select class="form-control" id="add_payment_payment_method">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Vade (Gün) :</label>
+                            <div class="col-md-9">
+                                <div class="btn-list mb-2">
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(1)">
+                                        <span class="fe fe-refresh-cw">1</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(3)">
+                                        <span class="fe fe-refresh-cw">3</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(5)">
+                                        <span class="fe fe-refresh-cw">5</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(7)">
+                                        <span class="fe fe-refresh-cw">7</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(15)">
+                                        <span class="fe fe-refresh-cw">15</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(20)">
+                                        <span class="fe fe-refresh-cw">20</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(30)">
+                                        <span class="fe fe-refresh-cw">30</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(45)">
+                                        <span class="fe fe-refresh-cw">45</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(60)">
+                                        <span class="fe fe-refresh-cw">60</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(90)">
+                                        <span class="fe fe-refresh-cw">90</span>
+                                    </button>
+                                </div>
+                                <input type="number" value="" class="form-control" id="add_payment_payment_term" min="1">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Vade Tarihi :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control datepicker" id="add_payment_due_date" placeholder="dd-mm-yyyy" />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Ödeme Tutarı :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="add_payment_payment_price">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Para Birimi :</label>
+                            <div class="col-md-9">
+                                <select class="form-control" id="add_payment_currency" required>
+                                    <option value="TRY">TRY</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="GBP">GBP</option>
                                 </select>
                             </div>
                         </div>
