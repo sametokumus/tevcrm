@@ -62,18 +62,13 @@ async function initSaleStats(sale_id){
     let data = await serviceGetSaleDetailInfo(sale_id);
     let sale = data.sale;
     console.log(sale)
-    let total = sale.grand_total;
-    if (sale.grand_total_with_shipping != null){
-        total = sale.grand_total_with_shipping;
-    }
-    let remaining_price = '-';
 
     $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
     $('#customer-employee').append('Müşteri Yetkilisi: '+sale.request.company_employee.name);
     $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
-    $('#total-price').text(changeCommasToDecimal(total) + ' ' + sale.currency);
-    $('#remaining-price').text(changeCommasToDecimal(remaining_price) + ' ' + sale.currency);
+    $('#total-price').text(changeCommasToDecimal(sale.total_price) + ' ' + sale.currency);
+    $('#remaining-price').text(changeCommasToDecimal(sale.remaining_price) + ' ' + sale.currency);
 
 
     $('#sale-date').append(formatDateAndTimeDESC(sale.created_at, '/'));
@@ -99,9 +94,10 @@ async function initPayments(sale_id){
                 '              <td>' + payment.id + '</td>\n' +
                 '              <td>' + checkNull(payment.payment_type) + '</td>\n' +
                 '              <td>' + checkNull(payment.payment_method) + '</td>\n' +
+                '              <td>' + formatDateASC(payment.invoice_date, "-") + '</td>\n' +
                 '              <td>' + checkNull(payment.payment_term) + '</td>\n' +
-                '              <td>' + checkNull(payment.due_date) + '</td>\n' +
-                '              <td>' + checkNull(payment.payment_price) + '</td>\n' +
+                '              <td>' + formatDateASC(payment.due_date, "-") + '</td>\n' +
+                '              <td>' + changeCommasToDecimal(payment.payment_price) + '</td>\n' +
                 '              <td>' + checkNull(payment.currency) + '</td>\n' +
                 '              <td></td>\n' +
                 '              <td>\n' +
@@ -182,6 +178,15 @@ async function openUpdatePaymentModal(payment_id){
 
     let data = await serviceGetAccountingPaymentById(payment_id);
     console.log(data)
+    let payment = data.payment;
+    document.getElementById('update_payment_id').value = payment_id;
+    document.getElementById('update_payment_payment_type').value = payment.payment_type;
+    document.getElementById('update_payment_payment_method').value = payment.payment_method;
+    document.getElementById('update_payment_invoice_date').value = formatDateASC(payment.invoice_date, "-");
+    document.getElementById('update_payment_payment_term').value = payment.payment_term;
+    document.getElementById('update_payment_due_date').value = formatDateASC(payment.due_date, "-");
+    document.getElementById('update_payment_payment_price').value = changeCommasToDecimal(payment.payment_price);
+    document.getElementById('update_payment_currency').value = payment.currency;
 }
 
 
@@ -208,4 +213,28 @@ async function addPaymentPaymentTermWithButton(day){
     });
     dueDate = formatDateSplit(dueDate, '-', '.');
     document.getElementById('add_payment_due_date').value = dueDate;
+}
+async function updatePaymentInvoiceDateToday(){
+    let currentDate = new Date();
+    currentDate = currentDate.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    currentDate = formatDateSplit(currentDate, '-', '.');
+    document.getElementById('update_payment_invoice_date').value = currentDate;
+}
+async function updatePaymentPaymentTermWithButton(day){
+    document.getElementById('update_payment_payment_term').value = day;
+
+    let currentDate = new Date();
+    let dueDate = new Date();
+    dueDate.setDate(currentDate.getDate() + parseInt(day));
+    dueDate = dueDate.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    dueDate = formatDateSplit(dueDate, '-', '.');
+    document.getElementById('update_payment_due_date').value = dueDate;
 }
