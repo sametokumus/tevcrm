@@ -2210,6 +2210,7 @@ async function serviceGetDeleteDeliveryTerm(id) {
 async function serviceGetPendingAccountingSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/accounting/getPendingAccountingSales/'+ userId, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
