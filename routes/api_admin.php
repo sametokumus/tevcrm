@@ -308,5 +308,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('accounting/getPendingAccountingSales/{user_id}', [AccountingController::class, 'getPendingAccountingSales']);
     Route::get('accounting/getOngoingAccountingSales/{user_id}', [AccountingController::class, 'getOngoingAccountingSales']);
     Route::get('accounting/getCompletedAccountingSales/{user_id}', [AccountingController::class, 'getCompletedAccountingSales']);
+    Route::get('accounting/getAccountingPayments/{sale_id}', [AccountingController::class, 'getAccountingPayments']);
 });
 

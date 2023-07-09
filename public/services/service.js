@@ -2237,3 +2237,12 @@ async function serviceGetCompletedAccountingSales() {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetAccountingPayments(sale_id) {
+    const data = await fetchDataGet('/admin/accounting/getAccountingPayments/'+ sale_id, 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

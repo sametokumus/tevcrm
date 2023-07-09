@@ -11,6 +11,8 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Sale;
 use App\Models\SaleNote;
+use App\Models\SaleTransaction;
+use App\Models\SaleTransactionPayment;
 use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -199,6 +201,26 @@ class AccountingController extends Controller
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getAccountingPayments($sale_id)
+    {
+        try {
+            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+
+            $payments = SaleTransactionPayment::query()
+                ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
+                ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
+                ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method')
+                ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
+                ->where('sale_transaction_payments.active', 1)
+                ->get();
+
+            $transaction['payments'] = $payments;
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['transaction' => $transaction]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
