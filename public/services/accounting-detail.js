@@ -26,6 +26,26 @@
             document.getElementById('add_payment_due_date').value = dueDate;
         });
 
+        $('#update_payment_payment_term').on('keyup', function (e){
+            e.preventDefault();
+            let val = document.getElementById('update_payment_payment_term').value;
+            if (val < 1){
+                document.getElementById('update_payment_payment_term').value = 1;
+                val = 1;
+            }
+
+            let currentDate = new Date();
+            let dueDate = new Date();
+            dueDate.setDate(currentDate.getDate() + parseInt(val));
+            dueDate = dueDate.toLocaleDateString('tr-TR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            dueDate = formatDateSplit(dueDate, '-', '.');
+            document.getElementById('update_payment_due_date').value = dueDate;
+        });
+
         $("#add_payment_form").submit(function( event ) {
             event.preventDefault();
 
@@ -187,6 +207,35 @@ async function openUpdatePaymentModal(payment_id){
     document.getElementById('update_payment_due_date').value = formatDateASC(payment.due_date, "-");
     document.getElementById('update_payment_payment_price').value = changeCommasToDecimal(payment.payment_price);
     document.getElementById('update_payment_currency').value = payment.currency;
+}
+async function updatePayment(){
+    let sale_id = getPathVariable('accounting-detail');
+    let payment_id = document.getElementById('update_payment_id').value;
+    let payment_type = document.getElementById('update_payment_payment_type').value;
+    let payment_method = document.getElementById('update_payment_payment_method').value;
+    let payment_term = document.getElementById('update_payment_payment_term').value;
+    let due_date = document.getElementById('update_payment_due_date').value;
+    let payment_price = document.getElementById('update_payment_payment_price').value;
+    let currency = document.getElementById('update_payment_currency').value;
+    console.log(due_date)
+    let formData = JSON.stringify({
+        "payment_id": payment_id,
+        "sale_id": sale_id,
+        "payment_type": payment_type,
+        "payment_method": payment_method,
+        "payment_term": payment_term,
+        "due_date": formatDateDESC(due_date, "-", "-"),
+        "payment_price": changePriceToDecimal(payment_price),
+        "currency": currency,
+    });
+    console.log(formData)
+    let returned = await servicePostUpdateAccountingPayment(formData);
+    if(returned){
+        // $("#add_payment_form").trigger("reset");
+        // $('#addPaymentModal').modal('hide');
+        // initPayments(sale_id);
+        location.reload();
+    }
 }
 
 
