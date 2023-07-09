@@ -1085,8 +1085,8 @@ class SaleController extends Controller
             $remaining_price = $total_price - $payed_price;
 
             $sale['total_price'] = $total_price;
-            $sale['payed_price'] = $payed_price;
-            $sale['remaining_price'] = number_format($remaining_price, 2, ",", ".");
+            $sale['payed_price'] = number_format($payed_price, 2, ".", "")$payed_price;
+            $sale['remaining_price'] = number_format($remaining_price, 2, ".", "");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
