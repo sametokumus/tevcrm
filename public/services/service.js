@@ -554,6 +554,25 @@ async function getActivityTypesAddSelectId(selectId){
     });
 }
 
+async function getPaymentTypesAddSelectId(selectId){
+    let data = await serviceGetPaymentTypes();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Ödeme Türü Seçiniz</option>');
+    $.each(data.types, function(i, type){
+        let optionRow = '<option value="'+type.id+'">'+type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+async function getPaymentMethodsAddSelectId(selectId){
+    let data = await serviceGetPaymentMethods();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Ödeme Yöntemi Seçiniz</option>');
+    $.each(data.methods, function(i, method){
+        let optionRow = '<option value="'+method.id+'">'+method.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getPaymentTermsAddSelectId(selectId){
     let data = await serviceGetPaymentTerms();
     $('#'+selectId+' option').remove();
@@ -2110,6 +2129,23 @@ async function servicePostUpdatePackingNote(formData) {
 
 
 
+async function serviceGetPaymentTypes() {
+    const data = await fetchDataGet('/admin/accounting/getPaymentTypes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetPaymentMethods() {
+    const data = await fetchDataGet('/admin/accounting/getPaymentMethods', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetPaymentTerms() {
     const data = await fetchDataGet('/admin/setting/getPaymentTerms', 'application/json');
     if (data.status == "success") {
@@ -2244,5 +2280,25 @@ async function serviceGetAccountingPayments(sale_id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+async function servicePostAddAccountingPayment(formData) {
+    const data = await fetchDataPost('/admin/accounting/addAccountingPayment', formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateAccountingPayment(formData) {
+    const data = await fetchDataPost('/admin/accounting/updateAccountingPayment', formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }

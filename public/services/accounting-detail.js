@@ -55,5 +55,32 @@ async function initPayments(sale_id){
     console.log(transaction)
 
 
+    $('#payments').DataTable({
+        responsive: false,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1}
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Ödeme Ekle',
+                action: function (e, dt, node, config) {
+                    openAddPaymentModal();
+                }
+            }
+        ],
+        paging: false,
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[0, 'asc']]
+    });
 
+}
+async function openAddPaymentModal(){
+    $('#addPaymentModal').modal('show');
+    await getPaymentTypesAddSelectId('add_payment_payment_type');
+    await getPaymentMethodsAddSelectId('add_payment_payment_method');
 }

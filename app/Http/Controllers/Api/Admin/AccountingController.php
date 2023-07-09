@@ -9,17 +9,43 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\PaymentMethod;
+use App\Models\PaymentType;
 use App\Models\Sale;
 use App\Models\SaleNote;
 use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
 use App\Models\Status;
 use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Nette\Schema\ValidationException;
 
 class AccountingController extends Controller
 {
+    public function getPaymentTypes()
+    {
+        try {
+
+            $types = PaymentType::query()->where('active', 1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['types' => $types]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getPaymentMethods()
+    {
+        try {
+
+            $methods = PaymentMethod::query()->where('active', 1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['methods' => $methods]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
     public function getPendingAccountingSales($user_id)
     {
         try {
@@ -225,6 +251,75 @@ class AccountingController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['transaction' => $transaction]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function addAccountingPayment(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required',
+            ]);
+
+            $sale_id = $request->sale_id;
+            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+
+            if ($transaction) {
+                $transaction_id = $transaction->transaction_id;
+            }else{
+                $transaction_id = Uuid::uuid();
+                SaleTransaction::query()->insert([
+                    'sale_id' => $sale_id,
+                    'transaction_id' => $transaction_id,
+                ]);
+            }
+
+            $payment_id = Uuid::uuid();
+
+            SaleTransactionPayment::query()->insert([
+                'payment_id' => $payment_id,
+                'transaction_id' => $transaction_id,
+                'payment_term' => $request->payment_term,
+                'payment_type' => $request->payment_type,
+                'payment_method' => $request->payment_method,
+                'due_date' => $request->due_date,
+                'payment_price' => $request->payment_price,
+                'currency' => $request->currency,
+            ]);
+
+            return response(['message' => __('Ödeme ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function updateAccountingPayment(Request $request)
+    {
+        try {
+            $request->validate([
+//                'sale_id' => 'required',
+            ]);
+
+            $payment_id = $request->payment_id;
+
+            SaleTransactionPayment::query()->where('payment_id', $payment_id)->update([
+                'payment_term' => $request->payment_term,
+                'payment_type' => $request->payment_type,
+                'payment_method' => $request->payment_method,
+                'due_date' => $request->due_date,
+                'payment_price' => $request->payment_price,
+                'currency' => $request->currency,
+            ]);
+
+            return response(['message' => __('Ödeme ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 }

@@ -23,6 +23,8 @@ class CreateSaleTransactionPaymentsTable extends Migration
             $table->date('due_date')->nullable();
             $table->date('payment_date')->nullable();
             $table->tinyInteger('payment_status_id')->default(1);
+            $table->decimal('payment_price',10,2, false)->nullable();
+            $table->string('currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

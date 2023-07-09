@@ -140,7 +140,7 @@ $extra_js='
         <div class="col-md-12">
             <div class="card border-theme mb-3">
                 <div class="card-body p-3 overflow-auto">
-                    <table id="packing-list-detail" class="table table-bordered text-nowrap key-buttons border-bottom w-100">
+                    <table id="payments" class="table table-bordered text-nowrap key-buttons border-bottom w-100">
                         <thead>
                         <tr>
                             <th class="border-bottom-0">N#</th>
@@ -183,8 +183,16 @@ $extra_js='
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Açıklama :</label>
                             <div class="col-md-9">
-                                <input type="hidden" class="form-control" id="cancel_sale_id" required>
-                                <textarea class="form-control" rows="3" id="cancel_sale_note" placeholder="Not" required=""></textarea>
+                                <input type="hidden" class="form-control" id="add_payment_sale_id" required>
+                                <select class="form-control" id="add_payment_payment_type">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Açıklama :</label>
+                            <div class="col-md-9">
+                                <select class="form-control" id="add_payment_payment_method">
+                                </select>
                             </div>
                         </div>
                     </div>
