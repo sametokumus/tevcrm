@@ -2217,3 +2217,23 @@ async function serviceGetPendingAccountingSales() {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetOngoingAccountingSales() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/accounting/getOngoingAccountingSales/'+ userId, 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetCompletedAccountingSales() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/accounting/getCompletedAccountingSales/'+ userId, 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
