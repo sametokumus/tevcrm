@@ -314,5 +314,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('accounting/getAccountingPaymentById/{payment_id}', [AccountingController::class, 'getAccountingPaymentById']);
     Route::post('accounting/addAccountingPayment', [AccountingController::class, 'addAccountingPayment']);
     Route::post('accounting/updateAccountingPayment', [AccountingController::class, 'updateAccountingPayment']);
+    Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
 });
 

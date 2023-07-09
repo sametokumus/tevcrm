@@ -60,6 +60,13 @@
 
         });
 
+        $("#update_status_form").submit(function( event ) {
+            event.preventDefault();
+
+            updateStatus();
+
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -109,6 +116,13 @@ async function initPayments(sale_id){
 
     if (transaction != null) {
         $.each(transaction.payments, function (i, payment) {
+            let status_span = '';
+            if (payment.payment_status_id == 1){
+                status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+payment.payment_id+'\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
+            }else if (payment.payment_status_id == 2){
+                status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+payment.payment_id+'\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
+            }
+
             let item = '<tr>\n' +
                 '              <td>' + (i + 1) + '</td>\n' +
                 '              <td>' + payment.id + '</td>\n' +
@@ -119,7 +133,7 @@ async function initPayments(sale_id){
                 '              <td>' + formatDateASC(payment.due_date, "-") + '</td>\n' +
                 '              <td>' + changeCommasToDecimal(payment.payment_price) + '</td>\n' +
                 '              <td>' + checkNull(payment.currency) + '</td>\n' +
-                '              <td></td>\n' +
+                '              <td>'+ status_span +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
                 '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment.payment_id + '\')">\n' +
@@ -286,4 +300,25 @@ async function updatePaymentPaymentTermWithButton(day){
     });
     dueDate = formatDateSplit(dueDate, '-', '.');
     document.getElementById('update_payment_due_date').value = dueDate;
+}
+
+
+function openStatusModal(payment_id, status_id){
+    $('#updateStatusModal').modal('show');
+    document.getElementById('update_status_payment_id').value = payment_id;
+    document.getElementById('update_payment_status').value = status_id;
+}
+async function updateStatus(){
+    let status_id = document.getElementById('update_payment_status').value;
+    let payment_id = document.getElementById('update_status_payment_id').value;
+    let formData = JSON.stringify({
+        "payment_id": payment_id,
+        "status_id": status_id
+    });
+    let returned = await servicePostUpdateAccountingPaymentStatus(formData);
+    if(returned){
+        $("#update_status_form").trigger("reset");
+        $('#updateStatusModal').modal('hide');
+        initPayments();
+    }
 }

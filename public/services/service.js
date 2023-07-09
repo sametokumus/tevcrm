@@ -2317,3 +2317,13 @@ async function servicePostUpdateAccountingPayment(formData) {
         return false;
     }
 }
+
+async function servicePostUpdateAccountingPaymentStatus(formData) {
+    const data = await fetchDataPost('/admin/accounting/updateAccountingPaymentStatus', formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
