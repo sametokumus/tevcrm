@@ -199,6 +199,28 @@ $extra_js="";
                 </div>
 
 
+
+                <div class="menu-header">Muhasebe Yönetimi</div>
+                <div id="nav-pending-accounting" class="d-none menu-item @if( Request::segment(1)== 'pending-accounting' ) active @endif">
+                    <a href="/pending-accounting" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">İşlem Yapılmayanlar</span>
+                    </a>
+                </div>
+                <div id="nav-ongoing-accounting" class="d-none menu-item @if( Request::segment(1)== 'ongoing-accounting' ) active @endif">
+                    <a href="/ongoing-accounting" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Devam Eden İşlemler</span>
+                    </a>
+                </div>
+                <div id="nav-completed-accounting" class="d-none menu-item @if( Request::segment(1)== 'completed-accounting' ) active @endif">
+                    <a href="/completed-accounting" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Tamamlanan İşlemler</span>
+                    </a>
+                </div>
+
+
                 <div class="menu-header">Ürünler</div>
                 <div id="nav-products" class="d-none menu-item @if( Request::segment(1)== 'products' ) active @endif">
                     <a href="/products" class="menu-link">

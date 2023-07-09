@@ -68,6 +68,9 @@ Route::get('/brands', function () { return view('brands'); });
 Route::get('/categories', function () { return view('categories'); });
 
 
+Route::get('/pending-accounting', function () { return view('pending-accounting'); });
+
+
 Route::post('/lang', function(Request $request) {
     $locale = $request->input('lang');
     App::setLocale($locale);
