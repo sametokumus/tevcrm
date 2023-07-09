@@ -26,6 +26,8 @@ use App\Models\RfqDetails;
 use App\Models\Sale;
 use App\Models\SaleNote;
 use App\Models\SaleOffer;
+use App\Models\SaleTransaction;
+use App\Models\SaleTransactionPayment;
 use App\Models\Status;
 use App\Models\StatusHistory;
 use App\Models\User;
@@ -1061,6 +1063,30 @@ class SaleController extends Controller
             $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
             $sale['product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->count();
             $sale['total_product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->sum('offer_quantity');
+
+            $total_price = $sale->grand_total;
+            if ($sale->grand_total_with_shipping != null){
+                $total_price = $sale->grand_total_with_shipping;
+            }
+            $payed_price = 0;
+            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+
+            if ($transaction) {
+                $payments = SaleTransactionPayment::query()
+                    ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
+                    ->where('sale_transaction_payments.active', 1)
+                    ->get();
+
+                foreach ($payments as $payment){
+                    $payed_price += $payment->payment_price;
+                }
+            }
+
+            $remaining_price = $total_price - $payed_price;
+
+            $sale['total_price'] = $total_price;
+            $sale['payed_price'] = $payed_price;
+            $sale['remaining_price'] = $remaining_price;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {

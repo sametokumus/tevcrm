@@ -91,27 +91,30 @@ async function initPayments(sale_id){
     console.log(transaction)
     $("#payments").dataTable().fnDestroy();
     $('#payments tbody > tr').remove();
-    $.each(transaction.payments, function (i, payment) {
-        let item = '<tr>\n' +
-            '              <td>'+ (i+1) +'</td>\n' +
-            '              <td>'+ payment.id +'</td>\n' +
-            '              <td>'+ checkNull(payment.payment_type) +'</td>\n' +
-            '              <td>'+ checkNull(payment.payment_method) +'</td>\n' +
-            '              <td>'+ checkNull(payment.payment_term) +'</td>\n' +
-            '              <td>'+ checkNull(payment.due_date) +'</td>\n' +
-            '              <td>'+ checkNull(payment.payment_price) +'</td>\n' +
-            '              <td>'+ checkNull(payment.currency) +'</td>\n' +
-            '              <td></td>\n' +
-            '              <td>\n' +
-            '                  <div class="btn-list">\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\''+ payment.payment_id +'\')">\n' +
-            '                          <span class="fe fe-edit"> </span> Düzenle\n' +
-            '                      </button>\n' +
-            '                  </div>\n' +
-            '              </td>\n' +
-            '          </tr>';
-        $('#payments tbody').append(item);
-    });
+
+    if (transaction != null) {
+        $.each(transaction.payments, function (i, payment) {
+            let item = '<tr>\n' +
+                '              <td>' + (i + 1) + '</td>\n' +
+                '              <td>' + payment.id + '</td>\n' +
+                '              <td>' + checkNull(payment.payment_type) + '</td>\n' +
+                '              <td>' + checkNull(payment.payment_method) + '</td>\n' +
+                '              <td>' + checkNull(payment.payment_term) + '</td>\n' +
+                '              <td>' + checkNull(payment.due_date) + '</td>\n' +
+                '              <td>' + checkNull(payment.payment_price) + '</td>\n' +
+                '              <td>' + checkNull(payment.currency) + '</td>\n' +
+                '              <td></td>\n' +
+                '              <td>\n' +
+                '                  <div class="btn-list">\n' +
+                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment.payment_id + '\')">\n' +
+                '                          <span class="fe fe-edit"> </span> Düzenle\n' +
+                '                      </button>\n' +
+                '                  </div>\n' +
+                '              </td>\n' +
+                '          </tr>';
+            $('#payments tbody').append(item);
+        });
+    }
 
     $('#payments').DataTable({
         responsive: false,
@@ -144,27 +147,30 @@ async function openAddPaymentModal(){
     await getPaymentMethodsAddSelectId('add_payment_payment_method');
 }
 async function addPayment(){
-    let sale_id = document.getElementById('add_payment_sale_id').value;
+    let sale_id = getPathVariable('accounting-detail');
     let payment_type = document.getElementById('add_payment_payment_type').value;
     let payment_method = document.getElementById('add_payment_payment_method').value;
     let payment_term = document.getElementById('add_payment_payment_term').value;
     let due_date = document.getElementById('add_payment_due_date').value;
-    let payment_price = document.getElementById('add_payment_price').value;
+    let payment_price = document.getElementById('add_payment_payment_price').value;
     let currency = document.getElementById('add_payment_currency').value;
+    console.log(due_date)
     let formData = JSON.stringify({
         "sale_id": sale_id,
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
-        "due_date": formatDateAndTime(due_date, "-"),
+        "due_date": formatDateDESC(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
     });
-    let returned = await servicePostAddProduct(formData);
+    console.log(formData)
+    let returned = await servicePostAddAccountingPayment(formData);
     if(returned){
-        $("#add_product_form").trigger("reset");
-        $('#addProductModal').modal('hide');
-        initProducts();
+        // $("#add_payment_form").trigger("reset");
+        // $('#addPaymentModal').modal('hide');
+        // initPayments(sale_id);
+        location.reload();
     }
 }
 
@@ -179,6 +185,16 @@ async function openUpdatePaymentModal(payment_id){
 }
 
 
+async function addPaymentInvoiceDateToday(){
+    let currentDate = new Date();
+    currentDate = currentDate.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    currentDate = formatDateSplit(currentDate, '-', '.');
+    document.getElementById('add_payment_invoice_date').value = currentDate;
+}
 async function addPaymentPaymentTermWithButton(day){
     document.getElementById('add_payment_payment_term').value = day;
 

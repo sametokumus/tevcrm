@@ -2299,6 +2299,7 @@ async function serviceGetAccountingPaymentById(payment_id) {
 
 async function servicePostAddAccountingPayment(formData) {
     const data = await fetchDataPost('/admin/accounting/addAccountingPayment', formData, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return true;
     } else {

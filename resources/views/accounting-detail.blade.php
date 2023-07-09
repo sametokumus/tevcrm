@@ -193,7 +193,6 @@ $(".timepicker").timepicker({
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Ödeme Türü :</label>
                             <div class="col-md-9">
-                                <input type="hidden" class="form-control" id="add_payment_sale_id" required>
                                 <select class="form-control" id="add_payment_payment_type">
                                 </select>
                             </div>
@@ -203,6 +202,17 @@ $(".timepicker").timepicker({
                             <div class="col-md-9">
                                 <select class="form-control" id="add_payment_payment_method">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Fatura Tarihi :</label>
+                            <div class="col-md-9">
+                                <div class="btn-list mb-2">
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentInvoiceDateToday()">
+                                        <span class="fe fe-refresh-cw">Bugün</span>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control datepicker" id="add_payment_invoice_date" placeholder="dd-mm-yyyy" />
                             </div>
                         </div>
                         <div class="row mb-4">
