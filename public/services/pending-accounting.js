@@ -43,7 +43,7 @@ async function initEmployeeSelect(){
 
 async function initSales(){
 
-    let data = await serviceGetApprovedSales();
+    let data = await serviceGetPendingAccountingSales();
     console.log(data)
 	$("#sales-datatable").dataTable().fnDestroy();
 	$('#sales-datatable tbody > tr').remove();

@@ -2204,3 +2204,15 @@ async function serviceGetDeleteDeliveryTerm(id) {
         return false;
     }
 }
+
+
+
+async function serviceGetPendingAccountingSales() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/accounting/getPendingAccountingSales/'+ userId, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

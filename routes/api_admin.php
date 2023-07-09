@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SettingController;
+use App\Http\Controllers\Api\Admin\AccountingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -302,5 +303,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('setting/addDeliveryTerm', [SettingController::class, 'addDeliveryTerm']);
     Route::post('setting/updateDeliveryTerm/{type_id}', [SettingController::class, 'updateDeliveryTerm']);
     Route::get('setting/deleteDeliveryTerm/{type_id}', [SettingController::class, 'deleteDeliveryTerm']);
+
+    //Accounting
+    Route::get('accounting/getPendingAccountingSales/{user_id}', [AccountingController::class, 'getPendingAccountingSales']);
 });
 
