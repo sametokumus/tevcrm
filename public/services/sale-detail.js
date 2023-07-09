@@ -68,7 +68,7 @@ async function initSaleStats(sale_id){
         total = changeCommasToDecimal(sale.grand_total_with_shipping);
     }
 
-    $('#customer-name').append('<a href="#" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
+    $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
     $('#customer-employee').append('Müşteri Yetkilisi: '+sale.request.company_employee.name);
     $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 

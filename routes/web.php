@@ -69,6 +69,9 @@ Route::get('/categories', function () { return view('categories'); });
 
 
 Route::get('/pending-accounting', function () { return view('pending-accounting'); });
+Route::get('/ongoing-accounting', function () { return view('ongoing-accounting'); });
+Route::get('/completed-accounting', function () { return view('completed-accounting'); });
+Route::get('/accounting-detail/{sale_id}', function () { return view('accounting-detail'); });
 
 
 Route::post('/lang', function(Request $request) {

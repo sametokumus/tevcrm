@@ -60,6 +60,7 @@ async function initSales(){
             '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
             '        </button>\n';
 
+        btn_list += '<a href="accounting-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Muhasebe Detayı</a>\n';
         btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
 
         let noteClass = 'btn-warning';
