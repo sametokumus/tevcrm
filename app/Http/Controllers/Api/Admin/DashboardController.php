@@ -24,13 +24,12 @@ class DashboardController extends Controller
             $sales = array();
             foreach ($last_months as $last_month){
                 $try_sale = Sale::query()
-                    ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, currency, SUM(amount) AS monthly_total')
+                    ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, currency, SUM(grand_total) AS monthly_total')
                     ->groupByRaw('YEAR(created_at), MONTH(created_at), currency')
                     ->where('year', $last_month->year)
                     ->where('month', $last_month->month)
                     ->where('currency', 'TRY')
-                    ->toSql();
-                return $try_sale;
+                    ->get();
 
                 $sale = array();
                 $sale['year'] = $last_month->year;
