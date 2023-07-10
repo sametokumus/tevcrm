@@ -30,7 +30,8 @@ class DashboardController extends Controller
                     ->whereYear('created_at', $last_month->year)
                     ->whereMonth('created_at', $last_month->month)
                     ->where('currency', 'TRY')
-                    ->get();
+                    ->toSql();
+                return $try_sale;
 
                 $sale = array();
                 $sale['year'] = $last_month->year;
