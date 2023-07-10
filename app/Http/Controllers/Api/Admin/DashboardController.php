@@ -19,16 +19,16 @@ class DashboardController extends Controller
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
                 ->limit(12)
-                ->toSql();
-            return $last_months;
+                ->get();
+//            return $last_months;
 
             $sales = array();
             foreach ($last_months as $last_month){
                 $try_sale = Sale::query()
                     ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, currency, SUM(grand_total) AS monthly_total')
                     ->groupByRaw('YEAR(created_at), MONTH(created_at), currency')
-                    ->where('year', $last_month->year)
-                    ->where('month', $last_month->month)
+                    ->whereYear('created_at', $last_month->year)
+                    ->whereMonth('created_at', $last_month->month)
                     ->where('currency', 'TRY')
                     ->get();
 
