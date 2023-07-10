@@ -15,18 +15,17 @@ class DashboardController extends Controller
     {
         try {
             $last_months = Sale::query()
-                ->selectRaw('YEAR(date) AS year, MONTH(date) AS month')
-                ->groupByRaw('YEAR(date), MONTH(date)')
-                ->orderByRaw('YEAR(date) DESC, MONTH(date) DESC')
+                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month')
+                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
                 ->limit(12)
-                ->toSql();
-            return $last_months;
+                ->get();
 
             $sales = array();
             foreach ($last_months as $last_month){
                 $try_sale = Sale::query()
-                    ->selectRaw('YEAR(date) AS year, MONTH(date) AS month, currency, SUM(amount) AS monthly_total')
-                    ->groupByRaw('YEAR(date), MONTH(date), currency')
+                    ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, currency, SUM(amount) AS monthly_total')
+                    ->groupByRaw('YEAR(created_at), MONTH(created_at), currency')
                     ->where('year', $last_month->year)
                     ->where('month', $last_month->month)
                     ->where('currency', 'TRY')
