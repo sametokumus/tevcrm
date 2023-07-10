@@ -107,6 +107,7 @@ class DashboardController extends Controller
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
                 ->limit(12)
                 ->get();
+            return $last_months;
 
             $sales = array();
             foreach ($last_months as $last_month){
