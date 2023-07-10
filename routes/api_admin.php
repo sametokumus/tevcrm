@@ -319,5 +319,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Dashboard
     Route::get('dashboard/getMonthlySales', [DashboardController::class, 'getMonthlySales']);
+    Route::get('dashboard/getApprovedMonthlySales', [DashboardController::class, 'getApprovedMonthlySales']);
 });
 
