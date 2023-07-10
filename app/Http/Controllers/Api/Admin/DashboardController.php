@@ -37,7 +37,7 @@ class DashboardController extends Controller
                 $sale = array();
                 $sale['year'] = $last_month->year;
                 $sale['month'] = $last_month->month;
-                $sale['try_sale'] = 0;
+                $sale['try_sale'] = '0.00';
                 if ($try_sale) {
                     $sale['try_sale'] = $try_sale->monthly_total;
                 }
