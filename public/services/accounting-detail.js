@@ -309,6 +309,7 @@ function openStatusModal(payment_id, status_id){
     document.getElementById('update_payment_status').value = status_id;
 }
 async function updateStatus(){
+    let sale_id = getPathVariable('accounting-detail');
     let status_id = document.getElementById('update_payment_status').value;
     let payment_id = document.getElementById('update_status_payment_id').value;
     let formData = JSON.stringify({
@@ -319,6 +320,6 @@ async function updateStatus(){
     if(returned){
         $("#update_status_form").trigger("reset");
         $('#updateStatusModal').modal('hide');
-        initPayments();
+        await initPayments(sale_id);
     }
 }

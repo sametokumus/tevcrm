@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Controllers\Api\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\SaleOffer;
+use App\Models\Sale;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+
+class DashboardController extends Controller
+{
+    public function getMonthlySales()
+    {
+        try {
+            $last_months = Sale::query()
+                ->selectRaw('YEAR(date) AS year, MONTH(date) AS month')
+                ->groupByRaw('YEAR(date), MONTH(date)')
+                ->orderByRaw('YEAR(date) DESC, MONTH(date) DESC')
+                ->limit(12)
+                ->get();
+
+            $sales = array();
+            foreach ($last_months as $last_month){
+                $try_sale = Sale::query()
+                    ->selectRaw('YEAR(date) AS year, MONTH(date) AS month, currency, SUM(amount) AS monthly_total')
+                    ->groupByRaw('YEAR(date), MONTH(date), currency')
+                    ->where('year', $last_month->year)
+                    ->where('month', $last_month->month)
+                    ->where('currency', 'TRY')
+                    ->first();
+
+                $sale = array();
+                $sale['year'] = $last_month->year;
+                $sale['month'] = $last_month->month;
+                $sale['try_sale'] = $try_sale->monthly_total;
+                array_push($sales, $sale);
+            }
+
+
+
+//            foreach ($sales as $sale) {
+//                $year = $sale->year;
+//                $month = $sale->month;
+//                $currency = $sale->currency;
+//                $monthlyTotal = $sale->monthly_total;
+//
+//            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+}

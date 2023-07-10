@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\AccountingController;
+use App\Http\Controllers\Api\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -315,5 +316,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('accounting/addAccountingPayment', [AccountingController::class, 'addAccountingPayment']);
     Route::post('accounting/updateAccountingPayment', [AccountingController::class, 'updateAccountingPayment']);
     Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
+
+    //Dashboard
+    Route::get('dashboard/getMonthlySales', [DashboardController::class, 'getMonthlySales']);
 });
 
