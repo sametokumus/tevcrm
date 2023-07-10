@@ -2327,3 +2327,35 @@ async function servicePostUpdateAccountingPaymentStatus(formData) {
         return false;
     }
 }
+
+
+
+async function serviceGetApprovedMonthlySales() {
+    const data = await fetchDataGet('/admin/dashboard/getApprovedMonthlySales', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetPotentialSales() {
+    const data = await fetchDataGet('/admin/dashboard/getPotentialSales', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCancelledPotentialSales() {
+    const data = await fetchDataGet('/admin/dashboard/getCancelledPotentialSales', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
