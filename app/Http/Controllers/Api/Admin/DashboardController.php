@@ -106,8 +106,7 @@ class DashboardController extends Controller
                 ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at)')
                 ->orderByRaw('YEAR(sales.created_at) DESC, MONTH(sales.created_at) DESC')
                 ->limit(12)
-                ->toSql();
-            return $last_months;
+                ->get();
 
             $sales = array();
             foreach ($last_months as $last_month){
