@@ -189,4 +189,192 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getPotentialSales()
+    {
+        try {
+            $last_months = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'continue')")
+                ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at)')
+                ->orderByRaw('YEAR(sales.created_at) DESC, MONTH(sales.created_at) DESC')
+                ->limit(12)
+                ->get();
+
+            $sales = array();
+            foreach ($last_months as $last_month){
+                $try_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'continue')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), sales.currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'TRY')
+                    ->first();
+                $usd_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'continue')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'USD')
+                    ->first();
+                $eur_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'continue')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'EUR')
+                    ->first();
+                $gbp_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'continue')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'GBP')
+                    ->first();
+
+
+                $sale = array();
+                $sale['year'] = $last_month->year;
+                $sale['month'] = $last_month->month;
+                $sale['try_sale'] = '0.00';
+                $sale['usd_sale'] = '0.00';
+                $sale['eur_sale'] = '0.00';
+                $sale['gbp_sale'] = '0.00';
+                if ($try_sale) {
+                    $sale['try_sale'] = $try_sale->monthly_total;
+                }
+                if ($usd_sale) {
+                    $sale['usd_sale'] = $usd_sale->monthly_total;
+                }
+                if ($eur_sale) {
+                    $sale['eur_sale'] = $eur_sale->monthly_total;
+                }
+                if ($gbp_sale) {
+                    $sale['gbp_sale'] = $gbp_sale->monthly_total;
+                }
+                array_push($sales, $sale);
+            }
+
+
+
+//            foreach ($sales as $sale) {
+//                $year = $sale->year;
+//                $month = $sale->month;
+//                $currency = $sale->currency;
+//                $monthlyTotal = $sale->monthly_total;
+//
+//            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getCancelledPotentialSales()
+    {
+        try {
+            $last_months = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'cancelled')")
+                ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at)')
+                ->orderByRaw('YEAR(sales.created_at) DESC, MONTH(sales.created_at) DESC')
+                ->limit(12)
+                ->get();
+
+            $sales = array();
+            foreach ($last_months as $last_month){
+                $try_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'cancelled')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), sales.currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'TRY')
+                    ->first();
+                $usd_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'cancelled')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'USD')
+                    ->first();
+                $eur_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'cancelled')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'EUR')
+                    ->first();
+                $gbp_sale = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.currency, SUM(sales.grand_total) AS monthly_total')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'cancelled')")
+                    ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at), currency')
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('sales.currency', 'GBP')
+                    ->first();
+
+
+                $sale = array();
+                $sale['year'] = $last_month->year;
+                $sale['month'] = $last_month->month;
+                $sale['try_sale'] = '0.00';
+                $sale['usd_sale'] = '0.00';
+                $sale['eur_sale'] = '0.00';
+                $sale['gbp_sale'] = '0.00';
+                if ($try_sale) {
+                    $sale['try_sale'] = $try_sale->monthly_total;
+                }
+                if ($usd_sale) {
+                    $sale['usd_sale'] = $usd_sale->monthly_total;
+                }
+                if ($eur_sale) {
+                    $sale['eur_sale'] = $eur_sale->monthly_total;
+                }
+                if ($gbp_sale) {
+                    $sale['gbp_sale'] = $gbp_sale->monthly_total;
+                }
+                array_push($sales, $sale);
+            }
+
+
+
+//            foreach ($sales as $sale) {
+//                $year = $sale->year;
+//                $month = $sale->month;
+//                $currency = $sale->currency;
+//                $monthlyTotal = $sale->monthly_total;
+//
+//            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }
