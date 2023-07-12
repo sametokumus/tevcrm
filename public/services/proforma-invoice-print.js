@@ -110,8 +110,8 @@ async function initSale(sale_id){
 
     $('#sale-detail tbody > tr').remove();
 
+    currency = sale.currency;
     $.each(sale.sale_offers, function (i, product) {
-        currency = product.offer_currency;
         let lead_time = checkNull(product.offer_lead_time);
         if (lead_time != ''){
             if (lead_time == 1){
@@ -134,8 +134,8 @@ async function initSale(sale_id){
             '           <td class="text-capitalize">' + checkNull(product.product_name) + '</td>\n' +
             '           <td class="text-center">' + checkNull(product.request_quantity) + '</td>\n' +
             '           <td class="text-center text-capitalize">' + checkNull(measurement_name) + '</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_pcs_price) + ' '+ product.offer_currency +'</td>\n' +
-            '           <td class="text-center">' + checkNull(product.offer_price) + ' '+ product.offer_currency +'</td>\n' +
+            '           <td class="text-center">' + checkNull(product.offer_pcs_price) + ' '+ currency +'</td>\n' +
+            '           <td class="text-center">' + checkNull(product.offer_price) + ' '+ currency +'</td>\n' +
             '           <td class="text-center">' + lead_time + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);

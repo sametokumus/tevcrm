@@ -119,10 +119,8 @@ async function initSale(sale_id){
 
     $('#sale-detail tbody > tr').remove();
 
-    let currency = '';
+    let currency = sale.currency;
     $.each(sale.sale_offers, function (i, product) {
-        console.log(product)
-        currency = product.offer_currency;
         let lead_time = checkNull(product.offer_lead_time);
         if (lead_time != ''){
             if (lead_time == 1){
