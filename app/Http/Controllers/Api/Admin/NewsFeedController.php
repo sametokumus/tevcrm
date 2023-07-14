@@ -32,7 +32,10 @@ class NewsFeedController extends Controller
                 $last_status = StatusHistory::query()->where('id', $action->id)->first();
                 $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
                 $admin = User::query()->where('id', $last_status->user_id)->first();
-                $last_status['user_name'] = $admin->name." ".$admin->surname;
+                $last_status['user_name'] = '';
+                if ($admin->name != null && $admin->surname != null) {
+                    $last_status['user_name'] = $admin->name . " " . $admin->surname;
+                }
                 $sale = Sale::query()->where('sale_id', $action->sale_id)->first();
                 $customer = Company::query()->where('id', $sale->customer_id)->first();
                 $sale['customer_name'] = $customer->name;
