@@ -392,7 +392,7 @@ class DashboardController extends Controller
 
             $sales = array();
             foreach ($last_months as $last_month){
-                $sales = Sale::query()
+                $sale_items = Sale::query()
                     ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, sales.*')
                     ->where('sales.active',1)
                     ->whereYear('created_at', $last_month->year)
@@ -407,7 +407,7 @@ class DashboardController extends Controller
                 $usd_price = 0;
                 $eur_price = 0;
 
-                foreach ($sales as $item){
+                foreach ($sale_items as $item){
 
                     if ($item->currency == 'TRY'){
                         $try_price += $item->grand_total;
