@@ -391,6 +391,10 @@ class DashboardController extends Controller
                 ->get();
 
             $sales = array();
+            $total_sales = array();
+            $try_total = 0;
+            $usd_total = 0;
+            $eur_total = 0;
             foreach ($last_months as $last_month){
                 $sale_items = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
@@ -426,6 +430,9 @@ class DashboardController extends Controller
                     }
                 }
 
+                $try_total += $try_price;
+                $usd_total += $usd_price;
+                $eur_total += $eur_price;
 
                 $sale = array();
                 $sale['year'] = $last_month->year;
@@ -436,8 +443,12 @@ class DashboardController extends Controller
                 array_push($sales, $sale);
             }
 
+            $total_sales['try_total'] = $try_total;
+            $total_sales['usd_total'] = $usd_total;
+            $total_sales['eur_total'] = $eur_total;
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
