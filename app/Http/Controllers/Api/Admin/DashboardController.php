@@ -399,7 +399,8 @@ class DashboardController extends Controller
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
                     ->whereYear('sales.created_at', $last_month->year)
                     ->whereMonth('sales.created_at', $last_month->month)
-                    ->get();
+                    ->toSql();
+                return $sale_items;
 
 
                 $sale = array();
