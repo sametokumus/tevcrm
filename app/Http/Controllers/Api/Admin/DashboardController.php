@@ -443,9 +443,9 @@ class DashboardController extends Controller
                 array_push($sales, $sale);
             }
 
-            $total_sales['try_total'] = $try_total;
-            $total_sales['usd_total'] = $usd_total;
-            $total_sales['eur_total'] = $eur_total;
+            $total_sales['try_total'] = number_format($try_total, 2,".","");
+            $total_sales['usd_total'] = number_format($usd_total, 2,".","");
+            $total_sales['eur_total'] = number_format($eur_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
