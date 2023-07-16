@@ -394,11 +394,11 @@ class DashboardController extends Controller
             foreach ($last_months as $last_month){
                 $sale_items = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, sales.*')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
                     ->where('sales.active',1)
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
-                    ->whereYear('created_at', $last_month->year)
-                    ->whereMonth('created_at', $last_month->month)
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
                     ->get();
 
 
