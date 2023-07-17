@@ -10,6 +10,17 @@
 	$(window).load(async function() {
 
 		checkLogin();
+
+        dash_currency = localStorage.getItem('dash_currency');
+        console.log(dash_currency)
+        if (dash_currency == null){
+            dash_currency = 'TRY';
+            localStorage.setItem('dash_currency', 'TRY');
+            document.getElementById('dash_currency').value = 'TRY';
+        }else{
+            document.getElementById('dash_currency').value = dash_currency;
+        }
+
         await getApprovedMontlySales();
         await getPotentialSales();
         await getCancelledPotentialSales();
@@ -17,6 +28,13 @@
 	});
 
 })(window.jQuery);
+let dash_currency;
+function changeDashCurrency(){
+    dash_currency = document.getElementById('dash_currency').value;
+    localStorage.setItem('dash_currency', dash_currency);
+    location.reload();
+}
+
 
 async function getApprovedMontlySales(){
 
@@ -25,20 +43,19 @@ async function getApprovedMontlySales(){
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
-    let tryArray = [];
-    let usdArray = [];
-    let eurArray = [];
-    // let gbpArray = [];
+    let yAxisArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
-        tryArray.push(sale.try_sale);
-        usdArray.push(sale.usd_sale);
-        eurArray.push(sale.eur_sale);
-        // gbpArray.push(sale.gbp_sale);
-    });
 
-    console.log(tryArray)
+        if (dash_currency == 'TRY'){
+            yAxisArray.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArray.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArray.push(sale.eur_sale);
+        }
+    });
 
     let apexColumnChartOptions = {
         chart: {
@@ -46,13 +63,23 @@ async function getApprovedMontlySales(){
             type: 'bar'
         },
         title: {
-            text: '',
-            align: 'center'
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_WHITE
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: '#fff'
+            }
         },
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '55%',
+                columnWidth: '20%',
                 endingShape: 'rounded'
             },
         },
@@ -64,22 +91,22 @@ async function getApprovedMontlySales(){
             width: 2,
             colors: ['transparent']
         },
-        // colors: [COLOR_GRAY_600, COLOR_GRAY_500, COLOR_GRAY_400, COLOR_GRAY_300],
-        theme: {
-          palette: 'palette3'
-        },
+        colors: ['#90ee7e'],
         series: [{
-            name: 'TRY',
-            data: tryArray
-        }, {
-            name: 'USD',
-            data: usdArray
-        }, {
-            name: 'EUR',
-            data: eurArray
+            name: dash_currency,
+            data: yAxisArray
         }],
         xaxis: {
             categories: xAxisArray,
+            labels: {
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
         },
         yaxis: {
             title: {
@@ -94,6 +121,13 @@ async function getApprovedMontlySales(){
             labels: {
                 formatter: function (val) {
                     return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
                 }
             }
         },
@@ -116,24 +150,25 @@ async function getApprovedMontlySales(){
 
 }
 
-async function getPotentialSales(){
+async function getApprovedMontlySales(){
 
-    let data = await serviceGetPotentialSales();
+    let data = await serviceGetCompletedMonthlySales();
     console.log(data)
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
-    let tryArray = [];
-    let usdArray = [];
-    let eurArray = [];
-    // let gbpArray = [];
+    let yAxisArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
-        tryArray.push(sale.try_sale);
-        usdArray.push(sale.usd_sale);
-        eurArray.push(sale.eur_sale);
-        // gbpArray.push(sale.gbp_sale);
+
+        if (dash_currency == 'TRY'){
+            yAxisArray.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArray.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArray.push(sale.eur_sale);
+        }
     });
 
     let apexColumnChartOptions = {
@@ -142,13 +177,23 @@ async function getPotentialSales(){
             type: 'bar'
         },
         title: {
-            text: '',
-            align: 'center'
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_WHITE
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: '#fff'
+            }
         },
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '55%',
+                columnWidth: '20%',
                 endingShape: 'rounded'
             },
         },
@@ -160,21 +205,22 @@ async function getPotentialSales(){
             width: 2,
             colors: ['transparent']
         },
-        theme: {
-            palette: 'palette4'
-        },
+        colors: ['#90ee7e'],
         series: [{
-            name: 'TRY',
-            data: tryArray
-        }, {
-            name: 'USD',
-            data: usdArray
-        }, {
-            name: 'EUR',
-            data: eurArray
+            name: dash_currency,
+            data: yAxisArray
         }],
         xaxis: {
             categories: xAxisArray,
+            labels: {
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
         },
         yaxis: {
             title: {
@@ -189,6 +235,126 @@ async function getPotentialSales(){
             labels: {
                 formatter: function (val) {
                     return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2))
+                }
+            }
+        }
+    };
+    var apexColumnChart = new ApexCharts(
+        document.querySelector('#chart-completed-monthly'),
+        apexColumnChartOptions
+    );
+    apexColumnChart.render();
+
+}
+
+async function getPotentialSales(){
+
+    let data = await serviceGetPotentialSales();
+    console.log(data)
+    let sales = data.sales.reverse();
+
+    let xAxisArray = [];
+    let yAxisArray = [];
+
+    $.each(sales, function (i, sale) {
+        xAxisArray.push(sale.month + "/" + sale.year);
+        if (dash_currency == 'TRY'){
+            yAxisArray.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArray.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArray.push(sale.eur_sale);
+        }
+    });
+
+    let apexColumnChartOptions = {
+        chart: {
+            height: 350,
+            type: 'bar'
+        },
+        title: {
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_WHITE
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: '#fff'
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '20%',
+                endingShape: 'rounded',
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        colors: ['#4ecdc4'],
+        series: [{
+            name: dash_currency,
+            data: yAxisArray
+        }],
+        xaxis: {
+            categories: xAxisArray,
+            labels: {
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Kazanç',
+                style: {
+                    color: hexToRgba(COLOR_WHITE, .7),
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400
+                }
+            },
+            labels: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
                 }
             }
         },
@@ -218,17 +384,17 @@ async function getCancelledPotentialSales(){
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
-    let tryArray = [];
-    let usdArray = [];
-    let eurArray = [];
-    // let gbpArray = [];
+    let yAxisArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
-        tryArray.push(sale.try_sale);
-        usdArray.push(sale.usd_sale);
-        eurArray.push(sale.eur_sale);
-        // gbpArray.push(sale.gbp_sale);
+        if (dash_currency == 'TRY'){
+            yAxisArray.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArray.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArray.push(sale.eur_sale);
+        }
     });
 
     let apexColumnChartOptions = {
@@ -237,13 +403,23 @@ async function getCancelledPotentialSales(){
             type: 'bar'
         },
         title: {
-            text: '',
-            align: 'center'
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_WHITE
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: '#fff'
+            }
         },
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '55%',
+                columnWidth: '20%',
                 endingShape: 'rounded'
             },
         },
@@ -255,21 +431,22 @@ async function getCancelledPotentialSales(){
             width: 2,
             colors: ['transparent']
         },
-        theme: {
-            palette: 'palette5'
-        },
+        colors: ['#4ecdc4'],
         series: [{
-            name: 'TRY',
-            data: tryArray
-        }, {
-            name: 'USD',
-            data: usdArray
-        }, {
-            name: 'EUR',
-            data: eurArray
+            name: dash_currency,
+            data: yAxisArray
         }],
         xaxis: {
             categories: xAxisArray,
+            labels: {
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
         },
         yaxis: {
             title: {
@@ -284,6 +461,13 @@ async function getCancelledPotentialSales(){
             labels: {
                 formatter: function (val) {
                     return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
                 }
             }
         },

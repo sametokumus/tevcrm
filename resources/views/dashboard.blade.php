@@ -4,13 +4,20 @@ $extra_js='
 <script src="plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
 <script src="plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
 <script src="plugins/apexcharts/dist/apexcharts.min.js"></script>
-//<script src="js/demo/dashboard.demo.js"></script>
 <script src="services/dashboard.js"></script>
 ';
 ?>
 
 <div id="content" class="app-content">
-
+    <div class="row">
+        <div class="col-12 mb-5">
+            <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
+                <option value="TRY">TRY</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+            </select>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-xl-3 col-lg-6">
@@ -210,6 +217,38 @@ $extra_js='
 
                     <div class="mb-3">
                         <div id="chart-approved-monthly"></div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">TAMAMLANAN SATIŞLAR</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <div id="chart-completed-monthly"></div>
                     </div>
 
 

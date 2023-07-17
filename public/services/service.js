@@ -2352,6 +2352,16 @@ async function serviceGetApprovedMonthlySales() {
     }
 }
 
+async function serviceGetCompletedMonthlySales() {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonths', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetPotentialSales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonths', 'application/json');
     console.log(data)
