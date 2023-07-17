@@ -28,14 +28,14 @@ async function getApprovedMontlySales(){
     let tryArray = [];
     let usdArray = [];
     let eurArray = [];
-    let gbpArray = [];
+    // let gbpArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
         tryArray.push(sale.try_sale);
         usdArray.push(sale.usd_sale);
         eurArray.push(sale.eur_sale);
-        gbpArray.push(sale.gbp_sale);
+        // gbpArray.push(sale.gbp_sale);
     });
 
     console.log(tryArray)
@@ -64,7 +64,10 @@ async function getApprovedMontlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: [COLOR_GRAY_600, COLOR_GRAY_500, COLOR_GRAY_400, COLOR_GRAY_300],
+        // colors: [COLOR_GRAY_600, COLOR_GRAY_500, COLOR_GRAY_400, COLOR_GRAY_300],
+        theme: {
+          palette: 'palette3'
+        },
         series: [{
             name: 'TRY',
             data: tryArray
@@ -74,9 +77,6 @@ async function getApprovedMontlySales(){
         }, {
             name: 'EUR',
             data: eurArray
-        }, {
-            name: 'GBP',
-            data: gbpArray
         }],
         xaxis: {
             categories: xAxisArray,
@@ -126,14 +126,14 @@ async function getPotentialSales(){
     let tryArray = [];
     let usdArray = [];
     let eurArray = [];
-    let gbpArray = [];
+    // let gbpArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
         tryArray.push(sale.try_sale);
         usdArray.push(sale.usd_sale);
         eurArray.push(sale.eur_sale);
-        gbpArray.push(sale.gbp_sale);
+        // gbpArray.push(sale.gbp_sale);
     });
 
     let apexColumnChartOptions = {
@@ -160,7 +160,9 @@ async function getPotentialSales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: [COLOR_GRAY_600, COLOR_GRAY_500, COLOR_GRAY_400, COLOR_GRAY_300],
+        theme: {
+            palette: 'palette4'
+        },
         series: [{
             name: 'TRY',
             data: tryArray
@@ -170,9 +172,6 @@ async function getPotentialSales(){
         }, {
             name: 'EUR',
             data: eurArray
-        }, {
-            name: 'GBP',
-            data: gbpArray
         }],
         xaxis: {
             categories: xAxisArray,
@@ -222,14 +221,14 @@ async function getCancelledPotentialSales(){
     let tryArray = [];
     let usdArray = [];
     let eurArray = [];
-    let gbpArray = [];
+    // let gbpArray = [];
 
     $.each(sales, function (i, sale) {
         xAxisArray.push(sale.month + "/" + sale.year);
         tryArray.push(sale.try_sale);
         usdArray.push(sale.usd_sale);
         eurArray.push(sale.eur_sale);
-        gbpArray.push(sale.gbp_sale);
+        // gbpArray.push(sale.gbp_sale);
     });
 
     let apexColumnChartOptions = {
@@ -256,7 +255,9 @@ async function getCancelledPotentialSales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: [COLOR_GRAY_600, COLOR_GRAY_500, COLOR_GRAY_400, COLOR_GRAY_300],
+        theme: {
+            palette: 'palette5'
+        },
         series: [{
             name: 'TRY',
             data: tryArray
@@ -266,9 +267,6 @@ async function getCancelledPotentialSales(){
         }, {
             name: 'EUR',
             data: eurArray
-        }, {
-            name: 'GBP',
-            data: gbpArray
         }],
         xaxis: {
             categories: xAxisArray,

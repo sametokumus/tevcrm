@@ -679,4 +679,110 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getTotalSales()
+    {
+        try {
+
+            $sales = array();
+
+            $sale_items = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.period as period')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->get();
+
+
+            $continue_try_price = 0;
+            $continue_usd_price = 0;
+            $continue_eur_price = 0;
+            $approved_try_price = 0;
+            $approved_usd_price = 0;
+            $approved_eur_price = 0;
+            $completed_try_price = 0;
+            $completed_usd_price = 0;
+            $completed_eur_price = 0;
+
+            foreach ($sale_items as $item){
+
+                if($item->period == 'continue'){
+
+                    if ($item->currency == 'TRY'){
+                        $continue_try_price += $item->grand_total;
+                        $continue_usd_price += $item->grand_total / $item->usd_rate;
+                        $continue_eur_price += $item->grand_total / $item->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $continue_usd_price += $item->grand_total;
+                        $continue_try_price += $item->grand_total * $item->usd_rate;
+                        $continue_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $continue_eur_price += $item->grand_total;
+                        $continue_try_price += $item->grand_total * $item->eur_rate;
+                        $continue_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+                }else if($item->period == 'approved'){
+
+                    if ($item->currency == 'TRY'){
+                        $approved_try_price += $item->grand_total;
+                        $approved_usd_price += $item->grand_total / $item->usd_rate;
+                        $approved_eur_price += $item->grand_total / $item->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $approved_usd_price += $item->grand_total;
+                        $approved_try_price += $item->grand_total * $item->usd_rate;
+                        $approved_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $approved_eur_price += $item->grand_total;
+                        $approved_try_price += $item->grand_total * $item->eur_rate;
+                        $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+                }else if($item->period == 'completed'){
+
+                    if ($item->currency == 'TRY'){
+                        $completed_try_price += $item->grand_total;
+                        $completed_usd_price += $item->grand_total / $item->usd_rate;
+                        $completed_eur_price += $item->grand_total / $item->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $completed_usd_price += $item->grand_total;
+                        $completed_try_price += $item->grand_total * $item->usd_rate;
+                        $completed_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $completed_eur_price += $item->grand_total;
+                        $completed_try_price += $item->grand_total * $item->eur_rate;
+                        $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+                }
+
+            }
+
+            $continue = array();
+            $continue['try_sale'] = number_format($continue_try_price, 2,".","");
+            $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
+            $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
+
+            $approved = array();
+            $approved['try_sale'] = number_format($approved_try_price, 2,".","");
+            $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
+            $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+
+            $completed = array();
+            $completed['try_sale'] = number_format($completed_try_price, 2,".","");
+            $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
+            $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
+
+
+
+
+            $sales['continue'] = $continue;
+            $sales['approved'] = $approved;
+            $sales['completed'] = $completed;
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }

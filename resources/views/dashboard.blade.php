@@ -208,7 +208,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="ratio ratio-21x9 mb-3">
+                    <div class="mb-3">
                         <div id="chart-approved-monthly"></div>
                     </div>
 
@@ -240,7 +240,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="ratio ratio-21x9 mb-3">
+                    <div class="mb-3">
                         <div id="chart-potential-sales"></div>
                     </div>
 
@@ -272,7 +272,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="ratio ratio-21x9 mb-3">
+                    <div class="mb-3">
                         <div id="chart-cancelled-potential-sales"></div>
                     </div>
 

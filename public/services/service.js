@@ -2330,8 +2330,10 @@ async function servicePostUpdateAccountingPaymentStatus(formData) {
 
 
 
+/* DASHBOARD SERVICES */
+
 async function serviceGetApprovedMonthlySales() {
-    const data = await fetchDataGet('/admin/dashboard/getApprovedMonthlySales', 'application/json');
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
     console.log(data)
     if (data.status == "success") {
         return data.object;
@@ -2341,7 +2343,7 @@ async function serviceGetApprovedMonthlySales() {
 }
 
 async function serviceGetPotentialSales() {
-    const data = await fetchDataGet('/admin/dashboard/getPotentialSales', 'application/json');
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonths', 'application/json');
     console.log(data)
     if (data.status == "success") {
         return data.object;
@@ -2351,7 +2353,7 @@ async function serviceGetPotentialSales() {
 }
 
 async function serviceGetCancelledPotentialSales() {
-    const data = await fetchDataGet('/admin/dashboard/getCancelledPotentialSales', 'application/json');
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths', 'application/json');
     console.log(data)
     if (data.status == "success") {
         return data.object;

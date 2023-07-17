@@ -318,6 +318,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
 
     //Dashboard
+    Route::get('dashboard/getTotalSales', [DashboardController::class, 'getTotalSales']);
+
     Route::get('dashboard/getMonthlySales', [DashboardController::class, 'getMonthlySales']);
     Route::get('dashboard/getApprovedMonthlySales', [DashboardController::class, 'getApprovedMonthlySales']);
     Route::get('dashboard/getPotentialSales', [DashboardController::class, 'getPotentialSales']);
