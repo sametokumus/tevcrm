@@ -2332,6 +2332,16 @@ async function servicePostUpdateAccountingPaymentStatus(formData) {
 
 /* DASHBOARD SERVICES */
 
+async function serviceGetTotalSales() {
+    const data = await fetchDataGet('/admin/dashboard/getTotalSales', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetApprovedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
     console.log(data)
@@ -2354,6 +2364,27 @@ async function serviceGetPotentialSales() {
 
 async function serviceGetCancelledPotentialSales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+
+async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins() {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdminId/'+ id, 'application/json');
     console.log(data)
     if (data.status == "success") {
         return data.object;

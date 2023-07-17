@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Company;
 use App\Models\SaleOffer;
 use App\Models\Sale;
@@ -806,6 +807,182 @@ class DashboardController extends Controller
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+
+    public function getMonthlyApprovedSalesLastTwelveMonthsByAdmins()
+    {
+        try {
+            $last_months = Sale::query()
+                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month')
+                ->where('sales.active',1)
+                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
+                ->limit(12)
+                ->get();
+
+            $admins = Admin::all();
+
+            foreach ($admins as $admin) {
+
+                $sales = array();
+                $total_sales = array();
+                $try_total = 0;
+                $usd_total = 0;
+                $eur_total = 0;
+
+                foreach ($last_months as $last_month) {
+                    $sale_items = Sale::query()
+                        ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                        ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                        ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
+                        ->where('offer_requests.request_id.authorized_personnel_id', $admin->id)
+                        ->where('sales.active', 1)
+                        ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                        ->whereYear('sales.created_at', $last_month->year)
+                        ->whereMonth('sales.created_at', $last_month->month)
+                        ->get();
+
+
+                    $sale = array();
+                    $sale['year'] = $last_month->year;
+                    $sale['month'] = $last_month->month;
+                    $try_price = 0;
+                    $usd_price = 0;
+                    $eur_price = 0;
+
+                    foreach ($sale_items as $item) {
+
+                        if ($item->currency == 'TRY') {
+                            $try_price += $item->grand_total;
+                            $usd_price += $item->grand_total / $item->usd_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate;
+                        } else if ($item->currency == 'USD') {
+                            $usd_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->usd_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        } else if ($item->currency == 'EUR') {
+                            $eur_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->eur_rate;
+                            $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        }
+                    }
+
+                    $try_total += $try_price;
+                    $usd_total += $usd_price;
+                    $eur_total += $eur_price;
+
+
+                    $sale = array();
+                    $sale['year'] = $last_month->year;
+                    $sale['month'] = $last_month->month;
+                    $sale['try_sale'] = number_format($try_price, 2, ".", "");
+                    $sale['usd_sale'] = number_format($usd_price, 2, ".", "");
+                    $sale['eur_sale'] = number_format($eur_price, 2, ".", "");
+                    array_push($sales, $sale);
+                }
+
+                $total_sales['try_total'] = number_format($try_total, 2, ".", "");
+                $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
+                $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
+
+
+                $admin['total_sales'] = $total_sales;
+
+            }
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getMonthlyApprovedSalesLastTwelveMonthsByAdminId($admin_id)
+    {
+        try {
+            $last_months = Sale::query()
+                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month')
+                ->where('sales.active',1)
+                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
+                ->limit(12)
+                ->get();
+
+            $admin = Admin::query()->where('id', $admin_id)->first();
+
+
+
+                $sales = array();
+                $total_sales = array();
+                $try_total = 0;
+                $usd_total = 0;
+                $eur_total = 0;
+
+                foreach ($last_months as $last_month) {
+                    $sale_items = Sale::query()
+                        ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                        ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                        ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
+                        ->where('offer_requests.request_id.authorized_personnel_id', $admin->id)
+                        ->where('sales.active', 1)
+                        ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                        ->whereYear('sales.created_at', $last_month->year)
+                        ->whereMonth('sales.created_at', $last_month->month)
+                        ->get();
+
+
+                    $sale = array();
+                    $sale['year'] = $last_month->year;
+                    $sale['month'] = $last_month->month;
+                    $try_price = 0;
+                    $usd_price = 0;
+                    $eur_price = 0;
+
+                    foreach ($sale_items as $item) {
+
+                        if ($item->currency == 'TRY') {
+                            $try_price += $item->grand_total;
+                            $usd_price += $item->grand_total / $item->usd_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate;
+                        } else if ($item->currency == 'USD') {
+                            $usd_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->usd_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        } else if ($item->currency == 'EUR') {
+                            $eur_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->eur_rate;
+                            $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        }
+                    }
+
+                    $try_total += $try_price;
+                    $usd_total += $usd_price;
+                    $eur_total += $eur_price;
+
+
+                    $sale = array();
+                    $sale['year'] = $last_month->year;
+                    $sale['month'] = $last_month->month;
+                    $sale['try_sale'] = number_format($try_price, 2, ".", "");
+                    $sale['usd_sale'] = number_format($usd_price, 2, ".", "");
+                    $sale['eur_sale'] = number_format($eur_price, 2, ".", "");
+                    array_push($sales, $sale);
+                }
+
+                $total_sales['try_total'] = number_format($try_total, 2, ".", "");
+                $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
+                $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
+
+
+                $admin['total_sales'] = $total_sales;
+
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
