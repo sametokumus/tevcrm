@@ -839,7 +839,7 @@ class DashboardController extends Controller
                         ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                         ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
                         ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
-                        ->where('offer_requests.request_id.authorized_personnel_id', $admin->id)
+                        ->where('offer_requests.authorized_personnel_id', $admin->id)
                         ->where('sales.active', 1)
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->whereYear('sales.created_at', $last_month->year)
