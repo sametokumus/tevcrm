@@ -895,7 +895,7 @@ class DashboardController extends Controller
             }
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['admins' => $admins]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
@@ -982,7 +982,7 @@ class DashboardController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['admin' => $admin]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
