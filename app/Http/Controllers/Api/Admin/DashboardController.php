@@ -689,7 +689,7 @@ class DashboardController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.period as period')
                 ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
                 ->get();
 
 
@@ -702,6 +702,9 @@ class DashboardController extends Controller
             $completed_try_price = 0;
             $completed_usd_price = 0;
             $completed_eur_price = 0;
+            $cancelled_try_price = 0;
+            $cancelled_usd_price = 0;
+            $cancelled_eur_price = 0;
 
             foreach ($sale_items as $item){
 
@@ -753,6 +756,22 @@ class DashboardController extends Controller
                         $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
 
+                }else if($item->period == 'cancelled'){
+
+                    if ($item->currency == 'TRY'){
+                        $cancelled_try_price += $item->grand_total;
+                        $cancelled_usd_price += $item->grand_total / $item->usd_rate;
+                        $cancelled_eur_price += $item->grand_total / $item->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $cancelled_usd_price += $item->grand_total;
+                        $cancelled_try_price += $item->grand_total * $item->usd_rate;
+                        $cancelled_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $cancelled_eur_price += $item->grand_total;
+                        $cancelled_try_price += $item->grand_total * $item->eur_rate;
+                        $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
                 }
 
             }
@@ -772,12 +791,18 @@ class DashboardController extends Controller
             $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
             $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
 
+            $cancelled = array();
+            $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
+            $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
+            $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+
 
 
 
             $sales['continue'] = $continue;
             $sales['approved'] = $approved;
             $sales['completed'] = $completed;
+            $sales['cancelled'] = $cancelled;
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
