@@ -31,10 +31,8 @@ async function initSaleHistory(sale_id){
     $('#status-history-table tbody tr').remove();
 
     $.each(actions, function (i, action) {
-        let last_time = formatDateAndTimeDESC(action.sale.created_at, "/");
-        if (action.sale.updated_at != null){
-            last_time = formatDateAndTimeDESC(action.sale.updated_at, "/");
-        }
+        let last_time = formatDateAndTimeDESC(action.last_status.created_at, "/");
+
         previous_status_name = action.previous_status.status_name;
         if (action.previous_status == 0){
             previous_status_name = '-';
