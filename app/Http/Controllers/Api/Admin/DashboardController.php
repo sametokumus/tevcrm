@@ -1103,6 +1103,7 @@ class DashboardController extends Controller
                 }
 
                 $data['sale_price'] = number_format($sale_total, 2, ".", "");
+                $data['detail'] = Company::query()->where('id', $company->id)->first();
                 array_push($company_sales, $data);
 
 
@@ -1110,9 +1111,6 @@ class DashboardController extends Controller
 
             $sortedCompanies = collect($company_sales)->sortByDesc('sale_price')->take(10)->values()->all();
 
-            foreach ($sortedCompanies as $sortedCompany){
-                $sortedCompany['detail'] = Company::query()->where('id', $sortedCompany['id'])->first();
-            }
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $sortedCompanies]]);
