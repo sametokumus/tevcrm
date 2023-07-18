@@ -68,7 +68,7 @@ async function initTopRequestedProducts(){
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ product.product_detail.ref_code +'\n' +
+            '                   '+ checkNull(product.product_detail.ref_code) +'\n' +
             '               </span>\n' +
             '           </td>\n' +
             '           <td>\n' +

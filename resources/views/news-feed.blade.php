@@ -242,6 +242,13 @@ $extra_js='
 
                     <div class="table-responsive">
                         <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <td>Ref. Code</td>
+                                <td>Ürün Adı</td>
+                                <td>Adet</td>
+                            </tr>
+                            </thead>
                             <tbody>
 
                             </tbody>

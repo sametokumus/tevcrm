@@ -67,7 +67,7 @@ class NewsFeedController extends Controller
                 ->selectRaw('product_id, sum(quantity) as total_quantity')
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')
-                ->limit(20)
+                ->limit(10)
                 ->get();
 
             foreach ($products as $product){

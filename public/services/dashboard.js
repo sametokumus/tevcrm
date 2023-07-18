@@ -27,6 +27,7 @@
         await getPotentialMonthlySales();
         await getCancelledMonthlySales();
         await getAdminsSales();
+        await initTopRequestedProducts();
 
 	});
 
@@ -543,4 +544,31 @@ async function getAdminsSales(){
     });
 
 
+}
+
+async function initTopRequestedProducts(){
+    let data = await serviceGetTopRequestedProducts();
+    let products = data.products;
+
+    $('#top-products-table tbody tr').remove();
+
+    $.each(products, function (i, product) {
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ checkNull(product.product_detail.ref_code) +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   '+ product.product_detail.product_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
+            '       </tr>';
+
+        $('#top-products-table tbody').append(item);
+    });
 }
