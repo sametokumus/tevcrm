@@ -1102,29 +1102,16 @@ class DashboardController extends Controller
                     $sale_total += $try_price;
                 }
 
-                $data['sale_price'] = $sale_total;
+                $data['sale_price'] = number_format($sale_total, 2, ".", "");
                 array_push($company_sales, $data);
 
-//                $sale = array();
-//                $sale['year'] = $last_month->year;
-//                $sale['month'] = $last_month->month;
-//                $sale['try_sale'] = number_format($try_price, 2, ".", "");
-//                $sale['usd_sale'] = number_format($usd_price, 2, ".", "");
-//                $sale['eur_sale'] = number_format($eur_price, 2, ".", "");
-//                array_push($sales, $sale);
-//
-//
-//                $total_sales['try_total'] = number_format($try_total, 2, ".", "");
-//                $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
-//                $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
-//
-//
-//                $admin['total_sales'] = $total_sales;
 
             }
 
+            $sortedCompanies = collect($company_sales)->sortBy('sale_price')->values()->all();
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['company_sales' => $company_sales]]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['company_sales' => $sortedCompanies]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
