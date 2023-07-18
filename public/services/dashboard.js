@@ -21,9 +21,12 @@
             document.getElementById('dash_currency').value = dash_currency;
         }
 
-        await getApprovedMontlySales();
-        await getPotentialSales();
-        await getCancelledPotentialSales();
+        await getTotalSales();
+        await getApprovedMonthlySales();
+        await getCompletedMonthlySales();
+        await getPotentialMonthlySales();
+        await getCancelledMonthlySales();
+        await getAdminsSales();
 
 	});
 
@@ -36,7 +39,37 @@ function changeDashCurrency(){
 }
 
 
-async function getApprovedMontlySales(){
+async function getTotalSales(){
+
+    let data = await serviceGetTotalSales();
+    console.log(data)
+    let sales = data.sales;
+
+    $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
+    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
+    $('#approved-text').append(text1);
+
+    $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
+    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
+    $('#completed-text').append(text2);
+
+    $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
+    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
+    $('#potential-text').append(text3);
+
+    $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
+    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
+    $('#cancelled-text').append(text4);
+
+
+
+}
+
+async function getApprovedMonthlySales(){
 
     let data = await serviceGetApprovedMonthlySales();
     console.log(data)
@@ -150,7 +183,7 @@ async function getApprovedMontlySales(){
 
 }
 
-async function getApprovedMontlySales(){
+async function getCompletedMonthlySales(){
 
     let data = await serviceGetCompletedMonthlySales();
     console.log(data)
@@ -205,7 +238,7 @@ async function getApprovedMontlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#90ee7e'],
+        colors: ['#feb019d9'],
         series: [{
             name: dash_currency,
             data: yAxisArray
@@ -264,7 +297,7 @@ async function getApprovedMontlySales(){
 
 }
 
-async function getPotentialSales(){
+async function getPotentialMonthlySales(){
 
     let data = await serviceGetPotentialSales();
     console.log(data)
@@ -377,7 +410,7 @@ async function getPotentialSales(){
 
 }
 
-async function getCancelledPotentialSales(){
+async function getCancelledMonthlySales(){
 
     let data = await serviceGetCancelledPotentialSales();
     console.log(data)
@@ -431,7 +464,7 @@ async function getCancelledPotentialSales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#4ecdc4'],
+        colors: ['#ff4560d9'],
         series: [{
             name: dash_currency,
             data: yAxisArray
@@ -487,5 +520,27 @@ async function getCancelledPotentialSales(){
         apexColumnChartOptions
     );
     apexColumnChart.render();
+
+}
+
+async function getAdminsSales(){
+
+    let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
+    console.log(data)
+    let admins = data.admins;
+
+    $('#admins-table tbody tr').remove();
+    $.each(admins, function (i, admin) {
+        let item = '<tr>\n' +
+            '           <td>'+ admin.id +'</td>\n' +
+            '           <td>'+ admin.name +' '+ admin.surname +'</td>\n' +
+            '           <td>'+ admin.email +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(admin.total_sales.try_total) +' TRY</td>\n' +
+            '           <td>'+ changeCommasToDecimal(admin.total_sales.usd_total) +' USD</td>\n' +
+            '           <td>'+ changeCommasToDecimal(admin.total_sales.eur_total) +' EUR</td>\n' +
+            '       </tr>';
+        $('#admins-table tbody').append(item);
+    });
+
 
 }

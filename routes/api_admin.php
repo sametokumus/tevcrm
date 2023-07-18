@@ -335,6 +335,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdminId/{admin_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdminId']);
 
 
+    Route::get('dashboard/getMostValuableCustomers', [DashboardController::class, 'getMostValuableCustomers']);
+
+
 
 
 
