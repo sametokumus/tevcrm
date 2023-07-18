@@ -1103,7 +1103,7 @@ class DashboardController extends Controller
                 }
 
                 $data['sale_price'] = $sale_total;
-
+                array_push($company_sales, $data);
 
 //                $sale = array();
 //                $sale['year'] = $last_month->year;
@@ -1124,7 +1124,7 @@ class DashboardController extends Controller
             }
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['data' => $data]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['company_sales' => $company_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
