@@ -29,19 +29,30 @@ class MobileController extends Controller
                 ->where('id',$sale_id)
                 ->first();
 
-            $data = array();
+            $item = array();
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->first();
             $status = Status::query()->where('id', $sale->status_id)->first();
 
-            $data['company_id'] = $company->id;
-            $data['company'] = $company->name;
-            $data['completed'] = 0;
+            $item['company_id'] = $company->id;
+            $item['company'] = $company->name;
+            $item['completed'] = 0;
             if ($status->mobile_id == 41){
-                $data['completed'] = 1;
+                $item['completed'] = 1;
             }
-            $data['confirmation_no'] = 'SMY-'.$sale_id;
-            $data['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
+            $item['confirmation_no'] = 'SMY-'.$sale_id;
+            $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
+            $item['currency'] = $sale->currency;
+            $item['order_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
+            $item['order_id'] = $sale->id;
+            $item['pieces'] = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->sum('offer_quantity');
+            $item['po_no'] = $sale->id;
+            $item['pr_no'] = $sale->id;
+            $item['price_total'] = $sale->grand_total;
+            $item['ref_no'] = $sale->id;
+            $item['subject'] = "";
+            $item['user_id'] = "";
+
 
 
 //            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
@@ -74,7 +85,7 @@ class MobileController extends Controller
 //            }
 //            $sale['sale_offers'] = $sale_offers;
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $item]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
