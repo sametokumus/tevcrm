@@ -340,6 +340,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
+    Route::get('mobile/getOrder/{sale_id}', [MobileController::class, 'getOrder']);
+
+
+
+
 
 
 });

@@ -20,6 +20,8 @@ class CreateStatusesTable extends Migration
             $table->string('action')->nullable();
             $table->tinyInteger('sequence')->default(1);
             $table->tinyInteger('changeList')->default(1);
+            $table->bigInteger('mobile_id')->nullable();
+            $table->string('mobile_name')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
