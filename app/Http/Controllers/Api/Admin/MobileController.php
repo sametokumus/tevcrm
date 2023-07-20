@@ -53,37 +53,32 @@ class MobileController extends Controller
             $item['subject'] = "";
             $item['user_id'] = "";
 
+            $order_items = array();
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+            $i = 1;
+            foreach ($sale_offers as $sale_offer){
+                $product = Product::query()->where('id', $sale_offer->product_id)->first();
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $measurement = Measurement::query()->where('id', $offer_product->measurement_id)->first();
 
+                $order_item = array();
+                $order_item['auto_date'] = Carbon::parse($sale_offer->created_at)->format('d.m.Y h:i:s');
+                $order_item['delivery_day'] = $sale_offer->offer_lead_time;
+                $order_item['description'] = $product->ref_code;
+                $order_item['item_name'] = $product->product_name;
+                $order_item['order_number'] = $i;
+                $order_item['progress'] = 0;
+                $order_item['state'] = $status->mobile_id;
+                $order_item['total_price'] = $sale_offer->sale_price;
+                $order_item['unit'] = $sale_offer->offer_quantity;
+                $order_item['unit_price'] = number_format(($sale_offer->sale_price / $sale_offer->offer_quantity), 2,".","");
+                $order_item['unit_type'] = $measurement->name_tr;
 
-//            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
-//
-//            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
-//            $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
-//            $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-//            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-//            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
-//            $sale['request'] = $offer_request;
-//
-//            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
-//            foreach ($sale_offers as $sale_offer){
-//                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
-//                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
-//                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
-//                $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
-//                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
-//                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
-//                $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
-//                $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
-//                $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
-//                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
-//                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
-//
-//                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
-//                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
-//                $sale_offer['sequence'] = $request_product->sequence;
-//
-//            }
-//            $sale['sale_offers'] = $sale_offers;
+                array_push($order_items, $order_item);
+                $i++;
+            }
+
+            $item['order_items'] = $order_items;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $item]);
         } catch (QueryException $queryException) {
