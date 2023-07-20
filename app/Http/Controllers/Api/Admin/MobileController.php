@@ -17,6 +17,7 @@ use App\Models\SaleOffer;
 use App\Models\Status;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MobileController extends Controller
 {
@@ -40,7 +41,7 @@ class MobileController extends Controller
                 $data['completed'] = 1;
             }
             $data['confirmation_no'] = 'SMY-'.$sale_id;
-            $data['creation_date'] = date('d.m.Y h:i:s', $sale->created_at);
+            $data['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
 
 
 //            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
