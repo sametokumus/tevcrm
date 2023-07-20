@@ -39,7 +39,7 @@ class MobileController extends Controller
             if ($status->mobile_id == 41){
                 $data['completed'] = 1;
             }
-            $data['confirmation_no'] = 'SMY'+$sale_id;
+            $data['confirmation_no'] = 'SMY-'.$sale_id;
             $data['creation_date'] = date('d.m.Y h:i:s', $sale->created_at);
 
 
