@@ -48,6 +48,12 @@ Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
 Route::get('sale/getLiveCurrencyLog', [SaleController::class, 'getLiveCurrencyLog']);
 
+
+
+Route::get('mobile/getOrder/{sale_id}', [MobileController::class, 'getOrder']);
+Route::post('mobile/getOrders', [MobileController::class, 'getOrders']);
+
+
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
@@ -340,9 +346,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
-
-    Route::get('mobile/getOrder/{sale_id}', [MobileController::class, 'getOrder']);
-    Route::post('mobile/getOrders', [MobileController::class, 'getOrders']);
 
 
 
