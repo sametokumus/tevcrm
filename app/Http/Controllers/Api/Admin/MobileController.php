@@ -208,7 +208,7 @@ class MobileController extends Controller
     {
         try {
             $request->validate([
-                'document_id' => 'required',
+                'document_type_id' => 'required',
             ]);
             $document_id = MobileDocument::query()->insertGetId([
                 'sale_id' => $sale_id,
