@@ -175,7 +175,7 @@ class MobileController extends Controller
                 ->selectRaw('mobile_documents.*, mobile_document_types.name as type_name')
                 ->where('sale_id', $sale_id)
                 ->where('active', 1)
-                ->get();
+                ->toSql();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
         } catch (QueryException $queryException) {

@@ -2416,6 +2416,7 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
 
 async function serviceGetMobileDocuments(id) {
     const data = await fetchDataGet('/admin/mobile/getDocuments/'+ id, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {

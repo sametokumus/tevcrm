@@ -25,6 +25,7 @@ function checkRole(){
 async function initDocuments(){
     let sale_id = getPathVariable('mobile-documents');
 	let data = await serviceGetMobileDocuments(sale_id);
+    console.log(data)
     $("#document-datatable").dataTable().fnDestroy();
     $('#document-datatable tbody > tr').remove();
 
