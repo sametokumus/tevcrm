@@ -15,7 +15,8 @@ class CreateMobileDocumentsTable extends Migration
     {
         Schema::create('mobile_documents', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('document_id');
+            $table->bigInteger('sale_id');
+            $table->bigInteger('document_type_id');
             $table->string('file_url');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();

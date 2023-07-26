@@ -7,6 +7,8 @@ use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Measurement;
+use App\Models\MobileDocument;
+use App\Models\MobileDocumentType;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
@@ -18,6 +20,7 @@ use App\Models\Status;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Nette\Schema\ValidationException;
 
 class MobileController extends Controller
 {
@@ -158,6 +161,92 @@ class MobileController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+
+
+
+    public function getDocuments($sale_id)
+    {
+        try {
+            $documents = MobileDocument::query()
+                ->leftJoin('mobile_document_types', 'mobile_document_types.id', '=', 'mobile_documents.document_type_id')
+                ->selectRaw('mobile_documents.*, mobile_document_types.name as type_name')
+                ->where('sale_id', $sale_id)
+                ->where('active', 1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getDocumentTypes()
+    {
+        try {
+            $document_types = MobileDocumentType::query()
+                ->where('active', 1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['document_types' => $document_types]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getDocumentUrl($sale_id)
+    {
+        try {
+            $documents = MobileDocument::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $documents]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function addDocument(Request $request, $sale_id)
+    {
+        try {
+            $request->validate([
+                'document_id' => 'required',
+            ]);
+            $document_id = MobileDocument::query()->insertGetId([
+                'sale_id' => $sale_id,
+                'document_type_id' => $request->document_type_id
+            ]);
+            if ($request->hasFile('file')) {
+                $rand = uniqid();
+                $file = $request->file('file');
+                $file_name = $rand . "-" . $file->getClientOriginalName();
+                $file->move(public_path('/img/document/'), $file_name);
+                $file_path = "/img/document/" . $file_name;
+                MobileDocument::query()->where('id',$document_id)->update([
+                    'file_url' => $file_path
+                ]);
+            }
+
+            return response(['message' => __('Döküman ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function deleteDocument($document_id){
+        try {
+
+            MobileDocument::query()->where('id',$document_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Döküman silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 }

@@ -74,6 +74,9 @@ Route::get('/completed-accounting', function () { return view('completed-account
 Route::get('/accounting-detail/{sale_id}', function () { return view('accounting-detail'); });
 
 
+Route::get('/mobile-documents/{sale_id}', function () { return view('mobile-documents'); });
+
+
 Route::post('/lang', function(Request $request) {
     $locale = $request->input('lang');
     App::setLocale($locale);

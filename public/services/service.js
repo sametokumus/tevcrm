@@ -596,6 +596,15 @@ async function getDeliveryTermsAddSelectId(selectId){
     });
 }
 
+async function getDocumentTypesAddSelectId(selectId){
+    let data = await serviceGetMobileDocumentTypes();
+    $('#'+selectId+' option').remove();
+    $.each(data.document_types, function(i, document_type){
+        let optionRow = '<option value="'+document_type.id+'">'+document_type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
     $('#'+selectId+' option').remove();
@@ -2400,5 +2409,37 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
+    }
+}
+
+
+
+async function serviceGetMobileDocuments(id) {
+    const data = await fetchDataGet('/admin/mobile/getDocuments/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetMobileDocumentTypes() {
+    const data = await fetchDataGet('/admin/mobile/getDocumentTypes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddMobileDocument(formData, id) {
+    await xhrDataPost('/admin/mobile/addDocument/'+id, formData, addDocumentCallback);
+}
+async function serviceGetDeleteMobileDocument(id) {
+    const data = await fetchDataGet('/admin/mobile/deleteDocument/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
     }
 }

@@ -52,6 +52,11 @@ Route::get('sale/getLiveCurrencyLog', [SaleController::class, 'getLiveCurrencyLo
 
 Route::get('mobile/getOrder/{sale_id}', [MobileController::class, 'getOrder']);
 Route::post('mobile/getOrders', [MobileController::class, 'getOrders']);
+Route::get('mobile/getDocuments/{sale_id}', [MobileController::class, 'getDocuments']);
+Route::get('mobile/getDocumentTypes', [MobileController::class, 'getDocumentTypes']);
+Route::get('mobile/getDocumentUrl/{sale_id}', [MobileController::class, 'getDocumentUrl']);
+Route::post('mobile/addDocument/{sale_id}', [MobileController::class, 'addDocument']);
+Route::get('mobile/deleteDocument/{document_id}', [MobileController::class, 'deleteDocument']);
 
 
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
