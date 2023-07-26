@@ -20,7 +20,7 @@ $extra_js='
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group float-end">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Firma Ekle</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addDocumentModal">Döküman Ekle</button>
                     </div>
                 </div>
             </div>
