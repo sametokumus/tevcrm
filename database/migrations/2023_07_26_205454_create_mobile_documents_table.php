@@ -17,7 +17,7 @@ class CreateMobileDocumentsTable extends Migration
             $table->id();
             $table->bigInteger('sale_id');
             $table->bigInteger('document_type_id');
-            $table->string('file_url');
+            $table->string('file_url')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

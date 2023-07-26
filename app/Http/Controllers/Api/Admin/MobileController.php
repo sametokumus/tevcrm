@@ -197,9 +197,16 @@ class MobileController extends Controller
     public function getDocumentUrl($sale_id)
     {
         try {
-            $documents = MobileDocument::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            $datas = MobileDocument::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            $documents = array_push();
+            foreach ($datas as $data){
+                $key = $data['document_type_id'];
+                $value = $data['file_url'];
+                $documentArray = [$key => $value];
+                array_push($documents, $documentArray);
+            }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $documents]);
+            return response(['message' => __('İşlem Başarılı.'), 'success' => 1, 'documents' => $documents]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
