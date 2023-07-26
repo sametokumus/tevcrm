@@ -173,8 +173,8 @@ class MobileController extends Controller
             $documents = MobileDocument::query()
                 ->leftJoin('mobile_document_types', 'mobile_document_types.id', '=', 'mobile_documents.document_type_id')
                 ->selectRaw('mobile_documents.*, mobile_document_types.name as type_name')
-                ->where('sale_id', $sale_id)
-                ->where('active', 1)
+                ->where('mobile_documents.sale_id', $sale_id)
+                ->where('mobile_documents.active', 1)
                 ->toSql();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
