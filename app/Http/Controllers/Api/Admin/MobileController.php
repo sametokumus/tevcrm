@@ -198,10 +198,10 @@ class MobileController extends Controller
     {
         try {
             $datas = MobileDocument::query()->where('sale_id', $sale_id)->where('active', 1)->get();
-            $documents = array_push();
+            $documents = array();
             foreach ($datas as $data){
                 $key = $data['document_type_id'];
-                $value = $data['file_url'];
+                $value = 'https://lenis-crm.wimco.com.tr'.$data['file_url'];
                 $documentArray = [$key => $value];
                 array_push($documents, $documentArray);
             }
