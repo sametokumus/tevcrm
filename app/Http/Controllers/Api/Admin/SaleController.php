@@ -1412,8 +1412,8 @@ class SaleController extends Controller
 
             foreach ($sales as $sale){
 
-                $date1 = date('YYYYmm', $sale->created_at);
-                $date2 = date('ddmmYYYY', $sale->created_at);
+                $date1 = date('Y', strtotime($sale->created_at));
+                $date2 = date('dmY', strtotime($sale->created_at));
 
                 $xml = null;
                 $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
