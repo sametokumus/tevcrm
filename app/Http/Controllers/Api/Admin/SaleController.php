@@ -1481,9 +1481,12 @@ class SaleController extends Controller
 //                }
 //
                 if (!empty($xml->Currency)) {
-                    $sale['eur_rate'] = (float)$xml->Currency[3]->ForexSelling;
-                    $sale['usd_rate'] = (float)$xml->Currency[0]->ForexSelling;
-                    $sale['gbp_rate'] = (float)$xml->Currency[4]->ForexSelling;
+//                    $sale['eur_rate'] = (float)$xml->Currency[3]->ForexSelling;
+//                    $sale['usd_rate'] = (float)$xml->Currency[0]->ForexSelling;
+//                    $sale['gbp_rate'] = (float)$xml->Currency[4]->ForexSelling;
+                    $sale['eur_rate'] = number_format((float) $xml->Currency[3]->ForexSelling, 2,".","");
+                    $sale['usd_rate'] = number_format((float) $xml->Currency[0]->ForexSelling, 2,".","");
+                    $sale['gbp_rate'] = number_format((float) $xml->Currency[4]->ForexSelling, 2,".","");
                 }
 
 //                $sale['eur_rate'] = number_format((float) $xml->Currency[3]->ForexSelling, 2,".","");
@@ -1498,7 +1501,7 @@ class SaleController extends Controller
 
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sale]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
