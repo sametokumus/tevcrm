@@ -1480,9 +1480,11 @@ class SaleController extends Controller
 //                    throw new \Exception('currency-001');
 //                }
 //
-                $sale['eur_rate'] = (float) $xml->Currency[3]->ForexSelling;
-                $sale['usd_rate'] = (float) $xml->Currency[0]->ForexSelling;
-                $sale['gbp_rate'] = (float) $xml->Currency[4]->ForexSelling;
+                if (!empty($xml->Currency)) {
+                    $sale['eur_rate'] = (float)$xml->Currency[3]->ForexSelling;
+                    $sale['usd_rate'] = (float)$xml->Currency[0]->ForexSelling;
+                    $sale['gbp_rate'] = (float)$xml->Currency[4]->ForexSelling;
+                }
 
 //                $sale['eur_rate'] = number_format((float) $xml->Currency[3]->ForexSelling, 2,".","");
 //                $sale['usd_rate'] = number_format((float) $xml->Currency[0]->ForexSelling, 2,".","");
