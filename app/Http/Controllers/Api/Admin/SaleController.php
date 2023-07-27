@@ -1433,7 +1433,7 @@ class SaleController extends Controller
 
             foreach ($sales as $sale){
 
-                // Assuming $sale->created_at is a valid date string in Y-m-d format (e.g., "2023-07-27")
+// Assuming $sale->created_at is a valid date string in Y-m-d format (e.g., "2023-07-27")
                 $createdDate = Carbon::parse($sale->created_at);
 
 // Check if the created date falls on a weekend (Saturday or Sunday)
@@ -1443,18 +1443,16 @@ class SaleController extends Controller
                     // If it's Sunday (0) or Saturday (6), find the previous Friday
                     $previousFriday = $createdDate->copy()->previous(Carbon::FRIDAY);
                     $previousFridayDate = $previousFriday->format('Y-m-d');
-
-                    $createdDate = $previousFridayDate; // Assign the modified date to the variable
                 } else {
                     // If it's not a weekend, the created_at date remains unchanged
-                    // No need to modify the $createdDate variable in this case
+                    $previousFridayDate = $createdDate->format('Y-m-d');
                 }
 
-// Now you can use $createdDate for further processing or displaying the correct date.
+// Now you can use $previousFridayDate for further processing or displaying the correct date.
 
 // Convert the modified date back to the desired format (dmY)
-                $date1 = $createdDate->format('Ym');
-                $date2 = $createdDate->format('dmY');
+                $date1 = Carbon::createFromFormat('Y-m-d', $previousFridayDate)->format('Ym');
+                $date2 = Carbon::createFromFormat('Y-m-d', $previousFridayDate)->format('dmY');
 
 //                $date1 = date('Ym', strtotime($createdDate));
 //                $date2 = date('dmY', strtotime($createdDate));
