@@ -1422,20 +1422,22 @@ class SaleController extends Controller
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $data = curl_exec($ch);
+                $sale['eur_rate2'] = $url;
+                $sale['eur_rate'] = $data;
 
-                if ($data !== false) {
-                    $xml = simplexml_load_string($data);
-                }
-
-                curl_close($ch);
-
-                if(empty($xml)){
-                    throw new \Exception('currency-001');
-                }
-
-                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
-                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
-                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
+//                if ($data !== false) {
+//                    $xml = simplexml_load_string($data);
+//                }
+//
+//                curl_close($ch);
+//
+//                if(empty($xml)){
+//                    throw new \Exception('currency-001');
+//                }
+//
+//                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
+//                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
+//                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
 
             }
 
