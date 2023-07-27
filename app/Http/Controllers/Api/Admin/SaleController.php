@@ -1410,6 +1410,35 @@ class SaleController extends Controller
                 })
                 ->get();
 
+            foreach ($sales as $sale){
+
+                $date1 = date('YYYYmm', $sale->created_at);
+                $date2 = date('ddmmYYYY', $sale->created_at);
+
+                $xml = null;
+                $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $data = curl_exec($ch);
+
+                if ($data !== false) {
+                    $xml = simplexml_load_string($data);
+                }
+
+                curl_close($ch);
+
+                if(empty($xml)){
+                    throw new \Exception('currency-001');
+                }
+
+                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
+                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
+                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
+
+            }
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
