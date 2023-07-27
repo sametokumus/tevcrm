@@ -1422,6 +1422,7 @@ class SaleController extends Controller
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $data = curl_exec($ch);
+                $sale['eur_rate2'] = $url;
                 $sale['eur_rate'] = $data;
 
 //                if ($data !== false) {
