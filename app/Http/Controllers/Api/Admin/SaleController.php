@@ -1427,6 +1427,9 @@ class SaleController extends Controller
             curl_close($ch);
 
 
+            $sale['eurBuying'] = (float) $xml->Currency[3]->ForexBuying;
+
+
 //            foreach ($sales as $sale){
 //
 //                $date1 = date('Ym', strtotime($sale->created_at));
