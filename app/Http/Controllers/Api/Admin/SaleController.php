@@ -34,7 +34,7 @@ use App\Models\User;
 use App\Models\UserContactRule;
 use App\Models\UserDocumentCheck;
 use App\Models\UserProfile;
-use Faker\Provider\DateTime;
+use DateTime;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -1433,7 +1433,6 @@ class SaleController extends Controller
 
             foreach ($sales as $sale){
 
-                // Assuming $sale->created_at is a valid date string in Y-m-d format (e.g., "2023-07-27")
                 $createdDate = new DateTime($sale->created_at);
 
 // Check if the created date falls on a weekend (Saturday or Sunday)
@@ -1445,10 +1444,10 @@ class SaleController extends Controller
                     $previousFriday->modify('previous friday');
                     $previousFridayDate = $previousFriday->format('Y-m-d');
 
-                    $createdDate = $previousFridayDate;
+                    $createdDate = $previousFridayDate; // Assign the modified date to the variable
                 } else {
                     // If it's not a weekend, the created_at date remains unchanged
-                    $createdDate = $sale->created_at;
+                    // No need to modify the $createdDate variable in this case
                 }
 
                 $date1 = date('Ym', strtotime($createdDate));
