@@ -1412,7 +1412,7 @@ class SaleController extends Controller
 
             foreach ($sales as $sale){
 
-                $date1 = date('Y', strtotime($sale->created_at));
+                $date1 = date('Ym', strtotime($sale->created_at));
                 $date2 = date('dmY', strtotime($sale->created_at));
 
                 $xml = null;
