@@ -34,6 +34,7 @@ use App\Models\User;
 use App\Models\UserContactRule;
 use App\Models\UserDocumentCheck;
 use App\Models\UserProfile;
+use Faker\Provider\DateTime;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -1432,8 +1433,26 @@ class SaleController extends Controller
 
             foreach ($sales as $sale){
 
-                $date1 = date('Ym', strtotime($sale->created_at));
-                $date2 = date('dmY', strtotime($sale->created_at));
+                // Assuming $sale->created_at is a valid date string in Y-m-d format (e.g., "2023-07-27")
+                $createdDate = new DateTime($sale->created_at);
+
+// Check if the created date falls on a weekend (Saturday or Sunday)
+                $dayOfWeek = $createdDate->format('w'); // 0 (Sunday) to 6 (Saturday)
+
+                if ($dayOfWeek === '0' || $dayOfWeek === '6') {
+                    // If it's Sunday (0) or Saturday (6), find the previous Friday
+                    $previousFriday = clone $createdDate;
+                    $previousFriday->modify('previous friday');
+                    $previousFridayDate = $previousFriday->format('Y-m-d');
+
+                    $createdDate = $previousFridayDate;
+                } else {
+                    // If it's not a weekend, the created_at date remains unchanged
+                    $createdDate = $sale->created_at;
+                }
+
+                $date1 = date('Ym', strtotime($createdDate));
+                $date2 = date('dmY', strtotime($createdDate));
 
                 $xml = null;
                 $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
