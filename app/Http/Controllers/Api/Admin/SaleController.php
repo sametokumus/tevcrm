@@ -1484,6 +1484,12 @@ class SaleController extends Controller
                 $sale['usd_rate'] = number_format((float) $xml->Currency[0]->ForexSelling, 2,".","");
                 $sale['gbp_rate'] = number_format((float) $xml->Currency[4]->ForexSelling, 2,".","");
 
+                Sale::query()->where('sale_id', $sale->sale_id)->update([
+                    'usd_rate' => $sale['usd_rate'],
+                    'eur_rate' => $sale['eur_rate'],
+                    'gbp_rate' => $sale['gbp_rate']
+                ]);
+
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sale]]);
