@@ -1479,7 +1479,7 @@ class SaleController extends Controller
                     throw new \Exception('currency-001');
                 }
 
-                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
+                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling[0];
                 $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
                 $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
 
