@@ -1403,7 +1403,7 @@ class SaleController extends Controller
                 ->where('sales.usd_rate', '1.00')
                 ->where('status_histories.status_id', 4)
                 ->where('status_histories.id', function ($query) {
-                    $query->select(DB::raw('MAX(id)'))
+                    $query->select(StatusHistory::raw('MAX(id)'))
                         ->from('status_histories')
                         ->whereRaw('status_histories.sale_id = sales.sale_id')
                         ->where('status_histories.status_id', 4);
