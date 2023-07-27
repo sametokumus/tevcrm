@@ -1397,7 +1397,7 @@ class SaleController extends Controller
     public function updateOldCurrencies()
     {
         try {
-            $sales = Sale::select('status_histories.*')
+            $sale = Sale::select('status_histories.*')
                 ->leftJoin('status_histories', 'sales.sale_id', '=', 'status_histories.sale_id')
                 ->where('sales.active', 1)
                 ->where('sales.usd_rate', '1.00')
@@ -1408,40 +1408,57 @@ class SaleController extends Controller
                         ->whereRaw('status_histories.sale_id = sales.sale_id')
                         ->where('status_histories.status_id', 4);
                 })
-                ->get();
+                ->first();
 
-            foreach ($sales as $sale){
-
-                $date1 = date('Ym', strtotime($sale->created_at));
-                $date2 = date('dmY', strtotime($sale->created_at));
-
-                $xml = null;
-                $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
-
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $data = curl_exec($ch);
-                $sale['eur_rate2'] = $url;
-                $sale['eur_rate'] = $data;
-
-//                if ($data !== false) {
-//                    $xml = simplexml_load_string($data);
-//                }
-//
-//                curl_close($ch);
-//
-//                if(empty($xml)){
-//                    throw new \Exception('currency-001');
-//                }
-//
-//                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
-//                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
-//                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
-
+            $date1 = date('Ym', strtotime($sale->created_at));
+            $date2 = date('dmY', strtotime($sale->created_at));
+            $xml = null;
+            $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $data = curl_exec($ch);
+            $sale['eur_rate2'] = $url;
+            $sale['eur_rate'] = $data;
+            if ($data !== false) {
+                $xml = simplexml_load_string($data);
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+            curl_close($ch);
+
+
+//            foreach ($sales as $sale){
+//
+//                $date1 = date('Ym', strtotime($sale->created_at));
+//                $date2 = date('dmY', strtotime($sale->created_at));
+//
+//                $xml = null;
+//                $url = 'https://www.tcmb.gov.tr/kurlar/'.$date1.'/'.$date2.'.xml';
+//
+//                $ch = curl_init();
+//                curl_setopt($ch, CURLOPT_URL, $url);
+//                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//                $data = curl_exec($ch);
+//                $sale['eur_rate2'] = $url;
+//                $sale['eur_rate'] = $data;
+//
+////                if ($data !== false) {
+////                    $xml = simplexml_load_string($data);
+////                }
+////
+////                curl_close($ch);
+////
+////                if(empty($xml)){
+////                    throw new \Exception('currency-001');
+////                }
+////
+////                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
+////                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
+////                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
+//
+//            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sale]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
