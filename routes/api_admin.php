@@ -225,6 +225,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/addSaleCurrencyLog/{request_id}', [SaleController::class, 'addSaleCurrencyLog']);
     Route::get('sale/getSaleByRequestId/{request_id}', [SaleController::class, 'getSaleByRequestId']);
     Route::get('sale/getCurrencyLogs', [SaleController::class, 'getCurrencyLogs']);
+    Route::get('sale/updateOldCurrencies', [SaleController::class, 'updateOldCurrencies']);
     Route::post('sale/addCurrencyLog', [SaleController::class, 'addCurrencyLog']);
     Route::get('sale/deleteCurrencyLog/{log_id}', [SaleController::class, 'deleteCurrencyLog']);
 

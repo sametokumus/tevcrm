@@ -1394,6 +1394,26 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
+    public function updateOldCurrencies()
+    {
+        try {
+            $sales = Sale::select('status_histories.*')
+                ->leftJoin('status_histories', 'sales.sale_id', '=', 'status_histories.sale_id')
+                ->where('sales.active', 1)
+                ->where('status_histories.status_id', 4)
+                ->where('status_histories.id', function ($query) {
+                    $query->select(DB::raw('MAX(id)'))
+                        ->from('status_histories')
+                        ->whereRaw('status_histories.sale_id = sales.sale_id')
+                        ->where('status_histories.status_id', 4);
+                })
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
     public function deleteCurrencyLog($log_id)
     {
