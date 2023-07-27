@@ -1474,15 +1474,14 @@ class SaleController extends Controller
                 curl_close($ch);
 
 
-                $sale['eurBuying'] = (float) $xml->Currency[3]->ForexBuying;
-//
-//                if(empty($xml)){
-//                    throw new \Exception('currency-001');
-//                }
-//
-//                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
-//                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
-//                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
+
+                if(empty($xml)){
+                    throw new \Exception('currency-001');
+                }
+
+                $sale['eur_rate'] = $xml->Currency[3]->ForexSelling;
+                $sale['usd_rate'] = $xml->Currency[0]->ForexSelling;
+                $sale['gbp_rate'] = $xml->Currency[4]->ForexSelling;
 
             }
 
