@@ -1400,6 +1400,7 @@ class SaleController extends Controller
             $sales = Sale::select('status_histories.*')
                 ->leftJoin('status_histories', 'sales.sale_id', '=', 'status_histories.sale_id')
                 ->where('sales.active', 1)
+                ->where('sales.usd_rate', '1.00')
                 ->where('status_histories.status_id', 4)
                 ->where('status_histories.id', function ($query) {
                     $query->select(DB::raw('MAX(id)'))
