@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Measurement;
@@ -67,8 +68,7 @@ class MobileController extends Controller
                 $order_item = array();
                 $order_item['auto_date'] = Carbon::parse($sale_offer->created_at)->format('d.m.Y h:i:s');
                 $order_item['delivery_day'] = $sale_offer->offer_lead_time;
-                $order_item['description'] = $product->ref_code;
-                $order_item['item_name'] = $product->product_name;
+                $order_item['description'] = $product->product_name;
                 $order_item['order_number'] = $i;
                 $order_item['progress'] = 0;
                 $order_item['state'] = $status->mobile_id;
@@ -76,6 +76,31 @@ class MobileController extends Controller
                 $order_item['unit'] = $sale_offer->offer_quantity;
                 $order_item['unit_price'] = number_format(($sale_offer->sale_price / $sale_offer->offer_quantity), 2,".","");
                 $order_item['unit_type'] = $measurement->name_tr;
+
+
+                if ($product->category_id != null){
+                    $category1 = Category::query()->where('id', $product->category_id)->first();
+                    if ($category1->parent_id != 0){
+
+                        $category2 = Category::query()->where('id', $category1->parent_id)->first();
+                        if ($category2->parent_id != 0){
+
+                            $category3 = Category::query()->where('id', $category2->parent_id)->first();
+                            $order_item['item_name'] = $category3->name;
+
+                        }else{
+                            $order_item['item_name'] = $category2->name;
+                        }
+
+                    }else{
+                        $order_item['item_name'] = $category1->name;
+                    }
+
+                }else{
+                    $order_item['item_name'] = "";
+                }
+
+
 
                 array_push($order_items, $order_item);
                 $i++;
@@ -135,8 +160,7 @@ class MobileController extends Controller
                     $order_item = array();
                     $order_item['auto_date'] = Carbon::parse($sale_offer->created_at)->format('d.m.Y h:i:s');
                     $order_item['delivery_day'] = $sale_offer->offer_lead_time;
-                    $order_item['description'] = $product->ref_code;
-                    $order_item['item_name'] = $product->product_name;
+                    $order_item['description'] = $product->product_name;
                     $order_item['order_number'] = $i;
                     $order_item['progress'] = 0;
                     $order_item['state'] = $status->mobile_id;
@@ -144,6 +168,28 @@ class MobileController extends Controller
                     $order_item['unit'] = $sale_offer->offer_quantity;
                     $order_item['unit_price'] = number_format(($sale_offer->sale_price / $sale_offer->offer_quantity), 2, ".", "");
                     $order_item['unit_type'] = $measurement->name_tr;
+
+                    if ($product->category_id != null){
+                        $category1 = Category::query()->where('id', $product->category_id)->first();
+                        if ($category1->parent_id != 0){
+
+                            $category2 = Category::query()->where('id', $category1->parent_id)->first();
+                            if ($category2->parent_id != 0){
+
+                                $category3 = Category::query()->where('id', $category2->parent_id)->first();
+                                $order_item['item_name'] = $category3->name;
+
+                            }else{
+                                $order_item['item_name'] = $category2->name;
+                            }
+
+                        }else{
+                            $order_item['item_name'] = $category1->name;
+                        }
+
+                    }else{
+                        $order_item['item_name'] = "";
+                    }
 
                     array_push($order_items, $order_item);
                     $i++;
