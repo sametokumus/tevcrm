@@ -56,6 +56,7 @@ class MobileController extends Controller
             $item['ref_no'] = $sale->id;
             $item['subject'] = "";
             $item['user_id'] = "";
+            $item['customer_po_no'] = "";
 
             $order_items = array();
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
@@ -148,6 +149,7 @@ class MobileController extends Controller
                 $item['ref_no'] = $sale->id;
                 $item['subject'] = "";
                 $item['user_id'] = "";
+                $item['customer_po_no'] = "";
 
                 $order_items = array();
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
