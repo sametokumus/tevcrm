@@ -77,7 +77,7 @@ class MobileController extends Controller
                 $order_item['unit'] = $sale_offer->offer_quantity;
                 $order_item['unit_price'] = number_format(($sale_offer->sale_price / $sale_offer->offer_quantity), 2,".","");
                 $order_item['unit_type'] = $measurement->name_tr;
-                $order_item['product_id'] = $product->product_id;
+                $order_item['product_id'] = $product;
 
 
                 if ($product->category_id != null){
