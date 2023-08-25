@@ -50,9 +50,13 @@ async function initContact(contact_id, sale_id){
     let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
     short_code = contact.short_code;
+    let width = '150px';
+    if (contact_id == 3){
+        width = '250px';
+    }
 
     $('#quote-print #logo img').remove();
-    $('#quote-print #logo').append('<img src="'+ contact.logo +'">');
+    $('#quote-print #logo').append('<img style="width: '+width+'" src="'+ contact.logo +'">');
 
     if (contact_id == 1){
         $('#print-footer').addClass('lenis-footer');
