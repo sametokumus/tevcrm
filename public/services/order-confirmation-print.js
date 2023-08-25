@@ -57,9 +57,13 @@ async function initContact(contact_id, sale_id){
     let data = await serviceGetContactById(contact_id);
     let contact = data.contact;
     short_code = contact.short_code;
+    let width = '150px';
+    if (short_code = 'SMY'){
+        width = '250px';
+    }
 
     $('#order-confirmation-print #logo img').remove();
-    $('#order-confirmation-print #logo').append('<img src="'+ contact.logo +'">');
+    $('#order-confirmation-print #logo').append('<img style="width: '+width+'" src="'+ contact.logo +'">');
 
     if (contact_id == 1){
         $('#print-footer').addClass('lenis-footer');
