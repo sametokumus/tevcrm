@@ -58,7 +58,7 @@ async function initContact(contact_id, sale_id){
     let contact = data.contact;
     short_code = contact.short_code;
     let width = '150px';
-    if (contact_id = 3){
+    if (contact_id == 3){
         width = '250px';
     }
 
