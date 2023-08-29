@@ -358,7 +358,7 @@ table tr.selected{
     #print-footer.lenis-footer{
         height: 150px;
     }
-    #print-footer.lenis-footer{
+    #print-footer.semy-footer{
         height: 120px;
     }
 
@@ -367,7 +367,11 @@ table tr.selected{
     }
 
     div.footer-spacer.lenis-spacer {
-        height: 25mm;
+        height: 35mm;
+    }
+
+    div.footer-spacer.semy-spacer {
+        height: 35mm;
     }
 
 
