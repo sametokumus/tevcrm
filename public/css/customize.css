@@ -358,13 +358,16 @@ table tr.selected{
     #print-footer.lenis-footer{
         height: 150px;
     }
+    #print-footer.lenis-footer{
+        height: 120px;
+    }
 
     div.footer-spacer {
         height: 15mm;
     }
 
     div.footer-spacer.lenis-spacer {
-        height: 35mm;
+        height: 25mm;
     }
 
 

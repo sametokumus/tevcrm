@@ -57,6 +57,10 @@ async function initContact(contact_id, sale_id){
         $('#print-footer').addClass('lenis-footer');
         $('.footer-spacer').addClass('lenis-spacer');
     }
+    if (contact_id == 3){
+        $('#print-footer').addClass('semy-footer');
+        $('.footer-spacer').addClass('semy-spacer');
+    }
     $('#print-footer img').remove();
     $('#print-footer').append('<img src="'+ contact.footer +'" alt="" class="w-100">');
 
