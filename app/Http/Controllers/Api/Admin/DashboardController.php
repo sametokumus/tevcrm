@@ -903,7 +903,8 @@ class DashboardController extends Controller
                 ->where('sales.active', 1)
                 ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
                 ->whereBetween('sales.created_at', [$lastMonthStart, $lastMonthEnd])
-                ->get();
+                ->toSql();
+            return $sale_items;
 
 
             $continue_try_price = 0;
