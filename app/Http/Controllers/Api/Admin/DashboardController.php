@@ -918,6 +918,7 @@ class DashboardController extends Controller
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
+            $approved_count = 0;
 
             foreach ($sale_items as $item){
 
@@ -938,6 +939,7 @@ class DashboardController extends Controller
                     }
 
                 }else if($item->period == 'approved'){
+                    $approved_count++;
 
                     if ($item->currency == 'TRY'){
                         $approved_try_price += $item->grand_total;
@@ -998,6 +1000,7 @@ class DashboardController extends Controller
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+            $approved['count'] = $approved_count;
 
             $completed = array();
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
