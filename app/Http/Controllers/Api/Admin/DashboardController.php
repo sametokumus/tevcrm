@@ -894,15 +894,16 @@ class DashboardController extends Controller
 
             $sales = array();
 
-            $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
-            $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
 
             $sale_items = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.period as period')
                 ->where('sales.active', 1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
-                ->whereBetween('sales.created_at', [$lastMonthStart, $lastMonthEnd])
+                ->whereIn('statuses.period', ['completed', 'approved', 'continue', 'cancelled'])
+                ->whereMonth('sales.created_at', '=', $currentMonth)
+                ->whereYear('sales.created_at', '=', $currentYear)
                 ->get();
 
 
