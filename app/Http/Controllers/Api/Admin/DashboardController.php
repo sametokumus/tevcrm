@@ -1030,7 +1030,7 @@ class DashboardController extends Controller
                 ->whereMonth('sales.created_at', '=', $currentMonth)
                 ->whereYear('sales.created_at', '=', $currentYear)
                 ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
-                ->get();
+                ->toSql();
             $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
