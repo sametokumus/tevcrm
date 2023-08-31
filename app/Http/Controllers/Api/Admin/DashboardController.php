@@ -1033,16 +1033,7 @@ class DashboardController extends Controller
 //                ->toSql();
             $daysInMonth = Carbon::create($currentYear, $currentMonth)->daysInMonth;
 
-            $dailyTotalApprovedSales = DB::table(DB::raw('(
-    SELECT DATE_FORMAT(date, "%Y-%m-%d") as date
-    FROM (
-        SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as date
-        FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as a
-        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as b
-        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as c
-    ) days
-    WHERE DATE_FORMAT(date, "%Y-%m") = ?
-) as all_days'))
+            $dailyTotalApprovedSales = DB::table(DB::raw('(SELECT DATE_FORMAT(date, "%Y-%m-%d") as date FROM (SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as date FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as a CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as b CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as c) days'))
                 ->leftJoinSub(
                     Sale::query()
                         ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(sales.grand_total) as total')
@@ -1057,7 +1048,7 @@ class DashboardController extends Controller
                     'sales_data.date'
                 )
                 ->select('all_days.date', DB::raw('COALESCE(sales_data.total, 0) as total'))
-                ->toSql();
+                ->get();
             $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
