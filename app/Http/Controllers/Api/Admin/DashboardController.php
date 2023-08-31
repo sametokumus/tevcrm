@@ -1042,7 +1042,7 @@ class DashboardController extends Controller
                 $allDays[$date->toDateString()] = 0;
             }
 
-            $salesData = Sale::query()
+            $dailyTotalApprovedSales = Sale::query()
                 ->selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as date, SUM(grand_total) as total')
                 ->where('active', 1)
                 ->whereIn('statuses.period', ['approved'])
@@ -1051,7 +1051,7 @@ class DashboardController extends Controller
                 ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))
                 ->get();
 
-            foreach ($salesData as $sale) {
+            foreach ($dailyTotalApprovedSales as $sale) {
                 $dailyTotalSales[$sale->date] = $sale->total;
             }
 
