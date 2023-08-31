@@ -10,6 +10,7 @@ use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -1018,6 +1019,19 @@ class DashboardController extends Controller
             $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+
+
+
+            $dailyTotalApprovedSales = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(sales.total_amount) as total')
+                ->where('sales.active', 1)
+                ->whereIn('statuses.period', ['approved'])
+                ->whereMonth('sales.created_at', '=', $currentMonth)
+                ->whereYear('sales.created_at', '=', $currentYear)
+                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
+                ->get();
+            $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
 
