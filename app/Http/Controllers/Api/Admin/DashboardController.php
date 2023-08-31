@@ -1049,13 +1049,13 @@ class DashboardController extends Controller
                 ->whereMonth('created_at', $currentMonth)
                 ->whereYear('created_at', $currentYear)
                 ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))
-                ->get();
+                ->toSql();
 
-            foreach ($dailyTotalApprovedSales as $sale) {
-                $dailyTotalSales[$sale->date] = $sale->total;
-            }
+//            foreach ($salesData as $sale) {
+//                $dailyTotalSales[$sale->date] = $sale->total;
+//            }
 
-            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
+//            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
             $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
