@@ -1039,7 +1039,9 @@ class DashboardController extends Controller
             $allDays = [];
 
             for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
-                $allDays[$date->toDateString()] = 0;
+                $allDays[$date->toDateString()]['TRY'] = 0;
+                $allDays[$date->toDateString()]['USD'] = 0;
+                $allDays[$date->toDateString()]['EUR'] = 0;
             }
 
             $salesData = Sale::query()
@@ -1053,16 +1055,18 @@ class DashboardController extends Controller
                 ->toSql();
             $approved['sales_data'] = $salesData;
 
-//            foreach ($salesData as $sale) {
-//                if ($sale->total != null) {
-//                    $dailyTotalSales[$sale->date] = $sale->total;
-//                }else{
-//                    $dailyTotalSales[$sale->date] = 0;
-//                }
-//            }
-//
-//            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
-//            $approved['daily_sales'] = $dailyTotalApprovedSales;
+            foreach ($salesData as $sale) {
+                if ($sale->total != null) {
+
+                    $dailyTotalSales[$sale->date][$sale->currency] = $sale->total;
+
+                }else{
+                    $dailyTotalSales[$sale->date][$sale->currency] = 0;
+                }
+            }
+
+            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
+            $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
 
