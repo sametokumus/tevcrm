@@ -1044,13 +1044,13 @@ class DashboardController extends Controller
 
             $salesData = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('DATE_FORMAT("sales.created_at", "%Y-%m-%d") as date, SUM(grand_total) as total')
+                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(grand_total) as total')
                 ->where('sales.active', 1)
                 ->whereIn('statuses.period', ['approved'])
                 ->whereMonth('sales.created_at', $currentMonth)
                 ->whereYear('sales.created_at', $currentYear)
-                ->groupBy(DB::raw('DATE_FORMAT("sales.created_at", "%Y-%m-%d")'))
-                ->toSql();
+                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
+                ->get();
             $approved['sales_data'] = $salesData;
 
 //            foreach ($salesData as $sale) {
