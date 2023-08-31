@@ -941,7 +941,10 @@ class DashboardController extends Controller
 
                 }else if($item->period == 'approved'){
                     $approved_count++;
-                    array_push($approved_serie, $item->grand_total);
+                    $x = array();
+                    $x['price'] = $item->grand_total;
+                    $x['id'] = $item->id;
+                    array_push($approved_serie, $x);
 
                     if ($item->currency == 'TRY'){
                         $approved_try_price += $item->grand_total;
