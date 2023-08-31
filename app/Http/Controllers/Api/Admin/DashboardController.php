@@ -1044,21 +1044,25 @@ class DashboardController extends Controller
 
             $salesData = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(grand_total) as total')
+                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(grand_total) as total, sales.currency')
                 ->where('sales.active', 1)
                 ->whereIn('statuses.period', ['approved'])
                 ->whereMonth('sales.created_at', $currentMonth)
                 ->whereYear('sales.created_at', $currentYear)
-                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
-                ->get();
+                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d"), sales.currency'))
+                ->toSql();
             $approved['sales_data'] = $salesData;
 
-            foreach ($salesData as $sale) {
-                $dailyTotalSales[$sale->date] = $sale->total;
-            }
-
-            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
-            $approved['daily_sales'] = $dailyTotalApprovedSales;
+//            foreach ($salesData as $sale) {
+//                if ($sale->total != null) {
+//                    $dailyTotalSales[$sale->date] = $sale->total;
+//                }else{
+//                    $dailyTotalSales[$sale->date] = 0;
+//                }
+//            }
+//
+//            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
+//            $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
 
