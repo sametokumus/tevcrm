@@ -1053,12 +1053,12 @@ class DashboardController extends Controller
                 ->get();
             $approved['sales_data'] = $salesData;
 
-//            foreach ($salesData as $sale) {
-//                $dailyTotalSales[$sale->date] = $sale->total;
-//            }
-//
-//            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
-//            $approved['daily_sales'] = $dailyTotalApprovedSales;
+            foreach ($salesData as $sale) {
+                $dailyTotalSales[$sale->date] = $sale->total;
+            }
+
+            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
+            $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
 
