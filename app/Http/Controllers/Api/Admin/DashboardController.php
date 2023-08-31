@@ -1044,29 +1044,38 @@ class DashboardController extends Controller
                 $allDays[$date->toDateString()]['EUR'] = 0;
             }
 
+//            $salesData = Sale::query()
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(grand_total) as total, sales.currency, sales.usd_rate, sales.eur_rate')
+//                ->where('sales.active', 1)
+//                ->whereIn('statuses.period', ['approved'])
+//                ->whereMonth('sales.created_at', $currentMonth)
+//                ->whereYear('sales.created_at', $currentYear)
+//                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d"), sales.currency'))
+//                ->get();
             $salesData = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(grand_total) as total, sales.currency')
+                ->selectRaw('sales.*')
                 ->where('sales.active', 1)
                 ->whereIn('statuses.period', ['approved'])
                 ->whereMonth('sales.created_at', $currentMonth)
                 ->whereYear('sales.created_at', $currentYear)
-                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d"), sales.currency'))
+//                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
                 ->get();
             $approved['sales_data'] = $salesData;
 
-            foreach ($salesData as $sale) {
-                if ($sale->total != null) {
-
-                    $dailyTotalSales[$sale->date][$sale->currency] = $sale->total;
-
-                }else{
-                    $dailyTotalSales[$sale->date][$sale->currency] = 0;
-                }
-            }
-
-            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
-            $approved['daily_sales'] = $dailyTotalApprovedSales;
+//            foreach ($salesData as $sale) {
+//                if ($sale->total != null) {
+//
+//                    $dailyTotalSales[$sale->date][$sale->currency] = $sale->total;
+//
+//                }else{
+//                    $dailyTotalSales[$sale->date][$sale->currency] = 0;
+//                }
+//            }
+//
+//            $dailyTotalApprovedSales = array_merge($allDays, $dailyTotalSales);
+//            $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
 
