@@ -1022,15 +1022,42 @@ class DashboardController extends Controller
 
 
 
-            $dailyTotalApprovedSales = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(sales.total_amount) as total')
-                ->where('sales.active', 1)
-                ->whereIn('statuses.period', ['approved'])
-                ->whereMonth('sales.created_at', '=', $currentMonth)
-                ->whereYear('sales.created_at', '=', $currentYear)
-                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
-                ->toSql();
+//            $dailyTotalApprovedSales = Sale::query()
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(sales.total_amount) as total')
+//                ->where('sales.active', 1)
+//                ->whereIn('statuses.period', ['approved'])
+//                ->whereMonth('sales.created_at', '=', $currentMonth)
+//                ->whereYear('sales.created_at', '=', $currentYear)
+//                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
+//                ->toSql();
+            $daysInMonth = Carbon::create($currentYear, $currentMonth)->daysInMonth;
+
+            $dailyTotalApprovedSales = DB::table(DB::raw('(
+    SELECT DATE_FORMAT(date, "%Y-%m-%d") as date
+    FROM (
+        SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as date
+        FROM (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as a
+        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as b
+        CROSS JOIN (SELECT 0 as a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) as c
+    ) days
+    WHERE DATE_FORMAT(date, "%Y-%m") = ?
+) as all_days'))
+                ->leftJoinSub(
+                    Sale::query()
+                        ->selectRaw('DATE_FORMAT(sales.created_at, "%Y-%m-%d") as date, SUM(sales.grand_total) as total')
+                        ->where('sales.active', 1)
+                        ->whereIn('statuses.period', ['approved'])
+                        ->whereMonth('sales.created_at', '=', $currentMonth)
+                        ->whereYear('sales.created_at', '=', $currentYear)
+                        ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")')),
+                    'sales_data',
+                    'all_days.date',
+                    '=',
+                    'sales_data.date'
+                )
+                ->select('all_days.date', DB::raw('COALESCE(sales_data.total, 0) as total'))
+                ->get();
             $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
