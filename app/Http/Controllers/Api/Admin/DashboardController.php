@@ -1048,7 +1048,7 @@ class DashboardController extends Controller
                     'sales_data.date'
                 )
                 ->select('all_days.date', DB::raw('COALESCE(sales_data.total, 0) as total'))
-                ->get();
+                ->toSql();
             $approved['daily_sales'] = $dailyTotalApprovedSales;
 
 
