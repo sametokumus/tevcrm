@@ -1034,8 +1034,8 @@ class DashboardController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.period as period')
                 ->where('sales.active', 1)
-                ->whereIn('statuses.period', ['approved'])
-                ->where('sales.created_at', $date->toDateString())
+                ->where('statuses.period', 'approved')
+                ->whereDate('sales.created_at', $date->toDateString())
                 ->get();
 
                 $daily_approved_try_price = 0;
@@ -1062,6 +1062,9 @@ class DashboardController extends Controller
 
                 $approved_serie_this_day = array();
                 $approved_serie_this_day['date'] = $date->toDateString();
+                $approved_serie_this_day['try'] = $daily_approved_try_price;
+                $approved_serie_this_day['usd'] = $daily_approved_usd_price;
+                $approved_serie_this_day['eur'] = $daily_approved_eur_price;
 
                 array_push($approved_serie, $approved_serie_this_day);
             }
