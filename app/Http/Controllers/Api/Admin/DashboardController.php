@@ -1062,9 +1062,9 @@ class DashboardController extends Controller
 
                 $approved_serie_this_day = array();
                 $approved_serie_this_day['date'] = $date->toDateString();
-                $approved_serie_this_day['try'] = $daily_approved_try_price;
-                $approved_serie_this_day['usd'] = $daily_approved_usd_price;
-                $approved_serie_this_day['eur'] = $daily_approved_eur_price;
+                $approved_serie_this_day['try'] = number_format($daily_approved_try_price, 2,".","");
+                $approved_serie_this_day['usd'] = number_format($daily_approved_usd_price, 2,".","");
+                $approved_serie_this_day['eur'] = number_format($daily_approved_eur_price, 2,".","");
 
                 array_push($approved_serie, $approved_serie_this_day);
             }
