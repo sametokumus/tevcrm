@@ -1022,6 +1022,8 @@ class DashboardController extends Controller
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
 
+            $day_count = 0;
+
 
             $firstDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->startOfDay();
             $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->lastOfMonth()->endOfDay();
@@ -1031,6 +1033,8 @@ class DashboardController extends Controller
             $continue_serie_try = array();
 
             for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
+                $day_count++;
+
                 $daily_total_continue_sales = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                     ->selectRaw('sales.*, statuses.period as period')
@@ -1234,6 +1238,7 @@ class DashboardController extends Controller
             $sales['approved'] = $approved;
             $sales['completed'] = $completed;
             $sales['cancelled'] = $cancelled;
+            $sales['day_count'] = $day_count;
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
