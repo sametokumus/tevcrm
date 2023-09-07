@@ -1074,6 +1074,7 @@ class DashboardController extends Controller
                 array_push($continue_serie_try, number_format($daily_continue_try_price, 2,".",""));
             }
             $continue['continue_serie'] = $continue_serie;
+            $continue['continue_serie_try'] = $continue_serie_try;
 
 
 
@@ -1121,6 +1122,7 @@ class DashboardController extends Controller
                 array_push($approved_serie_try, number_format($daily_approved_try_price, 2,".",""));
             }
             $approved['approved_serie'] = $approved_serie;
+            $approved['approved_serie_try'] = $approved_serie_try;
 
 
 
@@ -1168,6 +1170,7 @@ class DashboardController extends Controller
                 array_push($completed_serie_try, number_format($daily_completed_try_price, 2,".",""));
             }
             $completed['completed_serie'] = $completed_serie;
+            $completed['completed_serie_try'] = $completed_serie_try;
 
 
 
@@ -1215,6 +1218,7 @@ class DashboardController extends Controller
                 array_push($cancelled_serie_try, number_format($daily_cancelled_try_price, 2,".",""));
             }
             $cancelled['cancelled_serie'] = $cancelled_serie;
+            $cancelled['cancelled_serie_try'] = $cancelled_serie_try;
 
 
 
