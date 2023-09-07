@@ -1027,9 +1027,6 @@ class DashboardController extends Controller
             $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->lastOfMonth()->endOfDay();
 
 
-
-
-
             $continue_serie = array();
             $continue_serie_try = array();
 
@@ -1078,10 +1075,13 @@ class DashboardController extends Controller
 
 
 
+            $firstDayOfMonth2 = Carbon::create($currentYear, $currentMonth, 1)->startOfDay();
+            $lastDayOfMonth2 = Carbon::create($currentYear, $currentMonth, 1)->lastOfMonth()->endOfDay();
+
             $approved_serie = array();
             $approved_serie_try = array();
 
-            for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
+            for ($date = $firstDayOfMonth2; $date <= $lastDayOfMonth2; $date->addDay()) {
                 $daily_total_approved_sales = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.period as period')
