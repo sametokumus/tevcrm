@@ -209,6 +209,7 @@ class MobileController extends Controller
 
 
                     $item = array();
+                    $item['po_no'] = $sale_id;
                     $item['success'] = false;
                     $item['err_message'] = 'Sipariş Bulunamadı.';
 
