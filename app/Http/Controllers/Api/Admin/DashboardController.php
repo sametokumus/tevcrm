@@ -920,8 +920,7 @@ class DashboardController extends Controller
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
-            $approved_count = 0;
-            $approved_serie = array();
+//            $approved_count = 0;
 
             foreach ($sale_items as $item){
 
@@ -942,11 +941,12 @@ class DashboardController extends Controller
                     }
 
                 }else if($item->period == 'approved'){
-                    $approved_count++;
-                    $x = array();
-                    $x['price'] = $item->grand_total;
-                    $x['id'] = $item->id;
-                    array_push($approved_serie, $x);
+//                    $approved_count++;
+//                    $x = array();
+//                    $x['price'] = $item->grand_total;
+//                    $x['currency'] = $item->currency;
+//                    $x['id'] = $item->id;
+//                    $x['created_at'] = $item->created_at;
 
                     if ($item->currency == 'TRY'){
                         $approved_try_price += $item->grand_total;
@@ -961,6 +961,8 @@ class DashboardController extends Controller
                         $approved_try_price += $item->grand_total * $item->eur_rate;
                         $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
+
+//                    array_push($approved_serie, $x);
 
                 }else if($item->period == 'completed'){
 
@@ -1007,8 +1009,8 @@ class DashboardController extends Controller
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
-            $approved['count'] = $approved_count;
-            $approved['approved_serie'] = $approved_serie;
+//            $approved['count'] = $approved_count;
+//            $approved['approved_serie'] = $approved_serie;
 
             $completed = array();
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
@@ -1019,6 +1021,51 @@ class DashboardController extends Controller
             $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+
+
+            $approved_serie = array();
+
+            $firstDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->startOfDay();
+            $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->lastOfMonth()->endOfDay();
+            $allDays = [];
+
+            for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
+                $dailyTotalApprovedSales = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.period as period')
+                ->where('sales.active', 1)
+                ->whereIn('statuses.period', ['approved'])
+                ->where('sales.created_at', $date->toDateString())
+                ->get();
+
+                $daily_approved_try_price = 0;
+                $daily_approved_usd_price = 0;
+                $daily_approved_eur_price = 0;
+
+                foreach ($dailyTotalApprovedSales as $dtas){
+
+                    if ($dtas->currency == 'TRY'){
+                        $daily_approved_try_price += $dtas->grand_total;
+                        $daily_approved_usd_price += $dtas->grand_total / $dtas->usd_rate;
+                        $daily_approved_eur_price += $dtas->grand_total / $dtas->eur_rate;
+                    }else if ($dtas->currency == 'USD'){
+                        $daily_approved_usd_price += $dtas->grand_total;
+                        $daily_approved_try_price += $dtas->grand_total * $dtas->usd_rate;
+                        $daily_approved_eur_price += $dtas->grand_total / $dtas->eur_rate * $dtas->usd_rate;
+                    }else if ($dtas->currency == 'EUR'){
+                        $daily_approved_eur_price += $dtas->grand_total;
+                        $daily_approved_try_price += $dtas->grand_total * $dtas->eur_rate;
+                        $daily_approved_usd_price += $dtas->grand_total / $dtas->usd_rate * $dtas->eur_rate;
+                    }
+
+                }
+
+                $approved_serie_this_day = array();
+                $approved_serie_this_day['date'] = $date->toDateString();
+
+                array_push($approved_serie, $approved_serie_this_day);
+            }
+            $approved['approved_serie'] = $approved_serie;
 
 
 
@@ -1032,17 +1079,8 @@ class DashboardController extends Controller
 //                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
 //                ->toSql();
 
-            $firstDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->startOfDay();
-            $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->lastOfMonth()->endOfDay();
-
             $dailyTotalSales = [];
-            $allDays = [];
 
-            for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
-                $allDays[$date->toDateString()]['TRY'] = 0;
-                $allDays[$date->toDateString()]['USD'] = 0;
-                $allDays[$date->toDateString()]['EUR'] = 0;
-            }
 
 //            $salesData = Sale::query()
 //                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
@@ -1053,16 +1091,16 @@ class DashboardController extends Controller
 //                ->whereYear('sales.created_at', $currentYear)
 //                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d"), sales.currency'))
 //                ->get();
-            $salesData = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*')
-                ->where('sales.active', 1)
-                ->whereIn('statuses.period', ['approved'])
-                ->whereMonth('sales.created_at', $currentMonth)
-                ->whereYear('sales.created_at', $currentYear)
-//                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
-                ->get();
-            $approved['sales_data'] = $salesData;
+//            $salesData = Sale::query()
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('sales.*')
+//                ->where('sales.active', 1)
+//                ->whereIn('statuses.period', ['approved'])
+//                ->whereMonth('sales.created_at', $currentMonth)
+//                ->whereYear('sales.created_at', $currentYear)
+////                ->groupBy(DB::raw('DATE_FORMAT(sales.created_at, "%Y-%m-%d")'))
+//                ->get();
+//            $approved['sales_data'] = $salesData;
 
 //            foreach ($salesData as $sale) {
 //                if ($sale->total != null) {
