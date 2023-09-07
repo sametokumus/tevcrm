@@ -1030,51 +1030,51 @@ class DashboardController extends Controller
 
 
 
-//            $continue_serie = array();
-//            $continue_serie_try = array();
-//
-//            for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
-//                $daily_total_continue_sales = Sale::query()
-//                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-//                    ->selectRaw('sales.*, statuses.period as period')
-//                    ->where('sales.active', 1)
-//                    ->where('statuses.period', 'continue')
-//                    ->whereDate('sales.created_at', $date->toDateString())
-//                    ->get();
-//
-//                $daily_continue_try_price = 0;
-//                $daily_continue_usd_price = 0;
-//                $daily_continue_eur_price = 0;
-//
-//                foreach ($daily_total_continue_sales as $sl){
-//
-//                    if ($sl->currency == 'TRY'){
-//                        $daily_continue_try_price += $sl->grand_total;
-//                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate;
-//                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate;
-//                    }else if ($sl->currency == 'USD'){
-//                        $daily_continue_usd_price += $sl->grand_total;
-//                        $daily_continue_try_price += $sl->grand_total * $sl->usd_rate;
-//                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
-//                    }else if ($sl->currency == 'EUR'){
-//                        $daily_continue_eur_price += $sl->grand_total;
-//                        $daily_continue_try_price += $sl->grand_total * $sl->eur_rate;
-//                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
-//                    }
-//
-//                }
-//
-//                $continue_serie_this_day = array();
-//                $continue_serie_this_day['date'] = $date->toDateString();
-//                $continue_serie_this_day['try'] = number_format($daily_continue_try_price, 2,".","");
-//                $continue_serie_this_day['usd'] = number_format($daily_continue_usd_price, 2,".","");
-//                $continue_serie_this_day['eur'] = number_format($daily_continue_eur_price, 2,".","");
-//
-//                array_push($continue_serie, $continue_serie_this_day);
-//                array_push($continue_serie_try, number_format($daily_continue_try_price, 2,".",""));
-//            }
-//            $continue['continue_serie'] = $continue_serie;
-//            $continue['continue_serie_try'] = $continue_serie_try;
+            $continue_serie = array();
+            $continue_serie_try = array();
+
+            for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
+                $daily_total_continue_sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->selectRaw('sales.*, statuses.period as period')
+                    ->where('sales.active', 1)
+                    ->where('statuses.period', 'continue')
+                    ->whereDate('sales.created_at', $date->toDateString())
+                    ->get();
+
+                $daily_continue_try_price = 0;
+                $daily_continue_usd_price = 0;
+                $daily_continue_eur_price = 0;
+
+                foreach ($daily_total_continue_sales as $sl){
+
+                    if ($sl->currency == 'TRY'){
+                        $daily_continue_try_price += $sl->grand_total;
+                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate;
+                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                    }else if ($sl->currency == 'USD'){
+                        $daily_continue_usd_price += $sl->grand_total;
+                        $daily_continue_try_price += $sl->grand_total * $sl->usd_rate;
+                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                    }else if ($sl->currency == 'EUR'){
+                        $daily_continue_eur_price += $sl->grand_total;
+                        $daily_continue_try_price += $sl->grand_total * $sl->eur_rate;
+                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                }
+
+                $continue_serie_this_day = array();
+                $continue_serie_this_day['date'] = $date->toDateString();
+                $continue_serie_this_day['try'] = number_format($daily_continue_try_price, 2,".","");
+                $continue_serie_this_day['usd'] = number_format($daily_continue_usd_price, 2,".","");
+                $continue_serie_this_day['eur'] = number_format($daily_continue_eur_price, 2,".","");
+
+                array_push($continue_serie, $continue_serie_this_day);
+                array_push($continue_serie_try, number_format($daily_continue_try_price, 2,".",""));
+            }
+            $continue['continue_serie'] = $continue_serie;
+            $continue['continue_serie_try'] = $continue_serie_try;
 
 
 
