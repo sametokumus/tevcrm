@@ -1253,11 +1253,11 @@ class DashboardController extends Controller
         try {
             $last_months = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month')
+                ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month')
                 ->where('sales.active',1)
                 ->whereIn('statuses.period', ['completed', 'approved'])
-                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
-                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
+                ->groupByRaw('YEAR(sales.created_at), MONTH(sales.created_at)')
+                ->orderByRaw('YEAR(sales.created_at) DESC, MONTH(sales.created_at) DESC')
                 ->limit(12)
                 ->get();
 
