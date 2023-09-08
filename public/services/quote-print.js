@@ -20,6 +20,7 @@
             // Create a canvas from the HTML content using html2canvas
             html2canvas(content).then(canvas => {
                 const contentHeightInMm = content.clientHeight / 2.83465;
+                console.log(contentHeightInMm)
                 const pdfOptions = {
                     margin: 10,
                     filename: 'document.pdf',
