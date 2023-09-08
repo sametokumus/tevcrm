@@ -25,7 +25,7 @@
                     margin: 10,
                     filename: 'document.pdf',
                     image: { type: 'jpeg', quality: 1.0 }, // Maximum quality for JPEG images
-                    jsPDF: { unit: 'mm', format: [210, contentHeightInMm], orientation: 'portrait' }
+                    jsPDF: { unit: 'mm', format: [210, contentHeightInMm] }
                 };
 
                 // Get the canvas data as a base64-encoded PNG image
