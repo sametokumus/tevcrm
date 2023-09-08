@@ -283,7 +283,7 @@ async function initNewOfferDetail(){
 
                 item += '   <td>\n' +
                     '           <div class="btn-list">\n' +
-                    '               <button type="button" onclick="triggerOfferButton('+ company.offer_product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Teklife Ekle</span></button>\n' +
+                    '               <button type="button" onclick="triggerOfferButton(this, '+ company.offer_product.id +');" class="btn btn-sm btn-theme"><span class="fe fe-edit">Teklife Ekle</span></button>\n' +
                     '           </div>\n' +
                     '       </td>\n' +
                     '       <td>' + cheap_fast + '</td>\n' +
@@ -320,7 +320,13 @@ async function initNewOfferDetail(){
 }
 
 
-function triggerOfferButton(id){
+function triggerOfferButton(element, id){
+    let text = $(element).text();
+    if (text == 'Teklife Ekle'){
+        $(element).text('Tekliften Çıkar');
+    }else{
+        $(element).text('Teklife Ekle');
+    }
     $('#sale_btn_'+id).click();
 }
 

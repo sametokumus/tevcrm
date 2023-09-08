@@ -28,7 +28,7 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">ONAYLANAN</span>
+                        <span class="flex-grow-1">TOPLAM ONAYLANAN</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
@@ -70,7 +70,7 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TAMAMLANAN</span>
+                        <span class="flex-grow-1">TOPLAM TAMAMLANAN</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
@@ -113,7 +113,7 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">POTANSİYEL</span>
+                        <span class="flex-grow-1">TOPLAM POTANSİYEL</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
@@ -156,7 +156,7 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">İPTAL EDİLEN</span>
+                        <span class="flex-grow-1">TOPLAM İPTAL EDİLEN</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
@@ -191,6 +191,166 @@ $extra_js='
 
         </div>
 
+
+    </div>
+
+    <div class="row sparkboxes mt-0 mb-4">
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">BU AY ONAYLANAN</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="monthly-approved-box">
+                        <div class="col-12">
+                            <h4 class="mb-0"></h4>
+                        </div>
+                    </div>
+                    <div class="text-white text-opacity-80 text-truncate" id="monthly-approved-text">
+
+                    </div>
+
+                    <div class="box box1">
+                        <div id="spark1"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">BU AY TAMAMLANAN</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="monthly-completed-box">
+                        <div class="col-12">
+                            <h4 class="mb-0"></h4>
+                        </div>
+                    </div>
+                    <div class="text-white text-opacity-80 text-truncate" id="monthly-completed-text">
+
+                    </div>
+
+                    <div class="box box2">
+                        <div id="spark2"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">BU AY POTANSİYEL</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="monthly-continue-box">
+                        <div class="col-12">
+                            <h4 class="mb-0"></h4>
+                        </div>
+                    </div>
+                    <div class="text-white text-opacity-80 text-truncate" id="monthly-continue-text">
+
+                    </div>
+
+                    <div class="box box3">
+                        <div id="spark3"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">BU AY İPTAL EDİLEN</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="monthly-cancelled-box">
+                        <div class="col-12">
+                            <h4 class="mb-0"></h4>
+                        </div>
+                    </div>
+                    <div class="text-white text-opacity-80 text-truncate" id="monthly-cancelled-text">
+
+                    </div>
+
+                    <div class="box box4">
+                        <div id="spark4"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 

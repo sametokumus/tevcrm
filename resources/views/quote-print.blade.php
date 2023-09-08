@@ -15,6 +15,13 @@ $extra_js='
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row">
+                        <div class="col-12">
+                        </div>
+                        <div class="col-12">
+                            <button id="generatePdf" class="btn btn-theme btn-block w-100 no-print">Kaydet</button>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">
                             <label class="form-label">Dil</label>
                             <select class="form-control" id="lang">
@@ -33,7 +40,7 @@ $extra_js='
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
+                <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50" id="downloadPdf" style="width: 210mm;">
 
 
 

@@ -64,7 +64,7 @@ $extra_js='
                                         <button type="submit" class="btn btn-theme w-100">Filtrele</button>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <button type="button" class="btn btn-outline-danger w-100" onclick="removeFilter();">Filtreyi Kaldır</button>
+                                        <button type="button" class="btn btn-danger w-100" onclick="removeFilter();">Filtreyi Kaldır</button>
                                     </div>
                                 </div>
                             </div>

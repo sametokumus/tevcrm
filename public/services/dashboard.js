@@ -21,13 +21,14 @@
             document.getElementById('dash_currency').value = dash_currency;
         }
 
-        await getTotalSales();
-        await getApprovedMonthlySales();
-        await getCompletedMonthlySales();
-        await getPotentialMonthlySales();
-        await getCancelledMonthlySales();
-        await getAdminsSales();
-        await initTopRequestedProducts();
+        getTotalSales();
+        getLastMonthSales();
+        getApprovedMonthlySales();
+        getCompletedMonthlySales();
+        getPotentialMonthlySales();
+        getCancelledMonthlySales();
+        getAdminsSales();
+        initTopRequestedProducts();
 
 	});
 
@@ -39,7 +40,22 @@ function changeDashCurrency(){
     location.reload();
 }
 
+var randomizeArray = function (arg) {
+    var array = arg.slice();
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    while (0 !== currentIndex) {
+
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
 async function getTotalSales(){
 
     let data = await serviceGetTotalSales();
@@ -68,6 +84,167 @@ async function getTotalSales(){
 
 
 
+}
+
+async function getLastMonthSales(){
+    let data = await serviceGetLastMonthSales();
+    console.log('-------')
+    console.log(data)
+    let sales = data.sales;
+    let continue_data = sales.continue.continue_serie_try.map(parseFloat);
+    let approved_data = sales.approved.approved_serie_try.map(parseFloat);
+    let completed_data = sales.completed.completed_serie_try.map(parseFloat);
+    let cancelled_data = sales.cancelled.cancelled_serie_try.map(parseFloat);
+    let day_count = sales.day_count;
+
+    $('#monthly-approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
+    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
+    $('#monthly-approved-text').append(text1);
+
+    $('#monthly-completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
+    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
+    $('#monthly-completed-text').append(text2);
+
+    $('#monthly-continue-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
+    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
+    $('#monthly-continue-text').append(text3);
+
+    $('#monthly-cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
+    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
+    $('#monthly-cancelled-text').append(text4);
+
+    var spark1 = {
+        chart: {
+            id: 'sparkline1',
+            group: 'sparklines',
+            type: 'area',
+            height: 100,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'straight',
+            width: 1
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        series: [{
+            name: 'Sales',
+            data: approved_data
+        }],
+        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        yaxis: {
+            min: 0
+        },
+        xaxis: {
+            type: 'datetime',
+        },
+        colors: ['rgb(144, 238, 126)'],
+    }
+
+    var spark2 = {
+        chart: {
+            id: 'sparkline2',
+            group: 'sparklines',
+            type: 'area',
+            height: 100,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'straight',
+            width: 1
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        series: [{
+            name: 'Sales',
+            data: completed_data
+        }],
+        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        yaxis: {
+            min: 0
+        },
+        xaxis: {
+            type: 'datetime',
+        },
+        colors: ['rgb(254, 176, 25)'],
+    }
+
+    var spark3 = {
+        chart: {
+            id: 'sparkline3',
+            group: 'sparklines',
+            type: 'area',
+            height: 100,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'straight',
+            width: 1
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        series: [{
+            name: 'Sales',
+            data: continue_data
+        }],
+        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        yaxis: {
+            min: 0
+        },
+        xaxis: {
+            type: 'datetime',
+        },
+        colors: ['rgb(78, 205, 196)'],
+    }
+
+    var spark4 = {
+        chart: {
+            id: 'sparkline4',
+            group: 'sparklines',
+            type: 'area',
+            height: 100,
+            sparkline: {
+                enabled: true
+            },
+        },
+        stroke: {
+            curve: 'straight',
+            width: 1
+        },
+        fill: {
+            opacity: 0.3,
+        },
+        series: [{
+            name: 'Sales',
+            data: cancelled_data
+        }],
+        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        yaxis: {
+            min: 0
+        },
+        xaxis: {
+            type: 'datetime',
+        },
+        colors: ['rgb(255, 69, 96)'],
+    }
+
+    new ApexCharts(document.querySelector("#spark1"), spark1).render();
+    new ApexCharts(document.querySelector("#spark2"), spark2).render();
+    new ApexCharts(document.querySelector("#spark3"), spark3).render();
+    new ApexCharts(document.querySelector("#spark4"), spark4).render();
 }
 
 async function getApprovedMonthlySales(){
@@ -529,6 +706,8 @@ async function getAdminsSales(){
     let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
     console.log(data)
     let admins = data.admins;
+    admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
+
 
     $('#admins-table tbody tr').remove();
     $.each(admins, function (i, admin) {

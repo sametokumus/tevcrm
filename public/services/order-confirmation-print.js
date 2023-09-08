@@ -279,6 +279,7 @@ async function changeBankInfo(){
         return false;
     }else{
         let data = await serviceGetBankInfoById(bank_id);
+        console.log(data)
         let info = data.bank_info;
         $('#bank-details').append(info.detail);
     }

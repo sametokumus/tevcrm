@@ -2351,6 +2351,16 @@ async function serviceGetTotalSales() {
     }
 }
 
+async function serviceGetLastMonthSales() {
+    const data = await fetchDataGet('/admin/dashboard/getLastMonthSales', 'application/json');
+    console.log(data)
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetApprovedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
     console.log(data)

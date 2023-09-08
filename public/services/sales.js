@@ -208,9 +208,9 @@ async function initSales(){
             status_class = "border-default text-default";
         }
 
-        if (sale.status.period == "approved" || sale.status.period == "completed"){
-            btn_list += '<a href="mobile-documents/'+ sale.id +'" class="btn btn-sm btn-white">Mobil Dökümanlar</a>\n';
-        }
+        // if (sale.status.period == "approved" || sale.status.period == "completed"){
+        //     btn_list += '<a href="mobile-documents/'+ sale.id +'" class="btn btn-sm btn-white">Mobil Dökümanlar</a>\n';
+        // }
 
         btn_list += '</div>';
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';

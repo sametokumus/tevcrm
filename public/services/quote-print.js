@@ -12,6 +12,53 @@
             updateQuote();
 		});
 
+        window.jsPDF = window.jspdf.jsPDF;
+
+        document.getElementById('generatePdf').addEventListener('click', function () {
+            const content = document.getElementById('downloadPdf');
+
+            // Create a canvas from the HTML content using html2canvas
+            html2canvas(content).then(canvas => {
+                const contentHeightInMm = content.clientHeight / 2.83465;
+                const pdfOptions = {
+                    margin: 10,
+                    filename: 'document.pdf',
+                    image: { type: 'jpeg', quality: 1.0 }, // Maximum quality for JPEG images
+                    jsPDF: { unit: 'mm', format: [210, contentHeightInMm], orientation: 'portrait' }
+                };
+
+                // Get the canvas data as a base64-encoded PNG image
+                const imgData = canvas.toDataURL('image/png');
+
+                // Create a PDF using jspdf
+                const pdf = new jsPDF(pdfOptions);
+
+                const width = pdf.internal.pageSize.getWidth();
+                const height = pdf.internal.pageSize.getHeight();
+                console.log(width, height)
+                pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+
+                // Save the PDF as a base64-encoded string
+                const pdfBase64 = pdf.output('datauristring');
+
+                // You can now use pdfBase64 as needed, e.g., display, download, or send it to a server
+                console.log('Base64 PDF:', pdfBase64);
+
+                const base64PdfData = "data:application/pdf;base64,"+pdfBase64;
+                // Create a download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pdfBase64;
+                downloadLink.download = 'document.pdf'; // Set the desired file name
+
+                // Trigger a click event to start the download
+                downloadLink.click();
+
+                // Clean up by removing the download link (optional)
+                document.body.removeChild(downloadLink);
+
+            });
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -35,6 +82,9 @@ function checkRole(){
 
 function printOffer(){
 	window.print();
+}
+function saveOffer(){
+
 }
 
 async function changeOwner(){

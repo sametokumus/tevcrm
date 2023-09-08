@@ -5,8 +5,9 @@ $extra_js='
 <script>
 $(".datepicker").datepicker({
     autoclose: true,
-    format: "dd-mm-yyyy"
-});
+    format: "dd-mm-yyyy",
+    todayHighlight: true
+        }).datepicker("setDate", new Date());
 </script>
 ';
 ?>
