@@ -36,7 +36,7 @@
                 const width = pdf.internal.pageSize.getWidth();
                 const height = pdf.internal.pageSize.getHeight();
                 console.log(width, height)
-                pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+                pdf.addImage(imgData, 'PNG', 0, 0, 210, contentHeightInMm);
 
                 // Save the PDF as a base64-encoded string
                 const pdfBase64 = pdf.output('datauristring');
