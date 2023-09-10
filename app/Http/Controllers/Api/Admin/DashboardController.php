@@ -1021,8 +1021,6 @@ class DashboardController extends Controller
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
-//            $approved['count'] = $approved_count;
-//            $approved['approved_serie'] = $approved_serie;
 
             $completed = array();
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
@@ -1106,16 +1104,17 @@ class DashboardController extends Controller
 //                ->whereDate('sales.created_at', $date->toDateString())
 //                ->get();
 
-                $daily_total_approved_sales = Sale::query()
-                    ->selectRaw('sales.*, statuses.period as period')
-                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->leftJoin('status_histories as sh', function ($join) {
-                        $join->on('sh.sale_id', '=', 'sales.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id)')
+                $daily_total_approved_sales = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
                             ->where('sh.status_id', '=', 7);
                     })
-                    ->where('sales.active', 1)
-                    ->where('statuses.period', 'approved')
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'approved')
                     ->whereDate('sh.created_at', $date->toDateString())
                     ->get();
 
