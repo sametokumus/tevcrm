@@ -10,6 +10,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleOffer;
 use App\Models\Status;
 use App\Models\StatusHistory;
 use App\Models\User;
@@ -64,6 +65,27 @@ class NewsFeedController extends Controller
     {
         try {
             $products = OfferRequestProduct::query()
+                ->selectRaw('product_id, sum(quantity) as total_quantity')
+                ->groupBy('product_id')
+                ->orderByDesc('total_quantity')
+                ->limit(10)
+                ->get();
+
+            foreach ($products as $product){
+                $product_detail = Product::query()->where('id', $product->product_id)->first();
+                $product['product_detail'] = $product_detail;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getTopSaledProducts()
+    {
+        try {
+            $products = SaleOffer::query()
                 ->selectRaw('product_id, sum(quantity) as total_quantity')
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')

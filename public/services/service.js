@@ -1847,6 +1847,15 @@ async function serviceGetSaleHistoryActions() {
     }
 }
 
+async function serviceGetTopSaledProducts() {
+    const data = await fetchDataGet('/admin/newsFeed/getTopSaledProducts', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetTopRequestedProducts() {
     const data = await fetchDataGet('/admin/newsFeed/getTopRequestedProducts', 'application/json');
     if (data.status == "success") {
