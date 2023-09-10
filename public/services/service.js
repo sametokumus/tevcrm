@@ -1849,6 +1849,7 @@ async function serviceGetSaleHistoryActions() {
 
 async function serviceGetTopSaledProducts() {
     const data = await fetchDataGet('/admin/newsFeed/getTopSaledProducts', 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {

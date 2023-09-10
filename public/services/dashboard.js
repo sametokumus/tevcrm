@@ -28,7 +28,7 @@
         getPotentialMonthlySales();
         getCancelledMonthlySales();
         getAdminsSales();
-        initTopRequestedProducts();
+        initTopSaledProducts();
 
 	});
 
@@ -725,8 +725,9 @@ async function getAdminsSales(){
 
 }
 
-async function initTopRequestedProducts(){
-    let data = await serviceGetTopRequestedProducts();
+async function initTopSaledProducts(){
+    let data = await serviceGetTopSaledProducts();
+    console.log(data)
     let products = data.products;
 
     $('#top-products-table tbody tr').remove();
