@@ -179,14 +179,6 @@ class DashboardController extends Controller
 
 
 
-//            foreach ($sales as $sale) {
-//                $year = $sale->year;
-//                $month = $sale->month;
-//                $currency = $sale->currency;
-//                $monthlyTotal = $sale->monthly_total;
-//
-//            }
-
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
@@ -969,12 +961,6 @@ class DashboardController extends Controller
                     }
 
                 }else if($item->period == 'approved'){
-//                    $approved_count++;
-//                    $x = array();
-//                    $x['price'] = $item->grand_total;
-//                    $x['currency'] = $item->currency;
-//                    $x['id'] = $item->id;
-//                    $x['created_at'] = $item->created_at;
 
                     if ($item->currency == 'TRY'){
                         $approved_try_price += $item->grand_total;
@@ -989,8 +975,6 @@ class DashboardController extends Controller
                         $approved_try_price += $item->grand_total * $item->eur_rate;
                         $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
-
-//                    array_push($approved_serie, $x);
 
                 }else if($item->period == 'completed'){
 
@@ -1114,13 +1098,26 @@ class DashboardController extends Controller
             $approved_serie_try = array();
 
             for ($date = $firstDayOfMonth2; $date <= $lastDayOfMonth2; $date->addDay()) {
+//                $daily_total_approved_sales = Sale::query()
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('sales.*, statuses.period as period')
+//                ->where('sales.active', 1)
+//                ->where('statuses.period', 'approved')
+//                ->whereDate('sales.created_at', $date->toDateString())
+//                ->get();
+
                 $daily_total_approved_sales = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active', 1)
-                ->where('statuses.period', 'approved')
-                ->whereDate('sales.created_at', $date->toDateString())
-                ->get();
+                    ->selectRaw('sales.*, statuses.period as period')
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->leftJoin('status_histories as sh', function ($join) {
+                        $join->on('sh.sale_id', '=', 'sales.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id)')
+                            ->where('sh.status_id', '=', 7);
+                    })
+                    ->where('sales.active', 1)
+                    ->where('statuses.period', 'approved')
+                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->get();
 
                 $daily_approved_try_price = 0;
                 $daily_approved_usd_price = 0;
