@@ -481,21 +481,35 @@ class DashboardController extends Controller
 //                    ->whereRaw("(statuses.period = 'approved')")
 //                    ->whereYear('sales.created_at', $last_month->year)
 //                    ->whereMonth('sales.created_at', $last_month->month)
+////                    ->get();
+//
+//                $sale_items = Sale::query()
+//                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                    ->leftJoin('status_histories', function($join) {
+//                        $join->on('status_histories.sale_id', '=', 'sales.sale_id')
+//                            ->where('status_histories.status_id', '=', 7)
+//                            ->orderBy('status_histories.created_at', 'desc')
+//                            ->limit(1);
+//                    })
+//                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
+//                    ->where('sales.active', 1)
+//                    ->whereRaw("(statuses.period = 'approved')")
+//                    ->whereYear('status_histories.created_at', $last_month->year)
+//                    ->whereMonth('status_histories.created_at', $last_month->month)
 //                    ->get();
 
                 $sale_items = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                     ->leftJoin('status_histories', function($join) {
-                        $join->on('status_histories.sale_id', '=', 'sales.sale_id')
+                        $join->on('status_histories.sale_id', '=', 'sales.id')
                             ->where('status_histories.status_id', '=', 7)
-                            ->orderBy('status_histories.created_at', 'desc')
-                            ->limit(1);
+                            ->whereRaw('(status_histories.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id AND status_id = 7))');
                     })
-                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
+                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
                     ->where('sales.active', 1)
                     ->whereRaw("(statuses.period = 'approved')")
-                    ->whereYear('status_histories.created_at', $last_month->year)
-                    ->whereMonth('status_histories.created_at', $last_month->month)
+                    ->whereYear('sales.created_at', $last_month->year)
+                    ->whereMonth('sales.created_at', $last_month->month)
                     ->get();
 
 
