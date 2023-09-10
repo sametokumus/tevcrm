@@ -918,16 +918,6 @@ class DashboardController extends Controller
             $currentMonth = Carbon::now()->month;
             $currentYear = Carbon::now()->year;
 
-            $sale_items = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active', 1)
-                ->whereIn('statuses.period', ['completed', 'approved', 'continue', 'cancelled'])
-                ->whereMonth('sales.created_at', '=', $currentMonth)
-                ->whereYear('sales.created_at', '=', $currentYear)
-                ->get();
-
-
             $continue_try_price = 0;
             $continue_usd_price = 0;
             $continue_eur_price = 0;
@@ -940,65 +930,6 @@ class DashboardController extends Controller
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
-//            $approved_count = 0;
-
-            foreach ($sale_items as $item){
-
-                if($item->period == 'continue'){
-
-                    if ($item->currency == 'TRY'){
-                        $continue_try_price += $item->grand_total;
-                        $continue_usd_price += $item->grand_total / $item->usd_rate;
-                        $continue_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $continue_usd_price += $item->grand_total;
-                        $continue_try_price += $item->grand_total * $item->usd_rate;
-                        $continue_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $continue_eur_price += $item->grand_total;
-                        $continue_try_price += $item->grand_total * $item->eur_rate;
-                        $continue_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }else if($item->period == 'approved'){
-
-
-
-                }else if($item->period == 'completed'){
-
-                    if ($item->currency == 'TRY'){
-                        $completed_try_price += $item->grand_total;
-                        $completed_usd_price += $item->grand_total / $item->usd_rate;
-                        $completed_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $completed_usd_price += $item->grand_total;
-                        $completed_try_price += $item->grand_total * $item->usd_rate;
-                        $completed_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $completed_eur_price += $item->grand_total;
-                        $completed_try_price += $item->grand_total * $item->eur_rate;
-                        $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }else if($item->period == 'cancelled'){
-
-                    if ($item->currency == 'TRY'){
-                        $cancelled_try_price += $item->grand_total;
-                        $cancelled_usd_price += $item->grand_total / $item->usd_rate;
-                        $cancelled_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $cancelled_usd_price += $item->grand_total;
-                        $cancelled_try_price += $item->grand_total * $item->usd_rate;
-                        $cancelled_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $cancelled_eur_price += $item->grand_total;
-                        $cancelled_try_price += $item->grand_total * $item->eur_rate;
-                        $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }
-
-            }
 
 
             $continue = array();
@@ -1046,6 +977,20 @@ class DashboardController extends Controller
                         $daily_continue_eur_price += $sl->grand_total;
                         $daily_continue_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                    if ($sl->currency == 'TRY'){
+                        $continue_try_price += $sl->grand_total;
+                        $continue_usd_price += $sl->grand_total / $sl->usd_rate;
+                        $continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                    }else if ($sl->currency == 'USD'){
+                        $continue_usd_price += $sl->grand_total;
+                        $continue_try_price += $sl->grand_total * $sl->usd_rate;
+                        $continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                    }else if ($sl->currency == 'EUR'){
+                        $continue_eur_price += $sl->grand_total;
+                        $continue_try_price += $sl->grand_total * $sl->eur_rate;
+                        $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
                 }
@@ -1171,6 +1116,20 @@ class DashboardController extends Controller
                         $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
+                    if ($sl->currency == 'TRY'){
+                        $completed_try_price += $sl->grand_total;
+                        $completed_usd_price += $sl->grand_total / $sl->usd_rate;
+                        $completed_eur_price += $sl->grand_total / $sl->eur_rate;
+                    }else if ($sl->currency == 'USD'){
+                        $completed_usd_price += $sl->grand_total;
+                        $completed_try_price += $sl->grand_total * $sl->usd_rate;
+                        $completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                    }else if ($sl->currency == 'EUR'){
+                        $completed_eur_price += $sl->grand_total;
+                        $completed_try_price += $sl->grand_total * $sl->eur_rate;
+                        $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
                 }
 
                 $completed_serie_this_day = array();
@@ -1221,6 +1180,20 @@ class DashboardController extends Controller
                         $daily_cancelled_eur_price += $sl->grand_total;
                         $daily_cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                    if ($sl->currency == 'TRY'){
+                        $cancelled_try_price += $sl->grand_total;
+                        $cancelled_usd_price += $sl->grand_total / $sl->usd_rate;
+                        $cancelled_eur_price += $sl->grand_total / $sl->eur_rate;
+                    }else if ($sl->currency == 'USD'){
+                        $cancelled_usd_price += $sl->grand_total;
+                        $cancelled_try_price += $sl->grand_total * $sl->usd_rate;
+                        $cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                    }else if ($sl->currency == 'EUR'){
+                        $cancelled_eur_price += $sl->grand_total;
+                        $cancelled_try_price += $sl->grand_total * $sl->eur_rate;
+                        $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
                 }
