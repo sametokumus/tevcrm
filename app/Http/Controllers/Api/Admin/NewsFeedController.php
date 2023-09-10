@@ -95,12 +95,12 @@ class NewsFeedController extends Controller
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')
                 ->limit(10)
-                ->toSql();
+                ->get();
 
-//            foreach ($products as $product){
-//                $product_detail = Product::query()->where('id', $product->product_id)->first();
-//                $product['product_detail'] = $product_detail;
-//            }
+            foreach ($products as $product){
+                $product_detail = Product::query()->where('id', $product->product_id)->first();
+                $product['product_detail'] = $product_detail;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
