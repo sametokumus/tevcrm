@@ -86,7 +86,7 @@ class NewsFeedController extends Controller
     {
         try {
             $products = SaleOffer::query()
-                ->leftJoin('sales', 'sales.order_id', '=', 'sale_offers.order_id')
+                ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('product_id, sum(offer_quantity) as total_quantity')
                 ->where('sale_offers.active',1)
