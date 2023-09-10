@@ -962,19 +962,7 @@ class DashboardController extends Controller
 
                 }else if($item->period == 'approved'){
 
-                    if ($item->currency == 'TRY'){
-                        $approved_try_price += $item->grand_total;
-                        $approved_usd_price += $item->grand_total / $item->usd_rate;
-                        $approved_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $approved_usd_price += $item->grand_total;
-                        $approved_try_price += $item->grand_total * $item->usd_rate;
-                        $approved_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $approved_eur_price += $item->grand_total;
-                        $approved_try_price += $item->grand_total * $item->eur_rate;
-                        $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
+
 
                 }else if($item->period == 'completed'){
 
@@ -1012,25 +1000,12 @@ class DashboardController extends Controller
 
             }
 
+
             $continue = array();
-            $continue['try_sale'] = number_format($continue_try_price, 2,".","");
-            $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
-            $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
-
             $approved = array();
-            $approved['try_sale'] = number_format($approved_try_price, 2,".","");
-            $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
-            $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
-
             $completed = array();
-            $completed['try_sale'] = number_format($completed_try_price, 2,".","");
-            $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
-            $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
-
             $cancelled = array();
-            $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
-            $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
-            $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+
 
             $day_count = 0;
 
@@ -1096,13 +1071,6 @@ class DashboardController extends Controller
             $approved_serie_try = array();
 
             for ($date = $firstDayOfMonth2; $date <= $lastDayOfMonth2; $date->addDay()) {
-//                $daily_total_approved_sales = Sale::query()
-//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-//                ->selectRaw('sales.*, statuses.period as period')
-//                ->where('sales.active', 1)
-//                ->where('statuses.period', 'approved')
-//                ->whereDate('sales.created_at', $date->toDateString())
-//                ->get();
 
                 $daily_total_approved_sales = DB::table('sales AS s')
                     ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
@@ -1136,6 +1104,20 @@ class DashboardController extends Controller
                         $daily_approved_eur_price += $sl->grand_total;
                         $daily_approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                    if ($sl->currency == 'TRY'){
+                        $approved_try_price += $sl->grand_total;
+                        $approved_usd_price += $sl->grand_total / $sl->usd_rate;
+                        $approved_eur_price += $sl->grand_total / $sl->eur_rate;
+                    }else if ($sl->currency == 'USD'){
+                        $approved_usd_price += $sl->grand_total;
+                        $approved_try_price += $sl->grand_total * $sl->usd_rate;
+                        $approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                    }else if ($sl->currency == 'EUR'){
+                        $approved_eur_price += $sl->grand_total;
+                        $approved_try_price += $sl->grand_total * $sl->eur_rate;
+                        $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
                 }
@@ -1256,6 +1238,24 @@ class DashboardController extends Controller
             $cancelled['cancelled_serie_try'] = $cancelled_serie_try;
 
 
+
+
+
+            $continue['try_sale'] = number_format($continue_try_price, 2,".","");
+            $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
+            $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
+
+            $approved['try_sale'] = number_format($approved_try_price, 2,".","");
+            $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
+            $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+
+            $completed['try_sale'] = number_format($completed_try_price, 2,".","");
+            $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
+            $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
+
+            $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
+            $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
+            $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
 
 
             $sales['continue'] = $continue;
