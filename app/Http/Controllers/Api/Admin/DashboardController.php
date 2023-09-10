@@ -486,7 +486,7 @@ class DashboardController extends Controller
                 $sale_items = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                     ->leftJoin('status_histories', function($join) {
-                        $join->on('status_histories.sale_id', '=', 'sales.id')
+                        $join->on('status_histories.sale_id', '=', 'sales.sale_id')
                             ->where('status_histories.status_id', '=', 7)
                             ->orderBy('status_histories.created_at', 'desc')
                             ->limit(1);
