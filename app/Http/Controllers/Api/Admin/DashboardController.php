@@ -951,12 +951,18 @@ class DashboardController extends Controller
             for ($date = $firstDayOfMonth; $date <= $lastDayOfMonth; $date->addDay()) {
                 $day_count++;
 
-                $daily_total_continue_sales = Sale::query()
-                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->selectRaw('sales.*, statuses.period as period')
-                    ->where('sales.active', 1)
-                    ->where('statuses.period', 'continue')
-                    ->whereDate('sales.created_at', $date->toDateString())
+                $daily_total_continue_sales = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+                            ->where('sh.status_id', '=', 1);
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'continue')
+                    ->whereDate('sh.created_at', $date->toDateString())
                     ->get();
 
                 $daily_continue_try_price = 0;
@@ -1088,13 +1094,20 @@ class DashboardController extends Controller
             $completed_serie_try = array();
 
             for ($date = $firstDayOfMonth3; $date <= $lastDayOfMonth3; $date->addDay()) {
-                $daily_total_completed_sales = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active', 1)
-                ->where('statuses.period', 'completed')
-                ->whereDate('sales.created_at', $date->toDateString())
-                ->get();
+
+                $daily_total_completed_sales = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+                            ->where('sh.status_id', '=', 24);
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'completed')
+                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->get();
 
                 $daily_completed_try_price = 0;
                 $daily_completed_usd_price = 0;
@@ -1154,13 +1167,20 @@ class DashboardController extends Controller
             $cancelled_serie_try = array();
 
             for ($date = $firstDayOfMonth4; $date <= $lastDayOfMonth4; $date->addDay()) {
-                $daily_total_cancelled_sales = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active', 1)
-                ->where('statuses.period', 'cancelled')
-                ->whereDate('sales.created_at', $date->toDateString())
-                ->get();
+
+                $daily_total_cancelled_sales = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+                            ->whereRaw("(sh.status_id = '23' OR sh.status_id = '25' OR sh.status_id = '28')");
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'cancelled')
+                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->get();
 
                 $daily_cancelled_try_price = 0;
                 $daily_cancelled_usd_price = 0;
