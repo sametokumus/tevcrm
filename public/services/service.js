@@ -2372,6 +2372,7 @@ async function serviceGetLastMonthSales() {
 
 async function serviceGetApprovedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
+    console.log(1)
     console.log(data)
     if (data.status == "success") {
         return data.object;
