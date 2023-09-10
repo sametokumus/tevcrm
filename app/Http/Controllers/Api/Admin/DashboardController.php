@@ -505,7 +505,7 @@ class DashboardController extends Controller
                             ->where('status_histories.status_id', '=', 7)
                             ->whereRaw('(status_histories.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id AND status_id = 7))');
                     })
-                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
+                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
                     ->where('sales.active', 1)
                     ->whereRaw("(statuses.period = 'approved')")
                     ->whereYear('sales.created_at', $last_month->year)
