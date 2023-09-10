@@ -86,7 +86,12 @@ class NewsFeedController extends Controller
     {
         try {
             $products = SaleOffer::query()
+                ->leftJoin('sales', 'sales.order_id', '=', 'sale_offers.order_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('product_id, sum(offer_quantity) as total_quantity')
+                ->where('sale_offers.active',1)
+                ->where('sales.active',1)
+                ->whereIn('statuses.period', ['completed', 'approved'])
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')
                 ->limit(10)
