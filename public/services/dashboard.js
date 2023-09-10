@@ -727,7 +727,6 @@ async function getAdminsSales(){
 
 async function initTopSaledProducts(){
     let data = await serviceGetTopSaledProducts();
-    console.log(data)
     let products = data.products;
 
     $('#top-products-table tbody tr').remove();
