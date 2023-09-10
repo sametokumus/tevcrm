@@ -494,22 +494,35 @@ class DashboardController extends Controller
 //                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
 //                    ->where('sales.active', 1)
 //                    ->whereRaw("(statuses.period = 'approved')")
-//                    ->whereYear('status_histories.created_at', $last_month->year)
-//                    ->whereMonth('status_histories.created_at', $last_month->month)
+////                    ->whereYear('status_histories.created_at', $last_month->year)
+////                    ->whereMonth('status_histories.created_at', $last_month->month)
+////                    ->get();
+//
+//                $sale_items = Sale::query()
+//                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                    ->leftJoin('status_histories', function($join) {
+//                        $join->on('status_histories.sale_id', '=', 'sales.id')
+//                            ->where('status_histories.status_id', '=', 7)
+//                            ->whereRaw('(status_histories.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id AND status_id = 7))');
+//                    })
+//                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
+//                    ->where('sales.active', 1)
+//                    ->whereRaw("(statuses.period = 'approved')")
+//                    ->whereYear('sales.created_at', $last_month->year)
+//                    ->whereMonth('sales.created_at', $last_month->month)
 //                    ->get();
 
-                $sale_items = Sale::query()
-                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->leftJoin('status_histories', function($join) {
-                        $join->on('status_histories.sale_id', '=', 'sales.id')
-                            ->where('status_histories.status_id', '=', 7)
-                            ->whereRaw('(status_histories.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.id AND status_id = 7))');
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+                            ->where('sh.status_id', '=', 7);
                     })
-                    ->selectRaw('YEAR(status_histories.created_at) AS year, MONTH(status_histories.created_at) AS month, sales.*')
-                    ->where('sales.active', 1)
-                    ->whereRaw("(statuses.period = 'approved')")
-                    ->whereYear('sales.created_at', $last_month->year)
-                    ->whereMonth('sales.created_at', $last_month->month)
+                    ->where('s.active', '=', 1)
+                    ->whereYear('sh.created_at', '=', $last_month->year)
+                    ->whereMonth('sh.created_at', '=', $last_month->month)
                     ->get();
 
 
