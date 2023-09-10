@@ -86,16 +86,16 @@ class NewsFeedController extends Controller
     {
         try {
             $products = SaleOffer::query()
-                ->selectRaw('product_id, sum(quantity) as total_quantity')
+                ->selectRaw('product_id, sum(offer_quantity) as total_quantity')
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')
                 ->limit(10)
-                ->toSql();
+                ->get();
 
-//            foreach ($products as $product){
-//                $product_detail = Product::query()->where('id', $product->product_id)->first();
-//                $product['product_detail'] = $product_detail;
-//            }
+            foreach ($products as $product){
+                $product_detail = Product::query()->where('id', $product->product_id)->first();
+                $product['product_detail'] = $product_detail;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
