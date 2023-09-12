@@ -110,9 +110,6 @@ async function initSaleSuppliers(sale_id){
                 '                   ' + offer.supplier.name + '\n' +
                 '               </span>\n' +
                 '           </td>\n' +
-                '           <td><small>' + offer.supplier.website + '</small></td>\n' +
-                '           <td><small>' + offer.supplier.email + '</small></td>\n' +
-                '           <td><small>' + offer.supplier.phone + '</small></td>\n' +
                 '           <td><small>' + offer.product_count + ' Ürün</small></td>\n' +
                 '           <td><small>' + offer.total_price + ' ' + offer.currency + '+KDV</small></td>\n' +
                 '           <td>\n' +

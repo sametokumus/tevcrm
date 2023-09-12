@@ -706,7 +706,7 @@ async function getAdminsSales(){
         let item = '<tr>\n' +
             '           <td>'+ admin.id +'</td>\n' +
             '           <td>'+ admin.name +' '+ admin.surname +'</td>\n' +
-            '           <td>'+ admin.email +'</td>\n' +
+            '           <td>'+ admin.total_sales.sale_count +'</td>\n' +
             '           <td>'+ changeCommasToDecimal(admin.total_sales.try_total) +' TRY</td>\n' +
             '           <td>'+ changeCommasToDecimal(admin.total_sales.usd_total) +' USD</td>\n' +
             '           <td>'+ changeCommasToDecimal(admin.total_sales.eur_total) +' EUR</td>\n' +
