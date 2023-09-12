@@ -2072,6 +2072,7 @@ async function serviceGetSaleStatusHistory(sale_id) {
 
 async function serviceGetSaleSuppliers(sale_id) {
     const data = await fetchDataGet('/admin/sale/getSaleSuppliers/' + sale_id, 'application/json');
+    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {

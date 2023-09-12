@@ -1139,14 +1139,15 @@ class SaleController extends Controller
                 ->groupBy('sale_offers.supplier_id')
                 ->orderBy('sale_offers.supplier_id')
                 ->where('sale_id', $sale_id)
-                ->toSql();
+                ->where('active', 1)
+                ->get();
 
-//            foreach ($offers as $offer){
-//                $supplier = Company::query()->where('id', $offer->supplier_id)->first();
-//                $offer['supplier'] = $supplier;
-//                $currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
-//                $offer['currency'] = $currency;
-//            }
+            foreach ($offers as $offer){
+                $supplier = Company::query()->where('id', $offer->supplier_id)->first();
+                $offer['supplier'] = $supplier;
+                $currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
+                $offer['currency'] = $currency;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
         } catch (QueryException $queryException) {
