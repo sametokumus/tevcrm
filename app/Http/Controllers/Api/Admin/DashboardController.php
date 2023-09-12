@@ -1282,11 +1282,11 @@ class DashboardController extends Controller
 
             foreach ($admins as $admin) {
 
-                $sales = array();
                 $total_sales = array();
                 $try_total = 0;
                 $usd_total = 0;
                 $eur_total = 0;
+                $sale_count = 0;
 
                 foreach ($last_months as $last_month) {
                     $sale_items = Sale::query()
@@ -1301,14 +1301,12 @@ class DashboardController extends Controller
                         ->get();
 
 
-                    $sale = array();
-                    $sale['year'] = $last_month->year;
-                    $sale['month'] = $last_month->month;
                     $try_price = 0;
                     $usd_price = 0;
                     $eur_price = 0;
 
                     foreach ($sale_items as $item) {
+                        $sale_count++;
 
                         if ($item->currency == 'TRY') {
                             $try_price += $item->grand_total;
@@ -1342,6 +1340,7 @@ class DashboardController extends Controller
                 $total_sales['try_total'] = number_format($try_total, 2, ".", "");
                 $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
                 $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
+                $total_sales['sale_count'] = $sale_count;
 
 
                 $admin['total_sales'] = $total_sales;

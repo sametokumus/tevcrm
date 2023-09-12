@@ -51,7 +51,6 @@ $(function() {
         var lang = $(this).val();
         // Make an Ajax request to change the language
         Lang.setLocale(lang);
-        console.log(lang)
 
         $.ajax({
             url: '/lang',
@@ -1201,7 +1200,6 @@ async function servicePostAddOfferRequest(formData) {
 }
 async function servicePostOfferRequestProducts(formData, id) {
     const data = await fetchDataPost('/admin/offerRequest/offerRequestProducts/' + id, formData, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data;
     } else {
@@ -1211,7 +1209,6 @@ async function servicePostOfferRequestProducts(formData, id) {
 }
 async function servicePostUpdateOfferRequest(id, formData) {
     const data = await fetchDataPost('/admin/offerRequest/updateOfferRequest/' + id, formData, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -1586,7 +1583,6 @@ async function servicePostAddSaleNote(formData) {
 
 async function serviceGetLiveCurrencyLog() {
     const data = await fetchDataGet('/admin/sale/getLiveCurrencyLog', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return true;
     } else {
@@ -2269,7 +2265,6 @@ async function serviceGetDeleteDeliveryTerm(id) {
 async function serviceGetPendingAccountingSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/accounting/getPendingAccountingSales/'+ userId, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2279,7 +2274,6 @@ async function serviceGetPendingAccountingSales() {
 async function serviceGetOngoingAccountingSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/accounting/getOngoingAccountingSales/'+ userId, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2289,7 +2283,6 @@ async function serviceGetOngoingAccountingSales() {
 async function serviceGetCompletedAccountingSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/accounting/getCompletedAccountingSales/'+ userId, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2298,7 +2291,6 @@ async function serviceGetCompletedAccountingSales() {
 }
 async function serviceGetAccountingPayments(sale_id) {
     const data = await fetchDataGet('/admin/accounting/getAccountingPayments/'+ sale_id, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2307,7 +2299,6 @@ async function serviceGetAccountingPayments(sale_id) {
 }
 async function serviceGetAccountingPaymentById(payment_id) {
     const data = await fetchDataGet('/admin/accounting/getAccountingPaymentById/'+ payment_id, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2317,7 +2308,6 @@ async function serviceGetAccountingPaymentById(payment_id) {
 
 async function servicePostAddAccountingPayment(formData) {
     const data = await fetchDataPost('/admin/accounting/addAccountingPayment', formData, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return true;
     } else {
@@ -2352,7 +2342,6 @@ async function servicePostUpdateAccountingPaymentStatus(formData) {
 
 async function serviceGetTotalSales() {
     const data = await fetchDataGet('/admin/dashboard/getTotalSales', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2362,7 +2351,6 @@ async function serviceGetTotalSales() {
 
 async function serviceGetLastMonthSales() {
     const data = await fetchDataGet('/admin/dashboard/getLastMonthSales', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2372,8 +2360,6 @@ async function serviceGetLastMonthSales() {
 
 async function serviceGetApprovedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
-    console.log(1)
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2383,7 +2369,6 @@ async function serviceGetApprovedMonthlySales() {
 
 async function serviceGetCompletedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonths', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2393,7 +2378,6 @@ async function serviceGetCompletedMonthlySales() {
 
 async function serviceGetPotentialSales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonths', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2403,7 +2387,6 @@ async function serviceGetPotentialSales() {
 
 async function serviceGetCancelledPotentialSales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2414,7 +2397,6 @@ async function serviceGetCancelledPotentialSales() {
 
 async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins', 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2424,7 +2406,6 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins() {
 
 async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdminId/'+ id, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2436,7 +2417,6 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
 
 async function serviceGetMobileDocuments(id) {
     const data = await fetchDataGet('/admin/mobile/getDocuments/'+ id, 'application/json');
-    console.log(data)
     if (data.status == "success") {
         return data.object;
     } else {

@@ -12,7 +12,6 @@
 		checkLogin();
 
         dash_currency = localStorage.getItem('dash_currency');
-        console.log(dash_currency)
         if (dash_currency == null){
             dash_currency = 'TRY';
             localStorage.setItem('dash_currency', 'TRY');
@@ -59,7 +58,6 @@ var randomizeArray = function (arg) {
 async function getTotalSales(){
 
     let data = await serviceGetTotalSales();
-    console.log(data)
     let sales = data.sales;
 
     $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
@@ -88,8 +86,6 @@ async function getTotalSales(){
 
 async function getLastMonthSales(){
     let data = await serviceGetLastMonthSales();
-    console.log('-------')
-    console.log(data)
     let sales = data.sales;
     let continue_data = sales.continue.continue_serie_try.map(parseFloat);
     let approved_data = sales.approved.approved_serie_try.map(parseFloat);
@@ -363,7 +359,6 @@ async function getApprovedMonthlySales(){
 async function getCompletedMonthlySales(){
 
     let data = await serviceGetCompletedMonthlySales();
-    console.log(data)
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -477,7 +472,6 @@ async function getCompletedMonthlySales(){
 async function getPotentialMonthlySales(){
 
     let data = await serviceGetPotentialSales();
-    console.log(data)
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -590,7 +584,6 @@ async function getPotentialMonthlySales(){
 async function getCancelledMonthlySales(){
 
     let data = await serviceGetCancelledPotentialSales();
-    console.log(data)
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -703,8 +696,8 @@ async function getCancelledMonthlySales(){
 async function getAdminsSales(){
 
     let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
-    console.log(data)
     let admins = data.admins;
+    console.log(admins)
     admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
 
 
