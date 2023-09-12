@@ -1745,4 +1745,52 @@ class SaleController extends Controller
         }
     }
 
+    public function getSellingProcess($sale_id)
+    {
+        try {
+            $sale = Sale::query()->where('sale_id', $sale_id)->first();
+            $request_date = $sale->created_at;
+
+            $history1 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->orderByDesc('id')->first();
+            if ($history1){
+                $offer_date = $history1->created_at;
+                $offer_day = $offer_date->diffInDays($request_date);
+            }else{
+                $offer_date = null;
+                $offer_day = 0;
+            }
+
+            $history2 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->orderByDesc('id')->first();
+            if ($history2){
+                $confirmed_date = $history2->created_at;
+                $confirmed_day = $confirmed_date->diffInDays($offer_date);
+            }else{
+                $confirmed_date = null;
+                $confirmed_day = 0;
+            }
+
+            $history3 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->orderByDesc('id')->first();
+            if ($history3){
+                $completed_date = $history3->created_at;
+                $completed_day = $completed_date->diffInDays($confirmed_date);
+            }else{
+                $completed_date = null;
+                $completed_day = 0;
+            }
+
+            $process = array();
+            $process['request_date'] = $request_date;
+            $process['offer_date'] = $offer_date;
+            $process['confirmed_date'] = $confirmed_date;
+            $process['completed_date'] = $completed_date;
+            $process['offer_day'] = $offer_day;
+            $process['confirmed_day'] = $confirmed_day;
+            $process['completed_day'] = $completed_day;
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['process' => $process]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
 }

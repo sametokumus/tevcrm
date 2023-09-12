@@ -1581,6 +1581,16 @@ async function servicePostAddSaleNote(formData) {
 }
 
 
+async function serviceGetSellingProcess() {
+    const data = await fetchDataGet('/admin/sale/getSellingProcess', 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetLiveCurrencyLog() {
     const data = await fetchDataGet('/admin/sale/getLiveCurrencyLog', 'application/json');
     if (data.status == "success") {

@@ -18,6 +18,7 @@
         initSaleStats(sale_id);
         initSaleHistory(sale_id);
         initSaleSuppliers(sale_id);
+        initSellingProcess(sale_id);
 
         getDocumentTypesAddSelectId('add_document_type');
         initDocuments();
@@ -69,8 +70,11 @@ async function initSaleStats(sale_id){
     let sale = data.sale;
     console.log(sale)
     let total = '-';
+    if (sale.grand_total != null){
+        total = changeCommasToDecimal(sale.grand_total) + ' ' + sale.currency;
+    }
     if (sale.grand_total_with_shipping != null){
-        total = changeCommasToDecimal(sale.grand_total_with_shipping);
+        total = changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + sale.currency;
     }
 
     $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
@@ -111,7 +115,7 @@ async function initSaleSuppliers(sale_id){
                 '               </span>\n' +
                 '           </td>\n' +
                 '           <td><small>' + offer.product_count + ' Ürün</small></td>\n' +
-                '           <td><small>' + offer.total_price + ' ' + offer.currency + '+KDV</small></td>\n' +
+                '           <td><small>' + changeCommasToDecimal(offer.total_price) + ' ' + offer.currency + '+KDV</small></td>\n' +
                 '           <td>\n' +
                 '               <a href="/company-detail/' + offer.supplier_id + '" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
                 '           </td>\n' +
@@ -210,4 +214,118 @@ async function deleteDocument(document_id){
     if(returned){
         initDocuments();
     }
+}
+
+async function initSellingProcess(){
+
+    let data = await serviceGetSellingProcess();
+    console.log(data)
+    // let sales = data.sales.reverse();
+    //
+    // let xAxisArray = [];
+    // let yAxisArray = [];
+    //
+    // $.each(sales, function (i, sale) {
+    //     xAxisArray.push(sale.month + "/" + sale.year);
+    //
+    //     if (dash_currency == 'TRY'){
+    //         yAxisArray.push(sale.try_sale);
+    //     }else if (dash_currency == 'USD'){
+    //         yAxisArray.push(sale.usd_sale);
+    //     }else if (dash_currency == 'EUR'){
+    //         yAxisArray.push(sale.eur_sale);
+    //     }
+    // });
+    //
+    // let apexColumnChartOptions = {
+    //     chart: {
+    //         height: 350,
+    //         type: 'bar'
+    //     },
+    //     title: {
+    //         style: {
+    //             fontSize: '14px',
+    //             fontWeight: 'bold',
+    //             fontFamily: FONT_FAMILY,
+    //             color: COLOR_WHITE
+    //         },
+    //     },
+    //     legend: {
+    //         fontFamily: FONT_FAMILY,
+    //         labels: {
+    //             colors: '#fff'
+    //         }
+    //     },
+    //     plotOptions: {
+    //         bar: {
+    //             horizontal: false,
+    //             columnWidth: '20%',
+    //             endingShape: 'rounded'
+    //         },
+    //     },
+    //     dataLabels: {
+    //         enabled: false
+    //     },
+    //     stroke: {
+    //         show: true,
+    //         width: 2,
+    //         colors: ['transparent']
+    //     },
+    //     colors: ['#90ee7e'],
+    //     series: [{
+    //         name: dash_currency,
+    //         data: yAxisArray
+    //     }],
+    //     xaxis: {
+    //         categories: xAxisArray,
+    //         labels: {
+    //             style: {
+    //                 colors: '#fff',
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400,
+    //                 cssClass: 'apexcharts-xaxis-label',
+    //             }
+    //         }
+    //     },
+    //     yaxis: {
+    //         title: {
+    //             text: 'Kazanç',
+    //             style: {
+    //                 color: hexToRgba(COLOR_WHITE, .5),
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400
+    //             }
+    //         },
+    //         labels: {
+    //             formatter: function (val) {
+    //                 return changeCommasToDecimal(val.toFixed(2))
+    //             },
+    //             style: {
+    //                 colors: '#fff',
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400,
+    //                 cssClass: 'apexcharts-xaxis-label',
+    //             }
+    //         }
+    //     },
+    //     fill: {
+    //         opacity: 1
+    //     },
+    //     tooltip: {
+    //         y: {
+    //             formatter: function (val) {
+    //                 return changeCommasToDecimal(val.toFixed(2))
+    //             }
+    //         }
+    //     }
+    // };
+    // var apexColumnChart = new ApexCharts(
+    //     document.querySelector('#chart-approved-monthly'),
+    //     apexColumnChartOptions
+    // );
+    // apexColumnChart.render();
+
 }
