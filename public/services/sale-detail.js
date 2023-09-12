@@ -216,9 +216,9 @@ async function deleteDocument(document_id){
     }
 }
 
-async function initSellingProcess(){
+async function initSellingProcess(sale_id){
 
-    let data = await serviceGetSellingProcess();
+    let data = await serviceGetSellingProcess(sale_id);
     console.log(data)
     // let sales = data.sales.reverse();
     //

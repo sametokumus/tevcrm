@@ -1760,7 +1760,7 @@ class SaleController extends Controller
                 $offer_day = 0;
             }
 
-            $history2 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->orderByDesc('id')->first();
+            $history2 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 7)->orderByDesc('id')->first();
             if ($history2){
                 $confirmed_date = $history2->created_at;
                 $confirmed_day = $confirmed_date->diffInDays($offer_date);
@@ -1769,7 +1769,7 @@ class SaleController extends Controller
                 $confirmed_day = 0;
             }
 
-            $history3 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->orderByDesc('id')->first();
+            $history3 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 24)->orderByDesc('id')->first();
             if ($history3){
                 $completed_date = $history3->created_at;
                 $completed_day = $completed_date->diffInDays($confirmed_date);

@@ -1581,10 +1581,10 @@ async function servicePostAddSaleNote(formData) {
 }
 
 
-async function serviceGetSellingProcess() {
-    const data = await fetchDataGet('/admin/sale/getSellingProcess', 'application/json');
+async function serviceGetSellingProcess(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSellingProcess/' + sale_id, 'application/json');
     if (data.status == "success") {
-        return true;
+        return data.object;
     } else {
         return false;
         showAlert('İstek Başarısız.');
