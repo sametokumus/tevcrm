@@ -1282,6 +1282,7 @@ class DashboardController extends Controller
 
             foreach ($admins as $admin) {
 
+                $sales = array();
                 $total_sales = array();
                 $try_total = 0;
                 $usd_total = 0;
