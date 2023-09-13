@@ -218,7 +218,7 @@ function formatDateDESC(date, slicer) {
 
 	return year + slicer + month + slicer + day;
 }
-function formatDateDESC(date, slicer, splitter) {
+function formatDateDESC2(date, slicer, splitter) {
 	var dates = date.split(splitter);
 	date = dates[2]+'-'+dates[1]+'-'+dates[0];
 	date = new Date(date);

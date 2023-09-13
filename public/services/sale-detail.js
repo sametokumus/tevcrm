@@ -220,112 +220,124 @@ async function initSellingProcess(sale_id){
 
     let data = await serviceGetSellingProcess(sale_id);
     console.log(data)
-    // let sales = data.sales.reverse();
-    //
-    // let xAxisArray = [];
-    // let yAxisArray = [];
-    //
-    // $.each(sales, function (i, sale) {
-    //     xAxisArray.push(sale.month + "/" + sale.year);
-    //
-    //     if (dash_currency == 'TRY'){
-    //         yAxisArray.push(sale.try_sale);
-    //     }else if (dash_currency == 'USD'){
-    //         yAxisArray.push(sale.usd_sale);
-    //     }else if (dash_currency == 'EUR'){
-    //         yAxisArray.push(sale.eur_sale);
-    //     }
-    // });
-    //
-    // let apexColumnChartOptions = {
-    //     chart: {
-    //         height: 350,
-    //         type: 'bar'
-    //     },
-    //     title: {
-    //         style: {
-    //             fontSize: '14px',
-    //             fontWeight: 'bold',
-    //             fontFamily: FONT_FAMILY,
-    //             color: COLOR_WHITE
-    //         },
-    //     },
-    //     legend: {
-    //         fontFamily: FONT_FAMILY,
-    //         labels: {
-    //             colors: '#fff'
-    //         }
-    //     },
-    //     plotOptions: {
-    //         bar: {
-    //             horizontal: false,
-    //             columnWidth: '20%',
-    //             endingShape: 'rounded'
-    //         },
-    //     },
-    //     dataLabels: {
-    //         enabled: false
-    //     },
-    //     stroke: {
-    //         show: true,
-    //         width: 2,
-    //         colors: ['transparent']
-    //     },
-    //     colors: ['#90ee7e'],
-    //     series: [{
-    //         name: dash_currency,
-    //         data: yAxisArray
-    //     }],
-    //     xaxis: {
-    //         categories: xAxisArray,
-    //         labels: {
-    //             style: {
-    //                 colors: '#fff',
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400,
-    //                 cssClass: 'apexcharts-xaxis-label',
-    //             }
-    //         }
-    //     },
-    //     yaxis: {
-    //         title: {
-    //             text: 'Kazanç',
-    //             style: {
-    //                 color: hexToRgba(COLOR_WHITE, .5),
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400
-    //             }
-    //         },
-    //         labels: {
-    //             formatter: function (val) {
-    //                 return changeCommasToDecimal(val.toFixed(2))
-    //             },
-    //             style: {
-    //                 colors: '#fff',
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400,
-    //                 cssClass: 'apexcharts-xaxis-label',
-    //             }
-    //         }
-    //     },
-    //     fill: {
-    //         opacity: 1
-    //     },
-    //     tooltip: {
-    //         y: {
-    //             formatter: function (val) {
-    //                 return changeCommasToDecimal(val.toFixed(2))
-    //             }
-    //         }
-    //     }
-    // };
-    // var apexColumnChart = new ApexCharts(
-    //     document.querySelector('#chart-approved-monthly'),
-    //     apexColumnChartOptions
-    // );
-    // apexColumnChart.render();
+    let process = data.process;
+    console.log(formatDateDESC(process.request_date, '-'))
+
+    const processData = [];
+
+    if (process.offer_date != null) {
+        let date1 = formatDateDESC(process.request_date, '-');
+        let date2 = formatDateDESC(process.offer_date, '-');
+        if (process.offer_day == 0){
+            let date = new Date(formatDateDESC(process.offer_date, '-'));
+            date.setDate(date.getDate() + 1);
+            date2 = date.toISOString().split('T')[0];
+        }
+        let bar1 =
+            {
+                x: 'Teklif',
+                y: [
+                    new Date(date1).getTime(),
+                    new Date(date2).getTime()
+                ],
+                fillColor: '#4ecdc4',
+            }
+        ;
+        processData.push(bar1);
+    }
+
+    if (process.confirmed_date != null) {
+        let date1 = formatDateDESC(process.offer_date, '-');
+        let date2 = formatDateDESC(process.confirmed_date, '-');
+        if (process.confirmed_day == 0){
+            let date = new Date(formatDateDESC(process.confirmed_date, '-'));
+            date.setDate(date.getDate() + 1);
+            date2 = date.toISOString().split('T')[0];
+        }
+        let bar2 =
+            {
+                x: 'Onay',
+                y: [
+                    new Date(date1).getTime(),
+                    new Date(date2).getTime()
+                ],
+                fillColor: '#90ee7e'
+            }
+        ;
+        processData.push(bar2);
+    }
+
+    if (process.completed_date != null) {
+        let date1 = formatDateDESC(process.confirmed_date, '-');
+        let date2 = formatDateDESC(process.completed_date, '-');
+        if (process.completed_day == 0){
+            let date = new Date(formatDateDESC(process.completed_date, '-'));
+            date.setDate(date.getDate() + 1);
+            date2 = date.toISOString().split('T')[0];
+        }
+        let bar3 =
+            {
+                x: 'Satış',
+                y: [
+                    new Date(date1).getTime(),
+                    new Date(date2).getTime()
+                ],
+                fillColor: '#dc9b1c'
+            }
+        ;
+        processData.push(bar3);
+    }
+
+    console.log(processData)
+
+    var options = {
+        series: [
+            {
+                data: processData
+            }
+        ],
+        chart: {
+            height: 200,
+            type: 'rangeBar'
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                distributed: true,
+                dataLabels: {
+                    hideOverflowingLabels: false
+                }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(val, opts) {
+                var label = opts.w.globals.labels[opts.dataPointIndex]
+                var a = moment(val[0])
+                var b = moment(val[1])
+                var diff = b.diff(a, 'days')
+                return label + ': ' + diff + (diff > 1 ? ' gün' : ' gün')
+            },
+            style: {
+                colors: ['#f3f4f5', '#fff']
+            }
+        },
+        xaxis: {
+            type: 'datetime'
+        },
+        yaxis: {
+            show: false
+        },
+        grid: {
+            row: {
+                colors: ['#f3f4f5', '#fff'],
+                opacity: 0.1
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-selling-process"), options);
+    chart.render();
+
 
 }

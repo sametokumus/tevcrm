@@ -182,7 +182,7 @@ async function addOfferRequest(){
     let date = document.getElementById('add_offer_request_date').value;
 
     if (date != ''){
-        date = formatDateDESC(date, '-', '-');
+        date = formatDateDESC2(date, '-', '-');
     }
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),

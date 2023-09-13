@@ -190,7 +190,7 @@ async function addPayment(){
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
-        "due_date": formatDateDESC(due_date, "-", "-"),
+        "due_date": formatDateDESC2(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
     });
@@ -238,7 +238,7 @@ async function updatePayment(){
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
-        "due_date": formatDateDESC(due_date, "-", "-"),
+        "due_date": formatDateDESC2(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
     });

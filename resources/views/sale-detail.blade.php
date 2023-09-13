@@ -133,6 +133,34 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">SATIŞ SÜRECİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <div id="chart-selling-process"></div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">MOBİL DÖKÜMANLAR</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
