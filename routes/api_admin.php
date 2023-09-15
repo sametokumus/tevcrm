@@ -59,10 +59,6 @@ Route::get('mobile/getDocumentUrl/{sale_id}', [MobileController::class, 'getDocu
 Route::post('mobile/addDocument/{sale_id}', [MobileController::class, 'addDocument']);
 Route::get('mobile/deleteDocument/{document_id}', [MobileController::class, 'deleteDocument']);
 
-Route::get('fonts/ChakraPetch/ChakraPetch-Regular.ttf', function () {
-    return response()->file(public_path('fonts/ChakraPetch/ChakraPetch-Regular.ttf'));
-});
-
 
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 

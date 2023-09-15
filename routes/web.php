@@ -82,3 +82,8 @@ Route::post('/lang', function(Request $request) {
     App::setLocale($locale);
     session()->put('locale', $locale);
 });
+
+
+Route::get('fonts/ChakraPetch/ChakraPetch-Regular.ttf', function () {
+    return response()->file(public_path('fonts/ChakraPetch/ChakraPetch-Regular.ttf'));
+});
