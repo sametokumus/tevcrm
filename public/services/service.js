@@ -2459,7 +2459,7 @@ async function serviceGetDeleteMobileDocument(id) {
 async function serviceGetGeneratePDF(owner_id, sale_id) {
     const data = await fetchDataGet('/admin/pdf/getGeneratePDF/' + owner_id + '/' + sale_id, 'application/json');
     if (data.status == "success") {
-        return data.object;
+        return data;
     } else {
         showAlert('İstek Başarısız.');
     }

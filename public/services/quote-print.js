@@ -45,14 +45,15 @@ async function generatePDF(){
         // Fetch the PDF data
         const pdfData = await serviceGetGeneratePDF(owner_id, sale_id);
 
-        // Create a Blob from the PDF data
-        const blob = new Blob([pdfData], { type: 'application/pdf' });
-
         // Create a link element to download the PDF
         const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
+        link.href = `data:application/pdf;base64,${pdfData.object.file_pixel}`;
+        link.target = '_blank';
         link.download = 'invoice.pdf';
+        link.textContent = 'Download Invoice PDF';
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
     } catch (error) {
         console.error('An error occurred:', error);
     }

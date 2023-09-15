@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -16,13 +17,13 @@ class PdfController extends Controller
     {
         try {
             $sale = Sale::query()->where('sale_id', $sale_id)->first();
+            $contact = Contact::query()->where('id', $owner_id)->first();
 
             // Create a new PDF instance
             $pdf = new \FPDF();
             $pdf->AddPage();
-
-            // Set font
-            $pdf->SetFont('Arial', 'B', 16);
+            $pdf->AddFont('ChakraPetch', '', 'fonts/ChakraPetch/ChakraPetch-Regular.ttf', true);
+            $pdf->SetFont('ChakraPetch', '', 16);
 
             // Add content to the PDF (example: sale information)
             $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
