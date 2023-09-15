@@ -42,18 +42,17 @@ async function generatePDF(){
         let owner_id = document.getElementById('owners').value;
         let sale_id = getPathVariable('quote-print');
 
+        // Fetch the PDF data
         const pdfData = await serviceGetGeneratePDF(owner_id, sale_id);
 
-        // Handle the PDF data, for example, display a link to download the PDF
-        if (pdfData) {
-            const pdfLink = document.createElement('a');
-            pdfLink.href = `data:application/pdf;base64,${pdfData}`;
-            pdfLink.download = 'invoice.pdf';
-            pdfLink.textContent = 'Download Invoice PDF';
-            document.body.appendChild(pdfLink);
-        } else {
-            console.error('Failed to generate PDF.');
-        }
+        // Create a Blob from the PDF data
+        const blob = new Blob([pdfData], { type: 'application/pdf' });
+
+        // Create a link element to download the PDF
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'invoice.pdf';
+        link.click();
     } catch (error) {
         console.error('An error occurred:', error);
     }

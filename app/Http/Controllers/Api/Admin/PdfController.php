@@ -7,7 +7,7 @@ use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use PDF;
+use FPDF;
 
 class PdfController extends Controller
 {
@@ -30,15 +30,11 @@ class PdfController extends Controller
 
             // Output PDF as a response
             ob_start();
-            $pdf->Output();
-            $content = ob_get_clean();
+            $pdf->Output('invoice.pdf', 'I');  // Set the 'I' flag to output to the browser
 
-            return response::make($content, 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="invoice.pdf"'
-            ]);
+            // Clear the output buffer and disable further output
+            ob_end_flush();
 
-//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
