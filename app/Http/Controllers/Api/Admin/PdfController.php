@@ -22,7 +22,7 @@ class PdfController extends Controller
             // Create a new PDF instance
             $pdf = new \FPDF();
             $pdf->AddPage();
-            $fontUrl = url('https://lenis-crm.wimco.com.tr/fonts/ChakraPetch/ChakraPetch-Regular.ttf');
+            $fontUrl = public_path('fonts/ChakraPetch/ChakraPetch-Regular.ttf');
             $pdf->AddFont('ChakraPetch', '', $fontUrl, true);
             $pdf->SetFont('ChakraPetch', '', 16);
 
