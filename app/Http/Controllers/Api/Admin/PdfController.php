@@ -28,12 +28,8 @@ class PdfController extends Controller
             $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
             $pdf->Cell(0, 10, 'Sale ID: ' . $sale->sale_id, 0, 1);
 
-            // Output PDF as a response
-            ob_start();
-            $pdf->Output('invoice.pdf', 'I');  // Set the 'I' flag to output to the browser
-
-            // Clear the output buffer and disable further output
-            ob_end_flush();
+            $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
 
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
