@@ -37,6 +37,28 @@ function printOffer(){
 	window.print();
 }
 
+async function generatePDF(){
+    try {
+        let owner_id = document.getElementById('owners').value;
+        let sale_id = getPathVariable('quote-print');
+
+        const pdfData = await serviceGetGeneratePDF(owner_id, sale_id);
+
+        // Handle the PDF data, for example, display a link to download the PDF
+        if (pdfData) {
+            const pdfLink = document.createElement('a');
+            pdfLink.href = `data:application/pdf;base64,${pdfData}`;
+            pdfLink.download = 'invoice.pdf';
+            pdfLink.textContent = 'Download Invoice PDF';
+            document.body.appendChild(pdfLink);
+        } else {
+            console.error('Failed to generate PDF.');
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+}
+
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('quote-print');

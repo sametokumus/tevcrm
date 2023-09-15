@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\AccountingController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\MobileController;
+use App\Http\Controllers\Api\Admin\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -353,6 +354,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('dashboard/getMostValuableCustomers', [DashboardController::class, 'getMostValuableCustomers']);
+
+
+    Route::get('pdf/getGeneratePDF/{owner_id}/{sale_id}', [PdfController::class, 'getGeneratePDF']);
 
 
 

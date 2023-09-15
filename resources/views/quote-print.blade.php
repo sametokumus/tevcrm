@@ -16,7 +16,7 @@ $extra_js='
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-12">
-                            <button id="generatePdf" class="btn btn-theme btn-block w-100 no-print">Kaydet</button>
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">Kaydet</button>
                         </div>
                     </div>
                     <div class="row">

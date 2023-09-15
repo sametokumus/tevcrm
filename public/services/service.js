@@ -2455,3 +2455,12 @@ async function serviceGetDeleteMobileDocument(id) {
         return false;
     }
 }
+
+async function serviceGetGeneratePDF(owner_id, sale_id) {
+    const data = await fetchDataGet('/admin/pdf/getGeneratePDF/' + owner_id + '/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
