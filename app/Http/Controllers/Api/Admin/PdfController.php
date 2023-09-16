@@ -22,13 +22,16 @@ class PdfController extends Controller
             // Create a new PDF instance
             $pdf = new \FPDF();
             $pdf->AddPage();
-            $fontUrl = public_path('fonts/ChakraPetch/ChakraPetch-Regular.ttf');
-            $pdf->AddFont('ChakraPetch', '', $fontUrl, true);
-            $pdf->SetFont('ChakraPetch', '', 16);
+
+            $pdf->SetMargins(20, 20, 20);
+
+            // Set font
+            $pdf->SetFont('Arial', '', 12);
 
             // Add content to the PDF (example: sale information)
-            $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
-            $pdf->Cell(0, 10, 'Sale ID: ' . $sale->sale_id, 0, 1);
+
+            $pdf->SetXY(0, 0);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', ''); // add the text, align to Center of cell
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
