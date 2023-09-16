@@ -44,21 +44,38 @@ class PdfController extends Controller
 
             if ($contact->registration_no != '') {
                 $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Registration No').': '.$contact->registration_no, '0', '0', '');
+                $pdf->Cell(0, 0, __('Registration No').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+5 + $pdf->GetStringWidth(__('Registration No').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $contact->registration_no, '0', '0', '');
+
+                if ($contact->registration_office != '' && App::getLocale() != 'en') {
+                    $x += 10;
+
+                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(0, 0, __('Registration Office').': ', '0', '0', '');
+
+                    $x = $x+5 + $pdf->GetStringWidth(__('Registration Office').': ');
+                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(0, 0, $contact->registration_office, '0', '0', '');
+
+                }
             }
 
-            if ($contact->registration_office != '' && App::getLocale() != 'en') {
-                $x += 40;
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Registration Office').': '.$contact->registration_office, '0', '0', '');
-                $x = 10;
-            }
-
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $x = 10;
             $y += 5;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Address'), '0', '0', '');
 
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $lines = explode('<br>', $contact->address);
             foreach ($lines as $line) {
                 $y += 5;
