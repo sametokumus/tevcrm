@@ -30,7 +30,8 @@ class PdfController extends Controller
 
             // Set font
             $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
 
             // Add content to the PDF (example: sale information)
             $x = 10;
@@ -38,6 +39,8 @@ class PdfController extends Controller
 
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, $contact->name, '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
 
             if ($contact->registration_no != '') {
                 $y += 6;
