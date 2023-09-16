@@ -26,7 +26,7 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
 
             // Set font
-            $pdf->SetFont('Arial', '', 12);
+            $pdf->SetFont('Arial', '', 10);
 
             // Add content to the PDF (example: sale information)
 
