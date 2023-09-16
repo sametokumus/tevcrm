@@ -28,9 +28,8 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
 
             // Set font
-            $pdf->AddFont('chakra-regular', '', 'chakra-regular.php');
-            $pdf->AddFont('chakra-bold', 'B', 'chakra-bold.php');
-            $pdf->SetFont('chakra-regular', '', 10);
+            $pdf->AddFont('chakrapetch', '', 'chakrapetch.php');
+            $pdf->SetFont('chakrapetch', '', 10);
 
             // Add content to the PDF (example: sale information)
             $x = 10;
