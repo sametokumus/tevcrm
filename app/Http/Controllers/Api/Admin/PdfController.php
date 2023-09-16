@@ -313,6 +313,33 @@ class PdfController extends Controller
 
 
 
+            //PRODUCTS
+
+            // Sample product data (replace with your product data)
+            $products = [
+                ['Product 1', 'Category A', '$50.00'],
+                ['Product 2', 'Category B', '$65.00'],
+                // Add more products as needed
+            ];
+
+// Set the table header
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(40, 10, 'Product Name', 1);
+            $pdf->Cell(40, 10, 'Category', 1);
+            $pdf->Cell(40, 10, 'Price', 1);
+            $pdf->Ln();  // Move to the next line
+
+// Set the table content
+            $pdf->SetFont('Arial', '', 12);
+            foreach ($products as $product) {
+                foreach ($product as $value) {
+                    $pdf->Cell(40, 10, $value, 1);
+                }
+                $pdf->Ln();  // Move to the next line
+            }
+
+
+
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
 
