@@ -80,7 +80,7 @@ class PdfController extends Controller
             $lines = explode('<br>', $contact->address);
             foreach ($lines as $line) {
                 $y += 5;
-                $pdf->SetXY(10, $y);
+                $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
             }
 
@@ -96,6 +96,7 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
 
             $y += 5;
+            $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
