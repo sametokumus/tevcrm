@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Employee;
+use App\Models\MobileDocument;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Quote;
@@ -19,6 +20,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use FPDF;
+use Carbon\Carbon;
+
 
 class PdfController extends Controller
 {
@@ -34,6 +37,21 @@ class PdfController extends Controller
                 ->where('sales.sale_id',$sale_id)
                 ->first();
 
+            $this_document = MobileDocument::query()->where('sale_id', $sale->id)->first();
+            if ($this_document){
+                $createdAt = Carbon::parse($this_document->created_at);
+                $document_date = $createdAt->format('d/m/Y');
+                $document_id = $this_document->id;
+            }else{
+                $createdAt = Carbon::now();
+                $document_date = $createdAt->format('d/m/Y');
+                $document_id = MobileDocument::query()->insertGetId([
+                    'sale_id' => $sale->id,
+                    'document_type_id' => 30,
+                    'created_at' => $createdAt->format('Y-m-d H:i:s')
+                ]);
+            }
+
             $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
@@ -44,6 +62,17 @@ class PdfController extends Controller
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             $contact = Contact::query()->where('id', $owner_id)->first();
+
+            $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
+            if ($quote_count == 0){
+                $quote_id = Uuid::uuid();
+                Quote::query()->insert([
+                    'quote_id' => $quote_id,
+                    'sale_id' => $sale_id
+                ]);
+            }
+            $quote = Quote::query()->where('sale_id', $sale_id)->first();
+
 
             // Create a new PDF instance
             $pdf = new \FPDF();
@@ -168,16 +197,6 @@ class PdfController extends Controller
 
             //QUOTES
 
-            $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
-            if ($quote_count == 0){
-                $quote_id = Uuid::uuid();
-                Quote::query()->insert([
-                    'quote_id' => $quote_id,
-                    'sale_id' => $sale_id
-                ]);
-            }
-            $quote = Quote::query()->where('sale_id', $sale_id)->first();
-
             $y += 5;
 
             if ($company->company_request_code != ''){
@@ -277,6 +296,21 @@ class PdfController extends Controller
             $x = $pageWidth - $contact->logo_width - 10;
             $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
 
+            $imageInfo = $pdf->GetImageSize(public_path($contact->logo));
+            $imageHeight = $imageInfo['h'];
+
+            //TARİH - KOD
+
+            $y += 5;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '), '0', '0', 'R');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Date').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $document_date), '0', '0', 'R');
 
 
 
