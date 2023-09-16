@@ -301,16 +301,13 @@ class PdfController extends Controller
 
             //TARİH - KOD
 
-            $y += 5;
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $imageHeight + 15);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', 'R');
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '), '0', '0', 'R');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x+2 + $pdf->GetStringWidth(__('Date').': ');
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $document_date), '0', '0', 'R');
+            $pdf->SetXY($x, $imageHeight + 20);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', 'R');
 
 
 
