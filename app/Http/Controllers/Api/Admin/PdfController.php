@@ -73,7 +73,7 @@ class PdfController extends Controller
             }
 
             if ($contact->registration_office != '' && App::getLocale() != 'en') {
-                $x += 50;
+                $x += 40;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, __('Registration Office').': '.$contact->registration_office, '0', '0', '');
                 $x = 10;
@@ -85,9 +85,9 @@ class PdfController extends Controller
 
             $lines = explode('<br>', $contact->address);
             foreach ($lines as $line) {
+                $y += 6;
                 $pdf->SetXY(10, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
-                $y += 6;
             }
 
 //            $y += 6;
