@@ -31,23 +31,27 @@ class PdfController extends Controller
 
             // Add content to the PDF (example: sale information)
             $x = 10;
+            $y = 15;
 
-            $pdf->SetXY($x, 15);
+            $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
 
             if ($contact->registration_no != '') {
-                $x += 10;
-                $pdf->SetXY($x, 15);
+                $y += 10;
+                $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->registration_no), '0', '0', '');
             }
 
             if ($contact->registration_office != '') {
-                $x += 10;
-                $pdf->SetXY($x, 15);
+                $x += 50;
+                $y += 10;
+                $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', App::getLocale()), '0', '0', '');
+                $x = 10;
             }
 
-            $pdf->SetXY(100, 15);
+            $y += 10;
+            $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
