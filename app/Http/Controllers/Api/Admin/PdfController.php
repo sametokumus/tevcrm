@@ -3,8 +3,17 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Employee;
+use App\Models\OfferRequest;
+use App\Models\OfferRequestProduct;
+use App\Models\Quote;
 use App\Models\Sale;
+use App\Models\SaleNote;
+use App\Models\SaleOffer;
+use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -18,7 +27,22 @@ class PdfController extends Controller
     {
         try {
 
-            $sale = Sale::query()->where('sale_id', $sale_id)->first();
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
+            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
+
+            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+            $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+            $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+            $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             $contact = Contact::query()->where('id', $owner_id)->first();
 
             // Create a new PDF instance
@@ -108,12 +132,137 @@ class PdfController extends Controller
 
             //TITLE
 
-            $y += 8;
+            $y += 15;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Offer'), '0', '0', '');
+
+            //CUSTOMER INFO
+
+            $y += 15;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Customer').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Customer').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->name, '0', '0', '');
+
+            $y += 5;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->address, '0', '0', '');
+
+
+            //QUOTES
+
+            $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
+            if ($quote_count == 0){
+                $quote_id = Uuid::uuid();
+                Quote::query()->insert([
+                    'quote_id' => $quote_id,
+                    'sale_id' => $sale_id
+                ]);
+            }
+            $quote = Quote::query()->where('sale_id', $sale_id)->first();
+
+
+            if ($company->company_request_code != ''){
+                $y += 15;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $company->company_request_code, '0', '0', '');
+            }
+
+            if ($quote->payment_term != null) {
+
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $quote->payment_term, '0', '0', '');
+
+            }else if ($company->payment_term != null){
+
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $company->payment_term, '0', '0', '');
+
+            }
+
+            if ($quote->delivery_term != null) {
+
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Delivery Terms').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Delivery Terms').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $quote->delivery_term, '0', '0', '');
+
+            }
+
+            if ($quote->lead_time != null) {
+
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Insurance').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Insurance').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $quote->lead_time, '0', '0', '');
+
+            }
+
+            if ($quote->lead_time != null) {
+
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Country of Destination').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Country of Destination').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $quote->country_of_destination, '0', '0', '');
+
+            }
 
 
 
