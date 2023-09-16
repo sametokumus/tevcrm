@@ -27,7 +27,7 @@ class PdfController extends Controller
 
             if ($lineWidth <= $maxWidth) {
                 // The word fits within the max width, add it to the line
-                $line = $testLine;
+                $lines[] = $testLine;
             } else {
                 // Start a new line with the current word
                 $lines[] = $word;
