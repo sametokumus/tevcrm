@@ -15,24 +15,24 @@ class PdfController extends Controller
 {
 
     public function MultiCellWithMaxWidth($pdf, $maxWidth, $lineHeight, $text, $y) {
-        $words = explode(' ', $text);
-        $lines = array('');
+        $lines = explode('<br>', $text);
+//        $lines = array('');
 
-        foreach ($words as $word) {
-            $line = &$lines[count($lines) - 1];
-            $testLine = $line . ' ' . $word;
-
-            // Measure the width of the line
-            $lineWidth = $pdf->GetStringWidth($testLine);
-
-            if ($lineWidth <= $maxWidth) {
-                // The word fits within the max width, add it to the line
-                $lines[] = $testLine;
-            } else {
-                // Start a new line with the current word
-                $lines[] = $word;
-            }
-        }
+//        foreach ($words as $word) {
+//            $line = &$lines[count($lines) - 1];
+//            $testLine = $line . ' ' . $word;
+//
+//            // Measure the width of the line
+//            $lineWidth = $pdf->GetStringWidth($testLine);
+//
+//            if ($lineWidth <= $maxWidth) {
+//                // The word fits within the max width, add it to the line
+//                $lines[] = $testLine;
+//            } else {
+//                // Start a new line with the current word
+//                $lines[] = $word;
+//            }
+//        }
 
         // Output the lines
         foreach ($lines as $line) {
