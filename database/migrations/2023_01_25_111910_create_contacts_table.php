@@ -21,6 +21,7 @@ class CreateContactsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('logo')->nullable();
+            $table->integer('logo_width')->default(150);
             $table->string('footer')->nullable();
             $table->string('signature')->nullable();
             $table->string('registration_no')->nullable();

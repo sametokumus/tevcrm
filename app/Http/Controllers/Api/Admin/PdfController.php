@@ -240,6 +240,7 @@ class PdfController extends Controller
 
             }
 
+            //Insurance olarak kullanılıyor
             if ($quote->lead_time != null) {
 
                 $y += 5;
@@ -269,6 +270,11 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->country_of_destination), '0', '0', '');
 
             }
+
+
+            // LOGO
+            $pdf->Image(public_path($contact->logo), 10, 20, $contact->logo_width);  // Parameters: image file, x position, y position, width
+
 
 
 
