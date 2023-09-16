@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use FPDF;
 
@@ -29,9 +30,25 @@ class PdfController extends Controller
             $pdf->SetFont('Arial', '', 10);
 
             // Add content to the PDF (example: sale information)
+            $x = 10;
 
-            $pdf->SetXY(10, 15);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', ''); // add the text, align to Center of cell
+            $pdf->SetXY($x, 15);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+
+            if ($contact->registration_no != '') {
+                $x += 10;
+                $pdf->SetXY($x, 15);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->registration_no), '0', '0', '');
+            }
+
+            if ($contact->registration_office != '') {
+                $x += 10;
+                $pdf->SetXY($x, 15);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', App::getLocale()), '0', '0', '');
+            }
+
+            $pdf->SetXY(100, 15);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
