@@ -273,7 +273,9 @@ class PdfController extends Controller
 
 
             // LOGO
-            $pdf->Image(public_path($contact->logo), 10, 20, $contact->logo_width);  // Parameters: image file, x position, y position, width
+            $pageWidth = $pdf->GetPageWidth();
+            $x = $pageWidth - $contact->logo_width - 10;
+            $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
 
 
 
