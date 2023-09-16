@@ -306,8 +306,8 @@ class PdfController extends Controller
             $pdf->SetXY($x, $actual_height + 25);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', '');
 
-            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 13;
-            $pdf->SetFont('ChakraPetch-Bold', '', 12);
+            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 20;
+            $pdf->SetFont('ChakraPetch-Bold', '', 11);
             $pdf->SetXY($x, $actual_height + 32);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
 
