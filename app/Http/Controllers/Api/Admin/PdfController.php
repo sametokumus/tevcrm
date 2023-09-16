@@ -132,7 +132,7 @@ class PdfController extends Controller
 
             //TITLE
 
-            $y += 15;
+            $y += 10;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
@@ -141,28 +141,28 @@ class PdfController extends Controller
 
             //CUSTOMER INFO
 
-            $y += 15;
+            $y += 10;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Customer').': ', '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Customer').': '), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $x = $x+2 + $pdf->GetStringWidth(__('Customer').': ');
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $company->name, '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->name), '0', '0', '');
 
             $y += 5;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Address').': '), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $company->address, '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->address), '0', '0', '');
 
 
             //QUOTES
@@ -177,60 +177,65 @@ class PdfController extends Controller
             }
             $quote = Quote::query()->where('sale_id', $sale_id)->first();
 
+            $y += 5;
 
             if ($company->company_request_code != ''){
-                $y += 15;
+                $x = 10;
+                $y += 5;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Request Code').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Request Code').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $company->company_request_code, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->company_request_code), '0', '0', '');
             }
 
             if ($quote->payment_term != null) {
 
+                $x = 10;
                 $y += 5;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $quote->payment_term, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
 
             }else if ($company->payment_term != null){
 
+                $x = 10;
                 $y += 5;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Payment Terms').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $company->payment_term, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->payment_term), '0', '0', '');
 
             }
 
             if ($quote->delivery_term != null) {
 
+                $x = 10;
                 $y += 5;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Delivery Terms').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Delivery Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $x = $x+2 + $pdf->GetStringWidth(__('Delivery Terms').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $quote->delivery_term, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->delivery_term), '0', '0', '');
 
             }
 
@@ -240,27 +245,27 @@ class PdfController extends Controller
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Insurance').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Insurance').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $x = $x+2 + $pdf->GetStringWidth(__('Insurance').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $quote->lead_time, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->lead_time), '0', '0', '');
 
             }
 
-            if ($quote->lead_time != null) {
+            if ($quote->country_of_destination != null) {
 
                 $y += 5;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Country of Destination').': ', '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Country of Destination').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $x = $x+2 + $pdf->GetStringWidth(__('Country of Destination').': ');
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $quote->country_of_destination, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->country_of_destination), '0', '0', '');
 
             }
 
