@@ -17,6 +17,34 @@ class PdfController extends Controller
     public function getGeneratePDF($owner_id, $sale_id)
     {
         try {
+            function MultiCellWithMaxWidth($pdf, $maxWidth, $lineHeight, $text, $y) {
+                $words = explode(' ', $text);
+                $lines = array('');
+
+                foreach ($words as $word) {
+                    $line = &$lines[count($lines) - 1];
+                    $testLine = $line . ' ' . $word;
+
+                    // Measure the width of the line
+                    $lineWidth = $pdf->GetStringWidth($testLine);
+
+                    if ($lineWidth <= $maxWidth) {
+                        // The word fits within the max width, add it to the line
+                        $line = $testLine;
+                    } else {
+                        // Start a new line with the current word
+                        $lines[] = $word;
+                    }
+                }
+
+                // Output the lines
+                foreach ($lines as $line) {
+                    $pdf->Cell($maxWidth, $lineHeight, $line, 0, 1, 'L');
+                    $y += 6;
+                }
+                return $y;
+            }
+
             $sale = Sale::query()->where('sale_id', $sale_id)->first();
             $contact = Contact::query()->where('id', $owner_id)->first();
 
@@ -52,6 +80,11 @@ class PdfController extends Controller
             $y += 6;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Address'), '0', '0', '');
+
+            $maxWidth = 100; // Adjust as needed
+            $lineHeight = 6; // Adjust as needed
+            $y = MultiCellWithMaxWidth($pdf, $maxWidth, $lineHeight, $contact->address);
+
             $y += 6;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, $contact->address, '0', '0', '');
