@@ -34,25 +34,25 @@ class PdfController extends Controller
             $y = 15;
 
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+            $pdf->Cell(0, 0, $contact->name, '0', '0', '');
 
             if ($contact->registration_no != '') {
                 $y += 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->registration_no), '0', '0', '');
+                $pdf->Cell(0, 0, __('Registration No').': '.$contact->registration_no, '0', '0', '');
             }
 
-            if ($contact->registration_office != '') {
+            if ($contact->registration_office != '' && App::getLocale() != 'en') {
                 $x += 50;
                 $y += 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', App::getLocale()), '0', '0', '');
+                $pdf->Cell(0, 0, __('Registration Office').': '.$contact->registration_office, '0', '0', '');
                 $x = 10;
             }
 
             $y += 10;
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+            $pdf->Cell(0, 0, $contact->name, '0', '0', '');
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
