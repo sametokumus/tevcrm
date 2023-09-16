@@ -28,12 +28,11 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
 
 
-            // Set font
+            //COMPANY INFO
             $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
             $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
             $pdf->SetFont('ChakraPetch-Bold', '', 12);
 
-            // Add content to the PDF (example: sale information)
             $x = 10;
             $y = 15;
 
@@ -106,6 +105,17 @@ class PdfController extends Controller
             $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, $contact->email, '0', '0', '');
+
+            //TITLE
+
+            $y += 8;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 20);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Offer'), '0', '0', '');
+
+
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
