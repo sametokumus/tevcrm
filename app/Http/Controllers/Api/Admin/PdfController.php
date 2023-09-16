@@ -30,7 +30,7 @@ class PdfController extends Controller
 
             // Add content to the PDF (example: sale information)
 
-            $pdf->SetXY(0, 0);
+            $pdf->SetXY(10, 15);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', ''); // add the text, align to Center of cell
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
