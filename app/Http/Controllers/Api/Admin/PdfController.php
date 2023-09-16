@@ -36,7 +36,7 @@ class PdfController extends Controller
 
         // Output the lines
         foreach ($lines as $line) {
-            $pdf->Cell($maxWidth, $lineHeight, $line, 0, 1, 'L');
+            $pdf->Cell($maxWidth, $lineHeight, iconv('utf-8', 'iso-8859-9', $line), 0, 1, 'L');
             $y += 6;
         }
         return $y;
@@ -86,9 +86,9 @@ class PdfController extends Controller
             $lineHeight = 6; // Adjust as needed
             $y = $this->MultiCellWithMaxWidth($pdf, $maxWidth, $lineHeight, $contact->address, $y);
 
-            $y += 6;
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $contact->address, '0', '0', '');
+//            $y += 6;
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, $contact->address, '0', '0', '');
 
             $y += 6;
             $pdf->SetXY($x, $y);
