@@ -293,7 +293,7 @@ class PdfController extends Controller
 
             // LOGO
             $pageWidth = $pdf->GetPageWidth();
-            $x = $pageWidth - $contact->logo_width - 10;
+            $x = $pageWidth - $contact->logo_width - 20;
             $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
 
             list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
@@ -303,12 +303,12 @@ class PdfController extends Controller
 
             $x = $pageWidth - $pdf->GetStringWidth(__('Date').': '.$document_date) - 10;
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $actual_height + 15);
+            $pdf->SetXY($x, $actual_height + 30);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', '');
 
             $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 10;
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $actual_height + 20);
+            $pdf->SetXY($x, $actual_height + 37);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
 
 
