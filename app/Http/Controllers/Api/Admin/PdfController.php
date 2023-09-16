@@ -83,10 +83,12 @@ class PdfController extends Controller
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Address'), '0', '0', '');
 
-            $y += 6;
-            $maxWidth = 100; // Adjust as needed
-            $lineHeight = 6; // Adjust as needed
-            $y = $this->MultiCellWithMaxWidth($pdf, $maxWidth, $lineHeight, $contact->address, $y);
+            $lines = explode('<br>', $contact->address);
+            foreach ($lines as $line) {
+                $pdf->SetXY(10, $y);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
+                $y += 6;
+            }
 
 //            $y += 6;
 //            $pdf->SetXY($x, $y);
