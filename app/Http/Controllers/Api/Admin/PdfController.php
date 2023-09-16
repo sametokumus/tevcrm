@@ -43,7 +43,7 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
 
             if ($contact->registration_no != '') {
-                $y += 6;
+                $y += 5;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, __('Registration No').': '.$contact->registration_no, '0', '0', '');
             }
@@ -55,26 +55,26 @@ class PdfController extends Controller
                 $x = 10;
             }
 
-            $y += 6;
+            $y += 5;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Address'), '0', '0', '');
 
             $lines = explode('<br>', $contact->address);
             foreach ($lines as $line) {
-                $y += 6;
+                $y += 5;
                 $pdf->SetXY(10, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
             }
 
-//            $y += 6;
+//            $y += 5;
 //            $pdf->SetXY($x, $y);
 //            $pdf->Cell(0, 0, $contact->address, '0', '0', '');
 
-            $y += 6;
+            $y += 5;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Phone').': '.$contact->phone, '0', '0', '');
 
-            $y += 6;
+            $y += 5;
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Email').': '.$contact->email, '0', '0', '');
 
