@@ -31,7 +31,7 @@ class PdfController extends Controller
             // Set font
             $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
             $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetFont('ChakraPetch-Bold', '', 12);
 
             // Add content to the PDF (example: sale information)
             $x = 10;
@@ -84,17 +84,27 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
             }
 
-//            $y += 5;
-//            $pdf->SetXY($x, $y);
-//            $pdf->Cell(0, 0, $contact->address, '0', '0', '');
+            $y += 5;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
 
             $y += 5;
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Phone').': '.$contact->phone, '0', '0', '');
 
-            $y += 5;
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Email').': '.$contact->email, '0', '0', '');
+            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $contact->email, '0', '0', '');
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
