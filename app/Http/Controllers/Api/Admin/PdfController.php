@@ -37,7 +37,7 @@ class PdfController extends Controller
         // Output the lines
         foreach ($lines as $line) {
             $pdf->SetXY(10, $y);
-            $pdf->Cell($maxWidth, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
             $y += 6;
         }
         return $y;
