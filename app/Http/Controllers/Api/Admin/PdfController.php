@@ -357,7 +357,7 @@ class PdfController extends Controller
 
 
 // Set table content
-            $pdf->SetFont('ChakraPetch-Regular', '', 8);
+            $pdf->SetFont('ChakraPetch-Regular', '', 9);
             foreach ($sale_offers as $sale_offer) {
                 if (App::getLocale() == 'tr'){
                     $measurement_name = $sale_offer->measurement_name_tr;
@@ -408,6 +408,22 @@ class PdfController extends Controller
                 $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
 
+            //TOTAL PRICES
+
+            $x = 10;
+            $y += 10;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 9);
+            $pdf->Cell(140, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'R');
+
+            $pdf->SetXY($x + 140, $y);
+            $pdf->SetFont('ChakraPetch-Regular', '', 9);
+            $pdf->Cell(50, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'C');
+
+
+
+
+            //FOOTER
 
             $pdfContent = $pdf->Output('invoice.pdf', 'S');
 
