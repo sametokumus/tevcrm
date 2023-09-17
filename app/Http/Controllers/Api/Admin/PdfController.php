@@ -416,7 +416,7 @@ class PdfController extends Controller
             if ($sale->sub_total != null) {
                 $title = __('Sub Total');
                 if ($sale->vat == null || $sale->vat == '0.00' && $sale->freight == null) {
-                    $title = __('Total');
+                    $title = __('Grand Total');
                 }
 
                 $pdf->SetXY($x, $y);
