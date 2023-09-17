@@ -419,7 +419,7 @@ class PdfController extends Controller
             for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
                 $pdf->AddPage();
 
-                $pdf->Image(public_path($contact->footer), 10, 280, 190);
+                $pdf->Image(public_path($contact->footer), 10, 250, 190);
 
                 $tplIdx = $pdf->importPage($pageNo);
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
