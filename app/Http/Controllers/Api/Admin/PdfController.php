@@ -103,7 +103,7 @@ class PdfController extends Controller
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
-
+            $pdf->SetAutoPageBreak(true, 50);
 
             $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
             $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
