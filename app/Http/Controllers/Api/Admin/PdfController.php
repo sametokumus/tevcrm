@@ -383,8 +383,8 @@ class PdfController extends Controller
                 }
 
                 $pdf->setX(10);
-                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+                $pdf->Cell(10, 7, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(20, 7, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
                 // Save the current X and Y position
                 $xPos = $pdf->GetX();
@@ -397,11 +397,11 @@ class PdfController extends Controller
                 $pdf->SetXY($xPos+50, $yPos);
 
                 // Output remaining cells for the current row
-                $pdf->Cell(19, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
-                $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(19, 7, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(16, 7, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Cell(25, 7, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(30, 7, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(20, 7, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
 
 
