@@ -357,6 +357,8 @@ class PdfController extends Controller
 // Set the table content
             $pdf->SetFont('Arial', '', 12);
             foreach ($products as $product) {
+
+                $pdf->SetX($x);
                 $pdf->Cell(30, 10, $product[0], 1);
                 $pdf->MultiCell(60, 10, $product[1], 1);
                 $pdf->Cell(30, 10, $product[2], 1);
