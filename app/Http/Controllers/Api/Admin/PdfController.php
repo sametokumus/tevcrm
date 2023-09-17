@@ -408,20 +408,27 @@ class PdfController extends Controller
             }
 
 
-            $footerImage = public_path($contact->footer);
+// ... Rest of your code ...
 
-//            $pdf->SetY(-40);  // Position from the bottom of the page
-//            for ($page = 1; $page <= $pdf->PageNo(); $page++) {
-//                $pdf->AddPage();
-//                $pdf->Image($footerImage, 10, $pdf->GetY(), 190);
-//            }
+// Generate the PDF without the footer image
+            $pdfContent = $pdf->Output('invoice.pdf', 'S');
 
+// Load the generated PDF content
+            $pdf = new \FPDI();
+            $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
 
-            $pdf->SetY(-40);
-            $pdf->Image(public_path($footerImage), 10, $pdf->GetY(), 190);
+            for ($pageNo = 1; $pageNo <= $pdf->getNumPages(); $pageNo++) {
+                $pdf->AddPage();
 
-            $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
+                // Add the footer image to each page
+                $pdf->Image(public_path($contact->footer), 10, 280, 190);
+            }
+
+// Output the final PDF with the footer image on each page
+            $finalPdfContent = $pdf->Output('invoice_with_footer.pdf', 'S');
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($finalPdfContent))]]);
+
 
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
