@@ -379,6 +379,24 @@ class PdfController extends Controller
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             foreach ($sale_offers as $sale_offer) {
+                if (App::getLocale() == 'tr'){
+                    $measurement_name = $sale_offer->measurement_name_tr;
+                }else{
+                    $measurement_name = $sale_offer->measurement_name_en;
+                }
+
+                if ($sale_offer->offer_lead_time != '' && $sale_offer->offer_lead_time != null){
+                    if ($sale_offer->offer_lead_time == 1) {
+                        $lead_time = __('Stock');
+                    } elseif (intval($sale_offer->offer_lead_time) % 7 == 0) {
+                        $lead_time = (intval($sale_offer->offer_lead_time) / 7) . ' ' . __('Week');
+                    } else {
+                        $lead_time = $sale_offer->offer_lead_time . ' ' . __('Day');
+                    }
+                }else{
+                    $lead_time = '';
+                }
+
                 $pdf->setX(10);
                 $pdf->Cell(10, 10, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
@@ -394,11 +412,11 @@ class PdfController extends Controller
                 $pdf->SetXY($xPos+50, $yPos);
 
                 // Output remaining cells for the current row
-                $pdf->Cell(19, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
-                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), 1, 0, 'C');
-                $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
-                $pdf->Cell(30, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), 1, 0, 'C');
-                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(19, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price), 1, 0, 'C');
+                $pdf->Cell(30, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price), 1, 0, 'C');
+                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
 
 
