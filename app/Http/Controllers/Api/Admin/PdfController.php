@@ -329,14 +329,14 @@ class PdfController extends Controller
 
 // Set the table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(6, 10, 'N#', '0', '0', 'C');
-            $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '0', '0', 'C');
-            $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '0', '0', 'C');
-            $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '0', '0', 'C');
-            $pdf->Cell(12, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '0', '0', 'C');
-            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '0', '0', 'C');
-            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '0', '0', 'C');
-            $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '0', '0', 'C');
+            $pdf->Cell(10, 10, 'N#', '0', '0', 'C');
+            $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '0', '0', 'C');
+            $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '0', '0', 'C');
+            $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '0', '0', 'C');
+            $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '0', '0', 'C');
+            $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '0', '0', 'C');
+            $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '0', '0', 'C');
+            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '0', '0', 'C');
 
 // Set the table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -346,14 +346,14 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
 
 
-                $pdf->Cell(6, 10, 'N#', '1', '0', 'C');
-                $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '1', '0', 'C');
-                $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '1', '0', '');
-                $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '1', '0', 'C');
-                $pdf->Cell(12, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '1', '0', 'C');
-                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '1', '0', 'C');
-                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '1', '0', 'C');
-                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '1', '0', 'C');
+                $pdf->Cell(10, 10, 'N#', '1', '0', 'C');
+                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '1', '0', 'C');
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '1', '0', '');
+                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '1', '0', 'C');
+                $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '1', '0', 'C');
+                $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '1', '0', 'C');
+                $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '1', '0', 'C');
+                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '1', '0', 'C');
 
 //                foreach ($product as $value) {
 //                    $pdf->SetXY($x, $y);
