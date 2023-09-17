@@ -378,14 +378,14 @@ class PdfController extends Controller
 
                 $row_height = 14;
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
-                if ($name_width > 40){
+                if ($name_width > 50){
                     $row_height = 14 / (((int) ($name_width / 50)) + 1);
                 }
 
                 $pdf->setX(10);
                 $pdf->Cell(10, 14, $sale_offer->sequence, 1, 0, 'C');
 //                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $pdf->GetStringWidth($sale_offer->product_name)), 1, 0, 'C');
+                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height), 1, 0, 'C');
 
                 // Save the current X and Y position
                 $xPos = $pdf->GetX();
