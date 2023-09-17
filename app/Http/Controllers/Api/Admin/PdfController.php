@@ -392,12 +392,15 @@ class PdfController extends Controller
                 $xPos = $pdf->GetX();
                 $yPos = $pdf->GetY();
 
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 // Use MultiCell for product name with a width of 50mm
                 $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
 
                 // Reset X and move Y to the saved position (next line)
                 $pdf->SetXY($xPos+50, $yPos);
 
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 // Output remaining cells for the current row
                 $pdf->Cell(19, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
                 $pdf->Cell(16, 14, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
