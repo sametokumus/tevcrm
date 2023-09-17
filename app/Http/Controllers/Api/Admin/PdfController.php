@@ -411,16 +411,67 @@ class PdfController extends Controller
             //TOTAL PRICES
 
             $x = 10;
-            $y = $pdf->GetY();;
+            $y = $pdf->GetY();
+
+            if ($sale->sub_total != null) {
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'R');
+
+                $pdf->SetXY($x + 140, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->sub_total.' '.$currency), 1, 0, 'C');
+
+                $y += 10;
+            }
+
+            if ($sale->freight != null) {
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Freight')), 1, 0, 'R');
+
+                $pdf->SetXY($x + 140, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->freight.' '.$currency), 1, 0, 'C');
+
+                $y += 10;
+            }
+
+            if ($sale->vat != null && $sale->vat != '0.00') {
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Vat')), 1, 0, 'R');
+
+                $pdf->SetXY($x + 140, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->vat.' '.$currency), 1, 0, 'C');
+
+                $y += 10;
+            }
+
+            if ($sale->grand_total != null) {
+                if ($sale->vat != null && $sale->vat != '0.00' && $sale->freight != null) {
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                    $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Grand Total')), 1, 0, 'R');
+
+                    $pdf->SetXY($x + 140, $y);
+                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                    $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->grand_total . ' ' . $currency), 1, 0, 'C');
+
+                    $y += 10;
+                }
+            }
+
+            $y += 10;
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(140, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'R');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
 
-            $pdf->SetXY($x + 140, $y);
+            $y += 7;
+            $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $pdf->Cell(50, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'C');
-
-
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->note), 0, 0, '');
 
 
             //FOOTER
