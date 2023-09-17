@@ -374,12 +374,13 @@ class PdfController extends Controller
             $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '0', '0', 'C');
             $pdf->Cell(30, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '0', '0', 'C');
             $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '0', '0', 'C');
+            $pdf->Ln();
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             foreach ($sale_offers as $sale_offer) {
                 $x = 10;
                 $y += 10;
-                $pdf->SetXY($x, $y);
+//                $pdf->SetXY($x, $y);
 
 
                 $pdf->MultiCell(10, 10, $sale_offer->sequence, '1', 'C');
@@ -390,6 +391,7 @@ class PdfController extends Controller
                 $pdf->MultiCell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '1', 'C');
                 $pdf->MultiCell(30, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '1', 'C');
                 $pdf->MultiCell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '1', 'C');
+                $pdf->Ln();
 
             }
 
