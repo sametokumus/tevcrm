@@ -349,17 +349,18 @@ class PdfController extends Controller
 
 // Set the table header
             $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(40, 10, 'Product Name', 1);
-            $pdf->Cell(80, 10, 'Description', 1);
-            $pdf->Cell(40, 10, 'Price', 1);
+            $pdf->Cell(30, 10, 'Product Name', 1);
+            $pdf->Cell(60, 10, 'Description', 1);
+            $pdf->Cell(30, 10, 'Price', 1);
             $pdf->Ln();  // Move to the next line
 
 // Set the table content
             $pdf->SetFont('Arial', '', 12);
             foreach ($products as $product) {
-                $pdf->Cell(40, 10, $product[0], 1);
-                $pdf->MultiCell(80, 10, $product[1], 1);
-                $pdf->Cell(40, 10, $product[2], 1);
+                $pdf->Cell(30, 10, $product[0], 1);
+                $pdf->MultiCell(60, 10, $product[1], 1);
+                $pdf->Cell(30, 10, $product[2], 1);
+                $pdf->Ln();
             }
 
 //            $pdf->SetFont('ChakraPetch-Bold', '', 10);
