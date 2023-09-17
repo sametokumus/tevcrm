@@ -375,7 +375,9 @@ class PdfController extends Controller
             $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
             $pdf->Cell(30, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), 1, 0, 'C');
 //            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 1, 'C');
-            $pdf->MultiCell(50, 5, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 'C');  // Move to the next line
+            $pdf->MultiCell(20, 5, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 'C');  // Move to the next line
+
+            $pdf->Ln();
 
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
