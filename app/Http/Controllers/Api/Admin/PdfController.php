@@ -329,9 +329,14 @@ class PdfController extends Controller
 
 // Set the table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(40, 10, 'Product Name', 1);
-            $pdf->Cell(40, 10, 'Category', 1);
-            $pdf->Cell(40, 10, 'Price', 1);
+            $pdf->Cell(40, 10, 'N#', 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Ref. Code'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Product Name'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Qty'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Unit'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Unit Price'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Total Price'), 'B', '0', 'C');
+            $pdf->Cell(40, 10, __('Lead Time'), 'B', '0', 'C');
 
 // Set the table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
