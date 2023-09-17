@@ -406,7 +406,7 @@ class PdfController extends Controller
                 $yPos = $pdf->GetY();
 
                 // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(50, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
+                $pdf->MultiCell(50, 5, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
 
                 // Reset X and move Y to the saved position (next line)
                 $pdf->SetXY($xPos+50, $yPos);
