@@ -337,10 +337,13 @@ class PdfController extends Controller
 // Set the table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             foreach ($products as $product) {
+                $x = 10;
+                $y += 10;
                 foreach ($product as $value) {
+                    $pdf->SetXY($x, $y);
                     $pdf->Cell(40, 10, $value, 1);
+                    $x += 40;
                 }
-                $pdf->Ln();  // Move to the next line
             }
 
 
