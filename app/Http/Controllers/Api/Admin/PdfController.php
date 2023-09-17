@@ -341,12 +341,26 @@ class PdfController extends Controller
 
             //PRODUCTS
 
-            // Sample product data (replace with your product data)
             $products = [
-                ['1', 'Category A', '$50.00', '$50.00', '$50.00', '$50.00', '$50.00', '$50.00'],
-                ['2', 'Category B', '$65.00', '$65.00', '$65.00', '$65.00', '$65.00', '$65.00'],
+                ['Product 1', 'This is a long description for product 1 that will wrap to the next line.', '$50.00'],
+                ['Product 2', 'Short description for product 2.', '$65.00'],
                 // Add more products as needed
             ];
+
+// Set the table header
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(40, 10, 'Product Name', 1);
+            $pdf->Cell(80, 10, 'Description', 1);
+            $pdf->Cell(40, 10, 'Price', 1);
+            $pdf->Ln();  // Move to the next line
+
+// Set the table content
+            $pdf->SetFont('Arial', '', 12);
+            foreach ($products as $product) {
+                $pdf->Cell(40, 10, $product[0], 1);
+                $pdf->MultiCell(80, 10, $product[1], 1);
+                $pdf->Cell(40, 10, $product[2], 1);
+            }
 
 // Set the table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
