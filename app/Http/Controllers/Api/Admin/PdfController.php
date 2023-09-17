@@ -343,11 +343,23 @@ class PdfController extends Controller
             foreach ($products as $product) {
                 $x = 10;
                 $y += 10;
-                foreach ($product as $value) {
-                    $pdf->SetXY($x, $y);
-                    $pdf->Cell(23.75, 10, $value, 1);
-                    $x += 23.75;
-                }
+                $pdf->SetXY($x, $y);
+
+
+                $pdf->Cell(6, 10, 'N#', '0', '0', 'C');
+                $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '0', '0', 'C');
+                $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '0', '0', '');
+                $pdf->Cell(14, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '0', '0', 'C');
+                $pdf->Cell(12, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '0', '0', 'C');
+                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '0', '0', 'C');
+                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Total Price')), '0', '0', 'C');
+                $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), '0', '0', 'C');
+
+//                foreach ($product as $value) {
+//                    $pdf->SetXY($x, $y);
+//                    $pdf->Cell(23.75, 10, $value, 1);
+//                    $x += 23.75;
+//                }
             }
 
 
