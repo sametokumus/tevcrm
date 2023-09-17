@@ -340,15 +340,15 @@ class PdfController extends Controller
 
 // Set the table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            foreach ($products as $product) {
+            foreach ($sale_offers as $sale_offer) {
                 $x = 10;
                 $y += 10;
                 $pdf->SetXY($x, $y);
 
 
-                $pdf->Cell(10, 10, 'N#', '1', '0', 'C');
-                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), '1', '0', 'C');
-                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', __('Product Name')), '1', '0', '');
+                $pdf->Cell(10, 10, $sale_offer->sequence, '1', '0', 'C');
+                $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), '1', '0', 'C');
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), '1', '0', '');
                 $pdf->Cell(19, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), '1', '0', 'C');
                 $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), '1', '0', 'C');
                 $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), '1', '0', 'C');
