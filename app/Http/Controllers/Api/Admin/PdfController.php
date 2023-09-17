@@ -383,10 +383,10 @@ class PdfController extends Controller
                 }
 
                 $pdf->setX(10);
-//                $pdf->Cell(10, 14, $sale_offer->sequence, 1, 0, 'C');
-                $pdf->Cell(10, 14, '', 1, 0, 'C');
-//                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
+                $pdf->Cell(10, 14, $sale_offer->sequence, 1, 0, 'C');
+//                $pdf->Cell(10, 14, '', 1, 0, 'C');
+                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+//                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
 
                 // Save the current X and Y position
                 $xPos = $pdf->GetX();
@@ -409,7 +409,8 @@ class PdfController extends Controller
 
 
 
-
+            $pdf->SetY(-20);  // Position from the bottom of the page
+            $pdf->Image(public_path($contact->footer), 10, $pdf->GetY(), 190);
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
