@@ -379,6 +379,7 @@ class PdfController extends Controller
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             foreach ($sale_offers as $sale_offer) {
+                $pdf->setX(10);
                 $pdf->Cell(10, 10, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
@@ -390,7 +391,7 @@ class PdfController extends Controller
                 $pdf->MultiCell(50, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
 
                 // Reset X and move Y to the saved position (next line)
-                $pdf->SetXY($xPos, $yPos);
+                $pdf->SetXY($xPos+50, $yPos);
 
                 // Output remaining cells for the current row
                 $pdf->Cell(19, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
