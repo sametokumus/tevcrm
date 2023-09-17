@@ -81,10 +81,33 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
 
 
-            //COMPANY INFO
             $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
             $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
             $pdf->SetFont('ChakraPetch-Bold', '', 12);
+
+
+            // LOGO
+            $pageWidth = $pdf->GetPageWidth();
+            $x = $pageWidth - $contact->logo_width - 20;
+            $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
+
+            list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
+            $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
+
+            //TARİH - KOD
+
+            $x = $pageWidth - $pdf->GetStringWidth(__('Date').': '.$document_date) - 13;
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $actual_height + 25);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', '');
+
+            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 16;
+            $pdf->SetFont('ChakraPetch-Bold', '', 11);
+            $pdf->SetXY($x, $actual_height + 32);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
+
+
+            //COMPANY INFO
 
             $x = 10;
             $y = 15;
@@ -290,26 +313,6 @@ class PdfController extends Controller
 
             }
 
-
-            // LOGO
-            $pageWidth = $pdf->GetPageWidth();
-            $x = $pageWidth - $contact->logo_width - 20;
-            $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
-
-            list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
-            $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
-
-            //TARİH - KOD
-
-            $x = $pageWidth - $pdf->GetStringWidth(__('Date').': '.$document_date) - 13;
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $actual_height + 25);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', '');
-
-            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 16;
-            $pdf->SetFont('ChakraPetch-Bold', '', 11);
-            $pdf->SetXY($x, $actual_height + 32);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
 
 
 
