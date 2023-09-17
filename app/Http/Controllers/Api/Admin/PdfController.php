@@ -411,13 +411,13 @@ class PdfController extends Controller
             //TOTAL PRICES
 
             $x = 10;
-            $y += 10;
+            $y = $pdf->GetY();;
             $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 9);
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->Cell(140, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'R');
 
             $pdf->SetXY($x + 140, $y);
-            $pdf->SetFont('ChakraPetch-Regular', '', 9);
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $pdf->Cell(50, 14, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'C');
 
 
