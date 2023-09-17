@@ -382,14 +382,17 @@ class PdfController extends Controller
                 $pdf->Cell(10, 10, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
-                // Handle long product names
-                if (strlen($sale_offer->product_name) > 50) {
-                    $product_name = substr($sale_offer->product_name, 0, 47) . '...'; // Truncate if too long
-                } else {
-                    $product_name = $sale_offer->product_name;
-                }
+                // Save the current X and Y position
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
 
-                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $product_name), 1, 0, 'L');  // Use Cell for product name
+                // Use MultiCell for product name with a width of 50mm
+                $pdf->MultiCell(50, 10, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
+
+                // Reset X and move Y to the saved position (next line)
+                $pdf->SetXY($xPos, $yPos);
+
+                // Output remaining cells for the current row
                 $pdf->Cell(19, 10, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
                 $pdf->Cell(16, 10, iconv('utf-8', 'iso-8859-9', __('Unit')), 1, 0, 'C');
                 $pdf->Cell(25, 10, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
