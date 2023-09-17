@@ -420,7 +420,7 @@ class PdfController extends Controller
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->sub_total.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
                 $y += 10;
             }
@@ -432,7 +432,7 @@ class PdfController extends Controller
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->freight.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->freight, 2,",",".").' '.$currency), 1, 0, 'C');
 
                 $y += 10;
             }
@@ -444,7 +444,7 @@ class PdfController extends Controller
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->vat.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
                 $y += 10;
             }
@@ -457,21 +457,25 @@ class PdfController extends Controller
 
                     $pdf->SetXY($x + 140, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                    $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sale->grand_total . ' ' . $currency), 1, 0, 'C');
+                    $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
                     $y += 10;
                 }
             }
 
-            $y += 10;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
 
-            $y += 7;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->note), 0, 0, '');
+            //NOTE
+            if ($quote->note != null) {
+                $y += 10;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 8);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
+
+                $y += 5;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 8);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->note), 0, 0, '');
+            }
 
 
             //FOOTER
