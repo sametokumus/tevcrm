@@ -346,7 +346,7 @@ class PdfController extends Controller
                 foreach ($product as $value) {
                     $pdf->SetXY($x, $y);
                     $pdf->Cell(25, 10, $value, 1);
-                    $x += 40;
+                    $x += 25;
                 }
             }
 
