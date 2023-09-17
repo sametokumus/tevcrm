@@ -7,9 +7,12 @@ use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Employee;
+use App\Models\Measurement;
 use App\Models\MobileDocument;
+use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleNote;
@@ -61,6 +64,24 @@ class PdfController extends Controller
             $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+            foreach ($sale_offers as $sale_offer){
+                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
+                $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
+                $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
+                $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
+                $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
+                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                $sale_offer['sequence'] = $request_product->sequence;
+
+            }
             $contact = Contact::query()->where('id', $owner_id)->first();
 
             $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
