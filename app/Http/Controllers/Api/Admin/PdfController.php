@@ -40,6 +40,8 @@ class PdfController extends Controller
                 ->where('sales.sale_id',$sale_id)
                 ->first();
 
+            $currency = $sale->currency;
+
             $this_document = MobileDocument::query()->where('sale_id', $sale->id)->first();
             if ($this_document){
                 $createdAt = Carbon::parse($this_document->created_at);
@@ -69,7 +71,7 @@ class PdfController extends Controller
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
                 $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
                 $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
-                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,",",".");
                 $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
                 $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
                 $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
@@ -397,8 +399,8 @@ class PdfController extends Controller
                 // Output remaining cells for the current row
                 $pdf->Cell(19, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
                 $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price), 1, 0, 'C');
-                $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price), 1, 0, 'C');
+                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
 
