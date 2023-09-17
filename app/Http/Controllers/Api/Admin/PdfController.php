@@ -332,7 +332,6 @@ class PdfController extends Controller
             $pdf->Cell(40, 10, 'Product Name', 1);
             $pdf->Cell(40, 10, 'Category', 1);
             $pdf->Cell(40, 10, 'Price', 1);
-            $pdf->Ln();  // Move to the next line
 
 // Set the table content
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
