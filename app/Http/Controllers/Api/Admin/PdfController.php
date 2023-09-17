@@ -408,9 +408,13 @@ class PdfController extends Controller
             }
 
 
+            $footerImage = public_path($contact->footer);
 
-            $pdf->SetY(-20);  // Position from the bottom of the page
-            $pdf->Image(public_path($contact->footer), 10, $pdf->GetY(), 190);
+            $pdf->SetY(-40);  // Position from the bottom of the page
+            for ($page = 1; $page <= $pdf->PageNo(); $page++) {
+                $pdf->AddPage();
+                $pdf->Image($footerImage, 10, $pdf->GetY(), 190);
+            }
 
             $b64Doc = $pdf->Output('invoice.pdf', 'S');  // Set the 'I' flag to output to the browser
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($b64Doc))]]);
