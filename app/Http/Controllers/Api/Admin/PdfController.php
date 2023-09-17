@@ -313,8 +313,9 @@ class PdfController extends Controller
 
             }
 
-
-            $pdf->Ln();  // Move to the next line
+            $x = 10;
+            $y += 10;
+            $pdf->SetXY($x, $y);
 
 
             //PRODUCTS
