@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use FPDF;
+use setasign\Fpdi\Fpdi;
 use Carbon\Carbon;
 
 
@@ -414,7 +415,7 @@ class PdfController extends Controller
             $pdfContent = $pdf->Output('invoice.pdf', 'S');
 
 // Load the generated PDF content
-            $pdf = new \FPDI();
+            $pdf = new Fpdi();
             $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
 
             for ($pageNo = 1; $pageNo <= $pdf->getNumPages(); $pageNo++) {
