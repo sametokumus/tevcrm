@@ -409,23 +409,22 @@ class PdfController extends Controller
             }
 
 
-// ... Rest of your code ...
-
-// Generate the PDF without the footer image
             $pdfContent = $pdf->Output('invoice.pdf', 'S');
 
-// Load the generated PDF content
             $pdf = new Fpdi();
             $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
 
-            for ($pageNo = 1; $pageNo <= $pdf->getNumPages(); $pageNo++) {
+            $numPages = $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
+
+            for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
                 $pdf->AddPage();
 
-                // Add the footer image to each page
                 $pdf->Image(public_path($contact->footer), 10, 280, 190);
+
+                $tplIdx = $pdf->importPage($pageNo);
+                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
             }
 
-// Output the final PDF with the footer image on each page
             $finalPdfContent = $pdf->Output('invoice_with_footer.pdf', 'S');
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($finalPdfContent))]]);
