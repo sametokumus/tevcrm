@@ -414,9 +414,14 @@ class PdfController extends Controller
             $y = $pdf->GetY();
 
             if ($sale->sub_total != null) {
+                $title = __('Sub Total');
+                if ($sale->vat == null || $sale->vat == '0.00' && $sale->freight == null) {
+                    $title = __('Total');
+                }
+
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Sub Total')), 1, 0, 'R');
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper($title)), 1, 0, 'R');
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -428,7 +433,7 @@ class PdfController extends Controller
             if ($sale->freight != null) {
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Freight')), 1, 0, 'R');
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -440,7 +445,7 @@ class PdfController extends Controller
             if ($sale->vat != null && $sale->vat != '0.00') {
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Vat')), 1, 0, 'R');
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
 
                 $pdf->SetXY($x + 140, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -453,7 +458,7 @@ class PdfController extends Controller
                 if ($sale->vat != null && $sale->vat != '0.00' && $sale->freight != null) {
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                    $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', __('Grand Total')), 1, 0, 'R');
+                    $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
 
                     $pdf->SetXY($x + 140, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
