@@ -380,7 +380,7 @@ class PdfController extends Controller
             foreach ($sale_offers as $sale_offer) {
                 $x = 10;
                 $y += 10;
-//                $pdf->SetXY($x, $y);
+                $pdf->SetX($x);
 
 
                 $pdf->MultiCell(10, 10, $sale_offer->sequence, '1', 'C');
