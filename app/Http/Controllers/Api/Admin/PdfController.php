@@ -322,8 +322,8 @@ class PdfController extends Controller
 
             // Sample product data (replace with your product data)
             $products = [
-                ['Product 1', 'Category A', '$50.00'],
-                ['Product 2', 'Category B', '$65.00'],
+                ['1', 'Category A', '$50.00', '$50.00', '$50.00', '$50.00', '$50.00', '$50.00'],
+                ['2', 'Category B', '$65.00', '$65.00', '$65.00', '$65.00', '$65.00', '$65.00'],
                 // Add more products as needed
             ];
 
@@ -345,7 +345,7 @@ class PdfController extends Controller
                 $y += 10;
                 foreach ($product as $value) {
                     $pdf->SetXY($x, $y);
-                    $pdf->Cell(40, 10, $value, 1);
+                    $pdf->Cell(25, 10, $value, 1);
                     $x += 40;
                 }
             }
