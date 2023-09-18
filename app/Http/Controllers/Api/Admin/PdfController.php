@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\MobileDocument;
@@ -43,7 +44,7 @@ class PdfController extends Controller
 
             $currency = $sale->currency;
 
-            $this_document = MobileDocument::query()->where('sale_id', $sale->id)->first();
+            $this_document = Document::query()->where('sale_id', $sale->id)->first();
             if ($this_document){
                 $createdAt = Carbon::parse($this_document->created_at);
                 $document_date = $createdAt->format('d/m/Y');
@@ -51,9 +52,9 @@ class PdfController extends Controller
             }else{
                 $createdAt = Carbon::now();
                 $document_date = $createdAt->format('d/m/Y');
-                $document_id = MobileDocument::query()->insertGetId([
+                $document_id = Document::query()->insertGetId([
                     'sale_id' => $sale->id,
-                    'document_type_id' => 30,
+                    'document_type_id' => 1,
                     'created_at' => $createdAt->format('Y-m-d H:i:s')
                 ]);
             }
@@ -486,7 +487,7 @@ class PdfController extends Controller
 
             //FOOTER
 
-            $pdfContent = $pdf->Output('invoice.pdf', 'S');
+            $pdfContent = $pdf->Output('created.pdf', 'S');
 
             $pdf = new Fpdi();
             $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
@@ -502,9 +503,24 @@ class PdfController extends Controller
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
             }
 
-            $finalPdfContent = $pdf->Output('invoice_with_footer.pdf', 'S');
+            $filePath = public_path('img/document/' . $contact->short_code . '-OFR-' . $sale->id . '.pdf');
+            $pdf->Output($filePath, 'F');
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($finalPdfContent))]]);
+            $fileUrl = asset('img/document/' . $contact->short_code . '-OFR-' . $sale->id . '.pdf');
+            $fileName = $contact->short_code . '-OFR-' . $sale->id . '.pdf';
+
+            return response([
+                'message' => __('İşlem Başarılı.'),
+                'status' => 'success',
+                'object' => [
+                    'file_url' => $fileUrl,
+                    'file_name' => $fileName
+                ]
+            ]);
+
+//            $finalPdfContent = $pdf->Output($contact->short_code.'-OFR-'.$sale->id.'.pdf', 'S');
+//
+//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['file_pixel' => chunk_split(base64_encode($finalPdfContent))]]);
 
 
         } catch (QueryException $queryException) {

@@ -46,10 +46,10 @@ async function generatePDF(){
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
-    link.href = `data:application/pdf;base64,${pdfData.object.file_pixel}`;
+    link.href = `${pdfData.object.file_url}`;
     link.target = '_blank';
-    link.download = 'invoice.pdf';
-    link.textContent = 'Download Invoice PDF';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
