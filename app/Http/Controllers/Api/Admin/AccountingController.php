@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminStatusRole;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\PackingList;
 use App\Models\PaymentMethod;
 use App\Models\PaymentType;
 use App\Models\Sale;
@@ -51,16 +53,29 @@ class AccountingController extends Controller
         try {
             $admin = Admin::query()->where('id', $user_id)->first();
 
-            $sales = Sale::query()
-                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
-                ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+//            $sales = Sale::query()
+//                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
+//                ->where('sales.active',1)
+//                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+//                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+//                ->get();
+
+            $packing_lists = PackingList::query()
+                ->whereRaw("(packing_lists.packing_list_id NOT IN (SELECT packing_list_id FROM sale_transactions))")
+                ->where('packing_lists.active',1)
+                ->selectRaw('packing_lists.sale_id')
                 ->get();
 
-            foreach ($sales as $sale) {
+            $sales = array();
+
+            foreach ($packing_lists as $packing_list) {
+
+                $sale = Sale::query()->where('sale_id', $packing_list->sale_id)->first();
+
+                $sale->status_name = Status::query()->where('id', $sale->status_id)->first()->name;
+                $sale->owner_short_code = Contact::query()->where('id', $sale->owner_id)->first()->short_code;
 
                 $status_role = AdminStatusRole::query()->where('admin_role_id', $admin->admin_role_id)->where('status_id', $sale->status_id)->where('active', 1)->count();
                 if ($status_role > 0){
