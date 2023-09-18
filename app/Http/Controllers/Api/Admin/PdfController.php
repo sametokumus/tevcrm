@@ -483,6 +483,7 @@ class PdfController extends Controller
             }
 
 
+
             //FOOTER
 
             $pdfContent = $pdf->Output('invoice.pdf', 'S');
