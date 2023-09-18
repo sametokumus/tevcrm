@@ -466,7 +466,7 @@ class SaleController extends Controller
                 ->where('sale_offers.sale_id', $sale->sale_id)
                 ->where('sale_offers.active', 1)
                 ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
-                ->where('packing_list_products.packing_list_id', 'fgjdfkgfdjkgjldfgkfdjgljk')
+                ->where('packing_list_products.packing_list_id', $packing_list_id)
                 ->get();
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
