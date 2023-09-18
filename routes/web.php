@@ -55,6 +55,7 @@ Route::get('/order-confirmation-print/{sale_id}', function () { return view('ord
 Route::get('/proforma-invoice-print/{sale_id}', function () { return view('proforma-invoice-print'); });
 Route::get('/invoice-print/{sale_id}', function () { return view('invoice-print'); });
 Route::get('/packing-list-print/{sale_id}', function () { return view('packing-list-print'); });
+Route::get('/pl-invoice-print/{sale_id}', function () { return view('pl-invoice-print'); });
 
 
 Route::get('/settings', function () { return view('settings'); });

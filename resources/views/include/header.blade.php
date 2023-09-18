@@ -204,7 +204,7 @@ $extra_js="";
                 <div id="nav-pending-accounting" class="d-none menu-item @if( Request::segment(1)== 'pending-accounting' ) active @endif">
                     <a href="/pending-accounting" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
-                        <span class="menu-text">İşlem Yapılmayanlar</span>
+                        <span class="menu-text">Fatura Bekleyenler</span>
                     </a>
                 </div>
                 <div id="nav-ongoing-accounting" class="d-none menu-item @if( Request::segment(1)== 'ongoing-accounting' ) active @endif">

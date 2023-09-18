@@ -1416,6 +1416,15 @@ async function serviceGetSaleById(id) {
     }
 }
 
+async function serviceGetPackingListSaleById(id) {
+    const data = await fetchDataGet('/admin/sale/getPackingListSaleById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetApproveOfferBySaleId(id, revize) {
     let user_id = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/sale/getApproveOfferBySaleId/' + id + '/' + user_id + '/' + revize, 'application/json');

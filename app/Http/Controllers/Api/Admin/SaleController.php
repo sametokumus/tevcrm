@@ -431,6 +431,69 @@ class SaleController extends Controller
         }
     }
 
+    public function getPackingListSaleById($packing_list_id)
+    {
+        try {
+            $packing_list = PackingList::query()->where('packing_list_id', $packing_list_id)->first();
+            $sale_id = $packing_list->sale_id;
+
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
+            $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
+
+            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+            $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+            $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $sale['request'] = $offer_request;
+
+//            $sale_offers = SaleOffer::query()
+//                ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
+//                ->where('sale_id', $sale->sale_id)
+//                ->where('active', 1)
+//                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+//                ->get();
+            $sale_offers = SaleOffer::query()
+                ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
+                ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
+                ->selectRaw('sale_offers.*, packing_list_products.quantity as list_quantity')
+                ->where('sale_offers.sale_id', $sale->sale_id)
+                ->where('sale_offers.active', 1)
+                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+                ->where('packing_list_products.packing_list_id', 'fgjdfkgfdjkgjldfgkfdjgljk')
+                ->get();
+            foreach ($sale_offers as $sale_offer){
+                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
+                $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
+                $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
+                $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
+                $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
+                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                $sale_offer['sequence'] = $request_product->sequence;
+
+            }
+            $sale['sale_offers'] = $sale_offers;
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getApproveOfferBySaleId($sale_id, $user_id, $revize)
     {
         try {
