@@ -115,6 +115,8 @@ class AccountingController extends Controller
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
 
+                array_push($sales, $sale);
+
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
