@@ -506,7 +506,7 @@ class PdfController extends Controller
             $filePath = public_path('img/document/' . $contact->short_code . '-OFR-' . $sale->id . '.pdf');
             $pdf->Output($filePath, 'F');
 
-            $fileUrl = asset('img/document/' . $contact->short_code . '-OFR-' . $sale->id . '.pdf');
+            $fileUrl = 'img/document/' . $contact->short_code . '-OFR-' . $sale->id . '.pdf';
             $fileName = $contact->short_code . '-OFR-' . $sale->id . '.pdf';
 
             Document::query()->where('id', $document_id)->update([
