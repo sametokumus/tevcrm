@@ -127,35 +127,9 @@ $extra_js='
 
     </div>
 
-    <div class="row">
-
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
-                    <div class="flex-fill">
-                        <span class="flex-grow-1 fw-600 fs-12px">Talep Tarihi</span>
-                        <h3 id="sale-date"></h3>
-                        <div>&nbsp;</div>
-                        <div>&nbsp;</div>
-                    </div>
-                    <div class="opacity-5">
-                        <i class="fa fa-calendar-day fa-4x"></i>
-                    </div>
-                </div>
+    <div class="row" id="documents">
 
 
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
 
     </div>
     <div class="row">

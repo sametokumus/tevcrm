@@ -2424,7 +2424,14 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
     }
 }
 
-
+async function serviceGetDocuments(id) {
+    const data = await fetchDataGet('/admin/sale/getDocuments/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 async function serviceGetMobileDocuments(id) {
     const data = await fetchDataGet('/admin/mobile/getDocuments/'+ id, 'application/json');

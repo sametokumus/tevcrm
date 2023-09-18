@@ -5,7 +5,7 @@
 
          $('#add_document_form').submit(function (e){
              e.preventDefault();
-             addDocument();
+             addMobileDocument();
          });
 
 	});
@@ -16,12 +16,14 @@
         checkRole();
         let sale_id = getPathVariable('sale-detail');
         initSaleStats(sale_id);
+        initDocuments(sale_id);
+
         initSaleHistory(sale_id);
         initSaleSuppliers(sale_id);
         initSellingProcess(sale_id);
 
         getDocumentTypesAddSelectId('add_document_type');
-        initDocuments();
+        initMobileDocuments(sale_id);
 
     });
 
@@ -133,8 +135,38 @@ async function initSaleSuppliers(sale_id){
     }
 }
 
-async function initDocuments(){
-    let sale_id = getPathVariable('mobile-documents');
+async function initDocuments(sale_id){
+    let data = await serviceGetDocuments(sale_id);
+    console.log(data)
+
+    $.each(data.documents, function (i, document) {
+        if (document.file_url != null) {
+            let typeItem = '<div class="col-xl-3 col-lg-6">\n' +
+                '            <div class="card mb-3">\n' +
+                '                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">\n' +
+                '                    <div class="flex-fill">\n' +
+                '                        <h4><a href="' + document.file_url + '" target="_blank" class="text-white text-decoration-none">' + document.name + '</a></h4>\n' +
+                '                    </div>\n' +
+                '                    <div class="opacity-5">\n' +
+                '                        <i class="fa fa-file-pdf fa-2x"></i>\n' +
+                '                    </div>\n' +
+                '                </div>\n' +
+                '                <div class="card-arrow">\n' +
+                '                    <div class="card-arrow-top-left"></div>\n' +
+                '                    <div class="card-arrow-top-right"></div>\n' +
+                '                    <div class="card-arrow-bottom-left"></div>\n' +
+                '                    <div class="card-arrow-bottom-right"></div>\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '        </div>';
+            $('#documents').append(typeItem);
+        }
+    });
+
+
+}
+
+async function initMobileDocuments(sale_id){
     let data = await serviceGetMobileDocuments(sale_id);
     console.log(data)
     $("#document-datatable").dataTable().fnDestroy();
@@ -149,7 +181,7 @@ async function initDocuments(){
             '                      <a href="'+ api_url + document.file_url +'" target="_blank" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
             '                          <span class="fe fe-search"> </span> Görüntüle\n' +
             '                      </a>\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteDocument(\''+ document.id +'\')">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteMobileDocument(\''+ document.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Sil\n' +
             '                      </button>\n' +
             '                  </div>\n' +
@@ -172,7 +204,7 @@ async function initDocuments(){
                 text: 'Döküman Ekle',
                 className: 'btn btn-theme',
                 action: function ( e, dt, node, config ) {
-                    openAddDocumentModal();
+                    openAddMobileDocumentModal();
                 }
             }
         ],
@@ -188,17 +220,17 @@ async function openAddDocumentModal(){
     $('#addDocumentModal').modal('show');
 }
 
-async function addDocumentCallback(xhttp){
+async function addMobileDocumentCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
     $("#add_document_form").trigger("reset");
     $("#addDocumentModal").modal('hide');
-    initDocuments();
+    initMobileDocuments();
 }
 
-async function addDocument(){
+async function addMobileDocument(){
     let sale_id = getPathVariable('mobile-documents');
 
     let formData = new FormData();
@@ -209,10 +241,10 @@ async function addDocument(){
     await servicePostAddMobileDocument(formData, sale_id);
 }
 
-async function deleteDocument(document_id){
+async function deleteMobileDocument(document_id){
     let returned = await serviceGetDeleteMobileDocument(document_id);
     if(returned){
-        initDocuments();
+        initMobileDocuments();
     }
 }
 
