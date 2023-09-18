@@ -541,7 +541,7 @@ class PdfController extends Controller
 
             $currency = $sale->currency;
 
-            $this_document = Document::query()->where('sale_id', $sale->id)->first();
+            $this_document = Document::query()->where('sale_id', $sale_id)->first();
             if ($this_document){
                 $createdAt = Carbon::parse($this_document->created_at);
                 $document_date = $createdAt->format('d/m/Y');
