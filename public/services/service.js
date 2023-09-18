@@ -2464,3 +2464,12 @@ async function serviceGetGeneratePDF(owner_id, sale_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGenerateQuatotionPDF(owner_id, sale_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateQuatotionPDF/' + owner_id + '/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

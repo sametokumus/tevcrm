@@ -258,6 +258,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getSaleStatusHistory/{sale_id}', [SaleController::class, 'getSaleStatusHistory']);
     Route::get('sale/getSaleSuppliers/{sale_id}', [SaleController::class, 'getSaleSuppliers']);
 
+    //Documents
+    Route::get('sale/getDocuments/{sale_id}', [SaleController::class, 'getDocuments']);
+
 
     //Contact
     Route::get('contact/getContacts', [ContactController::class, 'getContacts']);
@@ -357,6 +360,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('pdf/getGeneratePDF/{owner_id}/{sale_id}', [PdfController::class, 'getGeneratePDF']);
+    Route::get('pdf/getGenerateQuatotionPDF/{owner_id}/{sale_id}', [PdfController::class, 'getGenerateQuatotionPDF']);
 
 
 

@@ -9,8 +9,11 @@ use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
 use App\Models\Company;
 use App\Models\CurrencyLog;
+use App\Models\Document;
+use App\Models\DocumentType;
 use App\Models\Employee;
 use App\Models\Measurement;
+use App\Models\MobileDocument;
 use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
@@ -1797,6 +1800,26 @@ class SaleController extends Controller
             $process['completed_hour'] = $completed_hour;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['process' => $process]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getDocuments($sale_id)
+    {
+        try {
+            $documents = DocumentType::query()->where('active', 1)->get();
+
+            foreach ($documents as $document){
+                $file = Document::query()->where('sale_id', $sale_id)->where('document_type_id', $document->id)->first();
+                if ($file){
+                    $document['file_url'] = $file->file_url;
+                }else{
+                    $document['file_url'] = null;
+                }
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
