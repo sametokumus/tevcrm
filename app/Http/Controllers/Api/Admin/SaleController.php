@@ -468,13 +468,16 @@ class SaleController extends Controller
                 ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
                 ->where('packing_list_products.packing_list_id', $packing_list_id)
                 ->get();
+            $list_grand_total = 0;
             foreach ($sale_offers as $sale_offer){
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
                 $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
                 $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
                 $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
-                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
+                $list_offer_price = $offer_pcs_price * $sale_offer->list_quantity;
+                $list_grand_total += $list_offer_price;
+                $sale_offer->offer_price = number_format($list_offer_price, 2,",",".");
                 $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
                 $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
                 $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
@@ -487,6 +490,7 @@ class SaleController extends Controller
 
             }
             $sale['sale_offers'] = $sale_offers;
+            $sale['list_grand_total'] = number_format($list_grand_total, 2,",",".");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
