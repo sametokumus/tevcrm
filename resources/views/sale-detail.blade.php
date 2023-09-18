@@ -13,9 +13,9 @@ $extra_js='
 
     <div class="row">
 
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 mb-3">
 
-            <div class="card mb-3">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
@@ -41,9 +41,9 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 mb-3">
 
-            <div class="card mb-3">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
@@ -69,9 +69,9 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 mb-3">
 
-            <div class="card mb-3">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
@@ -97,9 +97,9 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 mb-3">
 
-            <div class="card mb-3">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">

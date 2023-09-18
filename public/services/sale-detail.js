@@ -140,17 +140,22 @@ async function initDocuments(sale_id){
     console.log(data)
 
     $.each(data.documents, function (i, document) {
-        if (document.file_url != null) {
-            let typeItem = '<div class="col-xl-3 col-lg-6">\n' +
+
+            let item = '<div class="col-xl-3 col-lg-6">\n' +
                 '            <div class="card mb-3">\n' +
-                '                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">\n' +
+                '                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">\n';
+        if (document.file_url != null) {
+            item += '            <a href="' + document.file_url + '" target="_blank" class="text-white text-decoration-none">' +
                 '                    <div class="flex-fill">\n' +
-                '                        <h4><a href="' + document.file_url + '" target="_blank" class="text-white text-decoration-none">' + document.name + '</a></h4>\n' +
+                '                        <h5 class="mb-0"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
                 '                    </div>\n' +
-                '                    <div class="opacity-5">\n' +
-                '                        <i class="fa fa-file-pdf fa-2x"></i>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
+                '                </a>\n';
+        }else{
+            item += '                <div class="flex-fill">\n' +
+                '                        <h5 class="mb-0 text-danger"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
+                '                    </div>\n';
+        }
+            item += '            </div>\n' +
                 '                <div class="card-arrow">\n' +
                 '                    <div class="card-arrow-top-left"></div>\n' +
                 '                    <div class="card-arrow-top-right"></div>\n' +
@@ -159,8 +164,8 @@ async function initDocuments(sale_id){
                 '                </div>\n' +
                 '            </div>\n' +
                 '        </div>';
-            $('#documents').append(typeItem);
-        }
+            $('#documents').append(item);
+
     });
 
 
