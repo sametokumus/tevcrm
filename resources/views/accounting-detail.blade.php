@@ -372,7 +372,8 @@ $(".timepicker").timepicker({
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Ödeme Tutarı :</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="update_payment_payment_price">
+                                <input type="hidden" class="form-control" id="update_payment_packing_list_id">
+                                <input type="text" class="form-control" id="update_payment_payment_price" readonly>
                             </div>
                         </div>
                         <div class="row mb-4">

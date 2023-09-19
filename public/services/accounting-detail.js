@@ -250,6 +250,7 @@ async function openUpdatePaymentModal(payment_id){
     document.getElementById('update_payment_due_date').value = formatDateASC(payment.due_date, "-");
     document.getElementById('update_payment_payment_price').value = changeCommasToDecimal(payment.payment_price);
     document.getElementById('update_payment_currency').value = payment.currency;
+    document.getElementById('update_payment_packing_list_id').value = payment.packing_list_id;
 }
 async function updatePayment(){
     let sale_id = getPathVariable('accounting-detail');
