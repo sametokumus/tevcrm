@@ -286,7 +286,6 @@ class AccountingController extends Controller
                 }
 
                 $packing_list['transaction'] = $transaction;
-                $packing_list['sale_offers'] = $sale_offers;
                 $packing_list['count'] = $count;
                 $packing_list['currency'] = Sale::query()->where('sale_id', $sale_id)->first()->currency;
                 $packing_list['list_grand_total'] = number_format($list_grand_total, 2,",",".");
