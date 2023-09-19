@@ -338,6 +338,24 @@ async function updatePaymentPaymentTermWithButton(day){
 }
 
 
+async function addPaymentTaxWithButton(rate){
+    let price = document.getElementById('add_payment_payment_price').value;
+    price = changePriceToDecimal(price);
+    console.log(price)
+
+
+    // let currentDate = new Date();
+    // let dueDate = new Date();
+    // dueDate.setDate(currentDate.getDate() + parseInt(day));
+    // dueDate = dueDate.toLocaleDateString('tr-TR', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric'
+    // });
+    // dueDate = formatDateSplit(dueDate, '-', '.');
+    // document.getElementById('add_payment_due_date').value = dueDate;
+}
+
 function openStatusModal(payment_id, status_id){
     $('#updateStatusModal').modal('show');
     document.getElementById('update_status_payment_id').value = payment_id;

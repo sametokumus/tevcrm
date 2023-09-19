@@ -282,6 +282,38 @@ $(".timepicker").timepicker({
                                 <input type="text" class="form-control" id="add_payment_currency" readonly>
                             </div>
                         </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">KDV ORANI :</label>
+                            <div class="col-md-9">
+                                <div class="btn-list mb-2">
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(0)">
+                                        <span class="fe fe-refresh-cw">0</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(1)">
+                                        <span class="fe fe-refresh-cw">1</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(8)">
+                                        <span class="fe fe-refresh-cw">8</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(10)">
+                                        <span class="fe fe-refresh-cw">10</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(18)">
+                                        <span class="fe fe-refresh-cw">18</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(20)">
+                                        <span class="fe fe-refresh-cw">20</span>
+                                    </button>
+                                </div>
+                                <input type="number" value="" class="form-control" id="update_payment_tax_rate" min="0" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Para Birimi :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="add_payment_price_with_tax" readonly>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-theme">Kaydet</button>
@@ -379,12 +411,45 @@ $(".timepicker").timepicker({
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Para Birimi :</label>
                             <div class="col-md-9">
-                                <select class="form-control" id="update_payment_currency" required>
-                                    <option value="TRY">TRY</option>
-                                    <option value="EUR">EUR</option>
-                                    <option value="USD">USD</option>
-                                    <option value="GBP">GBP</option>
-                                </select>
+{{--                                <select class="form-control" id="update_payment_currency" required>--}}
+{{--                                    <option value="TRY">TRY</option>--}}
+{{--                                    <option value="EUR">EUR</option>--}}
+{{--                                    <option value="USD">USD</option>--}}
+{{--                                    <option value="GBP">GBP</option>--}}
+{{--                                </select>--}}
+                                <input type="text" class="form-control" id="update_payment_currency" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">KDV ORANI :</label>
+                            <div class="col-md-9">
+                                <div class="btn-list mb-2">
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(0)">
+                                        <span class="fe fe-refresh-cw">0</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(1)">
+                                        <span class="fe fe-refresh-cw">1</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(8)">
+                                        <span class="fe fe-refresh-cw">8</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(10)">
+                                        <span class="fe fe-refresh-cw">10</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(18)">
+                                        <span class="fe fe-refresh-cw">18</span>
+                                    </button>
+                                    <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(20)">
+                                        <span class="fe fe-refresh-cw">20</span>
+                                    </button>
+                                </div>
+                                <input type="number" value="" class="form-control" id="update_payment_tax_rate" min="0" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Para Birimi :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_payment_price_with_tax" readonly>
                             </div>
                         </div>
                     </div>
