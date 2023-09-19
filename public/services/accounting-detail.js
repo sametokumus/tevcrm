@@ -198,7 +198,6 @@ async function openAddPaymentModal(packing_list_id, price, currency){
     await getPaymentTypesAddSelectId('add_payment_payment_type');
     await getPaymentMethodsAddSelectId('add_payment_payment_method');
     document.getElementById('add_payment_payment_price').value = price;
-    document.getElementById('add_payment_payment_price_text').value = changeCommasToDecimal(price);
     document.getElementById('add_payment_currency').value = currency;
     document.getElementById('add_payment_packing_list_id').value = packing_list_id;
 }

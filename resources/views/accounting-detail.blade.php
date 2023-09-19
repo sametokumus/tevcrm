@@ -267,8 +267,7 @@ $(".timepicker").timepicker({
                             <label class="col-md-3 form-label">Ödeme Tutarı :</label>
                             <div class="col-md-9">
                                 <input type="hidden" class="form-control" id="add_payment_packing_list_id">
-                                <input type="hidden" class="form-control" id="add_payment_payment_price">
-                                <input type="text" class="form-control" id="add_payment_payment_price_text" readonly>
+                                <input type="text" class="form-control" id="add_payment_payment_price" readonly>
                             </div>
                         </div>
                         <div class="row mb-4">
