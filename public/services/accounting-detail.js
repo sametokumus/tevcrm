@@ -110,7 +110,7 @@ async function initSaleStats(sale_id){
 async function initPayments(sale_id){
     let data = await serviceGetAccountingPayments(sale_id);
     let packing_lists = data.packing_lists;
-    console.log(packing_lists)
+    console.log(data)
     $("#payments").dataTable().fnDestroy();
     $('#payments tbody > tr').remove();
 
