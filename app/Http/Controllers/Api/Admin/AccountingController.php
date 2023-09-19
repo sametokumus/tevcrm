@@ -275,7 +275,6 @@ class AccountingController extends Controller
                     ->where('sale_offers.sale_id', $sale_id)
                     ->where('sale_offers.active', 1)
                     ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
-                    ->where('packing_list_products.packing_list_id', $packing_list->packing_list_id)
                     ->get();
                 $list_grand_total = 0;
                 $count = 0;
