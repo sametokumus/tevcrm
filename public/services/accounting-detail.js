@@ -258,8 +258,8 @@ async function updatePayment(){
     let payment_type = document.getElementById('update_payment_payment_type').value;
     let payment_method = document.getElementById('update_payment_payment_method').value;
     let payment_term = document.getElementById('update_payment_payment_term').value;
-    let invoice_date = formatDateDESC2(document.getElementById('update_payment_invoice_date').value);
-    let due_date = formatDateDESC2(document.getElementById('update_payment_due_date').value);
+    let invoice_date = formatDateDESC2(document.getElementById('update_payment_invoice_date').value, "-", "-");
+    let due_date = formatDateDESC2(document.getElementById('update_payment_due_date').value, "-", "-");
     let payment_price = document.getElementById('update_payment_payment_price').value;
     let currency = document.getElementById('update_payment_currency').value;
     console.log(due_date)
