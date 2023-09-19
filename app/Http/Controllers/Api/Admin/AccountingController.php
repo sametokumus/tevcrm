@@ -251,21 +251,37 @@ class AccountingController extends Controller
     public function getAccountingPayments($sale_id)
     {
         try {
-            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+            $packing_lists = PackingList::query()->where('sale_id', $sale_id)->where('active', 1)->get();
 
-            if ($transaction) {
-                $payments = SaleTransactionPayment::query()
+            foreach ($packing_lists as $packing_list){
+                $transaction = SaleTransaction::query()
+                    ->leftJoin('sale_transaction_payments', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
                     ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
                     ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
-                    ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method')
-                    ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
-                    ->where('sale_transaction_payments.active', 1)
-                    ->get();
-
-                $transaction['payments'] = $payments;
+                    ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method, sale_transactions.*')
+                    ->where('sale_id', $sale_id)
+                    ->where('active', 1)
+                    ->first();
+                $packing_list['transaction'] = $transaction;
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['transaction' => $transaction]]);
+
+//
+//            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+//
+//            if ($transaction) {
+//                $payments = SaleTransactionPayment::query()
+//                    ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
+//                    ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
+//                    ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method')
+//                    ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
+//                    ->where('sale_transaction_payments.active', 1)
+//                    ->get();
+//
+//                $transaction['payments'] = $payments;
+//            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['packing_lists' => $packing_lists]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }

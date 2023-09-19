@@ -140,7 +140,7 @@ $(".timepicker").timepicker({
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                Ödeme Listesi
+                Gönderi Listesi
             </h1>
         </div>
     </div>

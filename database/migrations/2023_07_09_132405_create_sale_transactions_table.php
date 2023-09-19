@@ -19,6 +19,7 @@ class CreateSaleTransactionsTable extends Migration
             $table->string('sale_id');
             $table->string('packing_list_id');
             $table->tinyInteger('transaction_status_id')->default(1);
+            $table->text('transaction_invoice')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
