@@ -109,13 +109,14 @@ async function initSaleStats(sale_id){
 
 async function initPayments(sale_id){
     let data = await serviceGetAccountingPayments(sale_id);
-    let transaction = data.transaction;
-    console.log(transaction)
+    let packing_lists = data.packing_lists;
+    console.log(packing_lists)
     $("#payments").dataTable().fnDestroy();
     $('#payments tbody > tr').remove();
 
-    if (transaction != null) {
-        $.each(transaction.payments, function (i, payment) {
+    if (packing_lists != null) {
+        $.each(packing_lists, function (i, packing_list) {
+            let payment = packing_list.transaction;
             let status_span = '';
             if (payment.payment_status_id == 1){
                 status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+payment.payment_id+'\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
