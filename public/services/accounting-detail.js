@@ -117,27 +117,46 @@ async function initPayments(sale_id){
     if (packing_lists != null) {
         $.each(packing_lists, function (i, packing_list) {
             let payment = packing_list.transaction;
+            let payment_id = '';
+            let payment_type = '';
+            let payment_method = '';
+            let invoice_date = '';
+            let payment_term = '';
+            let due_date = '';
+            let payment_price = '';
+            let currency = '';
             let status_span = '';
-            if (payment.payment_status_id == 1){
-                status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+payment.payment_id+'\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
-            }else if (payment.payment_status_id == 2){
-                status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+payment.payment_id+'\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
+            if (payment != null) {
+                payment_id = payment.payment_id;
+                payment_type = checkNull(payment.payment_type);
+                payment_method = checkNull(payment.payment_method);
+                invoice_date = formatDateASC(payment.invoice_date, "-");
+                payment_term = checkNull(payment.payment_term);
+                due_date = formatDateASC(payment.due_date, "-");
+                payment_price = changeCommasToDecimal(payment.payment_price);
+                currency = checkNull(payment.currency);
+                if (payment.payment_status_id == 1) {
+                    status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
+                } else if (payment.payment_status_id == 2) {
+                    status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
+                }
             }
+
 
             let item = '<tr>\n' +
                 '              <td>' + (i + 1) + '</td>\n' +
-                '              <td>' + payment.id + '</td>\n' +
-                '              <td>' + checkNull(payment.payment_type) + '</td>\n' +
-                '              <td>' + checkNull(payment.payment_method) + '</td>\n' +
-                '              <td>' + formatDateASC(payment.invoice_date, "-") + '</td>\n' +
-                '              <td>' + checkNull(payment.payment_term) + '</td>\n' +
-                '              <td>' + formatDateASC(payment.due_date, "-") + '</td>\n' +
-                '              <td>' + changeCommasToDecimal(payment.payment_price) + '</td>\n' +
-                '              <td>' + checkNull(payment.currency) + '</td>\n' +
+                '              <td>' + packing_list.id + '</td>\n' +
+                '              <td>' + payment_type + '</td>\n' +
+                '              <td>' + payment_method + '</td>\n' +
+                '              <td>' + invoice_date + '</td>\n' +
+                '              <td>' + payment_term + '</td>\n' +
+                '              <td>' + due_date + '</td>\n' +
+                '              <td>' + payment_price + '</td>\n' +
+                '              <td>' + currency + '</td>\n' +
                 '              <td>'+ status_span +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
-                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment.payment_id + '\')">\n' +
+                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
                 '                          <span class="fe fe-edit"> </span> Düzenle\n' +
                 '                      </button>\n' +
                 '                  </div>\n' +
