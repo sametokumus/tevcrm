@@ -146,7 +146,7 @@ async function initPayments(sale_id){
                     '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
                     '       </button>\n';
             }else{
-                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + packing_list_id + '\', \'' + payment.payment_price + '\', \'' + payment.currency + '\')">\n' +
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + packing_list_id + '\', \'' + packing_list.list_grand_total + '\', \'' + packing_list.currency + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödeme Ekle\n' +
                     '       </button>\n';
             }
@@ -198,6 +198,7 @@ async function openAddPaymentModal(packing_list_id, price, currency){
     await getPaymentTypesAddSelectId('add_payment_payment_type');
     await getPaymentMethodsAddSelectId('add_payment_payment_method');
     document.getElementById('add_payment_payment_price').value = price;
+    document.getElementById('add_payment_payment_price_text').value = changeCommasToDecimal(price);
     document.getElementById('add_payment_currency').value = currency;
     document.getElementById('add_payment_packing_list_id').value = packing_list_id;
 }
@@ -209,6 +210,7 @@ async function addPayment(){
     let due_date = document.getElementById('add_payment_due_date').value;
     let payment_price = document.getElementById('add_payment_payment_price').value;
     let currency = document.getElementById('add_payment_currency').value;
+    let packing_list_id = document.getElementById('add_payment_packing_list_id').value;
     console.log(due_date)
     let formData = JSON.stringify({
         "sale_id": sale_id,
@@ -218,6 +220,7 @@ async function addPayment(){
         "due_date": formatDateDESC2(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
+        "packing_list_id": packing_list_id,
     });
     console.log(formData)
     let returned = await servicePostAddAccountingPayment(formData);

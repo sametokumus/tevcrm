@@ -321,17 +321,12 @@ class AccountingController extends Controller
             ]);
 
             $sale_id = $request->sale_id;
-            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
-
-            if ($transaction) {
-                $transaction_id = $transaction->transaction_id;
-            }else{
-                $transaction_id = Uuid::uuid();
-                SaleTransaction::query()->insert([
-                    'sale_id' => $sale_id,
-                    'transaction_id' => $transaction_id,
-                ]);
-            }
+            $transaction_id = Uuid::uuid();
+            SaleTransaction::query()->insert([
+                'sale_id' => $sale_id,
+                'transaction_id' => $transaction_id,
+                'packing_list_id' => $request->packing_list_id
+            ]);
 
             $payment_id = Uuid::uuid();
 
