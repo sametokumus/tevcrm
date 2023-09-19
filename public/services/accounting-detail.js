@@ -117,6 +117,7 @@ async function initPayments(sale_id){
     if (packing_lists != null) {
         $.each(packing_lists, function (i, packing_list) {
             let payment = packing_list.transaction;
+            let packing_list_id = packing_list.packing_list_id;
             let payment_id = '';
             let payment_type = '';
             let payment_method = '';
@@ -141,11 +142,11 @@ async function initPayments(sale_id){
                 } else if (payment.payment_status_id == 2) {
                     status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
                 }
-                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + packing_list_id + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
                     '       </button>\n';
             }else{
-                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + payment_id + '\')">\n' +
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + packing_list_id + '\', \'' + payment.payment_price + '\', \'' + payment.currency + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödeme Ekle\n' +
                     '       </button>\n';
             }
@@ -192,10 +193,13 @@ async function initPayments(sale_id){
 
 }
 
-async function openAddPaymentModal(){
+async function openAddPaymentModal(packing_list_id, price, currency){
     $('#addPaymentModal').modal('show');
     await getPaymentTypesAddSelectId('add_payment_payment_type');
     await getPaymentMethodsAddSelectId('add_payment_payment_method');
+    document.getElementById('add_payment_payment_price').value = price;
+    document.getElementById('add_payment_currency').value = currency;
+    document.getElementById('add_payment_packing_list_id').value = packing_list_id;
 }
 async function addPayment(){
     let sale_id = getPathVariable('accounting-detail');

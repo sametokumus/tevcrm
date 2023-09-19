@@ -266,13 +266,15 @@ $(".timepicker").timepicker({
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Ödeme Tutarı :</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="add_payment_payment_price">
+                                <input type="hidden" class="form-control" id="add_payment_packing_list_id">
+                                <input type="hidden" class="form-control" id="add_payment_payment_price">
+                                <input type="text" class="form-control" id="add_payment_payment_price_text" readonly>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Para Birimi :</label>
                             <div class="col-md-9">
-                                <select class="form-control" id="add_payment_currency" required>
+                                <select class="form-control" id="add_payment_currency" required readonly="">
                                     <option value="TRY">TRY</option>
                                     <option value="EUR">EUR</option>
                                     <option value="USD">USD</option>
