@@ -342,18 +342,12 @@ async function addPaymentTaxWithButton(rate){
     let price = document.getElementById('add_payment_payment_price').value;
     price = changePriceToDecimal(price);
     console.log(price)
+    let price_tax = '';
+    if (rate != 0) {
+        price_tax = price / 100 * rate;
+    }
 
-
-    // let currentDate = new Date();
-    // let dueDate = new Date();
-    // dueDate.setDate(currentDate.getDate() + parseInt(day));
-    // dueDate = dueDate.toLocaleDateString('tr-TR', {
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: 'numeric'
-    // });
-    // dueDate = formatDateSplit(dueDate, '-', '.');
-    // document.getElementById('add_payment_due_date').value = dueDate;
+    document.getElementById('add_payment_payment_price').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
 }
 
 function openStatusModal(payment_id, status_id){
