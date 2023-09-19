@@ -453,19 +453,13 @@ class SaleController extends Controller
             $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
             $sale['request'] = $offer_request;
 
-//            $sale_offers = SaleOffer::query()
-//                ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
-//                ->where('sale_id', $sale->sale_id)
-//                ->where('active', 1)
-//                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
-//                ->get();
             $sale_offers = SaleOffer::query()
                 ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
                 ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
                 ->selectRaw('sale_offers.*, packing_list_products.quantity as list_quantity')
                 ->where('sale_offers.sale_id', $sale->sale_id)
                 ->where('sale_offers.active', 1)
-                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+//                ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
                 ->where('packing_list_products.packing_list_id', $packing_list_id)
                 ->get();
             $list_grand_total = 0;
