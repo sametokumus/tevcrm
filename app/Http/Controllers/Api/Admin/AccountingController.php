@@ -261,7 +261,7 @@ class AccountingController extends Controller
                     ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method, sale_transactions.*')
                     ->where('sale_id', $sale_id)
                     ->where('active', 1)
-                    ->tosql();
+                    ->first();
                 $packing_list['transaction'] = $transaction;
             }
 
