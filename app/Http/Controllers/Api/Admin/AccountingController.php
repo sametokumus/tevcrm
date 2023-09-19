@@ -264,6 +264,7 @@ class AccountingController extends Controller
                     ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
                     ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method, sale_transactions.*')
                     ->where('sale_transactions.sale_id', $sale_id)
+                    ->where('sale_transactions.packing_list_id', $packing_list->packing_list_id)
                     ->where('sale_transactions.active', 1)
                     ->first();
 
