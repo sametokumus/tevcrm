@@ -126,6 +126,7 @@ async function initPayments(sale_id){
             let payment_price = '';
             let currency = '';
             let status_span = '';
+            let buttons = '';
             if (payment != null) {
                 payment_id = payment.payment_id;
                 payment_type = checkNull(payment.payment_type);
@@ -140,6 +141,13 @@ async function initPayments(sale_id){
                 } else if (payment.payment_status_id == 2) {
                     status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
                 }
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
+                    '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
+                    '       </button>\n';
+            }else{
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + payment_id + '\')">\n' +
+                    '           <span class="fe fe-edit"> </span> Ödeme Ekle\n' +
+                    '       </button>\n';
             }
 
 
@@ -159,9 +167,7 @@ async function initPayments(sale_id){
                 '              <td>'+ status_span +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
-                '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
-                '                          <span class="fe fe-edit"> </span> Düzenle\n' +
-                '                      </button>\n' +
+                '                      '+ buttons +'\n' +
                 '                  </div>\n' +
                 '              </td>\n' +
                 '          </tr>';
@@ -176,14 +182,6 @@ async function initPayments(sale_id){
             {responsivePriority: 2, targets: -1}
         ],
         dom: 'Bfrtip',
-        buttons: [
-            {
-                text: 'Ödeme Ekle',
-                action: function (e, dt, node, config) {
-                    openAddPaymentModal();
-                }
-            }
-        ],
         paging: false,
         scrollX: true,
         language: {
