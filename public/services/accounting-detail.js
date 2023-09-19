@@ -206,6 +206,7 @@ async function addPayment(){
     let payment_type = document.getElementById('add_payment_payment_type').value;
     let payment_method = document.getElementById('add_payment_payment_method').value;
     let payment_term = document.getElementById('add_payment_payment_term').value;
+    let invoice_date = document.getElementById('add_payment_invoice_date').value;
     let due_date = document.getElementById('add_payment_due_date').value;
     let payment_price = document.getElementById('add_payment_payment_price').value;
     let currency = document.getElementById('add_payment_currency').value;
@@ -216,6 +217,7 @@ async function addPayment(){
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
+        "invoice_date": formatDateDESC2(invoice_date, "-", "-"),
         "due_date": formatDateDESC2(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
