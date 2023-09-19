@@ -145,7 +145,7 @@ async function initPayments(sale_id){
                 buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
                     '       </button>\n';
-                buttons += '<a href="/pl-invoice-print/'+ packing_list_id +'" target="_blank">\n' +
+                buttons += '<a href="/pl-invoice-print/'+ packing_list_id +'" target="_blank" class="btn btn-sm btn-theme">\n' +
                     '           <span class="fe fe-edit"> </span> Inv. PDF\n' +
                     '       </a>\n';
             }else{
