@@ -142,7 +142,7 @@ async function initPayments(sale_id){
                 } else if (payment.payment_status_id == 2) {
                     status_span = '<span style="cursor:pointer;" class="badge border border-green text-green px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 2)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme tamamlandı</span>';
                 }
-                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + packing_list_id + '\')">\n' +
+                buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
                     '       </button>\n';
             }else{
