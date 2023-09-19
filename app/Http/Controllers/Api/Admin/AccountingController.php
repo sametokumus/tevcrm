@@ -8,13 +8,17 @@ use App\Models\AdminStatusRole;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Employee;
+use App\Models\Measurement;
+use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\PackingList;
 use App\Models\PaymentMethod;
 use App\Models\PaymentType;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleNote;
+use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
 use App\Models\Status;
@@ -262,24 +266,41 @@ class AccountingController extends Controller
                     ->where('sale_transactions.sale_id', $sale_id)
                     ->where('sale_transactions.active', 1)
                     ->first();
+
+                $sale_offers = SaleOffer::query()
+                    ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
+                    ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
+                    ->selectRaw('sale_offers.*, packing_list_products.quantity as list_quantity')
+                    ->where('sale_offers.sale_id', $sale_id)
+                    ->where('sale_offers.active', 1)
+                    ->whereRaw("(sales.sale_id NOT IN (SELECT sale_id FROM sale_transactions))")
+                    ->where('packing_list_products.packing_list_id', $packing_list->packing_list_id)
+                    ->get();
+                $list_grand_total = 0;
+                foreach ($sale_offers as $sale_offer){
+                    $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                    $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                    $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
+                    $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                    $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                    $list_offer_price = $offer_pcs_price * $sale_offer->list_quantity;
+                    $list_grand_total += $list_offer_price;
+                    $sale_offer->offer_price = number_format($list_offer_price, 2,",",".");
+                    $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
+                    $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
+                    $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
+                    $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                    $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
+                    $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                    $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                    $sale_offer['sequence'] = $request_product->sequence;
+                }
+
                 $packing_list['transaction'] = $transaction;
+                $packing_list['sale_offers'] = $sale_offers;
             }
 
-
-//
-//            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
-//
-//            if ($transaction) {
-//                $payments = SaleTransactionPayment::query()
-//                    ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
-//                    ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
-//                    ->selectRaw('sale_transaction_payments.*, payment_types.name as payment_type, payment_methods.name as payment_method')
-//                    ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
-//                    ->where('sale_transaction_payments.active', 1)
-//                    ->get();
-//
-//                $transaction['payments'] = $payments;
-//            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['packing_lists' => $packing_lists]]);
         } catch (QueryException $queryException) {
