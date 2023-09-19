@@ -332,6 +332,8 @@ class AccountingController extends Controller
 
             $payment_id = Uuid::uuid();
 
+            $payment_total = $request->payment_price + $request->payment_tax;
+
             SaleTransactionPayment::query()->insert([
                 'payment_id' => $payment_id,
                 'transaction_id' => $transaction_id,
@@ -340,7 +342,10 @@ class AccountingController extends Controller
                 'payment_method' => $request->payment_method,
                 'invoice_date' => $request->invoice_date,
                 'due_date' => $request->due_date,
+                'payment_tax_rate' => $request->payment_tax_rate,
                 'payment_price' => $request->payment_price,
+                'payment_tax' => $request->payment_tax,
+                'payment_total' => $payment_total,
                 'currency' => $request->currency,
             ]);
 
@@ -362,13 +367,18 @@ class AccountingController extends Controller
 
             $payment_id = $request->payment_id;
 
+            $payment_total = $request->payment_price + $request->payment_tax;
+
             SaleTransactionPayment::query()->where('payment_id', $payment_id)->update([
                 'payment_term' => $request->payment_term,
                 'payment_type' => $request->payment_type,
                 'payment_method' => $request->payment_method,
                 'invoice_date' => $request->invoice_date,
                 'due_date' => $request->due_date,
+                'payment_tax_rate' => $request->payment_tax_rate,
                 'payment_price' => $request->payment_price,
+                'payment_tax' => $request->payment_tax,
+                'payment_total' => $payment_total,
                 'currency' => $request->currency,
             ]);
 

@@ -164,6 +164,8 @@ $(".timepicker").timepicker({
                             <th class="border-bottom-0">Vade (Gün)</th>
                             <th class="border-bottom-0">Vade Tarihi</th>
                             <th class="border-bottom-0">Ödenecek Tutar</th>
+                            <th class="border-bottom-0">KDV Oranı</th>
+                            <th class="border-bottom-0">KDV Tutarı</th>
                             <th class="border-bottom-0">Para Birimi</th>
                             <th class="border-bottom-0">Durum</th>
                             <th class="border-bottom-0"></th>
@@ -283,7 +285,7 @@ $(".timepicker").timepicker({
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">KDV ORANI :</label>
+                            <label class="col-md-3 form-label">KDV Oranı :</label>
                             <div class="col-md-9">
                                 <div class="btn-list mb-2">
                                     <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentTaxWithButton(0)">
@@ -305,11 +307,11 @@ $(".timepicker").timepicker({
                                         <span class="fe fe-refresh-cw">20</span>
                                     </button>
                                 </div>
-                                <input type="number" value="" class="form-control" id="update_payment_tax_rate" min="0" readonly>
+                                <input type="number" value="" class="form-control" id="add_payment_tax_rate" min="0" readonly>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Para Birimi :</label>
+                            <label class="col-md-3 form-label">KDV Tutarı :</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="add_payment_price_with_tax" readonly>
                             </div>
@@ -421,7 +423,7 @@ $(".timepicker").timepicker({
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">KDV ORANI :</label>
+                            <label class="col-md-3 form-label">KDV Oranı :</label>
                             <div class="col-md-9">
                                 <div class="btn-list mb-2">
                                     <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentTaxWithButton(0)">
@@ -447,7 +449,7 @@ $(".timepicker").timepicker({
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Para Birimi :</label>
+                            <label class="col-md-3 form-label">KDV Tutarı :</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="update_payment_price_with_tax" readonly>
                             </div>

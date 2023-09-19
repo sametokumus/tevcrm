@@ -125,6 +125,8 @@ async function initPayments(sale_id){
             let payment_term = '';
             let due_date = '';
             let payment_price = '';
+            let payment_tax_rate = '';
+            let payment_tax = '';
             let currency = '';
             let status_span = '';
             let buttons = '';
@@ -136,6 +138,8 @@ async function initPayments(sale_id){
                 payment_term = checkNull(payment.payment_term);
                 due_date = formatDateASC(payment.due_date, "-");
                 payment_price = changeCommasToDecimal(payment.payment_price);
+                payment_tax_rate = payment.payment_tax_rate;
+                payment_tax = changeCommasToDecimal(payment.payment_tax);
                 currency = checkNull(payment.currency);
                 if (payment.payment_status_id == 1) {
                     status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
@@ -167,6 +171,8 @@ async function initPayments(sale_id){
                 '              <td>' + payment_term + '</td>\n' +
                 '              <td>' + due_date + '</td>\n' +
                 '              <td>' + payment_price + '</td>\n' +
+                '              <td>' + payment_tax_rate + '</td>\n' +
+                '              <td>' + payment_tax + '</td>\n' +
                 '              <td>' + currency + '</td>\n' +
                 '              <td>'+ status_span +'</td>\n' +
                 '              <td>\n' +
@@ -212,6 +218,8 @@ async function addPayment(){
     let invoice_date = document.getElementById('add_payment_invoice_date').value;
     let due_date = document.getElementById('add_payment_due_date').value;
     let payment_price = document.getElementById('add_payment_payment_price').value;
+    let payment_tax_rate = document.getElementById('add_payment_tax_rate').value;
+    let payment_tax = document.getElementById('add_payment_price_with_tax').value;
     let currency = document.getElementById('add_payment_currency').value;
     let packing_list_id = document.getElementById('add_payment_packing_list_id').value;
     console.log(due_date)
@@ -225,6 +233,8 @@ async function addPayment(){
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
         "packing_list_id": packing_list_id,
+        "payment_tax_rate": payment_tax_rate,
+        "payment_tax": changePriceToDecimal(payment_tax),
     });
     console.log(formData)
     let returned = await servicePostAddAccountingPayment(formData);
@@ -254,6 +264,8 @@ async function openUpdatePaymentModal(payment_id){
     document.getElementById('update_payment_payment_price').value = changeCommasToDecimal(payment.payment_price);
     document.getElementById('update_payment_currency').value = payment.currency;
     document.getElementById('update_payment_packing_list_id').value = payment.packing_list_id;
+    document.getElementById('update_payment_tax_rate').value = payment.payment_tax_rate;
+    document.getElementById('update_payment_price_with_tax').value = changeCommasToDecimal(payment.payment_tax);
 }
 async function updatePayment(){
     let sale_id = getPathVariable('accounting-detail');
@@ -264,6 +276,8 @@ async function updatePayment(){
     let invoice_date = formatDateDESC2(document.getElementById('update_payment_invoice_date').value, "-", "-");
     let due_date = formatDateDESC2(document.getElementById('update_payment_due_date').value, "-", "-");
     let payment_price = document.getElementById('update_payment_payment_price').value;
+    let payment_tax_rate = document.getElementById('update_payment_tax_rate').value;
+    let payment_tax = document.getElementById('update_payment_price_with_tax').value;
     let currency = document.getElementById('update_payment_currency').value;
     console.log(due_date)
     let formData = JSON.stringify({
@@ -276,6 +290,8 @@ async function updatePayment(){
         "due_date": due_date,
         "payment_price": changePriceToDecimal(payment_price),
         "currency": currency,
+        "payment_tax_rate": payment_tax_rate,
+        "payment_tax": changePriceToDecimal(payment_tax),
     });
     console.log(formData)
     let returned = await servicePostUpdateAccountingPayment(formData);
@@ -341,13 +357,24 @@ async function updatePaymentPaymentTermWithButton(day){
 async function addPaymentTaxWithButton(rate){
     let price = document.getElementById('add_payment_payment_price').value;
     price = changePriceToDecimal(price);
-    console.log(price)
     let price_tax = '';
     if (rate != 0) {
         price_tax = price / 100 * rate;
     }
 
-    document.getElementById('add_payment_payment_price').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
+    document.getElementById('add_payment_tax_rate').value = rate;
+    document.getElementById('add_payment_price_with_tax').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
+}
+async function updatePaymentTaxWithButton(rate){
+    let price = document.getElementById('update_payment_payment_price').value;
+    price = changePriceToDecimal(price);
+    let price_tax = '';
+    if (rate != 0) {
+        price_tax = price / 100 * rate;
+    }
+
+    document.getElementById('update_payment_tax_rate').value = rate;
+    document.getElementById('update_payment_price_with_tax').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
 }
 
 function openStatusModal(payment_id, status_id){
