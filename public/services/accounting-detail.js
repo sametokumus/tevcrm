@@ -146,6 +146,9 @@ async function initPayments(sale_id){
             let item = '<tr>\n' +
                 '              <td>' + (i + 1) + '</td>\n' +
                 '              <td class="d-none">' + packing_list.packing_list_id + '</td>\n' +
+                '              <td>' + packing_list.count + '</td>\n' +
+                '              <td>' + packing_list.list_grand_total + '</td>\n' +
+                '              <td>' + packing_list.currency + '</td>\n' +
                 '              <td>' + payment_type + '</td>\n' +
                 '              <td>' + payment_method + '</td>\n' +
                 '              <td>' + invoice_date + '</td>\n' +

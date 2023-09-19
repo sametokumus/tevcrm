@@ -155,6 +155,9 @@ $(".timepicker").timepicker({
                         <tr>
                             <th class="border-bottom-0">N#</th>
                             <th class="border-bottom-0 d-none">ID</th>
+                            <th class="border-bottom-0">Ürün Kalemi</th>
+                            <th class="border-bottom-0">Fiyat</th>
+                            <th class="border-bottom-0">Para Birimi</th>
                             <th class="border-bottom-0">Ödeme Türü</th>
                             <th class="border-bottom-0">Ödeme Yöntemi</th>
                             <th class="border-bottom-0">Fatura Tarihi</th>
