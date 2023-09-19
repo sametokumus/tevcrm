@@ -274,12 +274,13 @@ $(".timepicker").timepicker({
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Para Birimi :</label>
                             <div class="col-md-9">
-                                <select class="form-control" id="add_payment_currency" required readonly="">
-                                    <option value="TRY">TRY</option>
-                                    <option value="EUR">EUR</option>
-                                    <option value="USD">USD</option>
-                                    <option value="GBP">GBP</option>
-                                </select>
+{{--                                <select class="form-control" id="add_payment_currency" required readonly="">--}}
+{{--                                    <option value="TRY">TRY</option>--}}
+{{--                                    <option value="EUR">EUR</option>--}}
+{{--                                    <option value="USD">USD</option>--}}
+{{--                                    <option value="GBP">GBP</option>--}}
+{{--                                </select>--}}
+                                <input type="text" class="form-control" id="add_payment_currency" readonly>
                             </div>
                         </div>
                     </div>
