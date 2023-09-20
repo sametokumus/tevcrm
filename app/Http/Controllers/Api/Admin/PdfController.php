@@ -843,15 +843,15 @@ class PdfController extends Controller
 
 // Set table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(10, 12, 'N#', 1, 0, 'C');
-            $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 1, 0, 'C');
-            $pdf->Cell(50, 12, iconv('utf-8', 'iso-8859-9', __('Product Name')), 1, 0, 'C');
-            $pdf->Cell(19, 12, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
-            $pdf->Cell(16, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 1, 0, 'C');
-            $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
-            $pdf->Cell(30, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 1, 0, 'C');
-//            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 1, 'C');
-            $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 'C');  // Move to the next line
+            $pdf->Cell(10, 12, 'N#', 0, 0, 'C');
+            $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 0, 0, 'C');
+            $pdf->Cell(50, 12, iconv('utf-8', 'iso-8859-9', __('Product Name')), 0, 0, 'C');
+            $pdf->Cell(19, 12, iconv('utf-8', 'iso-8859-9', __('Qty')), 0, 0, 'C');
+            $pdf->Cell(16, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 0, 0, 'C');
+            $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 0, 0, 'C');
+            $pdf->Cell(30, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 0, 0, 'C');
+//            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
+            $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 'C');  // Move to the next line
 
 
 // Set table content
