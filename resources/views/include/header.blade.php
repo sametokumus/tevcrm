@@ -216,7 +216,7 @@ $extra_js="";
                 <div id="nav-completed-accounting" class="d-none menu-item @if( Request::segment(1)== 'completed-accounting' ) active @endif">
                     <a href="/completed-accounting" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
-                        <span class="menu-text">Ödenenler</span>
+                        <span class="menu-text">Ödeme Yapılanlar</span>
                     </a>
                 </div>
 
