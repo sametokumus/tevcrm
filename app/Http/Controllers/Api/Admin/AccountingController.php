@@ -203,7 +203,7 @@ class AccountingController extends Controller
 
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $packing_lists]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
