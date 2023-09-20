@@ -484,7 +484,11 @@ class SaleController extends Controller
 
             }
             $sale['sale_offers'] = $sale_offers;
-            $sale['list_grand_total'] = number_format($list_grand_total, 2,",",".");
+            $sale['list_total'] = number_format($list_grand_total, 2,",",".");
+            $transaction = SaleTransaction::query()->where('packing_list_id', $packing_list_id)->where('active', 1)->first();
+            $transaction_payment = SaleTransactionPayment::query()->where('transaction_id', $transaction->transaction_id)->where('active', 1)->first();
+            $sale['list_tax'] = number_format($transaction_payment->payment_tax, 2,",",".");
+            $sale['list_grand_total'] = number_format($transaction_payment->payment_total, 2,",",".");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
