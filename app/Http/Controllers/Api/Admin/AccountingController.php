@@ -150,6 +150,7 @@ class AccountingController extends Controller
                 ->where('packing_lists.active',1)
                 ->where('sale_transaction_payments.payment_status_id',1)
                 ->selectRaw('packing_lists.sale_id')
+                ->groupBy('packing_lists.sale_id')
                 ->get();
 
             $sales = array();
