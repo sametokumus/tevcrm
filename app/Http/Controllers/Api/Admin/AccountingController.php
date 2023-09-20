@@ -133,17 +133,33 @@ class AccountingController extends Controller
         try {
             $admin = Admin::query()->where('id', $user_id)->first();
 
-            $sales = Sale::query()
+//            $sales = Sale::query()
+//                ->leftJoin('sale_transactions', 'sale_transactions.sale_id', '=', 'sales.sale_id')
+//                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
+//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
+//                ->where('sales.active',1)
+//                ->whereRaw("(sale_transactions.transaction_status_id = 1 OR sale_transactions.transaction_status_id = 2)")
+//                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+//                ->get();
+
+            $packing_lists = PackingList::query()
                 ->leftJoin('sale_transactions', 'sale_transactions.sale_id', '=', 'sales.sale_id')
-                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
-                ->where('sales.active',1)
-                ->whereRaw("(sale_transactions.transaction_status_id = 1 OR sale_transactions.transaction_status_id = 2)")
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                ->leftJoin('sale_transaction_payments', 'sale_transaction_payments.transaction_id', '=', 'sale_transactions.transaction_id')
+                ->whereRaw("(packing_lists.packing_list_id IN (SELECT packing_list_id FROM sale_transactions))")
+                ->where('packing_lists.active',1)
+                ->where('sale_transaction_payments.payment_status_id',1)
+                ->selectRaw('packing_lists.sale_id')
                 ->get();
 
-            foreach ($sales as $sale) {
+            $sales = array();
+
+            foreach ($packing_lists as $packing_list) {
+
+                $sale = Sale::query()->where('sale_id', $packing_list->sale_id)->first();
+
+                $sale->status_name = Status::query()->where('id', $sale->status_id)->first()->name;
+                $sale->owner_short_code = Contact::query()->where('id', $sale->owner_id)->first()->short_code;
 
                 $status_role = AdminStatusRole::query()->where('admin_role_id', $admin->admin_role_id)->where('status_id', $sale->status_id)->where('active', 1)->count();
                 if ($status_role > 0){
@@ -182,6 +198,8 @@ class AccountingController extends Controller
 
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
+
+                array_push($sales, $sale);
 
             }
 
