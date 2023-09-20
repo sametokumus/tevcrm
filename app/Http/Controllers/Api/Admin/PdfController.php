@@ -877,8 +877,8 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
-                if ($name_width > 50){
-                    $wd = (($name_width / 50));
+                if ($name_width > 40){
+                    $wd = (($name_width / 40));
                     if ($wd >= 0 && $wd < 1){
                         $row_height = 15;
                     }else if ($wd >= 1 && $wd < 2){
