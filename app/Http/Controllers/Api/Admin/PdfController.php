@@ -768,7 +768,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $x = $x-3 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
 
@@ -782,7 +782,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $x = $x-3 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->payment_term), '0', '0', '');
 
@@ -798,7 +798,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Delivery Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Delivery Terms').': ');
+                $x = $x-3 + $pdf->GetStringWidth(__('Delivery Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->delivery_term), '0', '0', '');
 
