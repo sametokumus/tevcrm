@@ -205,7 +205,7 @@ class AccountingController extends Controller
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $packing_lists]]);
         } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
     public function getCompletedAccountingSales($user_id)
