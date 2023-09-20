@@ -723,7 +723,7 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Customer').': '), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x + $pdf->GetStringWidth(__('Customer').': ');
+            $x = $x-3 + $pdf->GetStringWidth(__('Customer').': ');
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->name), '0', '0', '');
 
@@ -735,7 +735,7 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Address').': '), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x + $pdf->GetStringWidth(__('Address').': ');
+            $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->address), '0', '0', '');
 
@@ -753,7 +753,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Request Code').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Request Code').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Request Code').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->company_request_code), '0', '0', '');
             }
@@ -768,7 +768,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
 
@@ -782,7 +782,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Payment Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Payment Terms').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->payment_term), '0', '0', '');
 
@@ -798,7 +798,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Delivery Terms').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Delivery Terms').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Delivery Terms').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->delivery_term), '0', '0', '');
 
@@ -814,7 +814,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Insurance').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Insurance').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Insurance').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->lead_time), '0', '0', '');
 
@@ -829,7 +829,7 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Country of Destination').': '), '0', '0', '');
 
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x + $pdf->GetStringWidth(__('Country of Destination').': ');
+                $x = $x+2 + $pdf->GetStringWidth(__('Country of Destination').': ');
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->country_of_destination), '0', '0', '');
 
