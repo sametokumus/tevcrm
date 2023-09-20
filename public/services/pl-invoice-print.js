@@ -165,7 +165,7 @@ async function initSale(packing_list_id){
     }
     if (sale.list_grand_total != null && sale.list_tax != null) {
         let item = '<tr>\n' +
-            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Tax") + '</td>\n' +
+            '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
             '           <td colspan="1" class="text-center">' + changeCommasToDecimal(sale.list_tax) + ' ' + currency + '</td>\n' +
             '       </tr>';
         $('#sale-detail tbody').append(item);
