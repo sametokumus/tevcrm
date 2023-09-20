@@ -843,15 +843,15 @@ class PdfController extends Controller
 
 // Set table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(10, 14, 'N#', 1, 0, 'C');
-            $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 1, 0, 'C');
-            $pdf->Cell(50, 14, iconv('utf-8', 'iso-8859-9', __('Product Name')), 1, 0, 'C');
-            $pdf->Cell(19, 14, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
-            $pdf->Cell(16, 14, iconv('utf-8', 'iso-8859-9', __('Unit')), 1, 0, 'C');
-            $pdf->Cell(25, 14, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
-            $pdf->Cell(30, 14, iconv('utf-8', 'iso-8859-9', __('Total Price')), 1, 0, 'C');
+            $pdf->Cell(10, 12, 'N#', 1, 0, 'C');
+            $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 1, 0, 'C');
+            $pdf->Cell(50, 12, iconv('utf-8', 'iso-8859-9', __('Product Name')), 1, 0, 'C');
+            $pdf->Cell(19, 12, iconv('utf-8', 'iso-8859-9', __('Qty')), 1, 0, 'C');
+            $pdf->Cell(16, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 1, 0, 'C');
+            $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 1, 0, 'C');
+            $pdf->Cell(30, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 1, 0, 'C');
 //            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 1, 'C');
-            $pdf->MultiCell(20, 7, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 'C');  // Move to the next line
+            $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 1, 'C');  // Move to the next line
 
 
 // Set table content
@@ -875,16 +875,16 @@ class PdfController extends Controller
                     $lead_time = '';
                 }
 
-                $row_height = 14;
+                $row_height = 15;
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
                 if ($name_width > 50){
-                    $row_height = 14 / (((int) ($name_width / 50)) + 1);
+                    $row_height = 15 / (($name_width / 50) + 1);
                 }
 
                 $pdf->setX(10);
-                $pdf->Cell(10, 14, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
 //                $pdf->Cell(10, 14, '', 1, 0, 'C');
-                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 //                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
 
                 // Save the current X and Y position
@@ -899,11 +899,11 @@ class PdfController extends Controller
                 $pdf->SetXY($xPos+50, $yPos);
 
                 // Output remaining cells for the current row
-                $pdf->Cell(19, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
-                $pdf->Cell(16, 14, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(30, 14, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
 
             //TOTAL PRICES
