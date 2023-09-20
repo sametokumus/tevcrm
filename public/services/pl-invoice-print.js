@@ -154,7 +154,7 @@ async function initSale(packing_list_id){
 
     if (sale.list_total != null) {
         let key = Lang.get("strings.Grand Total");
-        if (sale.list_grand_total != null && sale.list_tax != null) {
+        if (sale.list_grand_total != '0,00' && sale.list_tax != '0,00') {
             key = Lang.get("strings.Sub Total");
         }
         let item = '<tr>\n' +
@@ -163,7 +163,7 @@ async function initSale(packing_list_id){
             '       </tr>';
         $('#sale-detail tbody').append(item);
     }
-    if (sale.list_grand_total != null && sale.list_tax != null) {
+    if (sale.list_grand_total != '0,00' && sale.list_tax != '0,00') {
         let item = '<tr>\n' +
             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
             '           <td colspan="1" class="text-center">' + changeCommasToDecimal(sale.list_tax) + ' ' + currency + '</td>\n' +
