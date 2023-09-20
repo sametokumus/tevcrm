@@ -878,7 +878,19 @@ class PdfController extends Controller
                 $row_height = 15;
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
                 if ($name_width > 50){
-                    $row_height = 15 / (((int)($name_width / 50)) + 1);
+                    $wd = (($name_width / 50));
+                    if ($wd >= 0 && $wd < 1){
+                        $row_height = 15;
+                    }else if ($wd >= 1 && $wd < 2){
+                        $row_height = 7.5;
+                    }else if ($wd >= 2 && $wd < 3){
+                        $row_height = 5;
+                    }else if ($wd >= 3 && $wd < 4){
+                        $row_height = 3.75;
+                    }else if ($wd >= 4){
+                        $row_height = 3;
+                    }
+
                 }
 
                 $pdf->setX(10);
