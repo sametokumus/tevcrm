@@ -737,7 +737,9 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->address), '0', '0', '');
+//            $address = iconv('utf-8', 'iso-8859-9', $company->address);
+            $address = mb_convert_encoding($company->address, 'UTF-8', 'auto');
+            $pdf->Cell(0, 0, $address, '0', '0', '');
 
 
             //QUOTES
