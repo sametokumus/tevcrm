@@ -1138,16 +1138,18 @@ class SaleController extends Controller
                 $total_price = $sale->grand_total_with_shipping;
             }
             $payed_price = 0;
-            $transaction = SaleTransaction::query()->where('sale_id', $sale_id)->first();
+            $transactions = SaleTransaction::query()->where('sale_id', $sale_id)->get();
 
-            if ($transaction) {
-                $payments = SaleTransactionPayment::query()
-                    ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
-                    ->where('sale_transaction_payments.active', 1)
-                    ->get();
+            if ($transactions) {
+                foreach ($transactions as $transaction){
+                    $payments = SaleTransactionPayment::query()
+                        ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
+                        ->where('sale_transaction_payments.active', 1)
+                        ->get();
 
-                foreach ($payments as $payment){
-                    $payed_price += $payment->payment_price;
+                    foreach ($payments as $payment){
+                        $payed_price += $payment->payment_price;
+                    }
                 }
             }
 
