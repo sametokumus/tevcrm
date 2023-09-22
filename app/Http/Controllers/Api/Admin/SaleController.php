@@ -1145,6 +1145,7 @@ class SaleController extends Controller
                     $payments = SaleTransactionPayment::query()
                         ->where('sale_transaction_payments.transaction_id', $transaction->transaction_id)
                         ->where('sale_transaction_payments.active', 1)
+                        ->where('sale_transaction_payments.payment_status_id', 2)
                         ->get();
 
                     foreach ($payments as $payment){
