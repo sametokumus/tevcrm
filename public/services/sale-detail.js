@@ -15,7 +15,7 @@
 		checkLogin();
         checkRole();
         let sale_id = getPathVariable('sale-detail');
-        initSaleStats(sale_id);
+        await initSaleStats(sale_id);
         initDocuments(sale_id);
 
         initSaleHistory(sale_id);
