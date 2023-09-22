@@ -878,8 +878,11 @@ class PdfController extends Controller
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
-                if ($name_width > 60){
-                    $wd = (($name_width / 60));
+                if ($name_width > 48){
+                    $wd = (($name_width / 48));
+                    if ($name_width > 60){
+                        $wd = (($name_width / 60));
+                    }
                     if ($name_width > 110){
                         $wd = (($name_width / 55));
                     }
