@@ -404,6 +404,7 @@ async function updateStatus(){
     if(returned){
         $("#update_status_form").trigger("reset");
         $('#updateStatusModal').modal('hide');
+        initSaleStats(sale_id);
         await initPayments(sale_id);
     }
 }
