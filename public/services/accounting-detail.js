@@ -100,7 +100,7 @@ async function initSaleStats(sale_id){
     let sale = data.sale;
     console.log(sale)
 
-    $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
+    $('#customer-name').text('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
     $('#customer-employee').append('Müşteri Yetkilisi: '+sale.request.company_employee.name);
     $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
