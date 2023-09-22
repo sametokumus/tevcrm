@@ -315,9 +315,13 @@ async function initSellingProcess(sale_id){
             date.setDate(date.getDate() + 1);
             date2 = date.toISOString().split('T')[0];
         }
+        let label3 = 'Satış (Geçen Süre)';
+        if (process.is_completed == 1){
+            label3 = 'Satış';
+        }
         let bar3 =
             {
-                x: 'Satış',
+                x: label3,
                 y: [
                     new Date(date1).getTime(),
                     new Date(date2).getTime()
@@ -326,6 +330,24 @@ async function initSellingProcess(sale_id){
             }
         ;
         processData.push(bar3);
+    }
+
+    if (process.confirmed_date != null) {
+        let date1 = formatDateDESC(process.confirmed_date, '-');
+        let date2 = new Date(formatDateDESC(process.confirmed_date, '-'));
+        date2.setDate(date.getDate() + process.lead_time);
+        date2 = date.toISOString().split('T')[0];
+        let bar4 =
+            {
+                x: 'Satış (Teklif Süresi)',
+                y: [
+                    new Date(date1).getTime(),
+                    new Date(date2).getTime()
+                ],
+                fillColor: '#f9e80d'
+            }
+        ;
+        processData.push(bar4);
     }
 
 

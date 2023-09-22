@@ -1844,8 +1844,10 @@ class SaleController extends Controller
                 $confirmed_hour = 0;
             }
 
+            $is_completed = 0;
             $history3 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 24)->orderByDesc('id')->first();
             if ($history3){
+                $is_completed = 1;
                 $completed_date = $history3->created_at;
                 $completed_day = $completed_date->diffInDays($confirmed_date);
                 $completed_hour = $completed_date->diffInHours($confirmed_date);
@@ -1861,6 +1863,12 @@ class SaleController extends Controller
                 }
             }
 
+            $lead_time = SaleOffer::query()
+                ->where('active', 1)
+                ->where('sale_id', $sale_id)
+                ->orderBy('offer_lead_time')
+                ->first()->offer_lead_time;
+
             $process = array();
             $process['request_date'] = $request_date;
             $process['offer_date'] = $offer_date;
@@ -1872,6 +1880,8 @@ class SaleController extends Controller
             $process['offer_hour'] = $offer_hour;
             $process['confirmed_hour'] = $confirmed_hour;
             $process['completed_hour'] = $completed_hour;
+            $process['is_completed'] = $is_completed;
+            $process['lead_time'] = $lead_time;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['process' => $process]]);
         } catch (QueryException $queryException) {
