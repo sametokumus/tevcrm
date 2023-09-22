@@ -878,7 +878,6 @@ class PdfController extends Controller
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
                 $name_width = $pdf->GetStringWidth($sale_offer->product_name);
-                $border = 0;
                 if ($name_width > 48){
                     $wd = (($name_width / 48));
                     if ($name_width > 60){
@@ -895,7 +894,6 @@ class PdfController extends Controller
                     }
                     if ($wd >= 0 && $wd < 1){
                         $row_height = 15;
-                        $border = 1;
                     }else if ($wd >= 1 && $wd < 2){
                         $row_height = 7.5;
                     }else if ($wd >= 2 && $wd < 3){
@@ -912,7 +910,7 @@ class PdfController extends Controller
                 $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
 //                $pdf->Cell(10, 14, '', 1, 0, 'C');
 //                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
+                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 'T', 0, 'C');
 
                 // Save the current X and Y position
                 $xPos = $pdf->GetX();
@@ -920,7 +918,7 @@ class PdfController extends Controller
 
 
                 // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), $border, 'L');
+                $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
 
                 // Reset X and move Y to the saved position (next line)
                 $pdf->SetXY($xPos+50, $yPos);
