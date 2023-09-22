@@ -1850,9 +1850,15 @@ class SaleController extends Controller
                 $completed_day = $completed_date->diffInDays($confirmed_date);
                 $completed_hour = $completed_date->diffInHours($confirmed_date);
             }else{
-                $completed_date = null;
-                $completed_day = 0;
-                $completed_hour = 0;
+                if ($confirmed_date == null) {
+                    $completed_date = null;
+                    $completed_day = 0;
+                    $completed_hour = 0;
+                }else{
+                    $completed_date = Carbon::now();
+                    $completed_day = $completed_date->diffInDays($confirmed_date);
+                    $completed_hour = $completed_date->diffInHours($confirmed_date);
+                }
             }
 
             $process = array();

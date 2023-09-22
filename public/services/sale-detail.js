@@ -261,6 +261,7 @@ async function initSellingProcess(sale_id){
 
     let data = await serviceGetSellingProcess(sale_id);
     let process = data.process;
+    console.log(process)
 
     const processData = [];
 
