@@ -903,8 +903,10 @@ class PdfController extends Controller
                         $row_height = 5;
                     }else if ($wd >= 3 && $wd < 4){
                         $row_height = 3.75;
-                    }else if ($wd >= 4){
+                    }else if ($wd >= 4 && $wd < 5){
                         $row_height = 3;
+                    }else if ($wd >= 5){
+                        $row_height = 2.5;
                     }
 
                 }
