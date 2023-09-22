@@ -737,8 +737,7 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
             $pdf->SetXY($x, $y);
-//            $address = iconv('utf-8', 'iso-8859-9', $company->address);
-            $address = mb_convert_encoding($company->address, 'UTF-8', 'UTF-8');
+            $address = iconv('utf-8', 'iso-8859-9', $company->address);
             $pdf->Cell(0, 0, $address, '0', '0', '');
 
 
@@ -879,8 +878,8 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
-//                $product_name = iconv('utf-8', 'iso-8859-9', $sale_offer->product_name);
-                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'auto');
+                $product_name = iconv('utf-8', 'iso-8859-9', $sale_offer->product_name);
+//                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'auto');
                 $name_width = $pdf->GetStringWidth($product_name);
                 if ($name_width > 48){
                     $wd = (($name_width / 48));
