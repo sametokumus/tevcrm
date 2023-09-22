@@ -882,6 +882,9 @@ class PdfController extends Controller
                     if ($name_width > 110){
                         $wd = (($name_width / 55));
                     }
+                    if ($name_width > 200){
+                        $wd = (($name_width / 50));
+                    }
                     if ($wd >= 0 && $wd < 1){
                         $row_height = 15;
                     }else if ($wd >= 1 && $wd < 2){
