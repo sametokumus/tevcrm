@@ -335,8 +335,8 @@ async function initSellingProcess(sale_id){
     if (process.confirmed_date != null) {
         let date1 = formatDateDESC(process.confirmed_date, '-');
         let date2 = new Date(formatDateDESC(process.confirmed_date, '-'));
-        date2.setDate(date.getDate() + process.lead_time);
-        date2 = date.toISOString().split('T')[0];
+        date2.setDate(date2.getDate() + process.lead_time);
+        date2 = date2.toISOString().split('T')[0];
         let bar4 =
             {
                 x: 'Satış (Teklif Süresi)',
