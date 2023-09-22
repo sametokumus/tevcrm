@@ -15,7 +15,7 @@
 		checkLogin();
         checkRole();
         let sale_id = getPathVariable('sale-detail');
-        await initSaleStats(sale_id);
+        initSaleStats(sale_id);
         initDocuments(sale_id);
 
         initSaleHistory(sale_id);
@@ -35,7 +35,6 @@ function checkRole(){
 
 async function initSaleHistory(sale_id){
     let data = await serviceGetSaleStatusHistory(sale_id);
-    console.log(data)
     let actions = data.actions;
 
     $('#status-history-table tbody tr').remove();
@@ -113,7 +112,6 @@ async function initSaleSuppliers(sale_id){
     if (control.permission) {
         let data = await serviceGetSaleSuppliers(sale_id);
         let offers = data.offers;
-        console.log(offers)
         $('#suppliers-table tbody tr').remove();
 
         $.each(offers, function (i, offer) {
@@ -146,7 +144,6 @@ async function initSaleSuppliers(sale_id){
 
 async function initDocuments(sale_id){
     let data = await serviceGetDocuments(sale_id);
-    console.log(data)
 
     $.each(data.documents, function (i, document) {
 
@@ -182,7 +179,6 @@ async function initDocuments(sale_id){
 
 async function initMobileDocuments(sale_id){
     let data = await serviceGetMobileDocuments(sale_id);
-    console.log(data)
     $("#document-datatable").dataTable().fnDestroy();
     $('#document-datatable tbody > tr').remove();
 
@@ -250,7 +246,6 @@ async function addMobileDocument(){
     let formData = new FormData();
     formData.append('document_type_id', document.getElementById('add_document_type').value);
     formData.append('file', document.getElementById('add_document_file').files[0]);
-    console.log(formData);
 
     await servicePostAddMobileDocument(formData, sale_id);
 }
@@ -265,9 +260,7 @@ async function deleteMobileDocument(document_id){
 async function initSellingProcess(sale_id){
 
     let data = await serviceGetSellingProcess(sale_id);
-    console.log(data)
     let process = data.process;
-    console.log(formatDateDESC(process.request_date, '-'))
 
     const processData = [];
 
@@ -334,7 +327,6 @@ async function initSellingProcess(sale_id){
         processData.push(bar3);
     }
 
-    console.log(processData)
 
     var options = {
         series: [
