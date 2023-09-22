@@ -101,14 +101,14 @@ async function initSaleStats(sale_id){
     console.log(sale)
 
     $('#customer-name').html('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
-    $('#customer-employee').append('Müşteri Yetkilisi: '+sale.request.company_employee.name);
-    $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
+    $('#customer-employee').text('Müşteri Yetkilisi: '+sale.request.company_employee.name);
+    $('#owner-employee').text('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
     $('#total-price').text(changeCommasToDecimal(sale.total_price) + ' ' + sale.currency);
     $('#remaining-price').text(changeCommasToDecimal(sale.remaining_price) + ' ' + sale.currency);
 
 
-    $('#sale-date').append(formatDateAndTimeDESC(sale.created_at, '/'));
+    $('#sale-date').text(formatDateAndTimeDESC(sale.created_at, '/'));
 
     // $('#total-sale').text(stats.total_sale);
     // $('#active-sale').text(stats.active_sale);
