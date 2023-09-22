@@ -187,7 +187,7 @@ $(".timepicker").timepicker({
 
 </div>
 
-    <div class="modal modal-cover fade" id="addPaymentModal">
+    <div class="modal modal-cover fade" id="addPaymentModal" onclick="return false;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
