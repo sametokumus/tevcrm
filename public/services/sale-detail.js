@@ -92,7 +92,7 @@ async function initSaleStats(sale_id){
     }else{
         remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
     }
-    $('#remaining-price').html(remaining_message);
+    $('#remaining-message').html(remaining_message);
 
     $('#product-count').append(sale.product_count);
     $('#product-total-count').append('Toplam Ürün Adedi: '+sale.total_product_count);
