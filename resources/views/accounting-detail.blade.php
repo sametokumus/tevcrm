@@ -188,7 +188,7 @@ $(".timepicker").timepicker({
 </div>
 
     <div class="modal modal-cover fade" id="addPaymentModal">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Ödeme Ekle</h5>

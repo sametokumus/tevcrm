@@ -3,6 +3,16 @@
 
 	$(document).ready(function() {
 
+        $('#addPaymentModal').modal({
+            backdrop: 'static', // Prevent closing when clicking outside
+            keyboard: false // Prevent closing with the keyboard ESC key
+        });
+
+        $('#updatePaymentModal').modal({
+            backdrop: 'static', // Prevent closing when clicking outside
+            keyboard: false // Prevent closing with the keyboard ESC key
+        });
+
         $("#add_payment_payment_price").maskMoney({thousands:'.', decimal:','});
         $("#update_payment_payment_price").maskMoney({thousands:'.', decimal:','});
 
