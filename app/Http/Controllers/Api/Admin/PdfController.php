@@ -883,6 +883,9 @@ class PdfController extends Controller
                     if ($name_width > 60){
                         $wd = (($name_width / 60));
                     }
+                    if ($name_width > 100){
+                        $wd = (($name_width / 50));
+                    }
                     if ($name_width > 110){
                         $wd = (($name_width / 55));
                     }
