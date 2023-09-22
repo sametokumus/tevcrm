@@ -49,7 +49,7 @@ $extra_js='
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Toplam Satış Tutarı</span>
                         <h3 id="total-price"></h3>
-                        <div>&nbsp;</div>
+                        <div id="remaining-message">&nbsp;</div>
                         <div>&nbsp;</div>
                     </div>
                     <div class="opacity-5">

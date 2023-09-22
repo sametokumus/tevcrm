@@ -84,6 +84,15 @@ async function initSaleStats(sale_id){
     $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
     $('#total-price').text(total);
+    let remaining_message = '';
+    if (sale.payed_price = '0.00'){
+        remaining_message = '<span class="text-danger"><b>Ödeme Bekleniyor.</b></span>';
+    }else if (sale.remaining_price = '0.00'){
+        remaining_message = '<span class="text-theme"><b>Ödeme Tamamlandı.</b></span>';
+    }else{
+        remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
+    }
+    $('#remaining-price').html(remaining_message);
 
     $('#product-count').append(sale.product_count);
     $('#product-total-count').append('Toplam Ürün Adedi: '+sale.total_product_count);
