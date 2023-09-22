@@ -877,7 +877,9 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
-                $name_width = $pdf->GetStringWidth(iconv('utf-8', 'iso-8859-9', $sale_offer->product_name));
+//                $product_name = iconv('utf-8', 'iso-8859-9', $sale_offer->product_name);
+                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'auto');
+                $name_width = $pdf->GetStringWidth($product_name);
                 if ($name_width > 48){
                     $wd = (($name_width / 48));
                     if ($name_width > 60){
@@ -918,7 +920,7 @@ class PdfController extends Controller
 
 
                 // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 'T', 'L');
+                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
 
                 // Reset X and move Y to the saved position (next line)
                 $pdf->SetXY($xPos+50, $yPos);
