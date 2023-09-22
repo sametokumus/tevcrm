@@ -892,8 +892,10 @@ class PdfController extends Controller
                     if ($name_width > 200){
                         $wd = (($name_width / 50));
                     }
+                    $border = 0;
                     if ($wd >= 0 && $wd < 1){
                         $row_height = 15;
+                        $border = 1;
                     }else if ($wd >= 1 && $wd < 2){
                         $row_height = 7.5;
                     }else if ($wd >= 2 && $wd < 3){
@@ -918,7 +920,7 @@ class PdfController extends Controller
 
 
                 // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), 1, 'L');
+                $pdf->MultiCell(50, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_name), $border, 'L');
 
                 // Reset X and move Y to the saved position (next line)
                 $pdf->SetXY($xPos+50, $yPos);
