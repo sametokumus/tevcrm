@@ -84,9 +84,9 @@ async function initSaleStats(sale_id){
 
     $('#total-price').text(total);
     let remaining_message = '';
-    if (sale.payed_price = '0.00'){
+    if (sale.payed_price == '0.00'){
         remaining_message = '<span class="text-danger"><b>Ödeme Bekleniyor.</b></span>';
-    }else if (sale.remaining_price = '0.00'){
+    }else if (sale.remaining_price == '0.00'){
         remaining_message = '<span class="text-theme"><b>Ödeme Tamamlandı.</b></span>';
     }else{
         remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
