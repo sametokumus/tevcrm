@@ -358,22 +358,22 @@ async function initSellingProcess(sale_id){
         let delivery_message = '';
         if (process.is_completed == 1){
             if (diff1 == diff2){
-                delivery_message = 'Sipariş gününde teslim edildi.';
+                delivery_message = '<span class="text-theme"><b>Sipariş gününde teslim edildi.</b></span>';
             }else if (diff1 > diff2){
-                delivery_message = 'Siparişin son teslim tarihinden '+ (diff1 - diff2) +' gün önce teslim edildi.';
+                delivery_message = '<span class="text-theme"><b>Siparişin son teslim tarihinden '+ (diff1 - diff2) +' gün önce teslim edildi.</b></span>';
             }else{
-                delivery_message = 'Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geç teslim edildi.';
+                delivery_message = '<span class="text-warning"><b>Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geç teslim edildi.</b></span>';
             }
         }else{
             if (diff1 == diff2){
-                delivery_message = 'Bugün siparişin son teslim günü.';
+                delivery_message = '<span class="text-danger"><b>Bugün siparişin son teslim günü.</b></span>';
             }else if (diff1 > diff2){
-                delivery_message = 'Siparişin son teslim tarihine '+ (diff1 - diff2) +' gün kaldı.';
+                delivery_message = '<span class="text-danger"><b>Siparişin son teslim tarihine '+ (diff1 - diff2) +' gün kaldı.</b></span>';
             }else{
-                delivery_message = 'Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geçti.';
+                delivery_message = '<span class="text-danger"><b>Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geçti.</b></span>';
             }
         }
-        console.log(delivery_message)
+        $('#delivery-message').html(delivery_message);
 
     }
 
