@@ -348,6 +348,12 @@ async function initSellingProcess(sale_id){
             }
         ;
         processData.push(bar4);
+
+        var a = moment(new Date(date1).getTime())
+        var b = moment(new Date(date2).getTime())
+        var diff = b.diff(a, 'days')
+        console.log(diff)
+
     }
 
 
