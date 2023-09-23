@@ -349,10 +349,31 @@ async function initSellingProcess(sale_id){
         ;
         processData.push(bar4);
 
+        let date3 = formatDateDESC(process.completed_date, '-');
         var a = moment(new Date(date1).getTime())
         var b = moment(new Date(date2).getTime())
-        var diff = b.diff(a, 'days')
-        console.log(diff)
+        var c = moment(new Date(date3).getTime())
+        var diff1 = b.diff(a, 'days')
+        var diff2 = c.diff(a, 'days')
+        let delivery_message = '';
+        if (process.is_completed == 1){
+            if (diff1 == diff2){
+                delivery_message = 'Sipariş gününde teslim edildi.';
+            }else if (diff1 > diff2){
+                delivery_message = 'Siparişin son teslim tarihinden '+ (diff1 - diff2) +' gün önce teslim edildi.';
+            }else{
+                delivery_message = 'Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geç teslim edildi.';
+            }
+        }else{
+            if (diff1 == diff2){
+                delivery_message = 'Bugün siparişin son teslim günü.';
+            }else if (diff1 > diff2){
+                delivery_message = 'Siparişin son teslim tarihine '+ (diff1 - diff2) +' gün kaldı.';
+            }else{
+                delivery_message = 'Siparişin son teslim tarihinden '+ (diff2 - diff1) +' gün geçti.';
+            }
+        }
+        console.log(delivery_message)
 
     }
 
