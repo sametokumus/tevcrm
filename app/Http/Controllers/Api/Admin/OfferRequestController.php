@@ -311,7 +311,12 @@ class OfferRequestController extends Controller
             $created_at = Carbon::now()->format('Y-m-d H:i:s');
             if ($request->date != ''){
                 $date = Carbon::parse($request->date);
-                $timeToAdd = '00:00:00'; // Specify the time you want to add
+                $carbon = Carbon::now();
+
+                $hour = $carbon->hour;
+                $minute = $carbon->minute;
+                $second = $carbon->second;
+                $timeToAdd = $hour.':'.$minute.':'.$second;
 
                 $dateTime = $date->format('Y-m-d') . ' ' . $timeToAdd;
                 $created_at = Carbon::parse($dateTime);
