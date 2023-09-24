@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\MobileDocument;
@@ -18,6 +19,7 @@ use App\Models\Sale;
 use App\Models\SaleNote;
 use App\Models\SaleOffer;
 use App\Models\Status;
+use App\Models\StatusHistory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -119,6 +121,8 @@ class MobileController extends Controller
     {
         try {
             $data = array();
+            $sales = array();
+            $offers = array();
 
             foreach ($request->orders as $sale_id) {
 
@@ -203,7 +207,22 @@ class MobileController extends Controller
 
                     $item['order_items'] = $order_items;
 
-                    array_push($data, $item);
+                    if ($status->period == 'approved' || $status->period == 'completed'){
+                        array_push($data, $item);
+                        array_push($sales, $item);
+                    }elseif ($status->period == 'continue'){
+                        $history = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 6)->where('active', 1)->orderByDesc('id')->first();
+                        if ($history){
+                            $document = Document::query()->where('sale_id', $sale_id)->where('document_type_id', 1)->where('active', 1)->first();
+                            if ($document){
+                                $item['offer_document'] = 'https://lenis-crm.wimco.com.tr/'.$document->file_url;
+                            }else{
+                                $item['offer_document'] = '';
+                            }
+                            array_push($offers, $item);
+                        }
+                    }
+
 
                 }else{
 
@@ -224,7 +243,7 @@ class MobileController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data, 'sales' => $data, 'offers' => $data]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
