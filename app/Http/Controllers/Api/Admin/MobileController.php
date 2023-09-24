@@ -243,7 +243,7 @@ class MobileController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data, 'sales' => $data, 'offers' => $data]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'pro' => $data, 'sales' => $sales, 'offers' => $offers]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
