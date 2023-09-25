@@ -809,6 +809,7 @@ class PdfController extends Controller
             if ($quote->lead_time != null) {
 
                 $y += 5;
+                $x = 10;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
@@ -824,6 +825,7 @@ class PdfController extends Controller
             if ($quote->country_of_destination != null) {
 
                 $y += 5;
+                $x = 10;
 
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->SetXY($x, $y);
