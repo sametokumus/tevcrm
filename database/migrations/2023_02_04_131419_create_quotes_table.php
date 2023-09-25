@@ -22,6 +22,7 @@ class CreateQuotesTable extends Migration
             $table->string('delivery_term')->nullable();
             $table->string('country_of_destination')->nullable();
             $table->string('note')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
