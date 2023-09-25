@@ -628,10 +628,10 @@ class PdfController extends Controller
             $pdf->SetXY($x, $actual_height + 32);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
 
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $x = $pageWidth - $pdf->GetStringWidth(__('Expiry Date').': '.$document_date) - 10;
-            $pdf->SetXY($x, $actual_height + 38);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Expiry Date').': '.$document_date), '0', '0', '');
+            $pdf->SetFont('ChakraPetch-Regular', '', 8);
+            $x = $pageWidth - $pdf->GetStringWidth(__('Expiry Date').': '.$quote->expiry_date) - 10;
+            $pdf->SetXY($x, $actual_height + 40);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Expiry Date').': '.$quote->expiry_date), '0', '0', '');
 
 
             //COMPANY INFO
