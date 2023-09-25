@@ -3,11 +3,14 @@
 $extra_js='
 <script src="services/sw-step3.js"></script>
 <script>
-$(".datepicker").datepicker({
+  var today = new Date();
+  var newDate = new Date();
+  newDate.setDate(today.getDate() + 7);
+  $(".datepicker").datepicker({
     autoclose: true,
     format: "dd-mm-yyyy",
     todayHighlight: true
-        }).datepicker("setDate", new Date());
+  }).datepicker("setDate", newDate);
 </script>
 ';
 ?>
