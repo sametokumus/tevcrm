@@ -1021,6 +1021,9 @@ class PdfController extends Controller
                 $html = utf8_decode($quote->note);
                 $html = str_replace('<p>', "\n", $html);
                 $html = str_replace('</p>', '', $html);
+                $d = $pdf->GetX();
+                $f = $pdf->GetY();
+                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
 
                 $pdf->Write(5, $html);
 
