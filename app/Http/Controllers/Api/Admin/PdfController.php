@@ -1023,6 +1023,10 @@ class PdfController extends Controller
                 $html = str_replace('</p>', '', $html);
 
                 $pdf->Write(5, $html);
+
+                $d = $pdf->GetX();
+                $f = $pdf->GetY();
+                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
             }
 
 
