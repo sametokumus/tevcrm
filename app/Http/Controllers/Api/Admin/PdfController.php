@@ -1021,15 +1021,15 @@ class PdfController extends Controller
                 $html = utf8_decode($quote->note);
                 $html = str_replace('<p>', "\n", $html);
                 $html = str_replace('</p>', '', $html);
-                $d = $pdf->GetX();
-                $f = $pdf->GetY();
-                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
-
-                $y += 5;
-                $x = 10;
-                $pdf->SetXY($x, $y);
-//                $pdf->MultiCell(2, $html);
-                $pdf->MultiCell(0, 10, utf8_decode($html));
+//                $d = $pdf->GetX();
+//                $f = $pdf->GetY();
+//                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
+//
+//                $y += 5;
+//                $x = 10;
+//                $pdf->SetXY($x, $y);
+////                $pdf->MultiCell(2, $html);
+                $pdf->MultiCell(0, 5, utf8_decode($html));
 
                 $d = $pdf->GetX();
                 $f = $pdf->GetY();
