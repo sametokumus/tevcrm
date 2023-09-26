@@ -628,12 +628,7 @@ class PdfController extends Controller
             $pdf->SetXY($x, $actual_height + 32);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OFR-'.$sale->id), '0', '0', '');
 
-            $not_formatted_expiry_date = Carbon::parse($quote->expiry_date);
-            $expiry_date = $not_formatted_expiry_date->format('d/m/Y');
-            $pdf->SetFont('ChakraPetch-Regular', '', 8);
-            $x = $pageWidth - $pdf->GetStringWidth(__('Expiry Date').': '.$expiry_date) - 10;
-            $pdf->SetXY($x, $actual_height + 40);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Expiry Date').': '.$expiry_date), '0', '0', '');
+
 
 
             //COMPANY INFO
@@ -846,6 +841,26 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->country_of_destination), '0', '0', '');
 
             }
+
+            if ($quote->country_of_destination != null) {
+
+                $y += 5;
+                $x = 10;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Expiry Date').': '), '0', '0', '');
+
+                $not_formatted_expiry_date = Carbon::parse($quote->expiry_date);
+                $expiry_date = $not_formatted_expiry_date->format('d/m/Y');
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Expiry Date').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $expiry_date), '0', '0', '');
+
+            }
+
+
 
             $x = 10;
             $y += 10;
