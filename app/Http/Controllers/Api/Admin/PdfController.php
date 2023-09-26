@@ -900,7 +900,13 @@ class PdfController extends Controller
             $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 0, 0, 'C');
             $pdf->Cell(30, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 0, 0, 'C');
 //            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
-            $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 'C');  // Move to the next line
+            $lt_width = $pdf->GetStringWidth(__('Lead Time'));
+            if ($lt_width > 20){
+                $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 'C');  // Move to the next line
+            }else{
+                $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
+            }
+
 
 
 // Set table content
