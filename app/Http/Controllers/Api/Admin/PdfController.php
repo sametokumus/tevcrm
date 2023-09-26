@@ -743,16 +743,16 @@ class PdfController extends Controller
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
-            $pdf->SetXY($x, $y);
+            $pdf->SetXY($x, $y-2);
             $address = iconv('utf-8', 'iso-8859-9', $company->address);
 //            $pdf->Cell(0, 0, $address, '0', '0', '');
             $address_width = $pdf->GetStringWidth($address);
-            $address_height = (((int)($address_width / 100)) + 1) * 1.5;
+            $address_height = (((int)($address_width / 100)) + 1) * 2;
             $pdf->MultiCell(100, $address_height, $address, 0, 'L');
 
             //QUOTES
 
-            $y += 5;
+            $y += 8;
 
             if ($company->company_request_code != ''){
                 $x = 10;
