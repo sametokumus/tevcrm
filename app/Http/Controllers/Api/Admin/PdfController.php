@@ -528,9 +528,10 @@ class PdfController extends Controller
         }
     }
 
-    public function getGenerateQuatotionPDF($owner_id, $sale_id)
+    public function getGenerateQuatotionPDF($lang, $owner_id, $sale_id)
     {
         try {
+            App::setLocale($lang);
 
             $sale = Sale::query()
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')

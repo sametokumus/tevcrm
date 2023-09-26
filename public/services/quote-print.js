@@ -38,11 +38,12 @@ function printOffer(){
 }
 
 async function generatePDF(){
+    let lang = document.getElementById('lang').value;
     let owner_id = document.getElementById('owners').value;
     let sale_id = getPathVariable('quote-print');
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGenerateQuatotionPDF(owner_id, sale_id);
+    const pdfData = await serviceGetGenerateQuatotionPDF(lang, owner_id, sale_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');

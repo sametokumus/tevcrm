@@ -2481,8 +2481,8 @@ async function serviceGetGeneratePDF(owner_id, sale_id) {
     }
 }
 
-async function serviceGetGenerateQuatotionPDF(owner_id, sale_id) {
-    const data = await fetchDataGet('/admin/pdf/getGenerateQuatotionPDF/' + owner_id + '/' + sale_id, 'application/json');
+async function serviceGetGenerateQuatotionPDF(lang, owner_id, sale_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateQuatotionPDF/' + lang + '/' + owner_id + '/' + sale_id, 'application/json');
     if (data.status == "success") {
         return data;
     } else {
