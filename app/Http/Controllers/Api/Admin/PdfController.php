@@ -1016,7 +1016,7 @@ class PdfController extends Controller
                 $y += 5;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->note), 0, 0, '');
+                $pdf->MultiCell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->note), 0, 0, '');
             }
 
 
