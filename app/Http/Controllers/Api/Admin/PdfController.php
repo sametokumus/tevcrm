@@ -842,7 +842,7 @@ class PdfController extends Controller
 
             }
 
-            if ($quote->country_of_destination != null) {
+            if ($quote->expiry_date != null) {
 
                 $y += 5;
                 $x = 10;
