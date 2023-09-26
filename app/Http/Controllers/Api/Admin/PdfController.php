@@ -747,8 +747,8 @@ class PdfController extends Controller
             $address = iconv('utf-8', 'iso-8859-9', $company->address);
 //            $pdf->Cell(0, 0, $address, '0', '0', '');
             $address_width = $pdf->GetStringWidth($address);
-            $address_height = (((int)($address_width / 100)) + 1) * 2;
-            $pdf->MultiCell(100, $address_height, $address, 0, 'L');
+            $address_height = (((int)($address_width / 50)) + 1) * 2;
+            $pdf->MultiCell(50, $address_height, $address, 0, 'L');
 
             //QUOTES
 
