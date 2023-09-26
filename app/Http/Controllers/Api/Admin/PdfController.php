@@ -1009,18 +1009,20 @@ class PdfController extends Controller
             //NOTE
             if ($quote->note != null) {
                 $y += 10;
+                $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
 
                 $y += 5;
+                $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 $html = utf8_decode($quote->note);
                 $html = str_replace('<p>', "\n", $html);
                 $html = str_replace('</p>', '', $html);
 
-                $pdf->Write(0, iconv('utf-8', 'iso-8859-9', $html));
+                $pdf->Write(5, iconv('utf-8', 'iso-8859-9', $html));
             }
 
 
