@@ -1016,7 +1016,13 @@ class PdfController extends Controller
                 $y += 5;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $pdf->Write(0, iconv('utf-8', 'iso-8859-9', $quote->note));
+                $paragraphs = explode('</p>', $quote->note);
+                foreach ($paragraphs as $paragraph) {
+                    // Remove <p> tag
+                    $text = strip_tags($paragraph);
+                    $this->MultiCell(0, 10, utf8_decode($text));
+                }
+//                $pdf->Write(0, iconv('utf-8', 'iso-8859-9', $quote->note));
             }
 
 
