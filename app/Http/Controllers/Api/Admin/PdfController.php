@@ -905,6 +905,7 @@ class PdfController extends Controller
                 $pdf->MultiCell(20, 6, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 'C');  // Move to the next line
             }else{
                 $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
+                $pdf->Ln();
             }
 
 
