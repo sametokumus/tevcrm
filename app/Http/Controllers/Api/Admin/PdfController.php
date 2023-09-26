@@ -1025,7 +1025,7 @@ class PdfController extends Controller
                 $f = $pdf->GetY();
                 $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
 
-                $pdf->Write(5, $html);
+                $pdf->Write(1, $html);
 
                 $d = $pdf->GetX();
                 $f = $pdf->GetY();
