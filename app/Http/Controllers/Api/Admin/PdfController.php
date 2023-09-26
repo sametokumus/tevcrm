@@ -1028,7 +1028,8 @@ class PdfController extends Controller
                 $y += 5;
                 $x = 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Write(2, $html);
+//                $pdf->MultiCell(2, $html);
+                $pdf->MultiCell(0, 10, utf8_decode($html));
 
                 $d = $pdf->GetX();
                 $f = $pdf->GetY();
