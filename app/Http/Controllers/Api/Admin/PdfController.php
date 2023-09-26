@@ -621,7 +621,9 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $x = $pageWidth - $pdf->GetStringWidth(__('Date').': '.$document_date) - 10;
             $pdf->SetXY($x, $actual_height + 25);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '.$document_date), '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '), '0', '0', '');
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $document_date), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Bold', '', 11);
             $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OFR-'.$sale->id) - 10;
@@ -673,7 +675,7 @@ class PdfController extends Controller
             $x = 10;
             $y += 5;
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Address'), '0', '0', '');
+            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
             $lines = explode('<br>', $contact->address);
