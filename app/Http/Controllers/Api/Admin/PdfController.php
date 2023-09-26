@@ -1022,7 +1022,7 @@ class PdfController extends Controller
                 $html = str_replace('<p>', "\n", $html);
                 $html = str_replace('</p>', '', $html);
 
-                $pdf->Write(5, iconv('utf-8', 'iso-8859-9', $html));
+                $pdf->Write(5, $html);
             }
 
 
