@@ -376,7 +376,7 @@ async function updateQuote(){
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
         "freight": changePriceToDecimal(freight),
-        "expiry_date": formatDateDESC(expiry_date, "-"),
+        "expiry_date": formatDateDESC2(expiry_date, "-", "-"),
         "note": note
     });
 

@@ -101,7 +101,9 @@ async function initSaleStats(sale_id){
     console.log(sale)
 
     $('#customer-name').html('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
-    $('#customer-employee').text('Müşteri Yetkilisi: '+sale.request.company_employee.name);
+    if (sale.request.company_employee != null) {
+        $('#customer-employee').text('Müşteri Yetkilisi: ' + sale.request.company_employee.name);
+    }
     $('#owner-employee').text('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
     $('#total-price').text(changeCommasToDecimal(sale.total_price) + ' ' + sale.currency);
