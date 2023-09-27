@@ -354,6 +354,7 @@ async function initQuote(){
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
     document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    document.getElementById('update_quote_expiry_date').value = formatDateASC(quote.expiry_date, "-");
     $('#update_quote_note').summernote('code', checkNull(quote.note));
 }
 async function updateQuote(){
