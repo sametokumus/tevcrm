@@ -15,6 +15,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
+use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleNote;
 use App\Models\SaleOffer;
@@ -218,6 +219,12 @@ class MobileController extends Controller
                                 $item['offer_document'] = 'https://lenis-crm.wimco.com.tr/'.$document->file_url;
                             }else{
                                 $item['offer_document'] = '';
+                            }
+                            $quote = Quote::query()->where('sale_id', $sale->id)->where('active', 1)->first();
+                            if ($quote){
+                                $item['expiry_date'] = Carbon::parse($quote->expiry_date)->format('d-m-Y');
+                            }else{
+                                $item['expiry_date'] = '';
                             }
                             array_push($offers, $item);
                         }
