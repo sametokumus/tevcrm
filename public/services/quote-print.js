@@ -217,26 +217,35 @@ async function initQuote(sale_id){
     let quote = data.quote;
     console.log(quote)
 
-    if (checkNull(quote.payment_term) != '') {
-        document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
-        document.getElementById('update_quote_payment_term').value = quote.payment_term;
-    }
-    if (checkNull(quote.lead_time) != '') {
-        document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
-    }else{
-        $('#lead_time').addClass('d-none');
-    }
-    if (checkNull(quote.delivery_term) != '') {
-        document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
-    }else{
-        $('#delivery_term').addClass('d-none');
-    }
-    if (checkNull(quote.country_of_destination) != '') {
-        document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
-    }else{
-        $('#country_of_destination').addClass('d-none');
-    }
-    document.getElementById('note').innerHTML = checkNull(quote.note);
+    document.getElementById('update_quote_id').value = quote.id;
+    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
+    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
+    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
+    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    document.getElementById('update_quote_expiry_date').value = checkNull(quote.expiry_date);
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
+
+    // if (checkNull(quote.payment_term) != '') {
+    //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
+    //     document.getElementById('update_quote_payment_term').value = quote.payment_term;
+    // }
+    // if (checkNull(quote.lead_time) != '') {
+    //     document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
+    // }else{
+    //     $('#lead_time').addClass('d-none');
+    // }
+    // if (checkNull(quote.delivery_term) != '') {
+    //     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
+    // }else{
+    //     $('#delivery_term').addClass('d-none');
+    // }
+    // if (checkNull(quote.country_of_destination) != '') {
+    //     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
+    // }else{
+    //     $('#country_of_destination').addClass('d-none');
+    // }
+    // document.getElementById('note').innerHTML = checkNull(quote.note);
 }
 
 async function openUpdateQuoteModal(){
@@ -266,6 +275,7 @@ async function updateQuote(){
     let delivery_term = document.getElementById('update_quote_delivery_term').value;
     let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
     let freight = document.getElementById('update_quote_freight').value;
+    let expiry_date = document.getElementById('update_quote_expiry_date').value;
     let note = document.getElementById('update_quote_note').value;
 
     let formData = JSON.stringify({
@@ -276,6 +286,7 @@ async function updateQuote(){
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
         "freight": changePriceToDecimal(freight),
+        "expiry_date": formatDateDESC(expiry_date, "-"),
         "note": note
     });
 

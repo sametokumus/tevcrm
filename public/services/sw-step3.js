@@ -364,6 +364,7 @@ async function updateQuote(){
     let delivery_term = document.getElementById('update_quote_delivery_term').value;
     let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
     let freight = document.getElementById('update_quote_freight').value;
+    let expiry_date = document.getElementById('update_quote_expiry_date').value;
     let note = document.getElementById('update_quote_note').value;
 
     let formData = JSON.stringify({
@@ -374,6 +375,7 @@ async function updateQuote(){
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
         "freight": changePriceToDecimal(freight),
+        "expiry_date": formatDateDESC(expiry_date, "-"),
         "note": note
     });
 
