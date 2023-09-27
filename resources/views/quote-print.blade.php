@@ -2,6 +2,13 @@
 <?php
 $extra_js='
 <script src="services/quote-print.js"></script>
+<script>
+  $(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy",
+    todayHighlight: true
+  }).datepicker();
+</script>
 ';
 ?>
 
