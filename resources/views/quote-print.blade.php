@@ -39,7 +39,7 @@ $extra_js='
 
             <div class="row justify-content-center mb-3 no-print">
 
-                <div class="col-md-10">
+                <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
 
