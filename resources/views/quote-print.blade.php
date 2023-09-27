@@ -21,9 +21,17 @@ $extra_js='
 
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-xl-9 col-lg-12 col-md-12">
-                    <div class="row">
+                    <div class="row mb-3" id="no-pdf">
                         <div class="col-12">
-                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">Kaydet</button>
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3" id="has-pdf">
+                        <div class="col-6">
+                            <a id="showPdf" href="" class="btn btn-theme btn-block w-100 no-print">PDF Görüntüle</a>
+                        </div>
+                        <div class="col-6">
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
                         </div>
                     </div>
                     <div class="row">
@@ -106,7 +114,7 @@ $extra_js='
 
             </div>
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center d-none">
                 <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50" id="downloadPdf">
 
 

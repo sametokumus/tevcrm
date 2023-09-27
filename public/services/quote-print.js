@@ -22,7 +22,10 @@
 		checkRole();
 
         let sale_id = getPathVariable('quote-print');
-        await initSale(sale_id);
+
+        await getPaymentTermsAddSelectId('update_quote_payment_term');
+        await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+        // await initSale(sale_id);
         await initQuote(sale_id);
 	});
 
@@ -59,7 +62,7 @@ async function generatePDF(){
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('quote-print');
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -225,6 +228,13 @@ async function initQuote(sale_id){
     document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
     document.getElementById('update_quote_expiry_date').value = formatDateASC(quote.expiry_date, "-");
     $('#update_quote_note').summernote('code', checkNull(quote.note));
+
+    if (quote.quatotion_pdf == ''){
+        $('#has-pdf').remove();
+    }else{
+        $('#no-pdf').remove();
+        $('#showPdf').attr('href', quote.quatotion_pdf);
+    }
 
     // if (checkNull(quote.payment_term) != '') {
     //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
