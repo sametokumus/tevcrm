@@ -220,7 +220,7 @@ class MobileController extends Controller
                             }else{
                                 $item['offer_document'] = '';
                             }
-                            $quote = Quote::query()->where('sale_id', $sale->id)->where('active', 1)->first();
+                            $quote = Quote::query()->where('sale_id', $sale->sale_id)->where('active', 1)->first();
                             if ($quote){
                                 $item['expiry_date'] = Carbon::parse($quote->expiry_date)->format('d-m-Y');
                             }else{
