@@ -19,6 +19,7 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
+
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="row mb-3" id="no-pdf">
