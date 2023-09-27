@@ -909,6 +909,7 @@ class SaleController extends Controller
                 'lead_time' => $request->lead_time,
                 'delivery_term' => $request->delivery_term,
                 'country_of_destination' => $request->country_of_destination,
+                'expiry_date' => $request->expiry_date,
                 'note' => $request->note
             ]);
             $sale = Sale::query()->where('sale_id', $request->sale_id)->first();
