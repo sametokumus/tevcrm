@@ -26,7 +26,7 @@
         await getOwnersAddSelectId('owners');
         await getPaymentTermsAddSelectId('update_quote_payment_term');
         await getDeliveryTermsAddSelectId('update_quote_delivery_term');
-        // await initSale(sale_id);
+        await initSale(sale_id);
         await initQuote(sale_id);
 	});
 
