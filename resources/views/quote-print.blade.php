@@ -28,10 +28,10 @@ $extra_js='
                     </div>
                     <div class="row mb-3" id="has-pdf">
                         <div class="col-6">
-                            <a id="showPdf" href="" class="btn btn-theme btn-block w-100 no-print">PDF Görüntüle</a>
+                            <a id="showPdf" target="_blank" href="" class="btn btn-theme btn-block w-100 no-print">Mevcut PDF'i Görüntüle</a>
                         </div>
                         <div class="col-6">
-                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">Yeni PDF Oluştur</button>
                         </div>
                     </div>
                     <div class="row">
