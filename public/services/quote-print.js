@@ -215,6 +215,7 @@ async function initSale(sale_id){
 async function initQuote(sale_id){
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
+    console.log(quote)
 
     if (checkNull(quote.payment_term) != '') {
         document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
