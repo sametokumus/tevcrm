@@ -95,7 +95,7 @@ async function initSaleStats(sale_id){
     }
     $('#remaining-message').html(remaining_message);
 
-    $('#profit-rate-message').html('Karlılık: ' + sale.profit_rate);
+    $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
 
     $('#product-count').append(sale.product_count);
     $('#product-total-count').append('Toplam Ürün Adedi: '+sale.total_product_count);
