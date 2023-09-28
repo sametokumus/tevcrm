@@ -1176,6 +1176,7 @@ class SaleController extends Controller
             //let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
             $profit_rate = 100 * ($total_price - $total_offer_price) / $total_offer_price;
             $sale['profit_rate'] = number_format($profit_rate, 2, ",", "");
+            $sale['supplier_total'] = number_format($total_offer_price, 2, ".", "");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
