@@ -72,6 +72,11 @@ async function initSaleStats(sale_id){
     let data = await serviceGetSaleDetailInfo(sale_id);
     let sale = data.sale;
     console.log(sale)
+
+    let control = await serviceGetCheckAdminRolePermission(admin_id, 20);
+
+
+
     sale_global_id = sale.id;
     let total = '-';
     if (sale.grand_total != null){
@@ -97,9 +102,9 @@ async function initSaleStats(sale_id){
         remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
     }
     $('#remaining-message').html(remaining_message);
-
-    $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
-
+    if (control.permission) {
+        $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
+    }
     $('#product-count').append(sale.product_count);
     $('#product-total-count').append('Toplam Ürün Adedi: '+sale.total_product_count);
 
@@ -142,7 +147,7 @@ async function initSaleSuppliers(sale_id){
     }else{
         $('#suppliers-table tbody tr').remove();
         let item = '<tr>\n' +
-            '           <td colspan="7">Görüntüleme yetkini bulunmamaktadır.</td>\n' +
+            '           <td colspan="7">Görüntüleme yetkiniz bulunmamaktadır.</td>\n' +
             '       </tr>';
 
         $('#suppliers-table tbody').append(item);
