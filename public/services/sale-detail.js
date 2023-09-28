@@ -218,7 +218,7 @@ async function initMobileDocuments(sale_id){
                 text: 'Döküman Ekle',
                 className: 'btn btn-theme',
                 action: function ( e, dt, node, config ) {
-                    openAddMobileDocumentModal();
+                    openAddDocumentModal();
                 }
             }
         ],
