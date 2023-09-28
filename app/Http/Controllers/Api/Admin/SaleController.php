@@ -1140,6 +1140,14 @@ class SaleController extends Controller
             $sale['product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->count();
             $sale['total_product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->sum('offer_quantity');
 
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            $total_offer_price = 0;
+            foreach ($sale_offers as $sale_offer){
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
+                $total_offer_price += $offer_product->converted_price;
+            }
+
+
             $total_price = $sale->grand_total;
             if ($sale->grand_total_with_shipping != null){
                 $total_price = $sale->grand_total_with_shipping;
@@ -1162,10 +1170,12 @@ class SaleController extends Controller
             }
 
             $remaining_price = $total_price - $payed_price;
-
             $sale['total_price'] = $total_price;
             $sale['payed_price'] = number_format($payed_price, 2, ".", "");
             $sale['remaining_price'] = number_format($remaining_price, 2, ".", "");
+            //let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
+            $profit_rate = 100 * ($total_price - $total_offer_price) / $total_offer_price;
+            $sale['profit_rate'] = number_format($profit_rate, 2, ",", "");
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
