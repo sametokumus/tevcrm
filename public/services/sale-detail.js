@@ -73,6 +73,7 @@ async function initSaleStats(sale_id){
     let sale = data.sale;
     console.log(sale)
 
+    let admin_id = await localStorage.getItem('userId');
     let control = await serviceGetCheckAdminRolePermission(admin_id, 20);
 
 
