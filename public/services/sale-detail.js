@@ -244,7 +244,7 @@ async function addDocumentCallback(xhttp){
     initDocuments();
 }
 async function addDocument(){
-    let sale_id = getPathVariable('mobile-documents');
+    let sale_id = getPathVariable('sale-detail');
 
     let formData = new FormData();
     formData.append('document_type_id', document.getElementById('add_document_type').value);
