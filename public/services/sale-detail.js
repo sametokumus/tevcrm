@@ -5,7 +5,7 @@
 
          $('#add_document_form').submit(function (e){
              e.preventDefault();
-             addMobileDocument();
+             addDocument();
          });
 
 	});
@@ -234,30 +234,30 @@ async function openAddDocumentModal(){
     $('#addDocumentModal').modal('show');
 }
 
-async function addMobileDocumentCallback(xhttp){
+async function addDocumentCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
     $("#add_document_form").trigger("reset");
     $("#addDocumentModal").modal('hide');
-    initMobileDocuments();
+    initDocuments();
 }
-
-async function addMobileDocument(){
+async function addDocument(){
     let sale_id = getPathVariable('mobile-documents');
 
     let formData = new FormData();
     formData.append('document_type_id', document.getElementById('add_document_type').value);
     formData.append('file', document.getElementById('add_document_file').files[0]);
+    console.log(formData);
 
     await servicePostAddMobileDocument(formData, sale_id);
 }
 
-async function deleteMobileDocument(document_id){
+async function deleteDocument(document_id){
     let returned = await serviceGetDeleteMobileDocument(document_id);
     if(returned){
-        initMobileDocuments();
+        initDocuments();
     }
 }
 
