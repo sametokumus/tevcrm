@@ -23,7 +23,7 @@
         initSellingProcess(sale_id);
 
         getDocumentTypesAddSelectId('add_document_type');
-        initMobileDocuments(sale_id);
+        initMobileDocuments();
 
     });
 
@@ -66,10 +66,13 @@ async function initSaleHistory(sale_id){
     });
 }
 
+let sale_global_id = 0;
+
 async function initSaleStats(sale_id){
     let data = await serviceGetSaleDetailInfo(sale_id);
     let sale = data.sale;
     console.log(sale)
+    sale_global_id = sale.id;
     let total = '-';
     if (sale.grand_total != null){
         total = changeCommasToDecimal(sale.grand_total) + ' ' + sale.currency;
@@ -181,8 +184,8 @@ async function initDocuments(sale_id){
 
 }
 
-async function initMobileDocuments(sale_id){
-    let data = await serviceGetMobileDocuments(sale_id);
+async function initMobileDocuments(){
+    let data = await serviceGetMobileDocuments(sale_global_id);
     $("#document-datatable").dataTable().fnDestroy();
     $('#document-datatable tbody > tr').remove();
 
@@ -242,17 +245,16 @@ async function addMobileDocumentCallback(xhttp){
     $("#add_document_form").trigger("reset");
     $("#addDocumentModal").modal('hide');
     let sale_id = getPathVariable('sale-detail');
-    initMobileDocuments(sale_id);
+    initMobileDocuments();
 }
 async function addMobileDocument(){
-    let sale_id = getPathVariable('sale-detail');
 
     let formData = new FormData();
     formData.append('document_type_id', document.getElementById('add_document_type').value);
     formData.append('file', document.getElementById('add_document_file').files[0]);
     console.log(formData);
 
-    await servicePostAddMobileDocument(formData, sale_id);
+    await servicePostAddMobileDocument(formData, sale_global_id);
 }
 
 async function deleteMobileDocument(document_id){
