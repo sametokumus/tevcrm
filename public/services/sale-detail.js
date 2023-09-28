@@ -5,7 +5,7 @@
 
          $('#add_document_form').submit(function (e){
              e.preventDefault();
-             addDocument();
+             addMobileDocument();
          });
 
 	});
@@ -218,7 +218,7 @@ async function initMobileDocuments(sale_id){
                 text: 'Döküman Ekle',
                 className: 'btn btn-theme',
                 action: function ( e, dt, node, config ) {
-                    openAddDocumentModal();
+                    openAddMobileDocumentModal();
                 }
             }
         ],
@@ -230,20 +230,21 @@ async function initMobileDocuments(sale_id){
 
 }
 
-async function openAddDocumentModal(){
+async function openAddMobileDocumentModal(){
     $('#addDocumentModal').modal('show');
 }
 
-async function addDocumentCallback(xhttp){
+async function addMobileDocumentCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
     $("#add_document_form").trigger("reset");
     $("#addDocumentModal").modal('hide');
-    initDocuments();
+    let sale_id = getPathVariable('sale-detail');
+    initMobileDocuments(sale_id);
 }
-async function addDocument(){
+async function addMobileDocument(){
     let sale_id = getPathVariable('sale-detail');
 
     let formData = new FormData();
@@ -254,10 +255,11 @@ async function addDocument(){
     await servicePostAddMobileDocument(formData, sale_id);
 }
 
-async function deleteDocument(document_id){
+async function deleteMobileDocument(document_id){
     let returned = await serviceGetDeleteMobileDocument(document_id);
     if(returned){
-        initDocuments();
+        let sale_id = getPathVariable('sale-detail');
+        initMobileDocuments(sale_id);
     }
 }
 

@@ -2459,7 +2459,7 @@ async function serviceGetMobileDocumentTypes() {
     }
 }
 async function servicePostAddMobileDocument(formData, id) {
-    await xhrDataPost('/admin/mobile/addDocument/'+id, formData, addDocumentCallback);
+    await xhrDataPost('/admin/mobile/addDocument/'+id, formData, addMobileDocumentCallback);
 }
 async function serviceGetDeleteMobileDocument(id) {
     const data = await fetchDataGet('/admin/mobile/deleteDocument/' + id, 'application/json');
