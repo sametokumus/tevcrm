@@ -314,7 +314,7 @@ $extra_js='
                                     <span class="fe fe-refresh-cw">90</span>
                                 </button>
                             </div>
-                            <input type="number" value="" class="form-control" id="add_payment_payment_term" min="1">
+                            <input type="number" value="" class="form-control" id="add_payment_term_expiry" min="1">
                         </div>
                     </div>
                 </div>
@@ -336,10 +336,55 @@ $extra_js='
             <form method="post" action="#" id="update_payment_term_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">İsim</label>
+                        <label class="form-label col-md-3">İsim</label>
+                        <div class="col-md-9">
                             <input type="text" class="form-control" id="update_payment_term_name" placeholder="Adı" required>
                             <input type="hidden" class="form-control" id="update_payment_term_id" required>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Ödeme Türü :</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="update_payment_term_payment_type">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Vade (Gün) :</label>
+                        <div class="col-md-9">
+                            <div class="btn-list mb-2">
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(1)">
+                                    <span class="fe fe-refresh-cw">1</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(3)">
+                                    <span class="fe fe-refresh-cw">3</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(5)">
+                                    <span class="fe fe-refresh-cw">5</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(7)">
+                                    <span class="fe fe-refresh-cw">7</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(15)">
+                                    <span class="fe fe-refresh-cw">15</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(20)">
+                                    <span class="fe fe-refresh-cw">20</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(30)">
+                                    <span class="fe fe-refresh-cw">30</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(45)">
+                                    <span class="fe fe-refresh-cw">45</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(60)">
+                                    <span class="fe fe-refresh-cw">60</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="updatePaymentPaymentTermWithButton(90)">
+                                    <span class="fe fe-refresh-cw">90</span>
+                                </button>
+                            </div>
+                            <input type="number" value="" class="form-control" id="update_payment_term_expiry" min="1">
                         </div>
                     </div>
                 </div>

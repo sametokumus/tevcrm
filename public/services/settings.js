@@ -229,7 +229,9 @@ async function openAddPaymentTermModal(){
 }
 async function addPaymentTerm(){
     let formData = JSON.stringify({
-        "name":document.getElementById('add_payment_term_name').value
+        "name":document.getElementById('add_payment_term_name').value,
+        "payment_type":document.getElementById('add_payment_term_payment_type').value,
+        "expiry":document.getElementById('add_payment_term_expiry').value
     });
 
     let returned = await servicePostAddPaymentTerm(formData);
@@ -250,10 +252,14 @@ async function initUpdatePaymentTermModal(payment_term_id){
     let data = await serviceGetPaymentTermById(payment_term_id);
     let payment_term = data.payment_term;
     document.getElementById('update_payment_term_name').value = payment_term.name;
+    document.getElementById('update_payment_term_payment_type').value = payment_term.payment_type_id;
+    document.getElementById('update_payment_term_expiry').value = checkNull(payment_term.expiry);
 }
 async function updatePaymentTerm(){
     let formData = JSON.stringify({
-        "name":document.getElementById('update_payment_term_name').value
+        "name":document.getElementById('update_payment_term_name').value,
+        "payment_type":document.getElementById('update_payment_term_payment_type').value,
+        "expiry":document.getElementById('update_payment_term_expiry').value
     });
 
     let returned = await servicePostUpdatePaymentTerm(document.getElementById('update_payment_term_id').value, formData);
@@ -270,32 +276,10 @@ async function deletePaymentTerm(payment_term_id){
     }
 }
 async function addPaymentPaymentTermWithButton(day){
-    document.getElementById('add_payment_payment_term').value = day;
-
-    let currentDate = new Date();
-    let dueDate = new Date();
-    dueDate.setDate(currentDate.getDate() + parseInt(day));
-    dueDate = dueDate.toLocaleDateString('tr-TR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-    dueDate = formatDateSplit(dueDate, '-', '.');
-    document.getElementById('add_payment_due_date').value = dueDate;
+    document.getElementById('add_payment_term_expiry').value = day;
 }
 async function updatePaymentPaymentTermWithButton(day){
-    document.getElementById('update_payment_payment_term').value = day;
-
-    let currentDate = new Date();
-    let dueDate = new Date();
-    dueDate.setDate(currentDate.getDate() + parseInt(day));
-    dueDate = dueDate.toLocaleDateString('tr-TR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-    dueDate = formatDateSplit(dueDate, '-', '.');
-    document.getElementById('update_payment_due_date').value = dueDate;
+    document.getElementById('update_payment_term_expiry').value = day;
 }
 
 

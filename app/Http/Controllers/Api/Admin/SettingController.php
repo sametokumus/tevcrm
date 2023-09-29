@@ -35,6 +35,10 @@ class SettingController extends Controller
     {
         try {
             $payment_term = PaymentTerm::query()->where('id', $term_id)->where('active',1)->first();
+            $payment_term['payment_type_name'] = '';
+            if ($payment_term['payment_type_id'] != 0){
+                $payment_term['payment_type_name'] = PaymentType::query()->where('id', $payment_term['payment_type_id'])->first()->name;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['payment_term' => $payment_term]]);
         } catch (QueryException $queryException) {
@@ -50,6 +54,8 @@ class SettingController extends Controller
             ]);
             $payment_term_id = PaymentTerm::query()->insertGetId([
                 'name' => $request->name,
+                'payment_type_id' => $request->payment_type,
+                'expiry' => $request->expiry,
             ]);
 
             return response(['message' => __('Payment term ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['payment_term_id' => $payment_term_id]]);
@@ -70,6 +76,8 @@ class SettingController extends Controller
 
             PaymentTerm::query()->where('id', $term_id)->update([
                 'name' => $request->name,
+                'payment_type_id' => $request->payment_type,
+                'expiry' => $request->expiry,
             ]);
 
             return response(['message' => __('Payment term güncelleme işlemi başarılı.'),'status' => 'success']);
