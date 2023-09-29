@@ -94,6 +94,8 @@ $extra_js='
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Payment Term Adı</th>
+                                            <th scope="col">Ödeme Türü</th>
+                                            <th scope="col">Vade(Gün)</th>
                                             <th scope="col">İşlemler</th>
                                         </tr>
                                         </thead>

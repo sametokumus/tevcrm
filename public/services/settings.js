@@ -215,6 +215,8 @@ async function initPaymentTerms(){
         let item = '<tr>\n' +
             '           <th scope="row">'+ payment_term.id +'</th>\n' +
             '           <td>'+ payment_term.name +'</td>\n' +
+            '           <td>'+ payment_term.payment_type_id +'</td>\n' +
+            '           <td>'+ payment_term.expiry +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#datatablePaymentTerms tbody').append(item);
