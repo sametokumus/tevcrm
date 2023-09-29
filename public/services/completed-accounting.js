@@ -56,79 +56,9 @@ async function initSales(){
         }
         let status_class = "border-theme text-theme";
         let btn_list = '<div class="btn-list">\n';
-        // btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-        //     '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-        //     '        </button>\n';
 
         btn_list += '<a href="accounting-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Muhasebe Detayı</a>\n';
         btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
-
-        let noteClass = 'btn-warning';
-        if (sale.sale_notes.length != 0){
-            noteClass = 'btn-lime pulse-button';
-        }
-        btn_list += '<button id="bDel" type="button" class="btn btn-sm '+ noteClass +'" onclick="openSaleNoteModal(\''+ sale.sale_id +'\')">\n' +
-            '           <span class="fe fe-refresh-cw"> Not\n' +
-            '        </button>\n';
-        if (localStorage.getItem('userRole') == 1) {
-            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-outline-danger" onclick="openDeleteSale(\'' + sale.sale_id + '\')">\n' +
-                '           <span class="fe fe-refresh-cw"> Sil\n' +
-                '        </button>\n';
-        }
-
-        if (sale.status.action == "rfq"){
-            status_class = "border-danger text-danger";
-            btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
-                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger">RFQ Oluştur</a>\n';
-        }else if (sale.status.action == "rfq-update"){
-            status_class = "border-pink text-pink";
-            btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-pink">Talebi Güncelle</a>\n' +
-                '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Gir</a>\n';
-        }else if (sale.status.action == "offer"){
-            status_class = "border-warning text-warning";
-            btn_list += '<a href="sw-2-new/'+ sale.request_id +'" class="btn btn-sm btn-warning">Teklif Oluştur</a>\n';
-        }else if (sale.status.action == "offer-update"){
-            status_class = "border-yellow text-yellow";
-            btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Fiyatları Güncelle</a>\n';
-        }else if (sale.status.action == "quote"){
-            status_class = "border-lime text-lime";
-            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
-        }else if (sale.status.action == "offer-rev"){
-            status_class = "border-warning text-warning";
-            btn_list += '<a href="sw-3-rev/'+ sale.sale_id +'" class="btn btn-sm btn-warning">Teklifi Revize Et</a>\n';
-        }else if (sale.status.action == "admin-conf"){
-            status_class = "border-yellow text-yellow";
-            btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
-        }else if (sale.status.action == "admin-conf-success"){
-            status_class = "border-default text-default";
-            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
-        }else if (sale.status.action == "admin-rev-conf"){
-            status_class = "border-yellow text-yellow";
-            btn_list += '<a href="sw-4-rev/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Revize Teklifi Onayla</a>\n';
-        }else if (sale.status.action == "admin-rev-conf-success"){
-            status_class = "border-default text-default";
-            btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Rv. Quatotion PDF</a>\n';
-        }else if (sale.status.action == "oc-po"){
-            status_class = "border-green text-green";
-            btn_list += '<a href="order-confirmation-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Order Conf. PDF</a>\n';
-            let role = localStorage.getItem('userRole');
-            if (role == 1 || role == 2 || role == 3){
-                btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Supp. PO PDF</a>\n';
-            }
-        }else if (sale.status.action == "inv"){
-            status_class = "border-indigo text-indigo";
-
-            btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Proforma INV. PDF</a>\n';
-            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
-        }else if (sale.status.action == "pl-inv"){
-            status_class = "border-indigo text-indigo";
-
-            // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
-            btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
-            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
-        }else if (sale.status.action == "admin-conf-failed" || sale.status.action == "admin-rev-conf-failed"){
-            status_class = "border-default text-default";
-        }
 
         btn_list += '</div>';
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ sale.status_name +'</span>';
@@ -164,9 +94,9 @@ async function initSales(){
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
 			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
-			'              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
-			'              <td>'+ updated_at +'</td>\n' +
-			'              <td>'+ sale.diff_last_day +'</td>\n' +
+			// '              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
+			// '              <td>'+ updated_at +'</td>\n' +
+			// '              <td>'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
 			'              </td>\n' +

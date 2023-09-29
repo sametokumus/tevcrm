@@ -32,9 +32,9 @@ $extra_js='
                     <th class="border-bottom-0">Teklif Fiyatı</th>
                     <th class="border-bottom-0">Para Birimi</th>
                     <th class="border-bottom-0">Durum</th>
-                    <th class="border-bottom-0">Talep Tarihi</th>
-                    <th class="border-bottom-0">Son Güncelleme</th>
-                    <th class="border-bottom-0">Son İşlem</th>
+{{--                    <th class="border-bottom-0">Talep Tarihi</th>--}}
+{{--                    <th class="border-bottom-0">Son Güncelleme</th>--}}
+{{--                    <th class="border-bottom-0">Son İşlem</th>--}}
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>
