@@ -242,6 +242,7 @@ async function addPaymentTerm(){
     }
 }
 async function openUpdatePaymentTermModal(payment_term_id){
+    await getPaymentTypesAddSelectId('update_payment_term_payment_type');
     let company_id = getPathVariable('company-detail');
     $("#updatePaymentTermModal").modal('show');
     initUpdatePaymentTermModal(payment_term_id)
