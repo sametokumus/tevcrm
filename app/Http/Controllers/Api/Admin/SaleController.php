@@ -644,7 +644,7 @@ class SaleController extends Controller
             if ($last_forced && $new_status->period != 'cancelled'){
 
                 $history_check = StatusHistory::query()
-                    ->where('status_id', $last_forced->status_id)
+                    ->where('status_id', $last_forced->id)
                     ->where('sale_id', $request->sale_id)
                     ->where('active', 1)
                     ->orderByDesc('id')
