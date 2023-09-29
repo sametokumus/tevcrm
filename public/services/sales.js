@@ -135,9 +135,9 @@ async function initSales(){
         }
         let status_class = "border-theme text-theme";
         let btn_list = '<div class="btn-list">\n';
-        btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
-            '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
-            '        </button>\n';
+        // btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
+        //     '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
+        //     '        </button>\n';
 
         btn_list += '<a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n';
 
