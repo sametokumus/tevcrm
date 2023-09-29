@@ -205,6 +205,7 @@ async function initPayments(sale_id){
 
     $('#payments').DataTable({
         responsive: false,
+        buttons: [],
         columnDefs: [
             {responsivePriority: 1, targets: 0},
             {responsivePriority: 2, targets: -1}
