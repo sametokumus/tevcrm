@@ -2187,7 +2187,7 @@ async function serviceGetPaymentMethods() {
 async function serviceGetAccountingPaymentType(sale_id) {
     const data = await fetchDataGet('/admin/accounting/getAccountingPaymentType/' + sale_id, 'application/json');
     if (data.status == "success") {
-        return data;
+        return data.object;
     } else {
         showAlert('İstek Başarısız.');
     }

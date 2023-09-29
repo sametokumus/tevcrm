@@ -231,10 +231,7 @@ async function openAddPaymentModal(packing_list_id, price, currency){
 
     let sale_id = getPathVariable('accounting-detail');
     let data = await serviceGetAccountingPaymentType(sale_id);
-    console.log(data)
-    let term = data.object.term;
-    console.log(term.length)
-    console.log(term)
+    let term = data.term;
     if (term.length != 0){
         document.getElementById('add_payment_payment_type').value = term.payment_type_id;
         addPaymentPaymentTermWithButton(term.expiry);
