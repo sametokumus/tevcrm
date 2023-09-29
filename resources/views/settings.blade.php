@@ -267,8 +267,8 @@ $extra_js='
             <form method="post" action="#" id="add_payment_term_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">İsim</label>
+                        <label class="form-label col-md-3">İsim</label>
+                        <div class="col-md-9">
                             <input type="text" class="form-control" id="add_payment_term_name" placeholder="Adı" required>
                         </div>
                     </div>

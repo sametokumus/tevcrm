@@ -269,6 +269,34 @@ async function deletePaymentTerm(payment_term_id){
         initPaymentTerms();
     }
 }
+async function addPaymentPaymentTermWithButton(day){
+    document.getElementById('add_payment_payment_term').value = day;
+
+    let currentDate = new Date();
+    let dueDate = new Date();
+    dueDate.setDate(currentDate.getDate() + parseInt(day));
+    dueDate = dueDate.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    dueDate = formatDateSplit(dueDate, '-', '.');
+    document.getElementById('add_payment_due_date').value = dueDate;
+}
+async function updatePaymentPaymentTermWithButton(day){
+    document.getElementById('update_payment_payment_term').value = day;
+
+    let currentDate = new Date();
+    let dueDate = new Date();
+    dueDate.setDate(currentDate.getDate() + parseInt(day));
+    dueDate = dueDate.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    dueDate = formatDateSplit(dueDate, '-', '.');
+    document.getElementById('update_payment_due_date').value = dueDate;
+}
 
 
 async function initDeliveryTerms(){
