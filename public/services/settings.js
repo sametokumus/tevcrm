@@ -224,6 +224,7 @@ async function initPaymentTerms(){
 
 }
 async function openAddPaymentTermModal(){
+    await getPaymentTypesAddSelectId('add_payment_term_payment_type');
     $("#addPaymentTermModal").modal('show');
 }
 async function addPaymentTerm(){

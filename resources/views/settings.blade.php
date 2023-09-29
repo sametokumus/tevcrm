@@ -272,6 +272,51 @@ $extra_js='
                             <input type="text" class="form-control" id="add_payment_term_name" placeholder="Adı" required>
                         </div>
                     </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Ödeme Türü :</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="add_payment_term_payment_type">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Vade (Gün) :</label>
+                        <div class="col-md-9">
+                            <div class="btn-list mb-2">
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(1)">
+                                    <span class="fe fe-refresh-cw">1</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(3)">
+                                    <span class="fe fe-refresh-cw">3</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(5)">
+                                    <span class="fe fe-refresh-cw">5</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(7)">
+                                    <span class="fe fe-refresh-cw">7</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(15)">
+                                    <span class="fe fe-refresh-cw">15</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(20)">
+                                    <span class="fe fe-refresh-cw">20</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(30)">
+                                    <span class="fe fe-refresh-cw">30</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(45)">
+                                    <span class="fe fe-refresh-cw">45</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(60)">
+                                    <span class="fe fe-refresh-cw">60</span>
+                                </button>
+                                <button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="addPaymentPaymentTermWithButton(90)">
+                                    <span class="fe fe-refresh-cw">90</span>
+                                </button>
+                            </div>
+                            <input type="number" value="" class="form-control" id="add_payment_payment_term" min="1">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
