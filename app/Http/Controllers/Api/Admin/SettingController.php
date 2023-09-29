@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityType;
 use App\Models\DeliveryTerm;
 use App\Models\PaymentTerm;
+use App\Models\PaymentType;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -17,6 +18,12 @@ class SettingController extends Controller
     {
         try {
             $payment_terms = PaymentTerm::query()->where('active',1)->get();
+            foreach ($payment_terms as $payment_term){
+                $payment_term['payment_type_name'] = '';
+                if ($payment_term['payment_type_id'] != 0){
+                    $payment_term['payment_type_name'] = PaymentType::query()->where('id', $payment_term['payment_type_id'])->first()->name;
+                }
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['payment_terms' => $payment_terms]]);
         } catch (QueryException $queryException) {
