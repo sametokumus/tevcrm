@@ -235,7 +235,7 @@ async function openAddPaymentModal(packing_list_id, price, currency){
     let term = data.object.term;
     console.log(term.length)
     console.log(term)
-    if (term.length > 0){
+    if (term.length != 0){
         document.getElementById('add_payment_payment_type').value = term.payment_type_id;
         addPaymentPaymentTermWithButton(term.expiry);
     }
