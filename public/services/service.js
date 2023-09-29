@@ -1532,7 +1532,11 @@ async function servicePostUpdateSaleStatus(formData) {
         showAlert(data.message);
         return data;
     } else {
-        showAlert('İstek Başarısız.');
+        if (data.status == "success") {
+            showAlert(data.message);
+        }else {
+            showAlert('İstek Başarısız.');
+        }
         return false;
     }
 }

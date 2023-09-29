@@ -501,7 +501,7 @@ table tr.selected{
     right: 15px;
     width: 300px;
     display: none;
-    z-index: 100;
+    z-index: 1055;
     box-shadow: 0 2px 15px rgb(0 0 0 / 25%);
 }
 
