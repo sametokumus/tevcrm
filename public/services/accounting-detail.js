@@ -231,7 +231,8 @@ async function openAddPaymentModal(packing_list_id, price, currency){
 
     let sale_id = getPathVariable('accounting-detail');
     let data = await serviceGetAccountingPaymentType(sale_id);
-    let term = data.term;
+    console.log(data)
+    let term = data.object.term;
     console.log(term.length)
     console.log(term)
     if (term.length > 0){
