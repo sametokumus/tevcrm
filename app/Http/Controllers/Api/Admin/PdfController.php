@@ -935,9 +935,13 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
+
+                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
+                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+                $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
 //                $product_name = iconv('utf-8', 'iso-8859-9', $sale_offer->product_name);
 //                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'auto');
-                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'ISO-8859-1');
+//                $product_name = mb_convert_encoding($sale_offer->product_name, 'UTF-8', 'ISO-8859-1');
 
                 $name_width = $pdf->GetStringWidth($product_name);
                 if ($name_width > 48){
