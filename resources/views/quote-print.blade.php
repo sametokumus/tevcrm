@@ -22,12 +22,12 @@ $extra_js='
 
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-xl-9 col-lg-12 col-md-12">
-                    <div class="row mb-3" id="no-pdf">
+                    <div class="row mb-3 d-none" id="no-pdf">
                         <div class="col-12">
                             <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
                         </div>
                     </div>
-                    <div class="row mb-3" id="has-pdf">
+                    <div class="row mb-3 d-none" id="has-pdf">
                         <div class="col-6">
                             <a id="showPdf" target="_blank" href="" class="btn btn-theme btn-block w-100 no-print">Mevcut PDF'i Görüntüle</a>
                         </div>

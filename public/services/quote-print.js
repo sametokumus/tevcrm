@@ -231,9 +231,9 @@ async function initQuote(sale_id){
     $('#update_quote_note').summernote('code', checkNull(quote.note));
 
     if (quote.quatotion_pdf == ''){
-        $('#has-pdf').remove();
+        $('#no-pdf').removeClass('d-none');
     }else{
-        $('#no-pdf').remove();
+        $('#has-pdf').removeClass('d-none');
         $('#showPdf').attr('href', quote.quatotion_pdf);
     }
 
