@@ -215,7 +215,7 @@ async function initPaymentTerms(){
         let item = '<tr>\n' +
             '           <th scope="row">'+ payment_term.id +'</th>\n' +
             '           <td>'+ payment_term.name +'</td>\n' +
-            '           <td>'+ payment_term.payment_type_id +'</td>\n' +
+            '           <td>'+ payment_term.payment_type_name +'</td>\n' +
             '           <td>'+ checkNull(payment_term.expiry) +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
