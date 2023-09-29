@@ -636,16 +636,55 @@ class SaleController extends Controller
                 'status_id' => 'required',
                 'user_id' => 'required',
             ]);
-            Sale::query()->where('sale_id', $request->sale_id)->update([
-                'status_id' => $request->status_id,
-            ]);
+            $old_status_id = Sale::query()->where('sale_id', $request->sale_id)->first()->status_id;
+            $old_status = Status::query()->where('id', $old_status_id)->first();
+            $new_status = Status::query()->where('id', $request->status_id)->first();
+            $last_forced = Status::query()->where('sequence', '<', $new_status->sequence)->where('forced', 1)->orderByDesc('sequence')->first();
 
-            StatusHistory::query()->insert([
-                'sale_id' => $request->sale_id,
-                'status_id' => $request->status_id,
-                'user_id' => $request->user_id,
-            ]);
-            $status = Status::query()->where('id', $request->status_id)->first();
+            if ($last_forced){
+
+                $history_check = StatusHistory::query()
+                    ->where('status_id', $last_forced->status_id)
+                    ->where('sale_id', $request->sale_id)
+                    ->where('active', 1)
+                    ->orderByDesc('id')
+                    ->first();
+
+                if ($history_check){
+
+                    Sale::query()->where('sale_id', $request->sale_id)->update([
+                        'status_id' => $request->status_id,
+                    ]);
+
+                    StatusHistory::query()->insert([
+                        'sale_id' => $request->sale_id,
+                        'status_id' => $request->status_id,
+                        'user_id' => $request->user_id,
+                    ]);
+                    $status = Status::query()->where('id', $request->status_id)->first();
+
+                }else{
+
+                    return response(['message' => __('Zorunlu sipariş durumları atlanamaz.'), 'status' => 'status-001']);
+
+                }
+
+            }else{
+
+                Sale::query()->where('sale_id', $request->sale_id)->update([
+                    'status_id' => $request->status_id,
+                ]);
+
+                StatusHistory::query()->insert([
+                    'sale_id' => $request->sale_id,
+                    'status_id' => $request->status_id,
+                    'user_id' => $request->user_id,
+                ]);
+                $status = Status::query()->where('id', $request->status_id)->first();
+
+            }
+
+
 
             return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['period' => $status->period]]);
         } catch (ValidationException $validationException) {
