@@ -127,7 +127,7 @@ async function initSales(){
 		],
 		dom: 'Bfrtip',
         paging: false,
-		buttons: [],
+		buttons: false,
         scrollX: true,
 		language: {
 			url: "services/Turkish.json"
