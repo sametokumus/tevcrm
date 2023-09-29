@@ -227,6 +227,11 @@ async function openAddPaymentModal(packing_list_id, price, currency){
     document.getElementById('add_payment_payment_price').value = price;
     document.getElementById('add_payment_currency').value = currency;
     document.getElementById('add_payment_packing_list_id').value = packing_list_id;
+
+    let sale_id = getPathVariable('accounting-detail');
+    let data = await serviceGetAccountingPaymentType(sale_id);
+    let term = data.term;
+    console.log(term)
 }
 async function addPayment(){
     let sale_id = getPathVariable('accounting-detail');

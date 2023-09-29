@@ -337,6 +337,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('accounting/addAccountingPayment', [AccountingController::class, 'addAccountingPayment']);
     Route::post('accounting/updateAccountingPayment', [AccountingController::class, 'updateAccountingPayment']);
     Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
+    Route::get('accounting/getAccountingPaymentType', [AccountingController::class, 'getAccountingPaymentType']);
 
     //Dashboard
     Route::get('dashboard/getTotalSales', [DashboardController::class, 'getTotalSales']);

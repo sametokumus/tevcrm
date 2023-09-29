@@ -2184,6 +2184,14 @@ async function serviceGetPaymentMethods() {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetAccountingPaymentType(sale_id) {
+    const data = await fetchDataGet('/admin/accounting/getAccountingPaymentType/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 async function serviceGetPaymentTerms() {
     const data = await fetchDataGet('/admin/setting/getPaymentTerms', 'application/json');
@@ -2221,6 +2229,7 @@ async function servicePostUpdatePaymentTerm(id, formData) {
         return false;
     }
 }
+
 async function serviceGetDeletePaymentTerm(id) {
     const data = await fetchDataGet('/admin/setting/deletePaymentTerm/' + id, 'application/json');
     if (data.status == "success") {

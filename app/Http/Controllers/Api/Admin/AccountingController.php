@@ -14,8 +14,10 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\PackingList;
 use App\Models\PaymentMethod;
+use App\Models\PaymentTerm;
 use App\Models\PaymentType;
 use App\Models\Product;
+use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleNote;
 use App\Models\SaleOffer;
@@ -435,6 +437,24 @@ class AccountingController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function getAccountingPaymentType($sale_id)
+    {
+        try {
+            $term = array();
+            $quote = Quote::query()->where('sale_id', $sale_id)->where('active', 1)->first();
+            if ($quote) {
+                $payment_term = PaymentTerm::query()->where('name', $quote->payment_term)->where('active', 1)->first();
+                if ($payment_term){
+                    $term['payment_type_id'] = $payment_term['payment_type_id'];
+                    $term['expiry'] = $payment_term['expiry'];
+                }
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['term' => $term]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 }
