@@ -161,6 +161,9 @@ async function initPayments(sale_id){
                 buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdatePaymentModal(\'' + payment_id + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödemeyi Düzenle\n' +
                     '       </button>\n';
+                buttons += '<a href="/packing-list-print/'+ packing_list_id +'" target="_blank" class="btn btn-sm btn-theme">\n' +
+                    '           <span class="fe fe-edit"> </span> Packing List PDF\n' +
+                    '       </a>\n';
                 buttons += '<a href="/pl-invoice-print/'+ packing_list_id +'" target="_blank" class="btn btn-sm btn-theme">\n' +
                     '           <span class="fe fe-edit"> </span> Inv. PDF\n' +
                     '       </a>\n';
@@ -168,6 +171,9 @@ async function initPayments(sale_id){
                 buttons += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openAddPaymentModal(\'' + packing_list_id + '\', \'' + packing_list.list_grand_total + '\', \'' + packing_list.currency + '\')">\n' +
                     '           <span class="fe fe-edit"> </span> Ödeme Ekle\n' +
                     '       </button>\n';
+                buttons += '<a href="/packing-list-print/'+ packing_list_id +'" target="_blank" class="btn btn-sm btn-theme">\n' +
+                    '           <span class="fe fe-edit"> </span> Packing List PDF\n' +
+                    '       </a>\n';
             }
 
 
