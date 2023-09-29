@@ -126,17 +126,7 @@ async function initSales(){
 		],
 		dom: 'Bfrtip',
         paging: false,
-		// buttons: [
-        //     'excel',
-        //     'pdf',
-        //     {
-        //         text: 'Talep Oluştur',
-        //         className: 'btn btn-theme',
-        //         action: function ( e, dt, node, config ) {
-        //             window.location = '/new-offer-request';
-        //         }
-        //     }
-        // ],
+		buttons: [],
         scrollX: true,
 		language: {
 			url: "services/Turkish.json"

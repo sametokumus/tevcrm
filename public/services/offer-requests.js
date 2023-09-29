@@ -53,16 +53,7 @@ async function initOfferRequests(){
 		],
 		dom: 'Bfrtip',
         paging: false,
-		// buttons: [
-        //     'excel',
-        //     'pdf',
-        //     {
-        //         text: 'Talep Oluştur',
-        //         action: function ( e, dt, node, config ) {
-        //             window.location = '/offer-request';
-        //         }
-        //     }
-        // ],
+		buttons: [],
 		pageLength : -1,
 		language: {
 			url: "services/Turkish.json"
