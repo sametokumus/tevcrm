@@ -94,9 +94,9 @@ async function initSales(){
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
 			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
-			// '              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
-			// '              <td>'+ updated_at +'</td>\n' +
-			// '              <td>'+ sale.diff_last_day +'</td>\n' +
+            '              <td class="d-none">'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
+            '              <td class="d-none">'+ updated_at +'</td>\n' +
+            '              <td class="d-none">'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
 			'              </td>\n' +

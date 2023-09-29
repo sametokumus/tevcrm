@@ -95,9 +95,9 @@ async function initSales(){
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +
 			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
-			// '              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
-			// '              <td>'+ updated_at +'</td>\n' +
-			// '              <td>'+ sale.diff_last_day +'</td>\n' +
+			'              <td class="d-none">'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
+			'              <td class="d-none">'+ updated_at +'</td>\n' +
+			'              <td class="d-none">'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
 			'              </td>\n' +
@@ -115,6 +115,13 @@ async function initSales(){
                     return type === 'display' && data.length > 30 ?
                         data.substr(0, 30) + '...' :
                         data;
+                }
+            },
+            {
+                type: 'date',
+                targets: 10,
+                render: function(data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
             }
 		],
