@@ -665,7 +665,7 @@ class SaleController extends Controller
 
                 }else{
 
-                    return response(['message' => __('Zorunlu sipariş durumları atlanamaz.'), 'status' => 'status-001', 'a' => $history_check]);
+                    return response(['message' => __('Zorunlu sipariş durumları atlanamaz.'), 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
 
                 }
 
