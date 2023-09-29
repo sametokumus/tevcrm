@@ -116,13 +116,6 @@ async function initSales(){
                         data.substr(0, 30) + '...' :
                         data;
                 }
-            },
-            {
-                type: 'date',
-                targets: 10,
-                render: function(data, type, row) {
-                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
-                }
             }
 		],
 		dom: 'Bfrtip',
