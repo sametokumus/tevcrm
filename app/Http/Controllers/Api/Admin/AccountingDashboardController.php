@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -41,19 +42,21 @@ class AccountingDashboardController extends Controller
             $total_eur_price = 0;
 
             foreach ($total_payments as $item){
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
-                    $total_try_price += $item->grand_total;
-                    $total_usd_price += $item->grand_total / $item->usd_rate;
-                    $total_eur_price += $item->grand_total / $item->eur_rate;
+                    $total_try_price += $item->payment_price;
+                    $total_usd_price += $item->payment_price / $sale->usd_rate;
+                    $total_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
-                    $total_usd_price += $item->grand_total;
-                    $total_try_price += $item->grand_total * $item->usd_rate;
-                    $total_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    $total_usd_price += $item->payment_price;
+                    $total_try_price += $item->payment_price * $sale->usd_rate;
+                    $total_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
-                    $total_eur_price += $item->grand_total;
-                    $total_try_price += $item->grand_total * $item->eur_rate;
-                    $total_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    $total_eur_price += $item->payment_price;
+                    $total_try_price += $item->payment_price * $sale->eur_rate;
+                    $total_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
                 }
 
             }
@@ -74,19 +77,21 @@ class AccountingDashboardController extends Controller
             $pending_eur_price = 0;
 
             foreach ($pending_payments as $item){
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
-                    $pending_try_price += $item->grand_total;
-                    $pending_usd_price += $item->grand_total / $item->usd_rate;
-                    $pending_eur_price += $item->grand_total / $item->eur_rate;
+                    $pending_try_price += $item->payment_price;
+                    $pending_usd_price += $item->payment_price / $sale->usd_rate;
+                    $pending_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
-                    $pending_usd_price += $item->grand_total;
-                    $pending_try_price += $item->grand_total * $item->usd_rate;
-                    $pending_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    $pending_usd_price += $item->payment_price;
+                    $pending_try_price += $item->payment_price * $sale->usd_rate;
+                    $pending_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
-                    $pending_eur_price += $item->grand_total;
-                    $pending_try_price += $item->grand_total * $item->eur_rate;
-                    $pending_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    $pending_eur_price += $item->payment_price;
+                    $pending_try_price += $item->payment_price * $sale->eur_rate;
+                    $pending_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
                 }
 
             }
@@ -108,19 +113,21 @@ class AccountingDashboardController extends Controller
             $late_eur_price = 0;
 
             foreach ($late_payments as $item){
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
-                    $late_try_price += $item->grand_total;
-                    $late_usd_price += $item->grand_total / $item->usd_rate;
-                    $late_eur_price += $item->grand_total / $item->eur_rate;
+                    $late_try_price += $item->payment_price;
+                    $late_usd_price += $item->payment_price / $sale->usd_rate;
+                    $late_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
-                    $late_usd_price += $item->grand_total;
-                    $late_try_price += $item->grand_total * $item->usd_rate;
-                    $late_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    $late_usd_price += $item->payment_price;
+                    $late_try_price += $item->payment_price * $sale->usd_rate;
+                    $late_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
-                    $late_eur_price += $item->grand_total;
-                    $late_try_price += $item->grand_total * $item->eur_rate;
-                    $late_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    $late_eur_price += $item->payment_price;
+                    $late_try_price += $item->payment_price * $sale->eur_rate;
+                    $late_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
                 }
 
             }
