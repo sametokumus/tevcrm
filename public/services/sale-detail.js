@@ -94,15 +94,18 @@ async function initSaleStats(sale_id){
     $('#owner-employee').append('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
     $('#total-price').text(total);
-    let remaining_message = '';
-    if (sale.payed_price == '0.00'){
-        remaining_message = '<span class="text-danger"><b>Ödeme Bekleniyor.</b></span>';
-    }else if (sale.remaining_price == '0.00'){
-        remaining_message = '<span class="text-theme"><b>Ödeme Tamamlandı.</b></span>';
-    }else{
-        remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
+
+    if (sale.remaining_message) {
+        let remaining_message = '';
+        if (sale.payed_price == '0.00') {
+            remaining_message = '<span class="text-danger"><b>Ödeme Bekleniyor.</b></span>';
+        } else if (sale.remaining_price == '0.00') {
+            remaining_message = '<span class="text-theme"><b>Ödeme Tamamlandı.</b></span>';
+        } else {
+            remaining_message = '<span class="text-warning"><b>Kısmi Ödeme Yapıldı.</b></span>';
+        }
+        $('#remaining-message').html(remaining_message);
     }
-    $('#remaining-message').html(remaining_message);
     if (control.permission) {
         $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
     }
