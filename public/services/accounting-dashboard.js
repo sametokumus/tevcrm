@@ -20,14 +20,14 @@
             document.getElementById('dash_currency').value = dash_currency;
         }
 
-        getTotalSales();
-        getLastMonthSales();
-        getApprovedMonthlySales();
-        getCompletedMonthlySales();
-        getPotentialMonthlySales();
-        getCancelledMonthlySales();
-        getAdminsSales();
-        initTopSaledProducts();
+        // getTotalSales();
+        // getLastMonthSales();
+        // getApprovedMonthlySales();
+        // getCompletedMonthlySales();
+        // getPotentialMonthlySales();
+        // getCancelledMonthlySales();
+        // getAdminsSales();
+        // initTopSaledProducts();
 
 	});
 
@@ -55,6 +55,42 @@ var randomizeArray = function (arg) {
 
     return array;
 }
+
+async function getAccountingStats(){
+
+    let data = await serviceGetAccountingStats();
+    let stats = data.stats;
+    console.log(stats)
+
+    // $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
+    // let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
+    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
+    // $('#approved-text').append(text1);
+    //
+    // $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
+    // let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
+    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
+    // $('#completed-text').append(text2);
+    //
+    // $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
+    // let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
+    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
+    // $('#potential-text').append(text3);
+    //
+    // $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
+    // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
+    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
+    // $('#cancelled-text').append(text4);
+
+
+
+}
+
+
+
+
+
+
 async function getTotalSales(){
 
     let data = await serviceGetTotalSales();

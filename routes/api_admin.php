@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\AccountingController;
+use App\Http\Controllers\Api\Admin\AccountingDashboardController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\MobileController;
 use App\Http\Controllers\Api\Admin\PdfController;
@@ -338,6 +339,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('accounting/updateAccountingPayment', [AccountingController::class, 'updateAccountingPayment']);
     Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
     Route::get('accounting/getAccountingPaymentType/{sale_id}', [AccountingController::class, 'getAccountingPaymentType']);
+
+    //Accounting Dashboard
+    Route::get('accounting-dashboard/getAccountingStats', [AccountingDashboardController::class, 'getAccountingStats']);
 
     //Dashboard
     Route::get('dashboard/getTotalSales', [DashboardController::class, 'getTotalSales']);
