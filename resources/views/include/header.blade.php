@@ -201,6 +201,12 @@ $extra_js="";
 
 
                 <div class="menu-header">Muhasebe Yönetimi</div>
+                <div id="nav-accounting-dashboard" class="d-none menu-item @if( Request::segment(1)== 'accounting-dashboard' ) active @endif">
+                    <a href="/accounting-dashboard" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-gem"></i></span>
+                        <span class="menu-text">Muhasebe Dashboard</span>
+                    </a>
+                </div>
                 <div id="nav-pending-accounting" class="d-none menu-item @if( Request::segment(1)== 'pending-accounting' ) active @endif">
                     <a href="/pending-accounting" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
