@@ -20,6 +20,8 @@
             document.getElementById('dash_currency').value = dash_currency;
         }
 
+        getAccountingStats();
+
         // getTotalSales();
         // getLastMonthSales();
         // getApprovedMonthlySales();
