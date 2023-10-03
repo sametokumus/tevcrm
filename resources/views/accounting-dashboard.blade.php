@@ -4,7 +4,7 @@ $extra_js='
 <script src="plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
 <script src="plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
 <script src="plugins/apexcharts/dist/apexcharts.min.js"></script>
-<script src="services/dashboard.js"></script>
+<script src="services/accounting-dashboard.js"></script>
 ';
 ?>
 
