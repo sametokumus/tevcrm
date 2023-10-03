@@ -425,9 +425,15 @@ class AccountingController extends Controller
             ]);
 
             $payment_id = $request->payment_id;
+            if ($request->status_id == 1){
+                $payment_date = null;
+            }elseif ($request->status_id == 2) {
+                $payment_date = Carbon::now()->format('Y-m-d');
+            }
 
             SaleTransactionPayment::query()->where('payment_id', $payment_id)->update([
                 'payment_status_id' => $request->status_id,
+                'payment_date' => $payment_date
             ]);
 
             return response(['message' => __('Ödeme ekleme işlemi başarılı.'), 'status' => 'success']);
