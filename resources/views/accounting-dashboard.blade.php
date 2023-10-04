@@ -218,8 +218,8 @@ $extra_js='
                             <div class="card mb-3">
 
                                 <div class="card-header d-flex align-items-center bg-white bg-opacity-15">
-                                    <span class="flex-grow-1 fw-400">10/2023</span>
-                                    <span class="text-white text-opacity-50 text-decoration-none me-3">12.300,00 TRY / 500,00 EUR / 550,00 USD</span>
+                                    <span class="flex-grow-1 fw-400 fs-18px">10/2023</span>
+                                    <span class="text-white text-decoration-none me-3">12.300,00 TRY<br>500,00 EUR<br>550,00 USD</span>
                                 </div>
 
 
@@ -227,13 +227,13 @@ $extra_js='
 
                                     <div class="list-group-item d-flex px-3">
                                         <div class="me-3 pt-1">
-                                            <i class="far fa-google-wallet text-white text-opacity-50 fa-fw fa-lg"></i>
+                                            <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>
                                         </div>
                                         <div class="flex-fill">
                                             <div class="fw-400">Müşteri</div>
                                             <div class="text-white">Ödeme Tutarı</div>
                                             <div class="small text-white text-opacity-50 mb-2">Satış Kurları</div>
-                                            <div>
+                                            <div class="mb-2">
                                                 <span class="badge border border-danger text-danger">gecikmede</span>
                                             </div>
                                         </div>
