@@ -147,32 +147,24 @@ async function getCashFlows(){
         var options = {
             series: [{
                 name: 'Bubble1',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                    min: 10,
-                    max: 60
-                })
-            },
-                {
-                    name: 'Bubble2',
-                    data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 60
-                    })
-                },
-                {
-                    name: 'Bubble3',
-                    data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 60
-                    })
-                },
-                {
-                    name: 'Bubble4',
-                    data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                        min: 10,
-                        max: 60
-                    })
-                }],
+                data: [{
+                    x: 'Jan',
+                    y: 40,
+                    z: 10
+                }, {
+                    x: 'Feb',
+                    y: 20,
+                    z: 14
+                }, {
+                    x: 'Mar',
+                    y: 35,
+                    z: 18
+                }, {
+                    x: 'Apr',
+                    y: 50,
+                    z: 25
+                }]
+            }],
             chart: {
                 height: 350,
                 type: 'bubble',
