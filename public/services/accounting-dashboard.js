@@ -268,11 +268,11 @@ async function getCashFlows(){
             custom: function({ series, seriesIndex, dataPointIndex, w }) {
                 return (
                     '<div class="tooltip-custom">' +
-                    '<span>X: ' +
-                    series[0][dataPointIndex].x +
+                    '<span>' + options.series[seriesIndex].name + ' - X: ' +
+                    series[seriesIndex][dataPointIndex].x +
                     '</span>' +
                     '<span>Y: ' +
-                    series[0][dataPointIndex].y +
+                    series[seriesIndex][dataPointIndex].y +
                     '</span>' +
                     '</div>'
                 );
