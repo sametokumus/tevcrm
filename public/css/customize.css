@@ -619,14 +619,14 @@ div.DTE_Field select{
     background-color: rgba(255,255,255,.8);
 }
 .tooltip-custom-header{
-    background-color: rgba(150,150,150,.8);
-    color: #000;
+    background-color: rgba(195, 195, 195, 0.8);
+    color: #3a3a3a;
     padding: 5px 10px;
     font-weight: 700;
     font-size: 13px;
 }
 .tooltip-custom-content{
-    color: #000;
+    color: #3a3a3a;
     padding: 5px 10px;
 }
 .tooltip-custom-content p{

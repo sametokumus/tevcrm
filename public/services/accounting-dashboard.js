@@ -193,15 +193,22 @@ async function getCashFlows(){
     var options = {
         series: [{
             name: 'Bekleyen Ödemeler',
-            data: processedPendingArray
+            data: processedPendingArray,
+            fill: {
+                type: 'solid',
+                colors: ['#90ee7e']
+            }
         },{
             name: 'Geciken Ödemeler',
-            data: processedLateArray
+            data: processedLateArray,
+            fill: {
+                type: 'solid',
+                colors: ['#d94848']
+            }
         }],
         chart: {
             height: 350,
-            type: 'bubble',
-            colors: ['#90ee7e', '#d94848']
+            type: 'bubble'
         },
         title: {
             style: {
