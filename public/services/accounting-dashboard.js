@@ -179,9 +179,29 @@ async function getCashFlows(){
             height: 350,
             type: 'bubble',
         },
+        title: {
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_WHITE
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: '#fff'
+            }
+        },
         dataLabels: {
             enabled: false
         },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        colors: ['#90ee7e'],
         fill: {
             opacity: 1
         },
