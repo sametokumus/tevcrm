@@ -167,19 +167,41 @@ async function getCashFlows(){
     console.log(pendingArray)
     console.log(lateArray)
 
+    var processedPendingArray = pendingArray.map(function(item) {
+        var parts = item.x.split('-');
+        var day = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;  // JavaScript months are 0-indexed
+        var year = parseInt(parts[2], 10);
+        return {
+            x: new Date(year, month, day).getTime(),
+            y: item.y,
+            z: item.z
+        };
+    });
+    var processedLateArray = lateArray.map(function(item) {
+        var parts = item.x.split('-');
+        var day = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;  // JavaScript months are 0-indexed
+        var year = parseInt(parts[2], 10);
+        return {
+            x: new Date(year, month, day).getTime(),
+            y: item.y,
+            z: item.z
+        };
+    });
+
     var options = {
         series: [{
             name: 'Bekleyen Ödemeler',
-            colors: ['#90ee7e'],
-            data: pendingArray
+            data: processedPendingArray
         },{
             name: 'Geciken Ödemeler',
-            colors: ['#d94848'],
-            data: lateArray
+            data: processedLateArray
         }],
         chart: {
             height: 350,
             type: 'bubble',
+            colors: ['#90ee7e', '#d94848']
         },
         title: {
             style: {
