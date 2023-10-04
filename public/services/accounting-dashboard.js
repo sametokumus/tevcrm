@@ -115,8 +115,7 @@ async function getCashFlows(){
             let price = payment.payment_price;
             let data = {
                 "x": date,
-                "y": price,
-                "z": 14
+                "y": price
             };
 
             let date_status = '';
