@@ -95,6 +95,9 @@ async function getCashFlows(){
     let months = data.months;
     console.log(months)
 
+    let pendingArray = [];
+    let lateArray = [];
+
     $.each(months, function (i, month) {
         let month_box = '';
 
@@ -108,11 +111,26 @@ async function getCashFlows(){
 
         $.each(month.payments, function (i, payment) {
 
+            let date = formatDateASC(payment.due_date);
+            let price = changeCommasToDecimal(payment.payment_price);
+            let data = JSON.stringify({
+                "x": date,
+                "y": price,
+                "z": 14
+            });
+
             let date_status = '';
             if (!payment.date_status){
                 date_status = ' <div class="mb-2">\n' +
                     '               <span class="badge border border-danger text-danger">Gecikmede</span>\n' +
                     '           </div>\n';
+
+                lateArray.push(data);
+
+            }else{
+
+                pendingArray.push(data);
+
             }
 
             month_box += '          <div class="list-group-item d-flex px-3">\n' +
@@ -149,37 +167,21 @@ async function getCashFlows(){
 
     var options = {
         series: [{
-            name: 'Bubble1',
-            data: [{
-                x: 'Jan',
-                y: 40,
-                z: 10
-            }, {
-                x: 'Feb',
-                y: 20,
-                z: 14
-            }, {
-                x: 'Mar',
-                y: 35,
-                z: 18
-            }, {
-                x: 'Apr',
-                y: 50,
-                z: 25
-            }]
+            name: 'Bekleyen Ödemeler',
+            data: pendingArray
+        },{
+            name: 'Geciken Ödemeler',
+            data: lateArray
         }],
         chart: {
             height: 350,
             type: 'bubble',
         },
         dataLabels: {
-            enabled: false
+            enabled: true
         },
         fill: {
-            opacity: 0.8
-        },
-        title: {
-            text: 'Simple Bubble Chart'
+            opacity: 1
         },
         xaxis: {
             tickAmount: 12,
