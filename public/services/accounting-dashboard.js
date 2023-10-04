@@ -200,7 +200,8 @@ async function getCashFlows(){
         chart: {
             height: 350,
             type: 'bubble',
-            colors: ['#90ee7e', '#d94848']
+            colors: ['#90ee7e', '#d94848'],
+            minBubbleSize: 14
         },
         title: {
             style: {
