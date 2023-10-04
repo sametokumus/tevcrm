@@ -2185,6 +2185,15 @@ async function serviceGetCashFlows() {
     }
 }
 
+async function serviceGetCashFlowPayments() {
+    const data = await fetchDataGet('/admin/accounting-dashboard/getCashFlowPayments', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 
 
 

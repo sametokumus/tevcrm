@@ -22,6 +22,7 @@
 
         getAccountingStats();
         getCashFlows();
+        getCashFlowPayments();
 
         // getTotalSales();
         // getLastMonthSales();
@@ -231,7 +232,7 @@ async function getCashFlows(){
                 color: COLOR_WHITE
             },
         },
-        colors: ['#90ee7e', '#d94848'],
+        colors: ['rgba(254, 176, 25, 0.85)', 'rgba(255, 69, 96, 0.85)'],
         legend: {
             show: false
         },
@@ -317,18 +318,25 @@ async function getCashFlows(){
 
 }
 
-function generateData(baseval, count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-        var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
-        var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-        series.push([baseval, x, y]);
-        baseval += 86400000;
-        i++;
-    }
-    return series;
+async function getCashFlowPayments(){
+
+    let data = await serviceGetCashFlowPayments();
+    let payments = data.payments;
+    console.log(payments)
+
+    $.each(payments, function (i, payment) {
+        let item = '';
+
+        item += '';
+
+        // $('#cashflow-box').append(item);
+
+
+    });
+
 }
+
+
 
 
 

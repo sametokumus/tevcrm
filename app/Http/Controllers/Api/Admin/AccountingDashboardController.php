@@ -18,18 +18,6 @@ class AccountingDashboardController extends Controller
     public function getAccountingStats()
     {
         try {
-//            $sale_items = Sale::query()
-//                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-//                ->selectRaw('sales.*, statuses.period as period')
-//                ->where('sales.active',1)
-//                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
-//                ->get();
-
-//                $sale = Sale::query()
-//                    ->leftJoin('sale_transactions', 'sale_transactions.sale_id', '=', 'sales.sale_id')
-//                    ->where('sale_transactions.transaction_id', $item->transaction_id)
-//                    ->selectRaw('sales.*')
-//                    ->first();
 
             $stats = array();
 
@@ -262,6 +250,68 @@ class AccountingDashboardController extends Controller
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['months' => $months]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getCashFlowPayments()
+    {
+        try {
+            $payments = SaleTransactionPayment::query()
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('packing_lists.active',1)
+                ->where('sale_transaction_payments.active',1)
+                ->selectRaw('sale_transaction_payments.*')
+                ->get();
+
+
+
+                foreach ($payments as $item){
+
+                    $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
+                    $item['transaction'] = $transaction;
+                    $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
+                    $sale['owner'] = Contact::query()->where('id', $sale->owner_id)->first();
+                    $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
+                    $item['sale'] = $sale;
+
+                    $item['date_status'] = true;
+                    $date = Carbon::now()->format('Y-m-d');
+                    if ($item->due_date < $date){
+                        $item['date_status'] = false;
+                    }
+
+                    if ($item->currency == 'TRY'){
+                        $try_price = $item->payment_price;
+                        $usd_price = $item->payment_price / $sale->usd_rate;
+                        $eur_price = $item->payment_price / $sale->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $usd_price = $item->payment_price;
+                        $try_price = $item->payment_price * $sale->usd_rate;
+                        $eur_price = $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $eur_price = $item->payment_price;
+                        $try_price = $item->payment_price * $sale->eur_rate;
+                        $usd_price = $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                    }
+
+                    $price = array();
+                    $price['try_sale'] = number_format($try_price, 2,".","");
+                    $price['usd_sale'] = number_format($usd_price, 2,".","");
+                    $price['eur_sale'] = number_format($eur_price, 2,".","");
+                    $item['prices'] = $price;
+
+                }
+
+
+
+
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['payments' => $payments]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
