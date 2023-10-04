@@ -113,11 +113,11 @@ async function getCashFlows(){
 
             let date = formatDateASC(payment.due_date, '-');
             let price = changeCommasToDecimal(payment.payment_price);
-            let data = JSON.stringify({
+            let data = {
                 "x": date,
                 "y": price,
                 "z": 14
-            });
+            };
 
             let date_status = '';
             if (!payment.date_status){
