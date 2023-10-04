@@ -115,7 +115,8 @@ async function getCashFlows(){
             let price = payment.payment_price;
             let data = {
                 "x": date,
-                "y": price
+                "y": price,
+                "z": 14
             };
 
             let date_status = '';
@@ -200,8 +201,7 @@ async function getCashFlows(){
         chart: {
             height: 350,
             type: 'bubble',
-            colors: ['#90ee7e', '#d94848'],
-            minBubbleSize: 14
+            colors: ['#90ee7e', '#d94848']
         },
         title: {
             style: {
@@ -265,6 +265,20 @@ async function getCashFlows(){
                 }
             }
         },
+        tooltip: {
+            custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                return (
+                    '<div class="tooltip-custom">' +
+                    '<span>X: ' +
+                    w.globals.series[seriesIndex][dataPointIndex].x +
+                    '</span>' +
+                    '<span>Y: ' +
+                    w.globals.series[seriesIndex][dataPointIndex].y +
+                    '</span>' +
+                    '</div>'
+                );
+            }
+        }
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-cashflow"), options);
