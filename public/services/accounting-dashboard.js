@@ -265,7 +265,7 @@ async function getCashFlows(){
                 }
             }
         },tooltip: {
-            custom: function({ series, seriesIndex, dataPointIndex, w }) {
+            custom: function({ series, seriesIndex, dataPointIndex }) {
                 return (
                     '<div class="tooltip-custom">' +
                     '<span>' + options.series[seriesIndex].name + ' - X: ' +
