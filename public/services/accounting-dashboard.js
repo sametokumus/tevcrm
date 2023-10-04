@@ -269,10 +269,10 @@ async function getCashFlows(){
                 return (
                     '<div class="tooltip-custom">' +
                     '<span>X: ' +
-                    w.globals.series[seriesIndex][dataPointIndex].x +
+                    series[0][dataPointIndex].x +
                     '</span>' +
                     '<span>Y: ' +
-                    w.globals.series[seriesIndex][dataPointIndex].y +
+                    series[0][dataPointIndex].y +
                     '</span>' +
                     '</div>'
                 );
