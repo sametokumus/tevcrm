@@ -64,24 +64,24 @@ async function getAccountingStats(){
     let stats = data.stats;
     console.log(stats)
 
-    // $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
-    // let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
-    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    // $('#approved-text').append(text1);
-    //
-    // $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
-    // let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
-    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    // $('#completed-text').append(text2);
-    //
-    // $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
-    // let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
-    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    // $('#potential-text').append(text3);
-    //
-    // $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
-    // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
-    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
+    $('#total-box h4').append(changeCommasToDecimal(stats.total.try_sale) + ' TRY');
+    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.total.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.total.eur_sale);
+    $('#total-text').append(text1);
+
+    $('#pending-box h4').append(changeCommasToDecimal(stats.pending.try_sale) + ' TRY');
+    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.pending.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.pending.eur_sale);
+    $('#pending-text').append(text2);
+
+    $('#late-box h4').append(changeCommasToDecimal(stats.late.try_sale) + ' TRY');
+    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.late.usd_sale) +'<br/>\n' +
+        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.late.eur_sale);
+    $('#late-text').append(text3);
+
+    $('#profit-box h4').append(changeCommasToDecimal(stats.profit_rate) + '%');
+    // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.usd_sale) +'<br/>\n' +
+    //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.eur_sale);
     // $('#cancelled-text').append(text4);
 
 

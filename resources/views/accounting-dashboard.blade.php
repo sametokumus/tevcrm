@@ -28,13 +28,13 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM ONAYLANAN</span>
+                        <span class="flex-grow-1">TOPLAM ÖDENEN</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
-                    <div class="row align-items-center mb-2" id="approved-box">
+                    <div class="row align-items-center mb-2" id="total-box">
                         <div class="col-9">
                             <h4 class="mb-0"></h4>
                         </div>
@@ -44,7 +44,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="approved-text">
+                    <div class="text-white text-opacity-80 text-truncate" id="total-text">
 
                     </div>
 
@@ -70,13 +70,13 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM TAMAMLANAN</span>
+                        <span class="flex-grow-1">BEKLEYEN ÖDEMELER</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
-                    <div class="row align-items-center mb-2" id="completed-box">
+                    <div class="row align-items-center mb-2" id="pending-box">
                         <div class="col-9">
                             <h4 class="mb-0"></h4>
                         </div>
@@ -87,7 +87,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="completed-text">
+                    <div class="text-white text-opacity-80 text-truncate" id="pending-text">
 
                     </div>
 
@@ -113,13 +113,13 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM POTANSİYEL</span>
+                        <span class="flex-grow-1">GECİKEN ÖDEMELER</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
-                    <div class="row align-items-center mb-2" id="potential-box">
+                    <div class="row align-items-center mb-2" id="late-box">
                         <div class="col-9">
                             <h4 class="mb-0"></h4>
                         </div>
@@ -130,7 +130,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="potential-text">
+                    <div class="text-white text-opacity-80 text-truncate" id="late-text">
 
                     </div>
 
@@ -156,13 +156,13 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM İPTAL EDİLEN</span>
+                        <span class="flex-grow-1">ORTALAMA KARLILIK</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
-                    <div class="row align-items-center mb-2" id="cancelled-box">
+                    <div class="row align-items-center mb-2" id="profit-box">
                         <div class="col-9">
                             <h4 class="mb-0"></h4>
                         </div>
@@ -173,7 +173,7 @@ $extra_js='
                     </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="cancelled-text">
+                    <div class="text-white text-opacity-80 text-truncate" id="profit-text">
 
                     </div>
 
