@@ -164,6 +164,8 @@ async function getCashFlows(){
 
     });
 
+    console.log(pendingArray)
+    console.log(lateArray)
 
     var options = {
         series: [{
