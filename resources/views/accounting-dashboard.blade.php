@@ -9,7 +9,7 @@ $extra_js='
 ?>
 
 <div id="content" class="app-content">
-    <div class="row">
+    <div class="row d-none">
         <div class="col-12 mb-5">
             <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
                 <option value="TRY">TRY</option>
