@@ -189,6 +189,49 @@ class AccountingDashboardController extends Controller
                 ->limit(12)
                 ->get();
 
+            foreach ($months as $month){
+
+                $payments = SaleTransactionPayment::query()
+                    ->where('active',1)
+                    ->where('payment_status_id',1)
+                    ->where()
+                    ->get();
+
+                $try_price = 0;
+                $usd_price = 0;
+                $eur_price = 0;
+
+                foreach ($payments as $item){
+                    $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
+                    $item['transaction'] = $transaction;
+                    $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
+                    $item['sale'] = $sale;
+
+                    if ($item->currency == 'TRY'){
+                        $try_price += $item->payment_price;
+                        $usd_price += $item->payment_price / $sale->usd_rate;
+                        $eur_price += $item->payment_price / $sale->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $usd_price += $item->payment_price;
+                        $try_price += $item->payment_price * $sale->usd_rate;
+                        $eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $eur_price += $item->payment_price;
+                        $try_price += $item->payment_price * $sale->eur_rate;
+                        $usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                    }
+
+                }
+
+                $price = array();
+                $price['try_sale'] = number_format($try_price, 2,".","");
+                $price['usd_sale'] = number_format($usd_price, 2,".","");
+                $price['eur_sale'] = number_format($eur_price, 2,".","");
+
+                $month['prices'] = $price;
+
+            }
+
 //            $transactions = array();
 //            $sales = array();
 //            $total_sales = array();
