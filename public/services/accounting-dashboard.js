@@ -203,7 +203,6 @@ async function getCashFlows(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#90ee7e'],
         fill: {
             opacity: 1
         },
