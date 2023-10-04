@@ -35,8 +35,11 @@ class AccountingDashboardController extends Controller
 
             //Yapılan Ödemeler
             $total_payments = SaleTransactionPayment::query()
-                ->where('active',1)
-                ->where('payment_status_id',2)
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('packing_lists.active',1)
+                ->where('sale_transaction_payments.active',1)
+                ->where('sale_transaction_payments.payment_status_id',2)
                 ->get();
 
             $total_try_price = 0;
@@ -70,8 +73,11 @@ class AccountingDashboardController extends Controller
 
             //Bekleyen Ödemeler
             $pending_payments = SaleTransactionPayment::query()
-                ->where('active',1)
-                ->where('payment_status_id',1)
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('packing_lists.active',1)
+                ->where('sale_transaction_payments.active',1)
+                ->where('sale_transaction_payments.payment_status_id',1)
                 ->get();
 
             $pending_try_price = 0;
@@ -105,9 +111,12 @@ class AccountingDashboardController extends Controller
 
             //Geciken Ödemeler
             $late_payments = SaleTransactionPayment::query()
-                ->where('active',1)
-                ->where('payment_status_id',1)
-                ->where('due_date', '<', Carbon::now()->format('Y-m-d'))
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('packing_lists.active',1)
+                ->where('sale_transaction_payments.active',1)
+                ->where('sale_transaction_payments.payment_status_id',1)
+                ->where('sale_transaction_payments.due_date', '<', Carbon::now()->format('Y-m-d'))
                 ->get();
 
             $late_try_price = 0;
