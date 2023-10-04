@@ -111,7 +111,7 @@ async function getCashFlows(){
 
         $.each(month.payments, function (i, payment) {
 
-            let date = formatDateASC(payment.due_date);
+            let date = formatDateASC(payment.due_date, '-');
             let price = changeCommasToDecimal(payment.payment_price);
             let data = JSON.stringify({
                 "x": date,
