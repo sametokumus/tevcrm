@@ -112,7 +112,7 @@ async function getCashFlows(){
         $.each(month.payments, function (i, payment) {
 
             let date = formatDateASC(payment.due_date, '-');
-            let price = changeCommasToDecimal(payment.payment_price);
+            let price = payment.payment_price;
             let data = {
                 "x": date,
                 "y": price,
@@ -232,7 +232,7 @@ async function getCashFlows(){
         yaxis: {
             labels: {
                 formatter: function (val) {
-                    return changeCommasToDecimal(val.toFixed(2))
+                    return changeCommasToDecimal(val)
                 },
                 style: {
                     colors: '#fff',
