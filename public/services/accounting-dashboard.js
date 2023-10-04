@@ -101,8 +101,8 @@ async function getCashFlows(){
         month_box += '<div class="col-xl-3 col-md-4">\n' +
             '               <div class="card mb-3">\n' +
             '                   <div class="card-header d-flex align-items-center bg-white bg-opacity-15">\n' +
-            '                       <span class="flex-grow-1 fw-400 fs-18px">10/2023</span>\n' +
-            '                       <span class="text-white text-decoration-none me-3">12.300,00 TRY<br>500,00 EUR<br>550,00 USD</span>\n' +
+            '                       <span class="flex-grow-1 fw-400 fs-18px">'+ month.month +'/'+ month.year +'</span>\n' +
+            '                       <span class="text-white text-decoration-none me-3">'+ changeCommasToDecimal(month.prices.try_sale) +' TRY<br>'+ changeCommasToDecimal(month.prices.eur_sale) +' EUR<br>'+ changeCommasToDecimal(month.prices.usd_sale) +' USD</span>\n' +
             '                   </div>\n' +
             '                   <div class="list-group list-group-flush">';
 
@@ -120,8 +120,9 @@ async function getCashFlows(){
                 '                           <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>\n' +
                 '                       </div>\n' +
                 '                       <div class="flex-fill">\n' +
-                '                           <div class="fw-400">Müşteri</div>\n' +
-                '                           <div class="text-white">'+ payment.payment_price +'</div>\n' +
+                '                           <div class="fw-400">'+ payment.sale.customer.name +'</div>\n' +
+                '                           <div class="text-white"> Ödeme Tutarı'+ changeCommasToDecimal(payment.payment_price) +'</div>\n' +
+                '                           <div class="text-white"> Ödeme Tarihi'+ formatDateASC(payment.due_date, '-') +'</div>\n' +
                 '                           <div class="small text-white text-opacity-50 mb-2">EUR: '+ payment.sale.eur_rate +' / USD: '+ payment.sale.usd_rate +'</div>\n' +
                 '                           '+ date_status +
                 '                       </div>\n' +

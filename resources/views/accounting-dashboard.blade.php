@@ -213,45 +213,7 @@ $extra_js='
 
                     <div class="row mb-2" id="cashflow-box">
 
-                        <div class="col-xl-3 col-md-4">
 
-                            <div class="card mb-3">
-
-                                <div class="card-header d-flex align-items-center bg-white bg-opacity-15">
-                                    <span class="flex-grow-1 fw-400 fs-18px">10/2023</span>
-                                    <span class="text-white text-decoration-none me-3">12.300,00 TRY<br>500,00 EUR<br>550,00 USD</span>
-                                </div>
-
-
-                                <div class="list-group list-group-flush">
-
-                                    <div class="list-group-item d-flex px-3">
-                                        <div class="me-3 pt-1">
-                                            <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <div class="fw-400">Müşteri</div>
-                                            <div class="text-white">Ödeme Tutarı</div>
-                                            <div class="small text-white text-opacity-50 mb-2">Satış Kurları</div>
-                                            <div class="mb-2">
-                                                <span class="badge border border-danger text-danger">gecikmede</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="card-arrow">
-                                    <div class="card-arrow-top-left"></div>
-                                    <div class="card-arrow-top-right"></div>
-                                    <div class="card-arrow-bottom-left"></div>
-                                    <div class="card-arrow-bottom-right"></div>
-                                </div>
-
-                            </div>
-
-                        </div>
 
                     </div>
 

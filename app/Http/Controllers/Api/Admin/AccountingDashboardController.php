@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
@@ -185,8 +186,7 @@ class AccountingDashboardController extends Controller
                 ->where('sale_transaction_payments.active',1)
                 ->where('sale_transaction_payments.payment_status_id',1)
                 ->groupByRaw('YEAR(due_date), MONTH(due_date)')
-                ->orderByRaw('YEAR(due_date) DESC, MONTH(due_date) DESC')
-                ->limit(12)
+                ->orderByRaw('YEAR(due_date) ASC, MONTH(due_date) ASC')
                 ->get();
 
             foreach ($months as $month){
@@ -206,6 +206,7 @@ class AccountingDashboardController extends Controller
                     $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                     $item['transaction'] = $transaction;
                     $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
+                    $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
                     $item['sale'] = $sale;
 
                     $item['date_status'] = true;
