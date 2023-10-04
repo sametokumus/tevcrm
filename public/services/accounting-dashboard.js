@@ -97,6 +97,8 @@ async function getCashFlows(){
 
     let pendingArray = [];
     let lateArray = [];
+    let min_date = new Date();
+    let max_date = new Date();
 
     $.each(months, function (i, month) {
         let month_box = '';
@@ -110,6 +112,14 @@ async function getCashFlows(){
             '                   <div class="list-group list-group-flush">';
 
         $.each(month.payments, function (i, payment) {
+
+            let dueDate = new Date(payment.due_date);
+            if (dueDate < min_date) {
+                min_date = dueDate;
+            }
+            if (dueDate > max_date) {
+                max_date = dueDate;
+            }
 
             let date = formatDateASC(payment.due_date, '-');
             let price = payment.payment_price;
@@ -190,6 +200,11 @@ async function getCashFlows(){
     console.log(processedPendingArray)
     console.log(processedLateArray)
 
+    min_date.setDate(min_date.getDate() - 3);
+    min_date = min_date.toISOString().split('T')[0];
+    max_date.setDate(max_date.getDate() + 3);
+    max_date = max_date.toISOString().split('T')[0];
+
     var options = {
         series: [{
             name: 'Bekleyen Ödemeler',
@@ -210,7 +225,7 @@ async function getCashFlows(){
                 color: COLOR_WHITE
             },
         },
-        colors: ['#90ee7e', '#d94848', '#9C27B0'],
+        colors: ['#90ee7e', '#d94848'],
         legend: {
             show: false
         },
@@ -247,11 +262,8 @@ async function getCashFlows(){
                     return day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
                 }
             },
-            zoom: {
-                autoScaleYaxis: true,
-                enabled: true,
-                type: 'x'
-            }
+            min: new Date(min_date).getTime(),
+            max: new Date(max_date).getTime()
         },
         yaxis: {
             labels: {
