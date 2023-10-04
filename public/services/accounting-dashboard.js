@@ -21,6 +21,7 @@
         }
 
         getAccountingStats();
+        getCashFlows();
 
         // getTotalSales();
         // getLastMonthSales();
@@ -85,6 +86,61 @@ async function getAccountingStats(){
     // $('#cancelled-text').append(text4);
 
 
+
+}
+
+async function getCashFlows(){
+
+    let data = await serviceGetCashFlows();
+    let months = data.months;
+    console.log(months)
+
+    $.each(months, function (i, month) {
+        let month_box = '';
+
+        month_box += '<div class="col-xl-3 col-md-4">\n' +
+            '               <div class="card mb-3">\n' +
+            '                   <div class="card-header d-flex align-items-center bg-white bg-opacity-15">\n' +
+            '                       <span class="flex-grow-1 fw-400 fs-18px">10/2023</span>\n' +
+            '                       <span class="text-white text-decoration-none me-3">12.300,00 TRY<br>500,00 EUR<br>550,00 USD</span>\n' +
+            '                   </div>\n' +
+            '                   <div class="list-group list-group-flush">';
+
+        $.each(month.payments, function (i, payment) {
+
+            let date_status = '';
+            if (!payment.date_status){
+                date_status = ' <div class="mb-2">\n' +
+                    '               <span class="badge border border-danger text-danger">Gecikmede</span>\n' +
+                    '           </div>\n';
+            }
+
+            month_box += '          <div class="list-group-item d-flex px-3">\n' +
+                '                       <div class="me-3 pt-1">\n' +
+                '                           <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>\n' +
+                '                       </div>\n' +
+                '                       <div class="flex-fill">\n' +
+                '                           <div class="fw-400">Müşteri</div>\n' +
+                '                           <div class="text-white">'+ payment.payment_price +'</div>\n' +
+                '                           <div class="small text-white text-opacity-50 mb-2">EUR: '+ payment.sale.eur_rate +' / USD: '+ payment.sale.usd_rate +'</div>\n' +
+                '                           '+ date_status +
+                '                       </div>\n' +
+                '                   </div>';
+
+        });
+
+        month_box += '          </div>\n' +
+            '                   <div class="card-arrow">\n' +
+            '                       <div class="card-arrow-top-left"></div>\n' +
+            '                       <div class="card-arrow-top-right"></div>\n' +
+            '                       <div class="card-arrow-bottom-left"></div>\n' +
+            '                       <div class="card-arrow-bottom-right"></div>\n' +
+            '                   </div>\n' +
+            '               </div>\n' +
+            '         </div>';
+
+        $('#cashflow-box').append(month_box);
+    });
 
 }
 

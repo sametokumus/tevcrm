@@ -213,7 +213,7 @@ $extra_js='
 
                     <div class="row mb-2" id="cashflow-box">
 
-                        <div class="col-xl-4 col-lg-6">
+                        <div class="col-xl-3 col-md-4">
 
                             <div class="card mb-3">
 

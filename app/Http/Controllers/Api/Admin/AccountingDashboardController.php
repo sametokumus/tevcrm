@@ -208,6 +208,12 @@ class AccountingDashboardController extends Controller
                     $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
                     $item['sale'] = $sale;
 
+                    $item['date_status'] = true;
+                    $date = Carbon::now()->format('Y-m-d');
+                    if ($item->due_date < $date){
+                        $item['date_status'] = false;
+                    }
+
                     if ($item->currency == 'TRY'){
                         $try_price += $item->payment_price;
                         $usd_price += $item->payment_price / $sale->usd_rate;
