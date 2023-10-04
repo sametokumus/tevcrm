@@ -170,9 +170,11 @@ async function getCashFlows(){
     var options = {
         series: [{
             name: 'Bekleyen Ödemeler',
+            colors: ['#90ee7e'],
             data: pendingArray
         },{
             name: 'Geciken Ödemeler',
+            colors: ['#d94848'],
             data: lateArray
         }],
         chart: {
