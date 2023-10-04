@@ -144,54 +144,54 @@ async function getCashFlows(){
         $('#cashflow-box').append(month_box);
 
 
-        var options = {
-            series: [{
-                name: 'Bubble1',
-                data: [{
-                    x: 'Jan',
-                    y: 40,
-                    z: 10
-                }, {
-                    x: 'Feb',
-                    y: 20,
-                    z: 14
-                }, {
-                    x: 'Mar',
-                    y: 35,
-                    z: 18
-                }, {
-                    x: 'Apr',
-                    y: 50,
-                    z: 25
-                }]
-            }],
-            chart: {
-                height: 350,
-                type: 'bubble',
-            },
-            dataLabels: {
-                enabled: false
-            },
-            fill: {
-                opacity: 0.8
-            },
-            title: {
-                text: 'Simple Bubble Chart'
-            },
-            xaxis: {
-                tickAmount: 12,
-                type: 'category',
-            },
-            yaxis: {
-                max: 70
-            }
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart-cashflow"), options);
-        chart.render();
-
-
     });
+
+
+    var options = {
+        series: [{
+            name: 'Bubble1',
+            data: [{
+                x: 'Jan',
+                y: 40,
+                z: 10
+            }, {
+                x: 'Feb',
+                y: 20,
+                z: 14
+            }, {
+                x: 'Mar',
+                y: 35,
+                z: 18
+            }, {
+                x: 'Apr',
+                y: 50,
+                z: 25
+            }]
+        }],
+        chart: {
+            height: 350,
+            type: 'bubble',
+        },
+        dataLabels: {
+            enabled: false
+        },
+        fill: {
+            opacity: 0.8
+        },
+        title: {
+            text: 'Simple Bubble Chart'
+        },
+        xaxis: {
+            tickAmount: 12,
+            type: 'category',
+        },
+        yaxis: {
+            max: 70
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-cashflow"), options);
+    chart.render();
 
 }
 
