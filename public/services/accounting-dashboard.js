@@ -193,18 +193,10 @@ async function getCashFlows(){
     var options = {
         series: [{
             name: 'Bekleyen Ödemeler',
-            data: processedPendingArray,
-            fill: {
-                type: 'solid',
-                colors: ['#90ee7e']
-            }
+            data: processedPendingArray
         },{
             name: 'Geciken Ödemeler',
-            data: processedLateArray,
-            fill: {
-                type: 'solid',
-                colors: ['#d94848']
-            }
+            data: processedLateArray
         }],
         chart: {
             height: 350,
@@ -218,11 +210,13 @@ async function getCashFlows(){
                 color: COLOR_WHITE
             },
         },
-        legend: {
-            fontFamily: FONT_FAMILY,
-            labels: {
-                colors: '#ffffff'
+        plotOptions: {
+            bubble: {
+                color: ['#90ee7e', '#d94848'],  // Set colors for each series
             }
+        },
+        legend: {
+            enabled: false
         },
         dataLabels: {
             enabled: false
