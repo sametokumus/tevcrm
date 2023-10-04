@@ -123,6 +123,12 @@ async function getCashFlows(){
 
             let date = formatDateASC(payment.due_date, '-');
             let price = payment.payment_price;
+            if (payment.currency == 'USD'){
+                price = parseFloat(price * payment.sale.usd_rate).toFixed(2);
+            }
+            if (payment.currency == 'EUR'){
+                price = parseFloat(price * payment.sale.eur_rate).toFixed(2);
+            }
             let data = {
                 "x": date,
                 "y": price,
