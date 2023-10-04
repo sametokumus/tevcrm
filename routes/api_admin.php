@@ -342,6 +342,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Accounting Dashboard
     Route::get('accounting-dashboard/getAccountingStats', [AccountingDashboardController::class, 'getAccountingStats']);
+    Route::get('accounting-dashboard/getCashFlows', [AccountingDashboardController::class, 'getCashFlows']);
 
     //Dashboard
     Route::get('dashboard/getTotalSales', [DashboardController::class, 'getTotalSales']);

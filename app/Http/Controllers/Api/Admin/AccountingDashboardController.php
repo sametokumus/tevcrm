@@ -176,4 +176,81 @@ class AccountingDashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+
+    public function getCashFlows()
+    {
+        try {
+            $months = SaleTransactionPayment::query()
+                ->selectRaw('YEAR(due_date) AS year, MONTH(due_date) AS month')
+                ->where('sale_transaction_payments.active',1)
+                ->groupByRaw('YEAR(due_date), MONTH(due_date)')
+                ->orderByRaw('YEAR(due_date) DESC, MONTH(due_date) DESC')
+                ->limit(12)
+                ->get();
+
+//            $transactions = array();
+//            $sales = array();
+//            $total_sales = array();
+//            $try_total = 0;
+//            $usd_total = 0;
+//            $eur_total = 0;
+//            foreach ($months as $month){
+//                $sale_items = Sale::query()
+//                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+//                    ->selectRaw('YEAR(sales.created_at) AS year, MONTH(sales.created_at) AS month, sales.*')
+//                    ->where('sales.active',1)
+//                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+//                    ->whereYear('sales.created_at', $month->year)
+//                    ->whereMonth('sales.created_at', $month->month)
+//                    ->get();
+//
+//
+//                $sale = array();
+//                $sale['year'] = $last_month->year;
+//                $sale['month'] = $last_month->month;
+//                $try_price = 0;
+//                $usd_price = 0;
+//                $eur_price = 0;
+//
+//                foreach ($sale_items as $item){
+//
+//                    if ($item->currency == 'TRY'){
+//                        $try_price += $item->grand_total;
+//                        $usd_price += $item->grand_total / $item->usd_rate;
+//                        $eur_price += $item->grand_total / $item->eur_rate;
+//                    }else if ($item->currency == 'USD'){
+//                        $usd_price += $item->grand_total;
+//                        $try_price += $item->grand_total * $item->usd_rate;
+//                        $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+//                    }else if ($item->currency == 'EUR'){
+//                        $eur_price += $item->grand_total;
+//                        $try_price += $item->grand_total * $item->eur_rate;
+//                        $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+//                    }
+//                }
+//
+//                $try_total += $try_price;
+//                $usd_total += $usd_price;
+//                $eur_total += $eur_price;
+//
+//
+//                $sale = array();
+//                $sale['year'] = $last_month->year;
+//                $sale['month'] = $last_month->month;
+//                $sale['try_sale'] = number_format($try_price, 2,".","");
+//                $sale['usd_sale'] = number_format($usd_price, 2,".","");
+//                $sale['eur_sale'] = number_format($eur_price, 2,".","");
+//                array_push($sales, $sale);
+//            }
+//
+//            $total_sales['try_total'] = number_format($try_total, 2,".","");
+//            $total_sales['usd_total'] = number_format($usd_total, 2,".","");
+//            $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['months' => $months]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }
