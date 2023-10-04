@@ -209,12 +209,8 @@ async function getCashFlows(){
                 fontFamily: FONT_FAMILY,
                 color: COLOR_WHITE
             },
-        },colors: ['#F44336', '#E91E63', '#9C27B0'],
-        plotOptions: {
-            bubble: {
-                color: ['#90ee7e', '#d94848'],  // Set colors for each series
-            }
         },
+        colors: ['#90ee7e', '#d94848', '#9C27B0'],
         legend: {
             show: false
         },
