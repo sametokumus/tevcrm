@@ -211,13 +211,38 @@ async function getCashFlows(){
             type: 'datetime',
             labels: {
                 rotate: 0,
-                color: '#ffffff'
+                color: '#ffffff',
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                },
+                formatter: function(val) {
+                    // Format date to 'd-m-Y'
+                    var date = new Date(val);
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+                    return day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
+                }
             }
         },
         yaxis: {
-            max: 70,
-            color: '#ffffff'
-        }
+            labels: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
+        },
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-cashflow"), options);
