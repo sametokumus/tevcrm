@@ -120,9 +120,10 @@ async function getCashFlows(){
                 '                           <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>\n' +
                 '                       </div>\n' +
                 '                       <div class="flex-fill">\n' +
-                '                           <div class="fw-400">'+ payment.sale.customer.name +'</div>\n' +
-                '                           <div class="text-white"> Ödeme Tutarı'+ changeCommasToDecimal(payment.payment_price) +'</div>\n' +
-                '                           <div class="text-white"> Ödeme Tarihi'+ formatDateASC(payment.due_date, '-') +'</div>\n' +
+                '                           <div class="fw-600">'+ payment.sale.owner.short_code +'-'+ payment.sale.id +'</div>\n' +
+                '                           <div class="fw-400"><b>Müşteri:</b> '+ payment.sale.customer.name +'</div>\n' +
+                '                           <div class="text-white"><b>Ödeme Tutarı:</b> '+ changeCommasToDecimal(payment.payment_price) +'</div>\n' +
+                '                           <div class="text-white"><b>Ödeme Tarihi:</b> '+ formatDateASC(payment.due_date, '-') +'</div>\n' +
                 '                           <div class="small text-white text-opacity-50 mb-2">EUR: '+ payment.sale.eur_rate +' / USD: '+ payment.sale.usd_rate +'</div>\n' +
                 '                           '+ date_status +
                 '                       </div>\n' +

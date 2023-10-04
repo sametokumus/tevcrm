@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
@@ -206,6 +207,7 @@ class AccountingDashboardController extends Controller
                     $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                     $item['transaction'] = $transaction;
                     $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
+                    $sale['owner'] = Contact::query()->where('id', $sale->owner_id)->first();
                     $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
                     $item['sale'] = $sale;
 
