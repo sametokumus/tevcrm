@@ -180,14 +180,17 @@ async function getCashFlows(){
             type: 'bubble',
         },
         dataLabels: {
-            enabled: true
+            enabled: false
         },
         fill: {
             opacity: 1
         },
         xaxis: {
             tickAmount: 12,
-            type: 'category',
+            type: 'date',
+            labels: {
+                rotate: 0,
+            }
         },
         yaxis: {
             max: 70
