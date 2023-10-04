@@ -183,6 +183,7 @@ class AccountingDashboardController extends Controller
             $months = SaleTransactionPayment::query()
                 ->selectRaw('YEAR(due_date) AS year, MONTH(due_date) AS month')
                 ->where('sale_transaction_payments.active',1)
+                ->where('sale_transaction_payments.payment_status_id',1)
                 ->groupByRaw('YEAR(due_date), MONTH(due_date)')
                 ->orderByRaw('YEAR(due_date) DESC, MONTH(due_date) DESC')
                 ->limit(12)
