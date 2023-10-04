@@ -42,7 +42,7 @@ class AccountingDashboardController extends Controller
             $total_eur_price = 0;
 
             foreach ($total_payments as $item){
-                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
@@ -77,7 +77,7 @@ class AccountingDashboardController extends Controller
             $pending_eur_price = 0;
 
             foreach ($pending_payments as $item){
-                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
@@ -113,7 +113,7 @@ class AccountingDashboardController extends Controller
             $late_eur_price = 0;
 
             foreach ($late_payments as $item){
-                $transaction = SaleTransaction::query()->where('transaction_id', $item->tranaction_id)->first();
+                $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
                 if ($item->currency == 'TRY'){
