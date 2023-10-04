@@ -194,7 +194,8 @@ class AccountingDashboardController extends Controller
                 $payments = SaleTransactionPayment::query()
                     ->where('active',1)
                     ->where('payment_status_id',1)
-                    ->where()
+                    ->whereYear('due_date', $month->year)
+                    ->whereMonth('due_date', $month->month)
                     ->get();
 
                 $try_price = 0;
