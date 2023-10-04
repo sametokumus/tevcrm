@@ -265,20 +265,6 @@ async function getCashFlows(){
                 }
             }
         },
-        tooltip: {
-            custom: function({ series, seriesIndex, dataPointIndex, w }) {
-                return (
-                    '<div class="tooltip-custom">' +
-                    '<span>X: ' +
-                    w.globals.series[seriesIndex][dataPointIndex].x +
-                    '</span>' +
-                    '<span>Y: ' +
-                    w.globals.series[seriesIndex][dataPointIndex].y +
-                    '</span>' +
-                    '</div>'
-                );
-            }
-        }
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-cashflow"), options);
