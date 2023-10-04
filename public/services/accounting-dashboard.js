@@ -246,6 +246,11 @@ async function getCashFlows(){
                     var year = date.getFullYear();
                     return day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
                 }
+            },
+            zoom: {
+                autoScaleYaxis: true,
+                enabled: true,
+                type: 'x'
             }
         },
         yaxis: {
