@@ -358,6 +358,12 @@ class AccountingController extends Controller
 
             $payment_id = Uuid::uuid();
 
+            $tax_rate = $request->payment_tax_rate;
+            if ($tax_rate == '' || $tax_rate == null){
+                $tax_rate = 0;
+            }
+
+
             $payment_total = $request->payment_price + $request->payment_tax;
 
             SaleTransactionPayment::query()->insert([
@@ -368,7 +374,7 @@ class AccountingController extends Controller
                 'payment_method' => $request->payment_method,
                 'invoice_date' => $request->invoice_date,
                 'due_date' => $request->due_date,
-                'payment_tax_rate' => $request->payment_tax_rate,
+                'payment_tax_rate' => $tax_rate,
                 'payment_price' => $request->payment_price,
                 'payment_tax' => $request->payment_tax,
                 'payment_total' => $payment_total,
