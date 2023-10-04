@@ -193,10 +193,14 @@ class AccountingDashboardController extends Controller
             foreach ($months as $month){
 
                 $payments = SaleTransactionPayment::query()
-                    ->where('active',1)
-                    ->where('payment_status_id',1)
-                    ->whereYear('due_date', $month->year)
-                    ->whereMonth('due_date', $month->month)
+                    ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                    ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                    ->where('packing_lists.active',1)
+                    ->where('sale_transaction_payments.active',1)
+                    ->where('sale_transaction_payments.payment_status_id',1)
+                    ->whereYear('sale_transaction_payments.due_date', $month->year)
+                    ->whereMonth('sale_transaction_payments.due_date', $month->month)
+                    ->selectRaw('sale_transaction_payments.*')
                     ->get();
 
                 $try_price = 0;
