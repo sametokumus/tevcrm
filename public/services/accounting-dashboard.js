@@ -324,14 +324,84 @@ async function getCashFlowPayments(){
     let payments = data.payments;
     console.log(payments)
 
-    $.each(payments, function (i, payment) {
-        let item = '';
+    $("#payments-datatable").dataTable().fnDestroy();
+    $('#payments-datatable tbody > tr').remove();
 
-        item += '';
+    $.each(data.payments, function (i, payment) {
 
-        // $('#cashflow-box').append(item);
+        let row_status_class = "";
+        let status_class = "";
+        let status_name = "";
+        let order = 0;
 
+        if (payment.payment_status_id == 2){
+            row_status_class = "";
+            status_class = "border-theme text-theme";
+            status_name = "Ödeme Yapıldı";
+            order = 3;
+        }else if (payment.payment_status_id == 1){
+            if (payment.date_status){
+                row_status_class = "";
+                status_class = "border-warning text-warning";
+                status_name = "Ödeme Bekleniyor";
+                order = 2;
+            }else{
+                row_status_class = "bg-danger";
+                status_class = "border-danger text-danger";
+                status_name = "Ödeme Gecikmede";
+                order = 1;
+            }
+        }
 
+        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ status_name +'</span>';
+
+        let price = changeCommasToDecimal(payment.payment_price);
+
+        let item = '<tr class="'+ row_status_class +'">\n' +
+            '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
+            '              <td class="bg-dark">'+ payment.sale.owner.short_code +'-'+ payment.sale.id +'</td>\n' +
+            '              <td class="bg-dark">'+ payment.sale.customer.name +'</td>\n' +
+            '              <td class="bg-dark">'+ status +'</td>\n' +
+            '              <td class="bg-dark">'+ payment.date_message +'</td>\n' +
+            '              <td>'+ payment.payment_type_name +'</td>\n' +
+            '              <td>'+ payment.payment_method_name +'</td>\n' +
+            '              <td>'+ formatDateASC(payment.due_date, "-") +'</td>\n' +
+            '              <td>'+ price +'</td>\n' +
+            '              <td>'+ checkNull(payment.currency) +'</td>\n' +
+            '              <td class="d-none">'+ order +'</td>\n' +
+            '          </tr>';
+        $('#payments-datatable tbody').append(item);
+    });
+
+    $('#payments-datatable').DataTable({
+        responsive: false,
+        columnDefs: [
+            {
+                targets: 2,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 30 ?
+                        data.substr(0, 30) + '...' :
+                        data;
+                }
+            },
+            {
+                type: 'date',
+                targets: 7
+            }
+        ],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [
+        ],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: [[10, 'asc']],
+        fixedColumns: {
+            left: 5
+        }
     });
 
 }

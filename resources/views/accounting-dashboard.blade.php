@@ -269,6 +269,63 @@ $extra_js='
 
     </div>
 
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">ÖDEMELER</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <div class="row mb-2">
+
+                        <table id="payments-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+                            <thead>
+                            <tr>
+                                <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
+                                <th class="border-bottom-0 bg-dark">Satış Kodu</th>
+                                <th class="border-bottom-0 bg-dark">Müşteri</th>
+                                <th class="border-bottom-0 bg-dark">Durum</th>
+                                <th class="border-bottom-0 bg-dark">Durum</th>
+                                <th class="border-bottom-0">Ödeme Türü</th>
+                                <th class="border-bottom-0">Ödeme Yöntemi</th>
+                                <th class="border-bottom-0">Vade Tarihi</th>
+                                <th class="border-bottom-0">Fatura Tutarı</th>
+                                <th class="border-bottom-0">Para Birimi</th>
+                                <th class="border-bottom-0 d-none">Order</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 

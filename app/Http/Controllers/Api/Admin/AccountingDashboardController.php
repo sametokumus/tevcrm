@@ -261,9 +261,11 @@ class AccountingDashboardController extends Controller
             $payments = SaleTransactionPayment::query()
                 ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
                 ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
+                ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
                 ->where('packing_lists.active',1)
                 ->where('sale_transaction_payments.active',1)
-                ->selectRaw('sale_transaction_payments.*')
+                ->selectRaw('sale_transaction_payments.*, payment_methods.name as payment_method_name, payment_types.name as payment_type_name')
                 ->get();
 
 
@@ -278,9 +280,19 @@ class AccountingDashboardController extends Controller
                     $item['sale'] = $sale;
 
                     $item['date_status'] = true;
+                    $item['date_message'] = '';
                     $date = Carbon::now()->format('Y-m-d');
                     if ($item->due_date < $date){
                         $item['date_status'] = false;
+                        $differenceInDays = $date->diffInDays($item->due_date);
+                        $item['date_message'] = 'Ödeme '.$differenceInDays.' gün gecikmede';
+                    }else if ($item->due_date = $date){
+                        $item['date_status'] = false;
+                        $item['date_message'] = 'Son ödeme günü';
+                    }else if ($item->due_date > $date){
+                        $item['date_status'] = false;
+                        $differenceInDays = $item->due_date->diffInDays($date);
+                        $item['date_message'] = 'Son ödeme tarihine '.$differenceInDays.' gün kaldı';
                     }
 
                     if ($item->currency == 'TRY'){
