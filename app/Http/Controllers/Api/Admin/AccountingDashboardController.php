@@ -293,8 +293,8 @@ class AccountingDashboardController extends Controller
                         $item['date_message'] = 'Son ödeme günü';
                     }else if ($item->due_date > $date){
                         $item['date_status'] = false;
-                        $date2 = Carbon::createFromFormat('Y-m-d', $date);
-                        $date1 = Carbon::createFromFormat('Y-m-d', $item->due_date);
+                        $date1 = Carbon::createFromFormat('Y-m-d', $date);
+                        $date2 = Carbon::createFromFormat('Y-m-d', $item->due_date);
                         $differenceInDays = $date1->diffInDays($date2);
                         $item['date_message'] = 'Son ödeme tarihine '.$differenceInDays.' gün kaldı';
                     }
