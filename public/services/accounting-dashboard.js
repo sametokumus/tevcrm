@@ -82,7 +82,7 @@ async function getAccountingStats(){
     $('#profit-box h4').append(changeCommasToDecimal(parseFloat(stats.profit_rate).toFixed(2)) + '%');
     // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.usd_sale) +'<br/>\n' +
     //     '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.eur_sale);
-    $('#cancelled-text').append('&nbsp;<br/>&nbsp;');
+    // $('#cancelled-text').append(text4);
 
 
 

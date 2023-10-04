@@ -175,6 +175,8 @@ $extra_js='
 
                     <div class="text-white text-opacity-80 text-truncate" id="profit-text">
 
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
                     </div>
 
                 </div>
