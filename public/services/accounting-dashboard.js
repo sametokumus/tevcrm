@@ -192,7 +192,7 @@ async function getCashFlows(){
         legend: {
             fontFamily: FONT_FAMILY,
             labels: {
-                colors: '#fff'
+                colors: '#ffffff'
             }
         },
         dataLabels: {
@@ -208,13 +208,15 @@ async function getCashFlows(){
         },
         xaxis: {
             tickAmount: 12,
-            type: 'date',
+            type: 'datetime',
             labels: {
                 rotate: 0,
+                color: '#ffffff'
             }
         },
         yaxis: {
-            max: 70
+            max: 70,
+            color: '#ffffff'
         }
     };
 
