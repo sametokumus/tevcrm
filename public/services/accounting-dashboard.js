@@ -276,7 +276,7 @@ async function getCashFlows(){
                 return (
                     '<div class="tooltip-custom">' +
                         '<div class="tooltip-custom-header">'+
-                            ' + options.series[seriesIndex].name + '+
+                            + options.series[seriesIndex].name +
                         '</div>'+
                         '<div class="tooltip-custom-content">'+
                             '<p> Tarih: ' +
