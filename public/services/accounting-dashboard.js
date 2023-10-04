@@ -209,6 +209,8 @@ async function getCashFlows(){
                 fontFamily: FONT_FAMILY,
                 color: COLOR_WHITE
             },
+        },fill: {
+            colors: ['#F44336', '#E91E63', '#9C27B0']
         },
         plotOptions: {
             bubble: {
@@ -216,7 +218,7 @@ async function getCashFlows(){
             }
         },
         legend: {
-            enabled: false
+            show: false
         },
         dataLabels: {
             enabled: false
