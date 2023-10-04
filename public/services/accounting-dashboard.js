@@ -267,13 +267,19 @@ async function getCashFlows(){
         },
         tooltip: {
             custom: function({ series, seriesIndex, dataPointIndex }) {
+                var date = new Date(options.series[seriesIndex].data[dataPointIndex].x);
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+                var label_x = day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
+                var label_y = options.series[seriesIndex].data[dataPointIndex].y;
                 return (
                     '<div class="tooltip-custom">' +
                     '<span>' + options.series[seriesIndex].name + ' - X: ' +
-                    options.series[seriesIndex].data[dataPointIndex].x +
+                    label_x +
                     '</span>' +
                     '<span>Y: ' +
-                    options.series[seriesIndex].data[dataPointIndex].y +
+                    label_y +
                     '</span>' +
                     '</div>'
                 );
