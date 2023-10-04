@@ -275,12 +275,17 @@ async function getCashFlows(){
                 var label_y = options.series[seriesIndex].data[dataPointIndex].y;
                 return (
                     '<div class="tooltip-custom">' +
-                    '<span>' + options.series[seriesIndex].name + ' - X: ' +
-                    label_x +
-                    '</span>' +
-                    '<span>Y: ' +
-                    label_y +
-                    '</span>' +
+                        '<div class="tooltip-custom-header">'+
+                            ' + options.series[seriesIndex].name + '+
+                        '</div>'+
+                        '<div class="tooltip-custom-content">'+
+                            '<p> Tarih: ' +
+                            label_x +
+                            '</p>' +
+                            '<p>Tutar: ' +
+                            changeCommasToDecimal(label_y) + ' TRY' +
+                            '</p>' +
+                        '</div>'+
                     '</div>'
                 );
             }
