@@ -183,6 +183,9 @@ class AccountingDashboardController extends Controller
     {
         try {
             $months = SaleTransactionPayment::query()
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('packing_lists.active',1)
                 ->selectRaw('YEAR(due_date) AS year, MONTH(due_date) AS month')
                 ->where('sale_transaction_payments.active',1)
                 ->where('sale_transaction_payments.payment_status_id',1)
