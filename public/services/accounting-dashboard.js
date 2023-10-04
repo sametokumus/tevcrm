@@ -164,9 +164,6 @@ async function getCashFlows(){
 
     });
 
-    console.log(pendingArray)
-    console.log(lateArray)
-
     var processedPendingArray = pendingArray.map(function(item) {
         var parts = item.x.split('-');
         var day = parseInt(parts[0], 10);
@@ -189,6 +186,9 @@ async function getCashFlows(){
             z: item.z
         };
     });
+
+    console.log(processedPendingArray)
+    console.log(processedLateArray)
 
     var options = {
         series: [{
@@ -264,15 +264,16 @@ async function getCashFlows(){
                     cssClass: 'apexcharts-xaxis-label',
                 }
             }
-        },tooltip: {
+        },
+        tooltip: {
             custom: function({ series, seriesIndex, dataPointIndex }) {
                 return (
                     '<div class="tooltip-custom">' +
                     '<span>' + options.series[seriesIndex].name + ' - X: ' +
-                    series[seriesIndex][dataPointIndex].x +
+                    options.series[seriesIndex].data[dataPointIndex].x +
                     '</span>' +
                     '<span>Y: ' +
-                    series[seriesIndex][dataPointIndex].y +
+                    options.series[seriesIndex].data[dataPointIndex].y +
                     '</span>' +
                     '</div>'
                 );
