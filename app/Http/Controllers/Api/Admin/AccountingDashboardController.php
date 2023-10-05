@@ -279,22 +279,28 @@ class AccountingDashboardController extends Controller
                     $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
                     $item['sale'] = $sale;
 
-                    $item['date_status'] = true;
-                    $item['date_message'] = '';
                     $date = Carbon::now()->format('Y-m-d');
+
+                    $item['date_status'] = true;
                     if ($item->due_date < $date){
                         $item['date_status'] = false;
-                        $date1 = Carbon::createFromFormat('Y-m-d', $date);
-                        $date2 = Carbon::createFromFormat('Y-m-d', $item->due_date);
-                        $differenceInDays = $date1->diffInDays($date2);
-                        $item['date_message'] = 'Ödeme '.$differenceInDays.' gün gecikmede';
-                    }else if ($item->due_date = $date){
-                        $item['date_message'] = 'Son ödeme günü';
-                    }else if ($item->due_date > $date){
-                        $date1 = Carbon::createFromFormat('Y-m-d', $date);
-                        $date2 = Carbon::createFromFormat('Y-m-d', $item->due_date);
-                        $differenceInDays = $date1->diffInDays($date2);
-                        $item['date_message'] = 'Son ödeme tarihine '.$differenceInDays.' gün kaldı';
+                    }
+
+                    $item['date_message'] = '';
+                    if ($item->payment_status_id == 1) {
+                        if ($item->due_date < $date) {
+                            $date1 = Carbon::createFromFormat('Y-m-d', $date);
+                            $date2 = Carbon::createFromFormat('Y-m-d', $item->due_date);
+                            $differenceInDays = $date1->diffInDays($date2);
+                            $item['date_message'] = 'Ödeme ' . $differenceInDays . ' gün gecikmede';
+                        } else if ($item->due_date = $date) {
+                            $item['date_message'] = 'Son ödeme günü';
+                        } else if ($item->due_date > $date) {
+                            $date1 = Carbon::createFromFormat('Y-m-d', $date);
+                            $date2 = Carbon::createFromFormat('Y-m-d', $item->due_date);
+                            $differenceInDays = $date1->diffInDays($date2);
+                            $item['date_message'] = 'Son ödeme tarihine ' . $differenceInDays . ' gün kaldı';
+                        }
                     }
 
                     if ($item->currency == 'TRY'){
