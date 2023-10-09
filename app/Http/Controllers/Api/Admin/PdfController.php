@@ -755,9 +755,12 @@ class PdfController extends Controller
             $address_width = $pdf->GetStringWidth($address);
             $address_height = (((int)($address_width / 100)) + 1) * 2;
 
-
-            $pdf->SetXY($x, $y-2);
-            $pdf->MultiCell(100, $address_height, $address."---".$address_height, 0, 'L');
+            if ($address_height == 2){
+                $pdf->SetXY($x, $y);
+            }else {
+                $pdf->SetXY($x, $y - 2);
+            }
+            $pdf->MultiCell(100, $address_height, $address, 0, 'L');
 
             //QUOTES
 
