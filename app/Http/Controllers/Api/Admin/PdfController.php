@@ -938,6 +938,7 @@ class PdfController extends Controller
 
                 $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
                 $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
                 $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
 
                 $name_width = $pdf->GetStringWidth($product_name);
