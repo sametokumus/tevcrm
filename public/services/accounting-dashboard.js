@@ -356,6 +356,8 @@ async function getCashFlowPayments(){
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ status_name +'</span>';
 
         let price = changeCommasToDecimal(payment.payment_price);
+        let tax = changeCommasToDecimal(payment.payment_tax);
+        let total_price = changeCommasToDecimal(payment.payment_total);
 
         let item = '<tr class="'+ row_status_class +'">\n' +
             '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
@@ -367,6 +369,8 @@ async function getCashFlowPayments(){
             '              <td>'+ payment.payment_method_name +'</td>\n' +
             '              <td>'+ formatDateASC(payment.due_date, "-") +'</td>\n' +
             '              <td>'+ price +'</td>\n' +
+            '              <td>'+ tax +'</td>\n' +
+            '              <td>'+ total_price +'</td>\n' +
             '              <td>'+ checkNull(payment.currency) +'</td>\n' +
             '              <td class="d-none">'+ order +'</td>\n' +
             '          </tr>';
