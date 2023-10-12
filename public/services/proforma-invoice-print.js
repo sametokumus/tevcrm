@@ -303,7 +303,7 @@ async function initQuote(sale_id){
 
     if (checkNull(quote.payment_term) != '') {
         document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
-        document.getElementById('update_quote_payment_term').value = quote.payment_term;
+        // document.getElementById('update_quote_payment_term').value = quote.payment_term;
     }
     if (checkNull(quote.lead_time) != '') {
         document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
