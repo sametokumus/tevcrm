@@ -263,6 +263,8 @@ class AccountingDashboardController extends Controller
                 ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
                 ->leftJoin('payment_types', 'payment_types.id', '=', 'sale_transaction_payments.payment_type')
                 ->leftJoin('payment_methods', 'payment_methods.id', '=', 'sale_transaction_payments.payment_method')
+                ->leftJoin('sales', 'sales.sale_id', '=', 'sale_transactions.sale_id')
+                ->where('sales.active',1)
                 ->where('packing_lists.active',1)
                 ->where('sale_transaction_payments.active',1)
                 ->selectRaw('sale_transaction_payments.*, payment_methods.name as payment_method_name, payment_types.name as payment_type_name')
