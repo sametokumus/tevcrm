@@ -320,5 +320,5 @@ async function initQuote(sale_id){
     }else{
         $('#country_of_destination').addClass('d-none');
     }
-    document.getElementById('note').innerHTML = checkNull(quote.note);
+    // document.getElementById('note').innerHTML = checkNull(quote.note);
 }
