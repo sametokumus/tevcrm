@@ -216,13 +216,13 @@ $extra_js="";
                 <div id="nav-ongoing-accounting" class="d-none menu-item @if( Request::segment(1)== 'ongoing-accounting' ) active @endif">
                     <a href="/ongoing-accounting" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
-                        <span class="menu-text">Ödeme Bekleyenler</span>
+                        <span class="menu-text">Bekleyen Ödemeler</span>
                     </a>
                 </div>
                 <div id="nav-completed-accounting" class="d-none menu-item @if( Request::segment(1)== 'completed-accounting' ) active @endif">
                     <a href="/completed-accounting" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-gem"></i></span>
-                        <span class="menu-text">Ödeme Yapılanlar</span>
+                        <span class="menu-text">Tahsil Edilen Ödemeler</span>
                     </a>
                 </div>
 
