@@ -22,6 +22,7 @@
         // await initContact(1, sale_id);
         await initSale(sale_id);
         await initDetail(sale_id);
+        await initQuote(sale_id);
         await initBankInfoSelect();
         // await getOwnersAddSelectId('owners');
         // document.getElementById('owners').value = 1;
@@ -213,7 +214,7 @@ async function initDetail(sale_id){
     let detail = data.proforma_invoice_detail;
 
     if (detail != null) {
-        document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
+        // document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
         document.getElementById('note').innerHTML = checkNull(detail.note);
     }
 }
@@ -293,4 +294,31 @@ async function changeBankInfo(){
     }
 
     $("#addBankInfoModal").modal('hide');
+}
+
+
+async function initQuote(sale_id){
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
+
+    if (checkNull(quote.payment_term) != '') {
+        document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
+        document.getElementById('update_quote_payment_term').value = quote.payment_term;
+    }
+    if (checkNull(quote.lead_time) != '') {
+        document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
+    }else{
+        $('#lead_time').addClass('d-none');
+    }
+    if (checkNull(quote.delivery_term) != '') {
+        document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
+    }else{
+        $('#delivery_term').addClass('d-none');
+    }
+    if (checkNull(quote.country_of_destination) != '') {
+        document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
+    }else{
+        $('#country_of_destination').addClass('d-none');
+    }
+    document.getElementById('note').innerHTML = checkNull(quote.note);
 }

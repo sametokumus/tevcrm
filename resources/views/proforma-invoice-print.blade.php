@@ -64,7 +64,10 @@ $extra_js='
                                                         <span id="buyer_address"></span><br>
                                                         <span id="buyer_phone"></span><br>
                                                         <span id="buyer_email" class="d-block"></span><br>
-                                                        <span id="payment_term"></span><br>
+                                                        <span id="payment_term" class="d-block"></span>
+                                                        <span id="lead_time" class="d-block"></span>
+                                                        <span id="delivery_term" class="d-block"></span>
+                                                        <span id="country_of_destination" class="d-block"></span>
                                                     </address>
                                                 </div>
                                             </div>
