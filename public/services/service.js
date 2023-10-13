@@ -2394,6 +2394,16 @@ async function servicePostUpdateAccountingPaymentStatus(formData) {
     }
 }
 
+async function servicePostUpdateAccountingWaybill(formData) {
+    const data = await fetchDataPost('/admin/accounting/updateAccountingWaybill', formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 
 
 /* DASHBOARD SERVICES */

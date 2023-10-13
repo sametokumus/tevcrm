@@ -469,4 +469,24 @@ class AccountingController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function updateAccountingWaybill(Request $request)
+    {
+        try {
+            $request->validate([
+//                'sale_id' => 'required',
+            ]);
+
+            PackingList::query()->where('packing_list_id', $request->packing_list_id)->update([
+                'waybill' => $request->status_id
+            ]);
+
+            return response(['message' => __('İrsaliye işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
 }
