@@ -46,10 +46,29 @@ function printOffer(){
     window.print();
 }
 
+async function generatePDF(){
+    let lang = document.getElementById('lang').value;
+    let owner_id = document.getElementById('owners').value;
+    let sale_id = getPathVariable('order-confirmation-print');
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('order-confirmation-print');
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
 }
 
 async function initContact(contact_id, sale_id){
