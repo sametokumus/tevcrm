@@ -1647,7 +1647,7 @@ class PdfController extends Controller
 
             //SIGNATURES
 
-            $y += 10;
+            $y += 20;
             $x = 10;
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
@@ -1663,7 +1663,14 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
 
-            $y += 10;
+            $y += 3;
+            $x = 10;
+            $pdf->SetDrawColor(0, 0, 0);
+            $pdf->drawLine($x, $y, $x+70, $y);
+            $x = 130;
+            $pdf->drawLine($x, $y, $x+70, $y);
+
+            $y += 3;
             $x = 10;
             $text1 = __('Name Surname')." / ".__('Signature');
             $text2 = __('Name Surname')." / ".__('Signature')." / ".__('Date');
