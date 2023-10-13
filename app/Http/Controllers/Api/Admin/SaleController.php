@@ -936,6 +936,12 @@ class SaleController extends Controller
                 $quote['quatotion_pdf'] = $quatotion_pdf->file_url;
             }
 
+            $quote['oc_pdf'] = '';
+            $oc_pdf = Document::query()->where('sale_id', $sale_id)->where('document_type_id', 2)->where('active', 1)->first();
+            if ($oc_pdf){
+                $quote['oc_pdf'] = $oc_pdf->file_url;
+            }
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['quote' => $quote]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);

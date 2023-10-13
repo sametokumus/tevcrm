@@ -302,11 +302,11 @@ async function initQuote(sale_id){
     document.getElementById('update_quote_expiry_date').value = formatDateASC(quote.expiry_date, "-");
     $('#update_quote_note').summernote('code', checkNull(quote.note));
 
-    if (quote.quatotion_pdf == ''){
+    if (quote.oc_pdf == ''){
         $('#no-pdf').removeClass('d-none');
     }else{
         $('#has-pdf').removeClass('d-none');
-        $('#showPdf').attr('href', quote.quatotion_pdf);
+        $('#showPdf').attr('href', quote.oc_pdf);
     }
 
     // if (checkNull(quote.payment_term) != '') {
