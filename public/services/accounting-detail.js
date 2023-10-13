@@ -139,6 +139,7 @@ async function initPayments(sale_id){
             let payment_price = '';
             let payment_tax_rate = '';
             let payment_tax = '';
+            let payment_total = '';
             let currency = '';
             let status_span = '';
             let waybill = '';
@@ -153,6 +154,8 @@ async function initPayments(sale_id){
                 payment_price = changeCommasToDecimal(payment.payment_price);
                 payment_tax_rate = payment.payment_tax_rate;
                 payment_tax = changeCommasToDecimal(payment.payment_tax);
+                payment_total = changeCommasToDecimal(payment.payment_total);
+
                 currency = checkNull(payment.currency);
                 if (payment.payment_status_id == 1) {
                     status_span = '<span style="cursor:pointer;" class="badge border border-danger text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\'' + payment.payment_id + '\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Ödeme bekleniyor</span>';
@@ -197,6 +200,7 @@ async function initPayments(sale_id){
                 '              <td>' + payment_price + '</td>\n' +
                 '              <td>' + payment_tax_rate + '</td>\n' +
                 '              <td>' + payment_tax + '</td>\n' +
+                '              <td>' + payment_total + '</td>\n' +
                 '              <td>' + currency + '</td>\n' +
                 '              <td>'+ status_span +'</td>\n' +
                 '              <td>'+ waybill +'</td>\n' +

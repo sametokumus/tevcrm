@@ -166,6 +166,7 @@ $(".timepicker").timepicker({
                             <th class="border-bottom-0">Ödenecek Tutar</th>
                             <th class="border-bottom-0">KDV Oranı</th>
                             <th class="border-bottom-0">KDV Tutarı</th>
+                            <th class="border-bottom-0">Toplam Tutar</th>
                             <th class="border-bottom-0">Para Birimi</th>
                             <th class="border-bottom-0">Durum</th>
                             <th class="border-bottom-0">İrsaliye</th>
