@@ -397,7 +397,7 @@ async function addPaymentTaxWithButton(rate){
         let price_total = parseFloat(price) + parseFloat(price_tax);
         document.getElementById('add_payment_tax_rate').value = rate;
         document.getElementById('add_payment_price_with_tax').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
-        document.getElementById('add_payment_price_total').value = price_total;
+        document.getElementById('add_payment_price_total').value = changeCommasToDecimal(parseFloat(price_total).toFixed(2));
     }else{
         document.getElementById('add_payment_tax_rate').value = rate;
     }
