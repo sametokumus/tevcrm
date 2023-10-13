@@ -1666,9 +1666,9 @@ class PdfController extends Controller
             $y += 3;
             $x = 10;
             $pdf->SetDrawColor(0, 0, 0);
-            $pdf->drawLine($x, $y, $x+70, $y);
+            $pdf->Line($x, $y, $x+70, $y);
             $x = 130;
-            $pdf->drawLine($x, $y, $x+70, $y);
+            $pdf->Line($x, $y, $x+70, $y);
 
             $y += 3;
             $x = 10;
