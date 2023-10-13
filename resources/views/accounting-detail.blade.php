@@ -317,6 +317,12 @@ $(".timepicker").timepicker({
                                 <input type="text" class="form-control" id="add_payment_price_with_tax" readonly>
                             </div>
                         </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Toplam Tutar :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="add_payment_price_total" readonly>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-theme">Kaydet</button>
