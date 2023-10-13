@@ -178,9 +178,9 @@ async function initPayments(sale_id){
             }
 
             if (packing_list.waybill == 0){
-                waybill = '<span style="cursor:pointer;" class="badge border border-warning text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="setWaybill(\'' + sale_id + '\', \'' + payment.payment_id + '\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> İrsaliye Kesilmedi</span>';
+                waybill = '<span style="cursor:pointer;" class="badge border border-warning text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="setWaybill(\'' + sale_id + '\', \'' + packing_list.packing_list_id + '\', 1)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> İrsaliye Kesilmedi</span>';
             }else{
-                waybill = '<span style="cursor:pointer;" class="badge border border-theme text-theme px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="setWaybill(\'' + sale_id + '\', \'' + payment.payment_id + '\', 0)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> İrsaliye Kesildi</span>';
+                waybill = '<span style="cursor:pointer;" class="badge border border-theme text-theme px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="setWaybill(\'' + sale_id + '\', \'' + packing_list.packing_list_id + '\', 0)"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> İrsaliye Kesildi</span>';
             }
 
             let item = '<tr>\n' +
