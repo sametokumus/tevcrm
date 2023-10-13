@@ -168,6 +168,7 @@ $(".timepicker").timepicker({
                             <th class="border-bottom-0">KDV Tutarı</th>
                             <th class="border-bottom-0">Para Birimi</th>
                             <th class="border-bottom-0">Durum</th>
+                            <th class="border-bottom-0">İrsaliye</th>
                             <th class="border-bottom-0"></th>
                         </tr>
                         </thead>

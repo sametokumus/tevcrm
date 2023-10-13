@@ -141,6 +141,7 @@ async function initPayments(sale_id){
             let payment_tax = '';
             let currency = '';
             let status_span = '';
+            let waybill = '';
             let buttons = '';
             if (payment != null) {
                 payment_id = payment.payment_id;
@@ -176,6 +177,7 @@ async function initPayments(sale_id){
                     '       </a>\n';
             }
 
+            // if (payment.wa)
 
             let item = '<tr>\n' +
                 '              <td>' + (i + 1) + '</td>\n' +
@@ -193,6 +195,7 @@ async function initPayments(sale_id){
                 '              <td>' + payment_tax + '</td>\n' +
                 '              <td>' + currency + '</td>\n' +
                 '              <td>'+ status_span +'</td>\n' +
+                '              <td>'+ waybill +'</td>\n' +
                 '              <td>\n' +
                 '                  <div class="btn-list">\n' +
                 '                      '+ buttons +'\n' +
