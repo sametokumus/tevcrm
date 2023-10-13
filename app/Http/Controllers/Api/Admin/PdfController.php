@@ -13,6 +13,7 @@ use App\Models\MobileDocument;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
+use App\Models\OrderConfirmationDetail;
 use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
@@ -1325,7 +1326,7 @@ class PdfController extends Controller
 
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Offer'), '0', '0', '');
+            $pdf->Cell(0, 0, __('Order Confirmation'), '0', '0', '');
 
             //CUSTOMER INFO
 
@@ -1371,20 +1372,6 @@ class PdfController extends Controller
             //QUOTES
 
             $y += 8;
-
-            if ($company->company_request_code != ''){
-                $x = 10;
-                $y += 5;
-
-                $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Request Code').': '), '0', '0', '');
-
-                $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Request Code').': ');
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->company_request_code), '0', '0', '');
-            }
 
             if ($quote->payment_term != null) {
 
@@ -1444,23 +1431,6 @@ class PdfController extends Controller
 
             }
 
-            //Insurance olarak kullanılıyor
-            if ($quote->lead_time != null) {
-
-                $y += 5;
-                $x = 10;
-
-                $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Insurance').': '), '0', '0', '');
-
-                $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Insurance').': ');
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->lead_time), '0', '0', '');
-
-            }
-
             if ($quote->country_of_destination != null) {
 
                 $y += 5;
@@ -1476,25 +1446,6 @@ class PdfController extends Controller
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->country_of_destination), '0', '0', '');
 
             }
-
-            if ($quote->expiry_date != null) {
-
-                $y += 5;
-                $x = 10;
-
-                $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Expiry Date').': '), '0', '0', '');
-
-                $not_formatted_expiry_date = Carbon::parse($quote->expiry_date);
-                $expiry_date = $not_formatted_expiry_date->format('d/m/Y');
-                $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Expiry Date').': ');
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $expiry_date), '0', '0', '');
-
-            }
-
 
 
             $x = 10;
@@ -1670,20 +1621,22 @@ class PdfController extends Controller
 
 
             //NOTE
-            if ($quote->note != null) {
-                $y += 10;
-                $x = 10;
-                $pdf->SetXY($x, $y);
-                $pdf->SetFont('ChakraPetch-Bold', '', 8);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
+            $oc_detail = OrderConfirmationDetail::query()->where('sale_id', $sale_id)->first();
+            if ($oc_detail) {
+                if ($oc_detail->note != null) {
+                    $y += 10;
+                    $x = 10;
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont('ChakraPetch-Bold', '', 8);
+                    $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
 
-                $y += 5;
-                $x = 10;
-                $pdf->SetXY($x, $y);
-                $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = utf8_decode($quote->note);
-                $html = str_replace('<p>', '', $html);
-                $html = str_replace('</p>', "\n", $html);
+                    $y += 5;
+                    $x = 10;
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont('ChakraPetch-Regular', '', 8);
+                    $html = utf8_decode($oc_detail->note);
+                    $html = str_replace('<p>', '', $html);
+                    $html = str_replace('</p>', "\n", $html);
 //                $d = $pdf->GetX();
 //                $f = $pdf->GetY();
 //                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
@@ -1692,7 +1645,8 @@ class PdfController extends Controller
 //                $x = 10;
 //                $pdf->SetXY($x, $y);
 ////                $pdf->MultiCell(2, $html);
-                $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                }
             }
 
 
