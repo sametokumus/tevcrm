@@ -1640,18 +1640,40 @@ class PdfController extends Controller
                     $html = utf8_decode($oc_detail->note);
                     $html = str_replace('<p>', '', $html);
                     $html = str_replace('</p>', "\n", $html);
-//                $d = $pdf->GetX();
-//                $f = $pdf->GetY();
-//                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
-//
-//                $y += 5;
-//                $x = 10;
-//                $pdf->SetXY($x, $y);
-////                $pdf->MultiCell(2, $html);
                     $pdf->MultiCell(0, 5, utf8_decode($html));
                 }
             }
 
+
+            //SIGNATURES
+
+            $y += 10;
+            $x = 10;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 8);
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Authorised Signature')), 0, 0, 'C');
+            $x = 130;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 8);
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Customer Confirmation')), 0, 0, 'C');
+
+            $y += 30;
+            $x = 10;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 8);
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
+
+            $y += 10;
+            $x = 10;
+            $text1 = __('Name Surname')." / ".__('Signature');
+            $text2 = __('Name Surname')." / ".__('Signature')." / ".__('Date');
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 8);
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $text1), 0, 0, 'C');
+            $x = 130;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont('ChakraPetch-Bold', '', 8);
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $text2), 0, 0, 'C');
 
 
             //FOOTER
