@@ -1680,7 +1680,7 @@ class PdfController extends Controller
             list($originalWidth, $originalHeight) = getimagesize($imagePath);
             $aspectRatio = $originalWidth / $originalHeight;
             $width = $height * $aspectRatio;
-//            $this->Image($imagePath, $x, $y, $width, $height);
+            $pdf->Image($imagePath, $x, $y, $width, $height);
             $pdf->Cell(70, 0, $imagePath, 0, 0, 'C');
 
             $y += 3;
