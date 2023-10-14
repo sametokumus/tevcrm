@@ -1712,11 +1712,11 @@ class PdfController extends Controller
                 foreach ($html_array as $item){
                     $y += 5;
                     $pdf->SetXY($x, $y);
-                    $item = utf8_decode($item);
-                    $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $item);
+                    $text = utf8_decode($item);
+                    $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
                     $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-                    $item = iconv('utf-8', 'iso-8859-9', $inputString);
-                    $pdf->Cell(0, 0, $item, 0, 0, '');
+                    $text = iconv('utf-8', 'iso-8859-9', $inputString);
+                    $pdf->Cell(0, 0, $text, 0, 0, '');
                 }
 //                $html = str_replace('</p>', "\n", $html);
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $html);
