@@ -129,11 +129,22 @@ async function getCashFlows(){
             if (payment.currency == 'EUR'){
                 price = parseFloat(price * payment.sale.eur_rate).toFixed(2);
             }
+            let tax = payment.payment_tax;
+            if (tax == null){ tax = 0; }
+            if (payment.currency == 'USD'){
+                tax = parseFloat(tax * payment.sale.usd_rate).toFixed(2);
+            }
+            if (payment.currency == 'EUR'){
+                tax = parseFloat(tax * payment.sale.eur_rate).toFixed(2);
+            }
+            let total = price + tax;
             let data = {
                 "x": date,
                 "y": price,
                 "z": 14,
-                "t": payment.sale.owner.short_code + "-" + payment.sale.id
+                "title": payment.sale.owner.short_code + "-" + payment.sale.id,
+                "tax": tax,
+                "total": total
             };
 
             let date_status = '';
@@ -192,7 +203,9 @@ async function getCashFlows(){
             x: new Date(year, month, day).getTime(),
             y: item.y,
             z: item.z,
-            t: item.t
+            title: item.title,
+            tax: item.tax,
+            total: item.total
         };
     });
     var processedLateArray = lateArray.map(function(item) {
@@ -204,7 +217,9 @@ async function getCashFlows(){
             x: new Date(year, month, day).getTime(),
             y: item.y,
             z: item.z,
-            t: item.t
+            title: item.title,
+            tax: item.tax,
+            total: item.total
         };
     });
 
@@ -298,7 +313,9 @@ async function getCashFlows(){
                 var year = date.getFullYear();
                 var label_x = day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
                 var label_y = options.series[seriesIndex].data[dataPointIndex].y;
-                var label_t = options.series[seriesIndex].data[dataPointIndex].t;
+                var label_title = options.series[seriesIndex].data[dataPointIndex].title;
+                var label_tax = options.series[seriesIndex].data[dataPointIndex].tax;
+                var label_total = options.series[seriesIndex].data[dataPointIndex].total;
                 return (
                     '<div class="tooltip-custom">' +
                         '<div class="tooltip-custom-header">'+
@@ -309,10 +326,16 @@ async function getCashFlows(){
                             label_x +
                             '</p>' +
                             '<p> Sipariş No: ' +
-                            label_t +
+                            label_title +
                             '</p>' +
                             '<p>Tutar: ' +
                             changeCommasToDecimal(label_y) + ' TRY' +
+                            '</p>' +
+                            '<p>KDV: ' +
+                            changeCommasToDecimal(label_tax) + ' TRY' +
+                            '</p>' +
+                            '<p>Toplam Tutar: ' +
+                            changeCommasToDecimal(label_total) + ' TRY' +
                             '</p>' +
                         '</div>'+
                     '</div>'
