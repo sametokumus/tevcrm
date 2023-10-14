@@ -37,7 +37,7 @@ $extra_js='
                         <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-5 other-currencies">
+                        <div class="col-5 other-currencies text-right">
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@ $extra_js='
                         <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-5 other-currencies">
+                        <div class="col-5 other-currencies text-right">
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@ $extra_js='
                         <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-5 other-currencies">
+                        <div class="col-5 other-currencies text-right">
                         </div>
                     </div>
 

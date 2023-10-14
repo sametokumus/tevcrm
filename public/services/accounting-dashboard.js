@@ -70,16 +70,25 @@ async function getAccountingStats(){
     let text1 = changeCommasToDecimal(stats.total.usd_sale) +' <i class="fa fa-dollar-sign fa-fw me-1"></i> <br/>\n' +
         changeCommasToDecimal(stats.total.eur_sale) + ' <i class="fa fa-euro-sign fa-fw me-1"></i> ';
     $('#total-box .other-currencies').append(text1);
+    text1 = 'KDV: ' + changeCommasToDecimal(stats.total.payment_tax) +' TRY <br/>\n' +
+        'Toplam Tutar: ' + changeCommasToDecimal(stats.total.payment_total) + ' TRY';
+    $('#total-text').append(text1);
 
     $('#pending-box h4').append(changeCommasToDecimal(stats.pending.try_sale) + ' TRY');
     let text2 = changeCommasToDecimal(stats.pending.usd_sale) +' <i class="fa fa-dollar-sign fa-fw me-1"></i> <br/>\n' +
         changeCommasToDecimal(stats.pending.eur_sale) + ' <i class="fa fa-euro-sign fa-fw me-1"></i> ';
     $('#pending-box .other-currencies').append(text2);
+    text2 = 'KDV: ' + changeCommasToDecimal(stats.pending.payment_tax) +' TRY <br/>\n' +
+        'Toplam Tutar: ' + changeCommasToDecimal(stats.pending.payment_total) + ' TRY';
+    $('#pending-text').append(text2);
 
     $('#late-box h4').append(changeCommasToDecimal(stats.late.try_sale) + ' TRY');
     let text3 = changeCommasToDecimal(stats.late.usd_sale) +' <i class="fa fa-dollar-sign fa-fw me-1"></i> <br/>\n' +
         changeCommasToDecimal(stats.late.eur_sale) + ' <i class="fa fa-euro-sign fa-fw me-1"></i> ';
     $('#late-box .other-currencies').append(text3);
+    text3 = 'KDV: ' + changeCommasToDecimal(stats.late.payment_tax) +' TRY <br/>\n' +
+        'Toplam Tutar: ' + changeCommasToDecimal(stats.late.payment_total) + ' TRY';
+    $('#pending-text').append(text3);
 
     $('#profit-box h4').append(changeCommasToDecimal(parseFloat(stats.profit_rate).toFixed(2)) + '%');
     // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.usd_sale) +'<br/>\n' +

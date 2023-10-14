@@ -35,24 +35,34 @@ class AccountingDashboardController extends Controller
             $total_try_price = 0;
             $total_usd_price = 0;
             $total_eur_price = 0;
+            $total_payment_tax = 0;
 
             foreach ($total_payments as $item){
                 $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
+                $payment_tax = $item->payment_tax;
+                if ($payment_tax == null){
+                    $payment_tax = 0;
+                }
+
                 if ($item->currency == 'TRY'){
+                    $total_payment_tax += $payment_tax;
                     $total_try_price += $item->payment_price;
                     $total_usd_price += $item->payment_price / $sale->usd_rate;
                     $total_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
+                    $total_payment_tax += $payment_tax * $sale->usd_rate;
                     $total_usd_price += $item->payment_price;
                     $total_try_price += $item->payment_price * $sale->usd_rate;
                     $total_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
+                    $total_payment_tax += $payment_tax * $sale->eur_rate;
                     $total_eur_price += $item->payment_price;
                     $total_try_price += $item->payment_price * $sale->eur_rate;
                     $total_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
                 }
+
 
             }
 
@@ -60,6 +70,8 @@ class AccountingDashboardController extends Controller
             $total['try_sale'] = number_format($total_try_price, 2,".","");
             $total['usd_sale'] = number_format($total_usd_price, 2,".","");
             $total['eur_sale'] = number_format($total_eur_price, 2,".","");
+            $total['payment_tax'] = number_format($total_payment_tax, 2,".","");
+            $total['payment_total'] = number_format($total_try_price + $total_payment_tax, 2,".","");
 
             //Bekleyen Ödemeler
             $pending_payments = SaleTransactionPayment::query()
@@ -75,20 +87,29 @@ class AccountingDashboardController extends Controller
             $pending_try_price = 0;
             $pending_usd_price = 0;
             $pending_eur_price = 0;
+            $pending_payment_tax = 0;
 
             foreach ($pending_payments as $item){
                 $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
+                $payment_tax = $item->payment_tax;
+                if ($payment_tax == null){
+                    $payment_tax = 0;
+                }
+
                 if ($item->currency == 'TRY'){
+                    $pending_payment_tax += $payment_tax;
                     $pending_try_price += $item->payment_price;
                     $pending_usd_price += $item->payment_price / $sale->usd_rate;
                     $pending_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
+                    $pending_payment_tax += $payment_tax * $sale->usd_rate;
                     $pending_usd_price += $item->payment_price;
                     $pending_try_price += $item->payment_price * $sale->usd_rate;
                     $pending_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
+                    $pending_payment_tax += $payment_tax * $sale->eur_rate;
                     $pending_eur_price += $item->payment_price;
                     $pending_try_price += $item->payment_price * $sale->eur_rate;
                     $pending_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
@@ -100,6 +121,8 @@ class AccountingDashboardController extends Controller
             $pending['try_sale'] = number_format($pending_try_price, 2,".","");
             $pending['usd_sale'] = number_format($pending_usd_price, 2,".","");
             $pending['eur_sale'] = number_format($pending_eur_price, 2,".","");
+            $pending['payment_tax'] = number_format($pending_payment_tax, 2,".","");
+            $pending['payment_total'] = number_format($pending_try_price + $pending_payment_tax, 2,".","");
 
             //Geciken Ödemeler
             $late_payments = SaleTransactionPayment::query()
@@ -116,20 +139,29 @@ class AccountingDashboardController extends Controller
             $late_try_price = 0;
             $late_usd_price = 0;
             $late_eur_price = 0;
+            $late_payment_tax = 0;
 
             foreach ($late_payments as $item){
                 $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
                 $sale = Sale::query()->where('sale_id', $transaction->sale_id)->first();
 
+                $payment_tax = $item->payment_tax;
+                if ($payment_tax == null){
+                    $payment_tax = 0;
+                }
+
                 if ($item->currency == 'TRY'){
+                    $late_payment_tax += $payment_tax;
                     $late_try_price += $item->payment_price;
                     $late_usd_price += $item->payment_price / $sale->usd_rate;
                     $late_eur_price += $item->payment_price / $sale->eur_rate;
                 }else if ($item->currency == 'USD'){
+                    $late_payment_tax += $payment_tax * $sale->usd_rate;
                     $late_usd_price += $item->payment_price;
                     $late_try_price += $item->payment_price * $sale->usd_rate;
                     $late_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
+                    $late_payment_tax += $payment_tax * $sale->eur_rate;
                     $late_eur_price += $item->payment_price;
                     $late_try_price += $item->payment_price * $sale->eur_rate;
                     $late_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
@@ -141,6 +173,8 @@ class AccountingDashboardController extends Controller
             $late['try_sale'] = number_format($late_try_price, 2,".","");
             $late['usd_sale'] = number_format($late_usd_price, 2,".","");
             $late['eur_sale'] = number_format($late_eur_price, 2,".","");
+            $late['payment_tax'] = number_format($late_payment_tax, 2,".","");
+            $late['payment_total'] = number_format($late_try_price + $late_payment_tax, 2,".","");
 
 
             //Karlılık
