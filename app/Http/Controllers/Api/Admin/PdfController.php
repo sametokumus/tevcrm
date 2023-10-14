@@ -1710,7 +1710,10 @@ class PdfController extends Controller
                 $html = utf8_decode($bank->detail);
                 $html = str_replace('<p>', '', $html);
                 $html = str_replace('</p>', "\n", $html);
-                $pdf->MultiCell(0, 5, utf8_decode(iconv('utf-8', 'iso-8859-9', $html)));
+                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $html);
+                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+                $html = iconv('utf-8', 'iso-8859-9', $inputString);
+                $pdf->MultiCell(0, 5, $html);
 
             }
 
