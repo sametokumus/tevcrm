@@ -34,10 +34,10 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="total-box">
-                        <div class="col-9">
+                        <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-3 other-currencies">
+                        <div class="col-5 other-currencies">
                         </div>
                     </div>
 
@@ -75,12 +75,10 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="pending-box">
-                        <div class="col-9">
+                        <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="line" data-title="Visitors"
-                                 data-height="30"></div>
+                        <div class="col-5 other-currencies">
                         </div>
                     </div>
 
@@ -118,12 +116,10 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="late-box">
-                        <div class="col-9">
+                        <div class="col-7">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="pie" data-title="Visitors"
-                                 data-height="45"></div>
+                        <div class="col-5 other-currencies">
                         </div>
                     </div>
 
