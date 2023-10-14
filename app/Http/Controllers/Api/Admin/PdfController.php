@@ -1663,6 +1663,21 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
 
+            //Signature
+//            $pageWidth = $pdf->GetPageWidth();
+//            $x = $pageWidth - $contact->logo_width - 20;
+//            $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
+//
+//            list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
+//            $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
+
+
+            $y += 3;
+            $x = 10;
+            $imageHeight = 30;
+
+            $pdf->addImageWithHeight(public_path($contact->signature), $x, $y, $imageHeight);
+
             $y += 3;
             $x = 10;
             $pdf->SetDrawColor(0, 0, 0);
@@ -1724,6 +1739,18 @@ class PdfController extends Controller
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
+    }
+
+
+
+
+    public function addImageWithHeight($imagePath, $x, $y, $height)
+    {
+        list($originalWidth, $originalHeight) = getimagesize($imagePath);
+        $aspectRatio = $originalWidth / $originalHeight;
+        $width = $height * $aspectRatio;
+
+        $this->Image($imagePath, $x, $y, $width, $height);
     }
 
 
