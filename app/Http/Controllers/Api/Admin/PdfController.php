@@ -1711,14 +1711,11 @@ class PdfController extends Controller
                 foreach ($html_array as $item) {
                     $y += 5;
                     $pdf->SetXY($x, $y);
-
-                    // Remove Turkish characters
-                    $cleanInput = preg_replace('/[ğĞşŞıİüÜöÖçÇ]/u', '', $item);
-
-                    // Convert to ISO-8859-9 (Latin-5) encoding
-                    $inputString = mb_convert_encoding($cleanInput, 'ISO-8859-9', 'UTF-8');
-
-                    $pdf->Cell(0, 0, $inputString, 0, 0, '');
+                    // Exclude Turkish characters (Ğğ, Şş, İı, Üü, Öö, Çç)
+                    $cleanInput = preg_replace('/[^a-zA-Z0-9\s!@#$%^&*(),.?":{}|<>]/u', ' ', $item);
+                    $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+                    $item = iconv('utf-8', 'iso-8859-9', $inputString);
+                    $pdf->Cell(0, 0, $item, 0, 0, '');
                 }
 
             }
