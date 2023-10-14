@@ -92,6 +92,9 @@ $extra_js='
                                     <div class="col-sm-12">
                                         <textarea name="text" class="summernote" id="add_order_confirmation_note" title="Contents"></textarea>
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-outline-theme d-block w-100">Kaydet</button>
+                                    </div>
                                 </div>
                             </form>
 

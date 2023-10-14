@@ -1063,10 +1063,17 @@ class SaleController extends Controller
                 'sale_id' => 'required',
                 'note' => 'required',
             ]);
-            OrderConfirmationDetail::query()->insert([
-                'sale_id' => $request->sale_id,
-                'note' => $request->note
-            ]);
+            $has_detail = OrderConfirmationDetail::query()->where('sale_id', $request->sale_id)->where('active', 1)->first();
+            if ($has_detail) {
+                OrderConfirmationDetail::query()->where('sale_id', $request->sale_id)->update([
+                    'note' => $request->note
+                ]);
+            }else{
+                OrderConfirmationDetail::query()->insert([
+                    'sale_id' => $request->sale_id,
+                    'note' => $request->note
+                ]);
+            }
 
             return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {

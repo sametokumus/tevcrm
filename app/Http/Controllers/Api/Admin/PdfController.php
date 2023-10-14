@@ -14,6 +14,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
+use App\Models\OwnerBankInfo;
 use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
@@ -1135,7 +1136,7 @@ class PdfController extends Controller
         }
     }
 
-    public function getGenerateOrderConfirmationPDF($lang, $owner_id, $sale_id)
+    public function getGenerateOrderConfirmationPDF($lang, $owner_id, $sale_id, $bank_id)
     {
         try {
             App::setLocale($lang);
@@ -1692,6 +1693,28 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $text2), 0, 0, 'C');
 
+            //BANK INFO
+            if ($bank_id != 0){
+
+                $bank = OwnerBankInfo::query()->where('id', $bank_id)->first();
+                $y += 10;
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 8);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Bank Details')), 0, 0, '');
+
+                $y += 5;
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 8);
+                $html = utf8_decode($bank->detail);
+                $html = str_replace('<p>', '', $html);
+                $html = str_replace('</p>', "\n", $html);
+                $pdf->MultiCell(0, 5, utf8_decode($html));
+
+            }
+
+
 
             //FOOTER
 
@@ -1737,16 +1760,6 @@ class PdfController extends Controller
     }
 
 
-
-
-    public function addImageWithHeight($imagePath, $x, $y, $height)
-    {
-        list($originalWidth, $originalHeight) = getimagesize($imagePath);
-        $aspectRatio = $originalWidth / $originalHeight;
-        $width = $height * $aspectRatio;
-
-        $this->Image($imagePath, $x, $y, $width, $height);
-    }
 
 
 }

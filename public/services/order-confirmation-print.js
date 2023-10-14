@@ -17,11 +17,6 @@
             addNote();
         });
 
-        $('#update_note_form').submit(function (e){
-            e.preventDefault();
-            updateNote();
-        });
-
     });
 
     $(window).load(async function() {
@@ -30,9 +25,10 @@
 
         let sale_id = getPathVariable('order-confirmation-print');
         // await initContact(1, sale_id);
-        await initSale(sale_id);
-        await initQuote(sale_id);
-        await initBankInfoSelect();
+        // await initSale(sale_id);
+        initQuote(sale_id);
+        initBankInfoSelect();
+        initOrderConfirmationNote(sale_id);
     });
 
 })(window.jQuery);
@@ -49,10 +45,11 @@ function printOffer(){
 async function generatePDF(){
     let lang = document.getElementById('lang').value;
     let owner_id = document.getElementById('owners').value;
+    let bank_id = document.getElementById('select_bank_info').value;
     let sale_id = getPathVariable('order-confirmation-print');
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id);
+    const pdfData = await serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, bank_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
@@ -231,8 +228,11 @@ async function initSale(sale_id){
 
 }
 
-async function openAddNoteModal(){
-    $("#addNoteModal").modal('show');
+
+async function initOrderConfirmationNote(sale_id){
+    let data = await serviceGetOrderConfirmationDetailById(sale_id);
+    let order_confirmation_detail = data.order_confirmation_detail;
+    $('#add_order_confirmation_note').summernote('code', order_confirmation_detail.note);
 }
 async function addNote(){
     let sale_id = getPathVariable('order-confirmation-print');
@@ -243,38 +243,11 @@ async function addNote(){
     });
     console.log(formData)
     let returned = await servicePostAddOrderConfirmationDetail(formData);
-    if (returned){
-        $("#add_note_form").trigger("reset");
-        $("#addNoteModal").modal('hide');
-        initSale(sale_id);
-    }
-}
-
-async function openUpdateNoteModal(){
-    $("#updateNoteModal").modal('show');
-    await initUpdateNoteModal();
-}
-async function initUpdateNoteModal(){
-    $("#updateNoteModal").modal('show');
-    let sale_id = getPathVariable('order-confirmation-print');
-    let data = await serviceGetOrderConfirmationDetailById(sale_id);
-    let order_confirmation_detail = data.order_confirmation_detail;
-    $('#update_order_confirmation_note').summernote('code', order_confirmation_detail.note);
-}
-async function updateNote(){
-    let sale_id = getPathVariable('order-confirmation-print');
-    let note = $('#update_purchasing_order_note').summernote('code');
-    let formData = JSON.stringify({
-        "sale_id": sale_id,
-        "note": note
-    });
-    let returned = await servicePostUpdateOrderConfirmationDetail(formData);
-    if (returned){
-        $("#update_note_form").trigger("reset");
-        $('#note *').remove();
-        $("#updateNoteModal").modal('hide');
-        initSale(sale_id);
-    }
+    // if (returned){
+    //     $("#add_note_form").trigger("reset");
+    //     $("#addNoteModal").modal('hide');
+    //     initSale(sale_id);
+    // }
 }
 
 async function initBankInfoSelect(){
@@ -287,25 +260,6 @@ async function initBankInfoSelect(){
     });
 
 }
-async function openAddBankInfoModal(){
-    $("#addBankInfoModal").modal('show');
-}
-async function changeBankInfo(){
-    $('#bank-details *').remove();
-
-    let bank_id = document.getElementById('select_bank_info').value;
-    if(bank_id == 0){
-        return false;
-    }else{
-        let data = await serviceGetBankInfoById(bank_id);
-        console.log(data)
-        let info = data.bank_info;
-        $('#bank-details').append(info.detail);
-    }
-
-    $("#addBankInfoModal").modal('hide');
-}
-
 
 async function initQuote(sale_id){
     let data = await serviceGetQuoteBySaleId(sale_id);
@@ -349,26 +303,6 @@ async function initQuote(sale_id){
     // }
     // document.getElementById('note').innerHTML = checkNull(quote.note);
 }
-
-async function openUpdateQuoteModal(){
-    $("#updateQuoteModal").modal('show');
-    await initUpdateQuoteModal();
-}
-
-async function initUpdateQuoteModal(){
-    let sale_id = getPathVariable('order-confirmation-print');
-    let data = await serviceGetQuoteBySaleId(sale_id);
-    let quote = data.quote;
-
-    document.getElementById('update_quote_id').value = quote.id;
-    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
-    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
-    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
-    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
-    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
-    $('#update_quote_note').summernote('code', checkNull(quote.note));
-}
-
 async function updateQuote(){
     let sale_id = getPathVariable('order-confirmation-print');
     let quote_id = document.getElementById('update_quote_id').value;
