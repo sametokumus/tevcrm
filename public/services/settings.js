@@ -187,7 +187,7 @@ async function updateBankInfo(){
     if (returned){
         $("#update_bank_info_form").trigger("reset");
         $("#updateBankInfoModal").modal('hide');
-        initBankInfos();
+        await initBankInfos();
     }
 }
 async function deleteBankInfo(bank_info_id){
