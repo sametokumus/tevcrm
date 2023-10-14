@@ -137,7 +137,7 @@ async function getCashFlows(){
             if (payment.currency == 'EUR'){
                 tax = parseFloat(tax * payment.sale.eur_rate).toFixed(2);
             }
-            let total = price + tax;
+            let total = parseFloat(price) + parseFloat(tax);
             let data = {
                 "x": date,
                 "y": price,
