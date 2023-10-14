@@ -1658,7 +1658,7 @@ class PdfController extends Controller
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Customer Confirmation')), 0, 0, 'C');
 
             //Signature
-            $height = 15;
+            $height = 25;
             $imagePath = public_path($contact->signature);
             list($originalWidth, $originalHeight) = getimagesize($imagePath);
             $aspectRatio = $originalWidth / $originalHeight;
