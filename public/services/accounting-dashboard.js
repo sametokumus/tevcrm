@@ -88,7 +88,7 @@ async function getAccountingStats(){
     $('#late-box .other-currencies').append(text3);
     text3 = 'KDV: ' + changeCommasToDecimal(stats.late.payment_tax) +' TRY <br/>\n' +
         'Toplam Tutar: ' + changeCommasToDecimal(stats.late.payment_total) + ' TRY';
-    $('#pending-text').append(text3);
+    $('#late-text').append(text3);
 
     $('#profit-box h4').append(changeCommasToDecimal(parseFloat(stats.profit_rate).toFixed(2)) + '%');
     // let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.cancelled.usd_sale) +'<br/>\n' +
