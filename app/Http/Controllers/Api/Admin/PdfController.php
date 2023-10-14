@@ -1710,10 +1710,6 @@ class PdfController extends Controller
                 foreach ($html_array as $item) {
                     $y += 5;
                     $pdf->SetXY($x, $y);
-
-                    // No need to remove Turkish characters
-
-                    // Convert to ISO-8859-9 (Latin-5) encoding
                     $inputString = mb_convert_encoding($item, 'ISO-8859-9', 'UTF-8');
 
                     $pdf->Cell(0, 0, $inputString, 0, 0, '');
