@@ -1707,16 +1707,16 @@ class PdfController extends Controller
                 $x = 10;
 //                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
+//                $html = utf8_decode($bank->detail);
                 $html = str_replace('<p>', '', $html);
                 $html_array = explode('</p>', $html);
                 foreach ($html_array as $item){
                     $y += 5;
                     $pdf->SetXY($x, $y);
-                    $text = utf8_decode($item);
-                    $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
+                    $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $item);
                     $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-                    $text = iconv('utf-8', 'iso-8859-9', $inputString);
-                    $pdf->Cell(0, 0, $text, 0, 0, '');
+                    $item = iconv('utf-8', 'iso-8859-9', $inputString);
+                    $pdf->Cell(0, 0, $item, 0, 0, '');
                 }
 //                $html = str_replace('</p>', "\n", $html);
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $html);
