@@ -1664,24 +1664,14 @@ class PdfController extends Controller
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
 
             //Signature
-//            $pageWidth = $pdf->GetPageWidth();
-//            $x = $pageWidth - $contact->logo_width - 20;
-//            $pdf->Image(public_path($contact->logo), $x, 15, $contact->logo_width);  // Parameters: image file, x position, y position, width
-//
-//            list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
-//            $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
-
-
-            $y += 3;
-            $x = 10;
-            $height = 30;
-
+            $height = 10;
             $imagePath = public_path($contact->signature);
             list($originalWidth, $originalHeight) = getimagesize($imagePath);
             $aspectRatio = $originalWidth / $originalHeight;
             $width = $height * $aspectRatio;
+            $y += 3;
+            $x = 10 + ((70-$width)/2);
             $pdf->Image($imagePath, $x, $y, $width, $height);
-            $pdf->Cell(70, 0, $imagePath, 0, 0, 'C');
 
             $y += 3;
             $x = 10;
