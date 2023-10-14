@@ -68,7 +68,7 @@ async function getAccountingStats(){
     $('#total-box h4').append(changeCommasToDecimal(stats.total.try_sale) + ' TRY');
     let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.total.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.total.eur_sale);
-    $('#total-text').append(text1);
+    $('#total-box .other-currencies').append(text1);
 
     $('#pending-box h4').append(changeCommasToDecimal(stats.pending.try_sale) + ' TRY');
     let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(stats.pending.usd_sale) +'<br/>\n' +

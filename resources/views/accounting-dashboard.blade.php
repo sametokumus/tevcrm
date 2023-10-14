@@ -29,8 +29,7 @@ $extra_js='
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM ÖDENEN</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                        <a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -38,8 +37,7 @@ $extra_js='
                         <div class="col-9">
                             <h4 class="mb-0"></h4>
                         </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="bar" data-title="Visitors" data-height="30"></div>
+                        <div class="col-3 other-currencies">
                         </div>
                     </div>
 
