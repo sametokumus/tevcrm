@@ -1674,9 +1674,13 @@ class PdfController extends Controller
 
             $y += 3;
             $x = 10;
-            $imageHeight = 30;
+            $height = 30;
 
-            $this->addImageWithHeight(public_path($contact->signature), $x, $y, $imageHeight);
+            $imagePath = public_path($contact->signature);
+            list($originalWidth, $originalHeight) = getimagesize($imagePath);
+            $aspectRatio = $originalWidth / $originalHeight;
+            $width = $height * $aspectRatio;
+            $this->Image($imagePath, $x, $y, $width, $height);
 
             $y += 3;
             $x = 10;
