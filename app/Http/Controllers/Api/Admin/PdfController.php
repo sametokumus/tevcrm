@@ -1703,26 +1703,20 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Bank Details')), 0, 0, '');
 
-//                $y += 5;
                 $x = 10;
-//                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 $html = utf8_decode($bank->detail);
                 $html = str_replace('<p>', '', $html);
                 $html_array = explode('</p>', $html);
-                foreach ($html_array as $item){
+                foreach ($html_array as $item) {
                     $y += 5;
                     $pdf->SetXY($x, $y);
-                    $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $item);
+                    // Exclude Turkish characters (Ğğ, Şş, İı, Üü, Öö, Çç)
+                    $cleanInput = preg_replace('/[^a-zA-Z0-9\s!@#$%^&*(),.?":{}|<>]/u', ' ', $item);
                     $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
                     $item = iconv('utf-8', 'iso-8859-9', $inputString);
                     $pdf->Cell(0, 0, $item, 0, 0, '');
                 }
-//                $html = str_replace('</p>', "\n", $html);
-//                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $html);
-//                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-//                $html = iconv('utf-8', 'iso-8859-9', $inputString);
-//                $pdf->MultiCell(0, 5, $html);
 
             }
 
