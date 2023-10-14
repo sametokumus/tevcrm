@@ -51,6 +51,38 @@ $extra_js='
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3">
 
+
+                            <form method="post" action="#" id="bank_info_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Teklif Detayları
+                                    </h5>
+                                    <div class="col-sm-12 mb-3">
+                                        <select name="select_bank_info" class="form-control form-select" id="select_bank_info" required>
+                                            <option value="0">Bilgi Yok</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center mb-3 no-print">
+
+                <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
                             <form method="post" action="#" id="update_quote_form">
                                 <div class="row mb-4">
                                     <h5 class="px-2">
