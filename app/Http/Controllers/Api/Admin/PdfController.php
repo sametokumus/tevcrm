@@ -1657,21 +1657,21 @@ class PdfController extends Controller
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Customer Confirmation')), 0, 0, 'C');
 
+            //Signature
+            $height = 15;
+            $imagePath = public_path($contact->signature);
+            list($originalWidth, $originalHeight) = getimagesize($imagePath);
+            $aspectRatio = $originalWidth / $originalHeight;
+            $width = $height * $aspectRatio;
+            $y += 1;
+            $x = 10 + ((70-$width)/2);
+            $pdf->Image($imagePath, $x, $y, $width, $height);
+
             $y += 20;
             $x = 10;
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
-
-            //Signature
-            $height = 10;
-            $imagePath = public_path($contact->signature);
-            list($originalWidth, $originalHeight) = getimagesize($imagePath);
-            $aspectRatio = $originalWidth / $originalHeight;
-            $width = $height * $aspectRatio;
-            $y += 3;
-            $x = 10 + ((70-$width)/2);
-            $pdf->Image($imagePath, $x, $y, $width, $height);
 
             $y += 3;
             $x = 10;
