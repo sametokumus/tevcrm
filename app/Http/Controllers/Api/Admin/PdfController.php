@@ -1707,7 +1707,7 @@ class PdfController extends Controller
                 $x = 10;
 //                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-//                $html = utf8_decode($bank->detail);
+                $html = utf8_decode($bank->detail);
                 $html = str_replace('<p>', '', $html);
                 $html_array = explode('</p>', $html);
                 foreach ($html_array as $item){
