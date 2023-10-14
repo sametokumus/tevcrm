@@ -64,6 +64,7 @@ async function getAccountingStats(){
 
     let data = await serviceGetAccountingStats();
     let stats = data.stats;
+    console.log(stats)
 
     $('#total-box h4').append(changeCommasToDecimal(stats.total.try_sale) + ' TRY');
     let text1 = changeCommasToDecimal(stats.total.usd_sale) +' <i class="fa fa-dollar-sign fa-fw me-1"></i> <br/>\n' +
