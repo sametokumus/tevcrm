@@ -2538,8 +2538,8 @@ async function serviceGetGenerateQuatotionPDF(lang, owner_id, sale_id) {
     }
 }
 
-async function serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id) {
-    const data = await fetchDataGet('/admin/pdf/getGenerateOrderConfirmationPDF/' + lang + '/' + owner_id + '/' + sale_id, 'application/json');
+async function serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, bank_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateOrderConfirmationPDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + bank_id, 'application/json');
     if (data.status == "success") {
         return data;
     } else {
