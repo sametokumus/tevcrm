@@ -52,7 +52,7 @@ async function generatePDF(){
     let sale_id = getPathVariable('invoice-print');
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id);
+    const pdfData = await serviceGetGenerateInvoicePDF(lang, owner_id, sale_id, bank_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
