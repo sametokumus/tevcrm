@@ -2094,6 +2094,7 @@ class PdfController extends Controller
             $pdf->Cell(16, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 0, 0, 'C');
             $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 0, 0, 'C');
             $pdf->Cell(50, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 0, 0, 'C');
+            $pdf->Ln();
 //            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
 //            $lt_width = $pdf->GetStringWidth(__('Lead Time'));
 //            if ($lt_width > 20){
@@ -2699,6 +2700,7 @@ class PdfController extends Controller
             $pdf->Cell(16, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 0, 0, 'C');
             $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit Price')), 0, 0, 'C');
             $pdf->Cell(50, 12, iconv('utf-8', 'iso-8859-9', __('Total Price')), 0, 0, 'C');
+            $pdf->Ln();
 //            $pdf->Cell(20, 10, iconv('utf-8', 'iso-8859-9', __('Lead Time')), 0, 0, 'C');
 //            $lt_width = $pdf->GetStringWidth(__('Lead Time'));
 //            if ($lt_width > 20){
