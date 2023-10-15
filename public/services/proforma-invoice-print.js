@@ -246,7 +246,6 @@ async function initDetail(sale_id){
 
 async function updateDetail(){
     let sale_id = getPathVariable('proforma-invoice-print');
-    let payment_term = document.getElementById('update_sale_payment_term').value;
     let note = $('#update_sale_note').summernote('code');
     let shipping_price = document.getElementById('update_sale_shipping_price').value;
 
