@@ -1786,7 +1786,7 @@ class PdfController extends Controller
                 $document_date = $createdAt->format('d/m/Y');
                 $document_id = Document::query()->insertGetId([
                     'sale_id' => $sale_id,
-                    'document_type_id' => 2,
+                    'document_type_id' => 4,
                     'created_at' => $createdAt->format('Y-m-d H:i:s')
                 ]);
             }
@@ -1863,9 +1863,9 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $document_date), '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Bold', '', 11);
-            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-OC-'.$sale->id) - 10;
+            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-PI-'.$sale->id) - 10;
             $pdf->SetXY($x, $actual_height + 32);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-OC-'.$sale->id), '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-PI-'.$sale->id), '0', '0', '');
 
 
 
@@ -1953,7 +1953,7 @@ class PdfController extends Controller
 
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
             $pdf->SetXY($x, $y);
-            $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', __('Order Confirmation'));
+            $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', __('Proforma Invoice'));
             $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
             $title = iconv('utf-8', 'iso-8859-9', $inputString);
             $pdf->Cell(0, 0, $title, '0', '0', '');
@@ -2363,11 +2363,11 @@ class PdfController extends Controller
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
             }
 
-            $filePath = public_path('img/document/' . $contact->short_code . '-OC-' . $sale->id . '.pdf');
+            $filePath = public_path('img/document/' . $contact->short_code . '-PI-' . $sale->id . '.pdf');
             $pdf->Output($filePath, 'F');
 
-            $fileUrl = 'img/document/' . $contact->short_code . '-OC-' . $sale->id . '.pdf';
-            $fileName = $contact->short_code . '-OC-' . $sale->id . '.pdf';
+            $fileUrl = 'img/document/' . $contact->short_code . '-PI-' . $sale->id . '.pdf';
+            $fileName = $contact->short_code . '-PI-' . $sale->id . '.pdf';
 
             Document::query()->where('id', $document_id)->update([
                 'file_url' => $fileUrl
