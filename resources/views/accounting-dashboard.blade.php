@@ -23,7 +23,7 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center m-5px">
 
@@ -66,7 +66,7 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center m-5px">
 
@@ -110,7 +110,7 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center m-5px">
 
@@ -154,7 +154,7 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card">
+            <div class="card h-100">
 
                 <div class="card-body d-flex align-items-center m-5px">
 
