@@ -14,6 +14,19 @@ $extra_js='
 
             <div class="row justify-content-center mb-3 no-print">
                 <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="row mb-3 d-none" id="no-pdf">
+                        <div class="col-12">
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
+                        </div>
+                    </div>
+                    <div class="row mb-3 d-none" id="has-pdf">
+                        <div class="col-6">
+                            <a id="showPdf" target="_blank" href="" class="btn btn-theme btn-block w-100 no-print">Mevcut PDF'i Görüntüle</a>
+                        </div>
+                        <div class="col-6">
+                            <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">Yeni PDF Oluştur</button>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label">Dil</label>
@@ -30,6 +43,138 @@ $extra_js='
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row justify-content-center mb-3 no-print">
+
+                <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
+
+                            <form method="post" action="#" id="bank_info_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Banka Bilgisi
+                                    </h5>
+                                    <div class="col-sm-12">
+                                        <select name="select_bank_info" class="form-control form-select" id="select_bank_info" required>
+                                            <option value="0">Bilgi Yok</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center mb-3 no-print">
+
+                <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
+
+                            <form method="post" action="#" id="update_detail_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Proforma Fatura Detayları
+                                    </h5>
+                                    <div class="col-sm-12">
+                                        <label class="form-label">Shipping Price</label>
+                                        <input type="text" class="form-control" id="update_sale_shipping_price">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label class="form-label">Proforma Fatura Notu</label>
+                                        <textarea name="text" class="summernote" id="update_sale_note" title="Contents"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-outline-theme d-block w-100">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center mb-3 no-print">
+
+                <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
+                            <form method="post" action="#" id="update_quote_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Teklif Detayları
+                                    </h5>
+                                    <input type="hidden" class="form-control" id="update_quote_id">
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Teklif Geçerlilik Tarihi</label>
+                                        <input type="text" class="form-control datepicker" id="update_quote_expiry_date" placeholder="dd-mm-yyyy" />
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Payment Term</label>
+                                        <select class="form-control" id="update_quote_payment_term">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Delivery Terms</label>
+                                        <select class="form-control" id="update_quote_delivery_term">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Insurance</label>
+                                        <input type="text" class="form-control" id="update_quote_lead_time">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Country of Destination</label>
+                                        <input type="text" class="form-control" id="update_quote_country_of_destination">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label">Freight Price</label>
+                                        <input type="text" class="form-control" id="update_quote_freight">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Note</label>
+                                        <textarea name="text" class="summernote" id="update_quote_note" title="Contents"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-outline-theme d-block w-100">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="row justify-content-center">
@@ -165,64 +310,5 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
-
-<div class="modal modal-cover fade" id="updateDetailModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">BİLGİ GÜNCELLEME</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_detail_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Payment Terms</label>
-                            <input type="text" class="form-control" id="update_sale_payment_term">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Note</label>
-                            <textarea name="text" class="summernote" id="update_sale_note" title="Contents"></textarea>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Shipping Price</label>
-                            <input type="text" class="form-control" id="update_sale_shipping_price">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addBankInfoModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">BANKA BİLGİSİ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_quote_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <select onchange="changeBankInfo();" name="select_bank_info" class="form-control form-select" id="select_bank_info" required>
-                                <option value="0">Bilgi Yok</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 @include('include.footer')

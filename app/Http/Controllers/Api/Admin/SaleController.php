@@ -1127,13 +1127,11 @@ class SaleController extends Controller
             if ($count == 0){
                 ProformaInvoiceDetails::query()->insert([
                     'sale_id' => $request->sale_id,
-                    'note' => $request->note,
-                    'payment_term' => $request->payment_term,
+                    'note' => $request->note
                 ]);
             }else {
                 ProformaInvoiceDetails::query()->where('sale_id', $request->sale_id)->update([
-                    'note' => $request->note,
-                    'payment_term' => $request->payment_term,
+                    'note' => $request->note
                 ]);
             }
 

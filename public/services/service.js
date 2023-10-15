@@ -2546,3 +2546,12 @@ async function serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, b
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateProformaInvoicePDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + bank_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
