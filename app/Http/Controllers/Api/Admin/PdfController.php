@@ -16,6 +16,7 @@ use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
 use App\Models\OwnerBankInfo;
 use App\Models\Product;
+use App\Models\ProformaInvoiceDetails;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleNote;
@@ -2249,11 +2250,37 @@ class PdfController extends Controller
                 }
             }
 
+            if ($sale->shipping_price != null) {
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Shipping'))), 1, 0, 'R');
+
+                $pdf->SetXY($x + 140, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->shipping_price, 2,",",".").' '.$currency), 1, 0, 'C');
+
+                $y += 10;
+            }
+
+            if ($sale->grand_total_with_shipping != null) {
+                if ($sale->shipping_price != null) {
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                    $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
+
+                    $pdf->SetXY($x + 140, $y);
+                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                    $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total_with_shipping, 2,",",".") . ' ' . $currency), 1, 0, 'C');
+
+                    $y += 10;
+                }
+            }
+
 
             //NOTE
-            $oc_detail = OrderConfirmationDetail::query()->where('sale_id', $sale_id)->first();
-            if ($oc_detail) {
-                if ($oc_detail->note != null) {
+            $pi_detail = ProformaInvoiceDetails::query()->where('sale_id', $sale_id)->first();
+            if ($pi_detail) {
+                if ($pi_detail->note != null) {
                     $y += 10;
                     $x = 10;
                     $pdf->SetXY($x, $y);
@@ -2264,60 +2291,13 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($oc_detail->note);
+                    $html = utf8_decode($pi_detail->note);
                     $html = str_replace('<p>', '', $html);
                     $html = str_replace('</p>', "\n", $html);
                     $pdf->MultiCell(0, 5, utf8_decode($html));
                 }
             }
 
-
-            //SIGNATURES
-
-            $y += 20;
-            $x = 10;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Authorised Signature')), 0, 0, 'C');
-            $x = 130;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Customer Confirmation')), 0, 0, 'C');
-
-            //Signature
-            $height = 20;
-            $imagePath = public_path($contact->signature);
-            list($originalWidth, $originalHeight) = getimagesize($imagePath);
-            $aspectRatio = $originalWidth / $originalHeight;
-            $width = $height * $aspectRatio;
-            $y += 1;
-            $x = 10 + ((70-$width)/2);
-            $pdf->Image($imagePath, $x, $y, $width, $height);
-
-            $y += 20;
-            $x = 10;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $contact->authorized_name), 0, 0, 'C');
-
-            $y += 3;
-            $x = 10;
-            $pdf->SetDrawColor(0, 0, 0);
-            $pdf->Line($x, $y, $x+70, $y);
-            $x = 130;
-            $pdf->Line($x, $y, $x+70, $y);
-
-            $y += 3;
-            $x = 10;
-            $text1 = __('Name Surname')." / ".__('Signature');
-            $text2 = __('Name Surname')." / ".__('Signature')." / ".__('Date');
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $text1), 0, 0, 'C');
-            $x = 130;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $text2), 0, 0, 'C');
 
             //BANK INFO
             if ($bank_id != 0){
