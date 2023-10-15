@@ -147,30 +147,32 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center m-5px">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">ORTALAMA KARLILIK</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2" id="profit-box">
-                        <div class="col-9">
-                            <h4 class="mb-0"></h4>
+                    <div class="flex-fill">
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">ORTALAMA KARLILIK</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="donut" data-title="Visitors"
-                                 data-height="45"></div>
+
+
+                        <div class="row align-items-center mb-2" id="profit-box">
+                            <div class="col-9">
+                                <h4 class="mb-0"></h4>
+                            </div>
+                            <div class="col-3">
+                                <div class="mt-n3 mb-n2" data-render="apexchart" data-type="donut" data-title="Visitors"
+                                     data-height="45"></div>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="profit-text">
+                        <div class="text-white text-opacity-80 text-truncate" id="profit-text">
 
-                        <div>&nbsp;</div>
-                        <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                        </div>
                     </div>
 
                 </div>
