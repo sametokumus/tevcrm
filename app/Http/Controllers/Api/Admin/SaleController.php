@@ -942,6 +942,18 @@ class SaleController extends Controller
                 $quote['oc_pdf'] = $oc_pdf->file_url;
             }
 
+            $quote['pi_pdf'] = '';
+            $pi_pdf = Document::query()->where('sale_id', $sale_id)->where('document_type_id', 4)->where('active', 1)->first();
+            if ($pi_pdf){
+                $quote['pi_pdf'] = $pi_pdf->file_url;
+            }
+
+            $quote['inv_pdf'] = '';
+            $inv_pdf = Document::query()->where('sale_id', $sale_id)->where('document_type_id', 3)->where('active', 1)->first();
+            if ($inv_pdf){
+                $quote['inv_pdf'] = $inv_pdf->file_url;
+            }
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['quote' => $quote]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
