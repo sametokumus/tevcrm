@@ -19,7 +19,7 @@ $extra_js='
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
 
         <div class="col-xl-3 col-lg-6">
 
