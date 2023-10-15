@@ -49,7 +49,7 @@ async function generatePDF(){
     let lang = document.getElementById('lang').value;
     let owner_id = document.getElementById('owners').value;
     let bank_id = document.getElementById('select_bank_info').value;
-    let sale_id = getPathVariable('order-confirmation-print');
+    let sale_id = getPathVariable('proforma-invoice-print');
 
     // Fetch the PDF data
     const pdfData = await serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id);
@@ -331,7 +331,7 @@ async function initQuote(sale_id){
     // document.getElementById('note').innerHTML = checkNull(quote.note);
 }
 async function updateQuote(){
-    let sale_id = getPathVariable('order-confirmation-print');
+    let sale_id = getPathVariable('proforma-invoice-print');
     let quote_id = document.getElementById('update_quote_id').value;
     let payment_term = document.getElementById('update_quote_payment_term').value;
     let lead_time = document.getElementById('update_quote_lead_time').value;

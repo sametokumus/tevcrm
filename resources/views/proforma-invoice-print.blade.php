@@ -89,7 +89,7 @@ $extra_js='
                                     <h5 class="px-2">
                                         Proforma Fatura Detayları
                                     </h5>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 mb-3">
                                         <label class="form-label">Shipping Price</label>
                                         <input type="text" class="form-control" id="update_sale_shipping_price">
                                     </div>
