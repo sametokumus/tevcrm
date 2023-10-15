@@ -11,6 +11,11 @@
             updateDetail();
         });
 
+        $('#update_quote_form').submit(function (e){
+            e.preventDefault();
+            updateQuote();
+        });
+
     });
 
     $(window).load(async function() {
@@ -19,10 +24,11 @@
         checkRole();
 
         let sale_id = getPathVariable('invoice-print');
+        await initDetail(sale_id);
+        await initQuote(sale_id);
+        await initBankInfoSelect();
         // await initContact(1, sale_id);
         await initSale(sale_id);
-        await initDetail(sale_id);
-        await initBankInfoSelect();
         // await getOwnersAddSelectId('owners');
         // document.getElementById('owners').value = 1;
     });
@@ -39,10 +45,30 @@ function printOffer(){
     window.print();
 }
 
+async function generatePDF(){
+    let lang = document.getElementById('lang').value;
+    let owner_id = document.getElementById('owners').value;
+    let bank_id = document.getElementById('select_bank_info').value;
+    let sale_id = getPathVariable('invoice-print');
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('invoice-print');
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -213,37 +239,18 @@ async function initDetail(sale_id){
     let detail = data.proforma_invoice_detail;
 
     if (detail != null) {
-        document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
+        // document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
         document.getElementById('note').innerHTML = checkNull(detail.note);
-    }
-}
-
-async function openUpdateDetailModal(){
-    $("#updateDetailModal").modal('show');
-    await initUpdateDetailModal();
-}
-
-async function initUpdateDetailModal(){
-    let sale_id = getPathVariable('invoice-print');
-    let data = await serviceGetProformaInvoiceDetailById(sale_id);
-    let detail = data.proforma_invoice_detail;
-    console.log(detail)
-
-    if (detail != null) {
-        document.getElementById('update_sale_payment_term').value = checkNull(detail.payment_term);
-        $('#update_sale_note').summernote('code', checkNull(detail.note));
     }
 }
 
 async function updateDetail(){
     let sale_id = getPathVariable('invoice-print');
-    let payment_term = document.getElementById('update_sale_payment_term').value;
     let note = $('#update_sale_note').summernote('code');
     let shipping_price = document.getElementById('update_sale_shipping_price').value;
 
     let formData = JSON.stringify({
         "sale_id": sale_id,
-        "payment_term": payment_term,
         "note": note
     });
     let returned1 = await servicePostUpdateProformaInvoiceDetail(formData);
@@ -267,6 +274,7 @@ async function updateDetail(){
 
 
 
+
 async function initBankInfoSelect(){
     let data = await serviceGetBankInfos();
     let bank_infos = data.bank_infos;
@@ -277,20 +285,80 @@ async function initBankInfoSelect(){
     });
 
 }
-async function openAddBankInfoModal(){
-    $("#addBankInfoModal").modal('show');
-}
-async function changeBankInfo(){
-    $('#bank-details *').remove();
 
-    let bank_id = document.getElementById('select_bank_info').value;
-    if(bank_id == 0){
-        return false;
+
+
+async function initQuote(sale_id){
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
+    console.log(quote)
+
+    document.getElementById('update_quote_id').value = quote.id;
+    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
+    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
+    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
+    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    document.getElementById('update_quote_expiry_date').value = formatDateASC(quote.expiry_date, "-");
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
+
+    if (quote.pi_pdf == ''){
+        $('#no-pdf').removeClass('d-none');
     }else{
-        let data = await serviceGetBankInfoById(bank_id);
-        let info = data.bank_info;
-        $('#bank-details').append(info.detail);
+        $('#has-pdf').removeClass('d-none');
+        $('#showPdf').attr('href', quote.pi_pdf);
     }
 
-    $("#addBankInfoModal").modal('hide');
+    // if (checkNull(quote.payment_term) != '') {
+    //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
+    //     document.getElementById('update_quote_payment_term').value = quote.payment_term;
+    // }
+    // if (checkNull(quote.lead_time) != '') {
+    //     document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
+    // }else{
+    //     $('#lead_time').addClass('d-none');
+    // }
+    // if (checkNull(quote.delivery_term) != '') {
+    //     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
+    // }else{
+    //     $('#delivery_term').addClass('d-none');
+    // }
+    // if (checkNull(quote.country_of_destination) != '') {
+    //     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
+    // }else{
+    //     $('#country_of_destination').addClass('d-none');
+    // }
+    // document.getElementById('note').innerHTML = checkNull(quote.note);
+}
+async function updateQuote(){
+    let sale_id = getPathVariable('invoice-print');
+    let quote_id = document.getElementById('update_quote_id').value;
+    let payment_term = document.getElementById('update_quote_payment_term').value;
+    let lead_time = document.getElementById('update_quote_lead_time').value;
+    let delivery_term = document.getElementById('update_quote_delivery_term').value;
+    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
+    let freight = document.getElementById('update_quote_freight').value;
+    let note = document.getElementById('update_quote_note').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "quote_id": quote_id,
+        "payment_term": payment_term,
+        "lead_time": lead_time,
+        "delivery_term": delivery_term,
+        "country_of_destination": country_of_destination,
+        "freight": changePriceToDecimal(freight),
+        "note": note
+    });
+
+
+    let returned = await servicePostUpdateQuote(formData);
+    if (returned){
+        $("#update_quote_form").trigger("reset");
+        $('#updateQuoteModal').modal('hide');
+        await initSale(sale_id);
+        await initQuote(sale_id);
+    }else{
+        alert("Hata Oluştu");
+    }
 }

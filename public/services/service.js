@@ -2555,3 +2555,12 @@ async function serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, ban
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGenerateInvoicePDF(lang, owner_id, sale_id, bank_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateInvoicePDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + bank_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
