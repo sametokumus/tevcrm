@@ -23,27 +23,30 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card mb-3">
+            <div class="card">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center m-5px">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM ÖDENEN</span>
-                        <a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
 
-
-                    <div class="row align-items-center mb-2" id="total-box">
-                        <div class="col-7">
-                            <h4 class="mb-0"></h4>
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">TOPLAM ÖDENEN</span>
+                            <a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
-                        <div class="col-5 other-currencies text-right">
+
+
+                        <div class="row align-items-center mb-2" id="total-box">
+                            <div class="col-7">
+                                <h4 class="mb-0"></h4>
+                            </div>
+                            <div class="col-5 other-currencies text-right">
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="total-text">
+                        <div class="text-white text-opacity-80 text-truncate" id="total-text">
 
+                        </div>
                     </div>
 
                 </div>
@@ -63,28 +66,31 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card mb-3">
+            <div class="card">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center m-5px">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">BEKLEYEN ÖDEMELER</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
 
-
-                    <div class="row align-items-center mb-2" id="pending-box">
-                        <div class="col-7">
-                            <h4 class="mb-0"></h4>
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">BEKLEYEN ÖDEMELER</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
-                        <div class="col-5 other-currencies text-right">
+
+
+                        <div class="row align-items-center mb-2" id="pending-box">
+                            <div class="col-7">
+                                <h4 class="mb-0"></h4>
+                            </div>
+                            <div class="col-5 other-currencies text-right">
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="pending-text">
+                        <div class="text-white text-opacity-80 text-truncate" id="pending-text">
 
+                        </div>
                     </div>
 
                 </div>
@@ -104,28 +110,31 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card mb-3">
+            <div class="card">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center m-5px">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">GECİKEN ÖDEMELER</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
 
-
-                    <div class="row align-items-center mb-2" id="late-box">
-                        <div class="col-7">
-                            <h4 class="mb-0"></h4>
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">GECİKEN ÖDEMELER</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
-                        <div class="col-5 other-currencies text-right">
+
+
+                        <div class="row align-items-center mb-2" id="late-box">
+                            <div class="col-7">
+                                <h4 class="mb-0"></h4>
+                            </div>
+                            <div class="col-5 other-currencies text-right">
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="text-white text-opacity-80 text-truncate" id="late-text">
+                        <div class="text-white text-opacity-80 text-truncate" id="late-text">
 
+                        </div>
                     </div>
 
                 </div>
@@ -145,7 +154,7 @@ $extra_js='
 
         <div class="col-xl-3 col-lg-6">
 
-            <div class="card mb-3">
+            <div class="card">
 
                 <div class="card-body d-flex align-items-center m-5px">
 
