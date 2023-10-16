@@ -1241,7 +1241,11 @@ class SaleController extends Controller
             $sale['payed_price'] = number_format($payed_price, 2, ".", "");
             $sale['remaining_price'] = number_format($remaining_price, 2, ".", "");
             //let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
-            $profit_rate = 100 * ($total_price - $total_offer_price) / $total_offer_price;
+            if ($total_offer_price != 0) {
+                $profit_rate = 100 * ($total_price - $total_offer_price) / $total_offer_price;
+            }else{
+                $profit_rate = 0;
+            }
             $sale['profit_rate'] = number_format($profit_rate, 2, ",", "");
             $sale['supplier_total'] = number_format($total_offer_price, 2, ".", "");
 
