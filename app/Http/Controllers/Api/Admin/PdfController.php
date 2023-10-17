@@ -1079,6 +1079,7 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 $html = utf8_decode($quote->note);
+                $html = str_replace('<br>', "\n", $html);
                 $html = str_replace('<p>', '', $html);
                 $html = str_replace('</p>', "\n", $html);
 //                $d = $pdf->GetX();
@@ -1640,6 +1641,7 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($oc_detail->note);
+                    $html = str_replace('<br>', "\n", $html);
                     $html = str_replace('<p>', '', $html);
                     $html = str_replace('</p>', "\n", $html);
                     $pdf->MultiCell(0, 5, utf8_decode($html));
@@ -2294,6 +2296,7 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($pi_detail->note);
+                    $html = str_replace('<br>', "\n", $html);
                     $html = str_replace('<p>', '', $html);
                     $html = str_replace('</p>', "\n", $html);
                     $pdf->MultiCell(0, 5, utf8_decode($html));
@@ -2901,6 +2904,7 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($pi_detail->note);
+                    $html = str_replace('<br>', "\n", $html);
                     $html = str_replace('<p>', '', $html);
                     $html = str_replace('</p>', "\n", $html);
                     $pdf->MultiCell(0, 5, utf8_decode($html));
