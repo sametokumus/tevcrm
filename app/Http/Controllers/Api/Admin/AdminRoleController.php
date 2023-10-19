@@ -262,7 +262,13 @@ class AdminRoleController extends Controller
 
     public function getAdminRoleStatuses($role_id){
         try {
-            $role_statuses = AdminStatusRole::query()->where('admin_role_id', $role_id)->where('active',1)->get();
+            $role_statuses = AdminStatusRole::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'admin_status_roles.status_id')
+                ->where('admin_status_roles.admin_role_id', $role_id)
+                ->where('admin_status_roles.active',1)
+                ->where('statuses.active',1)
+                ->selectRaw('admin_status_roles.*')
+                ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['role_statuses' => $role_statuses]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
