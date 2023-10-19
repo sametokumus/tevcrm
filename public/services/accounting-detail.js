@@ -413,10 +413,10 @@ async function updatePaymentTaxWithButton(rate){
     let price_tax = '';
     if (rate != 0) {
         price_tax = price / 100 * rate;
-        document.getElementById('add_payment_tax_rate').value = rate;
-        document.getElementById('add_payment_price_with_tax').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
+        document.getElementById('update_payment_tax_rate').value = rate;
+        document.getElementById('update_payment_price_with_tax').value = changeCommasToDecimal(parseFloat(price_tax).toFixed(2));
     }else{
-        document.getElementById('add_payment_tax_rate').value = rate;
+        document.getElementById('update_payment_tax_rate').value = rate;
     }
 }
 
