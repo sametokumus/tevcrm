@@ -362,8 +362,15 @@ async function addPaymentInvoiceDateToday(){
 }
 async function addPaymentPaymentTermWithButton(day){
     document.getElementById('add_payment_payment_term').value = day;
+    let currentDate;
+    let invoice_date = document.getElementById('add_payment_invoice_date').value;
+    if (invoice_date == '') {
+        currentDate = new Date();
+    }else {
+        let [day, month, year] = invoiceDate.split('-');
+        currentDate = new Date(year, month - 1, day);
+    }
 
-    let currentDate = new Date();
     let dueDate = new Date();
     dueDate.setDate(currentDate.getDate() + parseInt(day));
     dueDate = dueDate.toLocaleDateString('tr-TR', {
