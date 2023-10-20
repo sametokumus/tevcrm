@@ -78,6 +78,7 @@ async function initSaleStats(sale_id){
 
 
 
+    $('#sale-code').text(sale.owner.short_code+'-'+sale.id);
     sale_global_id = sale.id;
     let total = '-';
     if (sale.grand_total != null){
