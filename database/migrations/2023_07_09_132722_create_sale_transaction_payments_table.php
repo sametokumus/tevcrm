@@ -29,6 +29,7 @@ class CreateSaleTransactionPaymentsTable extends Migration
             $table->decimal('payment_tax',10,2, false)->nullable();
             $table->decimal('payment_total',10,2, false)->nullable();
             $table->string('currency')->nullable();
+            $table->string('invoice_number')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

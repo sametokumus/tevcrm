@@ -160,6 +160,7 @@ $(".timepicker").timepicker({
                             <th class="border-bottom-0">Para Birimi</th>
                             <th class="border-bottom-0">Ödeme Türü</th>
                             <th class="border-bottom-0">Ödeme Yöntemi</th>
+                            <th class="border-bottom-0">Fatura Numarası</th>
                             <th class="border-bottom-0">Fatura Tarihi</th>
                             <th class="border-bottom-0">Vade (Gün)</th>
                             <th class="border-bottom-0">Vade Tarihi</th>
@@ -210,6 +211,12 @@ $(".timepicker").timepicker({
                             <div class="col-md-9">
                                 <select class="form-control" id="add_payment_payment_method">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Fatura Numarası :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="add_payment_invoice_number">
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -354,6 +361,12 @@ $(".timepicker").timepicker({
                             <div class="col-md-9">
                                 <select class="form-control" id="update_payment_payment_method">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Fatura Numarası :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_payment_invoice_number">
                             </div>
                         </div>
                         <div class="row mb-4">

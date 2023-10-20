@@ -133,6 +133,7 @@ async function initPayments(sale_id){
             let payment_id = '';
             let payment_type = '';
             let payment_method = '';
+            let invoice_number = '';
             let invoice_date = '';
             let payment_term = '';
             let due_date = '';
@@ -148,6 +149,7 @@ async function initPayments(sale_id){
                 payment_id = payment.payment_id;
                 payment_type = checkNull(payment.payment_type);
                 payment_method = checkNull(payment.payment_method);
+                invoice_number = checkNull(payment.invoice_number);
                 invoice_date = formatDateASC(payment.invoice_date, "-");
                 payment_term = checkNull(payment.payment_term);
                 due_date = formatDateASC(payment.due_date, "-");
@@ -194,6 +196,7 @@ async function initPayments(sale_id){
                 '              <td>' + packing_list.currency + '</td>\n' +
                 '              <td>' + payment_type + '</td>\n' +
                 '              <td>' + payment_method + '</td>\n' +
+                '              <td>' + invoice_number + '</td>\n' +
                 '              <td>' + invoice_date + '</td>\n' +
                 '              <td>' + payment_term + '</td>\n' +
                 '              <td>' + due_date + '</td>\n' +
@@ -259,6 +262,7 @@ async function addPayment(){
     let payment_tax_rate = document.getElementById('add_payment_tax_rate').value;
     let payment_tax = document.getElementById('add_payment_price_with_tax').value;
     let currency = document.getElementById('add_payment_currency').value;
+    let invoice_number = document.getElementById('add_payment_invoice_number').value;
     let packing_list_id = document.getElementById('add_payment_packing_list_id').value;
     console.log(due_date)
     let formData = JSON.stringify({
@@ -266,6 +270,7 @@ async function addPayment(){
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
+        "invoice_number": invoice_number,
         "invoice_date": formatDateDESC2(invoice_date, "-", "-"),
         "due_date": formatDateDESC2(due_date, "-", "-"),
         "payment_price": changePriceToDecimal(payment_price),
@@ -296,6 +301,7 @@ async function openUpdatePaymentModal(payment_id){
     document.getElementById('update_payment_id').value = payment_id;
     document.getElementById('update_payment_payment_type').value = payment.payment_type;
     document.getElementById('update_payment_payment_method').value = payment.payment_method;
+    document.getElementById('update_payment_invoice_number').value = checkNull(payment.invoice_number);
     document.getElementById('update_payment_invoice_date').value = formatDateASC(payment.invoice_date, "-");
     document.getElementById('update_payment_payment_term').value = payment.payment_term;
     document.getElementById('update_payment_due_date').value = formatDateASC(payment.due_date, "-");
@@ -317,6 +323,7 @@ async function updatePayment(){
     let payment_tax_rate = document.getElementById('update_payment_tax_rate').value;
     let payment_tax = document.getElementById('update_payment_price_with_tax').value;
     let currency = document.getElementById('update_payment_currency').value;
+    let invoice_number = document.getElementById('update_payment_invoice_number').value;
     console.log(due_date)
     let formData = JSON.stringify({
         "payment_id": payment_id,
@@ -324,6 +331,7 @@ async function updatePayment(){
         "payment_type": payment_type,
         "payment_method": payment_method,
         "payment_term": payment_term,
+        "invoice_number": invoice_number,
         "invoice_date": invoice_date,
         "due_date": due_date,
         "payment_price": changePriceToDecimal(payment_price),
