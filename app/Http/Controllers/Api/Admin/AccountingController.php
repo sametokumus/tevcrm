@@ -71,7 +71,7 @@ class AccountingController extends Controller
             $packing_lists = PackingList::query()
                 ->whereRaw("(packing_lists.packing_list_id NOT IN (SELECT packing_list_id FROM sale_transactions))")
                 ->where('packing_lists.active',1)
-                ->selectRaw('packing_lists.sale_id')
+                ->selectRaw('DISTINCT packing_lists.sale_id')
                 ->get();
 
             $sales = array();
