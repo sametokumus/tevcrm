@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\CurrencyLog;
 use App\Models\Document;
 use App\Models\DocumentType;
@@ -1199,6 +1200,7 @@ class SaleController extends Controller
             $sale['request'] = $offer_request;
 
             $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
+            $sale['owner'] = Contact::query()->where('id', $sale->owner_id)->first();
             $sale['product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->count();
             $sale['total_product_count'] = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->sum('offer_quantity');
 

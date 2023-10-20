@@ -100,6 +100,8 @@ async function initSaleStats(sale_id){
     let sale = data.sale;
     console.log(sale)
 
+
+    $('#sale-code').text(sale.owner.short_code+'-'+sale.id);
     $('#customer-name').html('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
     if (sale.request.company_employee != null) {
         $('#customer-employee').text('Müşteri Yetkilisi: ' + sale.request.company_employee.name);

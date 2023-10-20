@@ -29,7 +29,7 @@ $(".timepicker").timepicker({
 
                 <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
-                        <span class="flex-grow-1 fw-600 fs-12px">Müşteri</span>
+                        <span class="flex-grow-1 fw-600 fs-12px" id="sale-code"></span>
                         <h3 id="customer-name"></h3>
                         <div id="customer-employee"></div>
                         <div id="owner-employee"></div>
