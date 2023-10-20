@@ -143,7 +143,7 @@ class AccountingController extends Controller
                 ->whereRaw("(packing_lists.packing_list_id IN (SELECT packing_list_id FROM sale_transactions))")
                 ->where('packing_lists.active',1)
                 ->where('sale_transaction_payments.payment_status_id',1)
-                ->selectRaw('packing_lists.sale_id')
+                ->selectRaw('DISTINCT packing_lists.sale_id')
                 ->groupBy('packing_lists.sale_id')
                 ->get();
 
@@ -216,7 +216,7 @@ class AccountingController extends Controller
                 ->whereRaw("(packing_lists.packing_list_id IN (SELECT packing_list_id FROM sale_transactions))")
                 ->where('packing_lists.active',1)
                 ->where('sale_transaction_payments.payment_status_id',2)
-                ->selectRaw('packing_lists.sale_id')
+                ->selectRaw('DISTINCT packing_lists.sale_id')
                 ->groupBy('packing_lists.sale_id')
                 ->get();
 
