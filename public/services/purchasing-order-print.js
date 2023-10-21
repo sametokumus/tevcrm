@@ -260,6 +260,8 @@ async function initOffer(offer_id){
         $('#add_purchasing_order_note').summernote('code', purchasing_order_detail.note);
     }
 
+    $('#no-pdf').addClass('d-none');
+    $('#has-pdf').addClass('d-none');
     if (offer.file_url == null){
         $('#no-pdf').removeClass('d-none');
     }else{
