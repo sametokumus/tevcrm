@@ -254,6 +254,7 @@ async function initOffer(offer_id){
     let data2 = await serviceGetPurchasingOrderDetailById(offer_id);
     let purchasing_order_detail = data2.purchasing_order_detail;
     if (purchasing_order_detail == null){
+        $('#add_purchasing_order_note').summernote('code', '');
     }else{
         $('#add_purchasing_order_note').summernote('code', purchasing_order_detail.note);
     }
