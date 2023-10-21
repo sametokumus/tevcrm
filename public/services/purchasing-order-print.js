@@ -271,16 +271,20 @@ async function addNote(){
     let sale_id = getPathVariable('purchasing-order-print');
     let offer_id = document.getElementById('select_offer').value;
     let note = $('#add_purchasing_order_note').summernote('code');
-    let formData = JSON.stringify({
-        "sale_id": sale_id,
-        "offer_id": offer_id,
-        "note": note
-    });
-    let returned = await servicePostAddPurchasingOrderDetail(formData);
-    if (returned){
-        $("#add_note_form").trigger("reset");
-        $("#addNoteModal").modal('hide');
-        initOffer(offer_id);
+    if (offer_id == 0) {
+        showAlert("Teklif Seçiniz");
+    }else {
+        let formData = JSON.stringify({
+            "sale_id": sale_id,
+            "offer_id": offer_id,
+            "note": note
+        });
+        let returned = await servicePostAddPurchasingOrderDetail(formData);
+        if (returned) {
+            $("#add_note_form").trigger("reset");
+            $("#addNoteModal").modal('hide');
+            initOffer(offer_id);
+        }
     }
 }
 
