@@ -3326,8 +3326,8 @@ class PdfController extends Controller
                 // Output remaining cells for the current row
                 $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $product->quantity), 1, 0, 'C');
                 $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $product->pcs_price.' '.$product->currency), 1, 0, 'C');
-                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $product->total_price.' '.$product->currency), 1, 0, 'C');
+                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', number_format($product->pcs_price, 2,",",".").' '.$product->currency), 1, 0, 'C');
+                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', number_format($product->total_price, 2,",",".").' '.$product->currency), 1, 0, 'C');
                 $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
 
                 $i++;
