@@ -96,7 +96,7 @@ $extra_js='
 
             </div>
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center d-none">
                 <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
 
                     <div class="wrapper">
