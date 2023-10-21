@@ -46,11 +46,31 @@ function printOffer(){
 	window.print();
 }
 
+async function generatePDF(){
+    let lang = document.getElementById('lang').value;
+    let owner_id = document.getElementById('owners').value;
+    let sale_id = getPathVariable('purchasing-order-print');
+    let offer_id = document.getElementById('select_offer').value;
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, offer_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('purchasing-order-print');
     // await initOfferSelect(sale_id);
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
     // await initBankInfoSelect();
 }
 
@@ -233,20 +253,20 @@ async function initOffer(offer_id){
     $('#updateNoteBtn').addClass('d-none');
     let data2 = await serviceGetPurchasingOrderDetailById(offer_id);
     let purchasing_order_detail = data2.purchasing_order_detail;
-    console.log('dsfds')
-    console.log(purchasing_order_detail)
     if (purchasing_order_detail == null){
-        $('#addNoteBtn').removeClass('d-none');
     }else{
-        $('#updateNoteBtn').removeClass('d-none');
-        $('#note').append(purchasing_order_detail.note);
+        $('#add_purchasing_order_note').summernote('code', purchasing_order_detail.note);
+    }
+
+    if (offer.file_url == null){
+        $('#no-pdf').removeClass('d-none');
+    }else{
+        $('#has-pdf').removeClass('d-none');
+        $('#showPdf').attr('href', offer.file_url);
     }
 
 }
 
-async function openAddNoteModal(){
-    $("#addNoteModal").modal('show');
-}
 async function addNote(){
     let sale_id = getPathVariable('purchasing-order-print');
     let offer_id = document.getElementById('select_offer').value;
