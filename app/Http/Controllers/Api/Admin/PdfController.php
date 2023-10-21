@@ -3182,14 +3182,11 @@ class PdfController extends Controller
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Supplier').': '), '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Supplier')), '0', '0', '');
 
+            $y += 5;
+            $x = 10;
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            if ($lang == 'tr') {
-                $x = $x - 3 + $pdf->GetStringWidth(__('Supplier') . ': ');
-            }else{
-                $x = $x+2 + $pdf->GetStringWidth(__('Supplier') . ': ');
-            }
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->name), '0', '0', '');
 
@@ -3212,7 +3209,7 @@ class PdfController extends Controller
             if ($address_height == 2){
                 $pdf->SetXY($x, $y);
             }else {
-                $pdf->SetXY($x, $y - 2);
+                $pdf->SetXY($x, $y - 3);
             }
             $pdf->MultiCell(100, $address_height, $address, 0, 'L');
 
