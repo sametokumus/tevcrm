@@ -45,6 +45,52 @@ $extra_js='
                     </form>
                 </div>
             </div>
+            <div class="row mb-3 d-none" id="no-pdf">
+                <div class="col-12">
+                    <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">PDF Oluştur</button>
+                </div>
+            </div>
+            <div class="row mb-3 d-none" id="has-pdf">
+                <div class="col-6">
+                    <a id="showPdf" target="_blank" href="" class="btn btn-theme btn-block w-100 no-print">Mevcut PDF'i Görüntüle</a>
+                </div>
+                <div class="col-6">
+                    <button id="generatePdf" onclick="generatePDF();" class="btn btn-theme btn-block w-100 no-print">Yeni PDF Oluştur</button>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-3 no-print">
+
+                <div class="col-xl-9 col-lg-12 col-md-12">
+                    <div class="card border-theme mb-3">
+                        <div class="card-body p-3">
+
+
+                            <form method="post" action="#" id="add_note_form">
+                                <div class="row mb-4">
+                                    <h5 class="px-2">
+                                        Sipariş Notu
+                                    </h5>
+                                    <div class="col-sm-12">
+                                        <textarea name="text" class="summernote" id="add_purchasing_order_note" title="Contents"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-outline-theme d-block w-100">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
             <div class="row justify-content-center">
                 <div class="col-xl-9 col-lg-12 col-md-12 bg-white p-md-50">
@@ -193,81 +239,5 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
-
-
-<div class="modal modal-cover fade" id="addNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">NOT EKLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_note_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Bilgi</label>
-                            <textarea name="text" class="summernote" id="add_purchasing_order_note" title="Contents"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal modal-cover fade" id="updateNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">NOT GÜNCELLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_note_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Bilgi</label>
-                            <textarea name="text" class="summernote" id="update_purchasing_order_note" title="Contents"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addBankInfoModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">BANKA BİLGİSİ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_quote_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <select onchange="changeBankInfo();" name="select_bank_info" class="form-control form-select" id="select_bank_info" required>
-                                <option value="0">Bilgi Yok</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 @include('include.footer')

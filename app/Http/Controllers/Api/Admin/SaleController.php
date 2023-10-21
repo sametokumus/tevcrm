@@ -1004,7 +1004,7 @@ class SaleController extends Controller
     public function getPurchasingOrderDetailById($offer_id)
     {
         try {
-            $purchasing_order_detail = PurchasingOrderDetails::query()->where('offer_id', $offer_id)->first();
+            $purchasing_order_detail = PurchasingOrderDetails::query()->where('offer_id', $offer_id)->where('active', 1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['purchasing_order_detail' => $purchasing_order_detail]]);
         } catch (QueryException $queryException) {
@@ -1020,11 +1020,19 @@ class SaleController extends Controller
                 'offer_id' => 'required',
                 'note' => 'required',
             ]);
-            PurchasingOrderDetails::query()->insert([
-                'sale_id' => $request->sale_id,
-                'offer_id' => $request->offer_id,
-                'note' => $request->note
-            ]);
+
+            $has_detail = PurchasingOrderDetails::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->where('active', 1)->first();
+            if ($has_detail) {
+                PurchasingOrderDetails::query()->where('sale_id', $request->sale_id)->where('offer_id', $request->offer_id)->update([
+                    'note' => $request->note
+                ]);
+            }else{
+                PurchasingOrderDetails::query()->insert([
+                    'sale_id' => $request->sale_id,
+                    'offer_id' => $request->offer_id,
+                    'note' => $request->note
+                ]);
+            }
 
             return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
