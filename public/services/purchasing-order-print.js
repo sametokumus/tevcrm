@@ -53,7 +53,7 @@ async function generatePDF(){
     let offer_id = document.getElementById('select_offer').value;
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, offer_id);
+    const pdfData = await serviceGetGeneratePurchasingOfferPDF(lang, owner_id, sale_id, offer_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
@@ -87,6 +87,7 @@ async function changeOffer(){
 
     let offer_id = document.getElementById('select_offer').value;
     if(offer_id == 0){
+        $('#add_purchasing_order_note').summernote('code', '');
         $('#print-buttons').addClass('d-none');
         return false;
     }else{

@@ -20,6 +20,7 @@ class CreateOffersTable extends Migration
             $table->bigInteger('supplier_id')->default(0);
             $table->bigInteger('user_id')->default(0);
             $table->string('file_url')->nullable();
+            $table->date('file_date')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
