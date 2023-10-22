@@ -37,10 +37,10 @@ function printOffer(){
 async function generatePDF(){
     let lang = document.getElementById('lang').value;
     let owner_id = document.getElementById('owners').value;
-    let offer_id = getPathVariable('offer-print');
+    let packing_list_id = getPathVariable('packing-list-print');
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGeneratePackingListPDF(lang, owner_id, offer_id);
+    const pdfData = await serviceGetGeneratePackingListPDF(lang, owner_id, packing_list_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
