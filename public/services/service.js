@@ -2565,6 +2565,15 @@ async function serviceGetGenerateInvoicePDF(lang, owner_id, sale_id, bank_id) {
     }
 }
 
+async function serviceGetGeneratePackingListInvoicePDF(lang, owner_id, packing_list_id, bank_id) {
+    const data = await fetchDataGet('/admin/pdf/getGeneratePackingListInvoicePDF/' + lang + '/' + owner_id + '/' + packing_list_id + '/' + bank_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetGeneratePurchasingOfferPDF(lang, owner_id, sale_id, offer_id) {
     const data = await fetchDataGet('/admin/pdf/getGeneratePurchasingOfferPDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + offer_id, 'application/json');
     if (data.status == "success") {

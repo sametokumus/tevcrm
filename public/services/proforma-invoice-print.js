@@ -263,8 +263,6 @@ async function updateDetail(){
 
 
     if (returned1 && returned2){
-        $("#update_detail_form").trigger("reset");
-        $('#updateDetailModal').modal('hide');
         await initSale(sale_id);
         await initDetail(sale_id);
     }else{

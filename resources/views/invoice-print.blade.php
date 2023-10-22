@@ -87,14 +87,14 @@ $extra_js='
                             <form method="post" action="#" id="update_detail_form">
                                 <div class="row mb-4">
                                     <h5 class="px-2">
-                                        Proforma Fatura Detayları
+                                        Fatura Detayları
                                     </h5>
                                     <div class="col-sm-12 mb-3">
                                         <label class="form-label">Shipping Price</label>
                                         <input type="text" class="form-control" id="update_sale_shipping_price">
                                     </div>
                                     <div class="col-sm-12">
-                                        <label class="form-label">Proforma Fatura Notu</label>
+                                        <label class="form-label">Fatura Notu</label>
                                         <textarea name="text" class="summernote" id="update_sale_note" title="Contents"></textarea>
                                     </div>
                                     <div class="col-md-12 mb-3">

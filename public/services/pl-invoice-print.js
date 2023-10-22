@@ -11,6 +11,11 @@
             updateDetail();
         });
 
+        $('#update_quote_form').submit(function (e){
+            e.preventDefault();
+            updateQuote();
+        });
+
     });
 
     $(window).load(async function() {
@@ -22,6 +27,7 @@
         // await initContact(1, sale_id);
         let sale_id = await initSale(packing_list_id);
         await initDetail(sale_id);
+        await initQuote(sale_id);
         await initBankInfoSelect();
         // await getOwnersAddSelectId('owners');
         // document.getElementById('owners').value = 1;
@@ -39,10 +45,30 @@ function printOffer(){
     window.print();
 }
 
+async function generatePDF(){
+    let lang = document.getElementById('lang').value;
+    let owner_id = document.getElementById('owners').value;
+    let bank_id = document.getElementById('select_bank_info').value;
+    let packing_list_id = getPathVariable('pl-invoice-print');
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGeneratePackingListInvoicePDF(lang, owner_id, packing_list_id, bank_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('pl-invoice-print');
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -153,9 +179,9 @@ async function initSale(packing_list_id){
 
 
     if (sale.list_total != null) {
-        let key = Lang.get("strings.Grand Total");
+        let key = Lang.get("strings.Sub Total");
         if (sale.list_grand_total != '0,00' && sale.list_tax != '0,00') {
-            key = Lang.get("strings.Sub Total");
+            key = Lang.get("strings.Grand Total");
         }
         let item = '<tr>\n' +
             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + key + '</td>\n' +
@@ -176,6 +202,13 @@ async function initSale(packing_list_id){
         $('#sale-detail tbody').append(item2);
     }
 
+    if (sale.pli_url == '' || sale.pli_url == null){
+        $('#no-pdf').removeClass('d-none');
+    }else{
+        $('#has-pdf').removeClass('d-none');
+        $('#showPdf').attr('href', sale.pli_url);
+    }
+
     return sale_id;
 
 }
@@ -185,25 +218,8 @@ async function initDetail(sale_id){
     let detail = data.proforma_invoice_detail;
 
     if (detail != null) {
-        document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
+        // document.getElementById('payment_term').innerHTML = '<b>'+ Lang.get("strings.Payment Terms") +' :</b> ' + checkNull(detail.payment_term);
         document.getElementById('note').innerHTML = checkNull(detail.note);
-    }
-}
-
-async function openUpdateDetailModal(){
-    $("#updateDetailModal").modal('show');
-    await initUpdateDetailModal();
-}
-
-async function initUpdateDetailModal(){
-    let sale_id = getPathVariable('pl-invoice-print');
-    let data = await serviceGetProformaInvoiceDetailById(sale_id);
-    let detail = data.proforma_invoice_detail;
-    console.log(detail)
-
-    if (detail != null) {
-        document.getElementById('update_sale_payment_term').value = checkNull(detail.payment_term);
-        $('#update_sale_note').summernote('code', checkNull(detail.note));
     }
 }
 
@@ -228,8 +244,6 @@ async function updateDetail(){
 
 
     if (returned1 && returned2){
-        $("#update_detail_form").trigger("reset");
-        $('#updateDetailModal').modal('hide');
         await initSale(sale_id);
         await initDetail(sale_id);
     }else{
@@ -249,20 +263,53 @@ async function initBankInfoSelect(){
     });
 
 }
-async function openAddBankInfoModal(){
-    $("#addBankInfoModal").modal('show');
+
+
+async function initQuote(sale_id){
+    let data = await serviceGetQuoteBySaleId(sale_id);
+    let quote = data.quote;
+    console.log(quote)
+
+    document.getElementById('update_quote_id').value = quote.id;
+    document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
+    document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
+    document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
+    document.getElementById('update_quote_freight').value = changeCommasToDecimal(quote.freight);
+    document.getElementById('update_quote_expiry_date').value = formatDateASC(quote.expiry_date, "-");
+    $('#update_quote_note').summernote('code', checkNull(quote.note));
+
+
 }
-async function changeBankInfo(){
-    $('#bank-details *').remove();
+async function updateQuote(){
+    let sale_id = getPathVariable('invoice-print');
+    let quote_id = document.getElementById('update_quote_id').value;
+    let payment_term = document.getElementById('update_quote_payment_term').value;
+    let lead_time = document.getElementById('update_quote_lead_time').value;
+    let delivery_term = document.getElementById('update_quote_delivery_term').value;
+    let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
+    let freight = document.getElementById('update_quote_freight').value;
+    let note = document.getElementById('update_quote_note').value;
 
-    let bank_id = document.getElementById('select_bank_info').value;
-    if(bank_id == 0){
-        return false;
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "quote_id": quote_id,
+        "payment_term": payment_term,
+        "lead_time": lead_time,
+        "delivery_term": delivery_term,
+        "country_of_destination": country_of_destination,
+        "freight": changePriceToDecimal(freight),
+        "note": note
+    });
+
+
+    let returned = await servicePostUpdateQuote(formData);
+    if (returned){
+        $("#update_quote_form").trigger("reset");
+        $('#updateQuoteModal').modal('hide');
+        await initSale(sale_id);
+        await initQuote(sale_id);
     }else{
-        let data = await serviceGetBankInfoById(bank_id);
-        let info = data.bank_info;
-        $('#bank-details').append(info.detail);
+        alert("Hata Oluştu");
     }
-
-    $("#addBankInfoModal").modal('hide');
 }
