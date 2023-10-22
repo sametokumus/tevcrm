@@ -3906,7 +3906,7 @@ class PdfController extends Controller
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
             }
 
-            $filePath = public_path('img/document/' . $contact->short_code . '-RFQ-' . $sale->id . '.pdf');
+            $filePath = public_path('img/document/' . $contact->short_code . '-RFQ-' . $sale->id . '-'. $offer->id .'.pdf');
             $pdf->Output($filePath, 'F');
 
             $fileUrl = 'img/document/' . $contact->short_code . '-RFQ-' . $sale->id . '-'. $offer->id .'.pdf';
