@@ -4114,9 +4114,12 @@ class PdfController extends Controller
             $y += 10;
             $x = 10;
 
+            $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', __('Packing List'));
+            $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+            $title = iconv('utf-8', 'iso-8859-9', $inputString);
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Packing List'), '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $title), '0', '0', '');
 
             //CUSTOMER INFO
 
@@ -4263,6 +4266,7 @@ class PdfController extends Controller
                 // Output remaining cells for the current row
                 $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
                 $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Ln();
             }
 
 
