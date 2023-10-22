@@ -151,23 +151,8 @@ async function initDetail(offer_id){
     let detail = data.rfq_detail;
 
     if (detail != null) {
-        document.getElementById('note').innerHTML = checkNull(detail.note);
-    }
-}
-
-async function openUpdateDetailModal(){
-    $("#updateDetailModal").modal('show');
-    await initUpdateDetailModal();
-}
-
-async function initUpdateDetailModal(){
-    let offer_id = getPathVariable('offer-print');
-    let data = await serviceGetRfqDetailById(offer_id);
-    let detail = data.rfq_detail;
-    console.log(detail)
-
-    if (detail != null) {
         $('#update_offer_note').summernote('code', checkNull(detail.note));
+        document.getElementById('note').innerHTML = checkNull(detail.note);
     }
 }
 
@@ -182,8 +167,6 @@ async function updateDetail(){
     let returned = await servicePostUpdateRfqDetail(formData);
 
     if (returned){
-        $("#update_detail_form").trigger("reset");
-        $('#updateDetailModal').modal('hide');
         await initDetail(offer_id);
     }else{
         alert("Hata Oluştu");
