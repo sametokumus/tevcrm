@@ -2582,3 +2582,12 @@ async function serviceGetGenerateRfqPDF(lang, owner_id, offer_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGeneratePackingListPDF(lang, owner_id, packing_list_id) {
+    const data = await fetchDataGet('/admin/pdf/getGeneratePackingListPDF/' + lang + '/' + owner_id + '/' + packing_list_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
