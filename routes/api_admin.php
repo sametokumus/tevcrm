@@ -375,6 +375,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('pdf/getGenerateInvoicePDF/{lang}/{owner_id}/{sale_id}/{bank_id}', [PdfController::class, 'getGenerateInvoicePDF']);
     Route::get('pdf/getGeneratePurchasingOfferPDF/{lang}/{owner_id}/{sale_id}/{offer_id}', [PdfController::class, 'getGeneratePurchasingOfferPDF']);
     Route::get('pdf/getGenerateRfqPDF/{lang}/{owner_id}/{offer_id}', [PdfController::class, 'getGenerateRfqPDF']);
+    Route::get('pdf/getGeneratePackingListPDF/{lang}/{owner_id}/{sale_id}', [PdfController::class, 'getGeneratePackingListPDF']);
 
 
 

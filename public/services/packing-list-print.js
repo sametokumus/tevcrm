@@ -37,7 +37,7 @@ function printOffer(){
 async function changeOwner(){
     let owner = document.getElementById('owners').value;
     let sale_id = getPathVariable('proforma-invoice-print');
-    await initContact(owner, sale_id);
+    // await initContact(owner, sale_id);
 }
 
 async function initContact(contact_id, sale_id){
@@ -146,6 +146,15 @@ async function initSale(packing_list_id){
     }else{
         $('#note').append(sale.packing_note);
         $('#update_packing_note').summernote('code', sale.packing_note);
+    }
+
+    $('#no-pdf').addClass('d-none');
+    $('#has-pdf').addClass('d-none');
+    if (sale.pl_url == null){
+        $('#no-pdf').removeClass('d-none');
+    }else{
+        $('#has-pdf').removeClass('d-none');
+        $('#showPdf').attr('href', sale.pl_url);
     }
 
 }

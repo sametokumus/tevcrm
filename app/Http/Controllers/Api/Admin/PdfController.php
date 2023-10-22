@@ -16,6 +16,8 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
 use App\Models\OwnerBankInfo;
+use App\Models\PackingList;
+use App\Models\PackingListProduct;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -3911,6 +3913,406 @@ class PdfController extends Controller
 
             Offer::query()->where('offer_id', $offer_id)->update([
                 'rfq_url' => $fileUrl
+            ]);
+
+            return response([
+                'message' => __('İşlem Başarılı.'),
+                'status' => 'success',
+                'object' => [
+                    'file_url' => $fileUrl,
+                    'file_name' => $fileName
+                ]
+            ]);
+
+
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getGeneratePackingListPDF($lang, $owner_id, $packing_list_id)
+    {
+        try {
+            App::setLocale($lang);
+            $packing_list = PackingList::query()->where('packing_list_id', $packing_list_id)->first();
+            $sale_id = $packing_list->sale_id;
+
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
+            $currency = $sale->currency;
+
+            $createdAt = Carbon::now();
+            $document_date = $createdAt->format('d/m/Y');
+            PackingList::query()->where('packing_list_id', $packing_list_id)->update([
+                'pl_date' => $createdAt->format('Y-m-d')
+            ]);
+
+            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+            $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+            $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+            $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+
+            $sale_offers = SaleOffer::query()
+                ->join('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
+                ->selectRaw('sale_offers.*')
+                ->where('sale_offers.sale_id', $sale->sale_id)
+                ->where('packing_list_products.packing_list_id', $packing_list_id)
+                ->where('sale_offers.active', 1)
+                ->get();
+
+            foreach ($sale_offers as $sale_offer){
+                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
+                $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
+                $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
+                $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
+                $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
+                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                $sale_offer['sequence'] = $request_product->sequence;
+
+                $sale_offer['packing_count'] = PackingListProduct::query()
+                    ->where('active', 1)
+                    ->where('sale_offer_id', $sale_offer->id)
+                    ->where('packing_list_id', $packing_list->packing_list_id)
+                    ->first()
+                    ->quantity;
+
+            }
+            $contact = Contact::query()->where('id', $owner_id)->first();
+
+
+            // Create a new PDF instance
+            $pdf = new \FPDF();
+            $pdf->AddPage();
+
+            $pdf->SetMargins(20, 20, 20);
+            $pdf->SetAutoPageBreak(true, 40);
+
+            $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
+            $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
+            $pdf->SetFont('ChakraPetch-Bold', '', 12);
+
+
+            // LOGO
+            $pageWidth = $pdf->GetPageWidth();
+            $x = $pageWidth - $contact->logo_width - 10;
+            $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);  // Parameters: image file, x position, y position, width
+
+            list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
+            $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
+
+            //TARİH - KOD
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $x = $pageWidth - $pdf->GetStringWidth(__('Date').': '.$document_date) - 10;
+            $pdf->SetXY($x, $actual_height + 25);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Date').': '), '0', '0', '');
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $pageWidth - $pdf->GetStringWidth($document_date) - 10;
+            $pdf->SetXY($x, $actual_height + 25);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $document_date), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 11);
+            $x = $pageWidth - $pdf->GetStringWidth($contact->short_code.'-PL-'.$sale->id) - 10;
+            $pdf->SetXY($x, $actual_height + 32);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-PL-'.$sale->id), '0', '0', '');
+
+
+
+
+            //COMPANY INFO
+
+            $x = 10;
+            $y = 15;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 12);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+
+            if ($contact->registration_no != '') {
+                $y += 5;
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Registration No').': ', '0', '0', '');
+
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $x = $x+2 + $pdf->GetStringWidth(__('Registration No').': ');
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $contact->registration_no, '0', '0', '');
+
+                if ($contact->registration_office != '' && App::getLocale() != 'en') {
+
+                    $x = $x+5 + $pdf->GetStringWidth($contact->registration_no);
+
+                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(0, 0, __('Registration Office').': ', '0', '0', '');
+
+                    $x = $x+2 + $pdf->GetStringWidth(__('Registration Office').': ');
+                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(0, 0, $contact->registration_office, '0', '0', '');
+
+                }
+            }
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $x = 10;
+            $y += 5;
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $lines = explode('<br>', $contact->address);
+            foreach ($lines as $line) {
+                $y += 5;
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
+            }
+
+            $y += 5;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $contact->email, '0', '0', '');
+
+            //TITLE
+
+            $y += 10;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 20);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Packing List'), '0', '0', '');
+
+            //CUSTOMER INFO
+
+            $y += 10;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Customer').': '), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            if ($lang == 'tr') {
+                $x = $x - 3 + $pdf->GetStringWidth(__('Customer') . ': ');
+            }else{
+                $x = $x+2 + $pdf->GetStringWidth(__('Customer') . ': ');
+            }
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->name), '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Address').': '), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
+            $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $company->address);
+            $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+            $address = iconv('utf-8', 'iso-8859-9', $inputString);
+//            $pdf->Cell(0, 0, $address, '0', '0', '');
+            $address_width = $pdf->GetStringWidth($address);
+            $address_height = (((int)($address_width / 100)) + 1) * 2;
+
+            if ($address_height == 2){
+                $pdf->SetXY($x, $y);
+            }else {
+                $pdf->SetXY($x, $y - 2);
+            }
+            $pdf->MultiCell(100, $address_height, $address, 0, 'L');
+
+
+
+            $y += 13;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->phone, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->email, '0', '0', '');
+
+
+
+            $x = 10;
+            $y += 10;
+            $pdf->SetXY($x, $y);
+
+
+
+// Set table header
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->Cell(10, 12, 'N#', 0, 0, 'C');
+            $pdf->Cell(30, 12, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 0, 0, 'C');
+            $pdf->Cell(100, 12, iconv('utf-8', 'iso-8859-9', __('Product Name')), 0, 0, 'C');
+            $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Qty')), 0, 0, 'C');
+            $pdf->Cell(25, 12, iconv('utf-8', 'iso-8859-9', __('Unit')), 0, 0, 'C');
+            $pdf->Ln();
+
+
+
+// Set table content
+            $pdf->SetFont('ChakraPetch-Regular', '', 9);
+            foreach ($sale_offers as $sale_offer) {
+                if (App::getLocale() == 'tr'){
+                    $measurement_name = $sale_offer->measurement_name_tr;
+                }else{
+                    $measurement_name = $sale_offer->measurement_name_en;
+                }
+
+                $row_height = 15;
+                $pdf->SetFont('ChakraPetch-Regular', '', 9);
+
+                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
+                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
+                $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
+
+                $name_width = $pdf->GetStringWidth($product_name);
+                if ($name_width > 100){
+                    $wd = (($name_width / 100));
+                    if ($name_width > 200){
+                        $wd = (($name_width / 90));
+                    }
+                    if ($wd >= 0 && $wd < 1){
+                        $row_height = 15;
+                    }else if ($wd >= 1 && $wd < 2){
+                        $row_height = 7.5;
+                    }else if ($wd >= 2 && $wd < 3){
+                        $row_height = 5;
+                    }else if ($wd >= 3 && $wd < 4){
+                        $row_height = 3.75;
+                    }else if ($wd >= 4 && $wd < 5){
+                        $row_height = 3;
+                    }else if ($wd >= 5){
+                        $row_height = 2.5;
+                    }
+
+                }
+
+                $pdf->setX(10);
+                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
+//                $pdf->Cell(10, 14, '', 1, 0, 'C');
+                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+//                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
+
+                // Save the current X and Y position
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+
+
+                // Use MultiCell for product name with a width of 50mm
+                $pdf->MultiCell(100, $row_height, $product_name, 'T', 'L');
+
+                // Reset X and move Y to the saved position (next line)
+                $pdf->SetXY($xPos+100, $yPos);
+
+                // Output remaining cells for the current row
+                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+            }
+
+
+            //NOTE
+            if ($packing_list->note != null) {
+                $y += 10;
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Bold', '', 8);
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Note')), 0, 0, '');
+
+                $y += 5;
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->SetFont('ChakraPetch-Regular', '', 8);
+                $html = utf8_decode($packing_list->note);
+                $html = str_replace('<br>', "\n", $html);
+                $html = str_replace('<p>', '', $html);
+                $html = str_replace('</p>', "\n", $html);
+                $pdf->MultiCell(0, 5, utf8_decode($html));
+            }
+
+
+
+            //FOOTER
+
+            $pdfContent = $pdf->Output('created.pdf', 'S');
+
+            $pdf = new Fpdi();
+            $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
+
+            $numPages = $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
+
+            for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
+                $pdf->AddPage();
+
+                $pdf->Image(public_path($contact->footer), 10, 260, 190);
+
+                $tplIdx = $pdf->importPage($pageNo);
+                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+            }
+
+            $filePath = public_path('img/document/' . $contact->short_code . '-PL-' . $sale->id . '-'. $packing_list->id .'.pdf');
+            $pdf->Output($filePath, 'F');
+
+            $fileUrl = 'img/document/' . $contact->short_code . '-PL-' . $sale->id . '-'. $packing_list->id .'.pdf';
+            $fileName = $contact->short_code . '-PL-' . $sale->id . '-'. $packing_list->id .'.pdf';
+
+            PackingList::query()->where('packing_list_id', $packing_list_id)->update([
+                'pl_url' => $fileUrl
             ]);
 
             return response([
