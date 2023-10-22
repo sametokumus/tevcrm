@@ -2573,3 +2573,12 @@ async function serviceGetGeneratePurchasingOfferPDF(lang, owner_id, sale_id, off
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGenerateRfqPDF(lang, owner_id, offer_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateRfqPDF/' + lang + '/' + owner_id + '/' + offer_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
