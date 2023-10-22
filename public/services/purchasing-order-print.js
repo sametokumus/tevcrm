@@ -262,11 +262,11 @@ async function initOffer(offer_id){
 
     $('#no-pdf').addClass('d-none');
     $('#has-pdf').addClass('d-none');
-    if (offer.file_url == null){
+    if (offer.po_url == null){
         $('#no-pdf').removeClass('d-none');
     }else{
         $('#has-pdf').removeClass('d-none');
-        $('#showPdf').attr('href', offer.file_url);
+        $('#showPdf').attr('href', offer.po_url);
     }
 
 }

@@ -144,6 +144,18 @@ async function initOffer(offer_id){
         $('#offer-detail tbody').append(item);
     });
 
+
+
+
+    $('#no-pdf').addClass('d-none');
+    $('#has-pdf').addClass('d-none');
+    if (offer.rfq_url == null){
+        $('#no-pdf').removeClass('d-none');
+    }else{
+        $('#has-pdf').removeClass('d-none');
+        $('#showPdf').attr('href', offer.rfq_url);
+    }
+
 }
 
 async function initDetail(offer_id){
