@@ -3523,9 +3523,6 @@ class PdfController extends Controller
                 'rfq_date' => $createdAt->format('Y-m-d')
             ]);
 
-            $global_id = $sale->id;
-            $owner_id = $sale->owner_id;
-            $product_count = OfferProduct::query()->where('offer_id', $offer_id)->where('active', 1)->count();
             $company = Company::query()
                 ->leftJoin('countries', 'countries.id', '=', 'companies.country_id')
                 ->selectRaw('companies.*, countries.lang as country_lang')
@@ -3730,7 +3727,7 @@ class PdfController extends Controller
 
 
 
-            $y += 5;
+            $y += 13;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
