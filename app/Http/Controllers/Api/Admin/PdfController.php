@@ -4115,8 +4115,8 @@ class PdfController extends Controller
             $x = 10;
 
             $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', __('Packing List'));
-            $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-            $title = iconv('utf-8', 'iso-8859-9', $inputString);
+//            $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+            $title = iconv('utf-8', 'iso-8859-9', $cleanInput);
             $pdf->SetFont('ChakraPetch-Bold', '', 20);
             $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, $title, '0', '0', '');
