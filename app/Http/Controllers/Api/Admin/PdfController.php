@@ -812,7 +812,7 @@ class PdfController extends Controller
 
             //QUOTES
 
-            $y += 5;
+            $y += 8;
 
             if ($company->company_request_code != ''){
                 $x = 10;
