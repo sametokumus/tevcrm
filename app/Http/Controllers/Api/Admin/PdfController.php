@@ -204,7 +204,20 @@ class PdfController extends Controller
 
         return $y;
     }
-
+    private function leadtime($lt){
+        if ($lt != '' && $lt != null){
+            if ($lt == 1) {
+                $lead_time = __('Stock');
+            } elseif (intval($lt) % 7 == 0) {
+                $lead_time = (intval($lt) / 7) . ' ' . __('Week');
+            } else {
+                $lead_time = $lt . ' ' . __('Day');
+            }
+        }else{
+            $lead_time = '';
+        }
+        return $lead_time;
+    }
 
     public function getGeneratePDF($owner_id, $sale_id)
     {
@@ -958,23 +971,13 @@ class PdfController extends Controller
             $y += 12;
             $pdf->SetXY($x, $y);
             foreach ($sale_offers as $sale_offer) {
-                if (App::getLocale() == 'tr'){
+                if ($lang == 'tr'){
                     $measurement_name = $sale_offer->measurement_name_tr;
                 }else{
                     $measurement_name = $sale_offer->measurement_name_en;
                 }
 
-                if ($sale_offer->offer_lead_time != '' && $sale_offer->offer_lead_time != null){
-                    if ($sale_offer->offer_lead_time == 1) {
-                        $lead_time = __('Stock');
-                    } elseif (intval($sale_offer->offer_lead_time) % 7 == 0) {
-                        $lead_time = (intval($sale_offer->offer_lead_time) / 7) . ' ' . __('Week');
-                    } else {
-                        $lead_time = $sale_offer->offer_lead_time . ' ' . __('Day');
-                    }
-                }else{
-                    $lead_time = '';
-                }
+
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
@@ -1006,7 +1009,7 @@ class PdfController extends Controller
                 $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
                 $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');  // Move to the next line
 
                 $y += $row_height;
 
