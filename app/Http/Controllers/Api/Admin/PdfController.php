@@ -988,7 +988,7 @@ class PdfController extends Controller
                 $name_width = $pdf->GetStringWidth($product_name);
                 $lines_needed = ceil($name_width / 50);
                 $line_height = 8;
-                if ($linesNeeded > 1){
+                if ($lines_needed > 1){
                     $line_height = 5;
                 }
                 $row_height = $lines_needed * $line_height;
