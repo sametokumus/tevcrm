@@ -985,8 +985,9 @@ class PdfController extends Controller
                 $name_width = $pdf->GetStringWidth($product_name);
                 $name_height = (((int)($name_width / 100)) + 1) * 2;
 
+                $x = 40;
                 $pdf->SetXY($x, $y);
-                $pdf->MultiCell(100, $name_height, $product_name, 0, 'L');
+                $pdf->MultiCell(100, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
 
 
                 $y += 12;
