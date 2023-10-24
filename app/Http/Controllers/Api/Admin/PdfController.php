@@ -988,18 +988,14 @@ class PdfController extends Controller
 
                 $x = 40;
                 $pdf->SetXY($x, $y);
-//                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
-                $line_height = $name_height * 3;
+                $line_height = $name_height * 10;
                 $pdf->MultiCell(50, $line_height, $product_name.'-'.$name_width.'-'.$name_height.$product_name.'-'.$name_width.'-'.$name_height, 1, 'L');
 
+
+                $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(10, $line_height, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, $line_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-
-
-                // Use MultiCell for product name with a width of 50mm
-//                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
-
 
                 $x = 90;
                 $pdf->SetXY($x, $y);
