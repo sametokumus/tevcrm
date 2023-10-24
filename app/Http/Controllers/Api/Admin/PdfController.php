@@ -983,7 +983,7 @@ class PdfController extends Controller
                 $product_name = $this->textConvert($sale_offer->product_name);
 
                 $name_width = $pdf->GetStringWidth($product_name);
-                $name_width = $pdf->GetStringWidth('LNX 003-8-8 LNX 003-8-8 LNX 003-8-8 ');
+                $name_width = $pdf->GetStringWidth('LNX 003-8-8 LNX 003-8-8 LNX 003-8-8 LNX 003-8-8 ');
                 $row_count = (((int)($name_width / 50)) + 1);
 
                 $x = 40;
@@ -993,7 +993,7 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
                 $row_height = $row_count * $line_height;
-                $pdf->MultiCell(50, $line_height, $product_name.'-'.$line_height.'-'.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height, 1, 'L');
+                $pdf->MultiCell(50, $line_height, $product_name.'-'.$line_height.'-'.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height, 1, 'L');
 
 
                 $x = 10;
