@@ -199,7 +199,7 @@ class PdfController extends Controller
         $row_height = $lines_needed * $line_height;
         $pdf->MultiCell(50, $line_height, $address, 0, 'L');
 
-        return $y + $row_height;
+        return $y;
     }
     private function leadtime($lt){
         if ($lt != '' && $lt != null){
