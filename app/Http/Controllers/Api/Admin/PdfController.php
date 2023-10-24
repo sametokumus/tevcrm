@@ -995,7 +995,7 @@ class PdfController extends Controller
 
                 $x = 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C', 5);
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
                 $x = 90;
