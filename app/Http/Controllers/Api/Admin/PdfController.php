@@ -989,6 +989,7 @@ class PdfController extends Controller
 //                $x = 40;
 //                $pdf->SetXY($x, $y);
                 $pdf->setX(40);
+                $yPos = $pdf->GetY();
 //                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
                 $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height.$product_name.'-'.$name_width.'-'.$name_height, 1, 'L');
 
@@ -999,7 +1000,8 @@ class PdfController extends Controller
 
                 // Save the current X and Y position
                 $xPos = $pdf->GetX();
-                $yPos = $pdf->GetY();
+                $yPos = $y;
+//                $yPos = $pdf->GetY();
 
                 // Use MultiCell for product name with a width of 50mm
 //                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
