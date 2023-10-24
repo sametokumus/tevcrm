@@ -40,6 +40,18 @@ use Carbon\Carbon;
 
 class PdfController extends Controller
 {
+    private function clearText($text){
+
+    }
+    private function htmlTextConvertArray($text){
+
+    }
+    private function addCompanyLogo($pdf, $contact){
+        $pageWidth = $pdf->GetPageWidth();
+        $x = $pageWidth - $contact->logo_width - 10;
+        $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);
+    }
+
 
     public function getGeneratePDF($owner_id, $sale_id)
     {
@@ -570,10 +582,7 @@ class PdfController extends Controller
             $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale_id)->get();
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
-            $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
-            $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
@@ -620,9 +629,10 @@ class PdfController extends Controller
 
 
             // LOGO
-            $pageWidth = $pdf->GetPageWidth();
-            $x = $pageWidth - $contact->logo_width - 10;
-            $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);  // Parameters: image file, x position, y position, width
+//            $pageWidth = $pdf->GetPageWidth();
+//            $x = $pageWidth - $contact->logo_width - 10;
+//            $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);
+            $this->addCompanyLogo($pdf, $contact);
 
             list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
             $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
