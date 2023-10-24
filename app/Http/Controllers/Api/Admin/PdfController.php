@@ -195,12 +195,9 @@ class PdfController extends Controller
         $address = $this->textConvert($company->address);
         $address_width = $pdf->GetStringWidth($address);
         $lines_needed = ceil($address_width / 100);
-        $line_height = 8;
-        if ($lines_needed > 1){
-            $line_height = 5;
-        }
+        $line_height = 5;
         $row_height = $lines_needed * $line_height;
-        $pdf->MultiCell(50, $line_height, $address, 1, 'L');
+        $pdf->MultiCell(50, $line_height, $address, 0, 'L');
 
         return $y + $row_height;
     }
