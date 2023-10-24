@@ -187,22 +187,22 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Address').': '), '0', '0', '');
 
         $pdf->SetFont('ChakraPetch-Regular', '', 10);
-        $x = $x+2 + $pdf->GetStringWidth(__('Address').': ');
-        $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $company->address);
-        $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-        $address = iconv('utf-8', 'iso-8859-9', $inputString);
-//            $pdf->Cell(0, 0, $address, '0', '0', '');
+
+        $y += 5;
+        $x = 10;
+        $pdf->SetXY($x, $y);
+
+        $address = $this->textConvert($company->address);
         $address_width = $pdf->GetStringWidth($address);
-        $address_height = (((int)($address_width / 100)) + 1) * 2;
-
-        if ($address_height == 2){
-            $pdf->SetXY($x, $y);
-        }else {
-            $pdf->SetXY($x, $y - 2);
+        $lines_needed = ceil($address_width / 100);
+        $line_height = 8;
+        if ($lines_needed > 1){
+            $line_height = 5;
         }
-        $pdf->MultiCell(100, $address_height, $address, 0, 'L');
+        $row_height = $lines_needed * $line_height;
+        $pdf->MultiCell(50, $line_height, $address, 1, 'L');
 
-        return $y;
+        return $y + $row_height;
     }
     private function leadtime($lt){
         if ($lt != '' && $lt != null){
@@ -977,12 +977,7 @@ class PdfController extends Controller
                     $measurement_name = $sale_offer->measurement_name_en;
                 }
 
-
-
-                $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
-
-
 
                 $x = 40;
                 $pdf->SetXY($x, $y);
@@ -1009,7 +1004,7 @@ class PdfController extends Controller
                 $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
                 $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');
 
                 $y += $row_height;
 
