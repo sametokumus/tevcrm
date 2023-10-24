@@ -989,12 +989,12 @@ class PdfController extends Controller
                 $x = 40;
                 $pdf->SetXY($x, $y);
 //                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
-                $line_height = $name_height * 2;
+                $line_height = $name_height * 3;
                 $pdf->MultiCell(50, $line_height, $product_name.'-'.$name_width.'-'.$name_height.$product_name.'-'.$name_width.'-'.$name_height, 1, 'L');
 
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(10, $line_height, $sale_offer->sequence, 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+                $pdf->Cell(20, $line_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
 
                 // Use MultiCell for product name with a width of 50mm
@@ -1005,13 +1005,13 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
 
                 // Output remaining cells for the current row
-                $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
-                $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
+                $pdf->Cell(19, $line_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(16, $line_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Cell(25, $line_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(30, $line_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(20, $line_height, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
 
-                $y += 12;
+                $y += $line_height;
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
 //                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
 //                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
