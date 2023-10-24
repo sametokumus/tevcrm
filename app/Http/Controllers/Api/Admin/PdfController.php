@@ -188,7 +188,7 @@ class PdfController extends Controller
 
         $pdf->SetFont('ChakraPetch-Regular', '', 10);
 
-        $y += 5;
+        $y += 2;
         $x = 10;
         $pdf->SetXY($x, $y);
 
