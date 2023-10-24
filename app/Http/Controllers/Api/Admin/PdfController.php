@@ -69,6 +69,81 @@ class PdfController extends Controller
         $pdf->SetXY($x, $actual_height + 32);
         $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-'.$pdf_key.'-'.$sale_id), '0', '0', '');
     }
+    private function addOwnerInfo($pdf, $contact){
+        $x = 10;
+        $y = 15;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 12);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+
+        if ($contact->registration_no != '') {
+            $y += 5;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Registration No').': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x+2 + $pdf->GetStringWidth(__('Registration No').': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $contact->registration_no, '0', '0', '');
+
+            if ($contact->registration_office != '' && App::getLocale() != 'en') {
+
+                $x = $x+5 + $pdf->GetStringWidth($contact->registration_no);
+
+                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, __('Registration Office').': ', '0', '0', '');
+
+                $x = $x+2 + $pdf->GetStringWidth(__('Registration Office').': ');
+                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(0, 0, $contact->registration_office, '0', '0', '');
+
+            }
+        }
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $x = 10;
+        $y += 5;
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        $lines = explode('<br>', $contact->address);
+        foreach ($lines as $line) {
+            $y += 5;
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
+        }
+
+        $y += 5;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
+
+        $y += 5;
+        $x = 10;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, $contact->email, '0', '0', '');
+    }
 
 
     public function getGeneratePDF($owner_id, $sale_id)
@@ -654,79 +729,80 @@ class PdfController extends Controller
             $this->addDateAndCode($pdf, $document_date, $contact, $actual_height, $sale->id, $pageWidth, 'OFR');
 
             //COMPANY INFO
-            $x = 10;
-            $y = 15;
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 12);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-
-            if ($contact->registration_no != '') {
-                $y += 5;
-
-                $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, __('Registration No').': ', '0', '0', '');
-
-                $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                $x = $x+2 + $pdf->GetStringWidth(__('Registration No').': ');
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, $contact->registration_no, '0', '0', '');
-
-                if ($contact->registration_office != '' && App::getLocale() != 'en') {
-
-                    $x = $x+5 + $pdf->GetStringWidth($contact->registration_no);
-
-                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
-                    $pdf->SetXY($x, $y);
-                    $pdf->Cell(0, 0, __('Registration Office').': ', '0', '0', '');
-
-                    $x = $x+2 + $pdf->GetStringWidth(__('Registration Office').': ');
-                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
-                    $pdf->SetXY($x, $y);
-                    $pdf->Cell(0, 0, $contact->registration_office, '0', '0', '');
-
-                }
-            }
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $x = 10;
-            $y += 5;
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $lines = explode('<br>', $contact->address);
-            foreach ($lines as $line) {
-                $y += 5;
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
-            }
-
-            $y += 5;
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
-
-            $y += 5;
-            $x = 10;
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $contact->email, '0', '0', '');
+            $this->addOwnerInfo($pdf, $contact);
+//            $x = 10;
+//            $y = 15;
+//
+//            $pdf->SetFont('ChakraPetch-Bold', '', 12);
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->name), '0', '0', '');
+//
+//            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//
+//            if ($contact->registration_no != '') {
+//                $y += 5;
+//
+//                $pdf->SetFont('ChakraPetch-Bold', '', 10);
+//                $pdf->SetXY($x, $y);
+//                $pdf->Cell(0, 0, __('Registration No').': ', '0', '0', '');
+//
+//                $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//                $x = $x+2 + $pdf->GetStringWidth(__('Registration No').': ');
+//                $pdf->SetXY($x, $y);
+//                $pdf->Cell(0, 0, $contact->registration_no, '0', '0', '');
+//
+//                if ($contact->registration_office != '' && App::getLocale() != 'en') {
+//
+//                    $x = $x+5 + $pdf->GetStringWidth($contact->registration_no);
+//
+//                    $pdf->SetFont('ChakraPetch-Bold', '', 10);
+//                    $pdf->SetXY($x, $y);
+//                    $pdf->Cell(0, 0, __('Registration Office').': ', '0', '0', '');
+//
+//                    $x = $x+2 + $pdf->GetStringWidth(__('Registration Office').': ');
+//                    $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//                    $pdf->SetXY($x, $y);
+//                    $pdf->Cell(0, 0, $contact->registration_office, '0', '0', '');
+//
+//                }
+//            }
+//
+//            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+//            $x = 10;
+//            $y += 5;
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, __('Address').': ', '0', '0', '');
+//
+//            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//            $lines = explode('<br>', $contact->address);
+//            foreach ($lines as $line) {
+//                $y += 5;
+//                $pdf->SetXY($x, $y);
+//                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
+//            }
+//
+//            $y += 5;
+//
+//            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+//
+//            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, $contact->phone, '0', '0', '');
+//
+//            $y += 5;
+//            $x = 10;
+//
+//            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+//
+//            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+//            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+//            $pdf->SetXY($x, $y);
+//            $pdf->Cell(0, 0, $contact->email, '0', '0', '');
 
             //TITLE
 
