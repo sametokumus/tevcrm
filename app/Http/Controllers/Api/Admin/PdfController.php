@@ -197,7 +197,7 @@ class PdfController extends Controller
         $lines_needed = ceil($address_width / 100);
         $line_height = 5;
         $row_height = $lines_needed * $line_height;
-        $pdf->MultiCell(50, $line_height, $address, 0, 'L');
+        $pdf->MultiCell(100, $line_height, $address, 0, 'L');
 
         return $y;
     }
