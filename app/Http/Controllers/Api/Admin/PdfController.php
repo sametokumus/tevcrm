@@ -983,12 +983,12 @@ class PdfController extends Controller
                 $product_name = $this->textConvert($sale_offer->product_name);
 
                 $name_width = $pdf->GetStringWidth($product_name);
-                $name_height = (((int)($name_width / 50)) + 1);
+                $row_count = (((int)($name_width / 50)) + 1);
 
                 $x = 40;
                 $pdf->SetXY($x, $y);
-                $line_height = $name_height * 3;
-                $row_height = $name_height * $line_height;
+                $line_height = 5;
+                $row_height = $row_count * $line_height;
                 $pdf->MultiCell(50, $line_height, $product_name.'-'.$line_height.'-'.$row_height, 1, 'L');
 
 
