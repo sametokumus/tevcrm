@@ -46,6 +46,12 @@ class PdfController extends Controller
     private function htmlTextConvertArray($text){
 
     }
+    private function textConvert($text){
+        $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
+        $inputString = mb_convert_encoding($inputString, 'UTF-8', 'auto');
+        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
+        return iconv('utf-8', 'iso-8859-9', $inputString);
+    }
     private function addOwnerLogo($pdf, $contact, $pageWidth){
         $x = $pageWidth - $contact->logo_width - 10;
         $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);
@@ -922,14 +928,11 @@ class PdfController extends Controller
             }
 
 
-
+            // Set table header
             $x = 10;
             $y += 10;
             $pdf->SetXY($x, $y);
 
-
-
-// Set table header
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->Cell(10, 12, 'N#', 0, 0, 'C');
             $pdf->Cell(20, 12, iconv('utf-8', 'iso-8859-9', __('Ref. Code')), 0, 0, 'C');
@@ -949,7 +952,7 @@ class PdfController extends Controller
 
 
 
-// Set table content
+            // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 9);
             foreach ($sale_offers as $sale_offer) {
                 if (App::getLocale() == 'tr'){
@@ -973,66 +976,77 @@ class PdfController extends Controller
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
 
-                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
-                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
-                $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
+
+                $product_name = $this->textConvert($sale_offer->product_name);
 
                 $name_width = $pdf->GetStringWidth($product_name);
-                if ($name_width > 48){
-                    $wd = (($name_width / 48));
-                    if ($name_width > 60){
-                        $wd = (($name_width / 60));
-                    }
-                    if ($name_width > 100){
-                        $wd = (($name_width / 50));
-                    }
-                    if ($name_width > 110){
-                        $wd = (($name_width / 45));
-                    }
-                    if ($name_width > 200){
-                        $wd = (($name_width / 40));
-                    }
-                    if ($wd >= 0 && $wd < 1){
-                        $row_height = 15;
-                    }else if ($wd >= 1 && $wd < 2){
-                        $row_height = 7.5;
-                    }else if ($wd >= 2 && $wd < 3){
-                        $row_height = 5;
-                    }else if ($wd >= 3 && $wd < 4){
-                        $row_height = 3.75;
-                    }else if ($wd >= 4 && $wd < 5){
-                        $row_height = 3;
-                    }else if ($wd >= 5){
-                        $row_height = 2.5;
-                    }
+                $name_height = (((int)($name_width / 100)) + 1) * 2;
 
-                }
-
-                $pdf->setX(10);
-                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
-//                $pdf->Cell(10, 14, '', 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-//                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
-
-                // Save the current X and Y position
-                $xPos = $pdf->GetX();
-                $yPos = $pdf->GetY();
+                $pdf->SetXY($x, $y);
+                $pdf->MultiCell(100, $name_height, $product_name, 0, 'L');
 
 
-                // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
+//                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
+//                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
+//                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
+//                $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
+//
+//                $name_width = $pdf->GetStringWidth($product_name);
+//                if ($name_width > 48){
+//                    $wd = (($name_width / 48));
+//                    if ($name_width > 60){
+//                        $wd = (($name_width / 60));
+//                    }
+//                    if ($name_width > 100){
+//                        $wd = (($name_width / 50));
+//                    }
+//                    if ($name_width > 110){
+//                        $wd = (($name_width / 45));
+//                    }
+//                    if ($name_width > 200){
+//                        $wd = (($name_width / 40));
+//                    }
+//                    if ($wd >= 0 && $wd < 1){
+//                        $row_height = 15;
+//                    }else if ($wd >= 1 && $wd < 2){
+//                        $row_height = 7.5;
+//                    }else if ($wd >= 2 && $wd < 3){
+//                        $row_height = 5;
+//                    }else if ($wd >= 3 && $wd < 4){
+//                        $row_height = 3.75;
+//                    }else if ($wd >= 4 && $wd < 5){
+//                        $row_height = 3;
+//                    }else if ($wd >= 5){
+//                        $row_height = 2.5;
+//                    }
+//
+//                }
+//
+//                $pdf->setX(10);
+//                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
+//                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+//
+//                // Save the current X and Y position
+//                $xPos = $pdf->GetX();
+//                $yPos = $pdf->GetY();
+//
+//                // Use MultiCell for product name with a width of 50mm
+//                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
+//
+//                // Reset X and move Y to the saved position (next line)
+//                $pdf->SetXY($xPos+50, $yPos);
+//
+//                // Output remaining cells for the current row
+//                $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+//                $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+//                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+//                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+//                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
 
-                // Reset X and move Y to the saved position (next line)
-                $pdf->SetXY($xPos+50, $yPos);
-
-                // Output remaining cells for the current row
-                $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
-                $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
             }
+
+
+
 
             //TOTAL PRICES
 
