@@ -143,6 +143,8 @@ class PdfController extends Controller
         $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
         $pdf->SetXY($x, $y);
         $pdf->Cell(0, 0, $contact->email, '0', '0', '');
+
+        return $y;
     }
 
 
@@ -729,7 +731,7 @@ class PdfController extends Controller
             $this->addDateAndCode($pdf, $document_date, $contact, $actual_height, $sale->id, $pageWidth, 'OFR');
 
             //COMPANY INFO
-            $this->addOwnerInfo($pdf, $contact);
+            $y = $this->addOwnerInfo($pdf, $contact);
 //            $x = 10;
 //            $y = 15;
 //
