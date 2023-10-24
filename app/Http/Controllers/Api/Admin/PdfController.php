@@ -978,7 +978,6 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
-                $pdf->SetCellPadding(5);
 
 
                 $product_name = $this->textConvert($sale_offer->product_name);
@@ -989,7 +988,7 @@ class PdfController extends Controller
 
                 $x = 40;
                 $pdf->SetXY($x, $y);
-                $line_height = $name_height * 5;
+                $line_height = $name_height * 3;
                 $row_height = $name_height * $line_height;
                 $pdf->MultiCell(50, $line_height, $product_name.'-'.$name_width.'-'.$name_height.$product_name.'-'.$name_width.'-'.$name_height, 1, 'L');
 
