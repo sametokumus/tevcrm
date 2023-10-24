@@ -989,6 +989,9 @@ class PdfController extends Controller
                 $x = 40;
                 $pdf->SetXY($x, $y);
                 $line_height = 8;
+                if ($row_count > 1){
+                    $line_height = 5;
+                }
                 $row_height = $row_count * $line_height;
                 $pdf->MultiCell(50, $line_height, $product_name.'-'.$line_height.'-'.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height, 1, 'L');
 
