@@ -954,6 +954,9 @@ class PdfController extends Controller
 
             // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 9);
+            $x = 10;
+            $y += 12;
+            $pdf->SetXY($x, $y);
             foreach ($sale_offers as $sale_offer) {
                 if (App::getLocale() == 'tr'){
                     $measurement_name = $sale_offer->measurement_name_tr;
@@ -986,6 +989,7 @@ class PdfController extends Controller
                 $pdf->MultiCell(100, $name_height, $product_name, 0, 'L');
 
 
+                $y += 12;
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
 //                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
 //                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
