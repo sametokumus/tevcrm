@@ -46,8 +46,7 @@ class PdfController extends Controller
     private function htmlTextConvertArray($text){
 
     }
-    private function addCompanyLogo($pdf, $contact){
-        $pageWidth = $pdf->GetPageWidth();
+    private function addCompanyLogo($pdf, $contact, $pageWidth){
         $x = $pageWidth - $contact->logo_width - 10;
         $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);
     }
@@ -629,10 +628,10 @@ class PdfController extends Controller
 
 
             // LOGO
-//            $pageWidth = $pdf->GetPageWidth();
+            $pageWidth = $pdf->GetPageWidth();
 //            $x = $pageWidth - $contact->logo_width - 10;
 //            $pdf->Image(public_path($contact->logo), $x, 10, $contact->logo_width);
-            $this->addCompanyLogo($pdf, $contact);
+            $this->addCompanyLogo($pdf, $contact, $pageWidth);
 
             list($imageWidth, $imageHeight) = getimagesize(public_path($contact->logo));
             $actual_height = (int) ($contact->logo_width * $imageHeight / $imageWidth);
