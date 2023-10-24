@@ -654,7 +654,6 @@ class PdfController extends Controller
             $this->addDateAndCode($pdf, $document_date, $contact, $actual_height, $sale->id, $pageWidth, 'OFR');
 
             //COMPANY INFO
-
             $x = 10;
             $y = 15;
 
