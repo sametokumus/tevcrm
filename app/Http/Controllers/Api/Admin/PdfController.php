@@ -986,14 +986,33 @@ class PdfController extends Controller
                 $name_width = $pdf->GetStringWidth('LNX 003-12.360275-2');
                 $name_height = (((int)($name_width / 50)) + 1) * 2;
 
-                $x = 40;
-                $pdf->SetXY($x, $y);
-                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
+//                $x = 40;
+//                $pdf->SetXY($x, $y);
+//                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
 
 
                 $pdf->setX(10);
                 $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+
+                // Save the current X and Y position
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+
+                // Use MultiCell for product name with a width of 50mm
+//                $pdf->MultiCell(50, $row_height, $product_name, 'T', 'L');
+                $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
+
+
+                // Reset X and move Y to the saved position (next line)
+                $pdf->SetXY($xPos+50, $yPos);
+
+                // Output remaining cells for the current row
+                $pdf->Cell(19, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(16, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $lead_time), 1, 1, 'C');  // Move to the next line
 
                 $y += 12;
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
