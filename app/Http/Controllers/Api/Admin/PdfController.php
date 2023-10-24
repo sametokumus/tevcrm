@@ -991,6 +991,10 @@ class PdfController extends Controller
                 $pdf->MultiCell(50, $name_height, $product_name.'-'.$name_width.'-'.$name_height, 0, 'L');
 
 
+                $pdf->setX(10);
+                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+
                 $y += 12;
 //                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
 //                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
