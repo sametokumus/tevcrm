@@ -993,7 +993,13 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
                 $row_height = $row_count * $line_height;
-                $pdf->MultiCell(50, $line_height, $product_name.'-'.$line_height.'-'.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height.$row_height.$product_name.'-'.$line_height.'-'.$row_height, 1, 'L');
+
+                $linesNeeded = ceil($name_width / 50);
+                $lineHeight = 5; // Adjust this value based on your font size
+                $row_height = $linesNeeded * $lineHeight;
+
+//                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                $pdf->MultiCell(50, $line_height, 'LNX 003-8-8 LNX 003-8-8 LNX 003-8-8 LNX 003-8-8 ', 1, 'L');
 
 
                 $x = 10;
