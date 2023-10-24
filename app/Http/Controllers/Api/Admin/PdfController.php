@@ -978,6 +978,7 @@ class PdfController extends Controller
 
                 $row_height = 15;
                 $pdf->SetFont('ChakraPetch-Regular', '', 9);
+                $pdf->SetCellPadding(5);
 
 
                 $product_name = $this->textConvert($sale_offer->product_name);
@@ -995,7 +996,7 @@ class PdfController extends Controller
 
                 $x = 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C', 5);
+                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
                 $x = 90;
