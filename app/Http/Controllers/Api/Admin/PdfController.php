@@ -991,6 +991,7 @@ class PdfController extends Controller
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
+                    $old_y = $pdf->getY();
                 }
 
                 $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
