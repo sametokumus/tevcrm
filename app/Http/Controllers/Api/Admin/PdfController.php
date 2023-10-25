@@ -3734,7 +3734,6 @@ class PdfController extends Controller
                 $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', number_format($product->total_price, 2,",",".").' '.$product->currency), 1, 0, 'C');
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($product->lead_time)), 1, 1, 'C');
 
-                $pdf->Ln();
 
                 $i++;
             }
