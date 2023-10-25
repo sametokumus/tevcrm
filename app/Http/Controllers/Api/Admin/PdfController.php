@@ -3721,12 +3721,13 @@ class PdfController extends Controller
 
 
                 $x = 10;
-                $pdf->SetXY($x, $y);
+                $line_y = $pdf->GetY() - $row_height;
+                $pdf->SetXY($x, $line_y);
                 $pdf->Cell(10, $row_height, $i, 1, 0, 'C');
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $product->product_ref_code), 1, 0, 'C');
 
                 $x = 90;
-                $pdf->SetXY($x, $y);
+                $pdf->SetXY($x, $line_y);
                 $pdf->Cell(19, $row_height, iconv('utf-8', 'iso-8859-9', $product->offer_quantity), 1, 0, 'C');
                 $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', number_format($product->pcs_price, 2,",",".").' '.$product->currency), 1, 0, 'C');
