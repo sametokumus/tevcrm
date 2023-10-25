@@ -48,7 +48,7 @@ class PdfController extends Controller
     }
     private function textConvert($text){
         $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
-        $inputString = mb_convert_encoding($inputString, 'UTF-8', 'auto');
+//        $inputString = mb_convert_encoding($inputString, 'UTF-8', 'auto');
         $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
         return iconv('utf-8', 'iso-8859-9', $inputString);
     }
@@ -1081,7 +1081,8 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = utf8_decode($quote->note);
+                $html = $this->textConvert($quote->note);
+                $html = utf8_decode($html);
                 $html = str_replace('<br>', "\n", $html);
                 $html = str_replace('<p>', '', $html);
                 $html = str_replace('</p>', "\n", $html);
