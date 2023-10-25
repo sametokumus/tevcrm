@@ -985,7 +985,7 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
                 $row_height = $lines_needed * $line_height;
-                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                $pdf->MultiCell(50, $line_height, $product_name.'-'.$lines_needed, 1, 'L');
 
 
                 $x = 10;
