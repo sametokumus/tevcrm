@@ -3996,6 +3996,7 @@ class PdfController extends Controller
 
 
 
+            $y += 3;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
