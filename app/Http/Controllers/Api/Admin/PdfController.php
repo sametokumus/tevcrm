@@ -1119,12 +1119,12 @@ class PdfController extends Controller
             for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
                 $pdf->AddPage();
 
-                $width = 180;
+                $width = 190;
                 $imagePath = public_path($contact->footer);
                 list($originalWidth, $originalHeight) = getimagesize($imagePath);
                 $aspectRatio = $originalWidth / $originalHeight;
                 $height = $width / $aspectRatio;
-                $y = 295 - $height;
+                $y = 285 - $height;
                 $x = 10;
                 $pdf->Image($imagePath, $x, $y, $width, $height);
 
