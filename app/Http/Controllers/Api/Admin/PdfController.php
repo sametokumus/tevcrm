@@ -986,6 +986,11 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
                 $row_height = $lines_needed * $line_height;
+                $total_y = $pdf->getY() + $row_height;
+                if ($total_y > 250){
+                    $pdf->AddPage();
+                }
+
                 $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
 
 
@@ -999,7 +1004,8 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+//                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $total_y), 1, 0, 'C');
 
                 $x = 90;
                 $pdf->SetXY($x, $y);
@@ -1127,8 +1133,6 @@ class PdfController extends Controller
                 $y = 285 - $height;
                 $x = 10;
                 $pdf->Image($imagePath, $x, $y, $width, $height);
-
-//                $pdf->Image(public_path($contact->footer), 10, 260, 190);
 
                 $tplIdx = $pdf->importPage($pageNo);
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
