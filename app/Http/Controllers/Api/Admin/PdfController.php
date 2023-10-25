@@ -990,6 +990,7 @@ class PdfController extends Controller
                 if ($total_y > 250){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
+                    $y = 10;
                 }
 
                 $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
