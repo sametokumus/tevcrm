@@ -216,6 +216,9 @@ class PdfController extends Controller
         return $lead_time;
     }
 
+
+    //PDF'S
+
     public function getGenerateQuatotionPDF($lang, $owner_id, $sale_id)
     {
         try {
@@ -3678,7 +3681,8 @@ class PdfController extends Controller
                 $line_y = $pdf->GetY() - $row_height;
                 $pdf->SetXY($x, $line_y);
                 $pdf->Cell(10, $row_height, $i, 1, 0, 'C');
-                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $product->ref_code), 1, 0, 'C');
+//                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $product->ref_code), 1, 0, 'C');
+                $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', $name_width), 1, 0, 'C');
 
                 $x = 90;
                 $pdf->SetXY($x, $line_y);
@@ -3688,6 +3692,7 @@ class PdfController extends Controller
                 $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', ''), 1, 0, 'C');
                 $pdf->Cell(20, $row_height, iconv('utf-8', 'iso-8859-9', ''), 1, 1, 'C');
 
+                $y += $row_height;
 
                 $i++;
             }
