@@ -992,6 +992,8 @@ class PdfController extends Controller
                 $new_y = $pdf->getY();
                 if ($new_y > $old_y) {
                     $row_height = $new_y - $old_y;
+                }else{
+                    $row_height = $new_y - 20;
                 }
 
                 $x = 10;
