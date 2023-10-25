@@ -1082,7 +1082,7 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 $html = $this->textConvert($quote->note);
-                $html = utf8_decode($html);
+//                $html = utf8_decode($html);
                 $html = str_replace('<br>', "\n", $html);
                 $html = str_replace('<p>', '', $html);
                 $html = str_replace('</p>', "\n", $html);
@@ -1094,7 +1094,7 @@ class PdfController extends Controller
 //                $x = 10;
 //                $pdf->SetXY($x, $y);
 ////                $pdf->MultiCell(2, $html);
-                $pdf->MultiCell(0, 5, utf8_decode($html));
+                $pdf->MultiCell(0, 5, $html);
             }
 
 
