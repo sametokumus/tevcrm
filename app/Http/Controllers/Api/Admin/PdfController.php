@@ -566,11 +566,11 @@ class PdfController extends Controller
             }
 
             if ($sale->vat != null && $sale->vat != '0.00') {
-                $pdf->SetXY($x, $pdf->getY());
+                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
 
-                $pdf->SetXY($x + 140, $y);
+                $pdf->SetXY($x + 140, $pdf->getY());
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
