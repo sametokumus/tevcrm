@@ -541,11 +541,11 @@ class PdfController extends Controller
                     $title = __('Grand Total');
                 }
 
-                $pdf->SetXY($x, $pdf->getY());
+                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper($title)), 1, 0, 'R');
 
-                $pdf->SetXY($x + 140, $y);
+                $pdf->SetXY($x + 140, $pdf->getY());
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
@@ -554,11 +554,11 @@ class PdfController extends Controller
             }
 
             if ($sale->freight != null) {
-                $pdf->SetXY($x, $pdf->getY());
+                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
 
-                $pdf->SetXY($x + 140, $y);
+                $pdf->SetXY($x + 140, $pdf->getY());
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->freight, 2,",",".").' '.$currency), 1, 0, 'C');
 
