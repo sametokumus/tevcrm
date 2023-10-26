@@ -554,7 +554,7 @@ class PdfController extends Controller
             }
 
             if ($sale->freight != null) {
-                $pdf->SetXY($x, $y);
+                $pdf->SetXY($x, $pdf->getY());
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
 
