@@ -4074,7 +4074,7 @@ class PdfController extends Controller
 
                 $product_name = $this->textConvert($sale_offer->product_name);
                 $name_width = $pdf->GetStringWidth($product_name);
-                $lines_needed = ceil($name_width / 50);
+                $lines_needed = ceil($name_width / 100);
                 $line_height = 8;
                 if ($lines_needed > 1){
                     $line_height = 5;
@@ -4083,12 +4083,12 @@ class PdfController extends Controller
                 $total_y = $pdf->getY() + $row_height;
                 if ($total_y > 250){
                     $pdf->AddPage();
-                    $pdf->SetXY(50, 10);
+                    $pdf->SetXY(100, 10);
                     $y = 10;
                     $old_y = $pdf->getY();
                 }
 
-                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                $pdf->MultiCell(100, $line_height, $product_name, 1, 'L');
 
 
                 $new_y = $pdf->getY();
