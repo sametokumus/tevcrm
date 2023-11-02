@@ -376,7 +376,7 @@ async function addPaymentPaymentTermWithButton(day){
         console.log(currentDate.getDate())
     }
 
-    let dueDate = new Date();
+    let dueDate = new Date(currentDate);
     dueDate.setDate(currentDate.getDate() + parseInt(day));
     dueDate = dueDate.toLocaleDateString('tr-TR', {
         day: '2-digit',
