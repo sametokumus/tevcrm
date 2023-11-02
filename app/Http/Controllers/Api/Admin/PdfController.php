@@ -4060,19 +4060,21 @@ class PdfController extends Controller
             $y += 12;
             $pdf->SetXY($x, $y);
             foreach ($sale_offers as $sale_offer) {
-                if (App::getLocale() == 'tr'){
+                if ($lang == 'tr'){
                     $measurement_name = $sale_offer->measurement_name_tr;
                 }else{
                     $measurement_name = $sale_offer->measurement_name_en;
                 }
 
+                $pdf->SetFont('ChakraPetch-Regular', '', 9);
+
                 $x = 50;
-                $pdf->SetXY($x, $pdf->getY());
+                $pdf->SetXY($x, $pdf->GetY());
                 $old_y = $pdf->getY();
 
                 $product_name = $this->textConvert($sale_offer->product_name);
                 $name_width = $pdf->GetStringWidth($product_name);
-                $lines_needed = ceil($name_width / 100);
+                $lines_needed = ceil($name_width / 50);
                 $line_height = 8;
                 if ($lines_needed > 1){
                     $line_height = 5;
@@ -4086,7 +4088,7 @@ class PdfController extends Controller
                     $old_y = $pdf->getY();
                 }
 
-                $pdf->MultiCell(100, $line_height, $product_name, 1, 'L');
+                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
 
 
                 $new_y = $pdf->getY();
