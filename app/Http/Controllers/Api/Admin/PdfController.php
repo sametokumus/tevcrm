@@ -4063,57 +4063,50 @@ class PdfController extends Controller
                     $measurement_name = $sale_offer->measurement_name_en;
                 }
 
-                $row_height = 15;
-                $pdf->SetFont('ChakraPetch-Regular', '', 9);
+                $x = 40;
+                $pdf->SetXY($x, $pdf->GetY());
+                $old_y = $pdf->getY();
 
-                $cleanInput = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $sale_offer->product_name);
-                $inputString = mb_convert_encoding($cleanInput, 'UTF-8', 'auto');
-//                $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
-                $product_name = iconv('utf-8', 'iso-8859-9', $inputString);
-
+                $product_name = $this->textConvert($sale_offer->product_name);
                 $name_width = $pdf->GetStringWidth($product_name);
-                if ($name_width > 100){
-                    $wd = (($name_width / 100));
-                    if ($name_width > 200){
-                        $wd = (($name_width / 90));
-                    }
-                    if ($wd >= 0 && $wd < 1){
-                        $row_height = 15;
-                    }else if ($wd >= 1 && $wd < 2){
-                        $row_height = 7.5;
-                    }else if ($wd >= 2 && $wd < 3){
-                        $row_height = 5;
-                    }else if ($wd >= 3 && $wd < 4){
-                        $row_height = 3.75;
-                    }else if ($wd >= 4 && $wd < 5){
-                        $row_height = 3;
-                    }else if ($wd >= 5){
-                        $row_height = 2.5;
-                    }
-
+                $lines_needed = ceil($name_width / 50);
+                $line_height = 8;
+                if ($lines_needed > 1){
+                    $line_height = 5;
+                }
+                $row_height = $lines_needed * $line_height;
+                $total_y = $pdf->getY() + $row_height;
+                if ($total_y > 250){
+                    $pdf->AddPage();
+                    $pdf->SetXY(40, 10);
+                    $y = 10;
+                    $old_y = $pdf->getY();
                 }
 
-                $pdf->setX(10);
-                $pdf->Cell(10, 15, $sale_offer->sequence, 1, 0, 'C');
-//                $pdf->Cell(10, 14, '', 1, 0, 'C');
-                $pdf->Cell(30, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
-//                $pdf->Cell(20, 14, iconv('utf-8', 'iso-8859-9', $row_height.' - '.$name_width), 1, 0, 'C');
-
-                // Save the current X and Y position
-                $xPos = $pdf->GetX();
-                $yPos = $pdf->GetY();
+                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
 
 
-                // Use MultiCell for product name with a width of 50mm
-                $pdf->MultiCell(100, $row_height, $product_name, 'T', 'L');
+                $new_y = $pdf->getY();
+                if ($new_y > $old_y) {
+                    $row_height = $new_y - $old_y;
+                }else{
+                    $row_height = $new_y - 20;
+                }
 
-                // Reset X and move Y to the saved position (next line)
-                $pdf->SetXY($xPos+100, $yPos);
 
-                // Output remaining cells for the current row
-                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
-                $pdf->Cell(25, 15, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-                $pdf->Ln();
+
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
+
+                $x = 150;
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_quantity), 1, 0, 'C');
+                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+
+                $y += $row_height;
+
             }
 
 
