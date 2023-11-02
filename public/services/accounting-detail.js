@@ -370,6 +370,7 @@ async function addPaymentPaymentTermWithButton(day){
         currentDate = new Date();
     }else {
         let [day, month, year] = invoice_date.split('-');
+        console.log(day, month, year)
         currentDate = new Date(year, month - 1, day);
         console.log(currentDate)
         console.log(currentDate.getDate())
