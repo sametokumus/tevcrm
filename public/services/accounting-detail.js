@@ -372,6 +372,7 @@ async function addPaymentPaymentTermWithButton(day){
         let [day, month, year] = invoice_date.split('-');
         currentDate = new Date(year, month - 1, day);
         console.log(currentDate)
+        console.log(currentDate.getDate())
     }
 
     let dueDate = new Date();
@@ -381,6 +382,7 @@ async function addPaymentPaymentTermWithButton(day){
         month: '2-digit',
         year: 'numeric'
     });
+    console.log(dueDate)
     dueDate = formatDateSplit(dueDate, '-', '.');
     document.getElementById('add_payment_due_date').value = dueDate;
 }
