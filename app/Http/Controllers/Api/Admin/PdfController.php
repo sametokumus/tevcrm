@@ -4057,7 +4057,7 @@ class PdfController extends Controller
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 9);
             $x = 10;
-            $y += 17;
+            $y += 12;
             $pdf->SetXY($x, $y);
             foreach ($sale_offers as $sale_offer) {
                 if (App::getLocale() == 'tr'){
@@ -4067,7 +4067,7 @@ class PdfController extends Controller
                 }
 
                 $x = 50;
-                $pdf->SetXY($x, $pdf->GetY());
+                $pdf->SetXY($x, $pdf->getY());
                 $old_y = $pdf->getY();
 
                 $product_name = $this->textConvert($sale_offer->product_name);
