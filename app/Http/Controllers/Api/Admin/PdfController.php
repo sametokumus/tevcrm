@@ -549,12 +549,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
 
             }
 
-            $y = $pdf->GetY();
             if ($sale->freight != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
@@ -563,11 +562,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->freight, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
-            $y = $pdf->GetY();
             if ($sale->vat != null && $sale->vat != '0.00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -576,12 +574,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
-            $y = $pdf->GetY();
             if ($sale->grand_total != null) {
                 if (($sale->vat != null && $sale->vat != '0.00') || $sale->freight != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -590,7 +587,6 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
