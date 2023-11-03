@@ -553,6 +553,7 @@ class PdfController extends Controller
 
             }
 
+            $y = $pdf->GetY();
             if ($sale->freight != null) {
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
@@ -565,6 +566,7 @@ class PdfController extends Controller
                 $y += 10;
             }
 
+            $y = $pdf->GetY();
             if ($sale->vat != null && $sale->vat != '0.00') {
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
@@ -577,6 +579,7 @@ class PdfController extends Controller
                 $y += 10;
             }
 
+            $y = $pdf->GetY();
             if ($sale->grand_total != null) {
                 if (($sale->vat != null && $sale->vat != '0.00') || $sale->freight != null) {
                     $pdf->SetXY($x, $y);
