@@ -4216,7 +4216,7 @@ class PdfController extends Controller
             $request = $offer_request;
 
             $customer = Company::query()->where('id', $sale->customer_id)->first();
-            $contact = Contact::query()->where('id', $owner_id)->first();
+            $contact = Contact::query()->where('id', $sale->owner_id)->first();
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
             $total_offer_price = 0;
