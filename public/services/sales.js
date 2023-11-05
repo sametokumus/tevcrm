@@ -443,6 +443,9 @@ async function openShipmentPrice(sale_id){
     if (data.expenses != null){
         document.getElementById('add_shipment_price').value = changeCommasToDecimal(data.expenses.price);
         document.getElementById('add_shipment_currency').value = data.expenses.currency;
+    }else{
+        document.getElementById('add_shipment_price').value = "";
+        document.getElementById('add_shipment_currency').value = "TRY";
     }
 
 

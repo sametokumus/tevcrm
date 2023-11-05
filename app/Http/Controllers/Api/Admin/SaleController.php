@@ -2088,7 +2088,7 @@ class SaleController extends Controller
                 ]);
             }
 
-            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
