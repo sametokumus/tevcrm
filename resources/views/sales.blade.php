@@ -250,7 +250,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="add_shipment_currency" onchange="changeDashCurrency();">
+                            <select class="form-control" id="add_shipment_currency">
                                 <option value="TRY">TRY</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>

@@ -17,6 +17,7 @@
         let sale_id = getPathVariable('sale-detail');
         initSaleStats(sale_id);
         initDocuments(sale_id);
+        initExpenses(sale_id);
 
         initSaleHistory(sale_id);
         initSaleSuppliers(sale_id);
@@ -226,8 +227,6 @@ async function initMobileDocuments(){
         ],
         dom: 'Bfrtip',
         buttons: [
-            'excel',
-            'pdf',
             {
                 text: 'Döküman Ekle',
                 className: 'btn btn-theme',
@@ -447,4 +446,58 @@ async function initSellingProcess(sale_id){
     chart.render();
 
 
+}
+
+async function initExpenses(sale_id){
+    let data = await serviceGetSaleExpenseById(sale_id);
+    $("#expenses-datatable").dataTable().fnDestroy();
+    $('#expenses-datatable tbody > tr').remove();
+
+    $.each(data.expenses, function (i, expense) {
+        let item = '<tr>\n' +
+            '              <td>'+ expense.id +'</td>\n' +
+            '              <td>'+ expense.category_name +'</td>\n' +
+            '              <td>'+ changeCommasToDecimal(expense.price) +'</td>\n' +
+            '              <td>'+ expense.currency +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteSaleExpense(\''+ expense.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Sil\n' +
+            '                      </button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+        $('#expenses-datatable tbody').append(item);
+    });
+
+    $('#expenses-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Gider Ekle ve Güncelle',
+                className: 'btn btn-theme',
+                action: function ( e, dt, node, config ) {
+                    openAddExpenseModal();
+                }
+            }
+        ],
+        pageLength : -1,
+        language: {
+            url: "services/Turkish.json"
+        }
+    });
+
+}
+
+async function deleteSaleExpense(expense_id){
+    let returned = await serviceGetDeleteSaleExpense(expense_id);
+    if(returned){
+        let sale_id = getPathVariable('sale-detail');
+        initExpenses(sale_id);
+    }
 }

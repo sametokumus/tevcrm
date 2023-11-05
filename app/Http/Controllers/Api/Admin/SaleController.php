@@ -2098,5 +2098,18 @@ class SaleController extends Controller
         }
     }
 
+    public function deleteSaleExpense($expense_id)
+    {
+        try {
+            Expense::query()->where('id', $expense_id)->update([
+                'active' => 0
+            ]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
 
 }

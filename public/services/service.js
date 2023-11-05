@@ -1601,6 +1601,16 @@ async function servicePostAddSaleExpense(formData) {
         return false;
     }
 }
+async function serviceGetDeleteSaleExpense(expense_id) {
+    const data = await fetchDataGet('/admin/sale/deleteSaleExpense/' + expense_id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 

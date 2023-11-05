@@ -268,6 +268,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getSaleExpenseById/{sale_id}', [SaleController::class, 'getSaleExpenseById']);
     Route::get('sale/getSaleExpenseByCategoryId/{sale_id}/{category_id}', [SaleController::class, 'getSaleExpenseByCategoryId']);
     Route::post('sale/addSaleExpense', [SaleController::class, 'addSaleExpense']);
+    Route::get('sale/deleteSaleExpense/{expense_id}', [SaleController::class, 'deleteSaleExpense']);
 
     //Contact
     Route::get('contact/getContacts', [ContactController::class, 'getContacts']);

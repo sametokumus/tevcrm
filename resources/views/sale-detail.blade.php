@@ -169,6 +169,44 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EK GİDERLER</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <table id="expenses-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                        <thead>
+                        <tr>
+                            <th class="border-bottom-0" data-priority="1">ID</th>
+                            <th class="border-bottom-0">İsim</th>
+                            <th class="border-bottom-0">Tutar</th>
+                            <th class="border-bottom-0">Para Birimi</th>
+                            <th class="border-bottom-0" data-priority="2">İşlem</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">MOBİL DÖKÜMANLAR</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
