@@ -1387,6 +1387,8 @@ class SaleController extends Controller
                             $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
                         }else{
                             $expense_price = $sale->{$sc.'_rate'};
+                            $expense['sc'] = $sc;
+                            $expense['ec'] = $ec;
                         }
                     }
                     $total_expense += $expense_price;
