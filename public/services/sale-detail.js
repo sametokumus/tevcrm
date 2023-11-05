@@ -513,6 +513,7 @@ async function deleteSaleExpense(expense_id){
 async function openAddExpenseModal(){
     await getExpenseCategoriesAddSelectId('add_expense_category');
     $('#addExpenseModal').modal('show');
+    initExpenseToModal();
 }
 
 async function initExpenseToModal(){
