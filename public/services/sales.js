@@ -454,7 +454,7 @@ async function addShipmentPrice() {
 
     let formData = JSON.stringify({
         "sale_id": sale_id,
-        "category_id": user_id,
+        "category_id": 1,
         "price": changePriceToDecimal(price),
         "currency": currency
     });
