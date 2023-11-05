@@ -263,6 +263,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Documents
     Route::get('sale/getDocuments/{sale_id}', [SaleController::class, 'getDocuments']);
 
+    //Expense
+    Route::get('sale/getExpenseCategories', [SaleController::class, 'getExpenseCategories']);
+    Route::get('sale/getSaleExpenseById/{sale_id}', [SaleController::class, 'getSaleExpenseById']);
+    Route::get('sale/getSaleExpenseByCategoryId/{sale_id}/{category_id}', [SaleController::class, 'getSaleExpenseByCategoryId']);
+    Route::post('sale/addSaleExpense', [SaleController::class, 'addSaleExpense']);
 
     //Contact
     Route::get('contact/getContacts', [ContactController::class, 'getContacts']);

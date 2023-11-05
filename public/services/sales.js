@@ -204,6 +204,15 @@ async function initSales(){
             // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
             btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
+        }else if (sale.status.action == "pl-inv-exp"){
+            status_class = "border-indigo text-indigo";
+
+            // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
+            btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
+            btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
+            btn_list += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openShipmentPrice(\'' + sale.sale_id + '\')">\n' +
+                '           <span class="fe fe-refresh-cw"> Nakliye Tutarı\n' +
+                '        </button>\n';
         }else if (sale.status.action == "admin-conf-failed" || sale.status.action == "admin-rev-conf-failed"){
             status_class = "border-default text-default";
         }

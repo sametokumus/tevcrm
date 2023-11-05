@@ -13,6 +13,8 @@ use App\Models\CurrencyLog;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Employee;
+use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Models\Measurement;
 use App\Models\MobileDocument;
 use App\Models\Offer;
@@ -2012,6 +2014,85 @@ class SaleController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getExpenseCategories()
+    {
+        try {
+            $categories = ExpenseCategory::query()->where('active', 1)->orderBy('sequence')->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['categories' => $categories]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getSaleExpenseById($sale_id)
+    {
+        try {
+            $expenses = Expense::query()
+                ->leftJoin('expense_categories', 'expense_categories.id', '=', 'expenses.category_id')
+                ->where('expenses.sale_id', $sale_id)
+                ->where('expenses.active', 1)
+                ->selectRaw('expenses.*, expense_categories.name as category_name')
+                ->orderBy('expense_categories.sequence')
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['expenses' => $expenses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getSaleExpenseByCategoryId($sale_id, $category_id)
+    {
+        try {
+            $expenses = Expense::query()
+                ->leftJoin('expense_categories', 'expense_categories.id', '=', 'expenses.category_id')
+                ->where('expenses.sale_id', $sale_id)
+                ->where('expenses.category_id', $category_id)
+                ->where('expenses.active', 1)
+                ->selectRaw('expenses.*, expense_categories.name as category_name')
+                ->orderBy('expense_categories.sequence')
+                ->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['expenses' => $expenses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addSaleExpense(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required'
+            ]);
+            $has_price = Expense::query()
+                ->where('sale_id', $request->sale_id)
+                ->where('category_id', $request->category_id)
+                ->first();
+            if ($has_price) {
+                Expense::query()->where('sale_id', $request->sale_id)->where('category_id', $request->category_id)->update([
+                    'price' => $request->price,
+                    'active' => 1
+                ]);
+            }else{
+                Expense::query()->insert([
+                    'sale_id' => $request->sale_id,
+                    'category_id' => $request->category_id,
+                    'price' => $request->price
+                ]);
+            }
+
+            return response(['message' => __('Not ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 
