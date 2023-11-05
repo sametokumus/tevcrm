@@ -1383,7 +1383,11 @@ class SaleController extends Controller
                     }else{
                         $ec = strtolower($expense->currency);
                         $sc = strtolower($sale->currency);
-                        $expense_price = $expense->price * $sale->{$ec.'_rate'} / $sale->{$sc.'_rate'};
+                        if ($sale->{$sc.'_rate'} != 0) {
+                            $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                        }else{
+                            $expense_price = 0;
+                        }
                     }
                     $total_expense += $expense_price;
                     $expense['converted_price'] = $expense_price;
