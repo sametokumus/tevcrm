@@ -3,9 +3,17 @@
 
 	 $(document).ready(function() {
 
+         $(":input").inputmask();
+         $("#add_expense_price").maskMoney({thousands:'.', decimal:','});
+
          $('#add_document_form').submit(function (e){
              e.preventDefault();
              addMobileDocument();
+         });
+
+         $('#add_expense_form').submit(function (e){
+             e.preventDefault();
+             addExpense();
          });
 
 	});
@@ -504,7 +512,7 @@ async function deleteSaleExpense(expense_id){
 
 async function openAddExpenseModal(){
     await getExpenseCategoriesAddSelectId('add_expense_category');
-    $('#addDocumentModal').modal('show');
+    $('#addExpenseModal').modal('show');
 }
 
 async function initExpenseToModal(){
@@ -520,5 +528,26 @@ async function initExpenseToModal(){
     }else{
         document.getElementById('add_expense_price').value = "";
         document.getElementById('add_expense_currency').value = "TRY";
+    }
+}
+
+async function addExpense() {
+    let sale_id = getPathVariable('sale-detail');
+    let category_id = document.getElementById('add_expense_category').value;
+    let price = document.getElementById('add_expense_price').value;
+    let currency = document.getElementById('add_expense_currency').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "category_id": category_id,
+        "price": changePriceToDecimal(price),
+        "currency": currency
+    });
+    console.log(formData)
+
+    let returned = await servicePostAddSaleExpense(formData);
+    if (returned){
+        $('#addExpenseModal').modal('hide');
+        initExpenses(sale_id);
     }
 }
