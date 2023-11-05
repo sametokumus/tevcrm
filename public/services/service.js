@@ -606,7 +606,6 @@ async function getDocumentTypesAddSelectId(selectId){
 async function getExpenseCategoriesAddSelectId(selectId){
     let data = await serviceGetExpenseCategories();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Ödeme Yöntemi Seçiniz</option>');
     $.each(data.categories, function(i, category){
         let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
