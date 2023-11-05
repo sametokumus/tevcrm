@@ -603,6 +603,15 @@ async function getDocumentTypesAddSelectId(selectId){
         $('#'+selectId).append(optionRow);
     });
 }
+async function getExpenseCategoriesAddSelectId(selectId){
+    let data = await serviceGetExpenseCategories();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Ödeme Yöntemi Seçiniz</option>');
+    $.each(data.categories, function(i, category){
+        let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
 
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
@@ -1575,6 +1584,14 @@ async function servicePostUpdateQuote(formData) {
 
 
 
+async function serviceGetExpenseCategories() {
+    const data = await fetchDataGet('/admin/sale/getExpenseCategories', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function serviceGetSaleExpenseById(sale_id) {
     const data = await fetchDataGet('/admin/sale/getSaleExpenseById/' + sale_id, 'application/json');
     if (data.status == "success") {

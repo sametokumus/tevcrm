@@ -342,5 +342,47 @@ $extra_js='
     </div>
 </div>
 
+<div class="modal modal-cover fade" id="addExpenseModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">EK GİDERLER</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="#" id="add_expense_form">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Gider Türü</label>
+                            <select class="form-control" id="add_expense_category" onchange="initExpenseToModal();">
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Tutar</label>
+                            <input type="text" class="form-control" id="add_expense_price" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="add_expense_currency">
+                                <option value="TRY">TRY</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @include('include.footer')

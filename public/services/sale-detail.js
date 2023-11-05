@@ -501,3 +501,24 @@ async function deleteSaleExpense(expense_id){
         initExpenses(sale_id);
     }
 }
+
+async function openAddExpenseModal(){
+    await getExpenseCategoriesAddSelectId('add_expense_category');
+    $('#addDocumentModal').modal('show');
+}
+
+async function initExpenseToModal(){
+    let sale_id = getPathVariable('sale-detail');
+    let category_id = document.getElementById('add_expense_category').value;
+
+    let data = await serviceGetSaleExpenseByCategoryId(sale_id, category_id);
+    console.log(data)
+
+    if (data.expenses != null){
+        document.getElementById('add_expense_price').value = changeCommasToDecimal(data.expenses.price);
+        document.getElementById('add_expense_currency').value = data.expenses.currency;
+    }else{
+        document.getElementById('add_expense_price').value = "";
+        document.getElementById('add_expense_currency').value = "TRY";
+    }
+}
