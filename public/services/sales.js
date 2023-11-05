@@ -425,3 +425,14 @@ async function deleteSale(){
         await initSales();
     }
 }
+
+async function openShipmentPrice(sale_id){
+    $('#addShipmentPriceModal').modal('show');
+    document.getElementById('add_shipment_sale_id').value = sale_id;
+
+    let data = await serviceGetSaleExpenseByCategoryId(sale_id, 1);
+    console.log(data)
+
+
+
+}

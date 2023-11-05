@@ -1574,6 +1574,27 @@ async function servicePostUpdateQuote(formData) {
 
 
 
+
+async function serviceGetSaleExpenseById(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleExpenseById/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetSaleExpenseByCategoryId(sale_id, category_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleExpenseByCategoryId/' + sale_id + '/' + category_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+
+
+
 async function serviceGetSaleNotes(id) {
     const data = await fetchDataGet('/admin/sale/getSaleNotes/' + id, 'application/json');
     if (data.status == "success") {
