@@ -1366,7 +1366,7 @@ class SaleController extends Controller
             }
 
             if ($total_offer_price != 0) {
-                $total_expense = 100 * $total_price / $total_offer_price;
+                $total_expense = $total_offer_price;
             }else{
                 $total_expense = 0;
             }
