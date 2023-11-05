@@ -259,6 +259,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getSaleDetailInfo/{sale_id}', [SaleController::class, 'getSaleDetailInfo']);
     Route::get('sale/getSaleStatusHistory/{sale_id}', [SaleController::class, 'getSaleStatusHistory']);
     Route::get('sale/getSaleSuppliers/{sale_id}', [SaleController::class, 'getSaleSuppliers']);
+    Route::get('sale/getSaleSummary/{sale_id}', [SaleController::class, 'getSaleSummary']);
 
     //Documents
     Route::get('sale/getDocuments/{sale_id}', [SaleController::class, 'getDocuments']);

@@ -1331,6 +1331,81 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getSaleSummary($sale_id)
+    {
+        try {
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
+            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+            $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $sale['request'] = $offer_request;
+
+            $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
+            $sale['owner'] = Contact::query()->where('id', $sale->owner_id)->first();
+
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            $total_offer_price = 0;
+            foreach ($sale_offers as $sale_offer){
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
+                $sale_offer['offer_product'] = $offer_product;
+                $total_offer_price += $offer_product->converted_price;
+            }
+            $sale['sale_offers'] = $sale_offers;
+
+
+            $total_price = $sale->grand_total;
+            if ($sale->grand_total_with_shipping != null){
+                $total_price = $sale->grand_total_with_shipping;
+            }
+
+            if ($total_offer_price != 0) {
+                $total_expense = 100 * $total_price / $total_offer_price;
+            }else{
+                $total_expense = 0;
+            }
+
+            $expenses = Expense::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            foreach ($expenses as $expense){
+                if ($expense->currency == $sale->currency){
+                    $total_expense += $expense->price;
+                    $expense['converted_price'] = $expense->price;
+                }else{
+                    if ($expense->currency == 'TRY') {
+                        $ec = strtolower($expense->currency);
+                        $expense_price = $expense->price / $sale->{$ec.'_rate'};
+                    }else{
+                        $ec = strtolower($expense->currency);
+                        $sc = strtolower($sale->currency);
+                        $expense_price = $expense->price * $sale->{$ec.'_rate'} / $sale->{$sc.'_rate'};
+                    }
+                    $total_expense += $expense_price;
+                    $expense['converted_price'] = $expense_price;
+                }
+            }
+            $sale['expenses'] = $expenses;
+
+
+            if ($total_offer_price != 0) {
+                $profit_rate = 100 * $total_price / $total_expense;
+            }else{
+                $profit_rate = 0;
+            }
+            $sale['profit_rate'] = number_format($profit_rate, 2, ",", "");
+            $sale['supplier_total'] = number_format($total_offer_price, 2, ".", "");
+            $sale['total_expense'] = number_format($total_expense, 2, ".", "");
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 
     public function removeCancelledSales()

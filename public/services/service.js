@@ -2131,6 +2131,15 @@ async function servicePostUpdateProductName(formData, id) {
     }
 }
 
+async function serviceGetSaleSummary(sale_id) {
+    const data = await fetchDataGet('/admin/sale/getSaleSummary/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetSaleDetailInfo(sale_id) {
     const data = await fetchDataGet('/admin/sale/getSaleDetailInfo/' + sale_id, 'application/json');
     if (data.status == "success") {

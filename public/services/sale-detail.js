@@ -24,6 +24,7 @@
         checkRole();
         let sale_id = getPathVariable('sale-detail');
         initSaleStats(sale_id);
+        initSaleSummary(sale_id);
         initDocuments(sale_id);
         initExpenses(sale_id);
 
@@ -82,10 +83,6 @@ async function initSaleStats(sale_id){
     let sale = data.sale;
     console.log(sale)
 
-    let admin_id = await localStorage.getItem('userId');
-    let control = await serviceGetCheckAdminRolePermission(admin_id, 20);
-
-
 
     $('#sale-code').text(sale.owner.short_code+'-'+sale.id);
     sale_global_id = sale.id;
@@ -116,9 +113,7 @@ async function initSaleStats(sale_id){
         }
         $('#remaining-message').html(remaining_message);
     }
-    if (control.permission) {
-        $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
-    }
+
     $('#product-count').append(sale.product_count);
     $('#product-total-count').append('Toplam Ürün Adedi: '+sale.total_product_count);
 
@@ -127,6 +122,23 @@ async function initSaleStats(sale_id){
     // $('#total-sale').text(stats.total_sale);
     // $('#active-sale').text(stats.active_sale);
     // $('#total-product').text(stats.total_product);
+
+
+}
+
+async function initSaleSummary(sale_id){
+    let data = await serviceGetSaleSummary(sale_id);
+    let sale = data.sale;
+    console.log(sale)
+
+    let admin_id = await localStorage.getItem('userId');
+    let control = await serviceGetCheckAdminRolePermission(admin_id, 20);
+
+
+    if (control.permission) {
+        $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
+    }
+
 
 
 }
