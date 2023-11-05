@@ -113,10 +113,22 @@ class NewsFeedController extends Controller
         try {
             $stats = array();
 
-            $stats['total_request'] = Sale::query()->get()->count();
-            $stats['total_sale'] = Sale::query()->where('status_id', '>=', 7)->where('status_id', '<=', 20)->get()->count();
-            $stats['active_sale'] = Sale::query()->where('status_id', '>=', 1)->where('status_id', '<=', 17)->get()->count();
-            $stats['total_product'] = Product::query()->get()->count();
+            $stats['total_request'] = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                ->get()->count();
+            $stats['total_sale'] = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->get()->count();
+            $stats['active_sale'] = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->get()->count();
+            $stats['total_product'] = Product::query()->where('active', 1)->get()->count();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['stats' => $stats]]);
         } catch (QueryException $queryException) {
