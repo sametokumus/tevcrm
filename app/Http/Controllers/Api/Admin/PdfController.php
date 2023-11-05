@@ -4243,7 +4243,7 @@ class PdfController extends Controller
             foreach ($expenses as $expense){
                 if ($expense->currency == $sale->currency){
                     $total_expense += $expense->price;
-                    $expense['converted_price'] = $sale->currency;
+                    $expense['converted_price'] = $expense->price;
                 }else{
                     if ($expense->currency == 'TRY') {
                         $ec = strtolower($expense->currency);
@@ -4303,7 +4303,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, 'Sipariş Özeti', $y);
+            $y = $this->addPdfTitle($pdf, $this->textConvert('Sipariş Özeti'), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, 'tr', $company, $y);
@@ -4328,7 +4328,39 @@ class PdfController extends Controller
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 9);
             $i = 1;
-            foreach ($sale_offers as $sale_offer) {
+            $offers = SaleOffer::query()
+                ->selectRaw('sale_offers.supplier_id, SUM(total_price) as total_price, COUNT(supplier_id) as product_count')
+                ->groupBy('sale_offers.supplier_id')
+                ->orderBy('sale_offers.supplier_id')
+                ->where('sale_id', $sale_id)
+                ->where('active', 1)
+                ->get();
+            foreach ($offers as $offer) {
+                $supplier = Company::query()->where('id', $offer->supplier_id)->first();
+                $offer['supplier'] = $supplier;
+                $offer_currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
+                $offer['currency'] = $offer_currency;
+
+                if ($offer_currency == $sale->currency){
+                    $offer['converted_price'] = $offer->total_price;
+                }else{
+                    if ($offer_currency == 'TRY') {
+                        $oc = strtolower($offer_currency);
+                        $c_price = $offer->total_price / $sale->{$oc.'_rate'};
+                    }else if ($sale->currency == 'TRY') {
+                        $oc = strtolower($offer_currency);
+                        $c_price = $offer->total_price * $sale->{$oc.'_rate'};
+                    }else{
+                        $oc = strtolower($offer_currency);
+                        $sc = strtolower($sale->currency);
+                        if ($sale->{$sc.'_rate'} != 0) {
+                            $c_price = $offer->total_price * $sale->{$oc . '_rate'} / $sale->{$sc . '_rate'};
+                        }else{
+                            $c_price = 0;
+                        }
+                    }
+                    $offer['converted_price'] = $c_price;
+                }
 
 
                 $row_height = 15;
@@ -4336,9 +4368,9 @@ class PdfController extends Controller
 
 
                 $pdf->setX(10);
-                $pdf->Cell(10, 15, $i, 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', ''), 1, 0, 'C');
-                $pdf->Cell(20, 15, iconv('utf-8', 'iso-8859-9', $sale_offer->converted_price), 1, 0, 'C');
+                $pdf->Cell(10, 10, $i, 1, 0, 'C');
+                $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', $supplier->name), 1, 0, 'C');
+                $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', $offer->converted_price), 1, 0, 'C');
 
                 $pdf->Ln();
 
