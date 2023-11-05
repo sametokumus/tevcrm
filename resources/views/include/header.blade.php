@@ -86,7 +86,9 @@ $extra_js="";
 
 
         <div class="menu">
-
+            <div class="menu-item" id="header-btn">
+                <button class="btn btn-theme btn-sm" type="button" onclick="generatePDF();"><span>Sipariş Özeti</span></button>
+            </div>
             <div class="menu-item dropdown dropdown-mobile-full">
                 <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
                     <div class="menu-link">
