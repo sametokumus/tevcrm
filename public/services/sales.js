@@ -3,6 +3,9 @@
 
 	$(document).ready(function() {
 
+        $(":input").inputmask();
+        $("#add_shipment_price").maskMoney({thousands:'.', decimal:','});
+
 		$('#delete_sale_form').submit(function (e){
 			e.preventDefault();
             deleteSale();
@@ -31,6 +34,10 @@
             await initFilter();
             await initSales();
 		});
+        $('#add_shipment_price_form').submit(function (e){
+            e.preventDefault();
+            addShipmentPrice();
+        });
 	});
 
 	$(window).load(async function() {
@@ -433,6 +440,26 @@ async function openShipmentPrice(sale_id){
     let data = await serviceGetSaleExpenseByCategoryId(sale_id, 1);
     console.log(data)
 
+    if (data.expenses != null){
+        document.getElementById('add_shipment_sale_id').value = changeCommasToDecimal(data.expenses.price);
+    }
 
 
+}
+async function addShipmentPrice() {
+    let sale_id = document.getElementById('add_shipment_sale_id').value;
+    let price = document.getElementById('add_shipment_price').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "category_id": user_id,
+        "price": changePriceToDecimal(price)
+    });
+    console.log(formData)
+
+    let returned = await servicePostAddSaleExpense(formData);
+    if (returned){
+        $('#addShipmentPriceModal').modal('hide');
+        document.getElementById('add_shipment_sale_id').value = '';
+    }
 }

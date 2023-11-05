@@ -1591,7 +1591,16 @@ async function serviceGetSaleExpenseByCategoryId(sale_id, category_id) {
         showAlert('İstek Başarısız.');
     }
 }
-
+async function servicePostAddSaleExpense(formData) {
+    const data = await fetchDataPost('/admin/sale/addSaleExpense', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 
