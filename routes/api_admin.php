@@ -386,6 +386,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('pdf/getGeneratePackingListPDF/{lang}/{owner_id}/{packing_list_id}', [PdfController::class, 'getGeneratePackingListPDF']);
 
 
+    Route::get('pdf/getGenerateSaleSummaryPDF/{sale_id}', [PdfController::class, 'getGenerateSaleSummaryPDF']);
+
+
 
 
 

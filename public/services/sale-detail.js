@@ -43,6 +43,23 @@ function checkRole(){
     return true;
 }
 
+async function generatePDF(){
+    let sale_id = getPathVariable('sale-detail');
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGenerateSaleSummaryPDF(sale_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function initSaleHistory(sale_id){
     let data = await serviceGetSaleStatusHistory(sale_id);
     let actions = data.actions;
@@ -137,9 +154,9 @@ async function initSaleSummary(sale_id){
 
     if (control.permission) {
         $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
+        let header_btn = '<button class="btn btn-theme btn-sm" type="button" onclick="generatePDF();"><span>Sipariş Özeti</span></button>';
+        $('#header-btn').append(header_btn);
     }
-
-
 
 }
 

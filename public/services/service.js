@@ -2665,3 +2665,12 @@ async function serviceGetGeneratePackingListPDF(lang, owner_id, packing_list_id)
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetGenerateSaleSummaryPDF(sale_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateSaleSummaryPDF/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
