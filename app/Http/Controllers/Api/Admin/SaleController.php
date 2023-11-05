@@ -1375,7 +1375,7 @@ class SaleController extends Controller
             foreach ($expenses as $expense){
                 if ($expense->currency == $sale->currency){
                     $total_expense += $expense->price;
-                    $expense['converted_price'] = $expense->price;
+                    $expense['converted_price'] = $sale->currency;
                 }else{
                     if ($expense->currency == 'TRY') {
                         $ec = strtolower($expense->currency);
