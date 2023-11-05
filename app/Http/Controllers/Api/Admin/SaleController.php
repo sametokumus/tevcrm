@@ -1380,15 +1380,16 @@ class SaleController extends Controller
                     if ($expense->currency == 'TRY') {
                         $ec = strtolower($expense->currency);
                         $expense_price = $expense->price / $sale->{$ec.'_rate'};
+                    }else if ($sale->currency == 'TRY') {
+                        $ec = strtolower($expense->currency);
+                        $expense_price = $expense->price * $sale->{$ec.'_rate'};
                     }else{
                         $ec = strtolower($expense->currency);
                         $sc = strtolower($sale->currency);
                         if ($sale->{$sc.'_rate'} != 0) {
                             $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
                         }else{
-                            $expense_price = $sale->{$sc.'_rate'};
-                            $expense['sc'] = $sc;
-                            $expense['ec'] = $ec;
+                            $expense_price = 0;
                         }
                     }
                     $total_expense += $expense_price;
