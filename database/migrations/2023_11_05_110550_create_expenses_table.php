@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('sale_id');
             $table->bigInteger('category_id');
             $table->decimal('price',10,2, false)->nullable();
+            $table->string('currency')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

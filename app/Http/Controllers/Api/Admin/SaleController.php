@@ -2076,13 +2076,15 @@ class SaleController extends Controller
             if ($has_price) {
                 Expense::query()->where('sale_id', $request->sale_id)->where('category_id', $request->category_id)->update([
                     'price' => $request->price,
+                    'currency' => $request->currency,
                     'active' => 1
                 ]);
             }else{
                 Expense::query()->insert([
                     'sale_id' => $request->sale_id,
                     'category_id' => $request->category_id,
-                    'price' => $request->price
+                    'price' => $request->price,
+                    'currency' => $request->currency
                 ]);
             }
 

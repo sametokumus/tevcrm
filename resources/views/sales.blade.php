@@ -249,6 +249,15 @@ $extra_js='
                             <input type="hidden" class="form-control" id="add_shipment_sale_id" required>
                         </div>
                         <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="add_shipment_currency" onchange="changeDashCurrency();">
+                                <option value="TRY">TRY</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <button type="submit" class="btn btn-outline-theme">Kaydet</button>
                         </div>
                     </div>

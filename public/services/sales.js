@@ -441,7 +441,8 @@ async function openShipmentPrice(sale_id){
     console.log(data)
 
     if (data.expenses != null){
-        document.getElementById('add_shipment_sale_id').value = changeCommasToDecimal(data.expenses.price);
+        document.getElementById('add_shipment_price').value = changeCommasToDecimal(data.expenses.price);
+        document.getElementById('add_shipment_currency').value = data.expenses.currency;
     }
 
 
@@ -449,11 +450,13 @@ async function openShipmentPrice(sale_id){
 async function addShipmentPrice() {
     let sale_id = document.getElementById('add_shipment_sale_id').value;
     let price = document.getElementById('add_shipment_price').value;
+    let currency = document.getElementById('add_shipment_currency').value;
 
     let formData = JSON.stringify({
         "sale_id": sale_id,
         "category_id": user_id,
-        "price": changePriceToDecimal(price)
+        "price": changePriceToDecimal(price),
+        "currency": currency
     });
     console.log(formData)
 
