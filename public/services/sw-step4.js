@@ -119,6 +119,7 @@ async function initOfferDetail(){
                         return sale.currency;
                     } },
                 { data: "offer_lead_time", className:  "row-edit" },
+                { data: "profit_rate", className:  "row-edit" },
             ],
             select: false,
             scrollX: true,

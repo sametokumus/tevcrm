@@ -88,6 +88,7 @@ $extra_js='
                                     <th class="border-bottom-0">Teklif Fiyatı</th>
                                     <th class="border-bottom-0">Teklif Para Birimi</th>
                                     <th class="border-bottom-0">Teklif Teslimat Süresi</th>
+                                    <th class="border-bottom-0">Karlılık</th>
                                 </tr>
                                 </thead>
                                 <tbody id="sales-detail-body">
