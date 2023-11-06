@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Models\Measurement;
 use App\Models\MobileDocument;
 use App\Models\Offer;
@@ -4241,6 +4242,7 @@ class PdfController extends Controller
 
             $expenses = Expense::query()->where('sale_id', $sale_id)->where('active', 1)->get();
             foreach ($expenses as $expense){
+                $expense['category_name'] = ExpenseCategory::query()->where('id', $expense->category_id)->first()->name;
                 if ($expense->currency == $sale->currency){
                     $total_expense += $expense->price;
                     $expense['converted_price'] = $expense->price;
@@ -4312,12 +4314,12 @@ class PdfController extends Controller
 
 
 
-
-            $x = 10;
-            $y = $pdf->GetY();
+cc
 
 
             //Toplam Gelir
+            $y = $pdf->GetY();
+            $x = 10;
             $pdf->SetXY($x, $y+10);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Satış Tutarı'))), 1, 0, 'R');
@@ -4328,10 +4330,12 @@ class PdfController extends Controller
 
             $y += 10;
             $pdf->Ln();
-            $pdf->Ln();
 
 
             // Set table header
+            $y = $pdf->GetY();
+            $x = 10;
+            $pdf->setXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->Cell(190, 12, 'TEDARİK', 0, 0, 'L');
             $pdf->Ln();
@@ -4416,6 +4420,12 @@ class PdfController extends Controller
             }
 
             $pdf->Ln();
+
+
+
+            $y = $pdf->GetY();
+            $x = 10;
+            $pdf->setXY($x, $y);
 
             //Toplam Gider
             $pdf->SetXY($x, $y);
