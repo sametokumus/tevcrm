@@ -414,6 +414,7 @@ class SaleController extends Controller
                 $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
                 $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
                 $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $offer_price = $sale_offer->offer_price;
                 $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
                 $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
                 $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
@@ -425,11 +426,11 @@ class SaleController extends Controller
                 $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
                 $sale_offer['sequence'] = $request_product->sequence;
 
-                if ($sale_offer->offer_price != 0) {
-                    $offer_price = number_format($sale_offer->offer_price, 2,".","");
+                if ($offer_price != 0) {
+//                    $offer_price = number_format($sale_offer->offer_price, 2,".","");
                     $profit_rate = 100 * (floatval($sale_offer->sale_price) - floatval($offer_price)) / floatval($offer_price);
                     $sale_offer['sp'] = floatval($sale_offer->sale_price);
-                    $sale_offer['op'] = floatval($offer_price);
+                    $sale_offer['op'] = $offer_price;
                 }else{
                     $profit_rate = 0;
                 }
