@@ -427,10 +427,7 @@ class SaleController extends Controller
                 $sale_offer['sequence'] = $request_product->sequence;
 
                 if ($offer_price != 0) {
-//                    $offer_price = number_format($sale_offer->offer_price, 2,".","");
                     $profit_rate = 100 * (floatval($offer_price) - floatval($sale_offer->sale_price)) / floatval($sale_offer->sale_price);
-                    $sale_offer['sp'] = floatval($sale_offer->sale_price);
-                    $sale_offer['op'] = floatval($offer_price);
                 }else{
                     $profit_rate = 0;
                 }
