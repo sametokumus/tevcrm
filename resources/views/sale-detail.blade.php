@@ -169,6 +169,45 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">SİPARİŞ ÖZETİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table id="suppliers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <tbody>
+                            <tr>
+                                <td>
+                                   <span class="d-flex align-items-center">
+                                       <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
+                                       <b>Atrax Medikal Limited Şirketi</b>
+                                   </span>
+                                </td>
+                                <td>9.600,00 TRY</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EK GİDERLER</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
