@@ -32,6 +32,7 @@ Route::get('/new-offer-request', function () { return view('new-offer-request');
 Route::get('/offer-request-products/{id}', function () { return view('offer-request-products'); });
 Route::get('/offer-request/{id}', function () { return view('update-offer-request'); });
 Route::get('/offer/{id}', function () { return view('offer'); });
+Route::get('/offer-rev/{id}', function () { return view('offer-rev'); });
 Route::get('/sales', function () { return view('sales'); });
 Route::get('/sales-cancelled', function () { return view('sales-cancelled'); });
 Route::get('/approved-sales', function () { return view('approved-sales'); });
