@@ -425,12 +425,13 @@ class SaleController extends Controller
                 $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
                 $sale_offer['sequence'] = $request_product->sequence;
 
-                if ($sale_offer->offer_price != 0) {
-                    $profit_rate = 100 * (float)$sale_offer->sale_price / $sale_offer->offer_price;
-                }else{
-                    $profit_rate = 0;
-                }
-                $sale_offer['profit_rate'] = '%'.number_format($profit_rate, 2,",","");
+//                if ($sale_offer->offer_price != 0) {
+//                    $profit_rate = 100 * (float)$sale_offer->sale_price / $sale_offer->offer_price;
+//                }else{
+//                    $profit_rate = 0;
+//                }
+//                $sale_offer['profit_rate'] = '%'.number_format($profit_rate, 2,",","");
+                $sale_offer['profit_rate'] = $sale_offer->sale_price;
 
             }
             $sale['sale_offers'] = $sale_offers;
