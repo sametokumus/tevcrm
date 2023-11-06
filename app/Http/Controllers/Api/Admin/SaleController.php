@@ -431,7 +431,7 @@ class SaleController extends Controller
 //                    $profit_rate = 0;
 //                }
 //                $sale_offer['profit_rate'] = '%'.number_format($profit_rate, 2,",","");
-                $sale_offer['profit_rate'] = number_format($sale_offer->sale_price, 2,",","");
+                $sale_offer['profit_rate'] = floatval($sale_offer->sale_price);
 
             }
             $sale['sale_offers'] = $sale_offers;
