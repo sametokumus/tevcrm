@@ -48,7 +48,6 @@
 
 		checkLogin();
 		checkRole();
-        await initOfferRequest();
         await initOffers();
 
 	});
@@ -63,7 +62,7 @@ function checkRole(){
 }
 
 async function changeStatus(){
-    fastChangeStatus(3, sale_id);
+    fastChangeStatus(7, sale_id);
 }
 
 async function initEmployeeSelect(){
@@ -79,92 +78,6 @@ async function openAddOfferModal(){
 async function openOfferRequestNoteModal(note){
     $("#offerRequestNoteModal").modal('show');
     document.getElementById('show_offer_request_note').textContent = note;
-}
-
-async function initOfferRequest(){
-    let request_id = getPathVariable('offer-rev');
-    let data = await serviceGetOfferRequestById(request_id);
-    let offer_request = data.offer_request;
-    console.log(offer_request)
-
-    sale_id = offer_request.sale_id;
-
-    $("#offer-request-products").dataTable().fnDestroy();
-    $('#offer-request-products tbody > tr').remove();
-
-    $.each(offer_request.products, function (i, product) {
-        let note = '';
-        if (product.note != null && product.note != ''){
-            note = '<div class="btn-list">\n' +
-                '       <button onclick="openOfferRequestNoteModal(\'' + product.note + '\');" class="btn btn-sm btn-warning"><span class="fe fe-edit"> Satın Alma Notu</span></button>\n' +
-                '   </div>';
-        }
-        let measurement_name = '';
-        if (Lang.getLocale() == 'tr'){
-            measurement_name = product.measurement_name_tr;
-        }else{
-            measurement_name = product.measurement_name_tr;
-        }
-        let classname= '';
-        if (product.is_offered == 1){
-            classname= 'bg-success bg-opacity-50';
-        }
-        let item = '<tr id="productRow' + product.id + '" class="'+ classname +'">\n' +
-            '           <td>' + product.sequence + '</td>\n' +
-            '           <td>' + product.id + '</td>\n' +
-            '              <td>\n' +
-            '                  '+ note +'\n' +
-            '              </td>\n' +
-            '           <td>' + product.ref_code + '</td>\n' +
-            '           <td>' + product.product_name + '</td>\n' +
-            '           <td>' + product.quantity + '</td>\n' +
-            '           <td>' + checkNull(measurement_name) + '</td>\n' +
-            '           <td class="d-none">' + product.product.id + '</td>\n' +
-            '       </tr>';
-        $('#offer-request-products tbody').append(item);
-    });
-
-    let productDatatable = $('#offer-request-products').DataTable({
-        responsive: true,
-        columnDefs: [
-            { responsivePriority: 1, width: '40px', targets: 0 },
-            { responsivePriority: 2, targets: -1 },
-            { width: '100px', targets: 1 }
-        ],
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                text: 'Seçili Ürünler için Teklif İste',
-                action: function ( e, dt, node, config ) {
-                    openAddOfferModal(productDatatable.rows( { selected: true } ));
-                }
-            },
-            'selectAll',
-            'selectNone',
-            {
-                text: 'Seçili Ürün Adını Değiştir',
-                action: function ( e, dt, node, config ) {
-                    openUpdateProductNameModal(productDatatable.rows( { selected: true } ));
-                }
-            },
-            // 'excel',
-            // 'pdf'
-        ],
-        paging : false,
-        scrollX: true,
-        language: {
-            url: "services/Turkish.json"
-        },
-        order: [[0, 'asc']],
-        select: {
-            style: 'multi'
-        }
-    });
-
-    let data2 = await serviceGetContactById(offer_request.owner_id);
-    let contact = data2.contact;
-    short_code = contact.short_code;
-    global_id = offer_request.global_id;
 }
 
 async function addOffer(){
