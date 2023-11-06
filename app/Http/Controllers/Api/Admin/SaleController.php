@@ -428,9 +428,9 @@ class SaleController extends Controller
 
                 if ($offer_price != 0) {
 //                    $offer_price = number_format($sale_offer->offer_price, 2,".","");
-                    $profit_rate = 100 * (floatval($sale_offer->sale_price) - floatval($offer_price)) / floatval($offer_price);
+                    $profit_rate = 100 * floatval($sale_offer->sale_price) / floatval($offer_price);
                     $sale_offer['sp'] = floatval($sale_offer->sale_price);
-                    $sale_offer['op'] = $offer_price;
+                    $sale_offer['op'] = floatval($offer_price);
                 }else{
                     $profit_rate = 0;
                 }
