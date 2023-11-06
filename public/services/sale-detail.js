@@ -577,7 +577,7 @@ async function addExpense() {
 
     let returned = await servicePostAddSaleExpense(formData);
     if (returned){
-        $('#addExpenseModal').modal('hide');
+        // $('#addExpenseModal').modal('hide');
         initExpenses(sale_id);
     }
 }

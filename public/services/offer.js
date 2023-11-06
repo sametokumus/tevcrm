@@ -238,7 +238,7 @@ async function initOffers(){
         let bg_color = '';
         let btn_text = 'Fiyatları Gir';
         let btn_class = 'btn-theme';
-        if (offer.products != null){
+        if (offer.products.length > 0){
             if (offer.products[0].total_price != null){
                 bg_color = 'bg-secondary';
                 btn_text = 'Fiyatları Güncelle';
