@@ -414,7 +414,8 @@ async function initOfferDetailModal(offer_id){
                 "discounted_price": changePriceToDecimal(discounted_price),
                 "vat_rate": "",
                 "currency": currency,
-                "lead_time": lead_time
+                "lead_time": lead_time,
+                "offer_rev": false
             });
 
             let offer_id = document.getElementById('offer-detail-modal-offer-id').value;

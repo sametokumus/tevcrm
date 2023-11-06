@@ -14,6 +14,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleOffer;
 use App\Models\StatusHistory;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
@@ -428,6 +429,38 @@ class OfferController extends Controller
             Product::query()->where('id', $request_product->product_id)->update([
                 'product_name' => $request->product_name
             ]);
+
+
+            if ($request->offer_rev == true){
+
+                //update converted price
+                $sale_id = SaleOffer::query()->where('offer_id', $offer_id)->where('offer_product_id', $product_id)->first()->sale_id;
+                $sale = Sale::query()->where('sale_id', $sale_id)->first();
+                $convertible_price = $offer_product->total_price;
+                if ($offer_product->discount_rate > 0){
+                    $convertible_price = $offer_product->discounted_price;
+                }
+
+                $supply_price = CurrencyHelper::ChangePrice($offer_product->currency, $offer_product->converted_currency, $convertible_price, $sale->eur_rate, $sale->usd_rate, $sale->gbp_rate);
+
+                OfferProduct::query()->where('id', $product_id)->where('offer_id', $offer_id)->update([
+                    'converted_price' => $supply_price
+                ]);
+
+                //update sale offer price
+
+                SaleOffer::query()->where('offer_id', $offer_id)->where('offer_product_id', $product_id)->update([
+                    'pcs_price' => $request->pcs_price,
+                    'total_price' => $request->total_price,
+                    'discount_rate' => $request->discount_rate,
+                    'discounted_price' => $request->discounted_price,
+                    'vat_rate' => $request->vat_rate,
+                    'currency' => $request->currency,
+                    'lead_time' => $request->lead_time,
+                    'sale_price' => $supply_price
+                ]);
+
+            }
 
 
             return response(['message' => __('Teklif ürün güncelleme işlemi başarılı.'), 'status' => 'success']);
