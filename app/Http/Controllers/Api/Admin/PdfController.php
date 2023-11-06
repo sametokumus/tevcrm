@@ -4314,7 +4314,7 @@ class PdfController extends Controller
 
 
 
-cc
+
 
 
             //Toplam Gelir
