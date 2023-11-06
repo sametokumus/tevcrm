@@ -20,8 +20,7 @@ $extra_js='
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group float-end">
-                        <b>Sipariş Durumunu Değiştir: &nbsp;</b>
-                        <button type="button" class="btn btn-sm btn-pink" onclick="changeStatus();">Tedarikçi Fiyatları Girildi</button>
+                        <a href="/sales" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Güncellendi</a>
                     </div>
                 </div>
             </div>
