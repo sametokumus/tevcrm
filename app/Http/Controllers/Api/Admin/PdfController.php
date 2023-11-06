@@ -4322,7 +4322,7 @@ class PdfController extends Controller
             $x = 10;
             $pdf->SetXY($x, $y+10);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Satış Tutarı'))), 1, 0, 'R');
+            $pdf->Cell(150, 10, $this->textConvert('SATIŞ TUTARI'), 1, 0, 'L');
 
             $pdf->SetXY($x + 150, $y+10);
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -4337,7 +4337,7 @@ class PdfController extends Controller
             $x = 10;
             $pdf->setXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(190, 12, 'TEDARİK', 0, 0, 'L');
+            $pdf->Cell(190, 12, $this->textConvert('TEDARİK'), 0, 0, 'L');
             $pdf->Ln();
 
 
@@ -4391,12 +4391,12 @@ class PdfController extends Controller
                 $pdf->Ln();
             }
 
-            $pdf->Ln();
 
 
             // Set table header
+            $pdf->setX(10);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(190, 12, 'EK GİDERLER', 0, 0, 'L');
+            $pdf->Cell(190, 12, $this->textConvert('EK GİDERLER'), 0, 0, 'L');
             $pdf->Ln();
 
 
@@ -4410,7 +4410,7 @@ class PdfController extends Controller
 
 
                 $pdf->setX(10);
-                $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', $expense->category_name), 1, 0, 'C');
+                $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', $expense->category_name), 1, 0, 'L');
                 $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', number_format($expense->converted_price, 2,",",".").' '.$sale->currency), 1, 0, 'C');
 
                 $pdf->Ln();
@@ -4430,7 +4430,7 @@ class PdfController extends Controller
             //Toplam Gider
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Toplam Gider'))), 1, 0, 'R');
+            $pdf->Cell(150, 10, $this->textConvert('TOPLAM GİDER'), 1, 0, 'L');
 
             $pdf->SetXY($x + 150, $y);
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -4442,7 +4442,7 @@ class PdfController extends Controller
             //Kar
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Kar'))), 1, 0, 'R');
+            $pdf->Cell(150, 10, $this->textConvert('KAR'), 1, 0, 'L');
 
             $pdf->SetXY($x + 150, $y);
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
@@ -4454,11 +4454,11 @@ class PdfController extends Controller
             //Kar Oranı
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Kar Oranı'))), 1, 0, 'R');
+            $pdf->Cell(150, 10, $this->textConvert('KAR ORANI'), 1, 0, 'L');
 
             $pdf->SetXY($x + 150, $y);
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', number_format($profit_rate, 2, ",", "")), 1, 0, 'C');
+            $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', '%'.number_format($profit_rate, 2, ",", "")), 1, 0, 'C');
 
             $y += 10;
 
