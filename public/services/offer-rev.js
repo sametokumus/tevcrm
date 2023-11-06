@@ -82,7 +82,7 @@ async function openOfferRequestNoteModal(note){
 }
 
 async function initOfferRequest(){
-    let request_id = getPathVariable('offer');
+    let request_id = getPathVariable('offer-rev');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
     console.log(offer_request)
@@ -169,7 +169,7 @@ async function initOfferRequest(){
 
 async function addOffer(){
     let user_id = localStorage.getItem('userId');
-    let request_id = getPathVariable('offer');
+    let request_id = getPathVariable('offer-rev');
     // let supplier_id = document.getElementById('add_offer_company').value;
     let table = $('#offer-request-products').DataTable();
     let rows = table.rows({ selected: true } );
@@ -226,7 +226,7 @@ async function addOffer(){
 }
 
 async function initOffers(){
-    let request_id = getPathVariable('offer');
+    let request_id = getPathVariable('offer-rev');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
     console.log(offers)
