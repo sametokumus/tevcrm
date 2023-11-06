@@ -254,8 +254,8 @@ async function initOffers(){
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm '+ btn_class +'"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
-            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
-            '                      <button onclick="deleteOffer(\'' + offer.offer_id + '\');" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Sil</span></button>\n' +
+            // '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF</span></a>\n' +
+            // '                      <button onclick="deleteOffer(\'' + offer.offer_id + '\');" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Sil</span></button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '       </tr>';
