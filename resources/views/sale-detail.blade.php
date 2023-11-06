@@ -176,7 +176,7 @@ $extra_js='
 
 
                     <div class="table-responsive">
-                        <table id="suppliers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                        <table id="sale-summary-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                             <tbody>
                             <tr>
                                 <td>
