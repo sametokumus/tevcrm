@@ -156,6 +156,53 @@ async function initSaleSummary(sale_id){
         $('#profit-rate-message').html('<span class="text-theme"><b>Karlılık: %' + sale.profit_rate + '</b></span>');
         let header_btn = '<button class="btn btn-theme btn-sm" type="button" onclick="generatePDF();"><span>Sipariş Özeti</span></button>';
         $('#header-btn').append(header_btn);
+
+        let currency = sale.currency;
+        let total_price = sale.grand_total;
+        if (sale.grand_total_with_shipping != null){
+            total_price = sale.grand_total_with_shipping;
+        }
+
+        let item1 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>SATIŞ TUTARI</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '            <td>'+ changeCommasToDecimal(total_price) +' '+ currency +'</td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item1);
+
+        let item2 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>TEDARİK GİDERLERİ</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item2);
+
+
+
+        let data = await serviceGetSaleSuppliers(sale_id);
+        let offers = data.offers;
+
+        $.each(offers, function (i, offer) {
+            let offer_item = '<tr>\n' +
+                '                 <td>\n' +
+                '                    <span class="d-flex align-items-center pl-5">\n' +
+                '                        <b>'+ offer.supplier.name +'</b>\n' +
+                '                    </span>\n' +
+                '                 </td>\n' +
+                '                 <td>'+ changeCommasToDecimal(offer.converted_price) +' '+ currency +'</td>\n' +
+                '             </tr>';
+
+            $('#sale-summary-table tbody').append(offer_item);
+        });
     }
 
 }

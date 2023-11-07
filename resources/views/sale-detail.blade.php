@@ -178,15 +178,7 @@ $extra_js='
                     <div class="table-responsive">
                         <table id="sale-summary-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                             <tbody>
-                            <tr>
-                                <td>
-                                   <span class="d-flex align-items-center">
-                                       <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>
-                                       <b>Atrax Medikal Limited Şirketi</b>
-                                   </span>
-                                </td>
-                                <td>9.600,00 TRY</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>

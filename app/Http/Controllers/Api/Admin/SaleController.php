@@ -1327,11 +1327,39 @@ class SaleController extends Controller
                 ->where('active', 1)
                 ->get();
 
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
             foreach ($offers as $offer){
                 $supplier = Company::query()->where('id', $offer->supplier_id)->first();
                 $offer['supplier'] = $supplier;
-                $currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
-                $offer['currency'] = $currency;
+                $offer_currency = SaleOffer::query()->where('sale_id', $sale_id)->where('supplier_id', $offer->supplier_id)->first()->currency;
+                $offer['currency'] = $offer_currency;
+
+                if ($offer_currency == $sale->currency){
+                    $offer['converted_price'] = $offer->total_price;
+                }else{
+                    if ($offer_currency == 'TRY') {
+                        $oc = strtolower($offer_currency);
+                        $c_price = $offer->total_price / $sale->{$oc.'_rate'};
+                    }else if ($sale->currency == 'TRY') {
+                        $oc = strtolower($offer_currency);
+                        $c_price = $offer->total_price * $sale->{$oc.'_rate'};
+                    }else{
+                        $oc = strtolower($offer_currency);
+                        $sc = strtolower($sale->currency);
+                        if ($sale->{$sc.'_rate'} != 0) {
+                            $c_price = $offer->total_price * $sale->{$oc . '_rate'} / $sale->{$sc . '_rate'};
+                        }else{
+                            $c_price = 0;
+                        }
+                    }
+                    $offer['converted_price'] = $c_price;
+                }
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);
