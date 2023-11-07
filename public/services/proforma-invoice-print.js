@@ -5,6 +5,14 @@
 
         $(":input").inputmask();
         $("#update_sale_shipping_price").maskMoney({thousands:'.', decimal:','});
+        $("#update_currency_rate_usd").maskMoney({thousands:'.', decimal:','});
+        $("#update_currency_rate_eur").maskMoney({thousands:'.', decimal:','});
+        $("#update_currency_rate_gbp").maskMoney({thousands:'.', decimal:','});
+
+        $('#update_currency_rate_form').submit(function (e){
+            e.preventDefault();
+            updateCurrencyRate();
+        });
 
         $('#update_detail_form').submit(function (e){
             e.preventDefault();
@@ -128,6 +136,11 @@ async function initSale(sale_id){
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
     let company = sale.request.company;
+
+    document.getElementById('update_currency_rate_currency').value = sale.currency;
+    document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
+    document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
+    document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(sale.gbp_rate);
 
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
     if (checkNull(company.registration_number) != '') {
@@ -357,5 +370,33 @@ async function updateQuote(){
         await initQuote(sale_id);
     }else{
         alert("Hata Oluştu");
+    }
+}
+
+
+async function getCurrencyLog(){
+    let data = await serviceGetLastCurrencyLog();
+    let log = data.currency_log;
+    document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(log.usd);
+    document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(log.eur);
+    document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(log.gbp);
+}
+async function updateCurrencyRate() {
+    let request_id = getPathVariable('sw-2-new');
+    console.log(request_id)
+
+    let formData = JSON.stringify({
+        "currency": document.getElementById('update_currency_rate_currency').value,
+        "usd_rate": changePriceToDecimal(document.getElementById('update_currency_rate_usd').value),
+        "eur_rate": changePriceToDecimal(document.getElementById('update_currency_rate_eur').value),
+        "gbp_rate": changePriceToDecimal(document.getElementById('update_currency_rate_gbp').value)
+    });
+    console.log(formData)
+
+    let returned = await servicePostAddSaleCurrencyLog(formData, request_id);
+    if (returned){
+        await checkCurrencyLog();
+    }else{
+        alert("Kur Eklerken Hata Oluştu")
     }
 }
