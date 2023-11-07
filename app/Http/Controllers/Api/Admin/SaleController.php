@@ -937,9 +937,14 @@ class SaleController extends Controller
             $quote_count = Quote::query()->where('sale_id', $sale_id)->count();
             if ($quote_count == 0){
                 $quote_id = Uuid::uuid();
+                $now = Carbon::now();
+                $nowPlusSevenDays = $now->addDays(7);
+                $nowPlusSevenDaysFormatted = $nowPlusSevenDays->format('Y-m-d');
+
                 Quote::query()->insert([
                     'quote_id' => $quote_id,
-                    'sale_id' => $sale_id
+                    'sale_id' => $sale_id,
+                    'expiry_date' => $nowPlusSevenDaysFormatted
                 ]);
             }
             $quote = Quote::query()->where('sale_id', $sale_id)->first();
