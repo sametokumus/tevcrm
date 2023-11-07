@@ -260,7 +260,7 @@ async function initSaleSummary(sale_id){
             '                   <b>KAR ORANI</b>\n' +
             '               </span>\n' +
             '            </td>\n' +
-            '            <td>'+ sale.profit_rate +'</td>\n' +
+            '            <td>%'+ sale.profit_rate +'</td>\n' +
             '        </tr>';
 
         $('#sale-summary-table tbody').append(item6);

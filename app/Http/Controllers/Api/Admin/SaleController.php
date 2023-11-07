@@ -1409,6 +1409,7 @@ class SaleController extends Controller
 
             $expenses = Expense::query()->where('sale_id', $sale_id)->where('active', 1)->get();
             foreach ($expenses as $expense){
+                $expense['category_name'] = ExpenseCategory::query()->where('id', $expense->category_id)->first()->name;
                 if ($expense->currency == $sale->currency){
                     $total_expense += $expense->price;
                     $expense['converted_price'] = $expense->price;
