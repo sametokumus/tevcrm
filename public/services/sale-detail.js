@@ -194,7 +194,7 @@ async function initSaleSummary(sale_id){
         $.each(offers, function (i, offer) {
             let offer_item = '<tr>\n' +
                 '                 <td>\n' +
-                '                    <span class="d-flex align-items-center pl-5">\n' +
+                '                    <span class="d-flex align-items-center px-5">\n' +
                 '                        <b>'+ offer.supplier.name +'</b>\n' +
                 '                    </span>\n' +
                 '                 </td>\n' +
@@ -203,6 +203,70 @@ async function initSaleSummary(sale_id){
 
             $('#sale-summary-table tbody').append(offer_item);
         });
+
+
+        let item3 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>EK GİDERLER</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item3);
+
+        $.each(sale.expenses, function (i, expense) {
+            let offer_item = '<tr>\n' +
+                '                 <td>\n' +
+                '                    <span class="d-flex align-items-center px-5">\n' +
+                '                        <b>'+ expense.category_name +'</b>\n' +
+                '                    </span>\n' +
+                '                 </td>\n' +
+                '                 <td>'+ changeCommasToDecimal(expense.converted_price) +' '+ currency +'</td>\n' +
+                '             </tr>';
+
+            $('#sale-summary-table tbody').append(offer_item);
+        });
+
+        let item4 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>TOPLAM GİDER</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '            <td>'+ changeCommasToDecimal(total_expense) +' '+ currency +'</td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item4);
+
+        let item5 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>KAR</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '            <td>'+ changeCommasToDecimal(floatval(total_price) - floatval(total_expense)) +' '+ currency +'</td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item5);
+
+        let item6 = '<tr>\n' +
+            '            <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <b>KAR ORANI</b>\n' +
+            '               </span>\n' +
+            '            </td>\n' +
+            '            <td>'+ sale.profit_rate +'</td>\n' +
+            '        </tr>';
+
+        $('#sale-summary-table tbody').append(item6);
+
+
+
     }
 
 }
