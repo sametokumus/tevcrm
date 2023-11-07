@@ -236,7 +236,7 @@ async function initSaleSummary(sale_id){
             '                   <b>TOPLAM GİDER</b>\n' +
             '               </span>\n' +
             '            </td>\n' +
-            '            <td>'+ changeCommasToDecimal(total_expense) +' '+ currency +'</td>\n' +
+            '            <td>'+ changeCommasToDecimal(sale.total_expense) +' '+ currency +'</td>\n' +
             '        </tr>';
 
         $('#sale-summary-table tbody').append(item4);
@@ -248,7 +248,7 @@ async function initSaleSummary(sale_id){
             '                   <b>KAR</b>\n' +
             '               </span>\n' +
             '            </td>\n' +
-            '            <td>'+ changeCommasToDecimal(floatval(total_price) - floatval(total_expense)) +' '+ currency +'</td>\n' +
+            '            <td>'+ changeCommasToDecimal(floatval(total_price) - floatval(sale.total_expense)) +' '+ currency +'</td>\n' +
             '        </tr>';
 
         $('#sale-summary-table tbody').append(item5);
