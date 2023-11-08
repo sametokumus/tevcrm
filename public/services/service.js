@@ -2622,8 +2622,8 @@ async function serviceGetGenerateOrderConfirmationPDF(lang, owner_id, sale_id, b
     }
 }
 
-async function serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id) {
-    const data = await fetchDataGet('/admin/pdf/getGenerateProformaInvoicePDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + bank_id, 'application/json');
+async function serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id, target) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateProformaInvoicePDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + bank_id + '/' + target, 'application/json');
     if (data.status == "success") {
         return data;
     } else {
