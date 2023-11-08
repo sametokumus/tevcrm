@@ -42,7 +42,7 @@ $extra_js='
                             </select>
                         </div>
                         <div class="col-4">
-                            <label class="form-label">Firma</label>
+                            <label class="form-label">PDF Para Birimi</label>
                             <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
                                 <option value="TRY">TRY</option>
                                 <option value="USD">USD</option>
@@ -61,28 +61,30 @@ $extra_js='
                         <div class="card border-theme mb-3">
                             <div class="card-body">
                                 <div class="row p-3">
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Satış Para Birimi</label>
-                                        <input type="text" value="" class="form-control" id="update_currency_rate_currency" required readonly />
-                                    </div>
-                                    <div class="col-md-2 mb-3">
+                                    <h5 class="px-2">
+                                        Satış Kur Bilgileri
+                                    </h5>
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">1 TL Karşılığı Dolar Kuru</label>
                                         <input type="text" value="" class="form-control" id="update_currency_rate_usd" required />
-                                        <input type="text" value="" class="form-control" id="update_currency_rate_usd" required />
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">1 TL Karşılığı Euro Kuru</label>
                                         <input type="text" value="" class="form-control" id="update_currency_rate_eur" required />
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">1 TL Karşılığı Sterlin Kuru</label>
                                         <input type="text" value="" class="form-control" id="update_currency_rate_gbp" required />
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">&nbsp;</label>
-                                        <button type="submit" class="btn btn-theme w-100">Döviz Kurunu Onayla</button>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Satış Para Birimi</label>
+                                        <input type="text" value="" class="form-control" id="update_currency_rate_currency" required readonly />
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-theme w-100">Döviz Kurunu Güncelle</button>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-warning w-100" onclick="getCurrencyLog();">Güncel Döviz Kurunu Getir</button>
                                     </div>
