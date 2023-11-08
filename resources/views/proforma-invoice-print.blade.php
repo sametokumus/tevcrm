@@ -79,6 +79,7 @@ $extra_js='
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">Satış Para Birimi</label>
                                         <input type="text" value="" class="form-control" id="update_currency_rate_currency" required readonly />
+                                        <input type="hidden" value="" class="form-control" id="update_currency_rate_request_id" required readonly />
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">&nbsp;</label>

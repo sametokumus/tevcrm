@@ -138,6 +138,7 @@ async function initSale(sale_id){
     let company = sale.request.company;
 
     document.getElementById('update_currency_rate_currency').value = sale.currency;
+    document.getElementById('update_currency_rate_request_id').value = sale.request_id;
     document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
     document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
     document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(sale.gbp_rate);
@@ -382,7 +383,7 @@ async function getCurrencyLog(){
     document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(log.gbp);
 }
 async function updateCurrencyRate() {
-    let request_id = getPathVariable('sw-2-new');
+    let request_id = document.getElementById('update_currency_rate_request_id').value;
     console.log(request_id)
 
     let formData = JSON.stringify({
