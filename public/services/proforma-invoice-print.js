@@ -135,10 +135,10 @@ async function initSale(sale_id){
     await initContact(sale.owner_id, sale_id);
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
-    document.getElementById('pdf_currency').value = sale.sale_currency;
+    document.getElementById('pdf_currency').value = sale.currency;
     let company = sale.request.company;
 
-    document.getElementById('update_currency_rate_currency').value = sale.sale_currency;
+    document.getElementById('update_currency_rate_currency').value = sale.currency;
     document.getElementById('update_currency_rate_request_id').value = sale.request_id;
     document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
     document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
