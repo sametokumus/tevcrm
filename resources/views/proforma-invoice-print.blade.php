@@ -56,7 +56,7 @@ $extra_js='
 
             <div class="row justify-content-center mb-3 no-print">
 
-                <div class="col-md-12">
+                <div class="col-xl-9 col-lg-12 col-md-12">
                     <form method="post" action="#" id="update_currency_rate_form">
                         <div class="card border-theme mb-3">
                             <div class="card-body">
