@@ -395,7 +395,7 @@ async function updateCurrencyRate() {
 
     let returned = await servicePostAddSaleCurrencyLog(formData, request_id);
     if (returned){
-        await checkCurrencyLog();
+        showAlert('Kur bilgisi başarıyla güncellendi.')
     }else{
         alert("Kur Eklerken Hata Oluştu")
     }
