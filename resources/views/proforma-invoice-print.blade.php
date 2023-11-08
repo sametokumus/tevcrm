@@ -43,7 +43,7 @@ $extra_js='
                         </div>
                         <div class="col-4">
                             <label class="form-label">PDF Para Birimi</label>
-                            <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
+                            <select class="form-control" id="pdf_currency">
                                 <option value="TRY">TRY</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>
@@ -54,7 +54,7 @@ $extra_js='
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-3 no-print">
+            <div class="row justify-content-center mb-3 no-print d-none">
 
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     <form method="post" action="#" id="update_currency_rate_form">

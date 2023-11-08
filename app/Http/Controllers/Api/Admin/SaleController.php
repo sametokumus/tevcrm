@@ -1660,6 +1660,64 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
+    public function updateSaleCurrencyLogOnPI(Request $request, $request_id)
+    {
+        try {
+//            $request->validate([
+//                'request_id' => 'required',
+//            ]);
+
+            Sale::query()->where('request_id', $request_id)->update([
+                'usd_rate' => $request->usd_rate,
+                'eur_rate' => $request->eur_rate,
+                'gbp_rate' => $request->gbp_rate,
+                'currency' => $request->currency,
+            ]);
+
+
+            $offers = Offer::query()
+                ->leftJoin('companies', 'companies.id', '=', 'offers.supplier_id')
+                ->selectRaw('offers.*, companies.name as company_name')
+                ->where('offers.request_id', $request_id)
+                ->where('offers.active', 1)
+                ->get();
+
+            foreach ($offers as $offer) {
+                $products = OfferProduct::query()->where('offer_id', $offer->offer_id)->where('active', 1)->get();
+                foreach ($products as $product) {
+
+                    $convertible_price = $product->total_price;
+                    if ($product->discount_rate > 0){
+                        $convertible_price = $product->discounted_price;
+                    }
+
+                    $supply_price = CurrencyHelper::ChangePrice($product->currency, $request->currency, $convertible_price, $request->eur_rate, $request->usd_rate, $request->gbp_rate);
+
+                    OfferProduct::query()->where('id', $product->id)->update([
+                        'converted_price' => $supply_price,
+                        'converted_currency' => $request->currency
+                    ]);
+
+                }
+
+
+
+
+
+
+                $offer['products'] = $products;
+            }
+
+
+            return response(['message' => __('Kur ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
 
 
     public function getCurrencyLogs()

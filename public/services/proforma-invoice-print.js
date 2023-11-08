@@ -135,9 +135,10 @@ async function initSale(sale_id){
     await initContact(sale.owner_id, sale_id);
     await getOwnersAddSelectId('owners');
     document.getElementById('owners').value = sale.owner_id;
+    document.getElementById('pdf_currency').value = sale.sale_currency;
     let company = sale.request.company;
 
-    document.getElementById('update_currency_rate_currency').value = sale.currency;
+    document.getElementById('update_currency_rate_currency').value = sale.sale_currency;
     document.getElementById('update_currency_rate_request_id').value = sale.request_id;
     document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
     document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
@@ -394,10 +395,10 @@ async function updateCurrencyRate() {
     });
     console.log(formData)
 
-    let returned = await servicePostAddSaleCurrencyLog(formData, request_id);
+    let returned = await servicePostUpdateSaleCurrencyLogOnPI(formData, request_id);
     if (returned){
         showAlert('Kur bilgisi başarıyla güncellendi.')
     }else{
-        alert("Kur Eklerken Hata Oluştu")
+        alert("Kur bilgisi güncellerken hata oluştu.")
     }
 }

@@ -1695,6 +1695,16 @@ async function servicePostAddSaleCurrencyLog(formData, request_id) {
         return false;
     }
 }
+async function servicePostUpdateSaleCurrencyLogOnPI(formData, request_id) {
+    const data = await fetchDataPost('/admin/sale/updateSaleCurrencyLogOnPI/'+ request_id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 async function serviceGetSaleByRequestId(request_id) {
     const data = await fetchDataGet('/admin/sale/getSaleByRequestId/'+ request_id, 'application/json');
     if (data.status == "success") {
