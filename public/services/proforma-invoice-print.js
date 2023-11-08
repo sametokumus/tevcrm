@@ -58,9 +58,10 @@ async function generatePDF(){
     let owner_id = document.getElementById('owners').value;
     let bank_id = document.getElementById('select_bank_info').value;
     let sale_id = getPathVariable('proforma-invoice-print');
+    let target = document.getElementById('pdf_currency').value;
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id);
+    const pdfData = await serviceGetGenerateProformaInvoicePDF(lang, owner_id, sale_id, bank_id, target);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
