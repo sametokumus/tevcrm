@@ -680,9 +680,8 @@ class SaleController extends Controller
                     $status = Status::query()->where('id', $request->status_id)->first();
 
                 }else{
-//                    $history_status_name = Status::query()->where('id', $history_check->status_id)->first()->name;
-//                    $message = '"'.$history_status_name.'" sipariş durumu zorunludur.';
-                    return response(['message' => '$message', 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
+                    $message = '"'.$last_forced->name.'" sipariş durumu zorunludur.';
+                    return response(['message' => $message, 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
 
                 }
 
