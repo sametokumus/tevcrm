@@ -230,11 +230,11 @@ class PdfController extends Controller
         }else{
             if ($target == 'try'){
                 $source_rate = $sale->{$source.'_rate'};
-                $r_price = $price * $source_rate;
+                $r_price = floatval($price) * floatval($source_rate);
             }else{
                 $target_rate = $sale->{$target.'_rate'};
                 $source_rate = $sale->{$source.'_rate'};
-                $r_price = $price * $source_rate / $target_rate;
+                $r_price = floatval($price) * floatval($source_rate) / floatval($target_rate);
             }
         }
         return number_format($r_price, 2,",",".");

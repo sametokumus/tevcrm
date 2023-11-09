@@ -351,9 +351,11 @@ async function initStatusModal(sale_id, status_id){
     let statuses = data.statuses;
     $('#update_sale_status option').remove();
     $.each(statuses, function (i, status){
+        let forced = '';
+        if (status.forced == 1){forced = '(*)';}
         let selected = '';
         if(status.id == status_id){selected = 'selected';}
-        $('#update_sale_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
+        $('#update_sale_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +' '+ forced +'</option>');
     });
     document.getElementById('update_sale_id').value = sale_id;
 }
