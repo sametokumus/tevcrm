@@ -3373,7 +3373,7 @@ class PdfController extends Controller
                     $measurement_name = $product->measurement_name_en;
                 }
 
-                $pdf->SetFont('ChakraPetch-Regular', '', 9);
+                $pdf->SetFont('Courier', '', 9);
 
                 $x = 40;
                 $pdf->SetXY($x, $pdf->GetY());
