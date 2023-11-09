@@ -3373,7 +3373,7 @@ class PdfController extends Controller
                     $measurement_name = $product->measurement_name_en;
                 }
 
-                $pdf->SetFont('Courier', '', 9);
+                $pdf->SetFont('Arial', '', 9);
 
                 $x = 40;
                 $pdf->SetXY($x, $pdf->GetY());
