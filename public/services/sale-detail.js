@@ -195,7 +195,7 @@ async function initSaleSummary(sale_id){
             let offer_item = '<tr>\n' +
                 '                 <td>\n' +
                 '                    <span class="d-flex align-items-center px-5">\n' +
-                '                        <b>'+ offer.supplier.name +' ('+  +')</b>\n' +
+                '                        <b>'+ offer.supplier.name +' ('+ sale.owner.short_code + '-PO-'+ sale.id +')</b>\n' +
                 '                    </span>\n' +
                 '                 </td>\n' +
                 '                 <td>'+ changeCommasToDecimal(offer.converted_price) +' '+ currency +'</td>\n' +
