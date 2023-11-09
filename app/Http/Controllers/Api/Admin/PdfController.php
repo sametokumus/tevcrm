@@ -3280,7 +3280,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new \Mpdf\Mpdf();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -3400,8 +3400,8 @@ class PdfController extends Controller
                     $y = 10;
                     $old_y = $pdf->getY();
                 }
-                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
-
+//                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+$pdf->WriteHTML($product_name);
 
                 $new_y = $pdf->getY();
                 if ($new_y > $old_y) {
