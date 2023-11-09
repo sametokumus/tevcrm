@@ -4063,7 +4063,7 @@ class PdfController extends Controller
             $x = 10;
             $pdf->setXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->Cell(190, 12, $this->textConvert('TEDARİK'), 0, 0, 'L');
+            $pdf->Cell(190, 12, $this->textConvert('TEDARİK GİDERLERİ'), 0, 0, 'L');
             $pdf->Ln();
 
 
@@ -4110,7 +4110,7 @@ class PdfController extends Controller
 
 
                 $pdf->setX(10);
-                $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', $supplier->name), 1, 0, 'L');
+                $pdf->Cell(150, 10, iconv('utf-8', 'iso-8859-9', $supplier->name.' ('.$contact->short_code.'-PO-'.$sale->id.'-'.$offer->id.')'), 1, 0, 'L');
                 $pdf->Cell(40, 10, iconv('utf-8', 'iso-8859-9', number_format($offer->converted_price, 2,",",".").' '.$sale->currency), 1, 0, 'C');
 
 
