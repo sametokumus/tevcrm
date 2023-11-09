@@ -1437,7 +1437,8 @@ class SaleController extends Controller
                         }
                     }
                     $total_expense += $expense_price;
-                    $expense['converted_price'] = $expense_price;
+//                    $expense['converted_price'] = $expense_price;
+                    $expense['converted_price'] = number_format($expense_price, 2, '.', '');
                 }
             }
             $sale['expenses'] = $expenses;
