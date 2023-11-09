@@ -222,7 +222,6 @@ class PdfController extends Controller
 //        $price = number_format($price, 2,".","");
         $price = str_replace('.', '', $price);
         $price = str_replace(',', '.', $price);
-        return floatval($price);
         $source = strtolower($source);
         $target = strtolower($target);
         if($source == 'try'){
@@ -238,7 +237,7 @@ class PdfController extends Controller
                 $r_price = $price * $source_rate / $target_rate;
             }
         }
-        return $r_price;
+        return number_format($r_price, 2,",",".");
     }
 
 
