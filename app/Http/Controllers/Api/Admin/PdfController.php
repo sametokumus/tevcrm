@@ -1527,7 +1527,7 @@ class PdfController extends Controller
 // Set table content
             $pdf->SetFont('ChakraPetch-Regular', '', 9);
             $x = 10;
-            $y += 12;
+//            $y += 12;
             $pdf->SetXY($x, $y);
             $i = 1;
             foreach ($sale_offers as $sale_offer) {
@@ -1585,6 +1585,7 @@ class PdfController extends Controller
                 $pdf->Cell(16, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_pcs_price.' '.$target), 1, 0, 'C');
                 $pdf->Cell(50, $row_height, iconv('utf-8', 'iso-8859-9', $offer_price.' '.$target), 1, 0, 'C');
+                $pdf->Ln();
 
                 $i++;
 
