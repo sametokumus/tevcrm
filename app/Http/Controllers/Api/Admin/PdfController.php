@@ -49,12 +49,6 @@ class PdfController extends Controller
 
     }
     private function textConvert($text){
-        $text = str_replace('⁰', '0', $text);
-        $text = str_replace('”', '"', $text);
-        return iconv('UTF-8', 'ISO-8859-9//TRANSLIT', $text);
-        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-
-        return $text;
         $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
         $inputString = mb_convert_encoding($inputString, 'UTF-8', 'auto');
 //        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
@@ -3280,7 +3274,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \Mpdf\Mpdf();
+            $pdf = new \FPDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -3379,7 +3373,7 @@ class PdfController extends Controller
                     $measurement_name = $product->measurement_name_en;
                 }
 
-                $pdf->SetFont('Arial', '', 9);
+                $pdf->SetFont('ChakraPetch-Regular', '', 9);
 
                 $x = 40;
                 $pdf->SetXY($x, $pdf->GetY());
@@ -3400,8 +3394,8 @@ class PdfController extends Controller
                     $y = 10;
                     $old_y = $pdf->getY();
                 }
-//                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
-$pdf->WriteHTML($product_name);
+                $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+
 
                 $new_y = $pdf->getY();
                 if ($new_y > $old_y) {
