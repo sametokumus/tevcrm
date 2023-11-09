@@ -680,8 +680,8 @@ class SaleController extends Controller
                     $status = Status::query()->where('id', $request->status_id)->first();
 
                 }else{
-
-                    return response(['message' => __('Zorunlu sipariş durumları atlanamaz.'), 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
+                    $message = '"'.$history_check->name.'" sipariş durumu zorunludur.';
+                    return response(['message' => $message, 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
 
                 }
 
