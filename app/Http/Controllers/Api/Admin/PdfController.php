@@ -49,6 +49,7 @@ class PdfController extends Controller
 
     }
     private function textConvert($text){
+        return iconv('UTF-8', 'ISO-8859-9//TRANSLIT', $text);
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
         return $text;
