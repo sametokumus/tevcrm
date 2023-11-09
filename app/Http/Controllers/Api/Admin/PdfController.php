@@ -219,6 +219,7 @@ class PdfController extends Controller
     }
     private function convertPrice($price, $source, $target, $sale_id){
         $sale = Sale::query()->where('sale_id', $sale_id)->first();
+        $price = number_format($price, 2,",","");
         $source = strtolower($source);
         $target = strtolower($target);
         if($source == 'try'){
