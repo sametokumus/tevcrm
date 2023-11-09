@@ -49,6 +49,7 @@ class PdfController extends Controller
 
     }
     private function textConvert($text){
+        return $text;
         $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
         $inputString = mb_convert_encoding($inputString, 'UTF-8', 'auto');
 //        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
