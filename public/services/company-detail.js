@@ -435,6 +435,7 @@ async function initActivities(){
 
         let item = '<tr>\n' +
             '           <th scope="row">'+ activity.id +'</th>\n' +
+            '           <td>'+ activity.user.name +' '+ activity.user.surname +'</td>\n' +
             '           <td>'+ activity.type.name +'</td>\n' +
             '           <td>'+ activity.title +'</td>\n' +
             '           <td>'+ activity.employee.name +'</td>\n' +

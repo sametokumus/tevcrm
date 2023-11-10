@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\ActivityTask;
 use App\Models\ActivityType;
+use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Database\QueryException;
@@ -20,6 +21,7 @@ class ActivityController extends Controller
         try {
             $activities = Activity::query()->where('active',1)->get();
             foreach ($activities as $activity){
+                $activity['user'] = Admin::query()->where('id', $activity->user_id)->first();
                 $activity['tasks'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->get();
                 $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
                 $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
@@ -39,6 +41,7 @@ class ActivityController extends Controller
         try {
             $activities = Activity::query()->where('active',1)->where('company_id', $company_id)->get();
             foreach ($activities as $activity){
+                $activity['user'] = Admin::query()->where('id', $activity->user_id)->first();
                 $activity['tasks'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->get();
                 $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
                 $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
