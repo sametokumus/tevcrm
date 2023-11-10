@@ -146,9 +146,12 @@ async function openAddCompanyActivityModal(){
     $("#addCompanyActivityModal").modal('show');
 }
 async function initActivityAddModalEmployee(){
-    let company_id = document.getElementById('add_activity_company_id');
-    console.log(company_id)
-    getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
+    let company_id = document.getElementById('add_activity_company_id').value;
+    if (company_id != 0) {
+        getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
+    }else{
+        $('#add_activity_employee_id option').remove();
+    }
 }
 async function addActivity(){
     let company_id = document.getElementById('add_activity_company_id').value;
@@ -202,7 +205,11 @@ async function openUpdateCompanyActivityModal(activity_id){
 }
 async function initActivityUpdateModalEmployee(){
     let company_id = document.getElementById('update_activity_company_id');
-    getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
+    if (company_id != 0) {
+        getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
+    }else{
+        $('#update_activity_employee_id option').remove();
+    }
 }
 async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_form').reset();
