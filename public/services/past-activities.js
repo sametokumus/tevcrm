@@ -164,7 +164,6 @@ async function initActivities(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		order: false,
         fixedColumns: {
         left: 4
         }
