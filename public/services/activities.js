@@ -143,7 +143,9 @@ async function initActivities(){
 async function openAddCompanyActivityModal(){
     getActivityTypesAddSelectId('add_activity_type_id');
     await getCompaniesAddSelectId('add_activity_company_id');
-    $('#add_activity_company_id').select2();
+    $('#add_activity_company_id').select2({
+        placeholder: 'Firma Seçiniz',
+    });
     $("#addCompanyActivityModal").modal('show');
 }
 async function initActivityAddModalEmployee(){
