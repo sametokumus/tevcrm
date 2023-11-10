@@ -127,7 +127,8 @@ $extra_js='
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Firma</label>
-                            <select name="add_activity_company_id" class="form-control form-select select2" id="add_activity_company_id" onchange="initActivityAddModalEmployee();" required>
+                            <select class="form-control" id="add_activity_company_id" onchange="initActivityAddModalEmployee();">
+
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
