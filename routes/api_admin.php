@@ -133,6 +133,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Activity
     Route::get('activity/getActivities', [ActivityController::class, 'getActivities']);
+    Route::get('activity/getPastActivities', [ActivityController::class, 'getPastActivities']);
     Route::get('activity/getActivitiesByCompanyId/{company_id}', [ActivityController::class, 'getActivitiesByCompanyId']);
     Route::get('activity/getActivityById/{activity_id}', [ActivityController::class, 'getActivityById']);
     Route::post('activity/addActivity', [ActivityController::class, 'addActivity']);

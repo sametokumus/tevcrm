@@ -19,7 +19,32 @@ class ActivityController extends Controller
     public function getActivities()
     {
         try {
-            $activities = Activity::query()->where('active',1)->get();
+            $activities = Activity::query()
+                ->where('end', '>=', now())
+                ->where('active',1)
+                ->get();
+            foreach ($activities as $activity){
+                $activity['user'] = Admin::query()->where('id', $activity->user_id)->first();
+                $activity['tasks'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->get();
+                $activity['type'] = ActivityType::query()->where('id', $activity->type_id)->where('active', 1)->first();
+                $activity['company'] = Company::query()->where('id', $activity->company_id)->where('active', 1)->first();
+                $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
+                $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
+                $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getPastActivities()
+    {
+        try {
+            $activities = Activity::query()
+                ->where('end', '<', now())
+                ->where('active',1)
+                ->get();
             foreach ($activities as $activity){
                 $activity['user'] = Admin::query()->where('id', $activity->user_id)->first();
                 $activity['tasks'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->get();

@@ -229,6 +229,21 @@ $extra_js="";
                 </div>
 
 
+                <div class="menu-header">Aktiviteler</div>
+                <div id="nav-activities" class="d-none menu-item @if( Request::segment(1)== 'activities' ) active @endif">
+                    <a href="/activities" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-alarm"></i></span>
+                        <span class="menu-text">Gelecek Aktiviteler</span>
+                    </a>
+                </div>
+                <div id="nav-past-activities" class="d-none menu-item @if( Request::segment(1)== 'past-activities' ) active @endif">
+                    <a href="/past-activities" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-alarm"></i></span>
+                        <span class="menu-text">Gelecek Aktiviteler</span>
+                    </a>
+                </div>
+
+
                 <div class="menu-header">Ürünler</div>
                 <div id="nav-products" class="d-none menu-item @if( Request::segment(1)== 'products' ) active @endif">
                     <a href="/products" class="menu-link">

@@ -1096,6 +1096,24 @@ async function serviceGetDeleteActivityType(id) {
     }
 }
 
+async function serviceGetActivities() {
+    const data = await fetchDataGet('/admin/activity/getActivities', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetPastActivities() {
+    const data = await fetchDataGet('/admin/activity/getPastActivities', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetActivitiesByCompanyId(id) {
     const data = await fetchDataGet('/admin/activity/getActivitiesByCompanyId/'+ id, 'application/json');
     if (data.status == "success") {
