@@ -260,6 +260,7 @@ function isValidDate(dateString) {
 
 function formatDateAndTime2(date, slicer) {
     var dateArray = date.split(' ');
+    console.log(dateArray)
 
     // Check if the date part is in a valid format
     if (dateArray.length !== 2 || !isValidDate(dateArray[0])) {
