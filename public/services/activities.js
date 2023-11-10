@@ -205,6 +205,7 @@ async function openUpdateCompanyActivityModal(activity_id){
 }
 async function initActivityUpdateModalEmployee(){
     let company_id = document.getElementById('update_activity_company_id');
+    console.log(company_id)
     if (company_id != 0) {
         getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
     }else{
