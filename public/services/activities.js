@@ -123,10 +123,10 @@ async function initActivities(){
         }
 
         let item = '<tr>\n' +
-            '           <th scope="row">'+ activity.id +'</th>\n' +
-            '           <td>'+ activity.company.name +'</td>\n' +
-            '           <td>'+ activity.employee.name +'</td>\n' +
-            '           <td>'+ activity.user.name +' '+ activity.user.surname +'</td>\n' +
+            '           <th class="bg-dark">'+ activity.id +'</th>\n' +
+            '           <td class="bg-dark">'+ activity.company.name +'</td>\n' +
+            '           <td class="bg-dark">'+ activity.employee.name +'</td>\n' +
+            '           <td class="bg-dark">'+ activity.user.name +' '+ activity.user.surname +'</td>\n' +
             '           <td>'+ activity.type.name +'</td>\n' +
             '           <td>'+ activity.title +'</td>\n' +
             '           <td>'+ formatDateAndTimeDESC(activity.start, "/") +'</td>\n' +
