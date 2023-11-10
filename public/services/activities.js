@@ -147,6 +147,7 @@ async function openAddCompanyActivityModal(){
 }
 async function initActivityAddModalEmployee(){
     let company_id = document.getElementById('add_activity_company_id');
+    console.log(company_id)
     getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
 }
 async function addActivity(){
