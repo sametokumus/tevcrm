@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/activities.js"></script>
+<script src="services/past-activities.js"></script>
 ';
 ?>
 
@@ -100,7 +100,6 @@ $extra_js='
                     <th class="border-bottom-0">Başlangıç</th>
                     <th class="border-bottom-0">Bitiş</th>
                     <th class="border-bottom-0">Alt Görev</th>
-                    <th class="border-bottom-0">Kalan Süre</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>
