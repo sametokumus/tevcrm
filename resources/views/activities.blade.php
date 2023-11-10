@@ -2,6 +2,16 @@
 <?php
 $extra_js='
 <script src="services/activities.js"></script>
+<script>
+$(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy"
+});
+$(".timepicker").timepicker({
+    minuteStep: 15,
+    showMeridian: false
+});
+</script>
 ';
 ?>
 
