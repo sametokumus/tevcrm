@@ -163,9 +163,10 @@ $(".timepicker").timepicker({
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Yetkili</th>
                                             <th scope="col">Tür</th>
-                                            <th scope="col">Başlık</th>
-                                            <th scope="col">Firma Yetkilisi</th>
+                                            <th scope="col">Konu</th>
+                                            <th scope="col">Müşteri Yetkilisi</th>
                                             <th scope="col">Başlangıç</th>
                                             <th scope="col">Bitiş</th>
                                             <th scope="col">Alt Görev</th>
@@ -483,7 +484,7 @@ $(".timepicker").timepicker({
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Yapılacak Aktivite</label>
+                            <label class="form-label">Konu</label>
                             <input type="text" class="form-control" id="add_activity_title">
                         </div>
                         <div class="col-md-12 mb-3">
@@ -566,7 +567,7 @@ $(".timepicker").timepicker({
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Yapılacak Aktivite</label>
+                            <label class="form-label">Konu</label>
                             <input type="text" class="form-control" id="update_activity_title">
                             <input type="hidden" class="form-control" id="update_activity_id" required>
                         </div>

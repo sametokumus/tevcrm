@@ -421,6 +421,7 @@ async function deleteNote(note_id){
 async function initActivities(){
     let company_id = getPathVariable('company-detail');
     let data = await serviceGetActivitiesByCompanyId(company_id);
+    console.log(data)
     $('#datatableActivities tbody tr').remove();
     let logged_user_id = localStorage.getItem('userId');
 
@@ -470,8 +471,8 @@ async function addActivity(){
         tasks.push(item);
     }
 
-    let start = document.getElementById('add_activity_start_date').value + " " + document.getElementById('add_activity_start_time').value + ":00";
-    let end = document.getElementById('add_activity_end_date').value + " " + document.getElementById('add_activity_end_time').value + ":00";
+    let start = formatDateDESC2(document.getElementById('add_activity_start_date').value, "-", "-") + " " + document.getElementById('add_activity_start_time').value + ":00";
+    let end = formatDateDESC2(document.getElementById('add_activity_end_date').value, "-", "-")  + " " + document.getElementById('add_activity_end_time').value + ":00";
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
@@ -480,8 +481,8 @@ async function addActivity(){
         "description": document.getElementById('add_activity_description').value,
         "company_id": company_id,
         "employee_id": document.getElementById('add_activity_employee_id').value,
-        "start": formatDateAndTime2(start, "-"),
-        "end": formatDateAndTime2(end, "-"),
+        "start": start,
+        "end": end,
         "tasks": tasks
     });
 
