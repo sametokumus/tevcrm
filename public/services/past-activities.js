@@ -3,41 +3,45 @@
 
 	$(document).ready(function() {
 
-        $(":input").inputmask();
-        $("#add_shipment_price").maskMoney({thousands:'.', decimal:','});
-
-		$('#delete_sale_form').submit(function (e){
-			e.preventDefault();
-            deleteSale();
-		});
-		$('#update_status_form').submit(function (e){
-			e.preventDefault();
-            updateStatus();
-		});
-		$('#add_sale_note_form').submit(function (e){
-			e.preventDefault();
-            addSaleNote();
-		});
-		$('#add_cancel_note_form').submit(function (e){
-			e.preventDefault();
-            addCancelNote();
-		});
-		$('#sale_filter_form').submit(async function (e){
-			e.preventDefault();
-            await localStorage.setItem('sale_filter', 'true');
-            localStorage.setItem('sale_filter_owner', document.getElementById('sale_filter_owner').value);
-            localStorage.setItem('sale_filter_authorized_personnel', document.getElementById('sale_filter_authorized_personnel').value);
-            localStorage.setItem('sale_filter_purchasing_staff', document.getElementById('sale_filter_purchasing_staff').value);
-            localStorage.setItem('sale_filter_company', document.getElementById('sale_filter_company').value);
-            localStorage.setItem('sale_filter_company_employee', document.getElementById('sale_filter_company_employee').value);
-            localStorage.setItem('sale_filter_status', document.getElementById('sale_filter_status').value);
-            await initFilter();
-            await initSales();
-		});
-        $('#add_shipment_price_form').submit(function (e){
+        $('#add_activity_form').submit(function (e){
             e.preventDefault();
-            addShipmentPrice();
+            addActivity();
         });
+        $('#update_activity_form').submit(function (e){
+            e.preventDefault();
+            updateActivity();
+        });
+
+        $('#add-activity-new-task-btn').click(function (){
+            $('#add-activity-new-tasks-input').removeClass('d-none');
+        });
+
+        $('#add-activity-task-button').click(function (){
+            let task = document.getElementById('add-activity-task').value;
+            if (task == ''){
+                alert('Lütfen görev için içerik ekleyiniz.')
+            }else{
+                let count = document.getElementById('add-activity-new-task-count').value;
+                count = parseInt(count) + 1;
+                document.getElementById('add-activity-new-task-count').value = count;
+                let checkInput = '<div class="form-check">\n' +
+                    '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="0" id="add_activity_new_task_'+ count +'" />\n' +
+                    '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'" id="add_activity_new_task_'+ count +'_label">'+ task +'</label>\n' +
+                    '             </div>';
+                $('#add-activity-new-tasks-body').append(checkInput);
+                document.getElementById('add-activity-task').value = '';
+                $('#add-activity-new-tasks-input').addClass('d-none');
+            }
+        });
+
+        $('#update-activity-new-task-btn').click(function (){
+            $('#update-activity-new-tasks-input').removeClass('d-none');
+        });
+
+        $('#update-activity-task-button').click(function (){
+            updateActivityNewTask();
+        });
+
 	});
 
 	$(window).load(async function() {
@@ -45,7 +49,6 @@
 		checkLogin();
 		checkRole();
 
-        initFilter();
         initActivities();
 
 	});
@@ -54,55 +57,6 @@
 
 function checkRole(){
 	return true;
-}
-
-async function initFilter() {
-    await getOwnersAddSelectId('sale_filter_owner');
-    await getAdminsAddSelectId('sale_filter_authorized_personnel');
-    await getAdminsAddSelectId('sale_filter_purchasing_staff');
-    await getCustomersAndPotentialsAddSelectIdWithZero('sale_filter_company');
-
-    let data = await serviceGetStatuses();
-    let statuses = data.statuses;
-    $('#sale_filter_status option').remove();
-    $('#sale_filter_status').append('<option value="0">Durum Seçiniz</option>');
-    $.each(statuses, function (i, status){
-        $('#sale_filter_status').append('<option value="'+ status.id +'">'+ status.name +'</option>');
-    });
-
-    let filter = localStorage.getItem('sale_filter');
-    if (filter == 'true'){
-
-        await getEmployeesAddSelectIdWithZero(localStorage.getItem('sale_filter_company'), 'sale_filter_company_employee');
-
-        document.getElementById('sale_filter_owner').value = localStorage.getItem('sale_filter_owner');
-        document.getElementById('sale_filter_authorized_personnel').value = localStorage.getItem('sale_filter_authorized_personnel');
-        document.getElementById('sale_filter_purchasing_staff').value = localStorage.getItem('sale_filter_purchasing_staff');
-        document.getElementById('sale_filter_company').value = localStorage.getItem('sale_filter_company');
-        document.getElementById('sale_filter_company_employee').value = localStorage.getItem('sale_filter_company_employee');
-        document.getElementById('sale_filter_status').value = localStorage.getItem('sale_filter_status');
-    }
-
-
-}
-
-async function removeFilter(){
-    localStorage.setItem('sale_filter', 'false');
-    localStorage.removeItem('sale_filter_owner');
-    localStorage.removeItem('sale_filter_authorized_personnel');
-    localStorage.removeItem('sale_filter_purchasing_staff');
-    localStorage.removeItem('sale_filter_company');
-    localStorage.removeItem('sale_filter_company_employee');
-    localStorage.removeItem('sale_filter_status');
-    $('#sale_filter_company_employee option').remove();
-
-    initFilter();
-    initSales();
-}
-
-async function initEmployeeSelect(){
-    let company_id = document.getElementById('sale_filter_company').value;
-    getEmployeesAddSelectIdWithZero(company_id, 'sale_filter_company_employee');
 }
 
 async function initActivities(){
@@ -148,6 +102,20 @@ async function initActivities(){
                         data.substr(0, 30) + '...' :
                         data;
                 }
+            },
+            {
+                type: 'date',
+                targets: 6,
+                render: function(data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+                }
+            },
+            {
+                type: 'date',
+                targets: 7,
+                render: function(data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+                }
             }
 		],
 		dom: 'Bfrtip',
@@ -172,3 +140,187 @@ async function initActivities(){
 	});
 }
 
+async function openAddCompanyActivityModal(){
+    let company_id = getPathVariable('company-detail');
+    getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
+    getActivityTypesAddSelectId('add_activity_type_id');
+    $("#addCompanyActivityModal").modal('show');
+}
+async function addActivity(){
+    let company_id = getPathVariable('company-detail');
+    let user_id = localStorage.getItem('userId');
+
+    let task_count = document.getElementById('add-activity-new-task-count').value;
+    let tasks = [];
+    for (let i = 1; i <= task_count; i++) {
+        let title = document.getElementById('add_activity_new_task_'+i+'_label').textContent;
+        let is_completed = 0;
+        let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
+        let item = {
+            "task_id": parseInt(task_id),
+            "title": title,
+            "is_completed": parseInt(is_completed)
+        }
+        tasks.push(item);
+    }
+
+    let start = formatDateDESC2(document.getElementById('add_activity_start_date').value, "-", "-") + " " + document.getElementById('add_activity_start_time').value + ":00";
+    let end = formatDateDESC2(document.getElementById('add_activity_end_date').value, "-", "-")  + " " + document.getElementById('add_activity_end_time').value + ":00";
+
+    let formData = JSON.stringify({
+        "user_id": parseInt(user_id),
+        "type_id": document.getElementById('add_activity_type_id').value,
+        "title": document.getElementById('add_activity_title').value,
+        "description": document.getElementById('add_activity_description').value,
+        "company_id": company_id,
+        "employee_id": document.getElementById('add_activity_employee_id').value,
+        "start": start,
+        "end": end,
+        "tasks": tasks
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostAddActivity(formData);
+    if (returned){
+        $("#add_activity_form").trigger("reset");
+        $("#addCompanyActivityModal").modal('hide');
+        // initActivities();
+    }else{
+        alert("Hata Oluştu");
+    }
+}
+async function openUpdateCompanyActivityModal(activity_id){
+    let company_id = getPathVariable('company-detail');
+    getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
+    getActivityTypesAddSelectId('update_activity_type_id');
+    $("#updateCompanyActivityModal").modal('show');
+    initUpdateCompanyActivityModal(activity_id)
+}
+async function initUpdateCompanyActivityModal(activity_id){
+    document.getElementById('update_activity_form').reset();
+    $('#update-activity-tasks-body .form-check').remove();
+    document.getElementById('update_activity_id').value = activity_id;
+    let data = await serviceGetActivityById(activity_id);
+    let activity = data.activity;
+    document.getElementById('update_activity_type_id').value = activity.type_id;
+    document.getElementById('update_activity_title').value = activity.title;
+    document.getElementById('update_activity_description').value = activity.description;
+    document.getElementById('update_activity_employee_id').value = activity.employee_id;
+    document.getElementById('update_activity_start_date').value = formatDateASC(activity.start, "-");
+    document.getElementById('update_activity_start_time').value = formatTime(activity.start);
+    document.getElementById('update_activity_end_date').value = formatDateASC(activity.end, "-");
+    document.getElementById('update_activity_end_time').value = formatTime(activity.end);
+
+    let count = 0;
+    $.each(activity.tasks, function (i, task) {
+        count += 1;
+        let is_completed = '';
+        let task_status = 1;
+        if (task.is_completed == 1){
+            is_completed = 'checked';
+            task_status = 0;
+        }
+        let checkInput = '<div class="form-check" id="form-check-'+ task.id +'">\n' +
+            '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="'+ task.id +'" id="update_activity_task_'+ count +'" '+ is_completed +' onclick="changeTaskStatus(this, '+ task.id +' ,'+ task_status +')" />\n' +
+            '                 <label class="form-check-label" for="add_activity_task_'+ count +'" id="add_activity_task_'+ count +'_label">'+ task.title +'</label>\n' +
+            '                 (<a href="#" onclick="deleteActivityTask(event, '+ task.id +');">Görevi Sil</a>)\n' +
+            '             </div>';
+        $('#update-activity-tasks-body').append(checkInput);
+    });
+    document.getElementById('update-activity-task-count').value = count;
+}
+async function updateActivityCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_note_form").trigger("reset");
+    $("#updateCompanyActivityModal").modal('hide');
+    initActivities();
+}
+async function updateActivity(){
+    let company_id = getPathVariable('company-detail');
+    let user_id = localStorage.getItem('userId');
+    let activity_id = document.getElementById('update_activity_id').value;
+
+    let start = formatDateDESC2(document.getElementById('update_activity_start_date').value, "-", "-") + " " + document.getElementById('update_activity_start_time').value + ":00";
+    let end = formatDateDESC2(document.getElementById('update_activity_end_date').value, "-", "-")  + " " + document.getElementById('update_activity_end_time').value + ":00";
+    let formData = JSON.stringify({
+        "user_id": parseInt(user_id),
+        "type_id": document.getElementById('update_activity_type_id').value,
+        "title": document.getElementById('update_activity_title').value,
+        "description": document.getElementById('update_activity_description').value,
+        "company_id": company_id,
+        "employee_id": document.getElementById('update_activity_employee_id').value,
+        "start": start,
+        "end": end
+    });
+    let returned = await servicePostUpdateActivity(formData, activity_id);
+    if (returned){
+        $("#update_activity_form").trigger("reset");
+        $("#updateCompanyActivityModal").modal('hide');
+        initActivities();
+    }else{
+        alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    }
+}
+async function deleteActivity(activity_id){
+    let returned = await serviceGetDeleteActivity(activity_id);
+    if(returned){
+        initActivities();
+    }
+}
+async function deleteActivityTask(event, task_id){
+    event.preventDefault();
+    console.log(task_id)
+    let returned = await serviceGetDeleteActivityTask(task_id);
+    if(returned){
+        $('#form-check-'+task_id).remove();
+    }
+}
+async function changeTaskStatus(element, task_id, task_status){
+    $(element).attr('disabled', 'disabled');
+    let returned;
+    let new_status;
+    if (task_status == 0){
+        returned = await serviceGetUnCompleteActivityTask(task_id);
+        new_status = 1;
+    }else{
+        returned = await serviceGetCompleteActivityTask(task_id);
+        new_status = 0;
+    }
+    if(returned){
+        $(element).attr('onclick', "changeTaskStatus(this, '"+ task_id + "' ,'"+ new_status +"')");
+        $(element).removeAttr('disabled');
+    }
+}
+async function updateActivityNewTask(){
+    let task = document.getElementById('update-activity-task').value;
+    if (task == ''){
+        alert('Lütfen görev için içerik ekleyiniz.')
+    }else{
+
+        let formData = JSON.stringify({
+            "activity_id": parseInt(document.getElementById('update_activity_id').value),
+            "title": task
+        });
+
+        let returned = await servicePostAddActivityTask(formData);
+        if (returned == false) {
+            alert('Görev eklenirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+        }else{
+            let count = document.getElementById('update-activity-task-count').value;
+            count = parseInt(count) + 1;
+            document.getElementById('update-activity-task-count').value = count;
+            let checkInput = '<div class="form-check" id="form-check-'+ returned.task_id +'">\n' +
+                '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="'+ returned.task_id +'" id="update_activity_task_'+ count +'" onclick="changeTaskStatus(this, '+ returned.task_id +', 1)" />\n' +
+                '                 <label class="form-check-label" for="add_activity_task_'+ count +'" id="add_activity_task_'+ count +'_label">'+ task +'</label>\n' +
+                '                 (<a href="#" onclick="deleteActivityTask(event, '+ returned.task_id +');">Görevi Sil</a>)\n' +
+                '             </div>';
+            $('#update-activity-tasks-body').append(checkInput);
+            document.getElementById('update-activity-task').value = '';
+            $('#update-activity-new-tasks-input').addClass('d-none');
+        }
+    }
+}

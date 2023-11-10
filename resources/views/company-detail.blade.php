@@ -166,7 +166,7 @@ $(".timepicker").timepicker({
                                             <th scope="col">Yetkili</th>
                                             <th scope="col">Tür</th>
                                             <th scope="col">Konu</th>
-                                            <th scope="col">Müşteri Yetkilisi</th>
+                                            <th scope="col">Firma Yetkilisi</th>
                                             <th scope="col">Başlangıç</th>
                                             <th scope="col">Bitiş</th>
                                             <th scope="col">Alt Görev</th>

@@ -92,9 +92,9 @@ $extra_js='
                 <thead>
                 <tr>
                     <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
-                    <th class="border-bottom-0 bg-dark">Müşteri</th>
-                    <th class="border-bottom-0 bg-dark">Müşteri Yetkilisi</th>
+                    <th class="border-bottom-0 bg-dark">Firma</th>
                     <th class="border-bottom-0 bg-dark">Firma Yetkilisi</th>
+                    <th class="border-bottom-0 bg-dark">Aktivite Sorumlusu</th>
                     <th class="border-bottom-0">Tür</th>
                     <th class="border-bottom-0">Konu</th>
                     <th class="border-bottom-0">Başlangıç</th>
@@ -115,155 +115,182 @@ $extra_js='
 </div>
 <!--app-content close-->
 
-<div class="modal modal-cover fade" id="updateStatusModal">
+<div class="modal modal-cover fade" id="addCompanyActivityModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">DURUM GÜNCELLE</h5>
+                <h5 class="modal-title">AKTİVİTE EKLE</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="update_status_form">
+            <form method="post" action="#" id="add_activity_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Durum :</label>
-                        <div class="col-md-9">
-                            <input type="hidden" class="form-control" id="update_sale_id" required>
-                            <select name="update_sale_status" id="update_sale_status" class="form-control form-control-md" required>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="add_activity_company_id" onchange="initActivityAddModalEmployee();">
 
                             </select>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Firma Yetkilisi</label>
+                            <select class="form-control" id="add_activity_employee_id">
 
-<div class="modal modal-cover fade" id="addCancelNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">İPTAL SEBEBİ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_cancel_note_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <label class="col-md-3 form-label">Açıklama :</label>
-                        <div class="col-md-9">
-                            <input type="hidden" class="form-control" id="cancel_sale_id" required>
-                            <textarea class="form-control" rows="3" id="cancel_sale_note" placeholder="Not" required=""></textarea>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Aktivite Türü</label>
+                            <select class="form-control" id="add_activity_type_id">
 
-<div class="modal modal-cover fade" id="addSaleNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">SİPARİŞ NOTLARI</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-                <div class="modal-body">
-
-                    <div class="row mb-3">
-                        <div class="table-responsive">
-                            <table id="sales-notes-table" class="table table-striped table-borderless mb-2px small">
-                                <tbody>
-
-                                </tbody>
-                            </table>
+                            </select>
                         </div>
-                    </div>
-
-                    <form method="post" action="#" id="add_sale_note_form">
-                        <div class="row mb-4">
-                            <div class="col-md-12 mb-3">
-                                <input type="hidden" class="form-control" id="add_note_sale_id" required>
-                                <label class="form-label">Yeni Not Ekle</label>
-                                <textarea name="text" class="summernote" id="add_sale_note_description" title="Contents"></textarea>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Konu</label>
+                            <input type="text" class="form-control" id="add_activity_title">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" rows="3" id="add_activity_description"></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Başlangıç</label>
+                            <input type="text" class="form-control datepicker" id="add_activity_start_date" placeholder="dd-mm-yyyy" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="add_activity_start_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Bitiş</label>
+                            <input type="text" class="form-control datepicker" id="add_activity_end_date" placeholder="dd-mm-yyyy" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="add_activity_end_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3" id="add-activity-new-task-btn">Görev Ekle +</button></label>
+                        </div>
+                        <div id="add-activity-tasks-body" class="d-none mb-3">
+
+                        </div>
+                        <div id="add-activity-new-tasks-body" class="mb-3">
+                            <input type="hidden" id="add-activity-new-task-count" value="0">
+                        </div>
+                        <div class="row mb-3 d-none" id="add-activity-new-tasks-input">
+                            <div class="col-md-4 mb-3">
+                                <input type="text" class="form-control input-sm" id="add-activity-task" placeholder="Yeni Görev" />
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <button type="button" class="btn btn-default btn-sm" id="add-activity-task-button">Ekle</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
-
-<div class="modal modal-cover fade" id="deleteSaleModal">
+<div class="modal modal-cover fade" id="updateCompanyActivityModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">SİPARİŞ SİLME</h5>
+                <h5 class="modal-title">AKTİVİTE GÜNCELLE</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+            <form method="post" action="#" id="update_activity_form">
                 <div class="modal-body">
-                    <form method="post" action="#" id="delete_sale_form">
-                        <div class="row mb-4">
-                            <div class="col-md-12 mb-3">
-                                <input type="hidden" class="form-control" id="delete_sale_id" required>
-                                <label class="form-label">Siparişi silmek istediğinize emin misiniz?</label>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-danger">Sil</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addShipmentPriceModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">EK GİDERLER</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-
-                <form method="post" action="#" id="add_shipment_price_form">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Nakliye ve Paketleme Masrafları</label>
-                            <input type="text" class="form-control" id="add_shipment_price" required>
-                            <input type="hidden" class="form-control" id="add_shipment_sale_id" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="add_shipment_currency">
-                                <option value="TRY">TRY</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="update_activity_company_id" onchange="initActivityUpdateModalEmployee();">
+
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                            <label class="form-label">Firma Yetkilisi</label>
+                            <select class="form-control" id="update_activity_employee_id">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Aktivite Türü</label>
+                            <select class="form-control" id="update_activity_type_id">
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Konu</label>
+                            <input type="text" class="form-control" id="update_activity_title">
+                            <input type="hidden" class="form-control" id="update_activity_id" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Açıklama</label>
+                            <textarea class="form-control" rows="3" id="update_activity_description"></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Başlangıç</label>
+                            <input type="text" class="form-control datepicker" id="update_activity_start_date" placeholder="dd-mm-yyyy" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="update_activity_start_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Bitiş</label>
+                            <input type="text" class="form-control datepicker" id="update_activity_end_date" placeholder="dd-mm-yyyy" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Saat</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                <input type="text" class="form-control timepicker" id="update_activity_end_time" />
+                                <span class="input-group-addon input-group-text">
+                                    <i class="fa fa-clock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3" id="update-activity-new-task-btn">Görev Ekle +</button></label>
+                        </div>
+                        <div id="update-activity-tasks-body" class="mb-3">
+                            <input type="hidden" id="update-activity-task-count" value="0">
+
+                        </div>
+                        <div id="update-activity-new-tasks-body" class="d-none mb-3">
+                        </div>
+                        <div class="row mb-3 d-none" id="update-activity-new-tasks-input">
+                            <div class="col-md-4 mb-3">
+                                <input type="text" class="form-control input-sm" id="update-activity-task" placeholder="Yeni Görev" />
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <button type="button" class="btn btn-default btn-sm" id="update-activity-task-button">Ekle</button>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
