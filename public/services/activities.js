@@ -226,7 +226,7 @@ async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_end_time').value = formatTime(activity.end);
     document.getElementById('update_activity_company_id').value = activity.company_id;
     await getEmployeesAddSelectId(activity.company_id, 'update_activity_employee_id');
-    document.getElementById('update_activity_employee_id').value = activity.employee_id;
+    // document.getElementById('update_activity_employee_id').value = activity.employee_id;
 
     let count = 0;
     $.each(activity.tasks, function (i, task) {
