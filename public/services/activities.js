@@ -134,7 +134,7 @@ async function initActivities(){
             '           <td></td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
-        $('#datatableActivities tbody').append(item);
+        $('#activities-datatable tbody').append(item);
     });
 
 	$('#activities-datatable').DataTable({
@@ -165,6 +165,7 @@ async function initActivities(){
 		language: {
 			url: "services/Turkish.json"
 		},
+		order: false,
         fixedColumns: {
         left: 4
         }

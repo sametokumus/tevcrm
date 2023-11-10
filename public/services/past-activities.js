@@ -133,7 +133,7 @@ async function initActivities(){
             '           <td>'+ activity.task_count +' görev ('+ activity.completed_task_count +' tamamlanan)</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
-        $('#datatableActivities tbody').append(item);
+        $('#activities-datatable tbody').append(item);
     });
 
 	$('#activities-datatable').DataTable({
@@ -164,6 +164,7 @@ async function initActivities(){
 		language: {
 			url: "services/Turkish.json"
 		},
+		order: false,
         fixedColumns: {
         left: 4
         }
