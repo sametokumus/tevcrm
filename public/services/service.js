@@ -253,30 +253,20 @@ function formatDateAndTime(date, slicer) {
 	return year + slicer + month + slicer + day + ' ' + hour + ':' + minute;
 }
 
-function isValidDate(dateString) {
-    // Use the appropriate format for your date strings
-    return moment(dateString, "DD-MM-YYYY HH:mm:ss", true).isValid();
-}
+function formatDateAndTime2(dateString, slicer) {
+    let dateArray = dateString.split(' ');
 
-function formatDateAndTime2(date, slicer) {
-    var dateArray = date.split(' ');
-    console.log(dateArray)
-    console.log(isValidDate(dateArray[0]))
-    // Check if the date part is in a valid format
-    if (dateArray.length !== 2 || !isValidDate(date)) {
-        console.log(1)
-        return "Invalid Date";
-    }
+    let dates = dateArray[0];
+    let time = dateArray[1];
 
-    var date = new Date(dateArray[0]);
-    var time = dateArray[1];
+    let fullDate = dates.split('-');
+    let day = fullDate[0];
+    let month = fullDate[1];
+    let year = fullDate[2];
 
-    var day = ('0' + date.getDate()).slice(-2);
-    var month = ('0' + (date.getMonth() + 1)).slice(-2);
-    var year = date.getFullYear();
-    var hourMinute = time.split(':');
-    var hour = hourMinute[0];
-    var minute = hourMinute[1];
+    let hourMinute = time.split(':');
+    let hour = hourMinute[0];
+    let minute = hourMinute[1];
 
 	return year + slicer + month + slicer + day + ' ' + hour + ':' + minute;
 }
