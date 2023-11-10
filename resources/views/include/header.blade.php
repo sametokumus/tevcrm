@@ -239,7 +239,7 @@ $extra_js="";
                 <div id="nav-past-activities" class="d-none menu-item @if( Request::segment(1)== 'past-activities' ) active @endif">
                     <a href="/past-activities" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-alarm"></i></span>
-                        <span class="menu-text">Gelecek Aktiviteler</span>
+                        <span class="menu-text">Geçmiş Aktiviteler</span>
                     </a>
                 </div>
 

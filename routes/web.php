@@ -69,6 +69,9 @@ Route::get('/products', function () { return view('products'); });
 Route::get('/brands', function () { return view('brands'); });
 Route::get('/categories', function () { return view('categories'); });
 
+Route::get('/activities', function () { return view('activities'); });
+Route::get('/past-activities', function () { return view('past-activities'); });
+
 
 Route::get('/accounting-dashboard', function () { return view('accounting-dashboard'); });
 Route::get('/pending-accounting', function () { return view('pending-accounting'); });
