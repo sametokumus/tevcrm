@@ -3,6 +3,8 @@
 
 	$(document).ready(function() {
 
+        $('#add_activity_company_id').select2();
+
         $('#add_activity_form').submit(function (e){
             e.preventDefault();
             addActivity();
