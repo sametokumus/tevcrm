@@ -192,7 +192,7 @@ async function addActivity(){
     if (returned){
         $("#add_activity_form").trigger("reset");
         $("#addCompanyActivityModal").modal('hide');
-        // initActivities();
+        initActivities();
     }else{
         alert("Hata Oluştu");
     }
