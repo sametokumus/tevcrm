@@ -263,7 +263,7 @@ function formatDateAndTime2(date, slicer) {
     console.log(dateArray)
     console.log(isValidDate(dateArray[0]))
     // Check if the date part is in a valid format
-    if (dateArray.length !== 2 || !isValidDate(dateArray[0])) {
+    if (dateArray.length !== 2 || !isValidDate(date)) {
         console.log(1)
         return "Invalid Date";
     }
