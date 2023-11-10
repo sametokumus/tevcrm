@@ -480,8 +480,8 @@ async function addActivity(){
         "description": document.getElementById('add_activity_description').value,
         "company_id": company_id,
         "employee_id": document.getElementById('add_activity_employee_id').value,
-        "start": formatDateAndTime(start, "-"),
-        "end": formatDateAndTime(end, "-"),
+        "start": formatDateAndTime2(start, "-"),
+        "end": formatDateAndTime2(end, "-"),
         "tasks": tasks
     });
 
