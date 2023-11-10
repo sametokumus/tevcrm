@@ -3,8 +3,6 @@
 
 	$(document).ready(function() {
 
-        $('#add_activity_company_id').select2();
-
         $('#add_activity_form').submit(function (e){
             e.preventDefault();
             addActivity();
@@ -143,8 +141,9 @@ async function initActivities(){
 }
 
 async function openAddCompanyActivityModal(){
-    getCompaniesAddSelectId('add_activity_company_id');
     getActivityTypesAddSelectId('add_activity_type_id');
+    await getCompaniesAddSelectId('add_activity_company_id');
+    $('#add_activity_company_id').select2();
     $("#addCompanyActivityModal").modal('show');
 }
 async function initActivityAddModalEmployee(){
