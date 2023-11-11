@@ -36,7 +36,7 @@ class ActivityController extends Controller
                 $current_time = Carbon::now();
                 $end_time = $activity->end;
 
-                $difference = $current_time->diffForHumans($end_time);
+                $difference = $end_time->diffForHumans($current_time);
                 $activity['diff_end_day'] = $difference;
             }
 
