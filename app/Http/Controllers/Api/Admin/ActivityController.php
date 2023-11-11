@@ -34,10 +34,15 @@ class ActivityController extends Controller
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
 
                 $current_time = Carbon::now();
-                $end_time = Carbon::createFromFormat('Y-m-d H:i:s', $activity->end);
+                $end_time = Carbon::parse($activity->end);
 
-                $difference = $end_time->diffForHumans($current_time);
-                $activity['diff_end_day'] = $difference;
+                $difference = $end_time->diff($current_time);
+                $days = $difference->days;
+                $time = $difference->format('%H:%I');
+
+                $custom_diff = ($days > 0 ? $days . ' day(s) ' : '') . $time;
+
+                $activity['diff_end_day'] = $custom_diff;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
