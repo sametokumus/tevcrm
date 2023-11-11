@@ -85,7 +85,7 @@ async function initActivities(){
             '           <td>'+ formatDateAndTimeDESC(activity.start, "/") +'</td>\n' +
             '           <td>'+ formatDateAndTimeDESC(activity.end, "/") +'</td>\n' +
             '           <td>'+ activity.task_count +' görev ('+ activity.completed_task_count +' tamamlanan)</td>\n' +
-            '           <td></td>\n' +
+            '           <td>'+ activity.diff_end_day +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#activities-datatable tbody').append(item);

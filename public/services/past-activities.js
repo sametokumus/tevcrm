@@ -141,13 +141,20 @@ async function initActivities(){
 }
 
 async function openAddCompanyActivityModal(){
-    let company_id = getPathVariable('company-detail');
-    getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
     getActivityTypesAddSelectId('add_activity_type_id');
+    await getCompaniesAddSelectId('add_activity_company_id');
     $("#addCompanyActivityModal").modal('show');
 }
+async function initActivityAddModalEmployee(){
+    let company_id = document.getElementById('add_activity_company_id').value;
+    if (company_id != 0) {
+        getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
+    }else{
+        $('#add_activity_employee_id option').remove();
+    }
+}
 async function addActivity(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = document.getElementById('add_activity_company_id').value;
     let user_id = localStorage.getItem('userId');
 
     let task_count = document.getElementById('add-activity-new-task-count').value;
@@ -185,17 +192,24 @@ async function addActivity(){
     if (returned){
         $("#add_activity_form").trigger("reset");
         $("#addCompanyActivityModal").modal('hide');
-        // initActivities();
+        initActivities();
     }else{
         alert("Hata Oluştu");
     }
 }
 async function openUpdateCompanyActivityModal(activity_id){
-    let company_id = getPathVariable('company-detail');
-    getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
     getActivityTypesAddSelectId('update_activity_type_id');
+    await getCompaniesAddSelectId('update_activity_company_id');
     $("#updateCompanyActivityModal").modal('show');
     initUpdateCompanyActivityModal(activity_id)
+}
+async function initActivityUpdateModalEmployee(){
+    let company_id = document.getElementById('update_activity_company_id').value;
+    if (company_id != 0) {
+        getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
+    }else{
+        $('#update_activity_employee_id option').remove();
+    }
 }
 async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_form').reset();
@@ -206,11 +220,13 @@ async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_type_id').value = activity.type_id;
     document.getElementById('update_activity_title').value = activity.title;
     document.getElementById('update_activity_description').value = activity.description;
-    document.getElementById('update_activity_employee_id').value = activity.employee_id;
     document.getElementById('update_activity_start_date').value = formatDateASC(activity.start, "-");
     document.getElementById('update_activity_start_time').value = formatTime(activity.start);
     document.getElementById('update_activity_end_date').value = formatDateASC(activity.end, "-");
     document.getElementById('update_activity_end_time').value = formatTime(activity.end);
+    document.getElementById('update_activity_company_id').value = activity.company_id;
+    await getEmployeesAddSelectId(activity.company_id, 'update_activity_employee_id');
+    document.getElementById('update_activity_employee_id').value = activity.employee_id;
 
     let count = 0;
     $.each(activity.tasks, function (i, task) {
@@ -240,7 +256,7 @@ async function updateActivityCallback(xhttp){
     initActivities();
 }
 async function updateActivity(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = document.getElementById('update_activity_company_id').value;
     let user_id = localStorage.getItem('userId');
     let activity_id = document.getElementById('update_activity_id').value;
 

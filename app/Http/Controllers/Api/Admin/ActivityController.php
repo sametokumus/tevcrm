@@ -9,6 +9,7 @@ use App\Models\ActivityType;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -31,6 +32,12 @@ class ActivityController extends Controller
                 $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
                 $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
+
+                $current_time = Carbon::now();
+                $end_time = $activity->end;
+
+                $difference = $current_time->diffForHumans($end_time);
+                $activity['diff_end_day'] = $difference;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
