@@ -34,7 +34,7 @@ class ActivityController extends Controller
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
 
                 $current_time = Carbon::now();
-                $end_time = $activity->end;
+                $end_time = Carbon::createFromFormat('Y-m-d H:i:s', $activity->end);
 
                 $difference = $end_time->diffForHumans($current_time);
                 $activity['diff_end_day'] = $difference;
