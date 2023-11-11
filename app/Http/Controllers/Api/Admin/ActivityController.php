@@ -41,7 +41,7 @@ class ActivityController extends Controller
                 $time1 = $difference->format('%H');
                 $time2 = $difference->format('%I');
 
-                $custom_diff = ($days > 0 ? $days . ' gün ' : '') . $time1 . 'saat' . $time2 . 'dakika';
+                $custom_diff = ($days > 0 ? $days . ' gün ' : '') . $time1 . ' saat ' . $time2 . ' dakika';
 
                 $activity['diff_end_day'] = $custom_diff;
             }
