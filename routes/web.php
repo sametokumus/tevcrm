@@ -72,6 +72,8 @@ Route::get('/categories', function () { return view('categories'); });
 Route::get('/activities', function () { return view('activities'); });
 Route::get('/past-activities', function () { return view('past-activities'); });
 
+Route::get('/staff-targets', function () { return view('staff-targets'); });
+
 
 Route::get('/accounting-dashboard', function () { return view('accounting-dashboard'); });
 Route::get('/pending-accounting', function () { return view('pending-accounting'); });

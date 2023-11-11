@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\Admin\AccountingDashboardController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\MobileController;
 use App\Http\Controllers\Api\Admin\PdfController;
+use App\Http\Controllers\Api\Admin\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -391,6 +392,15 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('pdf/getGenerateSaleSummaryPDF/{sale_id}', [PdfController::class, 'getGenerateSaleSummaryPDF']);
 
 
+
+
+    //StaffTarget
+    Route::get('staff/getStaffTargets', [StaffController::class, 'getStaffTargets']);
+    Route::get('staff/getStaffTargetsByStaffId/{staff_id}', [StaffController::class, 'getStaffTargetsByStaffId']);
+    Route::get('staff/getStaffTargetById/{target_id}', [StaffController::class, 'getStaffTargetById']);
+    Route::post('staff/addStaffTarget', [StaffController::class, 'addStaffTarget']);
+    Route::post('staff/updateStaffTarget', [StaffController::class, 'updateStaffTarget']);
+    Route::get('staff/deleteStaffTarget/{target_id}', [StaffController::class, 'deleteStaffTarget']);
 
 
 
