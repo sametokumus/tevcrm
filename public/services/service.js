@@ -2765,6 +2765,26 @@ async function serviceGetStaffTargetById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function servicePostAddStaffTarget(formData) {
+    const data = await fetchDataPost('/admin/staff/addStaffTarget', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateStaffTarget(formData) {
+    const data = await fetchDataPost('/admin/staff/updateStaffTarget', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 async function serviceGetDeleteStaffTarget(id) {
     const data = await fetchDataGet('/admin/staff/deleteStaffTarget/' + id, 'application/json');
     if (data.status == "success") {

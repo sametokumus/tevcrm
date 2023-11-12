@@ -101,45 +101,30 @@ async function initStaffTargets(){
 }
 
 async function addStaffTarget(){
-    let company_id = document.getElementById('add_activity_company_id').value;
     let user_id = localStorage.getItem('userId');
+    let admin_id = document.getElementById('add_target_admin_id').value;
+    let type_id = document.getElementById('add_target_type_id').value;
+    let target = changePriceToDecimal(document.getElementById('add_target_target').value);
+    let currency = document.getElementById('add_target_currency').value;
+    let month = document.getElementById('add_target_month').value;
+    let year = document.getElementById('add_target_year').value;
 
-    let task_count = document.getElementById('add-activity-new-task-count').value;
-    let tasks = [];
-    for (let i = 1; i <= task_count; i++) {
-        let title = document.getElementById('add_activity_new_task_'+i+'_label').textContent;
-        let is_completed = 0;
-        let task_id = document.getElementById('add_activity_new_task_'+i).getAttribute('data-task-id');
-        let item = {
-            "task_id": parseInt(task_id),
-            "title": title,
-            "is_completed": parseInt(is_completed)
-        }
-        tasks.push(item);
-    }
-
-    let start = formatDateDESC2(document.getElementById('add_activity_start_date').value, "-", "-") + " " + document.getElementById('add_activity_start_time').value + ":00";
-    let end = formatDateDESC2(document.getElementById('add_activity_end_date').value, "-", "-")  + " " + document.getElementById('add_activity_end_time').value + ":00";
 
     let formData = JSON.stringify({
-        "user_id": parseInt(user_id),
-        "type_id": document.getElementById('add_activity_type_id').value,
-        "title": document.getElementById('add_activity_title').value,
-        "description": document.getElementById('add_activity_description').value,
-        "company_id": company_id,
-        "employee_id": document.getElementById('add_activity_employee_id').value,
-        "start": start,
-        "end": end,
-        "tasks": tasks
+        "admin_id": admin_id,
+        "type_id": type_id,
+        "target": target,
+        "currency": currency,
+        "month": month,
+        "year": year
     });
 
     console.log(formData);
 
-    let returned = await servicePostAddActivity(formData);
+    let returned = await servicePostAddStaffTarget(formData);
     if (returned){
-        $("#add_activity_form").trigger("reset");
-        $("#addCompanyActivityModal").modal('hide');
-        initActivities();
+        $("#add_staff_target_form").trigger("reset");
+        initStaffTargets();
     }else{
         alert("Hata Oluştu");
     }
