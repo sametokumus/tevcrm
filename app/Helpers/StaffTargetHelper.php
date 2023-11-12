@@ -21,6 +21,7 @@ class StaffTargetHelper
     public static function getTargetStatus($target_id)
     {
         $target = StaffTarget::query()->where('id', $target_id)->first();
+        return 1;
 
         if ($target->type_id == 1){
             $status = StaffTargetHelper::getTargetStatusType1($target);
