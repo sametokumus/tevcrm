@@ -32,11 +32,6 @@ class StaffController extends Controller
                     $month_name = 'Tüm Yıl';
                 }else{
                     $monthId = $target->month;
-
-// Create a Carbon instance for the first day of the specified month
-                    $date = Carbon::createFromDate(null, $monthId, 1);
-
-// Get the month name in Turkish
                     $month_name = trans("date.months.$monthId");
                 }
 
