@@ -23,7 +23,8 @@ class StaffTargetHelper
         $target = StaffTarget::query()->where('id', $target_id)->first();
 
         if ($target->type_id == 1){
-            $status = StaffTargetHelper::getTargetStatusType1($target);
+            $status = 1;
+//            $status = StaffTargetHelper::getTargetStatusType1($target);
         }else if ($target->type_id == 2){
             $status = StaffTargetHelper::getTargetStatusType2($target);
         }else if ($target->type_id == 3){
