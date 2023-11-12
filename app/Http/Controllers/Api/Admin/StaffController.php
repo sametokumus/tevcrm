@@ -31,8 +31,7 @@ class StaffController extends Controller
                 if ($target->month == 0){
                     $month_name = 'Tüm Yıl';
                 }else{
-//                    setlocale(LC_TIME, 'tr_TR');
-                    $date = Carbon::createFromDate(null, $target->month, 1)->locale('tr');
+                    $date = Carbon::createFromDate(null, $target->month, 1)->locale('tr_TR');
                     $month_name = $date->format('F');
                 }
 
