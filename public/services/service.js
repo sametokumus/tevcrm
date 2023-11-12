@@ -2788,8 +2788,8 @@ async function servicePostUpdateStaffTarget(formData) {
 async function serviceGetDeleteStaffTarget(id) {
     const data = await fetchDataGet('/admin/staff/deleteStaffTarget/' + id, 'application/json');
     if (data.status == "success") {
-        return data.object;
+        return true;
     } else {
-        showAlert('İstek Başarısız.');
+        return false;
     }
 }

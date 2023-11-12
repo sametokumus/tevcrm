@@ -194,6 +194,7 @@ async function updateStaffTarget(){
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }
 }
+
 async function deleteStaffTarget(target_id){
     let returned = await serviceGetDeleteStaffTarget(target_id);
     if(returned){
