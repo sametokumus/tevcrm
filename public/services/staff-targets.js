@@ -64,31 +64,7 @@ async function initStaffTargets(){
 
 	$('#targets-datatable').DataTable({
 		responsive: false,
-		columnDefs: [
-            {
-                targets: 3,
-                className: 'ellipsis',
-                render: function(data, type, row, meta) {
-                    return type === 'display' && data.length > 30 ?
-                        data.substr(0, 30) + '...' :
-                        data;
-                }
-            },
-            {
-                type: 'date',
-                targets: 6,
-                render: function(data, type, row) {
-                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
-                }
-            },
-            {
-                type: 'date',
-                targets: 7,
-                render: function(data, type, row) {
-                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
-                }
-            }
-		],
+		columnDefs: [],
 		dom: 'Bfrtip',
         paging: false,
 		buttons: [],
