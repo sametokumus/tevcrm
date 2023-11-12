@@ -43,6 +43,7 @@ class StaffTargetHelper
                    ->where('sh.status_id', '=', 7);
            })
            ->selectRaw('sales.*')
+           ->where('sales.owner_id',$target->admin_id)
            ->where('sales.active',1)
            ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
            ->whereYear('sh.created_at', '=', $target->year);
@@ -54,8 +55,6 @@ class StaffTargetHelper
 
         $sales = $sales
            ->get();
-
-       return $sales;
 
         $target_total_price = 0;
 
@@ -108,11 +107,12 @@ class StaffTargetHelper
        $sales = Sale::query()
            ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
            ->join('status_histories AS sh', function ($join) {
-               $join->on('s.sale_id', '=', 'sh.sale_id')
-                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+               $join->on('sales.sale_id', '=', 'sh.sale_id')
+                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.sale_id)')
                    ->where('sh.status_id', '=', 7);
            })
            ->selectRaw('sales.*')
+           ->where('sales.owner_id',$target->admin_id)
            ->where('sales.active',1)
            ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
            ->whereYear('sh.created_at', '=', $target->year);
@@ -223,11 +223,12 @@ class StaffTargetHelper
        $sales = Sale::query()
            ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
            ->join('status_histories AS sh', function ($join) {
-               $join->on('s.sale_id', '=', 'sh.sale_id')
-                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
+               $join->on('sales.sale_id', '=', 'sh.sale_id')
+                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.sale_id)')
                    ->where('sh.status_id', '=', 7);
            })
            ->selectRaw('sales.*')
+           ->where('sales.owner_id',$target->admin_id)
            ->where('sales.active',1)
            ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
            ->whereYear('sh.created_at', '=', $target->year);
