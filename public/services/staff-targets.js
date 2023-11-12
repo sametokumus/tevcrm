@@ -4,6 +4,7 @@
 	$(document).ready(function() {
         $(":input").inputmask();
         $("#add_target_target").maskMoney({thousands:'.', decimal:','});
+        $("#update_target_target").maskMoney({thousands:'.', decimal:','});
 
         $('#add_staff_target_form').submit(function (e){
             e.preventDefault();
@@ -128,68 +129,43 @@ async function addStaffTarget(){
 
 
 async function openUpdateStaffTargetModal(target_id){
-    // getAdminsAddSelectId('update_target_admin_id');
-    getStaffTargetTypesAddSelectId('update_target_type_id');
+    await getStaffTargetTypesAddSelectId('update_target_type_id');
     $("#updateStaffTargetModal").modal('show');
     initUpdateStaffTargetModal(target_id)
 }
 async function initUpdateStaffTargetModal(target_id){
-    document.getElementById('update_activity_form').reset();
-    $('#update-activity-tasks-body .form-check').remove();
-    document.getElementById('update_activity_id').value = activity_id;
-    let data = await serviceGetActivityById(activity_id);
-    let activity = data.activity;
-    document.getElementById('update_activity_type_id').value = activity.type_id;
-    document.getElementById('update_activity_title').value = activity.title;
-    document.getElementById('update_activity_description').value = activity.description;
-    document.getElementById('update_activity_start_date').value = formatDateASC(activity.start, "-");
-    document.getElementById('update_activity_start_time').value = formatTime(activity.start);
-    document.getElementById('update_activity_end_date').value = formatDateASC(activity.end, "-");
-    document.getElementById('update_activity_end_time').value = formatTime(activity.end);
-    document.getElementById('update_activity_company_id').value = activity.company_id;
-    await getEmployeesAddSelectId(activity.company_id, 'update_activity_employee_id');
-    document.getElementById('update_activity_employee_id').value = activity.employee_id;
-
-    let count = 0;
-    $.each(activity.tasks, function (i, task) {
-        count += 1;
-        let is_completed = '';
-        let task_status = 1;
-        if (task.is_completed == 1){
-            is_completed = 'checked';
-            task_status = 0;
-        }
-        let checkInput = '<div class="form-check" id="form-check-'+ task.id +'">\n' +
-            '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="'+ task.id +'" id="update_activity_task_'+ count +'" '+ is_completed +' onclick="changeTaskStatus(this, '+ task.id +' ,'+ task_status +')" />\n' +
-            '                 <label class="form-check-label" for="add_activity_task_'+ count +'" id="add_activity_task_'+ count +'_label">'+ task.title +'</label>\n' +
-            '                 (<a href="#" onclick="deleteActivityTask(event, '+ task.id +');">Görevi Sil</a>)\n' +
-            '             </div>';
-        $('#update-activity-tasks-body').append(checkInput);
-    });
-    document.getElementById('update-activity-task-count').value = count;
+    document.getElementById('update_staff_target_form').reset();
+    let data = await serviceGetStaffTargetById(target_id);
+    let target = data.target;
+    document.getElementById('update_target_id').value = target.id;
+    document.getElementById('update_target_type_id').value = target.type_id;
+    document.getElementById('update_target_target').value = target.target;
+    document.getElementById('update_target_currency').value = target.currency;
+    document.getElementById('update_target_month').value = target.month;
+    document.getElementById('update_target_year').value = target.year;
 }
 async function updateStaffTarget(){
-    let company_id = document.getElementById('update_activity_company_id').value;
-    let user_id = localStorage.getItem('userId');
-    let activity_id = document.getElementById('update_activity_id').value;
+    let id = document.getElementById('update_target_id').value;
+    let type_id = document.getElementById('update_target_type_id').value;
+    let target = changePriceToDecimal(document.getElementById('update_target_target').value);
+    let currency = document.getElementById('update_target_currency').value;
+    let month = document.getElementById('update_target_month').value;
+    let year = document.getElementById('update_target_year').value;
 
-    let start = formatDateDESC2(document.getElementById('update_activity_start_date').value, "-", "-") + " " + document.getElementById('update_activity_start_time').value + ":00";
-    let end = formatDateDESC2(document.getElementById('update_activity_end_date').value, "-", "-")  + " " + document.getElementById('update_activity_end_time').value + ":00";
+
     let formData = JSON.stringify({
-        "user_id": parseInt(user_id),
-        "type_id": document.getElementById('update_activity_type_id').value,
-        "title": document.getElementById('update_activity_title').value,
-        "description": document.getElementById('update_activity_description').value,
-        "company_id": company_id,
-        "employee_id": document.getElementById('update_activity_employee_id').value,
-        "start": start,
-        "end": end
+        "id": id,
+        "type_id": type_id,
+        "target": target,
+        "currency": currency,
+        "month": month,
+        "year": year
     });
-    let returned = await servicePostUpdateActivity(formData, activity_id);
+    let returned = await servicePostUpdateStaffTarget(formData);
     if (returned){
-        $("#update_activity_form").trigger("reset");
-        $("#updateCompanyActivityModal").modal('hide');
-        initActivities();
+        $("#update_staff_target_form").trigger("reset");
+        $("#updateStaffTargetModal").modal('hide');
+        initStaffTargets();
     }else{
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }
