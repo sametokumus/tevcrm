@@ -33,7 +33,8 @@ function checkRole(){
 	return true;
 }
 
-function addTargetChangeType(type_id){
+function addTargetChangeType(){
+    let type_id = document.getElementById('add_target_type_id').value;
     if (type_id == 3){
         document.getElementById('add_target_currency').value = '%';
         $('#add_target_currency').attr('disabled', 'disabled');
@@ -42,7 +43,8 @@ function addTargetChangeType(type_id){
     }
 }
 
-function updateTargetChangeType(type_id){
+function updateTargetChangeType(){
+    let type_id = document.getElementById('update_target_type_id').value;
     if (type_id == 3){
         document.getElementById('update_target_currency').value = '%';
         $('#update_target_currency').attr('disabled', 'disabled');
