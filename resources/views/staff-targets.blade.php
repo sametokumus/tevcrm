@@ -1,16 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/activities.js"></script>
-<script>
-$(".datepicker").datepicker({
-    autoclose: true,
-    format: "dd-mm-yyyy"
-});
-$(".timepicker").timepicker({
-    minuteStep: 15,
-    showMeridian: false
-});
+<script src="services/staff-targets.js"></script>
 </script>
 ';
 ?>
@@ -24,12 +15,12 @@ $(".timepicker").timepicker({
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Filtreleme
+                        Hedef Ekle
                     </h1>
                 </div>
             </div>
 
-            <form method="post" action="#" id="sale_filter_form">
+            <form method="post" action="#" id="add_staff_target_form">
                 <div class="row">
 
                     <div class="col-md-12">
@@ -37,44 +28,57 @@ $(".timepicker").timepicker({
                             <div class="card-body">
                                 <div class="row p-3">
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Talep Gelen Firma</label>
-                                        <select class="form-control" id="sale_filter_owner">
+                                        <label class="form-label">Personel</label>
+                                        <select class="form-control" id="add_target_admin_id">
 
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Yetkili Satış Temsilcisi</label>
-                                        <select class="form-control" id="sale_filter_authorized_personnel">
+                                        <label class="form-label">Tür</label>
+                                        <select class="form-control" id="add_target_type_id" onchange="addTargetChangeType();">
 
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Satın Alma Sorumlusu</label>
-                                        <select class="form-control" id="sale_filter_purchasing_staff">
+                                        <label class="form-label">Hedef</label>
+                                        <select class="form-control" id="add_target_target">
 
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Müşteri</label>
-                                        <select class="form-control form-select" id="sale_filter_company" onchange="initEmployeeSelect();">
+                                        <select class="form-control form-select" id="add_target_currency">
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Müşteri Yetkilisi</label>
-                                        <select class="form-control" id="sale_filter_company_employee">
-
+                                        <label class="form-label">Hedef Ay</label>
+                                        <select class="form-control" id="add_target_month">
+                                            <option value="0">Tüm Yıl</option>
+                                            <option value="1">Ocak</option>
+                                            <option value="2">Şubat</option>
+                                            <option value="3">Mart</option>
+                                            <option value="4">Nisan</option>
+                                            <option value="5">Mayıs</option>
+                                            <option value="6">Haziran</option>
+                                            <option value="7">Temmuz</option>
+                                            <option value="8">Ağustos</option>
+                                            <option value="9">Eylül</option>
+                                            <option value="10">Ekim</option>
+                                            <option value="11">Kasım</option>
+                                            <option value="12">Aralık</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Durum</label>
-                                        <select class="form-control" id="sale_filter_status">
+                                        <label class="form-label">Hedef Yıl</label>
+                                        <select class="form-control" id="add_target_year">
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <button type="submit" class="btn btn-theme w-100">Filtrele</button>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <button type="button" class="btn btn-danger w-100" onclick="removeFilter();">Filtreyi Kaldır</button>
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-theme w-100">Kaydet</button>
                                     </div>
                                 </div>
                             </div>
@@ -93,24 +97,21 @@ $(".timepicker").timepicker({
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Aktiviteler
+                        Satış Hedefleri
                     </h1>
                 </div>
             </div>
 
-            <table id="activities-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+            <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
-                    <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
-                    <th class="border-bottom-0 bg-dark">Firma</th>
-                    <th class="border-bottom-0 bg-dark">Firma Yetkilisi</th>
-                    <th class="border-bottom-0 bg-dark">Aktivite Sorumlusu</th>
+                    <th class="border-bottom-0" data-priority="1">N#</th>
+                    <th class="border-bottom-0">Personel</th>
                     <th class="border-bottom-0">Tür</th>
-                    <th class="border-bottom-0">Konu</th>
-                    <th class="border-bottom-0">Başlangıç</th>
-                    <th class="border-bottom-0">Bitiş</th>
-                    <th class="border-bottom-0">Alt Görev</th>
-                    <th class="border-bottom-0">Kalan Süre</th>
+                    <th class="border-bottom-0">Hedef</th>
+                    <th class="border-bottom-0">Ay</th>
+                    <th class="border-bottom-0">Yıl</th>
+                    <th class="border-bottom-0">Durum</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>

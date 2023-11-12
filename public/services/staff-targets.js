@@ -5,41 +5,11 @@
 
         $('#add_activity_form').submit(function (e){
             e.preventDefault();
-            addActivity();
+            addStaffTarget();
         });
         $('#update_activity_form').submit(function (e){
             e.preventDefault();
-            updateActivity();
-        });
-
-        $('#add-activity-new-task-btn').click(function (){
-            $('#add-activity-new-tasks-input').removeClass('d-none');
-        });
-
-        $('#add-activity-task-button').click(function (){
-            let task = document.getElementById('add-activity-task').value;
-            if (task == ''){
-                alert('Lütfen görev için içerik ekleyiniz.')
-            }else{
-                let count = document.getElementById('add-activity-new-task-count').value;
-                count = parseInt(count) + 1;
-                document.getElementById('add-activity-new-task-count').value = count;
-                let checkInput = '<div class="form-check">\n' +
-                    '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="0" id="add_activity_new_task_'+ count +'" />\n' +
-                    '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'" id="add_activity_new_task_'+ count +'_label">'+ task +'</label>\n' +
-                    '             </div>';
-                $('#add-activity-new-tasks-body').append(checkInput);
-                document.getElementById('add-activity-task').value = '';
-                $('#add-activity-new-tasks-input').addClass('d-none');
-            }
-        });
-
-        $('#update-activity-new-task-btn').click(function (){
-            $('#update-activity-new-tasks-input').removeClass('d-none');
-        });
-
-        $('#update-activity-task-button').click(function (){
-            updateActivityNewTask();
+            updateStaffTarget();
         });
 
 	});
@@ -49,7 +19,9 @@
 		checkLogin();
 		checkRole();
 
-        initActivities();
+        getAdminsAddSelectId('add_target_admin_id');
+        getStaffTargetTypesAddSelectId('add_target_type_id');
+        initStaffTargets();
 
 	});
 
@@ -59,39 +31,36 @@ function checkRole(){
 	return true;
 }
 
-async function initActivities(){
+async function initStaffTargets(){
 
-    let data = await serviceGetActivities();
+    let data = await serviceGetStaffTargets();
 
     console.log(data)
-	$("#activities-datatable").dataTable().fnDestroy();
-	$('#activities-datatable tbody > tr').remove();
+	$("#targets-datatable").dataTable().fnDestroy();
+	$('#targets-datatable tbody > tr').remove();
 
-    $.each(data.activities, function (i, activity) {
+    $.each(data.targets, function (i, target) {
 
         let actions = "";
         if (true){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateCompanyActivityModal(\''+ activity.id +'\');">Düzenle</button>\n' +
-                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteActivity(\''+ activity.id +'\');">Sil</button>\n';
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
         }
 
         let item = '<tr>\n' +
-            '           <th class="bg-dark">'+ activity.id +'</th>\n' +
-            '           <td class="bg-dark">'+ activity.company.name +'</td>\n' +
-            '           <td class="bg-dark">'+ activity.employee.name +'</td>\n' +
-            '           <td class="bg-dark">'+ activity.user.name +' '+ activity.user.surname +'</td>\n' +
-            '           <td>'+ activity.type.name +'</td>\n' +
-            '           <td>'+ activity.title +'</td>\n' +
-            '           <td>'+ formatDateAndTimeDESC(activity.start, "/") +'</td>\n' +
-            '           <td>'+ formatDateAndTimeDESC(activity.end, "/") +'</td>\n' +
-            '           <td>'+ activity.task_count +' görev ('+ activity.completed_task_count +' tamamlanan)</td>\n' +
-            '           <td>'+ activity.diff_end_day +'</td>\n' +
+            '           <th>'+ target.id +'</th>\n' +
+            '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
+            '           <td>'+ target.type_name +'</td>\n' +
+            '           <td>'+ target.target +' '+ target.currency +'</td>\n' +
+            '           <td>'+ target.month +'</td>\n' +
+            '           <td>'+ target.year +'</td>\n' +
+            '           <td></td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
-        $('#activities-datatable tbody').append(item);
+        $('#targets-datatable tbody').append(item);
     });
 
-	$('#activities-datatable').DataTable({
+	$('#targets-datatable').DataTable({
 		responsive: false,
 		columnDefs: [
             {
@@ -120,40 +89,16 @@ async function initActivities(){
 		],
 		dom: 'Bfrtip',
         paging: false,
-		buttons: [
-            {
-                text: 'Aktivite Oluştur',
-                className: 'btn btn-theme',
-                action: function ( e, dt, node, config ) {
-                    openAddCompanyActivityModal();
-                }
-            }
-        ],
+		buttons: [],
         scrollX: true,
 		language: {
 			url: "services/Turkish.json"
 		},
 		order: false,
-        fixedColumns: {
-        left: 4
-        }
 	});
 }
 
-async function openAddCompanyActivityModal(){
-    getActivityTypesAddSelectId('add_activity_type_id');
-    await getCompaniesAddSelectId('add_activity_company_id');
-    $("#addCompanyActivityModal").modal('show');
-}
-async function initActivityAddModalEmployee(){
-    let company_id = document.getElementById('add_activity_company_id').value;
-    if (company_id != 0) {
-        getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
-    }else{
-        $('#add_activity_employee_id option').remove();
-    }
-}
-async function addActivity(){
+async function addStaffTarget(){
     let company_id = document.getElementById('add_activity_company_id').value;
     let user_id = localStorage.getItem('userId');
 
@@ -197,21 +142,15 @@ async function addActivity(){
         alert("Hata Oluştu");
     }
 }
-async function openUpdateCompanyActivityModal(activity_id){
-    getActivityTypesAddSelectId('update_activity_type_id');
-    await getCompaniesAddSelectId('update_activity_company_id');
-    $("#updateCompanyActivityModal").modal('show');
-    initUpdateCompanyActivityModal(activity_id)
+
+
+async function openUpdateStaffTargetModal(target_id){
+    // getAdminsAddSelectId('update_target_admin_id');
+    getStaffTargetTypesAddSelectId('update_target_type_id');
+    $("#updateStaffTargetModal").modal('show');
+    initUpdateStaffTargetModal(target_id)
 }
-async function initActivityUpdateModalEmployee(){
-    let company_id = document.getElementById('update_activity_company_id').value;
-    if (company_id != 0) {
-        getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
-    }else{
-        $('#update_activity_employee_id option').remove();
-    }
-}
-async function initUpdateCompanyActivityModal(activity_id){
+async function initUpdateStaffTargetModal(target_id){
     document.getElementById('update_activity_form').reset();
     $('#update-activity-tasks-body .form-check').remove();
     document.getElementById('update_activity_id').value = activity_id;
@@ -246,16 +185,7 @@ async function initUpdateCompanyActivityModal(activity_id){
     });
     document.getElementById('update-activity-task-count').value = count;
 }
-async function updateActivityCallback(xhttp){
-    let jsonData = await xhttp.responseText;
-    const obj = JSON.parse(jsonData);
-    showAlert(obj.message);
-    console.log(obj)
-    $("#update_note_form").trigger("reset");
-    $("#updateCompanyActivityModal").modal('hide');
-    initActivities();
-}
-async function updateActivity(){
+async function updateStaffTarget(){
     let company_id = document.getElementById('update_activity_company_id').value;
     let user_id = localStorage.getItem('userId');
     let activity_id = document.getElementById('update_activity_id').value;
@@ -281,10 +211,10 @@ async function updateActivity(){
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }
 }
-async function deleteActivity(activity_id){
-    let returned = await serviceGetDeleteActivity(activity_id);
+async function deleteStaffTarget(target_id){
+    let returned = await serviceGetDeleteStaffTarget(target_id);
     if(returned){
-        initActivities();
+        initStaffTargets();
     }
 }
 async function deleteActivityTask(event, task_id){

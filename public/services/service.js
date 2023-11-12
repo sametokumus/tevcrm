@@ -461,6 +461,15 @@ async function getAdminsAddSelectId(selectId){
     });
 }
 
+async function getStaffTargetTypesAddSelectId(selectId){
+    let data = await serviceGetStaffTargetTypes();
+    $('#'+selectId+' option').remove();
+    $.each(data.target_types, function(i, target_type){
+        let optionRow = '<option value="'+target_type.id+'">'+target_type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getOwnersAddSelectId(selectId){
     let data = await serviceGetContacts();
     $('#'+selectId+' option').remove();
@@ -2718,6 +2727,48 @@ async function serviceGetGenerateSaleSummaryPDF(sale_id) {
     const data = await fetchDataGet('/admin/pdf/getGenerateSaleSummaryPDF/' + sale_id, 'application/json');
     if (data.status == "success") {
         return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+
+async function serviceGetStaffTargetTypes() {
+    const data = await fetchDataGet('/admin/staff/getStaffTargetTypes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetStaffTargets() {
+    const data = await fetchDataGet('/admin/staff/getStaffTargets', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetStaffTargetsByStaffId(id) {
+    const data = await fetchDataGet('/admin/staff/getStaffTargetsByStaffId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetStaffTargetById(id) {
+    const data = await fetchDataGet('/admin/staff/getStaffTargetById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetDeleteStaffTarget(id) {
+    const data = await fetchDataGet('/admin/staff/deleteStaffTarget/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
     } else {
         showAlert('İstek Başarısız.');
     }

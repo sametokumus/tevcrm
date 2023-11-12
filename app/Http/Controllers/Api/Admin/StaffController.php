@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\StaffTarget;
+use App\Models\StaffTargetType;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -141,6 +142,19 @@ class StaffController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         } catch (\Throwable $throwable) {
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getStaffTargetTypes()
+    {
+        try {
+            $target_types = StaffTargetType::query()
+                ->where('active', 1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['target_types' => $target_types]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 }

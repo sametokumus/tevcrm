@@ -402,6 +402,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('staff/updateStaffTarget', [StaffController::class, 'updateStaffTarget']);
     Route::get('staff/deleteStaffTarget/{target_id}', [StaffController::class, 'deleteStaffTarget']);
 
+    Route::get('staff/getStaffTargetTypes', [StaffController::class, 'getStaffTargetTypes']);
+
 
 
 
