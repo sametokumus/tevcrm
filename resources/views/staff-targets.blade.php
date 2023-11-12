@@ -41,13 +41,16 @@ $extra_js='
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Hedef</label>
-                                        <select class="form-control" id="add_target_target">
-
-                                        </select>
+                                        <input type="text" value="" class="form-control" id="add_target_target" />
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Müşteri</label>
+                                        <label class="form-label">Birim</label>
                                         <select class="form-control form-select" id="add_target_currency">
+                                            <option value="%">%</option>
+                                            <option value="TRY">TRY</option>
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="GBP">GBP</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">

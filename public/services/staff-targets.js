@@ -2,6 +2,8 @@
     "use strict";
 
 	$(document).ready(function() {
+        $(":input").inputmask();
+        $("#add_target_target").maskMoney({thousands:'.', decimal:','});
 
         $('#add_activity_form').submit(function (e){
             e.preventDefault();
