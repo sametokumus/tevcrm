@@ -77,7 +77,7 @@ async function initStaffTargets(){
             '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
             '           <td>'+ target.month_name +'</td>\n' +
             '           <td>'+ target.year +'</td>\n' +
-            '           <td></td>\n' +
+            '           <td>'+ target.status.rate +'% ('+ target.status.price +' '+ target.currency +')</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#targets-datatable tbody').append(item);
