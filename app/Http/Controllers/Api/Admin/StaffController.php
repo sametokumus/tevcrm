@@ -38,8 +38,8 @@ class StaffController extends Controller
 
                 $target['month_name'] = $month_name;
 
-//                $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
-                $target['status'] = 1;
+                $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
+//                $target['status'] = 1;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['targets' => $targets]]);
