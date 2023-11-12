@@ -177,7 +177,7 @@ $extra_js='
                                 <option value="12">Aralık</option>
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Hedef Yıl</label>
                             <select class="form-control" id="update_target_year">
                                 <option value="2023">2023</option>

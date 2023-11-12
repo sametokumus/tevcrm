@@ -139,7 +139,7 @@ async function initUpdateStaffTargetModal(target_id){
     let target = data.target;
     document.getElementById('update_target_id').value = target.id;
     document.getElementById('update_target_type_id').value = target.type_id;
-    document.getElementById('update_target_target').value = target.target;
+    document.getElementById('update_target_target').value = changeCommasToDecimal(target.target);
     document.getElementById('update_target_currency').value = target.currency;
     document.getElementById('update_target_month').value = target.month;
     document.getElementById('update_target_year').value = target.year;
