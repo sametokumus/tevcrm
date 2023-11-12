@@ -21,17 +21,16 @@ class StaffTargetHelper
     public static function getTargetStatus($target_id)
     {
         $target = StaffTarget::query()->where('id', $target_id)->first();
-        return $target;
 
-//        if ($target->type_id == 1){
-//            $status = StaffTargetHelper::getTargetStatusType1($target);
-//        }else if ($target->type_id == 2){
-//            $status = StaffTargetHelper::getTargetStatusType2($target);
-//        }else if ($target->type_id == 3){
-//            $status = StaffTargetHelper::getTargetStatusType3($target);
-//        }
-//
-//        return $status;
+        if ($target->type_id == 1){
+            $status = StaffTargetHelper::getTargetStatusType1($target);
+        }else if ($target->type_id == 2){
+            $status = StaffTargetHelper::getTargetStatusType2($target);
+        }else if ($target->type_id == 3){
+            $status = StaffTargetHelper::getTargetStatusType3($target);
+        }
+
+        return $status;
     }
 
     private static function getTargetStatusType1($target)
