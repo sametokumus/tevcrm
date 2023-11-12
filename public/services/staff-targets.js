@@ -33,6 +33,24 @@ function checkRole(){
 	return true;
 }
 
+function addTargetChangeType(type_id){
+    if (type_id == 3){
+        document.getElementById('add_target_currency').value = '%';
+        $('#add_target_currency').attr('disabled', 'disabled');
+    }else{
+        $('#add_target_currency').removeAttr('disabled');
+    }
+}
+
+function updateTargetChangeType(type_id){
+    if (type_id == 3){
+        document.getElementById('update_target_currency').value = '%';
+        $('#update_target_currency').attr('disabled', 'disabled');
+    }else{
+        $('#update_target_currency').removeAttr('disabled');
+    }
+}
+
 async function initStaffTargets(){
 
     let data = await serviceGetStaffTargets();
@@ -53,7 +71,7 @@ async function initStaffTargets(){
             '           <th>'+ target.id +'</th>\n' +
             '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
             '           <td>'+ target.type_name +'</td>\n' +
-            '           <td>'+ target.target +' '+ target.currency +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
             '           <td>'+ target.month +'</td>\n' +
             '           <td>'+ target.year +'</td>\n' +
             '           <td></td>\n' +
