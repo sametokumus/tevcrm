@@ -5,11 +5,11 @@
         $(":input").inputmask();
         $("#add_target_target").maskMoney({thousands:'.', decimal:','});
 
-        $('#add_activity_form').submit(function (e){
+        $('#add_staff_target_form').submit(function (e){
             e.preventDefault();
             addStaffTarget();
         });
-        $('#update_activity_form').submit(function (e){
+        $('#update_staff_target_form').submit(function (e){
             e.preventDefault();
             updateStaffTarget();
         });
