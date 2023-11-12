@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
@@ -36,6 +37,8 @@ class StaffController extends Controller
                 }
 
                 $target['month_name'] = $month_name;
+
+                $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['targets' => $targets]]);
@@ -57,6 +60,15 @@ class StaffController extends Controller
             foreach ($targets as $target){
                 $admin = Admin::query()->where('id', $target->admin_id)->first();
                 $target['admin'] = $admin;
+
+                if ($target->month == 0){
+                    $month_name = 'Tüm Yıl';
+                }else{
+                    $monthId = $target->month;
+                    $month_name = trans("date.months.$monthId");
+                }
+
+                $target['month_name'] = $month_name;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['targets' => $targets]]);
@@ -78,6 +90,15 @@ class StaffController extends Controller
 
             $admin = Admin::query()->where('id', $target->admin_id)->first();
             $target['admin'] = $admin;
+
+            if ($target->month == 0){
+                $month_name = 'Tüm Yıl';
+            }else{
+                $monthId = $target->month;
+                $month_name = trans("date.months.$monthId");
+            }
+
+            $target['month_name'] = $month_name;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['target' => $target]]);
         } catch (QueryException $queryException) {
