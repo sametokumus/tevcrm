@@ -10,6 +10,7 @@ use App\Models\StaffTargetType;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
+use Carbon\Carbon;
 
 class StaffController extends Controller
 {
@@ -26,6 +27,16 @@ class StaffController extends Controller
             foreach ($targets as $target){
                 $admin = Admin::query()->where('id', $target->admin_id)->first();
                 $target['admin'] = $admin;
+
+                if ($target->month == 0){
+                    $month_name = 'Tüm Yıl';
+                }else{
+                    setlocale(LC_TIME, 'tr_TR');
+                    $date = Carbon::createFromDate(null, $target->month, 1);
+                    $month_name = $date->formatLocalized('%B');
+                }
+
+                $target['month_name'] = $month_name;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['targets' => $targets]]);

@@ -75,7 +75,7 @@ async function initStaffTargets(){
             '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
             '           <td>'+ target.type_name +'</td>\n' +
             '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
-            '           <td>'+ target.month +'</td>\n' +
+            '           <td>'+ target.month_name +'</td>\n' +
             '           <td>'+ target.year +'</td>\n' +
             '           <td></td>\n' +
             '           <td>'+ actions +'</td>\n' +
