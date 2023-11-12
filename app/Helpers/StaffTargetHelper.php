@@ -38,7 +38,7 @@ class StaffTargetHelper
        $sales = Sale::query()
            ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
            ->join('status_histories AS sh', function ($join) {
-               $join->on('s.sale_id', '=', 'sh.sale_id')
+               $join->on('sales.sale_id', '=', 'sh.sale_id')
                    ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
                    ->where('sh.status_id', '=', 7);
            })
