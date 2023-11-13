@@ -327,8 +327,6 @@ class StaffTargetHelper
         }
 
         $status = array();
-        $status['p'] = $target_total_price;
-        $status['p2'] = $target_offer_price;
         $status['price'] = number_format(($target_total_price - $target_offer_price), 2, ".", "");
         if ($target_total_price != 0) {
             $sale_rate = 100 * ($target_total_price - $target_offer_price) / $target_total_price;
@@ -340,9 +338,7 @@ class StaffTargetHelper
         }else{
             $rate = 0;
         }
-        $status['sale_rate'] = number_format($sale_rate, 2, ",", "");
         $status['rate'] = number_format($rate, 2, ",", "");
-        $status['sales'] = $sales;
 
         return $status;
     }
