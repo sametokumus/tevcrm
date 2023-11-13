@@ -129,7 +129,7 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $line), '0', '0', '');
         }
 
-        $y += 8;
+        $y += 18;
 
         $pdf->SetFont('ChakraPetch-Bold', '', 10);
         $pdf->SetXY($x, $y);
