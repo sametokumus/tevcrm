@@ -299,18 +299,19 @@ class StaffTargetHelper
                 $sale_total_price = $sale->grand_total_with_shipping;
             }
 
-            if ($target->currency == $sale->currency){
+            $calculate_currency = 'TRY';
+            if ($calculate_currency == $sale->currency){
                 $target_total_price += $sale_total_price;
             }else{
-                if ($target->currency == 'TRY') {
+                if ($calculate_currency == 'TRY') {
                     $sc = strtolower($sale->currency);
                     $converted_price = $sale_total_price / $sale->{$sc.'_rate'};
                 }else{
                     if ($sale->currency == 'TRY') {
-                        $tc = strtolower($target->currency);
+                        $tc = strtolower($calculate_currency);
                         $converted_price = $sale_total_price * $sale->{$tc.'_rate'};
                     }else{
-                        $tc = strtolower($target->currency);
+                        $tc = strtolower($calculate_currency);
                         $sc = strtolower($sale->currency);
                         if ($sale->{$sc.'_rate'} != 0) {
                             $converted_price = $sale_total_price * $sale->{$tc . '_rate'} / $sale->{$sc . '_rate'};
