@@ -617,7 +617,7 @@ class PdfController extends Controller
 
             //NOTE
             if ($quote->note != null) {
-                $y = $pdf->getY() + 10;
+                $y = $pdf->getY() + 15;
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
