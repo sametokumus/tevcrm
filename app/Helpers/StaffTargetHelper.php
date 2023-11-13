@@ -331,7 +331,7 @@ class StaffTargetHelper
         $status['p2'] = $target_offer_price;
         $status['price'] = number_format(($target_total_price - $target_offer_price), 2, ".", "");
         if ($target_total_price != 0) {
-            $sale_rate = 100 * ($target_total_price - $target_offer_price) / $target->target;
+            $sale_rate = 100 * ($target_total_price - $target_offer_price) / $target_total_price;
         }else{
             $sale_rate = 0;
         }
