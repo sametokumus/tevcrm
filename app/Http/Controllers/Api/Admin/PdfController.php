@@ -814,7 +814,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, __('Offer'), $y);
+            $y = $this->addPdfTitle($pdf, __('Order Confirmation'), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
