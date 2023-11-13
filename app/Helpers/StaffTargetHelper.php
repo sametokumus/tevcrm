@@ -339,6 +339,7 @@ class StaffTargetHelper
         }
         $status['sale_rate'] = number_format($sale_rate, 2, ",", "");
         $status['rate'] = number_format($rate, 2, ",", "");
+        $status['sales'] = $sales;
 
         return $status;
     }
