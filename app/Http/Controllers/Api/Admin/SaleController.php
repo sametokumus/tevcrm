@@ -225,8 +225,8 @@ class SaleController extends Controller
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
                 $sale['request'] = $offer_request;
                 $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
 //                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
@@ -287,8 +287,8 @@ class SaleController extends Controller
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
                 $sale['request'] = $offer_request;
                 $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
 //                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
@@ -355,8 +355,8 @@ class SaleController extends Controller
                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
                 $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
                 $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
                 $sale['request'] = $offer_request;
                 $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
 //                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
@@ -403,8 +403,8 @@ class SaleController extends Controller
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
@@ -460,8 +460,8 @@ class SaleController extends Controller
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
             $sale_offers = SaleOffer::query()
@@ -1223,8 +1223,8 @@ class SaleController extends Controller
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
             $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
@@ -1384,8 +1384,8 @@ class SaleController extends Controller
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
             $sale['customer'] = Company::query()->where('id', $sale->customer_id)->first();
@@ -1910,8 +1910,8 @@ class SaleController extends Controller
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
 //            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
@@ -1992,8 +1992,8 @@ class SaleController extends Controller
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
             $sale['request'] = $offer_request;
 
 //            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
