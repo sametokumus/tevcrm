@@ -201,7 +201,33 @@ class PdfController extends Controller
         $row_height = $lines_needed * $line_height;
         $pdf->MultiCell(100, $line_height, $address, 0, 'L');
 
-        return $y + $row_height;
+
+
+        $y += $row_height;
+        $x = 10;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, $company->phone, '0', '0', '');
+
+        $y += 5;
+        $x = 10;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, $company->email, '0', '0', '');
+
+        return $y + 5;
     }
     private function leadtime($lt){
         if ($lt != '' && $lt != null){
