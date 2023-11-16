@@ -512,9 +512,6 @@ class DashboardController extends Controller
                 $eur_total += $eur_price;
 
 
-                $sale = array();
-                $sale['year'] = $last_month->year;
-                $sale['month'] = $last_month->month;
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
