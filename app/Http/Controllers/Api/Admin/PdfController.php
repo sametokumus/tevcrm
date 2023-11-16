@@ -2738,7 +2738,7 @@ class PdfController extends Controller
         }
     }
 
-    public function getGeneratePurchasingOfferPDF($lang, $owner_id, $sale_id, $offer_id)
+    public function getGeneratePurchasingOrderPDF($lang, $owner_id, $sale_id, $offer_id)
     {
         try {
             App::setLocale($lang);

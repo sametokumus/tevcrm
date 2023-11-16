@@ -2696,8 +2696,8 @@ async function serviceGetGeneratePackingListInvoicePDF(lang, owner_id, packing_l
     }
 }
 
-async function serviceGetGeneratePurchasingOfferPDF(lang, owner_id, sale_id, offer_id) {
-    const data = await fetchDataGet('/admin/pdf/getGeneratePurchasingOfferPDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + offer_id, 'application/json');
+async function serviceGetGeneratePurchasingOrderPDF(lang, owner_id, sale_id, offer_id) {
+    const data = await fetchDataGet('/admin/pdf/getGeneratePurchasingOrderPDF/' + lang + '/' + owner_id + '/' + sale_id + '/' + offer_id, 'application/json');
     if (data.status == "success") {
         return data;
     } else {
