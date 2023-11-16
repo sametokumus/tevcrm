@@ -3,6 +3,8 @@ namespace App\PDF;
 
 require_once(__DIR__ . '/../../vendor/setasign/fpdf/fpdf.php');
 
+use FPDF;
+
 class PDF extends FPDF
 {
     protected $B = 0;
