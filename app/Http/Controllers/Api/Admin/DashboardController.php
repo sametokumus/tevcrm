@@ -473,7 +473,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id=7)');
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'approved')
@@ -550,7 +550,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id=24)');
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 24)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
@@ -627,7 +627,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id=5)');
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 5)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
@@ -704,7 +704,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id  and (status_id=23 or status_id=25 or status_id=28))');
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND (status_id=23 or status_id=25 or status_id=28))'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
