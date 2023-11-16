@@ -2996,7 +2996,7 @@ class PdfController extends Controller
 //                    $html = str_replace('<p>', '', $html);
 //                    $html = str_replace('</p>', "\n", $html);
 //                    $pdf->MultiCell(0, 5, utf8_decode($html));
-                    $pdf->writeHTML($html);
+                    $pdf->writeHTML($po_detail->note);
                 }
             }
 
