@@ -482,7 +482,6 @@ class DashboardController extends Controller
                     ->whereMonth('sh.created_at', '=', $last_month->month)
                     ->get();
 
-
                 $sale = array();
                 $sale['sale_items'] = $sale_items;
                 $sale['year'] = $last_month->year;
