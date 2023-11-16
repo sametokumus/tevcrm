@@ -7,6 +7,19 @@ use FPDF;
 
 class PDF extends FPDF
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $fontDirectory = __DIR__ . '/../../public/fonts/';
+
+        // Load Regular Font
+        $this->AddFont('ChakraPetch-Regular', '', $fontDirectory . 'ChakraPetch-Regular.php');
+
+        // Load Bold Font
+        $this->AddFont('ChakraPetch-Bold', '', $fontDirectory . 'ChakraPetch-Bold.php');
+    }
+
     protected $B = 0;
     protected $I = 0;
     protected $U = 0;
@@ -14,6 +27,7 @@ class PDF extends FPDF
 
     function WriteHTML($html)
     {
+
         // HTML parser
         $html = str_replace("\n",' ',$html);
         $a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
@@ -74,12 +88,17 @@ class PDF extends FPDF
         // Modify style and select corresponding font
         $this->$tag += ($enable ? 1 : -1);
         $style = '';
-        foreach(array('B', 'I', 'U') as $s)
-        {
-            if($this->$s>0)
+        foreach (array('B', 'I', 'U') as $s) {
+            if ($this->$s > 0)
                 $style .= $s;
         }
-        $this->SetFont('',$style);
+
+        // Set the font using the selected style
+        if ($style == 'B') {
+            $this->SetFont('ChakraPetch-Bold', '');
+        } else {
+            $this->SetFont('ChakraPetch-Regular', '');
+        }
     }
 
     function PutLink($URL, $txt)
