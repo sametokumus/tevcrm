@@ -360,7 +360,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, $this->textConvert('Offer'), $y);
+            $y = $this->addPdfTitle($pdf, $this->textConvert(__('Offer')), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
@@ -815,7 +815,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, $this->textConvert('Order Confirmation'), $y);
+            $y = $this->addPdfTitle($pdf, $this->textConvert(__('Order Confirmation')), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
@@ -1310,7 +1310,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, $this->textConvert('Proforma Invoice'), $y);
+            $y = $this->addPdfTitle($pdf, $this->textConvert(__('Proforma Invoice')), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
@@ -1768,7 +1768,7 @@ class PdfController extends Controller
 
 
             //TITLE
-            $y = $this->addPdfTitle($pdf, $this->textConvert('Invoice'), $y);
+            $y = $this->addPdfTitle($pdf, $this->textConvert(__('Invoice')), $y);
 
             //CUSTOMER INFO
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
