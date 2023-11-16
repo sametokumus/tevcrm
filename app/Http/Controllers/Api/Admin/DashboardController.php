@@ -481,23 +481,7 @@ class DashboardController extends Controller
                     ->whereMonth('sh.created_at', $last_month->month)
                     ->get();
 
-                $sale_items_sql = DB::table('sales AS s')
-                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
-                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
-                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
-                    ->join('status_histories AS sh', function ($join) {
-                        $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id = 7)');
-                    })
-                    ->where('s.active', '=', 1)
-                    ->where('statuses.period', '=', 'approved')
-                    ->whereYear('sh.created_at', '=', $last_month->year)
-                    ->whereMonth('sh.created_at', '=', $last_month->month)
-                    ->toSql();
-
                 $sale = array();
-                $sale['sale_items_sql'] = $sale_items_sql;
-                $sale['sale_items'] = $sale_items;
                 $sale['year'] = $last_month->year;
                 $sale['month'] = $last_month->month;
                 $try_price = 0;
@@ -566,13 +550,12 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 24);
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id=24)');
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
-                    ->whereYear('sh.created_at', '=', $last_month->year)
-                    ->whereMonth('sh.created_at', '=', $last_month->month)
+                    ->whereYear('sh.created_at', $last_month->year)
+                    ->whereMonth('sh.created_at', $last_month->month)
                     ->get();
 
 
@@ -604,10 +587,6 @@ class DashboardController extends Controller
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
 
-
-                $sale = array();
-                $sale['year'] = $last_month->year;
-                $sale['month'] = $last_month->month;
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
@@ -648,13 +627,12 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 1);
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and status_id=5)');
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
-                    ->whereYear('sh.created_at', '=', $last_month->year)
-                    ->whereMonth('sh.created_at', '=', $last_month->month)
+                    ->whereYear('sh.created_at', $last_month->year)
+                    ->whereMonth('sh.created_at', $last_month->month)
                     ->get();
 
 
@@ -686,10 +664,6 @@ class DashboardController extends Controller
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
 
-
-                $sale = array();
-                $sale['year'] = $last_month->year;
-                $sale['month'] = $last_month->month;
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
@@ -730,13 +704,12 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->whereRaw("(sh.status_id = '23' OR sh.status_id = '25' OR sh.status_id = '28')");
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id  and (status_id=23 or status_id=25 or status_id=28))');
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
-                    ->whereYear('sh.created_at', '=', $last_month->year)
-                    ->whereMonth('sh.created_at', '=', $last_month->month)
+                    ->whereYear('sh.created_at', $last_month->year)
+                    ->whereMonth('sh.created_at', $last_month->month)
                     ->get();
 
 
@@ -768,10 +741,6 @@ class DashboardController extends Controller
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
 
-
-                $sale = array();
-                $sale['year'] = $last_month->year;
-                $sale['month'] = $last_month->month;
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
