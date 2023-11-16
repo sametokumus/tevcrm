@@ -11,13 +11,11 @@ class PDF extends FPDF
     {
         parent::__construct();
 
-        $fontDirectory = '/home/leniscrmwimcocom/public_html/vendor/setasign/fpdf/font/';
-
         // Load Regular Font
         $this->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
 
         // Load Bold Font
-        $this->AddFont('ChakraPetch-Bold', '', $fontDirectory . 'ChakraPetch-Bold.php');
+        $this->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
     }
 
     protected $B = 0;
