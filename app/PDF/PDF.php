@@ -66,7 +66,7 @@ class PDF extends FPDF
                             break;
                         case 'P':
                             // Add a new line before the paragraph
-                            $this->Ln(10);
+                            $this->Ln(5);
                             break;
                     }
                 }
