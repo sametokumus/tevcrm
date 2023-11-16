@@ -247,6 +247,7 @@ async function getApprovedMonthlySales(){
 
     let data = await serviceGetApprovedMonthlySales();
     let sales = data.sales.reverse();
+    console.log(sales)
 
     let xAxisArray = [];
     let yAxisArray = [];
@@ -262,6 +263,8 @@ async function getApprovedMonthlySales(){
             yAxisArray.push(sale.eur_sale);
         }
     });
+    console.log(xAxisArray)
+    console.log(yAxisArray)
 
     let apexColumnChartOptions = {
         chart: {
@@ -697,7 +700,6 @@ async function getAdminsSales(){
 
     let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
     let admins = data.admins;
-    console.log(admins)
     admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
 
 
