@@ -484,6 +484,7 @@ class DashboardController extends Controller
 
 
                 $sale = array();
+                $sale['sale_items'] = $sale_items;
                 $sale['year'] = $last_month->year;
                 $sale['month'] = $last_month->month;
                 $try_price = 0;
