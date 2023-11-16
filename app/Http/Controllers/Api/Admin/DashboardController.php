@@ -488,8 +488,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 7);
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id and sh.status_id = 7)');
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'approved')
