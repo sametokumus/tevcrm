@@ -3004,7 +3004,7 @@ class PdfController extends Controller
 
             //SIGNATURES
 
-            $y += 20;
+            $y = $pdf->getY() + 20;
             $x = 10;
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
