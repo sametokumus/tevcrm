@@ -246,6 +246,7 @@ async function getLastMonthSales(){
 async function getApprovedMonthlySales(){
 
     let data = await serviceGetApprovedMonthlySales();
+    console.log(data)
     let sales = data.sales.reverse();
     console.log(sales)
 
