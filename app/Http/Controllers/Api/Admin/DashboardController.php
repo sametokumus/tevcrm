@@ -937,8 +937,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 1);
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 5)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
@@ -1009,8 +1008,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 7);
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'approved')
@@ -1081,8 +1079,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->where('sh.status_id', '=', 24);
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 24)'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
@@ -1154,8 +1151,7 @@ class DashboardController extends Controller
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
                     ->join('status_histories AS sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id)')
-                            ->whereRaw("(sh.status_id = '23' OR sh.status_id = '25' OR sh.status_id = '28')");
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND (status_id=23 OR status_id=25 OR status_id=28))'));
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
@@ -1475,159 +1471,6 @@ class DashboardController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $sortedCompanies]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
-        }
-    }
-    public function getMostValuableCustomers2()
-    {
-        try {
-
-            $sales = array();
-
-            $customers = Sale::query()
-                ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('SUM(grand_total) AS monthly_total')
-                ->where('sales.active',1)
-                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
-                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12)
-                ->get();
-
-            $try_sale = Sale::query()
-                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month, currency, SUM(grand_total) AS monthly_total')
-                ->where('sales.active',1)
-                ->groupByRaw('YEAR(created_at), MONTH(created_at), currency')
-                ->whereYear('created_at', $last_month->year)
-                ->whereMonth('created_at', $last_month->month)
-                ->where('currency', 'TRY')
-                ->first();
-
-            $sale_items = Sale::query()
-                ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
-                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->get();
-
-
-            $continue_try_price = 0;
-            $continue_usd_price = 0;
-            $continue_eur_price = 0;
-            $approved_try_price = 0;
-            $approved_usd_price = 0;
-            $approved_eur_price = 0;
-            $completed_try_price = 0;
-            $completed_usd_price = 0;
-            $completed_eur_price = 0;
-            $cancelled_try_price = 0;
-            $cancelled_usd_price = 0;
-            $cancelled_eur_price = 0;
-
-            foreach ($sale_items as $item){
-
-                if($item->period == 'continue'){
-
-                    if ($item->currency == 'TRY'){
-                        $continue_try_price += $item->grand_total;
-                        $continue_usd_price += $item->grand_total / $item->usd_rate;
-                        $continue_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $continue_usd_price += $item->grand_total;
-                        $continue_try_price += $item->grand_total * $item->usd_rate;
-                        $continue_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $continue_eur_price += $item->grand_total;
-                        $continue_try_price += $item->grand_total * $item->eur_rate;
-                        $continue_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }else if($item->period == 'approved'){
-
-                    if ($item->currency == 'TRY'){
-                        $approved_try_price += $item->grand_total;
-                        $approved_usd_price += $item->grand_total / $item->usd_rate;
-                        $approved_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $approved_usd_price += $item->grand_total;
-                        $approved_try_price += $item->grand_total * $item->usd_rate;
-                        $approved_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $approved_eur_price += $item->grand_total;
-                        $approved_try_price += $item->grand_total * $item->eur_rate;
-                        $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }else if($item->period == 'completed'){
-
-                    if ($item->currency == 'TRY'){
-                        $completed_try_price += $item->grand_total;
-                        $completed_usd_price += $item->grand_total / $item->usd_rate;
-                        $completed_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $completed_usd_price += $item->grand_total;
-                        $completed_try_price += $item->grand_total * $item->usd_rate;
-                        $completed_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $completed_eur_price += $item->grand_total;
-                        $completed_try_price += $item->grand_total * $item->eur_rate;
-                        $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }else if($item->period == 'cancelled'){
-
-                    if ($item->currency == 'TRY'){
-                        $cancelled_try_price += $item->grand_total;
-                        $cancelled_usd_price += $item->grand_total / $item->usd_rate;
-                        $cancelled_eur_price += $item->grand_total / $item->eur_rate;
-                    }else if ($item->currency == 'USD'){
-                        $cancelled_usd_price += $item->grand_total;
-                        $cancelled_try_price += $item->grand_total * $item->usd_rate;
-                        $cancelled_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
-                    }else if ($item->currency == 'EUR'){
-                        $cancelled_eur_price += $item->grand_total;
-                        $cancelled_try_price += $item->grand_total * $item->eur_rate;
-                        $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
-                    }
-
-                }
-
-            }
-
-            $continue = array();
-            $continue['try_sale'] = number_format($continue_try_price, 2,".","");
-            $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
-            $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
-
-            $approved = array();
-            $approved['try_sale'] = number_format($approved_try_price, 2,".","");
-            $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
-            $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
-
-            $completed = array();
-            $completed['try_sale'] = number_format($completed_try_price, 2,".","");
-            $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
-            $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
-
-            $cancelled = array();
-            $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
-            $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
-            $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
-
-
-
-
-            $sales['continue'] = $continue;
-            $sales['approved'] = $approved;
-            $sales['completed'] = $completed;
-            $sales['cancelled'] = $cancelled;
-
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 }
