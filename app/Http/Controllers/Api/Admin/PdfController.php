@@ -2991,12 +2991,13 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-//                    $html = utf8_decode($po_detail->note);
+                    $html = utf8_decode($po_detail->note);
+                    $html = str_replace('&nbsp;', " ", $html);
 //                    $html = str_replace('<br>', "\n", $html);
 //                    $html = str_replace('<p>', '', $html);
 //                    $html = str_replace('</p>', "\n", $html);
 //                    $pdf->MultiCell(0, 5, utf8_decode($html));
-                    $pdf->writeHTML($po_detail->note);
+                    $pdf->writeHTML($html);
                 }
             }
 
