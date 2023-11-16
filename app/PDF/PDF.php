@@ -14,7 +14,7 @@ class PDF extends FPDF
         $fontDirectory = '/home/leniscrmwimcocom/public_html/vendor/setasign/fpdf/font/';
 
         // Load Regular Font
-        $this->AddFont('ChakraPetch-Regular', '', $fontDirectory . 'ChakraPetch-Regular.php');
+        $this->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
 
         // Load Bold Font
         $this->AddFont('ChakraPetch-Bold', '', $fontDirectory . 'ChakraPetch-Bold.php');
