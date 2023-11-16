@@ -53,7 +53,7 @@ async function generatePDF(){
     let offer_id = document.getElementById('select_offer').value;
 
     // Fetch the PDF data
-    const pdfData = await serviceGetGeneratePurchasingOfferPDF(lang, owner_id, sale_id, offer_id);
+    const pdfData = await serviceGetGeneratePurchasingOrderPDF(lang, owner_id, sale_id, offer_id);
 
     // Create a link element to download the PDF
     const link = document.createElement('a');
