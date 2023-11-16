@@ -11,7 +11,7 @@ class PDF extends FPDF
     {
         parent::__construct();
 
-        $fontDirectory = base_path('public/fonts/');
+        $fontDirectory = public_path('fonts/');
 
         // Load Regular Font
         $this->AddFont('ChakraPetch-Regular', '', $fontDirectory . 'ChakraPetch-Regular.php');
