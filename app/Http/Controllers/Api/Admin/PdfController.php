@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Response;
 use FPDF;
 use setasign\Fpdi\Fpdi;
 use Carbon\Carbon;
+use App\PDF\PDF;
 
 
 class PdfController extends Controller
@@ -2804,7 +2805,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
