@@ -676,7 +676,6 @@ async function initStaffTargets(user_id){
             '           <td>'+ target.month_name +'</td>\n' +
             '           <td>'+ target.year +'</td>\n' +
             '           <td>'+ target.status.rate +'%</td>\n' +
-            '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#targets-datatable tbody').append(item);
     });
