@@ -2548,6 +2548,15 @@ async function serviceGetLastMonthSales() {
     }
 }
 
+async function serviceGetLastMonthSalesByAdmin(id) {
+    const data = await fetchDataGet('/admin/dashboard/getLastMonthSalesByAdmin/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetApprovedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
     if (data.status == "success") {

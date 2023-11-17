@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\App;
 Route::get('/', function () { return view('login'); });
 Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
+Route::get('/my-dashboard', function () { return view('my-dashboard'); });
+Route::get('/staff-dashboard', function () { return view('staff-dashboard'); });
 Route::get('/news-feed', function () { return view('news-feed'); });
 Route::get('/teams', function () { return view('admins'); });
 Route::get('/my-account', function () { return view('account'); });
