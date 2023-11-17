@@ -199,7 +199,7 @@ async function getLastMonthSales(user_id){
 
 async function getApprovedMonthlySales(user_id){
 
-    let data = await serviceGetApprovedMonthlySales(user_id);
+    let data = await serviceGetApprovedMonthlySalesByAdmin(user_id);
     console.log(data)
     let sales = data.sales.reverse();
     console.log(sales)
