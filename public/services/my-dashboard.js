@@ -70,8 +70,8 @@ async function getTotalSales(){
 
 }
 
-async function getLastMonthSales(){
-    let data = await serviceGetLastMonthSalesByAdmin();
+async function getLastMonthSales(user_id){
+    let data = await serviceGetLastMonthSalesByAdmin(user_id);
     let sales = data.sales;
     let continue_data = sales.continue.continue_serie_try.map(parseFloat);
     let approved_data = sales.approved.approved_serie_try.map(parseFloat);
