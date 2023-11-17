@@ -208,7 +208,7 @@ class SaleController extends Controller
                 ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
                 ->where('sales.active',1)
 //                ->where('statuses.period','continue')
-                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved')")
+                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved' OR statuses.period = 'creating')")
                 ->get();
 
             foreach ($sales as $sale) {
