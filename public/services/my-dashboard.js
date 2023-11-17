@@ -22,14 +22,11 @@
         //     document.getElementById('staff_dash_currency').value = staff_dash_currency;
         // }
 
-        // getTotalSales();
         getLastMonthSales(user_id);
-        // getApprovedMonthlySales();
-        // getCompletedMonthlySales();
-        // getPotentialMonthlySales();
-        // getCancelledMonthlySales();
-        // getAdminsSales();
-        // initTopSaledProducts();
+        getApprovedMonthlySales(user_id);
+        getCompletedMonthlySales(user_id);
+        getPotentialMonthlySales(user_id);
+        getCancelledMonthlySales(user_id);
 
 	});
 
@@ -39,35 +36,6 @@ function changeDashCurrency(){
     staff_dash_currency = document.getElementById('staff_dash_currency').value;
     localStorage.setItem('staff_dash_currency', staff_dash_currency);
     location.reload();
-}
-
-async function getTotalSales(){
-
-    let data = await serviceGetTotalSales();
-    let sales = data.sales;
-
-    $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
-    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    $('#approved-text').append(text1);
-
-    $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
-    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    $('#completed-text').append(text2);
-
-    $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
-    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    $('#potential-text').append(text3);
-
-    $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
-    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
-    $('#cancelled-text').append(text4);
-
-
-
 }
 
 async function getLastMonthSales(user_id){
@@ -229,9 +197,9 @@ async function getLastMonthSales(user_id){
     new ApexCharts(document.querySelector("#spark4"), spark4).render();
 }
 
-async function getApprovedMonthlySales(){
+async function getApprovedMonthlySales(user_id){
 
-    let data = await serviceGetApprovedMonthlySales();
+    let data = await serviceGetApprovedMonthlySales(user_id);
     console.log(data)
     let sales = data.sales.reverse();
     console.log(sales)
@@ -346,9 +314,9 @@ async function getApprovedMonthlySales(){
 
 }
 
-async function getCompletedMonthlySales(){
+async function getCompletedMonthlySales(user_id){
 
-    let data = await serviceGetCompletedMonthlySales();
+    let data = await serviceGetCompletedMonthlySalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -459,9 +427,9 @@ async function getCompletedMonthlySales(){
 
 }
 
-async function getPotentialMonthlySales(){
+async function getPotentialMonthlySales(user_id){
 
-    let data = await serviceGetPotentialSales();
+    let data = await serviceGetPotentialSalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -571,9 +539,9 @@ async function getPotentialMonthlySales(){
 
 }
 
-async function getCancelledMonthlySales(){
+async function getCancelledMonthlySales(user_id){
 
-    let data = await serviceGetCancelledPotentialSales();
+    let data = await serviceGetCancelledPotentialSalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -681,54 +649,4 @@ async function getCancelledMonthlySales(){
     );
     apexColumnChart.render();
 
-}
-
-async function getAdminsSales(){
-
-    let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
-    let admins = data.admins;
-    admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
-
-
-    $('#admins-table tbody tr').remove();
-    $.each(admins, function (i, admin) {
-        let item = '<tr>\n' +
-            '           <td>'+ admin.id +'</td>\n' +
-            '           <td>'+ admin.name +' '+ admin.surname +'</td>\n' +
-            '           <td>'+ admin.total_sales.sale_count +'</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.try_total) +' TRY</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.usd_total) +' USD</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.eur_total) +' EUR</td>\n' +
-            '       </tr>';
-        $('#admins-table tbody').append(item);
-    });
-
-
-}
-
-async function initTopSaledProducts(){
-    let data = await serviceGetTopSaledProducts();
-    let products = data.products;
-
-    $('#top-products-table tbody tr').remove();
-
-    $.each(products, function (i, product) {
-
-        let item = '<tr>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ checkNull(product.product_detail.ref_code) +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   '+ product.product_detail.product_name +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
-            '       </tr>';
-
-        $('#top-products-table tbody').append(item);
-    });
 }

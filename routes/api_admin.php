@@ -368,9 +368,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::get('dashboard/getMonthlySalesLastTwelveMonths', [DashboardController::class, 'getMonthlySalesLastTwelveMonths']);
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonths']);
+    Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdmin']);
     Route::get('dashboard/getMonthlyCompletedSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyCompletedSalesLastTwelveMonths']);
+    Route::get('dashboard/getMonthlyCompletedSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyCompletedSalesLastTwelveMonthsByAdmin']);
     Route::get('dashboard/getMonthlyPotentialSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyPotentialSalesLastTwelveMonths']);
+    Route::get('dashboard/getMonthlyPotentialSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyPotentialSalesLastTwelveMonthsByAdmin']);
     Route::get('dashboard/getMonthlyCancelledSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyCancelledSalesLastTwelveMonths']);
+    Route::get('dashboard/getMonthlyCancelledSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyCancelledSalesLastTwelveMonthsByAdmin']);
 
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdmins']);
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdminId/{admin_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdminId']);

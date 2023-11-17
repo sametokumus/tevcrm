@@ -2566,8 +2566,26 @@ async function serviceGetApprovedMonthlySales() {
     }
 }
 
+async function serviceGetApprovedMonthlySalesByAdmin(id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmin/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetCompletedMonthlySales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonths', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCompletedMonthlySalesByAdmin(id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonthsByAdmin/' + id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2584,8 +2602,26 @@ async function serviceGetPotentialSales() {
     }
 }
 
+async function serviceGetPotentialSalesByAdmin(id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonthsByAdmin/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetCancelledPotentialSales() {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCancelledPotentialSalesByAdmin(id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonthsByAdmin/' + id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
