@@ -219,7 +219,7 @@ $extra_js='
 
     <div class="row">
 
-        <div class="col-xl-3">
+        <div class="col-xl-6">
 
             <div class="card mb-3">
 
