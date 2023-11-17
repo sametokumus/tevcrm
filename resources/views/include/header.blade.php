@@ -174,6 +174,8 @@ $extra_js="";
                     </a>
                 </div>
 
+                    <div class="menu-header">Diğer İşlemler</div>
+
                 <div class="menu-item has-sub @if( Request::segment(1)== 'customers' || Request::segment(1)== 'suppliers' || Request::segment(1)== 'potential-customers' ) active @endif">
                     <a href="#" class="menu-link">
                     <span class="menu-icon">
