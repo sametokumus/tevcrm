@@ -12,33 +12,49 @@ $extra_js='
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">
-                Satış Hedefleri
-            </h1>
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">SATIŞ HEDEFLERİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+                    <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+                        <thead>
+                        <tr>
+                            <th class="border-bottom-0" data-priority="1">N#</th>
+                            <th class="border-bottom-0">Personel</th>
+                            <th class="border-bottom-0">Tür</th>
+                            <th class="border-bottom-0">Hedef</th>
+                            <th class="border-bottom-0">Ay</th>
+                            <th class="border-bottom-0">Yıl</th>
+                            <th class="border-bottom-0">Durum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
-                <thead>
-                <tr>
-                    <th class="border-bottom-0" data-priority="1">N#</th>
-                    <th class="border-bottom-0">Personel</th>
-                    <th class="border-bottom-0">Tür</th>
-                    <th class="border-bottom-0">Hedef</th>
-                    <th class="border-bottom-0">Ay</th>
-                    <th class="border-bottom-0">Yıl</th>
-                    <th class="border-bottom-0">Durum</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 
 
     <div class="row sparkboxes mt-0 mb-4">
