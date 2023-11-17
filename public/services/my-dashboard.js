@@ -22,6 +22,7 @@
         //     document.getElementById('staff_dash_currency').value = staff_dash_currency;
         // }
 
+        initStaffTargets(user_id);
         getLastMonthSales(user_id);
         getApprovedMonthlySales(user_id);
         getCompletedMonthlySales(user_id);
@@ -649,4 +650,47 @@ async function getCancelledMonthlySales(user_id){
     );
     apexColumnChart.render();
 
+}
+
+async function initStaffTargets(user_id){
+
+    let data = await serviceGetStaffTargetsByStaffId(user_id);
+
+    console.log(data)
+    $("#targets-datatable").dataTable().fnDestroy();
+    $('#targets-datatable tbody > tr').remove();
+
+    $.each(data.targets, function (i, target) {
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
+        }
+
+        let item = '<tr>\n' +
+            '           <th>'+ target.id +'</th>\n' +
+            '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
+            '           <td>'+ target.type_name +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
+            '           <td>'+ target.month_name +'</td>\n' +
+            '           <td>'+ target.year +'</td>\n' +
+            '           <td>'+ target.status.rate +'%</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#targets-datatable tbody').append(item);
+    });
+
+    $('#targets-datatable').DataTable({
+        responsive: false,
+        columnDefs: [],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
+    });
 }

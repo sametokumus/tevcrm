@@ -9,190 +9,37 @@ $extra_js='
 ?>
 
 <div id="content" class="app-content">
+
     <div class="row">
-        <div class="col-12 mb-5">
-            <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
-                <option value="TRY">TRY</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-            </select>
+        <div class="col-md-12">
+            <h1 class="page-header">
+                Satış Hedefleri
+            </h1>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-md-12">
+            <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+                <thead>
+                <tr>
+                    <th class="border-bottom-0" data-priority="1">N#</th>
+                    <th class="border-bottom-0">Personel</th>
+                    <th class="border-bottom-0">Tür</th>
+                    <th class="border-bottom-0">Hedef</th>
+                    <th class="border-bottom-0">Ay</th>
+                    <th class="border-bottom-0">Yıl</th>
+                    <th class="border-bottom-0">Durum</th>
+                </tr>
+                </thead>
+                <tbody>
 
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM ONAYLANAN</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2" id="approved-box">
-                        <div class="col-9">
-                            <h4 class="mb-0"></h4>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="bar" data-title="Visitors" data-height="30"></div>
-                        </div>
-                    </div>
-
-
-                    <div class="text-white text-opacity-80 text-truncate" id="approved-text">
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
+                </tbody>
+            </table>
         </div>
-
-
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM TAMAMLANAN</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2" id="completed-box">
-                        <div class="col-9">
-                            <h4 class="mb-0"></h4>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="line" data-title="Visitors"
-                                 data-height="30"></div>
-                        </div>
-                    </div>
-
-
-                    <div class="text-white text-opacity-80 text-truncate" id="completed-text">
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM POTANSİYEL</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2" id="potential-box">
-                        <div class="col-9">
-                            <h4 class="mb-0"></h4>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="pie" data-title="Visitors"
-                                 data-height="45"></div>
-                        </div>
-                    </div>
-
-
-                    <div class="text-white text-opacity-80 text-truncate" id="potential-text">
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-xl-3 col-lg-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM İPTAL EDİLEN</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-
-                    <div class="row align-items-center mb-2" id="cancelled-box">
-                        <div class="col-9">
-                            <h4 class="mb-0"></h4>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="donut" data-title="Visitors"
-                                 data-height="45"></div>
-                        </div>
-                    </div>
-
-
-                    <div class="text-white text-opacity-80 text-truncate" id="cancelled-text">
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-
     </div>
+
+
 
     <div class="row sparkboxes mt-0 mb-4">
 
