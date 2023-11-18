@@ -24,6 +24,7 @@ use App\Models\OfferRequestProduct;
 use App\Models\OrderConfirmationDetail;
 use App\Models\PackingList;
 use App\Models\PackingListProduct;
+use App\Models\PackingStatus;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -1961,6 +1962,7 @@ class SaleController extends Controller
 
             foreach ($packing_lists as $packing_list) {
                 $packing_list['count'] = PackingListProduct::query()->where('packing_list_id', $packing_list->packing_list_id)->count();
+                $packing_list['status'] = PackingStatus::query()->where('id', $packing_list->packing_status_id)->first();
             }
 
 

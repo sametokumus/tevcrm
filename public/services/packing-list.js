@@ -203,6 +203,9 @@ async function initPackingLists(){
     $('#packing-lists tbody > tr').remove();
 
     $.each(packing_lists, function (i, packing_list) {
+        let status_class = "border-theme text-theme";
+        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
+
         let item = '<tr>\n' +
             '           <td>' + packing_list.packing_list_id + '</td>\n' +
             '           <td>' + packing_list.count + '</td>\n' +
@@ -240,4 +243,10 @@ async function deletePackingList(packing_list_id){
         await initPackingLists();
         await initOfferDetail();
     }
+}
+
+
+function openStatusModal(packing_list_id, packing_status_id){
+    $('#updateStatusModal').modal('show');
+    initStatusModal(sale_id, status_id);
 }
