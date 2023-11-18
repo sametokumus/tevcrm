@@ -234,30 +234,31 @@ class MobileController extends Controller
                             $item['order_items'] = $order_items;
 
 
-                        }
-
-
-                        if ($status->period == 'approved' || $status->period == 'completed'){
-                            array_push($data, $item);
-                            array_push($sales, $item);
-                        }elseif ($status->period == 'continue'){
-                            $history = StatusHistory::query()->where('sale_id', $sale->sale_id)->where('status_id', 6)->where('active', 1)->orderByDesc('id')->first();
-                            if ($history){
-                                $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
-                                if ($document){
-                                    $item['offer_document'] = 'https://lenis-crm.wimco.com.tr/'.$document->file_url;
-                                }else{
-                                    $item['offer_document'] = '';
+                            if ($status->period == 'approved' || $status->period == 'completed'){
+                                array_push($data, $item);
+                                array_push($sales, $item);
+                            }elseif ($status->period == 'continue'){
+                                $history = StatusHistory::query()->where('sale_id', $sale->sale_id)->where('status_id', 6)->where('active', 1)->orderByDesc('id')->first();
+                                if ($history){
+                                    $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
+                                    if ($document){
+                                        $item['offer_document'] = 'https://lenis-crm.wimco.com.tr/'.$document->file_url;
+                                    }else{
+                                        $item['offer_document'] = '';
+                                    }
+                                    $quote = Quote::query()->where('sale_id', $sale->sale_id)->where('active', 1)->first();
+                                    if ($quote){
+                                        $item['expiry_date'] = Carbon::parse($quote->expiry_date)->format('d-m-Y');
+                                    }else{
+                                        $item['expiry_date'] = '';
+                                    }
+                                    array_push($offers, $item);
                                 }
-                                $quote = Quote::query()->where('sale_id', $sale->sale_id)->where('active', 1)->first();
-                                if ($quote){
-                                    $item['expiry_date'] = Carbon::parse($quote->expiry_date)->format('d-m-Y');
-                                }else{
-                                    $item['expiry_date'] = '';
-                                }
-                                array_push($offers, $item);
                             }
+
                         }
+
+
 
 
 
