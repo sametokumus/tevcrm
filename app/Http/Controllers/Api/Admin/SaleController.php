@@ -659,7 +659,7 @@ class SaleController extends Controller
                 ->first();
 
 
-            if ($old_status_id == 21){
+            if ($old_status_id == 21 && $old_status->sequence < $new_status->sequence){
                 $shipment_price_check = Expense::query()->where('sale_id', $request->sale_id)->where('category_id', 1)->where('active', 1)->count();
                 if ($shipment_price_check == 0){
 
