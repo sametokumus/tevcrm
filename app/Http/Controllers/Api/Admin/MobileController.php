@@ -135,11 +135,11 @@ class MobileController extends Controller
 
                 if ($sale) {
 
-                    $packing_lists = PackingList::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    $packing_lists_count = PackingList::query()->where('sale_id', $sale->sale_id)->where('active', 1)->count();
 
-                    if ($packing_lists) {
+                    if ($packing_lists_count > 0) {
 
-
+                        $packing_lists = PackingList::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                         foreach ($packing_lists as $packing_list) {
 
 
