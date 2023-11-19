@@ -262,7 +262,7 @@ async function updateStatus(){
         "packing_list_id": packing_list_id,
         "status_id": status_id
     });
-    let data = await servicePostUpdateSaleStatus(formData);
+    let data = await servicePostUpdatePackingListStatus(formData);
     if(data.status == "success"){
         if (data.object.period == "cancelled"){
             $("#update_status_form").trigger("reset");
