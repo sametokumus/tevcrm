@@ -204,7 +204,7 @@ async function initPackingLists(){
 
     $.each(packing_lists, function (i, packing_list) {
         let status_class = "border-theme text-theme";
-        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
+        let status = '<span class="badge border pointer-event '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
 
         let item = '<tr>\n' +
             '           <td>' + packing_list.packing_list_id + '</td>\n' +
