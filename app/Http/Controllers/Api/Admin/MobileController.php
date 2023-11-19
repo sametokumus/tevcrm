@@ -16,6 +16,7 @@ use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\PackingList;
 use App\Models\PackingListProduct;
+use App\Models\PackingStatus;
 use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
@@ -148,11 +149,12 @@ class MobileController extends Controller
                             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
                             $company = Company::query()->where('id', $offer_request->company_id)->first();
                             $status = Status::query()->where('id', $sale->status_id)->first();
+                            $packing_status = PackingStatus::query()->where('id', $packing_list->packing_status_id)->first();
 
                             $item['company_id'] = $company->id;
                             $item['company'] = $company->name;
                             $item['completed'] = 0;
-                            if ($status->mobile_id == 41) {
+                            if ($packing_status->mobile_id == 41) {
                                 $item['completed'] = 1;
                             }
                             $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
@@ -199,7 +201,7 @@ class MobileController extends Controller
                                 $order_item['description'] = $product->product_name;
                                 $order_item['order_number'] = $i;
                                 $order_item['progress'] = 0;
-                                $order_item['state'] = $status->mobile_id;
+                                $order_item['state'] = $packing_status->mobile_id;
                                 $order_item['total_price'] = number_format($list_offer_price, 2, ".", "");
                                 $order_item['unit'] = $sale_offer->list_quantity;
                                 $order_item['unit_price'] = number_format($offer_pcs_price, 2, ".", "");
