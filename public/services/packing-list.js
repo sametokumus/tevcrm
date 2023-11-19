@@ -283,7 +283,7 @@ async function initStatusModal(packing_list_id, packing_status_id){
     $.each(statuses, function (i, status){
         let selected = '';
         if(status.id == packing_status_id){selected = 'selected';}
-        $('#update_sale_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
+        $('#update_packing_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
     });
     document.getElementById('update_packing_list_id').value = packing_list_id;
 }
