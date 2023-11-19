@@ -264,16 +264,9 @@ async function updateStatus(){
     });
     let data = await servicePostUpdatePackingListStatus(formData);
     if(data.status == "success"){
-        if (data.object.period == "cancelled"){
-            $("#update_status_form").trigger("reset");
-            $('#updateStatusModal').modal('hide');
-            $('#addCancelNoteModal').modal('show');
-            document.getElementById('cancel_sale_id').value = sale_id;
-        }else {
-            $("#update_status_form").trigger("reset");
-            $('#updateStatusModal').modal('hide');
-            initSales();
-        }
+        $("#update_status_form").trigger("reset");
+        $('#updateStatusModal').modal('hide');
+        initPackingLists();
     }
 }
 async function initStatusModal(packing_list_id, packing_status_id){
