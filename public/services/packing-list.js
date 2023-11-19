@@ -209,6 +209,7 @@ async function initPackingLists(){
         let item = '<tr>\n' +
             '           <td>' + packing_list.packing_list_id + '</td>\n' +
             '           <td>' + packing_list.count + '</td>\n' +
+            '           <td>' + status + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <a href="packing-list-print/'+ packing_list.packing_list_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n' +
