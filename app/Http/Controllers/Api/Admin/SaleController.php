@@ -713,6 +713,29 @@ class SaleController extends Controller
         }
     }
 
+    public function updatePackingListStatus(Request $request)
+    {
+        try {
+            $request->validate([
+                'packing_list_id' => 'required',
+                'status_id' => 'required'
+            ]);
+            PackingList::query()->where('packing_list_id', $request->packing_list_id)->update([
+                'packing_status_id' => $request->status_id,
+            ]);
+
+
+
+            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
     public function addCancelSaleNote(Request $request)
     {
         try {

@@ -201,6 +201,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/addSale', [SaleController::class, 'addSale']);
     Route::get('sale/deleteSale/{sale_id}', [SaleController::class, 'deleteSale']);
     Route::post('sale/updateSaleStatus', [SaleController::class, 'updateSaleStatus']);
+    Route::post('sale/updatePackingListStatus', [SaleController::class, 'updatePackingListStatus']);
     Route::get('sale/getSaleOfferById/{offer_product_id}', [SaleController::class, 'getSaleOfferById']);
     Route::get('sale/getSaleOffersByOfferId/{offer_id}', [SaleController::class, 'getSaleOffersByOfferId']);
     Route::post('sale/addSaleOfferPrice', [SaleController::class, 'addSaleOfferPrice']);
@@ -284,6 +285,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Status
     Route::get('status/getStatuses', [StatusController::class, 'getStatuses']);
     Route::get('status/getChangeableStatuses', [StatusController::class, 'getChangeableStatuses']);
+    Route::get('status/getPackingStatuses', [StatusController::class, 'getPackingStatuses']);
     Route::get('status/getAuthorizeStatuses/{user_id}', [StatusController::class, 'getAuthorizeStatuses']);
 
     //Measurement

@@ -15,6 +15,10 @@
             e.preventDefault();
             addProductCountToTable();
         });
+        $('#update_status_form').submit(function (e){
+            e.preventDefault();
+            updateStatus();
+        });
 	});
 
 	$(window).load(async function() {
@@ -204,7 +208,7 @@ async function initPackingLists(){
 
     $.each(packing_lists, function (i, packing_list) {
         let status_class = "border-theme text-theme";
-        let status = '<span class="badge border pointer-event '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
+        let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
 
         let item = '<tr>\n' +
             '           <td>' + packing_list.packing_list_id + '</td>\n' +
@@ -249,5 +253,37 @@ async function deletePackingList(packing_list_id){
 
 function openStatusModal(packing_list_id, packing_status_id){
     $('#updateStatusModal').modal('show');
-    initStatusModal(sale_id, status_id);
+    initStatusModal(packing_list_id, packing_status_id);
+}
+async function updateStatus(){
+    let status_id = document.getElementById('update_packing_list_status').value;
+    let packing_list_id = document.getElementById('update_packing_list_id').value;
+    let formData = JSON.stringify({
+        "packing_list_id": packing_list_id,
+        "status_id": status_id
+    });
+    let data = await servicePostUpdateSaleStatus(formData);
+    if(data.status == "success"){
+        if (data.object.period == "cancelled"){
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            $('#addCancelNoteModal').modal('show');
+            document.getElementById('cancel_sale_id').value = sale_id;
+        }else {
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            initSales();
+        }
+    }
+}
+async function initStatusModal(packing_list_id, packing_status_id){
+    let data = await serviceGetPackingStatuses();
+    let statuses = data.statuses;
+    $('#update_packing_status option').remove();
+    $.each(statuses, function (i, status){
+        let selected = '';
+        if(status.id == packing_status_id){selected = 'selected';}
+        $('#update_sale_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
+    });
+    document.getElementById('update_packing_list_id').value = packing_list_id;
 }

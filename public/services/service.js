@@ -1596,6 +1596,17 @@ async function servicePostUpdateSaleStatus(formData) {
     }
 }
 
+async function servicePostUpdatePackingListStatus(formData) {
+    const data = await fetchDataPost('/admin/sale/updatePackingListStatus', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 async function servicePostAddCancelSaleNote(formData) {
     const data = await fetchDataPost('/admin/sale/addCancelSaleNote', formData, 'application/json');
     if (data.status == "success") {
@@ -1802,6 +1813,15 @@ async function serviceGetStatuses() {
 async function serviceGetChangeableStatuses() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/status/getChangeableStatuses', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetPackingStatuses() {
+    let userId = localStorage.getItem('userId');
+    const data = await fetchDataGet('/admin/status/getPackingStatuses', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
