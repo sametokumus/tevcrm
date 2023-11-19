@@ -1589,7 +1589,9 @@ async function servicePostUpdateSaleStatus(formData) {
     } else {
         if (data.status == "status-001") {
             showAlert(data.message);
-        }else {
+        }else if (data.status == "status-002") {
+            showAlert(data.message);
+        }else{
             showAlert('İstek Başarısız.');
         }
         return false;

@@ -658,6 +658,19 @@ class SaleController extends Controller
                 ->orderByDesc('sequence')
                 ->first();
 
+
+            if ($old_status_id == 21){
+                $shipment_price_check = Expense::query()->where('sale_id', $request->sale_id)->where('category_id', 1)->where('active', 1)->count();
+                if ($shipment_price_check == 0){
+
+                    $message = 'Nakliye tutarı zorunludur.';
+                    return response(['message' => $message, 'status' => 'status-002']);
+
+                }
+            }
+
+
+
             if ($last_forced && $new_status->period != 'cancelled'){
 
                 $history_check = StatusHistory::query()
