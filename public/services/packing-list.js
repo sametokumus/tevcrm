@@ -256,7 +256,7 @@ function openStatusModal(packing_list_id, packing_status_id){
     initStatusModal(packing_list_id, packing_status_id);
 }
 async function updateStatus(){
-    let status_id = document.getElementById('update_packing_list_status').value;
+    let status_id = document.getElementById('update_packing_status').value;
     let packing_list_id = document.getElementById('update_packing_list_id').value;
     let formData = JSON.stringify({
         "packing_list_id": packing_list_id,
