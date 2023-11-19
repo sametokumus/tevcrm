@@ -135,7 +135,7 @@ class MobileController extends Controller
 
                 if ($sale) {
 
-                    $packing_lists = PackingList::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+                    $packing_lists = PackingList::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
 
                     if ($packing_lists) {
 
@@ -154,7 +154,7 @@ class MobileController extends Controller
                             if ($status->mobile_id == 41) {
                                 $item['completed'] = 1;
                             }
-                            $item['confirmation_no'] = 'SMY-' . $sale_id;
+                            $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
                             $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
                             $item['currency'] = $sale->currency;
                             $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
@@ -175,7 +175,7 @@ class MobileController extends Controller
                                 ->leftJoin('packing_list_products', 'packing_list_products.sale_offer_id', '=', 'sale_offers.id')
                                 ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
                                 ->selectRaw('sale_offers.*, packing_list_products.quantity as list_quantity')
-                                ->where('sale_offers.sale_id', $sale_id)
+                                ->where('sale_offers.sale_id', $sale->sale_id)
                                 ->where('sale_offers.active', 1)
                                 ->where('packing_list_products.packing_list_id', $packing_list->packing_list_id)
                                 ->get();
@@ -279,7 +279,7 @@ class MobileController extends Controller
                         if ($status->mobile_id == 41) {
                             $item['completed'] = 1;
                         }
-                        $item['confirmation_no'] = 'SMY-' . $sale_id;
+                        $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
                         $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
                         $item['currency'] = $sale->currency;
                         $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
