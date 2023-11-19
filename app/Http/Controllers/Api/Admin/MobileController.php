@@ -15,6 +15,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\OfferRequestProduct;
 use App\Models\PackingList;
+use App\Models\PackingListProduct;
 use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
@@ -199,7 +200,7 @@ class MobileController extends Controller
                                 $order_item['order_number'] = $i;
                                 $order_item['progress'] = 0;
                                 $order_item['state'] = $status->mobile_id;
-                                $order_item['total_price'] = $list_offer_price;
+                                $order_item['total_price'] = number_format($list_offer_price, 2, ".", "");
                                 $order_item['unit'] = $sale_offer->list_quantity;
                                 $order_item['unit_price'] = number_format($offer_pcs_price, 2, ".", "");
                                 $order_item['unit_type'] = $measurement->name_tr;
@@ -230,7 +231,7 @@ class MobileController extends Controller
                                 $i++;
                             }
 
-                            $item['price_total'] = $list_grand_total;
+                            $item['price_total'] = number_format($list_grand_total, 2, ".", "");
                             $item['order_items'] = $order_items;
 
 
@@ -261,7 +262,123 @@ class MobileController extends Controller
 
 
 
+                        // Packin list i olmayan ürünlerin siparişe eklenmesi
 
+                        $item = array();
+                        $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
+                        $company = Company::query()->where('id', $offer_request->company_id)->first();
+                        $status = Status::query()->where('id', $sale->status_id)->first();
+
+                        $item['company_id'] = $company->id;
+                        $item['company'] = $company->name;
+                        $item['completed'] = 0;
+                        if ($status->mobile_id == 41) {
+                            $item['completed'] = 1;
+                        }
+                        $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
+                        $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
+                        $item['currency'] = $sale->currency;
+                        $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
+                        $item['order_id'] = $sale->id;
+                        $item['pieces'] = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->sum('offer_quantity');
+                        $item['po_no'] = $sale->id;
+                        $item['pr_no'] = $sale->id;
+                        $item['ref_no'] = $sale->id;
+                        $item['subject'] = "";
+                        $item['user_id'] = "";
+                        $item['customer_po_no'] = "";
+                        $item['success'] = true;
+
+
+                        $order_items = array();
+
+                        $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+
+                        $i = 1;
+                        $list_grand_total = 0;
+                        $remaining_count = 0;
+
+                        foreach ($sale_offers as $sale_offer) {
+                            $packing_count = PackingListProduct::query()->where('active', 1)->where('sale_offer_id', $sale_offer->id)->sum('quantity');
+                            $remaining_count += $packing_count;
+                            $item_count = $sale_offer->offer_quantity - $packing_count;
+
+                            $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                            $list_offer_price = $offer_pcs_price * $item_count;
+                            $list_grand_total += $list_offer_price;
+
+
+                            $product = Product::query()->where('id', $sale_offer->product_id)->first();
+                            $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                            $measurement = Measurement::query()->where('id', $offer_product->measurement_id)->first();
+
+                            $order_item = array();
+                            $order_item['auto_date'] = Carbon::parse($sale_offer->created_at)->format('d.m.Y h:i:s');
+                            $order_item['delivery_day'] = $sale_offer->offer_lead_time;
+                            $order_item['description'] = $product->product_name;
+                            $order_item['order_number'] = $i;
+                            $order_item['progress'] = 0;
+                            $order_item['state'] = $status->mobile_id;
+                            $order_item['total_price'] = number_format($list_offer_price, 2, ".", "");
+                            $order_item['unit'] = $item_count;
+                            $order_item['unit_price'] = number_format($offer_pcs_price, 2, ".", "");
+                            $order_item['unit_type'] = $measurement->name_tr;
+
+                            if ($product->category_id != null) {
+                                $category1 = Category::query()->where('id', $product->category_id)->first();
+                                if ($category1->parent_id != 0) {
+
+                                    $category2 = Category::query()->where('id', $category1->parent_id)->first();
+                                    if ($category2->parent_id != 0) {
+
+                                        $category3 = Category::query()->where('id', $category2->parent_id)->first();
+                                        $order_item['item_name'] = $category3->name;
+
+                                    } else {
+                                        $order_item['item_name'] = $category2->name;
+                                    }
+
+                                } else {
+                                    $order_item['item_name'] = $category1->name;
+                                }
+
+                            } else {
+                                $order_item['item_name'] = "";
+                            }
+
+                            array_push($order_items, $order_item);
+                            $i++;
+                        }
+
+                        $item['price_total'] = number_format($list_grand_total, 2, ".", "");
+                        $item['order_items'] = $order_items;
+
+
+                        if ($status->period == 'approved' || $status->period == 'completed'){
+                            if ($remaining_count > 0) {
+                                array_push($data, $item);
+                                array_push($sales, $item);
+                            }
+                        }elseif ($status->period == 'continue'){
+                            if ($remaining_count > 0) {
+                                $history = StatusHistory::query()->where('sale_id', $sale->sale_id)->where('status_id', 6)->where('active', 1)->orderByDesc('id')->first();
+                                if ($history) {
+                                    $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
+                                    if ($document) {
+                                        $item['offer_document'] = 'https://lenis-crm.wimco.com.tr/' . $document->file_url;
+                                    } else {
+                                        $item['offer_document'] = '';
+                                    }
+                                    $quote = Quote::query()->where('sale_id', $sale->sale_id)->where('active', 1)->first();
+                                    if ($quote) {
+                                        $item['expiry_date'] = Carbon::parse($quote->expiry_date)->format('d-m-Y');
+                                    } else {
+                                        $item['expiry_date'] = '';
+                                    }
+                                    array_push($offers, $item);
+                                }
+                            }
+                        }
 
 
 
