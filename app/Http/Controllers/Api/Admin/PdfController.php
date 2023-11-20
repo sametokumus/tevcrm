@@ -3006,6 +3006,13 @@ class PdfController extends Controller
 
             $y = $pdf->getY() + 20;
             $x = 10;
+
+            if ($y > 250){
+                $pdf->AddPage();
+                $pdf->SetXY(10, 20);
+                $y = 20;
+            }
+
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
             $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Authorised Signature')), 0, 0, 'C');
