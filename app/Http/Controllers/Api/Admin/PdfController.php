@@ -662,20 +662,9 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = $this->textConvert($quote->note);
-//                $html = utf8_decode($html);
-                $html = str_replace('<br>', "\n", $html);
-                $html = str_replace('<p>', '', $html);
-                $html = str_replace('</p>', "\n", $html);
-//                $d = $pdf->GetX();
-//                $f = $pdf->GetY();
-//                $pdf->Cell(0, 0, $d.'-'.$f, 0, 0, '');
-//
-//                $y += 5;
-//                $x = 10;
-//                $pdf->SetXY($x, $y);
-////                $pdf->MultiCell(2, $html);
-                $pdf->MultiCell(0, 5, $html);
+                $html = utf8_decode($quote->note);
+                $html = str_replace('&nbsp;', " ", $html);
+                $pdf->writeHTML($html);
             }
 
 
@@ -829,8 +818,6 @@ class PdfController extends Controller
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
 
             //QUOTES
-
-            $y += 8;
 
             if ($quote->payment_term != null) {
 
@@ -1071,10 +1058,8 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($oc_detail->note);
-                    $html = str_replace('<br>', "\n", $html);
-                    $html = str_replace('<p>', '', $html);
-                    $html = str_replace('</p>', "\n", $html);
-                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $html = str_replace('&nbsp;', " ", $html);
+                    $pdf->writeHTML($html);
                 }
             }
 
@@ -1136,17 +1121,13 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Bank Details')), 0, 0, '');
 
+                $y += 5;
                 $x = 10;
+                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = str_replace('<p>', '', $bank->detail);
-                $html_array = explode('</p>', $html);
-                foreach ($html_array as $item) {
-                    $y += 5;
-                    $pdf->SetXY($x, $y);
-                    $inputString = mb_convert_encoding($item, 'ISO-8859-9', 'UTF-8');
-
-                    $pdf->Cell(0, 0, $inputString, 0, 0, '');
-                }
+                $html = utf8_decode($bank->detail);
+                $html = str_replace('&nbsp;', " ", $html);
+                $pdf->writeHTML($html);
 
             }
 
@@ -1576,10 +1557,8 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($pi_detail->note);
-                    $html = str_replace('<br>', "\n", $html);
-                    $html = str_replace('<p>', '', $html);
-                    $html = str_replace('</p>', "\n", $html);
-                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $html = str_replace('&nbsp;', " ", $html);
+                    $pdf->writeHTML($html);
                 }
             }
 
@@ -2052,10 +2031,8 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($pi_detail->note);
-                    $html = str_replace('<br>', "\n", $html);
-                    $html = str_replace('<p>', '', $html);
-                    $html = str_replace('</p>', "\n", $html);
-                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $html = str_replace('&nbsp;', " ", $html);
+                    $pdf->writeHTML($html);
                 }
             }
 
@@ -2640,10 +2617,8 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($pi_detail->note);
-                    $html = str_replace('<br>', "\n", $html);
-                    $html = str_replace('<p>', '', $html);
-                    $html = str_replace('</p>', "\n", $html);
-                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $html = str_replace('&nbsp;', " ", $html);
+                    $pdf->writeHTML($html);
                 }
             }
 
@@ -2978,10 +2953,6 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($po_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
-//                    $html = str_replace('<br>', "\n", $html);
-//                    $html = str_replace('<p>', '', $html);
-//                    $html = str_replace('</p>', "\n", $html);
-//                    $pdf->MultiCell(0, 5, utf8_decode($html));
                     $pdf->writeHTML($html);
                 }
             }
@@ -3327,10 +3298,8 @@ class PdfController extends Controller
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
                     $html = utf8_decode($rfq_detail->note);
-                    $html = str_replace('<br>', "\n", $html);
-                    $html = str_replace('<p>', '', $html);
-                    $html = str_replace('</p>', "\n", $html);
-                    $pdf->MultiCell(0, 5, utf8_decode($html));
+                    $html = str_replace('&nbsp;', " ", $html);
+                    $pdf->writeHTML($html);
                 }
             }
 
@@ -3738,10 +3707,8 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
                 $html = utf8_decode($packing_list->note);
-                $html = str_replace('<br>', "\n", $html);
-                $html = str_replace('<p>', '', $html);
-                $html = str_replace('</p>', "\n", $html);
-                $pdf->MultiCell(0, 5, utf8_decode($html));
+                $html = str_replace('&nbsp;', " ", $html);
+                $pdf->writeHTML($html);
             }
 
 
