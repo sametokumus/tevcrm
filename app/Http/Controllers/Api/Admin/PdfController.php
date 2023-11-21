@@ -51,9 +51,10 @@ class PdfController extends Controller
     }
     private function textConvert($text){
         $inputString = mb_convert_encoding($text, 'UTF-8', 'auto');
-        $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $inputString);
-        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
-        return iconv('utf-8', 'iso-8859-9', $inputString);
+//        $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $inputString);
+//        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
+//        return iconv('utf-8', 'iso-8859-9', $inputString);
+        return $inputString;
     }
     private function addOwnerLogo($pdf, $contact, $pageWidth){
         $x = $pageWidth - $contact->logo_width - 10;
