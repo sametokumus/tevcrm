@@ -1115,7 +1115,7 @@ class PdfController extends Controller
             if ($bank_id != 0){
 
                 $bank = OwnerBankInfo::query()->where('id', $bank_id)->first();
-                $y += 10;
+                $y += 20;
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
@@ -1125,7 +1125,6 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-//                $html = utf8_decode($bank->detail);
                 $html = str_replace('&nbsp;', " ", $this->textConvert($bank->detail));
                 $pdf->writeHTML($html);
 
@@ -1567,23 +1566,18 @@ class PdfController extends Controller
             if ($bank_id != 0){
 
                 $bank = OwnerBankInfo::query()->where('id', $bank_id)->first();
-                $y += 10;
+                $y += 20;
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 8);
                 $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Bank Details')), 0, 0, '');
 
+                $y += 5;
                 $x = 10;
+                $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = str_replace('<p>', '', $bank->detail);
-                $html_array = explode('</p>', $html);
-                foreach ($html_array as $item) {
-                    $y += 5;
-                    $pdf->SetXY($x, $y);
-                    $inputString = mb_convert_encoding($item, 'ISO-8859-9', 'UTF-8');
-
-                    $pdf->Cell(0, 0, $inputString, 0, 0, '');
-                }
+                $html = str_replace('&nbsp;', " ", $this->textConvert($bank->detail));
+                $pdf->writeHTML($html);
 
             }
 
