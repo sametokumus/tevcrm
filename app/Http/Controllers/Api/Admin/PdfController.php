@@ -59,8 +59,8 @@ class PdfController extends Controller
     private function textConvert($text){
         $inputString = mb_convert_encoding($text, 'UTF-8', 'auto');
 
-        // Remove characters that are not letters, numbers, or whitespace, including Turkish characters
-        $inputString = mb_ereg_replace('[^[:alnum:][:space:]ğüşıöçĞÜŞİÖÇ]', ' ', $inputString);
+        // Remove characters that are not letters, numbers, whitespace, or punctuation, including Turkish characters
+        $inputString = mb_ereg_replace('[^[:alnum:][:space:][:punct:]ğüşıöçĞÜŞİÖÇ]', ' ', $inputString);
 
         // Remove characters outside the printable ASCII range, including Turkish characters
         $inputString = mb_ereg_replace('[^ -~ğüşıöçĞÜŞİÖÇ]', '', $inputString);
@@ -68,6 +68,7 @@ class PdfController extends Controller
         // Convert the string to ISO-8859-9 encoding
         return mb_convert_encoding($inputString, 'ISO-8859-9', 'UTF-8');
     }
+
 
     private function addOwnerLogo($pdf, $contact, $pageWidth){
         $x = $pageWidth - $contact->logo_width - 10;
