@@ -49,12 +49,21 @@ class PdfController extends Controller
     private function htmlTextConvertArray($text){
 
     }
+//    private function textConvert($text){
+//        $inputString = mb_convert_encoding($text, 'UTF-8', 'auto');
+////        $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $inputString);
+////        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
+////        return iconv('utf-8', 'iso-8859-9', $inputString);
+//        return $inputString;
+//    }
     private function textConvert($text){
         $inputString = mb_convert_encoding($text, 'UTF-8', 'auto');
-//        $inputString = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $inputString);
-//        $inputString = preg_replace('/[^\x20-\x7E]/u', '', $inputString);
-//        return iconv('utf-8', 'iso-8859-9', $inputString);
-        return $inputString;
+        // Remove characters that are not letters, numbers, or whitespace
+        $inputString = mb_ereg_replace('[^[:alnum:][:space:]]', ' ', $inputString);
+        // Remove characters outside the printable ASCII range
+        $inputString = mb_ereg_replace('[^ -~]', '', $inputString);
+        // Convert the string to ISO-8859-9 encoding
+        return mb_convert_encoding($inputString, 'ISO-8859-9', 'UTF-8');
     }
     private function addOwnerLogo($pdf, $contact, $pageWidth){
         $x = $pageWidth - $contact->logo_width - 10;
