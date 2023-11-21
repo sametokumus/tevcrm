@@ -345,7 +345,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -789,7 +789,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -1253,7 +1253,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -1709,7 +1709,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -2196,7 +2196,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -3127,7 +3127,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -3420,7 +3420,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
@@ -3860,7 +3860,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new \FPDF();
+            $pdf = new PDF();
             $pdf->AddPage();
 
             $pdf->SetMargins(20, 20, 20);
