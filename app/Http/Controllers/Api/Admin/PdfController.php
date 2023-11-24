@@ -262,7 +262,7 @@ class PdfController extends Controller
         $target = strtolower($target);
         if($source == 'try'){
             $target_rate = $sale->{$target.'_rate'};
-            if ($price == 0){
+            if (floatval($price) == 0){
                 $r_price = 0;
             }else {
                 $r_price = floatval($price) / floatval($target_rate);
