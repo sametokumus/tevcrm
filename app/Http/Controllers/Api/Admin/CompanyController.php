@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\OfferRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -167,6 +168,48 @@ class CompanyController extends Controller
                 'active' => 0,
             ]);
             return response(['message' => __('Firma silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getBestCustomer(){
+        try {
+
+            $all_companies = Company::query()->where('active', 1)->get();
+            $companies = array();
+
+            foreach ($all_companies as $company){
+                $data = array();
+                $data['company'] = $company;
+
+                $request_count = OfferRequest::query()->where('company_id', $company->id)
+                    ->whereBetween('created_at', [now()->subDays(90), now()])
+                    ->count();
+
+                $sale_count = OfferRequest::query()->where('customer_id', $company->id)
+                    ->whereBetween('created_at', [now()->subDays(90), now()])
+                    ->count();
+
+                $c1 = ($sale_count * 100 / $request_count) / 10;
+
+
+                $data['request_count'] = $request_count;
+                $data['sale_count'] = $sale_count;
+                $data['c1'] = $c1;
+
+
+                array_push($companies, $data);
+            }
+
+
+
+
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {

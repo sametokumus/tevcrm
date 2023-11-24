@@ -2860,3 +2860,14 @@ async function serviceGetDeleteStaffTarget(id) {
         return false;
     }
 }
+
+
+
+async function serviceGetBestCustomer(id) {
+    const data = await fetchDataGet('/admin/company/getBestCustomer/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

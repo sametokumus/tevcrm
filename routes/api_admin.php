@@ -123,6 +123,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('company/addCompany', [CompanyController::class, 'addCompany']);
     Route::post('company/updateCompany/{company_id}', [CompanyController::class, 'updateCompany']);
     Route::get('company/deleteCompany/{company_id}', [CompanyController::class, 'deleteCompany']);
+    Route::get('company/getBestCustomer', [CompanyController::class, 'getBestCustomer']);
 
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);
