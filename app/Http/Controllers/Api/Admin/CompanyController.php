@@ -211,7 +211,9 @@ class CompanyController extends Controller
                 array_push($companies, $data);
             }
 
-
+            usort($companies, function ($a, $b) {
+                return $b['c1'] <=> $a['c1'];
+            });
 
 
             return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
