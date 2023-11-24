@@ -227,6 +227,7 @@ async function initQuote(sale_id){
 
     document.getElementById('update_quote_id').value = quote.id;
     document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(quote.advance_price);
     document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
@@ -241,26 +242,7 @@ async function initQuote(sale_id){
         $('#showPdf').attr('href', quote.quatotion_pdf);
     }
 
-    // if (checkNull(quote.payment_term) != '') {
-    //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
-    //     document.getElementById('update_quote_payment_term').value = quote.payment_term;
-    // }
-    // if (checkNull(quote.lead_time) != '') {
-    //     document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
-    // }else{
-    //     $('#lead_time').addClass('d-none');
-    // }
-    // if (checkNull(quote.delivery_term) != '') {
-    //     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
-    // }else{
-    //     $('#delivery_term').addClass('d-none');
-    // }
-    // if (checkNull(quote.country_of_destination) != '') {
-    //     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
-    // }else{
-    //     $('#country_of_destination').addClass('d-none');
-    // }
-    // document.getElementById('note').innerHTML = checkNull(quote.note);
+
 }
 
 async function openUpdateQuoteModal(){
