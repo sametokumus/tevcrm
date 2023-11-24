@@ -826,6 +826,11 @@ class PdfController extends Controller
             //QUOTES
 
             if ($quote->payment_term != null) {
+                $payment_term = '';
+                $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();
+                if ($pt){
+                    $payment_term = $pt->name;
+                }
 
                 $x = 10;
                 $y += 5;
@@ -841,7 +846,7 @@ class PdfController extends Controller
                     $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 }
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $payment_term), '0', '0', '');
 
             }else if ($company->payment_term != null){
 
@@ -1293,6 +1298,11 @@ class PdfController extends Controller
             $y += 8;
 
             if ($quote->payment_term != null) {
+                $payment_term = '';
+                $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();
+                if ($pt){
+                    $payment_term = $pt->name;
+                }
 
                 $x = 10;
                 $y += 5;
@@ -1308,7 +1318,7 @@ class PdfController extends Controller
                     $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 }
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $payment_term), '0', '0', '');
 
             }else if ($company->payment_term != null){
 
@@ -1742,6 +1752,11 @@ class PdfController extends Controller
             $y += 8;
 
             if ($quote->payment_term != null) {
+                $payment_term = '';
+                $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();
+                if ($pt){
+                    $payment_term = $pt->name;
+                }
 
                 $x = 10;
                 $y += 5;
@@ -1757,7 +1772,7 @@ class PdfController extends Controller
                     $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 }
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $payment_term), '0', '0', '');
 
             }else if ($company->payment_term != null){
 
@@ -2363,6 +2378,11 @@ class PdfController extends Controller
             $y += 8;
 
             if ($quote->payment_term != null) {
+                $payment_term = '';
+                $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();
+                if ($pt){
+                    $payment_term = $pt->name;
+                }
 
                 $x = 10;
                 $y += 5;
@@ -2378,7 +2398,7 @@ class PdfController extends Controller
                     $x = $x+2 + $pdf->GetStringWidth(__('Payment Terms').': ');
                 }
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $quote->payment_term), '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $payment_term), '0', '0', '');
 
             }else if ($company->payment_term != null){
 
