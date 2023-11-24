@@ -205,8 +205,7 @@ class CompanyController extends Controller
 
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
-                $data['c1'] = $c1;
-
+                $data['c1'] = (int)$c1;
 
                 array_push($companies, $data);
             }
