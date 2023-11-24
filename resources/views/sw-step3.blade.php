@@ -145,7 +145,7 @@ $extra_js='
                                     </div>
                                     <div class="col-sm-3 mb-3">
                                         <label class="form-label">Avans Tutarı</label>
-                                        <input type="text" class="form-control" id="update_quote_advance_price" readonly>
+                                        <input type="text" class="form-control" id="update_quote_advance_price" value="0,00" readonly>
                                     </div>
                                     <div class="col-sm-3 mb-3">
                                         <label class="form-label">Delivery Terms</label>
