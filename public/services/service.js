@@ -610,7 +610,7 @@ async function getPaymentTermsAddSelectId(selectId){
     let data = await serviceGetPaymentTerms();
     $('#'+selectId+' option').remove();
     $.each(data.payment_terms, function(i, payment_term){
-        let optionRow = '<option value="'+payment_term.name+'">'+payment_term.name+'</option>';
+        let optionRow = '<option value="'+payment_term.id+'">'+payment_term.name+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }
