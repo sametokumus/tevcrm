@@ -33,10 +33,10 @@
 
         let sale_id = getPathVariable('proforma-invoice-print');
         await initDetail(sale_id);
-        await initQuote(sale_id);
         await initBankInfoSelect();
         // await initContact(1, sale_id);
         await initSale(sale_id);
+        await initQuote(sale_id);
         // await getOwnersAddSelectId('owners');
         // document.getElementById('owners').value = 1;
     });
