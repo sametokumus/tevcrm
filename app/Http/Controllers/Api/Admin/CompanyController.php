@@ -219,6 +219,7 @@ class CompanyController extends Controller
                         $join->on('s.sale_id', '=', 'sh.sale_id')
                             ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                     })
+                    ->where('s.customer_id', $company->id)
                     ->where('s.active', '=', 1)
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                     ->whereBetween('s.created_at', [now()->subDays(90), now()])
