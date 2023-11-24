@@ -109,6 +109,7 @@ async function initSaleStats(sale_id){
     $('#owner-employee').text('Firma Yetkilisi: '+sale.request.authorized_personnel.name+' '+sale.request.authorized_personnel.surname);
 
     $('#total-price').text(changeCommasToDecimal(sale.total_price) + ' ' + sale.currency);
+    $('#advance-price').text('Avans Tutarı: ' + changeCommasToDecimal(sale.advance_price) + ' ' + sale.currency);
     $('#remaining-price').text(changeCommasToDecimal(sale.remaining_price) + ' ' + sale.currency);
 
 

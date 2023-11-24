@@ -1327,6 +1327,13 @@ class SaleController extends Controller
                 $total_price = $sale->grand_total_with_shipping;
             }
             $payed_price = 0;
+            $advance_price = 0;
+            $quote = Quote::query()->where('sale_id', $sale->sale_id)->where('active', 1)->first();
+            if ($quote){
+                $advance_price = $quote->advance_price;
+                $payed_price = $advance_price;
+            }
+
             $transactions = SaleTransaction::query()->where('sale_id', $sale_id)->where('active', 1)->get();
 
             $sale['remaining_message'] = false;
@@ -1350,6 +1357,7 @@ class SaleController extends Controller
 
             $remaining_price = $total_price - $payed_price;
             $sale['total_price'] = $total_price;
+            $sale['advance_price'] = $advance_price;
             $sale['payed_price'] = number_format($payed_price, 2, ".", "");
             $sale['remaining_price'] = number_format($remaining_price, 2, ".", "");
             //let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
