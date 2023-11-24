@@ -196,7 +196,11 @@ class CompanyController extends Controller
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
 
-                $c1 = ($sale_count * 100 / $request_count) / 10;
+                if ($sale_count != 0 && $request_count != 0) {
+                    $c1 = ($sale_count * 100 / $request_count) / 10;
+                }else{
+                    $c1 = 0;
+                }
 
 
                 $data['request_count'] = $request_count;
