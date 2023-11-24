@@ -248,7 +248,7 @@ async function initSaleSummary(sale_id){
             '                   <b>KAR</b>\n' +
             '               </span>\n' +
             '            </td>\n' +
-            '            <td>'+ changeCommasToDecimal(parseFloat(total_price).toFixed(2) - parseFloat(sale.total_expense).toFixed(2)) +' '+ currency +'</td>\n' +
+            '            <td>'+ changeCommasToDecimal(parseFloat(parseFloat(total_price) - parseFloat(sale.total_expense)).toFixed(2)) +' '+ currency +'</td>\n' +
             '        </tr>';
 
         $('#sale-summary-table tbody').append(item5);
