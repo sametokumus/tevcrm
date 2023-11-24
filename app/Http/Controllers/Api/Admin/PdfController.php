@@ -662,7 +662,7 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = utf8_decode($quote->note);
+                $html = $this->textConvert($quote->note);
                 $html = str_replace('&nbsp;', " ", $html);
                 $pdf->writeHTML($html);
             }
@@ -1057,7 +1057,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($oc_detail->note);
+                    $html = $this->textConvert($oc_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -1555,7 +1555,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($pi_detail->note);
+                    $html = $this->textConvert($pi_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -2024,7 +2024,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($pi_detail->note);
+                    $html = $this->textConvert($pi_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -2605,7 +2605,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($pi_detail->note);
+                    $html = $this->textConvert($pi_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -2935,7 +2935,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($po_detail->note);
+                    $html = $this->textConvert($po_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -3281,7 +3281,7 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = utf8_decode($rfq_detail->note);
+                    $html = $this->textConvert($rfq_detail->note);
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -3690,7 +3690,7 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = utf8_decode($packing_list->note);
+                $html = $this->textConvert($packing_list->note);
                 $html = str_replace('&nbsp;', " ", $html);
                 $pdf->writeHTML($html);
             }
