@@ -43,5 +43,33 @@ class CustomerHelper
             return 10;
         }
     }
+    public static function get_sales_profit_rate($total_profit_rate, $total_item_count)
+    {
+        $rate = $total_profit_rate / $total_item_count;
+        if ($rate < 10){
+            return 0;
+        }else if ($rate >= 10 && $rate < 20){
+            return 1;
+        }else if ($rate >= 20 && $rate < 30){
+            return 2;
+        }else if ($rate >= 30 && $rate < 40){
+            return 3;
+        }else if ($rate >= 40 && $rate < 50){
+            return 4;
+        }else if ($rate >= 50 && $rate < 60){
+            return 5;
+        }else if ($rate >= 60 && $rate < 70){
+            return 6;
+        }else if ($rate >= 70 && $rate < 80){
+            return 7;
+        }else if ($rate >= 80 && $rate < 90){
+            return 8;
+        }else if ($rate >= 90 && $rate < 100){
+            return 9;
+//        }else if ($rate >= 100){
+        }else{
+            return 10;
+        }
+    }
 
 }

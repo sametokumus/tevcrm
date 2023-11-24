@@ -1481,7 +1481,7 @@ class SaleController extends Controller
             $sale['expenses'] = $expenses;
 
 
-            if ($total_offer_price != 0) {
+            if ($total_expense != 0) {
                 $profit_rate = 100 * ($total_price - $total_expense) / $total_expense;
             }else{
                 $profit_rate = 0;
