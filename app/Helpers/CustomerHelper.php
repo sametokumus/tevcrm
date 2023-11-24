@@ -75,5 +75,35 @@ class CustomerHelper
             return 10;
         }
     }
+    public static function get_sale_payment_point($advance, $expiry)
+    {
+        if ($advance == null && $expiry == null){
+            return 0;
+        }else {
+            if ($expiry == 1){
+                return 10;
+            }else if ($advance >= 50){
+                return 9;
+            }else if ($advance >= 40){
+                return 8;
+            }else if ($advance >= 30){
+                return 7;
+            }else if ($advance >= 20){
+                return 6;
+            }else if ($expiry > 1 && $expiry <= 7){
+                return 5;
+            }else if ($expiry > 7 && $expiry <= 15){
+                return 4;
+            }else if ($expiry > 15 && $expiry <= 30){
+                return 3;
+            }else if ($expiry > 30 && $expiry <= 60){
+                return 2;
+            }else if ($expiry > 60 && $expiry <= 90){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
 
 }

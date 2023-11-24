@@ -217,6 +217,7 @@ async function initPaymentTerms(){
             '           <td>'+ payment_term.name +'</td>\n' +
             '           <td>'+ payment_term.payment_type_name +'</td>\n' +
             '           <td>'+ checkNull(payment_term.expiry) +'</td>\n' +
+            '           <td>'+ checkNull(payment_term.advance) +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#datatablePaymentTerms tbody').append(item);
@@ -231,7 +232,8 @@ async function addPaymentTerm(){
     let formData = JSON.stringify({
         "name":document.getElementById('add_payment_term_name').value,
         "payment_type":document.getElementById('add_payment_term_payment_type').value,
-        "expiry":document.getElementById('add_payment_term_expiry').value
+        "expiry":document.getElementById('add_payment_term_expiry').value,
+        "advance":document.getElementById('add_payment_term_advance').value
     });
 
     let returned = await servicePostAddPaymentTerm(formData);
@@ -255,12 +257,14 @@ async function initUpdatePaymentTermModal(payment_term_id){
     document.getElementById('update_payment_term_name').value = payment_term.name;
     document.getElementById('update_payment_term_payment_type').value = payment_term.payment_type_id;
     document.getElementById('update_payment_term_expiry').value = checkNull(payment_term.expiry);
+    document.getElementById('update_payment_term_advance').value = checkNull(payment_term.advance);
 }
 async function updatePaymentTerm(){
     let formData = JSON.stringify({
         "name":document.getElementById('update_payment_term_name').value,
         "payment_type":document.getElementById('update_payment_term_payment_type').value,
-        "expiry":document.getElementById('update_payment_term_expiry').value
+        "expiry":document.getElementById('update_payment_term_expiry').value,
+        "advance":document.getElementById('update_payment_term_advance').value
     });
 
     let returned = await servicePostUpdatePaymentTerm(document.getElementById('update_payment_term_id').value, formData);

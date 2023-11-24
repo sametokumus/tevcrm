@@ -96,6 +96,7 @@ $extra_js='
                                             <th scope="col">Payment Term Adı</th>
                                             <th scope="col">Ödeme Türü</th>
                                             <th scope="col">Vade(Gün)</th>
+                                            <th scope="col">Avans(Yüzde)</th>
                                             <th scope="col">İşlemler</th>
                                         </tr>
                                         </thead>
@@ -317,6 +318,12 @@ $extra_js='
                             <input type="number" value="" class="form-control" id="add_payment_term_expiry" min="1">
                         </div>
                     </div>
+                    <div class="row mb-4">
+                        <label class="form-label col-md-3">Avans (Yüzde)</label>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" id="add_payment_term_advance" placeholder="Avans (Yüzde)" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
@@ -385,6 +392,12 @@ $extra_js='
                                 </button>
                             </div>
                             <input type="number" value="" class="form-control" id="update_payment_term_expiry" min="1">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label class="form-label col-md-3">Avans (Yüzde)</label>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" id="update_payment_term_advance" placeholder="Avans (Yüzde)" required>
                         </div>
                     </div>
                 </div>
