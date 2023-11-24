@@ -139,7 +139,7 @@ $extra_js='
                                     </div>
                                     <div class="col-sm-3 mb-3">
                                         <label class="form-label">Payment Term</label>
-                                        <select class="form-control" id="update_quote_payment_term">
+                                        <select class="form-control" id="update_quote_payment_term" onchange="checkAdvancePrice();">
 
                                         </select>
                                     </div>

@@ -36,6 +36,8 @@
     });
 
 })(window.jQuery);
+
+let sale_price = 0;
 let short_code;
 let currency = "";
 
@@ -208,6 +210,7 @@ async function initSale(sale_id){
 
     if (sale.grand_total != null) {
         if ((sale.vat != null && sale.vat != '0.00') || sale.freight != null) {
+            sale_price = sale.grand_total;
             let item = '<tr>\n' +
                 '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
                 '           <td colspan="1" class="text-center">' + changeCommasToDecimal(sale.grand_total) + ' ' + currency + '</td>\n' +
@@ -226,6 +229,7 @@ async function initSale(sale_id){
 
     if (sale.grand_total_with_shipping != null) {
         if (sale.shipping_price != null) {
+            sale_price = sale.grand_total_with_shipping;
             let item = '<tr>\n' +
                 '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Grand Total") + '</td>\n' +
                 '           <td colspan="1" class="text-center">' + changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + currency + '</td>\n' +

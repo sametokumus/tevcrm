@@ -48,6 +48,8 @@
 
 })(window.jQuery);
 
+let sale_price = 0;
+
 function checkRole(){
 	return true;
 }
@@ -413,6 +415,8 @@ async function initSaleTableFooter(){
         sale_currency = data.sale_currency;
 
     });
+
+    sale_price = offer_total;
 
     let profit = offer_total - supplier_total;
     let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;

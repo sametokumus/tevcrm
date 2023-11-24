@@ -36,6 +36,8 @@
     });
 
 })(window.jQuery);
+
+let sale_price = 0;
 let short_code;
 let currency = "";
 
@@ -192,6 +194,7 @@ async function initSale(packing_list_id){
         $('#sale-detail tbody').append(item);
     }
     if (sale.list_grand_total != '0,00' && sale.list_tax != '0,00') {
+        sale_price = sale.grand_total;
         let item = '<tr>\n' +
             '           <td colspan="6" class="fw-800 text-right text-uppercase">' + Lang.get("strings.Vat") + '</td>\n' +
             '           <td colspan="1" class="text-center">' + changeCommasToDecimal(sale.list_tax) + ' ' + currency + '</td>\n' +
