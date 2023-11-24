@@ -221,7 +221,7 @@ class CompanyController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                    ->whereBetween('sales.created_at', [now()->subDays(90), now()])
+                    ->whereBetween('s.created_at', [now()->subDays(90), now()])
                     ->get();
 
                 $sale = array();
