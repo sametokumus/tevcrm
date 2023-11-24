@@ -1075,9 +1075,10 @@ class SaleController extends Controller
 
             $sales = Sale::query()
                 ->leftJoin('quotes', 'quotes.sale_id', '=', 'sales.sale_id')
+                ->leftJoin('payment_terms', 'payment_terms.id', '=', 'quotes.payment_term')
                 ->where('sales.active', 1)
                 ->whereRaw('sales.active = 1 AND (quotes.payment_term = 2 OR quotes.payment_term = 4 OR quotes.payment_term = 14 OR quotes.payment_term = 15 OR quotes.payment_term = 17 OR quotes.payment_term = 18 OR quotes.payment_term = 19)')
-                ->selectRaw('sales.*, quotes.quote_id as quote_id, quotes.advance as advance')
+                ->selectRaw('sales.*, quotes.quote_id as quote_id, payment_terms.advance as advance')
                 ->get();
 
             foreach ($sales as $sale){
