@@ -2,6 +2,16 @@
 <?php
 $extra_js='
 <script src="services/sw-step3-rev.js"></script>
+<script>
+  var today = new Date();
+  var newDate = new Date();
+  newDate.setDate(today.getDate() + 7);
+  $(".datepicker").datepicker({
+    autoclose: true,
+    format: "dd-mm-yyyy",
+    todayHighlight: true
+  }).datepicker("setDate", newDate);
+</script>
 ';
 ?>
 
@@ -123,13 +133,21 @@ $extra_js='
                                         Teklif Detayları
                                     </h5>
                                     <input type="hidden" class="form-control" id="update_quote_id">
-                                    <div class="col-sm-6 mb-3">
+                                    <div class="col-sm-3 mb-3">
+                                        <label class="form-label">Teklif Geçerlilik Tarihi</label>
+                                        <input type="text" class="form-control datepicker" id="update_quote_expiry_date" placeholder="dd-mm-yyyy" />
+                                    </div>
+                                    <div class="col-sm-3 mb-3">
                                         <label class="form-label">Payment Term</label>
                                         <select class="form-control" id="update_quote_payment_term">
 
                                         </select>
                                     </div>
-                                    <div class="col-sm-6 mb-3">
+                                    <div class="col-sm-3 mb-3">
+                                        <label class="form-label">Avans Tutarı</label>
+                                        <input type="text" class="form-control" id="update_quote_advance_price" value="0,00" readonly>
+                                    </div>
+                                    <div class="col-sm-3 mb-3">
                                         <label class="form-label">Delivery Terms</label>
                                         <select class="form-control" id="update_quote_delivery_term">
 

@@ -5,6 +5,7 @@
 
         $(":input").inputmask();
         $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_advance_price").maskMoney({thousands:'.', decimal:','});
         $("#update_quote_vat_rate").maskMoney({thousands:'.', decimal:','});
 
 		$('#update_quote_form').submit(function (e){
@@ -271,6 +272,7 @@ async function initUpdateQuoteModal(){
 
     document.getElementById('update_quote_id').value = quote.id;
     document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(quote.advance_price);
     document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
@@ -282,6 +284,7 @@ async function updateQuote(){
     let sale_id = getPathVariable('quote-print');
     let quote_id = document.getElementById('update_quote_id').value;
     let payment_term = document.getElementById('update_quote_payment_term').value;
+    let advance_price = document.getElementById('update_quote_advance_price').value;
     let lead_time = document.getElementById('update_quote_lead_time').value;
     let delivery_term = document.getElementById('update_quote_delivery_term').value;
     let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
@@ -293,6 +296,7 @@ async function updateQuote(){
         "sale_id": sale_id,
         "quote_id": quote_id,
         "payment_term": payment_term,
+        "advance_price": changePriceToDecimal(advance_price),
         "lead_time": lead_time,
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
@@ -311,4 +315,23 @@ async function updateQuote(){
     }else{
         alert("Hata Oluştu");
     }
+}
+
+
+
+async function checkAdvancePrice(){
+    let payment_term_id = document.getElementById('update_quote_payment_term').value;
+    let data = await serviceGetPaymentTermById(payment_term_id);
+    let term = data.payment_term;
+
+    console.log(sale_price)
+    if (term.advance != null && term.advance != 0){
+        if (sale_price != 0) {
+            document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(parseFloat(sale_price / 100 * term.advance).toFixed(2));
+        }
+    }else{
+        document.getElementById('update_quote_advance_price').value = '0,00';
+    }
+
+
 }

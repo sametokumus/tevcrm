@@ -5,6 +5,8 @@
 
         $(":input").inputmask();
         $("#update_sale_shipping_price").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+        $("#update_quote_advance_price").maskMoney({thousands:'.', decimal:','});
 
         $('#update_detail_form').submit(function (e){
             e.preventDefault();
@@ -293,6 +295,7 @@ async function initQuote(sale_id){
 
     document.getElementById('update_quote_id').value = quote.id;
     document.getElementById('update_quote_payment_term').value = checkNull(quote.payment_term);
+    document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(quote.advance_price);
     document.getElementById('update_quote_lead_time').value = checkNull(quote.lead_time);
     document.getElementById('update_quote_delivery_term').value = checkNull(quote.delivery_term);
     document.getElementById('update_quote_country_of_destination').value = checkNull(quote.country_of_destination);
@@ -307,45 +310,29 @@ async function initQuote(sale_id){
         $('#showPdf').attr('href', quote.inv_pdf);
     }
 
-    // if (checkNull(quote.payment_term) != '') {
-    //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
-    //     document.getElementById('update_quote_payment_term').value = quote.payment_term;
-    // }
-    // if (checkNull(quote.lead_time) != '') {
-    //     document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
-    // }else{
-    //     $('#lead_time').addClass('d-none');
-    // }
-    // if (checkNull(quote.delivery_term) != '') {
-    //     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
-    // }else{
-    //     $('#delivery_term').addClass('d-none');
-    // }
-    // if (checkNull(quote.country_of_destination) != '') {
-    //     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
-    // }else{
-    //     $('#country_of_destination').addClass('d-none');
-    // }
-    // document.getElementById('note').innerHTML = checkNull(quote.note);
 }
 async function updateQuote(){
     let sale_id = getPathVariable('invoice-print');
     let quote_id = document.getElementById('update_quote_id').value;
     let payment_term = document.getElementById('update_quote_payment_term').value;
+    let advance_price = document.getElementById('update_quote_advance_price').value;
     let lead_time = document.getElementById('update_quote_lead_time').value;
     let delivery_term = document.getElementById('update_quote_delivery_term').value;
     let country_of_destination = document.getElementById('update_quote_country_of_destination').value;
     let freight = document.getElementById('update_quote_freight').value;
+    let expiry_date = document.getElementById('update_quote_expiry_date').value;
     let note = document.getElementById('update_quote_note').value;
 
     let formData = JSON.stringify({
         "sale_id": sale_id,
         "quote_id": quote_id,
         "payment_term": payment_term,
+        "advance_price": changePriceToDecimal(advance_price),
         "lead_time": lead_time,
         "delivery_term": delivery_term,
         "country_of_destination": country_of_destination,
         "freight": changePriceToDecimal(freight),
+        "expiry_date": formatDateDESC2(expiry_date, "-", "-"),
         "note": note
     });
 
@@ -359,4 +346,23 @@ async function updateQuote(){
     }else{
         alert("Hata Oluştu");
     }
+}
+
+
+
+async function checkAdvancePrice(){
+    let payment_term_id = document.getElementById('update_quote_payment_term').value;
+    let data = await serviceGetPaymentTermById(payment_term_id);
+    let term = data.payment_term;
+
+    console.log(sale_price)
+    if (term.advance != null && term.advance != 0){
+        if (sale_price != 0) {
+            document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(parseFloat(sale_price / 100 * term.advance).toFixed(2));
+        }
+    }else{
+        document.getElementById('update_quote_advance_price').value = '0,00';
+    }
+
+
 }

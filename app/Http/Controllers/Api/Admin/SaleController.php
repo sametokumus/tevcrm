@@ -25,6 +25,7 @@ use App\Models\OrderConfirmationDetail;
 use App\Models\PackingList;
 use App\Models\PackingListProduct;
 use App\Models\PackingStatus;
+use App\Models\PaymentTerm;
 use App\Models\Product;
 use App\Models\ProformaInvoiceDetails;
 use App\Models\PurchasingOrderDetails;
@@ -1048,6 +1049,48 @@ class SaleController extends Controller
                 'freight' => $freight,
                 'grand_total' => $grand_total
             ]);
+
+            return response(['message' => __('Bilgi güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateQuoteTerms()
+    {
+        try {
+            $quotes = Quote::query()->where('active', 1)->get();
+            foreach ($quotes as $quote){
+                $term = PaymentTerm::query()->where('name', $quote->payment_term)->first();
+                if ($term){
+                    Quote::query()->where('id', $quote->id)->update([
+                        'payment_term' => $term->id
+                    ]);
+                }
+            }
+
+            $sales = Sale::query()
+                ->leftJoin('quotes', 'quotes.sale_id', '=', 'sales.sale_id')
+                ->where('sales.active', 1)
+                ->whereRaw('sales.active = 1 AND (quotes.payment_term = 2 OR quotes.payment_term = 4 OR quotes.payment_term = 14 OR quotes.payment_term = 15 OR quotes.payment_term = 17 OR quotes.payment_term = 18 OR quotes.payment_term = 19)')
+                ->selectRaw('sales.*, quotes.quote_id as quote_id, quotes.advance as advance')
+                ->get();
+
+            foreach ($sales as $sale){
+                $total_price = $sale->grand_total;
+                if ($sale->grand_total_with_shipping != null){
+                    $total_price = $sale->grand_total_with_shipping;
+                }
+                $advance = $total_price / 100 * $sale->advance;
+
+                Quote::query()->where('quote_id', $sale->quote_id)->update([
+                    'advance_price' => $advance
+                ]);
+            }
 
             return response(['message' => __('Bilgi güncelleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
