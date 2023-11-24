@@ -45,7 +45,11 @@ class CustomerHelper
     }
     public static function get_sales_profit_rate($total_profit_rate, $total_item_count)
     {
-        $rate = $total_profit_rate / $total_item_count;
+        if ($total_profit_rate == 0 || $total_item_count == 0){
+            return 0;
+        }else {
+            $rate = $total_profit_rate / $total_item_count;
+        }
         if ($rate < 10){
             return 0;
         }else if ($rate >= 10 && $rate < 20){
