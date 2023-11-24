@@ -18,6 +18,7 @@ class CreateQuotesTable extends Migration
             $table->string('quote_id');
             $table->string('sale_id');
             $table->string('payment_term')->nullable();
+            $table->decimal('advance_price',10,2, false)->default(0);
             $table->string('lead_time')->nullable();
             $table->string('delivery_term')->nullable();
             $table->string('country_of_destination')->nullable();

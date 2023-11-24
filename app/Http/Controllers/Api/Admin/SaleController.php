@@ -1027,6 +1027,7 @@ class SaleController extends Controller
             ]);
             Quote::query()->where('id', $request->quote_id)->update([
                 'payment_term' => $request->payment_term,
+                'advance_price' => $request->advance_price,
                 'lead_time' => $request->lead_time,
                 'delivery_term' => $request->delivery_term,
                 'country_of_destination' => $request->country_of_destination,
