@@ -3140,33 +3140,6 @@ class PdfController extends Controller
             $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
 
 
-
-            $y += 3;
-            $x = 10;
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $company->phone, '0', '0', '');
-
-            $y += 5;
-            $x = 10;
-
-            $pdf->SetFont('ChakraPetch-Bold', '', 10);
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
-
-            $pdf->SetFont('ChakraPetch-Regular', '', 10);
-            $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 0, $company->email, '0', '0', '');
-
-
-
             $x = 10;
             $y += 10;
             $pdf->SetXY($x, $y);
