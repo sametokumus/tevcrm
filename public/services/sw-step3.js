@@ -451,6 +451,8 @@ async function checkAdvancePrice(){
         if (sale_price != 0) {
             document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(parseFloat(sale_price / 100 * term.advance).toFixed(2));
         }
+    }else{
+        document.getElementById('update_quote_advance_price').value = '0,00';
     }
 
 
