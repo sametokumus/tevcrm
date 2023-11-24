@@ -302,6 +302,10 @@ async function initBankInfoSelect(){
 
 
 async function initQuote(sale_id){
+
+    await getPaymentTermsAddSelectId('update_quote_payment_term');
+    await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+
     let data = await serviceGetQuoteBySaleId(sale_id);
     let quote = data.quote;
     console.log(quote)
