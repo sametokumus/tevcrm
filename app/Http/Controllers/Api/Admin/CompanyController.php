@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\OfferRequest;
+use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -191,7 +192,7 @@ class CompanyController extends Controller
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
 
-                $sale_count = OfferRequest::query()->where('customer_id', $company->id)
+                $sale_count = Sale::query()->where('customer_id', $company->id)
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
 
