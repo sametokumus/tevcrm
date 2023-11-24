@@ -176,7 +176,7 @@ async function initSaleSummary(sale_id){
         $('#sale-summary-table tbody').append(item1);
 
         let item2 = '<tr>\n' +
-            '            <td>\n' +
+            '            <td colspan="2">\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
             '                   <b>TEDARİK GİDERLERİ</b>\n' +
@@ -206,7 +206,7 @@ async function initSaleSummary(sale_id){
 
 
         let item3 = '<tr>\n' +
-            '            <td>\n' +
+            '            <td colspan="2">\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
             '                   <b>EK GİDERLER</b>\n' +
@@ -248,7 +248,7 @@ async function initSaleSummary(sale_id){
             '                   <b>KAR</b>\n' +
             '               </span>\n' +
             '            </td>\n' +
-            '            <td>'+ changeCommasToDecimal(parseFloat(total_price) - parseFloat(sale.total_expense)) +' '+ currency +'</td>\n' +
+            '            <td>'+ changeCommasToDecimal(parseFloat(total_price).toFixed(2) - parseFloat(sale.total_expense).toFixed(2)) +' '+ currency +'</td>\n' +
             '        </tr>';
 
         $('#sale-summary-table tbody').append(item5);
