@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\CustomerHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\OfferRequest;
@@ -198,16 +199,11 @@ class CompanyController extends Controller
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
 
-                if ($sale_count != 0 && $request_count != 0) {
-                    $c2 = ($sale_count * 100 / $request_count) / 10;
-                }else{
-                    $c2 = 0;
-                }
 
 
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
-                $data['c2'] = (int)$c2;
+                $data['c2'] = CustomerHelper::get_request_and_sales_rate($request_count, $sale_count);
 
 
                 //Toplam İş Hacmi
@@ -241,6 +237,7 @@ class CompanyController extends Controller
 
 
                 $data['usd_price'] = $usd_price;
+                $data['c4'] = CustomerHelper::get_sales_total_rate($usd_price);
 
 
 
@@ -249,7 +246,7 @@ class CompanyController extends Controller
             }
 
             usort($companies, function ($a, $b) {
-                return $b['usd_price'] <=> $a['usd_price'];
+                return $b['c4'] <=> $a['c4'];
             });
 
 
