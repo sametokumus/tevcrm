@@ -24,7 +24,9 @@
         checkRole();
 
         let sale_id = getPathVariable('order-confirmation-print');
-        getOwnersAddSelectId('owners');
+        await getPaymentTermsAddSelectId('update_quote_payment_term');
+        await getDeliveryTermsAddSelectId('update_quote_delivery_term');
+        await getOwnersAddSelectId('owners');
         initQuote(sale_id);
         initBankInfoSelect();
         initOrderConfirmationNote(sale_id);
@@ -128,9 +130,6 @@ async function initSale(sale_id){
     await initContact(sale.owner_id, sale_id);
 
     document.getElementById('owners').value = sale.owner_id;
-
-    await getPaymentTermsAddSelectId('update_quote_payment_term');
-    await getDeliveryTermsAddSelectId('update_quote_delivery_term');
 
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
@@ -282,26 +281,7 @@ async function initQuote(sale_id){
         $('#showPdf').attr('href', quote.oc_pdf);
     }
 
-    // if (checkNull(quote.payment_term) != '') {
-    //     document.getElementById('payment_term').innerHTML = '<b>' + Lang.get("strings.Payment Terms") + ' :</b> ' + quote.payment_term;
-    //     document.getElementById('update_quote_payment_term').value = quote.payment_term;
-    // }
-    // if (checkNull(quote.lead_time) != '') {
-    //     document.getElementById('lead_time').innerHTML = '<b>' + Lang.get("strings.Insurance") + ' :</b> ' + checkNull(quote.lead_time);
-    // }else{
-    //     $('#lead_time').addClass('d-none');
-    // }
-    // if (checkNull(quote.delivery_term) != '') {
-    //     document.getElementById('delivery_term').innerHTML = '<b>'+ Lang.get("strings.Delivery Terms") +' :</b> '+ checkNull(quote.delivery_term);
-    // }else{
-    //     $('#delivery_term').addClass('d-none');
-    // }
-    // if (checkNull(quote.country_of_destination) != '') {
-    //     document.getElementById('country_of_destination').innerHTML = '<b>'+ Lang.get("strings.Country of Destination") +' :</b> '+ checkNull(quote.country_of_destination);
-    // }else{
-    //     $('#country_of_destination').addClass('d-none');
-    // }
-    // document.getElementById('note').innerHTML = checkNull(quote.note);
+
 }
 async function updateQuote(){
     let sale_id = getPathVariable('order-confirmation-print');
