@@ -8,6 +8,7 @@ use App\Models\OfferRequest;
 use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Nette\Schema\ValidationException;
 
 class CompanyController extends Controller
@@ -188,6 +189,7 @@ class CompanyController extends Controller
                 $data = array();
                 $data['company'] = $company;
 
+                //Sipariş/Teklif Oranı
                 $request_count = OfferRequest::query()->where('company_id', $company->id)
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
@@ -197,21 +199,56 @@ class CompanyController extends Controller
                     ->count();
 
                 if ($sale_count != 0 && $request_count != 0) {
-                    $c1 = ($sale_count * 100 / $request_count) / 10;
+                    $c2 = ($sale_count * 100 / $request_count) / 10;
                 }else{
-                    $c1 = 0;
+                    $c2 = 0;
                 }
 
 
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
-                $data['c1'] = (int)$c1;
+                $data['c2'] = (int)$c2;
+
+
+                //Toplam İş Hacmi
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                    ->whereBetween('sales.created_at', [now()->subDays(90), now()])
+                    ->get();
+
+                $sale = array();
+                $usd_price = 0;
+
+                foreach ($sale_items as $item){
+
+                    if ($item->currency == 'TRY'){
+                        $usd_price += $item->grand_total / $item->usd_rate;
+                    }else if ($item->currency == 'USD'){
+                        $usd_price += $item->grand_total;
+                    }else if ($item->currency == 'EUR'){
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+                }
+
+
+                $data['usd_price'] = $usd_price;
+
+
+
 
                 array_push($companies, $data);
             }
 
             usort($companies, function ($a, $b) {
-                return $b['c1'] <=> $a['c1'];
+                return $b['usd_price'] <=> $a['usd_price'];
             });
 
 
