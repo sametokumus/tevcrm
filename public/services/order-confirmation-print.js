@@ -24,14 +24,12 @@
         checkRole();
 
         let sale_id = getPathVariable('order-confirmation-print');
-        await getPaymentTermsAddSelectId('update_quote_payment_term');
-        await getDeliveryTermsAddSelectId('update_quote_delivery_term');
-        await getOwnersAddSelectId('owners');
-        initQuote(sale_id);
+        getOwnersAddSelectId('owners');
         initBankInfoSelect();
         initOrderConfirmationNote(sale_id);
         await initContact(1, sale_id);
         await initSale(sale_id);
+        initQuote(sale_id);
     });
 
 })(window.jQuery);
@@ -130,6 +128,9 @@ async function initSale(sale_id){
     await initContact(sale.owner_id, sale_id);
 
     document.getElementById('owners').value = sale.owner_id;
+
+    await getPaymentTermsAddSelectId('update_quote_payment_term');
+    await getDeliveryTermsAddSelectId('update_quote_delivery_term');
 
     let company = sale.request.company;
     document.getElementById('buyer_name').innerHTML = '<b>'+ Lang.get("strings.Customer") +' :</b> '+ company.name;
