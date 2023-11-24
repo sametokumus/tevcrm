@@ -459,7 +459,7 @@ class AccountingController extends Controller
             $term = array();
             $quote = Quote::query()->where('sale_id', $sale_id)->where('active', 1)->first();
             if ($quote) {
-                $payment_term = PaymentTerm::query()->where('name', $quote->payment_term)->where('active', 1)->first();
+                $payment_term = PaymentTerm::query()->where('id', $quote->payment_term)->where('active', 1)->first();
                 if ($payment_term){
                     $term['payment_type_id'] = $payment_term['payment_type_id'];
                     $term['expiry'] = $payment_term['expiry'];
