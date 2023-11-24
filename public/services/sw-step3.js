@@ -3,6 +3,7 @@
 
     $(":input").inputmask();
     $("#update_quote_freight").maskMoney({thousands:'.', decimal:','});
+    $("#update_quote_advance_price").maskMoney({thousands:'.', decimal:','});
     $("#add_offer_price_price").maskMoney({thousands:'.', decimal:','});
     $("#update_offer_price_price").maskMoney({thousands:'.', decimal:','});
     $("#add_batch_offer_currency_change").maskMoney({thousands:'.', decimal:','});
@@ -46,6 +47,8 @@
 	});
 
 })(window.jQuery);
+
+let sale_price = 0;
 
 function checkRole(){
 	return true;
@@ -411,6 +414,8 @@ async function initSaleTableFooter(){
 
     });
 
+    sale_price = offer_total;
+
     let profit = offer_total - supplier_total;
     let profit_rate = 100 * (offer_total - supplier_total) / supplier_total;
     let footer_text = '';
@@ -433,4 +438,20 @@ async function initSaleTableFooter(){
         '             <th colspan="20" class="border-bottom-0">'+ footer_text +'</th>\n' +
         '         </tr>';
     $("#sales-detail tfoot").append(footer);
+}
+
+
+async function checkAdvancePrice(){
+    let payment_term_id = document.getElementById('update_quote_payment_term').value;
+    let data = await serviceGetPaymentTermById(payment_term_id);
+    let term = data.payment_term;
+
+    console.log(sale_price)
+    if (term.advance != null && term.advance != 0){
+        if (sale_price != 0) {
+            document.getElementById('update_quote_advance_price').value = changeCommasToDecimal(parseFloat(sale_price / 100 * term.advance).toFixed(2));
+        }
+    }
+
+
 }
