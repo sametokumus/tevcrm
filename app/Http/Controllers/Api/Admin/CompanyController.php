@@ -355,7 +355,7 @@ class CompanyController extends Controller
             }
 
             usort($companies, function ($a, $b) {
-                return $b['c4'] <=> $a['c4'];
+                return $b['company_rate'] <=> $a['company_rate'];
             });
 
 
