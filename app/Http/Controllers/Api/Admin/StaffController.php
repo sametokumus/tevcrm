@@ -204,7 +204,7 @@ class StaffController extends Controller
     public function getBestStaff(){
         try {
 
-            $all_staffs = Company::query()->where('active', 1)->get();
+            $all_staffs = Admin::query()->where('active', 1)->get();
             $staffs = array();
 
             foreach ($all_staffs as $staff){
@@ -352,11 +352,11 @@ class StaffController extends Controller
                 $c5 = StaffHelper::get_manager_point($staff->id);
                 $data['c5'] = $c5;
 
-                $c1_rate = CustomerHelper::get_point_rate($c1, 17);
-                $c2_rate = CustomerHelper::get_point_rate($c2, 15);
-                $c3_rate = CustomerHelper::get_point_rate($c3, 14);
-                $c4_rate = CustomerHelper::get_point_rate($c4, 13);
-                $c5_rate = CustomerHelper::get_point_rate($c5, 11);
+                $c1_rate = StaffHelper::get_point_rate($c1, 17);
+                $c2_rate = StaffHelper::get_point_rate($c2, 15);
+                $c3_rate = StaffHelper::get_point_rate($c3, 14);
+                $c4_rate = StaffHelper::get_point_rate($c4, 13);
+                $c5_rate = StaffHelper::get_point_rate($c5, 11);
 
                 $data['c1_rate'] = $c1_rate;
                 $data['c2_rate'] = $c2_rate;
