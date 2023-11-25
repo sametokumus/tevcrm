@@ -322,8 +322,8 @@ class CompanyController extends Controller
                 $data['usd_price'] = $usd_price;
                 $data['c4'] = CustomerHelper::get_sales_total_rate($usd_price);
 
-                $data['total_profit_rate'] = $total_profit_rate;
-                $data['total_item_count'] = $total_item_count;
+                $data['total_payment_point'] = $total_payment_point;
+                $data['total_payment_count'] = $total_payment_count;
                 $data['c5'] = CustomerHelper::get_sales_payment_point($total_payment_point, $total_payment_count);
 
 
