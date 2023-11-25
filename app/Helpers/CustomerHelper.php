@@ -108,7 +108,7 @@ class CustomerHelper
     public static function get_sales_payment_point($total_payment_point, $total_payment_count)
     {
         if ($total_payment_point != 0 && $total_payment_count != 0) {
-            $c5 = $total_payment_count / $total_payment_count;
+            $c5 = $total_payment_point / $total_payment_count;
         }else{
             $c5 = 0;
         }
