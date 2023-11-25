@@ -76,6 +76,7 @@ async function initPage(){
     await getCustomersAndPotentialsAddSelectId('update_offer_request_company');
     await getMeasurementsAddSelectId('update_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('update_offer_request_product_category_1');
+    await getSaleTypesAddSelectId('update_offer_request_sale_type');
     let data1 = await serviceGetBrands();
     let brands = [];
     $.each(data1.brands, function (i, brand) {
@@ -117,6 +118,7 @@ async function initOfferRequest(){
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
     document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
     document.getElementById('update_offer_request_company_request_code').value = offer_request.company_request_code;
+    document.getElementById('update_offer_request_date').value = formatDateASC(offer_request.created_at);
     document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
     if (offer_request.company_id != null && offer_request.company_id != 0) {
@@ -142,6 +144,7 @@ async function updateOfferRequest(){
     let employee = document.getElementById('update_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
     let request_code = document.getElementById('update_offer_request_company_request_code').value;
+    let type_id = document.getElementById('add_offer_request_sale_type').value;
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
@@ -150,7 +153,8 @@ async function updateOfferRequest(){
         "company_id": company,
         "company_employee_id": employee,
         "company_request_code": request_code,
-        "owner_id": owner
+        "owner_id": owner,
+        "type_id": type_id
     });
 
     console.log(request_id)

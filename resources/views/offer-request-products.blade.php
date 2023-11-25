@@ -54,6 +54,12 @@ $extra_js='
 
                                                 </select>
                                             </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Satış Türü</label>
+                                                <select class="form-control" id="update_offer_request_sale_type">
+
+                                                </select>
+                                            </div>
                                             <div class="col-md-2 mb-3">
                                                 <label class="form-label">Müşteri</label>
                                                 <select class="form-control" id="update_offer_request_company" onchange="initEmployeeSelect();">
@@ -69,6 +75,10 @@ $extra_js='
                                             <div class="col-md-2 mb-3">
                                                 <label class="form-label">Müşteri Talep Kodu</label>
                                                 <input type="text" value="" class="form-control" id="update_offer_request_company_request_code" />
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Talep Tarihi</label>
+                                                <input type="text" class="form-control datepicker" id="update_offer_request_date" placeholder="dd-mm-yyyy" readonly />
                                             </div>
                                             <div class="col-md-12 mb-3">
                                                 <button type="submit" class="btn btn-theme w-100">Talep Bilgilerini Güncelle</button>

@@ -377,6 +377,7 @@ class OfferRequestController extends Controller
             ]);
             Sale::query()->where('request_id', $request_id)->update([
                 'owner_id' => $request->owner_id,
+                'type_id' => $request->type_id
             ]);
 
             return response(['message' => __('Talep güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
