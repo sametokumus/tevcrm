@@ -455,7 +455,7 @@ class StaffController extends Controller
                 $c4_rate = StaffHelper::get_point_rate($c4, 13);
                 $c5_rate = StaffHelper::get_point_rate($c5, 11);
                 $c6_rate = StaffHelper::get_point_rate($c6, 9);
-                $c7_rate = StaffHelper::get_point_rate($c7, 9);
+                $c7_rate = StaffHelper::get_point_rate($c7, 7);
                 $c8_rate = StaffHelper::get_point_rate($c8, 6);
                 $c9_rate = StaffHelper::get_point_rate($c9, 5);
 
