@@ -358,8 +358,10 @@ class CompanyController extends Controller
                 return $b['company_rate'] <=> $a['company_rate'];
             });
 
+            $return_companies = array_slice($companies, 0, 10);
 
-            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
+
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['companies' => $return_companies]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
