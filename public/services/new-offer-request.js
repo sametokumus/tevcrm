@@ -181,6 +181,7 @@ async function addOfferRequest(){
     if (employee == 0){employee = null;}
     let request_code = document.getElementById('add_offer_request_company_request_code').value;
     let date = document.getElementById('add_offer_request_date').value;
+    let type_id = document.getElementById('add_offer_request_sale_type').value;
 
     if (date != ''){
         date = formatDateDESC2(date, '-', '-');
@@ -193,7 +194,8 @@ async function addOfferRequest(){
         "company_id": company,
         "company_employee_id": employee,
         "company_request_code": request_code,
-        "date": date
+        "date": date,
+        "type_id": type_id
     });
 
     console.log(formData);

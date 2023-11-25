@@ -341,6 +341,7 @@ class OfferRequestController extends Controller
                 'owner_id' => $request->owner_id,
                 'customer_id' => $request->company_id,
                 'status_id' => 1,
+                'type_id' => $request->type_id,
                 'created_at' => $created_at,
             ]);
             StatusHistory::query()->insert([
