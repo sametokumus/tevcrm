@@ -7,6 +7,16 @@ use App\Models\CurrencyLog;
 
 class CustomerHelper
 {
+    public static function get_point_rate($point, $rate)
+    {
+        if ($point != 0 && $rate != 0) {
+            $point_rate = $point * $rate / 100;
+        }else{
+            $point_rate = 0;
+        }
+        return $point_rate;
+
+    }
     public static function get_request_and_sales_rate($request_count, $sale_count)
     {
         if ($sale_count != 0 && $request_count != 0) {

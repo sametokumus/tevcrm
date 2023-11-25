@@ -312,23 +312,43 @@ class CompanyController extends Controller
 
 
 
-                $data['c1'] = CustomerHelper::get_company_point($company->id);
+                $c1 = CustomerHelper::get_company_point($company->id);
+                $data['c1'] = $c1;
 
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
-                $data['c2'] = CustomerHelper::get_request_and_sales_rate($request_count, $sale_count);
+                $c2 = CustomerHelper::get_request_and_sales_rate($request_count, $sale_count);
+                $data['c2'] = $c2;
 
                 $data['total_profit_rate'] = $total_profit_rate;
                 $data['total_item_count'] = $total_item_count;
-                $data['c3'] = CustomerHelper::get_sales_profit_rate($total_profit_rate, $total_item_count);
+                $c3 = CustomerHelper::get_sales_profit_rate($total_profit_rate, $total_item_count);
+                $data['c3'] = $c3;
 
                 $data['usd_price'] = $usd_price;
-                $data['c4'] = CustomerHelper::get_sales_total_rate($usd_price);
+                $c4 = CustomerHelper::get_sales_total_rate($usd_price);
+                $data['c4'] = $c4;
 
                 $data['total_payment_point'] = $total_payment_point;
                 $data['total_payment_count'] = $total_payment_count;
-                $data['c5'] = CustomerHelper::get_sales_payment_point($total_payment_point, $total_payment_count);
+                $c5 = CustomerHelper::get_sales_payment_point($total_payment_point, $total_payment_count);
+                $data['c5'] = $c5;
 
+                $c1_rate = CustomerHelper::get_point_rate($c1, 25);
+                $c2_rate = CustomerHelper::get_point_rate($c2, 22);
+                $c3_rate = CustomerHelper::get_point_rate($c3, 20);
+                $c4_rate = CustomerHelper::get_point_rate($c4, 18);
+                $c5_rate = CustomerHelper::get_point_rate($c5, 15);
+
+                $data['c1_rate'] = $c1_rate;
+                $data['c2_rate'] = $c2_rate;
+                $data['c3_rate'] = $c3_rate;
+                $data['c4_rate'] = $c4_rate;
+                $data['c5_rate'] = $c5_rate;
+
+
+                $company_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate;
+                $data['company_rate'] = $company_rate;
 
 
                 array_push($companies, $data);
