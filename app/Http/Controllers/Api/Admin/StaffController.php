@@ -329,6 +329,7 @@ class StaffController extends Controller
                 }
 
 
+                //c8
                 $export_sale_count = Sale::query()
                     ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
                     ->where('sales.type_id', 2)
@@ -360,7 +361,7 @@ class StaffController extends Controller
                 $c5 = StaffHelper::get_manager_point($staff->id);
                 $data['c5'] = $c5;
 
-                $c8 = StaffHelper::get_manager_point($export_sale_count);
+                $c8 = StaffHelper::get_export_sale_point($export_sale_count);
                 $data['c8'] = $c8;
 
                 $c1_rate = StaffHelper::get_point_rate($c1, 17);
