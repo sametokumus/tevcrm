@@ -207,10 +207,6 @@ class CompanyController extends Controller
 
 
 
-                $data['request_count'] = $request_count;
-                $data['sale_count'] = $sale_count;
-                $data['c2'] = CustomerHelper::get_request_and_sales_rate($request_count, $sale_count);
-
 
                 //Toplam İş Hacmi ve karlılık
                 $sale_items = DB::table('sales AS s')
@@ -314,6 +310,13 @@ class CompanyController extends Controller
 
                 }
 
+
+
+                $data['c1'] = CustomerHelper::get_company_point($company->id);
+
+                $data['request_count'] = $request_count;
+                $data['sale_count'] = $sale_count;
+                $data['c2'] = CustomerHelper::get_request_and_sales_rate($request_count, $sale_count);
 
                 $data['total_profit_rate'] = $total_profit_rate;
                 $data['total_item_count'] = $total_item_count;
