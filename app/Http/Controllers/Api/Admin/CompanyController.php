@@ -348,7 +348,7 @@ class CompanyController extends Controller
 
 
                 $company_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate;
-                $data['company_rate'] = $company_rate;
+                $data['company_rate'] = number_format($company_rate, 2, '.', '');
 
 
                 array_push($companies, $data);
