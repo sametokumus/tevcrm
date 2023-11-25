@@ -51,6 +51,7 @@ async function initPage(){
     await getCustomersAndPotentialsAddSelectId('add_offer_request_company');
     await getMeasurementsAddSelectId('add_offer_request_product_measurement');
     await getParentCategoriesAddSelectId('add_offer_request_product_category_1');
+    await getSaleTypesAddSelectId('add_offer_request_sale_type');
     let data1 = await serviceGetBrands();
     let brands = [];
     $.each(data1.brands, function (i, brand) {

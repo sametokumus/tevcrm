@@ -215,6 +215,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getRfqDetailById/{offer_id}', [SaleController::class, 'getRfqDetailById']);
     Route::post('sale/updateRfqDetail', [SaleController::class, 'updateRfqDetail']);
 
+    Route::get('sale/getSaleTypes', [SaleController::class, 'getSaleTypes']);
+
     Route::get('sale/removeCancelledSales', [SaleController::class, 'removeCancelledSales']);
 
     Route::get('sale/getPackingableProductsBySaleId/{sale_id}', [SaleController::class, 'getPackingableProductsBySaleId']);

@@ -461,6 +461,15 @@ async function getAdminsAddSelectId(selectId){
     });
 }
 
+async function getSaleTypesAddSelectId(selectId){
+    let data = await serviceGetSaleTypes();
+    $('#'+selectId+' option').remove();
+    $.each(data.types, function(i, type){
+        let optionRow = '<option value="'+type.id+'">'+type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getStaffTargetTypesAddSelectId(selectId){
     let data = await serviceGetStaffTargetTypes();
     $('#'+selectId+' option').remove();
@@ -1406,6 +1415,17 @@ async function serviceGetDeleteContact(id) {
     } else {
         showAlert('İstek Başarısız.');
         return false;
+    }
+}
+
+
+
+async function serviceGetSaleTypes() {
+    const data = await fetchDataGet('/admin/sale/getSaleTypes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
     }
 }
 

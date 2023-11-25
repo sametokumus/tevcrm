@@ -36,6 +36,7 @@ use App\Models\SaleNote;
 use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
+use App\Models\SaleType;
 use App\Models\Status;
 use App\Models\StatusHistory;
 use App\Models\User;
@@ -2382,6 +2383,17 @@ class SaleController extends Controller
             ]);
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getSaleTypes()
+    {
+        try {
+            $types = SaleType::query()->where('active', 1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['types' => $types]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
