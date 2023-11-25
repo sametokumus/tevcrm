@@ -238,7 +238,7 @@ class StaffController extends Controller
                     ->where('offer_requests.authorized_personnel_id', $staff->id)
                     ->where('s.active', '=', 1)
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                    ->whereBetween('s.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
                     ->get();
 
                 $sale = array();
@@ -329,6 +329,35 @@ class StaffController extends Controller
                 }
 
 
+
+
+                //c6
+                $c6_sales = DB::table('sales AS s')
+                    ->selectRaw('companies.*, COUNT(*) as sale_count')
+                    ->leftJoin('companies', 'companies.id', '=', 's.customer_id')
+                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+                    ->where('s.active', '=', 1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                    ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->groupBy('s.customer_id')
+                    ->get();
+
+                $customer_total_count = 0;
+                $customer_total_point = 0;
+                foreach ($c6_sales as $item){
+                    $customer_total_point += StaffHelper::get_sale_customer_point($item->sale_count);
+                    $customer_total_count++;
+                }
+
+
+
+
                 //c8
                 $export_sale_count = Sale::query()
                     ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
@@ -336,6 +365,38 @@ class StaffController extends Controller
                     ->where('offer_requests.authorized_personnel_id', $staff->id)
                     ->whereBetween('sales.created_at', [now()->startOfMonth(), now()->endOfMonth()])
                     ->count();
+
+
+
+                //c9
+                $c9_sales = DB::table('sales AS s')
+                    ->select('s.*')
+                    ->leftJoin('companies', 'companies.id', '=', 's.customer_id')
+                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+                    ->where('s.active', 1)
+                    ->where(function ($query) {
+                        $query->where('statuses.period', 'completed')
+                            ->orWhere('statuses.period', 'approved');
+                    })
+                    ->whereNotExists(function ($query) {
+                        $query->select(DB::raw(1))
+                            ->from('sales AS s2')
+                            ->whereRaw('s2.customer_id = s.customer_id AND s2.created_at < s.created_at');
+                    })
+                    ->get();
+
+                $first_sale_count = 0;
+                foreach ($c9_sales as $item) {
+                    if (now()->format('Y-m') == \Carbon\Carbon::parse($item->created_at)->format('Y-m')) {
+                        $first_sale_count++;
+                    }
+                }
 
 
 
@@ -361,25 +422,37 @@ class StaffController extends Controller
                 $c5 = StaffHelper::get_manager_point($staff->id);
                 $data['c5'] = $c5;
 
+                $data['customer_total_point'] = $customer_total_point;
+                $data['customer_total_count'] = $customer_total_count;
+                $c6 = StaffHelper::get_sales_customer_point($customer_total_point, $customer_total_count);
+                $data['c6'] = $c6;
+
                 $c8 = StaffHelper::get_export_sale_point($export_sale_count);
                 $data['c8'] = $c8;
+
+                $c9 = StaffHelper::get_first_sale_point($first_sale_count);
+                $data['c9'] = $c9;
 
                 $c1_rate = StaffHelper::get_point_rate($c1, 17);
                 $c2_rate = StaffHelper::get_point_rate($c2, 15);
                 $c3_rate = StaffHelper::get_point_rate($c3, 14);
                 $c4_rate = StaffHelper::get_point_rate($c4, 13);
                 $c5_rate = StaffHelper::get_point_rate($c5, 11);
+                $c6_rate = StaffHelper::get_point_rate($c6, 9);
                 $c8_rate = StaffHelper::get_point_rate($c8, 6);
+                $c9_rate = StaffHelper::get_point_rate($c9, 5);
 
                 $data['c1_rate'] = $c1_rate;
                 $data['c2_rate'] = $c2_rate;
                 $data['c3_rate'] = $c3_rate;
                 $data['c4_rate'] = $c4_rate;
                 $data['c5_rate'] = $c5_rate;
+                $data['c6_rate'] = $c6_rate;
                 $data['c8_rate'] = $c8_rate;
+                $data['c9_rate'] = $c8_rate;
 
 
-                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c8_rate;
+                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c8_rate + $c9_rate;
                 $data['staff_rate'] = number_format($staff_rate, 2, '.', '');
 
 
