@@ -196,7 +196,7 @@ class CompanyController extends Controller
                 $data = array();
                 $data['company'] = $company;
 
-                //Sipariş/Teklif Oranı
+                //Sipariş/Teklif Oranı - c2
                 $request_count = OfferRequest::query()->where('company_id', $company->id)
                     ->whereBetween('created_at', [now()->subDays(90), now()])
                     ->count();
@@ -208,7 +208,7 @@ class CompanyController extends Controller
 
 
 
-                //Toplam İş Hacmi ve karlılık
+                //Toplam İş Hacmi ve karlılık - c4
                 $sale_items = DB::table('sales AS s')
                     ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
                     ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
@@ -232,7 +232,7 @@ class CompanyController extends Controller
 
                 foreach ($sale_items as $item){
 
-                    //satış
+                    //satış - c4
                     $total_price = $item->grand_total;
                     if ($item->grand_total_with_shipping != null){
                         $total_price = $item->grand_total_with_shipping;
@@ -246,6 +246,7 @@ class CompanyController extends Controller
                         $usd_price += $total_price / $item->usd_rate * $item->eur_rate;
                     }
 
+                    //c3
                     //satın alma
                     $sale_offers = SaleOffer::query()->where('sale_id', $item->sale_id)->where('active', 1)->get();
                     $total_offer_price = 0;
@@ -298,7 +299,7 @@ class CompanyController extends Controller
                     $total_item_count++;
 
 
-                    //ödeme yöntemi
+                    //ödeme yöntemi - c5
                     $quote = Quote::query()->where('sale_id', $item->sale_id)->where('active', 1)->first();
                     if ($quote){
                         $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();

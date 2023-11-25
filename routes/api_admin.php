@@ -413,6 +413,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::get('staff/getStaffTargetTypes', [StaffController::class, 'getStaffTargetTypes']);
 
+    Route::get('staff/getBestStaff', [StaffController::class, 'getBestStaff']);
+
 
 
 
