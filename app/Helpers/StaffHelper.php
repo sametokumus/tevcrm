@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Models\CompanyPoint;
+use App\Models\StaffPoint;
 use App\Models\CurrencyLog;
 
 class StaffHelper
@@ -125,24 +125,24 @@ class StaffHelper
     public static function get_sales_payment_point($total_payment_point, $total_payment_count)
     {
         if ($total_payment_point != 0 && $total_payment_count != 0) {
-            $c5 = $total_payment_point / $total_payment_count;
+            $c4 = $total_payment_point / $total_payment_count;
         }else{
-            $c5 = 0;
+            $c4 = 0;
         }
-        return (int)$c5;
+        return (int)$c4;
 
     }
     //c5
     public static function get_manager_point($staff_id)
     {
-        $company_point = CompanyPoint::query()->where('company_id', $company_id)->where('active', 1)->orderByDesc('id')->first();
-        if ($company_point) {
-            $c1 = $company_point->point;
+        $staff_point = StaffPoint::query()->where('staff_id', $staff_id)->where('active', 1)->orderByDesc('id')->first();
+        if ($staff_point) {
+            $c5 = $staff_point->point;
         }else{
             // default değer 5 olarak tanımlıyoruz
-            $c1 = 5;
+            $c5 = 5;
         }
-        return $c1;
+        return $c5;
 
     }
 
