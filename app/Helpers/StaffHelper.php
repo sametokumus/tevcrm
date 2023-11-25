@@ -145,5 +145,14 @@ class StaffHelper
         return $c5;
 
     }
+    //c8
+    public static function get_export_sale_point($count)
+    {
+        if ($count < 10) {
+            return $count;
+        }else{
+            return 10;
+        }
+    }
 
 }

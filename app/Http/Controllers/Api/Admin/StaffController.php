@@ -329,6 +329,14 @@ class StaffController extends Controller
                 }
 
 
+                $export_sale_count = Sale::query()
+                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                    ->where('sales.type_id', 2)
+                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+                    ->whereBetween('sales.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->count();
+
+
 
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
@@ -352,20 +360,25 @@ class StaffController extends Controller
                 $c5 = StaffHelper::get_manager_point($staff->id);
                 $data['c5'] = $c5;
 
+                $c8 = StaffHelper::get_manager_point($export_sale_count);
+                $data['c8'] = $c8;
+
                 $c1_rate = StaffHelper::get_point_rate($c1, 17);
                 $c2_rate = StaffHelper::get_point_rate($c2, 15);
                 $c3_rate = StaffHelper::get_point_rate($c3, 14);
                 $c4_rate = StaffHelper::get_point_rate($c4, 13);
                 $c5_rate = StaffHelper::get_point_rate($c5, 11);
+                $c8_rate = StaffHelper::get_point_rate($c8, 6);
 
                 $data['c1_rate'] = $c1_rate;
                 $data['c2_rate'] = $c2_rate;
                 $data['c3_rate'] = $c3_rate;
                 $data['c4_rate'] = $c4_rate;
                 $data['c5_rate'] = $c5_rate;
+                $data['c8_rate'] = $c8_rate;
 
 
-                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate;
+                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c8_rate;
                 $data['staff_rate'] = number_format($staff_rate, 2, '.', '');
 
 
