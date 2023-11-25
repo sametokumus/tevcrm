@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\CompanyPoint;
 use App\Models\CurrencyLog;
 
 class CustomerHelper
@@ -113,6 +114,18 @@ class CustomerHelper
             $c5 = 0;
         }
         return (int)$c5;
+
+    }
+    public static function get_company_point($company_id)
+    {
+        $company_point = CompanyPoint::query()->where('company_id', $company_id)->where('active', 1)->orderByDesc('id')->first();
+        if ($company_point) {
+            $c1 = $company_point->point;
+        }else{
+            // default değer 5 olarak tanımlıyoruz
+            $c1 = 5;
+        }
+        return $c1;
 
     }
 
