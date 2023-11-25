@@ -9,6 +9,8 @@ use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
+use App\Models\PaymentTerm;
+use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use Illuminate\Database\QueryException;
@@ -229,6 +231,8 @@ class CompanyController extends Controller
                 $usd_price = 0;
                 $total_profit_rate = 0;
                 $total_item_count = 0;
+                $total_payment_point = 0;
+                $total_payment_count = 0;
 
                 foreach ($sale_items as $item){
 
@@ -297,6 +301,17 @@ class CompanyController extends Controller
                     $total_profit_rate += $profit_rate;
                     $total_item_count++;
 
+
+                    //ödeme yöntemi
+                    $quote = Quote::query()->where('sale_id', $item->sale_id)->where('active', 1)->first();
+                    if ($quote){
+                        $pt = PaymentTerm::query()->where('id', $quote->payment_type)->first();
+                        if ($pt){
+                            $total_payment_point += CustomerHelper::get_sale_payment_point($pt->advance, $pt->expiry);
+                            $total_payment_count++;
+                        }
+                    }
+
                 }
 
 
@@ -307,6 +322,9 @@ class CompanyController extends Controller
                 $data['usd_price'] = $usd_price;
                 $data['c4'] = CustomerHelper::get_sales_total_rate($usd_price);
 
+                $data['total_profit_rate'] = $total_profit_rate;
+                $data['total_item_count'] = $total_item_count;
+                $data['c5'] = CustomerHelper::get_sales_payment_point($total_payment_point, $total_payment_count);
 
 
 
