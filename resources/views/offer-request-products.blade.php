@@ -36,19 +36,19 @@ $extra_js='
                                         <input type="hidden" class="form-control" id="update_offer_request_product_count" value="0">
                                         <input type="hidden" class="form-control" id="update_offer_request_id">
                                         <div class="row p-3">
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Talep Gelen Firma</label>
                                                 <select class="form-control" id="update_offer_request_owner">
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Yetkili Satış Temsilcisi</label>
                                                 <select class="form-control" id="update_offer_request_authorized_personnel">
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Satın Alma Sorumlusu</label>
                                                 <select class="form-control" id="update_offer_request_purchasing_staff">
 
@@ -60,19 +60,19 @@ $extra_js='
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Müşteri</label>
                                                 <select class="form-control" id="update_offer_request_company" onchange="initEmployeeSelect();">
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Müşteri Yetkilisi</label>
                                                 <select class="form-control" id="update_offer_request_company_employee">
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 mb-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label class="form-label">Müşteri Talep Kodu</label>
                                                 <input type="text" value="" class="form-control" id="update_offer_request_company_request_code" />
                                             </div>
