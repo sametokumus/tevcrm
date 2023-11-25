@@ -449,7 +449,7 @@ class StaffController extends Controller
                 $data['c5_rate'] = $c5_rate;
                 $data['c6_rate'] = $c6_rate;
                 $data['c8_rate'] = $c8_rate;
-                $data['c9_rate'] = $c8_rate;
+                $data['c9_rate'] = $c9_rate;
 
 
                 $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c8_rate + $c9_rate;
