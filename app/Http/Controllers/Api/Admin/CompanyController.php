@@ -305,7 +305,7 @@ class CompanyController extends Controller
                     //ödeme yöntemi
                     $quote = Quote::query()->where('sale_id', $item->sale_id)->where('active', 1)->first();
                     if ($quote){
-                        $pt = PaymentTerm::query()->where('id', $quote->payment_type)->first();
+                        $pt = PaymentTerm::query()->where('id', $quote->payment_term)->first();
                         if ($pt){
                             $total_payment_point += CustomerHelper::get_sale_payment_point($pt->advance, $pt->expiry);
                             $total_payment_count++;
