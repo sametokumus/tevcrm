@@ -113,6 +113,7 @@ async function initOfferRequest(){
 
     document.getElementById('update_offer_request_id').value = request_id;
     document.getElementById('update_offer_request_owner').value = offer_request.owner_id;
+    document.getElementById('update_offer_request_sale_type').value = offer_request.sale_type_id;
     document.getElementById('update_offer_request_authorized_personnel').value = checkNull(offer_request.authorized_personnel_id);
     document.getElementById('update_offer_request_purchasing_staff').value = checkNull(offer_request.purchasing_staff_id);
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
@@ -144,7 +145,7 @@ async function updateOfferRequest(){
     let employee = document.getElementById('update_offer_request_company_employee').value;
     if (employee == 0){employee = null;}
     let request_code = document.getElementById('update_offer_request_company_request_code').value;
-    let type_id = document.getElementById('add_offer_request_sale_type').value;
+    let type_id = document.getElementById('update_offer_request_sale_type').value;
 
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),

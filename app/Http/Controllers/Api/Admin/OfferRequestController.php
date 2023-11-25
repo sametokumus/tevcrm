@@ -70,6 +70,7 @@ class OfferRequestController extends Controller
 
             }
             $offer_request['products'] = $offer_request_products;
+            $offer_request['sale_type_id'] = Sale::query()->where('request_id', $offer_request->request_id)->first()->type_id;
             $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $offer_request['purchasing_staff'] = Admin::query()->where('id', $offer_request->purchasing_staff_id)->where('active', 1)->first();
             $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
