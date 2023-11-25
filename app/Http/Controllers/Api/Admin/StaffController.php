@@ -6,6 +6,7 @@ use App\Helpers\CustomerHelper;
 use App\Helpers\StaffHelper;
 use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Expense;
@@ -358,6 +359,18 @@ class StaffController extends Controller
 
 
 
+                //c7
+                $activity_count = Activity::query()
+                    ->leftJoin('activity_types', 'activity_types.id', '=', 'activities.type_id')
+                    ->where('activity_types.face_to_face', 1)
+                    ->where('activities.user_id', $staff->id)
+                    ->where('activities.active', 1)
+                    ->whereBetween('activities.start', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->count();
+
+
+
+
                 //c8
                 $export_sale_count = Sale::query()
                     ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
@@ -427,6 +440,9 @@ class StaffController extends Controller
                 $c6 = StaffHelper::get_sales_customer_point($customer_total_point, $customer_total_count);
                 $data['c6'] = $c6;
 
+                $c7 = StaffHelper::get_activity_point($activity_count);
+                $data['c7'] = $c7;
+
                 $c8 = StaffHelper::get_export_sale_point($export_sale_count);
                 $data['c8'] = $c8;
 
@@ -439,6 +455,7 @@ class StaffController extends Controller
                 $c4_rate = StaffHelper::get_point_rate($c4, 13);
                 $c5_rate = StaffHelper::get_point_rate($c5, 11);
                 $c6_rate = StaffHelper::get_point_rate($c6, 9);
+                $c7_rate = StaffHelper::get_point_rate($c7, 9);
                 $c8_rate = StaffHelper::get_point_rate($c8, 6);
                 $c9_rate = StaffHelper::get_point_rate($c9, 5);
 
@@ -448,11 +465,12 @@ class StaffController extends Controller
                 $data['c4_rate'] = $c4_rate;
                 $data['c5_rate'] = $c5_rate;
                 $data['c6_rate'] = $c6_rate;
+                $data['c7_rate'] = $c7_rate;
                 $data['c8_rate'] = $c8_rate;
                 $data['c9_rate'] = $c9_rate;
 
 
-                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c8_rate + $c9_rate;
+                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c7_rate + $c8_rate + $c9_rate;
                 $data['staff_rate'] = number_format($staff_rate, 2, '.', '');
 
 
