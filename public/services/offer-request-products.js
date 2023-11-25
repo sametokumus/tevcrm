@@ -118,7 +118,7 @@ async function initOfferRequest(){
     document.getElementById('update_offer_request_company').value = offer_request.company_id;
     document.getElementById('update_offer_request_company_employee').value = offer_request.company_employee_id;
     document.getElementById('update_offer_request_company_request_code').value = offer_request.company_request_code;
-    document.getElementById('update_offer_request_date').value = formatDateASC(offer_request.created_at);
+    document.getElementById('update_offer_request_date').value = formatDateASC(offer_request.created_at, '-');
     document.getElementById('update_offer_request_product_count').value = offer_request.products.length;
 
     if (offer_request.company_id != null && offer_request.company_id != 0) {
