@@ -212,5 +212,32 @@ class StaffHelper
             return 10;
         }
     }
+    //c10 customer point
+    public static function get_customer_point($count)
+    {
+        if ($count == 0){
+            return 0;
+        }else if ($count <= 3){
+            return 1;
+        }else if ($count <= 5){
+            return 2;
+        }else if ($count <= 7){
+            return 3;
+        }else if ($count <= 9){
+            return 4;
+        }else if ($count <= 11){
+            return 5;
+        }else if ($count <= 13){
+            return 6;
+        }else if ($count <= 15){
+            return 7;
+        }else if ($count <= 17){
+            return 8;
+        }else if ($count <= 19){
+            return 9;
+        }else{
+            return 10;
+        }
+    }
 
 }

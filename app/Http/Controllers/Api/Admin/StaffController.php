@@ -413,6 +413,15 @@ class StaffController extends Controller
 
 
 
+                //c10
+                $customer_count = Company::query()
+                    ->where('active', 1)
+                    ->where('user_id', $staff->id)
+                    ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->count();
+
+
+
                 $data['request_count'] = $request_count;
                 $data['sale_count'] = $sale_count;
                 $c1 = StaffHelper::get_request_and_sales_rate($request_count, $sale_count);
@@ -449,6 +458,9 @@ class StaffController extends Controller
                 $c9 = StaffHelper::get_first_sale_point($first_sale_count);
                 $data['c9'] = $c9;
 
+                $c10 = StaffHelper::get_customer_point($customer_count);
+                $data['c10'] = $c10;
+
                 $c1_rate = StaffHelper::get_point_rate($c1, 17);
                 $c2_rate = StaffHelper::get_point_rate($c2, 15);
                 $c3_rate = StaffHelper::get_point_rate($c3, 14);
@@ -458,6 +470,7 @@ class StaffController extends Controller
                 $c7_rate = StaffHelper::get_point_rate($c7, 7);
                 $c8_rate = StaffHelper::get_point_rate($c8, 6);
                 $c9_rate = StaffHelper::get_point_rate($c9, 5);
+                $c10_rate = StaffHelper::get_point_rate($c10, 4);
 
                 $data['c1_rate'] = $c1_rate;
                 $data['c2_rate'] = $c2_rate;
@@ -468,9 +481,10 @@ class StaffController extends Controller
                 $data['c7_rate'] = $c7_rate;
                 $data['c8_rate'] = $c8_rate;
                 $data['c9_rate'] = $c9_rate;
+                $data['c10_rate'] = $c10_rate;
 
 
-                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c7_rate + $c8_rate + $c9_rate;
+                $staff_rate = $c1_rate + $c2_rate + $c3_rate + $c4_rate + $c5_rate + $c6_rate + $c7_rate + $c8_rate + $c9_rate + $c10_rate;
                 $data['staff_rate'] = number_format($staff_rate, 2, '.', '');
 
 
