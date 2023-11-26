@@ -2682,8 +2682,8 @@ async function serviceGetCancelledPotentialSalesByAdmin(id) {
 }
 
 
-async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins() {
-    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins', 'application/json');
+async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
