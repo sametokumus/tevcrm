@@ -457,14 +457,7 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12);
-
-            if ($owner_id != 0){
-                $last_months = $last_months
-                    ->where('sales.owner_id', $owner_id);
-            }
-
-            $last_months = $last_months
+                ->limit(12)
                 ->get();
 
             $sales = array();
@@ -627,14 +620,7 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12);
-
-            if ($owner_id != 0){
-                $last_months = $last_months
-                    ->where('sales.owner_id', $owner_id);
-            }
-
-            $last_months = $last_months
+                ->limit(12)
                 ->get();
 
             $sales = array();
@@ -797,14 +783,7 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12);
-
-            if ($owner_id != 0){
-                $last_months = $last_months
-                    ->where('sales.owner_id', $owner_id);
-            }
-
-            $last_months = $last_months
+                ->limit(12)
                 ->get();
 
             $sales = array();
@@ -967,14 +946,7 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12);
-
-            if ($owner_id != 0){
-                $last_months = $last_months
-                    ->where('sales.owner_id', $owner_id);
-            }
-
-            $last_months = $last_months
+                ->limit(12)
                 ->get();
 
             $sales = array();
