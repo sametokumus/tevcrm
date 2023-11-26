@@ -178,7 +178,7 @@ $extra_js='
 
     </div>
 
-    <div class="row sparkboxes mt-0 mb-4">
+    <div class="row sparkboxes">
 
         <div class="col-xl-3 col-lg-6">
 
