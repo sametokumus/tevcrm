@@ -2627,8 +2627,8 @@ async function serviceGetApprovedMonthlySalesByAdmin(id) {
     }
 }
 
-async function serviceGetCompletedMonthlySales() {
-    const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonths', 'application/json');
+async function serviceGetCompletedMonthlySales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCompletedSalesLastTwelveMonths/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2645,8 +2645,8 @@ async function serviceGetCompletedMonthlySalesByAdmin(id) {
     }
 }
 
-async function serviceGetPotentialSales() {
-    const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonths', 'application/json');
+async function serviceGetPotentialSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyPotentialSalesLastTwelveMonths/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -2663,8 +2663,8 @@ async function serviceGetPotentialSalesByAdmin(id) {
     }
 }
 
-async function serviceGetCancelledPotentialSales() {
-    const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths', 'application/json');
+async function serviceGetCancelledPotentialSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyCancelledSalesLastTwelveMonths/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
