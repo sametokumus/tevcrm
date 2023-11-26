@@ -145,6 +145,7 @@ async function addCompany(){
     formData.append('is_potential_customer', isPotential);
     formData.append('is_customer', isCustomer);
     formData.append('is_supplier', isSupplier);
+    formData.append('user_id', localStorage.getItem('userId'));
     formData.append('logo', document.getElementById('add_company_logo').files[0]);
     console.log(formData);
 

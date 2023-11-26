@@ -100,7 +100,8 @@ class CompanyController extends Controller
                 'skype' => $request->skype,
                 'online' => $request->online,
                 'registration_number' => $request->registration_number,
-                'payment_term' => $request->payment_term
+                'payment_term' => $request->payment_term,
+                'user_id' => $request->user_id
             ]);
             if ($request->hasFile('logo')) {
                 $rand = uniqid();
