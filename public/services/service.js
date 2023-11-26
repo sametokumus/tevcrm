@@ -2591,8 +2591,8 @@ async function serviceGetTotalSales(dash_owner) {
     }
 }
 
-async function serviceGetLastMonthSales() {
-    const data = await fetchDataGet('/admin/dashboard/getLastMonthSales', 'application/json');
+async function serviceGetLastMonthSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getLastMonthSales/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

@@ -86,7 +86,7 @@ async function getTotalSales(){
 }
 
 async function getLastMonthSales(){
-    let data = await serviceGetLastMonthSales();
+    let data = await serviceGetLastMonthSales(dash_owner);
     let sales = data.sales;
     let continue_data = sales.continue.continue_serie_try.map(parseFloat);
     let approved_data = sales.approved.approved_serie_try.map(parseFloat);

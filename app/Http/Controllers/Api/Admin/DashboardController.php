@@ -1212,7 +1212,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function getLastMonthSales()
+    public function getLastMonthSales($owner_id)
     {
         try {
 
@@ -1264,7 +1264,14 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
-                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->whereDate('sh.created_at', $date->toDateString());
+
+                if ($owner_id != 0){
+                    $daily_total_continue_sales = $daily_total_continue_sales
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $daily_total_continue_sales = $daily_total_continue_sales
                     ->get();
 
                 $daily_continue_try_price = 0;
@@ -1335,7 +1342,14 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'approved')
-                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->whereDate('sh.created_at', $date->toDateString());
+
+                if ($owner_id != 0){
+                    $daily_total_approved_sales = $daily_total_approved_sales
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $daily_total_approved_sales = $daily_total_approved_sales
                     ->get();
 
                 $daily_approved_try_price = 0;
@@ -1406,7 +1420,14 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
-                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->whereDate('sh.created_at', $date->toDateString());
+
+                if ($owner_id != 0){
+                    $daily_total_completed_sales = $daily_total_completed_sales
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $daily_total_completed_sales = $daily_total_completed_sales
                     ->get();
 
                 $daily_completed_try_price = 0;
@@ -1478,7 +1499,14 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
-                    ->whereDate('sh.created_at', $date->toDateString())
+                    ->whereDate('sh.created_at', $date->toDateString());
+
+                if ($owner_id != 0){
+                    $daily_total_cancelled_sales = $daily_total_cancelled_sales
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $daily_total_cancelled_sales = $daily_total_cancelled_sales
                     ->get();
 
                 $daily_cancelled_try_price = 0;
