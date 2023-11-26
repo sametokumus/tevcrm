@@ -327,7 +327,7 @@ $extra_js='
 
     </div>
 
-    <div class="row masonry-layout" data-masonry='{"percentPosition": true }'>
+    <div class="row masonry-layout">
 
         <div class="col-xl-6">
 
