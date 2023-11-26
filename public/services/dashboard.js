@@ -11,6 +11,17 @@
 
 		checkLogin();
 
+        await getDashboardOwnersAddSelectId('dash_owner');
+
+        dash_owner = localStorage.getItem('dash_owner');
+        if (dash_owner == null){
+            dash_owner = '0';
+            localStorage.setItem('dash_owner', '0');
+            document.getElementById('dash_owner').value = '0';
+        }else{
+            document.getElementById('dash_owner').value = dash_owner;
+        }
+
         dash_currency = localStorage.getItem('dash_currency');
         if (dash_currency == null){
             dash_currency = 'TRY';
@@ -33,31 +44,21 @@
 
 })(window.jQuery);
 let dash_currency;
+let dash_owner;
 function changeDashCurrency(){
     dash_currency = document.getElementById('dash_currency').value;
     localStorage.setItem('dash_currency', dash_currency);
     location.reload();
 }
-
-var randomizeArray = function (arg) {
-    var array = arg.slice();
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+function changeDashOwner(){
+    dash_owner = document.getElementById('dash_owner').value;
+    localStorage.setItem('dash_owner', dash_owner);
+    location.reload();
 }
+
 async function getTotalSales(){
 
-    let data = await serviceGetTotalSales();
+    let data = await serviceGetTotalSales(dash_owner);
     let sales = data.sales;
 
     $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');

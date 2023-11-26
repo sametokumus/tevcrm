@@ -363,7 +363,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('accounting-dashboard/getCashFlowPayments', [AccountingDashboardController::class, 'getCashFlowPayments']);
 
     //Dashboard
-    Route::get('dashboard/getTotalSales', [DashboardController::class, 'getTotalSales']);
+    Route::get('dashboard/getTotalSales/{owner_id}', [DashboardController::class, 'getTotalSales']);
     Route::get('dashboard/getLastMonthSales', [DashboardController::class, 'getLastMonthSales']);
     Route::get('dashboard/getLastMonthSalesByAdmin/{admin_id}', [DashboardController::class, 'getLastMonthSalesByAdmin']);
 

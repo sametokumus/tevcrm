@@ -1073,7 +1073,7 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function getTotalSales()
+    public function getTotalSales($owner_id)
     {
         try {
 
@@ -1083,7 +1083,14 @@ class DashboardController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->selectRaw('sales.*, statuses.period as period')
                 ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')");
+
+            if ($owner_id != 0){
+                $sale_items = $sale_items
+                    ->where('sales.owner_id', $owner_id);
+            }
+
+            $sale_items = $sale_items
                 ->get();
 
 

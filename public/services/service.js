@@ -489,6 +489,16 @@ async function getOwnersAddSelectId(selectId){
     });
 }
 
+async function getDashboardOwnersAddSelectId(selectId){
+    let data = await serviceGetContacts();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Tüm Firmalar</option>');
+    $.each(data.contacts, function(i, contact){
+        let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCompaniesAddSelectId(selectId){
     let data = await serviceGetCompanies();
     $('#'+selectId+' option').remove();
@@ -2572,8 +2582,8 @@ async function servicePostUpdateAccountingWaybill(formData) {
 
 /* DASHBOARD SERVICES */
 
-async function serviceGetTotalSales() {
-    const data = await fetchDataGet('/admin/dashboard/getTotalSales', 'application/json');
+async function serviceGetTotalSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getTotalSales/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
