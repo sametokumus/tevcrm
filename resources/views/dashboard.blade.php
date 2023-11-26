@@ -336,6 +336,50 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="admins-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Ad Soyad</td>
+                                <td>Satış Adedi</td>
+                                <td>TRY</td>
+                                <td>USD</td>
+                                <td>EUR</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-6">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">ONAYLANAN SATIŞLAR</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
@@ -442,50 +486,6 @@ $extra_js='
                         <div id="chart-cancelled-potential-sales"></div>
                     </div>
 
-
-                </div>
-
-
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-xl-6">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table id="admins-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                            <thead>
-                            <tr>
-                                <td>#</td>
-                                <td>Ad Soyad</td>
-                                <td>Satış Adedi</td>
-                                <td>TRY</td>
-                                <td>USD</td>
-                                <td>EUR</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
 
