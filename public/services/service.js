@@ -2609,8 +2609,8 @@ async function serviceGetLastMonthSalesByAdmin(id) {
     }
 }
 
-async function serviceGetApprovedMonthlySales() {
-    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths', 'application/json');
+async function serviceGetApprovedMonthlySales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

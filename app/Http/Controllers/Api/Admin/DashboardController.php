@@ -449,7 +449,7 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function getMonthlyApprovedSalesLastTwelveMonths()
+    public function getMonthlyApprovedSalesLastTwelveMonths($owner_id)
     {
         try {
             $last_months = Sale::query()
@@ -457,7 +457,14 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12)
+                ->limit(12);
+
+            if ($owner_id != 0){
+                $last_months = $last_months
+                    ->where('sales.owner_id', $owner_id);
+            }
+
+            $last_months = $last_months
                 ->get();
 
             $sales = array();

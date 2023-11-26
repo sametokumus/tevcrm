@@ -373,7 +373,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('dashboard/getCancelledPotentialSales', [DashboardController::class, 'getCancelledPotentialSales']);
 
     Route::get('dashboard/getMonthlySalesLastTwelveMonths', [DashboardController::class, 'getMonthlySalesLastTwelveMonths']);
-    Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonths']);
+    Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonths/{owner_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonths']);
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdmin']);
     Route::get('dashboard/getMonthlyCompletedSalesLastTwelveMonths', [DashboardController::class, 'getMonthlyCompletedSalesLastTwelveMonths']);
     Route::get('dashboard/getMonthlyCompletedSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyCompletedSalesLastTwelveMonthsByAdmin']);
