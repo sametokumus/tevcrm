@@ -457,14 +457,7 @@ class DashboardController extends Controller
                 ->where('sales.active',1)
                 ->groupByRaw('YEAR(created_at), MONTH(created_at)')
                 ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
-                ->limit(12);
-
-            if ($owner_id != 0){
-                $last_months = $last_months
-                    ->where('sales.owner_id', $owner_id);
-            }
-
-            $last_months = $last_months
+                ->limit(12)
                 ->get();
 
             $sales = array();
@@ -485,7 +478,14 @@ class DashboardController extends Controller
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'approved')
                     ->whereYear('sh.created_at', $last_month->year)
-                    ->whereMonth('sh.created_at', $last_month->month)
+                    ->whereMonth('sh.created_at', $last_month->month);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
                     ->get();
 
                 $sale = array();
@@ -612,7 +612,7 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function getMonthlyCompletedSalesLastTwelveMonths()
+    public function getMonthlyCompletedSalesLastTwelveMonths($owner_id)
     {
         try {
             $last_months = Sale::query()
@@ -641,7 +641,14 @@ class DashboardController extends Controller
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
                     ->whereYear('sh.created_at', $last_month->year)
-                    ->whereMonth('sh.created_at', $last_month->month)
+                    ->whereMonth('sh.created_at', $last_month->month);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
                     ->get();
 
 
@@ -768,7 +775,7 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function getMonthlyPotentialSalesLastTwelveMonths()
+    public function getMonthlyPotentialSalesLastTwelveMonths($owner_id)
     {
         try {
             $last_months = Sale::query()
@@ -797,7 +804,14 @@ class DashboardController extends Controller
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
                     ->whereYear('sh.created_at', $last_month->year)
-                    ->whereMonth('sh.created_at', $last_month->month)
+                    ->whereMonth('sh.created_at', $last_month->month);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
                     ->get();
 
 
@@ -924,7 +938,7 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function getMonthlyCancelledSalesLastTwelveMonths()
+    public function getMonthlyCancelledSalesLastTwelveMonths($owner_id)
     {
         try {
             $last_months = Sale::query()
@@ -953,7 +967,14 @@ class DashboardController extends Controller
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
                     ->whereYear('sh.created_at', $last_month->year)
-                    ->whereMonth('sh.created_at', $last_month->month)
+                    ->whereMonth('sh.created_at', $last_month->month);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
                     ->get();
 
 
