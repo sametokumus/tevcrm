@@ -47,11 +47,6 @@ $extra_js='
                         </div>
                     </div>
 
-
-                    <div class="text-white text-opacity-80 text-truncate" id="approved-text">
-
-                    </div>
-
                 </div>
 
 
@@ -88,11 +83,6 @@ $extra_js='
                             <div class="mt-n2" data-render="apexchart" data-type="line" data-title="Visitors"
                                  data-height="30"></div>
                         </div>
-                    </div>
-
-
-                    <div class="text-white text-opacity-80 text-truncate" id="completed-text">
-
                     </div>
 
                 </div>
@@ -133,11 +123,6 @@ $extra_js='
                         </div>
                     </div>
 
-
-                    <div class="text-white text-opacity-80 text-truncate" id="potential-text">
-
-                    </div>
-
                 </div>
 
 
@@ -176,11 +161,6 @@ $extra_js='
                         </div>
                     </div>
 
-
-                    <div class="text-white text-opacity-80 text-truncate" id="cancelled-text">
-
-                    </div>
-
                 </div>
 
 
@@ -216,9 +196,6 @@ $extra_js='
                         <div class="col-12">
                             <h4 class="mb-0"></h4>
                         </div>
-                    </div>
-                    <div class="text-white text-opacity-80 text-truncate" id="monthly-approved-text">
-
                     </div>
 
                     <div class="box box1">
@@ -256,9 +233,6 @@ $extra_js='
                             <h4 class="mb-0"></h4>
                         </div>
                     </div>
-                    <div class="text-white text-opacity-80 text-truncate" id="monthly-completed-text">
-
-                    </div>
 
                     <div class="box box2">
                         <div id="spark2"></div>
@@ -295,9 +269,6 @@ $extra_js='
                             <h4 class="mb-0"></h4>
                         </div>
                     </div>
-                    <div class="text-white text-opacity-80 text-truncate" id="monthly-continue-text">
-
-                    </div>
 
                     <div class="box box3">
                         <div id="spark3"></div>
@@ -333,9 +304,6 @@ $extra_js='
                         <div class="col-12">
                             <h4 class="mb-0"></h4>
                         </div>
-                    </div>
-                    <div class="text-white text-opacity-80 text-truncate" id="monthly-cancelled-text">
-
                     </div>
 
                     <div class="box box4">

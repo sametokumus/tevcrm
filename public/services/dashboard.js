@@ -61,27 +61,31 @@ async function getTotalSales(){
     let data = await serviceGetTotalSales(dash_owner);
     let sales = data.sales;
 
-    $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
-    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    $('#approved-text').append(text1);
+    let approved_sale = 0;
+    let completed_sale = 0;
+    let continue_sale = 0;
+    let cancelled_sale = 0;
+    if (dash_currency == 'TRY'){
+        approved_sale = sales.approved.try_sale;
+        completed_sale = sales.completed.try_sale;
+        continue_sale = sales.continue.try_sale;
+        cancelled_sale = sales.cancelled.try_sale;
+    }else if (dash_currency == 'USD'){
+        approved_sale = sales.approved.usd_sale;
+        completed_sale = sales.completed.usd_sale;
+        continue_sale = sales.continue.usd_sale;
+        cancelled_sale = sales.cancelled.usd_sale;
+    }else if (dash_currency == 'EUR'){
+        approved_sale = sales.approved.eur_sale;
+        completed_sale = sales.completed.eur_sale;
+        continue_sale = sales.continue.eur_sale;
+        cancelled_sale = sales.cancelled.eur_sale;
+    }
 
-    $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
-    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    $('#completed-text').append(text2);
-
-    $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
-    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    $('#potential-text').append(text3);
-
-    $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
-    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
-    $('#cancelled-text').append(text4);
-
-
+    $('#approved-box h4').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
+    $('#completed-box h4').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
+    $('#potential-box h4').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
+    $('#cancelled-box h4').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
 }
 
@@ -94,25 +98,34 @@ async function getLastMonthSales(){
     let cancelled_data = sales.cancelled.cancelled_serie_try.map(parseFloat);
     let day_count = sales.day_count;
 
-    $('#monthly-approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
-    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    $('#monthly-approved-text').append(text1);
+    let approved_sale = 0;
+    let completed_sale = 0;
+    let continue_sale = 0;
+    let cancelled_sale = 0;
+    if (dash_currency == 'TRY'){
+        approved_sale = sales.approved.try_sale;
+        completed_sale = sales.completed.try_sale;
+        continue_sale = sales.continue.try_sale;
+        cancelled_sale = sales.cancelled.try_sale;
+    }else if (dash_currency == 'USD'){
+        approved_sale = sales.approved.usd_sale;
+        completed_sale = sales.completed.usd_sale;
+        continue_sale = sales.continue.usd_sale;
+        cancelled_sale = sales.cancelled.usd_sale;
+    }else if (dash_currency == 'EUR'){
+        approved_sale = sales.approved.eur_sale;
+        completed_sale = sales.completed.eur_sale;
+        continue_sale = sales.continue.eur_sale;
+        cancelled_sale = sales.cancelled.eur_sale;
+    }
 
-    $('#monthly-completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
-    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    $('#monthly-completed-text').append(text2);
+    $('#monthly-approved-box h4').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
 
-    $('#monthly-continue-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
-    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    $('#monthly-continue-text').append(text3);
+    $('#monthly-completed-box h4').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
 
-    $('#monthly-cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
-    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
-    $('#monthly-cancelled-text').append(text4);
+    $('#monthly-continue-box h4').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
+
+    $('#monthly-cancelled-box h4').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
     var spark1 = {
         chart: {
