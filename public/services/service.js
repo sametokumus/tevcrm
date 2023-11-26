@@ -2031,8 +2031,8 @@ async function serviceGetSaleHistoryActions() {
     }
 }
 
-async function serviceGetTopSaledProducts() {
-    const data = await fetchDataGet('/admin/newsFeed/getTopSaledProducts', 'application/json');
+async function serviceGetTopSaledProducts(dash_owner) {
+    const data = await fetchDataGet('/admin/newsFeed/getTopSaledProducts/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

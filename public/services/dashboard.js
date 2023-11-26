@@ -363,7 +363,7 @@ async function getApprovedMonthlySales(){
 
 async function getCompletedMonthlySales(){
 
-    let data = await serviceGetCompletedMonthlySales();
+    let data = await serviceGetCompletedMonthlySales(dash_owner);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -476,7 +476,7 @@ async function getCompletedMonthlySales(){
 
 async function getPotentialMonthlySales(){
 
-    let data = await serviceGetPotentialSales();
+    let data = await serviceGetPotentialSales(dash_owner);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -588,7 +588,7 @@ async function getPotentialMonthlySales(){
 
 async function getCancelledMonthlySales(){
 
-    let data = await serviceGetCancelledPotentialSales();
+    let data = await serviceGetCancelledPotentialSales(dash_owner);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -722,7 +722,7 @@ async function getAdminsSales(){
 }
 
 async function initTopSaledProducts(){
-    let data = await serviceGetTopSaledProducts();
+    let data = await serviceGetTopSaledProducts(dash_owner);
     let products = data.products;
 
     $('#top-products-table tbody tr').remove();

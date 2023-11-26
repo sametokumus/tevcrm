@@ -82,7 +82,7 @@ class NewsFeedController extends Controller
         }
     }
 
-    public function getTopSaledProducts()
+    public function getTopSaledProducts($owner_id)
     {
         try {
             $products = SaleOffer::query()
@@ -94,7 +94,14 @@ class NewsFeedController extends Controller
                 ->whereIn('statuses.period', ['completed', 'approved'])
                 ->groupBy('product_id')
                 ->orderByDesc('total_quantity')
-                ->limit(10)
+                ->limit(10);
+
+            if ($owner_id != 0){
+                $products = $products
+                    ->where('sales.owner_id', $owner_id);
+            }
+
+            $products = $products
                 ->get();
 
             foreach ($products as $product){

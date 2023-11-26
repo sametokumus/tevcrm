@@ -300,7 +300,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //News Feed
     Route::get('newsFeed/getSaleHistoryActions', [NewsFeedController::class, 'getSaleHistoryActions']);
     Route::get('newsFeed/getTopRequestedProducts', [NewsFeedController::class, 'getTopRequestedProducts']);
-    Route::get('newsFeed/getTopSaledProducts', [NewsFeedController::class, 'getTopSaledProducts']);
+    Route::get('newsFeed/getTopSaledProducts/{owner_id}', [NewsFeedController::class, 'getTopSaledProducts']);
     Route::get('newsFeed/getSaleStats', [NewsFeedController::class, 'getSaleStats']);
 
     //Product
@@ -382,7 +382,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('dashboard/getMonthlyCancelledSalesLastTwelveMonths/{owner_id}', [DashboardController::class, 'getMonthlyCancelledSalesLastTwelveMonths']);
     Route::get('dashboard/getMonthlyCancelledSalesLastTwelveMonthsByAdmin/{admin_id}', [DashboardController::class, 'getMonthlyCancelledSalesLastTwelveMonthsByAdmin']);
 
-    Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdmins']);
+    Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdmins/{owner_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdmins']);
     Route::get('dashboard/getMonthlyApprovedSalesLastTwelveMonthsByAdminId/{admin_id}', [DashboardController::class, 'getMonthlyApprovedSalesLastTwelveMonthsByAdminId']);
 
 

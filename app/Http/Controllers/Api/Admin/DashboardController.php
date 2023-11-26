@@ -1978,7 +1978,7 @@ class DashboardController extends Controller
     }
 
 
-    public function getMonthlyApprovedSalesLastTwelveMonthsByAdmins()
+    public function getMonthlyApprovedSalesLastTwelveMonthsByAdmins($owner_id)
     {
         try {
             $last_months = Sale::query()
@@ -2011,7 +2011,14 @@ class DashboardController extends Controller
                         ->where('sales.active', 1)
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->whereYear('sales.created_at', $last_month->year)
-                        ->whereMonth('sales.created_at', $last_month->month)
+                        ->whereMonth('sales.created_at', $last_month->month);
+
+                    if ($owner_id != 0){
+                        $sale_items = $sale_items
+                            ->where('sales.owner_id', $owner_id);
+                    }
+
+                    $sale_items = $sale_items
                         ->get();
 
 
