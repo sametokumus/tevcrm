@@ -756,7 +756,7 @@ async function initTopSaledProducts(){
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ product.product_detail.product_name.substring(150) +'...\n' +
+            '                   '+ product.product_detail.product_name.substring(0, 150) +'...\n' +
             '               </span>\n' +
             '           </td>\n' +
             '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
