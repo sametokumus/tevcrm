@@ -2893,8 +2893,17 @@ async function serviceGetDeleteStaffTarget(id) {
 
 
 
-async function serviceGetBestCustomer(id) {
-    const data = await fetchDataGet('/admin/company/getBestCustomer/' + id, 'application/json');
+async function serviceGetBestCustomer() {
+    const data = await fetchDataGet('/admin/company/getBestCustomer', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetBestStaff() {
+    const data = await fetchDataGet('/admin/staff/getBestStaff', 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

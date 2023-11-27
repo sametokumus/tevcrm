@@ -331,6 +331,7 @@ $extra_js='
 
         <div class="col-xl-6">
 
+            //onaylanan satışlar
             <div class="card mb-3">
 
                 <div class="card-body">
@@ -359,10 +360,7 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
+            //tamamlanan satışlar
             <div class="card mb-3">
 
                 <div class="card-body">
@@ -391,10 +389,7 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
+            //potansiyel satışlar
             <div class="card mb-3">
 
                 <div class="card-body">
@@ -423,10 +418,7 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
+            //iptal edilen satışlar
             <div class="card mb-3">
 
                 <div class="card-body">
@@ -459,6 +451,45 @@ $extra_js='
 
         <div class="col-xl-6">
 
+            //en iyi müşteri
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN İYİ MÜŞTERİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="best-customers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Müşteri</td>
+                                <td>Puan</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+            //ekip satışları
             <div class="card mb-3">
 
                 <div class="card-body">
@@ -499,10 +530,7 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
+            //en çok satılan ürünler
             <div class="card mb-3">
 
                 <div class="card-body">

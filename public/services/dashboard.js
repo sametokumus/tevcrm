@@ -39,6 +39,7 @@
         getCancelledMonthlySales();
         getAdminsSales();
         initTopSaledProducts();
+        getBestCustomers();
 
 	});
 
@@ -759,4 +760,23 @@ async function initTopSaledProducts(){
 
         $('#top-products-table tbody').append(item);
     });
+}
+
+async function getBestCustomers(){
+
+    let data = await serviceGetBestCustomer();
+    let companies = data.companies;
+
+
+    $('#best-customers-table tbody tr').remove();
+    $.each(companies, function (i, company) {
+        let item = '<tr>\n' +
+            '           <td>'+ i +'</td>\n' +
+            '           <td>'+ company.company.name +'</td>\n' +
+            '           <td>'+ company.company_rate +'</td>\n' +
+            '       </tr>';
+        $('#admins-table tbody').append(item);
+    });
+
+
 }
