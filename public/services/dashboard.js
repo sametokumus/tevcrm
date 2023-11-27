@@ -40,6 +40,7 @@
         getAdminsSales();
         initTopSaledProducts();
         getBestCustomers();
+        getBestStaffs();
 
 	});
 
@@ -771,11 +772,30 @@ async function getBestCustomers(){
     $('#best-customers-table tbody tr').remove();
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
-            '           <td>'+ i +'</td>\n' +
+            '           <td>'+ (i+1) +'</td>\n' +
             '           <td>'+ company.company.name +'</td>\n' +
             '           <td>'+ company.company_rate +'</td>\n' +
             '       </tr>';
-        $('#admins-table tbody').append(item);
+        $('#best-customers-table tbody').append(item);
+    });
+
+
+}
+
+async function getBestStaffs(){
+
+    let data = await serviceGetBestStaff();
+    let staffs = data.staffs;
+
+
+    $('#best-staffs-table tbody tr').remove();
+    $.each(staffs, function (i, staff) {
+        let item = '<tr>\n' +
+            '           <td>'+ (i+1) +'</td>\n' +
+            '           <td>'+ staff.staff.name +' '+ staff.staff.surname +'</td>\n' +
+            '           <td>'+ staff.staff_rate +'</td>\n' +
+            '       </tr>';
+        $('#best-staffs-table tbody').append(item);
     });
 
 
