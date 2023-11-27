@@ -545,9 +545,7 @@ $extra_js='
                                 <td>#</td>
                                 <td>Ad Soyad</td>
                                 <td>Satış Adedi</td>
-                                <td>TRY</td>
-                                <td>USD</td>
-                                <td>EUR</td>
+                                <td>Tutar</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -583,7 +581,6 @@ $extra_js='
                         <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                             <thead>
                             <tr>
-                                <td>Ref. Code</td>
                                 <td>Ürün Adı</td>
                                 <td>Adet</td>
                             </tr>

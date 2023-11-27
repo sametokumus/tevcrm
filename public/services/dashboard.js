@@ -722,13 +722,21 @@ async function getAdminsSales(){
 
     $('#admins-table tbody tr').remove();
     $.each(admins, function (i, admin) {
+
+        let sale_price = 0;
+        if (dash_currency == 'TRY'){
+            sale_price = admin.total_sales.try_total;
+        }else if (dash_currency == 'USD'){
+            sale_price = admin.total_sales.usd_total;
+        }else if (dash_currency == 'EUR'){
+            sale_price = admin.total_sales.eur_total;
+        }
+
         let item = '<tr>\n' +
             '           <td>'+ admin.id +'</td>\n' +
             '           <td>'+ admin.name +' '+ admin.surname +'</td>\n' +
             '           <td>'+ admin.total_sales.sale_count +'</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.try_total) +' TRY</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.usd_total) +' USD</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.eur_total) +' EUR</td>\n' +
+            '           <td>'+ changeCommasToDecimal(sale_price) +' '+ dash_currency +'</td>\n' +
             '       </tr>';
         $('#admins-table tbody').append(item);
     });
@@ -748,12 +756,7 @@ async function initTopSaledProducts(){
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ checkNull(product.product_detail.ref_code) +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   '+ product.product_detail.product_name +'\n' +
+            '                   '+ product.product_detail.product_name.substring(150) +'...\n' +
             '               </span>\n' +
             '           </td>\n' +
             '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
