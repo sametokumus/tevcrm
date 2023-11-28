@@ -100,10 +100,10 @@ async function getTotalSales(){
         cancelled_sale = sales.cancelled.eur_sale;
     }
 
-    $('#approved-box h4').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
-    $('#completed-box h4').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
-    $('#potential-box h4').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
-    $('#cancelled-box h4').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
+    $('#approved-box h5').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
+    $('#completed-box h5').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
+    $('#potential-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
+    $('#cancelled-box h5').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
 }
 
@@ -137,13 +137,13 @@ async function getLastMonthSales(){
         cancelled_sale = sales.cancelled.eur_sale;
     }
 
-    $('#monthly-approved-box h4').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
+    $('#monthly-approved-box h5').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
 
-    $('#monthly-completed-box h4').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
+    $('#monthly-completed-box h5').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
 
-    $('#monthly-continue-box h4').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
+    $('#monthly-continue-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
 
-    $('#monthly-cancelled-box h4').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
+    $('#monthly-cancelled-box h5').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
     var spark1 = {
         chart: {
