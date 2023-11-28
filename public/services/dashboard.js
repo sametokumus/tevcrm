@@ -45,6 +45,15 @@
 	});
 
 })(window.jQuery);
+
+var $grid = $('.col-xl-6').masonry({
+    itemSelector: '.col-xl-6',
+    percentPosition: true
+});
+
+$grid.masonry('reloadItems');
+$grid.masonry('layout');
+
 let dash_currency;
 let dash_owner;
 function changeDashCurrency(){
