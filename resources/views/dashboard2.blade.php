@@ -360,10 +360,6 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
             <!-- tamamlanan satışlar -->
             <div class="card mb-3">
 
@@ -393,10 +389,6 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
             <!-- potansiyel satışlar -->
             <div class="card mb-3">
 
@@ -425,10 +417,6 @@ $extra_js='
                 </div>
 
             </div>
-
-        </div>
-
-        <div class="col-xl-6">
 
             <!-- iptal edilen satışlar -->
             <div class="card mb-3">
@@ -501,10 +489,6 @@ $extra_js='
 
             </div>
 
-        </div>
-
-        <div class="col-xl-6">
-
             <!-- en iyi personel -->
             <div class="card mb-3">
 
@@ -542,10 +526,6 @@ $extra_js='
                 </div>
 
             </div>
-
-        </div>
-
-        <div class="col-xl-6">
 
             <!-- ekip satışları -->
             <div class="card mb-3">
@@ -585,10 +565,6 @@ $extra_js='
                 </div>
 
             </div>
-
-        </div>
-
-        <div class="col-xl-6">
 
             <!-- en çok satılan ürünler -->
             <div class="card mb-3">

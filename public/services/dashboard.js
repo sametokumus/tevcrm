@@ -776,7 +776,7 @@ async function getBestCustomers(){
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
             '           <td>'+ (i+1) +'</td>\n' +
-            '           <td>'+ company.company.name.substring(0, 50) +'</td>\n' +
+            '           <td>'+ company.company.name.substring(0, 30) +'...</td>\n' +
             '           <td>'+ company.company_rate +'</td>\n' +
             '       </tr>';
         $('#best-customers-table tbody').append(item);
