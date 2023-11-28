@@ -387,6 +387,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('dashboard/getMostValuableCustomers', [DashboardController::class, 'getMostValuableCustomers']);
+    Route::get('dashboard/getTotalProfitRate/{owner_id}', [DashboardController::class, 'getTotalProfitRate']);
+    Route::get('dashboard/getMonthlyProfitRatesLastTwelveMonths/{owner_id}', [DashboardController::class, 'getMonthlyProfitRatesLastTwelveMonths']);
 
 
     Route::get('pdf/getGeneratePDF/{owner_id}/{sale_id}', [PdfController::class, 'getGeneratePDF']);

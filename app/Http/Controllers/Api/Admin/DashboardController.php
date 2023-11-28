@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
+use App\Models\Expense;
 use App\Models\SaleOffer;
 use App\Models\Sale;
 use Illuminate\Database\QueryException;
@@ -2217,5 +2218,184 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
     }
+
+
+    public function getTotalProfitRate($owner_id)
+    {
+        try {
+
+            //Karlılık
+            $sale_items = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.period as period')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')");
+
+            if ($owner_id != 0){
+                $sale_items = $sale_items
+                    ->where('s.owner_id', $owner_id);
+            }
+
+            $sale_items = $sale_items
+                ->get();
+
+            $sale_total = 0;
+            $offer_total = 0;
+            foreach ($sale_items as $sale){
+                $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($sale_offers as $sale_offer){
+                    if ($sale->currency == 'TRY'){
+                        $sale_total += $sale_offer->sale_price;
+                        $offer_total += $sale_offer->offer_price;
+                    }else if ($sale->currency == 'USD'){
+                        $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                    }else if ($sale->currency == 'EUR'){
+                        $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }
+                }
+
+                //ek giderler
+                $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($expenses as $expense){
+                    if ($expense->currency == $sale->currency){
+                        $sale_total += $expense->price;
+                    }else{
+                        if ($expense->currency == 'TRY') {
+                            $sc = strtolower($sale->currency);
+                            $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        }else{
+                            if ($sale->currency == 'TRY') {
+                                $ec = strtolower($expense->currency);
+                                $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            }else{
+                                $ec = strtolower($expense->currency);
+                                $sc = strtolower($sale->currency);
+                                if ($sale->{$sc.'_rate'} != 0) {
+                                    $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                }else{
+                                    $expense_price = 0;
+                                }
+                            }
+                        }
+                        $sale_total += $expense_price;
+                    }
+                }
+
+
+            }
+            $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+            $profit_rate = number_format($profit_rate, 2,",","");
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
+    public function getMonthlyProfitRatesLastTwelveMonths($owner_id)
+    {
+        try {
+            $last_months = Sale::query()
+                ->selectRaw('YEAR(created_at) AS year, MONTH(created_at) AS month')
+                ->where('sales.active',1)
+                ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+                ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
+                ->limit(12)
+                ->get();
+
+            $profit_rates = array();
+            foreach ($last_months as $last_month){
+
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'approved')
+                    ->whereYear('sh.created_at', $last_month->year)
+                    ->whereMonth('sh.created_at', $last_month->month);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
+                    ->get();
+
+                $month = array();
+                $month['year'] = $last_month->year;
+                $month['month'] = $last_month->month;
+
+                $sale_total = 0;
+                $offer_total = 0;
+                foreach ($sale_items as $sale){
+
+                    $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($sale_offers as $sale_offer){
+                        if ($sale->currency == 'TRY'){
+                            $sale_total += $sale_offer->sale_price;
+                            $offer_total += $sale_offer->offer_price;
+                        }else if ($sale->currency == 'USD'){
+                            $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                        }else if ($sale->currency == 'EUR'){
+                            $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }
+                    }
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == $sale->currency){
+                            $sale_total += $expense->price;
+                        }else{
+                            if ($expense->currency == 'TRY') {
+                                $sc = strtolower($sale->currency);
+                                $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                            }else{
+                                if ($sale->currency == 'TRY') {
+                                    $ec = strtolower($expense->currency);
+                                    $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                                }else{
+                                    $ec = strtolower($expense->currency);
+                                    $sc = strtolower($sale->currency);
+                                    if ($sale->{$sc.'_rate'} != 0) {
+                                        $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                    }else{
+                                        $expense_price = 0;
+                                    }
+                                }
+                            }
+                            $sale_total += $expense_price;
+                        }
+                    }
+
+
+                }
+
+                $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+
+
+                $month['profit_rate'] = number_format($profit_rate, 2,",","");
+                array_push($profit_rates, $month);
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rates' => $profit_rates]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+
+
 
 }

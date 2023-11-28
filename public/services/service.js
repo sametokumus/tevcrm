@@ -2910,3 +2910,21 @@ async function serviceGetBestStaff() {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetTotalProfitRate(owner_id) {
+    const data = await fetchDataGet('/admin/dashboard/getTotalProfitRate/' + owner_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetMonthlyProfitRatesLastTwelveMonths(owner_id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyProfitRatesLastTwelveMonths/' + owner_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

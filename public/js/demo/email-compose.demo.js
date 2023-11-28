@@ -1,6 +1,6 @@
 /*
 Template Name: HUD - Responsive Bootstrap 5 Admin Template
-Version: 1.0.0
+Version: 2.3.0
 Author: Sean Ngu
 Website: http://www.seantheme.com/hud/
 */

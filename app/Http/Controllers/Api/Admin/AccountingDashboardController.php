@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Expense;
 use App\Models\Sale;
 use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
@@ -190,17 +191,46 @@ class AccountingDashboardController extends Controller
             foreach ($sale_items as $sale){
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                 foreach ($sale_offers as $sale_offer){
-                    if ($item->currency == 'TRY'){
+                    if ($sale->currency == 'TRY'){
                         $sale_total += $sale_offer->sale_price;
                         $offer_total += $sale_offer->offer_price;
-                    }else if ($item->currency == 'USD'){
+                    }else if ($sale->currency == 'USD'){
                         $sale_total += $sale_offer->sale_price * $sale->usd_rate;
                         $offer_total += $sale_offer->offer_price * $sale->usd_rate;
-                    }else if ($item->currency == 'EUR'){
+                    }else if ($sale->currency == 'EUR'){
                         $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $offer_total += $sale_offer->offer_price * $sale->eur_rate;
                     }
                 }
+
+                //ek giderler
+                $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($expenses as $expense){
+                    if ($expense->currency == $sale->currency){
+                        $sale_total += $expense->price;
+                    }else{
+                        if ($expense->currency == 'TRY') {
+                            $sc = strtolower($sale->currency);
+                            $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        }else{
+                            if ($sale->currency == 'TRY') {
+                                $ec = strtolower($expense->currency);
+                                $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            }else{
+                                $ec = strtolower($expense->currency);
+                                $sc = strtolower($sale->currency);
+                                if ($sale->{$sc.'_rate'} != 0) {
+                                    $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                }else{
+                                    $expense_price = 0;
+                                }
+                            }
+                        }
+                        $sale_total += $expense_price;
+                    }
+                }
+
+
             }
             $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
 

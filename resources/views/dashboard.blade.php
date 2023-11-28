@@ -162,6 +162,40 @@ $extra_js='
         </div>
 
 
+        <div class="col-xl-2 col-lg-3">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">TOPLAM KARLILIK</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+
+                    <div class="row align-items-center mb-2" id="total-profit-box">
+                        <div class="col-12">
+                            <h5 class="mb-0"></h5>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
     </div>
 
     <div class="row sparkboxes">
