@@ -54,6 +54,8 @@
 
 let dash_currency;
 let dash_owner;
+const aspectRatio = 16 / 9;
+
 function reLoadGrid(){
     var $grid = $('.row.masonry-layout').masonry({
         itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]',
@@ -299,9 +301,11 @@ async function getApprovedMonthlySales(){
     console.log(xAxisArray)
     console.log(yAxisArray)
 
+    let desiredWidth = document.getElementById('chart-approved-monthly').clientWidth;
+    let desiredHeight = Math.floor(desiredWidth / aspectRatio);
     let apexColumnChartOptions = {
         chart: {
-            height: 350,
+            height: desiredHeight,
             type: 'bar'
         },
         title: {

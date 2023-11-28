@@ -329,7 +329,7 @@ $extra_js='
 
     <div class="row masonry-layout">
 
-        <div class="col-xl-6">
+        <div class="col-xl-3">
 
             <!-- onaylanan satışlar -->
             <div class="card mb-3">
@@ -362,7 +362,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-3">
 
             <!-- tamamlanan satışlar -->
             <div class="card mb-3">
@@ -395,7 +395,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-3">
 
             <!-- potansiyel satışlar -->
             <div class="card mb-3">
@@ -428,7 +428,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-3">
 
             <!-- iptal edilen satışlar -->
             <div class="card mb-3">
@@ -461,7 +461,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
 
             <!-- en iyi müşteri -->
             <div class="card mb-3">
@@ -503,7 +503,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
 
             <!-- en iyi personel -->
             <div class="card mb-3">
@@ -545,7 +545,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
 
             <!-- ekip satışları -->
             <div class="card mb-3">
@@ -588,7 +588,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
 
             <!-- en çok satılan ürünler -->
             <div class="card mb-3">
