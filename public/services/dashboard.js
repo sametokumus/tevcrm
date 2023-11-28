@@ -4,7 +4,7 @@
 	 $(document).ready(function() {
 
          var $grid = $('.row.masonry-layout').masonry({
-             itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]', // Selects elements with classes starting with col-xl-
+             itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]',
              percentPosition: true
          });
 
@@ -54,6 +54,15 @@
 
 let dash_currency;
 let dash_owner;
+function reLoadGrid(){
+    var $grid = $('.row.masonry-layout').masonry({
+        itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]',
+        percentPosition: true
+    });
+
+    $grid.masonry('reloadItems');
+    $grid.masonry('layout');
+}
 function changeDashCurrency(){
     dash_currency = document.getElementById('dash_currency').value;
     localStorage.setItem('dash_currency', dash_currency);
@@ -381,6 +390,8 @@ async function getApprovedMonthlySales(){
     );
     apexColumnChart.render();
 
+    reLoadGrid();
+
 }
 
 async function getCompletedMonthlySales(){
@@ -494,6 +505,8 @@ async function getCompletedMonthlySales(){
     );
     apexColumnChart.render();
 
+    reLoadGrid();
+
 }
 
 async function getPotentialMonthlySales(){
@@ -605,6 +618,8 @@ async function getPotentialMonthlySales(){
         apexColumnChartOptions
     );
     apexColumnChart.render();
+
+    reLoadGrid();
 
 }
 
@@ -718,6 +733,8 @@ async function getCancelledMonthlySales(){
     );
     apexColumnChart.render();
 
+    reLoadGrid();
+
 }
 
 async function getAdminsSales(){
@@ -748,6 +765,7 @@ async function getAdminsSales(){
         $('#admins-table tbody').append(item);
     });
 
+    reLoadGrid();
 
 }
 
@@ -771,6 +789,8 @@ async function initTopSaledProducts(){
 
         $('#top-products-table tbody').append(item);
     });
+
+    reLoadGrid();
 }
 
 async function getBestCustomers(){
@@ -789,6 +809,7 @@ async function getBestCustomers(){
         $('#best-customers-table tbody').append(item);
     });
 
+    reLoadGrid();
 
 }
 
@@ -808,5 +829,5 @@ async function getBestStaffs(){
         $('#best-staffs-table tbody').append(item);
     });
 
-
+    reLoadGrid();
 }
