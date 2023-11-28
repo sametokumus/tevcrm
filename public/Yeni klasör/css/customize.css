@@ -1,0 +1,640 @@
+.text-right{
+    text-align: right !important;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.5rem 1rem;
+}
+.card-text{
+    margin-bottom: .1rem;
+}
+.nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link{
+    padding: 1rem 1rem;
+}
+
+select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.form-control{
+    padding: .375rem .75rem !important;
+}
+.form-control.input-sm {
+    padding: 0.2rem 0.75rem !important;
+}
+.datepicker.datepicker-dropdown {
+    width: 18.75rem;
+    padding: 0.375rem 0.75rem 0.75rem;
+    z-index: 1065!important;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+div.dataTables_wrapper div.dt-buttons {
+    float: left;
+    text-align: left;
+}
+div.dataTables_wrapper div.dt-buttons button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.251rem 0.51rem;
+    font-size: 0.875rem;
+    border-radius: 3px;
+    line-height: 1.5;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: #798e98 !important;
+    background: transparent !important;
+    border-color: #798e98 !important;
+}
+
+div.dataTables_wrapper div.dt-buttons button.btn.btn-theme {
+    color: rgba(0,0,0,.75) !important;
+    background-color: #3cd2a5 !important;
+    border-color: #3cd2a5 !important;
+}
+
+div.dataTables_wrapper div.dt-buttons button.btn.btn-warning {
+    color: rgba(255,255,255,.75) !important;
+    background-color: #ff9f0c !important;
+    border-color: #ff9f0c !important;
+}
+
+div.dataTables_wrapper div.dt-buttons button.btn.btn-danger {
+    color: rgba(255,255,255,.75) !important;
+    background-color: #ff6060 !important;
+    border-color: #ff6060 !important;
+}
+
+div.dataTables_wrapper div.dt-buttons button.btn.btn-yellow {
+    color: rgba(0,0,0,.75) !important;
+    background-color: #f9e80d !important;
+    border-color: #f9e80d !important;
+}
+
+table tr.selected{
+    background-color: rgba(255,255,255,.2) !important;
+}
+
+
+
+/* OFFER PRINT */
+#offer-print #logo img{
+    width: 150px;
+}
+#offer-print .contact-col{
+    margin-top: 30px;
+}
+#offer-print .logo-header{
+    text-align: right;
+}
+#offer-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#offer-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#offer-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+
+/* QUOTE PRINT */
+#quote-print #logo img{
+    width: 150px;
+}
+#quote-print .contact-col{
+    margin-top: 40px;
+}
+#quote-print .logo-header{
+    text-align: right;
+}
+#quote-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#quote-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#quote-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+
+/* PURCHASING ORDER PRINT */
+#purchasing-order-print #logo img{
+    width: 150px;
+}
+#purchasing-order-print .contact-col{
+    margin-top: 40px;
+}
+#purchasing-order-print .logo-header{
+    text-align: right;
+}
+#purchasing-order-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#purchasing-order-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#purchasing-order-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+#purchasing-order-print #note *{
+    margin: 0;
+}
+
+
+/* ORDER CONFIRMATION PRINT */
+#order-confirmation-print #logo img{
+    width: 150px;
+}
+#order-confirmation-print .contact-col{
+    margin-top: 40px;
+}
+#order-confirmation-print .logo-header{
+    text-align: right;
+}
+#order-confirmation-print .logo-header .date{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 300;
+}
+#order-confirmation-print .logo-header .offer-id{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#order-confirmation-print #offer-detail{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+#order-confirmation-print #note *{
+    margin: 0;
+}
+
+#bank-details p{
+    margin-bottom: 5px;
+    line-height: 13px;
+}
+
+#bank-details table{
+    width: 100% !important;
+    margin-top: 10px;
+    font-size: 12px;
+}
+#bank-details table tr{
+    font-size: 10px;
+    font-weight: 300;
+}
+#bank-details table td{
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 10px;
+}
+
+.company-signature .name{
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-top: -10px;
+    font-weight: 800;
+}
+
+.company-signature #signature{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    height: 70px;
+    width: 220px;
+    margin: auto;
+}
+
+
+.company-signature .signature,
+.customer-signature .signature{
+    width: auto;
+    height: 60px;
+}
+.customer-signature .name{
+    height: 20px;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.p-md-50{
+    padding: 50px !important;
+}
+.printable .print-color * {
+    color: #000 !important;
+}
+.printable #note *{
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.printable #note p{
+    margin-bottom: 0;
+    line-height: 13px;
+}
+.printable table{
+    margin: 0 !important;
+}
+.printable table td{
+    border: 1px solid rgba(0,0,0,.3);
+}
+.printable #bank-details table td{
+    border: 1px solid rgba(0,0,0,.3);
+}
+
+.printable table td.border-0{
+    border: 0px;
+}
+
+@media print {
+    .p-md-50{
+        padding: 0px !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+    .print-color * {
+        color: #000 !important;
+    }
+    .pace{
+        display: none;
+    }
+    #note *{
+        font-size: 12px;
+    }
+    table{
+        margin: 0 !important;
+    }
+    table td{
+        border: 1px solid rgba(0,0,0,.3);
+    }
+    #bank-details table td{
+        border: 1px solid rgba(0,0,0,.3);
+    }
+}
+
+
+.modal-backdrop.show:nth-of-type(even) {
+    z-index: 1054 !important;
+}
+#updateOfferProductModal.show{
+    z-index: 1062 !important;
+}
+#addOfferProductModal.show{
+    z-index: 1062 !important;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 0rem 0.5rem;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+#sales-datatable {
+    white-space: nowrap;
+}
+@media only screen and (max-width: 1500px) {
+    #sales-datatable {
+        white-space: normal;
+    }
+    #sales-datatable .btn {
+        margin-bottom: 5px;
+    }
+}
+
+#company-grid .grid-item{
+    display: inline-grid;
+}
+
+@media print {
+    @page {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    #print-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+        border-top: 1px solid #ccc;
+    }
+    #print-footer.lenis-footer{
+        height: 150px;
+    }
+    #print-footer.semy-footer{
+        height: 120px;
+    }
+
+    div.footer-spacer {
+        height: 15mm;
+    }
+
+    div.footer-spacer.lenis-spacer {
+        height: 35mm;
+    }
+
+    div.footer-spacer.semy-spacer {
+        height: 45mm;
+    }
+
+
+}
+
+#category_view li{
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .75);
+}
+
+#offer-print *{
+    font-size: 13px;
+}
+
+#offer-print .page-header{
+    font-size: 28px;
+}
+#quote-print *{
+    font-size: 13px;
+}
+
+#quote-print .page-header{
+    font-size: 28px;
+}
+#order-confirmation-print *{
+    font-size: 13px;
+}
+
+#order-confirmation-print .page-header{
+    font-size: 28px;
+}
+#purchasing-order-print *{
+    font-size: 13px;
+}
+
+#purchasing-order-print .page-header{
+    font-size: 28px;
+}
+.logo-header #logo{
+    margin-bottom: 10px;
+}
+
+#sales-datatable td span.badge{
+    cursor: pointer;
+}
+
+
+/*DTE*/
+/*.DTE_Field label{*/
+/*    display: none;*/
+/*}*/
+
+.select2-container{
+    z-index: 9999;
+}
+.select2-dropdown{
+    background: #666;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.select2-container--default .select2-selection--multiple{
+    background-color: transparent;
+}
+.select2-container--default .select2-selection--multiple{
+    border: 1px solid rgba(255,255,255,.3);
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border: 1px solid rgba(255,255,255,.3);
+}
+.select2-search__field{
+    color: #aaaaaa;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: #666666;
+    border: 1px solid #666666;
+}
+
+.select2-container--default .select2-selection--single {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(255,255,255,.75);
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid rgba(255,255,255,.3);
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    height: 35px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: rgba(255,255,255,.75);
+    line-height: 20px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.app-header .brand .brand-logo .brand-img{
+    width: auto;
+    height: 40px;
+    background: none;
+}
+.dtfc-fixed-left{
+    z-index: 1;
+}
+
+
+#sales-notes-table *{
+    margin-bottom: 0;
+}
+/* Toast */
+.alert-container {
+    border-radius: 0;
+    background-color: #3cd2a5;
+    color: #333;
+    border: none;
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    width: 300px;
+    display: none;
+    z-index: 1055;
+    box-shadow: 0 2px 15px rgb(0 0 0 / 25%);
+}
+
+.alert-container .alert {
+    text-align: left;
+    padding: 15px 30px;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 1;
+    border: none;
+}
+
+
+.pulse-button {
+    cursor: pointer;
+    box-shadow: 0 0 0 0 #ff9f0c;
+    -webkit-animation: pulse 1.5s infinite;
+
+}
+.pulse-button:hover {
+    -webkit-animation: none;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        transform: scale(.9);
+    }
+    70% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 50px rgba(255, 159, 12, 1);
+    }
+    100% {
+        transform: scale(.9);
+        box-shadow: 0 0 0 0 rgba(255, 159, 12, 1);
+    }
+}
+
+.table tr.disabled {
+    opacity: .5;
+}
+
+.table tr.disabled span.badge{
+    pointer-events: none;
+}
+
+.table tr.disabled button.btn{
+    pointer-events: none;
+}
+
+.table tr.disabled a.btn{
+    pointer-events: none;
+}
+
+
+/* DTE Lightbox */
+div.DTED_Lightbox_Wrapper div.DTED_Lightbox_Container div.DTED_Lightbox_Content_Wrapper div.DTED_Lightbox_Content div.DTE div.DTE_Body_Content{
+    background-color: rgba(28,38,47,.95);
+}
+div.DTE div.DTE_Footer{
+    background-color: rgba(28,38,47,1);
+    border: none;
+}
+
+div.DTE div.DTE_Header{
+    background-color: rgba(28,38,47,1);
+    border: none;
+}
+
+div.DTED_Lightbox_Wrapper div.DTED_Lightbox_Container div.DTED_Lightbox_Content_Wrapper div.DTED_Lightbox_Content div.DTED_Lightbox_Close:after{
+    color: rgba(255,255,255,.75);
+}
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:active,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:focus,
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button:active:focus{
+    background-color: var(--bs-theme);
+    border: none;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+    color: #000;
+}
+
+div.DTE_Field input, div.DTE_Field textarea{
+    background-color: inherit;
+}
+div.DTE_Field input:focus, div.DTE_Field textarea:focus{
+    background-color: inherit;
+}
+div.DTE_Body div.DTE_Body_Content div.DTE_Field:hover {
+    background-color: transparent;
+    border: none;
+}
+div.DTE_Field select{
+    background: transparent;
+}
+
+
+#packing-list-detail tr td{
+    display: table-cell !important;
+}
+#packing-list-detail tr td:nth-child(8){
+    display: none !important;
+}
+#packing-list-detail tr td:nth-child(9){
+    display: none !important;
+}
+
+#new-offer-detail_wrapper .dtfc-fixed-left{
+    left: 0 !important;
+}
+
+
+.tooltip-custom{
+    background-color: rgba(255,255,255,.8);
+}
+.tooltip-custom-header{
+    background-color: rgba(195, 195, 195, 0.8);
+    color: #3a3a3a;
+    padding: 5px 10px;
+    font-weight: 700;
+    font-size: 13px;
+}
+.tooltip-custom-content{
+    color: #3a3a3a;
+    padding: 5px 10px;
+}
+.tooltip-custom-content p{
+    margin-bottom: 3px;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.app-sidebar .app-sidebar-content .menu{
+    padding-bottom: 300px;
+}
