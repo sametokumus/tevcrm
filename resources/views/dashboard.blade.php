@@ -327,6 +327,8 @@ $extra_js='
 
     </div>
 
+    <div class="row">
+        <div class="col-xl-6">
     <div class="row masonry-layout">
 
         <div class="col-xl-3">
@@ -460,6 +462,11 @@ $extra_js='
             </div>
 
         </div>
+
+    </div>
+        </div>
+        <div class="col-xl-6">
+    <div class="row masonry-layout">
 
         <div class="col-xl-4">
 
@@ -629,6 +636,8 @@ $extra_js='
 
         </div>
 
+    </div>
+        </div>
     </div>
 
 </div>
