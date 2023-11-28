@@ -40,11 +40,8 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="approved-box">
-                        <div class="col-9">
+                        <div class="col-12">
                             <h5 class="mb-0"></h5>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="bar" data-title="Visitors" data-height="30"></div>
                         </div>
                     </div>
 
@@ -77,12 +74,8 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="completed-box">
-                        <div class="col-9">
+                        <div class="col-12">
                             <h5 class="mb-0"></h5>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n2" data-render="apexchart" data-type="line" data-title="Visitors"
-                                 data-height="30"></div>
                         </div>
                     </div>
 
@@ -115,12 +108,8 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="potential-box">
-                        <div class="col-9">
+                        <div class="col-12">
                             <h5 class="mb-0"></h5>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="pie" data-title="Visitors"
-                                 data-height="45"></div>
                         </div>
                     </div>
 
@@ -153,12 +142,8 @@ $extra_js='
 
 
                     <div class="row align-items-center mb-2" id="cancelled-box">
-                        <div class="col-9">
+                        <div class="col-12">
                             <h5 class="mb-0"></h5>
-                        </div>
-                        <div class="col-3">
-                            <div class="mt-n3 mb-n2" data-render="apexchart" data-type="donut" data-title="Visitors"
-                                 data-height="45"></div>
                         </div>
                     </div>
 
