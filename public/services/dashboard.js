@@ -3,7 +3,13 @@
 
 	 $(document).ready(function() {
 
+         var $grid = $('.row.masonry-layout').masonry({
+             itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]', // Selects elements with classes starting with col-xl-
+             percentPosition: true
+         });
 
+         $grid.masonry('reloadItems');
+         $grid.masonry('layout');
 
 	});
 
@@ -45,14 +51,6 @@
 	});
 
 })(window.jQuery);
-
-var $grid = $('.col-xl-6').masonry({
-    itemSelector: '.col-xl-6',
-    percentPosition: true
-});
-
-$grid.masonry('reloadItems');
-$grid.masonry('layout');
 
 let dash_currency;
 let dash_owner;
