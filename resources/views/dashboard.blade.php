@@ -62,9 +62,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-sm m-auto d-block text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-sm m-auto d-block text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-sm m-auto d-block text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
                             </div>
                         </div>
                     </div>
@@ -240,6 +240,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="monthly-approved-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -391,7 +396,14 @@ $extra_js='
 
 
                             <div class="mb-3">
-                                <div id="chart-approved-monthly"></div>
+                                <div id="chart-approved-monthly">
+
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                        <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                        <div class="spinner spinner-grow spinner-grow-sm m-1 text-success"></div>
+                                    </div>
+                                </div>
                             </div>
 
 
