@@ -61,6 +61,7 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="approved-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinner-grow text-dark"></div>
                         </div>
                     </div>
 
@@ -94,6 +95,7 @@ $extra_js='
 
                     <div class="row align-items-center mb-2" id="completed-box">
                         <div class="col-12">
+                            <div class="spinner-border text-light"></div>
                             <h5 class="mb-0"></h5>
                         </div>
                     </div>
