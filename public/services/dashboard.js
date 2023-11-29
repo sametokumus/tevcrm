@@ -424,7 +424,7 @@ async function getCompletedMonthlySales(){
 
     let apexColumnChartOptions = {
         chart: {
-            height: 350,
+            height: 300,
             type: 'bar'
         },
         title: {
@@ -539,7 +539,7 @@ async function getPotentialMonthlySales(){
 
     let apexColumnChartOptions = {
         chart: {
-            height: 350,
+            height: 300,
             type: 'bar'
         },
         title: {
@@ -654,7 +654,7 @@ async function getCancelledMonthlySales(){
 
     let apexColumnChartOptions = {
         chart: {
-            height: 350,
+            height: 300,
             type: 'bar'
         },
         title: {
