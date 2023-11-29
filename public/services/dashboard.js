@@ -142,12 +142,14 @@ async function getLastMonthSales(){
         cancelled_sale = sales.cancelled.eur_sale;
     }
 
+    $('#monthly-approved-box .spinners').remove();
+    $('#monthly-completed-box .spinners').remove();
+    $('#monthly-continue-box .spinners').remove();
+    $('#monthly-cancelled-box .spinners').remove();
+
     $('#monthly-approved-box h5').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
-
     $('#monthly-completed-box h5').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
-
     $('#monthly-continue-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
-
     $('#monthly-cancelled-box h5').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
     var spark1 = {
@@ -389,6 +391,7 @@ async function getApprovedMonthlySales(){
             }
         }
     };
+    $('#chart-approved-monthly .spinners').remove();
     var apexColumnChart = new ApexCharts(
         document.querySelector('#chart-approved-monthly'),
         apexColumnChartOptions
@@ -504,6 +507,7 @@ async function getCompletedMonthlySales(){
             }
         }
     };
+    $('#chart-completed-monthly .spinners').remove();
     var apexColumnChart = new ApexCharts(
         document.querySelector('#chart-completed-monthly'),
         apexColumnChartOptions
@@ -618,6 +622,7 @@ async function getPotentialMonthlySales(){
             }
         }
     };
+    $('#chart-potential-sales .spinners').remove();
     var apexColumnChart = new ApexCharts(
         document.querySelector('#chart-potential-sales'),
         apexColumnChartOptions
@@ -732,6 +737,7 @@ async function getCancelledMonthlySales(){
             }
         }
     };
+    $('#chart-cancelled-potential-sales .spinners').remove();
     var apexColumnChart = new ApexCharts(
         document.querySelector('#chart-cancelled-potential-sales'),
         apexColumnChartOptions
@@ -748,6 +754,7 @@ async function getAdminsSales(){
     let admins = data.admins;
     admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
 
+    $('#admins-table tbody .spinners').remove();
 
     $('#admins-table tbody tr').remove();
     $.each(admins, function (i, admin) {
@@ -778,6 +785,8 @@ async function initTopSaledProducts(){
     let data = await serviceGetTopSaledProducts(dash_owner);
     let products = data.products;
 
+    $('#top-products-table tbody .spinners').remove();
+
     $('#top-products-table tbody tr').remove();
 
     $.each(products, function (i, product) {
@@ -803,6 +812,7 @@ async function getBestCustomers(){
     let data = await serviceGetBestCustomer();
     let companies = data.companies;
 
+    $('#best-customers-table tbody .spinners').remove();
 
     $('#best-customers-table tbody tr').remove();
     $.each(companies, function (i, company) {
@@ -823,6 +833,7 @@ async function getBestStaffs(){
     let data = await serviceGetBestStaff();
     let staffs = data.staffs;
 
+    $('#best-staffs-table tbody .spinners').remove();
 
     $('#best-staffs-table tbody tr').remove();
     $.each(staffs, function (i, staff) {
