@@ -91,7 +91,7 @@ $extra_js='
             <table id="sales-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
-                    <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
+                    <th class="border-bottom-0 bg-dark-600" data-priority="1">N#</th>
                     <th class="border-bottom-0 bg-dark">Satış Kodu</th>
                     <th class="border-bottom-0 bg-dark">Müşteri</th>
                     <th class="border-bottom-0 bg-dark">Satış Temsilcisi</th>
