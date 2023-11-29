@@ -812,7 +812,7 @@ async function getBestCustomers(){
     let data = await serviceGetBestCustomer();
     let companies = data.companies;
 
-    $('#best-customers-table tbody .spinners').remove();
+    $('#best-customers-table').siblings('.spinners').remove();
 
     $('#best-customers-table tbody tr').remove();
     $.each(companies, function (i, company) {
