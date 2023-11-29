@@ -147,7 +147,7 @@ $extra_js='
 
 <div class="modal modal-cover fade" id="addProductCountModal">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content" style="background-color: #202b36;">
+        <div class="modal-content" style="background-color: #d0d6dd;">
             <div class="modal-header">
                 <h5 class="modal-title">Gönderi Adedi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

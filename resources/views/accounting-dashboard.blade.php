@@ -31,7 +31,7 @@ $extra_js='
 
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">TOPLAM ÖDENEN</span>
-                            <a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                            <a href="#" data-toggle="card-expand" class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
 
@@ -44,7 +44,7 @@ $extra_js='
                         </div>
 
 
-                        <div class="text-white text-opacity-80 text-truncate" id="total-text">
+                        <div class="text-dark text-opacity-80 text-truncate" id="total-text">
 
                         </div>
                     </div>
@@ -75,7 +75,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">BEKLEYEN ÖDEMELER</span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
 
@@ -88,7 +88,7 @@ $extra_js='
                         </div>
 
 
-                        <div class="text-white text-opacity-80 text-truncate" id="pending-text">
+                        <div class="text-dark text-opacity-80 text-truncate" id="pending-text">
 
                         </div>
                     </div>
@@ -119,7 +119,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">GECİKEN ÖDEMELER</span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
 
@@ -132,7 +132,7 @@ $extra_js='
                         </div>
 
 
-                        <div class="text-white text-opacity-80 text-truncate" id="late-text">
+                        <div class="text-dark text-opacity-80 text-truncate" id="late-text">
 
                         </div>
                     </div>
@@ -162,7 +162,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">ORTALAMA KARLILIK</span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
 
@@ -177,7 +177,7 @@ $extra_js='
                         </div>
 
 
-                        <div class="text-white text-opacity-80 text-truncate" id="profit-text">
+                        <div class="text-dark text-opacity-80 text-truncate" id="profit-text">
 
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
@@ -211,7 +211,7 @@ $extra_js='
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">ÖDEMELER</span>
-                        <a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                        <a href="#" data-toggle="card-expand" class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -247,7 +247,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">NAKİT AKIŞI</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -285,7 +285,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">ÖDEMELER</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
