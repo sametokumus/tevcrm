@@ -315,7 +315,7 @@ async function getApprovedMonthlySales(){
         legend: {
             fontFamily: FONT_FAMILY,
             labels: {
-                colors: '#fff'
+                colors: COLOR_DARK
             }
         },
         plotOptions: {
@@ -430,7 +430,7 @@ async function getCompletedMonthlySales(){
         legend: {
             fontFamily: FONT_FAMILY,
             labels: {
-                colors: '#fff'
+                colors: COLOR_DARK
             }
         },
         plotOptions: {
@@ -457,7 +457,7 @@ async function getCompletedMonthlySales(){
             categories: xAxisArray,
             labels: {
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -480,7 +480,7 @@ async function getCompletedMonthlySales(){
                     return changeCommasToDecimal(val.toFixed(2))
                 },
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -544,7 +544,7 @@ async function getPotentialMonthlySales(){
         legend: {
             fontFamily: FONT_FAMILY,
             labels: {
-                colors: '#fff'
+                colors: COLOR_DARK
             }
         },
         plotOptions: {
@@ -571,7 +571,7 @@ async function getPotentialMonthlySales(){
             categories: xAxisArray,
             labels: {
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -594,7 +594,7 @@ async function getPotentialMonthlySales(){
                     return changeCommasToDecimal(val.toFixed(2))
                 },
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -658,7 +658,7 @@ async function getCancelledMonthlySales(){
         legend: {
             fontFamily: FONT_FAMILY,
             labels: {
-                colors: '#fff'
+                colors: COLOR_DARK
             }
         },
         plotOptions: {
@@ -685,7 +685,7 @@ async function getCancelledMonthlySales(){
             categories: xAxisArray,
             labels: {
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -708,7 +708,7 @@ async function getCancelledMonthlySales(){
                     return changeCommasToDecimal(val.toFixed(2))
                 },
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
