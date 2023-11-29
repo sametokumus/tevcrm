@@ -342,7 +342,7 @@ async function getApprovedMonthlySales(){
             categories: xAxisArray,
             labels: {
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,

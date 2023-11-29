@@ -28,7 +28,7 @@ $extra_js='
 
         <div class="col-xl-2 col-lg-3">
 
-            <div class="card mb-3">
+            <div class="card bg-theme text-white mb-3">
 
                 <div class="card-body">
 
