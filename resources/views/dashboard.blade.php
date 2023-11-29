@@ -11,16 +11,35 @@ $extra_js='
 
 <div id="content" class="app-content">
     <div class="row">
-        <div class="col-6 mb-5">
-            <select class="form-control" id="dash_owner" onchange="changeDashOwner();">
-            </select>
-        </div>
-        <div class="col-6 mb-5">
-            <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
-                <option value="TRY">TRY</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-            </select>
+
+        <div class="card border-theme">
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-6">
+                        <select class="form-control" id="dash_owner" onchange="changeDashOwner();">
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" id="dash_currency" onchange="changeDashCurrency();">
+                            <option value="TRY">TRY</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+
         </div>
     </div>
 
