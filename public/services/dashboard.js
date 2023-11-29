@@ -754,7 +754,7 @@ async function getAdminsSales(){
     let admins = data.admins;
     admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
 
-    $('#admins-table tbody .spinners').remove();
+    $('#admins-table').siblings('.spinners').remove();
 
     $('#admins-table tbody tr').remove();
     $.each(admins, function (i, admin) {
@@ -785,7 +785,7 @@ async function initTopSaledProducts(){
     let data = await serviceGetTopSaledProducts(dash_owner);
     let products = data.products;
 
-    $('#top-products-table tbody .spinners').remove();
+    $('#top-products-table').siblings('.spinners').remove();
 
     $('#top-products-table tbody tr').remove();
 
@@ -833,7 +833,7 @@ async function getBestStaffs(){
     let data = await serviceGetBestStaff();
     let staffs = data.staffs;
 
-    $('#best-staffs-table tbody .spinners').remove();
+    $('#best-staffs-table').siblings('.spinners').remove();
 
     $('#best-staffs-table tbody tr').remove();
     $.each(staffs, function (i, staff) {
