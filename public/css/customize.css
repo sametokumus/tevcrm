@@ -578,15 +578,15 @@ table tr.selected{
 
 /* DTE Lightbox */
 div.DTED_Lightbox_Wrapper div.DTED_Lightbox_Container div.DTED_Lightbox_Content_Wrapper div.DTED_Lightbox_Content div.DTE div.DTE_Body_Content{
-    background-color: rgba(28,38,47,.95);
+    /*background-color: rgba(28,38,47,.95);*/
 }
 div.DTE div.DTE_Footer{
-    background-color: rgba(28,38,47,1);
+    /*background-color: rgba(28,38,47,1);*/
     border: none;
 }
 
 div.DTE div.DTE_Header{
-    background-color: rgba(28,38,47,1);
+    /*background-color: rgba(28,38,47,1);*/
     border: none;
 }
 
