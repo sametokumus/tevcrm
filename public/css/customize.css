@@ -1,5 +1,17 @@
+:root, [data-bs-theme=light] {
+linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.99) 100%);
+    --bs-body-bg-image: url(images/pattern.png);
+    --bs-body-bg-image-size: 4.6875rem;
+    --bs-body-bg-cover: url(images/cover-semy.jpg);
+}
 #header{
     background: #1d2835f2;
+}
+.app-header .menu-toggler .bar{
+    background: #fff;
+}
+.app-header .menu .menu-item .menu-link{
+    color: #fff;
 }
 
 .text-right{
