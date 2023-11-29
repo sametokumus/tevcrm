@@ -100,6 +100,11 @@ async function getTotalSales(){
         cancelled_sale = sales.cancelled.eur_sale;
     }
 
+    $('#approved-box .spinners').remove();
+    $('#completed-box .spinners').remove();
+    $('#potential-box .spinners').remove();
+    $('#cancelled-box .spinners').remove();
+
     $('#approved-box h5').append(changeCommasToDecimal(approved_sale) + ' ' + dash_currency);
     $('#completed-box h5').append(changeCommasToDecimal(completed_sale) + ' ' + dash_currency);
     $('#potential-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
