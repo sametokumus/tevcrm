@@ -573,7 +573,7 @@ async function initSellingProcess(sale_id){
                 return label + ': ' + diff + (diff > 1 ? ' gün' : ' gün')
             },
             style: {
-                colors: ['#f3f4f5', '#fff']
+                colors: ['#000000bf', '#000000bf']
             }
         },
         xaxis: {
@@ -584,7 +584,7 @@ async function initSellingProcess(sale_id){
         },
         grid: {
             row: {
-                colors: ['#f3f4f5', '#fff'],
+                colors: ['#000000bf', '#000000bf'],
                 opacity: 0.1
             }
         }
