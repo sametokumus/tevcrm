@@ -294,11 +294,11 @@ $extra_js='
                         <table id="payments-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                             <thead>
                             <tr>
-                                <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
-                                <th class="border-bottom-0 bg-dark">Satış Kodu</th>
-                                <th class="border-bottom-0 bg-dark">Müşteri</th>
-                                <th class="border-bottom-0 bg-dark">Durum</th>
-                                <th class="border-bottom-0 bg-dark">Durum</th>
+                                <th class="border-bottom-0 bg-dark-100" data-priority="1">N#</th>
+                                <th class="border-bottom-0 bg-dark-100">Satış Kodu</th>
+                                <th class="border-bottom-0 bg-dark-100">Müşteri</th>
+                                <th class="border-bottom-0 bg-dark-100">Durum</th>
+                                <th class="border-bottom-0 bg-dark-100">Durum</th>
                                 <th class="border-bottom-0">Ödeme Türü</th>
                                 <th class="border-bottom-0">Ödeme Yöntemi</th>
                                 <th class="border-bottom-0">Vade Tarihi</th>

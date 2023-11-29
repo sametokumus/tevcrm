@@ -400,11 +400,11 @@ async function getCashFlowPayments(){
         let total_price = changeCommasToDecimal(payment.payment_total);
 
         let item = '<tr class="'+ row_status_class +'">\n' +
-            '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
-            '              <td class="bg-dark">'+ payment.sale.owner.short_code +'-'+ payment.sale.id +'</td>\n' +
-            '              <td class="bg-dark">'+ payment.sale.customer.name +'</td>\n' +
-            '              <td class="bg-dark">'+ status +'</td>\n' +
-            '              <td class="bg-dark">'+ payment.date_message +'</td>\n' +
+            '              <td class="bg-dark-100">'+ (i+1)+'</td>\n' +
+            '              <td class="bg-dark-100">'+ payment.sale.owner.short_code +'-'+ payment.sale.id +'</td>\n' +
+            '              <td class="bg-dark-100">'+ payment.sale.customer.name +'</td>\n' +
+            '              <td class="bg-dark-100">'+ status +'</td>\n' +
+            '              <td class="bg-dark-100">'+ payment.date_message +'</td>\n' +
             '              <td>'+ payment.payment_type_name +'</td>\n' +
             '              <td>'+ payment.payment_method_name +'</td>\n' +
             '              <td>'+ formatDateASC(payment.due_date, "-") +'</td>\n' +

@@ -141,10 +141,10 @@ async function initSales(){
         }
 
         let saleItem = '<tr '+ authorization +'>\n' +
-            '              <td class="bg-dark">'+ (i+1)+'</td>\n' +
-			'              <td class="bg-dark">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
-            '              <td class="bg-dark">'+ sale.request.company.name +'</td>\n' +
-			'              <td class="bg-dark">'+ authorized_name +'</td>\n' +
+            '              <td class="bg-dark-100">'+ (i+1)+'</td>\n' +
+			'              <td class="bg-dark-100">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
+            '              <td class="bg-dark-100">'+ sale.request.company.name +'</td>\n' +
+			'              <td class="bg-dark-100">'+ authorized_name +'</td>\n' +
 			'              <td>'+ employee_name +'</td>\n' +
 			'              <td class="d-none">'+ sale.request.product_count +'</td>\n' +
 			'              <td>'+ changeCommasToDecimal(price) +'</td>\n' +

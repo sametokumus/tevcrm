@@ -101,10 +101,10 @@ $(".timepicker").timepicker({
             <table id="activities-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
-                    <th class="border-bottom-0 bg-dark" data-priority="1">N#</th>
-                    <th class="border-bottom-0 bg-dark">Firma</th>
-                    <th class="border-bottom-0 bg-dark">Firma Yetkilisi</th>
-                    <th class="border-bottom-0 bg-dark">Aktivite Sorumlusu</th>
+                    <th class="border-bottom-0 bg-dark-100" data-priority="1">N#</th>
+                    <th class="border-bottom-0 bg-dark-100">Firma</th>
+                    <th class="border-bottom-0 bg-dark-100">Firma Yetkilisi</th>
+                    <th class="border-bottom-0 bg-dark-100">Aktivite Sorumlusu</th>
                     <th class="border-bottom-0">Tür</th>
                     <th class="border-bottom-0">Konu</th>
                     <th class="border-bottom-0">Başlangıç</th>

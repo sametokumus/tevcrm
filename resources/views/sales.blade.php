@@ -91,10 +91,10 @@ $extra_js='
             <table id="sales-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
-                    <th class="border-bottom-0 bg-dark-600" data-priority="1">N#</th>
-                    <th class="border-bottom-0 bg-dark">Satış Kodu</th>
-                    <th class="border-bottom-0 bg-dark">Müşteri</th>
-                    <th class="border-bottom-0 bg-dark">Satış Temsilcisi</th>
+                    <th class="border-bottom-0 bg-dark-100" data-priority="1">N#</th>
+                    <th class="border-bottom-0 bg-dark-100">Satış Kodu</th>
+                    <th class="border-bottom-0 bg-dark-100">Müşteri</th>
+                    <th class="border-bottom-0 bg-dark-100">Satış Temsilcisi</th>
                     <th class="border-bottom-0">Müşteri Yetkilisi</th>
                     <th class="border-bottom-0">Ürün Adedi</th>
                     <th class="border-bottom-0">Teklif Fiyatı</th>
