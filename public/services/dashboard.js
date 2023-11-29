@@ -309,7 +309,7 @@ async function getApprovedMonthlySales(){
                 fontSize: '14px',
                 fontWeight: 'bold',
                 fontFamily: FONT_FAMILY,
-                color: COLOR_WHITE
+                color: COLOR_DARK
             },
         },
         legend: {
@@ -365,7 +365,7 @@ async function getApprovedMonthlySales(){
                     return changeCommasToDecimal(val.toFixed(2))
                 },
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
