@@ -27,7 +27,7 @@ $(".timepicker").timepicker({
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px" id="sale-code"></span>
                         <h3 id="customer-name"></h3>
@@ -55,7 +55,7 @@ $(".timepicker").timepicker({
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Toplam Satış Tutarı</span>
                         <h3 id="total-price"></h3>
@@ -83,7 +83,7 @@ $(".timepicker").timepicker({
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Kalan Ödeme Tutarı</span>
                         <h3 id="remaining-price"></h3>
@@ -111,7 +111,7 @@ $(".timepicker").timepicker({
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Talep Tarihi</span>
                         <h3 id="sale-date"></h3>

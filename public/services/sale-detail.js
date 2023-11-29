@@ -111,7 +111,7 @@ async function initSaleStats(sale_id){
         total = changeCommasToDecimal(sale.grand_total_with_shipping) + ' ' + sale.currency;
     }
 
-    $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-white">'+sale.request.company.name+'</a>');
+    $('#customer-name').append('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-dark">'+sale.request.company.name+'</a>');
     if (sale.request.company_employee != null) {
         $('#customer-employee').text('Müşteri Yetkilisi: ' + sale.request.company_employee.name);
     }
@@ -292,8 +292,8 @@ async function initSaleSuppliers(sale_id){
                 '           <td><small>' + offer.product_count + ' Ürün</small></td>\n' +
                 '           <td><small>' + changeCommasToDecimal(offer.total_price) + ' ' + offer.currency + '+KDV</small></td>\n' +
                 '           <td>\n' +
-                '               <a href="/company-detail/' + offer.supplier_id + '" class="text-decoration-none text-white"><i class="bi bi-search"></i></a>\n' +
-                '               <a href="/purchasing-order-print/' + sale_id + '" class="text-decoration-none text-white"><i class="bi bi-file-pdf-fill"></i></a>\n' +
+                '               <a href="/company-detail/' + offer.supplier_id + '" class="text-decoration-none text-dark"><i class="bi bi-search"></i></a>\n' +
+                '               <a href="/purchasing-order-print/' + sale_id + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill"></i></a>\n' +
                 '           </td>\n' +
                 '       </tr>';
 
@@ -316,9 +316,9 @@ async function initDocuments(sale_id){
 
             let item = '<div class="col-xl-3 col-lg-6">\n' +
                 '            <div class="card mb-3">\n' +
-                '                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">\n';
+                '                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">\n';
         if (document.file_url != null) {
-            item += '            <a href="' + document.file_url + '" target="_blank" class="text-white text-decoration-none">' +
+            item += '            <a href="' + document.file_url + '" target="_blank" class="text-dark text-decoration-none">' +
                 '                    <div class="flex-fill">\n' +
                 '                        <h5 class="mb-0"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
                 '                    </div>\n' +

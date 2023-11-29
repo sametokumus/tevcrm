@@ -17,7 +17,7 @@ $extra_js='
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px" id="sale-code"></span>
                         <h3 id="customer-name"></h3>
@@ -45,7 +45,7 @@ $extra_js='
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Toplam Satış Tutarı</span>
                         <h3 id="total-price"></h3>
@@ -73,7 +73,7 @@ $extra_js='
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Ürün</span>
                         <h3 id="product-count"></h3>
@@ -101,7 +101,7 @@ $extra_js='
 
             <div class="card h-100">
 
-                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Talep Tarihi</span>
                         <h3 id="sale-date"></h3>
@@ -143,7 +143,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">SATIŞ SÜRECİ</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -171,7 +171,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">SİPARİŞ ÖZETİ</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -202,7 +202,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EK GİDERLER</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -240,7 +240,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">MOBİL DÖKÜMANLAR</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -276,7 +276,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TEDARİKÇİLER</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -312,7 +312,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">SİPARİŞ SÜRECİ</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
