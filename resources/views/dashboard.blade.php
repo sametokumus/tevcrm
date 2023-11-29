@@ -47,7 +47,7 @@ $extra_js='
 
         <div class="col-xl-2 col-lg-3">
 
-            <div class="card bg-theme-600 mb-3">
+            <div class="card bg-theme-200 mb-3">
 
                 <div class="card-body">
 
@@ -81,7 +81,7 @@ $extra_js='
 
         <div class="col-xl-2 col-lg-3">
 
-            <div class="card bg-warning-600 mb-3">
+            <div class="card bg-warning-200 mb-3">
 
                 <div class="card-body">
 
@@ -115,7 +115,7 @@ $extra_js='
 
         <div class="col-xl-2 col-lg-3">
 
-            <div class="card bg-info-600 mb-3">
+            <div class="card bg-info-200 mb-3">
 
                 <div class="card-body">
 
@@ -149,7 +149,7 @@ $extra_js='
 
         <div class="col-xl-2 col-lg-3">
 
-            <div class="card bg-danger-600 mb-3">
+            <div class="card bg-danger-200 mb-3">
 
                 <div class="card-body">
 
