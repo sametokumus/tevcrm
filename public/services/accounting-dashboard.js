@@ -260,7 +260,7 @@ async function getCashFlows(){
                 fontSize: '14px',
                 fontWeight: 'bold',
                 fontFamily: FONT_FAMILY,
-                color: COLOR_WHITE
+                color: COLOR_DARK
             },
         },
         colors: ['rgba(254, 176, 25, 0.85)', 'rgba(255, 69, 96, 0.85)'],
@@ -283,9 +283,9 @@ async function getCashFlows(){
             type: 'datetime',
             labels: {
                 rotate: 0,
-                color: '#ffffff',
+                color: COLOR_DARK,
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
@@ -309,7 +309,7 @@ async function getCashFlows(){
                     return changeCommasToDecimal(val)
                 },
                 style: {
-                    colors: '#fff',
+                    colors: COLOR_DARK,
                     fontSize: '12px',
                     fontFamily: FONT_FAMILY,
                     fontWeight: 400,
