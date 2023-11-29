@@ -658,3 +658,8 @@ div.DTE_Field select{
 .app-sidebar .app-sidebar-content .menu{
     padding-bottom: 300px;
 }
+
+.spinner-grow-xsm {
+    --bs-spinner-width: .5rem;
+    --bs-spinner-height: .5rem;
+}
