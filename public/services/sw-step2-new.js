@@ -227,15 +227,15 @@ async function initNewOfferDetail(){
     // $("#new-offer-detail").dataTable().fnDestroy();
     $('#new-offer-detail tbody > tr').remove();
 
-    let head_first = '<th rowspan="2" class="border-bottom-0 bg-dark">N#</th>\n' +
-        '             <th rowspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>';
+    let head_first = '<th rowspan="2" class="border-bottom-0 bg-dark-100">N#</th>\n' +
+        '             <th rowspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>';
     let head_second = '';
 
 
     let total_row = '<tr>';
-    total_row += '<td colspan="2" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
+    total_row += '<td colspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
     $.each(companies, function (i, company) {
-        head_first += '<th colspan="6" class="border-bottom-0 bg-dark" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
+        head_first += '<th colspan="6" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
         head_second += '<th class="border-bottom-0"></th>\n' +
             '           <th class="border-bottom-0">Ucuz, Hızlı</th>\n' +
             '           <th class="border-bottom-0">Birim</th>\n' +
