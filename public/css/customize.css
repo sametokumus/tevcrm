@@ -442,6 +442,9 @@ table tr.selected{
 
 .select2-container{
     z-index: 9999;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: 4px;
+    color: var(--bs-body-color);
 }
 .select2-dropdown{
     background: #666;
