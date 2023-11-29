@@ -10,9 +10,9 @@ $extra_js='
 ?>
 
 <div id="content" class="app-content">
-    <div class="row">
+    <div class="">
 
-        <div class="card border-theme">
+        <div class="card border-theme mb-3">
 
             <div class="card-body">
 
