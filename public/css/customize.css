@@ -486,7 +486,8 @@ table tr.selected{
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: rgba(255,255,255,.75);
+    /*color: rgba(255,255,255,.75);*/
+    color: var(--bs-body-color);
     line-height: 20px;
 }
 
