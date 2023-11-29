@@ -301,7 +301,7 @@ async function getApprovedMonthlySales(){
 
     let apexColumnChartOptions = {
         chart: {
-            height: 350,
+            height: 300,
             type: 'bar'
         },
         title: {

@@ -99,8 +99,12 @@ $extra_js='
 
                     <div class="row align-items-center mb-2" id="completed-box">
                         <div class="col-12">
-                            <div class="spinner-border text-light"></div>
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -135,6 +139,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="potential-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -169,6 +178,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="cancelled-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -203,6 +217,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="total-profit-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -281,6 +300,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="monthly-completed-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -317,6 +341,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="monthly-continue-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -353,6 +382,11 @@ $extra_js='
                     <div class="row align-items-center mb-2" id="monthly-cancelled-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -436,7 +470,13 @@ $extra_js='
 
 
                             <div class="mb-3">
-                                <div id="chart-completed-monthly"></div>
+                                <div id="chart-completed-monthly">
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -469,7 +509,13 @@ $extra_js='
 
 
                             <div class="mb-3">
-                                <div id="chart-potential-sales"></div>
+                                <div id="chart-potential-sales">
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -502,7 +548,13 @@ $extra_js='
 
 
                             <div class="mb-3">
-                                <div id="chart-cancelled-potential-sales"></div>
+                                <div id="chart-cancelled-potential-sales">
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -550,7 +602,11 @@ $extra_js='
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -592,7 +648,11 @@ $extra_js='
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -635,7 +695,11 @@ $extra_js='
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -676,7 +740,11 @@ $extra_js='
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-light"></div>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
