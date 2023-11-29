@@ -117,7 +117,7 @@ async function getCashFlows(){
             '               <div class="card mb-3">\n' +
             '                   <div class="card-header d-flex align-items-center bg-white bg-opacity-15">\n' +
             '                       <span class="flex-grow-1 fw-400 fs-18px">'+ month.month +'/'+ month.year +'</span>\n' +
-            '                       <span class="text-white text-decoration-none me-3">'+ changeCommasToDecimal(month.prices.try_sale) +' TRY<br>'+ changeCommasToDecimal(month.prices.eur_sale) +' EUR<br>'+ changeCommasToDecimal(month.prices.usd_sale) +' USD</span>\n' +
+            '                       <span class="text-dark text-decoration-none me-3">'+ changeCommasToDecimal(month.prices.try_sale) +' TRY<br>'+ changeCommasToDecimal(month.prices.eur_sale) +' EUR<br>'+ changeCommasToDecimal(month.prices.usd_sale) +' USD</span>\n' +
             '                   </div>\n' +
             '                   <div class="list-group list-group-flush">';
 
@@ -158,10 +158,12 @@ async function getCashFlows(){
             };
 
             let date_status = '';
+            let item_bg = '';
             if (!payment.date_status){
                 date_status = ' <div class="mb-2">\n' +
                     '               <span class="badge border border-danger text-danger">Gecikmede</span>\n' +
                     '           </div>\n';
+                item_bg = 'bg-danger-200';
 
                 lateArray.push(data);
 
@@ -171,18 +173,18 @@ async function getCashFlows(){
 
             }
 
-            month_box += '          <div class="list-group-item d-flex px-3">\n' +
+            month_box += '          <div class="list-group-item d-flex px-3 '+ item_bg +'">\n' +
                 '                       <div class="me-3 pt-1">\n' +
-                '                           <i class="far fa-question-circle text-white text-opacity-50 fa-fw fa-lg"></i>\n' +
+                '                           <i class="far fa-question-circle text-dark text-opacity-50 fa-fw fa-lg"></i>\n' +
                 '                       </div>\n' +
                 '                       <div class="flex-fill">\n' +
                 '                           <div class="fw-600">'+ payment.sale.owner.short_code +'-'+ payment.sale.id +'</div>\n' +
                 '                           <div class="fw-400"><b>Müşteri:</b> '+ payment.sale.customer.name +'</div>\n' +
-                '                           <div class="text-white"><b>Tutar:</b> '+ changeCommasToDecimal(payment.payment_price) +' '+ payment.currency +'</div>\n' +
-                '                           <div class="text-white"><b>KDV:</b> '+ changeCommasToDecimal(payment.payment_tax) +' '+ payment.currency +'</div>\n' +
-                '                           <div class="text-white"><b>Toplam Tutar:</b> '+ changeCommasToDecimal(payment.payment_total) +' '+ payment.currency +'</div>\n' +
-                '                           <div class="text-white"><b>Ödeme Tarihi:</b> '+ formatDateASC(payment.due_date, '-') +'</div>\n' +
-                '                           <div class="small text-white text-opacity-50 mb-2">EUR: '+ payment.sale.eur_rate +' / USD: '+ payment.sale.usd_rate +'</div>\n' +
+                '                           <div class="text-dark"><b>Tutar:</b> '+ changeCommasToDecimal(payment.payment_price) +' '+ payment.currency +'</div>\n' +
+                '                           <div class="text-dark"><b>KDV:</b> '+ changeCommasToDecimal(payment.payment_tax) +' '+ payment.currency +'</div>\n' +
+                '                           <div class="text-dark"><b>Toplam Tutar:</b> '+ changeCommasToDecimal(payment.payment_total) +' '+ payment.currency +'</div>\n' +
+                '                           <div class="text-dark"><b>Ödeme Tarihi:</b> '+ formatDateASC(payment.due_date, '-') +'</div>\n' +
+                '                           <div class="small text-dark text-opacity-50 mb-2">EUR: '+ payment.sale.eur_rate +' / USD: '+ payment.sale.usd_rate +'</div>\n' +
                 '                           '+ date_status +
                 '                       </div>\n' +
                 '                   </div>';
