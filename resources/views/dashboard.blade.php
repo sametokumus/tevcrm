@@ -62,9 +62,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-success"></div>
                             </div>
                         </div>
                     </div>
@@ -101,9 +101,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-warning"></div>
                             </div>
                         </div>
                     </div>
@@ -140,9 +140,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-info"></div>
                             </div>
                         </div>
                     </div>
@@ -179,9 +179,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-danger"></div>
                             </div>
                         </div>
                     </div>
@@ -213,19 +213,13 @@ $extra_js='
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
-                    <div class="spinners">
-                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                    </div>
-
                     <div class="row align-items-center mb-2" id="total-profit-box">
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
                         </div>
                     </div>
@@ -265,9 +259,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-success"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-success"></div>
                             </div>
                         </div>
                     </div>
@@ -306,9 +300,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-warning"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-warning"></div>
                             </div>
                         </div>
                     </div>
@@ -347,9 +341,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-info"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-info"></div>
                             </div>
                         </div>
                     </div>
@@ -388,9 +382,9 @@ $extra_js='
                         <div class="col-12">
                             <h5 class="mb-0"></h5>
                             <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-danger"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-danger"></div>
                             </div>
                         </div>
                     </div>
@@ -438,9 +432,9 @@ $extra_js='
                                 <div id="chart-approved-monthly">
 
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-success"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-success"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-success"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-success"></div>
                                     </div>
                                 </div>
                             </div>
@@ -477,9 +471,9 @@ $extra_js='
                             <div class="mb-3">
                                 <div id="chart-completed-monthly">
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-warning"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-warning"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-warning"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-warning"></div>
                                     </div>
                                 </div>
                             </div>
@@ -516,9 +510,9 @@ $extra_js='
                             <div class="mb-3">
                                 <div id="chart-potential-sales">
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-info"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-info"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-info"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-info"></div>
                                     </div>
                                 </div>
                             </div>
@@ -555,9 +549,9 @@ $extra_js='
                             <div class="mb-3">
                                 <div id="chart-cancelled-potential-sales">
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-danger"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-danger"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-danger"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-danger"></div>
                                     </div>
                                 </div>
                             </div>
@@ -608,9 +602,9 @@ $extra_js='
                                     </thead>
                                     <tbody>
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                                     </div>
                                     </tbody>
                                 </table>
@@ -654,9 +648,9 @@ $extra_js='
                                     </thead>
                                     <tbody>
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                                     </div>
                                     </tbody>
                                 </table>
@@ -701,9 +695,9 @@ $extra_js='
                                     </thead>
                                     <tbody>
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                                     </div>
                                     </tbody>
                                 </table>
@@ -746,9 +740,9 @@ $extra_js='
                                     </thead>
                                     <tbody>
                                     <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                                     </div>
                                     </tbody>
                                 </table>
