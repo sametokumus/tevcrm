@@ -214,9 +214,9 @@ $extra_js='
                     </div>
 
                     <div class="spinners">
-                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
-                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                     </div>
 
                     <div class="row align-items-center mb-2" id="total-profit-box">

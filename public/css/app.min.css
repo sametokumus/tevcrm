@@ -8327,12 +8327,72 @@ textarea.form-control-lg {
     }
 }
 
+@keyframes spinner-grow-1 {
+    0% {
+        transform: scale(0)
+    }
+    50% {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes spinner-grow-2 {
+    10% {
+        transform: scale(0)
+    }
+    60% {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes spinner-grow-3 {
+    20% {
+        transform: scale(0)
+    }
+    70% {
+        opacity: 1;
+        transform: none
+    }
+}
+
 .spinner-grow {
     --bs-spinner-width: 2rem;
     --bs-spinner-height: 2rem;
     --bs-spinner-vertical-align: -0.125em;
     --bs-spinner-animation-speed: 0.75s;
     --bs-spinner-animation-name: spinner-grow;
+    background-color: currentcolor;
+    opacity: 0
+}
+
+.spinner-grow-1 {
+    --bs-spinner-width: .5rem;
+    --bs-spinner-height: .5rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-animation-speed: 1s;
+    --bs-spinner-animation-name: spinner-grow-1;
+    background-color: currentcolor;
+    opacity: 0
+}
+
+.spinner-grow-2 {
+    --bs-spinner-width: .5rem;
+    --bs-spinner-height: .5rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-animation-speed: 1s;
+    --bs-spinner-animation-name: spinner-grow-2;
+    background-color: currentcolor;
+    opacity: 0
+}
+
+.spinner-grow-3 {
+    --bs-spinner-width: .5rem;
+    --bs-spinner-height: .5rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-animation-speed: 1s;
+    --bs-spinner-animation-name: spinner-grow-3;
     background-color: currentcolor;
     opacity: 0
 }
