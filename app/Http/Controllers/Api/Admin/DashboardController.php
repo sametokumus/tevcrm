@@ -2233,7 +2233,7 @@ class DashboardController extends Controller
 
             if ($owner_id != 0){
                 $sale_items = $sale_items
-                    ->where('s.owner_id', $owner_id);
+                    ->where('sales.owner_id', $owner_id);
             }
 
             $sale_items = $sale_items
