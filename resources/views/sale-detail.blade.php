@@ -320,10 +320,10 @@ $extra_js='
                         <table id="status-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                             <thead>
                             <tr>
-                                <td>Kullanıcı</td>
-                                <td>İşlem Tarihi</td>
-                                <td>Önceki Durum</td>
-                                <td>Güncel Durum</td>
+                                <th>Kullanıcı</th>
+                                <th>İşlem Tarihi</th>
+                                <th class="text-right">Önceki Durum</th>
+                                <th><i class="bi bi-arrow-90deg-right"></i> Güncel Durum</th>
                             </tr>
                             </thead>
                             <tbody>
