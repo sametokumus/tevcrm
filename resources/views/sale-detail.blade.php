@@ -318,6 +318,14 @@ $extra_js='
 
                     <div class="table-responsive">
                         <table id="status-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <td>Kullanıcı</td>
+                                <td>İşlem Tarihi</td>
+                                <td>Önceki Durum</td>
+                                <td>Güncel Durum</td>
+                            </tr>
+                            </thead>
                             <tbody>
 
                             </tbody>
