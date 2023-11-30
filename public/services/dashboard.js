@@ -858,7 +858,7 @@ async function getTotalProfitRate(){
 
     $('#total-profit-box .spinners').remove();
 
-    $('#approved-box h5').append(profit_rate + '%');
+    $('#total-profit-box h5').append(profit_rate + '%');
 
 }
 

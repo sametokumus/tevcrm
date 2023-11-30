@@ -2380,9 +2380,11 @@ class DashboardController extends Controller
 
                 }
 
-                $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+                $profit_rate = 0;
+//                $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
 
-
+                $month['offer_total'] = $offer_total;
+                $month['sale_total'] = $sale_total;
                 $month['profit_rate'] = number_format($profit_rate, 2,",","");
                 array_push($profit_rates, $month);
             }
