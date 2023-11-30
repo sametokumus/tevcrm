@@ -853,11 +853,12 @@ async function getBestStaffs(){
 async function getTotalProfitRate(){
 
     let data = await serviceGetTotalProfitRate(dash_owner);
-    let profit_rate = data.profit_rate;
-
-    $('#total-profit-box .spinners').remove();
-
-    $('#approved-box h5').append(profit_rate + '%');
+    console.log(data)
+    // let profit_rate = data.profit_rate;
+    //
+    // $('#total-profit-box .spinners').remove();
+    //
+    // $('#approved-box h5').append(profit_rate + '%');
 
 }
 
