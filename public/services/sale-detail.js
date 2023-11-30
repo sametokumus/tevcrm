@@ -83,7 +83,7 @@ async function initSaleHistory(sale_id){
             '           </td>\n' +
             '           <td><small>'+ last_time +'</small></td>\n' +
             '           <td class="text-right">\n' +
-            '               <span class="badge bg-theme text-theme-900 bg-opacity-75 rounded-0 pt-5px" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
+            '               <span class="badge bg-theme text-theme-900 bg-opacity-50 rounded-0 pt-5px" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
             '           </td>\n' +
             '           <td>\n' +
             '               <i class="bi bi-arrow-90deg-right"></i>\n' +
