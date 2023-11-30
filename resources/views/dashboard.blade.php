@@ -213,6 +213,11 @@ $extra_js='
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
+                    <div class="spinners">
+                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                        <div class="spinner spinner-grow spinner-grow-xsm m-1 text-dark"></div>
+                    </div>
 
                     <div class="row align-items-center mb-2" id="total-profit-box">
                         <div class="col-12">
