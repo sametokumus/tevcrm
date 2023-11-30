@@ -1437,7 +1437,7 @@ class SaleController extends Controller
                 $offer['currency'] = $offer_currency;
 
                 if ($offer_currency == $sale->currency){
-                    $offer['converted_price'] = $offer->total_price;
+                    $offer['converted_price'] = number_format($offer->total_price, 2, ".", "");
                 }else{
                     if ($offer_currency == 'TRY') {
                         $oc = strtolower($offer_currency);
@@ -1454,7 +1454,7 @@ class SaleController extends Controller
                             $c_price = 0;
                         }
                     }
-                    $offer['converted_price'] = $c_price;
+                    $offer['converted_price'] = number_format($c_price, 2, ".", "");
                 }
             }
 
