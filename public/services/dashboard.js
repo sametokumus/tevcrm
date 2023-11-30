@@ -38,11 +38,13 @@
         }
 
         getTotalSales();
+        getTotalProfitRate();
         getLastMonthSales();
         getApprovedMonthlySales();
         getCompletedMonthlySales();
         getPotentialMonthlySales();
         getCancelledMonthlySales();
+        getMonthlyProfitRates();
         getAdminsSales();
         initTopSaledProducts();
         getBestCustomers();
@@ -846,4 +848,135 @@ async function getBestStaffs(){
     });
 
     reLoadGrid();
+}
+
+async function getTotalProfitRate(){
+
+    let data = await serviceGetTotalProfitRate(dash_owner);
+    let profit_rate = data.profit_rate;
+
+    $('#total-profit-box .spinners').remove();
+
+    $('#approved-box h5').append(profit_rate + '%');
+
+}
+
+async function getMonthlyProfitRates(){
+
+    let data = await serviceGetMonthlyProfitRatesLastTwelveMonths(dash_owner);
+    console.log(data)
+    // let sales = data.sales.reverse();
+    // console.log(sales)
+    //
+    // let xAxisArray = [];
+    // let yAxisArray = [];
+    //
+    // $.each(sales, function (i, sale) {
+    //     xAxisArray.push(sale.month + "/" + sale.year);
+    //
+    //     if (dash_currency == 'TRY'){
+    //         yAxisArray.push(sale.try_sale);
+    //     }else if (dash_currency == 'USD'){
+    //         yAxisArray.push(sale.usd_sale);
+    //     }else if (dash_currency == 'EUR'){
+    //         yAxisArray.push(sale.eur_sale);
+    //     }
+    // });
+    // console.log(xAxisArray)
+    // console.log(yAxisArray)
+    //
+    // let apexColumnChartOptions = {
+    //     chart: {
+    //         height: 300,
+    //         type: 'bar'
+    //     },
+    //     title: {
+    //         style: {
+    //             fontSize: '14px',
+    //             fontWeight: 'bold',
+    //             fontFamily: FONT_FAMILY,
+    //             color: COLOR_DARK
+    //         },
+    //     },
+    //     legend: {
+    //         fontFamily: FONT_FAMILY,
+    //         labels: {
+    //             colors: COLOR_DARK
+    //         }
+    //     },
+    //     plotOptions: {
+    //         bar: {
+    //             horizontal: false,
+    //             columnWidth: '20%',
+    //             endingShape: 'rounded'
+    //         },
+    //     },
+    //     dataLabels: {
+    //         enabled: false
+    //     },
+    //     stroke: {
+    //         show: true,
+    //         width: 2,
+    //         colors: ['transparent']
+    //     },
+    //     colors: ['#90ee7e'],
+    //     series: [{
+    //         name: dash_currency,
+    //         data: yAxisArray
+    //     }],
+    //     xaxis: {
+    //         categories: xAxisArray,
+    //         labels: {
+    //             style: {
+    //                 colors: COLOR_DARK,
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400,
+    //                 cssClass: 'apexcharts-xaxis-label',
+    //             }
+    //         }
+    //     },
+    //     yaxis: {
+    //         title: {
+    //             text: 'Kazanç',
+    //             style: {
+    //                 color: hexToRgba(COLOR_WHITE, .5),
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400
+    //             }
+    //         },
+    //         labels: {
+    //             formatter: function (val) {
+    //                 return changeCommasToDecimal(val.toFixed(2))
+    //             },
+    //             style: {
+    //                 colors: COLOR_DARK,
+    //                 fontSize: '12px',
+    //                 fontFamily: FONT_FAMILY,
+    //                 fontWeight: 400,
+    //                 cssClass: 'apexcharts-xaxis-label',
+    //             }
+    //         }
+    //     },
+    //     fill: {
+    //         opacity: 1
+    //     },
+    //     tooltip: {
+    //         y: {
+    //             formatter: function (val) {
+    //                 return changeCommasToDecimal(val.toFixed(2))
+    //             }
+    //         }
+    //     }
+    // };
+    // $('#chart-approved-monthly .spinners').remove();
+    // var apexColumnChart = new ApexCharts(
+    //     document.querySelector('#chart-approved-monthly'),
+    //     apexColumnChartOptions
+    // );
+    // apexColumnChart.render();
+    //
+    // reLoadGrid();
+
 }
