@@ -854,11 +854,11 @@ async function getTotalProfitRate(){
 
     let data = await serviceGetTotalProfitRate(dash_owner);
     console.log(data)
-    // let profit_rate = data.profit_rate;
-    //
-    // $('#total-profit-box .spinners').remove();
-    //
-    // $('#approved-box h5').append(profit_rate + '%');
+    let profit_rate = data.profit_rate;
+
+    $('#total-profit-box .spinners').remove();
+
+    $('#approved-box h5').append(profit_rate + '%');
 
 }
 

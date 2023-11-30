@@ -2285,11 +2285,10 @@ class DashboardController extends Controller
 
 
             }
-//            $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
-//            $profit_rate = number_format($profit_rate, 2,",","");
+            $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+            $profit_rate = number_format($profit_rate, 2,",","");
 
-//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate]]);
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['o' => $offer_total, 's'=>$sale_total]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
