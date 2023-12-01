@@ -2388,7 +2388,7 @@ class DashboardController extends Controller
 
                 $month['offer_total'] = $offer_total;
                 $month['sale_total'] = $sale_total;
-                $month['profit_rate'] = number_format($profit_rate, 2,",","");
+                $month['profit_rate'] = number_format($profit_rate, 2,".","");
                 array_push($profit_rates, $month);
             }
 

@@ -883,11 +883,21 @@ async function getMonthlyProfitRates(){
             toolbar: { show: false }
         },
         title: {
-            text: 'Average High & Low Temperature',
-            align: 'center',
-            color: app.color.bodyColor
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_DARK
+            },
         },
-        colors: [app.color.theme, app.color.secondary],
+        legend: {
+            show: true,
+            position: 'top',
+            offsetY: -10,
+            horizontalAlign: 'right',
+            floating: true
+        },
+        colors: [app.color.theme],
         dataLabels: {
             enabled: true,
             offsetY: 1,
@@ -917,14 +927,7 @@ async function getMonthlyProfitRates(){
         ],
         markers: { size: 4 },
         xaxis: { categories: xAxisArray },
-        yaxis: { min: 0, max: 300 },
-        legend: {
-            show: true,
-            position: 'top',
-            offsetY: -10,
-            horizontalAlign: 'right',
-            floating: true
-        }
+        yaxis: { min: 0, max: 300 }
     };
     var apexLineChart = new ApexCharts(
         document.querySelector('#chart-profit-rates-monthly'),
