@@ -590,7 +590,7 @@ $extra_js='
                         <div class="card-body">
 
                             <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">Aylık Karlılık</span>
+                                <span class="flex-grow-1">AYLIK KARLILIK</span>
                                 <a href="#" data-toggle="card-expand"
                                    class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
