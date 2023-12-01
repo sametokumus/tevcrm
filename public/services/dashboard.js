@@ -59,7 +59,7 @@ function reLoadGrid(){
     $grid.masonry('reloadItems');
     $grid.masonry('layout');
 
-    $('.row.masonry-layout-2').masonry({
+    $('.masonry-layout-2').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
         gutter: '2%',
