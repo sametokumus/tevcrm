@@ -878,7 +878,7 @@ async function getMonthlyProfitRates(){
 
     var apexLineChartOptions = {
         chart: {
-            height: 350,
+            height: 300,
             type: 'line',
             toolbar: { show: false }
         },
@@ -927,8 +927,9 @@ async function getMonthlyProfitRates(){
         ],
         markers: { size: 4 },
         xaxis: { categories: xAxisArray },
-        yaxis: { min: 0, max: 300 }
+        yaxis: { min: 0, max: 250 }
     };
+    $('#chart-profit-rates-monthly .spinners').remove();
     var apexLineChart = new ApexCharts(
         document.querySelector('#chart-profit-rates-monthly'),
         apexLineChartOptions
