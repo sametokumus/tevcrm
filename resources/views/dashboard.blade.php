@@ -576,9 +576,9 @@ $extra_js='
         </div>
         <div class="col-xl-6">
 
-            <div class="row masonry-layout">
+            <div class="row masonry-layout-2">
 
-                <div class="col-xl-6">
+                <div class="col-xl-12">
 
                     <!-- aylık karlılık -->
                     <div class="card mb-3">

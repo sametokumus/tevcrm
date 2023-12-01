@@ -56,7 +56,14 @@ function reLoadGrid(){
 
     $grid.masonry('reloadItems');
     $grid.masonry('layout');
-    console.log($grid.masonry('getItemElements'));
+
+    var $grid2 = $('.row.masonry-layout-2').masonry({
+        itemSelector: '[class^="col-xl-"]'
+    });
+
+    $grid2.masonry('reloadItems');
+    $grid2.masonry('layout');
+    console.log($grid2.masonry('getItemElements'));
 }
 function changeDashCurrency(){
     dash_currency = document.getElementById('dash_currency').value;
