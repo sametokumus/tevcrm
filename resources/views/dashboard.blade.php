@@ -12,9 +12,9 @@ $extra_js='
 <div id="content" class="app-content">
     <div class="">
 
-        <div class="card border-theme mb-3">
+        <div class="card bg-light border-dark mb-3">
 
-            <div class="card-body">
+            <div class="card-body p-3">
 
                 <div class="row">
                     <div class="col-6">
