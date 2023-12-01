@@ -578,6 +578,7 @@ $extra_js='
 
             <div class="masonry-layout-2">
                 <div class="grid-sizer"></div>
+                <div class="gutter-sizer"></div>
 
                 <div class="grid-item grid-item--width2">
 
