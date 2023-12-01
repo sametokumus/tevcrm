@@ -866,118 +866,72 @@ async function getMonthlyProfitRates(){
 
     let data = await serviceGetMonthlyProfitRatesLastTwelveMonths(dash_owner);
     console.log(data)
-    // let sales = data.sales.reverse();
-    // console.log(sales)
-    //
-    // let xAxisArray = [];
-    // let yAxisArray = [];
-    //
-    // $.each(sales, function (i, sale) {
-    //     xAxisArray.push(sale.month + "/" + sale.year);
-    //
-    //     if (dash_currency == 'TRY'){
-    //         yAxisArray.push(sale.try_sale);
-    //     }else if (dash_currency == 'USD'){
-    //         yAxisArray.push(sale.usd_sale);
-    //     }else if (dash_currency == 'EUR'){
-    //         yAxisArray.push(sale.eur_sale);
-    //     }
-    // });
-    // console.log(xAxisArray)
-    // console.log(yAxisArray)
-    //
-    // let apexColumnChartOptions = {
-    //     chart: {
-    //         height: 300,
-    //         type: 'bar'
-    //     },
-    //     title: {
-    //         style: {
-    //             fontSize: '14px',
-    //             fontWeight: 'bold',
-    //             fontFamily: FONT_FAMILY,
-    //             color: COLOR_DARK
-    //         },
-    //     },
-    //     legend: {
-    //         fontFamily: FONT_FAMILY,
-    //         labels: {
-    //             colors: COLOR_DARK
-    //         }
-    //     },
-    //     plotOptions: {
-    //         bar: {
-    //             horizontal: false,
-    //             columnWidth: '20%',
-    //             endingShape: 'rounded'
-    //         },
-    //     },
-    //     dataLabels: {
-    //         enabled: false
-    //     },
-    //     stroke: {
-    //         show: true,
-    //         width: 2,
-    //         colors: ['transparent']
-    //     },
-    //     colors: ['#90ee7e'],
-    //     series: [{
-    //         name: dash_currency,
-    //         data: yAxisArray
-    //     }],
-    //     xaxis: {
-    //         categories: xAxisArray,
-    //         labels: {
-    //             style: {
-    //                 colors: COLOR_DARK,
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400,
-    //                 cssClass: 'apexcharts-xaxis-label',
-    //             }
-    //         }
-    //     },
-    //     yaxis: {
-    //         title: {
-    //             text: 'Kazanç',
-    //             style: {
-    //                 color: hexToRgba(COLOR_WHITE, .5),
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400
-    //             }
-    //         },
-    //         labels: {
-    //             formatter: function (val) {
-    //                 return changeCommasToDecimal(val.toFixed(2))
-    //             },
-    //             style: {
-    //                 colors: COLOR_DARK,
-    //                 fontSize: '12px',
-    //                 fontFamily: FONT_FAMILY,
-    //                 fontWeight: 400,
-    //                 cssClass: 'apexcharts-xaxis-label',
-    //             }
-    //         }
-    //     },
-    //     fill: {
-    //         opacity: 1
-    //     },
-    //     tooltip: {
-    //         y: {
-    //             formatter: function (val) {
-    //                 return changeCommasToDecimal(val.toFixed(2))
-    //             }
-    //         }
-    //     }
-    // };
-    // $('#chart-approved-monthly .spinners').remove();
-    // var apexColumnChart = new ApexCharts(
-    //     document.querySelector('#chart-approved-monthly'),
-    //     apexColumnChartOptions
-    // );
-    // apexColumnChart.render();
-    //
-    // reLoadGrid();
+    let profit_rates = data.profit_rates.reverse();
+
+    let xAxisArray = [];
+    let yAxisArray = [];
+
+    $.each(profit_rates, function (i, rate) {
+        xAxisArray.push(rate.month + "/" + rate.year);
+        yAxisArray.push(rate.profit_rate);
+    });
+
+    var apexLineChartOptions = {
+        chart: {
+            height: 350,
+            type: 'line',
+            toolbar: { show: false }
+        },
+        title: {
+            text: 'Average High & Low Temperature',
+            align: 'center',
+            color: app.color.bodyColor
+        },
+        colors: [app.color.theme, app.color.secondary],
+        dataLabels: {
+            enabled: true,
+            offsetY: 1,
+            background: {
+                enabled: true,
+                padding: 4,
+                borderRadius: 4,
+                borderWidth: 0,
+                opacity: 0.9,
+                dropShadow: { enabled: false }
+            },
+            style: {
+                fontSize: '11px',
+                fontFamily: app.font.bodyFontFamily,
+                fontWeight: 500
+            }
+        },
+        stroke: { curve: 'smooth', width: 3 },
+        grid: {
+            row: {
+                colors: [app.color.bodyBg, 'transparent'],
+                opacity: 0.5
+            }
+        },
+        series: [
+            { name: 'Karlılık', data: yAxisArray }
+        ],
+        markers: { size: 4 },
+        xaxis: { categories: xAxisArray },
+        yaxis: { min: 0, max: 300 },
+        legend: {
+            show: true,
+            position: 'top',
+            offsetY: -10,
+            horizontalAlign: 'right',
+            floating: true
+        }
+    };
+    var apexLineChart = new ApexCharts(
+        document.querySelector('#chart-profit-rates-monthly'),
+        apexLineChartOptions
+    );
+    apexLineChart.render();
+
+    reLoadGrid();
 
 }

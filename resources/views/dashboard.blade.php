@@ -578,6 +578,46 @@ $extra_js='
 
             <div class="row masonry-layout">
 
+                <div class="col-xl-12">
+
+                    <!-- aylık karlılık -->
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <div class="d-flex fw-bold small mb-3">
+                                <span class="flex-grow-1">Aylık Karlılık</span>
+                                <a href="#" data-toggle="card-expand"
+                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <div id="chart-profit-rates-monthly">
+
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-theme"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-theme"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-theme"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <div class="col-xl-6">
 
                     <!-- en iyi müşteri -->
