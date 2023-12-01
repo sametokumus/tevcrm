@@ -577,8 +577,9 @@ $extra_js='
         <div class="col-xl-6">
 
             <div class="row masonry-layout-2">
+                <div class="grid-sizer"></div>
 
-                <div class="col-xl-12">
+                <div class="grid-item col-xl-12">
 
                     <!-- aylık karlılık -->
                     <div class="card mb-3">
@@ -618,7 +619,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item col-xl-6">
 
                     <!-- en iyi müşteri -->
                     <div class="card mb-3">
@@ -664,7 +665,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item col-xl-6">
 
                     <!-- en iyi personel -->
                     <div class="card mb-3">
@@ -710,7 +711,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item col-xl-6">
 
                     <!-- ekip satışları -->
                     <div class="card mb-3">
@@ -757,7 +758,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-12">
+                <div class="grid-item col-xl-12">
 
                     <!-- en çok satılan ürünler -->
                     <div class="card mb-3">

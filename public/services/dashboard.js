@@ -57,13 +57,11 @@ function reLoadGrid(){
     $grid.masonry('reloadItems');
     $grid.masonry('layout');
 
-    var $grid2 = $('.row.masonry-layout-2').masonry({
-        itemSelector: '[class^="col-xl-"]'
+    $('.row.masonry-layout-2').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true
     });
-
-    $grid2.masonry('reloadItems');
-    $grid2.masonry('layout');
-    console.log($grid2.masonry('getItemElements'));
 }
 function changeDashCurrency(){
     dash_currency = document.getElementById('dash_currency').value;
