@@ -666,9 +666,10 @@ div.DTE_Field select{
 
 .masonry-layout-2 .grid-sizer,
 .masonry-layout-2 .grid-item {
-    width: 50%;
+    width: 49%;
 }
 .masonry-layout-2 .grid-item {
     float: left;
 }
 .masonry-layout-2 .grid-item--width2 { width:  100%; }
+.masonry-layout-2 .gutter-sizer { width: 2%; }
