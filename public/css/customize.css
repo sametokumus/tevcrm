@@ -664,6 +664,16 @@ div.DTE_Field select{
     --bs-spinner-height: .5rem;
 }
 
+.masonry-layout-1 .grid-sizer,
+.masonry-layout-1 .grid-item {
+    width: 49%;
+}
+.masonry-layout-1 .grid-item {
+    float: left;
+}
+.masonry-layout-1 .grid-item--width2 { width:  100%; }
+.masonry-layout-1 .gutter-sizer { width: 2%; }
+
 .masonry-layout-2 .grid-sizer,
 .masonry-layout-2 .grid-item {
     width: 49%;

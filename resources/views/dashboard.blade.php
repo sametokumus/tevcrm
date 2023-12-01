@@ -412,9 +412,11 @@ $extra_js='
     <div class="row">
         <div class="col-xl-6">
 
-            <div class="row masonry-layout">
+            <div class="masonry-layout-1">
+                <div class="grid-sizer"></div>
+                <div class="gutter-sizer"></div>
 
-                <div class="col-xl-6">
+                <div class="grid-item">
 
                     <!-- onaylanan satışlar -->
                     <div class="card mb-3">
@@ -454,7 +456,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item">
 
                     <!-- tamamlanan satışlar -->
                     <div class="card mb-3">
@@ -493,7 +495,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item">
 
                     <!-- potansiyel satışlar -->
                     <div class="card mb-3">
@@ -532,7 +534,7 @@ $extra_js='
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="grid-item">
 
                     <!-- iptal edilen satışlar -->
                     <div class="card mb-3">

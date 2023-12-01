@@ -50,12 +50,12 @@
 let dash_currency;
 let dash_owner;
 function reLoadGrid(){
-    var $grid = $('.row.masonry-layout').masonry({
-        itemSelector: '[class^="col-xl-"]'
+    $('.masonry-layout-1').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        gutter: '.gutter-sizer',
+        percentPosition: true
     });
-
-    $grid.masonry('reloadItems');
-    $grid.masonry('layout');
 
     $('.masonry-layout-2').masonry({
         itemSelector: '.grid-item',
