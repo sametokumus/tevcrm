@@ -3,7 +3,9 @@
 
 	 $(document).ready(function() {
 
-         reLoadGrid();
+         setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 	});
 
 	$(window).load(async function() {
@@ -398,7 +400,9 @@ async function getApprovedMonthlySales(){
     );
     apexColumnChart.render();
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -514,7 +518,9 @@ async function getCompletedMonthlySales(){
     );
     apexColumnChart.render();
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -629,7 +635,9 @@ async function getPotentialMonthlySales(){
     );
     apexColumnChart.render();
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -744,7 +752,9 @@ async function getCancelledMonthlySales(){
     );
     apexColumnChart.render();
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -777,7 +787,9 @@ async function getAdminsSales(){
         $('#admins-table tbody').append(item);
     });
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -804,7 +816,9 @@ async function initTopSaledProducts(){
         $('#top-products-table tbody').append(item);
     });
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 }
 
 async function getBestCustomers(){
@@ -824,7 +838,9 @@ async function getBestCustomers(){
         $('#best-customers-table tbody').append(item);
     });
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
 
@@ -845,7 +861,9 @@ async function getBestStaffs(){
         $('#best-staffs-table tbody').append(item);
     });
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 }
 
 async function getTotalProfitRate(){
@@ -934,6 +952,8 @@ async function getMonthlyProfitRates(){
     );
     apexLineChart.render();
 
-    reLoadGrid();
+    setTimeout(function() {
+        reLoadGrid();
+    }, 100);
 
 }
