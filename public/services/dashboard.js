@@ -58,8 +58,7 @@ let dash_currency;
 let dash_owner;
 function reLoadGrid(){
     var $grid = $('.row.masonry-layout').masonry({
-        itemSelector: '[class^="col-xl-"]',
-        percentPosition: true
+        itemSelector: '[class^="col-xl-"]'
     });
 
     $grid.masonry('reloadItems');
