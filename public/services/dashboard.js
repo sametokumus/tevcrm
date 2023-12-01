@@ -3,9 +3,7 @@
 
 	 $(document).ready(function() {
 
-         setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+         reLoadGrid();
 	});
 
 	$(window).load(async function() {
@@ -62,7 +60,7 @@ function reLoadGrid(){
     $('.masonry-layout-2').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
-        gutter: '2%',
+        gutter: '.gutter-sizer',
         percentPosition: true
     });
 }
@@ -401,9 +399,7 @@ async function getApprovedMonthlySales(){
     );
     apexColumnChart.render();
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -519,9 +515,7 @@ async function getCompletedMonthlySales(){
     );
     apexColumnChart.render();
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -636,9 +630,7 @@ async function getPotentialMonthlySales(){
     );
     apexColumnChart.render();
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -753,9 +745,7 @@ async function getCancelledMonthlySales(){
     );
     apexColumnChart.render();
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -788,9 +778,7 @@ async function getAdminsSales(){
         $('#admins-table tbody').append(item);
     });
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -817,9 +805,7 @@ async function initTopSaledProducts(){
         $('#top-products-table tbody').append(item);
     });
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 }
 
 async function getBestCustomers(){
@@ -839,9 +825,7 @@ async function getBestCustomers(){
         $('#best-customers-table tbody').append(item);
     });
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
 
@@ -862,9 +846,7 @@ async function getBestStaffs(){
         $('#best-staffs-table tbody').append(item);
     });
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 }
 
 async function getTotalProfitRate(){
@@ -953,8 +935,6 @@ async function getMonthlyProfitRates(){
     );
     apexLineChart.render();
 
-    setTimeout(function() {
-        reLoadGrid();
-    }, 100);
+    reLoadGrid();
 
 }
