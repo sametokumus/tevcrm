@@ -4,7 +4,6 @@
 	 $(document).ready(function() {
 
          reLoadGrid();
-
 	});
 
 	$(window).load(async function() {
@@ -57,6 +56,7 @@ function reLoadGrid(){
 
     $grid.masonry('reloadItems');
     $grid.masonry('layout');
+    console.log($grid.masonry('getItemElements'));
 }
 function changeDashCurrency(){
     dash_currency = document.getElementById('dash_currency').value;
