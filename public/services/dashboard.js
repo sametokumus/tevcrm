@@ -3,13 +3,7 @@
 
 	 $(document).ready(function() {
 
-         var $grid = $('.row.masonry-layout').masonry({
-             itemSelector: '.col-xl-6, .col-xl-4, [class^="col-xl-"]',
-             percentPosition: true
-         });
-
-         $grid.masonry('reloadItems');
-         $grid.masonry('layout');
+         reLoadGrid();
 
 	});
 
