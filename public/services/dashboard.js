@@ -62,6 +62,7 @@ function reLoadGrid(){
     $('.row.masonry-layout-2').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
+        gutter: '.gutter-sizer',
         percentPosition: true
     });
 }
