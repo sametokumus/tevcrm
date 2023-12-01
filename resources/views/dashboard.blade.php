@@ -4,7 +4,7 @@ $extra_js='
 <script src="plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
 <script src="plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
 <script src="plugins/apexcharts/dist/apexcharts.min.js"></script>
-<script src="plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script src="services/dashboard.js"></script>
 ';
 ?>
