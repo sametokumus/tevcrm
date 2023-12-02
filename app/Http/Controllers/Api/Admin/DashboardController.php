@@ -2241,7 +2241,7 @@ class DashboardController extends Controller
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
                 ->groupBy('companies.id')
-                ->havingRaw('MAX(sales.created_at) IS NULL')
+                ->havingRaw('last_sale_date IS NULL')
 //                ->orWhere(function ($query) {
 //                    $query->whereNotIn(DB::raw('MAX(statuses.period)'), ['approved', 'completed', 'continue']);
 //                })
