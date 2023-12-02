@@ -2218,11 +2218,11 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
     }
-    public function getCustomerOrderTimes()
+    public function getCustomerByNotSaleLongTimes()
     {
         try {
 
-            $has_sale_companies = Company::query()
+            $companies = Company::query()
                 ->leftJoin('sales', function ($join) {
                     $join->on('sales.id', '=', DB::raw("(SELECT MAX(s.id)
                         FROM sales s
@@ -2238,7 +2238,17 @@ class DashboardController extends Controller
                 ->orderBy('last_sale_date')
                 ->get();
 
-            $no_sale_companies = Company::query()->whereNotExists(function ($query) {
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$companies' => $companies]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
+    public function getCustomerByNotSale()
+    {
+        try {
+
+            $companies = Company::query()->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('sales')
                     ->join('statuses', 'sales.status_id', '=', 'statuses.id')
@@ -2248,7 +2258,7 @@ class DashboardController extends Controller
                 ->get();
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_sale_companies' => $has_sale_companies, 'no_sale_companies' => $no_sale_companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$companies' => $companies]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }

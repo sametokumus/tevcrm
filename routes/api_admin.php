@@ -387,7 +387,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     Route::get('dashboard/getMostValuableCustomers', [DashboardController::class, 'getMostValuableCustomers']);
-    Route::get('dashboard/getCustomerOrderTimes', [DashboardController::class, 'getCustomerOrderTimes']);
+    Route::get('dashboard/getCustomerByNotSaleLongTimes', [DashboardController::class, 'getCustomerByNotSaleLongTimes']);
+    Route::get('dashboard/getCustomerByNotSale', [DashboardController::class, 'getCustomerByNotSale']);
     Route::get('dashboard/getTotalProfitRate/{owner_id}', [DashboardController::class, 'getTotalProfitRate']);
     Route::get('dashboard/getMonthlyProfitRatesLastTwelveMonths/{owner_id}', [DashboardController::class, 'getMonthlyProfitRatesLastTwelveMonths']);
 
