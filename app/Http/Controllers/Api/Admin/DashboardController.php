@@ -2218,6 +2218,35 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
     }
+    public function getCustomerOrderTimes()
+    {
+        try {
+
+            $has_sale_companies = Company::query()
+                ->where('companies.active', 1)
+                ->where('sales.active', 1)
+                ->where('last_sale_date', '!=', null)
+                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
+                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
+                ->orderByDesc('last_sale_date')
+                ->groupBy('companies.id')
+                ->get();
+
+            $no_sale_companies = Company::query()
+                ->where('companies.active', 1)
+                ->where('sales.active', 1)
+                ->where('last_sale_date', '!=', null)
+                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
+                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
+                ->groupBy('companies.id')
+                ->get();
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_sale_companies' => $has_sale_companies, 'no_sale_companies' => $no_sale_companies]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
 
 
     public function getTotalProfitRate($owner_id)
