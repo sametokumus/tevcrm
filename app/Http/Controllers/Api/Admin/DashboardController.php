@@ -2238,10 +2238,12 @@ class DashboardController extends Controller
                 ->orderBy('last_sale_date')
                 ->get();
 
-            $no_sale_companies = Company::query()
-                ->whereDoesntHave('sales', function ($query) {
-                    $query->join('statuses', 'sales.status_id', '=', 'statuses.id')
-                    ->where('statuses.period', 'not in', ['approved', 'completed']);
+            $no_sale_companies = Company::whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('sales')
+                    ->join('statuses', 'sales.status_id', '=', 'statuses.id')
+                    ->whereRaw('companies.id = sales.customer_id')
+                    ->whereNotIn('statuses.period', ['approved', 'completed']);
                 })
                 ->get();
 
