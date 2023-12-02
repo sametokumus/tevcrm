@@ -2223,26 +2223,26 @@ class DashboardController extends Controller
         try {
 
             $has_sale_companies = Company::query()
+                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'), 'statuses.period as period')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
                 ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
-                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'), 'statuses.period as period')
                 ->groupBy('companies.id')
                 ->havingRaw('MAX(sales.created_at) IS NOT NULL')
                 ->orderBy('last_sale_date')
                 ->get();
 
-
-            $no_sale_companies = Company::query()
-                ->where('companies.active', 1)
-                ->where('sales.active', 1)
-                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
-                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-                ->groupBy('companies.id')
-                ->havingRaw('MAX(sales.created_at) IS NULL')
-                ->get();
+            $no_sale_companies = null;
+//            $no_sale_companies = Company::query()
+//                ->where('companies.active', 1)
+//                ->where('sales.active', 1)
+//                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
+//                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
+//                ->groupBy('companies.id')
+//                ->havingRaw('MAX(sales.created_at) IS NULL')
+//                ->get();
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_sale_companies' => $has_sale_companies, 'no_sale_companies' => $no_sale_companies]]);
