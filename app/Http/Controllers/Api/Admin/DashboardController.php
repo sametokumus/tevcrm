@@ -2225,11 +2225,11 @@ class DashboardController extends Controller
             $has_sale_companies = Company::query()
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
-                ->where('last_sale_date', '!=', null)
                 ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
                 ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-                ->orderByDesc('sales.created_at')
                 ->groupBy('companies.id')
+                ->havingRaw('MAX(sales.created_at) IS NOT NULL') // Use HAVING instead of WHERE for aggregate functions
+                ->orderByDesc('last_sale_date') // Order by the alias instead of the original column
                 ->get();
 
             $no_sale_companies = Company::query()
