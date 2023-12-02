@@ -2230,20 +2230,23 @@ class DashboardController extends Controller
                 ->where('sales.active', 1)
                 ->groupBy('companies.id')
                 ->havingRaw('MAX(sales.created_at) IS NOT NULL')
-                ->havingRaw('MAX(CASE WHEN statuses.period = "completed" OR statuses.period = "approved" THEN 1 ELSE 0 END) > 0')
+                ->havingRaw('MAX(CASE WHEN statuses.period = "completed" OR statuses.period = "approved" OR statuses.period = "continue" THEN 1 ELSE 0 END) > 0')
                 ->orderBy('last_sale_date')
                 ->get();
 
-
-            $no_sale_companies = null;
-//            $no_sale_companies = Company::query()
-//                ->where('companies.active', 1)
-//                ->where('sales.active', 1)
-//                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
-//                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-//                ->groupBy('companies.id')
-//                ->havingRaw('MAX(sales.created_at) IS NULL')
-//                ->get();
+            $no_sale_companies = Company::query()
+                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
+                ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('companies.active', 1)
+                ->where('sales.active', 1)
+                ->groupBy('companies.id')
+                ->havingRaw('MAX(sales.created_at) IS NULL')
+                ->orWhere(function($query) {
+                    $query->whereNotIn(DB::raw('MAX(statuses.period)'), ['approved', 'completed', 'continue']);
+                })
+                ->orderBy('last_sale_date')
+                ->get();
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_sale_companies' => $has_sale_companies, 'no_sale_companies' => $no_sale_companies]]);
