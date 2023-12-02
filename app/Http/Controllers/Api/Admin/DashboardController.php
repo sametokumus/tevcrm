@@ -2223,7 +2223,7 @@ class DashboardController extends Controller
         try {
 
             $has_sale_companies = Company::query()
-                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'), DB::raw('MAX(statuses.period) as period'))
+                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
                 ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->where('companies.active', 1)
