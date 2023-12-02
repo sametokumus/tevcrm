@@ -2223,21 +2223,19 @@ class DashboardController extends Controller
         try {
 
             $has_sale_companies = Company::query()
-                ->select('companies.*', 'sales.created_at as last_sale_date')
-                ->leftJoin(DB::raw("(SELECT MAX(s.id) as max_id
-                                            FROM (
-                                                SELECT sales.id, sales.customer_id
-                                                FROM sales
-                                                LEFT JOIN statuses ON statuses.id = sales.status_id
-                                                WHERE sales.customer_id = 59
-                                                  AND statuses.period IN ('completed', 'approved')
-                                            ) s) AS latest_sales"),
-        'sales.id', '=', 'latest_sales.max_id')
+                ->leftJoin('sales', function ($join) {
+                $join->on('sales.id', '=', DB::raw("(SELECT MAX(s.id)
+    FROM sales s
+    LEFT JOIN statuses ON statuses.id = s.status_id
+    WHERE statuses.period IN ('completed', 'approved')
+      AND s.customer_id = companies.id
+      AND s.active = 1)")
+                );
+            })
                 ->where('companies.active', 1)
-                ->where('sales.active', 1)
-                ->groupBy('companies.id', 'sales.id')
-                ->havingRaw('MAX(sales.created_at) IS NOT NULL')
-                ->orderBy('latest_sales.last_sale_date')
+                ->whereNotNull('sales.created_at')
+                ->select('companies.*', 'sales.created_at as last_sale_date')
+                ->orderBy('last_sale_date')
                 ->get();
 
 //            $no_sale_companies = null;
