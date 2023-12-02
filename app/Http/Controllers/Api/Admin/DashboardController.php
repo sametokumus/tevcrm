@@ -2229,7 +2229,7 @@ class DashboardController extends Controller
                         LEFT JOIN statuses ON statuses.id = sales.status_id
                         WHERE sales.active = 1
                             AND statuses.period IN ('completed', 'approved')
-                        GROUP BY sales.customer_id) AS latest_sales'"),
+                        GROUP BY sales.customer_id) AS latest_sales"),
         'companies.id', '=', 'latest_sales.customer_id')
     ->leftJoin('sales', function ($join) {
                 $join->on('latest_sales.customer_id', '=', 'sales.customer_id')
