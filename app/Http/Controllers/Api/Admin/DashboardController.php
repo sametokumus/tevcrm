@@ -2228,7 +2228,7 @@ class DashboardController extends Controller
                 ->where('last_sale_date', '!=', null)
                 ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
                 ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-                ->orderByDesc('last_sale_date')
+                ->orderByDesc('sales.created_at')
                 ->groupBy('companies.id')
                 ->get();
 
