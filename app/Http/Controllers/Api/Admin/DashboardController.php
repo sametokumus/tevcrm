@@ -2223,17 +2223,26 @@ class DashboardController extends Controller
         try {
 
             $has_sale_companies = Company::query()
-                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-                ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->select('companies.*', 'sales.created_at as last_sale_date')
+                ->leftJoin(DB::raw('(SELECT sales.customer_id, MAX(sales.created_at) as last_sale_date
+                        FROM sales
+                        LEFT JOIN statuses ON statuses.id = sales.status_id
+                        WHERE sales.active = 1
+                            AND statuses.period IN ('completed', 'approved')
+                        GROUP BY sales.customer_id) AS latest_sales'),
+        'companies.id', '=', 'latest_sales.customer_id')
+    ->leftJoin('sales', function ($join) {
+                $join->on('latest_sales.customer_id', '=', 'sales.customer_id')
+                    ->on('latest_sales.last_sale_date', '=', 'sales.created_at');
+            })
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
-                ->groupBy('companies.id')
+                ->groupBy('companies.id', 'sales.id')
                 ->havingRaw('MAX(sales.created_at) IS NOT NULL')
-                ->havingRaw('MAX(CASE WHEN statuses.period = "completed" OR statuses.period = "approved" OR statuses.period = "continue" THEN 1 ELSE 0 END) > 0')
-                ->orderBy('last_sale_date')
+                ->orderBy('latest_sales.last_sale_date')
                 ->get();
 
+//            $no_sale_companies = null;
             $no_sale_companies = Company::query()
                 ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
                 ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
