@@ -2232,15 +2232,15 @@ class DashboardController extends Controller
                 ->orderByDesc('last_sale_date')
                 ->get();
 
-
-            $no_sale_companies = Company::query()
-                ->where('companies.active', 1)
-                ->where('sales.active', 1)
-                ->where('last_sale_date', '!=', null)
-                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
-                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
-                ->groupBy('companies.id')
-                ->get();
+            $no_sale_companies = null;
+//            $no_sale_companies = Company::query()
+//                ->where('companies.active', 1)
+//                ->where('sales.active', 1)
+//                ->where('last_sale_date', '!=', null)
+//                ->leftJoin('sales', 'companies.id', '=', 'sales.customer_id')
+//                ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'))
+//                ->groupBy('companies.id')
+//                ->get();
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_sale_companies' => $has_sale_companies, 'no_sale_companies' => $no_sale_companies]]);
