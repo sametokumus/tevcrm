@@ -2228,9 +2228,9 @@ class DashboardController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
-                ->whereRaw("(MAX(statuses.period) = 'completed' OR MAX(statuses.period) = 'approved')")
                 ->groupBy('companies.id')
                 ->havingRaw('MAX(sales.created_at) IS NOT NULL')
+                ->havingRaw('MAX(CASE WHEN statuses.period = "completed" OR statuses.period = "approved" THEN 1 ELSE 0 END) > 0')
                 ->orderBy('last_sale_date')
                 ->get();
 
