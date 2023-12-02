@@ -2224,8 +2224,8 @@ class DashboardController extends Controller
 
             $has_sale_companies = Company::query()
                 ->select('companies.*', DB::raw('MAX(sales.created_at) as last_sale_date'), 'statuses.period as period')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->leftJoin('sales', 'sales.customer_id', '=', 'companies.id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->where('companies.active', 1)
                 ->where('sales.active', 1)
                 ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
