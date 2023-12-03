@@ -975,7 +975,7 @@ async function getCustomerByNotSaleLongTimes(){
             }
         ],
         dom: 'Bfrtip',
-        paging: false,
+        paging: true,
         buttons: [],
         scrollX: true,
         language: {
