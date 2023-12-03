@@ -948,16 +948,41 @@ async function getCustomerByNotSaleLongTimes(){
 
     $('#customer-not-sale-timely-table').siblings('.spinners').remove();
 
+    $("#customer-not-sale-timely-table").dataTable().fnDestroy();
     $('#customer-not-sale-timely-table tbody tr').remove();
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
             '           <td>'+ company.id +'</td>\n' +
             '           <td>'+ company.name +'</td>\n' +
-            '           <td>'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
+            '           <td class="text-nowrap">'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
             '       </tr>';
         $('#customer-not-sale-timely-table tbody').append(item);
     });
 
+
+
+    $('#customer-not-sale-timely-table').DataTable({
+        responsive: false,
+        columnDefs: [
+            {
+                targets: 1,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 30 ?
+                        data.substr(0, 30) + '...' :
+                        data;
+                }
+            }
+        ],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
+    });
     reLoadGrid();
 }
 

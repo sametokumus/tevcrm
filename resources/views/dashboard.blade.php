@@ -775,12 +775,12 @@ $extra_js='
                             </div>
 
                             <div class="table-responsive">
-                                <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
+                                <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small">
                                     <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Müşteri</th>
-                                        <th>Son Sipariş Tarihi</td>
+                                        <th class="text-nowrap">Son Sipariş</td>
                                     </tr>
                                     </thead>
                                     <tbody>
