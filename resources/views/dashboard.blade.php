@@ -775,7 +775,7 @@ $extra_js='
                             </div>
 
                             <div class="table-responsive">
-                                <table id="customer-not-sale-timely-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
                                         <td>#</td>
@@ -821,7 +821,7 @@ $extra_js='
                             </div>
 
                             <div class="table-responsive">
-                                <table id="customer-not-sale-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                <table id="customer-not-sale-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
                                         <td>#</td>
