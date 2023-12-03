@@ -684,20 +684,20 @@ div.DTE_Field select{
 .masonry-layout-2 .grid-item--width2 { width:  100%; }
 .masonry-layout-2 .gutter-sizer { width: 2%; }
 
-.table-fixed {
-    width: 100%;
-}
-.table-fixed tbody {
-    height: 200px;
-    overflow-y: auto;
-    width: 100%;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-    display: block;
-}
-.table-fixed tbody td {
-    float: left;
-}
-.table-fixed thead tr th {
-    float: left;
-}
+/*.table-fixed {*/
+/*    width: 100%;*/
+/*}*/
+/*.table-fixed tbody {*/
+/*    height: 200px;*/
+/*    overflow-y: auto;*/
+/*    width: 100%;*/
+/*}*/
+/*.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {*/
+/*    display: block;*/
+/*}*/
+/*.table-fixed tbody td {*/
+/*    float: left;*/
+/*}*/
+/*.table-fixed thead tr th {*/
+/*    float: left;*/
+/*}*/
