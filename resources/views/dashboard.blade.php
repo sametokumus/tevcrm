@@ -639,9 +639,9 @@ $extra_js='
                                 <table id="best-customers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>#</td>
-                                        <td>Müşteri</td>
-                                        <td>Puan</td>
+                                        <th>#</th>
+                                        <th>Müşteri</th>
+                                        <th>Puan</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -685,9 +685,9 @@ $extra_js='
                                 <table id="best-staffs-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>#</td>
-                                        <td>Ad Soyad</td>
-                                        <td>Puan</td>
+                                        <th>#</th>
+                                        <th>Ad Soyad</th>
+                                        <th>Puan</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -731,10 +731,10 @@ $extra_js='
                                 <table id="admins-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>#</td>
-                                        <td>Ad Soyad</td>
-                                        <td>Satış Adedi</td>
-                                        <td>Tutar</td>
+                                        <th>#</th>
+                                        <th>Ad Soyad</th>
+                                        <th>Satış Adedi</th>
+                                        <th>Tutar</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -778,9 +778,9 @@ $extra_js='
                                 <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>#</td>
-                                        <td>Müşteri</td>
-                                        <td>Son Sipariş Tarihi</td>
+                                        <th>#</th>
+                                        <th>Müşteri</th>
+                                        <th>Son Sipariş Tarihi</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -824,9 +824,9 @@ $extra_js='
                                 <table id="customer-not-sale-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>#</td>
-                                        <td>Müşteri</td>
-                                        <td>Son Sipariş Tarihi</td>
+                                        <th>#</th>
+                                        <th>Müşteri</th>
+                                        <th>Son Sipariş Tarihi</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -870,8 +870,8 @@ $extra_js='
                                 <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <td>Ürün Adı</td>
-                                        <td>Adet</td>
+                                        <th>Ürün Adı</th>
+                                        <th>Adet</th>
                                     </tr>
                                     </thead>
                                     <tbody>
