@@ -954,7 +954,7 @@ async function getCustomerByNotSaleLongTimes(){
         let item = '<tr>\n' +
             '           <td>'+ company.id +'</td>\n' +
             '           <td>'+ company.name +'</td>\n' +
-            '           <td class="text-nowrap">'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
+            '           <td>'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
             '       </tr>';
         $('#customer-not-sale-timely-table tbody').append(item);
     });
