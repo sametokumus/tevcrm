@@ -42,6 +42,8 @@
         initTopSaledProducts();
         getBestCustomers();
         getBestStaffs();
+        getCustomerByNotSaleLongTimes();
+        getCustomerByNotSale();
 
 	});
 
