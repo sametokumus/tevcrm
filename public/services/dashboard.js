@@ -959,21 +959,9 @@ async function getCustomerByNotSaleLongTimes(){
         $('#customer-not-sale-timely-table tbody').append(item);
     });
 
-
-
     $('#customer-not-sale-timely-table').DataTable({
         responsive: false,
-        columnDefs: [
-            {
-                targets: 1,
-                className: 'ellipsis',
-                render: function(data, type, row, meta) {
-                    return type === 'display' && data.length > 30 ?
-                        data.substr(0, 30) + '...' :
-                        data;
-                }
-            }
-        ],
+        columnDefs: [],
         dom: 'Bfrtip',
         paging: true,
         buttons: [],
@@ -1005,17 +993,7 @@ async function getCustomerByNotSale(){
 
     $('#customer-not-sale-table').DataTable({
         responsive: false,
-        columnDefs: [
-            {
-                targets: 1,
-                className: 'ellipsis',
-                render: function(data, type, row, meta) {
-                    return type === 'display' && data.length > 30 ?
-                        data.substr(0, 30) + '...' :
-                        data;
-                }
-            }
-        ],
+        columnDefs: [],
         dom: 'Bfrtip',
         paging: true,
         buttons: [],
