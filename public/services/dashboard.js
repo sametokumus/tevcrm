@@ -993,6 +993,7 @@ async function getCustomerByNotSale(){
 
     $('#customer-not-sale-table').siblings('.spinners').remove();
 
+    $("#customer-not-sale-table").dataTable().fnDestroy();
     $('#customer-not-sale-table tbody tr').remove();
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
@@ -1000,6 +1001,29 @@ async function getCustomerByNotSale(){
             '           <td>'+ company.name +'</td>\n' +
             '       </tr>';
         $('#customer-not-sale-table tbody').append(item);
+    });
+
+    $('#customer-not-sale-table').DataTable({
+        responsive: false,
+        columnDefs: [
+            {
+                targets: 1,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 30 ?
+                        data.substr(0, 30) + '...' :
+                        data;
+                }
+            }
+        ],
+        dom: 'Bfrtip',
+        paging: true,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
     });
 
     reLoadGrid();
