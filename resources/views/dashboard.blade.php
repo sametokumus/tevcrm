@@ -761,7 +761,7 @@ $extra_js='
 
                 </div>
 
-                <div class="grid-item">
+                <div class="grid-item grid-item--width2">
 
                     <!-- siparişi olmayan müşteriler (zamansal) -->
                     <div class="card mb-3">
@@ -807,7 +807,7 @@ $extra_js='
 
                 </div>
 
-                <div class="grid-item">
+                <div class="grid-item grid-item--width2">
 
                     <!-- siparişi olmayan müşteriler -->
                     <div class="card mb-3">
