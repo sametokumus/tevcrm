@@ -2239,7 +2239,7 @@ class DashboardController extends Controller
                 ->get();
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$companies' => $companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
@@ -2258,7 +2258,7 @@ class DashboardController extends Controller
                 ->get();
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$companies' => $companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }

@@ -938,3 +938,42 @@ async function getMonthlyProfitRates(){
     reLoadGrid();
 
 }
+
+async function getCustomerByNotSaleLongTimes(){
+
+    let data = await serviceGetCustomerByNotSaleLongTimes();
+    let companies = data.companies;
+
+    $('#customer-not-sale-timely-table').siblings('.spinners').remove();
+
+    $('#customer-not-sale-timely-table tbody tr').remove();
+    $.each(companies, function (i, company) {
+        let item = '<tr>\n' +
+            '           <td>'+ company.id +'</td>\n' +
+            '           <td>'+ company.name +'</td>\n' +
+            '           <td>'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
+            '       </tr>';
+        $('#customer-not-sale-timely-table tbody').append(item);
+    });
+
+    reLoadGrid();
+}
+
+async function getCustomerByNotSale(){
+
+    let data = await serviceGetCustomerByNotSale();
+    let companies = data.companies;
+
+    $('#customer-not-sale-table').siblings('.spinners').remove();
+
+    $('#customer-not-sale-table tbody tr').remove();
+    $.each(companies, function (i, company) {
+        let item = '<tr>\n' +
+            '           <td>'+ company.id +'</td>\n' +
+            '           <td>'+ company.name +'</td>\n' +
+            '       </tr>';
+        $('#customer-not-sale-table tbody').append(item);
+    });
+
+    reLoadGrid();
+}

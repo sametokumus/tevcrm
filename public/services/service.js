@@ -2928,3 +2928,21 @@ async function serviceGetMonthlyProfitRatesLastTwelveMonths(owner_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetCustomerByNotSaleLongTimes() {
+    const data = await fetchDataGet('/admin/dashboard/getCustomerByNotSaleLongTimes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCustomerByNotSale() {
+    const data = await fetchDataGet('/admin/dashboard/getCustomerByNotSale', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
