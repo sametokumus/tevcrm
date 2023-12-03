@@ -826,7 +826,6 @@ $extra_js='
                                     <tr>
                                         <th>#</th>
                                         <th>Müşteri</th>
-                                        <th>Son Sipariş Tarihi</td>
                                     </tr>
                                     </thead>
                                     <tbody>
