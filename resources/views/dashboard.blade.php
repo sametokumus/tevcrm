@@ -778,7 +778,7 @@ $extra_js='
                                 <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="max-width: 30px;">#</th>
                                         <th>Müşteri</th>
                                         <th class="text-nowrap">Son Sipariş</td>
                                     </tr>
@@ -824,7 +824,7 @@ $extra_js='
                                 <table id="customer-not-sale-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="max-width: 30px;">#</th>
                                         <th>Müşteri</th>
                                     </tr>
                                     </thead>

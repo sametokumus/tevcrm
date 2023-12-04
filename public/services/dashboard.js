@@ -952,7 +952,7 @@ async function getCustomerByNotSaleLongTimes(){
     $('#customer-not-sale-timely-table tbody tr').remove();
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
-            '           <td>'+ company.id +'</td>\n' +
+            '           <td style="max-width: 30px;">'+ company.id +'</td>\n' +
             '           <td>'+ company.name +'</td>\n' +
             '           <td>'+ formatDateASC(company.last_sale_date, '-') +'</td>\n' +
             '       </tr>';
@@ -985,7 +985,7 @@ async function getCustomerByNotSale(){
     $('#customer-not-sale-table tbody tr').remove();
     $.each(companies, function (i, company) {
         let item = '<tr>\n' +
-            '           <td>'+ company.id +'</td>\n' +
+            '           <td style="max-width: 30px;">'+ company.id +'</td>\n' +
             '           <td>'+ company.name +'</td>\n' +
             '       </tr>';
         $('#customer-not-sale-table tbody').append(item);
