@@ -1019,7 +1019,7 @@ async function getBestSalesLastNinetyDays(){
     $('#best-sales-by-price-table tbody tr').remove();
     $.each(by_sale_price, function (i, sale) {
         let item = '<tr>\n' +
-            '           <td>'+ sale.shortcode +'-'+ sale.id +'</td>\n' +
+            '           <td>'+ sale.short_code +'-'+ sale.id +'</td>\n' +
             '           <td>'+ changeCommasToDecimal(sale.offer_total) +' '+ sale.currency +'</td>\n' +
             '       </tr>';
         $('#best-sales-by-price-table tbody').append(item);
@@ -1030,7 +1030,7 @@ async function getBestSalesLastNinetyDays(){
     $('#best-sales-by-profit-table tbody tr').remove();
     $.each(by_sale_price, function (i, sale) {
         let item = '<tr>\n' +
-            '           <td>'+ sale.shortcode +'-'+ sale.id +'</td>\n' +
+            '           <td>'+ sale.short_code +'-'+ sale.id +'</td>\n' +
             '           <td>'+ sale.profit_rate +'</td>\n' +
             '       </tr>';
         $('#best-sales-by-profit-table tbody').append(item);
