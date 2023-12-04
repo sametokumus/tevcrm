@@ -50,7 +50,7 @@ class MobileController extends Controller
             if ($status->mobile_id == 41){
                 $item['completed'] = 1;
             }
-            $item['confirmation_no'] = 'SMY-'.$sale_id;
+            $item['confirmation_no'] = 'SMY-'.$sale->id;
             $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
             $item['currency'] = $sale->currency;
             $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
@@ -157,7 +157,7 @@ class MobileController extends Controller
                             if ($packing_status->mobile_id == 41) {
                                 $item['completed'] = 1;
                             }
-                            $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
+                            $item['confirmation_no'] = 'SMY-' . $sale->id;
                             $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
                             $item['currency'] = $sale->currency;
                             $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
@@ -277,7 +277,7 @@ class MobileController extends Controller
                         if ($status->mobile_id == 41) {
                             $item['completed'] = 1;
                         }
-                        $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
+                        $item['confirmation_no'] = 'SMY-' . $sale->id;
                         $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
                         $item['currency'] = $sale->currency;
                         $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
@@ -398,7 +398,7 @@ class MobileController extends Controller
                         if ($status->mobile_id == 41) {
                             $item['completed'] = 1;
                         }
-                        $item['confirmation_no'] = 'SMY-' . $sale->sale_id;
+                        $item['confirmation_no'] = 'SMY-' . $sale->id;
                         $item['creation_date'] = Carbon::parse($sale->created_at)->format('d.m.Y h:i:s');
                         $item['currency'] = $sale->currency;
                         $item['order_date'] = Carbon::parse($sale->created_at)->format('Y-m-d');
