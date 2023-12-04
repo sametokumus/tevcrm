@@ -2538,7 +2538,7 @@ class DashboardController extends Controller
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['by_sale_price' => $by_sale_price, 'by_profit_rate' => $by_profit_rate]]);
         } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
     }
 
