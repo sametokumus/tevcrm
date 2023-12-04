@@ -1028,7 +1028,7 @@ async function getBestSalesLastNinetyDays(){
     $('#best-sales-by-profit-table').siblings('.spinners').remove();
 
     $('#best-sales-by-profit-table tbody tr').remove();
-    $.each(by_sale_price, function (i, sale) {
+    $.each(by_profit_rate, function (i, sale) {
         let item = '<tr>\n' +
             '           <td>'+ sale.short_code +'-'+ sale.id +'</td>\n' +
             '           <td>'+ sale.profit_rate +'</td>\n' +
