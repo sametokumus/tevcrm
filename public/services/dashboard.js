@@ -44,6 +44,7 @@
         getBestStaffs();
         getCustomerByNotSaleLongTimes();
         getCustomerByNotSale();
+        getBestSalesLastNinetyDays();
 
 	});
 
@@ -1002,6 +1003,37 @@ async function getCustomerByNotSale(){
             url: "services/Turkish.json"
         },
         order: false,
+    });
+
+    reLoadGrid();
+}
+
+async function getBestSalesLastNinetyDays(){
+
+    let data = await serviceGetBestSalesLastNinetyDays(dash_owner);
+    let by_sale_price = data.by_sale_price;
+    let by_profit_rate = data.by_profit_rate;
+
+    $('#best-sales-by-price-table').siblings('.spinners').remove();
+
+    $('#best-sales-by-price-table tbody tr').remove();
+    $.each(by_sale_price, function (i, sale) {
+        let item = '<tr>\n' +
+            '           <td>'+ sale.shortcode +'-'+ sale.id +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(sale.offer_total) +' '+ sale.currency +'</td>\n' +
+            '       </tr>';
+        $('#best-sales-by-price-table tbody').append(item);
+    });
+
+    $('#best-sales-by-profit-table').siblings('.spinners').remove();
+
+    $('#best-sales-by-profit-table tbody tr').remove();
+    $.each(by_sale_price, function (i, sale) {
+        let item = '<tr>\n' +
+            '           <td>'+ sale.shortcode +'-'+ sale.id +'</td>\n' +
+            '           <td>'+ sale.profit_rate +'</td>\n' +
+            '       </tr>';
+        $('#best-sales-by-profit-table tbody').append(item);
     });
 
     reLoadGrid();

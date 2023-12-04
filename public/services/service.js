@@ -2946,3 +2946,12 @@ async function serviceGetCustomerByNotSale() {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function serviceGetBestSalesLastNinetyDays(owner_id) {
+    const data = await fetchDataGet('/admin/dashboard/getBestSalesLastNinetyDays/' + owner_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

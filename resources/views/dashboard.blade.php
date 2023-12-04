@@ -761,6 +761,96 @@ $extra_js='
 
                 </div>
 
+                <div class="grid-item">
+
+                    <!-- ekip satışları -->
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <div class="d-flex fw-bold small mb-3">
+                                <span class="flex-grow-1">EN YÜKSEK RAKAMLI SATIŞLAR (Son 90 Gün)</span>
+                                <a href="#" data-toggle="card-expand"
+                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="best-sales-by-price-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Satış</th>
+                                        <th>Tutar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="grid-item">
+
+                    <!-- en karlı satışlar 90 gün -->
+                    <div class="card mb-3">
+
+                        <div class="card-body">
+
+                            <div class="d-flex fw-bold small mb-3">
+                                <span class="flex-grow-1">EN KARLI SATIŞLAR (Son 90 Gün)</span>
+                                <a href="#" data-toggle="card-expand"
+                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="best-sales-by-profit-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Satış</th>
+                                        <th>Kar Oranı</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div class="spinners">
+                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <div class="grid-item grid-item--width2">
 
                     <!-- siparişi olmayan müşteriler (zamansal) -->
