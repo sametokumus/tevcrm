@@ -2523,7 +2523,7 @@ class DashboardController extends Controller
                 $item['sale_total'] = $sale_total;
                 $item['offer_total'] = $offer_total;
                 $profit = $offer_total - $sale_total;
-                if ($profit <= 0){
+                if ($profit <= 0 || $sale_total <= 0){
                     $profit_rate = 0;
                 }else {
                     $profit_rate = 100 * $profit / $sale_total;
