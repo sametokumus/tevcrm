@@ -2460,7 +2460,7 @@ class DashboardController extends Controller
                 })
                 ->where('s.active', '=', 1)
                 ->whereIn('statuses.period', ['completed', 'approved'])
-                ->whereBetween('s.created_at', [now()->subDays(90), now()]);
+                ->whereBetween('sh.created_at', [now()->subDays(90), now()]);
 
             if ($owner_id != 0){
                 $sale_items = $sale_items
