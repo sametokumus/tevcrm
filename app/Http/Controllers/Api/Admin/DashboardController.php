@@ -2520,8 +2520,8 @@ class DashboardController extends Controller
 
                 $item['id'] = $sale->id;
                 $item['short_code'] = Contact::query()->where('id', $sale->owner_id)->first()->short_code;
-                $item['sale_total'] = $sale_total;
-                $item['offer_total'] = $offer_total;
+                $item['sale_total'] = number_format($sale_total, 2, ',', '.');
+                $item['offer_total'] = number_format($offer_total, 2, ',', '.');
                 $profit = $offer_total - $sale_total;
                 if ($profit <= 0 || $sale_total <= 0){
                     $profit_rate = 0;
