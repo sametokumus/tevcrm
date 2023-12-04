@@ -769,7 +769,7 @@ $extra_js='
                         <div class="card-body">
 
                             <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
+                                <span class="flex-grow-1">UZUN SÜREDİR SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
                                 <a href="#" data-toggle="card-expand"
                                    class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
@@ -815,7 +815,7 @@ $extra_js='
                         <div class="card-body">
 
                             <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
+                                <span class="flex-grow-1">HİÇ SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
                                 <a href="#" data-toggle="card-expand"
                                    class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
