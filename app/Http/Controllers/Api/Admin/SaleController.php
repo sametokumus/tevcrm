@@ -429,7 +429,7 @@ class SaleController extends Controller
                 $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
                 $sale_offer['sequence'] = $request_product->sequence;
 
-                if ($offer_price != 0) {
+                if ($offer_price != 0 && $sale_offer->sale_price != 0) {
                     $profit_rate = 100 * (floatval($offer_price) - floatval($sale_offer->sale_price)) / floatval($sale_offer->sale_price);
                 }else{
                     $profit_rate = 0;
