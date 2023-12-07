@@ -426,6 +426,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
+    //Chat
 
 
 });

@@ -9,6 +9,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "beyondcode/laravel-websockets": "^1.14",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -16,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "mariuzzo/laravel-js-localization": "^1.10",
+        "pusher/pusher-php-server": "^7.2",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.4",
         "twilio/sdk": "^6.33"
