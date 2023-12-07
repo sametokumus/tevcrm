@@ -31,6 +31,8 @@ use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\MobileController;
 use App\Http\Controllers\Api\Admin\PdfController;
 use App\Http\Controllers\Api\Admin\StaffController;
+use App\Http\Controllers\Api\Admin\ChatController;
+use App\Http\Controllers\Api\Admin\SocketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -427,7 +429,18 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
     //Chat
+    Route::post("/sockets/connect", [SocketsController::class, "connect"]);
+    Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\ConfigAppManager $appManager) {
+        return view('chat', [
+            "port" => env("LARAVEL_WEBSOCKETS_PORT"),
+            "host" => env("LARAVEL_WEBSOCKETS_HOST"),
+            "authEndpoint" => "/api/sockets/connect",
+            "logChannel" => \BeyondCode\LaravelWebSockets\DashboardLogger::LOG_CHANNEL_PREFIX,
+            "apps" => $appManager->all()
+        ]);
+    });
 
+    Route::post('/chat/sendMessage', [ChatController::class, 'sendChatMessage']);
 
 });
 

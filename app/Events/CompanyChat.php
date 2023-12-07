@@ -16,7 +16,6 @@ class CompanyChat implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $user_id;
     public $user;
 
     /**
@@ -24,11 +23,10 @@ class CompanyChat implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($message, $user_id)
+    public function __construct($message, $user)
     {
         $this->message = $message;
-        $this->user_id = $user_id;
-        $this->user = User::query()->where('id', $user_id)->first();
+        $this->user = $user;
     }
 
     /**
