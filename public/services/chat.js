@@ -9,15 +9,15 @@ channel.bind('App\\Events\\CompanyChat', function(data) {
     console.log('Received message: ', data);
     let received = JSON.stringify(data);
     // Handle the received message as needed
-    handleSendMessageEvent(data.message)
+    handleSendMessageEvent(data)
 });
 
-function handleSendMessageEvent(message) {
+function handleSendMessageEvent(data) {
 
     // Update the chat interface or append the message to the DOM
     const chatMessagesDiv = document.getElementById('chat-messages');
     const messageElement = document.createElement('p');
-    messageElement.innerHTML = message;
+    messageElement.innerHTML = data.message;
     chatMessagesDiv.appendChild(messageElement);
 
     // Scroll to the bottom to show the latest message
