@@ -17,7 +17,7 @@ function handleSendMessageEvent(data) {
     // Update the chat interface or append the message to the DOM
     const chatMessagesDiv = document.getElementById('chat-messages');
     const messageElement = document.createElement('p');
-    messageElement.innerHTML = data.message;
+    messageElement.innerHTML = data.user.name + ' ' + data.user.surname + ': <br>' + data.message + '<br>';
     chatMessagesDiv.appendChild(messageElement);
 
     // Scroll to the bottom to show the latest message
