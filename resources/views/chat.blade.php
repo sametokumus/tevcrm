@@ -8,6 +8,7 @@
 
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+    <script src="{{ asset('services/service.js') }}" defer></script>
     <script src="{{ asset('services/chat.js') }}" defer></script>
 
 </head>
