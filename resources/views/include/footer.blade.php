@@ -18,7 +18,16 @@
                                 <div class="widget-chat-message">
                                     Not much, It's got a new look, contact pics show up in group messaging, some other small stuff.
                                 </div>
-                                <div class="widget-chat-message last">
+                                <div class="widget-chat-message">
+                                    How's crusty old iOS 6 treating you?
+                                </div>
+                                <div class="widget-chat-message">
+                                    How's crusty old iOS 6 treating you?
+                                </div>
+                                <div class="widget-chat-message">
+                                    How's crusty old iOS 6 treating you?
+                                </div>
+                                <div class="widget-chat-message">
                                     How's crusty old iOS 6 treating you?
                                 </div>
                             </div>
