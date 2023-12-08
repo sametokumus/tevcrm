@@ -33,15 +33,21 @@
                             </div>
                         </div>
                         <div class="widget-chat-item">
-                            <div class="widget-chat-content"><div class="widget-chat-name">Süper Admin</div><div class="widget-chat-message">
+                            <div class="widget-chat-content">
+                                <div class="widget-chat-name">Süper Admin</div>
+                                <div class="widget-chat-message">
                                     dfdsf
-                                </div><div class="widget-chat-message">
+                                </div>
+                                <div class="widget-chat-message">
                                     test
-                                </div><div class="widget-chat-message">
+                                </div>
+                                <div class="widget-chat-message">
                                     test
-                                </div><div class="widget-chat-message">
+                                </div>
+                                <div class="widget-chat-message">
                                     test
-                                </div>      </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="widget-chat-item reply">
                             <div class="widget-chat-content">
