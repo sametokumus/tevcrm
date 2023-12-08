@@ -435,6 +435,11 @@ async function getPublicChats(){
     $.each(messages, function(i, message){
         console.log('lu: ' + last_user + '    ld: ' + last_day);
 
+        let reply = '';
+        if (message.sender_id == user_id){
+            reply = 'reply';
+        }
+
         message_panel += '';
         if (last_day != formatDateASC(message.created_at, '-')){
             if (last_user != ''){
@@ -449,10 +454,10 @@ async function getPublicChats(){
             if (last_user != ''){
                 message_panel += '      </div>\n' +
                     '               </div>\n';
-                message_panel += '  <div class="widget-chat-item">\n' +
+                message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
                     '                   <div class="widget-chat-content">\n';
             }else{
-                message_panel += '  <div class="widget-chat-item">\n' +
+                message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
                     '                   <div class="widget-chat-content">\n';
             }
 
@@ -462,15 +467,6 @@ async function getPublicChats(){
                 '                 '+ message.message +'\n' +
                 // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
                 '             </div>\n';
-
-            // message_panel += '  <div class="widget-chat-item">\n' +
-            //     '                   <div class="widget-chat-content">';
-            //
-            //
-            //
-            // message_panel += '      </div>\n' +
-            //     '               </div>';
-            // message_panel += '';
 
         }else{
             message_panel += '<div class="widget-chat-message">\n' +
