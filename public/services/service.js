@@ -433,6 +433,8 @@ async function getPublicChats(){
     let message_panel = '';
 
     $.each(messages, function(i, message){
+        console.log('lu: ' + last_user + '    ld: ' + last_day);
+
         message_panel += '';
         if (last_day != formatDateASC(message.created_at, '-')){
             if (last_user != ''){
