@@ -699,3 +699,7 @@ div.DTE_Field select{
 .app-theme-panel .app-theme-panel-content .card-body{
     height: calc(100vh - 160px);
 }
+.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-message{
+    display: block;
+    width: fit-content;
+}
