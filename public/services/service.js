@@ -477,7 +477,7 @@ async function getPublicChats(){
     });
 
 
-    $('.menu-item.d-none').remove();
+    $('.app-theme-panel .widget-chat').append(message_panel);
 
 }
 
