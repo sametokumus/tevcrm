@@ -430,15 +430,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Chat
     Route::post("/sockets/connect", [SocketsController::class, "connect"]);
-    Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\ConfigAppManager $appManager) {
-        return view('chat', [
-            "port" => env("LARAVEL_WEBSOCKETS_PORT"),
-            "host" => env("LARAVEL_WEBSOCKETS_HOST"),
-            "authEndpoint" => "/api/sockets/connect",
-            "logChannel" => \BeyondCode\LaravelWebSockets\DashboardLogger::LOG_CHANNEL_PREFIX,
-            "apps" => $appManager->all()
-        ]);
-    });
 
     Route::post('/chat/sendMessage', [ChatController::class, 'sendChatMessage']);
 

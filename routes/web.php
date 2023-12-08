@@ -97,3 +97,15 @@ Route::post('/lang', function(Request $request) {
 Route::get('fonts/ChakraPetch/ChakraPetch-Regular.ttf', function () {
     return response()->file(public_path('fonts/ChakraPetch/ChakraPetch-Regular.ttf'));
 });
+
+
+
+Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\ConfigAppManager $appManager) {
+    return view('chat', [
+        "port" => env("LARAVEL_WEBSOCKETS_PORT"),
+        "host" => env("LARAVEL_WEBSOCKETS_HOST"),
+        "authEndpoint" => "/api/sockets/connect",
+        "logChannel" => \BeyondCode\LaravelWebSockets\DashboardLogger::LOG_CHANNEL_PREFIX,
+        "apps" => $appManager->all()
+    ]);
+});
