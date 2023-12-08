@@ -100,12 +100,12 @@ Route::get('fonts/ChakraPetch/ChakraPetch-Regular.ttf', function () {
 
 
 
-Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\ConfigAppManager $appManager) {
+Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\AppProvider $appProvider) {
     return view('chat', [
         "port" => env("LARAVEL_WEBSOCKETS_PORT"),
         "host" => env("LARAVEL_WEBSOCKETS_HOST"),
         "authEndpoint" => "/api/sockets/connect",
-        "logChannel" => \BeyondCode\LaravelWebSockets\DashboardLogger::LOG_CHANNEL_PREFIX,
-        "apps" => $appManager->all()
+        "logChannel" => \BeyondCode\LaravelWebSockets\Dashboard\DashboardLogger::LOG_CHANNEL_PREFIX,
+        "apps" => $appProvider->all()
     ]);
 });
