@@ -434,12 +434,12 @@ async function getPublicChats(){
 
     $.each(messages, function(i, message){
         message_panel += '';
-        if (last_day != formatDateDESC(message.created_at, '-')){
+        if (last_day != formatDateASC(message.created_at, '-')){
             if (last_user != ''){
                 message_panel += '      </div>\n' +
                     '               </div>';
             }
-            message_panel += '<div class="widget-chat-date">'+ formatDateDESC(message.created_at, '-') +'</div>';
+            message_panel += '<div class="widget-chat-date">'+ formatDateASC(message.created_at, '-') +'</div>';
             last_user = '';
         }
 
@@ -473,7 +473,7 @@ async function getPublicChats(){
 
 
 
-        last_day = formatDateDESC(message.created_at, '-');
+        last_day = formatDateASC(message.created_at, '-');
     });
 
 
