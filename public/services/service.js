@@ -456,6 +456,8 @@ async function getPublicChats(){
                     '                   <div class="widget-chat-content">';
             }
 
+            message_panel += '<div class="widget-chat-name">'+ message.sender.name + ' ' + message.sender.surname +'</div>';
+
             message_panel += '<div class="widget-chat-message">\n' +
                 '                 '+ message.message +'\n' +
                 // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
@@ -473,7 +475,7 @@ async function getPublicChats(){
         }else{
             message_panel += '<div class="widget-chat-message last">\n' +
                 '                 '+ message.message +'\n' +
-                '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
+                // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
                 '             </div>';
         }
 
