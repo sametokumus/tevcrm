@@ -429,7 +429,7 @@ async function getPublicChats(){
 
 
     let data = await serviceGetCompanyChatMessages(chatPage);
-    let messages = data.messages.reverse();
+    let messages = data.messages.data.reverse();
     let message_panel = '';
 
     $.each(messages, function(i, message){
