@@ -472,7 +472,7 @@ async function getPublicChats(){
 
 
 
-
+        last_user = message.sender_id;
         last_day = formatDateASC(message.created_at, '-');
     });
 
