@@ -1,38 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Chat App</title>
+@include('include.header')
+<?php
+$extra_js='
+<script src="services/chat.js"></script>
+';
+?>
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<!--app-content open-->
+<div class="main-content app-content">
+    <div class="side-app">
 
-    <script src="{{ asset('services/service.js') }}" defer></script>
-    <script src="{{ asset('services/chat.js') }}" defer></script>
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
 
-</head>
-<body>
-<div>
-    <h1>Chat App</h1>
 
-    <div class="container">
-        <div class="row">
-            <div id="chat-messages" style="width: 300px; border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: auto; margin-bottom: 30px;"></div>
+            <div>
+                <h1>Chat App</h1>
+
+                <div class="container">
+                    <div class="row">
+                        <div id="chat-messages" style="width: 300px; border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: auto; margin-bottom: 30px;"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <form id="chat-form">
+                            <input type="text" id="message" placeholder="Type your message">
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
+        <!-- CONTAINER END -->
     </div>
-
-    <div class="container">
-        <div class="row">
-            <form id="chat-form">
-                <input type="text" id="message" placeholder="Type your message">
-                <button type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-
-
 </div>
+<!--app-content close-->
 
-</body>
-</html>
+@include('include.footer')
