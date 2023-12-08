@@ -486,6 +486,9 @@ async function getPublicChats(){
 
     $('.app-theme-panel .widget-chat').append(message_panel);
 
+    let scrollableDiv = document.getElementById('chat-body');
+    scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+
 }
 
 async function checkLogin () {

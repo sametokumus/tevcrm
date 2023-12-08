@@ -9,7 +9,7 @@
 
             <div class="card">
                 <div class="card-header bg-none fw-bold d-flex align-items-center">Chat <a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="card-expand"><i class="fa fa-expand"></i></a></div>
-                <div class="card-body bg-inverse bg-opacity-10" data-scrollbar="true">
+                <div class="card-body bg-inverse bg-opacity-10" id="chat-body" data-scrollbar="true">
                     <div class="widget-chat">
                         <div class="widget-chat-date">Today 14:21</div>
                         <div class="widget-chat-item">

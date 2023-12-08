@@ -703,3 +703,6 @@ div.DTE_Field select{
     display: block;
     width: fit-content;
 }
+.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-item.reply .widget-chat-message{
+    float: right;
+}
