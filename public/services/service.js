@@ -439,29 +439,29 @@ async function getPublicChats(){
         if (last_day != formatDateASC(message.created_at, '-')){
             if (last_user != ''){
                 message_panel += '      </div>\n' +
-                    '               </div>';
+                    '               </div>\n';
             }
-            message_panel += '<div class="widget-chat-date">'+ formatDateASC(message.created_at, '-') +'</div>';
+            message_panel += '<div class="widget-chat-date">'+ formatDateASC(message.created_at, '-') +'</div>\n';
             last_user = '';
         }
 
         if (last_user != message.sender_id){
             if (last_user != ''){
                 message_panel += '      </div>\n' +
-                    '               </div>';
+                    '               </div>\n';
                 message_panel += '  <div class="widget-chat-item">\n' +
-                    '                   <div class="widget-chat-content">';
+                    '                   <div class="widget-chat-content">\n';
             }else{
                 message_panel += '  <div class="widget-chat-item">\n' +
-                    '                   <div class="widget-chat-content">';
+                    '                   <div class="widget-chat-content">\n';
             }
 
-            message_panel += '<div class="widget-chat-name">'+ message.sender.name + ' ' + message.sender.surname +'</div>';
+            message_panel += '<div class="widget-chat-name">'+ message.sender.name + ' ' + message.sender.surname +'</div>\n';
 
             message_panel += '<div class="widget-chat-message">\n' +
                 '                 '+ message.message +'\n' +
                 // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
-                '             </div>';
+                '             </div>\n';
 
             // message_panel += '  <div class="widget-chat-item">\n' +
             //     '                   <div class="widget-chat-content">';
@@ -476,7 +476,7 @@ async function getPublicChats(){
             message_panel += '<div class="widget-chat-message">\n' +
                 '                 '+ message.message +'\n' +
                 // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
-                '             </div>';
+                '             </div>\n';
         }
 
 
