@@ -2955,3 +2955,15 @@ async function serviceGetBestSalesLastNinetyDays(owner_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+
+async function servicePostCompanyChatMessage(formData) {
+    const data = await fetchDataPost('/admin/companyChat/sendMessage', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

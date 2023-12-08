@@ -431,7 +431,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Chat
     Route::post("/sockets/connect", [SocketsController::class, "connect"]);
 
-    Route::post('/chat/sendMessage', [ChatController::class, 'sendChatMessage']);
+    Route::post('/companyChat/sendMessage', [ChatController::class, 'sendCompanyChatMessage']);
 
 });
 

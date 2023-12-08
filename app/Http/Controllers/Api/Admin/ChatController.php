@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
-    public static function sendChatMessage(Request $request)
+    public static function sendCompanyChatMessage(Request $request)
     {
         try {
 
             $message = $request->input("message", null);
             $user = User::query()->where('id', $request->user_id)->first();
-//            \App\Events\SendMessage::dispatch($message);
             event(new CompanyChat($message, $user));
             Log::info('Chat message send: ' . $message . ' / user:' . $user);
 
