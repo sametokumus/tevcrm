@@ -684,3 +684,18 @@ div.DTE_Field select{
 .masonry-layout-2 .grid-item--width2 { width:  100%; }
 .masonry-layout-2 .gutter-sizer { width: 2%; }
 
+/* CHAT */
+.app-theme-panel .app-theme-panel-container{
+    width: 25rem;
+    position: absolute;
+    right: 0;
+    height: calc(100vh - 52px);
+    top: 52px;
+    z-index: 1;
+}
+.app-theme-panel .app-theme-panel-content{
+    width: 25rem;
+}
+.app-theme-panel .app-theme-panel-content .card-body{
+    height: calc(100vh - 160px);
+}

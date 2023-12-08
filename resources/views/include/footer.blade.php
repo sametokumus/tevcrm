@@ -8,12 +8,11 @@
         <div class="app-theme-panel-content">
 
             <div class="card">
-                <div class="card-header bg-none fw-bold d-flex align-items-center">Discussion group <a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="card-expand"><i class="fa fa-expand"></i></a></div>
-                <div class="card-body bg-inverse bg-opacity-10" data-scrollbar="true" data-height="200px">
+                <div class="card-header bg-none fw-bold d-flex align-items-center">Chat <a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="card-expand"><i class="fa fa-expand"></i></a></div>
+                <div class="card-body bg-inverse bg-opacity-10" data-scrollbar="true">
                     <div class="widget-chat">
                         <div class="widget-chat-date">Today 14:21</div>
                         <div class="widget-chat-item">
-                            <div class="widget-chat-media"><img src="assets/img/user/user-2.jpg" alt="" /></div>
                             <div class="widget-chat-content">
                                 <div class="widget-chat-name">Roberto Lambert</div>
                                 <div class="widget-chat-message">
@@ -28,8 +27,8 @@
                             <div class="widget-chat-content">
                                 <div class="widget-chat-message last">
                                     Sucks
+                                    <div class="widget-chat-status"><b>Read</b> 16:30</div>
                                 </div>
-                                <div class="widget-chat-status"><b>Read</b> 16:30</div>
                             </div>
                         </div>
                     </div>

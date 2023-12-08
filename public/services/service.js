@@ -34,7 +34,8 @@
 		// checkLogin();
         $('#header_user_name').text(localStorage.getItem('userName'));
 
-        await createNavbar();
+        createNavbar();
+        getPublicChats();
 	});
 
 
@@ -416,6 +417,66 @@ async function createNavbar(){
     $.each(data.role_permissions, function(i, role_permission){
         $('#nav-'+role_permission.permission_key).removeClass('d-none');
     });
+    $('.menu-item.d-none').remove();
+
+}
+
+let chatPage = 1;
+async function getPublicChats(){
+   let user_id = await localStorage.getItem('userId');
+   let last_day = '';
+   let last_user = '';
+
+
+    let data = await serviceGetCompanyChatMessages(chatPage);
+    let messages = data.messages.reverse();
+    let message_panel = '';
+
+    $.each(messages, function(i, message){
+        message_panel += '';
+        if (last_day != formatDateDESC(message.created_at)){
+            if (last_user != ''){
+                message_panel += '      </div>\n' +
+                    '               </div>';
+            }
+            message_panel += '<div class="widget-chat-date">'+ formatDateDESC(message.created_at) +'</div>';
+            last_user = '';
+        }
+
+        if (last_user != message.sender_id){
+            if (last_user != ''){
+                message_panel += '      </div>\n' +
+                    '               </div>';
+            }
+
+            if (last_user == ''){
+                message_panel += '  <div class="widget-chat-item">\n' +
+                    '                   <div class="widget-chat-content">';
+            }
+            message_panel += '';
+
+            // message_panel += '  <div class="widget-chat-item">\n' +
+            //     '                   <div class="widget-chat-content">';
+            //
+            //
+            //
+            // message_panel += '      </div>\n' +
+            //     '               </div>';
+            // message_panel += '';
+
+        }else{
+
+        }
+
+
+
+
+
+
+        last_day = formatDateDESC(message.created_at);
+    });
+
+
     $('.menu-item.d-none').remove();
 
 }
@@ -2965,5 +3026,14 @@ async function servicePostCompanyChatMessage(formData) {
     } else {
         showAlert('İstek Başarısız.');
         return false;
+    }
+}
+
+async function serviceGetCompanyChatMessages(page) {
+    const data = await fetchDataGet('/admin/companyChat/getPublicChatMessages/' + page, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
     }
 }
