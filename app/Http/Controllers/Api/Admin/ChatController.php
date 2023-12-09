@@ -36,17 +36,20 @@ class ChatController extends Controller
     public static function sendPublicChatMessage(Request $request)
     {
         try {
-            $message = $request->message;
+            $message_text = $request->message;
             $user = Admin::query()->where('id', $request->user_id)->first();
-            event(new CompanyChat($message, $user));
-            Log::info('Chat message send: ' . $message . ' / user:' . $user);
 
             $message_id = Uuid::uuid();
-            PublicChat::query()->insert([
+            $message_id = PublicChat::query()->insertGetId([
                 'message_id' => $message_id,
                 'sender_id' => $request->user_id,
-                'message' => $message
+                'message' => $message_text
             ]);
+
+            $message = PublicChat::query()->where('id', $message_id)->first();
+
+            event(new CompanyChat($message, $user));
+            Log::info('Chat message send: ' . $message . ' / user:' . $user);
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
         }catch (\Exception $e) {

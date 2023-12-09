@@ -428,10 +428,10 @@ async function createNavbar(){
 }
 
 let chatPage = 1;
+let last_day = '';
+let last_user = '';
 async function getPublicChats(){
    let user_id = await localStorage.getItem('userId');
-   let last_day = '';
-   let last_user = '';
 
 
     let data = await serviceGetCompanyChatMessages(chatPage);
@@ -484,9 +484,6 @@ async function getPublicChats(){
         }
 
 
-
-
-
         last_user = message.sender_id;
         last_day = formatDateASC(message.created_at, '-');
     });
@@ -520,6 +517,38 @@ async function sendPublicChatMessage (){
         showAlert('Boş mesaj gönderemezsiniz!');
     }
 }
+
+/*Listen Chat Message*/
+
+Pusher.logToConsole = true;
+
+var pusher = new Pusher('c52432e0f85707bee8d3', {
+    cluster: 'eu'
+});
+
+var channel = pusher.subscribe('company-chat-channel');
+channel.bind('App\\Events\\CompanyChat', function(data) {
+    console.log('Received message: ', data);
+    let received = JSON.stringify(data);
+    // Handle the received message as needed
+    handleSendMessageEvent(data)
+});
+
+function handleSendMessageEvent(data) {
+
+    // Update the chat interface or append the message to the DOM
+    const chatMessagesDiv = document.getElementById('chat-messages');
+    const messageElement = document.createElement('p');
+    messageElement.innerHTML = data.user.name + ' ' + data.user.surname + ': <br>' + data.message + '<br>';
+    chatMessagesDiv.appendChild(messageElement);
+
+    // Scroll to the bottom to show the latest message
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+}
+
+/*Listen Chat Message*/
+
+
 
 async function checkLogin () {
     // localStorage.setItem('userLogin', 'true');
