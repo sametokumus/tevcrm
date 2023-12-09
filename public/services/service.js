@@ -26,8 +26,14 @@
 
 		});
 
+        $('#chat-form').submit(function (e){
+            e.preventDefault();
+            sendPublicChatMessage();
+        });
 
-	});
+
+
+    });
 
 
 	$(window).on('load',async function() {
@@ -491,6 +497,20 @@ async function getPublicChats(){
     let scrollableDiv = document.getElementById('chat-body');
     scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
 
+}
+
+async function sendPublicChatMessage (){
+    const messageInput = document.getElementById('chat-message-text');
+    const message = messageInput.value.trim();
+
+    let formData = JSON.stringify({
+        "message": message,
+        "user_id": localStorage.getItem('userId')
+    });
+    let returned = servicePostCompanyChatMessage(formData);
+    if (!returned){
+        alert('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    }
 }
 
 async function checkLogin () {

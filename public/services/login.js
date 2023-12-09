@@ -37,7 +37,7 @@
 								if(rel != null && rel=="xxx"){
 									window.location.href = "xxx?id=";
 								}else{
-									window.location.href = "news-feed";
+									window.location.href = "my-dashboard";
 								}
 							}
 							hashpw(hash, salt, result, function() {});
