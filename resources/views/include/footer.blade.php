@@ -4,7 +4,7 @@
 <div class="app-theme-panel">
     <div class="app-theme-panel-container">
         <a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i
-                class="bi bi-sliders"></i></a>
+                class="bi bi-envelope"></i></a>
         <div class="app-theme-panel-content">
 
             <div class="card">

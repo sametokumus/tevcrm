@@ -724,3 +724,20 @@ div.DTE_Field select{
     margin: 0.25rem 0;
     line-height: 1.5;
 }
+.app-theme-panel{
+    right: -25rem;
+}
+.app-theme-panel .app-theme-toggle-btn {
+    position: absolute;
+    top: 0%;
+    margin-top: 0;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    left: 0;
+    margin-left: -3rem;
+    background: var(--bs-theme);
+    color: var(--bs-theme-color);
+}
