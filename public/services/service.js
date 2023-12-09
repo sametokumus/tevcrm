@@ -563,7 +563,7 @@ async function handleSendMessageEvent(data) {
         }
 
         if (user_id != message.sender_id) {
-            message_panel += '<div class="widget-chat-name">' + user.name + ' ' + user.surname + '</div>\n';
+            message_panel += '<div class="widget-chat-name">' + sender.name + ' ' + sender.surname + '</div>\n';
         }
 
         message_panel += '<div class="widget-chat-message">\n' +
