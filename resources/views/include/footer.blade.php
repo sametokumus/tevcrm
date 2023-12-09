@@ -11,59 +11,16 @@
                 <div class="card-header bg-none fw-bold d-flex align-items-center">Chat <a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="card-expand"><i class="fa fa-expand"></i></a></div>
                 <div class="card-body bg-inverse bg-opacity-10" id="chat-body" data-scrollbar="true">
                     <div class="widget-chat">
-                        <div class="widget-chat-date">Today 14:21</div>
-                        <div class="widget-chat-item">
-                            <div class="widget-chat-content">
-                                <div class="widget-chat-name">Roberto Lambert</div>
-                                <div class="widget-chat-message">
-                                    Not much, It's got a new look, contact pics show up in group messaging, some other small stuff.
-                                </div>
-                                <div class="widget-chat-message">
-                                    How's crusty old iOS 6 treating you?
-                                </div>
-                                <div class="widget-chat-message">
-                                    How's crusty old iOS 6 treating you?
-                                </div>
-                                <div class="widget-chat-message">
-                                    How's crusty old iOS 6 treating you?
-                                </div>
-                                <div class="widget-chat-message">
-                                    How's crusty old iOS 6 treating you?
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-chat-item">
-                            <div class="widget-chat-content">
-                                <div class="widget-chat-name">Süper Admin</div>
-                                <div class="widget-chat-message">
-                                    dfdsf
-                                </div>
-                                <div class="widget-chat-message">
-                                    test
-                                </div>
-                                <div class="widget-chat-message">
-                                    test
-                                </div>
-                                <div class="widget-chat-message">
-                                    test
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-chat-item reply">
-                            <div class="widget-chat-content">
-                                <div class="widget-chat-message last">
-                                    Sucks
-                                    <div class="widget-chat-status"><b>Read</b> 16:30</div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="card-footer bg-none">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <button class="btn btn-outline-default" type="button"><i class="fa fa-paper-plane text-muted"></i></button>
-                    </div>
+                    <form id="chat-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="chat-message-text" placeholder="Mesajınız...">
+                            <button class="btn btn-outline-default" type="submit"><i class="fa fa-paper-plane text-muted"></i></button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- card-arrow -->
