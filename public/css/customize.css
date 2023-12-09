@@ -717,7 +717,7 @@ div.DTE_Field select{
     left: auto;
     right: -0.25rem;
 }
-.widget-chat .widget-chat-name, .widget-chat .widget-chat-status {
+.widget-chat .widget-chat-status {
     font-size: .6875rem;
     font-weight: 600;
     color: #ccc;
