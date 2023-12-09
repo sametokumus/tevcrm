@@ -585,14 +585,12 @@ async function handleSendMessageEvent(data) {
     last_user = message.sender_id;
     last_day = formatDateASC(message.created_at, '-');
 
-    // // Update the chat interface or append the message to the DOM
-    // const chatMessagesDiv = document.getElementById('chat-messages');
-    // const messageElement = document.createElement('p');
-    // messageElement.innerHTML = data.user.name + ' ' + data.user.surname + ': <br>' + data.message + '<br>';
-    // chatMessagesDiv.appendChild(messageElement);
-    //
-    // // Scroll to the bottom to show the latest message
-    // chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+
+
+    $('.app-theme-panel .widget-chat').append(message_panel);
+
+    let scrollableDiv = document.getElementById('chat-body');
+    scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
 }
 
 /*Listen Chat Message*/
