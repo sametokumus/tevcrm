@@ -439,7 +439,6 @@ async function getPublicChats(){
     let message_panel = '';
 
     $.each(messages, function(i, message){
-        console.log('lu: ' + last_user + '    ld: ' + last_day);
 
         let reply = '';
         if (message.sender_id == user_id){
@@ -528,22 +527,68 @@ var pusher = new Pusher('c52432e0f85707bee8d3', {
 
 var channel = pusher.subscribe('company-chat-channel');
 channel.bind('App\\Events\\CompanyChat', function(data) {
-    console.log('Received message: ', data);
-    let received = JSON.stringify(data);
-    // Handle the received message as needed
     handleSendMessageEvent(data)
 });
 
 function handleSendMessageEvent(data) {
+    let message = data.message;
+    let sender = data.user;
+    let message_panel = '';
 
-    // Update the chat interface or append the message to the DOM
-    const chatMessagesDiv = document.getElementById('chat-messages');
-    const messageElement = document.createElement('p');
-    messageElement.innerHTML = data.user.name + ' ' + data.user.surname + ': <br>' + data.message + '<br>';
-    chatMessagesDiv.appendChild(messageElement);
+    let reply = '';
+    if (message.sender_id == user_id){
+        reply = 'reply';
+    }
 
-    // Scroll to the bottom to show the latest message
-    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+    message_panel += '';
+    if (last_day != formatDateASC(message.created_at, '-')){
+        if (last_user != ''){
+            message_panel += '      </div>\n' +
+                '               </div>\n';
+        }
+        message_panel += '<div class="widget-chat-date">'+ formatDateASC(message.created_at, '-') +'</div>\n';
+        last_user = '';
+    }
+
+    if (last_user != message.sender_id){
+        if (last_user != ''){
+            message_panel += '      </div>\n' +
+                '               </div>\n';
+            message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
+                '                   <div class="widget-chat-content">\n';
+        }else{
+            message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
+                '                   <div class="widget-chat-content">\n';
+        }
+
+        if (user_id != message.sender_id) {
+            message_panel += '<div class="widget-chat-name">' + user.name + ' ' + user.surname + '</div>\n';
+        }
+
+        message_panel += '<div class="widget-chat-message">\n' +
+            '                 '+ message.message +'\n' +
+            '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
+            '             </div>\n';
+
+    }else{
+        message_panel += '<div class="widget-chat-message">\n' +
+            '                 '+ message.message +'\n' +
+            '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
+            '             </div>\n';
+    }
+
+
+    last_user = message.sender_id;
+    last_day = formatDateASC(message.created_at, '-');
+
+    // // Update the chat interface or append the message to the DOM
+    // const chatMessagesDiv = document.getElementById('chat-messages');
+    // const messageElement = document.createElement('p');
+    // messageElement.innerHTML = data.user.name + ' ' + data.user.surname + ': <br>' + data.message + '<br>';
+    // chatMessagesDiv.appendChild(messageElement);
+    //
+    // // Scroll to the bottom to show the latest message
+    // chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
 }
 
 /*Listen Chat Message*/
