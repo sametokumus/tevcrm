@@ -461,17 +461,19 @@ async function getPublicChats(){
                     '                   <div class="widget-chat-content">\n';
             }
 
-            message_panel += '<div class="widget-chat-name">'+ message.sender.name + ' ' + message.sender.surname +'</div>\n';
+            if (user_id != message.sender_id) {
+                message_panel += '<div class="widget-chat-name">' + message.sender.name + ' ' + message.sender.surname + '</div>\n';
+            }
 
             message_panel += '<div class="widget-chat-message">\n' +
                 '                 '+ message.message +'\n' +
-                // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
+                '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
                 '             </div>\n';
 
         }else{
             message_panel += '<div class="widget-chat-message">\n' +
                 '                 '+ message.message +'\n' +
-                // '                 <div class="widget-chat-status"><b>Read</b> 16:30</div>\n' +
+                '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
                 '             </div>\n';
         }
 

@@ -699,10 +699,21 @@ div.DTE_Field select{
 .app-theme-panel .app-theme-panel-content .card-body{
     height: calc(100vh - 160px);
 }
-.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-message{
-    display: block;
-    width: fit-content;
+/*.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-message{*/
+/*    display: block;*/
+/*    width: fit-content;*/
+/*}*/
+/*.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-item.reply .widget-chat-message{*/
+/*    float: right;*/
+/*}*/
+.widget-chat .reply .widget-chat-message {
+    background: #1d2835f2;
+    color: var(--bs-theme-color);
 }
-.app-theme-panel .app-theme-panel-content .card-body .widget-chat .widget-chat-item.reply .widget-chat-message{
-    float: right;
+.widget-chat .reply .widget-chat-message.last:before {
+    border-color: transparent;
+    border-bottom-color: #1d2835f2;
+    border-left-color: #1d2835f2;
+    left: auto;
+    right: -0.25rem;
 }
