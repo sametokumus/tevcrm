@@ -530,10 +530,11 @@ channel.bind('App\\Events\\CompanyChat', function(data) {
     handleSendMessageEvent(data)
 });
 
-function handleSendMessageEvent(data) {
+async function handleSendMessageEvent(data) {
     let message = data.message;
     let sender = data.user;
     let message_panel = '';
+    let user_id = await localStorage.getItem('userId');
 
     let reply = '';
     if (message.sender_id == user_id){
