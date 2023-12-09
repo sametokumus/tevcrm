@@ -535,55 +535,20 @@ async function handleSendMessageEvent(data) {
     let sender = data.user;
     let message_panel = '';
     let user_id = await localStorage.getItem('userId');
-    console.log(data)
-    console.log(message)
-    console.log(sender)
-
     let reply = '';
     if (message.sender_id == user_id){
         reply = 'reply';
     }
 
     message_panel += '';
-    if (last_day != formatDateASC(message.created_at, '-')){
-        if (last_user != ''){
-            message_panel += '      </div>\n' +
-                '               </div>\n';
-        }
-        message_panel += '<div class="widget-chat-date">'+ formatDateASC(message.created_at, '-') +'</div>\n';
-        last_user = '';
-    }
-
-    if (last_user != message.sender_id){
-        if (last_user != ''){
-            message_panel += '      </div>\n' +
-                '               </div>\n';
-            message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
-                '                   <div class="widget-chat-content">\n';
-        }else{
-            message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
-                '                   <div class="widget-chat-content">\n';
-        }
-
-        if (user_id != message.sender_id) {
-            message_panel += '<div class="widget-chat-name">' + sender.name + ' ' + sender.surname + '</div>\n';
-        }
-
-        message_panel += '<div class="widget-chat-message">\n' +
-            '                 '+ message.message +'\n' +
-            '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
-            '             </div>\n';
-
-    }else{
-        message_panel += '<div class="widget-chat-message">\n' +
-            '                 '+ message.message +'\n' +
-            '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
-            '             </div>\n';
-    }
-
-
-    last_user = message.sender_id;
-    last_day = formatDateASC(message.created_at, '-');
+    message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
+        '                   <div class="widget-chat-content">\n';
+    message_panel += '<div class="widget-chat-message">\n' +
+        '                 '+ message.message +'\n' +
+        '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
+        '             </div>\n';
+    message_panel += '      </div>\n' +
+        '               </div>\n';
 
 
 
