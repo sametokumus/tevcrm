@@ -535,6 +535,9 @@ async function handleSendMessageEvent(data) {
     let sender = data.user;
     let message_panel = '';
     let user_id = await localStorage.getItem('userId');
+    console.log(data)
+    console.log(message)
+    console.log(sender)
 
     let reply = '';
     if (message.sender_id == user_id){
