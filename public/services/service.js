@@ -503,13 +503,21 @@ async function sendPublicChatMessage (){
     const messageInput = document.getElementById('chat-message-text');
     const message = messageInput.value.trim();
 
-    let formData = JSON.stringify({
-        "message": message,
-        "user_id": localStorage.getItem('userId')
-    });
-    let returned = servicePostCompanyChatMessage(formData);
-    if (!returned){
-        alert('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    if (message != ''){
+
+        let formData = JSON.stringify({
+            "message": message,
+            "user_id": localStorage.getItem('userId')
+        });
+        let returned = servicePostCompanyChatMessage(formData);
+        if (!returned){
+            showAlert('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+        }else{
+            document.getElementById('chat-message-text').value = '';
+        }
+
+    }else{
+        showAlert('Boş mesaj gönderemezsiniz!');
     }
 }
 
