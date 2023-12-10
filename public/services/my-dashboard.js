@@ -53,8 +53,8 @@ async function initAdmin(user_id){
     let admin = data.admin;
     console.log(admin)
     $('#staff-name').text(admin.name + ' ' + admin.surname);
-    $('#staff-email').text('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
-    $('#staff-phone').text('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
+    $('#staff-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
+    $('#staff-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
 
     let profile_photo = '/img/user/null-profile-picture.png';
     if (admin.profile_photo != null && admin.profile_photo != ''){
