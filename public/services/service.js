@@ -117,7 +117,7 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 	var returnData;
 	xhr.timeout = 5000;
 	xhr.addEventListener("readystatechange", function() {
-        console.log(this.readyState)
+        console.log(this)
 		if(this.readyState === 4) {
 			callBackFunction(this);
 		}
