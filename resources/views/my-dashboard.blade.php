@@ -49,31 +49,31 @@ $extra_js='
                     <div class="profile-content">
                         <ul class="profile-tab nav nav-tabs nav-tabs-v2" role="tablist">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link pointer-event">
                                     <div class="nav-field">Posts</div>
                                     <div class="nav-value">382</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link pointer-event">
                                     <div class="nav-field">Followers</div>
                                     <div class="nav-value">1.3m</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link pointer-event">
                                     <div class="nav-field">Photos</div>
                                     <div class="nav-value">1,397</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link pointer-event">
                                     <div class="nav-field">Videos</div>
                                     <div class="nav-value">120</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#profile-followers" class="nav-link">
+                                <a href="#" class="nav-link pointer-event">
                                     <div class="nav-field">Following</div>
                                     <div class="nav-value">2,592</div>
                                 </a>
