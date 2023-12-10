@@ -962,7 +962,7 @@ async function servicePostUpdateUserOld(id, formData) {
 }
 
 async function servicePostUpdateUser(id, formData) {
-    await xhrDataPost('/admin/adminRole/updateUser/' + id, formData, updateProfileCallback());
+    await xhrDataPost('/admin/adminRole/updateUser/' + id, formData, updateProfileCallback);
 }
 
 async function serviceGetDeleteAdmin(id) {
