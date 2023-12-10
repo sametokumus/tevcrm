@@ -30,6 +30,7 @@ $extra_js='
                             <div class="mb-3" id="staff-email">
                                 <i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>
                             </div>
+                            <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
                             <hr class="mt-4 mb-4">
 
                             <div class="fw-bold mb-3 fs-16px">Firmalar</div>
@@ -1028,4 +1029,56 @@ $extra_js='
 </div>
 
 
+
+<div class="modal modal-cover fade" id="updateProfileModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">FİRMA GÜNCELLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_account_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">E-posta :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_email" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Ad :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Soyad :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_surname" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Telefon :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_phone" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Profil fotoğrafını <a href="#" id="update_admin_current_profile_photo" target="_blank">'görüntülemek için tıklayınız...</a></label>
+                                <input type="file" class="form-control" id="update_admin_profile_photo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @include('include.footer')

@@ -3,7 +3,14 @@
 
 	 $(document).ready(function() {
 
+         $('#update-profile-button').click(function (){
+             openUpdateProfileModal();
+         });
 
+         $('#update_account_form').submit(function (e){
+             e.preventDefault();
+             updateProfile();
+         });
 
 	});
 
@@ -54,6 +61,44 @@ async function initAdmin(user_id){
         profile_photo = admin.profile_photo;
     }
     $('#staff-image').attr('src', profile_photo);
+}
+
+async function openUpdateProfileModal(){
+    $("#updateProfileModal").modal('show');
+    await initUpdateProfileModal();
+}
+async function initUpdateProfileModal(){
+    let user_id = localStorage.getItem('userId');
+    let data = await serviceGetAdminById(user_id);
+    let admin = data.admin;
+    document.getElementById('update_admin_email').value = admin.email;
+    document.getElementById('update_admin_name').value = admin.name;
+    document.getElementById('update_admin_surname').value = admin.surname;
+    document.getElementById('update_admin_phone').value = admin.phone_number;
+
+    $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
+}
+async function updateProfileCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_account_form").trigger("reset");
+    $("#updateProfileModal").modal('hide');
+    initAdmin();
+}
+async function updateProfile(){
+    let formData = new FormData();
+    formData.append('email', document.getElementById('update_admin_email').value);
+    formData.append('name', document.getElementById('update_admin_name').value);
+    formData.append('surname', document.getElementById('update_admin_surname').value);
+    formData.append('phone_number', document.getElementById('update_admin_phone').value);
+    formData.append('password', document.getElementById('update_admin_password').value)
+    formData.append('profile_photo', document.getElementById('update_admin_profile_photo').files[0]);
+    console.log(formData);
+
+    let user_id = localStorage.getItem('userId');
+    await servicePostUpdateUser(user_id, formData);
 }
 
 async function getLastMonthSales(user_id){
@@ -710,3 +755,4 @@ async function initStaffTargets(user_id){
         order: false,
     });
 }
+
