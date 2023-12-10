@@ -44,6 +44,7 @@ function changeDashCurrency(){
 async function initAdmin(user_id){
     let data = await serviceGetAdminById(user_id);
     let admin = data.admin;
+    console.log(admin)
     document.getElementById('staff_name').value = admin.name + ' ' + admin.surname;
     document.getElementById('staff_email').value = admin.email;
     document.getElementById('staff_phone').value = admin.phone_number;
