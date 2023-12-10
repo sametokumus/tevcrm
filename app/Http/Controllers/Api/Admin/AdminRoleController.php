@@ -103,7 +103,7 @@ class AdminRoleController extends Controller
 
             ]);
 
-            $admin = Admin::query()->where('id',$id)->update([
+            Admin::query()->where('id',$id)->update([
                 'email' => $request->email,
                 'name' => $request->name,
                 'surname' => $request->surname,
@@ -111,7 +111,7 @@ class AdminRoleController extends Controller
             ]);
 
             if ($request->password != "") {
-                $admin = Admin::query()->where('id', $id)->update([
+                Admin::query()->where('id', $id)->update([
                     'password' => Hash::make($request->password)
                 ]);
             }
@@ -128,7 +128,7 @@ class AdminRoleController extends Controller
                 ]);
             }
 
-            return response(['message' => 'Hesap güncelleme işlemi başarılı.','status' => 'success']);
+            return response(['message' => __('Hesap güncelleme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
