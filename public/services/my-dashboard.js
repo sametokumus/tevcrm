@@ -45,9 +45,9 @@ async function initAdmin(user_id){
     let data = await serviceGetAdminById(user_id);
     let admin = data.admin;
     console.log(admin)
-    $('#staff_name').append(admin.name + ' ' + admin.surname);
-    $('#staff_email').append(admin.email);
-    $('#staff_phone').append(admin.phone_number);
+    $('#staff-name').append(admin.name + ' ' + admin.surname);
+    $('#staff-email').append(admin.email);
+    $('#staff-phone').append(admin.phone_number);
 
     let profile_photo = '/img/user/null-profile-picture.png';
     if (admin.profile_photo != null && admin.profile_photo != ''){
