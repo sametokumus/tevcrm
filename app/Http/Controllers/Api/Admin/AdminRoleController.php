@@ -128,7 +128,7 @@ class AdminRoleController extends Controller
                 ]);
             }
 
-            return response(['message' => 'Hesap güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);
+            return response(['message' => 'Hesap güncelleme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {
