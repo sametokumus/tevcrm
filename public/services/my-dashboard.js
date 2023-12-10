@@ -85,7 +85,8 @@ async function updateProfileCallback(xhttp){
     console.log(obj)
     $("#update_account_form").trigger("reset");
     $("#updateProfileModal").modal('hide');
-    initAdmin();
+    let user_id = localStorage.getItem('userId');
+    initAdmin(user_id);
 }
 async function updateProfile(){
     let formData = new FormData();
