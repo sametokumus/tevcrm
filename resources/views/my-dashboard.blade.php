@@ -1066,6 +1066,12 @@ $extra_js='
                             </div>
                         </div>
                         <div class="row mb-4">
+                            <label class="col-md-3 form-label">Şifre :</label>
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" id="update_admin_password">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
                             <div class="col-md-12">
                                 <label class="form-label">Profil fotoğrafını <a href="#" id="update_admin_current_profile_photo" target="_blank">görüntülemek için tıklayınız...</a></label>
                                 <input type="file" class="form-control" id="update_admin_profile_photo" />
