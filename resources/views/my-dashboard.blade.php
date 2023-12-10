@@ -25,10 +25,10 @@ $extra_js='
 
                             <h4 id="staff-name"></h4>
                             <div class="mb-1" id="staff-phone">
-                                <i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>
+
                             </div>
                             <div class="mb-3" id="staff-email">
-                                <i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>
+
                             </div>
                             <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
                             <hr class="mt-4 mb-4">
