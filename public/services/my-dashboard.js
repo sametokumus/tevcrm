@@ -79,6 +79,7 @@ async function initUpdateProfileModal(){
     $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
 }
 async function updateProfileCallback(xhttp){
+    console.log(1)
     console.log(xhttp)
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
