@@ -53,7 +53,7 @@ async function initAdmin(user_id){
     if (admin.profile_photo != null && admin.profile_photo != ''){
         profile_photo = admin.profile_photo;
     }
-    $('#staff-image').attr('href', profile_photo);
+    $('#staff-image').attr('src', profile_photo);
 }
 
 async function getLastMonthSales(user_id){
