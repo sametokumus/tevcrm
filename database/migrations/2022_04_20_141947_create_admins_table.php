@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->string('phone_number');
             $table->string('password');
             $table->string('token')->nullable()->unique();
+            $table->string('profile_photo')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

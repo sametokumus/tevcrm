@@ -22,10 +22,8 @@
 
              console.log(formData)
 
-			 let returned = await servicePostUpdateUser(user_id, formData);
-			 if(returned){
-				 initUser();
-			 }
+			 await servicePostUpdateUser(user_id, formData);
+
 
 		 });
 
@@ -45,6 +43,15 @@ function checkRole(){
 	return true;
 }
 
+async function updateAdminAccountCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    console.log(jsonData)
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    initUser();
+}
+
 async function initUser(){
     let userId = localStorage.getItem('userId');
 	let data = await serviceGetAdminById(userId);
@@ -54,6 +61,7 @@ async function initUser(){
 	document.getElementById('update_admin_surname').value = admin.surname;
 	document.getElementById('update_admin_phone').value = admin.phone_number;
 
+    $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
 }
 
 

@@ -22,6 +22,8 @@
         //     document.getElementById('staff_dash_currency').value = staff_dash_currency;
         // }
 
+
+        initAdmin(user_id);
         initStaffTargets(user_id);
         getLastMonthSales(user_id);
         getApprovedMonthlySales(user_id);
@@ -37,6 +39,20 @@ function changeDashCurrency(){
     staff_dash_currency = document.getElementById('staff_dash_currency').value;
     localStorage.setItem('staff_dash_currency', staff_dash_currency);
     location.reload();
+}
+
+async function initAdmin(user_id){
+    let data = await serviceGetAdminById(user_id);
+    let admin = data.admin;
+    document.getElementById('staff_name').value = admin.name + ' ' + admin.surname;
+    document.getElementById('staff_email').value = admin.email;
+    document.getElementById('staff_phone').value = admin.phone_number;
+
+    let profile_photo = '/img/user/null-profile-picture.png';
+    if (admin.profile_photo != null && admin.profile_photo != ''){
+        profile_photo = admin.profile_photo;
+    }
+    $('#staff-image').attr('href', profile_photo);
 }
 
 async function getLastMonthSales(user_id){

@@ -20,63 +20,26 @@ $extra_js='
                     <div class="profile-sidebar">
                         <div class="desktop-sticky-top">
                             <div class="profile-img">
-                                <img src="assets/img/user/profile.jpg" alt="">
+                                <img id="staff-image" src="" alt="">
                             </div>
 
-                            <h4>John Smith</h4>
-                            <div class="mb-3 text-inverse text-opacity-50 fw-bold mt-n2">@johnsmith</div>
-                            <p>
-                                Principal UXUI Design &amp; Brand Architecture for HUD. Creator of SeanTheme.
-                                Bringing the world closer together. Studied Computer Science and Psychology at Harvard University.
-                            </p>
-                            <div class="mb-1">
-                                <i class="fa fa-map-marker-alt fa-fw text-inverse text-opacity-50"></i> New York, NY
+                            <h4 id="staff-name"></h4>
+                            <div class="mb-1" id="staff-phone">
+                                <i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>
                             </div>
-                            <div class="mb-3">
-                                <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> seantheme.com/hud
+                            <div class="mb-3" id="staff-email">
+                                <i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>
                             </div>
                             <hr class="mt-4 mb-4">
 
-                            <div class="fw-bold mb-3 fs-16px">People to follow</div>
+                            <div class="fw-bold mb-3 fs-16px">Firmalar</div>
                             <div class="d-flex align-items-center mb-3">
-                                <img src="assets/img/user/user-1.jpg" alt="" width="30" class="rounded-circle">
+                                <img src="img/user/null-profile-picture.png" alt="" width="30" class="rounded-circle">
                                 <div class="flex-fill px-3">
                                     <div class="fw-bold text-truncate w-100px">Noor Rowe</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">3.1m followers</div>
+                                    <div class="fs-12px text-inverse text-opacity-50">Müşteri</div>
                                 </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">Follow</a>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="assets/img/user/user-2.jpg" alt="" width="30" class="rounded-circle">
-                                <div class="flex-fill px-3">
-                                    <div class="fw-bold text-truncate w-100px">Abbey Parker</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">302k followers</div>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">Follow</a>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="assets/img/user/user-3.jpg" alt="" width="30" class="rounded-circle">
-                                <div class="flex-fill px-3">
-                                    <div class="fw-bold text-truncate w-100px">Savannah Nicholson</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">720k followers</div>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">Follow</a>
-                            </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="assets/img/user/user-4.jpg" alt="" width="30" class="rounded-circle">
-                                <div class="flex-fill px-3">
-                                    <div class="fw-bold text-truncate w-100px">Kenny Bright</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">1.4m followers</div>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">Follow</a>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <img src="assets/img/user/user-5.jpg" alt="" width="30" class="rounded-circle">
-                                <div class="flex-fill px-3">
-                                    <div class="fw-bold text-truncate w-100px">Cara Poole</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">989k followers</div>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">Follow</a>
+                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>
                             </div>
                         </div>
                     </div>

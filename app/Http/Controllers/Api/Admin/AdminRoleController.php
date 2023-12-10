@@ -116,6 +116,18 @@ class AdminRoleController extends Controller
                 ]);
             }
 
+
+            if ($request->hasFile('profile_photo')) {
+                $rand = uniqid();
+                $image = $request->file('profile_photo');
+                $image_name = $rand . "-" . $image->getClientOriginalName();
+                $image->move(public_path('/img/user/'), $image_name);
+                $image_path = "/img/user/" . $image_name;
+                Admin::query()->where('id',$id)->update([
+                    'profile_photo' => $image_path
+                ]);
+            }
+
             return response(['message' => 'Hesap güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);

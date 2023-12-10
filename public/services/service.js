@@ -949,7 +949,7 @@ async function servicePostUpdateAdmin(id, formData) {
 		return false;
 	}
 }
-async function servicePostUpdateUser(id, formData) {
+async function servicePostUpdateUserOld(id, formData) {
 	const data = await fetchDataPost('/admin/adminRole/updateUser/' + id, formData, 'application/json');
 	if (data.status == "success") {
 		showAlert(data.message);
@@ -959,6 +959,11 @@ async function servicePostUpdateUser(id, formData) {
 		return false;
 	}
 }
+
+async function servicePostUpdateUser(id, formData) {
+    await xhrDataPost('/admin/adminRole/updateUser/' + id, formData, updateAdminAccountCallback());
+}
+
 async function serviceGetDeleteAdmin(id) {
 	const data = await fetchDataGet('/admin/adminRole/deleteAdmin/' + id, 'application/json');
 	if (data.status == "success") {
