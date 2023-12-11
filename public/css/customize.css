@@ -478,7 +478,7 @@ table tr.selected{
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #249d79;
-    color: #000;
+    color: #fff;
 }
 
 .select2-container--default .select2-selection--single {
