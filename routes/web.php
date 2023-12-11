@@ -61,7 +61,7 @@ Route::get('/packing-list-print/{sale_id}', function () { return view('packing-l
 Route::get('/pl-invoice-print/{sale_id}', function () { return view('pl-invoice-print'); });
 
 
-Route::get('/notify-settings', function () { return view('settings'); });
+Route::get('/notify-settings', function () { return view('notify-settings'); });
 
 Route::get('/settings', function () { return view('settings'); });
 Route::get('/currency-logs', function () { return view('currency-logs'); });
