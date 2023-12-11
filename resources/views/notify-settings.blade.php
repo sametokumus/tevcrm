@@ -20,7 +20,7 @@ $extra_js='
                 </div>
             </div>
 
-            <form method="post" action="#" id="add_notify_setting_form">
+            <form method="post" action="#" id="add_notify_form">
                 <div class="row">
 
                     <div class="col-md-12">
@@ -28,8 +28,8 @@ $extra_js='
                             <div class="card-body">
                                 <div class="row p-3">
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Personel</label>
-                                        <select class="form-control" id="add_target_admin_id">
+                                        <label class="form-label">Sipariş Durumu</label>
+                                        <select class="form-control" id="add_notify_status_id">
 
                                         </select>
                                     </div>

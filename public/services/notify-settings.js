@@ -22,9 +22,9 @@
 		checkLogin();
 		checkRole();
 
-        getAdminsAddSelectId('add_target_admin_id');
+        getStatusesAddSelectId('add_notify_status_id');
         getStaffTargetTypesAddSelectId('add_target_type_id');
-        initStaffTargets();
+        // initStaffTargets();
 
 	});
 

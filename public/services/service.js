@@ -604,6 +604,17 @@ async function getAdminsAddSelectId(selectId){
     });
 }
 
+async function getStatusesAddSelectId(selectId){
+    let data = await serviceGetStatuses();
+    let statuses = data.statuses;
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Durum Seçiniz</option>');
+    $.each(statuses, function (i, status){
+        let optionRow = '<option value="'+status.id+'">'+status.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getSaleTypesAddSelectId(selectId){
     let data = await serviceGetSaleTypes();
     $('#'+selectId+' option').remove();
