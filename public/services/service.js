@@ -604,6 +604,16 @@ async function getAdminsAddSelectId(selectId){
     });
 }
 
+async function getAdminRolesAddSelectId(select_id){
+    $('#'+select_id +' option').remove();
+    let data = await serviceGetAdminRoles();
+    $('#'+selectId).append('<option value="0">Rol Seçiniz</option>');
+    $.each(data.admin_roles, function (i, role) {
+        let roleItem = '<option value="'+ role.id +'">'+ role.name +'</option>';
+        $('#'+select_id).append(roleItem);
+    });
+}
+
 async function getStatusesAddSelectId(selectId){
     let data = await serviceGetStatuses();
     let statuses = data.statuses;

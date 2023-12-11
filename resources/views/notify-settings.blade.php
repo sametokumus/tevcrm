@@ -34,24 +34,19 @@ $extra_js='
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label">Tür</label>
-                                        <select class="form-control" id="add_target_type_id" onchange="addTargetChangeType();">
+                                        <label class="form-label">Yetki</label>
+                                        <select class="form-control" id="add_notify_role_id">
 
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Personel</label>
+                                        <select name="add_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="add_notify_staff_id" required>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Hedef</label>
                                         <input type="text" value="" class="form-control" id="add_target_target" />
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Birim</label>
-                                        <select class="form-control form-select" id="add_target_currency">
-                                            <option value="%">%</option>
-                                            <option value="TRY">TRY</option>
-                                            <option value="USD">USD</option>
-                                            <option value="EUR">EUR</option>
-                                            <option value="GBP">GBP</option>
-                                        </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Hedef Ay</label>

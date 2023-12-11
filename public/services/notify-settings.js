@@ -23,7 +23,8 @@
 		checkRole();
 
         getStatusesAddSelectId('add_notify_status_id');
-        getStaffTargetTypesAddSelectId('add_target_type_id');
+        getAdminRolesAddSelectId('add_notify_role_id');
+        getAdminsAddSelectId('add_notify_staff_id');
         // initStaffTargets();
 
 	});

@@ -464,8 +464,12 @@ table tr.selected{
     color: #aaaaaa;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice{
-    background-color: #666666;
-    border: 1px solid #666666;
+    background-color: #798e98;
+    border: 1px solid #798e98;
+    color: #fff;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff;
 }
 
 .select2-container--default .select2-selection--single {
