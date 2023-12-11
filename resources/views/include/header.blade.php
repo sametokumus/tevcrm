@@ -354,6 +354,15 @@ $extra_js="";
                         </div>
                     </div>
                 </div>
+
+                <div id="nav-notify-settings" class="d-none menu-item @if( Request::segment(1)== 'notify-settings' ) active @endif">
+                    <a href="/notify-settings" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-info-circle"></i></span>
+                        <span class="menu-text">Bildirim Ayarları</span>
+                    </a>
+                </div>
+
+
             </div>
 
 {{--            <div class="p-3 px-4 mt-auto">--}}
