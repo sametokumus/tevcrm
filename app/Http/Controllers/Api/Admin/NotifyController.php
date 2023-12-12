@@ -24,7 +24,7 @@ class NotifyController extends Controller
             StatusNotifySetting::query()->insertGetId([
                 'status_id' => $request->status_id,
                 'role_id' => $role_id,
-                'receivers' => $request->receivers,
+                'receivers' => json_encode($request->receivers),
                 'is_notification' => $request->to_notification,
                 'is_mail' => $request->to_mail
             ]);
