@@ -3167,3 +3167,27 @@ async function servicePostUpdateNotificationSetting(formData) {
         return false;
     }
 }
+async function serviceGetDeleteNotificationSetting(id) {
+    const data = await fetchDataGet('/admin/notify/deleteNotificationSetting/' + id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
+async function serviceGetNotifySettings() {
+    const data = await fetchDataGet('/admin/notify/getNotifySettings', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetNotifySettingById(id) {
+    const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

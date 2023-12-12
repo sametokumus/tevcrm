@@ -429,6 +429,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Notify
     Route::post('notify/addNotifySetting', [NotifyController::class, 'addNotifySetting']);
     Route::post('notify/updateNotifySetting', [NotifyController::class, 'updateNotifySetting']);
+    Route::get('notify/deleteNotifySetting/{setting_id}', [NotifyController::class, 'deleteNotifySetting']);
+    Route::get('notify/getNotifySettings', [NotifyController::class, 'getNotifySettings']);
+    Route::get('notify/getNotifySettingById/{setting_id}', [NotifyController::class, 'getNotifySettingById']);
 
 
     //Chat

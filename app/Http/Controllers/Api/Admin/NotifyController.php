@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\AdminRole;
 use App\Models\Product;
+use App\Models\StaffTarget;
+use App\Models\Status;
 use App\Models\StatusNotifySetting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -64,6 +69,89 @@ class NotifyController extends Controller
             return response(['message' => 'Hatalı işlem.', 'status' => 'error-001', 'er' => $throwable->getMessage()]);
         }
 
+    }
+
+    public function deleteNotifySetting($setting_id)
+    {
+        try {
+
+            StatusNotifySetting::query()->where('id', $setting_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Bildirim silme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001', 'ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getNotifySettings()
+    {
+        try {
+            $settings = StatusNotifySetting::query()
+                ->where('active', 1)
+                ->get();
+
+            foreach ($settings as $setting){
+                $status_name = '';
+                $role_name = '';
+                $receivers_name = '';
+
+                $status_name = Status::query()->where('id', $setting->status_id)->name;
+
+                if ($setting->role_id != 0){
+                    $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
+                }
+
+                if ($setting->receivers != '[]'){
+                    $receivers_name = AdminRole::query()->where('id', 1)->name;
+                }
+
+                $setting['status_name'] = $status_name;
+                $setting['role_name'] = $role_name;
+                $setting['receivers_name'] = $receivers_name;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$settings' => $settings]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
+
+    public function getNotifySettingById($setting_id)
+    {
+        try {
+
+            $setting = StatusNotifySetting::query()
+                ->where('active', 1)
+                ->where('id', $setting_id)
+                ->get();
+
+            $status_name = '';
+            $role_name = '';
+            $receivers_name = '';
+
+            $status_name = Status::query()->where('id', $setting->status_id)->name;
+
+            if ($setting->role_id != 0){
+                $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
+            }
+
+            if ($setting->receivers != '[]'){
+                $receivers_name = AdminRole::query()->where('id', 1)->name;
+            }
+
+            $setting['status_name'] = $status_name;
+            $setting['role_name'] = $role_name;
+            $setting['receivers_name'] = $receivers_name;
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['setting' => $setting]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
     }
 
 }
