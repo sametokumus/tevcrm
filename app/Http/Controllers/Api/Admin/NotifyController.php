@@ -96,9 +96,8 @@ class NotifyController extends Controller
                 ->get();
 
             foreach ($settings as $setting){
-                $status_name = '';
                 $role_name = '';
-                $receivers_name = '';
+                $receiver_names = '';
 
                 $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
@@ -107,15 +106,20 @@ class NotifyController extends Controller
                 }
 
                 if ($setting->receivers != '[]'){
-                    $receivers_name = AdminRole::query()->where('id', 1)->first()->name;
+                    $receiversArray = json_decode($setting->receivers, true);
+                    foreach ($receiversArray as $receiverId) {
+                        $receiver = Admin::query()->where('id', $receiverId)->first();
+                        $receiverName = $receiver->name.' '.$receiver->surname;
+                        $receiver_names += $receiverName . ", ";
+                    }
                 }
 
                 $setting['status_name'] = $status_name;
                 $setting['role_name'] = $role_name;
-                $setting['receivers_name'] = $receivers_name;
+                $setting['receiver_names'] = $receiver_names;
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$settings' => $settings]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['settings' => $settings]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
@@ -130,9 +134,8 @@ class NotifyController extends Controller
                 ->where('id', $setting_id)
                 ->get();
 
-            $status_name = '';
             $role_name = '';
-            $receivers_name = '';
+            $receiver_names = '';
 
             $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
@@ -141,12 +144,17 @@ class NotifyController extends Controller
             }
 
             if ($setting->receivers != '[]'){
-                $receivers_name = AdminRole::query()->where('id', 1)->first()->name;
+                $receiversArray = json_decode($setting->receivers, true);
+                foreach ($receiversArray as $receiverId) {
+                    $receiver = Admin::query()->where('id', $receiverId)->first();
+                    $receiverName = $receiver->name.' '.$receiver->surname;
+                    $receiver_names += $receiverName . ", ";
+                }
             }
 
             $setting['status_name'] = $status_name;
             $setting['role_name'] = $role_name;
-            $setting['receivers_name'] = $receivers_name;
+            $setting['receiver_names'] = $receiver_names;
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['setting' => $setting]]);
         } catch (QueryException $queryException) {
