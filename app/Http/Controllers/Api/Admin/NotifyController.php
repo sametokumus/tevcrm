@@ -51,7 +51,7 @@ class NotifyController extends Controller
             StatusNotifySetting::query()->where('id', $request->id)->update([
                 'status_id' => $request->status_id,
                 'role_id' => $role_id,
-                'receivers' => $request->receivers,
+                'receivers' => implode(', ', $request->receivers),
                 'is_notification' => $request->to_notification,
                 'is_mail' => $request->to_mail
             ]);
