@@ -108,13 +108,13 @@ async function addNotifySetting(){
 
     console.log(formData);
 
-    // let returned = await servicePostAddNotificationSetting(formData);
-    // if (returned){
-    //     $("#add_notify_form").trigger("reset");
-    //     initStaffTargets();
-    // }else{
-    //     alert("Hata Oluştu");
-    // }
+    let returned = await servicePostAddNotificationSetting(formData);
+    if (returned){
+        $("#add_notify_form").trigger("reset");
+        // initStaffTargets();
+    }else{
+        alert("Hata Oluştu");
+    }
 }
 
 

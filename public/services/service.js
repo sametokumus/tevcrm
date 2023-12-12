@@ -3156,3 +3156,14 @@ async function servicePostAddNotificationSetting(formData) {
         return false;
     }
 }
+
+async function servicePostUpdateNotificationSetting(formData) {
+    const data = await fetchDataPost('/admin/notify/updateNotifySetting', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
