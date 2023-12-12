@@ -110,7 +110,7 @@ class NotifyController extends Controller
                     foreach ($receiversArray as $receiverId) {
                         $receiver = Admin::query()->where('id', $receiverId)->first();
                         $receiverName = $receiver->name.' '.$receiver->surname;
-                        $receiver_names += $receiverName . ", ";
+                        $receiver_names .= $receiverName . ", ";
                     }
                 }
 
@@ -148,7 +148,7 @@ class NotifyController extends Controller
                 foreach ($receiversArray as $receiverId) {
                     $receiver = Admin::query()->where('id', $receiverId)->first();
                     $receiverName = $receiver->name.' '.$receiver->surname;
-                    $receiver_names += $receiverName . ", ";
+                    $receiver_names .= $receiverName . ", ";
                 }
             }
 
