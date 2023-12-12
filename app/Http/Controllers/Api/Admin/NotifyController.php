@@ -116,7 +116,7 @@ class NotifyController extends Controller
 
                 $setting['status_name'] = $status_name;
                 $setting['role_name'] = $role_name;
-                $setting['receiver_names'] = $receiver_names;
+                $setting['receiver_names'] = substr($receiver_names, 0, -2);
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['settings' => $settings]]);
@@ -154,7 +154,7 @@ class NotifyController extends Controller
 
             $setting['status_name'] = $status_name;
             $setting['role_name'] = $role_name;
-            $setting['receiver_names'] = $receiver_names;
+            $setting['receiver_names'] = substr($receiver_names, 0, -2);
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['setting' => $setting]]);
         } catch (QueryException $queryException) {

@@ -40,42 +40,50 @@ async function initNotifySettings(){
     let data = await serviceGetNotifySettings();
 
     console.log(data)
-	// $("#targets-datatable").dataTable().fnDestroy();
-	// $('#targets-datatable tbody > tr').remove();
-    //
-    // $.each(data.targets, function (i, target) {
-    //
-    //     let actions = "";
-    //     if (true){
-    //         actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
-    //             '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
-    //     }
-    //
-    //     let item = '<tr>\n' +
-    //         '           <th>'+ target.id +'</th>\n' +
-    //         '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
-    //         '           <td>'+ target.type_name +'</td>\n' +
-    //         '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
-    //         '           <td>'+ target.month_name +'</td>\n' +
-    //         '           <td>'+ target.year +'</td>\n' +
-    //         '           <td>'+ target.status.rate +'%</td>\n' +
-    //         '           <td>'+ actions +'</td>\n' +
-    //         '       </tr>';
-    //     $('#targets-datatable tbody').append(item);
-    // });
-    //
-	// $('#targets-datatable').DataTable({
-	// 	responsive: false,
-	// 	columnDefs: [],
-	// 	dom: 'Bfrtip',
-    //     paging: false,
-	// 	buttons: [],
-    //     scrollX: true,
-	// 	language: {
-	// 		url: "services/Turkish.json"
-	// 	},
-	// 	order: false,
-	// });
+	$("#notify-datatable").dataTable().fnDestroy();
+	$('#notify-datatable tbody > tr').remove();
+
+    $.each(data.settings, function (i, setting) {
+
+        let to_notification = "Hayır";
+        let to_mail = "Hayır";
+        if (setting.is_notification == 1){
+            to_notification = "Evet";
+        }
+        if (setting.is_mail == 1){
+            to_mail = "Evet";
+        }
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateNotifySettingModal(\''+ setting.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteNotifySetting(\''+ setting.id +'\');">Sil</button>\n';
+        }
+
+        let item = '<tr>\n' +
+            '           <th>'+ setting.id +'</th>\n' +
+            '           <td>'+ setting.status_name +'</td>\n' +
+            '           <td>'+ setting.role_name +'</td>\n' +
+            '           <td>'+ setting.receiver_names +'</td>\n' +
+            '           <td>'+ to_notification +'</td>\n' +
+            '           <td>'+ to_mail +'</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#notify-datatable tbody').append(item);
+    });
+
+	$('#notify-datatable').DataTable({
+		responsive: false,
+		columnDefs: [],
+		dom: 'Bfrtip',
+        paging: false,
+		buttons: [],
+        scrollX: true,
+		language: {
+			url: "services/Turkish.json"
+		},
+		order: false,
+	});
 }
 
 async function addNotifySetting(){
@@ -119,10 +127,10 @@ async function addNotifySetting(){
 }
 
 
-async function openUpdateStaffTargetModal(target_id){
+async function openUpdateNotifySettingModal(setting_id){
     await getStaffTargetTypesAddSelectId('update_target_type_id');
     $("#updateStaffTargetModal").modal('show');
-    initUpdateStaffTargetModal(target_id)
+    initUpdateStaffTargetModal(setting_id)
 }
 async function initUpdateStaffTargetModal(target_id){
     document.getElementById('update_staff_target_form').reset();
@@ -162,9 +170,9 @@ async function updateStaffTarget(){
     }
 }
 
-async function deleteStaffTarget(target_id){
-    let returned = await serviceGetDeleteStaffTarget(target_id);
+async function deleteNotifySetting(setting_id){
+    let returned = await serviceGetDeleteNotificationSetting(setting_id);
     if(returned){
-        initStaffTargets();
+        initNotifySettings();
     }
 }
