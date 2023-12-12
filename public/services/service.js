@@ -3168,7 +3168,7 @@ async function servicePostUpdateNotificationSetting(formData) {
     }
 }
 async function serviceGetDeleteNotificationSetting(id) {
-    const data = await fetchDataGet('/admin/notify/deleteNotificationSetting/' + id, 'application/json');
+    const data = await fetchDataGet('/admin/notify/deleteNotifySetting/' + id, 'application/json');
     if (data.status == "success") {
         return true;
     } else {
