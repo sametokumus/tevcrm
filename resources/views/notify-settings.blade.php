@@ -29,7 +29,7 @@ $extra_js='
                                 <div class="row p-3">
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Sipariş Durumu</label>
-                                        <select class="form-control" id="add_notify_status_id">
+                                        <select class="form-control" id="add_notify_status_id" required>
 
                                         </select>
                                     </div>
@@ -39,41 +39,20 @@ $extra_js='
 
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-5 mb-3">
                                         <label class="form-label">Personel</label>
-                                        <select name="add_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="add_notify_staff_id" required>
+                                        <select name="add_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="add_notify_staff_id">
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Hedef</label>
-                                        <input type="text" value="" class="form-control" id="add_target_target" />
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Hedef Ay</label>
-                                        <select class="form-control" id="add_target_month">
-                                            <option value="0">Tüm Yıl</option>
-                                            <option value="1">Ocak</option>
-                                            <option value="2">Şubat</option>
-                                            <option value="3">Mart</option>
-                                            <option value="4">Nisan</option>
-                                            <option value="5">Mayıs</option>
-                                            <option value="6">Haziran</option>
-                                            <option value="7">Temmuz</option>
-                                            <option value="8">Ağustos</option>
-                                            <option value="9">Eylül</option>
-                                            <option value="10">Ekim</option>
-                                            <option value="11">Kasım</option>
-                                            <option value="12">Aralık</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Hedef Yıl</label>
-                                        <select class="form-control" id="add_target_year">
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
-                                        </select>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="" id="add_notify_to_notification" />
+                                            <label class="form-check-label" for="add_notify_to_notification">Bildirim</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" value="" id="add_notify_to_mail" />
+                                            <label class="form-check-label" for="add_notify_to_mail">Mail</label>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Kaydet</button>
