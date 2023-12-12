@@ -88,11 +88,11 @@ async function addNotifySetting(){
         to_mail = 1;
     }
 
-    let status_id = document.getElementById('add_target_admin_id').value;
-    let role_id = document.getElementById('add_target_type_id').value;
+    let status_id = document.getElementById('add_notify_status_id').value;
+    let role_id = document.getElementById('add_notify_role_id').value;
 
     let receivers = [];
-    let receiver_objs = $('#add_offer_company').find(':selected');
+    let receiver_objs = $('#add_notify_staff_id').find(':selected');
     for (let i = 0; i < receiver_objs.length; i++) {
         receivers.push(receiver_objs[i].value);
     }
