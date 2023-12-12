@@ -17,7 +17,7 @@ class CreateStatusNotifySettingsTable extends Migration
             $table->id();
             $table->bigInteger('status_id');
             $table->bigInteger('role_id')->nullable();
-            $table->string('receivers')->nullable();
+            $table->json('receivers')->nullable();
             $table->tinyInteger('is_notification')->default(0);
             $table->tinyInteger('is_mail')->default(0);
             $table->tinyInteger('active')->default(1);
