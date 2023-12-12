@@ -100,15 +100,15 @@ class NotifyController extends Controller
                 $role_name = '';
                 $receivers_name = '';
 
-                $status_name = Status::query()->where('id', $setting->status_id)->name;
-
-                if ($setting->role_id != 0){
-                    $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
-                }
-
-                if ($setting->receivers != '[]'){
-                    $receivers_name = AdminRole::query()->where('id', 1)->name;
-                }
+//                $status_name = Status::query()->where('id', $setting->status_id)->name;
+//
+//                if ($setting->role_id != 0){
+//                    $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
+//                }
+//
+//                if ($setting->receivers != '[]'){
+//                    $receivers_name = AdminRole::query()->where('id', 1)->name;
+//                }
 
                 $setting['status_name'] = $status_name;
                 $setting['role_name'] = $role_name;
