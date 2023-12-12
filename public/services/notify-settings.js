@@ -111,6 +111,7 @@ async function addNotifySetting(){
     let returned = await servicePostAddNotificationSetting(formData);
     if (returned){
         $("#add_notify_form").trigger("reset");
+        $('.select2-selection__rendered li').remove();
         // initStaffTargets();
     }else{
         alert("Hata Oluştu");
