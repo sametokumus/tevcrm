@@ -48,13 +48,20 @@ class NotifyController extends Controller
 
             $role_id = null;
             if ($request->role_id != 0){$role_id = $request->role_id;}
-            StatusNotifySetting::query()->where('id', $request->id)->update([
-                'status_id' => $request->status_id,
-                'role_id' => $role_id,
-                'receivers' => $request->receivers,
-                'is_notification' => $request->to_notification,
-                'is_mail' => $request->to_mail
-            ]);
+            $model = new StatusNotifySetting();
+            $model->status_id = $request->status_id;
+            $model->role_id = $role_id;
+            $model->receivers = $request->receivers;
+            $model->is_notification = $request->to_notification;
+            $model->is_mail = $request->to_mail;
+            $model->save();
+//            StatusNotifySetting::query()->where('id', $request->id)->update([
+//                'status_id' => $request->status_id,
+//                'role_id' => $role_id,
+//                'receivers' => $request->receivers,
+//                'is_notification' => $request->to_notification,
+//                'is_mail' => $request->to_mail
+//            ]);
             return response(['message' => 'Bildirim güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
