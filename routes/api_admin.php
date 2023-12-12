@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\Admin\PdfController;
 use App\Http\Controllers\Api\Admin\StaffController;
 use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
+use App\Http\Controllers\Api\Admin\NotifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -425,7 +426,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('staff/getBestStaff', [StaffController::class, 'getBestStaff']);
 
 
-
+    //Notify
+    Route::post('notify/addNotifySetting', [NotifyController::class, 'addNotifySetting']);
 
 
     //Chat

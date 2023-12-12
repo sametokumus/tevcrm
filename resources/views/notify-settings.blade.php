@@ -45,7 +45,7 @@ $extra_js='
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label class="form-label">Bildirim Türü Seçiniz</label>
+                                        <label class="form-label">Uyarı Türü Seçiniz</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" value="" id="add_notify_to_notification" />
                                             <label class="form-check-label" for="add_notify_to_notification">Bildirim</label>

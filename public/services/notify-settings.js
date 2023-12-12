@@ -6,9 +6,9 @@
         $("#add_target_target").maskMoney({thousands:'.', decimal:','});
         $("#update_target_target").maskMoney({thousands:'.', decimal:','});
 
-        $('#add_staff_target_form').submit(function (e){
+        $('#add_notify_form').submit(function (e){
             e.preventDefault();
-            addStaffTarget();
+            addNotifySetting();
         });
         $('#update_staff_target_form').submit(function (e){
             e.preventDefault();
@@ -33,26 +33,6 @@
 
 function checkRole(){
 	return true;
-}
-
-function addTargetChangeType(){
-    let type_id = document.getElementById('add_target_type_id').value;
-    if (type_id == 3){
-        document.getElementById('add_target_currency').value = '%';
-        $('#add_target_currency').attr('disabled', 'disabled');
-    }else{
-        $('#add_target_currency').removeAttr('disabled');
-    }
-}
-
-function updateTargetChangeType(){
-    let type_id = document.getElementById('update_target_type_id').value;
-    if (type_id == 3){
-        document.getElementById('update_target_currency').value = '%';
-        $('#update_target_currency').attr('disabled', 'disabled');
-    }else{
-        $('#update_target_currency').removeAttr('disabled');
-    }
 }
 
 async function initStaffTargets(){
@@ -98,34 +78,43 @@ async function initStaffTargets(){
 	});
 }
 
-async function addStaffTarget(){
-    let user_id = localStorage.getItem('userId');
-    let admin_id = document.getElementById('add_target_admin_id').value;
-    let type_id = document.getElementById('add_target_type_id').value;
-    let target = changePriceToDecimal(document.getElementById('add_target_target').value);
-    let currency = document.getElementById('add_target_currency').value;
-    let month = document.getElementById('add_target_month').value;
-    let year = document.getElementById('add_target_year').value;
+async function addNotifySetting(){
+    let to_notification = 0;
+    let to_mail = 0;
+    if(document.getElementById('add_notify_to_notification').checked){
+        to_notification = 1;
+    }
+    if(document.getElementById('add_notify_to_mail').checked){
+        to_mail = 1;
+    }
+
+    let status_id = document.getElementById('add_target_admin_id').value;
+    let role_id = document.getElementById('add_target_type_id').value;
+
+    let receivers = [];
+    let receiver_objs = $('#add_offer_company').find(':selected');
+    for (let i = 0; i < receiver_objs.length; i++) {
+        receivers.push(receiver_objs[i].value);
+    }
 
 
     let formData = JSON.stringify({
-        "admin_id": admin_id,
-        "type_id": type_id,
-        "target": target,
-        "currency": currency,
-        "month": month,
-        "year": year
+        "status_id": status_id,
+        "role_id": role_id,
+        "receivers": receivers,
+        "to_notification": to_notification,
+        "to_mail": to_mail
     });
 
     console.log(formData);
 
-    let returned = await servicePostAddStaffTarget(formData);
-    if (returned){
-        $("#add_staff_target_form").trigger("reset");
-        initStaffTargets();
-    }else{
-        alert("Hata Oluştu");
-    }
+    // let returned = await servicePostAddNotificationSetting(formData);
+    // if (returned){
+    //     $("#add_notify_form").trigger("reset");
+    //     initStaffTargets();
+    // }else{
+    //     alert("Hata Oluştu");
+    // }
 }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\StatusNotifySetting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -14,22 +15,19 @@ class NotifyController extends Controller
     public function addNotifySetting(Request $request)
     {
         try {
-//            $request->validate([
-//                'stock_code' => 'required'
-//            ]);
-
-            $product_id = Product::query()->insertGetId([
-                'brand_id' => $request->brand_id,
-                'category_id' => $request->category_id,
-                'ref_code' => $request->ref_code,
-                'product_name' => $request->product_name,
-                'stock_code' => $request->stock_code,
-                'stock_quantity' => $request->stock_quantity,
-                'date_code' => $request->date_code,
-                'price' => $request->price,
-                'currency' => $request->currency,
+            $request->validate([
+                'status_id' => 'required'
             ]);
-            return response(['message' => 'Ürün ekleme işlemi başarılı.', 'status' => 'success', 'object' => ['product_id' => $product_id]]);
+
+            $role_id = null;
+            if ($request->role_id != 0){$role_id = $request->role_id;}
+            StatusNotifySetting::query()->insertGetId([
+                'status_id' => $request->status_id,
+                'role_id' => $role_id,
+                'is_notification' => $request->to_notification,
+                'is_mail' => $request->to_mail
+            ]);
+            return response(['message' => 'Bildirim ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.', 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

@@ -3145,3 +3145,14 @@ async function serviceGetCompanyChatMessages(page) {
         showAlert('İstek Başarısız.');
     }
 }
+
+async function servicePostAddNotificationSetting(formData) {
+    const data = await fetchDataPost('/admin/notify/addNotifySetting', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
