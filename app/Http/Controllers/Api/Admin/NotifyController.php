@@ -100,22 +100,22 @@ class NotifyController extends Controller
                 $role_name = '';
                 $receivers_name = '';
 
-                $status_name = Status::query()->where('id', $setting->status_id);
+                $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
-//                if ($setting->role_id != 0){
-//                    $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
-//                }
-//
-//                if ($setting->receivers != '[]'){
-//                    $receivers_name = AdminRole::query()->where('id', 1)->name;
-//                }
+                if ($setting->role_id != 0){
+                    $role_name = AdminRole::query()->where('id', $setting->role_id)->first()->name;
+                }
+
+                if ($setting->receivers != '[]'){
+                    $receivers_name = AdminRole::query()->where('id', 1)->first()->name;
+                }
 
                 $setting['status_name'] = $status_name;
                 $setting['role_name'] = $role_name;
                 $setting['receivers_name'] = $receivers_name;
             }
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['settings' => $settings]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['$settings' => $settings]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
@@ -134,14 +134,14 @@ class NotifyController extends Controller
             $role_name = '';
             $receivers_name = '';
 
-            $status_name = Status::query()->where('id', $setting->status_id)->name;
+            $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
             if ($setting->role_id != 0){
-                $role_name = AdminRole::query()->where('id', $setting->role_id)->name;
+                $role_name = AdminRole::query()->where('id', $setting->role_id)->first()->name;
             }
 
             if ($setting->receivers != '[]'){
-                $receivers_name = AdminRole::query()->where('id', 1)->name;
+                $receivers_name = AdminRole::query()->where('id', 1)->first()->name;
             }
 
             $setting['status_name'] = $status_name;
