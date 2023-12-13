@@ -563,7 +563,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 251){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
