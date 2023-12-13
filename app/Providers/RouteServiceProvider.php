@@ -59,6 +59,13 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
+
+            // Add a new route group for Pusher authentication
+            Route::prefix('broadcasting')
+                ->middleware(['web']) // Adjust the middleware based on your needs
+                ->namespace($this->namespace)
+                ->group(base_path('routes/channels.php'));
+
         });
     }
 
