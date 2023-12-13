@@ -137,7 +137,7 @@ function showNotify(notify_id, title, message) {
     let notify = '  <div id="notify-'+ notify_id +'" class="toast" data-autohide="false">\n' +
         '               <div class="toast-header">\n' +
         '                   <i class="far fa-bell text-muted me-2"></i>\n' +
-        '                   <strong class="me-auto">'+ <title></title> +'</strong>\n' +
+        '                   <strong class="me-auto">'+ title +'</strong>\n' +
         // '                   <small>11 mins ago</small>\n' +
         '                   <button type="button" class="btn-close" data-bs-dismiss="toast"></button>\n' +
         '               </div>\n' +
