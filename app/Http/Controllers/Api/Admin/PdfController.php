@@ -963,7 +963,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 250){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
@@ -1430,7 +1430,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 250){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
@@ -2868,7 +2868,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 250){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
@@ -3229,7 +3229,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 250){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(40, 10);
                     $y = 10;
@@ -3647,7 +3647,7 @@ class PdfController extends Controller
                 }
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
-                if ($total_y > 250){
+                if ($total_y > 249){
                     $pdf->AddPage();
                     $pdf->SetXY(100, 10);
                     $y = 10;
