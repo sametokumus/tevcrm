@@ -145,9 +145,8 @@ async function initUpdateNotifySettingModal(setting_id){
     document.getElementById('update_notify_id').value = setting.id;
     document.getElementById('update_notify_status_id').value = setting.status_id;
     document.getElementById('update_notify_role_id').value = setting.role_id;
-    var defaultValues = ["1", "12"];
-    $("#update_notify_staff_id").val(defaultValues).trigger("change");
-    // $("#update_notify_staff_id").val(setting.receivers).trigger("change");
+    let values = JSON.parse(setting.receivers);
+    $("#update_notify_staff_id").val(values).trigger("change");
     if (setting.is_notification == 1){ document.getElementById('update_notify_to_notification').checked = true; }
     if (setting.is_mail == 1){ document.getElementById('update_notify_to_mail').checked = true; }
 }
