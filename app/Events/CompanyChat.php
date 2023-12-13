@@ -36,8 +36,8 @@ class CompanyChat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-//        return ['company-chat-channel'];
+        return ['company-chat-channel'];
 //        return new Channel('company-chat-channel');
-        return new PrivateChannel('company-chat-channel');
+//        return new PrivateChannel('company-chat-channel');
     }
 }
