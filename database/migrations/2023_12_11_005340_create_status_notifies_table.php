@@ -15,11 +15,14 @@ class CreateStatusNotifiesTable extends Migration
     {
         Schema::create('status_notifies', function (Blueprint $table) {
             $table->id();
+            $table->string('notify_id');
             $table->bigInteger('setting_id');
+            $table->string('sale_id');
             $table->bigInteger('sender_id')->nullable();
             $table->bigInteger('receiver_id')->nullable();
             $table->string('notify')->nullable();
             $table->tinyInteger('is_read')->default(0);
+            $table->tinyInteger('type')->default(1); //1:notification, 2:mail
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

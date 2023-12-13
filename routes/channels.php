@@ -23,3 +23,11 @@ Broadcast::channel("company-chat-channel", function () {
         "user" => $this->user
     ];
 });
+
+Broadcast::channel("status-channel", function () {
+    return [
+        "id" => $this->id,
+        "title" => $this->title,
+        "message" => $this->message
+    ];
+});
