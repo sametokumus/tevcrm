@@ -101,7 +101,7 @@ class NotifyController extends Controller
 
                 $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
-                if ($setting->role_id != 0){
+                if ($setting->role_id != null){
                     $role_name = AdminRole::query()->where('id', $setting->role_id)->first()->name;
                 }
 
@@ -139,7 +139,7 @@ class NotifyController extends Controller
 
             $status_name = Status::query()->where('id', $setting->status_id)->first()->name;
 
-            if ($setting->role_id != 0){
+            if ($setting->role_id != null){
                 $role_name = AdminRole::query()->where('id', $setting->role_id)->first()->name;
             }
 
