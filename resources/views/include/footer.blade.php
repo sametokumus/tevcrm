@@ -1,4 +1,4 @@
-<div class="toasts-container">
+<div class="toasts-container flex-column-reverse">
     <div class="toast" data-autohide="false">
         <div class="toast-header">
             <i class="far fa-bell text-muted me-2"></i>
