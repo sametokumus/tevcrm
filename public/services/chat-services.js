@@ -135,7 +135,7 @@ async function handleSendMessageEvent(data) {
     message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
         '                   <div class="widget-chat-content">\n';
 
-    if (message.sender_id != user_id){
+    if (message.sender_id != user_id && last_user != message.sender_id){
         message_panel += '      <div class="widget-chat-name">'+ sender.name + ' ' + sender.surname +'</div>\n';
     }
 
@@ -159,6 +159,9 @@ async function handleSendMessageEvent(data) {
         let id = message.message_id;
         showNotify(id, title, message_text);
     }
+
+    last_user = message.sender_id;
+    last_day = formatDateASC(message.created_at, '-');
 }
 
 /*Listen Chat Message*/
