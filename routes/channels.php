@@ -47,5 +47,3 @@ Broadcast::channel('presence-status-channel', function ($user) {
     ];
 });
 
-// Add auth route
-Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);

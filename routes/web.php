@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use \App\Http\Controllers\Api\Admin\BroadcastingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,3 +112,6 @@ Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\AppProvider $ap
         "apps" => $appProvider->all()
     ]);
 });
+
+// Add auth route
+Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);
