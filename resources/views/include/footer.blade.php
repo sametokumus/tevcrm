@@ -128,6 +128,7 @@
 <script src="messages.js"></script>
 <script src="services/service.js"></script>
 <script src="services/chat-services.js"></script>
+<script src="services/notify-services.js"></script>
 <?php echo $extra_js; ?>
 
 </body>
