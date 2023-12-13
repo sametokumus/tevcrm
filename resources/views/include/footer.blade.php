@@ -130,10 +130,11 @@
 <script src="services/chat-services.js"></script>
 <?php echo $extra_js; ?>
 <script>
-    // Ensure the document is ready
     $(document).ready(function() {
-        // Call the toast function
-        $('.toast').toast('show');
+        $('.toast').toast({
+            autohide: false, // Set to true if you want to enable auto-hide
+            delay: 5000 // Set the delay in milliseconds (5000ms = 5 seconds)
+        }).toast('show');
     });
 </script>
 
