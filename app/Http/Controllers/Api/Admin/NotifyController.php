@@ -132,7 +132,7 @@ class NotifyController extends Controller
             $setting = StatusNotifySetting::query()
                 ->where('active', 1)
                 ->where('id', $setting_id)
-                ->get();
+                ->first();
 
             $role_name = '';
             $receiver_names = '';
