@@ -10,9 +10,9 @@
             e.preventDefault();
             addNotifySetting();
         });
-        $('#update_staff_target_form').submit(function (e){
+        $('#update_notify_form').submit(function (e){
             e.preventDefault();
-            updateStaffTarget();
+            updateNotifySetting();
         });
 
 	});
@@ -47,11 +47,15 @@ async function initNotifySettings(){
 
         let to_notification = "Hayır";
         let to_mail = "Hayır";
+        let receiver_names = "";
         if (setting.is_notification == 1){
             to_notification = "Evet";
         }
         if (setting.is_mail == 1){
             to_mail = "Evet";
+        }
+        if (setting.receiver_names != false){
+            receiver_names = setting.receiver_names;
         }
 
         let actions = "";
@@ -64,7 +68,7 @@ async function initNotifySettings(){
             '           <th>'+ setting.id +'</th>\n' +
             '           <td>'+ setting.status_name +'</td>\n' +
             '           <td>'+ setting.role_name +'</td>\n' +
-            '           <td>'+ setting.receiver_names +'</td>\n' +
+            '           <td>'+ receiver_names +'</td>\n' +
             '           <td>'+ to_notification +'</td>\n' +
             '           <td>'+ to_mail +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
@@ -128,43 +132,56 @@ async function addNotifySetting(){
 
 
 async function openUpdateNotifySettingModal(setting_id){
-    await getStaffTargetTypesAddSelectId('update_target_type_id');
-    $("#updateStaffTargetModal").modal('show');
-    initUpdateStaffTargetModal(setting_id)
+    getStatusesAddSelectId('update_notify_status_id');
+    getAdminRolesAddSelectId('update_notify_role_id');
+    getAdminsAddSelectId('update_notify_staff_id');
+    $("#updateNotifySettingModal").modal('show');
+    initUpdateNotifySettingModal(setting_id)
 }
-async function initUpdateStaffTargetModal(target_id){
-    document.getElementById('update_staff_target_form').reset();
-    let data = await serviceGetStaffTargetById(target_id);
-    let target = data.target;
-    document.getElementById('update_target_id').value = target.id;
-    document.getElementById('update_target_type_id').value = target.type_id;
-    document.getElementById('update_target_target').value = changeCommasToDecimal(target.target);
-    document.getElementById('update_target_currency').value = target.currency;
-    document.getElementById('update_target_month').value = target.month;
-    document.getElementById('update_target_year').value = target.year;
+async function initUpdateNotifySettingModal(setting_id){
+    document.getElementById('update_notify_form').reset();
+    let data = await serviceGetNotifySettingById(setting_id);
+    let setting = data.setting;
+    document.getElementById('update_notify_id').value = setting.id;
+    document.getElementById('update_notify_status_id').value = setting.status_id;
+    document.getElementById('update_notify_role_id').value = setting.role_id;
+    if (setting.is_notification == 1){ document.getElementById('update_notify_to_notification').checked = true; }
+    if (setting.is_mail == 1){ document.getElementById('update_notify_to_mail').checked = true; }
 }
-async function updateStaffTarget(){
-    let id = document.getElementById('update_target_id').value;
-    let type_id = document.getElementById('update_target_type_id').value;
-    let target = changePriceToDecimal(document.getElementById('update_target_target').value);
-    let currency = document.getElementById('update_target_currency').value;
-    let month = document.getElementById('update_target_month').value;
-    let year = document.getElementById('update_target_year').value;
+async function updateNotifySetting(){
+    let id = document.getElementById('update_notify_id').value;
+    let to_notification = 0;
+    let to_mail = 0;
+    if(document.getElementById('update_notify_to_notification').checked){
+        to_notification = 1;
+    }
+    if(document.getElementById('update_notify_to_mail').checked){
+        to_mail = 1;
+    }
+
+    let status_id = document.getElementById('update_notify_status_id').value;
+    let role_id = document.getElementById('update_notify_role_id').value;
+
+    let receivers = [];
+    let receiver_objs = $('#update_notify_staff_id').find(':selected');
+    for (let i = 0; i < receiver_objs.length; i++) {
+        receivers.push(receiver_objs[i].value);
+    }
 
 
     let formData = JSON.stringify({
         "id": id,
-        "type_id": type_id,
-        "target": target,
-        "currency": currency,
-        "month": month,
-        "year": year
+        "status_id": status_id,
+        "role_id": role_id,
+        "receivers": receivers,
+        "to_notification": to_notification,
+        "to_mail": to_mail
     });
-    let returned = await servicePostUpdateStaffTarget(formData);
+    let returned = await servicePostUpdateNotificationSetting(formData);
     if (returned){
-        $("#update_staff_target_form").trigger("reset");
-        $("#updateStaffTargetModal").modal('hide');
-        initStaffTargets();
+        $("#update_notify_form").trigger("reset");
+        $("#updateNotifySettingModal").modal('hide');
+        initNotifySettings();
     }else{
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }

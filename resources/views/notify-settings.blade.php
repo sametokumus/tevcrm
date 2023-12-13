@@ -102,63 +102,44 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
-<div class="modal modal-cover fade" id="updateStaffTargetModal">
+<div class="modal modal-cover fade" id="updateNotifySettingModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Hedef Güncelle</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="update_staff_target_form">
+            <form method="post" action="#" id="update_notify_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <input type="hidden" value="" class="form-control" id="update_target_id" />
-                            <label class="form-label">Tür</label>
-                            <select class="form-control" id="update_target_type_id" onchange="updateTargetChangeType();">
+                            <input type="hidden" value="" class="form-control" id="update_notify_id" />
+                            <label class="form-label">Sipariş Durumu</label>
+                            <select class="form-control" id="update_notify_status_id" required>
 
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Hedef</label>
-                            <input type="text" value="" class="form-control" id="update_target_target" />
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Birim</label>
-                            <select class="form-control form-select" id="update_target_currency">
-                                <option value="%">%</option>
-                                <option value="TRY">TRY</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
+                            <label class="form-label">Yetki</label>
+                            <select class="form-control" id="update_notify_role_id">
+
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Hedef Ay</label>
-                            <select class="form-control" id="update_target_month">
-                                <option value="0">Tüm Yıl</option>
-                                <option value="1">Ocak</option>
-                                <option value="2">Şubat</option>
-                                <option value="3">Mart</option>
-                                <option value="4">Nisan</option>
-                                <option value="5">Mayıs</option>
-                                <option value="6">Haziran</option>
-                                <option value="7">Temmuz</option>
-                                <option value="8">Ağustos</option>
-                                <option value="9">Eylül</option>
-                                <option value="10">Ekim</option>
-                                <option value="11">Kasım</option>
-                                <option value="12">Aralık</option>
+                            <label class="form-label">Personel</label>
+                            <select name="update_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="update_notify_staff_id">
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Hedef Yıl</label>
-                            <select class="form-control" id="update_target_year">
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                            </select>
+                            <label class="form-label d-block">Uyarı Türü Seçiniz</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="update_notify_to_notification" />
+                                <label class="form-check-label" for="update_notify_to_notification">Bildirim</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="update_notify_to_mail" />
+                                <label class="form-check-label" for="update_notify_to_mail">Mail</label>
+                            </div>
                         </div>
                     </div>
                 </div>
