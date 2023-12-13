@@ -130,7 +130,11 @@
 <script src="services/chat-services.js"></script>
 <?php echo $extra_js; ?>
 <script>
-    $('.toast').toast('show');
+    // Ensure the document is ready
+    $(document).ready(function() {
+        // Call the toast function
+        $('.toast').toast('show');
+    });
 </script>
 
 </body>
