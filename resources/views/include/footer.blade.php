@@ -2,7 +2,7 @@
     <div class="toast" data-autohide="false">
         <div class="toast-header">
             <i class="far fa-bell text-muted me-2"></i>
-            <strong class="me-auto">Bootstrap</strong>
+            <strong class="me-auto">Bootstrap 1</strong>
             <small>11 mins ago</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
         </div>
@@ -13,7 +13,7 @@
     <div class="toast" data-autohide="false">
         <div class="toast-header">
             <i class="far fa-bell text-muted me-2"></i>
-            <strong class="me-auto">Bootstrap</strong>
+            <strong class="me-auto">Bootstrap 2</strong>
             <small>11 mins ago</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
         </div>
