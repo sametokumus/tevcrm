@@ -754,3 +754,7 @@ div.DTE_Field select{
     background: var(--bs-theme);
     color: var(--bs-theme-color);
 }
+
+table.dataTable{
+    min-width: 100%;
+}
