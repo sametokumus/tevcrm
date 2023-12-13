@@ -155,9 +155,9 @@ async function handleSendMessageEvent(data) {
 
     if ($('#public-chat-panel').hasClass('active') != true){
         let title = sender.name + ' ' + sender.surname;
-        let message = message.message;
+        let message_text = message.message;
         let id = message.message_id;
-        showNotify(id, title, message);
+        showNotify(id, title, message_text);
     }
 }
 
