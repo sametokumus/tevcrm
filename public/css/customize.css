@@ -758,3 +758,12 @@ div.DTE_Field select{
 table.dataTable{
     min-width: 100%;
 }
+
+.toasts-container{
+    z-index: 1031;
+}
+
+.toasts-container .toast{
+    margin-bottom: 5px;
+    border-left: 7px solid var(--bs-theme);
+}
