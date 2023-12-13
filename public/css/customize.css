@@ -761,6 +761,8 @@ table.dataTable{
 
 .toasts-container{
     z-index: 1031;
+    bottom: 20px;
+    top: auto;
 }
 
 .toasts-container .toast{

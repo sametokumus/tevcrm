@@ -152,6 +152,13 @@ async function handleSendMessageEvent(data) {
 
     let scrollableDiv = document.getElementById('chat-body');
     scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+
+    if ($('#public-chat-panel').hasClass('active') != true){
+        let title = sender.name + ' ' + sender.surname;
+        let message = message.message;
+        let id = message.message_id;
+        showNotify(id, title, message);
+    }
 }
 
 /*Listen Chat Message*/

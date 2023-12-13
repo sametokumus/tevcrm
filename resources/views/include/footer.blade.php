@@ -1,4 +1,4 @@
-<div class="toasts-container flex-column-reverse">
+<div class="toasts-container">
     <div class="toast" data-autohide="false">
         <div class="toast-header">
             <i class="far fa-bell text-muted me-2"></i>
@@ -24,7 +24,7 @@
 </div>
 
 
-<div class="app-theme-panel">
+<div class="app-theme-panel" id="public-chat-panel">
     <div class="app-theme-panel-container">
         <a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn">
             <i class="bi bi-envelope"></i>
@@ -129,14 +129,6 @@
 <script src="services/service.js"></script>
 <script src="services/chat-services.js"></script>
 <?php echo $extra_js; ?>
-<script>
-    $(document).ready(function() {
-        $('.toast').toast({
-            autohide: false, // Set to true if you want to enable auto-hide
-            delay: 5000 // Set the delay in milliseconds (5000ms = 5 seconds)
-        }).toast('show');
-    });
-</script>
 
 </body>
 
