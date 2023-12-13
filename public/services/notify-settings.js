@@ -132,9 +132,9 @@ async function addNotifySetting(){
 
 
 async function openUpdateNotifySettingModal(setting_id){
-    getStatusesAddSelectId('update_notify_status_id');
-    getAdminRolesAddSelectId('update_notify_role_id');
-    getAdminsAddSelectId('update_notify_staff_id');
+    await getStatusesAddSelectId('update_notify_status_id');
+    await getAdminRolesAddSelectId('update_notify_role_id');
+    await getAdminsAddSelectId('update_notify_staff_id');
     $("#updateNotifySettingModal").modal('show');
     initUpdateNotifySettingModal(setting_id)
 }
