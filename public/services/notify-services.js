@@ -13,17 +13,26 @@
 
 })(window.jQuery);
 
-/*Listen Chat Message*/
+/*Listen Status Change*/
 
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('c52432e0f85707bee8d3', {
-    cluster: 'eu'
+    cluster: 'eu',
+    authEndpoint: '/broadcasting/auth', // Adjust the endpoint based on your setup
+    encrypted: true
 });
 
-var channel = pusher.subscribe('status-channel');
-channel.bind('App\\Events\\StatusChange', function(data) {
-    handleStatusChangeEvent(data)
+var channel = pusher.subscribe('presence-status-channel');
+
+channel.bind('pusher:subscription_succeeded', function (members) {
+    members.each(function (member) {
+        handleStatusChangeEvent(member.info);
+    });
+});
+
+channel.bind('App\\Events\\StatusChange', function (data) {
+    handleStatusChangeEvent(data);
 });
 
 async function handleStatusChangeEvent(data) {
@@ -33,4 +42,4 @@ async function handleStatusChangeEvent(data) {
     showNotify(id, title, message);
 }
 
-/*Listen Chat Message*/
+/*Listen Status Change*/

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Api\Admin\BroadcastingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +26,26 @@ Broadcast::channel("company-chat-channel", function () {
     ];
 });
 
-Broadcast::channel("status-channel", function () {
+//Broadcast::channel("status-channel", function () {
+//    return [
+//        "id" => $this->id,
+//        "title" => $this->title,
+//        "message" => $this->message
+//    ];
+//});
+Broadcast::channel('status-channel', function ($user) {
     return [
-        "id" => $this->id,
-        "title" => $this->title,
-        "message" => $this->message
+        'id' => $user->id,
+        'title' => $user->title,
+        'message' => $user->message,
     ];
 });
+Broadcast::channel('presence-status-channel', function ($user) {
+    return [
+        'id' => $user->id,
+        'name' => $user->name,
+    ];
+});
+
+// Add auth route
+Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);
