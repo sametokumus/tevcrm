@@ -134,10 +134,15 @@ async function handleSendMessageEvent(data) {
     message_panel += '';
     message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
         '                   <div class="widget-chat-content">\n';
-    message_panel += '<div class="widget-chat-message">\n' +
-        '                 '+ message.message +'\n' +
-        '                 <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
-        '             </div>\n';
+
+    if (message.sender_id == user_id){
+        message_panel += '      <div class="widget-chat-name">'+ sender.name + ' ' + sender.surname +'</div>\n';
+    }
+
+    message_panel += '          <div class="widget-chat-message">\n' +
+        '                           '+ message.message +'\n' +
+        '                           <div class="widget-chat-status">'+ formatTime(message.created_at) +'</div>\n' +
+        '                       </div>\n';
     message_panel += '      </div>\n' +
         '               </div>\n';
 
