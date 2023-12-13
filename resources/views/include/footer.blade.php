@@ -103,6 +103,7 @@
 </script>
 <script src="messages.js"></script>
 <script src="services/service.js"></script>
+<script src="services/chat-services.js"></script>
 <?php echo $extra_js; ?>
 
 
