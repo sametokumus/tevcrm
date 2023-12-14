@@ -79,6 +79,53 @@ class StatusHistoryHelper
 
             }
 
+            //send to receivers
+            if ($notify_setting->receivers != '[]'){
+                $receiversArray = json_decode($notify_setting->receivers, true);
+                foreach ($receiversArray as $receiverId) {
+                    $receiver = Admin::query()->where('id', $receiverId)->first();
+
+                    $notify_id = Uuid::uuid();
+                    $setting_id = $notify_setting->id;
+                    $sale = Sale::query()->where('sale_id', $sale_id)->first();
+                    $sale_owner = Contact::query()->where('id', $sale->owner_id)->first();
+                    $short_code = $sale_owner->short_code.'-'.$sale->id;
+                    $sender_id = $user_id;
+                    $sender = Admin::query()->where('id', $user_id)->first();
+                    $sender_name = $sender->name.' '.$sender->surname;
+                    $notify = '<b>'.$sender_name.'</b> tarafından <b>'.$short_code.'</b> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+
+                    if ($notify_setting->is_notification == 1){
+                        StatusNotify::query()->insert([
+                            'notify_id' => $notify_id,
+                            'setting_id' => $setting_id,
+                            'sale_id' => $sale_id,
+                            'sender_id' => $sender_id,
+                            'receiver_id' => $receiver->id,
+                            'notify' => $notify,
+                            'type'=> 1
+                        ]);
+
+                        $check_send = StatusNotifyHelper::SendToNotification($notify_id, $short_code, $notify, $receiver->id);
+                    }
+
+                    if ($notify_setting->is_mail == 1){
+                        StatusNotify::query()->insert([
+                            'notify_id' => $notify_id,
+                            'setting_id' => $setting_id,
+                            'sale_id' => $sale_id,
+                            'sender_id' => $sender_id,
+                            'receiver_id' => $receiver->id,
+                            'notify' => $notify,
+                            'type'=> 2
+                        ]);
+
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, $notify, $receiver);
+                    }
+                }
+
+            }
+
         }
 
         return true;
