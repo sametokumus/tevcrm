@@ -14,6 +14,9 @@
 
          $('#mark-all-read-button').click(function (e){
              e.preventDefault();
+             markAsReadAllNotify();
+             $('#user-notifies .list-group-item').removeClass('bg-theme-100');
+             $('#user-notifies .list-group-item div.text-right').remove();
          });
 
 	});
