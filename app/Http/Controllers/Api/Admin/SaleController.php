@@ -741,7 +741,7 @@ class SaleController extends Controller
                         $sender_id = $request->user_id;
                         $sender = Admin::query()->where('id', $request->user_id)->first();
                         $sender_name = $sender->name.' '.$sender->surname;
-                        $notify = $sender_name.' tarafından '.$short_code.' numaralı siparişin durumu "'.$new_status->name.'" olarak güncellendi.';
+                        $notify = '<b>'.$sender_name.'</b> tarafından <b>'.$short_code.'</b> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
 
                         if ($notify_setting->is_notification == 1){
                             StatusNotify::query()->insert([
