@@ -7,7 +7,7 @@
 
 
     $(window).on('load',async function() {
-
+        checkHeaderNotifyCount();
     });
 
 
@@ -79,5 +79,17 @@ async function markAsReadAllNotify(){
         // initStaffTargets();
     }else{
         alert("Hata Oluştu");
+    }
+}
+
+async function checkHeaderNotifyCount(){
+    let user_id = localStorage.getItem('userId');
+
+    let data = await serviceGetNotReadNotifyCountByUserId(user_id);
+    if (data.count == 0){
+        $('#header-notify .badge').addClass('d-none');
+    }else{
+        $('#header-notify .badge').text(data.count);
+        $('#header-notify .badge').removeClass('d-none');
     }
 }
