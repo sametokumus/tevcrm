@@ -23,7 +23,7 @@ class BroadcastingController extends Controller
                 'message' => $user->message,
             ]);
         } catch (\Exception $e) {
-            \Log::error('Error in BroadcastingController: ' . $e->getMessage() . ' req: '.$request);
+            \Log::error('Error in BroadcastingController: ' . $e->getMessage() . ' req: '.$user);
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }
