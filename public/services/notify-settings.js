@@ -124,7 +124,7 @@ async function addNotifySetting(){
     if (returned){
         $("#add_notify_form").trigger("reset");
         $('.select2-selection__rendered li').remove();
-        // initStaffTargets();
+        initNotifySettings();
     }else{
         alert("Hata Oluştu");
     }

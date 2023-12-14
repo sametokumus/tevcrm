@@ -72,6 +72,8 @@ class StatusHistoryHelper
                             'notify' => $notify,
                             'type'=> 2
                         ]);
+
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, $notify, $role_user);
                     }
                 }
 
