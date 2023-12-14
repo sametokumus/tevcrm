@@ -249,7 +249,7 @@ class SaleController extends Controller
                     $updated_at = $sale->updated_at;
 //                    $updated_at = Carbon::parse($sale->updated_at);
 //                    $updated_at = $updated_at->subHours(3);
-                    $sale->updated_at = $sale->updated_at->addHours(3);
+//                    $sale->updated_at = $sale->updated_at->addHours(3);
                 }else{
                     $updated_at = Carbon::parse($sale->created_at);
 //                    $updated_at = $updated_at->subHours(3);
