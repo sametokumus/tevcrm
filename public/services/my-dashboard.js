@@ -787,4 +787,5 @@ async function initStaffNotifies(user_id){
 async function markAsRead(notify_id){
     markAsReadSingleNotify(notify_id);
     $('#dash-notify-'+notify_id).removeClass('bg-theme-100');
+    $('#dash-notify-'+notify_id+ ' div.text-right').remove();
 }
