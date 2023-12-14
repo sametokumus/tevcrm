@@ -113,5 +113,3 @@ Route::get('/chat', function (\BeyondCode\LaravelWebSockets\Apps\AppProvider $ap
     ]);
 });
 
-// Add auth route
-Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);

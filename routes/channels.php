@@ -52,3 +52,6 @@ Broadcast::channel('user.{userId}', function ($user, $userId) {
         return array('name' => $user->name);
     }
 });
+
+// Add auth route
+Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);
