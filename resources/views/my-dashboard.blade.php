@@ -434,12 +434,14 @@ $extra_js='
                                                     <a href="#" id="mark-all-read-button" class="text-inverse text-opacity-50"><small>Tümünü Okundu Olarak İşaretle</small></a>
                                                 </div>
                                             </div>
-                                            <div class="list-group list-group-flush">
+                                            <div class="list-group list-group-flush" id="user-notifies">
                                                 <div class="list-group-item px-3">
                                                     <div class="text-inverse text-opacity-50"><small><strong>Trending Worldwide</strong></small></div>
                                                     <div class="fw-bold mb-2">#CronaOutbreak</div>
                                                     <div class="fs-13px mb-1">The coronavirus is affecting 210 countries around the world and 2 ...</div>
-                                                    <div><small class="text-inverse text-opacity-50">49.3m share</small></div>
+                                                    <div class="text-right">
+                                                        <button type="button" class="btn"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>
+                                                    </div>
                                                 </div>
                                                 <div class="list-group-item px-3">
                                                     <div class="text-inverse text-opacity-50"><small><strong>Trending Worldwide</strong></small></div>
