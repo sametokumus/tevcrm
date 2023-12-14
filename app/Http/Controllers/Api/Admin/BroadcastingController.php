@@ -12,7 +12,7 @@ class BroadcastingController extends Controller
         $user = $request->user();
 
         if (!$user) {
-            abort(403, 'Unauthorized');
+//            abort(403, 'Unauthorized');
         }
 
         return response()->json([
