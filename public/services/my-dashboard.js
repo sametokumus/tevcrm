@@ -12,6 +12,10 @@
              updateProfile();
          });
 
+         $('#mark-all-read-button').click(function (e){
+             e.preventDefault();
+         });
+
 	});
 
 	$(window).load(async function() {
