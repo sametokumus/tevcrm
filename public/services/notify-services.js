@@ -67,14 +67,15 @@ function showNotify(notify_id, title, message) {
 }
 
 async function markAsReadSingleNotify(notify_id){
-    let returned = await serviceGetReadNotifyById(notify_id);
+    await serviceGetReadNotifyById(notify_id);
+    checkHeaderNotifyCount();
 }
 
 async function markAsReadAllNotify(){
     let user_id = localStorage.getItem('userId');
 
     await serviceGetReadAllNotifyByUserId(user_id);
-
+    checkHeaderNotifyCount();
 }
 
 async function checkHeaderNotifyCount(){
