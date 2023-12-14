@@ -30,7 +30,8 @@ Broadcast::channel("status-channel", function () {
     return [
         "id" => $this->id,
         "title" => $this->title,
-        "message" => $this->message
+        "message" => $this->message,
+        "receiver_id" => $this->receiver_id
     ];
 });
 

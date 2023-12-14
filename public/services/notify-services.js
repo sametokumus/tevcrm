@@ -30,7 +30,11 @@ async function handleStatusChangeEvent(data) {
     let id = data.id;
     let title = data.title;
     let message = data.message;
-    showNotify(id, title, message);
+    let receiver_id = data.receiver_id;
+    let user_id = localStorage.getItem('userId');
+    if (receiver_id == user_id) {
+        showNotify(id, title, message);
+    }
 }
 
 /*Listen Status Change*/

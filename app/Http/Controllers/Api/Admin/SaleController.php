@@ -754,7 +754,7 @@ class SaleController extends Controller
                                 'type'=> 1
                             ]);
 
-                            $check_send = StatusNotifyHelper::SendToNotification($notify_id, $short_code, $notify);
+                            $check_send = StatusNotifyHelper::SendToNotification($notify_id, $short_code, $notify, $role_user->id);
                         }
 
                         if ($notify_setting->is_mail == 1){

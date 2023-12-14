@@ -17,17 +17,19 @@ class StatusChange implements ShouldBroadcast
     public $id;
     public $title;
     public $message;
+    public $receiver_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($id, $title, $message)
+    public function __construct($id, $title, $message, $receiver_id)
     {
         $this->id = $id;
         $this->title = $title;
         $this->message = $message;
+        $this->receiver_id = $receiver_id;
     }
 
     /**
