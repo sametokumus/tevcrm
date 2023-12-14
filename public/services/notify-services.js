@@ -73,13 +73,8 @@ async function markAsReadSingleNotify(notify_id){
 async function markAsReadAllNotify(){
     let user_id = localStorage.getItem('userId');
 
-    let returned = await serviceGetReadAllNotifyByUserId(user_id);
-    if (returned){
-        // $("#add_staff_target_form").trigger("reset");
-        // initStaffTargets();
-    }else{
-        alert("Hata Oluştu");
-    }
+    await serviceGetReadAllNotifyByUserId(user_id);
+
 }
 
 async function checkHeaderNotifyCount(){
