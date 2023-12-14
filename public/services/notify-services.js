@@ -19,12 +19,9 @@ Pusher.logToConsole = true;
 
 var pusher = new Pusher('c52432e0f85707bee8d3', {
     cluster: 'eu',
-    authEndpoint: '/broadcasting/auth', // Adjust the endpoint based on your setup
-    encrypted: true,
-    auth: {
-        headers: {
-            'X-CSRF-Token': document.head.querySelector('meta[name="csrf-token"]').content
-        }
+    channelAuthorization: {
+        endpoint: "/pusher_auth.php",
+        headers: { "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').content },
     }
 });
 

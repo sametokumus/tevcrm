@@ -15,9 +15,9 @@ use \App\Http\Controllers\Api\Admin\BroadcastingController;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+//Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
 
 Broadcast::channel("company-chat-channel", function () {
     return [
@@ -47,3 +47,8 @@ Broadcast::channel('presence-status-channel', function ($user) {
     ];
 });
 
+Broadcast::channel('user.{userId}', function ($user, $userId) {
+    if ($user->id === $userId) {
+        return array('name' => $user->name);
+    }
+});
