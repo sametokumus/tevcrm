@@ -266,7 +266,7 @@ async function initSales(){
 			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
 			'              <td>'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
-			'              <td>'+ updated_at +'</td>\n' +
+			'              <td>'+ formatDateAndTimeDESC2(updated_at, "/") +'</td>\n' +
 			'              <td>'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
