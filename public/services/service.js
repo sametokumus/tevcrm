@@ -147,10 +147,14 @@ function showNotify(notify_id, title, message) {
         '           </div>\n';
     $('.toasts-container').append(notify);
 
-    $('#notify-'+ notify_id).toast({
+    let $notifyElement = $('#notify-'+ notify_id);
+    $notifyElement.toast({
         autohide: false,
         delay: 3000
     }).toast('show');
+    $notifyElement.addEventListener('hidden.bs.toast', () => {
+        console.log(notify_id)
+    })
 }
 
 async function createSession () {

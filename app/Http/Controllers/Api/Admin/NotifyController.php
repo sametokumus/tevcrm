@@ -9,6 +9,7 @@ use App\Models\AdminRole;
 use App\Models\Product;
 use App\Models\StaffTarget;
 use App\Models\Status;
+use App\Models\StatusNotify;
 use App\Models\StatusNotifySetting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -157,6 +158,20 @@ class NotifyController extends Controller
             $setting['receiver_names'] = substr($receiver_names, 0, -2);
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['setting' => $setting]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getReadNotifyById($notify_id)
+    {
+        try {
+
+            StatusNotify::query()->where('notify_id', $notify_id)->update([
+                'is_read' => 1
+            ]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
