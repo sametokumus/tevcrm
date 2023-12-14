@@ -9,17 +9,22 @@ class BroadcastingController extends Controller
 {
     public function authenticate(Request $request)
     {
-        $user = $request->user();
+        try {
+            $user = $request->user();
 
-        if (!$user) {
-//            abort(403, 'Unauthorized');
+            if (!$user) {
+                abort(403, 'Unauthorized');
+            }
+
+            return response()->json([
+                'id' => $user->id,
+                'name' => $user->name,
+                'title' => $user->title,
+                'message' => $user->message,
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error in BroadcastingController: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error'], 500);
         }
-
-        return response()->json([
-            'id' => $user->id,
-            'name' => $user->name,
-            'title' => $user->title,
-            'message' => $user->message,
-        ]);
     }
 }
