@@ -257,6 +257,7 @@ class SaleController extends Controller
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
                 $sale->created_at = $sale->created_at->addHours(3);
+                $sale->updated_at = $sale->updated_at->addHours(3);
 
             }
 
