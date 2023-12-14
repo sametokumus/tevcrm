@@ -772,7 +772,7 @@ async function initStaffNotifies(user_id){
             actions = '     <div class="text-right">\n' +
                 '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
                 '           </div>\n';
-            bg_color = 'bg-theme-400';
+            bg_color = 'bg-theme-100';
         }
 
         let item = '<div class="list-group-item px-3 '+ bg_color +'">\n' +
