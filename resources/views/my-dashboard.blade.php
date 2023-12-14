@@ -441,6 +441,18 @@ $extra_js='
                                                     <div class="fs-13px mb-1">The coronavirus is affecting 210 countries around the world and 2 ...</div>
                                                     <div><small class="text-inverse text-opacity-50">49.3m share</small></div>
                                                 </div>
+                                                <div class="list-group-item px-3">
+                                                    <div class="text-inverse text-opacity-50"><small><strong>Trending Worldwide</strong></small></div>
+                                                    <div class="fw-bold mb-2">#CronaOutbreak</div>
+                                                    <div class="fs-13px mb-1">The coronavirus is affecting 210 countries around the world and 2 ...</div>
+                                                    <div><small class="text-inverse text-opacity-50">49.3m share</small></div>
+                                                </div>
+                                                <div class="list-group-item px-3">
+                                                    <div class="text-inverse text-opacity-50"><small><strong>Trending Worldwide</strong></small></div>
+                                                    <div class="fw-bold mb-2">#CronaOutbreak</div>
+                                                    <div class="fs-13px mb-1">The coronavirus is affecting 210 countries around the world and 2 ...</div>
+                                                    <div><small class="text-inverse text-opacity-50">49.3m share</small></div>
+                                                </div>
                                             </div>
                                             <div class="list-group list-group-flush">
                                                 <a href="#" class="list-group-item list-group-action text-center">
