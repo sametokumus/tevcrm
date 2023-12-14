@@ -769,3 +769,9 @@ table.dataTable{
     margin-bottom: 5px;
     border-left: 7px solid var(--bs-theme);
 }
+.list-group-flush > .list-group-item:first-child {
+    border-width: 0 0 var(--bs-list-group-border-width);
+}
+.list-group-flush > .list-group-item:last-child {
+    border-width: 0 0 var(--bs-list-group-border-width);
+}
