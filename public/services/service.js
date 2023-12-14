@@ -133,30 +133,6 @@ function showAlert(message){
 	}, 3000);
 }
 
-function showNotify(notify_id, title, message) {
-    let notify = '  <div id="notify-'+ notify_id +'" class="toast" data-autohide="false">\n' +
-        '               <div class="toast-header">\n' +
-        '                   <i class="far fa-bell text-muted me-2"></i>\n' +
-        '                   <strong class="me-auto">'+ title +'</strong>\n' +
-        // '                   <small>11 mins ago</small>\n' +
-        '                   <button type="button" class="btn-close" data-bs-dismiss="toast"></button>\n' +
-        '               </div>\n' +
-        '               <div class="toast-body">\n' +
-        '                   '+ message +'\n' +
-        '               </div>\n' +
-        '           </div>\n';
-    $('.toasts-container').append(notify);
-
-    let $notifyElement = $('#notify-'+ notify_id);
-    $notifyElement.toast({
-        autohide: false,
-        delay: 3000
-    }).toast('show');
-    $notifyElement.on('hidden.bs.toast', function () {
-        console.log(notify_id);
-    });
-}
-
 async function createSession () {
 	var userLogin = await localStorage.getItem('userLogin');
 	if(userLogin == null){
@@ -3068,6 +3044,22 @@ async function serviceGetNotifySettings() {
 }
 async function serviceGetNotifySettingById(id) {
     const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetReadNotifyById(notify_id) {
+    const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + notify_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetReadAllNotifyByUserId(user_id) {
+    const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + user_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

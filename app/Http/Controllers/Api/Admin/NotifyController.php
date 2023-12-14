@@ -176,5 +176,18 @@ class NotifyController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getReadAllNotifyByUserId($user_id)
+    {
+        try {
+
+            StatusNotify::query()->where('receiver_id', $user_id)->update([
+                'is_read' => 1
+            ]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 }

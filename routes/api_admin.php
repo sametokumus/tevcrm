@@ -433,6 +433,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('notify/getNotifySettings', [NotifyController::class, 'getNotifySettings']);
     Route::get('notify/getNotifySettingById/{setting_id}', [NotifyController::class, 'getNotifySettingById']);
     Route::get('notify/getReadNotifyById/{notify_id}', [NotifyController::class, 'getReadNotifyById']);
+    Route::get('notify/getReadAllNotifyByUserId/{user_id}', [NotifyController::class, 'getReadAllNotifyByUserId']);
 
 
     //Chat
