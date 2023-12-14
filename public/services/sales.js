@@ -138,7 +138,7 @@ async function initSales(){
         let updated_at = formatDateAndTimeDESC2(sale.created_at, "/");
         // let updated_at = sale.created_at;
         if (sale.updated_at != null){
-            updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
+            updated_at = formatDateAndTimeDESC2(sale.updated_at, "/");
         }
         let status_class = "border-theme text-theme";
         let btn_list = '<div class="btn-list">\n';
