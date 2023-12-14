@@ -52,7 +52,7 @@ async function initSales(){
         let updated_at = formatDateAndTimeDESC2(sale.created_at, "/");
         // let updated_at = sale.created_at;
         if (sale.updated_at != null){
-            updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
+            updated_at = formatDateAndTimeDESC2(sale.updated_at, "/");
         }
         let status_class = "border-theme text-theme";
         let btn_list = '<div class="btn-list">\n';
@@ -95,7 +95,7 @@ async function initSales(){
 			'              <td>'+ checkNull(sale.currency) +'</td>\n' +
 			'              <td>'+ status +'</td>\n' +
             '              <td class="d-none">'+ formatDateAndTimeDESC2(sale.created_at, "/") +'</td>\n' +
-            '              <td>'+ updated_at +'</td>\n' +
+            '              <td>'+ formatDateAndTimeDESC2(updated_at, "/") +'</td>\n' +
             '              <td>'+ sale.diff_last_day +'</td>\n' +
 			'              <td>\n' +
 			'                  '+ btn_list +'\n' +
