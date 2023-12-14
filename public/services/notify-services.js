@@ -18,26 +18,12 @@
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('c52432e0f85707bee8d3', {
-    cluster: 'eu',
-    channelAuthorization: {
-        endpoint: "/broadcasting/auth",
-        headers: { "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').content },
-    }
+    cluster: 'eu'
 });
 
-// var channel = pusher.subscribe('presence-status-channel');
-let userId = localStorage.getItem('userId');
-var channel = pusher.subscribe('presence-status-channel.' + userId); // Replace userId with the actual user ID
-
-
-channel.bind('pusher:subscription_succeeded', function (members) {
-    members.each(function (member) {
-        handleStatusChangeEvent(member.info);
-    });
-});
-
-channel.bind('App\\Events\\StatusChange', function (data) {
-    handleStatusChangeEvent(data);
+var channel = pusher.subscribe('status-channel');
+channel.bind('App\\Events\\StatusChange', function(data) {
+    handleStatusChangeEvent(data)
 });
 
 async function handleStatusChangeEvent(data) {

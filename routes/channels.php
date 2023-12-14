@@ -26,32 +26,11 @@ Broadcast::channel("company-chat-channel", function () {
     ];
 });
 
-//Broadcast::channel("status-channel", function () {
-//    return [
-//        "id" => $this->id,
-//        "title" => $this->title,
-//        "message" => $this->message
-//    ];
-//});
-Broadcast::channel('status-channel', function ($user) {
+Broadcast::channel("status-channel", function () {
     return [
-        'id' => $user->id,
-        'title' => $user->title,
-        'message' => $user->message,
-    ];
-});
-Broadcast::channel('presence-status-channel', function ($user) {
-    return [
-        'id' => $user->id,
-        'name' => $user->name,
+        "id" => $this->id,
+        "title" => $this->title,
+        "message" => $this->message
     ];
 });
 
-Broadcast::channel('user.{userId}', function ($user, $userId) {
-    if ($user->id === $userId) {
-        return array('name' => $user->name);
-    }
-});
-
-// Add auth route
-Route::post('/broadcasting/auth', [BroadcastingController::class, 'authenticate']);
