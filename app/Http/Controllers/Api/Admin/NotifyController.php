@@ -189,5 +189,20 @@ class NotifyController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getNotReadNotifyCountByUserId($user_id)
+    {
+        try {
+
+            $count = StatusNotify::query()
+                ->where('receiver_id', $user_id)
+                ->where('is_read', 0)
+                ->where('active', 1)
+                ->count();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['count' => $count]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 }

@@ -89,6 +89,12 @@ $extra_js="";
             <div class="menu-item" id="header-btn">
 
             </div>
+            <div class="menu-item">
+                <a href="/my-dashboard" id="header-notify" data-bs-display="static" class="menu-link">
+                    <div class="menu-icon"><i class="bi bi-bell nav-icon"></i></div>
+                    <div class="menu-badge bg-theme">34</div>
+                </a>
+            </div>
             <div class="menu-item dropdown dropdown-mobile-full">
                 <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
                     <div class="menu-link">
