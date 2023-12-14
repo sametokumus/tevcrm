@@ -316,7 +316,11 @@ class OfferRequestController extends Controller
                 $second = $carbon->second;
                 $timeToAdd = $hour.':'.$minute.':'.$second;
 
-                $dateTime = $date->format('Y-m-d') . ' ' . $timeToAdd;
+                if ($date <= $carbon) {
+                    $dateTime = $date->format('Y-m-d') . ' ' . $timeToAdd;
+                }else{
+                    $dateTime = $carbon->format('Y-m-d') . ' ' . $timeToAdd;
+                }
                 $created_at = Carbon::parse($dateTime);
             }
 
