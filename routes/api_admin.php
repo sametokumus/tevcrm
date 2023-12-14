@@ -435,6 +435,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('notify/getReadNotifyById/{notify_id}', [NotifyController::class, 'getReadNotifyById']);
     Route::get('notify/getReadAllNotifyByUserId/{user_id}', [NotifyController::class, 'getReadAllNotifyByUserId']);
     Route::get('notify/getNotReadNotifyCountByUserId/{user_id}', [NotifyController::class, 'getNotReadNotifyCountByUserId']);
+    Route::get('notify/getNotifiesByUserId/{user_id}', [NotifyController::class, 'getNotifiesByUserId']);
 
 
     //Chat

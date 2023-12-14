@@ -204,5 +204,21 @@ class NotifyController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getNotifiesByUserId($user_id)
+    {
+        try {
+
+            $notifies = StatusNotify::query()
+                ->where('receiver_id', $user_id)
+                ->where('active', 1)
+                ->orderByDesc('id')
+                ->limit(30)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['notifies' => $notifies]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 }

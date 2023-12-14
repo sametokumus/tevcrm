@@ -3074,3 +3074,11 @@ async function serviceGetNotReadNotifyCountByUserId(user_id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetNotifiesByUserId(user_id) {
+    const data = await fetchDataGet('/admin/notify/getNotifiesByUserId/' + user_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}

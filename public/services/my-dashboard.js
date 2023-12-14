@@ -32,6 +32,7 @@
 
         initAdmin(user_id);
         initStaffTargets(user_id);
+        initStaffNotifies(user_id);
         getLastMonthSales(user_id);
         getApprovedMonthlySales(user_id);
         getCompletedMonthlySales(user_id);
@@ -755,5 +756,31 @@ async function initStaffTargets(user_id){
         },
         order: false,
     });
+}
+
+async function initStaffNotifies(user_id){
+
+    let data = await serviceGetNotifiesByUserId(user_id);
+
+    $('#user-notifies .list-group-item').remove();
+
+    $.each(data.notifies, function (i, notify) {
+
+        let actions = "";
+        let bg_color = "";
+        if (notify.is_read == 0){
+            actions = '     <div class="text-right">\n' +
+                '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
+                '           </div>\n';
+            bg_color = 'bg-theme-400';
+        }
+
+        let item = '<div class="list-group-item px-3 '+ bg_color +'">\n' +
+            '           <div class="fs-13px mb-1">'+ notify.notify +'</div>\n' +
+            '           ' + actions + '' +
+            '       </div>\n';
+        $('#user-notifies').append(item);
+    });
+
 }
 
