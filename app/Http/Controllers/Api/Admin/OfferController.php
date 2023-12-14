@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Helpers\CurrencyHelper;
+use App\Helpers\StatusHistoryHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
@@ -323,11 +324,7 @@ class OfferController extends Controller
                 Sale::query()->where('request_id', $request->request_id)->update([
                     'status_id' => 2
                 ]);
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale->sale_id,
-                    'status_id' => 2,
-                    'user_id' => $request->user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale->sale_id, 2, $request->user_id);
             }
 
             return response(['message' => __('Teklif ekleme işlemi başarılı.'), 'status' => 'success']);

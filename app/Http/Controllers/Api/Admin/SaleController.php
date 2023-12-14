@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Helpers\CurrencyHelper;
+use App\Helpers\StatusHistoryHelper;
 use App\Helpers\StatusNotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -521,21 +522,13 @@ class SaleController extends Controller
                     'status_id' => 26
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale_id,
-                    'status_id' => 26,
-                    'user_id' => $user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale_id, 26, $user_id);
             }else if ($revize == 1){
                 Sale::query()->where('sale_id', $sale_id)->update([
                     'status_id' => 32
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale_id,
-                    'status_id' => 32,
-                    'user_id' => $user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale_id, 32, $user_id);
             }else{
                 return response(['message' => __('Hatalı işlem.'), 'status' => 'query-001']);
             }
@@ -556,21 +549,13 @@ class SaleController extends Controller
                     'status_id' => 27
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale_id,
-                    'status_id' => 27,
-                    'user_id' => $user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale_id, 27, $user_id);
             }else if ($revize == 1){
                 Sale::query()->where('sale_id', $sale_id)->update([
                     'status_id' => 33
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale_id,
-                    'status_id' => 33,
-                    'user_id' => $user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale_id, 33, $user_id);
             }else{
                 return response(['message' => __('Hatalı işlem.'), 'status' => 'query-001']);
             }
@@ -600,11 +585,7 @@ class SaleController extends Controller
                 'grand_total_with_shipping' => null
             ]);
 
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 4,
-                'user_id' => $request->user_id,
-            ]);
+            StatusHistoryHelper::addStatusHistory($sale_id, 4, $request->user_id);
 
             SaleOffer::query()->where('sale_id', $sale_id)->update([
                 'active' => 0
@@ -691,11 +672,8 @@ class SaleController extends Controller
                         'status_id' => $request->status_id,
                     ]);
 
-                    StatusHistory::query()->insert([
-                        'sale_id' => $request->sale_id,
-                        'status_id' => $request->status_id,
-                        'user_id' => $request->user_id,
-                    ]);
+                    StatusHistoryHelper::addStatusHistory($request->sale_id, $request->status_id, $request->user_id);
+
                     $status = Status::query()->where('id', $request->status_id)->first();
 
                 }else{
@@ -710,67 +688,9 @@ class SaleController extends Controller
                     'status_id' => $request->status_id,
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $request->sale_id,
-                    'status_id' => $request->status_id,
-                    'user_id' => $request->user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($request->sale_id, $request->status_id, $request->user_id);
+
                 $status = Status::query()->where('id', $request->status_id)->first();
-
-            }
-
-            $notify_settings = StatusNotifySetting::query()
-                ->where('active', 1)
-                ->where('status_id', $request->status_id)
-                ->get();
-
-            foreach ($notify_settings as $notify_setting){
-
-                //send to role
-                $role_id = $notify_setting->role_id;
-                if ($role_id != null){
-
-                    $role_users = Admin::query()->where('active', 1)->where('admin_role_id', $role_id)->get();
-                    foreach ($role_users as $role_user){
-                        $notify_id = Uuid::uuid();
-                        $setting_id = $notify_setting->id;
-                        $sale_id = $request->sale_id;
-                        $sale = Sale::query()->where('sale_id', $sale_id)->first();
-                        $sale_owner = Contact::query()->where('id', $sale->owner_id)->first();
-                        $short_code = $sale_owner->short_code.'-'.$sale->id;
-                        $sender_id = $request->user_id;
-                        $sender = Admin::query()->where('id', $request->user_id)->first();
-                        $sender_name = $sender->name.' '.$sender->surname;
-                        $notify = '<b>'.$sender_name.'</b> tarafından <b>'.$short_code.'</b> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
-
-                        if ($notify_setting->is_notification == 1){
-                            StatusNotify::query()->insert([
-                                'notify_id' => $notify_id,
-                                'setting_id' => $setting_id,
-                                'sale_id' => $sale_id,
-                                'sender_id' => $sender_id,
-                                'receiver_id' => $role_user->id,
-                                'notify' => $notify,
-                                'type'=> 1
-                            ]);
-
-                            $check_send = StatusNotifyHelper::SendToNotification($notify_id, $short_code, $notify, $role_user->id);
-                        }
-
-                        if ($notify_setting->is_mail == 1){
-                            StatusNotify::query()->insert([
-                                'notify_id' => $notify_id,
-                                'setting_id' => $setting_id,
-                                'sale_id' => $sale_id,
-                                'sender_id' => $sender_id,
-                                'receiver_id' => $role_user->id,
-                                'notify' => $notify,
-                                'type'=> 2
-                            ]);
-                        }
-                    }
-
-                }
 
             }
 
@@ -929,11 +849,7 @@ class SaleController extends Controller
                     'status_id' => 5
                 ]);
 
-                StatusHistory::query()->insert([
-                    'sale_id' => $sale_id,
-                    'status_id' => 5,
-                    'user_id' => $request->user_id,
-                ]);
+                StatusHistoryHelper::addStatusHistory($sale_id, 5, $request->user_id);
 
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
                 $sub_total = 0;

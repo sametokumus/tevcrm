@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\StatusHistoryHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Brand;
@@ -192,11 +193,7 @@ class OfferRequestController extends Controller
                 'customer_id' => $request->company_id,
                 'status_id' => 1
             ]);
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 1,
-                'user_id' => $request->user_id,
-            ]);
+            StatusHistoryHelper::addStatusHistory($sale_id, 1, $request->user_id);
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {
@@ -345,12 +342,7 @@ class OfferRequestController extends Controller
                 'type_id' => $request->type_id,
                 'created_at' => $created_at,
             ]);
-            StatusHistory::query()->insert([
-                'sale_id' => $sale_id,
-                'status_id' => 1,
-                'user_id' => $request->user_id,
-                'created_at' => $created_at,
-            ]);
+            StatusHistoryHelper::addStatusHistory($sale_id, 1, $request->user_id);
 
             return response(['message' => __('Talep ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['request_id' => $request_id]]);
         } catch (ValidationException $validationException) {
