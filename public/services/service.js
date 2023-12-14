@@ -3051,7 +3051,7 @@ async function serviceGetNotifySettingById(id) {
     }
 }
 async function serviceGetReadNotifyById(notify_id) {
-    const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + notify_id, 'application/json');
+    const data = await fetchDataGet('/admin/notify/getReadNotifyById/' + notify_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
@@ -3059,7 +3059,7 @@ async function serviceGetReadNotifyById(notify_id) {
     }
 }
 async function serviceGetReadAllNotifyByUserId(user_id) {
-    const data = await fetchDataGet('/admin/notify/getNotifySettingById/' + user_id, 'application/json');
+    const data = await fetchDataGet('/admin/notify/getReadAllNotifyByUserId/' + user_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {
