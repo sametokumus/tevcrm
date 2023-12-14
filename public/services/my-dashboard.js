@@ -775,7 +775,7 @@ async function initStaffNotifies(user_id){
             bg_color = 'bg-theme-100';
         }
 
-        let item = '<div class="list-group-item px-3 '+ bg_color +'">\n' +
+        let item = '<div class="list-group-item px-3 '+ bg_color +'" id="dash-notify-'+ notify.notify_id +'">\n' +
             '           <div class="fs-13px mb-1">'+ notify.notify +'</div>\n' +
             '           ' + actions + '' +
             '       </div>\n';
@@ -784,3 +784,7 @@ async function initStaffNotifies(user_id){
 
 }
 
+async function markAsRead(notify_id){
+    markAsReadSingleNotify(notify_id);
+    $('#dash-notify-'+notify_id).removeClass('bg-theme-100');
+}
