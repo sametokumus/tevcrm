@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Events\StatusChange;
 use App\Notifications\StatusChangeNotification;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class StatusNotifyHelper
 {
@@ -25,7 +26,9 @@ class StatusNotifyHelper
     {
         try {
 
-            $receiver->notify(new StatusChangeNotification());
+//            $receiver->notify(new StatusChangeNotification());
+
+            Mail::queue(new \App\Mail\StatusChangeMail($receiver->name, $receiver->email));
 
             return true;
         }catch (\Exception $e){
