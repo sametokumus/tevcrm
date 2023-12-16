@@ -6,6 +6,7 @@ use App\Helpers\CurrencyHelper;
 use App\Helpers\StatusHistoryHelper;
 use App\Helpers\StatusNotifyHelper;
 use App\Http\Controllers\Controller;
+use App\Mail\StatusChangeMail;
 use App\Models\Admin;
 use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
@@ -50,8 +51,10 @@ use App\Models\UserProfile;
 use DateTime;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Nette\Schema\ValidationException;
 use Carbon\Carbon;
@@ -2373,5 +2376,15 @@ class SaleController extends Controller
         }
     }
 
-
+    public static function subscribe(Request $request)
+    {
+        Mail::to($request->email)->send(new StatusChangeMail($request->email));
+        return new JsonResponse(
+            [
+                'success' => true,
+                'message' => "Thank you for subscribing to our email, please check your inbox"
+            ],
+            200
+        );
+    }
 }

@@ -14,21 +14,11 @@ class StatusChangeMail extends Mailable
 //    protected $name;
     protected $email;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct($email) {
 //        $this->name = $name;
         $this->email = $email;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build() {
 //        return $this
 //            ->subject('Aramıza Hoşgeldin!')
