@@ -32,7 +32,7 @@ class StatusNotifyHelper
 
 //            Mail::queue(new \App\Mail\StatusChangeMail($receiver->name, $receiver->email));
 
-            Mail::to($receiver->email)->send(new StatusChangeMail($receiver->name, $receiver->email));
+            Mail::to($receiver->email)->send(new StatusChangeMail($receiver->email));
 
             return true;
         }catch (\Exception $e){

@@ -11,7 +11,7 @@ class StatusChangeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
+//    protected $name;
     protected $email;
 
     /**
@@ -19,8 +19,8 @@ class StatusChangeMail extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $email) {
-        $this->name = $name;
+    public function __construct($email) {
+//        $this->name = $name;
         $this->email = $email;
     }
 
