@@ -2392,6 +2392,7 @@ class SaleController extends Controller
                 ],
                 200
             );
+
         }catch (\Exception $e){
             Log::info('Mail not send: / exception:' . $e);
 
