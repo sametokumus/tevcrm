@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Events\StatusChange;
 use App\Helpers\CurrencyHelper;
 use App\Helpers\StatusHistoryHelper;
 use App\Helpers\StatusNotifyHelper;
@@ -54,6 +55,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Nette\Schema\ValidationException;
@@ -2378,13 +2380,22 @@ class SaleController extends Controller
 
     public static function subscribe(Request $request)
     {
-        Mail::to($request->email)->send(new StatusChangeMail($request->email));
-        return new JsonResponse(
-            [
-                'success' => true,
-                'message' => "Thank you for subscribing to our email, please check your inbox"
-            ],
-            200
-        );
+
+
+        try {
+
+            Mail::to($request->email)->send(new StatusChangeMail($request->email));
+            return new JsonResponse(
+                [
+                    'success' => true,
+                    'message' => "Thank you for subscribing to our email, please check your inbox"
+                ],
+                200
+            );
+        }catch (\Exception $e){
+            Log::info('Mail not send: / exception:' . $e);
+
+            return false;
+        }
     }
 }
