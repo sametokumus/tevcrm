@@ -30,10 +30,13 @@ class StatusChangeMail extends Mailable
      * @return $this
      */
     public function build() {
+//        return $this
+//            ->subject('Aramıza Hoşgeldin!')
+//            ->to($this->email)
+//            ->with(['name' => $this->name])
+//            ->markdown('emails.welcome');
         return $this
-            ->subject('Aramıza Hoşgeldin!')
-            ->to($this->email)
-            ->with(['name' => $this->name])
+            ->subject('Thank you for subscribing to our newsletter')
             ->markdown('emails.welcome');
     }
 }
