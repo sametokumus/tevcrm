@@ -690,6 +690,7 @@ async function initSendSupplierMailModal(request_id){
 
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
     let suppliers = data.suppliers;
+    console.log(data)
 
     document.getElementById('mail_request_id').value = request_id;
     document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
