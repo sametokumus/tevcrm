@@ -112,7 +112,8 @@
 <script src="vendor/jquery.toast.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="plugins/summernote/dist/summernote-lite.min.js"></script>
-<script src="plugins/tag-it/js/tag-it.min.js" type="1ee5da7eee724822bedea042-text/javascript"></script>
+<script src="plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+<script src="plugins/tag-it/js/tag-it.min.js"></script>
 <script src="plugins/select-picker/dist/picker.min.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="plugins/highlight.js/highlight.min.js" type="fbc7b3cca511f0e3491682e1-text/javascript"></script>
