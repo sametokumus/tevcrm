@@ -2,9 +2,7 @@
 
     # {{ $title }}
 
-    <h3>{!! $message !!}</h3>
-
-
+    {!! $message !!}
 
 
     {{ config('app.name') }}
