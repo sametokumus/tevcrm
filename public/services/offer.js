@@ -704,15 +704,7 @@ async function initSendSupplierMailModal(request_id){
 
     $('#send_mail_to_address').tagit({
         fieldName: 'to-mails',
-        tagSource: [
-            { label: 'C++', value: 'cpp' },
-            { label: 'Java', value: 'java' },
-            { label: 'PHP', value: 'php' },
-            { label: 'JavaScript', value: 'js' },
-            { label: 'Ruby', value: 'ruby' },
-            { label: 'Python', value: 'python' },
-            { label: 'C', value: 'c' }
-        ],
+        tagSource: ['c++', 'java', 'php', 'javascript', 'ruby', 'python', 'c'],
         autocomplete: false
     });
 
