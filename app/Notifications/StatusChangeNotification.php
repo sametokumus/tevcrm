@@ -29,7 +29,6 @@ class StatusChangeNotification extends Notification
         return (new MailMessage)
             ->subject($this->title)
             ->from('mail-sender@sametokumus.com','SEMY BROTHERS')
-            ->greeting($this->title)
             ->markdown('emails.status_change_notification', [
                 'title' => $this->title,
                 'message' => $this->message,

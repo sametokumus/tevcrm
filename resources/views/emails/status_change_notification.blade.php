@@ -4,9 +4,11 @@
         # {{ $greeting }}
     @endif
 
+    {{-- Title --}}
     # {{ $title }}
 
-    {!! $message !!}
+    {{-- Message --}}
+    {{ $message }}
 
     {{-- Intro Lines --}}
     @foreach ($introLines as $line)
