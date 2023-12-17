@@ -2,11 +2,9 @@
 
     # {{ $title }}
 
-    <p>{!! $message !!}</p>
+    {!! $message !!}
 
-    <br>
-    <br>
-    <br>
+
 
 
     {{ config('app.name') }}
