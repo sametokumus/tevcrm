@@ -100,7 +100,7 @@ async function openUpdateLayoutModal(layout_id){
 }
 async function initUpdateLayoutModal(layout_id){
     document.getElementById('update_layout_form').reset();
-    let data = await serviceGetNotifySettingById(layout_id);
+    let data = await serviceGetEmailLayoutById(layout_id);
     let layout = data.layout;
     document.getElementById('update_layout_id').value = layout.id;
     document.getElementById('update_layout_name').value = layout.name;
