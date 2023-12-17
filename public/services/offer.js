@@ -248,7 +248,7 @@ async function initOffers(){
 
         let item = '<tr id="offerRow' + offer.id + '" class="'+ bg_color +'">\n' +
             '           <td>' + (i+1) + '</td>\n' +
-            '           <td>' + short_code + '-RFQ-' + global_id + '</td>\n' +
+            '           <td>' + short_code + '-RFQ-' + global_id + '-' + offer.id + '</td>\n' +
             '           <td>' + offer.company_name + '</td>\n' +
             '           <td>' + offer.product_count + '</td>\n' +
             '              <td>\n' +
