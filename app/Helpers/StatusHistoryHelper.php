@@ -73,7 +73,7 @@ class StatusHistoryHelper
                             'type'=> 2
                         ]);
 
-                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, $notify, $role_user);
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $receiver);
                     }
                 }
 
@@ -120,7 +120,7 @@ class StatusHistoryHelper
                             'type'=> 2
                         ]);
 
-                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, $notify, $receiver);
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $receiver);
                     }
                 }
 
