@@ -21,16 +21,11 @@ class StatusChangeMail extends Mailable
         $this->message = $message;
     }
 
-    public function build()
-    {
+    public function build() {
         return $this
             ->subject($this->title)
             ->to($this->email)
             ->with(['title' => $this->title, 'message' => $this->message])
-            ->markdown('emails.welcome')
-            ->withSwiftMessage(function ($message) {
-                $message->getHeaders()
-                    ->addTextHeader('Content-Type', 'text/html');
-            });
+            ->markdown('emails.welcome');
     }
 }
