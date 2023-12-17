@@ -452,6 +452,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('mail/deleteLayout/{layout_id}', [MailController::class, 'deleteLayout']);
     Route::get('mail/getLayouts', [MailController::class, 'getLayouts']);
     Route::get('mail/getLayoutById/{layout_id}', [MailController::class, 'getLayoutById']);
+    Route::get('mail/getMailableSuppliersByRequestId/{request_id}', [OfferController::class, 'getMailableSuppliersByRequestId']);
 
 });
 

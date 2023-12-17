@@ -489,4 +489,31 @@ class OfferController extends Controller
             return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
+
+    public function getMailableSuppliersByRequestId($request_id)
+    {
+        try {
+
+            $offers = Offer::query()
+                ->where('offers.request_id', $request_id)
+                ->where('offers.active', 1)
+                ->where('offers.rfq_url', '!=', null)
+                ->get();
+
+            $suppliers = array();
+
+            foreach ($offers as $offer) {
+                $supplier = Company::query()->where('id', $offer->supplier_id)->first();
+                $employees = Employee::query()->where('company_id', $offer->supplier_id)->get();
+                $supplier['employees'] = $employees;
+
+                array_push($suppliers, $supplier);
+            }
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }

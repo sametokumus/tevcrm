@@ -3130,3 +3130,12 @@ async function serviceGetDeleteEmailLayout(id) {
         return false;
     }
 }
+
+async function serviceGetMailableSuppliersByRequestId(id) {
+    const data = await fetchDataGet('/admin/mail/getMailableSuppliersByRequestId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
