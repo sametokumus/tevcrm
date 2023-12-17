@@ -700,7 +700,7 @@ async function initSendSupplierMailModal(request_id){
     document.getElementById('send_mail_request_id').value = request_id;
     document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
 
-    let tagSourceArray = [];
+    $('#send_mail_to_address option').remove();
     $.each(suppliers, function (i, supplier) {
         $.each(supplier.employees, function (i, employee) {
             let optionRow = '<option selected value="'+employee.id+'">'+employee.email+'</option>';

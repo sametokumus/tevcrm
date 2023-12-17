@@ -111,7 +111,7 @@ class MailController extends Controller
 
             }
 
-            return response(['message' => __('Şablon güncelleme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Mailleriniz tedarikçilerinize iletildi.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
