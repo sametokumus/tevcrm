@@ -2,13 +2,11 @@
     {{-- Greeting --}}
     @if (! empty($greeting))
         # {{ $greeting }}
-    @else
-        @if ($level === 'error')
-            # @lang('Whoops!')
-        @else
-            # @lang('Hello!')
-        @endif
     @endif
+
+    # {{ $title }}
+
+    {!! $message !!}
 
     {{-- Intro Lines --}}
     @foreach ($introLines as $line)
@@ -24,16 +22,16 @@
     @if (! empty($salutation))
         {{ $salutation }}
     @else
-        @lang('Regards'),<br>
-        {{ config('app.name') }}
+{{--        @lang('Regards'),<br>--}}
+    {{ config('app.name') }}
     @endif
 
     {{-- Subcopy --}}
     @isset($actionText)
         @slot('subcopy')
             @lang(
-                "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-                'into your web browser:',
+                "Eğer \":actionText\" butonuna tıkladığınızda sorun yaşıyorsanız aşağıdaki linki tarayıcınızın adres çubuğuna yapıştırabilirsiniz.\n".
+                'Bağlantı adresi:',
                 [
                     'actionText' => $actionText,
                 ]
