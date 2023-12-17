@@ -391,8 +391,7 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
                             <ul id="email-to" class="form-control tagit">
-                                <li><a href="#" >sametokumus89@gmail.com</a>
-                                </li>
+                                <li>sametokumus89@gmail.com</li>
                             </ul>
                         </div>
                         <div class="col-md-12 mb-3">
