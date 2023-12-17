@@ -703,7 +703,7 @@ async function initSendSupplierMailModal(request_id){
     });
 
     $('#send_mail_to_address').tagit({
-        fieldName: 'to-mails',
+        fieldName: 'tags',
         availableTags: ['c++', 'java', 'php', 'javascript', 'ruby', 'python', 'c'],
     });
 
