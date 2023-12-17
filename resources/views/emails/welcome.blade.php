@@ -1,6 +1,9 @@
 @component('mail::message')
-    # Hoşgeldiniz
-{{--    {{$name}}--}}
-    Teşekkür Ederiz,<br>
+
+    {{$title}}
+    <p>{{$message}}</p>
+    <p></p>
+    <p></p>
+    <p></p>
     {{ config('app.name') }}
 @endcomponent

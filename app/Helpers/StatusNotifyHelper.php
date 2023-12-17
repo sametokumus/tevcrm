@@ -28,11 +28,7 @@ class StatusNotifyHelper
     {
         try {
 
-//            $receiver->notify(new StatusChangeNotification());
-
-//            Mail::queue(new \App\Mail\StatusChangeMail($receiver->name, $receiver->email));
-
-            Mail::to($receiver->email)->send(new StatusChangeMail($receiver->email));
+            Mail::to($receiver->email)->send(new StatusChangeMail($receiver->email, $title, $message));
 
             return true;
         }catch (\Exception $e){

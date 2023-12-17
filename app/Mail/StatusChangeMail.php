@@ -11,22 +11,21 @@ class StatusChangeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-//    protected $name;
     protected $email;
+    protected $title;
+    protected $message;
 
-    public function __construct($email) {
-//        $this->name = $name;
+    public function __construct($email, $title, $message) {
         $this->email = $email;
+        $this->title = $title;
+        $this->message = $message;
     }
 
     public function build() {
-//        return $this
-//            ->subject('Aramıza Hoşgeldin!')
-//            ->to($this->email)
-//            ->with(['name' => $this->name])
-//            ->markdown('emails.welcome');
         return $this
-            ->subject('Thank you for subscribing to our newsletter')
+            ->subject($this->title)
+            ->to($this->email)
+            ->with(['title' => $this->title, 'message' => $this->message])
             ->markdown('emails.welcome');
     }
 }
