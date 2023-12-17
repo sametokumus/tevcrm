@@ -388,7 +388,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
-                            <ul id="jquery-tagit" class="tagit form-control">
+                            <ul id="email-to" class="tagit form-control">
                                 <li>fancy</li>
                                 <li>new</li>
                                 <li>tag</li>
