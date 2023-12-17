@@ -2,8 +2,6 @@
 <?php
 $extra_js='
 <script src="services/offer.js"></script>
-    <link href="plugins/tag-it/css/jquery.tagit.css" rel="stylesheet">
-    <script src="plugins/tag-it/js/tag-it.min.js" type="1ee5da7eee724822bedea042-text/javascript"></script>
 ';
 ?>
 
