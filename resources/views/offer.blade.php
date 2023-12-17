@@ -400,7 +400,10 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
                             <ul id="send_mail_to_address" class="tagit form-control">
-
+                                <li value="aaa">fancy</li>
+                                <li>new</li>
+                                <li>tag</li>
+                                <li>demo</li>
                             </ul>
                         </div>
                         <div class="col-md-12 mb-3">
