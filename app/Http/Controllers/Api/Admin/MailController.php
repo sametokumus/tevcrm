@@ -115,7 +115,7 @@ class MailController extends Controller
                     ->where('offers.active',1)
                     ->first();
                 $sale = Sale::query()->where('request_id', $request->request_id)->first();
-                $owner = Contact::query()->where('id', $sale->owner_id);
+                $owner = Contact::query()->where('id', $sale->owner_id)->first();
 
                 $attachment_name = $owner->short_code.'-RFQ-'.$sale->id.'.pdf';
                 $attachment_url = $offer->rfq_url;
