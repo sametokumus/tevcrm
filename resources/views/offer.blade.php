@@ -381,13 +381,15 @@ $extra_js='
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Şablon</label>
-                            <div class="col-9">
-                                <select class="form-control" id="send_mail_layouts" required>
+                            <div class="row">
+                                <div class="col-9">
+                                    <select class="form-control" id="send_mail_layouts" required>
 
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <button type="button" class="btn btn-warning" onclick="setMailLayout();">Şablonu Kullan</button>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <button type="button" class="btn btn-theme btn-block" onclick="setMailLayout();">Şablonu Kullan</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
