@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Mail\OfferRequestMail;
 use App\Models\Admin;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\EmailLayout;
 use App\Models\Employee;
 use App\Models\Note;
+use App\Models\Offer;
+use App\Models\Sale;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -106,8 +109,18 @@ class MailController extends Controller
             $staff = Admin::query()->where('id', $request->staff_id)->first();
             foreach ($request->receivers as $receiver_id) {
                 $receiver = Employee::query()->where('id', $receiver_id)->first();
+                $offer = Offer::query()
+                    ->where('offers.request_id',$request->request_id)
+                    ->where('offers.supplier_id',$receiver->company_id)
+                    ->where('offers.active',1)
+                    ->first();
+                $sale = Sale::query()->where('request_id', $request->request_id)->first();
+                $owner = Contact::query()->where('id', $sale->owner_id);
 
-                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $request->subject, $request->text));
+                $attachment_name = $owner->short_code.'-RFQ-'.$sale->id.'.pdf';
+                $attachment_url = $offer->rfq_url;
+
+                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $request->subject, $request->text, $attachment_name, $attachment_url));
 
             }
 
