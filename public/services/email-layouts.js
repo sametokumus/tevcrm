@@ -115,12 +115,11 @@ async function updateLayout(){
 
 
     let formData = JSON.stringify({
-        "id": id,
         "name": name,
         "subject": subject,
         "text": text
     });
-    let returned = await servicePostUpdateEmailLayout(formData);
+    let returned = await servicePostUpdateEmailLayout(id, formData);
     if (returned){
         $("#update_layout_form").trigger("reset");
         $("#updateLayoutModal").modal('hide');
