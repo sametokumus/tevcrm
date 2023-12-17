@@ -391,9 +391,7 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
                             <ul id="email-to" class="form-control tagit">
-                                <li><a href="https://seantheme.com/cdn-cgi/l/email-protection"
-                                       class="__cf_email__"
-                                       data-cfemail="7f0c0a0f0f100d0b3f0c1a1e110b171a121a511c1012">[email&#160;protected]</a>
+                                <li><a href="#" >sametokumus89@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
