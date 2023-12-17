@@ -23,7 +23,7 @@ class MailController extends Controller
             ]);
             EmailLayout::query()->insert([
                 'name' => $request->name,
-                'title' => $request->title,
+                'subject' => $request->subject,
                 'text' => $request->text
             ]);
 
@@ -46,7 +46,7 @@ class MailController extends Controller
 
             EmailLayout::query()->where('id', $layout_id)->update([
                 'name' => $request->name,
-                'title' => $request->title,
+                'subject' => $request->subject,
                 'text' => $request->text
             ]);
 
