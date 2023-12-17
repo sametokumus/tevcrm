@@ -19,7 +19,6 @@
                 minLength: 2
             }
         });
-    });
 
 		$('#update_product_name_form').submit(function (e){
 			e.preventDefault();
