@@ -2,6 +2,8 @@
 <?php
 $extra_js='
 <script src="services/offer.js"></script>
+    <link href="plugins/tag-it/css/jquery.tagit.css" rel="stylesheet">
+    <script src="plugins/tag-it/js/tag-it.min.js" type="1ee5da7eee724822bedea042-text/javascript"></script>
 ';
 ?>
 
@@ -343,6 +345,61 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Vergi Oranı</label>
                             <input type="text" class="form-control" id="update_offer_product_vat_rate">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Para Birimi</label>
+                            <select class="form-control" id="update_offer_product_currency" required>
+                                <option value="TRY">TRY</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Teslimat Süresi (Gün)</label>
+                            <input type="text" class="form-control" id="update_offer_product_lead_time">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-cover fade" id="sendSupplierMailModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">TEDARİKÇİLERE MAİL GÖNDER</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="send_supplier_mail_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Gönderici</label>
+                            <select class="form-control" id="send_mail_staff" required>
+
+                            </select>
+                            <input type="hidden" class="form-control" id="mail_request_id">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Alıcı</label>
+                            <ul id="email-to" class="form-control tagit">
+                                <li><a href="https://seantheme.com/cdn-cgi/l/email-protection"
+                                       class="__cf_email__"
+                                       data-cfemail="7f0c0a0f0f100d0b3f0c1a1e110b171a121a511c1012">[email&#160;protected]</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Ürün Adı</label>
+                            <input type="text" class="form-control" id="update_offer_product_product_name" readonly>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Para Birimi</label>

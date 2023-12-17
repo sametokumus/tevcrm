@@ -677,28 +677,17 @@ async function deleteOffer(offer_id){
 
 
 async function openSendSupplierMailModal(){
-    $("#updateSendSupplierMailModal").modal('show');
+    $("#sendSupplierMailModal").modal('show');
     let request_id = getPathVariable('offer');
     await initSendSupplierMailModal(request_id);
 }
 
 async function initSendSupplierMailModal(request_id){
+
+    await getAdminsAddSelectId('send_mail_staff');
+
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
-    let product = data.product;
+    let suppliers = data.suppliers;
 
-    document.getElementById('update_offer_id').value = offer_id;
-    document.getElementById('update_offer_product_id').value = product_id;
 
-    document.getElementById('update_offer_product_ref_code').value = product.product_detail.ref_code;
-    document.getElementById('update_offer_product_product_name').value = product.product_detail.product_name;
-    document.getElementById('update_offer_product_date_code').value = checkNull(product.date_code);
-    document.getElementById('update_offer_product_package_type').value = checkNull(product.package_type);
-    document.getElementById('update_offer_product_quantity').value = checkNull(product.quantity);
-    document.getElementById('update_offer_product_pcs_price').value = checkNull(changeCommasToDecimal(product.pcs_price));
-    document.getElementById('update_offer_product_total_price').value = checkNull(changeCommasToDecimal(product.total_price));
-    document.getElementById('update_offer_product_discount_rate').value = checkNull(changeCommasToDecimal(product.discount_rate));
-    document.getElementById('update_offer_product_discounted_price').value = checkNull(changeCommasToDecimal(product.discounted_price));
-    document.getElementById('update_offer_product_vat_rate').value = checkNull(changeCommasToDecimal(product.vat_rate));
-    document.getElementById('update_offer_product_currency').value = checkNull(product.currency);
-    document.getElementById('update_offer_product_lead_time').value = checkNull(product.lead_time);
 }
