@@ -3,7 +3,7 @@
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
             {{--{{ config('app.name') }}--}}
-            <img src="https://kablocu.wimco.com.tr/images/logo.png" alt="">
+            <img src="https://lenis-crm.wimco.com.tr/img/logo/semy-light2.png" alt="">
         @endcomponent
     @endslot
 
