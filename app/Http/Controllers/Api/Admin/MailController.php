@@ -96,7 +96,7 @@ class MailController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-    public function sendMailOfferToSupplier(Request $request, $layout_id){
+    public function sendMailOfferToSupplier(Request $request){
         try {
             $request->validate([
                 'subject' => 'required',
