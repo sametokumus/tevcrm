@@ -247,7 +247,10 @@ async function initOffers(){
         }
         let pdf_btn = '';
         if (offer.rfq_url != null) {
-            pdf_btn = '<a href="' + offer.rfq_url + '" target="_blank" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF Görüntüle</span></a>\n';
+            pdf_btn =  '<a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF Düzenle</span></a>\n' +
+                '       <a href="' + offer.rfq_url + '" target="_blank" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF Görüntüle</span></a>\n';
+        }else{
+            pdf_btn =  '<a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF Oluştur</span></a>\n';
         }
 
         let item = '<tr id="offerRow' + offer.id + '" class="'+ bg_color +'">\n' +
@@ -258,7 +261,6 @@ async function initOffers(){
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button onclick="openOfferDetailModal(\'' + offer.offer_id + '\');" class="btn btn-sm '+ btn_class +'"><span class="fe fe-edit"> '+ btn_text +'</span></button>\n' +
-            '                      <a href="offer-print/'+ offer.offer_id +'" class="btn btn-sm btn-theme"><span class="fe fe-edit"> RFQ PDF Oluştur</span></a>\n' +
             '                      ' + pdf_btn +
             '                      <button onclick="deleteOffer(\'' + offer.offer_id + '\');" class="btn btn-sm btn-danger"><span class="fe fe-edit"> Sil</span></button>\n' +
             '                  </div>\n' +
