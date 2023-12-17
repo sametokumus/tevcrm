@@ -689,5 +689,7 @@ async function initSendSupplierMailModal(request_id){
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
     let suppliers = data.suppliers;
 
+    $('#email-to').tagit();
+
 
 }
