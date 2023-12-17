@@ -508,7 +508,7 @@ class OfferController extends Controller
 
             foreach ($offers as $offer) {
                 $supplier = Company::query()->where('id', $offer->supplier_id)->first();
-                $employees = Employee::query()->where('company_id', $offer->supplier_id)->get();
+                $employees = Employee::query()->where('company_id', $offer->supplier_id)->where('active', 1)->get();
                 $supplier['employees'] = $employees;
 
                 array_push($suppliers, $supplier);

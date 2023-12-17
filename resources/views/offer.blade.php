@@ -415,8 +415,7 @@ $extra_js='
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                    <button type="submit" class="btn btn-outline-theme">Mail Gönder</button>
                 </div>
             </form>
         </div>
