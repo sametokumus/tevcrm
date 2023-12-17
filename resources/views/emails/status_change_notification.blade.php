@@ -8,8 +8,7 @@
     # {{ $title }}
 
     {{-- Message --}}
-    **{!! $message !!}**
-    **{{ $message }}**
+    {!! $message !!}
 
     {{-- Intro Lines --}}
     @foreach ($introLines as $line)
