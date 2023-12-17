@@ -698,7 +698,7 @@ async function initSendSupplierMailModal(request_id){
     let tagSourceArray = [];
     $.each(suppliers, function (i, supplier) {
         $.each(supplier.employees, function (i, employee) {
-            let optionRow = '<option value="'+employee.id+'">'+employee.email+'</option>';
+            let optionRow = '<option selected value="'+employee.id+'">'+employee.email+'</option>';
             $('#send_mail_to_address').append(optionRow);
         });
     });
