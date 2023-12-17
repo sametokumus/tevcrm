@@ -685,14 +685,38 @@ async function openSendSupplierMailModal(){
 }
 
 async function initSendSupplierMailModal(request_id){
-
     await getAdminsAddSelectId('send_mail_staff');
+    await getMailLayoutsAddSelectId('send_mail_layouts');
 
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
     let suppliers = data.suppliers;
 
-    $('#email-to').tagit({
-        fieldName: 'tags'
+    document.getElementById('mail_request_id').value = request_id;
+    document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
+
+    let tagSourceArray = [];
+    $.each(suppliers, function (i, supplier) {
+        $.each(supplier.employees, function (i, employee) {
+            tagSourceArray.push({ label: employee.email, value: employee.id });
+        });
     });
 
+    $('#send_mail_to_address').tagit({
+        fieldName: 'to-mails',
+        tagSource: tagSourceArray,
+        autocomplete: false
+    });
+
+}
+
+async function setMailLayout(){
+    let layout_id = document.getElementById('send_mail_layouts').value;
+
+    let data = await serviceGetEmailLayoutById(layout_id);
+    let layout = data.layout;
+
+
+    document.getElementById('send_mail_subject').value = layout.subject;
+    $('#send_mail_subject').value = layout.subject;
+    $('#send_mail_text').summernote('code', checkNull(layout.text));
 }

@@ -380,6 +380,17 @@ $extra_js='
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
+                            <label class="form-label">Şablon</label>
+                            <div class="col-9">
+                                <select class="form-control" id="send_mail_layouts" required>
+
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-warning" onclick="setMailLayout();">Şablonu Kullan</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Gönderici</label>
                             <select class="form-control" id="send_mail_staff" required>
 
@@ -388,29 +399,17 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
-                            <ul id="email-to" class="tagit form-control">
-                                <li>fancy</li>
-                                <li>new</li>
-                                <li>tag</li>
-                                <li>demo</li>
+                            <ul id="send_mail_to_address" class="tagit form-control">
+
                             </ul>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Ürün Adı</label>
-                            <input type="text" class="form-control" id="update_offer_product_product_name" readonly>
+                            <label class="form-label">Konu</label>
+                            <input type="text" class="form-control" id="send_mail_subject" readonly>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Para Birimi</label>
-                            <select class="form-control" id="update_offer_product_currency" required>
-                                <option value="TRY">TRY</option>
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                                <option value="GBP">GBP</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Teslimat Süresi (Gün)</label>
-                            <input type="text" class="form-control" id="update_offer_product_lead_time">
+                            <label class="form-label">Mesajınız</label>
+                            <textarea name="text" class="summernote" id="send_mail_text" title="Contents"></textarea>
                         </div>
                     </div>
                 </div>

@@ -750,6 +750,15 @@ async function getCategoriesAddSelectId(selectId){
     });
 }
 
+async function getMailLayoutsAddSelectId(selectId){
+    let data = await serviceGetEmailLayouts();
+    $('#'+selectId+' option').remove();
+    $.each(data.layouts, function(i, layout){
+        let optionRow = '<option value="'+layout.id+'">'+layout.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function fastChangeStatus(status_id, sale_id){
     let user_id = localStorage.getItem('userId');
     let formData = JSON.stringify({

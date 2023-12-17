@@ -500,6 +500,10 @@ class OfferController extends Controller
                 ->where('offers.rfq_url', '!=', null)
                 ->get();
 
+            $request = OfferRequest::query()
+                ->where('request_id', $request_id)
+                ->first();
+
             $suppliers = array();
 
             foreach ($offers as $offer) {
@@ -511,7 +515,7 @@ class OfferController extends Controller
             }
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
