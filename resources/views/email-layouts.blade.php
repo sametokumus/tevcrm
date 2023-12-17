@@ -74,20 +74,17 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Durum Bildirimleri
+                        Şablonlar
                     </h1>
                 </div>
             </div>
 
-            <table id="notify-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+            <table id="layout-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                 <thead>
                 <tr>
                     <th class="border-bottom-0" data-priority="1">N#</th>
-                    <th class="border-bottom-0">Sipariş Durumu</th>
-                    <th class="border-bottom-0">Rol</th>
-                    <th class="border-bottom-0">Personel</th>
-                    <th class="border-bottom-0">Bildirim</th>
-                    <th class="border-bottom-0">Mail</th>
+                    <th class="border-bottom-0">Şablon İsmi</th>
+                    <th class="border-bottom-0">Konu</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
                 </tr>
                 </thead>

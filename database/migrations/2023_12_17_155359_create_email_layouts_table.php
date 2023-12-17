@@ -17,7 +17,7 @@ class CreateEmailLayoutsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('subject');
-            $table->text('content');
+            $table->text('text');
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

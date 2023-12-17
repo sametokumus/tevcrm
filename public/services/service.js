@@ -3082,3 +3082,51 @@ async function serviceGetNotifiesByUserId(user_id) {
         showAlert('İstek Başarısız.');
     }
 }
+
+
+async function serviceGetEmailLayouts() {
+    const data = await fetchDataGet('/admin/mail/getLayouts', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetEmailLayoutById(id) {
+    const data = await fetchDataGet('/admin/mail/getLayoutById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddEmailLayout(formData) {
+    const data = await fetchDataPost('/admin/mail/addLayout', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateEmailLayout(id, formData) {
+    const data = await fetchDataPost('/admin/mail/updateLayout/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteEmailLayout(id) {
+    const data = await fetchDataGet('/admin/mail/deleteLayout/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

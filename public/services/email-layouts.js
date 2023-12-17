@@ -25,7 +25,7 @@
         getStatusesAddSelectId('add_notify_status_id');
         getAdminRolesAddSelectId('add_notify_role_id');
         getAdminsAddSelectId('add_notify_staff_id');
-        initNotifySettings();
+        initEmailLayouts();
 
 	});
 
@@ -35,48 +35,32 @@ function checkRole(){
 	return true;
 }
 
-async function initNotifySettings(){
+async function initEmailLayouts(){
 
-    let data = await serviceGetNotifySettings();
+    let data = await serviceGetEmailLayouts();
 
     console.log(data)
-	$("#notify-datatable").dataTable().fnDestroy();
-	$('#notify-datatable tbody > tr').remove();
+	$("#layout-datatable").dataTable().fnDestroy();
+	$('#layout-datatable tbody > tr').remove();
 
-    $.each(data.settings, function (i, setting) {
-
-        let to_notification = "Hayır";
-        let to_mail = "Hayır";
-        let receiver_names = "";
-        if (setting.is_notification == 1){
-            to_notification = "Evet";
-        }
-        if (setting.is_mail == 1){
-            to_mail = "Evet";
-        }
-        if (setting.receiver_names != false){
-            receiver_names = setting.receiver_names;
-        }
+    $.each(data.layouts, function (i, layout) {
 
         let actions = "";
         if (true){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateNotifySettingModal(\''+ setting.id +'\');">Düzenle</button>\n' +
-                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteNotifySetting(\''+ setting.id +'\');">Sil</button>\n';
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateEmailLayoutModal(\''+ setting.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteEmailLayout(\''+ setting.id +'\');">Sil</button>\n';
         }
 
         let item = '<tr>\n' +
-            '           <th>'+ setting.id +'</th>\n' +
-            '           <td>'+ setting.status_name +'</td>\n' +
-            '           <td>'+ setting.role_name +'</td>\n' +
-            '           <td>'+ receiver_names +'</td>\n' +
-            '           <td>'+ to_notification +'</td>\n' +
-            '           <td>'+ to_mail +'</td>\n' +
+            '           <th>'+ layout.id +'</th>\n' +
+            '           <td>'+ layout.name +'</td>\n' +
+            '           <td>'+ layout.title +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
-        $('#notify-datatable tbody').append(item);
+        $('#layout-datatable tbody').append(item);
     });
 
-	$('#notify-datatable').DataTable({
+	$('#layout-datatable').DataTable({
 		responsive: false,
 		columnDefs: [],
 		dom: 'Bfrtip',

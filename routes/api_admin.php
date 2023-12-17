@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\Admin\StaffController;
 use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
+use App\Http\Controllers\Api\Admin\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -443,6 +444,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::post('/companyChat/sendMessage', [ChatController::class, 'sendPublicChatMessage']);
     Route::get('/companyChat/getPublicChatMessages/{page}', [ChatController::class, 'getPublicChatMessages']);
+
+
+    //Email
+    Route::post('mail/addLayout', [MailController::class, 'addLayout']);
+    Route::post('mail/updateLayout/{layout_id}', [MailController::class, 'updateLayout']);
+    Route::get('mail/deleteLayout/{layout_id}', [MailController::class, 'deleteLayout']);
+    Route::get('mail/getLayouts', [MailController::class, 'getLayouts']);
+    Route::get('mail/getLayoutById/{layout_id}', [MailController::class, 'getLayoutById']);
 
 });
 
