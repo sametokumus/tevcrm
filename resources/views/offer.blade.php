@@ -388,8 +388,11 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
-                            <ul id="email-to" class="form-control tagit">
-                                <li>sametokumus89@gmail.com</li>
+                            <ul id="jquery-tagit" class="tagit form-control">
+                                <li>fancy</li>
+                                <li>new</li>
+                                <li>tag</li>
+                                <li>demo</li>
                             </ul>
                         </div>
                         <div class="col-md-12 mb-3">
