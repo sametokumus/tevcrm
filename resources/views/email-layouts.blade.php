@@ -26,33 +26,16 @@ $extra_js='
                         <div class="card border-theme mb-3">
                             <div class="card-body">
                                 <div class="row p-3">
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Sipariş Durumu</label>
-                                        <select class="form-control" id="add_notify_status_id" required>
-
-                                        </select>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Şablon Adı</label>
+                                        <input type="text" class="form-control" id="add_layout_name">
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="form-label">Yetki</label>
-                                        <select class="form-control" id="add_notify_role_id">
-
-                                        </select>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Konu</label>
+                                        <input type="text" class="form-control" id="add_layout_subject">
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label class="form-label">Personel</label>
-                                        <select name="add_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="add_notify_staff_id">
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="form-label d-block">Uyarı Türü Seçiniz</label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="" id="add_notify_to_notification" />
-                                            <label class="form-check-label" for="add_notify_to_notification">Bildirim</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="" id="add_notify_to_mail" />
-                                            <label class="form-check-label" for="add_notify_to_mail">Mail</label>
-                                        </div>
+                                    <div class="col-md-12 mb-3">
+                                        <textarea name="text" class="summernote" id="add_layout_text" title="Contents"></textarea>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Kaydet</button>
@@ -98,44 +81,27 @@ $extra_js='
     </div>
 </div>
 <!--app-content close-->
-<div class="modal modal-cover fade" id="updateNotifySettingModal">
+<div class="modal modal-cover fade" id="updateLayoutModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Hedef Güncelle</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="#" id="update_notify_form">
+            <form method="post" action="#" id="update_layout_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <input type="hidden" value="" class="form-control" id="update_notify_id" />
-                            <label class="form-label">Sipariş Durumu</label>
-                            <select class="form-control" id="update_notify_status_id" required>
-
-                            </select>
+                            <input type="hidden" value="" class="form-control" id="update_layout_id" />
+                            <label class="form-label">Şablon Adı</label>
+                            <input type="text" class="form-control" id="update_layout_name">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Yetki</label>
-                            <select class="form-control" id="update_notify_role_id">
-
-                            </select>
+                            <label class="form-label">Konu</label>
+                            <input type="text" class="form-control" id="update_layout_subject">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label">Personel</label>
-                            <select name="update_notify_staff_id[]" class="form-control form-select select2" multiple="multiple" id="update_notify_staff_id">
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label d-block">Uyarı Türü Seçiniz</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="update_notify_to_notification" />
-                                <label class="form-check-label" for="update_notify_to_notification">Bildirim</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="update_notify_to_mail" />
-                                <label class="form-check-label" for="update_notify_to_mail">Mail</label>
-                            </div>
+                            <textarea name="text" class="summernote" id="update_layout_text" title="Contents"></textarea>
                         </div>
                     </div>
                 </div>
