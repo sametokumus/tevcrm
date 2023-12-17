@@ -105,7 +105,7 @@ async function initUpdateLayoutModal(layout_id){
     document.getElementById('update_layout_id').value = layout.id;
     document.getElementById('update_layout_name').value = layout.name;
     document.getElementById('update_layout_subject').value = layout.subject;
-    document.getElementById('update_layout_text').value = layout.text;
+    document.getElementById('update_layout_text').innerHTML = checkNull(layout.text);
 }
 async function updateLayout(){
     let id = document.getElementById('update_layout_id').value;
