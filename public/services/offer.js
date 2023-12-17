@@ -11,14 +11,7 @@
         $("#update_offer_product_total_price").maskMoney({thousands:'.', decimal:','});
         $("#update_offer_product_discounted_price").maskMoney({thousands:'.', decimal:','});
 
-        $('#email-to').tagit({
-            fieldName: 'tags',
-            availableTags: ['c++', 'java', 'php', 'javascript', 'ruby', 'python', 'c'],
-            autocomplete: {
-                delay: 0,
-                minLength: 2
-            }
-        });
+
 
 		$('#update_product_name_form').submit(function (e){
 			e.preventDefault();
@@ -698,6 +691,8 @@ async function initSendSupplierMailModal(request_id){
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
     let suppliers = data.suppliers;
 
-
+    $('#email-to').tagit({
+        fieldName: 'tags'
+    });
 
 }
