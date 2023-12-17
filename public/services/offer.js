@@ -704,8 +704,7 @@ async function initSendSupplierMailModal(request_id){
 
     $('#send_mail_to_address').tagit({
         fieldName: 'to-mails',
-        tagSource: tagSourceArray,
-        autocomplete: false
+        tagSource: tagSourceArray
     });
 
 }
