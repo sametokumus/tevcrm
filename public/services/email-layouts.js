@@ -49,7 +49,7 @@ async function initEmailLayouts(){
         let item = '<tr>\n' +
             '           <th>'+ layout.id +'</th>\n' +
             '           <td>'+ layout.name +'</td>\n' +
-            '           <td>'+ layout.title +'</td>\n' +
+            '           <td>'+ layout.subject +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#layout-datatable tbody').append(item);
