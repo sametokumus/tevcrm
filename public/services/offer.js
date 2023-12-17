@@ -698,15 +698,10 @@ async function initSendSupplierMailModal(request_id){
     let tagSourceArray = [];
     $.each(suppliers, function (i, supplier) {
         $.each(supplier.employees, function (i, employee) {
-            tagSourceArray.push({ label: employee.email, value: employee.id });
+            let optionRow = '<option value="'+employee.id+'">'+employee.email+'</option>';
+            $('#send_mail_to_address').append(optionRow);
         });
     });
-
-    $('#send_mail_to_address').tagit({
-        fieldName: 'tags',
-        availableTags: ['c++', 'java', 'php', 'javascript', 'ruby', 'python', 'c'],
-    });
-
 }
 
 async function setMailLayout(){
