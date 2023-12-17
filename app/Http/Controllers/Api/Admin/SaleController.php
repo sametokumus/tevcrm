@@ -2377,26 +2377,4 @@ class SaleController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
-
-    public static function subscribe(Request $request)
-    {
-
-
-        try {
-
-            Mail::to($request->email)->send(new StatusChangeMail($request->email));
-            return new JsonResponse(
-                [
-                    'success' => true,
-                    'message' => "Thank you for subscribing to our email, please check your inbox"
-                ],
-                200
-            );
-
-        }catch (\Exception $e){
-            Log::info('Mail not send: / exception:' . $e);
-
-            return false;
-        }
-    }
 }
