@@ -42,7 +42,7 @@ async function initEmailLayouts(){
 
         let actions = "";
         if (true){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateEmailLayoutModal(\''+ layout.id +'\');">Düzenle</button>\n' +
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateLayoutModal(\''+ layout.id +'\');">Düzenle</button>\n' +
                 '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteEmailLayout(\''+ layout.id +'\');">Sil</button>\n';
         }
 
