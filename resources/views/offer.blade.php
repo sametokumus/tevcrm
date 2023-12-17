@@ -388,7 +388,7 @@ $extra_js='
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <button type="button" class="btn btn-theme btn-block" onclick="setMailLayout();">Şablonu Kullan</button>
+                                    <button type="button" class="btn btn-theme w-100" onclick="setMailLayout();">Şablonu Kullan</button>
                                 </div>
                             </div>
                         </div>
@@ -397,7 +397,7 @@ $extra_js='
                             <select class="form-control" id="send_mail_staff" required>
 
                             </select>
-                            <input type="hidden" class="form-control" id="mail_request_id">
+                            <input type="hidden" class="form-control" id="send_mail_request_id">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Alıcı</label>
@@ -406,7 +406,7 @@ $extra_js='
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Konu</label>
-                            <input type="text" class="form-control" id="send_mail_subject" readonly>
+                            <input type="text" class="form-control" id="send_mail_subject">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Mesajınız</label>

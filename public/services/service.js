@@ -3148,3 +3148,13 @@ async function serviceGetMailableSuppliersByRequestId(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function servicePostSendMailOfferToSupplier(formData) {
+    const data = await fetchDataPost('/admin/mail/sendMailOfferToSupplier', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}

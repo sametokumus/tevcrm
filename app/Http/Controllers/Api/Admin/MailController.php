@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OfferRequestMail;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\EmailLayout;
@@ -10,6 +11,7 @@ use App\Models\Employee;
 use App\Models\Note;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Nette\Schema\ValidationException;
 
 class MailController extends Controller
@@ -92,6 +94,30 @@ class MailController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['layout' => $layout]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function sendMailOfferToSupplier(Request $request, $layout_id){
+        try {
+            $request->validate([
+                'subject' => 'required',
+                'text' => 'required',
+            ]);
+
+            $staff = Admin::query()->where('id', $request->staff_id)->first();
+            foreach ($request->receivers as $receiver_id) {
+                $receiver = Employee::query()->where('id', $receiver_id)->first();
+
+                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $request->subject, $request->text));
+
+            }
+
+            return response(['message' => __('Şablon güncelleme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 }

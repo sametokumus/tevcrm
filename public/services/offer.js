@@ -44,6 +44,11 @@
             e.preventDefault();
             updateOfferProduct();
         });
+
+        $('#send_supplier_mail_form').submit(function (e){
+            e.preventDefault();
+            sendSupplierMail();
+        });
 	});
 
 	$(window).load(async function() {
@@ -692,7 +697,7 @@ async function initSendSupplierMailModal(request_id){
     let suppliers = data.suppliers;
     console.log(data)
 
-    document.getElementById('mail_request_id').value = request_id;
+    document.getElementById('send_mail_request_id').value = request_id;
     document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
 
     let tagSourceArray = [];
@@ -712,6 +717,34 @@ async function setMailLayout(){
 
 
     document.getElementById('send_mail_subject').value = layout.subject;
-    $('#send_mail_subject').value = layout.subject;
     $('#send_mail_text').summernote('code', checkNull(layout.text));
+}
+
+async function sendSupplierMail(){
+    let request_id = document.getElementById('send_mail_request_id').value;
+    let staff_id = document.getElementById('send_mail_staff').value;
+    let subject = document.getElementById('send_mail_subject').value;
+    let text = $('#send_mail_text').summernote('code');
+
+    let receivers = [];
+    let receiver_objs = $('#send_mail_to_address').find(':selected');
+    for (let i = 0; i < receiver_objs.length; i++) {
+        receivers.push(receiver_objs[i].value);
+    }
+
+    let formData = JSON.stringify({
+        "request_id": request_id,
+        "staff_id": staff_id,
+        "subject": subject,
+        "text": text,
+        "receivers": receivers
+    });
+    let returned = await servicePostSendMailOfferToSupplier(formData);
+    if (returned){
+        $("#send_supplier_mail_form").trigger("reset");
+        $("#sendSupplierMailModal").modal('hide');
+    }else{
+        showAlert('Mail gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    }
+
 }
