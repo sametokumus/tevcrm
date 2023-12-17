@@ -3,6 +3,8 @@
 
 	$(document).ready(function() {
         $(":input").inputmask();
+        $("#add_target_target").maskMoney({thousands:'.', decimal:','});
+        $("#update_target_target").maskMoney({thousands:'.', decimal:','});
 
         $('#add_notify_form').submit(function (e){
             e.preventDefault();

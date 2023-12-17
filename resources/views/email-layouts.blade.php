@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/notify-settings.js"></script>
+<script src="services/email-layouts.js"></script>
 ';
 ?>
 
@@ -14,12 +14,12 @@ $extra_js='
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        Bildirim Ekle
+                        E-Posta Şablonu Oluştur
                     </h1>
                 </div>
             </div>
 
-            <form method="post" action="#" id="add_notify_form">
+            <form method="post" action="#" id="add_layout_form">
                 <div class="row">
 
                     <div class="col-md-12">

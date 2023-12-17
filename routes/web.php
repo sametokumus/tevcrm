@@ -63,6 +63,7 @@ Route::get('/pl-invoice-print/{sale_id}', function () { return view('pl-invoice-
 
 
 Route::get('/notify-settings', function () { return view('notify-settings'); });
+Route::get('/email-layouts', function () { return view('email-layouts'); });
 
 Route::get('/settings', function () { return view('settings'); });
 Route::get('/currency-logs', function () { return view('currency-logs'); });

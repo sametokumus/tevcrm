@@ -368,6 +368,13 @@ $extra_js="";
                     </a>
                 </div>
 
+                <div id="nav-email-layouts" class="d-none menu-item @if( Request::segment(1)== 'email-layouts' ) active @endif">
+                    <a href="/email-layouts" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-mailbox"></i></span>
+                        <span class="menu-text">E-Posta Şablonları</span>
+                    </a>
+                </div>
+
 
             </div>
 
