@@ -54,7 +54,7 @@ Route::get('language/changeLanguage/{language_key}',[LanguageController::class,'
 Route::post('login', [AuthController::class, 'login'])->name('admin.login');
 
 Route::get('sale/getLiveCurrencyLog', [SaleController::class, 'getLiveCurrencyLog']);
-Route::get('notify/getCheckSystemNotifies', [SaleController::class, 'getCheckSystemNotifies']);
+Route::get('notify/getCheckSystemNotifies', [NotifyController::class, 'getCheckSystemNotifies']);
 
 
 
