@@ -245,7 +245,8 @@ class NotifyController extends Controller
                     ->first();
                 $min_lead_time = $op->lead_time;
                 $now = Carbon::now();
-                $plusLeadTime = $offer->po_date->addDays($min_lead_time);
+                $poDate = Carbon::parse($offer->po_date);
+                $plusLeadTime = $poDate->addDays($min_lead_time);
                 $plusLeadTimeFormatted = $plusLeadTime->format('Y-m-d');
 
                 $daysDifference = $now->diffInDays($plusLeadTime);
