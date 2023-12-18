@@ -6,14 +6,17 @@ use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminRole;
+use App\Models\Contact;
 use App\Models\Offer;
 use App\Models\OfferProduct;
+use App\Models\OfferRequest;
 use App\Models\Product;
 use App\Models\StaffTarget;
 use App\Models\Status;
 use App\Models\StatusNotify;
 use App\Models\StatusNotifySetting;
 use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -233,7 +236,7 @@ class NotifyController extends Controller
                 ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                 ->whereRaw("(statuses.sequence >= 19 AND statuses.sequence <= 23)")
                 ->where('offers.po_url', '!=', null)
-                ->selectRaw('offers.*, sales.sale_id as sale_id')
+                ->selectRaw('offers.*, sales.sale_id as sale_id, sales.owner_id as owner_id, sales.id as global_id')
                 ->get();
 
             foreach ($offers as $offer){
@@ -243,6 +246,8 @@ class NotifyController extends Controller
                     ->where('lead_time', '!=', null)
                     ->orderBy('lead_time')
                     ->first();
+                $offer_request = OfferRequest::query()->where('request_id', $offer->request_id)->first();
+                $owner = Contact::query()->where('id', $offer->owner_id)->first();
                 $min_lead_time = $op->lead_time;
                 $now = Carbon::now();
                 $poDate = Carbon::parse($offer->po_date);
@@ -251,6 +256,20 @@ class NotifyController extends Controller
 
                 $daysDifference = $now->diffInDays($plusLeadTime);
                 $offer['diff'] = $daysDifference;
+
+                if ($daysDifference == 1){
+                    $notify_id = Uuid::uuid();
+                    $notify = '<b>'.$owner->short_code.'-'.$offer->global_id.'</b> numaralı siparişin tedarik sürecinin tamamlanmasına <b>1 gün</b> kaldı.';
+                    StatusNotify::query()->insert([
+                        'notify_id' => $notify_id,
+                        'setting_id' => 1,
+                        'sale_id' => $offer->sale_id,
+                        'sender_id' => 0,
+                        'receiver_id' => $offer_request->purchasing_staff_id,
+                        'notify' => $notify,
+                        'type'=> 3
+                    ]);
+                }
             }
 
 
