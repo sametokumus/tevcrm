@@ -6,11 +6,14 @@ use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminRole;
+use App\Models\Offer;
+use App\Models\OfferProduct;
 use App\Models\Product;
 use App\Models\StaffTarget;
 use App\Models\Status;
 use App\Models\StatusNotify;
 use App\Models\StatusNotifySetting;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
@@ -216,6 +219,42 @@ class NotifyController extends Controller
                 ->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['notifies' => $notifies]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getCheckSystemNotifies()
+    {
+        try {
+
+            //rule 1
+            $offers = Offer::query()
+                ->leftJoin('sales', 'sales.request_id', '=', 'offers.request_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->whereRaw("(statuses.sequence >= 19 AND statuses.sequence <= 23)")
+                ->where('offers.po_url', '!=', null)
+                ->selectRaw('offers.*, sales.sale_id as sale_id')
+                ->get();
+
+            foreach ($offers as $offer){
+                $op = OfferProduct::query()
+                    ->where('offer_id', $offer->offer_id)
+                    ->where('active', 1)
+                    ->where('lead_time', '!=', null)
+                    ->orderBy('lead_time')
+                    ->first();
+                $min_lead_time = $op->lead_time;
+                $now = Carbon::now();
+                $plusLeadTime = $offer->po_date->addDays($min_lead_time);
+                $plusLeadTimeFormatted = $plusLeadTime->format('Y-m-d');
+
+                $daysDifference = $now->diffInDays($plusLeadTime);
+                $offer['diff'] = $daysDifference;
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
