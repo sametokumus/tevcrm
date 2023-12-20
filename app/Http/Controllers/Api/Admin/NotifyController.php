@@ -490,62 +490,64 @@ class NotifyController extends Controller
                             ->created_at;
 
 
-                        $lead_time = SaleOffer::query()
+                        $sale_offer = SaleOffer::query()
                             ->where('sale_id', $sale->sale_id)
                             ->where('active', 1)
                             ->where('lead_time', '!=', null)
                             ->orderBy('lead_time')
-                            ->first()
-                            ->lead_time;
+                            ->first();
 
-                        $status_confirmed_date = Carbon::parse($status_confirmed_date);
-                        $lastActionPlusLeadTime = $status_confirmed_date->addDays($lead_time);
-                        $last_action_date = $lastActionPlusLeadTime->format('Y-m-d H:i:s');
-                        $now = Carbon::now();
+                        if ($sale_offer) {
+                            $lead_time = $sale_offer->lead_time;
+                            $status_confirmed_date = Carbon::parse($status_confirmed_date);
+                            $lastActionPlusLeadTime = $status_confirmed_date->addDays($lead_time);
+                            $last_action_date = $lastActionPlusLeadTime->format('Y-m-d H:i:s');
+                            $now = Carbon::now();
 
-                        $send_notify = false;
-                        if ($now > $last_action_date){
-                            $daysDifference = $now->diffInDays($last_action_date);
-                            if ($daysDifference == 2) {
-                                $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
-                                $send_notify = true;
-                            }
-                        }else if($now == $last_action_date){
-                            $send_notify = true;
-                            $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
-                        }else{
-
-                            $check_notify = StatusNotify::query()
-                                ->where('sale_id', $sale->sale_id)
-                                ->where('type', 3)
-                                ->where('setting_id', 9)
-                                ->where('receiver_id', $offer_request->authorized_personnel_id)
-                                ->orderByDesc('id')
-                                ->first();
-                            if ($check_notify) {
-                                $last_action_date = Carbon::parse($check_notify->created_at);
+                            $send_notify = false;
+                            if ($now > $last_action_date) {
                                 $daysDifference = $now->diffInDays($last_action_date);
-
                                 if ($daysDifference == 2) {
-                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin <b>teslimat süresi geçti.</b>';
+                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
                                     $send_notify = true;
+                                }
+                            } else if ($now == $last_action_date) {
+                                $send_notify = true;
+                                $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                            } else {
+
+                                $check_notify = StatusNotify::query()
+                                    ->where('sale_id', $sale->sale_id)
+                                    ->where('type', 3)
+                                    ->where('setting_id', 9)
+                                    ->where('receiver_id', $offer_request->authorized_personnel_id)
+                                    ->orderByDesc('id')
+                                    ->first();
+                                if ($check_notify) {
+                                    $last_action_date = Carbon::parse($check_notify->created_at);
+                                    $daysDifference = $now->diffInDays($last_action_date);
+
+                                    if ($daysDifference == 2) {
+                                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin <b>teslimat süresi geçti.</b>';
+                                        $send_notify = true;
+                                    }
+
                                 }
 
                             }
 
-                        }
-
-                        if ($send_notify){
-                            $notify_id = Uuid::uuid();
-                            StatusNotify::query()->insert([
-                                'notify_id' => $notify_id,
-                                'setting_id' => 9,
-                                'sale_id' => $sale->sale_id,
-                                'sender_id' => 0,
-                                'receiver_id' => $offer_request->authorized_personnel_id,
-                                'notify' => $notify,
-                                'type' => 3
-                            ]);
+                            if ($send_notify) {
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 9,
+                                    'sale_id' => $sale->sale_id,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $offer_request->authorized_personnel_id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+                            }
                         }
                     }
                 }
