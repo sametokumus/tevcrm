@@ -554,7 +554,7 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_8_sales' => $option_8_sales]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_9_sales' => $option_9_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
