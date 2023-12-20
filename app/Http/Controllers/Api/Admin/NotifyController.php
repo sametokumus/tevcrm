@@ -465,7 +465,7 @@ class NotifyController extends Controller
             if ($option_9->is_open == 1) {
                 $option_9_sales = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->where('sales.period', 'approved')
+                    ->where('statuses.period', 'approved')
                     ->where('sales.active', 1)
                     ->selectRaw('sales.*, statuses.sequence, statuses.action')
                     ->get();
