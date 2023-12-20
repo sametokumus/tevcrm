@@ -334,7 +334,7 @@ class NotifyController extends Controller
 
 
 
-            $option_7 = SystemNotifyOption::query()->where('id', 3)->first();
+            $option_7 = SystemNotifyOption::query()->where('id', 7)->first();
 
             //option 3
             if ($option_7->is_open == 1) {
