@@ -377,7 +377,7 @@ class NotifyController extends Controller
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
-                            'setting_id' => 3,
+                            'setting_id' => 7,
                             'sale_id' => $sale->sale_id,
                             'sender_id' => 0,
                             'receiver_id' => $offer_request->purchasing_staff_id,
@@ -387,7 +387,7 @@ class NotifyController extends Controller
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
-                            'setting_id' => 3,
+                            'setting_id' => 7,
                             'sale_id' => $sale->sale_id,
                             'sender_id' => 0,
                             'receiver_id' => $offer_request->authorized_personnel_id,
@@ -401,7 +401,7 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_7_sales' => $option_3_sales]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_7_sales' => $option_7_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
