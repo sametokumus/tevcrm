@@ -291,7 +291,7 @@ class NotifyController extends Controller
 
                 foreach ($option_3_sales as $sale){
                     $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
-                    $owner = Contact::query()->where('id', $offer->owner_id)->first();
+                    $owner = Contact::query()->where('id', $sale->owner_id)->first();
                     $status_change_date = StatusHistory::query()
                         ->where('sale_id', $sale->sale_id)
                         ->where('active', 1)
