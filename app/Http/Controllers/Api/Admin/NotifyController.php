@@ -189,7 +189,7 @@ class NotifyController extends Controller
     {
         try {
 
-            StatusNotify::query()->where('receiver_id', $user_id)->update([
+            StatusNotify::query()->where('receiver_id', $user_id)->where('type', 1)->update([
                 'is_read' => 1
             ]);
 
@@ -315,7 +315,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 1) {
+                    if ($daysDifference == 3) {
                         $notify_id = Uuid::uuid();
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>Tedarikçi teklifleri</b> henüz sisteme işlenmedi.';
                         StatusNotify::query()->insert([
@@ -336,7 +336,7 @@ class NotifyController extends Controller
 
             $option_7 = SystemNotifyOption::query()->where('id', 7)->first();
 
-            //option 3
+            //option 7
             if ($option_7->is_open == 1) {
                 $option_7_sales = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
@@ -372,7 +372,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 1) {
+                    if ($daysDifference == 3) {
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteriye henüz <b>Teklif</b> iletilmedi.';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
@@ -401,7 +401,64 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_7_sales' => $option_7_sales]]);
+            $option_8 = SystemNotifyOption::query()->where('id', 8)->first();
+
+            //option 8
+            if ($option_8->is_open == 1) {
+                $option_8_sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('sales.status_id', 6)
+                    ->where('sales.active', 1)
+                    ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                    ->get();
+
+                foreach ($option_8_sales as $sale){
+                    $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
+                    $owner = Contact::query()->where('id', $sale->owner_id)->first();
+                    $status_change_date = StatusHistory::query()
+                        ->where('sale_id', $sale->sale_id)
+                        ->where('status_id', 6)
+                        ->where('active', 1)
+                        ->orderByDesc('id')
+                        ->first()
+                        ->created_at;
+                    $last_action_date = Carbon::parse($status_change_date);
+
+                    $check_notify = StatusNotify::query()
+                        ->where('sale_id', $sale->sale_id)
+                        ->where('type', 3)
+                        ->where('setting_id', 8)
+                        ->where('receiver_id', $offer_request->authorized_personnel_id)
+                        ->orderByDesc('id')
+                        ->first();
+                    if ($check_notify){
+                        $last_action_date = Carbon::parse($check_notify->created_at);
+                    }
+
+                    $now = Carbon::now();
+                    $daysDifference = $now->diffInDays($last_action_date);
+                    $sale['diff'] = $daysDifference;
+
+                    if ($daysDifference == 3) {
+                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteri henüz <b>dönüş yapmadı.</b>';
+                        $notify_id = Uuid::uuid();
+                        StatusNotify::query()->insert([
+                            'notify_id' => $notify_id,
+                            'setting_id' => 8,
+                            'sale_id' => $sale->sale_id,
+                            'sender_id' => 0,
+                            'receiver_id' => $offer_request->authorized_personnel_id,
+                            'notify' => $notify,
+                            'type' => 3
+                        ]);
+                    }
+                }
+
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_8_sales' => $option_8_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
