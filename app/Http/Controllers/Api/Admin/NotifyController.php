@@ -12,6 +12,7 @@ use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleOffer;
 use App\Models\StaffTarget;
 use App\Models\Status;
 use App\Models\StatusHistory;
@@ -439,7 +440,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 3) {
+                    if ($daysDifference == 2) {
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteri henüz <b>dönüş yapmadı.</b>';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
@@ -451,6 +452,101 @@ class NotifyController extends Controller
                             'notify' => $notify,
                             'type' => 3
                         ]);
+                    }
+                }
+
+            }
+
+
+
+            $option_9 = SystemNotifyOption::query()->where('id', 9)->first();
+
+            //option 9
+            if ($option_9->is_open == 1) {
+                $option_9_sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('sales.period', 'approved')
+                    ->where('sales.active', 1)
+                    ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                    ->get();
+
+                foreach ($option_9_sales as $sale){
+                    $check_delivery = StatusHistory::query()
+                        ->where('sale_id', $sale->sale_id)
+                        ->where('status_id', 19)
+                        ->where('active', 1)
+                        ->orderByDesc('id')
+                        ->first();
+
+                    if (!$check_delivery) {
+                        $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
+                        $owner = Contact::query()->where('id', $sale->owner_id)->first();
+                        $status_confirmed_date = StatusHistory::query()
+                            ->where('sale_id', $sale->sale_id)
+                            ->where('status_id', 7)
+                            ->where('active', 1)
+                            ->orderByDesc('id')
+                            ->first()
+                            ->created_at;
+
+
+                        $lead_time = SaleOffer::query()
+                            ->where('sale_id', $sale->sale_id)
+                            ->where('active', 1)
+                            ->where('lead_time', '!=', null)
+                            ->orderBy('lead_time')
+                            ->first()
+                            ->lead_time;
+
+                        $status_confirmed_date = Carbon::parse($status_confirmed_date);
+                        $lastActionPlusLeadTime = $status_confirmed_date->addDays($lead_time);
+                        $last_action_date = $lastActionPlusLeadTime->format('Y-m-d H:i:s');
+                        $now = Carbon::now();
+
+                        $send_notify = false;
+                        if ($now > $last_action_date){
+                            $daysDifference = $now->diffInDays($last_action_date);
+                            if ($daysDifference == 2) {
+                                $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
+                                $send_notify = true;
+                            }
+                        }else if($now == $last_action_date){
+                            $send_notify = true;
+                            $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                        }else{
+
+                            $check_notify = StatusNotify::query()
+                                ->where('sale_id', $sale->sale_id)
+                                ->where('type', 3)
+                                ->where('setting_id', 9)
+                                ->where('receiver_id', $offer_request->authorized_personnel_id)
+                                ->orderByDesc('id')
+                                ->first();
+                            if ($check_notify) {
+                                $last_action_date = Carbon::parse($check_notify->created_at);
+                                $daysDifference = $now->diffInDays($last_action_date);
+
+                                if ($daysDifference == 2) {
+                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin <b>teslimat süresi geçti.</b>';
+                                    $send_notify = true;
+                                }
+
+                            }
+
+                        }
+
+                        if ($send_notify){
+                            $notify_id = Uuid::uuid();
+                            StatusNotify::query()->insert([
+                                'notify_id' => $notify_id,
+                                'setting_id' => 9,
+                                'sale_id' => $sale->sale_id,
+                                'sender_id' => 0,
+                                'receiver_id' => $offer_request->authorized_personnel_id,
+                                'notify' => $notify,
+                                'type' => 3
+                            ]);
+                        }
                     }
                 }
 
