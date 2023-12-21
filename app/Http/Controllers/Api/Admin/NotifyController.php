@@ -512,6 +512,13 @@ class NotifyController extends Controller
                                     $send_notify = true;
                                 }
                                 $sale['diff'] = $daysDifference;
+
+                                if ($daysDifference == 0){
+                                    $send_notify = true;
+                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                    $sale['diff'] = 0;
+                                }
+
                             } else if ($now < $last_action_date) {
 
                                 $check_notify = StatusNotify::query()
@@ -531,11 +538,17 @@ class NotifyController extends Controller
                                     }
                                     $sale['diff'] = $daysDifference;
 
+                                    if ($daysDifference == 0){
+                                        $send_notify = true;
+                                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                        $sale['diff'] = 0;
+                                    }
+
                                 }
                             } else {
                                 $send_notify = true;
                                 $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
-                                $sale['diff'] = 0000;
+                                $sale['diff'] = 0;
                             }
 
                             if ($send_notify) {
