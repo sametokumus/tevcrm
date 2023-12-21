@@ -535,7 +535,7 @@ class NotifyController extends Controller
                             } else {
                                 $send_notify = true;
                                 $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
-                                $sale['diff'] = 0;
+                                $sale['diff'] = 0000;
                             }
 
                             if ($send_notify) {
