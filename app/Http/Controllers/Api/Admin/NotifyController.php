@@ -612,7 +612,7 @@ class NotifyController extends Controller
                                 $daysDifference = $now->diffInDays($last_action_date);
                                 $transaction_payment['diff'] = $daysDifference;
 
-                                if ($daysDifference == 1) {
+                                if ($daysDifference == 2) {
                                     $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>ödenmeyen fatura</b> bulunuyor.';
                                     $notify_id = Uuid::uuid();
                                     StatusNotify::query()->insert([
