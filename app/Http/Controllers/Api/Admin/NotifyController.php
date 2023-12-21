@@ -511,9 +511,11 @@ class NotifyController extends Controller
                                     $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
                                     $send_notify = true;
                                 }
+                                $sale['diff'] = $daysDifference;
                             } else if ($now == $last_action_date) {
                                 $send_notify = true;
                                 $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                $sale['diff'] = 0;
                             } else {
 
                                 $check_notify = StatusNotify::query()
@@ -531,6 +533,7 @@ class NotifyController extends Controller
                                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin <b>teslimat süresi geçti.</b>';
                                         $send_notify = true;
                                     }
+                                    $sale['diff'] = $daysDifference;
 
                                 }
 
