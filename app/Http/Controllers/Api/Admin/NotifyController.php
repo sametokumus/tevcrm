@@ -610,7 +610,7 @@ class NotifyController extends Controller
                                 $last_action_date = Carbon::parse($status_invoice_due_date);
                                 $now = Carbon::now();
                                 $daysDifference = $now->diffInDays($last_action_date);
-                                $sale['diff'] = $daysDifference;
+                                $transaction['diff'] = $daysDifference;
 
                                 if ($daysDifference == 1) {
                                     $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>ödenmeyen fatura</b> bulunuyor.';
@@ -628,7 +628,7 @@ class NotifyController extends Controller
 
                             }
                         }
-
+                        $sale['transactions'] = $transactions;
                     }
                 }
 
