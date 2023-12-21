@@ -13,6 +13,8 @@ use App\Models\OfferRequest;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\SaleTransaction;
+use App\Models\SaleTransactionPayment;
 use App\Models\StaffTarget;
 use App\Models\Status;
 use App\Models\StatusHistory;
@@ -571,7 +573,70 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_9_sales' => $option_9_sales]]);
+            $option_10 = SystemNotifyOption::query()->where('id', 9)->first();
+
+            //option 10
+            if ($option_10->is_open == 1) {
+                $option_10_sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('statuses.period', 'approved')
+                    ->where('sales.active', 1)
+                    ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                    ->get();
+
+                foreach ($option_10_sales as $sale){
+                    $check_invoice_status = StatusHistory::query()
+                        ->where('sale_id', $sale->sale_id)
+                        ->where('status_id', 22)
+                        ->where('active', 1)
+                        ->orderByDesc('id')
+                        ->first();
+
+                    if ($check_invoice_status) {
+
+                        $transactions = SaleTransaction::query()
+                            ->where('sale_id', $sale->sale_id)
+                            ->where('active', 1)
+                            ->get();
+
+                        foreach ($transactions as $transaction) {
+                            $transaction_payment = SaleTransactionPayment::query()->where('transaction_id', $transaction->transaction_id)->where('active', 1)->first();
+                            if ($transaction_payment->payment_status_id == 1) {
+
+                                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
+                                $owner = Contact::query()->where('id', $sale->owner_id)->first();
+                                $status_invoice_due_date = $check_invoice_status->due_date;
+
+                                $last_action_date = Carbon::parse($status_invoice_due_date);
+                                $now = Carbon::now();
+                                $daysDifference = $now->diffInDays($last_action_date);
+                                $sale['diff'] = $daysDifference;
+
+                                if ($daysDifference == 1) {
+                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>ödenmeyen fatura</b> bulunuyor.';
+                                    $notify_id = Uuid::uuid();
+                                    StatusNotify::query()->insert([
+                                        'notify_id' => $notify_id,
+                                        'setting_id' => 10,
+                                        'sale_id' => $sale->sale_id,
+                                        'sender_id' => 0,
+                                        'receiver_id' => $offer_request->authorized_personnel_id,
+                                        'notify' => $notify,
+                                        'type' => 3
+                                    ]);
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_10_sales' => $option_10_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e'=>$queryException->getMessage()]);
         }
