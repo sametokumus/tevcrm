@@ -605,7 +605,7 @@ class NotifyController extends Controller
 
                                 $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
                                 $owner = Contact::query()->where('id', $sale->owner_id)->first();
-                                $status_invoice_due_date = $check_invoice_status->due_date;
+                                $status_invoice_due_date = $transaction->due_date;
 
                                 $last_action_date = Carbon::parse($status_invoice_due_date);
                                 $now = Carbon::now();
