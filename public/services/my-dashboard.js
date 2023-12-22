@@ -829,23 +829,20 @@ async function initStaffCompanies(user_id){
 }
 
 function filterCompanies() {
-    // Get the input value
-    let searchText = document.getElementById('search-company-text').value.toLowerCase();
-    console.log(searchText)
 
-    // Get all company items
+    let searchText = document.getElementById('search-company-text').value.toLowerCase();
+
     let companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
 
-    // Loop through each company item
     for (let i = 0; i < companyItems.length; i++) {
         let companyName = companyItems[i].querySelector('.company-name').textContent.toLowerCase();
-        console.log(companyName)
-        console.log(companyName.includes(searchText))
-        // Check if the company name contains the search text
+
         if (companyName.includes(searchText)) {
-            companyItems[i].style.display = 'flex';  // Show the company item
+            companyItems[i].classList.add('d-flex');
+            companyItems[i].classList.remove('d-none');
         } else {
-            companyItems[i].style.display = 'none';  // Hide the company item
+            companyItems[i].classList.remove('d-flex');
+            companyItems[i].classList.add('d-none');
         }
     }
 }
