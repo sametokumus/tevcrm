@@ -831,6 +831,7 @@ async function initStaffCompanies(user_id){
 function filterCompanies() {
     // Get the input value
     var searchText = document.getElementById('search-company-text').value.toLowerCase();
+    console.log(searchText)
 
     // Get all company items
     var companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
