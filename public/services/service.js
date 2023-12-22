@@ -1046,6 +1046,15 @@ async function serviceGetDeleteCompany(id) {
 	}
 }
 
+async function serviceGetCompaniesByStaffId(id) {
+    const data = await fetchDataGet('/admin/company/getCompaniesByStaffId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 
 async function serviceGetEmployeesByCompanyId(id) {
     const data = await fetchDataGet('/admin/employee/getEmployeesByCompanyId/'+ id, 'application/json');

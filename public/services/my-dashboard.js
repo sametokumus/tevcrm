@@ -40,6 +40,7 @@
         initAdmin(user_id);
         initStaffTargets(user_id);
         initStaffNotifies(user_id);
+        initStaffCompanies(user_id);
         getLastMonthSales(user_id);
         getApprovedMonthlySales(user_id);
         getCompletedMonthlySales(user_id);
@@ -765,9 +766,9 @@ async function initStaffTargets(user_id){
     });
 }
 
-async function initStaffNotifies(user_id){
+async function initStaffCompanies(user_id){
 
-    let data = await serviceGetNotifiesByUserId(user_id);
+    let data = await serviceGetCompaniesByStaffId(user_id);
 
     $('#user-notifies .list-group-item').remove();
 
@@ -782,10 +783,7 @@ async function initStaffNotifies(user_id){
             bg_color = 'bg-theme-100';
         }
 
-        let item = '<div class="list-group-item px-3 '+ bg_color +'" id="dash-notify-'+ notify.notify_id +'">\n' +
-            '           <div class="fs-13px mb-1">'+ notify.notify +'</div>\n' +
-            '           ' + actions + '' +
-            '       </div>\n';
+        let item = '';
         $('#user-notifies').append(item);
     });
 

@@ -372,4 +372,19 @@ class CompanyController extends Controller
             return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
+
+    public function getCompaniesByStaffId($staff_id){
+        try {
+
+            $companies = Company::query()->where('active', 1)->where('user_id', $staff_id)->get();
+
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001', 'message' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
 }

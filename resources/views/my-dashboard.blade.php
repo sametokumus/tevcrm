@@ -34,13 +34,23 @@ $extra_js='
                             <hr class="mt-4 mb-4">
 
                             <div class="fw-bold mb-3 fs-16px">Firmalar</div>
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="img/user/null-profile-picture.png" alt="" width="30" class="rounded-circle">
-                                <div class="flex-fill px-3">
-                                    <div class="fw-bold text-truncate w-100px">Noor Rowe</div>
-                                    <div class="fs-12px text-inverse text-opacity-50">Müşteri</div>
+                            <div id="staff-companies">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="img/user/null-profile-picture.png" alt="" width="30" class="rounded-circle">
+                                    <div class="flex-fill px-3">
+                                        <div class="fw-bold text-truncate w-100px">Noor Rowe</div>
+                                        <div class="fs-12px text-inverse text-opacity-50">Müşteri</div>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>
                                 </div>
-                                <a href="#" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="img/user/null-profile-picture.png" alt="" width="30" class="rounded-circle">
+                                    <div class="flex-fill px-3">
+                                        <div class="fw-bold text-truncate w-100px">Noor Rowe</div>
+                                        <div class="fs-12px text-inverse text-opacity-50">Müşteri</div>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>
+                                </div>
                             </div>
                         </div>
                     </div>
