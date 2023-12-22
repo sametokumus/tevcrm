@@ -33,7 +33,14 @@ $extra_js='
                             <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
                             <hr class="mt-4 mb-4">
 
-                            <div class="fw-bold mb-3 fs-16px">Firmalar</div>
+                            <div class="fw-bold mb-1 fs-16px">Firmalar</div>
+                            <div class="fw-bold mb-3 fs-16px">
+                                <form id="search-company-form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="search-company-text" placeholder="Firma Arama...">
+                                    </div>
+                                </form>
+                            </div>
                             <div id="staff-companies">
 
                             </div>
