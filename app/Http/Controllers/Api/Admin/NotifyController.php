@@ -593,17 +593,6 @@ class NotifyController extends Controller
 
 
                 foreach ($packing_lists as $packing_list){
-                    $transaction = SaleTransaction::query()
-                        ->where('packing_list_id', $packing_list->packing_list_id)
-                        ->where('active', 1)
-                        ->first();
-                    $transaction_payment = SaleTransactionPayment::query()
-                        ->where('transaction_id', $transaction->transaction_id)
-                        ->where('active', 1)
-                        ->first();
-
-
-                    if ($transaction_payment->payment_status_id == 1) {
 
                         $sale = Sale::query()
                             ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
@@ -654,8 +643,6 @@ class NotifyController extends Controller
                         }
 
                         array_push($option_10_sales, $sale);
-
-                    }
 
                 }
 
