@@ -10,6 +10,7 @@ use App\Models\Contact;
 use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
+use App\Models\PackingList;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleOffer;
@@ -577,14 +578,103 @@ class NotifyController extends Controller
 
             //option 10
             if ($option_10->is_open == 1) {
-                $option_10_sales = Sale::query()
+
+                $packing_lists = PackingList::query()
+                    ->select('packing_lists.*', 'sales.status_id', 'statuses.name')
+                    ->leftJoin('sale_transactions', 'sale_transactions.packing_list_id', '=', 'packing_lists.packing_list_id')
+                    ->leftJoin('sales', 'sales.sale_id', '=', 'packing_lists.sale_id')
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('packing_lists.active', 1)
+                    ->whereNull('sale_transactions.packing_list_id')
+                    ->where('statuses.period', 'approved')
+                    ->get();
+
+                $option_10_sales = array();
+
+
+                foreach ($packing_lists as $packing_list){
+                    $transaction = SaleTransaction::query()
+                        ->where('packing_list_id', $packing_list->packing_list_id)
+                        ->where('active', 1)
+                        ->first();
+                    $transaction_payment = SaleTransactionPayment::query()
+                        ->where('transaction_id', $transaction->transaction_id)
+                        ->where('active', 1)
+                        ->first();
+
+
+                    if ($transaction_payment->payment_status_id == 1) {
+
+                        $sale = Sale::query()
+                            ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                            ->where('statuses.period', 'approved')
+                            ->where('sales.active', 1)
+                            ->where('sales.sale_id', $packing_list->sale_id)
+                            ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                            ->first();
+
+                        $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
+                        $owner = Contact::query()->where('id', $sale->owner_id)->first();
+                        $packing_date = $packing_list->created_at;
+
+                        $last_action_date = Carbon::parse($packing_date);
+
+                        $check_notify = StatusNotify::query()
+                            ->where('sale_id', $sale->sale_id)
+                            ->where('type', 3)
+                            ->where('setting_id', 10)
+                            ->orderByDesc('id')
+                            ->first();
+
+                        if ($check_notify){
+                            $last_action_date = Carbon::parse($check_notify->created_at);
+                        }
+
+                        $now = Carbon::now();
+                        $daysDifference = $now->diffInDays($last_action_date);
+                        $sale['diff'] = $daysDifference;
+
+                        if ($daysDifference == 1) {
+                            $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>fatura oluşturmanız gerekiyor.</b>';
+
+                            $account_staffs = Admin::query()->where('admin_role_id', 5)->where('active', 1)->get();
+
+                            foreach ($account_staffs as $staff) {
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 10,
+                                    'sale_id' => $sale->sale_id,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $staff->id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+                            }
+                        }
+
+                        array_push($option_10_sales, $sale);
+
+                    }
+
+                }
+
+            }
+
+
+
+            $option_11 = SystemNotifyOption::query()->where('id', 11)->first();
+
+            //option 11
+            if ($option_11->is_open == 1) {
+                $option_11_sales = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                     ->where('statuses.period', 'approved')
                     ->where('sales.active', 1)
                     ->selectRaw('sales.*, statuses.sequence, statuses.action')
                     ->get();
 
-                foreach ($option_10_sales as $sale){
+                foreach ($option_11_sales as $sale){
                     $check_invoice_status = StatusHistory::query()
                         ->where('sale_id', $sale->sale_id)
                         ->where('status_id', 22)
@@ -608,6 +698,18 @@ class NotifyController extends Controller
                                 $status_invoice_due_date = $transaction_payment->due_date;
 
                                 $last_action_date = Carbon::parse($status_invoice_due_date);
+
+                                $check_notify = StatusNotify::query()
+                                    ->where('sale_id', $sale->sale_id)
+                                    ->where('type', 3)
+                                    ->where('setting_id', 11)
+                                    ->where('receiver_id', $offer_request->authorized_personnel_id)
+                                    ->orderByDesc('id')
+                                    ->first();
+                                if ($check_notify){
+                                    $last_action_date = Carbon::parse($check_notify->created_at);
+                                }
+
                                 $now = Carbon::now();
                                 $daysDifference = $now->diffInDays($last_action_date);
                                 $transaction_payment['diff'] = $daysDifference;
@@ -617,7 +719,7 @@ class NotifyController extends Controller
                                     $notify_id = Uuid::uuid();
                                     StatusNotify::query()->insert([
                                         'notify_id' => $notify_id,
-                                        'setting_id' => 10,
+                                        'setting_id' => 11,
                                         'sale_id' => $sale->sale_id,
                                         'sender_id' => 0,
                                         'receiver_id' => $offer_request->authorized_personnel_id,
