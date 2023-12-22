@@ -594,13 +594,15 @@ class NotifyController extends Controller
 
                 foreach ($packing_lists as $packing_list){
 
-                        $sale = Sale::query()
-                            ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                            ->where('statuses.period', 'approved')
-                            ->where('sales.active', 1)
-                            ->where('sales.sale_id', $packing_list->sale_id)
-                            ->selectRaw('sales.*, statuses.sequence, statuses.action')
-                            ->first();
+                    $sale = Sale::query()
+                        ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                        ->where('statuses.period', 'approved')
+                        ->where('sales.active', 1)
+                        ->where('sales.sale_id', $packing_list->sale_id)
+                        ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                        ->first();
+
+                    if ($sale) {
 
                         $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->first();
                         $owner = Contact::query()->where('id', $sale->owner_id)->first();
@@ -615,7 +617,7 @@ class NotifyController extends Controller
                             ->orderByDesc('id')
                             ->first();
 
-                        if ($check_notify){
+                        if ($check_notify) {
                             $last_action_date = Carbon::parse($check_notify->created_at);
                         }
 
@@ -643,6 +645,8 @@ class NotifyController extends Controller
                         }
 
                         array_push($option_10_sales, $sale);
+
+                    }
 
                 }
 
