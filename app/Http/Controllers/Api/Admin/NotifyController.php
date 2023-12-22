@@ -625,7 +625,7 @@ class NotifyController extends Controller
                         $daysDifference = $now->diffInDays($last_action_date);
                         $sale['diff'] = $daysDifference;
 
-                        if ($daysDifference == 1) {
+                        if ($daysDifference >= 1) {
                             $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>fatura oluşturmanız gerekiyor.</b>';
 
                             $account_staffs = Admin::query()->where('admin_role_id', 5)->where('active', 1)->get();
