@@ -818,7 +818,7 @@ async function initStaffCompanies(user_id){
         let item = '<div class="d-flex align-items-center mb-3">\n' +
             '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
             '                  <div class="flex-fill px-3">\n' +
-            '                      <div class="fw-bold text-truncate w-100px">'+ company.name +'</div>\n' +
+            '                      <div class="fw-bold text-truncate w-100px company-name">'+ company.name +'</div>\n' +
             '                      <div class="fs-12px text-inverse text-opacity-50">'+ type +'</div>\n' +
             '                  </div>\n' +
             '                  <a href="/company-detail/'+ company.id +'" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>\n' +
@@ -830,15 +830,15 @@ async function initStaffCompanies(user_id){
 
 function filterCompanies() {
     // Get the input value
-    var searchText = document.getElementById('search-company-text').value.toLowerCase();
+    let searchText = document.getElementById('search-company-text').value.toLowerCase();
     console.log(searchText)
 
     // Get all company items
-    var companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
+    let companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
 
     // Loop through each company item
-    for (var i = 0; i < companyItems.length; i++) {
-        var companyName = companyItems[i].getElementsByClassName('fw-bold')[0].textContent.toLowerCase();
+    for (let i = 0; i < companyItems.length; i++) {
+        let companyName = companyItems[i].querySelector('.company-name').textContent.toLowerCase();
 
         // Check if the company name contains the search text
         if (companyName.includes(searchText)) {
