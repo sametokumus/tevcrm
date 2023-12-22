@@ -770,21 +770,21 @@ async function initStaffCompanies(user_id){
 
     let data = await serviceGetCompaniesByStaffId(user_id);
 
-    $('#user-notifies .list-group-item').remove();
+    console.log(data)
 
-    $.each(data.notifies, function (i, notify) {
+    $.each(data.companies, function (i, notify) {
 
         let actions = "";
         let bg_color = "";
-        if (notify.is_read == 0){
-            actions = '     <div class="text-right">\n' +
-                '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
-                '           </div>\n';
-            bg_color = 'bg-theme-100';
-        }
+        // if (notify.is_read == 0){
+        //     actions = '     <div class="text-right">\n' +
+        //         '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
+        //         '           </div>\n';
+        //     bg_color = 'bg-theme-100';
+        // }
 
         let item = '';
-        $('#user-notifies').append(item);
+        $('#staff-companies').append(item);
     });
 
 }
