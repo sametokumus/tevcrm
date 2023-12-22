@@ -37,7 +37,7 @@ $extra_js='
                             <div class="fw-bold mb-3 fs-16px">
                                 <form id="search-company-form">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="search-company-text" placeholder="Firma Arama...">
+                                        <input type="text" class="form-control" id="search-company-text" placeholder="Firma Arama..." onchange="filterCompanies()";>
                                     </div>
                                 </form>
                             </div>

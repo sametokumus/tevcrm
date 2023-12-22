@@ -828,6 +828,26 @@ async function initStaffCompanies(user_id){
 
 }
 
+function filterCompanies() {
+    // Get the input value
+    var searchText = document.getElementById('search-company-text').value.toLowerCase();
+
+    // Get all company items
+    var companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
+
+    // Loop through each company item
+    for (var i = 0; i < companyItems.length; i++) {
+        var companyName = companyItems[i].getElementsByClassName('fw-bold')[0].textContent.toLowerCase();
+
+        // Check if the company name contains the search text
+        if (companyName.includes(searchText)) {
+            companyItems[i].style.display = 'flex';  // Show the company item
+        } else {
+            companyItems[i].style.display = 'none';  // Hide the company item
+        }
+    }
+}
+
 async function markAsRead(notify_id){
     markAsReadSingleNotify(notify_id);
     $('#dash-notify-'+notify_id).removeClass('bg-theme-100');
