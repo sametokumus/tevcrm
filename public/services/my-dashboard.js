@@ -766,6 +766,32 @@ async function initStaffTargets(user_id){
     });
 }
 
+async function initStaffNotifies(user_id){
+
+    let data = await serviceGetNotifiesByUserId(user_id);
+
+    $('#user-notifies .list-group-item').remove();
+
+    $.each(data.notifies, function (i, notify) {
+
+        let actions = "";
+        let bg_color = "";
+        if (notify.is_read == 0){
+            actions = '     <div class="text-right">\n' +
+                '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
+                '           </div>\n';
+            bg_color = 'bg-theme-100';
+        }
+
+        let item = '<div class="list-group-item px-3 '+ bg_color +'" id="dash-notify-'+ notify.notify_id +'">\n' +
+            '           <div class="fs-13px mb-1">'+ notify.notify +'</div>\n' +
+            '           ' + actions + '' +
+            '       </div>\n';
+        $('#user-notifies').append(item);
+    });
+
+}
+
 async function initStaffCompanies(user_id){
 
     let data = await serviceGetCompaniesByStaffId(user_id);
