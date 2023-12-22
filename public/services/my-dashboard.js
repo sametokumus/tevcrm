@@ -840,6 +840,7 @@ function filterCompanies() {
     for (let i = 0; i < companyItems.length; i++) {
         let companyName = companyItems[i].querySelector('.company-name').textContent.toLowerCase();
         console.log(companyName)
+        console.log(companyName.includes(searchText))
         // Check if the company name contains the search text
         if (companyName.includes(searchText)) {
             companyItems[i].style.display = 'flex';  // Show the company item
