@@ -815,7 +815,7 @@ async function initStaffCompanies(user_id){
         }
         type = type.slice(0, -1);
 
-        let item = '<div class="d-flex align-items-center mb-3">\n' +
+        let item = '<div class="company-info d-flex align-items-center mb-3">\n' +
             '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
             '                  <div class="flex-fill px-3">\n' +
             '                      <div class="fw-bold text-truncate w-100px company-name">'+ company.name +'</div>\n' +
@@ -832,7 +832,7 @@ function filterCompanies() {
 
     let searchText = document.getElementById('search-company-text').value.toLowerCase();
 
-    let companyItems = document.getElementById('staff-companies').getElementsByClassName('d-flex');
+    let companyItems = document.getElementById('staff-companies').getElementsByClassName('company-info');
 
     for (let i = 0; i < companyItems.length; i++) {
         let companyName = companyItems[i].querySelector('.company-name').textContent.toLowerCase();
