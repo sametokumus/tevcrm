@@ -798,18 +798,31 @@ async function initStaffCompanies(user_id){
 
     console.log(data)
 
-    $.each(data.companies, function (i, notify) {
+    $.each(data.companies, function (i, company) {
+        let logo = 'img/user/null-profile-picture.png';
+        if (company.logo != null){
+            logo = company.logo;
+        }
+        let type = '';
+        if (company.is_supplier == 1){
+            type += 'Tedarikçi ,';
+        }
+        if (company.is_customer == 1){
+            type += 'Müşteri ,';
+        }
+        if (company.is_potential_customer == 1){
+            type += 'Potansiyel Müşteri ,';
+        }
+        type = type.slice(0, -1);
 
-        let actions = "";
-        let bg_color = "";
-        // if (notify.is_read == 0){
-        //     actions = '     <div class="text-right">\n' +
-        //         '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
-        //         '           </div>\n';
-        //     bg_color = 'bg-theme-100';
-        // }
-
-        let item = '';
+        let item = '<div class="d-flex align-items-center mb-3">\n' +
+            '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
+            '                  <div class="flex-fill px-3">\n' +
+            '                      <div class="fw-bold text-truncate w-100px">'+ company.name +'</div>\n' +
+            '                      <div class="fs-12px text-inverse text-opacity-50">'+ type +'</div>\n' +
+            '                  </div>\n' +
+            '                  <a href="/company-detail/'+ company.id +'" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>\n' +
+            '              </div>\n';
         $('#staff-companies').append(item);
     });
 
