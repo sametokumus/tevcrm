@@ -861,11 +861,10 @@ class StaffController extends Controller
                 return $b['staff_rate'] <=> $a['staff_rate'];
             });
 
-            $index = $staffs->search(function ($item) use ($staff_id) {
-                return $item['staff']['id'] === $staff_id;
-            });
+            $index = array_search($staff_id, array_column($staffs, 'staff', 'id'));
 
-            $staff = $staffs->get($index);
+
+            $staff = $staffs[$index];
 
 
             return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staff' => $staff, 'position' => $index]]);
