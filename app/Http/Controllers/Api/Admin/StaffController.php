@@ -862,15 +862,13 @@ class StaffController extends Controller
             });
 
             $position = 0;
+            $staff;
             foreach ($staffs as $index => $item) {
-                if (isset($item['staff']['id']) && $item['staff']['id'] === $staff_id) {
+                if ($item->staff->id == $staff_id) {
                     $position = $index;
+                    $staff = $item;
                 }
             }
-
-
-            $staff = $staffs[$position];
-
 
             return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staff' => $staff, 'position' => $position, 'staffs' => $staffs]]);
         } catch (ValidationException $validationException) {
