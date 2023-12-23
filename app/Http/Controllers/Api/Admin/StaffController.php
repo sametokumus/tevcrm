@@ -861,13 +861,18 @@ class StaffController extends Controller
                 return $b['staff_rate'] <=> $a['staff_rate'];
             });
 
-            $index = array_search($staff_id, array_column($staffs, 'staff', 'id'));
+            $position = 0;
+            foreach ($staffs as $index => $item) {
+                if (isset($item['staff']['id']) && $item['staff']['id'] === $staff_id) {
+                    $position = $index;
+                }
+            }
 
 
-            $staff = $staffs[$index];
+            $staff = $staffs[$position];
 
 
-            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staff' => $staff, 'position' => $index, 'staffs' => $staffs]]);
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staff' => $staff, 'position' => $position, 'staffs' => $staffs]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
