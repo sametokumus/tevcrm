@@ -868,7 +868,7 @@ async function initStaffStats(user_id){
 
     let data2 = await serviceGetStaffSituation(user_id);
 
-    console.log(data)
+    console.log(data2)
     $('#stat-6').append(data.position + '. (' + data2.staff_rate + ')');
 
 }
