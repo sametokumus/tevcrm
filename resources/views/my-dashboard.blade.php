@@ -52,32 +52,38 @@ $extra_js='
                         <ul class="profile-tab nav nav-tabs nav-tabs-v2" role="tablist">
                             <li class="nav-item">
                                 <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Posts</div>
-                                    <div class="nav-value">382</div>
+                                    <div class="nav-field">Toplam Müşteri</div>
+                                    <div class="nav-value" id="stat-1"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Followers</div>
-                                    <div class="nav-value">1.3m</div>
+                                    <div class="nav-field">Eklenen Müşteri</div>
+                                    <div class="nav-value" id="stat-2"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Photos</div>
-                                    <div class="nav-value">1,397</div>
+                                    <div class="nav-field">Yapılan Görüşme</div>
+                                    <div class="nav-value" id="stat-3"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Videos</div>
-                                    <div class="nav-value">120</div>
+                                    <div class="nav-field">Toplam Teklif</div>
+                                    <div class="nav-value" id="stat-4"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Following</div>
-                                    <div class="nav-value">2,592</div>
+                                    <div class="nav-field">Toplam Sipariş</div>
+                                    <div class="nav-value" id="stat-5"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="pointer-events:none;">
+                                    <div class="nav-field">Sıralama ve Puan</div>
+                                    <div class="nav-value" id="stat-6"></div>
                                 </a>
                             </li>
                         </ul>
@@ -440,7 +446,7 @@ $extra_js='
 
                                             </div>
                                             <div class="list-group list-group-flush">
-                                                <a href="#" class="list-group-item list-group-action text-center">
+                                                <a href="#" class="d-none list-group-item list-group-action text-center">
                                                     Show more
                                                 </a>
                                             </div>

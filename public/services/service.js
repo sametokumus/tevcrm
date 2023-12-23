@@ -2876,6 +2876,24 @@ async function serviceGetGenerateSaleSummaryPDF(sale_id) {
 }
 
 
+async function serviceGetStaffStatistics(id) {
+    const data = await fetchDataGet('/admin/staff/getStaffStatistics/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetStaffSituation(id) {
+    const data = await fetchDataGet('/admin/staff/getStaffSituation/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetStaffTargetTypes() {
     const data = await fetchDataGet('/admin/staff/getStaffTargetTypes', 'application/json');
     if (data.status == "success") {

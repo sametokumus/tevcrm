@@ -41,6 +41,7 @@
         initStaffTargets(user_id);
         initStaffNotifies(user_id);
         initStaffCompanies(user_id);
+        initStaffStats(user_id);
         getLastMonthSales(user_id);
         getApprovedMonthlySales(user_id);
         getCompletedMonthlySales(user_id);
@@ -851,4 +852,23 @@ async function markAsRead(notify_id){
     markAsReadSingleNotify(notify_id);
     $('#dash-notify-'+notify_id).removeClass('bg-theme-100');
     $('#dash-notify-'+notify_id+ ' div.text-right').remove();
+}
+
+async function initStaffStats(user_id){
+
+    let data = await serviceGetStaffStatistics(user_id);
+
+    console.log(data)
+
+    $('#stat-1').append(data.total_company_count);
+    $('#stat-2').append(data.add_this_month_company);
+    $('#stat-3').append(data.activity_this_month);
+    $('#stat-4').append(data.request_this_month);
+    $('#stat-5').append(data.sale_this_month);
+
+    let data2 = await serviceGetStaffSituation(user_id);
+
+    console.log(data)
+    $('#stat-6').append(data.position + '. (' + data2.staff_rate + ')');
+
 }

@@ -428,6 +428,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     Route::get('staff/getBestStaff', [StaffController::class, 'getBestStaff']);
 
+    Route::get('staff/getStaffStatistics/{staff_id}', [StaffController::class, 'getStaffStatistics']);
+    Route::get('staff/getStaffSituation/{staff_id}', [StaffController::class, 'getStaffSituation']);
+
 
     //Notify
     Route::post('notify/addNotifySetting', [NotifyController::class, 'addNotifySetting']);
