@@ -173,8 +173,13 @@ async function handleSendMessageEvent(data) {
         showNotify(id, title, message_text);
 
         let chatCount = localStorage.getItem('chatCount');
-        console.log(chatCount);
-        // if ()
+        if (chatCount == null){
+            localStorage.setItem('chatCount', 1);
+        }else{
+            chatCount = parseInt(chatCount) + 1;
+            localStorage.setItem('chatCount', chatCount);
+        }
+        console.log(chatCount)
     }
 
     last_user = message.sender_id;
