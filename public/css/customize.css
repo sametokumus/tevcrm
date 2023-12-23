@@ -781,3 +781,7 @@ table.dataTable{
     overflow: hidden;
     overflow-y: auto;
 }
+
+.widget-chat .widget-chat-item{
+    align-items: flex-start;
+}

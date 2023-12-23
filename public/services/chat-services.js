@@ -32,7 +32,7 @@ async function getPublicChats(){
     $.each(messages, function(i, message){
 
         let reply = '';
-        let user_image = '<div class="widget-chat-media"><img src="img/user/null-profile-picture.png" alt="" /></div>\n';
+        let user_image = '<div class="widget-chat-media"><img src="'+ message.sender.profile_photo +'" alt="" /></div>\n';
         if (message.sender_id == user_id){
             reply = 'reply';
             user_image = '';
@@ -131,12 +131,15 @@ async function handleSendMessageEvent(data) {
     let message_panel = '';
     let user_id = await localStorage.getItem('userId');
     let reply = '';
+    let user_image = '<div class="widget-chat-media"><img src="'+ sender.profile_photo +'" alt="" /></div>\n';
     if (message.sender_id == user_id){
         reply = 'reply';
+        user_image = '';
     }
 
     message_panel += '';
     message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
+        '                   '+ user_image +'\n' +
         '                   <div class="widget-chat-content">\n';
 
     if (message.sender_id != user_id && last_user != message.sender_id){
