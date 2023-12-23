@@ -806,23 +806,24 @@ async function initStaffCompanies(user_id){
         }
         let type = '';
         if (company.is_supplier == 1){
-            type += 'Tedarikçi ,';
+            type += ' Tedarikçi,';
         }
         if (company.is_customer == 1){
-            type += 'Müşteri ,';
+            type += ' Müşteri,';
         }
         if (company.is_potential_customer == 1){
-            type += 'Potansiyel Müşteri ,';
+            type += ' Potansiyel Müşteri,';
         }
         type = type.slice(0, -1);
 
         let item = '<div class="company-info d-flex align-items-center mb-3">\n' +
+            '                  <a href="/company-detail/'+ company.id +'" class="btn btn-sm btn-outline-theme fs-11px">\n' +
             '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
             '                  <div class="flex-fill px-3">\n' +
             '                      <div class="fw-bold text-truncate w-100px company-name">'+ company.name +'</div>\n' +
             '                      <div class="fs-12px text-inverse text-opacity-50">'+ type +'</div>\n' +
             '                  </div>\n' +
-            '                  <a href="/company-detail/'+ company.id +'" class="btn btn-sm btn-outline-theme fs-11px">İncele</a>\n' +
+            '                  </a>\n' +
             '              </div>\n';
         $('#staff-companies').append(item);
     });
