@@ -33,6 +33,9 @@ async function getPublicChats(){
 
         let reply = '';
         let user_image = '<div class="widget-chat-media" style="background-image: url(\''+ message.sender.profile_photo +'\')"></div>\n';
+        if (message.sender.profile_photo == null){
+            user_image = '<div class="widget-chat-media" style="background-image: url(\'img/user/null-profile-picture.png\')"></div>\n';
+        }
         if (message.sender_id == user_id){
             reply = 'reply';
             user_image = '';
@@ -132,6 +135,9 @@ async function handleSendMessageEvent(data) {
     let user_id = await localStorage.getItem('userId');
     let reply = '';
     let user_image = '<div class="widget-chat-media" style="background-image: url(\''+ sender.profile_photo +'\')"></div>\n';
+    if (sender.profile_photo == null){
+        user_image = '<div class="widget-chat-media" style="background-image: url(\'img/user/null-profile-picture.png\')"></div>\n';
+    }
     if (message.sender_id == user_id){
         reply = 'reply';
         user_image = '';
