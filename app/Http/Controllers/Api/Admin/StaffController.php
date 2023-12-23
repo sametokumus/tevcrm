@@ -541,11 +541,13 @@ class StaffController extends Controller
                 ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
                 ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
                 ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
                 ->join('status_histories AS sh', function ($join) {
                     $join->on('s.sale_id', '=', 'sh.sale_id')
                         ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                 })
                 ->where('s.active', '=', 1)
+                ->where('offer_requests.authorized_personnel_id', '=', $staff_id)
                 ->whereMonth('sh.created_at', $now->month)
                 ->whereYear('sh.created_at', $now->year)
                 ->count();
