@@ -10,9 +10,9 @@
 
         $('.app-theme-toggle-btn').click(function (){
             if ($('.app-theme-panel').hasClass('active')){
-                console.log('t1')
-            }else{
-                console.log('t2')
+                localStorage.setItem('chatCount', 0);
+                $('.app-theme-toggle-btn .badge').addClass('d-none');
+                $('.app-theme-toggle-btn .badge').text('');
             }
         });
 
@@ -32,8 +32,14 @@ let last_user = '';
 async function getPublicChats(){
     let user_id = await localStorage.getItem('userId');
 
+    let chatCount = localStorage.getItem('chatCount');
+    if (chatCount != null && chatCount != 0) {
+        $('.app-theme-toggle-btn .badge').removeClass('d-none');
+        $('.app-theme-toggle-btn .badge').text(chatCount);
+    }
 
-    let data = await serviceGetCompanyChatMessages(chatPage);
+
+        let data = await serviceGetCompanyChatMessages(chatPage);
     let messages = data.messages.data.reverse();
     let message_panel = '';
 
