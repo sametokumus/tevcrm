@@ -815,3 +815,15 @@ table.dataTable{
     overflow: hidden;
     overflow-y: auto;
 }
+.app-header .menu .menu-item .menu-link .badge {
+    font-size: 12px;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 100%;
+    font-weight: 600;
+}
