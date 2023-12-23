@@ -864,7 +864,7 @@ class StaffController extends Controller
             $position = 0;
             $staff;
             foreach ($staffs as $index => $item) {
-                if ($item->staff->id == $staff_id) {
+                if ($item['staff']['id'] == $staff_id) {
                     $position = $index;
                     $staff = $item;
                 }
