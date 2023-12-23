@@ -32,8 +32,7 @@
 	$(window).on('load',async function() {
 		// checkLogin();
         $('#header_user_name').text(localStorage.getItem('userName'));
-        console.log(localStorage.getItem('userPhoto'))
-        if (localStorage.getItem('userPhoto') != null) {
+        if (localStorage.getItem('userPhoto') != 'null') {
             document.getElementById('header_user_image').src = localStorage.getItem('userPhoto');
         }
 
