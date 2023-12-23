@@ -646,7 +646,12 @@ $extra_js='
                             <tr>
                                 <th>#</th>
                                 <th>Müşteri</th>
-                                <th>Puan</th>
+                                <th>İkili ilişki katsayısı (%25)</th>
+                                <th>Sipariş/Teklif (Adet) (%22)</th>
+                                <th>Karlılık (%20)</th>
+                                <th>Toplam İş Hacmi (Tutar) 3 Ay (%18)</th>
+                                <th>Ödeme Yöntemi (%15)</th>
+                                <th>Genel Puan</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -691,7 +696,17 @@ $extra_js='
                             <tr>
                                 <th>#</th>
                                 <th>Ad Soyad</th>
-                                <th>Puan</th>
+                                <th>Sipariş/Teklif (Adet) (%17)</th>
+                                <th>Toplam İş Hacmi (Tutar) 3 Ay (%15)</th>
+                                <th>Karlılık (%14)</th>
+                                <th>Ödeme Yöntemi (%12)</th>
+                                <th>Yönetici Değerlendirmesi (%11)</th>
+                                <th>Aynı Müşteriye Devamlı Satış (%9)</th>
+                                <th>Yapılan Görüşme Sayısı Yüz Yüze (%7)</th>
+                                <th>İhracat Satışı (%6)</th>
+                                <th>İlk Satış (%5)</th>
+                                <th>Sisteme Katılan Müşteri Sayısı (%4)</th>
+                                <th>Genel Puan</th>
                             </tr>
                             </thead>
                             <tbody>

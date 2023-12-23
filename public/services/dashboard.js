@@ -823,7 +823,12 @@ async function getBestCustomers(){
         let item = '<tr>\n' +
             '           <td>'+ (i+1) +'</td>\n' +
             '           <td>'+ company.company.name.substring(0, 30) +'...</td>\n' +
-            '           <td>'+ company.company_rate +'</td>\n' +
+            '           <td>'+ company.c1 +'</td>\n' +
+            '           <td>'+ company.c2 +'</td>\n' +
+            '           <td>'+ company.c3 +'</td>\n' +
+            '           <td>'+ company.c4 +'</td>\n' +
+            '           <td>'+ company.c5 +'</td>\n' +
+            '           <td><b>'+ company.company_rate +'</b></td>\n' +
             '       </tr>';
         $('#best-customers-table tbody').append(item);
     });
@@ -844,7 +849,17 @@ async function getBestStaffs(){
         let item = '<tr>\n' +
             '           <td>'+ (i+1) +'</td>\n' +
             '           <td>'+ staff.staff.name +' '+ staff.staff.surname +'</td>\n' +
-            '           <td>'+ staff.staff_rate +'</td>\n' +
+            '           <td>'+ staff.c1 +'</td>\n' +
+            '           <td>'+ staff.c2 +'</td>\n' +
+            '           <td>'+ staff.c3 +'</td>\n' +
+            '           <td>'+ staff.c4 +'</td>\n' +
+            '           <td>'+ staff.c5 +'</td>\n' +
+            '           <td>'+ staff.c6 +'</td>\n' +
+            '           <td>'+ staff.c7 +'</td>\n' +
+            '           <td>'+ staff.c8 +'</td>\n' +
+            '           <td>'+ staff.c9 +'</td>\n' +
+            '           <td>'+ staff.c10 +'</td>\n' +
+            '           <td><b>'+ staff.staff_rate +'</b></td>\n' +
             '       </tr>';
         $('#best-staffs-table tbody').append(item);
     });
