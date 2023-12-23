@@ -809,3 +809,9 @@ table.dataTable{
     border-radius: 100%;
     margin-top: 15px;
 }
+
+#staff-companies{
+    max-height: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+}
