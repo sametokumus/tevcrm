@@ -99,7 +99,10 @@ $extra_js="";
             <div class="menu-item dropdown dropdown-mobile-full">
                 <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
                     <div class="menu-link">
-                        <div class="menu-icon"><i class="bi bi-people nav-icon"></i></div>
+{{--                        <div class="menu-icon"><i class="bi bi-people nav-icon"></i></div>--}}
+                        <div class="menu-img">
+                            <img src="img/user/null-profile-picture.png" id="header_user_image" alt="Profile" height="60">
+                        </div>
                         <div class="menu-text d-sm-block d-none mx-2" id="header_user_name"></div>
                     </div>
                 </a>

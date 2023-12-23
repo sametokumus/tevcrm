@@ -32,6 +32,7 @@
 	$(window).on('load',async function() {
 		// checkLogin();
         $('#header_user_name').text(localStorage.getItem('userName'));
+        document.getElementById('header_user_image').src = localStorage.getItem('userPhoto');
 
         createNavbar();
 	});
