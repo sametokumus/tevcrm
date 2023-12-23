@@ -181,9 +181,9 @@ async function handleSendMessageEvent(data) {
         localStorage.setItem('chatCount', chatCount);
         if ($('.app-theme-toggle-btn .badge').hasClass('d-none') == true){
             $('.app-theme-toggle-btn .badge').removeClass('d-none');
-            $('.app-theme-toggle-btn .badge').textContent(chatCount);
+            $('.app-theme-toggle-btn .badge').text(chatCount);
         }else{
-            $('.app-theme-toggle-btn .badge').textContent(chatCount);
+            $('.app-theme-toggle-btn .badge').text(chatCount);
         }
     }
 
