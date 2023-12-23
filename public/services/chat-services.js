@@ -8,6 +8,14 @@
             sendPublicChatMessage();
         });
 
+        $('.app-theme-toggle-btn').click(function (){
+            if ($('.app-theme-panel').hasClass('active')){
+                console.log('t1')
+            }else{
+                console.log('t2')
+            }
+        });
+
     });
 
 
@@ -170,7 +178,7 @@ async function handleSendMessageEvent(data) {
         let title = sender.name + ' ' + sender.surname;
         let message_text = message.message;
         let id = message.message_id;
-        showNotify(id, title, message_text);
+        showChatNotify(id, title, message_text);
 
         let chatCount = localStorage.getItem('chatCount');
         if (chatCount == null){
@@ -192,3 +200,23 @@ async function handleSendMessageEvent(data) {
 }
 
 /*Listen Chat Message*/
+function showChatNotify(notify_id, title, message) {
+    let notify = '  <div id="notify-'+ notify_id +'" class="toast" data-autohide="false">\n' +
+        '               <div class="toast-header">\n' +
+        '                   <i class="far fa-bell text-muted me-2"></i>\n' +
+        '                   <strong class="me-auto">'+ title +'</strong>\n' +
+        // '                   <small>11 mins ago</small>\n' +
+        '                   <button type="button" class="btn-close" data-bs-dismiss="toast"></button>\n' +
+        '               </div>\n' +
+        '               <div class="toast-body">\n' +
+        '                   '+ message +'\n' +
+        '               </div>\n' +
+        '           </div>\n';
+    $('.toasts-container').append(notify);
+
+    let $notifyElement = $('#notify-'+ notify_id);
+    $notifyElement.toast({
+        autohide: true,
+        delay: 3000
+    }).toast('show');
+}
