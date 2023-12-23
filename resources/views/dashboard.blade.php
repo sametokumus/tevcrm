@@ -622,369 +622,363 @@ $extra_js='
 
                 </div>
 
-                <div class="grid-item">
+            </div>
 
-                    <!-- en iyi müşteri -->
-                    <div class="card mb-3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
 
-                        <div class="card-body">
+            <!-- en iyi müşteri -->
+            <div class="card mb-3">
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EN İYİ MÜŞTERİ</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN İYİ MÜŞTERİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="best-customers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Müşteri</th>
+                                <th>Puan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="best-customers-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Müşteri</th>
-                                        <th>Puan</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item">
 
-                    <!-- en iyi personel -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EN İYİ PERSONEL</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-12">
+
+            <!-- en iyi personel -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN İYİ PERSONEL</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="best-staffs-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Puan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="best-staffs-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Ad Soyad</th>
-                                        <th>Puan</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item">
 
-                    <!-- ekip satışları -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-4">
+
+            <!-- ekip satışları -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="admins-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Satış Adedi</th>
+                                <th>Tutar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="admins-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Ad Soyad</th>
-                                        <th>Satış Adedi</th>
-                                        <th>Tutar</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item">
 
-                    <!-- ekip satışları -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EN YÜKSEK RAKAMLI SATIŞLAR (Son 90 Gün)</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-4">
+
+            <!-- en yüksek rakamlı satışlar -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN YÜKSEK RAKAMLI SATIŞLAR (Son 90 Gün)</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="best-sales-by-price-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Satış</th>
+                                <th>Tutar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="best-sales-by-price-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Satış</th>
-                                        <th>Tutar</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item">
 
-                    <!-- en karlı satışlar 90 gün -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EN KARLI SATIŞLAR (Son 90 Gün)</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-4">
+
+            <!-- en karlı satışlar 90 gün -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN KARLI SATIŞLAR (Son 90 Gün)</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="best-sales-by-profit-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Satış</th>
+                                <th>Kar Oranı</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="best-sales-by-profit-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Satış</th>
-                                        <th>Kar Oranı</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item grid-item--width2">
 
-                    <!-- siparişi olmayan müşteriler (zamansal) -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">UZUN SÜREDİR SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-4">
+
+            <!-- siparişi olmayan müşteriler (zamansal) -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">UZUN SÜREDİR SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th style="max-width: 30px;">#</th>
+                                <th>Müşteri</th>
+                                <th class="text-nowrap">Son Sipariş</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="customer-not-sale-timely-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th style="max-width: 30px;">#</th>
-                                        <th>Müşteri</th>
-                                        <th class="text-nowrap">Son Sipariş</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item grid-item--width2">
 
-                    <!-- siparişi olmayan müşteriler -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">HİÇ SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+        </div>
+        <div class="col-4">
+
+            <!-- siparişi olmayan müşteriler -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">HİÇ SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="customer-not-sale-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th style="max-width: 30px;">#</th>
+                                <th>Müşteri</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table id="customer-not-sale-table" class="table table-striped table-fixed table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th style="max-width: 30px;">#</th>
-                                        <th>Müşteri</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
 
-                <div class="grid-item grid-item--width2">
 
-                    <!-- en çok satılan ürünler -->
-                    <div class="card mb-3">
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
 
-                        <div class="card-body">
+            </div>
 
-                            <div class="d-flex fw-bold small mb-3">
-                                <span class="flex-grow-1">EN ÇOK SATILAN ÜRÜNLER</span>
-                                <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                            </div>
+        </div>
+        <div class="col-4">
 
-                            <div class="table-responsive">
-                                <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Ürün Adı</th>
-                                        <th>Adet</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <div class="spinners">
-                                        <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                        <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
-                                    </div>
-                                    </tbody>
-                                </table>
-                            </div>
+            <!-- en çok satılan ürünler -->
+            <div class="card mb-3">
 
-                        </div>
+                <div class="card-body">
 
-
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">EN ÇOK SATILAN ÜRÜNLER</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
+                    <div class="table-responsive">
+                        <table id="top-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Ürün Adı</th>
+                                <th>Adet</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
                 </div>
 
             </div>
