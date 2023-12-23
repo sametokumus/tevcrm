@@ -741,6 +741,8 @@ class NotifyController extends Controller
                     ->where('companies.is_customer', 1)
                     ->get();
 
+                $option_12_companies = array();
+
                 foreach ($companies as $company){
 
                     $offer_request = OfferRequest::query()->where('company_id', $company->id)->orderByDesc('id')->first();
@@ -778,6 +780,8 @@ class NotifyController extends Controller
                                     'notify' => $notify,
                                     'type' => 3
                                 ]);
+                                $company['days_difference'] = $daysDifference;
+                                array_push($option_12_companies, $company);
                             }
 
                         }
@@ -811,6 +815,8 @@ class NotifyController extends Controller
                                         'notify' => $notify,
                                         'type' => 3
                                     ]);
+                                    $company['days_difference'] = $daysDifference;
+                                    array_push($option_12_companies, $company);
                                 }
                             }else{
 
@@ -825,6 +831,8 @@ class NotifyController extends Controller
                                     'notify' => $notify,
                                     'type' => 3
                                 ]);
+                                $company['days_difference'] = 'nothing';
+                                array_push($option_12_companies, $company);
 
                             }
 
@@ -837,7 +845,7 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_12_companies' => $option_12_companies]]);
 //            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_12_sales' => $option_12_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e'=>$queryException->getMessage()]);
