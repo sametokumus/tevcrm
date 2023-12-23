@@ -32,8 +32,10 @@ async function getPublicChats(){
     $.each(messages, function(i, message){
 
         let reply = '';
+        let user_image = '<div class="widget-chat-media"><img src="img/user/null-profile-picture.png" alt="" /></div>\n';
         if (message.sender_id == user_id){
             reply = 'reply';
+            user_image = '';
         }
 
         message_panel += '';
@@ -51,11 +53,11 @@ async function getPublicChats(){
                 message_panel += '      </div>\n' +
                     '               </div>\n';
                 message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
-                    '                   <div class="widget-chat-media"><img src="img/user/null-profile-picture.png" alt="" /></div>\n' +
+                    '                   '+ user_image +'\n' +
                     '                   <div class="widget-chat-content">\n';
             }else{
                 message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
-                    '                   <div class="widget-chat-media"><img src="img/user/null-profile-picture.png" alt="" /></div>\n' +
+                    '                   '+ user_image +'\n' +
                     '                   <div class="widget-chat-content">\n';
             }
 
