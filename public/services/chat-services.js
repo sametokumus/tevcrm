@@ -171,6 +171,10 @@ async function handleSendMessageEvent(data) {
         let message_text = message.message;
         let id = message.message_id;
         showNotify(id, title, message_text);
+
+        let chatCount = localStorage.getItem('chatCount');
+        console.log(chatCount);
+        // if ()
     }
 
     last_user = message.sender_id;
