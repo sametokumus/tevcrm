@@ -827,3 +827,6 @@ table.dataTable{
     border-radius: 100%;
     font-weight: 600;
 }
+.app-header .menu .menu-item .menu-link .menu-img{
+    margin-right: 0;
+}

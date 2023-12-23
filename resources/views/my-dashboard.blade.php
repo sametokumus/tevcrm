@@ -109,7 +109,6 @@ $extra_js='
                                                             <thead>
                                                             <tr>
                                                                 <th class="border-bottom-0" data-priority="1">N#</th>
-                                                                <th class="border-bottom-0">Personel</th>
                                                                 <th class="border-bottom-0">Tür</th>
                                                                 <th class="border-bottom-0">Hedef</th>
                                                                 <th class="border-bottom-0">Ay</th>

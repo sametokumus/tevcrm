@@ -743,12 +743,17 @@ async function initStaffTargets(user_id){
 
         let item = '<tr>\n' +
             '           <th>'+ target.id +'</th>\n' +
-            '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
+            // '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
             '           <td>'+ target.type_name +'</td>\n' +
             '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
             '           <td>'+ target.month_name +'</td>\n' +
             '           <td>'+ target.year +'</td>\n' +
-            '           <td>'+ target.status.rate +'%</td>\n' +
+            // '           <td>'+ target.status.rate +'%</td>\n' +
+            '           <td>\n' +
+            '               <div class="progress">\n' +
+            '                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ target.status.rate +'%">'+ target.status.rate +'%</div>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
             '       </tr>';
         $('#targets-datatable tbody').append(item);
     });
