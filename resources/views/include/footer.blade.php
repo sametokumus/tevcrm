@@ -28,7 +28,7 @@
     <div class="app-theme-panel-container">
         <a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn">
             <i class="bi bi-envelope"></i>
-            <span class="badge bg-success">5</span>
+            <span class="badge bg-danger d-none"></span>
         </a>
         <div class="app-theme-panel-content">
 

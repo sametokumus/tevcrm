@@ -179,6 +179,12 @@ async function handleSendMessageEvent(data) {
             chatCount = parseInt(chatCount) + 1;
         }
         localStorage.setItem('chatCount', chatCount);
+        if ($('.app-theme-toggle-btn .badge').hasClass('d-none') == true){
+            $('.app-theme-toggle-btn .badge').removeClass('d-none');
+            $('.app-theme-toggle-btn .badge').textContent(chatCount);
+        }else{
+            $('.app-theme-toggle-btn .badge').textContent(chatCount);
+        }
     }
 
     last_user = message.sender_id;
