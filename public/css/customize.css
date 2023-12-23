@@ -785,3 +785,12 @@ table.dataTable{
 .widget-chat .widget-chat-item{
     align-items: flex-start;
 }
+.widget-chat .widget-chat-media {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 100%;
+    margin-top: 15px;
+}
