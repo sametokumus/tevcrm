@@ -54,6 +54,7 @@ async function getPublicChats(){
                     '                   <div class="widget-chat-content">\n';
             }else{
                 message_panel += '  <div class="widget-chat-item '+ reply +'">\n' +
+                    '                   <div class="widget-chat-media"><img src="img/user/null-profile-picture.png" alt="" /></div>\n';
                     '                   <div class="widget-chat-content">\n';
             }
 
