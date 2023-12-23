@@ -6,6 +6,7 @@ use App\Helpers\StaffTargetHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminRole;
+use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Offer;
 use App\Models\OfferProduct;
@@ -730,7 +731,114 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_10_sales' => $option_10_sales]]);
+            $option_12 = SystemNotifyOption::query()->where('id', 8)->first();
+
+            //option 12
+            if ($option_12->is_open == 1) {
+                $companies = Company::query()
+                    ->select('companies.*')
+                    ->where('companies.active', 1)
+                    ->where('companies.is_customer', 1)
+                    ->get();
+
+                foreach ($companies as $company){
+
+                    $offer_request = OfferRequest::query()->where('company_id', $company->id)->orderByDesc('id')->first();
+
+                    if ($offer_request){
+
+                        $admins = Admin::query()->where('admin_role_id', 3)->where('active', 1)->get();
+
+                        foreach ($admins as $admin) {
+
+                            $last_action_date = Carbon::parse($offer_request->created_at);
+
+                            $check_notify = StatusNotify::query()
+                                ->where('type', 3)
+                                ->where('setting_id', 12)
+                                ->where('receiver_id', $admin->id)
+                                ->orderByDesc('id')
+                                ->first();
+                            if ($check_notify) {
+                                $last_action_date = Carbon::parse($check_notify->created_at);
+                            }
+
+                            $now = Carbon::now();
+                            $daysDifference = $now->diffInDays($last_action_date);
+
+                            if ($daysDifference >= 30) {
+                                $notify = '<b>' . $company->name . '</b> uzun zamandır <b>talep göndermedi.</b>';
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 12,
+                                    'sale_id' => null,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $admin->id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+                            }
+
+                        }
+
+                    }else{
+
+                        $admins = Admin::query()->where('admin_role_id', 3)->where('active', 1)->get();
+
+                        foreach ($admins as $admin) {
+
+                            $check_notify = StatusNotify::query()
+                                ->where('type', 3)
+                                ->where('setting_id', 12)
+                                ->where('receiver_id', $admin->id)
+                                ->orderByDesc('id')
+                                ->first();
+                            if ($check_notify){
+                                $last_action_date = Carbon::parse($check_notify->created_at);
+                                $now = Carbon::now();
+                                $daysDifference = $now->diffInDays($last_action_date);
+
+                                if ($daysDifference >= 30){
+                                    $notify = '<b>' . $company->name . '</b> uzun zamandır <b>talep göndermedi.</b>';
+                                    $notify_id = Uuid::uuid();
+                                    StatusNotify::query()->insert([
+                                        'notify_id' => $notify_id,
+                                        'setting_id' => 12,
+                                        'sale_id' => null,
+                                        'sender_id' => 0,
+                                        'receiver_id' => $admin->id,
+                                        'notify' => $notify,
+                                        'type' => 3
+                                    ]);
+                                }
+                            }else{
+
+                                $notify = '<b>' . $company->name . '</b> uzun zamandır <b>talep göndermedi.</b>';
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 12,
+                                    'sale_id' => null,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $admin->id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_12_sales' => $option_12_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e'=>$queryException->getMessage()]);
         }
