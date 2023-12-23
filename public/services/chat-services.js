@@ -174,12 +174,11 @@ async function handleSendMessageEvent(data) {
 
         let chatCount = localStorage.getItem('chatCount');
         if (chatCount == null){
-            localStorage.setItem('chatCount', 1);
+            chatCount = 1;
         }else{
             chatCount = parseInt(chatCount) + 1;
-            localStorage.setItem('chatCount', chatCount);
         }
-        console.log(chatCount)
+        localStorage.setItem('chatCount', chatCount);
     }
 
     last_user = message.sender_id;
