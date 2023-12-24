@@ -156,6 +156,8 @@ async function getLastMonthSales(){
     $('#monthly-continue-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
     $('#monthly-cancelled-box h5').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
+    console.log(approved_data)
+
     var spark1 = {
         chart: {
             id: 'sparkline1',
@@ -1022,7 +1024,6 @@ async function getBestSalesLastNinetyDays(){
     let data = await serviceGetBestSalesLastNinetyDays(dash_owner);
     let by_sale_price = data.by_sale_price;
     let by_profit_rate = data.by_profit_rate;
-    console.log(data)
 
     $('#best-sales-by-price-table').siblings('.spinners').remove();
 
@@ -1030,7 +1031,7 @@ async function getBestSalesLastNinetyDays(){
     $.each(by_sale_price, function (i, sale) {
         let item = '<tr>\n' +
             '           <td>'+ sale.short_code +'-'+ sale.id +'</td>\n' +
-            '           <td>'+ changeCommasToDecimal(sale.offer_total) +' '+ sale.currency +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(sale.offer_total) +' TRY</td>\n' +
             '       </tr>';
         $('#best-sales-by-price-table tbody').append(item);
     });
