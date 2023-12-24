@@ -156,7 +156,11 @@ async function getLastMonthSales(){
     $('#monthly-continue-box h5').append(changeCommasToDecimal(continue_sale) + ' ' + dash_currency);
     $('#monthly-cancelled-box h5').append(changeCommasToDecimal(cancelled_sale) + ' ' + dash_currency);
 
-    console.log(approved_data)
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+
+    const formattedDate = year+'-'+month;
 
     var spark1 = {
         chart: {
@@ -179,7 +183,7 @@ async function getLastMonthSales(){
             name: 'Sales',
             data: approved_data
         }],
-        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        labels: [...Array(day_count).keys()].map(n => formattedDate+`-0${n+1}`),
         yaxis: {
             min: 0
         },
