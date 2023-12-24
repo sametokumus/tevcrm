@@ -339,6 +339,129 @@ class NotifyController extends Controller
 
 
 
+            $option_4 = SystemNotifyOption::query()->where('id', 4)->first();
+
+            //option 4
+            if ($option_4->is_open == 1) {
+                $companies = Company::query()
+                    ->select('companies.*')
+                    ->where('companies.active', 1)
+                    ->where('companies.is_customer', 1)
+                    ->get();
+
+                $option_4_companies = array();
+
+                foreach ($companies as $company){
+
+                    $sale = Sale::query()
+                        ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                        ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                        ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                        ->where('sales.active', 1)
+                        ->selectRaw('sales.*, statuses.sequence, statuses.action')
+                        ->orderByDesc('id')
+                        ->first();
+
+                    if ($sale){
+
+                        $admins = Admin::query()->where('admin_role_id', 3)->where('active', 1)->get();
+
+                        foreach ($admins as $admin) {
+
+                            $history = StatusHistory::query()->where('sale_id', $sale->sale_id)->where('status_id', 7)->where('active', 1)->orderByDesc('id')->first();
+
+                            $last_action_date = Carbon::parse($history->created_at);
+
+                            $check_notify = StatusNotify::query()
+                                ->where('type', 3)
+                                ->where('setting_id', 4)
+                                ->where('receiver_id', $admin->id)
+                                ->orderByDesc('id')
+                                ->first();
+                            if ($check_notify) {
+                                $last_action_date = Carbon::parse($check_notify->created_at);
+                            }
+
+                            $now = Carbon::now();
+                            $daysDifference = $now->diffInDays($last_action_date);
+
+                            if ($daysDifference >= 60) {
+                                $notify = '<b>' . $company->name . '</b> 60 gündür <b>teklif onaylamadı.</b>';
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 4,
+                                    'sale_id' => null,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $admin->id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+                                $company['days_difference'] = $daysDifference;
+                                array_push($option_4_companies, $company);
+                            }
+
+                        }
+
+                    }else{
+
+                        $admins = Admin::query()->where('admin_role_id', 3)->where('active', 1)->get();
+
+                        foreach ($admins as $admin) {
+
+                            $check_notify = StatusNotify::query()
+                                ->where('type', 3)
+                                ->where('setting_id', 4)
+                                ->where('receiver_id', $admin->id)
+                                ->orderByDesc('id')
+                                ->first();
+                            if ($check_notify){
+                                $last_action_date = Carbon::parse($check_notify->created_at);
+                                $now = Carbon::now();
+                                $daysDifference = $now->diffInDays($last_action_date);
+
+                                if ($daysDifference >= 60){
+                                    $notify = '<b>' . $company->name . '</b> 60 gündür <b>teklif onaylamadı.</b>';
+                                    $notify_id = Uuid::uuid();
+                                    StatusNotify::query()->insert([
+                                        'notify_id' => $notify_id,
+                                        'setting_id' => 4,
+                                        'sale_id' => null,
+                                        'sender_id' => 0,
+                                        'receiver_id' => $admin->id,
+                                        'notify' => $notify,
+                                        'type' => 3
+                                    ]);
+                                    $company['days_difference'] = $daysDifference;
+                                    array_push($option_4_companies, $company);
+                                }
+                            }else{
+
+                                $notify = '<b>' . $company->name . '</b> 60 gündür <b>teklif onaylamadı.</b>';
+                                $notify_id = Uuid::uuid();
+                                StatusNotify::query()->insert([
+                                    'notify_id' => $notify_id,
+                                    'setting_id' => 4,
+                                    'sale_id' => null,
+                                    'sender_id' => 0,
+                                    'receiver_id' => $admin->id,
+                                    'notify' => $notify,
+                                    'type' => 3
+                                ]);
+                                $company['days_difference'] = 'nothing';
+                                array_push($option_4_companies, $company);
+
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+
             $option_7 = SystemNotifyOption::query()->where('id', 7)->first();
 
             //option 7
@@ -804,7 +927,7 @@ class NotifyController extends Controller
                                 $daysDifference = $now->diffInDays($last_action_date);
 
                                 if ($daysDifference >= 30){
-                                    $notify = '<b>' . $company->name . '</b> uzun zamandır <b>talep göndermedi.</b>';
+                                    $notify = '<b>' . $company->name . '</b> 30 gündür <b>talep göndermedi.</b>';
                                     $notify_id = Uuid::uuid();
                                     StatusNotify::query()->insert([
                                         'notify_id' => $notify_id,
@@ -820,7 +943,7 @@ class NotifyController extends Controller
                                 }
                             }else{
 
-                                $notify = '<b>' . $company->name . '</b> uzun zamandır <b>talep göndermedi.</b>';
+                                $notify = '<b>' . $company->name . '</b> 30 gündür <b>talep göndermedi.</b>';
                                 $notify_id = Uuid::uuid();
                                 StatusNotify::query()->insert([
                                     'notify_id' => $notify_id,
@@ -845,7 +968,7 @@ class NotifyController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_12_companies' => $option_12_companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_4_companies' => $option_4_companies]]);
 //            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['option_12_sales' => $option_12_sales]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e'=>$queryException->getMessage()]);

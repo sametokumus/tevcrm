@@ -17,7 +17,7 @@ class CreateStatusNotifiesTable extends Migration
             $table->id();
             $table->string('notify_id');
             $table->bigInteger('setting_id');
-            $table->string('sale_id');
+            $table->string('sale_id')->nullable();
             $table->bigInteger('sender_id')->nullable();
             $table->bigInteger('receiver_id')->nullable();
             $table->string('notify')->nullable();
