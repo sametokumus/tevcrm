@@ -358,6 +358,7 @@ class NotifyController extends Controller
                         ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->where('sales.active', 1)
+                        ->where('offer_requests.company_id', $company->id)
                         ->selectRaw('sales.*, statuses.sequence, statuses.action')
                         ->orderByDesc('id')
                         ->first();
