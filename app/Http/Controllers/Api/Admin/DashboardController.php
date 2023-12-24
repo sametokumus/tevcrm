@@ -2234,6 +2234,7 @@ class DashboardController extends Controller
                     );
                 })
                 ->where('companies.active', 1)
+                ->where('companies.is_customer', 1)
                 ->whereNotNull('sales.created_at')
                 ->select('companies.*', 'sales.created_at as last_sale_date')
                 ->orderBy('last_sale_date')
@@ -2253,7 +2254,9 @@ class DashboardController extends Controller
                 $query->select(DB::raw(1))
                     ->from('sales')
                     ->join('statuses', 'sales.status_id', '=', 'statuses.id')
-                    ->whereRaw('companies.id = sales.customer_id')
+                    ->whereRaw('companies.id = sales.customer_id
+                                    AND companies.is_customer = 1
+                                    AND companies.active = 1')
                     ->whereNotIn('statuses.period', ['approved', 'completed']);
                 })
                 ->get();

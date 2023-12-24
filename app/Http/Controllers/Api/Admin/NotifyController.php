@@ -386,7 +386,7 @@ class NotifyController extends Controller
                             $now = Carbon::now();
                             $daysDifference = $now->diffInDays($last_action_date);
 
-                            if ($daysDifference >= 6) {
+                            if ($daysDifference >= 60) {
                                 $notify = '<b>' . $company->name . '</b> 60 gündür <b>teklif onaylamadı.</b>';
                                 $notify_id = Uuid::uuid();
                                 StatusNotify::query()->insert([
@@ -421,7 +421,7 @@ class NotifyController extends Controller
                                 $now = Carbon::now();
                                 $daysDifference = $now->diffInDays($last_action_date);
 
-                                if ($daysDifference >= 6){
+                                if ($daysDifference >= 60){
                                     $notify = '<b>' . $company->name . '</b> 60 gündür <b>teklif onaylamadı.</b>';
                                     $notify_id = Uuid::uuid();
                                     StatusNotify::query()->insert([
