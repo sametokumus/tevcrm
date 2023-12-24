@@ -289,9 +289,7 @@ async function getLastMonthSales(){
 async function getApprovedMonthlySales(){
 
     let data = await serviceGetApprovedMonthlySales(dash_owner);
-    console.log(data)
     let sales = data.sales.reverse();
-    console.log(sales)
 
     let xAxisArray = [];
     let yAxisArray = [];
@@ -307,8 +305,6 @@ async function getApprovedMonthlySales(){
             yAxisArray.push(sale.eur_sale);
         }
     });
-    console.log(xAxisArray)
-    console.log(yAxisArray)
 
     let apexColumnChartOptions = {
         chart: {
@@ -870,7 +866,6 @@ async function getBestStaffs(){
 async function getTotalProfitRate(){
 
     let data = await serviceGetTotalProfitRate(dash_owner);
-    console.log(data)
     let profit_rate = data.profit_rate;
 
     $('#total-profit-box .spinners').remove();
@@ -882,7 +877,6 @@ async function getTotalProfitRate(){
 async function getMonthlyProfitRates(){
 
     let data = await serviceGetMonthlyProfitRatesLastTwelveMonths(dash_owner);
-    console.log(data)
     let profit_rates = data.profit_rates.reverse();
 
     let xAxisArray = [];
@@ -1028,6 +1022,7 @@ async function getBestSalesLastNinetyDays(){
     let data = await serviceGetBestSalesLastNinetyDays(dash_owner);
     let by_sale_price = data.by_sale_price;
     let by_profit_rate = data.by_profit_rate;
+    console.log(data)
 
     $('#best-sales-by-price-table').siblings('.spinners').remove();
 
