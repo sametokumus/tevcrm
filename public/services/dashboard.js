@@ -214,7 +214,7 @@ async function getLastMonthSales(){
             name: 'Sales',
             data: completed_data
         }],
-        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        labels: [...Array(day_count).keys()].map(n => formattedDate+`-0${n+1}`),
         yaxis: {
             min: 0
         },
@@ -245,7 +245,7 @@ async function getLastMonthSales(){
             name: 'Sales',
             data: continue_data
         }],
-        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        labels: [...Array(day_count).keys()].map(n => formattedDate+`-0${n+1}`),
         yaxis: {
             min: 0
         },
@@ -276,7 +276,7 @@ async function getLastMonthSales(){
             name: 'Sales',
             data: cancelled_data
         }],
-        labels: [...Array(day_count).keys()].map(n => `2018-09-0${n+1}`),
+        labels: [...Array(day_count).keys()].map(n => formattedDate+`-0${n+1}`),
         yaxis: {
             min: 0
         },
