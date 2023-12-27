@@ -45,7 +45,7 @@
 
 })(window.jQuery);
 
-const api_url = 'https://lenis-crm.wimco.com.tr';
+const api_url = 'https://crm.semytechnology.com';
 
 $(function() {
     // Listen for the language dropdown change event
