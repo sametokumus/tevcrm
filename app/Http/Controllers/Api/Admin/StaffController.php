@@ -724,7 +724,7 @@ class StaffController extends Controller
                         $join->on('s.sale_id', '=', 'sh.sale_id')
                             ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                     })
-                    ->where('offer_requests.authorized_personnel_id', '=', 1)
+                    ->where('offer_requests.authorized_personnel_id', '=', $staff->id)
                     ->where('s.active', '=', 1)
                     ->whereIn('statuses.period', ['completed', 'approved'])
                     ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
