@@ -699,18 +699,34 @@ class StaffController extends Controller
 
 
                 //c6
-                $c6_sales = DB::table('sales AS s')
-                    ->selectRaw('companies.*, COUNT(*) as sale_count')
+//                $c6_sales = DB::table('sales AS s')
+//                    ->selectRaw('companies.*, COUNT(*) as sale_count')
+//                    ->leftJoin('companies', 'companies.id', '=', 's.customer_id')
+//                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
+//                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+//                    ->join('status_histories AS sh', function ($join) {
+//                        $join->on('s.sale_id', '=', 'sh.sale_id')
+//                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+//                    })
+//                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+//                    ->where('s.active', '=', 1)
+//                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+//                    ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+//                    ->groupBy('s.customer_id')
+//                    ->get();
+
+                $c6_sales = DB::table('sales as s')
+                    ->select('companies.*', DB::raw('COUNT(*) as sale_count'))
                     ->leftJoin('companies', 'companies.id', '=', 's.customer_id')
                     ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
                     ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
-                    ->join('status_histories AS sh', function ($join) {
+                    ->join('status_histories as sh', function ($join) {
                         $join->on('s.sale_id', '=', 'sh.sale_id')
                             ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
                     })
-                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+                    ->where('offer_requests.authorized_personnel_id', '=', 1)
                     ->where('s.active', '=', 1)
-                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                    ->whereIn('statuses.period', ['completed', 'approved'])
                     ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
                     ->groupBy('s.customer_id')
                     ->get();
