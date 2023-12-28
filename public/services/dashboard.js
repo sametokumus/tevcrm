@@ -978,7 +978,7 @@ async function getCustomerByNotSaleLongTimes(){
     $('#customer-not-sale-timely-table').DataTable({
         responsive: false,
         columnDefs: [],
-        dom: 'Bfrtip',
+        dom: 'Brtip',
         paging: true,
         buttons: [],
         scrollX: true,

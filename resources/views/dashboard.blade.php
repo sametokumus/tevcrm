@@ -737,7 +737,7 @@ $extra_js='
             <!-- ekip satışları -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
@@ -783,7 +783,7 @@ $extra_js='
             <!-- en yüksek rakamlı satışlar -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN YÜKSEK RAKAMLI SATIŞLAR (Son 90 Gün)</span>
@@ -827,7 +827,7 @@ $extra_js='
             <!-- en karlı satışlar 90 gün -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN KARLI SATIŞLAR (Son 90 Gün)</span>
@@ -871,7 +871,7 @@ $extra_js='
             <!-- siparişi olmayan müşteriler (zamansal) -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">UZUN SÜREDİR SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
@@ -885,7 +885,7 @@ $extra_js='
                             <tr>
                                 <th style="max-width: 30px;">#</th>
                                 <th>Müşteri</th>
-                                <th class="text-nowrap">Son Sipariş</td>
+                                <th class="text-nowrap">Son Sipariş</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -916,7 +916,7 @@ $extra_js='
             <!-- siparişi olmayan müşteriler -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">HİÇ SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
@@ -960,7 +960,7 @@ $extra_js='
             <!-- en çok satılan ürünler -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN ÇOK SATILAN ÜRÜNLER</span>

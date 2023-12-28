@@ -830,3 +830,9 @@ table.dataTable{
 .app-header .menu .menu-item .menu-link .menu-img{
     margin-right: 0;
 }
+
+.card-body.fixed-table-card{
+    height: 450px;
+    overflow: hidden;
+    overflow-y: auto;
+}
