@@ -294,10 +294,8 @@ async function getLastMonthSales(){
 
 async function getApprovedMonthlySales(){
 
-    let data2 = await serviceGetDashboardApprovedSales(dash_owner);
-    console.log(data2)
-
-    let data = await serviceGetApprovedMonthlySales(dash_owner);
+    let data = await serviceGetDashboardApprovedSales(dash_owner);
+    console.log(data)
     // let sales = data.sales.reverse();
     let sales = data.sales.reverse();
     let previous_sales = data.previous_sales.reverse();
