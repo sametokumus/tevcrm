@@ -651,6 +651,7 @@ class DashboardController extends Controller
             $sales = array();
             $previous_sales = array();
 
+
             foreach ($currentYearArray as $currentMonth){
 
                 $sale_items = DB::table('sales AS s')
