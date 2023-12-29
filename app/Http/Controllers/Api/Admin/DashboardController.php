@@ -300,10 +300,10 @@ class DashboardController extends Controller
                 array_push($previousYearArray, $month_array2);
             }
 
-//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
-//                'sales' => $currentYearArray,
-//                'previous_sales' => $previousYearArray
-//            ]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
+                'sales' => $currentYearArray,
+                'previous_sales' => $previousYearArray
+            ]]);
 
             $sales = array();
             $previous_sales = array();
