@@ -1033,7 +1033,7 @@ async function getMonthlyProfitRates(){
         legend: {
             show: true,
             position: 'top',
-            offsetY: -10,
+            offsetY: 0,
             horizontalAlign: 'right',
             floating: true
         },
@@ -1103,6 +1103,7 @@ async function getMonthlyTurningRates(){
     $.each(previous_turning_rates, function (i, rate) {
         yAxisArrayPrevious.push(rate.turning_rate);
     });
+    console.log(yAxisArray)
 
     var apexLineChartOptions = {
         chart: {
@@ -1121,7 +1122,7 @@ async function getMonthlyTurningRates(){
         legend: {
             show: true,
             position: 'top',
-            offsetY: -10,
+            offsetY: 0,
             horizontalAlign: 'right',
             floating: true
         },

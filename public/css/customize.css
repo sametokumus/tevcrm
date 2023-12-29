@@ -836,7 +836,3 @@ table.dataTable{
     overflow: hidden;
     overflow-y: auto;
 }
-
-.apexcharts-legend.apexcharts-align-right.apx-legend-position-top{
-    top: 0 !important;
-}
