@@ -130,10 +130,8 @@ class DashboardController extends Controller
                 ->get();
 
             $sales = array();
-            $total_sales = array();
-            $try_total = 0;
-            $usd_total = 0;
-            $eur_total = 0;
+            $previous_sales = array();
+
             foreach ($currentYearArray as $currentMonth){
 
                 $sale_items = DB::table('sales AS s')
@@ -157,9 +155,6 @@ class DashboardController extends Controller
                 $sale_items = $sale_items
                     ->get();
 
-                $sale = array();
-//                $sale['year'] = $currentMonth->year;
-//                $sale['month'] = $currentMonth->month;
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
@@ -179,11 +174,31 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
+
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $item->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $try_price += $expense->price;
+                            $usd_price += $expense->price / $item->usd_rate;
+                            $eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $usd_price += $expense->price;
+                            $try_price += $expense->price * $item->usd_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $eur_price += $expense->price;
+                            $try_price += $expense->price * $item->eur_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
+
+                    }
+
                 }
 
-                $try_total += $try_price;
-                $usd_total += $usd_price;
-                $eur_total += $eur_price;
+
+
 
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
@@ -192,17 +207,85 @@ class DashboardController extends Controller
                 array_push($sales, $currentMonth);
             }
 
-            $total_sales['try_total'] = number_format($try_total, 2,".","");
-            $total_sales['usd_total'] = number_format($usd_total, 2,".","");
-            $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            foreach ($previousYearArray as $currentMonth){
+
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'approved')
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
+                    ->get();
+
+                $try_price = 0;
+                $usd_price = 0;
+                $eur_price = 0;
+
+                foreach ($sale_items as $item){
+
+                    if ($item->currency == 'TRY'){
+                        $try_price += $item->grand_total;
+                        $usd_price += $item->grand_total / $item->usd_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate;
+                    }else if ($item->currency == 'USD'){
+                        $usd_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->usd_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $eur_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->eur_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $item->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $try_price += $expense->price;
+                            $usd_price += $expense->price / $item->usd_rate;
+                            $eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $usd_price += $expense->price;
+                            $try_price += $expense->price * $item->usd_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $eur_price += $expense->price;
+                            $try_price += $expense->price * $item->eur_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
+
+                    }
+
+                }
+
+
+
+
+
+                $currentMonth['try_sale'] = number_format($try_price, 2,".","");
+                $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
+                $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                array_push($previous_sales, $currentMonth);
+            }
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
                 'sales' => $sales,
-                'total_sales' => $total_sales,
-                'l'=>$last_months,
-                'c'=>$currentYearArray,
-                'p'=>$previousYearArray
+                'previous_sales' => $previous_sales
             ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
