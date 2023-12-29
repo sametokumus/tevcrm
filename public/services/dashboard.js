@@ -1084,6 +1084,7 @@ async function getMonthlyProfitRates(){
 async function getMonthlyTurningRates(){
 
     let data = await serviceGetMonthlyTurningRates(dash_owner);
+    console.log(data)
     let turning_rates = data.turning_rates;
     let previous_turning_rates = data.previous_turning_rates;
 
