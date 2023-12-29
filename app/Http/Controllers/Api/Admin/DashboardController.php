@@ -745,14 +745,6 @@ class DashboardController extends Controller
                 $sale_items = $sale_items
                     ->get();
 
-                if ($owner_id != 0){
-                    $sale_items = $sale_items
-                        ->where('s.owner_id', $owner_id);
-                }
-
-                $sale_items = $sale_items
-                    ->get();
-
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
@@ -1574,6 +1566,9 @@ class DashboardController extends Controller
 
             foreach ($sale_items as $item){
 
+                //ek giderler
+                $expenses = Expense::query()->where('sale_id', $item->sale_id)->where('active', 1)->get();
+
                 if($item->period == 'continue'){
 
                     if ($item->currency == 'TRY'){
@@ -1588,6 +1583,22 @@ class DashboardController extends Controller
                         $continue_eur_price += $item->grand_total;
                         $continue_try_price += $item->grand_total * $item->eur_rate;
                         $continue_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $continue_try_price += $expense->price;
+                            $continue_usd_price += $expense->price / $item->usd_rate;
+                            $continue_eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $continue_usd_price += $expense->price;
+                            $continue_try_price += $expense->price * $item->usd_rate;
+                            $continue_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $continue_eur_price += $expense->price;
+                            $continue_try_price += $expense->price * $item->eur_rate;
+                            $continue_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
                     }
 
                 }else if($item->period == 'approved'){
@@ -1606,6 +1617,22 @@ class DashboardController extends Controller
                         $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
 
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $approved_try_price += $expense->price;
+                            $approved_usd_price += $expense->price / $item->usd_rate;
+                            $approved_eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $approved_usd_price += $expense->price;
+                            $approved_try_price += $expense->price * $item->usd_rate;
+                            $approved_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $approved_eur_price += $expense->price;
+                            $approved_try_price += $expense->price * $item->eur_rate;
+                            $approved_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
+                    }
+
                 }else if($item->period == 'completed'){
 
                     if ($item->currency == 'TRY'){
@@ -1622,6 +1649,22 @@ class DashboardController extends Controller
                         $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
                     }
 
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $completed_try_price += $expense->price;
+                            $completed_usd_price += $expense->price / $item->usd_rate;
+                            $completed_eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $completed_usd_price += $expense->price;
+                            $completed_try_price += $expense->price * $item->usd_rate;
+                            $completed_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $completed_eur_price += $expense->price;
+                            $completed_try_price += $expense->price * $item->eur_rate;
+                            $completed_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
+                    }
+
                 }else if($item->period == 'cancelled'){
 
                     if ($item->currency == 'TRY'){
@@ -1636,6 +1679,22 @@ class DashboardController extends Controller
                         $cancelled_eur_price += $item->grand_total;
                         $cancelled_try_price += $item->grand_total * $item->eur_rate;
                         $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                    }
+
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $cancelled_try_price += $expense->price;
+                            $cancelled_usd_price += $expense->price / $item->usd_rate;
+                            $cancelled_eur_price += $expense->price / $item->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $cancelled_usd_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $item->usd_rate;
+                            $cancelled_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $cancelled_eur_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $item->eur_rate;
+                            $cancelled_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                        }
                     }
 
                 }
@@ -1773,6 +1832,39 @@ class DashboardController extends Controller
                         $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sl->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $daily_continue_try_price += $expense->price;
+                            $daily_continue_usd_price += $expense->price / $sl->usd_rate;
+                            $daily_continue_eur_price += $expense->price / $sl->eur_rate;
+
+                            $continue_try_price += $expense->price;
+                            $continue_usd_price += $expense->price / $sl->usd_rate;
+                            $continue_eur_price += $expense->price / $sl->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $daily_continue_usd_price += $expense->price;
+                            $daily_continue_try_price += $expense->price * $sl->usd_rate;
+                            $daily_continue_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+
+                            $continue_usd_price += $expense->price;
+                            $continue_try_price += $expense->price * $sl->usd_rate;
+                            $continue_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $daily_continue_eur_price += $expense->price;
+                            $daily_continue_try_price += $expense->price * $sl->eur_rate;
+                            $daily_continue_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+
+                            $continue_eur_price += $expense->price;
+                            $continue_try_price += $expense->price * $sl->eur_rate;
+                            $continue_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                        }
+
+                    }
+
+
+
                 }
 
                 $continue_serie_this_day = array();
@@ -1849,6 +1941,37 @@ class DashboardController extends Controller
                         $approved_eur_price += $sl->grand_total;
                         $approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sl->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $daily_approved_try_price += $expense->price;
+                            $daily_approved_usd_price += $expense->price / $sl->usd_rate;
+                            $daily_approved_eur_price += $expense->price / $sl->eur_rate;
+
+                            $approved_try_price += $expense->price;
+                            $approved_usd_price += $expense->price / $sl->usd_rate;
+                            $approved_eur_price += $expense->price / $sl->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $daily_approved_usd_price += $expense->price;
+                            $daily_approved_try_price += $expense->price * $sl->usd_rate;
+                            $daily_approved_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+
+                            $approved_usd_price += $expense->price;
+                            $approved_try_price += $expense->price * $sl->usd_rate;
+                            $approved_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $daily_approved_eur_price += $expense->price;
+                            $daily_approved_try_price += $expense->price * $sl->eur_rate;
+                            $daily_approved_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+
+                            $approved_eur_price += $expense->price;
+                            $approved_try_price += $expense->price * $sl->eur_rate;
+                            $approved_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                        }
+
                     }
 
                 }
@@ -1929,6 +2052,37 @@ class DashboardController extends Controller
                         $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
                     }
 
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sl->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $daily_completed_try_price += $expense->price;
+                            $daily_completed_usd_price += $expense->price / $sl->usd_rate;
+                            $daily_completed_eur_price += $expense->price / $sl->eur_rate;
+
+                            $completed_try_price += $expense->price;
+                            $completed_usd_price += $expense->price / $sl->usd_rate;
+                            $completed_eur_price += $expense->price / $sl->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $daily_completed_usd_price += $expense->price;
+                            $daily_completed_try_price += $expense->price * $sl->usd_rate;
+                            $daily_completed_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+
+                            $completed_usd_price += $expense->price;
+                            $completed_try_price += $expense->price * $sl->usd_rate;
+                            $completed_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $daily_completed_eur_price += $expense->price;
+                            $daily_completed_try_price += $expense->price * $sl->eur_rate;
+                            $daily_completed_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+
+                            $completed_eur_price += $expense->price;
+                            $completed_try_price += $expense->price * $sl->eur_rate;
+                            $completed_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                        }
+
+                    }
+
                 }
 
                 $completed_serie_this_day = array();
@@ -2006,6 +2160,37 @@ class DashboardController extends Controller
                         $cancelled_eur_price += $sl->grand_total;
                         $cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                    }
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sl->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == 'TRY'){
+                            $daily_cancelled_try_price += $expense->price;
+                            $daily_cancelled_usd_price += $expense->price / $sl->usd_rate;
+                            $daily_cancelled_eur_price += $expense->price / $sl->eur_rate;
+
+                            $cancelled_try_price += $expense->price;
+                            $cancelled_usd_price += $expense->price / $sl->usd_rate;
+                            $cancelled_eur_price += $expense->price / $sl->eur_rate;
+                        }else if ($expense->currency == 'USD'){
+                            $daily_cancelled_usd_price += $expense->price;
+                            $daily_cancelled_try_price += $expense->price * $sl->usd_rate;
+                            $daily_cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+
+                            $cancelled_usd_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $sl->usd_rate;
+                            $cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                        }else if ($expense->currency == 'EUR'){
+                            $daily_cancelled_eur_price += $expense->price;
+                            $daily_cancelled_try_price += $expense->price * $sl->eur_rate;
+                            $daily_cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+
+                            $cancelled_eur_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $sl->eur_rate;
+                            $cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                        }
+
                     }
 
                 }
@@ -2690,10 +2875,10 @@ class DashboardController extends Controller
                     ->from('sales')
                     ->join('statuses', 'sales.status_id', '=', 'statuses.id')
                     ->whereRaw('companies.id = sales.customer_id
-                                    AND companies.is_customer = 1
                                     AND companies.active = 1')
                     ->whereNotIn('statuses.period', ['approved', 'completed']);
                 })
+                ->where('companies.is_customer', 1)
                 ->get();
 
 
