@@ -1226,7 +1226,7 @@ $extra_js='
             <!-- sipariş durum değişiklikleri -->
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body fixed-table-card">
 
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">SON SİPARİŞ İŞLEMLERİ</span>

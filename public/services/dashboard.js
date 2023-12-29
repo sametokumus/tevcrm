@@ -1271,7 +1271,7 @@ async function initSaleHistory(){
     let actions = data.actions;
     console.log(data)
 
-    $('#sales-history-table .spinners').remove();
+    $('#sales-history-table').siblings('.spinners').remove();
     $('#sales-history-table tbody tr').remove();
 
     $.each(actions, function (i, action) {
