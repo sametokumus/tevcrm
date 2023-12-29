@@ -3316,7 +3316,9 @@ class DashboardController extends Controller
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
                 'offer_turning_rate' => $offer_turning_rate,
-                'turnover_rate' => $turnover_rate
+                'turnover_rate' => $turnover_rate,
+                '$this_month_price' => $this_month_price,
+                '$previous_month_price' => $previous_month_price
             ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
