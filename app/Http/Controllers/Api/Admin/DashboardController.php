@@ -3318,7 +3318,9 @@ class DashboardController extends Controller
                 'offer_turning_rate' => $offer_turning_rate,
                 'turnover_rate' => $turnover_rate,
                 '$this_month_price' => $this_month_price,
-                '$previous_month_price' => $previous_month_price
+                '$previous_month_price' => $previous_month_price,
+                '$currentMonth' => $currentMonth,
+                '$previousMonth' => $previousMonth
             ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
