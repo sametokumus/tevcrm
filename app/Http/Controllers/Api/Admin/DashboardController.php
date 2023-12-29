@@ -300,11 +300,6 @@ class DashboardController extends Controller
                 array_push($previousYearArray, $month_array2);
             }
 
-//            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
-//                'sales' => $currentYearArray,
-//                'previous_sales' => $previousYearArray
-//            ]]);
-
             $sales = array();
             $previous_sales = array();
 
@@ -321,7 +316,7 @@ class DashboardController extends Controller
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
                     ->whereYear('sh.created_at', $currentMonth['year'])
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
@@ -391,8 +386,8 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'continue')
-                    ->whereYear('sh.created_at', $currentMonth->year)
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
@@ -495,8 +490,8 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
-                    ->whereYear('sh.created_at', $currentMonth->year)
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
@@ -565,8 +560,8 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'cancelled')
-                    ->whereYear('sh.created_at', $currentMonth->year)
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
@@ -669,8 +664,8 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
-                    ->whereYear('sh.created_at', $currentMonth->year)
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
@@ -739,8 +734,8 @@ class DashboardController extends Controller
                     })
                     ->where('s.active', '=', 1)
                     ->where('statuses.period', '=', 'completed')
-                    ->whereYear('sh.created_at', $currentMonth->year)
-                    ->whereMonth('sh.created_at', $currentMonth->month);
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
 
                 if ($owner_id != 0){
                     $sale_items = $sale_items
