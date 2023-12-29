@@ -295,8 +295,6 @@ async function getLastMonthSales(){
 async function getApprovedMonthlySales(){
 
     let data = await serviceGetDashboardApprovedSales(dash_owner);
-    console.log(data)
-    // let sales = data.sales.reverse();
     let sales = data.sales;
     let previous_sales = data.previous_sales;
 
@@ -308,7 +306,6 @@ async function getApprovedMonthlySales(){
     let previousYear = currentYear - 1;
 
     $.each(sales, function (i, sale) {
-        // xAxisArray.push(sale.month + "/" + sale.year);
         xAxisArray.push(sale.month);
 
         if (dash_currency == 'TRY'){
@@ -434,14 +431,19 @@ async function getApprovedMonthlySales(){
 
 async function getCompletedMonthlySales(){
 
-    let data = await serviceGetCompletedMonthlySales(dash_owner);
-    let sales = data.sales.reverse();
+    let data = await serviceGetDashboardCompletedSales(dash_owner);
+    let sales = data.sales;
+    let previous_sales = data.previous_sales;
 
     let xAxisArray = [];
     let yAxisArray = [];
+    let yAxisArrayPrevious = [];
+
+    let currentYear = new Date().getFullYear();
+    let previousYear = currentYear - 1;
 
     $.each(sales, function (i, sale) {
-        xAxisArray.push(sale.month + "/" + sale.year);
+        xAxisArray.push(sale.month);
 
         if (dash_currency == 'TRY'){
             yAxisArray.push(sale.try_sale);
@@ -449,6 +451,16 @@ async function getCompletedMonthlySales(){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }
+    });
+
+    $.each(previous_sales, function (i, sale) {
+        if (dash_currency == 'TRY'){
+            yAxisArrayPrevious.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArrayPrevious.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArrayPrevious.push(sale.eur_sale);
         }
     });
 
@@ -486,11 +498,17 @@ async function getCompletedMonthlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#feb019d9'],
-        series: [{
-            name: dash_currency,
-            data: yAxisArray
-        }],
+        colors: ['#8d989d', '#feb019d9'],
+        series: [
+            {
+                name: previousYear,
+                data: yAxisArrayPrevious
+            },
+            {
+                name: currentYear,
+                data: yAxisArray
+            }
+        ],
         xaxis: {
             categories: xAxisArray,
             labels: {
@@ -550,20 +568,36 @@ async function getCompletedMonthlySales(){
 
 async function getPotentialMonthlySales(){
 
-    let data = await serviceGetPotentialSales(dash_owner);
-    let sales = data.sales.reverse();
+    let data = await serviceGetDashboardPotentialSales(dash_owner);
+    let sales = data.sales;
+    let previous_sales = data.previous_sales;
 
     let xAxisArray = [];
     let yAxisArray = [];
+    let yAxisArrayPrevious = [];
+
+    let currentYear = new Date().getFullYear();
+    let previousYear = currentYear - 1;
 
     $.each(sales, function (i, sale) {
-        xAxisArray.push(sale.month + "/" + sale.year);
+        xAxisArray.push(sale.month);
+
         if (dash_currency == 'TRY'){
             yAxisArray.push(sale.try_sale);
         }else if (dash_currency == 'USD'){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }
+    });
+
+    $.each(previous_sales, function (i, sale) {
+        if (dash_currency == 'TRY'){
+            yAxisArrayPrevious.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArrayPrevious.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArrayPrevious.push(sale.eur_sale);
         }
     });
 
@@ -601,11 +635,17 @@ async function getPotentialMonthlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#4ecdc4'],
-        series: [{
-            name: dash_currency,
-            data: yAxisArray
-        }],
+        colors: ['#8d989d', '#4ecdc4'],
+        series: [
+            {
+                name: previousYear,
+                data: yAxisArrayPrevious
+            },
+            {
+                name: currentYear,
+                data: yAxisArray
+            }
+        ],
         xaxis: {
             categories: xAxisArray,
             labels: {
@@ -665,20 +705,36 @@ async function getPotentialMonthlySales(){
 
 async function getCancelledMonthlySales(){
 
-    let data = await serviceGetCancelledPotentialSales(dash_owner);
-    let sales = data.sales.reverse();
+    let data = await serviceGetDashboardCancelledSales(dash_owner);
+    let sales = data.sales;
+    let previous_sales = data.previous_sales;
 
     let xAxisArray = [];
     let yAxisArray = [];
+    let yAxisArrayPrevious = [];
+
+    let currentYear = new Date().getFullYear();
+    let previousYear = currentYear - 1;
 
     $.each(sales, function (i, sale) {
-        xAxisArray.push(sale.month + "/" + sale.year);
+        xAxisArray.push(sale.month);
+
         if (dash_currency == 'TRY'){
             yAxisArray.push(sale.try_sale);
         }else if (dash_currency == 'USD'){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }
+    });
+
+    $.each(previous_sales, function (i, sale) {
+        if (dash_currency == 'TRY'){
+            yAxisArrayPrevious.push(sale.try_sale);
+        }else if (dash_currency == 'USD'){
+            yAxisArrayPrevious.push(sale.usd_sale);
+        }else if (dash_currency == 'EUR'){
+            yAxisArrayPrevious.push(sale.eur_sale);
         }
     });
 
@@ -716,11 +772,17 @@ async function getCancelledMonthlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#ff4560d9'],
-        series: [{
-            name: dash_currency,
-            data: yAxisArray
-        }],
+        colors: ['#8d989d', '#ff4560d9'],
+        series: [
+            {
+                name: previousYear,
+                data: yAxisArrayPrevious
+            },
+            {
+                name: currentYear,
+                data: yAxisArray
+            }
+        ],
         xaxis: {
             categories: xAxisArray,
             labels: {

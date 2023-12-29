@@ -2667,6 +2667,33 @@ async function serviceGetDashboardApprovedSales(dash_owner) {
     }
 }
 
+async function serviceGetDashboardCompletedSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getCompletedSales/' + dash_owner, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetDashboardPotentialSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getPotentialSales/' + dash_owner, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetDashboardCancelledSales(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getCancelledSales/' + dash_owner, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetApprovedMonthlySales(dash_owner) {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyApprovedSalesLastTwelveMonths/' + dash_owner, 'application/json');
     if (data.status == "success") {
