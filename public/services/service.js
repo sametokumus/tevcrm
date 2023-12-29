@@ -2658,7 +2658,7 @@ async function serviceGetLastMonthSalesByAdmin(id) {
     }
 }
 
-async function serviceGetApprovedSales(dash_owner) {
+async function serviceGetDashboardApprovedSales(dash_owner) {
     const data = await fetchDataGet('/admin/dashboard/getApprovedSales/' + dash_owner, 'application/json');
     if (data.status == "success") {
         return data.object;

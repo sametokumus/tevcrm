@@ -294,7 +294,7 @@ async function getLastMonthSales(){
 
 async function getApprovedMonthlySales(){
 
-    let data2 = await serviceGetApprovedSales(dash_owner);
+    let data2 = await serviceGetDashboardApprovedSales(dash_owner);
     console.log(data2)
 
     let data = await serviceGetApprovedMonthlySales(dash_owner);
