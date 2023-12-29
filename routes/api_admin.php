@@ -399,6 +399,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('dashboard/getCustomerByNotSale', [DashboardController::class, 'getCustomerByNotSale']);
     Route::get('dashboard/getTotalProfitRate/{owner_id}', [DashboardController::class, 'getTotalProfitRate']);
     Route::get('dashboard/getMonthlyProfitRates/{owner_id}', [DashboardController::class, 'getMonthlyProfitRates']);
+    Route::get('dashboard/getMonthlyTurningRates/{owner_id}', [DashboardController::class, 'getMonthlyTurningRates']);
     Route::get('dashboard/getMonthlyProfitRatesLastTwelveMonths/{owner_id}', [DashboardController::class, 'getMonthlyProfitRatesLastTwelveMonths']);
     Route::get('dashboard/getBestSalesLastNinetyDays/{owner_id}', [DashboardController::class, 'getBestSalesLastNinetyDays']);
 

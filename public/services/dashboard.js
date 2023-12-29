@@ -39,6 +39,7 @@
         getPotentialMonthlySales();
         getCancelledMonthlySales();
         getMonthlyProfitRates();
+        getMonthlyTurningRates();
         getAdminsSales();
         initTopSaledProducts();
         getBestCustomers();
@@ -1072,6 +1073,93 @@ async function getMonthlyProfitRates(){
     $('#chart-profit-rates-monthly .spinners').remove();
     var apexLineChart = new ApexCharts(
         document.querySelector('#chart-profit-rates-monthly'),
+        apexLineChartOptions
+    );
+    apexLineChart.render();
+
+    reLoadGrid();
+
+}
+
+async function getMonthlyTurningRates(){
+
+    let data = await serviceGetMonthlyTurningRates(dash_owner);
+    let turning_rates = data.turning_rates;
+    let previous_turning_rates = data.previous_turning_rates;
+
+    let xAxisArray = [];
+    let yAxisArray = [];
+    let yAxisArrayPrevious = [];
+
+    let currentYear = new Date().getFullYear();
+    let previousYear = currentYear - 1;
+
+    $.each(turning_rates, function (i, rate) {
+        xAxisArray.push(rate.month);
+        yAxisArray.push(rate.turning_rate);
+    });
+
+    $.each(previous_turning_rates, function (i, rate) {
+        yAxisArrayPrevious.push(rate.turning_rate);
+    });
+
+    var apexLineChartOptions = {
+        chart: {
+            height: 300,
+            type: 'line',
+            toolbar: { show: false }
+        },
+        title: {
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_DARK
+            },
+        },
+        legend: {
+            show: true,
+            position: 'top',
+            offsetY: -10,
+            horizontalAlign: 'right',
+            floating: true
+        },
+        colors: ['#8d989d', app.color.indigo],
+        dataLabels: {
+            enabled: true,
+            offsetY: 1,
+            background: {
+                enabled: true,
+                padding: 4,
+                borderRadius: 4,
+                borderWidth: 0,
+                opacity: 0.9,
+                dropShadow: { enabled: false }
+            },
+            style: {
+                fontSize: '11px',
+                fontFamily: app.font.bodyFontFamily,
+                fontWeight: 500
+            }
+        },
+        stroke: { curve: 'smooth', width: 3 },
+        grid: {
+            row: {
+                colors: [app.color.bodyBg, 'transparent'],
+                opacity: 0.5
+            }
+        },
+        series: [
+            { name: previousYear, data: yAxisArrayPrevious },
+            { name: currentYear, data: yAxisArray }
+        ],
+        markers: { size: 4 },
+        xaxis: { categories: xAxisArray },
+        yaxis: { min: 0, max: 250 }
+    };
+    $('#chart-turning-rates-monthly .spinners').remove();
+    var apexLineChart = new ApexCharts(
+        document.querySelector('#chart-turning-rates-monthly'),
         apexLineChartOptions
     );
     apexLineChart.render();

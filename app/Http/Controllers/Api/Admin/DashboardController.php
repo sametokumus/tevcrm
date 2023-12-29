@@ -3277,6 +3277,126 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getMonthlyTurningRates($owner_id)
+    {
+        try {
+            $currentYearArray = array();
+            $previousYearArray = array();
+
+            $currentYear = date('Y');
+            $previousYear = $currentYear - 1;
+
+            for ($month = 1; $month <= 12; $month++) {
+                $month_array = array();
+                $month_array['year'] = $currentYear;
+                $month_array['month'] = $month;
+                array_push($currentYearArray, $month_array);
+
+                $month_array2 = array();
+                $month_array2['year'] = $previousYear;
+                $month_array2['month'] = $month;
+                array_push($previousYearArray, $month_array2);
+            }
+
+            $turning_rates = array();
+            $previous_turning_rates = array();
+
+            foreach ($currentYearArray as $currentMonth){
+
+                // talep sayısı
+                $total_request = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                    ->whereYear('sales.created_at', $currentMonth['year'])
+                    ->whereMonth('sales.created_at', $currentMonth['month']);
+                if ($owner_id != 0){
+                    $total_request = $total_request
+                        ->where('sales.owner_id', $owner_id);
+                }
+                $total_request = $total_request
+                    ->get()->count();
+
+
+                // sipariş sayısı
+                $total_sale = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
+                if ($owner_id != 0){
+                    $total_sale = $total_sale
+                        ->where('sales.owner_id', $owner_id);
+                }
+                $total_sale = $total_sale
+                    ->get()->count();
+
+                $currentMonth['total_request'] = $total_request;
+                $currentMonth['total_sale'] = $total_sale;
+                $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2,",","");
+                array_push($turning_rates, $currentMonth);
+            }
+
+            foreach ($previousYearArray as $currentMonth){
+
+                // talep sayısı
+                $total_request = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                    ->whereYear('sales.created_at', $currentMonth['year'])
+                    ->whereMonth('sales.created_at', $currentMonth['month']);
+                if ($owner_id != 0){
+                    $total_request = $total_request
+                        ->where('sales.owner_id', $owner_id);
+                }
+                $total_request = $total_request
+                    ->get()->count();
+
+
+                // sipariş sayısı
+                $total_sale = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
+                if ($owner_id != 0){
+                    $total_sale = $total_sale
+                        ->where('sales.owner_id', $owner_id);
+                }
+                $total_sale = $total_sale
+                    ->get()->count();
+
+                $currentMonth['total_request'] = $total_request;
+                $currentMonth['total_sale'] = $total_sale;
+                $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2,",","");
+                array_push($previous_turning_rates, $currentMonth);
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
+                'turning_rates' => $turning_rates,
+                'previous_turning_rates' => $previous_turning_rates
+            ]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 
     public function getBestSalesLastNinetyDays($owner_id)
