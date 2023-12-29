@@ -1085,7 +1085,6 @@ async function getMonthlyProfitRates(){
 async function getMonthlyTurningRates(){
 
     let data = await serviceGetMonthlyTurningRates(dash_owner);
-    console.log(data)
     let turning_rates = data.turning_rates;
     let previous_turning_rates = data.previous_turning_rates;
 
@@ -1104,7 +1103,6 @@ async function getMonthlyTurningRates(){
     $.each(previous_turning_rates, function (i, rate) {
         yAxisArrayPrevious.push(rate.turning_rate);
     });
-    console.log(yAxisArray)
 
     var apexLineChartOptions = {
         chart: {
@@ -1273,6 +1271,7 @@ async function initSaleHistory(){
     let actions = data.actions;
     console.log(data)
 
+    $('#sales-history-table .spinners').remove();
     $('#sales-history-table tbody tr').remove();
 
     $.each(actions, function (i, action) {
