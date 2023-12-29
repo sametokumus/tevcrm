@@ -299,8 +299,8 @@ async function getApprovedMonthlySales(){
 
     let data = await serviceGetApprovedMonthlySales(dash_owner);
     // let sales = data.sales.reverse();
-    let sales = data.sales;
-    let previous_sales = data.previous_sales;
+    let sales = data.sales.reverse();
+    let previous_sales = data.previous_sales.reverse();
 
     let xAxisArray = [];
     let yAxisArray = [];
