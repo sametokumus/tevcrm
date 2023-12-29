@@ -1157,7 +1157,7 @@ async function getMonthlyTurningRates(){
         ],
         markers: { size: 4 },
         xaxis: { categories: xAxisArray },
-        yaxis: { min: 0, max: 250 }
+        yaxis: { min: 0, max: 100 }
     };
     $('#chart-turning-rates-monthly .spinners').remove();
     var apexLineChart = new ApexCharts(
