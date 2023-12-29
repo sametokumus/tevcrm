@@ -352,7 +352,7 @@ async function getApprovedMonthlySales(){
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '50%',
+                columnWidth: '80%',
                 endingShape: 'rounded'
             },
         },
@@ -364,7 +364,7 @@ async function getApprovedMonthlySales(){
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#90ee7e', '#90ee7e'],
+        colors: ['#8d989d', '#90ee7e'],
         series: [
             {
                 name: previousYear,
