@@ -297,8 +297,8 @@ async function getApprovedMonthlySales(){
     let data = await serviceGetDashboardApprovedSales(dash_owner);
     console.log(data)
     // let sales = data.sales.reverse();
-    let sales = data.sales.reverse();
-    let previous_sales = data.previous_sales.reverse();
+    let sales = data.sales;
+    let previous_sales = data.previous_sales;
 
     let xAxisArray = [];
     let yAxisArray = [];
@@ -352,7 +352,7 @@ async function getApprovedMonthlySales(){
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '20%',
+                columnWidth: '50%',
                 endingShape: 'rounded'
             },
         },
