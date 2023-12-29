@@ -3032,6 +3032,15 @@ async function serviceGetTotalProfitRate(owner_id) {
     }
 }
 
+async function serviceGetMonthlyProfitRates(owner_id) {
+    const data = await fetchDataGet('/admin/dashboard/getMonthlyProfitRates/' + owner_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetMonthlyProfitRatesLastTwelveMonths(owner_id) {
     const data = await fetchDataGet('/admin/dashboard/getMonthlyProfitRatesLastTwelveMonths/' + owner_id, 'application/json');
     if (data.status == "success") {

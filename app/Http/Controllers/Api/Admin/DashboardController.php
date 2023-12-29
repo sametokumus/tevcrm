@@ -3069,6 +3069,211 @@ class DashboardController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function getMonthlyProfitRates($owner_id)
+    {
+        try {
+            $currentYearArray = array();
+            $previousYearArray = array();
+
+            $currentYear = date('Y');
+            $previousYear = $currentYear - 1;
+
+            for ($month = 1; $month <= 12; $month++) {
+                $month_array = array();
+                $month_array['year'] = $currentYear;
+                $month_array['month'] = $month;
+                array_push($currentYearArray, $month_array);
+
+                $month_array2 = array();
+                $month_array2['year'] = $previousYear;
+                $month_array2['month'] = $month;
+                array_push($previousYearArray, $month_array2);
+            }
+
+            $profit_rates = array();
+            $previous_profit_rates = array();
+
+            foreach ($currentYearArray as $currentMonth){
+
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'approved')
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
+                    ->get();
+
+                $month = array();
+                $month['year'] = $currentMonth['year'];
+                $month['month'] = $currentMonth['month'];
+
+                $sale_total = 0;
+                $offer_total = 0;
+                foreach ($sale_items as $sale){
+
+                    $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($sale_offers as $sale_offer){
+                        if ($sale->currency == 'TRY'){
+                            $sale_total += $sale_offer->sale_price;
+                            $offer_total += $sale_offer->offer_price;
+                        }else if ($sale->currency == 'USD'){
+                            $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                        }else if ($sale->currency == 'EUR'){
+                            $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }
+                    }
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == $sale->currency){
+                            $sale_total += $expense->price;
+                        }else{
+                            if ($expense->currency == 'TRY') {
+                                $sc = strtolower($sale->currency);
+                                $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                            }else{
+                                if ($sale->currency == 'TRY') {
+                                    $ec = strtolower($expense->currency);
+                                    $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                                }else{
+                                    $ec = strtolower($expense->currency);
+                                    $sc = strtolower($sale->currency);
+                                    if ($sale->{$sc.'_rate'} != 0) {
+                                        $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                    }else{
+                                        $expense_price = 0;
+                                    }
+                                }
+                            }
+                            $sale_total += $expense_price;
+                        }
+                    }
+
+
+                }
+
+                if ($offer_total == 0 || $sale_total == 0) {
+                    $profit_rate = 0;
+                }else {
+                    $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+                }
+
+                $month['offer_total'] = $offer_total;
+                $month['sale_total'] = $sale_total;
+                $month['profit_rate'] = number_format($profit_rate, 2,".","");
+                array_push($profit_rates, $month);
+            }
+
+            foreach ($previousYearArray as $currentMonth){
+
+                $sale_items = DB::table('sales AS s')
+                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('s.sale_id', '=', 'sh.sale_id')
+                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                    })
+                    ->where('s.active', '=', 1)
+                    ->where('statuses.period', '=', 'approved')
+                    ->whereYear('sh.created_at', $currentMonth['year'])
+                    ->whereMonth('sh.created_at', $currentMonth['month']);
+
+                if ($owner_id != 0){
+                    $sale_items = $sale_items
+                        ->where('s.owner_id', $owner_id);
+                }
+
+                $sale_items = $sale_items
+                    ->get();
+
+                $month = array();
+                $month['year'] = $currentMonth['year'];
+                $month['month'] = $currentMonth['month'];
+
+                $sale_total = 0;
+                $offer_total = 0;
+                foreach ($sale_items as $sale){
+
+                    $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($sale_offers as $sale_offer){
+                        if ($sale->currency == 'TRY'){
+                            $sale_total += $sale_offer->sale_price;
+                            $offer_total += $sale_offer->offer_price;
+                        }else if ($sale->currency == 'USD'){
+                            $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                        }else if ($sale->currency == 'EUR'){
+                            $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }
+                    }
+
+                    //ek giderler
+                    $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                    foreach ($expenses as $expense){
+                        if ($expense->currency == $sale->currency){
+                            $sale_total += $expense->price;
+                        }else{
+                            if ($expense->currency == 'TRY') {
+                                $sc = strtolower($sale->currency);
+                                $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                            }else{
+                                if ($sale->currency == 'TRY') {
+                                    $ec = strtolower($expense->currency);
+                                    $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                                }else{
+                                    $ec = strtolower($expense->currency);
+                                    $sc = strtolower($sale->currency);
+                                    if ($sale->{$sc.'_rate'} != 0) {
+                                        $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                    }else{
+                                        $expense_price = 0;
+                                    }
+                                }
+                            }
+                            $sale_total += $expense_price;
+                        }
+                    }
+
+
+                }
+
+                if ($offer_total == 0 || $sale_total == 0) {
+                    $profit_rate = 0;
+                }else {
+                    $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+                }
+
+                $month['offer_total'] = $offer_total;
+                $month['sale_total'] = $sale_total;
+                $month['profit_rate'] = number_format($profit_rate, 2,".","");
+                array_push($previous_profit_rates, $month);
+            }
+
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rates' => $profit_rates]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
 
     public function getBestSalesLastNinetyDays($owner_id)

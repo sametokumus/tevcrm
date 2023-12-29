@@ -995,7 +995,7 @@ async function getDashboardStats(){
 
 async function getMonthlyProfitRates(){
 
-    let data = await serviceGetMonthlyProfitRatesLastTwelveMonths(dash_owner);
+    let data = await serviceGetMonthlyProfitRates(dash_owner);
     let profit_rates = data.profit_rates.reverse();
 
     let xAxisArray = [];
