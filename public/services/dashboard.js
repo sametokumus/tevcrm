@@ -32,6 +32,7 @@
 
         getTotalSales();
         getTotalProfitRate();
+        getDashboardStats();
         getLastMonthSales();
         getApprovedMonthlySales();
         getCompletedMonthlySales();
@@ -963,6 +964,20 @@ async function getTotalProfitRate(){
     $('#total-profit-box .spinners').remove();
 
     $('#total-profit-box h5').append(profit_rate + '%');
+
+}
+
+async function getDashboardStats(){
+
+    let data = await serviceGetDashboardStats(dash_owner);
+    let offer_turning_rate = data.offer_turning_rate;
+    let turnover_rate = data.turnover_rate;
+
+    $('#offer-turning-box .spinners').remove();
+    $('#offer-turning-box h5').append(offer_turning_rate + '%');
+
+    $('#turnover-box .spinners').remove();
+    $('#turnover-box h5').append(turnover_rate + '%');
 
 }
 

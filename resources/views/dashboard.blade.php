@@ -45,7 +45,7 @@ $extra_js='
 
     <div class="row">
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card bg-theme-200 mb-3">
 
@@ -84,7 +84,7 @@ $extra_js='
         </div>
 
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card bg-warning-200 mb-3">
 
@@ -123,7 +123,7 @@ $extra_js='
         </div>
 
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card bg-info-200 mb-3">
 
@@ -162,7 +162,7 @@ $extra_js='
         </div>
 
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card bg-danger-200 mb-3">
 
@@ -201,7 +201,7 @@ $extra_js='
         </div>
 
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card mb-3">
 
@@ -243,7 +243,7 @@ $extra_js='
 
     <div class="row sparkboxes">
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card mb-3">
 
@@ -284,7 +284,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card mb-3">
 
@@ -325,7 +325,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card mb-3">
 
@@ -366,7 +366,7 @@ $extra_js='
 
         </div>
 
-        <div class="col-xl-2 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
 
             <div class="card mb-3">
 
@@ -391,6 +391,77 @@ $extra_js='
 
                     <div class="box box4">
                         <div id="spark4"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-2 col-lg-2">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">TEKLİFLERİN SİPARİŞE DÖNME ORANI</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="offer-turning-box">
+                        <div class="col-12">
+                            <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">ÖNCEKİ AYA GÖRE CİRO ORANI</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="row align-items-center mb-2" id="turnover-box">
+                        <div class="col-12">
+                            <h5 class="mb-0"></h5>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

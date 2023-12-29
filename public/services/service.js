@@ -2649,6 +2649,15 @@ async function serviceGetLastMonthSales(dash_owner) {
     }
 }
 
+async function serviceGetDashboardStats(dash_owner) {
+    const data = await fetchDataGet('/admin/dashboard/getDashboardStats/' + dash_owner, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetLastMonthSalesByAdmin(id) {
     const data = await fetchDataGet('/admin/dashboard/getLastMonthSalesByAdmin/' + id, 'application/json');
     if (data.status == "success") {
