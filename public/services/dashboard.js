@@ -996,14 +996,23 @@ async function getDashboardStats(){
 async function getMonthlyProfitRates(){
 
     let data = await serviceGetMonthlyProfitRates(dash_owner);
-    let profit_rates = data.profit_rates.reverse();
+    let profit_rates = data.profit_rates;
+    let previous_profit_rates = data.previous_profit_rates;
 
     let xAxisArray = [];
     let yAxisArray = [];
+    let yAxisArrayPrevious = [];
+
+    let currentYear = new Date().getFullYear();
+    let previousYear = currentYear - 1;
 
     $.each(profit_rates, function (i, rate) {
-        xAxisArray.push(rate.month + "/" + rate.year);
+        xAxisArray.push(rate.month);
         yAxisArray.push(rate.profit_rate);
+    });
+
+    $.each(previous_profit_rates, function (i, rate) {
+        yAxisArrayPrevious.push(rate.profit_rate);
     });
 
     var apexLineChartOptions = {
@@ -1027,7 +1036,7 @@ async function getMonthlyProfitRates(){
             horizontalAlign: 'right',
             floating: true
         },
-        colors: [app.color.theme],
+        colors: ['#8d989d', app.color.theme],
         dataLabels: {
             enabled: true,
             offsetY: 1,
@@ -1053,7 +1062,8 @@ async function getMonthlyProfitRates(){
             }
         },
         series: [
-            { name: 'Karlılık', data: yAxisArray }
+            { name: previousYear, data: yAxisArrayPrevious },
+            { name: currentYear, data: yAxisArray }
         ],
         markers: { size: 4 },
         xaxis: { categories: xAxisArray },

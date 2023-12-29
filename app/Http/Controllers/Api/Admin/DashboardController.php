@@ -3269,7 +3269,10 @@ class DashboardController extends Controller
 
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rates' => $profit_rates]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
+                'profit_rates' => $profit_rates,
+                'previous_profit_rates' => $previous_profit_rates
+            ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
