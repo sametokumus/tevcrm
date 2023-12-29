@@ -1219,6 +1219,55 @@ $extra_js='
             </div>
 
         </div>
+
+
+        <div class="col-12">
+
+            <!-- sipariş durum değişiklikleri -->
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <div class="d-flex fw-bold small mb-3">
+                        <span class="flex-grow-1">SON SİPARİŞ İŞLEMLERİ</span>
+                        <a href="#" data-toggle="card-expand"
+                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="sales-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Müşteri</th>
+                                <th>Kullanıcı</th>
+                                <th>İşlem Tarihi</th>
+                                <th class="text-right">Önceki Durum</th>
+                                <th><i class="bi bi-arrow-90deg-right"></i> Güncel Durum</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="spinners">
+                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
 </div>

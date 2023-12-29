@@ -47,6 +47,7 @@
         getCustomerByNotSaleLongTimes();
         getCustomerByNotSale();
         getBestSalesLastNinetyDays();
+        initSaleHistory();
 
 	});
 
@@ -1157,7 +1158,7 @@ async function getMonthlyTurningRates(){
         ],
         markers: { size: 4 },
         xaxis: { categories: xAxisArray },
-        yaxis: { min: 0, max: 100 }
+        yaxis: { min: 0, max: 50 }
     };
     $('#chart-turning-rates-monthly .spinners').remove();
     var apexLineChart = new ApexCharts(
@@ -1265,4 +1266,46 @@ async function getBestSalesLastNinetyDays(){
     });
 
     reLoadGrid();
+}
+
+async function initSaleHistory(){
+    let data = await serviceGetSaleHistoryActions();
+    let actions = data.actions;
+    console.log(data)
+
+    $('#sales-history-table tbody tr').remove();
+
+    $.each(actions, function (i, action) {
+        let last_time = formatDateAndTimeDESC(action.last_status.created_at, "/");
+
+        previous_status_name = action.previous_status.status_name;
+        if (action.previous_status == 0){
+            previous_status_name = '-';
+        }
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ action.sale.customer_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ action.last_status.user_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ last_time +'</small></td>\n' +
+            '           <td class="text-right">\n' +
+            '               <span class="badge bg-theme text-theme-900 bg-opacity-50 rounded-0 pt-5px" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
+            '               <span class="badge bg-theme text-white rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
+            '           </td>\n' +
+            '       </tr>';
+
+        $('#sales-history-table tbody').append(item);
+    });
 }
