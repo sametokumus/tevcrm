@@ -972,12 +972,24 @@ async function getDashboardStats(){
     let data = await serviceGetDashboardStats(dash_owner);
     let offer_turning_rate = data.offer_turning_rate;
     let turnover_rate = data.turnover_rate;
+    let total_request = data.total_request;
+    let total_sale = data.total_sale;
+    let total_activity = data.total_activity;
 
     $('#offer-turning-box .spinners').remove();
     $('#offer-turning-box h5').append(offer_turning_rate + '%');
 
     $('#turnover-box .spinners').remove();
     $('#turnover-box h5').append(turnover_rate + '%');
+
+    $('#total-request-box .spinners').remove();
+    $('#total-request-box h5').append(total_request);
+
+    $('#total-sale-box .spinners').remove();
+    $('#total-sale-box h5').append(total_sale);
+
+    $('#total-activity-box .spinners').remove();
+    $('#total-activity-box h5').append(total_activity);
 
 }
 
