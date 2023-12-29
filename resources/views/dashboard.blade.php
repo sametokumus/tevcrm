@@ -415,7 +415,7 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TEKLİFLERİN SİPARİŞE DÖNME ORANI</span>
+                        <span class="flex-grow-1">TEKLİF ONAYLANMA ORANI</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>

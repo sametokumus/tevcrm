@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Contact;
@@ -3314,13 +3315,56 @@ class DashboardController extends Controller
             }
 
 
+
+            // bu ay talep sayısı
+            $total_request = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                ->whereYear('sales.created_at', $currentYear)
+                ->whereMonth('sales.created_at', $currentMonth);
+            if ($owner_id != 0){
+                $total_request = $total_request
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $total_request = $total_request
+                ->get()->count();
+
+
+            // bu ay sipariş sayısı
+            $total_sale = DB::table('sales AS s')
+                ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->join('status_histories AS sh', function ($join) {
+                    $join->on('s.sale_id', '=', 'sh.sale_id')
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                })
+                ->where('s.active', '=', 1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->whereYear('sh.created_at', $currentYear)
+                ->whereMonth('sh.created_at', $currentMonth);
+            if ($owner_id != 0){
+                $total_sale = $total_sale
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $total_sale = $total_sale
+                ->get()->count();
+
+
+            // bu ay aktivite sayısı
+            $total_activity = Activity::query()
+                ->where('active',1)
+                ->whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $currentMonth)
+                ->get()->count();
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
                 'offer_turning_rate' => $offer_turning_rate,
                 'turnover_rate' => $turnover_rate,
-                '$this_month_price' => $this_month_price,
-                '$previous_month_price' => $previous_month_price,
-                '$currentMonth' => $currentMonth,
-                '$previousMonth' => $previousMonth
+                'total_request' => $total_request,
+                'total_sale' => $total_sale,
+                'total_activity' => $total_activity
             ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
