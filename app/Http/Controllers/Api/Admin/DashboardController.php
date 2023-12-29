@@ -3355,8 +3355,8 @@ class DashboardController extends Controller
             // bu ay aktivite sayısı
             $total_activity = Activity::query()
                 ->where('active',1)
-                ->whereYear('created_at', $currentYear)
-                ->whereMonth('created_at', $currentMonth)
+                ->whereYear('start', $currentYear)
+                ->whereMonth('start', $currentMonth)
                 ->get()->count();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
