@@ -3340,7 +3340,11 @@ class DashboardController extends Controller
 
                 $currentMonth['total_request'] = $total_request;
                 $currentMonth['total_sale'] = $total_sale;
-                $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2,",","");
+                if ($total_sale != 0 && $total_request != 0) {
+                    $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2, ",", "");
+                }else{
+                    $currentMonth['turning_rate'] = '0,00';
+                }
                 array_push($turning_rates, $currentMonth);
             }
 
@@ -3383,7 +3387,11 @@ class DashboardController extends Controller
 
                 $currentMonth['total_request'] = $total_request;
                 $currentMonth['total_sale'] = $total_sale;
-                $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2,",","");
+                if ($total_sale != 0 && $total_request != 0) {
+                    $currentMonth['turning_rate'] = number_format($total_sale * 100 / $total_request, 2, ",", "");
+                }else{
+                    $currentMonth['turning_rate'] = '0,00';
+                }
                 array_push($previous_turning_rates, $currentMonth);
             }
 
