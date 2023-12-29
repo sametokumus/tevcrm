@@ -486,7 +486,7 @@ async function getCompletedMonthlySales(){
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '20%',
+                columnWidth: '80%',
                 endingShape: 'rounded'
             },
         },
@@ -623,7 +623,7 @@ async function getPotentialMonthlySales(){
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '20%',
+                columnWidth: '80%',
                 endingShape: 'rounded',
             },
         },
@@ -760,7 +760,7 @@ async function getCancelledMonthlySales(){
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '20%',
+                columnWidth: '80%',
                 endingShape: 'rounded'
             },
         },
