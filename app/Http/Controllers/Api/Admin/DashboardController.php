@@ -2614,7 +2614,7 @@ class DashboardController extends Controller
                 ->limit(12)
                 ->get();
 
-            $admins = Admin::all();
+            $admins = Admin::query()->where('active', 1)->get();
 
             foreach ($admins as $admin) {
 
