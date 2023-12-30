@@ -129,7 +129,38 @@ $extra_js='
 
     <div class="row" id="documents">
 
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-3">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
+                    <a href="img/document/AKV-OFR-12000982.pdf" target="_blank" class="text-dark text-decoration-none">                    <div class="flex-fill">
+                            <h5 class="mb-0"><i class="fa fa-file-pdf"></i> Fiyat Teklifi</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-xl-3 col-lg-6">
+            <a href="img/document/AKV-OFR-12000982.pdf" target="_blank" class="btn btn-theme text-white text-decoration-none">
+                <div class="flex-fill">
+                    <h5 class="mb-0"><i class="fa fa-file-pdf"></i> Fiyat Teklifi</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+            <a href="img/document/AKV-OFR-12000982.pdf" target="_blank" class="btn btn-default text-dark text-decoration-none">
+                <div class="flex-fill">
+                    <h5 class="mb-0"><i class="fa fa-file-pdf"></i> Fiyat Teklifi</h5>
+                </div>
+            </a>
+        </div>
 
     </div>
     <div class="row">
