@@ -162,8 +162,8 @@ async function initSales(){
         }
 
         if (sale.status.action == "rfq"){
-            status_class = "border-danger text-danger";
-            status_class = "bg-danger text-white";
+            // status_class = "border-danger text-danger";
+            status_class = "bg-danger text-white shadow-xl";
             btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger">RFQ Oluştur</a>\n';
         }else if (sale.status.action == "rfq-update"){
