@@ -859,3 +859,9 @@ table.dataTable{
 .pointer-event-none {
     pointer-events: none;
 }
+
+.dash-icon{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
