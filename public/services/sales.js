@@ -140,7 +140,8 @@ async function initSales(){
         if (sale.updated_at != null){
             updated_at = formatDateAndTimeDESC(sale.updated_at, "/");
         }
-        let status_class = "border-theme text-theme";
+        // let status_class = "border-theme text-theme";
+        status_class = "bg-theme border-none text-white shadow-xl";
         let btn_list = '<div class="btn-list">\n';
         // btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openStatusModal(\''+ sale.sale_id +'\', \''+ sale.status_id +'\')">\n' +
         //     '           <span class="fe fe-refresh-cw"> Durum Değiştir\n' +
@@ -163,60 +164,74 @@ async function initSales(){
 
         if (sale.status.action == "rfq"){
             // status_class = "border-danger text-danger";
-            status_class = "bg-danger text-white shadow-xl";
+            status_class = "bg-danger border-none text-white shadow-xl";
             btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-danger">Talebi Güncelle</a>\n' +
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-danger">RFQ Oluştur</a>\n';
         }else if (sale.status.action == "rfq-update"){
-            status_class = "border-pink text-pink";
+            // status_class = "border-pink text-pink";
+            status_class = "bg-pink border-none text-white shadow-xl";
             btn_list += '<a href="offer-request-products/'+ sale.request_id +'" class="btn btn-sm btn-pink">Talebi Güncelle</a>\n' +
                 '        <a href="offer/'+ sale.request_id +'" class="btn btn-sm btn-pink">Tedarikçi Fiyatları Gir</a>\n';
         }else if (sale.status.action == "offer"){
-            status_class = "border-warning text-warning";
+            // status_class = "border-warning text-warning";
+            status_class = "bg-warning border-none text-white shadow-xl";
             btn_list += '<a href="sw-2-new/'+ sale.request_id +'" class="btn btn-sm btn-warning">Teklif Oluştur</a>\n';
         }else if (sale.status.action == "offer-update"){
-            status_class = "border-yellow text-yellow";
+            // status_class = "border-yellow text-yellow";
+            status_class = "bg-yellow border-none text-white shadow-xl";
             btn_list += '<a href="sw-3/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Fiyatları Güncelle</a>\n';
         }else if (sale.status.action == "offer-price-rev"){
-            status_class = "border-yellow text-yellow";
+            // status_class = "border-yellow text-yellow";
+            status_class = "bg-yellow border-none text-white shadow-xl";
             btn_list += '<a href="offer-rev/'+ sale.request_id +'" class="btn btn-sm btn-yellow">Tedarik Fiyatlarını Güncelle</a>\n';
         }else if (sale.status.action == "quote"){
-            status_class = "border-lime text-lime";
+            // status_class = "border-lime text-lime";
+            status_class = "bg-lime border-none text-white shadow-xl";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
         }else if (sale.status.action == "offer-rev"){
-            status_class = "border-warning text-warning";
+            // status_class = "border-warning text-warning";
+            status_class = "bg-warning border-none text-white shadow-xl";
             btn_list += '<a href="sw-3-rev/'+ sale.sale_id +'" class="btn btn-sm btn-warning">Teklifi Revize Et</a>\n';
         }else if (sale.status.action == "admin-conf"){
-            status_class = "border-yellow text-yellow";
+            // status_class = "border-yellow text-yellow";
+            status_class = "bg-yellow border-none text-white shadow-xl";
             btn_list += '<a href="sw-4/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Teklifi Onayla</a>\n';
         }else if (sale.status.action == "admin-conf-success"){
-            status_class = "border-default text-default";
+            // status_class = "border-default text-default";
+            status_class = "bg-default border-none text-white shadow-xl";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Quatotion PDF</a>\n';
         }else if (sale.status.action == "admin-rev-conf"){
-            status_class = "border-yellow text-yellow";
+            // status_class = "border-yellow text-yellow";
+            status_class = "bg-yellow border-none text-white shadow-xl";
             btn_list += '<a href="sw-4-rev/'+ sale.sale_id +'" class="btn btn-sm btn-yellow">Revize Teklifi Onayla</a>\n';
         }else if (sale.status.action == "admin-rev-conf-success"){
-            status_class = "border-default text-default";
+            // status_class = "border-default text-default";
+            status_class = "bg-default border-none text-white shadow-xl";
             btn_list += '<a href="quote-print/'+ sale.sale_id +'" class="btn btn-sm btn-lime">Rv. Quatotion PDF</a>\n';
         }else if (sale.status.action == "oc-po"){
-            status_class = "border-green text-green";
+            // status_class = "border-green text-green";
+            status_class = "bg-green border-none text-white shadow-xl";
             btn_list += '<a href="order-confirmation-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Order Conf. PDF</a>\n';
             let role = localStorage.getItem('userRole');
             if (role == 1 || role == 2 || role == 3){
                 btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Supp. PO PDF</a>\n';
             }
         }else if (sale.status.action == "inv"){
-            status_class = "border-indigo text-indigo";
+            // status_class = "border-indigo text-indigo";
+            status_class = "bg-indigo border-none text-white shadow-xl";
 
             btn_list += '<a href="proforma-invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Proforma INV. PDF</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
         }else if (sale.status.action == "pl-inv"){
-            status_class = "border-indigo text-indigo";
+            // status_class = "border-indigo text-indigo";
+            status_class = "bg-indigo border-none text-white shadow-xl";
 
             // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
             btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
             btn_list += '<a href="invoice-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Inv. PDF</a>\n';
         }else if (sale.status.action == "pl-inv-exp"){
-            status_class = "border-indigo text-indigo";
+            // status_class = "border-indigo text-indigo";
+            status_class = "bg-indigo border-none text-white shadow-xl";
 
             // btn_list += '<a href="packing-list-print/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n';
             btn_list += '<a href="packing-list/'+ sale.sale_id +'" class="btn btn-sm btn-indigo">Packing Lists</a>\n';
@@ -225,7 +240,8 @@ async function initSales(){
                 '           <span class="fe fe-refresh-cw"> Nakliye Tutarı\n' +
                 '        </button>\n';
         }else if (sale.status.action == "admin-conf-failed" || sale.status.action == "admin-rev-conf-failed"){
-            status_class = "border-default text-default";
+            // status_class = "border-default text-default";
+            status_class = "bg-default border-none text-white shadow-xl";
         }
 
         // if (sale.status.period == "approved" || sale.status.period == "completed"){
