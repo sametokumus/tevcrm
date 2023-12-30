@@ -836,21 +836,25 @@ table.dataTable{
     overflow: hidden;
     overflow-y: auto;
 }
-.card-body.fixed-table-card::-webkit-scrollbar {
-    width: 12px; /* Width of the scrollbar */
+.card-body.fixed-table-card::-webkit-scrollbar ,
+.table-responsive::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
 }
 
-.card-body.fixed-table-card::-webkit-scrollbar-track {
+.card-body.fixed-table-card::-webkit-scrollbar-track ,
+.table-responsive::-webkit-scrollbar-track {
     background-color: #f1f1f1; /* Color of the track */
 }
 
 /* Define the styles for the scrollbar thumb (the draggable handle) */
-.card-body.fixed-table-card::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color of the thumb */
+.card-body.fixed-table-card::-webkit-scrollbar-thumb ,
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #bbb; /* Color of the thumb */
     border-radius: 6px; /* Rounded corners for the thumb */
 }
 
 /* Hover styles for the thumb */
-.card-body.fixed-table-card::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Color of the thumb on hover */
+.card-body.fixed-table-card::-webkit-scrollbar-thumb:hover ,
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--bs-border-color-rgb), .75); /* Color of the thumb on hover */
 }
