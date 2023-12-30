@@ -318,13 +318,13 @@ async function initDocuments(sale_id){
 
             let item = '<div class="col-xl-3 col-lg-6">\n';
         if (document.file_url != null) {
-            item += '<a href="' + document.file_url + '" target="_blank" class="btn btn-theme d-block text-decoration-none py-2 mb-3">\n' +
+            item += '<a href="' + document.file_url + '" target="_blank" class="btn btn-theme d-block shadow-xl text-decoration-none py-2 mb-3">\n' +
                 '        <div class="flex-fill">\n' +
                 '            <h5 class="mb-0 text-white"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
                 '        </div>\n' +
                 '    </a>\n';
         }else{
-            item += '<a href="#" target="_blank" class="btn btn-default d-block text-decoration-none py-2 mb-3 pointer-event-none">\n' +
+            item += '<a href="#" target="_blank" class="btn btn-default d-block shadow-xl text-decoration-none py-2 mb-3 pointer-event-none">\n' +
                 '        <div class="flex-fill">\n' +
                 '            <h5 class="mb-0 text-white"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
                 '        </div>\n' +
