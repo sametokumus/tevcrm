@@ -3538,8 +3538,12 @@ class DashboardController extends Controller
 
             //ciro oranı
             $currentYear = date('Y');
+            $previousYear = $currentYear;
             $currentMonth = date('n');
             $previousMonth = date('n', strtotime('last month'));
+            if ($previousMonth == 12){
+                $previousYear = $currentYear - 1;
+            }
 
             //bu ay
             $this_month_sales = DB::table('sales AS s')
@@ -3603,7 +3607,7 @@ class DashboardController extends Controller
                 ->where('s.active', '=', 1)
                 ->where('statuses.period', '=', 'completed')
 //                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                ->whereYear('sh.created_at', $currentYear)
+                ->whereYear('sh.created_at', $previousYear)
                 ->whereMonth('sh.created_at', $previousMonth);
 
             if ($owner_id != 0){
@@ -3667,6 +3671,43 @@ class DashboardController extends Controller
                 ->get()->count();
 
 
+            // önceki ay talep sayısı
+            $previous_total_request = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                ->whereYear('sales.created_at', $previousYear)
+                ->whereMonth('sales.created_at', $previousMonth);
+            if ($owner_id != 0){
+                $previous_total_request = $previous_total_request
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $previous_total_request = $previous_total_request
+                ->get()->count();
+
+            //talep ikon
+            if ($total_request == $previous_total_request){
+                $total_request_icon = '-';
+            }else if ($total_request > $previous_total_request){
+                $total_request_icon = 'up';
+            }else{
+                $total_request_icon = 'down';
+            }
+
+            // bu yıl talep sayısı
+            $year_total_request = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue' OR statuses.period = 'cancelled')")
+                ->whereYear('sales.created_at', $currentYear);
+            if ($owner_id != 0){
+                $year_total_request = $year_total_request
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $year_total_request = $year_total_request
+                ->get()->count();
+
+
             // bu ay sipariş sayısı
             $total_sale = DB::table('sales AS s')
                 ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
@@ -3688,6 +3729,56 @@ class DashboardController extends Controller
                 ->get()->count();
 
 
+            // önceki ay sipariş sayısı
+            $previous_total_sale = DB::table('sales AS s')
+                ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->join('status_histories AS sh', function ($join) {
+                    $join->on('s.sale_id', '=', 'sh.sale_id')
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                })
+                ->where('s.active', '=', 1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->whereYear('sh.created_at', $previousYear)
+                ->whereMonth('sh.created_at', $previousMonth);
+            if ($owner_id != 0){
+                $previous_total_sale = $previous_total_sale
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $previous_total_sale = $previous_total_sale
+                ->get()->count();
+
+            //sipariş ikon
+            if ($total_sale == $previous_total_sale){
+                $total_sale_icon = '-';
+            }else if ($total_sale > $previous_total_sale){
+                $total_sale_icon = 'up';
+            }else{
+                $total_sale_icon = 'down';
+            }
+
+
+            // bu yıl sipariş sayısı
+            $year_total_sale = DB::table('sales AS s')
+                ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->join('status_histories AS sh', function ($join) {
+                    $join->on('s.sale_id', '=', 'sh.sale_id')
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                })
+                ->where('s.active', '=', 1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved' OR statuses.period = 'continue')")
+                ->whereYear('sh.created_at', $currentYear);
+            if ($owner_id != 0){
+                $year_total_sale = $year_total_sale
+                    ->where('sales.owner_id', $owner_id);
+            }
+            $year_total_sale = $year_total_sale
+                ->get()->count();
+
+
             // bu ay aktivite sayısı
             $total_activity = Activity::query()
                 ->where('active',1)
@@ -3695,12 +3786,41 @@ class DashboardController extends Controller
                 ->whereMonth('start', $currentMonth)
                 ->get()->count();
 
+            // önceki ay aktivite sayısı
+            $previous_total_activity = Activity::query()
+                ->where('active',1)
+                ->whereYear('start', $previousYear)
+                ->whereMonth('start', $previousMonth)
+                ->get()->count();
+
+            //aktivite ikon
+            if ($total_activity == $previous_total_activity){
+                $total_activity_icon = '-';
+            }else if ($total_activity > $previous_total_activity){
+                $total_activity_icon = 'up';
+            }else{
+                $total_activity_icon = 'down';
+            }
+
+
+            // bu yıl aktivite sayısı
+            $year_total_activity = Activity::query()
+                ->where('active',1)
+                ->whereYear('start', $currentYear)
+                ->get()->count();
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
                 'offer_turning_rate' => $offer_turning_rate,
                 'turnover_rate' => $turnover_rate,
                 'total_request' => $total_request,
+                'year_total_request' => $year_total_request,
+                'total_request_icon' => $total_request_icon,
                 'total_sale' => $total_sale,
-                'total_activity' => $total_activity
+                'year_total_sale' => $year_total_sale,
+                'total_sale_icon' => $total_sale_icon,
+                'total_activity' => $total_activity,
+                'year_total_activity' => $year_total_activity,
+                'total_activity_icon' => $total_activity_icon
             ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);

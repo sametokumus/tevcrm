@@ -975,8 +975,14 @@ async function getDashboardStats(){
     let offer_turning_rate = data.offer_turning_rate;
     let turnover_rate = data.turnover_rate;
     let total_request = data.total_request;
+    let year_total_request = data.year_total_request;
+    let total_request_icon = data.total_request_icon;
     let total_sale = data.total_sale;
+    let year_total_sale = data.year_total_sale;
+    let total_sale_icon = data.total_sale_icon;
     let total_activity = data.total_activity;
+    let year_total_activity = data.year_total_activity;
+    let total_activity_icon = data.total_activity_icon;
 
     $('#offer-turning-box .spinners').remove();
     $('#offer-turning-box h5').append(offer_turning_rate + '%');
@@ -985,13 +991,37 @@ async function getDashboardStats(){
     $('#turnover-box h5').append(turnover_rate + '%');
 
     $('#total-request-box .spinners').remove();
-    $('#total-request-box h5').append(total_request);
+    $('#total-request-box h5').append(total_request + ' - ' + year_total_request);
+    if(total_request_icon == '-'){
+        total_request_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
+    }else if (total_request_icon == 'up'){
+        total_request_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
+    }else if (total_request_icon == 'down'){
+        total_request_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+    }
+    $('#total-request-box-icon').append(total_request_icon);
 
     $('#total-sale-box .spinners').remove();
-    $('#total-sale-box h5').append(total_sale);
+    $('#total-sale-box h5').append(total_sale + ' - ' + year_total_sale);
+    if(total_sale_icon == '-'){
+        total_sale_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
+    }else if (total_sale_icon == 'up'){
+        total_sale_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
+    }else if (total_sale_icon == 'down'){
+        total_sale_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+    }
+    $('#total-sale-box-icon').append(total_sale_icon);
 
     $('#total-activity-box .spinners').remove();
-    $('#total-activity-box h5').append(total_activity);
+    $('#total-activity-box h5').append(total_activity + ' - ' + year_total_activity);
+    if(total_activity_icon == '-'){
+        total_activity_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
+    }else if (total_activity_icon == 'up'){
+        total_activity_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
+    }else if (total_activity_icon == 'down'){
+        total_activity_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+    }
+    $('#total-activity-box-icon').append(total_activity_icon);
 
 }
 

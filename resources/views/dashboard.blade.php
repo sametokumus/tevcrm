@@ -263,8 +263,8 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon">
-                        <i class="fa fa-wallet fa-3x"></i>
+                    <div class="opacity-2 dash-icon" id="total-request-box-icon">
+
                     </div>
 
                 </div>
@@ -546,8 +546,8 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon">
-                        <i class="fa fa-wallet fa-3x"></i>
+                    <div class="opacity-2 dash-icon" id="total-sale-box-icon">
+
                     </div>
 
                 </div>
@@ -584,8 +584,8 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon">
-                        <i class="fa fa-wallet fa-3x"></i>
+                    <div class="opacity-2 dash-icon" id="total-activity-box-icon">
+
                     </div>
 
                 </div>
