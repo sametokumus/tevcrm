@@ -271,8 +271,13 @@ async function initSales(){
         if (sale.authorization == 0){
             authorization = 'class="disabled"';
         }
+        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-lg fa-fw me-2 fa-star"></i></a>';
+        if (true){
+            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><i class="fas fa-lg fa-fw me-2 fa-star"></i></a>';
+        }
 
         let saleItem = '<tr '+ authorization +'>\n' +
+            '              <td class="bg-dark-100">'+ pinned+'</td>\n' +
             '              <td class="bg-dark-100">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark-100">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
             '              <td class="bg-dark-100">'+ sale.request.company.name +'</td>\n' +
@@ -296,7 +301,7 @@ async function initSales(){
 		responsive: false,
 		columnDefs: [
             {
-                targets: 2,
+                targets: 3,
                 className: 'ellipsis',
                 render: function(data, type, row, meta) {
                     return type === 'display' && data.length > 30 ?
@@ -306,7 +311,7 @@ async function initSales(){
             },
             {
                 type: 'date',
-                targets: 10,
+                targets: 11,
                 render: function(data, type, row) {
                     return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
@@ -329,9 +334,12 @@ async function initSales(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		order: [[10, 'desc']],
+		order: [
+            [0, 'asc'],
+            [11, 'desc']
+        ],
         fixedColumns: {
-        left: 4
+            left: 5
         }
 	});
 }
@@ -490,4 +498,24 @@ async function addShipmentPrice() {
         $('#addShipmentPriceModal').modal('hide');
         document.getElementById('add_shipment_sale_id').value = '';
     }
+}
+
+
+async function addSalePin(event, sale_id){
+    event.preventDefault();
+    // let sale_id = document.getElementById('delete_sale_id').value;
+    // let returned = await serviceGetDeleteSale(sale_id);
+    // if(returned){
+    //     $('#deleteSaleModal').modal('hide');
+    //     await initSales();
+    // }
+}
+async function deleteSalePin(event, sale_id){
+    event.preventDefault();
+    // let sale_id = document.getElementById('delete_sale_id').value;
+    // let returned = await serviceGetDeleteSale(sale_id);
+    // if(returned){
+    //     $('#deleteSaleModal').modal('hide');
+    //     await initSales();
+    // }
 }
