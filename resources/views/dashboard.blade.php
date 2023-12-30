@@ -245,21 +245,26 @@ $extra_js='
 
                 <div class="card-body">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM TALEP (Bu Ay)</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">TOPLAM TALEP (Bu Ay)</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                        </div>
 
-                    <div class="row align-items-center mb-2" id="total-request-box">
-                        <div class="col-12">
-                            <h5 class="mb-0"></h5>
-                            <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                        <div class="row align-items-center mb-2" id="total-request-box">
+                            <div class="col-12">
+                                <h5 class="mb-0"></h5>
+                                <div class="spinners">
+                                    <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="opacity-5">
+                        <i class="fa fa-wallet fa-4x"></i>
                     </div>
 
                 </div>
