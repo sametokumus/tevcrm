@@ -301,6 +301,11 @@ async function initSales(){
 		responsive: false,
 		columnDefs: [
             {
+                targets: 'custom-sort',  // Add this class to the th element where you want a custom order
+                orderable: true,         // Allow ordering on this column
+                orderData: [3, 0],       // Use data from column index 3 for sorting
+            },
+            {
                 targets: 3,
                 className: 'ellipsis',
                 render: function(data, type, row, meta) {
