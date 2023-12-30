@@ -272,11 +272,13 @@ async function initSales(){
             authorization = 'class="disabled"';
         }
         let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-fw fa-star"></i></a>';
+        let pinned_class = '';
         if (sale.pinned == 1){
             pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><i class="fas fa-fw fa-star"></i></a>';
+            pinned_class = 'is_pinned';
         }
 
-        let saleItem = '<tr '+ authorization +'>\n' +
+        let saleItem = '<tr '+ authorization + ' ' + pinned_class +'>\n' +
             '              <td class="bg-dark-100">'+ pinned+'</td>\n' +
             '              <td class="bg-dark-100">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark-100">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
@@ -300,11 +302,6 @@ async function initSales(){
 	$('#sales-datatable').DataTable({
 		responsive: false,
 		columnDefs: [
-            {
-                targets: 'custom-sort',  // Add this class to the th element where you want a custom order
-                orderable: true,         // Allow ordering on this column
-                orderData: [3, 0],       // Use data from column index 3 for sorting
-            },
             {
                 targets: 3,
                 className: 'ellipsis',
@@ -339,10 +336,21 @@ async function initSales(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		order: [
-            [0, 'asc'],
-            // [11, 'desc']
-        ],
+		// order: [
+        //     [0, 'asc'],
+        //     // [11, 'desc']
+        // ],
+        order: [], // Clear default order
+        createdRow: function (row, data, dataIndex) {
+            if ($(row).hasClass('is_pinned')) {
+                // If the row has the class 'is_pinned', set a special order value
+                $(row).data('order', 1);
+            } else {
+                // If the row doesn't have the class 'is_pinned', set a different order value
+                $(row).data('order', 0);
+            }
+        },
+        order: [[0, 'asc']], // Order based on the custom 'order' data
         fixedColumns: {
             left: 5
         }
