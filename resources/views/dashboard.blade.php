@@ -243,7 +243,7 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
 
                     <div class="flex-fill">
                         <div class="d-flex fw-bold small mb-3">
