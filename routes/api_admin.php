@@ -285,6 +285,10 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('sale/addSaleExpense', [SaleController::class, 'addSaleExpense']);
     Route::get('sale/deleteSaleExpense/{expense_id}', [SaleController::class, 'deleteSaleExpense']);
 
+    //Pinned
+    Route::get('sale/addSalePin/{sale_id}', [SaleController::class, 'addSalePin']);
+    Route::get('sale/deleteSalePin/{sale_id}', [SaleController::class, 'deleteSalePin']);
+
     //Contact
     Route::get('contact/getContacts', [ContactController::class, 'getContacts']);
     Route::get('contact/getContactById/{contact_id}', [ContactController::class, 'getContactById']);

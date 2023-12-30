@@ -2367,6 +2367,32 @@ class SaleController extends Controller
         }
     }
 
+    public function addSalePin($sale_id)
+    {
+        try {
+            Sale::query()->where('sale_id', $sale_id)->update([
+                'pinned' => 1
+            ]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function deleteSalePin($sale_id)
+    {
+        try {
+            Sale::query()->where('sale_id', $sale_id)->update([
+                'pinned' => 0
+            ]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getSaleTypes()
     {
         try {

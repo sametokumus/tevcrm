@@ -1766,6 +1766,24 @@ async function serviceGetDeleteSaleExpense(expense_id) {
         return false;
     }
 }
+async function serviceGetAddSalePin(sale_id) {
+    const data = await fetchDataGet('/admin/sale/addSalePin/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteSalePin(sale_id) {
+    const data = await fetchDataGet('/admin/sale/deleteSalePin/' + sale_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 

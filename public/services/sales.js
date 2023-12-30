@@ -503,19 +503,15 @@ async function addShipmentPrice() {
 
 async function addSalePin(event, sale_id){
     event.preventDefault();
-    // let sale_id = document.getElementById('delete_sale_id').value;
-    // let returned = await serviceGetDeleteSale(sale_id);
-    // if(returned){
-    //     $('#deleteSaleModal').modal('hide');
-    //     await initSales();
-    // }
+    let returned = await serviceGetAddSalePin(sale_id);
+    if(returned){
+        await initSales();
+    }
 }
 async function deleteSalePin(event, sale_id){
     event.preventDefault();
-    // let sale_id = document.getElementById('delete_sale_id').value;
-    // let returned = await serviceGetDeleteSale(sale_id);
-    // if(returned){
-    //     $('#deleteSaleModal').modal('hide');
-    //     await initSales();
-    // }
+    let returned = await serviceGetDeleteSalePin(sale_id);
+    if(returned){
+        await initSales();
+    }
 }
