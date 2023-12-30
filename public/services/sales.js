@@ -271,9 +271,9 @@ async function initSales(){
         if (sale.authorization == 0){
             authorization = 'class="disabled"';
         }
-        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-lg fa-fw me-2 fa-star"></i></a>';
-        if (true){
-            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><i class="fas fa-lg fa-fw me-2 fa-star"></i></a>';
+        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-fw fa-star"></i></a>';
+        if (sale.pinned == 1){
+            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><i class="fas fa-fw fa-star"></i></a>';
         }
 
         let saleItem = '<tr '+ authorization +'>\n' +

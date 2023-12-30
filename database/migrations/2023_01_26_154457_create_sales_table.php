@@ -32,6 +32,7 @@ class CreateSalesTable extends Migration
             $table->decimal('eur_rate',10,2, false)->nullable();
             $table->decimal('gbp_rate',10,2, false)->nullable();
             $table->string('currency')->nullable();
+            $table->tinyInteger('pinned')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
