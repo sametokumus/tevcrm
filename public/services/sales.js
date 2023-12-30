@@ -271,10 +271,10 @@ async function initSales(){
         if (sale.authorization == 0){
             authorization = 'disabled';
         }
-        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-fw fa-star"></i></a>';
+        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><span>0</span><i class="far fa-fw fa-star"></i></a>';
         let pinned_class = '';
         if (sale.pinned == 1){
-            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><i class="fas fa-fw fa-star"></i></a>';
+            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><span>1</span><i class="fas fa-fw fa-star"></i></a>';
             pinned_class = 'is_pinned';
         }
 
@@ -336,21 +336,10 @@ async function initSales(){
 		language: {
 			url: "services/Turkish.json"
 		},
-		// order: [
-        //     [0, 'asc'],
-        //     // [11, 'desc']
-        // ],
-        order: [], // Clear default order
-        createdRow: function (row, data, dataIndex) {
-            if ($(row).hasClass('is_pinned')) {
-                // If the row has the class 'is_pinned', set a special order value
-                $(row).data('order', 1);
-            } else {
-                // If the row doesn't have the class 'is_pinned', set a different order value
-                $(row).data('order', 0);
-            }
-        },
-        order: [[0, 'asc']], // Order based on the custom 'order' data
+		order: [
+            [0, 'desc'],
+            // [11, 'desc']
+        ],
         fixedColumns: {
             left: 5
         }
