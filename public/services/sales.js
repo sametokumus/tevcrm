@@ -336,7 +336,7 @@ async function initSales(){
 		},
 		order: [
             [0, 'asc'],
-            [11, 'desc']
+            // [11, 'desc']
         ],
         fixedColumns: {
             left: 5
