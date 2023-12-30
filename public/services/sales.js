@@ -271,10 +271,10 @@ async function initSales(){
         if (sale.authorization == 0){
             authorization = 'disabled';
         }
-        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><span>0</span><i class="far fa-fw fa-star"></i></a>';
+        let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><span class="d-none">0</span><i class="far fa-fw fa-star"></i></a>';
         let pinned_class = '';
         if (sale.pinned == 1){
-            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><span>1</span><i class="fas fa-fw fa-star"></i></a>';
+            pinned = '<a href="#" onclick="deleteSalePin(event, \''+ sale.sale_id +'\');"><span class="d-none">1</span><i class="fas fa-fw fa-star"></i></a>';
             pinned_class = 'is_pinned';
         }
 
@@ -338,7 +338,7 @@ async function initSales(){
 		},
 		order: [
             [0, 'desc'],
-            // [11, 'desc']
+            [11, 'desc']
         ],
         fixedColumns: {
             left: 5
