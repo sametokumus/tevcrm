@@ -263,7 +263,7 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-5">
+                    <div class="opacity-2 icon-absolute">
                         <i class="fa fa-wallet fa-4x"></i>
                     </div>
 
