@@ -568,7 +568,7 @@ $extra_js='
 
                     <div class="flex-fill">
                         <div class="d-flex fw-bold small mb-3">
-                            <span class="flex-grow-1">TOPLAM GÖRÜŞME (Bu Ay - Bu Yıl)</span>
+                            <span class="flex-grow-1">TOPLAM GÖRÜŞME <small>(Bu Ay - Bu Yıl)</small></span>
                             <a href="#" data-toggle="card-expand"
                                class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
