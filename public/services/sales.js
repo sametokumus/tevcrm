@@ -269,7 +269,7 @@ async function initSales(){
         }
         let authorization = '';
         if (sale.authorization == 0){
-            authorization = 'class="disabled"';
+            authorization = 'disabled';
         }
         let pinned = '<a href="#" onclick="addSalePin(event, \''+ sale.sale_id +'\');"><i class="far fa-fw fa-star"></i></a>';
         let pinned_class = '';
@@ -278,7 +278,7 @@ async function initSales(){
             pinned_class = 'is_pinned';
         }
 
-        let saleItem = '<tr '+ authorization + ' ' + pinned_class +'>\n' +
+        let saleItem = '<tr class="'+ authorization + ' ' + pinned_class +'">\n' +
             '              <td class="bg-dark-100">'+ pinned+'</td>\n' +
             '              <td class="bg-dark-100">'+ (i+1)+'</td>\n' +
 			'              <td class="bg-dark-100">'+ sale.owner_short_code +'-'+ sale.id +'</td>\n' +
