@@ -855,3 +855,7 @@ table.dataTable{
 *::-webkit-scrollbar-thumb:hover  {
     background-color: rgba(var(--bs-border-color-rgb), .75); /* Color of the thumb on hover */
 }
+
+.pointer-event-none {
+    pointer-events: none;
+}

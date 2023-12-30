@@ -316,29 +316,21 @@ async function initDocuments(sale_id){
 
     $.each(data.documents, function (i, document) {
 
-            let item = '<div class="col-xl-3 col-lg-6">\n' +
-                '            <div class="card mb-3">\n' +
-                '                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">\n';
+            let item = '<div class="col-xl-3 col-lg-6">\n';
         if (document.file_url != null) {
-            item += '            <a href="' + document.file_url + '" target="_blank" class="text-dark text-decoration-none">' +
-                '                    <div class="flex-fill">\n' +
-                '                        <h5 class="mb-0"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
-                '                    </div>\n' +
-                '                </a>\n';
+            item += '<a href="' + document.file_url + '" target="_blank" class="btn btn-theme d-block text-decoration-none py-2">\n' +
+                '        <div class="flex-fill text-white">\n' +
+                '            <h5 class="mb-0"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
+                '        </div>\n' +
+                '    </a>\n';
         }else{
-            item += '                <div class="flex-fill">\n' +
-                '                        <h5 class="mb-0 text-danger"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
-                '                    </div>\n';
+            item += '<a href="#" target="_blank" class="btn btn-theme d-block text-decoration-none py-2 pointer-event-none">\n' +
+                '        <div class="flex-fill text-white">\n' +
+                '            <h5 class="mb-0"><i class="fa fa-file-pdf"></i> ' + document.name + '</h5>\n' +
+                '        </div>\n' +
+                '    </a>\n';
         }
-            item += '            </div>\n' +
-                '                <div class="card-arrow">\n' +
-                '                    <div class="card-arrow-top-left"></div>\n' +
-                '                    <div class="card-arrow-top-right"></div>\n' +
-                '                    <div class="card-arrow-bottom-left"></div>\n' +
-                '                    <div class="card-arrow-bottom-right"></div>\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '        </div>';
+            item += '</div>';
             $('#documents').append(item);
 
     });
