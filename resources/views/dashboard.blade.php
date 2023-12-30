@@ -243,11 +243,11 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body d-flex align-items-center text-dark m-5px bg-white bg-opacity-15">
+                <div class="card-body d-flex align-items-center bg-white bg-opacity-15">
 
                     <div class="flex-fill">
                         <div class="d-flex fw-bold small mb-3">
-                            <span class="flex-grow-1">TOPLAM TALEP (Bu Ay)</span>
+                            <span class="flex-grow-1">TOPLAM TALEP (Bu Ay - Bu Yıl)</span>
                             <a href="#" data-toggle="card-expand"
                                class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
@@ -264,7 +264,7 @@ $extra_js='
                         </div>
                     </div>
                     <div class="opacity-2 dash-icon">
-                        <i class="fa fa-wallet fa-4x"></i>
+                        <i class="fa fa-wallet fa-3x"></i>
                     </div>
 
                 </div>
@@ -526,23 +526,28 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center bg-white bg-opacity-15">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM SİPARİŞ (Bu Ay)</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">TOPLAM SİPARİŞ (Bu Ay - Bu Yıl)</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                        </div>
 
-                    <div class="row align-items-center mb-2" id="total-sale-box">
-                        <div class="col-12">
-                            <h5 class="mb-0"></h5>
-                            <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                        <div class="row align-items-center mb-2" id="total-sale-box">
+                            <div class="col-12">
+                                <h5 class="mb-0"></h5>
+                                <div class="spinners">
+                                    <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="opacity-2 dash-icon">
+                        <i class="fa fa-wallet fa-3x"></i>
                     </div>
 
                 </div>
@@ -559,23 +564,28 @@ $extra_js='
 
             <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body d-flex align-items-center bg-white bg-opacity-15">
 
-                    <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">TOPLAM GÖRÜŞME (Bu Ay)</span>
-                        <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                    </div>
+                    <div class="flex-fill">
+                        <div class="d-flex fw-bold small mb-3">
+                            <span class="flex-grow-1">TOPLAM GÖRÜŞME (Bu Ay - Bu Yıl)</span>
+                            <a href="#" data-toggle="card-expand"
+                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                        </div>
 
-                    <div class="row align-items-center mb-2" id="total-activity-box">
-                        <div class="col-12">
-                            <h5 class="mb-0"></h5>
-                            <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
-                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                        <div class="row align-items-center mb-2" id="total-activity-box">
+                            <div class="col-12">
+                                <h5 class="mb-0"></h5>
+                                <div class="spinners">
+                                    <div class="spinner spinner-grow spinner-grow-1 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-2 m-1 text-dark"></div>
+                                    <div class="spinner spinner-grow spinner-grow-3 m-1 text-dark"></div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="opacity-2 dash-icon">
+                        <i class="fa fa-wallet fa-3x"></i>
                     </div>
 
                 </div>
