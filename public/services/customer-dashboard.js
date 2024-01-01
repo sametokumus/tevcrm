@@ -110,8 +110,9 @@ function checkRole(){
 async function initSidebarInfo(company_id){
     let data = await serviceGetCompanyById(company_id);
     let company = data.company;
+    console.log(company)
 
-    let logo = 'img/compamy/empty.jpg';
+    let logo = 'img/company/empty.jpg';
     if (company.logo != null){
         logo = company.logo;
     }
