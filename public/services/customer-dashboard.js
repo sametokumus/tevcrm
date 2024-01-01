@@ -108,6 +108,8 @@ function checkRole(){
     return true;
 }
 async function initSidebarInfo(company_id){
+    $('.profile-sidebar .desktop-sticky-top *').remove();
+
     let data = await serviceGetCompanyById(company_id);
     let company = data.company;
     console.log(company)
@@ -148,9 +150,27 @@ async function initSidebarInfo(company_id){
         '          <div class="mb-3">\n' +
         '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> '+ company.website +'\n' +
         '          </div>\n' +
-        '          <hr class="mt-4 mb-4">';
+        '          <hr class="mt-4 mb-4">\n' +
+        '          <h4>Yetkililer</h4>\n';
 
     $('.profile-sidebar #sidebar-info').append(sidebar);
+
+
+    let data2 = await serviceGetEmployeesByCompanyId(company_id);
+    $.each(data2.employees, function (i, employee) {
+        let photo = "img/user/null-profile-picture.png";
+        if (employee.photo != null){photo = employee.photo;}
+
+        let item = '<div>\n' +
+            '                  <img src="'+ photo +'" alt="" width="30" class="rounded-circle">\n' +
+            '                  <div class="flex-fill px-3">\n' +
+            '                      <div class="fw-bold text-truncate w-100px company-name">'+ employee.name +'</div>\n' +
+            '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.email +'</div>\n' +
+            '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.mobile +'</div>\n' +
+            '                  </div>\n' +
+            '              </div>\n';
+        $('.profile-sidebar #sidebar-info').append(item);
+    });
 }
 
 async function initCompany(company_id){
