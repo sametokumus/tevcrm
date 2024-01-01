@@ -211,7 +211,7 @@ async function updateCompanyCallback(xhttp){
     console.log(obj)
     $("#update_company_form").trigger("reset");
     let company_id = getPathVariable('customer-dashboard');
-    initCompany(company_id);
+    initSidebarInfo(company_id);
 }
 async function updateCompany(){
     let isPotential = 0;
