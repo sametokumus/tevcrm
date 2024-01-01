@@ -93,8 +93,6 @@
         checkRole();
         let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
-        initCompany(company_id);
-        initEmployees();
         initNotes();
         initActivities();
 
@@ -157,7 +155,8 @@ async function initSidebarInfo(company_id){
 
 
     let data2 = await serviceGetEmployeesByCompanyId(company_id);
-    $.each(data2.employees, function (i, employee) {
+    let employees = data2.employees;
+    $.each(employees, function (i, employee) {
         let photo = "img/user/null-profile-picture.png";
         if (employee.photo != null){photo = employee.photo;}
 
@@ -171,17 +170,18 @@ async function initSidebarInfo(company_id){
             '              </div>\n';
         $('.profile-sidebar #sidebar-info').append(item);
     });
+
+
+    initCompany(company);
+    initEmployees(employees);
 }
 
-async function initCompany(company_id){
+async function initCompany(company){
     await getCountriesAddSelectId('update_company_country');
     await getPaymentTermsAddSelectId('update_company_payment_term');
 
     document.getElementById('update_company_form').reset();
-    document.getElementById('update_company_id').value = company_id;
-    let data = await serviceGetCompanyById(company_id);
-    let company = data.company;
-    console.log(company)
+    document.getElementById('update_company_id').value = company.id;
     document.getElementById('update_company_name').value = company.name;
     document.getElementById('update_company_email').value = company.email;
     document.getElementById('update_company_website').value = company.website;
@@ -208,7 +208,7 @@ async function updateCompanyCallback(xhttp){
     showAlert(obj.message);
     console.log(obj)
     $("#update_company_form").trigger("reset");
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     initCompany(company_id);
 }
 async function updateCompany(){
@@ -247,16 +247,14 @@ async function updateCompany(){
         console.log(pair[0]+ ', ' + pair[1]);
     }
 
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     await servicePostUpdateCompany(company_id, formData);
 }
 
-async function initEmployees(){
-    let company_id = getPathVariable('company-detail');
-    let data = await serviceGetEmployeesByCompanyId(company_id);
+async function initEmployees(employees){
     $('#employees-grid .grid-item').remove();
 
-    $.each(data.employees, function (i, employee) {
+    $.each(employees, function (i, employee) {
         let photo = "img/employee/empty.jpg";
         if (employee.photo != null){photo = api_url + employee.photo;}
         let item = '<div class="col-md-4 grid-item">\n' +
@@ -301,7 +299,7 @@ async function addEmployeeCallback(xhttp){
     initEmployees();
 }
 async function addEmployee(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let formData = new FormData();
     formData.append('company_id', company_id);
     formData.append('name', document.getElementById('add_employee_name').value);
@@ -343,7 +341,7 @@ async function updateEmployeeCallback(xhttp){
 }
 async function updateEmployee(){
     let id = document.getElementById('update_employee_id').value;
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let formData = new FormData();
     formData.append('company_id', company_id);
     formData.append('name', document.getElementById('update_employee_name').value);
@@ -367,8 +365,7 @@ async function deleteEmployee(employee_id){
 
 
 
-async function initNotes(){
-    let company_id = getPathVariable('company-detail');
+async function initNotes(company_id){
     let data = await serviceGetNotesByCompanyId(company_id);
     $('#note-list .note-list-item').remove();
     let logged_user_id = localStorage.getItem('userId');
@@ -416,7 +413,7 @@ async function initNotes(){
 
 }
 async function openAddCompanyNoteModal(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     getEmployeesAddSelectId(company_id, 'add_note_employee');
     $("#addCompanyNoteModal").modal('show');
 }
@@ -430,7 +427,7 @@ async function addNoteCallback(xhttp){
     initNotes();
 }
 async function addNote(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let user_id = localStorage.getItem('userId');
     let formData = new FormData();
     formData.append('user_id', user_id);
@@ -443,7 +440,7 @@ async function addNote(){
     await servicePostAddNote(formData);
 }
 async function openUpdateCompanyNoteModal(note_id){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     getEmployeesAddSelectId(company_id, 'update_note_employee');
     $("#updateCompanyNoteModal").modal('show');
     initUpdateCompanyNoteModal(note_id)
@@ -467,7 +464,7 @@ async function updateNoteCallback(xhttp){
     initNotes();
 }
 async function updateNote(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let user_id = localStorage.getItem('userId');
     let formData = new FormData();
     formData.append('user_id', user_id);
@@ -485,8 +482,7 @@ async function deleteNote(note_id){
     }
 }
 
-async function initActivities(){
-    let company_id = getPathVariable('company-detail');
+async function initActivities(company_id){
     let data = await serviceGetActivitiesByCompanyId(company_id);
     console.log(data)
     $('#datatableActivities tbody tr').remove();
@@ -516,13 +512,13 @@ async function initActivities(){
 
 }
 async function openAddCompanyActivityModal(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     getEmployeesAddSelectId(company_id, 'add_activity_employee_id');
     getActivityTypesAddSelectId('add_activity_type_id');
     $("#addCompanyActivityModal").modal('show');
 }
 async function addActivity(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let user_id = localStorage.getItem('userId');
 
     let task_count = document.getElementById('add-activity-new-task-count').value;
@@ -566,7 +562,7 @@ async function addActivity(){
     }
 }
 async function openUpdateCompanyActivityModal(activity_id){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     getEmployeesAddSelectId(company_id, 'update_activity_employee_id');
     getActivityTypesAddSelectId('update_activity_type_id');
     $("#updateCompanyActivityModal").modal('show');
@@ -615,7 +611,7 @@ async function updateActivityCallback(xhttp){
     initActivities();
 }
 async function updateActivity(){
-    let company_id = getPathVariable('company-detail');
+    let company_id = getPathVariable('customer-dashboard');
     let user_id = localStorage.getItem('userId');
     let activity_id = document.getElementById('update_activity_id').value;
 
