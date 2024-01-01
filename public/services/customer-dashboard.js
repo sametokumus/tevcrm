@@ -500,7 +500,8 @@ async function deleteNote(note_id){
 async function initActivities(company_id){
     let data = await serviceGetActivitiesByCompanyId(company_id);
     console.log(data)
-    $('#datatableActivities tbody tr').remove();
+    $("#datatableActivities").dataTable().fnDestroy();
+    $('#datatableActivities tbody > tr').remove();
     let logged_user_id = localStorage.getItem('userId');
 
     $.each(data.activities, function (i, activity) {
@@ -523,6 +524,19 @@ async function initActivities(company_id){
             '           <td>'+ actions +'</td>\n' +
             '       </tr>';
         $('#datatableActivities tbody').append(item);
+    });
+
+    $('#datatableActivities').DataTable({
+        responsive: false,
+        columnDefs: [],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
     });
 
 }
