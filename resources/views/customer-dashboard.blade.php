@@ -267,95 +267,23 @@ $(".timepicker").timepicker({
                                         <div class="card mb-3">
                                             <div class="list-group list-group-flush">
                                                 <div class="list-group-item fw-bold px-3 d-flex">
-                                                    <span class="flex-fill">Trends for you</span>
-                                                    <a href="#" class="text-inverse text-opacity-50"><i
-                                                            class="fa fa-cog"></i></a>
+                                                    <span class="flex-fill">Satış Yapılan Ürünler</span>
                                                 </div>
                                                 <div class="list-group-item px-3">
-                                                    <div class="text-inverse text-opacity-50"><small><strong>Trending
-                                                                Worldwide</strong></small></div>
-                                                    <div class="fw-bold mb-2">#BreakingNews</div>
-                                                    <a href="#" class="card text-inverse text-decoration-none mb-1">
-                                                        <div class="card-body">
-                                                            <div class="row no-gutters">
-                                                                <div class="col-md-8">
-                                                                    <div class="small text-inverse text-opacity-50 mb-1 mt-n1">
-                                                                        Space
-                                                                    </div>
-                                                                    <div class="h-40px fs-13px overflow-hidden mb-n1">
-                                                                        Distant star explosion is brightest ever
-                                                                        seen, study finds
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 d-flex">
-                                                                    <div class="h-100 w-100"
-                                                                         style="background: url(img/gallery/news-1.jpg) center; background-size: cover;"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-arrow">
-                                                            <div class="card-arrow-top-left"></div>
-                                                            <div class="card-arrow-top-right"></div>
-                                                            <div class="card-arrow-bottom-left"></div>
-                                                            <div class="card-arrow-bottom-right"></div>
-                                                        </div>
-                                                    </a>
-                                                    <div><small class="text-inverse text-opacity-50">1.89m
-                                                            share</small></div>
-                                                </div>
-                                                <div class="list-group-item px-3">
-                                                    <div class="fw-bold mb-2">#TrollingForGood</div>
-                                                    <div class="fs-13px mb-1">Be a good Troll and spread some
-                                                        positivity on HUD today.
+                                                    <div class="table-responsive">
+                                                        <table id="saled-products-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Ürün Adı</th>
+                                                                <th>Adet</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                    <div><small class="text-inverse text-opacity-50"><i
-                                                                class="fa fa-external-link-square-alt"></i> Promoted by
-                                                            HUD Trolls</small></div>
                                                 </div>
-                                                <div class="list-group-item px-3">
-                                                    <div class="text-inverse text-opacity-50"><small><strong>Trending
-                                                                Worldwide</strong></small></div>
-                                                    <div class="fw-bold mb-2">#CronaOutbreak</div>
-                                                    <div class="fs-13px mb-1">The coronavirus is affecting 210
-                                                        countries around the world and 2 ...
-                                                    </div>
-                                                    <div><small class="text-inverse text-opacity-50">49.3m
-                                                            share</small></div>
-                                                </div>
-                                                <div class="list-group-item px-3">
-                                                    <div class="text-inverse text-opacity-50"><small><strong>Trending
-                                                                in New York</strong></small></div>
-                                                    <div class="fw-bold mb-2">#CoronavirusPandemic</div>
-                                                    <a href="#" class="card mb-1 text-inverse text-decoration-none">
-                                                        <div class="card-body">
-                                                            <div class="row no-gutters">
-                                                                <div class="col-md-8">
-                                                                    <div class="fs-12px text-inverse text-opacity-50 mt-n1">
-                                                                        Coronavirus
-                                                                    </div>
-                                                                    <div class="h-40px fs-13px overflow-hidden mb-n1">
-                                                                        Coronavirus: US suspends travel from Europe
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 d-flex">
-                                                                    <div class="h-100 w-100"
-                                                                         style="background: url(img/gallery/news-2.jpg) center; background-size: cover;"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-arrow">
-                                                            <div class="card-arrow-top-left"></div>
-                                                            <div class="card-arrow-top-right"></div>
-                                                            <div class="card-arrow-bottom-left"></div>
-                                                            <div class="card-arrow-bottom-right"></div>
-                                                        </div>
-                                                    </a>
-                                                    <div><small class="text-inverse text-opacity-50">821k
-                                                            share</small></div>
-                                                </div>
-                                                <a href="#" class="list-group-item list-group-action text-center">
-                                                    Show more
-                                                </a>
                                             </div>
                                             <div class="card-arrow">
                                                 <div class="card-arrow-top-left"></div>

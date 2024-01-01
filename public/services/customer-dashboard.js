@@ -93,6 +93,7 @@
         checkRole();
         let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
+        initSaledProducts(company_id);
         initNotes(company_id);
         initActivities(company_id);
 
@@ -732,3 +733,25 @@ async function updateActivityNewTask(){
 
 
 
+async function initSaledProducts(company_id){
+    let data = await serviceGetSaledProductsByCompanyId(company_id);
+    let products = data.products;
+
+    $('#saled-products-table tbody tr').remove();
+
+    $.each(products, function (i, product) {
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ product.product_detail.product_name.substring(0, 50) +'...\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
+            '       </tr>';
+
+        $('#saled-products-table tbody').append(item);
+    });
+
+}

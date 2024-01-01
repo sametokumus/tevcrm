@@ -1058,6 +1058,15 @@ async function serviceGetCompaniesByStaffId(id) {
     }
 }
 
+async function serviceGetSaledProductsByCompanyId(id) {
+    const data = await fetchDataGet('/admin/company/getSaledProductsByCompanyId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 
 async function serviceGetEmployeesByCompanyId(id) {
     const data = await fetchDataGet('/admin/employee/getEmployeesByCompanyId/'+ id, 'application/json');

@@ -10,6 +10,7 @@ use App\Models\ExpenseCategory;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
 use App\Models\PaymentTerm;
+use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
@@ -385,6 +386,32 @@ class CompanyController extends Controller
             return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001', 'message' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getSaledProductsByCompanyId($company_id)
+    {
+        try {
+            $products = SaleOffer::query()
+                ->leftJoin('sales', 'sales.sale_id', '=', 'sale_offers.sale_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('product_id, sum(offer_quantity) as total_quantity')
+                ->where('sale_offers.active',1)
+                ->where('sales.active',1)
+                ->where('sales.customer_id', $company_id)
+                ->whereIn('statuses.period', ['completed', 'approved'])
+                ->groupBy('product_id')
+                ->orderByDesc('total_quantity')
+                ->get();
+
+            foreach ($products as $product){
+                $product_detail = Product::query()->where('id', $product->product_id)->first();
+                $product['product_detail'] = $product_detail;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 }

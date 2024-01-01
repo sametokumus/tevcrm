@@ -130,6 +130,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('company/deleteCompany/{company_id}', [CompanyController::class, 'deleteCompany']);
     Route::get('company/getBestCustomer', [CompanyController::class, 'getBestCustomer']);
     Route::get('company/getCompaniesByStaffId/{staff_id}', [CompanyController::class, 'getCompaniesByStaffId']);
+    Route::get('company/getSaledProductsByCompanyId/{company_id}', [CompanyController::class, 'getSaledProductsByCompanyId']);
 
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);
