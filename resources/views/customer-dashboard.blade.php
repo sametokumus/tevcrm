@@ -26,6 +26,10 @@ $(".timepicker").timepicker({
 
                     <div class="profile-sidebar">
                         <div class="desktop-sticky-top">
+                            <div id="sidebar-info">
+
+                            </div>
+
                             <div class="profile-img">
                                 <img src="img/company/empty.jpg" alt>
                             </div>

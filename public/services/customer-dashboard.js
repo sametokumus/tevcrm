@@ -92,6 +92,7 @@
         checkLogin();
         checkRole();
         let company_id = getPathVariable('company-detail');
+        initSidebarInfo(company_id);
         initCompany(company_id);
         initEmployees();
         initNotes();
@@ -106,6 +107,49 @@
 function checkRole(){
     return true;
 }
+async function initSidebarInfo(company_id){
+    let data = await serviceGetCompanyById(company_id);
+    let company = data.company;
+    console.log(company)
+    document.getElementById('update_company_name').value = company.name;
+    document.getElementById('update_company_email').value = company.email;
+    document.getElementById('update_company_website').value = company.website;
+    document.getElementById('update_company_phone').value = company.phone;
+    document.getElementById('update_company_fax').value = company.fax;
+    document.getElementById('update_company_address').value = company.address;
+    document.getElementById('update_company_country').value = company.country_id;
+    document.getElementById('update_company_tax_office').value = company.tax_office;
+    document.getElementById('update_company_tax_number').value = company.tax_number;
+    document.getElementById('update_company_linkedin').value = company.linkedin;
+    document.getElementById('update_company_skype').value = company.skype;
+    document.getElementById('update_company_online').value = company.online;
+    document.getElementById('update_company_registration_number').value = company.registration_number;
+    document.getElementById('update_company_payment_term').value = company.payment_term;
+    $('#update_company_current_logo').attr('href', company.logo);
+    if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
+    if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
+    if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
+    let sidebar = '<div class="profile-img">\n' +
+        '              <img src="img/company/empty.jpg" alt>\n' +
+        '          </div>\n' +
+        '          <h4>John Smith</h4>\n' +
+        '          <div class="mb-3 text-inverse text-opacity-50 fw-bold mt-n2">@johnsmith</div>\n' +
+        '          <p>\n' +
+        '              Principal UXUI Design & Brand Architecture for HUD. Creator of SeanTheme.\n' +
+        '              Bringing the world closer together. Studied Computer Science and Psychology at\n' +
+        '              Harvard University.\n' +
+        '          </p>\n' +
+        '          <div class="mb-1">\n' +
+        '              <i class="fa fa-map-marker-alt fa-fw text-inverse text-opacity-50"></i> New York, NY\n' +
+        '          </div>\n' +
+        '          <div class="mb-3">\n' +
+        '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> seantheme.com/hud\n' +
+        '          </div>\n' +
+        '          <hr class="mt-4 mb-4">';
+
+    $('.profile-sidebar #sidebar-info').append(sidebar);
+}
+
 async function initCompany(company_id){
     await getCountriesAddSelectId('update_company_country');
     await getPaymentTermsAddSelectId('update_company_payment_term');
