@@ -93,8 +93,8 @@
         checkRole();
         let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
-        initNotes();
-        initActivities();
+        initNotes(company_id);
+        initActivities(company_id);
 
     });
 
