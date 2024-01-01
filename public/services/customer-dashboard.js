@@ -263,7 +263,7 @@ async function initEmployees(employees){
             '              <div class="card">\n' +
             '                <div class="m-1 bg-inverse bg-opacity-15">\n' +
             '                  <div class="position-relative overflow-hidden" style="height: 225px">\n' +
-            '                    <img src="assets/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
+            '                    <img src="/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
             '                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
             '                      <div class="my-2">\n' +
             '                        <img src="'+ photo +'" alt="" width="80" class="rounded-circle" />\n' +
