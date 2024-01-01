@@ -174,7 +174,7 @@ async function initSidebarInfo(company_id){
     });
 
 
-    // initCompany(company);
+    initCompany(company);
     // initEmployees(employees);
 }
 
