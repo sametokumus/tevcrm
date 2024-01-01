@@ -161,12 +161,14 @@ async function initSidebarInfo(company_id){
         if (employee.photo != null){photo = employee.photo;}
 
         let item = '<div>\n' +
+            '                  <a href="#" class="company-info d-flex align-items-center mb-3 text-decoration-none fs-12px pointer-event-none">\n' +
             '                  <img src="'+ photo +'" alt="" width="30" class="rounded-circle">\n' +
             '                  <div class="flex-fill px-3">\n' +
             '                      <div class="fw-bold text-truncate w-100px company-name">'+ employee.name +'</div>\n' +
             '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.email +'</div>\n' +
             '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.mobile +'</div>\n' +
             '                  </div>\n' +
+            '                  </a>\n' +
             '              </div>\n';
         $('.profile-sidebar #sidebar-info').append(item);
     });
