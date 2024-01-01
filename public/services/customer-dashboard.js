@@ -259,8 +259,8 @@ async function initEmployees(employees){
         let photo = "img/employee/empty.jpg";
         if (employee.photo != null){photo = employee.photo;}
 
-        let item = '<div class="col-md-4 grid-item">\n' +
-            '              <div class="card col-md-4 grid-item">\n' +
+        let item = '<div class="col-sm-6 grid-item">\n' +
+            '              <div class="card">\n' +
             '                <div class="m-1 bg-inverse bg-opacity-15">\n' +
             '                  <div class="position-relative overflow-hidden" style="height: 225px">\n' +
             '                    <img src="assets/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
