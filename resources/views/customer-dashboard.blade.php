@@ -37,22 +37,22 @@ $(".timepicker").timepicker({
                         <ul class="profile-tab nav nav-tabs nav-tabs-v2">
                             <li class="nav-item">
                                 <a href="#info-tab" class="nav-link active" data-bs-toggle="tab">
-                                    <div class="nav-value">Firma Bilgileri</div>
+                                    <div class="nav-value fs-18px">Firma Bilgileri</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#employees-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value">Yetkililer</div>
+                                    <div class="nav-value fs-18px">Yetkililer</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#notes-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value">Notlar</div>
+                                    <div class="nav-value fs-18px">Notlar</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#activities-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value">Aktiviteler</div>
+                                    <div class="nav-value fs-18px">Aktiviteler</div>
                                 </a>
                             </li>
                         </ul>
@@ -193,7 +193,16 @@ $(".timepicker").timepicker({
                                             <div class="card mb-3">
                                                 <div class="card-body p-4">
 
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="btn-group float-end">
+                                                                <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyNoteModal();">Not Ekle</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="note-list">
 
+                                                    </div>
 
                                                 </div>
                                                 <div class="card-arrow">
@@ -210,7 +219,36 @@ $(".timepicker").timepicker({
                                             <div class="card mb-3">
                                                 <div class="card-body p-4">
 
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="btn-group float-end">
+                                                                <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyActivityModal();">Aktivite Ekle</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <table id="datatableActivities" class="table text-nowrap w-100">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Yetkili</th>
+                                                                    <th scope="col">Tür</th>
+                                                                    <th scope="col">Konu</th>
+                                                                    <th scope="col">Firma Yetkilisi</th>
+                                                                    <th scope="col">Başlangıç</th>
+                                                                    <th scope="col">Bitiş</th>
+                                                                    <th scope="col">Alt Görev</th>
+                                                                    <th scope="col">İşlemler</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class="card-arrow">
