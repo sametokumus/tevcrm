@@ -129,21 +129,42 @@ async function initSidebarInfo(company_id){
     if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
     if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
     if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
+
+    let logo = 'img/compamy/empty.jpg';
+    if (company.logo != null){
+        logo = company.logo;
+    }
+    let type = '';
+    if (company.is_supplier == 1){
+        type += ' Tedarikçi,';
+    }
+    if (company.is_customer == 1){
+        type += ' Müşteri,';
+    }
+    if (company.is_potential_customer == 1){
+        type += ' Potansiyel Müşteri,';
+    }
+    type = type.slice(0, -1);
+
     let sidebar = '<div class="profile-img">\n' +
-        '              <img src="img/company/empty.jpg" alt>\n' +
+        '              <img src="'+ logo +'" alt>\n' +
         '          </div>\n' +
-        '          <h4>John Smith</h4>\n' +
-        '          <div class="mb-3 text-inverse text-opacity-50 fw-bold mt-n2">@johnsmith</div>\n' +
-        '          <p>\n' +
-        '              Principal UXUI Design & Brand Architecture for HUD. Creator of SeanTheme.\n' +
-        '              Bringing the world closer together. Studied Computer Science and Psychology at\n' +
-        '              Harvard University.\n' +
-        '          </p>\n' +
+        '          <h4>'+ company.name +'</h4>\n' +
+        '          <div class="mb-3 text-inverse text-opacity-50 fw-bold mt-n2">'+ type +'</div>\n' +
         '          <div class="mb-1">\n' +
-        '              <i class="fa fa-map-marker-alt fa-fw text-inverse text-opacity-50"></i> New York, NY\n' +
+        '              <i class="fa fa-map-marker-alt fa-fw text-inverse text-opacity-50"></i> '+ company.address +'\n' +
+        '          </div>\n' +
+        '          <div class="mb-1">\n' +
+        '              <i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i> '+ company.email +'\n' +
+        '          </div>\n' +
+        '          <div class="mb-1">\n' +
+        '              <i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i> '+ company.phone +'\n' +
+        '          </div>\n' +
+        '          <div class="mb-1">\n' +
+        '              <i class="fa fa-fax fa-fw text-inverse text-opacity-50"></i> '+ company.fax +'\n' +
         '          </div>\n' +
         '          <div class="mb-3">\n' +
-        '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> seantheme.com/hud\n' +
+        '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> '+ company.website +'\n' +
         '          </div>\n' +
         '          <hr class="mt-4 mb-4">';
 
