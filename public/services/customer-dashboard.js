@@ -110,25 +110,6 @@ function checkRole(){
 async function initSidebarInfo(company_id){
     let data = await serviceGetCompanyById(company_id);
     let company = data.company;
-    console.log(company)
-    document.getElementById('update_company_name').value = company.name;
-    document.getElementById('update_company_email').value = company.email;
-    document.getElementById('update_company_website').value = company.website;
-    document.getElementById('update_company_phone').value = company.phone;
-    document.getElementById('update_company_fax').value = company.fax;
-    document.getElementById('update_company_address').value = company.address;
-    document.getElementById('update_company_country').value = company.country_id;
-    document.getElementById('update_company_tax_office').value = company.tax_office;
-    document.getElementById('update_company_tax_number').value = company.tax_number;
-    document.getElementById('update_company_linkedin').value = company.linkedin;
-    document.getElementById('update_company_skype').value = company.skype;
-    document.getElementById('update_company_online').value = company.online;
-    document.getElementById('update_company_registration_number').value = company.registration_number;
-    document.getElementById('update_company_payment_term').value = company.payment_term;
-    $('#update_company_current_logo').attr('href', company.logo);
-    if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
-    if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
-    if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
 
     let logo = 'img/compamy/empty.jpg';
     if (company.logo != null){
