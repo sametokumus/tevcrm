@@ -292,6 +292,34 @@ $(".timepicker").timepicker({
                                                 <div class="card-arrow-bottom-right"></div>
                                             </div>
                                         </div>
+                                        <div class="card mb-3">
+                                            <div class="list-group list-group-flush">
+                                                <div class="list-group-item fw-bold px-3 d-flex">
+                                                    <span class="flex-fill">Satışlar</span>
+                                                </div>
+                                                <div class="list-group-item px-3">
+                                                    <div class="table-responsive">
+                                                        <table id="sales-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Sipariş No</th>
+                                                                <th>Detay</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-arrow">
+                                                <div class="card-arrow-top-left"></div>
+                                                <div class="card-arrow-top-right"></div>
+                                                <div class="card-arrow-bottom-left"></div>
+                                                <div class="card-arrow-bottom-right"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

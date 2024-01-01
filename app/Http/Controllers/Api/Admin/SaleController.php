@@ -81,6 +81,51 @@ class SaleController extends Controller
         }
     }
 
+    public function getSalesByCompanyId($company_id)
+    {
+        try {
+
+            $sales = Sale::query()
+                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
+                ->where('sales.active',1)
+                ->where('sales.customer_id',$company_id)
+                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved' OR statuses.period = 'creating' OR statuses.period = 'completed')")
+                ->get();
+
+            foreach ($sales as $sale) {
+
+                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+
+                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+                $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+                $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+                $sale['request'] = $offer_request;
+                $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
+
+
+                $current_time = Carbon::now();
+                if ($sale->updated_at != null) {
+                    $updated_at = $sale->updated_at;
+                } else {
+                    $updated_at = Carbon::parse($sale->created_at);
+                }
+
+                $difference = $updated_at->diffForHumans($current_time);
+                $sale['diff_last_day'] = $difference;
+                $sale->created_at = $sale->created_at->addHours(3);
+
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getSales()
     {
         try {
@@ -122,6 +167,9 @@ class SaleController extends Controller
 
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
+                $sale->created_at = $sale->created_at->addHours(3);
+
+
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
@@ -200,69 +248,6 @@ class SaleController extends Controller
 
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
-
-            }
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
-        }
-    }
-
-    public function getActiveSales($user_id)
-    {
-        try {
-            $admin = Admin::query()->where('id', $user_id)->first();
-
-            $sales = Sale::query()
-                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
-                ->where('sales.active',1)
-//                ->where('statuses.period','continue')
-                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved' OR statuses.period = 'creating')")
-                ->get();
-
-            foreach ($sales as $sale) {
-
-                $status_role = AdminStatusRole::query()->where('admin_role_id', $admin->admin_role_id)->where('status_id', $sale->status_id)->where('active', 1)->count();
-                if ($status_role > 0){
-                    $sale['authorization'] = 1;
-                }else{
-                    $sale['authorization'] = 0;
-                }
-
-                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
-
-                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
-                $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
-                $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
-                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
-                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
-                $sale['request'] = $offer_request;
-                $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
-//                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
-//                $sale['currency'] = '';
-//                if ($sale_offer){
-//                    if ($sale_offer->offer_currency != '' && $sale_offer->offer_currency != null){
-//                        $sale['currency'] = $sale_offer->offer_currency;
-//                    }
-//                }
-
-                $current_time = Carbon::now();
-                if ($sale->updated_at != null){
-                    $updated_at = $sale->updated_at;
-//                    $updated_at = Carbon::parse($sale->updated_at);
-//                    $updated_at = $updated_at->subHours(3);
-//                    $sale->updated_at = $sale->updated_at->addHours(3);
-                }else{
-                    $updated_at = Carbon::parse($sale->created_at);
-//                    $updated_at = $updated_at->subHours(3);
-                }
-
-                $difference = $updated_at->diffForHumans($current_time);
-                $sale['diff_last_day'] = $difference;
-                $sale->created_at = $sale->created_at->addHours(3);
 
             }
 
@@ -393,6 +378,69 @@ class SaleController extends Controller
 
                 $difference = $updated_at->diffForHumans($current_time);
                 $sale['diff_last_day'] = $difference;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getActiveSales($user_id)
+    {
+        try {
+            $admin = Admin::query()->where('id', $user_id)->first();
+
+            $sales = Sale::query()
+                ->leftJoin('contacts', 'contacts.id', '=', 'sales.owner_id')
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name, contacts.short_code as owner_short_code')
+                ->where('sales.active',1)
+//                ->where('statuses.period','continue')
+                ->whereRaw("(statuses.period = 'continue' OR statuses.period = 'approved' OR statuses.period = 'creating')")
+                ->get();
+
+            foreach ($sales as $sale) {
+
+                $status_role = AdminStatusRole::query()->where('admin_role_id', $admin->admin_role_id)->where('status_id', $sale->status_id)->where('active', 1)->count();
+                if ($status_role > 0){
+                    $sale['authorization'] = 1;
+                }else{
+                    $sale['authorization'] = 0;
+                }
+
+                $sale['sale_notes'] = SaleNote::query()->where('sale_id', $sale->sale_id)->get();
+
+                $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+                $offer_request['product_count'] = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
+                $offer_request['authorized_personnel'] = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
+                $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+                $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+                $sale['request'] = $offer_request;
+                $sale['status'] = Status::query()->where('id', $sale->status_id)->first();
+//                $sale_offer = SaleOffer::query()->where('sale_id', $sale->sale_id)->first();
+//                $sale['currency'] = '';
+//                if ($sale_offer){
+//                    if ($sale_offer->offer_currency != '' && $sale_offer->offer_currency != null){
+//                        $sale['currency'] = $sale_offer->offer_currency;
+//                    }
+//                }
+
+                $current_time = Carbon::now();
+                if ($sale->updated_at != null){
+                    $updated_at = $sale->updated_at;
+//                    $updated_at = Carbon::parse($sale->updated_at);
+//                    $updated_at = $updated_at->subHours(3);
+//                    $sale->updated_at = $sale->updated_at->addHours(3);
+                }else{
+                    $updated_at = Carbon::parse($sale->created_at);
+//                    $updated_at = $updated_at->subHours(3);
+                }
+
+                $difference = $updated_at->diffForHumans($current_time);
+                $sale['diff_last_day'] = $difference;
+                $sale->created_at = $sale->created_at->addHours(3);
+
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales]]);

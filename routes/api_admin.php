@@ -198,6 +198,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Sale
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
+    Route::get('sale/getSalesByCompanyId/{company_id}', [SaleController::class, 'getSalesByCompanyId']);
     Route::get('sale/getActiveSales/{user_id}', [SaleController::class, 'getActiveSales']);
     Route::get('sale/getApprovedSales/{user_id}', [SaleController::class, 'getApprovedSales']);
     Route::get('sale/getCancelledSales/{user_id}', [SaleController::class, 'getCancelledSales']);

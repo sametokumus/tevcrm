@@ -1508,6 +1508,15 @@ async function serviceGetSales() {
     }
 }
 
+async function serviceGetSalesByCompanyId(id) {
+    const data = await fetchDataGet('/admin/sale/getSalesByCompanyId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetActiveSales() {
     let userId = localStorage.getItem('userId');
     const data = await fetchDataGet('/admin/sale/getActiveSales/'+ userId, 'application/json');

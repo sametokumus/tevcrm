@@ -94,6 +94,7 @@
         let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
         initSaledProducts(company_id);
+        initSales(company_id);
         initNotes(company_id);
         initActivities(company_id);
 
@@ -752,6 +753,34 @@ async function initSaledProducts(company_id){
             '       </tr>';
 
         $('#saled-products-table tbody').append(item);
+    });
+
+}
+
+
+async function initSales(company_id){
+    let data = await serviceGetSalesByCompanyId(company_id);
+    let sales = data.sales;
+
+    $('#sales-table tbody tr').remove();
+
+    $.each(products, function (i, product) {
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ sale.owner_short_code +'-'+ sale.id +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <div class="btn-list">\n' +
+            '                   <a href="sale-detail/'+ sale.sale_id +'" class="btn btn-sm btn-info">Satış Detayı</a>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
+            '       </tr>';
+
+        $('#sales-table tbody').append(item);
     });
 
 }
