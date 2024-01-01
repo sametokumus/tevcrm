@@ -414,8 +414,7 @@ $(".timepicker").timepicker({
                                                 <div class="card-body">
 
                                                     <div class="d-flex align-items-center mb-3">
-                                                        <a href="#"><img src="img/user/profile.jpg" alt
-                                                                         width="50" class="rounded-circle"></a>
+                                                        <a href="#" class="pointer-event-none"><img src="img/company/empty.jpg" width="50" class="rounded-circle"></a>
                                                         <div class="flex-fill ps-2">
                                                             <div class="fw-bold"><a href="#"
                                                                                     class="text-decoration-none">Clyde
