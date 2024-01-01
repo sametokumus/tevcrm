@@ -175,7 +175,7 @@ async function initSidebarInfo(company_id){
 
 
     initCompany(company);
-    // initEmployees(employees);
+    initEmployees(employees);
 }
 
 async function initCompany(company){
@@ -198,7 +198,6 @@ async function initCompany(company){
     document.getElementById('update_company_online').value = company.online;
     document.getElementById('update_company_registration_number').value = company.registration_number;
     document.getElementById('update_company_payment_term').value = company.payment_term;
-    $('#update_company_current_logo').attr('href', company.logo);
     if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
     if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
     if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
@@ -254,39 +253,45 @@ async function updateCompany(){
 }
 
 async function initEmployees(employees){
-    $('#employees-grid .grid-item').remove();
+    $('#employees-tab .grid-item').remove();
 
     $.each(employees, function (i, employee) {
         let photo = "img/employee/empty.jpg";
-        if (employee.photo != null){photo = api_url + employee.photo;}
-        let item = '<div class="col-md-4 grid-item">\n' +
-            '           <div class="card border-theme mb-3">\n' +
-            '               <div class="card-body">\n' +
-            '                   <div class="row gx-0 align-items-center">\n' +
-            '                       <div class="col-md-4">\n' +
-            '                           <img src="'+ photo +'" alt="" class="card-img rounded-0" />\n' +
-            '                       </div>\n' +
-            '                       <div class="col-md-8">\n' +
-            '                           <div class="card-body">\n' +
-            '                               <h5 class="card-title">'+ employee.name +'</h5>\n' +
-            '                               <p class="card-text">Ünvan/Pozisyon: '+ employee.title +'</p>\n' +
-            '                               <p class="card-text">Eposta: '+ employee.email +'</p>\n' +
-            '                               <p class="card-text">Telefon: '+ employee.phone +'</p>\n' +
-            '                               <p class="card-text">Cep Telefonu: '+ employee.mobile +'</p>\n' +
-            '                               <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyEmployeeModal(\''+ employee.id +'\');">Düzenle</button>\n' +
-            '                               <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteEmployee(\''+ employee.id +'\');">Sil</button>\n' +
-            '                           </div>\n' +
-            '                       </div>\n' +
-            '                   </div>\n' +
-            '               </div>\n' +
-            '               <div class="card-arrow">\n' +
-            '                   <div class="card-arrow-top-left"></div>\n' +
-            '                   <div class="card-arrow-top-right"></div>\n' +
-            '                   <div class="card-arrow-bottom-left"></div>\n' +
-            '                   <div class="card-arrow-bottom-right"></div>\n' +
-            '               </div>\n' +
-            '           </div>\n' +
-            '       </div>';
+        if (employee.photo != null){photo = employee.photo;}
+
+        let item = '<div class="card grid-item">\n' +
+            '                <div class="m-1 bg-inverse bg-opacity-15">\n' +
+            '                  <div class="position-relative overflow-hidden" style="height: 165px">\n' +
+            '                    <img src="assets/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
+            '                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
+            '                      <div class="my-2">\n' +
+            '                        <img src="'+ photo +'" alt="" width="80" class="rounded-circle" />\n' +
+            '                      </div>\n' +
+            '                      <div>\n' +
+            '                        <div class="fw-bold">'+ employee.name +'</div>\n' +
+            '                        <div class="small">Ünvan/Pozisyon: '+ employee.title +'</div>\n' +
+            '                        <div class="small">Eposta: '+ employee.email +'</div>\n' +
+            '                        <div class="small">Telefon: '+ employee.phone +'</div>\n' +
+            '                        <div class="small">Cep Telefonu: '+ employee.mobile +'</div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                  <div class="card-body py-2 px-3">\n' +
+            '                    <div class="row text-center">\n' +
+            '                      <div class="col-12">\n' +
+            '                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyEmployeeModal(\''+ employee.id +'\');">Düzenle</button>\n' +
+            '                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteEmployee(\''+ employee.id +'\');">Sil</button>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '                <div class="card-arrow">\n' +
+            '                  <div class="card-arrow-top-left"></div>\n' +
+            '                  <div class="card-arrow-top-right"></div>\n' +
+            '                  <div class="card-arrow-bottom-left"></div>\n' +
+            '                  <div class="card-arrow-bottom-right"></div>\n' +
+            '                </div>\n' +
+            '              </div>';
         $('#employees-grid').append(item);
     });
 

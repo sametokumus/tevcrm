@@ -63,7 +63,7 @@ $(".timepicker").timepicker({
 
                                         <div class="tab-pane fade show active" id="info-tab">
                                             <div class="card mb-3">
-                                                <div class="card-body">
+                                                <div class="card-body p-4">
 
                                                     <form method="post" action="#" id="update_company_form">
                                                         <div class="row mb-4">
@@ -143,7 +143,7 @@ $(".timepicker").timepicker({
                                                                 <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
                                                             </div>
                                                             <div class="col-md-12 mb-3">
-                                                                <label class="form-label">Logo <a href="#" id="update_company_current_logo" target="_blank">'yu görüntülemek için tıklayınız...</a></label>
+                                                                <label class="form-label">Logo</label>
                                                                 <input type="file" class="form-control" id="update_company_logo" />
                                                             </div>
                                                             <div class="col-md-12 mb-3">
@@ -164,206 +164,28 @@ $(".timepicker").timepicker({
 
 
                                         <div class="tab-pane fade" id="employees-tab">
-                                            <div class="list-group">
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-1.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Ethel
-                                                                Wilkes</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">North
-                                                            Raundspic
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
+                                            <div class="card mb-3">
+                                                <div class="card-body p-4">
+
+
+
                                                 </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-2.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Shanaya
-                                                                Hansen</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">North
-                                                            Raundspic
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-3.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">James
-                                                                Allman</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">North
-                                                            Raundspic
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-4.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Marie
-                                                                Welsh</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">
-                                                            Crencheporford
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-5.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Lamar
-                                                                Kirkland</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Prince
-                                                            Ewoodswan
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-6.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Bentley
-                                                                Osborne</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Red
-                                                            Suvern
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-7.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Ollie
-                                                                Goulding</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Doa</div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-8.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Hiba
-                                                                Calvert</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Stemunds
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-9.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Rivka
-                                                                Redfern</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Fallnee
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
-                                                </div>
-                                                <div class="list-group-item d-flex align-items-center">
-                                                    <img src="img/user/user-10.jpg" alt width="50"
-                                                         class="rounded-sm ms-n2">
-                                                    <div class="flex-fill px-3">
-                                                        <div><a href="#"
-                                                                class="text-inverse fw-bold text-decoration-none">Roshni
-                                                                Fernandez</a></div>
-                                                        <div class="text-inverse text-opacity-50 fs-13px">Mount
-                                                            Lerdo
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-outline-theme">Follow</a>
+                                                <div class="card-arrow">
+                                                    <div class="card-arrow-top-left"></div>
+                                                    <div class="card-arrow-top-right"></div>
+                                                    <div class="card-arrow-bottom-left"></div>
+                                                    <div class="card-arrow-bottom-right"></div>
                                                 </div>
                                             </div>
-                                            <div class="text-center p-3"><a href="#"
-                                                                            class="text-inverse text-decoration-none">Show
-                                                    more <b class="caret"></b></a></div>
                                         </div>
 
 
                                         <div class="tab-pane fade" id="notes-tab">
                                             <div class="card mb-3">
-                                                <div class="card-header fw-bold bg-transparent">May 20</div>
-                                                <div class="card-body">
-                                                    <div class="widget-img-list">
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-1.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-1.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-2.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-2.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-3.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-3.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-4.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-4.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-5.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-5.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-6.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-6.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-7.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-7.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-8.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-8.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-9.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-9.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-10.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-10.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-11.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-11.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-12.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-12.jpg)"></span></a>
-                                                        </div>
-                                                    </div>
+                                                <div class="card-body p-4">
+
+
+
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -372,246 +194,15 @@ $(".timepicker").timepicker({
                                                     <div class="card-arrow-bottom-right"></div>
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="card-header fw-bold bg-transparent">May 16</div>
-                                                <div class="card-body">
-                                                    <div class="widget-img-list">
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-13.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-13.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-14.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-14.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-15.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-15.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-16.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-16.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-17.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-17.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-18.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-18.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-19.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-19.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-20.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-20.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-21.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-21.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-22.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-22.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-23.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-23.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-24.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-24.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-25.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-25.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-26.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-26.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-27.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-27.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-28.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-28.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-29.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-29.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="widget-img-list-item"><a
-                                                                href="img/gallery/gallery-30.jpg"
-                                                                data-lity><span class="img"
-                                                                                style="background-image: url(img/gallery/gallery-30.jpg)"></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center p-3"><a href="#"
-                                                                            class="text-inverse text-decoration-none">Show
-                                                    more <b class="caret"></b></a></div>
                                         </div>
 
 
                                         <div class="tab-pane fade" id="activities-tab">
                                             <div class="card mb-3">
-                                                <div class="card-header fw-bold bg-transparent">Collections #1</div>
-                                                <div class="card-body">
-                                                    <div class="row gx-1">
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=RQ5ljyGg-ig"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/RQ5ljyGg-ig/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=5lWkZ-JaEOc"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/5lWkZ-JaEOc/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=9ZfN87gSjvI"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/9ZfN87gSjvI/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=w2H07DRv2_M"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/w2H07DRv2_M/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=PntG8KEVjR8"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/PntG8KEVjR8/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=q8kxKvSQ7MI"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/q8kxKvSQ7MI/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=cutu3Bw4ep4"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/cutu3Bw4ep4/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=gCspUXGrraM"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/gCspUXGrraM/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="card mb-3">
-                                                <div class="card-header fw-bold bg-transparent">Collections #2</div>
-                                                <div class="card-body">
-                                                    <div class="row gx-1">
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=COtpTM1MpAA"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/COtpTM1MpAA/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=8NVkGHVOazc"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/8NVkGHVOazc/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=QgQ7MWLsw1w"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/QgQ7MWLsw1w/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=Dmw0ucCv8aQ"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/Dmw0ucCv8aQ/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=r1d7ST2TG2U"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/r1d7ST2TG2U/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=WUR-XWBcHvs"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/WUR-XWBcHvs/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=A7sQ8RWj0Cw"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/A7sQ8RWj0Cw/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-6 mb-1">
-                                                            <a href="https://www.youtube.com/watch?v=IMN2VfiXls4"
-                                                               data-lity>
-                                                                <img src="../../img.youtube.com/vi/IMN2VfiXls4/mqdefault.jpg"
-                                                                     alt class="d-block w-100">
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                <div class="card-body p-4">
+
+
+
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
