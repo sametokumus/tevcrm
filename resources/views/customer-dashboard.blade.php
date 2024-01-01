@@ -167,6 +167,13 @@ $(".timepicker").timepicker({
                                             <div class="card mb-3">
                                                 <div class="card-body p-4">
 
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="btn-group float-end">
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCompanyEmployeeModal">Yetkili Ekle</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="row" id="employees-grid">
 
                                                     </div>

@@ -305,7 +305,8 @@ async function addEmployeeCallback(xhttp){
     console.log(obj)
     $("#add_employee_form").trigger("reset");
     $("#addCompanyEmployeeModal").modal('hide');
-    initEmployees();
+    let company_id = getPathVariable('customer-dashboard');
+    initSidebarInfo(company_id);
 }
 async function addEmployee(){
     let company_id = getPathVariable('customer-dashboard');
@@ -346,7 +347,8 @@ async function updateEmployeeCallback(xhttp){
     console.log(obj)
     $("#update_employee_form").trigger("reset");
     $("#updateCompanyEmployeeModal").modal('hide');
-    initEmployees();
+    let company_id = getPathVariable('customer-dashboard');
+    initSidebarInfo(company_id);
 }
 async function updateEmployee(){
     let id = document.getElementById('update_employee_id').value;
@@ -367,7 +369,8 @@ async function updateEmployee(){
 async function deleteEmployee(employee_id){
     let returned = await serviceGetDeleteEmployee(employee_id);
     if(returned){
-        initEmployees();
+        let company_id = getPathVariable('customer-dashboard');
+        initSidebarInfo(company_id);
     }
 }
 
