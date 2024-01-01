@@ -37,22 +37,22 @@ $(".timepicker").timepicker({
                         <ul class="profile-tab nav nav-tabs nav-tabs-v2">
                             <li class="nav-item">
                                 <a href="#info-tab" class="nav-link active" data-bs-toggle="tab">
-                                    <div class="nav-value fs-18px">Firma Bilgileri</div>
+                                    <div class="nav-value fs-16px">Firma Bilgileri</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#employees-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value fs-18px">Yetkililer</div>
+                                    <div class="nav-value fs-16px">Yetkililer</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#notes-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value fs-18px">Notlar</div>
+                                    <div class="nav-value fs-16px">Notlar</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#activities-tab" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-value fs-18px">Aktiviteler</div>
+                                    <div class="nav-value fs-16px">Aktiviteler</div>
                                 </a>
                             </li>
                         </ul>
