@@ -256,7 +256,7 @@ async function initEmployees(employees){
     $('#employees-tab #employees-grid .grid-item').remove();
 
     $.each(employees, function (i, employee) {
-        let photo = "img/employee/empty.jpg";
+        let photo = "img/user/null-profile-picture.png";
         if (employee.photo != null){photo = employee.photo;}
 
         let item = '<div class="col-sm-6 grid-item">\n' +
