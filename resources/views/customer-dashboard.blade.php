@@ -27,7 +27,7 @@ $(".timepicker").timepicker({
                     <div class="profile-sidebar">
                         <div class="desktop-sticky-top">
                             <div class="profile-img">
-                                <img src="img/user/profile.jpg" alt>
+                                <img src="img/company/empty.jpg" alt>
                             </div>
 
                             <h4>John Smith</h4>
