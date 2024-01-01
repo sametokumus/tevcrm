@@ -106,7 +106,7 @@ function checkRole(){
     return true;
 }
 async function initSidebarInfo(company_id){
-    $('.profile-sidebar .desktop-sticky-top *').remove();
+    $('.profile-sidebar #sidebar-info *').remove();
 
     let data = await serviceGetCompanyById(company_id);
     let company = data.company;
