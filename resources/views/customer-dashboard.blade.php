@@ -196,7 +196,7 @@ $(".timepicker").timepicker({
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
                                                             <div class="btn-group float-end">
-                                                                <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyNoteModal();">Not Ekle</button>
+                                                                <button type="button" class="btn btn-theme" onclick="openAddCompanyNoteModal();">Not Ekle</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -222,7 +222,7 @@ $(".timepicker").timepicker({
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
                                                             <div class="btn-group float-end">
-                                                                <button type="button" class="btn btn-outline-secondary" onclick="openAddCompanyActivityModal();">Aktivite Ekle</button>
+                                                                <button type="button" class="btn btn-theme" onclick="openAddCompanyActivityModal();">Aktivite Ekle</button>
                                                             </div>
                                                         </div>
                                                     </div>

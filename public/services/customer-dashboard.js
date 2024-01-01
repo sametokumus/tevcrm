@@ -402,8 +402,8 @@ async function initNotes(company_id){
         }
 
         let item = '<div class="row mb-3 note-list-item">\n' +
-            '           <div class="col-md-4">\n' +
-            '               <div class="card mb-3">\n' +
+            '           <div class="col-md-12">\n' +
+            '               <div class="card mb-3 p-2">\n' +
             '                   '+ image +'\n' +
             '                   <div class="card-body">\n' +
             '                       <h6 class="card-title"><strong>'+ note.user_name +'</strong> tarafından; '+ note.company.name +' ve '+ note.employee.name +' hakkında</h6>\n' +
@@ -436,7 +436,8 @@ async function addNoteCallback(xhttp){
     console.log(obj)
     $("#add_note_form").trigger("reset");
     $("#addCompanyNoteModal").modal('hide');
-    initNotes();
+    let company_id = getPathVariable('customer-dashboard');
+    initNotes(company_id);
 }
 async function addNote(){
     let company_id = getPathVariable('customer-dashboard');
@@ -473,7 +474,8 @@ async function updateNoteCallback(xhttp){
     console.log(obj)
     $("#update_note_form").trigger("reset");
     $("#updateCompanyNoteModal").modal('hide');
-    initNotes();
+    let company_id = getPathVariable('customer-dashboard');
+    initNotes(company_id);
 }
 async function updateNote(){
     let company_id = getPathVariable('customer-dashboard');
@@ -490,7 +492,8 @@ async function updateNote(){
 async function deleteNote(note_id){
     let returned = await serviceGetDeleteNote(note_id);
     if(returned){
-        initNotes();
+        let company_id = getPathVariable('customer-dashboard');
+        initNotes(company_id);
     }
 }
 
@@ -569,6 +572,8 @@ async function addActivity(){
         $("#add_activity_form").trigger("reset");
         $("#addCompanyActivityModal").modal('hide');
         // initActivities();
+        let company_id = getPathVariable('customer-dashboard');
+        initActivities(company_id);
     }else{
         alert("Hata Oluştu");
     }
