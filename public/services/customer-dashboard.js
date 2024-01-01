@@ -91,7 +91,7 @@
 
         checkLogin();
         checkRole();
-        let company_id = getPathVariable('company-detail');
+        let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
         initCompany(company_id);
         initEmployees();
