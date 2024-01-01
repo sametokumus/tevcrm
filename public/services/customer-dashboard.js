@@ -253,15 +253,16 @@ async function updateCompany(){
 }
 
 async function initEmployees(employees){
-    $('#employees-tab .grid-item').remove();
+    $('#employees-tab #employees-grid .grid-item').remove();
 
     $.each(employees, function (i, employee) {
         let photo = "img/employee/empty.jpg";
         if (employee.photo != null){photo = employee.photo;}
 
-        let item = '<div class="card grid-item">\n' +
+        let item = '<div class="col-md-4 grid-item">\n' +
+            '              <div class="card col-md-4 grid-item">\n' +
             '                <div class="m-1 bg-inverse bg-opacity-15">\n' +
-            '                  <div class="position-relative overflow-hidden" style="height: 165px">\n' +
+            '                  <div class="position-relative overflow-hidden" style="height: 225px">\n' +
             '                    <img src="assets/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
             '                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
             '                      <div class="my-2">\n' +
@@ -291,8 +292,9 @@ async function initEmployees(employees){
             '                  <div class="card-arrow-bottom-left"></div>\n' +
             '                  <div class="card-arrow-bottom-right"></div>\n' +
             '                </div>\n' +
+            '              </div>\n' +
             '              </div>';
-        $('#employees-tab .card-body').append(item);
+        $('#employees-tab #employees-grid').append(item);
     });
 
 }
