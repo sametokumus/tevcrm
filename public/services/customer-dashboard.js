@@ -781,6 +781,7 @@ async function initSales(company_id){
             '       </tr>';
 
         $('#sales-table tbody').append(item);
+
     });
 
 }
