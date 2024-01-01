@@ -149,7 +149,7 @@ async function initSidebarInfo(company_id){
         '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> '+ company.website +'\n' +
         '          </div>\n' +
         '          <hr class="mt-4 mb-4">\n' +
-        '          <h4>Yetkililer</h4>\n';
+        '          <h6>Yetkililer</h6>\n';
 
     $('.profile-sidebar #sidebar-info').append(sidebar);
 

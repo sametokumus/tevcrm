@@ -36,33 +36,23 @@ $(".timepicker").timepicker({
                     <div class="profile-content">
                         <ul class="profile-tab nav nav-tabs nav-tabs-v2">
                             <li class="nav-item">
-                                <a href="#profile-post" class="nav-link active" data-bs-toggle="tab">
-                                    <div class="nav-field">Posts</div>
-                                    <div class="nav-value">382</div>
+                                <a href="#info-tab" class="nav-link active" data-bs-toggle="tab">
+                                    <div class="nav-value">Firma Bilgileri</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#profile-followers" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-field">Followers</div>
-                                    <div class="nav-value">1.3m</div>
+                                <a href="#employees-tab" class="nav-link" data-bs-toggle="tab">
+                                    <div class="nav-value">Yetkililer</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#profile-media" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-field">Photos</div>
-                                    <div class="nav-value">1,397</div>
+                                <a href="#notes-tab" class="nav-link" data-bs-toggle="tab">
+                                    <div class="nav-value">Notlar</div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#profile-video" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-field">Videos</div>
-                                    <div class="nav-value">120</div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#profile-followers" class="nav-link" data-bs-toggle="tab">
-                                    <div class="nav-field">Following</div>
-                                    <div class="nav-value">2,592</div>
+                                <a href="#activities-tab" class="nav-link" data-bs-toggle="tab">
+                                    <div class="nav-value">Aktiviteler</div>
                                 </a>
                             </li>
                         </ul>
@@ -71,395 +61,97 @@ $(".timepicker").timepicker({
                                 <div class="col-xl-8">
                                     <div class="tab-content p-0">
 
-                                        <div class="tab-pane fade show active" id="profile-post">
+                                        <div class="tab-pane fade show active" id="info-tab">
                                             <div class="card mb-3">
                                                 <div class="card-body">
 
-                                                    <div class="d-flex align-items-center mb-3">
-                                                        <a href="#"><img src="img/user/profile.jpg" alt
-                                                                         width="50" class="rounded-circle"></a>
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="fw-bold"><a href="#"
-                                                                                    class="text-decoration-none">Clyde
-                                                                    Stanley</a> at <a href="#"
-                                                                                      class="text-decoration-none">South
-                                                                    Lake Tahoe, California</a></div>
-                                                            <div class="small text-inverse text-opacity-50">March
-                                                                16
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <p>Best vacation of 2017</p>
-                                                    <div class="profile-img-list">
-                                                        <div class="profile-img-list-item main"><a
-                                                                href="img/gallery/gallery-1.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-1.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-2.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-2.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-3.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-3.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-4.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-4.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item with-number">
-                                                            <a href="img/gallery/gallery-5.jpg" data-lity
-                                                               class="profile-img-list-link">
-                                                                    <span class="profile-img-content"
-                                                                          style="background-image: url(img/gallery/gallery-5.jpg)"></span>
-                                                                <div class="profile-img-number">+12</div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-1">
-
-                                                    <div class="row text-center fw-bold">
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-thumbs-up me-1 d-block d-sm-inline"></i>
-                                                                Likes
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-comment me-1 d-block d-sm-inline"></i>
-                                                                Comment
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="fa fa-share me-1 d-block d-sm-inline"></i>
-                                                                Share
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-3 mt-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="img/user/user.jpg" alt width="35"
-                                                             class="rounded-circle">
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="position-relative d-flex align-items-center">
-                                                                <input type="text"
-                                                                       class="form-control rounded-pill bg-white bg-opacity-15"
-                                                                       style="padding-right: 120px;"
-                                                                       placeholder="Write a comment...">
-                                                                <div class="position-absolute end-0 text-center">
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-smile"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-camera"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-video"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-3"><i
-                                                                            class="fa fa-paw"></i></a>
+                                                    <form method="post" action="#" id="update_company_form">
+                                                        <div class="row mb-4">
+                                                            <div class="col-md-12 mb-3">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="update_company_is_potential_customer" />
+                                                                    <label class="form-check-label" for="update_company_is_potential_customer">Potansiyel Müşteri</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="update_company_is_customer" />
+                                                                    <label class="form-check-label" for="update_company_is_customer">Müşteri</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="update_company_is_supplier" />
+                                                                    <label class="form-check-label" for="update_company_is_supplier">Tedarikçi</label>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="card mb-3">
-                                                <div class="card-body">
+                                                            <div class="col-md-12 mb-3">
+                                                                <label class="form-label">Firma Adı</label>
+                                                                <input type="text" class="form-control" id="update_company_name" placeholder="Firma Adı" required>
+                                                                <input type="hidden" class="form-control" id="update_company_id" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Eposta</label>
+                                                                <input type="text" class="form-control" id="update_company_email" placeholder="Eposta" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Website</label>
+                                                                <input type="text" class="form-control" id="update_company_website" placeholder="Website">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Telefon</label>
+                                                                <input type="text" class="form-control" id="update_company_phone" placeholder="Telefon" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Faks</label>
+                                                                <input type="text" class="form-control" id="update_company_fax" placeholder="Faks">
+                                                            </div>
+                                                            <div class="col-md-12 mb-3">
+                                                                <label class="form-label">Adres</label>
+                                                                <input type="text" class="form-control" id="update_company_address" placeholder="Adres">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Ülke</label>
+                                                                <select class="form-control" id="update_company_country">
 
-                                                    <div class="d-flex align-items-center mb-3">
-                                                        <a href="#"><img src="img/user/profile.jpg" alt
-                                                                         width="50" class="rounded-circle"></a>
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="fw-bold"><a href="#"
-                                                                                    class="text-decoration-none">Clyde
-                                                                    Stanley</a> is watching <a href="#"
-                                                                                               class="text-decoration-none">PATAGONIA
-                                                                    8k</a></div>
-                                                            <div class="small text-inverse text-opacity-50">March
-                                                                12
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Registration Number</label>
+                                                                <input type="text" class="form-control" id="update_company_registration_number" placeholder="Registration Number">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Vergi Dairesi</label>
+                                                                <input type="text" class="form-control" id="update_company_tax_office" placeholder="Vergi Dairesi">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Vergi Numarası</label>
+                                                                <input type="text" class="form-control" id="update_company_tax_number" placeholder="Vergi Numarası">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">LinkedIn</label>
+                                                                <input type="text" class="form-control" id="update_company_linkedin" placeholder="LinkedIn">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Skype</label>
+                                                                <input type="text" class="form-control" id="update_company_skype" placeholder="Skype">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Payment Term</label>
+                                                                <select class="form-control" id="update_company_payment_term">
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label class="form-label">Diğer</label>
+                                                                <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
+                                                            </div>
+                                                            <div class="col-md-12 mb-3">
+                                                                <label class="form-label">Logo <a href="#" id="update_company_current_logo" target="_blank">'yu görüntülemek için tıklayınız...</a></label>
+                                                                <input type="file" class="form-control" id="update_company_logo" />
+                                                            </div>
+                                                            <div class="col-md-12 mb-3">
+                                                                <button type="submit" class="btn btn-outline-theme float-end">Kaydet</button>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
 
-                                                    <p>Nice PATAGONIA footage in 8K</p>
-                                                    <div class="ratio ratio-16x9">
-                                                        <iframe src="https://www.youtube.com/embed/ChOhcHD8fBA?showinfo=0"></iframe>
-                                                    </div>
-                                                    <hr class="mb-1">
-
-                                                    <div class="row text-center fw-bold">
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-thumbs-up me-1 d-block d-sm-inline"></i>
-                                                                Likes
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-comment me-1 d-block d-sm-inline"></i>
-                                                                Comment
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="fa fa-share me-1 d-block d-sm-inline"></i>
-                                                                Share
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-3 mt-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="img/user/user.jpg" alt width="35"
-                                                             class="rounded-circle">
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="position-relative d-flex align-items-center">
-                                                                <input type="text"
-                                                                       class="form-control rounded-pill bg-white bg-opacity-15"
-                                                                       style="padding-right: 120px;"
-                                                                       placeholder="Write a comment...">
-                                                                <div class="position-absolute end-0 text-center">
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-smile"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-camera"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-video"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-3"><i
-                                                                            class="fa fa-paw"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-
-                                                    <div class="d-flex align-items-center mb-3">
-                                                        <a href="#" class="text-decoration-none"><img
-                                                                src="img/user/profile.jpg" alt width="50"
-                                                                class="rounded-circle"></a>
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="fw-bold"><a href="#"
-                                                                                    class="text-decoration-none">Clyde
-                                                                    Stanley</a></div>
-                                                            <div class="small text-inverse text-opacity-50">March
-                                                                4
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Quisque
-                                                        sodales urna justo, ac ultrices magna consectetur
-                                                        id.<br><br>
-                                                        Donec tempor ligula sit amet nunc porta, sed aliquam leo
-                                                        sagittis.<br>
-                                                        Ut auctor congue efficitur. Praesent aliquam pulvinar neque,
-                                                        placerat semper massa elementum et.
-                                                    </p>
-                                                    <hr class="mb-1">
-
-                                                    <div class="row text-center fw-bold">
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-thumbs-up me-1 d-block d-sm-inline"></i>
-                                                                Likes
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-comment me-1 d-block d-sm-inline"></i>
-                                                                Comment
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="fa fa-share me-1 d-block d-sm-inline"></i>
-                                                                Share
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-3 mt-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="img/user/user.jpg" alt width="35"
-                                                             class="rounded-circle">
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="position-relative d-flex align-items-center">
-                                                                <input type="text"
-                                                                       class="form-control rounded-pill bg-white bg-opacity-15"
-                                                                       style="padding-right: 120px;"
-                                                                       placeholder="Write a comment...">
-                                                                <div class="position-absolute end-0 text-center">
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-smile"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-camera"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-video"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-3"><i
-                                                                            class="fa fa-paw"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-
-                                                    <div class="d-flex align-items-center mb-3">
-                                                        <a href="#" class="pointer-event-none"><img src="img/company/empty.jpg" width="50" class="rounded-circle"></a>
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="fw-bold"><a href="#"
-                                                                                    class="text-decoration-none">Clyde
-                                                                    Stanley</a> at <a href="#"
-                                                                                      class="text-decoration-none">United
-                                                                    States</a></div>
-                                                            <div class="small text-inverse text-opacity-50">May 5
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <p>Business Trip</p>
-                                                    <div class="profile-img-list">
-                                                        <div class="profile-img-list-item main"><a
-                                                                href="img/gallery/gallery-5.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-5.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item main"><a
-                                                                href="img/gallery/gallery-6.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-6.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-7.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-7.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-8.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-8.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-9.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-9.jpg)"></span></a>
-                                                        </div>
-                                                        <div class="profile-img-list-item"><a
-                                                                href="img/gallery/gallery-10.jpg" data-lity
-                                                                class="profile-img-list-link"><span
-                                                                    class="profile-img-content"
-                                                                    style="background-image: url(img/gallery/gallery-10.jpg)"></span></a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mb-1">
-
-                                                    <div class="row text-center fw-bold">
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-thumbs-up me-1 d-block d-sm-inline"></i>
-                                                                Likes
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="far fa-comment me-1 d-block d-sm-inline"></i>
-                                                                Comment
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="#"
-                                                               class="text-inverse text-opacity-50 text-decoration-none d-block p-2">
-                                                                <i class="fa fa-share me-1 d-block d-sm-inline"></i>
-                                                                Share
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="mt-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="img/user/user.jpg" alt width="35"
-                                                             class="rounded-circle">
-                                                        <div class="flex-fill ps-2">
-                                                            <div class="position-relative d-flex align-items-center">
-                                                                <input type="text"
-                                                                       class="form-control rounded-pill bg-white bg-opacity-15"
-                                                                       style="padding-right: 120px;"
-                                                                       placeholder="Write a comment...">
-                                                                <div class="position-absolute end-0 text-center">
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-smile"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-camera"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-2"><i
-                                                                            class="fa fa-video"></i></a>
-                                                                    <a href="#"
-                                                                       class="text-inverse text-opacity-50 me-3"><i
-                                                                            class="fa fa-paw"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -471,7 +163,7 @@ $(".timepicker").timepicker({
                                         </div>
 
 
-                                        <div class="tab-pane fade" id="profile-followers">
+                                        <div class="tab-pane fade" id="employees-tab">
                                             <div class="list-group">
                                                 <div class="list-group-item d-flex align-items-center">
                                                     <img src="img/user/user-1.jpg" alt width="50"
@@ -606,7 +298,7 @@ $(".timepicker").timepicker({
                                         </div>
 
 
-                                        <div class="tab-pane fade" id="profile-media">
+                                        <div class="tab-pane fade" id="notes-tab">
                                             <div class="card mb-3">
                                                 <div class="card-header fw-bold bg-transparent">May 20</div>
                                                 <div class="card-body">
@@ -789,7 +481,7 @@ $(".timepicker").timepicker({
                                         </div>
 
 
-                                        <div class="tab-pane fade" id="profile-video">
+                                        <div class="tab-pane fade" id="activities-tab">
                                             <div class="card mb-3">
                                                 <div class="card-header fw-bold bg-transparent">Collections #1</div>
                                                 <div class="card-body">
