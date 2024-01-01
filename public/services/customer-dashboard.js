@@ -292,7 +292,7 @@ async function initEmployees(employees){
             '                  <div class="card-arrow-bottom-right"></div>\n' +
             '                </div>\n' +
             '              </div>';
-        $('#employees-grid').append(item);
+        $('#employees-tab .card-body').append(item);
     });
 
 }
