@@ -625,7 +625,8 @@ async function updateActivityCallback(xhttp){
     console.log(obj)
     $("#update_note_form").trigger("reset");
     $("#updateCompanyActivityModal").modal('hide');
-    initActivities();
+    let company_id = getPathVariable('customer-dashboard');
+    initActivities(company_id);
 }
 async function updateActivity(){
     let company_id = getPathVariable('customer-dashboard');
@@ -648,7 +649,8 @@ async function updateActivity(){
     if (returned){
         $("#update_activity_form").trigger("reset");
         $("#updateCompanyActivityModal").modal('hide');
-        initActivities();
+        let company_id = getPathVariable('customer-dashboard');
+        initActivities(company_id);
     }else{
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }
@@ -656,7 +658,8 @@ async function updateActivity(){
 async function deleteActivity(activity_id){
     let returned = await serviceGetDeleteActivity(activity_id);
     if(returned){
-        initActivities();
+        let company_id = getPathVariable('customer-dashboard');
+        initActivities(company_id);
     }
 }
 async function deleteActivityTask(event, task_id){
