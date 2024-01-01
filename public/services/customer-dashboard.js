@@ -764,7 +764,7 @@ async function initSales(company_id){
 
     $('#sales-table tbody tr').remove();
 
-    $.each(products, function (i, product) {
+    $.each(sales, function (i, sale) {
 
         let item = '<tr>\n' +
             '           <td>\n' +
