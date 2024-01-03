@@ -102,7 +102,7 @@ async function initSaleStats(sale_id){
 
 
     $('#sale-code').text(sale.owner.short_code+'-'+sale.id);
-    $('#customer-name').html('<a href="/company-detail/'+sale.request.company.id+'" class="text-decoration-none text-dark">'+sale.request.company.name+'</a>');
+    $('#customer-name').html('<a href="/customer-dashboard/'+sale.request.company.id+'" class="text-decoration-none text-dark">'+sale.request.company.name+'</a>');
     if (sale.request.company_employee != null) {
         $('#customer-employee').text('Müşteri Yetkilisi: ' + sale.request.company_employee.name);
     }

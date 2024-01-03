@@ -822,7 +822,7 @@ async function initStaffCompanies(user_id){
         type = type.slice(0, -1);
 
         let item = '<div>\n' +
-            '                  <a href="/company-detail/'+ company.id +'" class="company-info d-flex align-items-center mb-3 text-decoration-none fs-12px">\n' +
+            '                  <a href="/customer-dashboard/'+ company.id +'" class="company-info d-flex align-items-center mb-3 text-decoration-none fs-12px">\n' +
             '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
             '                  <div class="flex-fill px-3">\n' +
             '                      <div class="fw-bold text-truncate w-100px company-name">'+ company.name +'</div>\n' +

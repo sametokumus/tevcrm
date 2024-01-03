@@ -83,7 +83,7 @@ async function initCompanies(){
             '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateCompanyModal(\''+ company.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Hızlı Düzenle\n' +
             '                      </button>\n' +
-            '                      <a href="company-detail/'+ company.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
+            '                      <a href="customer-dashboard/'+ company.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
             '                          <span class="fe fe-search"> </span> Detaylı İncele\n' +
             '                      </a>\n' +
             '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCompany(\''+ company.id +'\')">\n' +
