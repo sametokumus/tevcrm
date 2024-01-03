@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Helpers\CustomerHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\City;
 use App\Models\Company;
+use App\Models\Country;
+use App\Models\District;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use App\Models\OfferProduct;
@@ -179,6 +183,89 @@ class CompanyController extends Controller
                 'active' => 0,
             ]);
             return response(['message' => __('Firma silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getAddressesByCompanyId($company_id)
+    {
+        try {
+            $addresses = Address::query()->where('company_id', $company_id)->where('active',1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['addresses' => $addresses]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getAddressById($address_id)
+    {
+        try {
+            $address = Address::query()->where('id', $address_id)->where('active',1)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['address' => $address]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addCompanyAddress(Request $request)
+    {
+        try {
+            $request->validate([
+                'company_id' => 'required',
+                'name' => 'required',
+                'address' => 'required',
+            ]);
+            Address::query()->insertGetId([
+                'company_id' => $request->company_id,
+                'name' => $request->name,
+                'address' => $request->address,
+            ]);
+            return response(['message' => __('Adres ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateCompanyAddress(Request $request){
+        try {
+            $request->validate([
+                'name' => 'required',
+                'address' => 'required',
+            ]);
+
+            $address = Address::query()->where('id',$request->address_id)->update([
+                'name' => $request->name,
+                'address' => $request->address
+            ]);
+
+            return response(['message' => __('Adres güncelleme işlemi başarılı.'),'status' => 'success','object' => ['address' => $address]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteCompanyAddress($address_id){
+        try {
+
+            Address::query()->where('id',$address_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Adres silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {

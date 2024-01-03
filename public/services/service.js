@@ -1287,6 +1287,53 @@ async function servicePostAddActivityTask(formData) {
     }
 }
 
+async function serviceGetAddressesByCompanyId(id) {
+    const data = await fetchDataGet('/admin/company/getAddressesByCompanyId/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetAddressById(id) {
+    const data = await fetchDataGet('/admin/company/getAddressById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddCompanyAddress(formData) {
+    const data = await fetchDataPost('/admin/company/addCompanyAddress', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateCompanyAddress(formData) {
+    const data = await fetchDataPost('/admin/company/updateCompanyAddress', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteCompanyAddress(id) {
+    const data = await fetchDataGet('/admin/company/deleteCompanyAddress/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 
 async function serviceGetOfferRequests() {
     const data = await fetchDataGet('/admin/offerRequest/getOfferRequests', 'application/json');

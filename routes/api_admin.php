@@ -132,6 +132,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('company/getCompaniesByStaffId/{staff_id}', [CompanyController::class, 'getCompaniesByStaffId']);
     Route::get('company/getSaledProductsByCompanyId/{company_id}', [CompanyController::class, 'getSaledProductsByCompanyId']);
 
+    //CompanyAddress
+    Route::get('company/getAddressesByCompanyId/{company_id}', [CompanyController::class, 'getAddressesByCompanyId']);
+    Route::get('company/getAddressById/{address_id}', [CompanyController::class, 'getAddressById']);
+    Route::post('company/addCompanyAddress', [CompanyController::class, 'addCompanyAddress']);
+    Route::post('company/updateCompanyAddress', [CompanyController::class, 'updateCompanyAddress']);
+    Route::get('company/deleteCompanyAddress/{address_id}', [CompanyController::class, 'deleteCompanyAddress']);
+
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);
     Route::get('employee/getEmployeesByCompanyId/{company_id}', [EmployeeController::class, 'getEmployeesByCompanyId']);
