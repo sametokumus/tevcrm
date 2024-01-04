@@ -874,9 +874,9 @@ async function addDeliveryAddress(){
     }
 }
 async function updateDeliveryAddress(){
-    let address_id = document.getElementById('add_delivery_address_id').value;
-    let name = document.getElementById('add_delivery_address_name').value;
-    let address = document.getElementById('add_delivery_address').value;
+    let address_id = document.getElementById('update_delivery_address_id').value;
+    let name = document.getElementById('update_delivery_address_name').value;
+    let address = document.getElementById('update_delivery_address').value;
 
     let formData = JSON.stringify({
         "address_id": address_id,
