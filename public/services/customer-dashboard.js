@@ -895,3 +895,10 @@ async function updateDeliveryAddress(){
         alert("Hata Oluştu");
     }
 }
+async function deleteDeliveryAddress(address_id){
+    let returned = await serviceGetDeleteCompanyAddress(address_id);
+    if(returned){
+        let company_id = getPathVariable('customer-dashboard');
+        initDeliveryAddresses(company_id);
+    }
+}
