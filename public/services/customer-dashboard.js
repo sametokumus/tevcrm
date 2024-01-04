@@ -833,7 +833,9 @@ async function initDeliveryAddresses(company_id){
         language: {
             url: "services/Turkish.json"
         },
-        order: false,
+        order: [
+            [0, 'asc']
+        ]
     });
 
 }

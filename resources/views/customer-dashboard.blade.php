@@ -182,7 +182,7 @@ $(".timepicker").timepicker({
 
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
-                                                            <table id="datatableDeliveryAddresses" class="table text-nowrap w-100">
+                                                            <table id="datatableDeliveryAddresses" class="table table-bordered nowrap key-buttons border-bottom">
                                                                 <thead>
                                                                 <tr>
                                                                     <th scope="col">#</th>
