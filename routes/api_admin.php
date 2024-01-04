@@ -138,6 +138,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('company/addCompanyAddress', [CompanyController::class, 'addCompanyAddress']);
     Route::post('company/updateCompanyAddress', [CompanyController::class, 'updateCompanyAddress']);
     Route::get('company/deleteCompanyAddress/{address_id}', [CompanyController::class, 'deleteCompanyAddress']);
+    Route::get('company/addDefaultCompanyAddresses', [CompanyController::class, 'addDefaultCompanyAddresses']);
 
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);
