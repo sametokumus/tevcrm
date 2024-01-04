@@ -885,10 +885,10 @@ async function updateDeliveryAddress(){
         "address": address
     });
 
-    let returned = await servicePostAddCompanyAddress(formData);
+    let returned = await servicePostUpdateCompanyAddress(formData);
     if (returned){
-        $("#add_delivery_address_form").trigger("reset");
-        $("#addDeliveryAddressModal").modal('hide');
+        $("#update_delivery_address_form").trigger("reset");
+        $("#updateDeliveryAddressModal").modal('hide');
         let company_id = getPathVariable('customer-dashboard');
         initDeliveryAddresses(company_id);
     }else{
