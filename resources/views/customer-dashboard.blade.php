@@ -185,10 +185,10 @@ $(".timepicker").timepicker({
                                                             <table id="datatableDeliveryAddresses" class="table table-bordered nowrap key-buttons border-bottom">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">Başlık</th>
-                                                                    <th scope="col">Adres</th>
-                                                                    <th scope="col">İşlemler</th>
+                                                                    <th class="border-bottom-0">#</th>
+                                                                    <th class="border-bottom-0">Başlık</th>
+                                                                    <th class="border-bottom-0">Adres</th>
+                                                                    <th class="border-bottom-0">İşlemler</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
