@@ -41,6 +41,11 @@ $(".timepicker").timepicker({
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="#delivery-address-tab" class="nav-link" data-bs-toggle="tab">
+                                    <div class="nav-value fs-16px">Sevk Adresleri</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#employees-tab" class="nav-link" data-bs-toggle="tab">
                                     <div class="nav-value fs-16px">Yetkililer</div>
                                 </a>
@@ -151,6 +156,47 @@ $(".timepicker").timepicker({
                                                             </div>
                                                         </div>
                                                     </form>
+
+                                                </div>
+                                                <div class="card-arrow">
+                                                    <div class="card-arrow-top-left"></div>
+                                                    <div class="card-arrow-top-right"></div>
+                                                    <div class="card-arrow-bottom-left"></div>
+                                                    <div class="card-arrow-bottom-right"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="tab-pane fade" id="delivery-address-tab">
+                                            <div class="card mb-3">
+                                                <div class="card-body p-4">
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="btn-group float-end">
+                                                                <button type="button" class="btn btn-theme" onclick="openAddDeliveryAddressModal();">Sevk Adresi Ekle</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <table id="datatableDeliveryAddresses" class="table text-nowrap w-100">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Başlık</th>
+                                                                    <th scope="col">Adres</th>
+                                                                    <th scope="col">İşlemler</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class="card-arrow">
@@ -774,6 +820,64 @@ $(".timepicker").timepicker({
                             <div class="col-md-2 mb-3">
                                 <button type="button" class="btn btn-default btn-sm" id="update-activity-task-button">Ekle</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-cover fade" id="addDeliveryAddressModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SEVK ADRESİ EKLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="add_delivery_address_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Adres Başlığı</label>
+                            <input type="text" class="form-control" id="add_delivery_address_name">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Adres</label>
+                            <input type="text" class="form-control" id="add_delivery_address">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal modal-cover fade" id="updateDeliveryAddressModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SEVK ADRESİ GÜNCELLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_delivery_address_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Adres Başlığı</label>
+                            <input type="text" class="form-control" id="update_delivery_address_name">
+                            <input type="hidden" class="form-control" id="update_delivery_address_id">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Adres</label>
+                            <input type="text" class="form-control" id="update_delivery_address">
                         </div>
                     </div>
                 </div>

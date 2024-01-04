@@ -46,6 +46,17 @@
 
 
 
+        $('#add_delivery_address_form').submit(function (e){
+            e.preventDefault();
+            addDeliveryAddress();
+        });
+        $('#update_delivery_address_form').submit(function (e){
+            e.preventDefault();
+            updateDeliveryAddress();
+        });
+
+
+
         $('#add_activity_form').submit(function (e){
             e.preventDefault();
             addActivity();
@@ -784,4 +795,99 @@ async function initSales(company_id){
 
     });
 
+}
+
+
+async function initDeliveryAddresses(company_id){
+    let data = await serviceGetAddressesByCompanyId(company_id);
+    console.log(data)
+    $("#datatableDeliveryAddresses").dataTable().fnDestroy();
+    $('#datatableDeliveryAddresses tbody > tr').remove();
+    let logged_user_id = localStorage.getItem('userId');
+
+    $.each(data.addresses, function (i, address) {
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateDeliveryAddressModal(\''+ address.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteDeliveryAddress(\''+ address.id +'\');">Sil</button>\n';
+        }
+
+        let item = '<tr>\n' +
+            '           <th scope="row">'+ address.id +'</th>\n' +
+            '           <td>'+ address.name +'</td>\n' +
+            '           <td>'+ address.address +'</td>\n' +
+            '           <td>'+ actions +'</td>\n' +
+            '       </tr>';
+        $('#datatableDeliveryAddresses tbody').append(item);
+    });
+
+    $('#datatableDeliveryAddresses').DataTable({
+        responsive: false,
+        columnDefs: [],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
+    });
+
+}
+async function openUpdateDeliveryAddressModal(address_id){
+    $("#updateDeliveryAddressModal").modal('show');
+    initUpdateDeliveryAddressModal(address_id)
+}
+async function initUpdateDeliveryAddressModal(address_id){
+    document.getElementById('update_delivery_address_form').reset();
+    let data = await serviceGetAddressById(address_id);
+    let address = data.address;
+    document.getElementById('update_delivery_address_id').value = address.id;
+    document.getElementById('update_delivery_address_name').value = address.name;
+    document.getElementById('update_delivery_address').value = address.address;
+}
+async function addDeliveryAddress(){
+    let company_id = getPathVariable('customer-dashboard');
+
+    let name = document.getElementById('add_delivery_address_name').value;
+    let address = document.getElementById('add_delivery_address').value;
+
+    let formData = JSON.stringify({
+        "company_id": company_id,
+        "name": name,
+        "address": address
+    });
+
+    let returned = await servicePostAddCompanyAddress(formData);
+    if (returned){
+        $("#add_delivery_address_form").trigger("reset");
+        $("#addDeliveryAddressModal").modal('hide');
+        let company_id = getPathVariable('customer-dashboard');
+        initDeliveryAddresses(company_id);
+    }else{
+        alert("Hata Oluştu");
+    }
+}
+async function updateDeliveryAddress(){
+    let address_id = document.getElementById('add_delivery_address_id').value;
+    let name = document.getElementById('add_delivery_address_name').value;
+    let address = document.getElementById('add_delivery_address').value;
+
+    let formData = JSON.stringify({
+        "address_id": address_id,
+        "name": name,
+        "address": address
+    });
+
+    let returned = await servicePostAddCompanyAddress(formData);
+    if (returned){
+        $("#add_delivery_address_form").trigger("reset");
+        $("#addDeliveryAddressModal").modal('hide');
+        let company_id = getPathVariable('customer-dashboard');
+        initDeliveryAddresses(company_id);
+    }else{
+        alert("Hata Oluştu");
+    }
 }
