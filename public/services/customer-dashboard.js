@@ -106,6 +106,7 @@
         initSidebarInfo(company_id);
         initSaledProducts(company_id);
         initSales(company_id);
+        initDeliveryAddresses(company_id);
         initNotes(company_id);
         initActivities(company_id);
 
