@@ -836,6 +836,9 @@ async function initDeliveryAddresses(company_id){
     });
 
 }
+async function openAddDeliveryAddressModal(){
+    $("#addDeliveryAddressModal").modal('show');
+}
 async function openUpdateDeliveryAddressModal(address_id){
     $("#updateDeliveryAddressModal").modal('show');
     initUpdateDeliveryAddressModal(address_id)
