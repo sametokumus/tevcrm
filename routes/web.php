@@ -49,9 +49,8 @@ Route::get('/sw-2/{request_id}', function () { return view('sw-step2'); });
 Route::get('/sw-2-new/{request_id}', function () { return view('sw-step2-new'); });
 Route::get('/sw-3/{sale_id}', function () { return view('sw-step3'); });
 Route::get('/sw-3-rev/{sale_id}', function () { return view('sw-step3-rev'); });
-Route::get('/sw-4/{sale_id}', function () { return view('sw-step4'); });
-Route::get('/sw-4-rev/{sale_id}', function () { return view('sw-step4'); });
-Route::get('/sw-4-new/{sale_id}', function () { return view('sw-step4-new'); });
+Route::get('/sw-4/{sale_id}', function () { return view('sw-step4-new'); });
+Route::get('/sw-4-rev/{sale_id}', function () { return view('sw-step4-new'); });
 
 
 Route::get('/offer-print/{offer_id}', function () { return view('offer-print'); });
