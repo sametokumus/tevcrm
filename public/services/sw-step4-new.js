@@ -32,7 +32,7 @@ let revize = 0;
 let table;
 
 async function initOfferDetail(){
-    let sale_id = getPathVariable('sw-4');
+    let sale_id = getPathVariable('sw-4-new');
     if (sale_id == undefined){
         sale_id = getPathVariable('sw-4-rev');
         revize = 1;
@@ -193,7 +193,7 @@ async function initOfferDetail(){
 }
 
 async function approveOffer() {
-    let sale_id = getPathVariable('sw-4');
+    let sale_id = getPathVariable('sw-4-new');
     if (sale_id == undefined){
         sale_id = getPathVariable('sw-4-rev');
         revize = 1;
@@ -212,7 +212,7 @@ async function openRejectOfferModal() {
 }
 
 async function rejectOffer() {
-    let sale_id = getPathVariable('sw-4');
+    let sale_id = getPathVariable('sw-4-new');
     if (sale_id == undefined){
         sale_id = getPathVariable('sw-4-rev');
         revize = 1;

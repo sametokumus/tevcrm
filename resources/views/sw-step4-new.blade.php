@@ -12,7 +12,6 @@ $extra_js='
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
 
-
             <div class="row">
                 <div class="col-md-12">
                     <nav class="nav nav-wizards-3 mb-2">
