@@ -40,7 +40,6 @@ async function initOfferDetail(){
     let data = await serviceGetSaleConfirmationById(sale_id);
     let sale = data.sale;
     console.log(sale)
-    $('#sw_customer_name').text(sale.request.company.name);
     initCustomer(sale.request.company, sale.request.company_employee);
 
     $('#offer-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency +'</b>');
