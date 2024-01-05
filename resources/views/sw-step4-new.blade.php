@@ -60,8 +60,8 @@ $extra_js='
 
                                             <hr class="mt-4 mb-4">
 
-                                            <button type="button" class="btn btn-block btn-theme fs-11px" onclick="approveOffer();">Teklifi Onayla</button>
-                                            <button type="button" class="btn btn-block btn-outline-default fs-11px" onclick="openRejectOfferModal();">Teklifi Reddet</button>
+                                            <button type="button" class="btn d-block w-100 btn-theme fs-13px mb-1" onclick="approveOffer();">Teklifi Onayla</button>
+                                            <button type="button" class="btn d-block w-100 btn-outline-default fs-13px mb-1" onclick="openRejectOfferModal();">Teklifi Reddet</button>
 
                                         </div>
                                     </div>
