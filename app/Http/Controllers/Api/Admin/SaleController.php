@@ -523,6 +523,7 @@ class SaleController extends Controller
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
+
                 $supply_total += $sale_offer->sale_price;
                 $offer_total += $sale_offer->offer_price;
 
