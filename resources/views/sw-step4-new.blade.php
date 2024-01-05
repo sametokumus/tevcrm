@@ -75,9 +75,9 @@ $extra_js='
 
                                                         <div class="card mb-3">
                                                             <div class="list-group list-group-flush">
-                                                                <div class="list-group-item fw-bold px-3 d-flex">
+                                                                <div class="list-group-item fw-bold px-3 d-flex bg-theme text-white">
                                                                     <div class="flex-fill">
-                                                                        Tedarik Fiyatı: 13.806,00 TRY   |   Satış Fiyatı: 19.840,00 TRY   |   Kar: 6.034,00 TRY   |   Kar Oranı: %43,71   |   Teslimat Süresi: 14
+                                                                        Ürün: LNX-003   |   Tedarik Fiyatı: 13.806,00 TRY   |   Satış Fiyatı: 19.840,00 TRY   |   Kar: 6.034,00 TRY   |   Kar Oranı: %43,71   |   Teslimat Süresi: 14
                                                                     </div>
                                                                 </div>
                                                                 <div class="list-group-item px-3">
