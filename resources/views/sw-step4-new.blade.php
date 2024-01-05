@@ -73,40 +73,7 @@ $extra_js='
                                                 <div class="col-xl-12">
                                                     <div id="offer-products" class="desktop-sticky-top d-none d-lg-block">
 
-                                                        <div class="card mb-3">
-                                                            <div class="list-group list-group-flush">
-                                                                <div class="list-group-item fw-bold px-3 d-flex bg-theme text-white">
-                                                                    <div class="flex-fill">
-                                                                        Ürün: LNX-003   |   Tedarik Fiyatı: 13.806,00 TRY   |   Satış Fiyatı: 19.840,00 TRY   |   Kar: 6.034,00 TRY   |   Kar Oranı: %43,71   |   Teslimat Süresi: 14
-                                                                    </div>
-                                                                </div>
-                                                                <div class="list-group-item px-3">
-                                                                    <div class="table-responsive">
-                                                                        <table id="offer-products-table-1" class="table table-striped table-borderless mb-2px small text-nowrap">
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th>Tedarikçi</th>
-                                                                                <th>Miktar</th>
-                                                                                <th>Birim Fiyat</th>
-                                                                                <th>Toplam Fiyat</th>
-                                                                                <th>Satış Para Birimi Cinsinden</th>
-                                                                                <th>Teslimat Süresi</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
 
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-arrow">
-                                                                <div class="card-arrow-top-left"></div>
-                                                                <div class="card-arrow-top-right"></div>
-                                                                <div class="card-arrow-bottom-left"></div>
-                                                                <div class="card-arrow-bottom-right"></div>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                 </div>
