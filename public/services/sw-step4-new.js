@@ -195,9 +195,9 @@ async function initOfferDetail(){
 async function initCustomer(company, employee){
     console.log(company)
     console.log(employee)
-    $('#employee-name').text(admin.name + ' ' + admin.surname);
-    $('#employee-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
-    $('#employee-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
+    $('#employee-name').text(employee.name + ' ' + employee.surname);
+    $('#employee-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + employee.email);
+    $('#employee-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + employee.phone);
 
     let logo = '/img/company/empty.jpg';
     if (company.logo != null && company.logo != ''){
