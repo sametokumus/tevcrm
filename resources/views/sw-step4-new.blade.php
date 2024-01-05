@@ -23,9 +23,21 @@ $extra_js='
 
                                     <div class="profile-sidebar">
                                         <div class="desktop-sticky-top">
-                                            <div id="sidebar-info">
+                                            <div class="profile-img">
+                                                <img id="customer-logo" src="" alt="">
+                                            </div>
+
+                                            <h4 id="employee-name"></h4>
+                                            <div class="mb-1" id="employee-phone">
 
                                             </div>
+                                            <div class="mb-3" id="employee-email">
+
+                                            </div>
+                                            <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
+                                            <hr class="mt-4 mb-4">
+
+
                                         </div>
                                     </div>
 

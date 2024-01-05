@@ -41,6 +41,7 @@ async function initOfferDetail(){
     let sale = data.sale;
     console.log(sale)
     $('#sw_customer_name').text(sale.request.company.name);
+    initCustomer(sale.request.company, sale.request.company_employee);
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
@@ -190,6 +191,19 @@ async function initOfferDetail(){
     }else{
         alert('Bu sipariş teklif oluşturmaya hazır değildir.');
     }
+}
+async function initCustomer(company, employee){
+    console.log(company)
+    console.log(employee)
+    $('#employee-name').text(admin.name + ' ' + admin.surname);
+    $('#employee-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
+    $('#employee-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
+
+    let logo = '/img/company/empty.jpg';
+    if (company.logo != null && company.logo != ''){
+        logo = company.logo;
+    }
+    $('#customer-logo').attr('src', logo);
 }
 
 async function approveOffer() {
