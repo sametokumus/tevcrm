@@ -523,6 +523,10 @@ class SaleController extends Controller
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
+
+                $supply_total += $sale_offer->sale_price;
+                $offer_total += $sale_offer->offer_price;
+
                 $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
                 $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
                 $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
@@ -547,9 +551,6 @@ class SaleController extends Controller
                 }
                 $sale_offer['profit'] = number_format((floatval($offer_price) - floatval($sale_offer->sale_price)), 2,",",".");
                 $sale_offer['profit_rate'] = '%'.number_format($profit_rate, 2,",","");
-
-                $supply_total += $sale_offer->sale_price;
-                $offer_total += $sale_offer->offer_price;
 
                 $request_product_id = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first()->request_product_id;
                 $offer_products = OfferProduct::query()->where('request_product_id', $request_product_id)->where('active', 1)->get();
