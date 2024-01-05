@@ -865,3 +865,8 @@ table.dataTable{
     bottom: 10px;
     right: 10px;
 }
+
+.is_pinned td{
+    --bs-bg-opacity: 1;
+    background-color: rgba(167, 216, 201, var(--bs-bg-opacity)) !important;
+}
