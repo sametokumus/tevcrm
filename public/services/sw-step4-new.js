@@ -85,9 +85,9 @@ async function initOfferDetail(){
                 item += '                <tr class="'+ row_bg +'">\n' +
                 '                            <td>'+ s_offer.supplier.name +'</td>\n' +
                 '                            <td>'+ s_offer.quantity +'</td>\n' +
-                '                            <td>'+ (checkNull(s_offer.pcs_price)) +' '+ s_offer.currency +'</td>\n' +
-                '                            <td>'+ s_offer.total_price +' '+ s_offer.currency +'</td>\n' +
-                '                            <td>'+ s_offer.converted_price +' '+ s_offer.converted_currency +'</td>\n' +
+                '                            <td>'+ changeCommasToDecimal(s_offer.pcs_price) +' '+ s_offer.currency +'</td>\n' +
+                '                            <td>'+ changeCommasToDecimal(s_offer.total_price) +' '+ s_offer.currency +'</td>\n' +
+                '                            <td>'+ changeCommasToDecimal(s_offer.converted_price) +' '+ s_offer.converted_currency +'</td>\n' +
                 '                            <td>'+ s_offer.lead_time +'</td>\n' +
                 '                        </tr>\n';
             });
