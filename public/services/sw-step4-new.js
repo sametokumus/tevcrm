@@ -44,13 +44,19 @@ async function initOfferDetail(){
     initCustomer(sale.request.company, sale.request.company_employee);
 
     $('#offer-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency +'</b>');
-    $('#supply-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency +'</b>');
-    $('#profit-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency +'</b>');
+    $('#supply-price').html('<b>Tedarik Fiyatı: ' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency +'</b>');
+    $('#profit-price').html('<b>Kar: ' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency +'</b>');
     $('#profit-rate').html('<b>Kar Oranı: %' + sale.profit_rate +'</b>');
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
         console.log(offers)
+
+        $.each(offers, function (i, offer) {
+            console.log(offer)
+        });
+
+
         $("#sales-detail").dataTable().fnDestroy();
         $('#sales-detail tbody > tr').remove();
 
@@ -150,12 +156,10 @@ async function initOfferDetail(){
             },
             footerCallback: function (row, data, start, end, display) {
                 let api = this.api();
-                console.log(data)
                 let supplier_total = 0;
                 let offer_total = 0;
                 let sale_currency;
                 $.each(data, function (i, offer) {
-                    console.log(offer)
                     // if (offer.discounted_price == null || offer.discounted_price == "0,00"){
                     //     supplier_total += parseFloat(changePriceToDecimal(offer.total_price.toString()));
                     // }else{
@@ -198,8 +202,6 @@ async function initOfferDetail(){
     }
 }
 async function initCustomer(company, employee){
-    console.log(company)
-    console.log(employee)
     $('#customer-name').text(company.name);
     $('#employee-name').html('<i class="fa fa-user fa-fw text-inverse text-opacity-50"></i>' + employee.name);
     $('#employee-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + employee.email);
@@ -219,7 +221,6 @@ async function approveOffer() {
         revize = 1;
     }
     let returned = await serviceGetApproveOfferBySaleId(sale_id, revize);
-    console.log(returned)
     if (returned){
         window.location.href = "/sales";
     }else{
@@ -238,7 +239,6 @@ async function rejectOffer() {
         revize = 1;
     }
     let user_id = localStorage.getItem('userId');
-    console.log(sale_id)
     let returned = await serviceGetRejectOfferBySaleId(sale_id, revize);
     if (returned){
 
