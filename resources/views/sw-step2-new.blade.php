@@ -192,7 +192,7 @@ $extra_js='
 
             </div>
 
-            <div class="row">
+            <div class="row d-none">
 
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">

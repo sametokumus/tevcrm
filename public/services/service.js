@@ -1615,6 +1615,15 @@ async function serviceGetSaleById(id) {
     }
 }
 
+async function serviceGetSaleConfirmationById(id) {
+    const data = await fetchDataGet('/admin/sale/getSaleConfirmationById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetPackingListSaleById(id) {
     const data = await fetchDataGet('/admin/sale/getPackingListSaleById/' + id, 'application/json');
     if (data.status == "success") {

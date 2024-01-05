@@ -37,11 +37,16 @@ async function initOfferDetail(){
         sale_id = getPathVariable('sw-4-rev');
         revize = 1;
     }
-    let data = await serviceGetSaleById(sale_id);
+    let data = await serviceGetSaleConfirmationById(sale_id);
     let sale = data.sale;
     console.log(sale)
     $('#sw_customer_name').text(sale.request.company.name);
     initCustomer(sale.request.company, sale.request.company_employee);
+
+    $('#offer-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency +'</b>');
+    $('#supply-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency +'</b>');
+    $('#profit-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency +'</b>');
+    $('#profit-rate').html('<b>Kar Oranı: %' + sale.profit_rate +'</b>');
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
@@ -195,7 +200,8 @@ async function initOfferDetail(){
 async function initCustomer(company, employee){
     console.log(company)
     console.log(employee)
-    $('#employee-name').text(employee.name + ' ' + employee.surname);
+    $('#customer-name').text(company.name);
+    $('#employee-name').html('<i class="fa fa-user fa-fw text-inverse text-opacity-50"></i>' + employee.name);
     $('#employee-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + employee.email);
     $('#employee-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + employee.phone);
 

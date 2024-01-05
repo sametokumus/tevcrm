@@ -503,6 +503,81 @@ class SaleController extends Controller
         }
     }
 
+    public function getSaleConfirmationById($sale_id)
+    {
+        try {
+            $sale = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.name as status_name')
+                ->where('sales.active',1)
+                ->where('sales.sale_id',$sale_id)
+                ->first();
+
+            $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
+            $offer_request['company'] = Company::query()->where('id', $offer_request->company_id)->first();
+            $offer_request['company_employee'] = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            $sale['request'] = $offer_request;
+
+            $supply_total = 0;
+            $offer_total = 0;
+
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+            foreach ($sale_offers as $sale_offer){
+                $sale_offer['supplier_name'] = Company::query()->where('id', $sale_offer->supplier_id)->first()->name;
+                $sale_offer['product_name'] = Product::query()->where('id', $sale_offer->product_id)->first()->product_name;
+                $sale_offer['product_ref_code'] = Product::query()->where('id', $sale_offer->product_id)->first()->ref_code;
+                $offer_pcs_price = $sale_offer->offer_price / $sale_offer->offer_quantity;
+                $sale_offer['offer_pcs_price'] = number_format($offer_pcs_price, 2,".","");
+                $offer_price = $sale_offer->offer_price;
+                $sale_offer->offer_price = number_format($sale_offer->offer_price, 2,",",".");
+                $sale_offer->pcs_price = number_format($sale_offer->pcs_price, 2,",",".");
+                $sale_offer->total_price = number_format($sale_offer->total_price, 2,",",".");
+                $sale_offer->discounted_price = number_format($sale_offer->discounted_price, 2,",",".");
+                $sale_offer['measurement_name_tr'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_tr;
+                $sale_offer['measurement_name_en'] = Measurement::query()->where('id', $sale_offer->measurement_id)->first()->name_en;
+
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first();
+                $request_product = OfferRequestProduct::query()->where('id', $offer_product->request_product_id)->first();
+                $sale_offer['sequence'] = $request_product->sequence;
+
+                if ($offer_price != 0 && $sale_offer->sale_price != 0) {
+                    $profit_rate = 100 * (floatval($offer_price) - floatval($sale_offer->sale_price)) / floatval($sale_offer->sale_price);
+                }else{
+                    $profit_rate = 0;
+                }
+                $sale_offer['profit'] = number_format((floatval($offer_price) - floatval($sale_offer->sale_price)), 2,",",".");
+                $sale_offer['profit_rate'] = '%'.number_format($profit_rate, 2,",","");
+
+                $supply_total += $sale_offer->sale_price;
+                $offer_total += $sale_offer->offer_price;
+
+                $request_product_id = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->first()->request_product_id;
+                $offer_products = OfferProduct::query()->where('request_product_id', $request_product_id)->where('active', 1)->get();
+                foreach ($offer_products as $offer_product){
+                    $offer_product['is_sended_offer'] = 0;
+                    if ($offer_product->id == $sale_offer->offer_product_id){
+                        $offer_product['is_sended_offer'] = 1;
+                    }
+                    $offer = Offer::query()->where('offer_id', $offer_product->offer_id)->first();
+                    $offer_product['supplier'] = Company::query()->where('id', $offer->supplier_id)->first();
+                }
+                $sale_offer['supplier_offers'] = $offer_products;
+
+            }
+            $sale['sale_offers'] = $sale_offers;
+
+            $sale['supply_price'] = number_format($supply_total, 2,",",".");
+            $sale['offer_price'] = number_format($offer_total, 2,",",".");
+            $sale['profit'] = number_format($offer_total - $supply_total, 2,",",".");
+            $profit_rate = 100 * ($offer_total - $supply_total) / $supply_total;
+            $sale['profit_rate'] = number_format($profit_rate, 2,",","");
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
     public function getPackingListSaleById($packing_list_id)
     {
         try {
