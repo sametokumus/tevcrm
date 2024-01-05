@@ -80,12 +80,12 @@ async function initOfferDetail(){
             $.each(offer.supplier_offers, function (i, s_offer) {
                 let row_bg = '';
                 if (s_offer.is_sended_offer == 1){
-                    row_bg = 'bg-theme-300';
+                    row_bg = 'bg-theme-200';
                 }
                 item += '                <tr class="'+ row_bg +'">\n' +
                 '                            <td>'+ s_offer.supplier.name +'</td>\n' +
                 '                            <td>'+ s_offer.quantity +'</td>\n' +
-                '                            <td>'+ changeCommasToDecimal(checkNull(s_offer.pcs_price)) +' '+ s_offer.currency +'</td>\n' +
+                '                            <td>'+ (checkNull(s_offer.pcs_price)) +' '+ s_offer.currency +'</td>\n' +
                 '                            <td>'+ s_offer.total_price +' '+ s_offer.currency +'</td>\n' +
                 '                            <td>'+ s_offer.converted_price +' '+ s_offer.converted_currency +'</td>\n' +
                 '                            <td>'+ s_offer.lead_time +'</td>\n' +
