@@ -174,7 +174,7 @@ class PdfController extends Controller
 
         return $y;
     }
-    private function addCompanyInfo($pdf, $lang, $company, $y){
+    private function addCompanyInfo($pdf, $lang, $company, $employee, $y){
         $y += 10;
         $x = 10;
 
@@ -211,31 +211,71 @@ class PdfController extends Controller
         $row_height = $lines_needed * $line_height;
         $pdf->MultiCell(100, $line_height, $address, 0, 'L');
 
+        if ($employee == null) {
 
+            $y += $row_height + 3;
+            $x = 10;
 
-        $y += $row_height + 3;
-        $x = 10;
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone') . ': ', '0', '0', '');
 
-        $pdf->SetFont('ChakraPetch-Bold', '', 10);
-        $pdf->SetXY($x, $y);
-        $pdf->Cell(0, 0, __('Phone').': ', '0', '0', '');
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Phone') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->phone, '0', '0', '');
 
-        $pdf->SetFont('ChakraPetch-Regular', '', 10);
-        $x = $x+2 + $pdf->GetStringWidth(__('Phone').': ');
-        $pdf->SetXY($x, $y);
-        $pdf->Cell(0, 0, $company->phone, '0', '0', '');
+            $y += 5;
+            $x = 10;
 
-        $y += 5;
-        $x = 10;
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email') . ': ', '0', '0', '');
 
-        $pdf->SetFont('ChakraPetch-Bold', '', 10);
-        $pdf->SetXY($x, $y);
-        $pdf->Cell(0, 0, __('Email').': ', '0', '0', '');
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Email') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->email, '0', '0', '');
 
-        $pdf->SetFont('ChakraPetch-Regular', '', 10);
-        $x = $x+2 + $pdf->GetStringWidth(__('Email').': ');
-        $pdf->SetXY($x, $y);
-        $pdf->Cell(0, 0, $company->email, '0', '0', '');
+        }else{
+
+            $y += $row_height + 3;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Authorized') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Authorized') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->name, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Phone') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->phone, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Email') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->email, '0', '0', '');
+
+        }
 
         return $y + 5;
     }
@@ -3097,6 +3137,15 @@ class PdfController extends Controller
                 ->where('sales.request_id',$offer->request_id)
                 ->first();
 
+            $offer_request = OfferRequest::query()
+                ->selectRaw('offer_requests.*')
+                ->where('offer_requests.active',1)
+                ->where('offer_requests.request_id',$offer->request_id)
+                ->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
 
             $createdAt = Carbon::now();
             $document_date = $createdAt->format('d/m/Y');
@@ -3168,7 +3217,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Request For Quotation')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
             $x = 10;

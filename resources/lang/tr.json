@@ -43,5 +43,6 @@
     "Week" : "Hafta",
     "Day" : "Gün",
     "Insurance" : "Sigorta",
-    "Request Code" : "Talep Kodu"
+    "Request Code" : "Talep Kodu",
+    "Authorized" : "Yetkili"
 }
