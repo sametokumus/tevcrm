@@ -870,3 +870,12 @@ table.dataTable{
     --bs-bg-opacity: 1;
     background-color: rgba(167, 216, 201, var(--bs-bg-opacity)) !important;
 }
+.progress{
+    position: relative;
+}
+.progress span{
+    position: absolute;
+    width: 100%;
+    color: #000;
+    font-weight: 700;
+}
