@@ -70,11 +70,11 @@ class StaffTargetHelper
             }else{
                 if ($target->currency == 'TRY') {
                     $sc = strtolower($sale->currency);
-                    $converted_price = $sale_total_price / $sale->{$sc.'_rate'};
+                    $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
                 }else{
                     if ($sale->currency == 'TRY') {
                         $tc = strtolower($target->currency);
-                        $converted_price = $sale_total_price * $sale->{$tc.'_rate'};
+                        $converted_price = $sale_total_price / $sale->{$tc.'_rate'};
                     }else{
                         $tc = strtolower($target->currency);
                         $sc = strtolower($sale->currency);
@@ -153,11 +153,11 @@ class StaffTargetHelper
                 }else{
                     if ($expense->currency == 'TRY') {
                         $sc = strtolower($sale->currency);
-                        $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        $expense_price = $expense->price * $sale->{$sc.'_rate'};
                     }else{
                         if ($sale->currency == 'TRY') {
                             $ec = strtolower($expense->currency);
-                            $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            $expense_price = $expense->price / $sale->{$ec.'_rate'};
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($sale->currency);
@@ -185,11 +185,11 @@ class StaffTargetHelper
             }else{
                 if ($target->currency == 'TRY') {
                     $sc = strtolower($sale->currency);
-                    $converted_price = $sale_total_price / $sale->{$sc.'_rate'};
+                    $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
                 }else{
                     if ($sale->currency == 'TRY') {
                         $tc = strtolower($target->currency);
-                        $converted_price = $sale_total_price * $sale->{$tc.'_rate'};
+                        $converted_price = $sale_total_price / $sale->{$tc.'_rate'};
                     }else{
                         $tc = strtolower($target->currency);
                         $sc = strtolower($sale->currency);
@@ -269,11 +269,11 @@ class StaffTargetHelper
                 }else{
                     if ($expense->currency == 'TRY') {
                         $sc = strtolower($sale->currency);
-                        $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        $expense_price = $expense->price * $sale->{$sc.'_rate'};
                     }else{
                         if ($sale->currency == 'TRY') {
                             $ec = strtolower($expense->currency);
-                            $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            $expense_price = $expense->price / $sale->{$ec.'_rate'};
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($sale->currency);
@@ -302,11 +302,11 @@ class StaffTargetHelper
             }else{
                 if ($calculate_currency == 'TRY') {
                     $sc = strtolower($sale->currency);
-                    $converted_price = $sale_total_price / $sale->{$sc.'_rate'};
+                    $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
                 }else{
                     if ($sale->currency == 'TRY') {
                         $tc = strtolower($calculate_currency);
-                        $converted_price = $sale_total_price * $sale->{$tc.'_rate'};
+                        $converted_price = $sale_total_price / $sale->{$tc.'_rate'};
                     }else{
                         $tc = strtolower($calculate_currency);
                         $sc = strtolower($sale->currency);
