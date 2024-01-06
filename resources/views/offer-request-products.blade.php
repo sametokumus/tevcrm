@@ -98,7 +98,7 @@ $extra_js='
                     <div class="col-md-12">
                         <div class="card border-theme mb-3">
                             <div class="card-body p-3">
-                                <h6><a href="img/sample-import.xlsx" class="fw-400 text-white-50">Örnek Import dökümanını buradan indirebilirsiniz</a></h6>
+                                <h6><a href="img/sample-import.xlsx" class="fw-400 text-dark-50">Örnek Import dökümanını buradan indirebilirsiniz</a></h6>
                                 <form action="#" method="post" id="import_data_form" enctype="multipart/form-data" style="display: none;">
                                     <input type="file" name="import_file" id="import_file" onchange="$('#import_submit_btn').click();">
                                     <button id="import_submit_btn" type="submit">import</button>
