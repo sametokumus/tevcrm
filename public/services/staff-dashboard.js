@@ -127,7 +127,7 @@ async function initStaffs(){
                 '                                                                <td>'+ target.year +'</td>\n' +
                 '                                                                <td>\n' +
                 '                                                                    <div class="progress">\n' +
-                '                                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%">'+ target.status.rate +'%</div>\n' +
+                '                                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
                 '                                                                    </div>\n' +
                 '                                                                </td>\n' +
                 '                                                            </tr>\n';
