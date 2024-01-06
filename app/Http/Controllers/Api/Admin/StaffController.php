@@ -438,6 +438,7 @@ class StaffController extends Controller
             $currentYearArray = array();
 
             $currentYear = date('Y');
+            $currentMonth = date('m');
 
             for ($month = 1; $month <= 12; $month++) {
                 $month_array = array();
@@ -506,9 +507,44 @@ class StaffController extends Controller
                     }
 
                 }
+
+                $sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('sales.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
+                    })
+                    ->selectRaw('sales.*')
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                    ->whereYear('sh.created_at', '=', $currentYear)
+                    ->whereMonth('sh.created_at', '=', $currentMonth)
+                    ->get();
+
+                $month_total_price = 0;
+
+                foreach ($sales as $sale){
+
+                    $sale_total_price = $sale->grand_total;
+                    if ($sale->grand_total_with_shipping != null){
+                        $sale_total_price = $sale->grand_total_with_shipping;
+                    }
+
+                    if ($sale->currency == "TRY"){
+                        $month_total_price += $sale_total_price;
+                    }else{
+                        $sc = strtolower($sale->currency);
+                        $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+                        $month_total_price += $converted_price;
+                    }
+
+                }
+
                 $month_target['year'] = $currentYear;
                 $month_target['month'] = $currentMonth['month'];
                 $month_target['target'] = $this_month_target;
+                $month_target['price'] = $month_total_price;
                 array_push($monthly_targets, $month_target);
 
             }
