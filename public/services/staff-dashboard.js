@@ -50,7 +50,7 @@ async function initStaffs(){
             '                                <img src="'+ profile_photo +'" alt="">\n' +
             '                            </div>\n' +
             '                            <h4>'+ staff.staff.name +' '+ staff.staff.surname +'</h4>\n' +
-            '                            <div class="mb-1"><i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i> '+ staff.staff.name +'</div>\n' +
+            '                            <div class="mb-1"><i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i> '+ staff.staff.phone_number +'</div>\n' +
             '                            <div class="mb-0"><i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i> '+ staff.staff.email +'</div>\n' +
             '                        </div>\n' +
             '                    </div>\n' +
