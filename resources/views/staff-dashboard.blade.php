@@ -1,10 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-<script src="plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
-<script src="plugins/apexcharts/dist/apexcharts.min.js"></script>
-<script src="services/my-dashboard.js"></script>
+<script src="services/staff-dashboard.js"></script>
 ';
 ?>
 
