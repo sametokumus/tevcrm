@@ -461,13 +461,17 @@ class StaffController extends Controller
                     ->orderByDesc('id')
                     ->first();
 
-                if ($target->currency == "TRY"){
-                    $this_year_target += $target->target;
-                }else{
-                    $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
-                    $sc = strtolower($target->currency);
-                    $target_price = $target->target * $last_currency_log->{$sc};
-                    $this_year_target += $target_price;
+                if ($target) {
+
+                    if ($target->currency == "TRY") {
+                        $this_year_target += $target->target;
+                    } else {
+                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+                        $sc = strtolower($target->currency);
+                        $target_price = $target->target * $last_currency_log->{$sc};
+                        $this_year_target += $target_price;
+                    }
+
                 }
 
             }
