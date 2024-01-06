@@ -493,13 +493,17 @@ class StaffController extends Controller
                         ->orderByDesc('id')
                         ->first();
 
-                    if ($target->currency == "TRY"){
-                        $this_month_target += $target->target;
-                    }else{
-                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
-                        $sc = strtolower($target->currency);
-                        $target_price = $target->target * $last_currency_log->{$sc};
-                        $this_month_target += $target_price;
+                    if ($target) {
+
+                        if ($target->currency == "TRY") {
+                            $this_month_target += $target->target;
+                        } else {
+                            $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+                            $sc = strtolower($target->currency);
+                            $target_price = $target->target * $last_currency_log->{$sc};
+                            $this_month_target += $target_price;
+                        }
+
                     }
 
                 }
@@ -603,7 +607,7 @@ class StaffController extends Controller
         } catch (QueryException $queryException) {
             return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001', 'message' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getLine()]);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 }
