@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Admin;
 use App\Models\Company;
+use App\Models\CurrencyLog;
 use App\Models\Expense;
 use App\Models\OfferProduct;
 use App\Models\OfferRequest;
@@ -422,6 +423,177 @@ class StaffController extends Controller
             });
 
             return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staffs' => $staffs]]);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001', 'message' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function getAllStaffStatisticsMonthly(){
+        try {
+
+            $currentYearArray = array();
+
+            $currentYear = date('Y');
+
+            for ($month = 1; $month <= 12; $month++) {
+                $month_array = array();
+                $month_array['year'] = $currentYear;
+                $month_array['month'] = $month;
+                array_push($currentYearArray, $month_array);
+            }
+
+            $this_year_target = 0;
+
+            $staffs = Admin::query()->where('active', 1)->get();
+
+            foreach ($staffs as $staff){
+
+                $target = StaffTarget::query()
+                    ->where('admin_id', $staff->id)
+                    ->where('active', 1)
+                    ->where('type', 1)
+                    ->where('month', 0)
+                    ->where('year', $currentYear)
+                    ->orderByDesc('id')
+                    ->first();
+
+                if ($target->currency == "TRY"){
+                    $this_year_target += $target->target;
+                }else{
+                    $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+                    $sc = strtolower($target->currency);
+                    $target_price = $target->target * $last_currency_log->{$sc};
+                    $this_year_target += $target_price;
+                }
+
+            }
+
+            $monthly_targets = array();
+            foreach ($currentYearArray as $currentMonth){
+                $this_month_target = 0;
+                $month_target = array();
+
+                foreach ($staffs as $staff){
+
+                    $target = StaffTarget::query()
+                        ->where('admin_id', $staff->id)
+                        ->where('active', 1)
+                        ->where('type', 1)
+                        ->where('month', 0)
+                        ->where('month', $currentMonth['month'])
+                        ->where('year', $currentYear)
+                        ->orderByDesc('id')
+                        ->first();
+
+                    if ($target->currency == "TRY"){
+                        $this_month_target += $target->target;
+                    }else{
+                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+                        $sc = strtolower($target->currency);
+                        $target_price = $target->target * $last_currency_log->{$sc};
+                        $this_month_target += $target_price;
+                    }
+
+                }
+                $month_target['year'] = $currentYear;
+                $month_target['month'] = $currentMonth['month'];
+                $month_target['target'] = $this_month_target;
+                array_push($monthly_targets, $month_target);
+
+            }
+
+//            foreach ($all_staffs as $staff){
+//                $staff_id = $staff->id;
+//                $data = StaffHelper::get_staff_data($staff);
+//
+//
+//                $total_company_count = Company::query()
+//                    ->where('active', 1)
+//                    ->where('user_id', $staff_id)
+//                    ->count();
+//
+//                $now = Carbon::now();
+//
+//                $add_this_month_company = Company::query()
+//                    ->where('active', 1)
+//                    ->where('user_id', $staff_id)
+//                    ->whereMonth('created_at', $now->month)
+//                    ->whereYear('created_at', $now->year)
+//                    ->count();
+//
+//                $activity_this_month = Activity::query()
+//                    ->where('active', 1)
+//                    ->where('user_id', $staff_id)
+//                    ->whereMonth('start', $now->month)
+//                    ->whereYear('start', $now->year)
+//                    ->count();
+//
+//                $request_this_month = OfferRequest::query()
+//                    ->where('active', 1)
+//                    ->where('authorized_personnel_id', $staff_id)
+//                    ->whereMonth('created_at', $now->month)
+//                    ->whereYear('created_at', $now->year)
+//                    ->count();
+//
+//                $sale_this_month = DB::table('sales AS s')
+//                    ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+//                    ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+//                    ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+//                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
+//                    ->join('status_histories AS sh', function ($join) {
+//                        $join->on('s.sale_id', '=', 'sh.sale_id')
+//                            ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+//                    })
+//                    ->where('s.active', '=', 1)
+//                    ->where('offer_requests.authorized_personnel_id', '=', $staff_id)
+//                    ->whereMonth('sh.created_at', $now->month)
+//                    ->whereYear('sh.created_at', $now->year)
+//                    ->count();
+//
+//                $data['total_company_count'] = $total_company_count;
+//                $data['add_this_month_company'] = $add_this_month_company;
+//                $data['activity_this_month'] = $activity_this_month;
+//                $data['request_this_month'] = $request_this_month;
+//                $data['sale_this_month'] = $sale_this_month;
+//
+//
+//                $targets = StaffTarget::query()
+//                    ->leftJoin('staff_target_types', 'staff_target_types.id', '=', 'staff_targets.type_id')
+//                    ->where('staff_targets.admin_id', $staff_id)
+//                    ->where('staff_targets.active', 1)
+//                    ->selectRaw('staff_targets.*, staff_target_types.name as type_name')
+//                    ->get();
+//
+//                foreach ($targets as $target){
+//                    $admin = Admin::query()->where('id', $target->admin_id)->first();
+//                    $target['admin'] = $admin;
+//
+//                    if ($target->month == 0){
+//                        $month_name = 'Tüm Yıl';
+//                    }else{
+//                        $monthId = $target->month;
+//                        $month_name = trans("date.months.$monthId");
+//                    }
+//
+//                    $target['month_name'] = $month_name;
+//
+//                    $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
+//                }
+//                $data['targets'] = $targets;
+//
+//
+//                array_push($staffs, $data);
+//            }
+//
+//            usort($staffs, function ($a, $b) {
+//                return $b['staff_rate'] <=> $a['staff_rate'];
+//            });
+
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['this_year_target' => $this_year_target, 'monthly_targets' => $monthly_targets]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
