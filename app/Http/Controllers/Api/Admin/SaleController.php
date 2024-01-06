@@ -975,18 +975,18 @@ class SaleController extends Controller
 
             $offer_check = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->where('offer_price', null)->count();
             if ($offer_check == 0) {
-                Sale::query()->where('sale_id', $sale_id)->update([
-                    'status_id' => 5
-                ]);
-
-                StatusHistoryHelper::addStatusHistory($sale_id, 5, $request->user_id);
 
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
                 $sub_total = 0;
                 $vat = 0;
+                $check_all_is_notify = true;
                 foreach ($sale_offers as $sale_offer){
                     $sub_total += $sale_offer->offer_price;
                     $vat += $sale_offer->offer_price / 100 * $sale_offer->vat_rate;
+
+                    if ($sale_offer->offer_price == null){
+                        $check_all_is_notify = false;
+                    }
                 }
 
                 $grand_total = $sub_total + $vat;
@@ -995,6 +995,16 @@ class SaleController extends Controller
                     'vat' => $vat,
                     'grand_total' => $grand_total
                 ]);
+
+                if ($check_all_is_notify){
+
+                    Sale::query()->where('sale_id', $sale_id)->update([
+                        'status_id' => 5
+                    ]);
+
+                    StatusHistoryHelper::addStatusHistory($sale_id, 5, $request->user_id);
+
+                }
             }
 
             return response(['message' => __('Satış fiyatı ekleme işlemi başarılı.'), 'status' => 'success']);
