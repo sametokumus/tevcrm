@@ -243,7 +243,7 @@ async function initStaffTargets(user_id){
     $('#targets-datatable').DataTable({
         responsive: false,
         columnDefs: [],
-        dom: 'Bfrtip',
+        dom: 'Brtip',
         paging: false,
         buttons: [],
         scrollX: true,
