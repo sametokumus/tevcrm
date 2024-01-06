@@ -211,6 +211,7 @@ class NotifyController extends Controller
                 ->where('receiver_id', $user_id)
                 ->where('is_read', 0)
                 ->where('active', 1)
+                ->where('type', 1)
                 ->count();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['count' => $count]]);
