@@ -113,6 +113,8 @@ class StaffController extends Controller
 
             $target['month_name'] = $month_name;
 
+            $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['target' => $target]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);

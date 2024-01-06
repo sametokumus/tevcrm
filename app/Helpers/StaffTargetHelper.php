@@ -40,8 +40,7 @@ class StaffTargetHelper
            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
            ->join('status_histories AS sh', function ($join) {
                $join->on('sales.sale_id', '=', 'sh.sale_id')
-                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.sale_id)')
-                   ->where('sh.status_id', '=', 7);
+                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
            })
            ->selectRaw('sales.*')
            ->where('offer_requests.authorized_personnel_id',$target->admin_id)
@@ -110,8 +109,7 @@ class StaffTargetHelper
            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
            ->join('status_histories AS sh', function ($join) {
                $join->on('sales.sale_id', '=', 'sh.sale_id')
-                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.sale_id)')
-                   ->where('sh.status_id', '=', 7);
+                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
            })
            ->selectRaw('sales.*')
            ->where('offer_requests.authorized_personnel_id',$target->admin_id)
@@ -227,8 +225,7 @@ class StaffTargetHelper
            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
            ->join('status_histories AS sh', function ($join) {
                $join->on('sales.sale_id', '=', 'sh.sale_id')
-                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories WHERE sale_id = sales.sale_id)')
-                   ->where('sh.status_id', '=', 7);
+                   ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
            })
            ->selectRaw('sales.*')
            ->where('offer_requests.authorized_personnel_id',$target->admin_id)
