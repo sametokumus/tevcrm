@@ -394,7 +394,7 @@ class StaffController extends Controller
                 return $b['staff_rate'] <=> $a['staff_rate'];
             });
 
-            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staff' => $staff, 'position' => $position, 'staffs' => $staffs]]);
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['staffs' => $staffs]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
