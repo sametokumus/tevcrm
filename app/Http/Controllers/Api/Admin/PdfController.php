@@ -357,6 +357,10 @@ class PdfController extends Controller
 
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
@@ -417,7 +421,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Offer')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
 
@@ -805,7 +809,10 @@ class PdfController extends Controller
             $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
@@ -866,7 +873,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Order Confirmation')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
             //QUOTES
 
@@ -1273,7 +1280,10 @@ class PdfController extends Controller
             $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
@@ -1334,7 +1344,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Proforma Invoice')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
 
@@ -1729,7 +1739,10 @@ class PdfController extends Controller
             $product_count = OfferRequestProduct::query()->where('request_id', $offer_request->request_id)->where('active', 1)->count();
             $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
 
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($sale_offers as $sale_offer){
@@ -1790,7 +1803,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Invoice')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
             //QUOTES
 
@@ -2788,6 +2801,15 @@ class PdfController extends Controller
                 ->first();
             $contact = Contact::query()->where('id', $owner_id)->first();
 
+
+
+            $offer_request = OfferRequest::query()
+                ->selectRaw('offer_requests.*')
+                ->where('offer_requests.active',1)
+                ->where('offer_requests.request_id',$offer->request_id)
+                ->first();
+            $employee = null;
+
             $products = SaleOffer::query()
                 ->leftJoin('offer_products', 'offer_products.id', '=', 'sale_offers.offer_product_id')
                 ->selectRaw('offer_products.*')
@@ -2846,7 +2868,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Purchasing Order')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $y);
+            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
 
@@ -3143,9 +3165,6 @@ class PdfController extends Controller
                 ->where('offer_requests.request_id',$offer->request_id)
                 ->first();
             $employee = null;
-            if ($offer_request->company_employee_id != null) {
-                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
-            }
 
             $createdAt = Carbon::now();
             $document_date = $createdAt->format('d/m/Y');
@@ -3825,7 +3844,10 @@ class PdfController extends Controller
             $offer_request = OfferRequest::query()->where('request_id', $sale->request_id)->where('active', 1)->first();
             $authorized_personnel = Admin::query()->where('id', $offer_request->authorized_personnel_id)->where('active', 1)->first();
             $company = Company::query()->where('id', $offer_request->company_id)->where('active', 1)->first();
-            $company_employee = Employee::query()->where('id', $offer_request->company_employee_id)->where('active', 1)->first();
+            $employee = null;
+            if ($offer_request->company_employee_id != null) {
+                $employee = Employee::query()->where('id', $offer_request->company_employee_id)->first();
+            }
             $request = $offer_request;
 
             $customer = Company::query()->where('id', $sale->customer_id)->first();
@@ -3923,7 +3945,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert('Sipariş Özeti'), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, 'tr', $company, $y);
+            $y = $this->addCompanyInfo($pdf, 'tr', $company, $employee, $y);
 
 
 
