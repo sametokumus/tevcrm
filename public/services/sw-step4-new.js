@@ -42,10 +42,10 @@ async function initOfferDetail(){
     console.log(sale)
     initCustomer(sale.request.company, sale.request.company_employee);
 
-    $('#offer-price').html('<b>Satış Fiyatı: ' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency +'</b>');
-    $('#supply-price').html('<b>Tedarik Fiyatı: ' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency +'</b>');
-    $('#profit-price').html('<b>Kar: ' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency +'</b>');
-    $('#profit-rate').html('<b>Kar Oranı: %' + sale.profit_rate +'</b>');
+    $('#offer-price').html('<b>Satış Fiyatı: </b>' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency);
+    $('#supply-price').html('<b>Tedarik Fiyatı: </b>' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency);
+    $('#profit-price').html('<b>Kar: </b>' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency);
+    $('#profit-rate').html('<b>Kar Oranı: </b>%' + sale.profit_rate);
 
     if (sale.status_id >= 4) {
         let offers = sale.sale_offers;
@@ -64,7 +64,7 @@ async function initOfferDetail(){
                 '            </div>\n' +
                 '            <div class="list-group-item px-3">\n' +
                 '                <div class="table-responsive">\n' +
-                '                    <table id="offer-products-table-'+ (i+1) +'" class="table table-striped table-borderless mb-2px small text-nowrap">\n' +
+                '                    <table id="offer-products-table-'+ (i+1) +'" class="table table-bordered mb-2px small text-nowrap">\n' +
                 '                        <thead>\n' +
                 '                        <tr>\n' +
                 '                            <th>Tedarikçi</th>\n' +
