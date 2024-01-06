@@ -487,7 +487,6 @@ class StaffController extends Controller
                         ->where('admin_id', $staff->id)
                         ->where('active', 1)
                         ->where('type_id', 1)
-                        ->where('month', 0)
                         ->where('month', $currentMonth['month'])
                         ->where('year', $currentYear)
                         ->orderByDesc('id')
