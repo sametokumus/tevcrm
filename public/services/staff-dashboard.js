@@ -1,15 +1,29 @@
 (function($) {
     "use strict";
 
-	 $(document).ready(function() {
+    $(document).ready(function() {
 
+        $('#update-profile-button').click(function (){
+            openUpdateProfileModal();
+        });
 
+        $('#update_account_form').submit(function (e){
+            e.preventDefault();
+            updateProfile();
+        });
 
-	});
+        $('#mark-all-read-button').click(function (e){
+            e.preventDefault();
+            markAsReadAllNotify();
+            $('#user-notifies .list-group-item').removeClass('bg-theme-100');
+            $('#user-notifies .list-group-item div.text-right').remove();
+        });
 
-	$(window).load(async function() {
+    });
 
-		checkLogin();
+    $(window).load(async function() {
+
+        checkLogin();
         staff_dash_currency = 'TRY';
         let user_id = localStorage.getItem('userId');
 
@@ -22,16 +36,19 @@
         //     document.getElementById('staff_dash_currency').value = staff_dash_currency;
         // }
 
-        // getTotalSales();
-        getLastMonthSales(user_id);
-        // getApprovedMonthlySales();
-        // getCompletedMonthlySales();
-        // getPotentialMonthlySales();
-        // getCancelledMonthlySales();
-        // getAdminsSales();
-        // initTopSaledProducts();
 
-	});
+        initAdmin(user_id);
+        initStaffTargets(user_id);
+        initStaffNotifies(user_id);
+        initStaffCompanies(user_id);
+        initStaffStats(user_id);
+        getLastMonthSales(user_id);
+        getApprovedMonthlySales(user_id);
+        getCompletedMonthlySales(user_id);
+        getPotentialMonthlySales(user_id);
+        getCancelledMonthlySales(user_id);
+
+    });
 
 })(window.jQuery);
 let staff_dash_currency;
@@ -41,37 +58,62 @@ function changeDashCurrency(){
     location.reload();
 }
 
-async function getTotalSales(){
+async function initAdmin(user_id){
+    let data = await serviceGetAdminById(user_id);
+    let admin = data.admin;
+    console.log(admin)
+    $('#staff-name').text(admin.name + ' ' + admin.surname);
+    $('#staff-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
+    $('#staff-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
 
-    let data = await serviceGetTotalSales();
-    let sales = data.sales;
-
-    $('#approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
-    let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    $('#approved-text').append(text1);
-
-    $('#completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
-    let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    $('#completed-text').append(text2);
-
-    $('#potential-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
-    let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    $('#potential-text').append(text3);
-
-    $('#cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
-    let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
-        '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
-    $('#cancelled-text').append(text4);
-
-
-
+    let profile_photo = '/img/user/null-profile-picture.png';
+    if (admin.profile_photo != null && admin.profile_photo != ''){
+        profile_photo = admin.profile_photo;
+    }
+    $('#staff-image').attr('src', profile_photo);
 }
 
-async function getLastMonthSales(){
-    let data = await serviceGetLastMonthSalesByAdmin();
+async function openUpdateProfileModal(){
+    $("#updateProfileModal").modal('show');
+    await initUpdateProfileModal();
+}
+async function initUpdateProfileModal(){
+    let user_id = localStorage.getItem('userId');
+    let data = await serviceGetAdminById(user_id);
+    let admin = data.admin;
+    document.getElementById('update_admin_email').value = admin.email;
+    document.getElementById('update_admin_name').value = admin.name;
+    document.getElementById('update_admin_surname').value = admin.surname;
+    document.getElementById('update_admin_phone').value = admin.phone_number;
+
+    $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
+}
+async function updateProfileCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_account_form").trigger("reset");
+    $("#updateProfileModal").modal('hide');
+    let user_id = localStorage.getItem('userId');
+    initAdmin(user_id);
+}
+async function updateProfile(){
+    let formData = new FormData();
+    formData.append('email', document.getElementById('update_admin_email').value);
+    formData.append('name', document.getElementById('update_admin_name').value);
+    formData.append('surname', document.getElementById('update_admin_surname').value);
+    formData.append('phone_number', document.getElementById('update_admin_phone').value);
+    formData.append('password', document.getElementById('update_admin_password').value)
+    formData.append('profile_photo', document.getElementById('update_admin_profile_photo').files[0]);
+    console.log(formData);
+
+    let user_id = localStorage.getItem('userId');
+    await servicePostUpdateUser(user_id, formData);
+}
+
+async function getLastMonthSales(user_id){
+    let data = await serviceGetLastMonthSalesByAdmin(user_id);
     let sales = data.sales;
     let continue_data = sales.continue.continue_serie_try.map(parseFloat);
     let approved_data = sales.approved.approved_serie_try.map(parseFloat);
@@ -229,9 +271,9 @@ async function getLastMonthSales(){
     new ApexCharts(document.querySelector("#spark4"), spark4).render();
 }
 
-async function getApprovedMonthlySales(){
+async function getApprovedMonthlySales(user_id){
 
-    let data = await serviceGetApprovedMonthlySales();
+    let data = await serviceGetApprovedMonthlySalesByAdmin(user_id);
     console.log(data)
     let sales = data.sales.reverse();
     console.log(sales)
@@ -346,9 +388,9 @@ async function getApprovedMonthlySales(){
 
 }
 
-async function getCompletedMonthlySales(){
+async function getCompletedMonthlySales(user_id){
 
-    let data = await serviceGetCompletedMonthlySales();
+    let data = await serviceGetCompletedMonthlySalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -459,9 +501,9 @@ async function getCompletedMonthlySales(){
 
 }
 
-async function getPotentialMonthlySales(){
+async function getPotentialMonthlySales(user_id){
 
-    let data = await serviceGetPotentialSales();
+    let data = await serviceGetPotentialSalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -571,9 +613,9 @@ async function getPotentialMonthlySales(){
 
 }
 
-async function getCancelledMonthlySales(){
+async function getCancelledMonthlySales(user_id){
 
-    let data = await serviceGetCancelledPotentialSales();
+    let data = await serviceGetCancelledPotentialSalesByAdmin(user_id);
     let sales = data.sales.reverse();
 
     let xAxisArray = [];
@@ -683,52 +725,156 @@ async function getCancelledMonthlySales(){
 
 }
 
-async function getAdminsSales(){
+async function initStaffTargets(user_id){
 
-    let data = await serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdmins();
-    let admins = data.admins;
-    admins.sort((a, b) => parseFloat(b.total_sales.try_total) - parseFloat(a.total_sales.try_total));
+    let data = await serviceGetStaffTargetsByStaffId(user_id);
 
+    console.log(data)
+    $("#targets-datatable").dataTable().fnDestroy();
+    $('#targets-datatable tbody > tr').remove();
 
-    $('#admins-table tbody tr').remove();
-    $.each(admins, function (i, admin) {
+    $.each(data.targets, function (i, target) {
+
+        let actions = "";
+        if (true){
+            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
+                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
+        }
+
         let item = '<tr>\n' +
-            '           <td>'+ admin.id +'</td>\n' +
-            '           <td>'+ admin.name +' '+ admin.surname +'</td>\n' +
-            '           <td>'+ admin.total_sales.sale_count +'</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.try_total) +' TRY</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.usd_total) +' USD</td>\n' +
-            '           <td>'+ changeCommasToDecimal(admin.total_sales.eur_total) +' EUR</td>\n' +
+            '           <th>'+ target.id +'</th>\n' +
+            // '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
+            '           <td>'+ target.type_name +'</td>\n' +
+            '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
+            '           <td>'+ target.month_name +'</td>\n' +
+            '           <td>'+ target.year +'</td>\n' +
+            // '           <td>'+ target.status.rate +'%</td>\n' +
+            '           <td>\n' +
+            '               <div class="progress">\n' +
+            '                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%">'+ target.status.rate +'%</div>\n' +
+            '               </div>\n' +
+            '           </td>\n' +
             '       </tr>';
-        $('#admins-table tbody').append(item);
+        $('#targets-datatable tbody').append(item);
     });
 
+    $('#targets-datatable').DataTable({
+        responsive: false,
+        columnDefs: [],
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [],
+        scrollX: true,
+        language: {
+            url: "services/Turkish.json"
+        },
+        order: false,
+    });
+}
+
+async function initStaffNotifies(user_id){
+
+    let data = await serviceGetNotifiesByUserId(user_id);
+
+    $('#user-notifies .list-group-item').remove();
+
+    $.each(data.notifies, function (i, notify) {
+
+        let actions = "";
+        let bg_color = "";
+        if (notify.is_read == 0){
+            actions = '     <div class="text-right">\n' +
+                '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
+                '           </div>\n';
+            bg_color = 'bg-theme-100';
+        }
+
+        let item = '<div class="list-group-item px-3 '+ bg_color +'" id="dash-notify-'+ notify.notify_id +'">\n' +
+            '           <div class="fs-13px mb-1">'+ notify.notify +'</div>\n' +
+            '           ' + actions + '' +
+            '       </div>\n';
+        $('#user-notifies').append(item);
+    });
 
 }
 
-async function initTopSaledProducts(){
-    let data = await serviceGetTopSaledProducts();
-    let products = data.products;
+async function initStaffCompanies(user_id){
 
-    $('#top-products-table tbody tr').remove();
+    let data = await serviceGetCompaniesByStaffId(user_id);
 
-    $.each(products, function (i, product) {
+    console.log(data)
 
-        let item = '<tr>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
-            '                   '+ checkNull(product.product_detail.ref_code) +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td>\n' +
-            '               <span class="d-flex align-items-center">\n' +
-            '                   '+ product.product_detail.product_name +'\n' +
-            '               </span>\n' +
-            '           </td>\n' +
-            '           <td><small>'+ product.total_quantity +' Adet</small></td>\n' +
-            '       </tr>';
+    $.each(data.companies, function (i, company) {
+        let logo = 'img/user/null-profile-picture.png';
+        if (company.logo != null){
+            logo = company.logo;
+        }
+        let type = '';
+        if (company.is_supplier == 1){
+            type += ' Tedarikçi,';
+        }
+        if (company.is_customer == 1){
+            type += ' Müşteri,';
+        }
+        if (company.is_potential_customer == 1){
+            type += ' Potansiyel Müşteri,';
+        }
+        type = type.slice(0, -1);
 
-        $('#top-products-table tbody').append(item);
+        let item = '<div>\n' +
+            '                  <a href="/customer-dashboard/'+ company.id +'" class="company-info d-flex align-items-center mb-3 text-decoration-none fs-12px">\n' +
+            '                  <img src="'+ logo +'" alt="" width="30" class="rounded-circle">\n' +
+            '                  <div class="flex-fill px-3">\n' +
+            '                      <div class="fw-bold text-truncate w-100px company-name">'+ company.name +'</div>\n' +
+            '                      <div class="fs-12px text-inverse text-opacity-50">'+ type +'</div>\n' +
+            '                  </div>\n' +
+            '                  </a>\n' +
+            '              </div>\n';
+        $('#staff-companies').append(item);
     });
+
+}
+
+function filterCompanies() {
+
+    let searchText = document.getElementById('search-company-text').value.toLowerCase();
+
+    let companyItems = document.getElementById('staff-companies').getElementsByClassName('company-info');
+
+    for (let i = 0; i < companyItems.length; i++) {
+        let companyName = companyItems[i].querySelector('.company-name').textContent.toLowerCase();
+
+        if (companyName.includes(searchText)) {
+            companyItems[i].classList.add('d-flex');
+            companyItems[i].classList.remove('d-none');
+        } else {
+            companyItems[i].classList.remove('d-flex');
+            companyItems[i].classList.add('d-none');
+        }
+    }
+}
+
+async function markAsRead(notify_id){
+    markAsReadSingleNotify(notify_id);
+    $('#dash-notify-'+notify_id).removeClass('bg-theme-100');
+    $('#dash-notify-'+notify_id+ ' div.text-right').remove();
+}
+
+async function initStaffStats(user_id){
+
+    let data = await serviceGetStaffStatistics(user_id);
+
+    console.log(data)
+
+    $('#stat-1').append(data.total_company_count);
+    $('#stat-2').append(data.add_this_month_company);
+    $('#stat-3').append(data.activity_this_month);
+    $('#stat-4').append(data.request_this_month);
+    $('#stat-5').append(data.sale_this_month);
+
+    let data2 = await serviceGetStaffSituation(user_id);
+
+    console.log(data2)
+    $('#stat-6').append(data2.position + '. (' + data2.staff.staff_rate + ')');
+
 }
