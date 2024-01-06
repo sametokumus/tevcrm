@@ -194,7 +194,7 @@ class NotifyController extends Controller
     {
         try {
 
-            StatusNotify::query()->where('receiver_id', $user_id)->where('type', 1)->update([
+            StatusNotify::query()->where('receiver_id', $user_id)->whereRaw('type = 1 OR type = 3')->update([
                 'is_read' => 1
             ]);
 
@@ -211,7 +211,7 @@ class NotifyController extends Controller
                 ->where('receiver_id', $user_id)
                 ->where('is_read', 0)
                 ->where('active', 1)
-                ->where('type', 1)
+                ->whereRaw('type = 1 OR type = 3')
                 ->count();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['count' => $count]]);
