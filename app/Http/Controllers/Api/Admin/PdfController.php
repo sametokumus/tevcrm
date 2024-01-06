@@ -218,6 +218,18 @@ class PdfController extends Controller
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
             $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Authorized') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Authorized') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->name, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
             $pdf->Cell(0, 0, __('Phone') . ': ', '0', '0', '');
 
             $pdf->SetFont('ChakraPetch-Regular', '', 10);
