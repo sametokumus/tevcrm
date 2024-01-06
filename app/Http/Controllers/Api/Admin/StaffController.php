@@ -387,6 +387,31 @@ class StaffController extends Controller
                 $data['sale_this_month'] = $sale_this_month;
 
 
+                $targets = StaffTarget::query()
+                    ->leftJoin('staff_target_types', 'staff_target_types.id', '=', 'staff_targets.type_id')
+                    ->where('staff_targets.admin_id', $staff_id)
+                    ->where('staff_targets.active', 1)
+                    ->selectRaw('staff_targets.*, staff_target_types.name as type_name')
+                    ->get();
+
+                foreach ($targets as $target){
+                    $admin = Admin::query()->where('id', $target->admin_id)->first();
+                    $target['admin'] = $admin;
+
+                    if ($target->month == 0){
+                        $month_name = 'Tüm Yıl';
+                    }else{
+                        $monthId = $target->month;
+                        $month_name = trans("date.months.$monthId");
+                    }
+
+                    $target['month_name'] = $month_name;
+
+                    $target['status'] = StaffTargetHelper::getTargetStatus($target->id);
+                }
+                $data['targets'] = $targets;
+
+
                 array_push($staffs, $data);
             }
 
