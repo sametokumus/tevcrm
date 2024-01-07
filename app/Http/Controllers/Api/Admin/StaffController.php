@@ -598,7 +598,7 @@ class StaffController extends Controller
                 $month_target['month'] = $currentMonth['month'];
                 $month_target['target'] = number_format($this_month_target_price, 2, ",", ".");
                 $month_target['month_total_price'] = number_format($month_total_price, 2, ",", ".");
-                $month_target['staffs'] = $staffs2;
+//                $month_target['staffs'] = $staffs2;
                 array_push($monthly_targets, $month_target);
 
                 if ($thisMonth == $currentMonth['month']){

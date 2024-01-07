@@ -91,20 +91,15 @@ $extra_js='
                 <div class="card-body">
 
                     <div class="d-flex fw-bold small mb-3">
-                        <span class="flex-grow-1">ONAYLANAN SATIŞLAR</span>
+                        <span class="flex-grow-1">AYLIK HEDEF BAŞARI GRAFİĞİ</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
                     <div class="mb-3">
-                        <div id="chart-approved-monthly">
+                        <div id="chart-yearly-targets">
 
-                            <div class="spinners">
-                                <div class="spinner spinner-grow spinner-grow-1 m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-2 m-1 text-success"></div>
-                                <div class="spinner spinner-grow spinner-grow-3 m-1 text-success"></div>
-                            </div>
                         </div>
                     </div>
 
