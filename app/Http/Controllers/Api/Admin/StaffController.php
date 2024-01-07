@@ -516,7 +516,7 @@ class StaffController extends Controller
             }
             $this_year_target['year'] = $currentYear;
             $this_year_target['target'] = $this_year_target_price;
-            $this_year_target['month_total_price'] = $year_total_price;
+            $this_year_target['year_total_price'] = $year_total_price;
             $this_year_target['staffs'] = $staffs;
 
 
