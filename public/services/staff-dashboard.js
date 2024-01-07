@@ -192,6 +192,17 @@ async function initStaffs(){
 
 }
 
+async function initStaffs(){
+    let data = await serviceGetAllStaffStatisticsMonthly();
+    let this_year_target = data.this_year_target;
+    let this_month_target = data.this_month_target;
+    let monthly_targets = data.monthly_targets;
+    console.log(this_year_target)
+
+
+
+}
+
 async function initAdmin(user_id){
     let data = await serviceGetAdminById(user_id);
     let admin = data.admin;

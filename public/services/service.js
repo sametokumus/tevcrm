@@ -3043,6 +3043,15 @@ async function serviceGetAllStaffStatistics() {
     }
 }
 
+async function serviceGetAllStaffStatisticsMonthly() {
+    const data = await fetchDataGet('/admin/staff/getAllStaffStatisticsMonthly', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 async function serviceGetStaffTargetTypes() {
     const data = await fetchDataGet('/admin/staff/getStaffTargetTypes', 'application/json');
     if (data.status == "success") {

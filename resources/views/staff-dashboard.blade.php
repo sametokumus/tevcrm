@@ -15,13 +15,14 @@ $extra_js='
 
                 <div class="card-body">
 
-                    <div class="d-flex fw-bold small mb-3">
+                    <div class="d-flex fw-bold small mb-1">
                         <span class="flex-grow-1">YILLIK SATIŞLARIN DAĞILIMI</span>
                         <a href="#" data-toggle="card-expand"
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                        <div class="d-block">
-                            Hedef: 2.000.000,00 TRY | Satış: 1.600.000,00 TRY
-                        </div>
+                    </div>
+
+                    <div class="d-block fw-bold small mb-3">
+                        Hedef: 2.000.000,00 TRY | Satış: 1.600.000,00 TRY
                     </div>
 
 
