@@ -200,6 +200,7 @@ async function initStats(){
     let monthly_targets = data.monthly_targets;
     console.log(this_year_target)
 
+    $('#yearly-result').html('HEDEF: '+ this_year_target.target +' TRY <br>SATIŞ: '+ this_year_target.year_total_price +' TRY');
 
 
 }

@@ -21,13 +21,13 @@ $extra_js='
                            class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
-                    <div class="d-block fw-bold small mb-3">
-                        Hedef: 2.000.000,00 TRY | Satış: 1.600.000,00 TRY
+                    <div class="d-block fw-bold small mb-3" id="yearly-result">
+
                     </div>
 
 
                     <div class="mb-3">
-                        <div id="chart-sales-monthly">
+                        <div id="chart-yearly-result">
 
                         </div>
                     </div>
