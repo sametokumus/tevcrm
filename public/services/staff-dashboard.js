@@ -202,6 +202,32 @@ async function initStats(){
 
     $('#yearly-result').html('HEDEF: '+ this_year_target.target +' TRY <br>SATIŞ: '+ this_year_target.year_total_price +' TRY');
 
+    //yearly chart
+    var yearlyChartOptions = {
+        chart: {
+            height: 365,
+            type: 'pie',
+        },
+        dataLabels: {
+            dropShadow: {
+                enabled: false,
+                top: 1,
+                left: 1,
+                blur: 1,
+                opacity: 1
+            }
+        },
+        stroke: { show: false },
+        colors: [ 'rgba('+ app.color.pinkRgb +', .75)',  'rgba('+ app.color.warningRgb +', .75)',  'rgba('+app.color.themeRgb +', .75)', 'rgba('+ app.color.bodyColorRgb + ', .5)',  'rgba('+app.color.indigoRgb +', .75)'],
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        series: [44, 55, 13, 43, 22],
+        title: { text: 'HeatMap Chart (Single color)' }
+    };
+    var yearlyChart = new ApexCharts(
+        document.querySelector('#chart-yearly-result'),
+        yearlyChartOptions
+    );
+    yearlyChart.render();
 
 }
 
