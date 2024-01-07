@@ -483,7 +483,9 @@ class StaffController extends Controller
 
                 $month_total_price = 0;
 
-                foreach ($staffs as $staff){
+
+                $staffs2 = Admin::query()->where('active', 1)->get();
+                foreach ($staffs2 as $staff){
 
                     $target = StaffTarget::query()
                         ->where('admin_id', $staff->id)
