@@ -451,31 +451,31 @@ class StaffController extends Controller
 
             $staffs = Admin::query()->where('active', 1)->get();
 
-            foreach ($staffs as $staff){
-
-                $target = StaffTarget::query()
-                    ->where('admin_id', $staff->id)
-                    ->where('active', 1)
-                    ->where('type_id', 1)
-                    ->where('month', 0)
-                    ->where('year', $currentYear)
-                    ->orderByDesc('id')
-                    ->first();
-
-                if ($target) {
-
-                    if ($target->currency == "TRY") {
-                        $this_year_target += $target->target;
-                    } else {
-                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
-                        $sc = strtolower($target->currency);
-                        $target_price = $target->target * $last_currency_log->{$sc};
-                        $this_year_target += $target_price;
-                    }
-
-                }
-
-            }
+//            foreach ($staffs as $staff){
+//
+//                $target = StaffTarget::query()
+//                    ->where('admin_id', $staff->id)
+//                    ->where('active', 1)
+//                    ->where('type_id', 1)
+//                    ->where('month', 0)
+//                    ->where('year', $currentYear)
+//                    ->orderByDesc('id')
+//                    ->first();
+//
+//                if ($target) {
+//
+//                    if ($target->currency == "TRY") {
+//                        $this_year_target += $target->target;
+//                    } else {
+//                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+//                        $sc = strtolower($target->currency);
+//                        $target_price = $target->target * $last_currency_log->{$sc};
+//                        $this_year_target += $target_price;
+//                    }
+//
+//                }
+//
+//            }
 
             $monthly_targets = array();
             foreach ($currentYearArray as $currentMonth){
