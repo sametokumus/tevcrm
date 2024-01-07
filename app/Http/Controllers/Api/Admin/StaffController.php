@@ -438,7 +438,6 @@ class StaffController extends Controller
             $currentYearArray = array();
 
             $currentYear = date('Y');
-            $currentMonth = date('m');
 
             for ($month = 1; $month <= 12; $month++) {
                 $month_array = array();
@@ -519,7 +518,7 @@ class StaffController extends Controller
                         ->where('offer_requests.authorized_personnel_id', $staff->id)
                         ->where('sales.active',1)
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                        ->whereYear('sh.created_at', '=', $currentYear)
+                        ->whereYear('sh.created_at', '=', $currentMonth['year'])
                         ->whereMonth('sh.created_at', '=', $currentMonth['month'])
                         ->get();
 
