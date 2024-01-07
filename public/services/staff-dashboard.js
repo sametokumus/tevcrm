@@ -18,6 +18,7 @@
 
         checkLogin();
 
+        initStats();
         initStaffs();
 
     });
@@ -192,7 +193,7 @@ async function initStaffs(){
 
 }
 
-async function initStaffs(){
+async function initStats(){
     let data = await serviceGetAllStaffStatisticsMonthly();
     let this_year_target = data.this_year_target;
     let this_month_target = data.this_month_target;
