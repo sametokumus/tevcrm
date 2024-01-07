@@ -603,6 +603,8 @@ class StaffController extends Controller
                 if ($thisMonth == $currentMonth['month']){
                     $this_month_target['year'] = $currentYear;
                     $this_month_target['month'] = $currentMonth['month'];
+                    $month_target['target'] = number_format($this_month_target_price, 2, ",", ".");
+                    $month_target['month_total_price'] = number_format($month_total_price, 2, ",", ".");
                     $this_month_target['staffs'] = $staffs2;
                 }
 
