@@ -482,7 +482,11 @@ class StaffController extends Controller
                 $this_month_target = 0;
                 $month_target = array();
 
+                $month_total_price = 0;
+
                 foreach ($staffs as $staff){
+
+                    $staff_price = 0;
 
                     $target = StaffTarget::query()
                         ->where('admin_id', $staff->id)
@@ -506,38 +510,40 @@ class StaffController extends Controller
 
                     }
 
-                }
+                    $sales = Sale::query()
+                        ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                        ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                        ->join('status_histories AS sh', function ($join) {
+                            $join->on('sales.sale_id', '=', 'sh.sale_id')
+                                ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
+                        })
+                        ->selectRaw('sales.*')
+                        ->where('offer_requests.authorized_personnel_id', $staff->id)
+                        ->where('sales.active',1)
+                        ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                        ->whereYear('sh.created_at', '=', $currentYear)
+                        ->whereMonth('sh.created_at', '=', $currentMonth['month'])
+                        ->get();
 
-                $sales = Sale::query()
-                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
-                    ->join('status_histories AS sh', function ($join) {
-                        $join->on('sales.sale_id', '=', 'sh.sale_id')
-                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
-                    })
-                    ->selectRaw('sales.*')
-                    ->where('sales.active',1)
-                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
-                    ->whereYear('sh.created_at', '=', $currentYear)
-                    ->whereMonth('sh.created_at', '=', $currentMonth['month'])
-                    ->get();
+                    foreach ($sales as $sale){
 
-                $month_total_price = 0;
+                        $sale_total_price = $sale->grand_total;
+                        if ($sale->grand_total_with_shipping != null){
+                            $sale_total_price = $sale->grand_total_with_shipping;
+                        }
 
-                foreach ($sales as $sale){
+                        if ($sale->currency == "TRY"){
+                            $month_total_price += $sale_total_price;
+                            $staff_price += $sale_total_price;
+                        }else{
+                            $sc = strtolower($sale->currency);
+                            $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+                            $month_total_price += $converted_price;
+                            $staff_price += $converted_price;
+                        }
 
-                    $sale_total_price = $sale->grand_total;
-                    if ($sale->grand_total_with_shipping != null){
-                        $sale_total_price = $sale->grand_total_with_shipping;
                     }
-
-                    if ($sale->currency == "TRY"){
-                        $month_total_price += $sale_total_price;
-                    }else{
-                        $sc = strtolower($sale->currency);
-                        $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
-                        $month_total_price += $converted_price;
-                    }
+                    $staff['sale_price'] = $staff_price;
 
                 }
 
@@ -545,6 +551,7 @@ class StaffController extends Controller
                 $month_target['month'] = $currentMonth['month'];
                 $month_target['target'] = $this_month_target;
                 $month_target['price'] = $month_total_price;
+                $month_target['staff'] = $staffs;
                 array_push($monthly_targets, $month_target);
 
             }
