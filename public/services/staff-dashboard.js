@@ -209,7 +209,7 @@ async function initStats(){
     $.each(this_year_target.staffs, function (i, staff) {
         if (staff.staff_sales != "0.00") {
             yearlyLabelsArray.push(staff.name + ' ' + staff.surname);
-            yearlySeriesArray.push(staff.staff_sales);
+            yearlySeriesArray.push(parseFloat(staff.staff_sales));
         }
     });
 
