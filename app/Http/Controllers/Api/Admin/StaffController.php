@@ -451,31 +451,31 @@ class StaffController extends Controller
 
             $staffs = Admin::query()->where('active', 1)->get();
 
-//            foreach ($staffs as $staff){
-//
-//                $target = StaffTarget::query()
-//                    ->where('admin_id', $staff->id)
-//                    ->where('active', 1)
-//                    ->where('type_id', 1)
-//                    ->where('month', 0)
-//                    ->where('year', $currentYear)
-//                    ->orderByDesc('id')
-//                    ->first();
-//
-//                if ($target) {
-//
-//                    if ($target->currency == "TRY") {
-//                        $this_year_target += $target->target;
-//                    } else {
-//                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
-//                        $sc = strtolower($target->currency);
-//                        $target_price = $target->target * $last_currency_log->{$sc};
-//                        $this_year_target += $target_price;
-//                    }
-//
-//                }
-//
-//            }
+            foreach ($staffs as $staff){
+
+                $target = StaffTarget::query()
+                    ->where('admin_id', $staff->id)
+                    ->where('active', 1)
+                    ->where('type_id', 1)
+                    ->where('month', 0)
+                    ->where('year', $currentYear)
+                    ->orderByDesc('id')
+                    ->first();
+
+                if ($target) {
+
+                    if ($target->currency == "TRY") {
+                        $this_year_target += $target->target;
+                    } else {
+                        $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
+                        $sc = strtolower($target->currency);
+                        $target_price = $target->target * $last_currency_log->{$sc};
+                        $this_year_target += $target_price;
+                    }
+
+                }
+
+            }
 
             $monthly_targets = array();
             foreach ($currentYearArray as $currentMonth){
@@ -521,28 +521,28 @@ class StaffController extends Controller
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->whereYear('sh.created_at', '=', $currentYear)
                         ->whereMonth('sh.created_at', '=', $currentMonth['month'])
-                        ->get();
+                        ->toSql();
 
                     $staff_price = 0;
 
-                    foreach ($sales as $sale){
-
-                        $sale_total_price = $sale->grand_total;
-                        if ($sale->grand_total_with_shipping != null){
-                            $sale_total_price = $sale->grand_total_with_shipping;
-                        }
-
-                        if ($sale->currency == "TRY"){
-                            $month_total_price += $sale_total_price;
-                            $staff_price += $sale_total_price;
-                        }else{
-                            $sc = strtolower($sale->currency);
-                            $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
-                            $month_total_price += $converted_price;
-                            $staff_price += $converted_price;
-                        }
-
-                    }
+//                    foreach ($sales as $sale){
+//
+//                        $sale_total_price = $sale->grand_total;
+//                        if ($sale->grand_total_with_shipping != null){
+//                            $sale_total_price = $sale->grand_total_with_shipping;
+//                        }
+//
+//                        if ($sale->currency == "TRY"){
+//                            $month_total_price += $sale_total_price;
+//                            $staff_price += $sale_total_price;
+//                        }else{
+//                            $sc = strtolower($sale->currency);
+//                            $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+//                            $month_total_price += $converted_price;
+//                            $staff_price += $converted_price;
+//                        }
+//
+//                    }
                     $staff['sales'] = $sales;
                     $staff['sale_price'] = $staff_price;
 
