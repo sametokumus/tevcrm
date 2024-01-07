@@ -260,7 +260,7 @@ async function initStats(){
 
     let monthlyChartOptions = {
         chart: {
-            height: 365,
+            height: 500,
             type: 'pie',
         },
         dataLabels: {
