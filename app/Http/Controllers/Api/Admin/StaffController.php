@@ -510,13 +510,13 @@ class StaffController extends Controller
                     }
 
                 }
-                $staff['staff_sales'] = $staff_price;
+                $staff['staff_sales'] = number_format($staff_price, 2, ",", ".");
 
 
             }
             $this_year_target['year'] = $currentYear;
-            $this_year_target['target'] = $this_year_target_price;
-            $this_year_target['year_total_price'] = $year_total_price;
+            $this_year_target['target'] = number_format($this_year_target_price, 2, ",", ".");
+            $this_year_target['year_total_price'] = number_format($year_total_price, 2, ",", ".");
             $this_year_target['staffs'] = $staffs;
 
 
@@ -590,22 +590,22 @@ class StaffController extends Controller
                         }
 
                     }
-                    $staff2['staff_sales'] = $staff_price;
+                    $staff2['staff_sales'] = number_format($staff_price, 2, ",", ".");
 
                 }
 
                 $month_target['year'] = $currentYear;
                 $month_target['month'] = $currentMonth['month'];
-                $month_target['target'] = $this_month_target_price;
-                $month_target['month_total_price'] = $month_total_price;
+                $month_target['target'] = number_format($this_month_target_price, 2, ",", ".");
+                $month_target['month_total_price'] = number_format($month_total_price, 2, ",", ".");
                 $month_target['staffs'] = $staffs2;
                 array_push($monthly_targets, $month_target);
 
                 if ($thisMonth == $currentMonth['month']){
                     $this_month_target['year'] = $currentYear;
                     $this_month_target['month'] = $currentMonth['month'];
-                    $this_month_target['target'] = $this_month_target_price;
-                    $this_month_target['month_total_price'] = $month_total_price;
+                    $this_month_target['target'] = number_format($this_month_target_price, 2, ",", ".");
+                    $this_month_target['month_total_price'] = number_format($month_total_price, 2, ",", ".");
                     $this_month_target['staffs'] = $staffs2;
                 }
 
