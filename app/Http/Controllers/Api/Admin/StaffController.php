@@ -447,7 +447,9 @@ class StaffController extends Controller
                 array_push($currentYearArray, $month_array);
             }
 
-            $this_year_target = 0;
+            $this_year_target = array();
+            $this_year_target_price = 0;
+            $year_total_price = 0;
 
             $staffs = Admin::query()->where('active', 1)->get();
 
@@ -465,22 +467,64 @@ class StaffController extends Controller
                 if ($target) {
 
                     if ($target->currency == "TRY") {
-                        $this_year_target += $target->target;
+                        $this_year_target_price += $target->target;
                     } else {
                         $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
                         $sc = strtolower($target->currency);
                         $target_price = $target->target * $last_currency_log->{$sc};
-                        $this_year_target += $target_price;
+                        $this_year_target_price += $target_price;
+                    }
+                }
+
+                $sales = Sale::query()
+                    ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                    ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+                    ->join('status_histories AS sh', function ($join) {
+                        $join->on('sales.sale_id', '=', 'sh.sale_id')
+                            ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
+                    })
+                    ->selectRaw('sales.*')
+                    ->where('offer_requests.authorized_personnel_id', $staff->id)
+                    ->where('sales.active',1)
+                    ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                    ->whereYear('sh.created_at', '=', $currentYear)
+                    ->get();
+
+                $staff_price = 0;
+
+                foreach ($sales as $sale){
+
+                    $sale_total_price = $sale->grand_total;
+                    if ($sale->grand_total_with_shipping != null){
+                        $sale_total_price = $sale->grand_total_with_shipping;
+                    }
+
+                    if ($sale->currency == "TRY"){
+                        $year_total_price += $sale_total_price;
+                        $staff_price += $sale_total_price;
+                    }else{
+                        $sc = strtolower($sale->currency);
+                        $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+                        $year_total_price += $converted_price;
+                        $staff_price += $converted_price;
                     }
 
                 }
+                $staff['staff_sales'] = $staff_price;
+
 
             }
+            $this_year_target['year'] = $currentYear;
+            $this_year_target['target'] = $this_year_target_price;
+            $this_year_target['month_total_price'] = $year_total_price;
+            $this_year_target['staffs'] = $staffs;
+
+
 
             $monthly_targets = array();
-            $this_month_targets = array();
+            $this_month_target = array();
             foreach ($currentYearArray as $currentMonth){
-                $this_month_target = 0;
+                $this_month_target_price = 0;
                 $month_target = array();
 
                 $month_total_price = 0;
@@ -501,12 +545,12 @@ class StaffController extends Controller
                     if ($target) {
 
                         if ($target->currency == "TRY") {
-                            $this_month_target += $target->target;
+                            $this_month_target_price += $target->target;
                         } else {
                             $last_currency_log = CurrencyLog::query()->orderByDesc('id')->first();
                             $sc = strtolower($target->currency);
                             $target_price = $target->target * $last_currency_log->{$sc};
-                            $this_month_target += $target_price;
+                            $this_month_target_price += $target_price;
                         }
 
                     }
@@ -552,22 +596,22 @@ class StaffController extends Controller
 
                 $month_target['year'] = $currentYear;
                 $month_target['month'] = $currentMonth['month'];
-                $month_target['target'] = $this_month_target;
+                $month_target['target'] = $this_month_target_price;
                 $month_target['month_total_price'] = $month_total_price;
                 $month_target['staffs'] = $staffs2;
                 array_push($monthly_targets, $month_target);
 
                 if ($thisMonth == $currentMonth['month']){
-                    $this_month_targets['year'] = $currentYear;
-                    $this_month_targets['month'] = $currentMonth['month'];
-                    $this_month_targets['target'] = $this_month_target;
-                    $this_month_targets['month_total_price'] = $month_total_price;
-                    $this_month_targets['staffs'] = $staffs2;
+                    $this_month_target['year'] = $currentYear;
+                    $this_month_target['month'] = $currentMonth['month'];
+                    $this_month_target['target'] = $this_month_target_price;
+                    $this_month_target['month_total_price'] = $month_total_price;
+                    $this_month_target['staffs'] = $staffs2;
                 }
 
             }
 
-            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['this_year_target' => $this_year_target, 'monthly_targets' => $monthly_targets, 'this_month_targets' => $this_month_targets]]);
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success', 'object' => ['this_year_target' => $this_year_target, 'monthly_targets' => $monthly_targets, 'this_month_target' => $this_month_target]]);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
