@@ -485,10 +485,10 @@ class StaffController extends Controller
 
 
                 $staffs2 = Admin::query()->where('active', 1)->get();
-                foreach ($staffs2 as $staff){
+                foreach ($staffs2 as $staff2){
 
                     $target = StaffTarget::query()
-                        ->where('admin_id', $staff->id)
+                        ->where('admin_id', $staff2->id)
                         ->where('active', 1)
                         ->where('type_id', 1)
                         ->where('month', $currentMonth['month'])
@@ -517,7 +517,7 @@ class StaffController extends Controller
                                 ->whereRaw('sh.created_at = (SELECT MAX(created_at) FROM status_histories as sh2 WHERE sh2.sale_id = sales.sale_id AND sh2.status_id = 7)');
                         })
                         ->selectRaw('sales.*')
-                        ->where('offer_requests.authorized_personnel_id', $staff->id)
+                        ->where('offer_requests.authorized_personnel_id', $staff2->id)
                         ->where('sales.active',1)
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->whereYear('sh.created_at', '=', $currentMonth['year'])
@@ -547,9 +547,9 @@ class StaffController extends Controller
                         $month_total_price += 1000000;
 
                     }
-                    $staff['sales'] = $sales;
-                    $staff['sale_price'] = $staff_price;
-                    $staff['month_total_price'] = $month_total_price;
+                    $staff2['sales'] = $sales;
+                    $staff2['sale_price'] = $staff_price;
+                    $staff2['month_total_price'] = $month_total_price;
 
                 }
 
