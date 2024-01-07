@@ -521,30 +521,31 @@ class StaffController extends Controller
                         ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                         ->whereYear('sh.created_at', '=', $currentYear)
                         ->whereMonth('sh.created_at', '=', $currentMonth['month'])
-                        ->toSql();
+                        ->get();
 
                     $staff_price = 0;
 
-//                    foreach ($sales as $sale){
-//
-//                        $sale_total_price = $sale->grand_total;
-//                        if ($sale->grand_total_with_shipping != null){
-//                            $sale_total_price = $sale->grand_total_with_shipping;
-//                        }
-//
-//                        if ($sale->currency == "TRY"){
-//                            $month_total_price += $sale_total_price;
-//                            $staff_price += $sale_total_price;
-//                        }else{
-//                            $sc = strtolower($sale->currency);
-//                            $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
-//                            $month_total_price += $converted_price;
-//                            $staff_price += $converted_price;
-//                        }
-//
-//                    }
+                    foreach ($sales as $sale){
+
+                        $sale_total_price = $sale->grand_total;
+                        if ($sale->grand_total_with_shipping != null){
+                            $sale_total_price = $sale->grand_total_with_shipping;
+                        }
+
+                        if ($sale->currency == "TRY"){
+                            $month_total_price += $sale_total_price;
+                            $staff_price += $sale_total_price;
+                        }else{
+                            $sc = strtolower($sale->currency);
+                            $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+                            $month_total_price += $converted_price;
+                            $staff_price += $converted_price;
+                        }
+
+                    }
                     $staff['sales'] = $sales;
                     $staff['sale_price'] = $staff_price;
+                    $staff['month_total_price'] = $month_total_price;
 
                 }
 
