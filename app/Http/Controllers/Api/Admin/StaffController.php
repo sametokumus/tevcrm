@@ -543,9 +543,6 @@ class StaffController extends Controller
                             $staff_price += $converted_price;
                         }
 
-                        $staff_price += 1000;
-                        $month_total_price += 1000000;
-
                     }
                     $staff2['sales'] = $sales;
                     $staff2['sale_price'] = $staff_price;
