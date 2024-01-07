@@ -236,7 +236,7 @@ async function initStats(){
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return changeCommasToDecimal(val.toFixed(2))
+                    return changeCommasToDecimal(val.toFixed(2)) + ' TRY'
                 }
             }
         }
@@ -276,7 +276,14 @@ async function initStats(){
         colors: [ 'rgba('+ app.color.pinkRgb +', .75)',  'rgba('+ app.color.warningRgb +', .75)',  'rgba('+app.color.themeRgb +', .75)', 'rgba('+ app.color.bodyColorRgb + ', .5)',  'rgba('+app.color.indigoRgb +', .75)'],
         labels: monthlyLabelsArray,
         series: monthlySeriesArray,
-        title: { text: '' }
+        title: { text: '' },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2)) + ' TRY'
+                }
+            }
+        }
     };
     let monthlyChart = new ApexCharts(
         document.querySelector('#chart-monthly-result'),
@@ -382,7 +389,7 @@ async function initStats(){
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return changeCommasToDecimal(val.toFixed(2))
+                    return changeCommasToDecimal(val.toFixed(2)) + ' TRY'
                 }
             }
         }
