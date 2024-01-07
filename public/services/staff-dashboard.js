@@ -277,6 +277,115 @@ async function initStats(){
     );
     monthlyChart.render();
 
+
+    //all months chart
+    let xAxisArray = [];
+    let yAxisArrayTarget = [];
+    let yAxisArraySale = [];
+
+    $.each(monthly_targets, function (i, data) {
+        xAxisArray.push(data.month);
+        yAxisArrayTarget.push(data.target);
+        yAxisArraySale.push(data.month_total_price);
+    });
+
+    let apexColumnChartOptions = {
+        chart: {
+            height: 300,
+            type: 'bar'
+        },
+        title: {
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                color: COLOR_DARK
+            },
+        },
+        legend: {
+            fontFamily: FONT_FAMILY,
+            labels: {
+                colors: COLOR_DARK
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '80%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        colors: ['#ff4560d9', '#90ee7e'],
+        series: [
+            {
+                name: "Hedef",
+                data: yAxisArrayTarget
+            },
+            {
+                name: "Satış",
+                data: yAxisArraySale
+            }
+        ],
+        xaxis: {
+            categories: xAxisArray,
+            labels: {
+                style: {
+                    colors: COLOR_DARK,
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Kazanç',
+                style: {
+                    color: hexToRgba(COLOR_WHITE, .5),
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400
+                }
+            },
+            labels: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2))
+                },
+                style: {
+                    colors: COLOR_DARK,
+                    fontSize: '12px',
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label',
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return changeCommasToDecimal(val.toFixed(2))
+                }
+            }
+        }
+    };
+    var apexColumnChart = new ApexCharts(
+        document.querySelector('#chart-yearly-targets'),
+        apexColumnChartOptions
+    );
+    apexColumnChart.render();
+
 }
 
 async function initAdmin(user_id){
