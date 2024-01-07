@@ -510,7 +510,7 @@ class StaffController extends Controller
                     }
 
                 }
-                $staff['staff_sales'] = number_format($staff_price, 2, ",", ".");
+                $staff['staff_sales'] = number_format($staff_price, 2, ".", "");
 
 
             }
