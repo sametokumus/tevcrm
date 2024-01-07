@@ -486,8 +486,6 @@ class StaffController extends Controller
 
                 foreach ($staffs as $staff){
 
-                    $staff_price = 0;
-
                     $target = StaffTarget::query()
                         ->where('admin_id', $staff->id)
                         ->where('active', 1)
@@ -525,6 +523,8 @@ class StaffController extends Controller
                         ->whereMonth('sh.created_at', '=', $currentMonth['month'])
                         ->get();
 
+                    $staff_price = 0;
+
                     foreach ($sales as $sale){
 
                         $sale_total_price = $sale->grand_total;
@@ -543,6 +543,7 @@ class StaffController extends Controller
                         }
 
                     }
+                    $staff['sales'] = $sales;
                     $staff['sale_price'] = $staff_price;
 
                 }
@@ -551,7 +552,7 @@ class StaffController extends Controller
                 $month_target['month'] = $currentMonth['month'];
                 $month_target['target'] = $this_month_target;
                 $month_target['price'] = $month_total_price;
-                $month_target['staff'] = $staffs;
+                $month_target['staffs'] = $staffs;
                 array_push($monthly_targets, $month_target);
 
             }
