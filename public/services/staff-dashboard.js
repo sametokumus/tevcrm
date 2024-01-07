@@ -260,7 +260,7 @@ async function initStats(){
 
     let monthlyChartOptions = {
         chart: {
-            height: 500,
+            height: 365,
             type: 'pie',
         },
         dataLabels: {
@@ -305,7 +305,7 @@ async function initStats(){
 
     let apexColumnChartOptions = {
         chart: {
-            height: 300,
+            height: 200,
             type: 'bar'
         },
         title: {
