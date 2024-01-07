@@ -201,6 +201,7 @@ async function initStats(){
     console.log(this_year_target)
 
     $('#yearly-result').html('HEDEF: '+ this_year_target.target +' TRY <br>SATIŞ: '+ this_year_target.year_total_price +' TRY');
+    $('#monthly-result').html('HEDEF: '+ this_month_target.target +' TRY <br>SATIŞ: '+ this_month_target.month_total_price +' TRY');
 
     //yearly chart
     let yearlyLabelsArray = [];
@@ -238,6 +239,43 @@ async function initStats(){
         yearlyChartOptions
     );
     yearlyChart.render();
+
+    //monthly chart
+    let monthlyLabelsArray = [];
+    let monthlySeriesArray = [];
+
+    $.each(this_month_target.staffs, function (i, staff) {
+        if (staff.staff_sales != "0.00") {
+            monthlyLabelsArray.push(staff.name + ' ' + staff.surname);
+            monthlySeriesArray.push(parseFloat(staff.staff_sales));
+        }
+    });
+
+    let monthlyChartOptions = {
+        chart: {
+            height: 365,
+            type: 'pie',
+        },
+        dataLabels: {
+            dropShadow: {
+                enabled: false,
+                top: 1,
+                left: 1,
+                blur: 1,
+                opacity: 1
+            }
+        },
+        stroke: { show: false },
+        colors: [ 'rgba('+ app.color.pinkRgb +', .75)',  'rgba('+ app.color.warningRgb +', .75)',  'rgba('+app.color.themeRgb +', .75)', 'rgba('+ app.color.bodyColorRgb + ', .5)',  'rgba('+app.color.indigoRgb +', .75)'],
+        labels: monthlyLabelsArray,
+        series: monthlySeriesArray,
+        title: { text: '' }
+    };
+    let monthlyChart = new ApexCharts(
+        document.querySelector('#chart-monthly-result'),
+        monthlyChartOptions
+    );
+    monthlyChart.render();
 
 }
 
