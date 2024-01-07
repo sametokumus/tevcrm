@@ -519,7 +519,7 @@ class StaffController extends Controller
                     ->where('sales.active',1)
                     ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
                     ->whereYear('sh.created_at', '=', $currentYear)
-                    ->whereMonth('sh.created_at', '=', $currentMonth)
+                    ->whereMonth('sh.created_at', '=', $currentMonth['month'])
                     ->get();
 
                 $month_total_price = 0;
