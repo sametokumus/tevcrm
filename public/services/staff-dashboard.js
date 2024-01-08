@@ -107,10 +107,10 @@ async function initStaffs(){
             '                                </a>\n' +
             '                            </li>\n' +
             '                            <li class="nav-item">\n' +
-            '                                <a href="#" class="nav-link" style="pointer-events:none;">\n' +
+            '                                <div class="nav-link">\n' +
             '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px mb-1" onclick="openAddStaffTargetModal('+ staff.id +');">Hedef Ekle</button>\n' +
             '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px" onclick="openAddPointModal('+ staff.id +');">Yönetici Puanı Ekle</button>\n' +
-            '                                </a>\n' +
+            '                                </div>\n' +
             '                            </li>\n' +
             '                        </ul>\n' +
             '                        <div class="profile-content-container">\n' +
