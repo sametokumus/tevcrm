@@ -879,3 +879,7 @@ table.dataTable{
     color: #000;
     font-weight: 700;
 }
+
+#staffs .nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link {
+    padding: 1rem .5rem;
+}

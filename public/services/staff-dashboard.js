@@ -2,14 +2,17 @@
     "use strict";
 
     $(document).ready(function() {
+        $(":input").inputmask();
+        $("#add_target_target").maskMoney({thousands:'.', decimal:','});
+        $("#update_target_target").maskMoney({thousands:'.', decimal:','});
 
-        $('#update-profile-button').click(function (){
-            openUpdateProfileModal();
-        });
-
-        $('#update_account_form').submit(function (e){
+        $('#add_staff_target_form').submit(function (e){
             e.preventDefault();
-            updateProfile();
+            addStaffTarget();
+        });
+        $('#update_staff_target_form').submit(function (e){
+            e.preventDefault();
+            updateStaffTarget();
         });
 
     });
@@ -29,6 +32,8 @@ async function initStaffs(){
     let data = await serviceGetAllStaffStatistics();
     let staffs = data.staffs;
     console.log(staffs)
+
+    $('#content #staffs *').remove();
 
     $.each(data.staffs, function (i, staff) {
 
@@ -103,8 +108,8 @@ async function initStaffs(){
             '                            </li>\n' +
             '                            <li class="nav-item">\n' +
             '                                <a href="#" class="nav-link" style="pointer-events:none;">\n' +
-            '                                    <button class="nav-btn btn btn-theme">Hedef Ekle</button>\n' +
-            '                                    <button class="nav-btn btn btn-theme">Yönetici Puanı</button>\n' +
+            '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px mb-1" onclick="openAddStaffTargetModal('+ staff.id +');">Hedef Ekle</button>\n' +
+            '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px" onclick="openAddPointModal('+ staff.id +');">Yönetici Puanı Ekle</button>\n' +
             '                                </a>\n' +
             '                            </li>\n' +
             '                        </ul>\n' +
@@ -414,83 +419,108 @@ async function initStats(){
 
 }
 
-async function initAdmin(user_id){
-    let data = await serviceGetAdminById(user_id);
-    let admin = data.admin;
-    console.log(admin)
-    $('#staff-name').text(admin.name + ' ' + admin.surname);
-    $('#staff-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
-    $('#staff-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
 
-    let profile_photo = '/img/user/null-profile-picture.png';
-    if (admin.profile_photo != null && admin.profile_photo != ''){
-        profile_photo = admin.profile_photo;
+function addTargetChangeType(){
+    let type_id = document.getElementById('add_target_type_id').value;
+    if (type_id == 3){
+        document.getElementById('add_target_currency').value = '%';
+        $('#add_target_currency').attr('disabled', 'disabled');
+    }else{
+        $('#add_target_currency').removeAttr('disabled');
     }
-    $('#staff-image').attr('src', profile_photo);
 }
 
-async function initStaffTargets(user_id){
-
-    let data = await serviceGetStaffTargetsByStaffId(user_id);
-
-    console.log(data)
-    $("#targets-datatable").dataTable().fnDestroy();
-    $('#targets-datatable tbody > tr').remove();
-
-    $.each(data.targets, function (i, target) {
-
-        let actions = "";
-        if (true){
-            actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
-                '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
-        }
-
-        let item = '<tr>\n' +
-            '           <th>'+ target.id +'</th>\n' +
-            // '           <td>'+ target.admin.name +' '+ target.admin.surname +'</td>\n' +
-            '           <td>'+ target.type_name +'</td>\n' +
-            '           <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
-            '           <td>'+ target.month_name +'</td>\n' +
-            '           <td>'+ target.year +'</td>\n' +
-            // '           <td>'+ target.status.rate +'%</td>\n' +
-            '           <td>\n' +
-            '               <div class="progress">\n' +
-            '                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%">'+ target.status.rate +'%</div>\n' +
-            '               </div>\n' +
-            '           </td>\n' +
-            '       </tr>';
-        $('#targets-datatable tbody').append(item);
-    });
-
-    $('#targets-datatable').DataTable({
-        responsive: false,
-        columnDefs: [],
-        dom: 'Bfrtip',
-        paging: false,
-        buttons: [],
-        scrollX: true,
-        language: {
-            url: "services/Turkish.json"
-        },
-        order: false,
-    });
+function updateTargetChangeType(){
+    let type_id = document.getElementById('update_target_type_id').value;
+    if (type_id == 3){
+        document.getElementById('update_target_currency').value = '%';
+        $('#update_target_currency').attr('disabled', 'disabled');
+    }else{
+        $('#update_target_currency').removeAttr('disabled');
+    }
 }
 
-async function initStaffStats(user_id){
+async function openAddStaffTargetModal(staff_id){
+    await getStaffTargetTypesAddSelectId('add_target_type_id');
+    document.getElementById('add_target_staff_id').value = staff_id;
+    $("#addStaffTargetModal").modal('show');
+}
+async function addStaffTarget(){
+    let admin_id = document.getElementById('add_target_staff_id').value;
+    let type_id = document.getElementById('add_target_type_id').value;
+    let target = changePriceToDecimal(document.getElementById('add_target_target').value);
+    let currency = document.getElementById('add_target_currency').value;
+    let month = document.getElementById('add_target_month').value;
+    let year = document.getElementById('add_target_year').value;
 
-    let data = await serviceGetStaffStatistics(user_id);
 
-    console.log(data)
+    let formData = JSON.stringify({
+        "admin_id": admin_id,
+        "type_id": type_id,
+        "target": target,
+        "currency": currency,
+        "month": month,
+        "year": year
+    });
 
-    $('#stat-1').append(data.total_company_count);
-    $('#stat-2').append(data.add_this_month_company);
-    $('#stat-3').append(data.activity_this_month);
-    $('#stat-4').append(data.request_this_month);
-    $('#stat-5').append(data.sale_this_month);
+    console.log(formData);
 
-    let data2 = await serviceGetStaffSituation(user_id);
+    let returned = await servicePostAddStaffTarget(formData);
+    if (returned){
+        $("#add_staff_target_form").trigger("reset");
+        initStaffs();
+    }else{
+        alert("Hata Oluştu");
+    }
+}
 
-    console.log(data2)
-    $('#stat-6').append(data2.position + '. (' + data2.staff.staff_rate + ')');
 
+async function openUpdateStaffTargetModal(target_id){
+    await getStaffTargetTypesAddSelectId('update_target_type_id');
+    $("#updateStaffTargetModal").modal('show');
+    initUpdateStaffTargetModal(target_id)
+}
+async function initUpdateStaffTargetModal(target_id){
+    document.getElementById('update_staff_target_form').reset();
+    let data = await serviceGetStaffTargetById(target_id);
+    let target = data.target;
+    document.getElementById('update_target_id').value = target.id;
+    document.getElementById('update_target_type_id').value = target.type_id;
+    document.getElementById('update_target_target').value = changeCommasToDecimal(target.target);
+    document.getElementById('update_target_currency').value = target.currency;
+    document.getElementById('update_target_month').value = target.month;
+    document.getElementById('update_target_year').value = target.year;
+}
+async function updateStaffTarget(){
+    let id = document.getElementById('update_target_id').value;
+    let type_id = document.getElementById('update_target_type_id').value;
+    let target = changePriceToDecimal(document.getElementById('update_target_target').value);
+    let currency = document.getElementById('update_target_currency').value;
+    let month = document.getElementById('update_target_month').value;
+    let year = document.getElementById('update_target_year').value;
+
+
+    let formData = JSON.stringify({
+        "id": id,
+        "type_id": type_id,
+        "target": target,
+        "currency": currency,
+        "month": month,
+        "year": year
+    });
+    let returned = await servicePostUpdateStaffTarget(formData);
+    if (returned){
+        $("#update_staff_target_form").trigger("reset");
+        $("#updateStaffTargetModal").modal('hide');
+        initStaffTargets();
+    }else{
+        alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
+    }
+}
+
+async function deleteStaffTarget(target_id){
+    let returned = await serviceGetDeleteStaffTarget(target_id);
+    if(returned){
+        initStaffTargets();
+    }
 }
