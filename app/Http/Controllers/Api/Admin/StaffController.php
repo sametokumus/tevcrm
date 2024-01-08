@@ -17,6 +17,7 @@ use App\Models\PaymentTerm;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\StaffPoint;
 use App\Models\StaffTarget;
 use App\Models\StaffTargetType;
 use Illuminate\Database\QueryException;
@@ -383,11 +384,19 @@ class StaffController extends Controller
                     ->whereYear('sh.created_at', $now->year)
                     ->count();
 
+                $staff_point = StaffPoint::query()->where('staff_id', $staff_id)->orderByDesc('id')->first();
+                if ($staff_point){
+                    $manager_point = $staff_point->point;
+                }else{
+                    $manager_point = "-";
+                }
+
                 $data['total_company_count'] = $total_company_count;
                 $data['add_this_month_company'] = $add_this_month_company;
                 $data['activity_this_month'] = $activity_this_month;
                 $data['request_this_month'] = $request_this_month;
                 $data['sale_this_month'] = $sale_this_month;
+                $data['manager_point'] = $manager_point;
 
 
                 $targets = StaffTarget::query()

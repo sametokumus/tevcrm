@@ -95,6 +95,18 @@ async function initStaffs(){
             '                                    <div class="nav-value" id="stat-6">'+ (i+1) +'. ('+ staff.staff_rate +')</div>\n' +
             '                                </a>\n' +
             '                            </li>\n' +
+            '                            <li class="nav-item">\n' +
+            '                                <a href="#" class="nav-link" style="pointer-events:none;">\n' +
+            '                                    <div class="nav-field">Yönetici Puanı</div>\n' +
+            '                                    <div class="nav-value" id="stat-6">'+ staff.manager_point +'</div>\n' +
+            '                                </a>\n' +
+            '                            </li>\n' +
+            '                            <li class="nav-item">\n' +
+            '                                <a href="#" class="nav-link" style="pointer-events:none;">\n' +
+            '                                    <button class="nav-btn btn btn-theme">Hedef Ekle</button>\n' +
+            '                                    <button class="nav-btn btn btn-theme">Yönetici Puanı</button>\n' +
+            '                                </a>\n' +
+            '                            </li>\n' +
             '                        </ul>\n' +
             '                        <div class="profile-content-container">\n' +
             '                            <div class="row gx-4">\n' +
