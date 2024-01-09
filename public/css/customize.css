@@ -883,3 +883,7 @@ table.dataTable{
 #staffs .nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link {
     padding: 1rem .5rem;
 }
+
+#staffs .nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link:hover {
+    border: none;
+}

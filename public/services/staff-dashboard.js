@@ -468,6 +468,7 @@ async function addStaffTarget(){
     let returned = await servicePostAddStaffTarget(formData);
     if (returned){
         $("#add_staff_target_form").trigger("reset");
+        $("#addStaffTargetModal").modal('hide');
         initStaffs();
     }else{
         alert("Hata Oluştu");
