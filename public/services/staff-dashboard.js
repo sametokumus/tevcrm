@@ -522,7 +522,7 @@ async function updateStaffTarget(){
     if (returned){
         $("#update_staff_target_form").trigger("reset");
         $("#updateStaffTargetModal").modal('hide');
-        initStaffTargets();
+        initStaffs();
     }else{
         alert('Güncelleme yapılırken bir hata oluştu. Lütfen tekrar deneyiniz!');
     }
