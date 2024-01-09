@@ -27,7 +27,7 @@
 <div class="app-theme-panel" id="public-chat-panel">
     <div class="app-theme-panel-container">
         <a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn">
-            <i class="bi bi-envelope"></i>
+            <i class="bi bi-arrow-right"></i>
             <span class="badge bg-danger d-none"></span>
         </a>
         <div class="app-theme-panel-content">
