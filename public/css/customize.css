@@ -887,3 +887,10 @@ table.dataTable{
 #staffs .nav.nav-tabs.nav-tabs-v2>.nav-item>.nav-link:hover {
     border: none;
 }
+#staffs .nav.nav-tabs.nav-tabs-v2 > .nav-item > .nav-link.active, #staffs .nav.nav-tabs.nav-tabs-v2 > .nav-item > .nav-link:hover {
+    border: none;
+}
+
+#staffs .nav.nav-tabs.nav-tabs-v2 > .nav-item.show > .nav-link {
+    border: none;
+}
