@@ -209,6 +209,7 @@ class StaffTargetHelper
         $status['rate'] = number_format($rate, 2, ",", "");
         $status['total_sale_price'] = number_format($total_sale_price, 2, ",", "");
         $status['total_offer_price'] = number_format($total_offer_price, 2, ",", "");
+        $status['sales'] = $sales;
 
         return $status;
     }
