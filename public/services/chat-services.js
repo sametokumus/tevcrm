@@ -13,6 +13,9 @@
                 localStorage.setItem('chatCount', 0);
                 $('.app-theme-toggle-btn .badge').addClass('d-none');
                 $('.app-theme-toggle-btn .badge').text('');
+                $('#chat-icon').removeClass('bi-envelope').addClass('bi-arrow-right');
+            }else{
+                $('#chat-icon').removeClass('bi-arrow-right').addClass('bi-envelope');
             }
         });
 
