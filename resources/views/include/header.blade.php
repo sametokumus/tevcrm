@@ -306,11 +306,28 @@ $extra_js="";
                     </div>
                 </div>
 
-                <div id="nav-staff-targets" class="d-none menu-item @if( Request::segment(1)== 'staff-targets' ) active @endif">
-                    <a href="/staff-targets" class="menu-link">
-                        <span class="menu-icon"><i class="bi bi-pie-chart"></i></span>
-                        <span class="menu-text">Satış Hedefleri</span>
+                <div class="menu-item has-sub @if( Request::segment(1)== 'staff-targets' || Request::segment(1)== 'target-dashboard' ) active @endif">
+                    <a href="#" class="menu-link">
+                    <span class="menu-icon">
+                    <i class="bi bi-pie-chart"></i>
+                    </span>
+                        <span class="menu-text">Ayarlar</span>
+                        <span class="menu-caret"><b class="caret"></b></span>
                     </a>
+                    <div class="menu-submenu">
+                        <div id="nav-target-dashboard" class="d-none menu-item @if( Request::segment(1)== 'target-dashboard' ) active @endif">
+                            <a href="/target-dashboard" class="menu-link">
+                                <span class="menu-icon"><i class="bi bi-pie-chart"></i></span>
+                                <span class="menu-text">Hedef Grafikleri</span>
+                            </a>
+                        </div>
+                        <div id="nav-staff-targets" class="d-none menu-item @if( Request::segment(1)== 'staff-targets' ) active @endif">
+                            <a href="/staff-targets" class="menu-link">
+                                <span class="menu-icon"><i class="bi bi-pie-chart"></i></span>
+                                <span class="menu-text">Tüm Hedefler</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="menu-item has-sub @if( Request::segment(1)== 'settings' || Request::segment(1)== 'contacts' || Request::segment(1)== 'currency-logs' ) active @endif">

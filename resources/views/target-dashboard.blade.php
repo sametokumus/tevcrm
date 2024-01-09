@@ -1,7 +1,7 @@
 @include('include.header')
 <?php
 $extra_js='
-<script src="services/staff-dashboard.js"></script>
+<script src="services/target-dashboard.js"></script>
 <script src="/plugins/apexcharts/dist/apexcharts.min.js"/></script>
 ';
 ?>
