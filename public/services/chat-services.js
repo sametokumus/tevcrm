@@ -156,6 +156,8 @@ channel.bind('App\\Events\\CompanyChat', function(data) {
 });
 
 async function handleSendMessageEvent(data) {
+    playSound();
+
     let message = data.message;
     let sender = data.user;
     let message_panel = '';
@@ -238,4 +240,10 @@ function showChatNotify(notify_id, title, message) {
         autohide: true,
         delay: 3000
     }).toast('show');
+}
+
+function playSound() {
+    // Replace 'path/to/your/sound.wav' with the actual path to your WAV sound file
+    const audio = new Audio('COMCell_Message.wav');
+    audio.play();
 }
