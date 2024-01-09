@@ -6,13 +6,14 @@ var pusher = new Pusher('c52432e0f85707bee8d3', {
 
 var channel = pusher.subscribe('company-chat-channel');
 channel.bind('App\\Events\\CompanyChat', function(data) {
-    console.log('Received message: ', data);
+    // console.log('Received message: ', data);
     let received = JSON.stringify(data);
     // Handle the received message as needed
     handleSendMessageEvent(data)
 });
 
 function handleSendMessageEvent(data) {
+    playSound();
 
     // Update the chat interface or append the message to the DOM
     const chatMessagesDiv = document.getElementById('chat-messages');
@@ -22,6 +23,12 @@ function handleSendMessageEvent(data) {
 
     // Scroll to the bottom to show the latest message
     chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+}
+
+function playSound() {
+    // Replace 'path/to/your/sound.wav' with the actual path to your WAV sound file
+    const audio = new Audio('COMCell_Message.wav');
+    audio.play();
 }
 
 // mesaj gönderme
