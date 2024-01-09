@@ -311,7 +311,7 @@ $extra_js="";
                     <span class="menu-icon">
                     <i class="bi bi-pie-chart"></i>
                     </span>
-                        <span class="menu-text">Ayarlar</span>
+                        <span class="menu-text">Hedef Yönetimi</span>
                         <span class="menu-caret"><b class="caret"></b></span>
                     </a>
                     <div class="menu-submenu">
