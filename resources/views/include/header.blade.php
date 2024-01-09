@@ -314,6 +314,7 @@ $extra_js="";
                         <span class="menu-text">Hedef Yönetimi</span>
                         <span class="menu-caret"><b class="caret"></b></span>
                     </a>
+
                     <div class="menu-submenu">
                         <div id="nav-target-dashboard" class="d-none menu-item @if( Request::segment(1)== 'target-dashboard' ) active @endif">
                             <a href="/target-dashboard" class="menu-link">
