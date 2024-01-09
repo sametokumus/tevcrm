@@ -416,6 +416,7 @@ $('.select2').on('click', () => {
 async function createNavbar(){
    let user_role = await localStorage.getItem('userRole');
     let data = await serviceGetAdminRolePermissions(user_role);
+    console.log(data)
     $.each(data.role_permissions, function(i, role_permission){
         $('#nav-'+role_permission.permission_key).removeClass('d-none');
     });
