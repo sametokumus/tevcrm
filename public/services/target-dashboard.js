@@ -110,7 +110,7 @@ async function initStaffs(){
             '                                    <div class="nav-value" id="stat-6">'+ staff.manager_point +'</div>\n' +
             '                                </a>\n' +
             '                            </li>\n' +
-            '                            <li class="nav-item">\n' +
+            '                            <li class="nav-item" style="margin-right: 0; margin-left: auto;">\n' +
             '                                <div class="nav-link">\n' +
             '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px mb-1" onclick="openAddStaffTargetModal('+ staff.staff.id +');">Hedef Ekle</button>\n' +
             '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px" onclick="openAddStaffPointModal('+ staff.staff.id +');">Yönetici Puanı Ekle</button>\n' +

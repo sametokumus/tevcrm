@@ -60,6 +60,11 @@ $(".timepicker").timepicker({
                                     <div class="nav-value fs-16px">Aktiviteler</div>
                                 </a>
                             </li>
+                            <li class="nav-item" style="margin-right: 0; margin-left: auto;">
+                                <a href="#" class="nav-link pointer-event-none">
+                                    <div class="nav-value fs-16px">Müşteri Puanı</div>
+                                </a>
+                            </li>
                         </ul>
                         <div class="profile-content-container">
                             <div class="row gx-4">
