@@ -415,6 +415,7 @@ async function openSaleNoteModal(sale_id){
     $.each(data.sale_notes, function (i, note) {
 
         let item = '<tr>\n' +
+            '           <td>'+ formatDateAndTimeDESC2(note.created_at, '-') +'</td>\n' +
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
             '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
