@@ -135,36 +135,33 @@ class StaffTargetHelper
             foreach ($sale_offers as $sale_offer){
                 $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
                 $sale_offer['offer_product'] = $offer_product;
-                $total_offer_price += $offer_product->converted_price;
-            }
+                $offer_price += $offer_product->converted_price;
 
-//            $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
-//            foreach ($expenses as $expense){
-//                $expense['category_name'] = ExpenseCategory::query()->where('id', $expense->category_id)->first()->name;
-//                if ($expense->currency == $sale->currency){
-//                    $total_offer_price += $expense->price;
-//                    $expense['converted_price'] = $expense->price;
-//                }else{
-//                    if ($expense->currency == 'TRY') {
-//                        $sc = strtolower($sale->currency);
-//                        $expense_price = $expense->price / $sale->{$sc.'_rate'};
-//                    }else{
-//                        if ($sale->currency == 'TRY') {
-//                            $ec = strtolower($expense->currency);
-//                            $expense_price = $expense->price * $sale->{$ec.'_rate'};
-//                        }else{
-//                            $ec = strtolower($expense->currency);
-//                            $sc = strtolower($sale->currency);
-//                            if ($sale->{$sc.'_rate'} != 0) {
-//                                $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
-//                            }else{
-//                                $expense_price = 0;
-//                            }
-//                        }
-//                    }
-//                    $total_offer_price += $expense_price;
-//                }
-//            }
+
+                if ($target->currency == $sale->currency){
+                    $total_offer_price += $offer_price;
+                }else{
+                    if ($target->currency == 'TRY') {
+                        $sc = strtolower($sale->currency);
+                        $converted_price = $offer_price * $sale->{$sc.'_rate'};
+                    }else{
+                        if ($sale->currency == 'TRY') {
+                            $tc = strtolower($target->currency);
+                            $converted_price = $offer_price / $sale->{$tc.'_rate'};
+                        }else{
+                            $tc = strtolower($target->currency);
+                            $sc = strtolower($sale->currency);
+                            if ($sale->{$sc.'_rate'} != 0) {
+                                $converted_price = $offer_price * $sale->{$tc . '_rate'} / $sale->{$sc . '_rate'};
+                            }else{
+                                $converted_price = 0;
+                            }
+                        }
+                    }
+                    $total_offer_price += $converted_price;
+                }
+
+            }
 
 
             //satış
