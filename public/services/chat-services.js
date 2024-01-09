@@ -19,6 +19,12 @@
             }
         });
 
+        if ($('.app-theme-panel').hasClass('active')){
+            $('#chat-icon').removeClass('bi-envelope').addClass('bi-arrow-right');
+        }else{
+            $('#chat-icon').removeClass('bi-arrow-right').addClass('bi-envelope');
+        }
+
     });
 
 
