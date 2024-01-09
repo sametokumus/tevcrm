@@ -153,11 +153,11 @@ class StaffTargetHelper
                 }else{
                     if ($expense->currency == 'TRY') {
                         $sc = strtolower($sale->currency);
-                        $expense_price = $expense->price * $sale->{$sc.'_rate'};
+                        $expense_price = $expense->price / $sale->{$sc.'_rate'};
                     }else{
                         if ($sale->currency == 'TRY') {
                             $ec = strtolower($expense->currency);
-                            $expense_price = $expense->price / $sale->{$ec.'_rate'};
+                            $expense_price = $expense->price * $sale->{$ec.'_rate'};
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($sale->currency);
@@ -269,11 +269,11 @@ class StaffTargetHelper
                 }else{
                     if ($expense->currency == 'TRY') {
                         $sc = strtolower($sale->currency);
-                        $expense_price = $expense->price * $sale->{$sc.'_rate'};
+                        $expense_price = $expense->price / $sale->{$sc.'_rate'};
                     }else{
                         if ($sale->currency == 'TRY') {
                             $ec = strtolower($expense->currency);
-                            $expense_price = $expense->price / $sale->{$ec.'_rate'};
+                            $expense_price = $expense->price * $sale->{$ec.'_rate'};
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($sale->currency);
@@ -336,6 +336,8 @@ class StaffTargetHelper
             $rate = 0;
         }
         $status['rate'] = number_format($rate, 2, ",", "");
+        $status['target_total_price'] = number_format($target_total_price, 2, ",", "");
+        $status['target_offer_price'] = number_format($target_offer_price, 2, ",", "");
 
         return $status;
     }
