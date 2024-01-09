@@ -531,6 +531,6 @@ async function updateStaffTarget(){
 async function deleteStaffTarget(target_id){
     let returned = await serviceGetDeleteStaffTarget(target_id);
     if(returned){
-        initStaffTargets();
+        initStaffs();
     }
 }
