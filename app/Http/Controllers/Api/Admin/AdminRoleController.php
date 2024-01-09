@@ -234,6 +234,7 @@ class AdminRoleController extends Controller
                 ->selectRaw('admin_permission_roles.*, admin_permissions.value as permission_key')
                 ->where('admin_permission_roles.admin_role_id', $role_id)
                 ->where('admin_permission_roles.active',1)
+                ->where('admin_permissions.active',1)
                 ->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['role_permissions' => $role_permissions]]);
         } catch (QueryException $queryException) {
