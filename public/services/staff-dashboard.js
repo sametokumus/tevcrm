@@ -540,7 +540,7 @@ async function deleteStaffTarget(target_id){
 }
 
 async function openAddStaffPointModal(staff_id){
-    initStaffPoints('staff_id');
+    initStaffPoints(staff_id);
     document.getElementById('add_point_staff_id').value = staff_id;
     $("#addStaffPointModal").modal('show');
 }
