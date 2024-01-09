@@ -267,4 +267,50 @@ $extra_js='
     </div>
 </div>
 
+<div class="modal modal-cover fade" id="addStaffPointModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Personel Puanları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="#" id="add_staff_point_form">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <input type="hidden" class="form-control" id="add_point_staff_id" required>
+                            <label class="form-label">Yeni Puan Ekle</label>
+                            <input type="number" class="form-control" id="add_point_point" min="1" max="10" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row mb-3">
+                    <div class="table-responsive">
+                        <table id="staff-points-table" class="table table-striped table-borderless mb-2px small">
+                            <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Yönetici</th>
+                                <th>Puan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('include.footer')

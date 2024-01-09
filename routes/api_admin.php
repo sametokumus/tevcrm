@@ -451,6 +451,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('staff/getAllStaffStatistics', [StaffController::class, 'getAllStaffStatistics']);
     Route::get('staff/getAllStaffStatisticsMonthly', [StaffController::class, 'getAllStaffStatisticsMonthly']);
 
+    Route::get('staff/getStaffPointsByStaffId/{staff_id}', [StaffController::class, 'getStaffPointsByStaffId']);
+    Route::post('staff/addStaffPoint', [StaffController::class, 'addStaffPoint']);
+
 
     //Notify
     Route::post('notify/addNotifySetting', [NotifyController::class, 'addNotifySetting']);

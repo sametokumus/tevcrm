@@ -628,4 +628,48 @@ class StaffController extends Controller
             return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
+
+    public function getStaffPointsByStaffId($staff_id)
+    {
+        try {
+            $points = StaffPoint::query()
+                ->where('staff_id', $staff_id)
+                ->where('active', 1)
+                ->orderByDesc('id')
+                ->get();
+
+            foreach ($points as $point){
+                $user = Admin::query()->where('id', $point->user_id)->first();
+                $point['user_name'] = $user->name." ".$user->surname;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['points' => $points]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addStaffPoint(Request $request)
+    {
+        try {
+            $request->validate([
+                'staff_id' => 'required',
+                'user_id' => 'required',
+                'point' => 'required',
+            ]);
+            StaffPoint::query()->insert([
+                'staff_id' => $request->staff_id,
+                'user_id' => $request->user_id,
+                'point' => $request->point
+            ]);
+
+            return response(['message' => __('Hedef ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001', 'a' => $throwable->getMessage()]);
+        }
+    }
 }

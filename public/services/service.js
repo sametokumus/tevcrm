@@ -3113,6 +3113,24 @@ async function serviceGetDeleteStaffTarget(id) {
     }
 }
 
+async function serviceGetStaffPointsByStaffId(id) {
+    const data = await fetchDataGet('/admin/staff/getStaffPointsByStaffId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddStaffPoint(formData) {
+    const data = await fetchDataPost('/admin/staff/addStaffPoint', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 
 
 async function serviceGetBestCustomer() {

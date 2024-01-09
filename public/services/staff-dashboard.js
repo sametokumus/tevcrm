@@ -14,6 +14,10 @@
             e.preventDefault();
             updateStaffTarget();
         });
+        $('#add_staff_point_form').submit(function (e){
+            e.preventDefault();
+            addStaffPoint();
+        });
 
     });
 
@@ -109,7 +113,7 @@ async function initStaffs(){
             '                            <li class="nav-item">\n' +
             '                                <div class="nav-link">\n' +
             '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px mb-1" onclick="openAddStaffTargetModal('+ staff.staff.id +');">Hedef Ekle</button>\n' +
-            '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px" onclick="openAddPointModal('+ staff.staff.id +');">Yönetici Puanı Ekle</button>\n' +
+            '                                    <button class="nav-btn btn btn-theme btn-sm d-block w-150px" onclick="openAddStaffPointModal('+ staff.staff.id +');">Yönetici Puanı Ekle</button>\n' +
             '                                </div>\n' +
             '                            </li>\n' +
             '                        </ul>\n' +
@@ -532,5 +536,61 @@ async function deleteStaffTarget(target_id){
     let returned = await serviceGetDeleteStaffTarget(target_id);
     if(returned){
         initStaffs();
+    }
+}
+
+async function openAddStaffPointModal(staff_id){
+    initStaffPoints('staff_id');
+    document.getElementById('add_point_staff_id').value = staff_id;
+    $("#addStaffPointModal").modal('show');
+}
+
+async function initStaffPoints(staff_id){
+
+    let data = await serviceGetStaffPointsByStaffId(staff_id);
+    console.log(data)
+
+    $('#staff-points-table tbody tr').remove();
+
+    $.each(data.points, function (i, point) {
+
+        let item = '<tr>\n' +
+            '           <td>'+ formatDateAndTimeDESC2(point.created_at, '-') +'</td>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ point.user_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>'+ point.point +'</td>\n' +
+            '       </tr>';
+
+        $('#staff-points-table tbody').append(item);
+    });
+
+}
+
+async function addStaffPoint(){
+    let staff_id = document.getElementById('add_point_staff_id').value;
+    let point = document.getElementById('add_point_point').value;
+    let user_id = localStorage.getItem('userId');
+
+
+    let formData = JSON.stringify({
+        "staff_id": staff_id,
+        "user_id": user_id,
+        "point": point
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostAddStaffPoint(formData);
+    if (returned){
+        $("#add_staff_point_form").trigger("reset");
+        // $("#addStaffPointModal").modal('hide');
+        initStaffPoints(staff_id);
+        initStaffs();
+    }else{
+        alert("Hata Oluştu");
     }
 }
