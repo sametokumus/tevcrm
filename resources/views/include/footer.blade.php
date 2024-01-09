@@ -33,7 +33,7 @@
         <div class="app-theme-panel-content">
 
             <div class="card">
-                <div class="card-header bg-none fw-bold d-flex align-items-center">Chat <a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="theme-panel-expand"><i class="fa fa-close"></i></a></div>
+                <div class="card-header bg-none fw-bold d-flex align-items-center">Chat <a href="#" id="chat-panel-close" class="ms-auto text-muted text-decoration-none" data-toggle="theme-panel-expand"><i class="fa fa-close"></i></a></div>
                 <div class="card-body bg-inverse bg-opacity-10" id="chat-body" data-scrollbar="true">
                     <div class="widget-chat">
 

@@ -25,6 +25,10 @@
             $('#chat-icon').removeClass('bi-arrow-right').addClass('bi-envelope');
         }
 
+        $('#chat-panel-close').click(function (){
+            $('#chat-icon').removeClass('bi-arrow-right').addClass('bi-envelope');
+        });
+
     });
 
 
