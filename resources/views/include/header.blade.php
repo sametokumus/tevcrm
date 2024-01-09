@@ -142,13 +142,13 @@ $extra_js="";
                 <div class="menu-header">Haber Kaynağı</div>
                 <div id="nav-my-dashboard" class="menu-item @if( Request::segment(1)== 'my-dashboard' ) active @endif">
                     <a href="/my-dashboard" class="menu-link">
-                        <span class="menu-icon"><i class="bi bi-cpu"></i></span>
+                        <span class="menu-icon"><i class="bi bi-person-fill"></i></span>
                         <span class="menu-text">Profilim</span>
                     </a>
                 </div>
                 <div id="nav-dashboard" class="d-none menu-item @if( Request::segment(1)== 'dashboard' ) active @endif">
                     <a href="/dashboard" class="menu-link">
-                        <span class="menu-icon"><i class="bi bi-cpu"></i></span>
+                        <span class="menu-icon"><i class="bi bi-bar-chart-fill"></i></span>
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
