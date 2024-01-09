@@ -54,7 +54,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM ONAYLANAN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -93,7 +93,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM TAMAMLANAN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -132,7 +132,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM POTANSİYEL</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -171,7 +171,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM İPTAL EDİLEN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
 
@@ -210,7 +210,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TOPLAM KARLILIK</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="total-profit-box">
@@ -249,7 +249,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">TOPLAM TALEP <small>(Bu Ay - Yıl)</small></span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
                         <div class="row align-items-center mb-2" id="total-request-box">
@@ -295,7 +295,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">BU AY ONAYLANAN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="monthly-approved-box">
@@ -336,7 +336,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">BU AY TAMAMLANAN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="monthly-completed-box">
@@ -377,7 +377,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">BU AY POTANSİYEL</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="monthly-continue-box">
@@ -418,7 +418,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">BU AY İPTAL EDİLEN</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="monthly-cancelled-box">
@@ -460,7 +460,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">TEKLİF ONAYLANMA ORANI</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="offer-turning-box">
@@ -493,7 +493,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">ÖNCEKİ AYA GÖRE CİRO ORANI</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="row align-items-center mb-2" id="turnover-box">
@@ -532,7 +532,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">TOPLAM SİPARİŞ <small>(Bu Ay - Yıl)</small></span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
                         <div class="row align-items-center mb-2" id="total-sale-box">
@@ -570,7 +570,7 @@ $extra_js='
                         <div class="d-flex fw-bold small mb-3">
                             <span class="flex-grow-1">TOPLAM GÖRÜŞME <small>(Bu Ay - Yıl)</small></span>
                             <a href="#" data-toggle="card-expand"
-                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                               class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                         </div>
 
                         <div class="row align-items-center mb-2" id="total-activity-box">
@@ -621,7 +621,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">ONAYLANAN SATIŞLAR</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -661,7 +661,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">TAMAMLANAN SATIŞLAR</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -700,7 +700,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">POTANSİYEL SATIŞLAR</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -739,7 +739,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">İPTAL EDİLEN SATIŞLAR</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -787,7 +787,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">AYLIK KARLILIK</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -827,7 +827,7 @@ $extra_js='
                             <div class="d-flex fw-bold small mb-3">
                                 <span class="flex-grow-1">AYLIK TEKLİF ONAYLANMA ORANI</span>
                                 <a href="#" data-toggle="card-expand"
-                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                   class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                             </div>
 
 
@@ -872,7 +872,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN İYİ MÜŞTERİ</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -922,7 +922,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN İYİ PERSONEL</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -977,7 +977,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EKİP SATIŞLARI (Son 12 Ay)</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1023,7 +1023,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN YÜKSEK RAKAMLI SATIŞLAR (Son 90 Gün)</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1067,7 +1067,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN KARLI SATIŞLAR (Son 90 Gün)</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1111,7 +1111,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">UZUN SÜREDİR SİPARİŞİ OLMAYAN MÜŞTERİLER (Zamansal)</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1156,7 +1156,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">HİÇ SİPARİŞİ OLMAYAN MÜŞTERİLER</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1200,7 +1200,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">EN ÇOK SATILAN ÜRÜNLER</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
@@ -1246,7 +1246,7 @@ $extra_js='
                     <div class="d-flex fw-bold small mb-3">
                         <span class="flex-grow-1">SON SİPARİŞ İŞLEMLERİ</span>
                         <a href="#" data-toggle="card-expand"
-                           class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                           class="text-white text-muted text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                     </div>
 
                     <div class="table-responsive">
