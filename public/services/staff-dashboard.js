@@ -134,10 +134,18 @@ async function initStaffs(){
             '                                                                <th class="border-bottom-0">Ay</th>\n' +
             '                                                                <th class="border-bottom-0">Yıl</th>\n' +
             '                                                                <th class="border-bottom-0">Durum</th>\n' +
+            '                                                                <th class="border-bottom-0">İşlem</th>\n' +
             '                                                            </tr>\n' +
             '                                                            </thead>\n' +
             '                                                            <tbody>\n';
         $.each(staff.targets, function (i, target) {
+
+            let actions = "";
+            if (true){
+                actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
+                    '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
+            }
+
             item += '                                                       <tr>\n' +
                 '                                                                <td>'+ target.type_name +'</td>\n' +
                 '                                                                <td>'+ changeCommasToDecimal(target.target) +' '+ target.currency +'</td>\n' +
@@ -148,6 +156,7 @@ async function initStaffs(){
                 '                                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
                 '                                                                    </div>\n' +
                 '                                                                </td>\n' +
+                '                                                                <td>'+ actions +'</td>\n' +
                 '                                                            </tr>\n';
         });
 
