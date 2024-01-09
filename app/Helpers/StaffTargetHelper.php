@@ -125,30 +125,24 @@ class StaffTargetHelper
         $sales = $sales
            ->get();
 
-        $target_total_price = 0;
-        $target_offer_price = 0;
+        $total_sale_price = 0;
+        $total_offer_price = 0;
 
         foreach ($sales as $sale){
 
+            //satın alma
             $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
-            $total_offer_price = 0;
             foreach ($sale_offers as $sale_offer){
                 $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
                 $sale_offer['offer_product'] = $offer_product;
                 $total_offer_price += $offer_product->converted_price;
             }
 
-            if ($total_offer_price != 0) {
-                $total_expense = $total_offer_price;
-            }else{
-                $total_expense = 0;
-            }
-
             $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($expenses as $expense){
                 $expense['category_name'] = ExpenseCategory::query()->where('id', $expense->category_id)->first()->name;
                 if ($expense->currency == $sale->currency){
-                    $total_expense += $expense->price;
+                    $total_offer_price += $expense->price;
                     $expense['converted_price'] = $expense->price;
                 }else{
                     if ($expense->currency == 'TRY') {
@@ -168,54 +162,53 @@ class StaffTargetHelper
                             }
                         }
                     }
-                    $total_expense += $expense_price;
+                    $total_offer_price += $expense_price;
                 }
             }
 
-            $target_offer_price = $total_expense;
 
-
-            $sale_total_price = $sale->grand_total;
+            //satış
+            $sale_price = $sale->grand_total;
             if ($sale->grand_total_with_shipping != null){
-                $sale_total_price = $sale->grand_total_with_shipping;
+                $sale_price = $sale->grand_total_with_shipping;
             }
 
             if ($target->currency == $sale->currency){
-                $target_total_price += $sale_total_price;
+                $total_sale_price += $sale_price;
             }else{
                 if ($target->currency == 'TRY') {
                     $sc = strtolower($sale->currency);
-                    $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
+                    $converted_price = $sale_price * $sale->{$sc.'_rate'};
                 }else{
                     if ($sale->currency == 'TRY') {
                         $tc = strtolower($target->currency);
-                        $converted_price = $sale_total_price / $sale->{$tc.'_rate'};
+                        $converted_price = $sale_price / $sale->{$tc.'_rate'};
                     }else{
                         $tc = strtolower($target->currency);
                         $sc = strtolower($sale->currency);
                         if ($sale->{$sc.'_rate'} != 0) {
-                            $converted_price = $sale_total_price * $sale->{$tc . '_rate'} / $sale->{$sc . '_rate'};
+                            $converted_price = $sale_price * $sale->{$tc . '_rate'} / $sale->{$sc . '_rate'};
                         }else{
                             $converted_price = 0;
                         }
                     }
                 }
-                $target_total_price += $converted_price;
+                $total_sale_price += $converted_price;
             }
 
 
         }
 
         $status = array();
-        $status['price'] = number_format(($target_total_price - $target_offer_price), 2, ".", "");
-        if ($target_total_price != 0) {
-            $rate = 100 * ($target_total_price - $target_offer_price) / $target->target;
+        $status['price'] = number_format(($total_sale_price - $total_offer_price), 2, ".", "");
+        if ($total_sale_price != 0) {
+            $rate = 100 * ($total_sale_price - $total_offer_price) / $target->target;
         }else{
             $rate = 0;
         }
         $status['rate'] = number_format($rate, 2, ",", "");
-        $status['target_total_price'] = number_format($target_total_price, 2, ",", "");
-        $status['target_offer_price'] = number_format($target_offer_price, 2, ",", "");
+        $status['target_total_price'] = number_format($total_sale_price, 2, ",", "");
+        $status['target_offer_price'] = number_format($total_offer_price, 2, ",", "");
 
         return $status;
     }
