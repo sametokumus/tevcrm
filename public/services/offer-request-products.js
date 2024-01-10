@@ -29,6 +29,7 @@
 
                 json_data.forEach(function(obj) {
                     console.log(obj)
+                    obj[3] = $('<div/>').text(obj[3]).html();
                     table.row.add({
                         "id": "",
                         "product_stock_code": obj[0],
