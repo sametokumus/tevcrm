@@ -1019,7 +1019,7 @@ async function getDashboardStats(){
     }else if (total_activity_icon == 'up'){
         total_activity_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
     }else if (total_activity_icon == 'down'){
-        total_activity_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+        total_activity_icon = '<img src="img/icons/icon-subtract.png">';
     }
     $('#total-activity-box-icon').append(total_activity_icon);
 
