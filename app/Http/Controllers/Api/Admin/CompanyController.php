@@ -539,7 +539,7 @@ class CompanyController extends Controller
                 'point' => $request->point
             ]);
 
-            return response(['message' => __('Hedef ekleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Müşteri puanı ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
