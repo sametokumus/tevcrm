@@ -28,17 +28,18 @@
         let user_id = getPathVariable('staff-dashboard');
         console.log(user_id)
 
-
-        // initAdmin(user_id);
-        // initStaffTargets(user_id);
-        // initStaffNotifies(user_id);
-        // initStaffCompanies(user_id);
-        // initStaffStats(user_id);
-        // getLastMonthSales(user_id);
-        // getApprovedMonthlySales(user_id);
-        // getCompletedMonthlySales(user_id);
-        // getPotentialMonthlySales(user_id);
-        // getCancelledMonthlySales(user_id);
+        if (user_id != undefined) {
+            initAdmin(user_id);
+            initStaffTargets(user_id);
+            initStaffNotifies(user_id);
+            initStaffCompanies(user_id);
+            initStaffStats(user_id);
+            getLastMonthSales(user_id);
+            getApprovedMonthlySales(user_id);
+            getCompletedMonthlySales(user_id);
+            getPotentialMonthlySales(user_id);
+            getCancelledMonthlySales(user_id);
+        }
 
 	});
 
