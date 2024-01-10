@@ -947,7 +947,11 @@ async function initCompanyPoints(company_id){
         $('#company-points-table tbody').append(item);
     });
 
-    $('#customer-point').html('Müşteri Puanı: '+ last_point.point);
+    if (data.points.length > 0) {
+        $('#customer-point').html('Müşteri Puanı: ' + last_point.point);
+    }else{
+        $('#customer-point').html('Müşteri Puanı: -');
+    }
 
 }
 
