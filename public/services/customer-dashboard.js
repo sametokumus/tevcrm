@@ -947,7 +947,7 @@ async function initCompanyPoints(company_id){
         $('#company-points-table tbody').append(item);
     });
 
-    $('#customer-point').text('Müşteri Puanı: '+ last_point.point);
+    $('#customer-point').html('Müşteri Puanı: '+ last_point.point);
 
 }
 
