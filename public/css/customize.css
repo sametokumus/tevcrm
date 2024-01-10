@@ -862,8 +862,13 @@ table.dataTable{
 
 .dash-icon{
     position: absolute;
-    bottom: 10px;
+    bottom: -10px;
     right: 10px;
+}
+
+.dash-icon img{
+    width: 80px;
+    height: auto;
 }
 
 .is_pinned td{

@@ -1015,11 +1015,11 @@ async function getDashboardStats(){
     $('#total-activity-box .spinners').remove();
     $('#total-activity-box h5').append(total_activity + ' - ' + year_total_activity);
     if(total_activity_icon == '-'){
-        total_activity_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
-    }else if (total_activity_icon == 'up'){
-        total_activity_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
-    }else if (total_activity_icon == 'down'){
         total_activity_icon = '<img src="img/icons/icon-subtract.png">';
+    }else if (total_activity_icon == 'up'){
+        total_activity_icon = '<img src="img/icons/icon-up.png">';
+    }else if (total_activity_icon == 'down'){
+        total_activity_icon = '<img src="img/icons/icon-down.png">';
     }
     $('#total-activity-box-icon').append(total_activity_icon);
 

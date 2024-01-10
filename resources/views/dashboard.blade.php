@@ -584,7 +584,7 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon" id="total-activity-box-icon">
+                    <div class="dash-icon" id="total-activity-box-icon">
 
                     </div>
 
