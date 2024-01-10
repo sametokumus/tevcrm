@@ -123,7 +123,7 @@ async function initOfferRequest(){
             '                  '+ note +'\n' +
             '              </td>\n' +
             '           <td>' + product.ref_code + '</td>\n' +
-            '           <td>' + product.product_name + '</td>\n' +
+            '           <td>' + $('<div/>').text(product.product_name).html() + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>' + checkNull(measurement_name) + '</td>\n' +
             '           <td class="d-none">' + product.product.id + '</td>\n' +
