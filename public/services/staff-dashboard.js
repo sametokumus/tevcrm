@@ -8,6 +8,7 @@
 	$(window).load(async function() {
 
 		checkLogin();
+        staff_dash_currency = 'TRY';
         let user_id = getPathVariable('staff-dashboard');
         console.log(user_id)
 
@@ -31,6 +32,7 @@
 	});
 
 })(window.jQuery);
+let staff_dash_currency;
 let dash_staff;
 function changeDashStaff(){
     dash_staff = document.getElementById('dash_staff').value;
