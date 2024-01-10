@@ -102,10 +102,6 @@
             addCompanyPoint();
         });
 
-        $('#add-customer-point-button').click(function (){
-            openAddCompanyPointModal();
-        });
-
     });
 
     $(window).load( function() {
@@ -174,7 +170,7 @@ async function initSidebarInfo(company_id){
         '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> '+ company.website +'\n' +
         '          </div>\n' +
         '          <hr class="mt-4 mb-4">\n' +
-        '          <button type="button" id="add-customer-point-button" class="btn btn-sm btn-outline-theme fs-11px">Müşteri Puanı Ekle</button>\n' +
+        '          <button type="button" onclick="openAddCompanyPointModal();" class="btn btn-sm btn-outline-theme fs-11px">Müşteri Puanı Ekle</button>\n' +
         '          <hr class="mt-4 mb-4">\n' +
         '          <h6>Yetkililer</h6>\n';
 
