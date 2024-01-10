@@ -64,44 +64,6 @@ async function initAdmin(user_id){
     $('#staff-image').attr('src', profile_photo);
 }
 
-async function openUpdateProfileModal(){
-    $("#updateProfileModal").modal('show');
-    await initUpdateProfileModal();
-}
-async function initUpdateProfileModal(){
-    let user_id = localStorage.getItem('userId');
-    let data = await serviceGetAdminById(user_id);
-    let admin = data.admin;
-    document.getElementById('update_admin_email').value = admin.email;
-    document.getElementById('update_admin_name').value = admin.name;
-    document.getElementById('update_admin_surname').value = admin.surname;
-    document.getElementById('update_admin_phone').value = admin.phone_number;
-
-    $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
-}
-async function updateProfileCallback(xhttp){
-    let jsonData = await xhttp.responseText;
-    const obj = JSON.parse(jsonData);
-    showAlert(obj.message);
-    console.log(obj)
-    $("#update_account_form").trigger("reset");
-    $("#updateProfileModal").modal('hide');
-    let user_id = localStorage.getItem('userId');
-    initAdmin(user_id);
-}
-async function updateProfile(){
-    let formData = new FormData();
-    formData.append('email', document.getElementById('update_admin_email').value);
-    formData.append('name', document.getElementById('update_admin_name').value);
-    formData.append('surname', document.getElementById('update_admin_surname').value);
-    formData.append('phone_number', document.getElementById('update_admin_phone').value);
-    formData.append('password', document.getElementById('update_admin_password').value)
-    formData.append('profile_photo', document.getElementById('update_admin_profile_photo').files[0]);
-    console.log(formData);
-
-    let user_id = localStorage.getItem('userId');
-    await servicePostUpdateUser(user_id, formData);
-}
 
 async function getLastMonthSales(user_id){
     let data = await serviceGetLastMonthSalesByAdmin(user_id);
@@ -115,22 +77,22 @@ async function getLastMonthSales(user_id){
     $('#monthly-approved-box h4').html(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
     let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
-    $('#monthly-approved-text').append(text1);
+    $('#monthly-approved-text').html(text1);
 
-    $('#monthly-completed-box h4').append(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
+    $('#monthly-completed-box h4').html(changeCommasToDecimal(sales.completed.try_sale) + ' TRY');
     let text2 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.completed.eur_sale);
-    $('#monthly-completed-text').append(text2);
+    $('#monthly-completed-text').html(text2);
 
-    $('#monthly-continue-box h4').append(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
+    $('#monthly-continue-box h4').html(changeCommasToDecimal(sales.continue.try_sale) + ' TRY');
     let text3 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.continue.eur_sale);
-    $('#monthly-continue-text').append(text3);
+    $('#monthly-continue-text').html(text3);
 
-    $('#monthly-cancelled-box h4').append(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
+    $('#monthly-cancelled-box h4').html(changeCommasToDecimal(sales.cancelled.try_sale) + ' TRY');
     let text4 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.cancelled.eur_sale);
-    $('#monthly-cancelled-text').append(text4);
+    $('#monthly-cancelled-text').html(text4);
 
     var spark1 = {
         chart: {
@@ -775,7 +737,7 @@ async function initStaffNotifies(user_id){
         let bg_color = "";
         if (notify.is_read == 0){
             actions = '     <div class="text-right">\n' +
-                '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
+                // '               <button type="button" onclick="markAsRead(\'' + notify.notify_id + '\')" class="btn btn-link p-0"><small class="text-inverse text-opacity-50">Okundu Olarak İşaretle</small></button>\n' +
                 '           </div>\n';
             bg_color = 'bg-theme-100';
         }
@@ -857,15 +819,15 @@ async function initStaffStats(user_id){
 
     console.log(data)
 
-    $('#stat-1').append(data.total_company_count);
-    $('#stat-2').append(data.add_this_month_company);
-    $('#stat-3').append(data.activity_this_month);
-    $('#stat-4').append(data.request_this_month);
-    $('#stat-5').append(data.sale_this_month);
+    $('#stat-1').html(data.total_company_count);
+    $('#stat-2').html(data.add_this_month_company);
+    $('#stat-3').html(data.activity_this_month);
+    $('#stat-4').html(data.request_this_month);
+    $('#stat-5').html(data.sale_this_month);
 
     let data2 = await serviceGetStaffSituation(user_id);
 
     console.log(data2)
-    $('#stat-6').append(data2.position + '. (' + data2.staff.staff_rate + ')');
+    $('#stat-6').html(data2.position + '. (' + data2.staff.staff_rate + ')');
 
 }

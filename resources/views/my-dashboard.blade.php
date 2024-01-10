@@ -157,7 +157,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-approved-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-approved-text">
 
                                                         </div>
 
@@ -196,7 +196,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-completed-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-completed-text">
 
                                                         </div>
 
@@ -235,7 +235,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-continue-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-continue-text">
 
                                                         </div>
 
@@ -266,7 +266,7 @@ $extra_js='
                                                         <div class="d-flex fw-bold small mb-3">
                                                             <span class="flex-grow-1">BU AY İPTAL EDİLEN</span>
                                                             <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                               class="text-dark text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
                                                         </div>
 
                                                         <div class="row align-items-center mb-2" id="monthly-cancelled-box">

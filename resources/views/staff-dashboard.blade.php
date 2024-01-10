@@ -55,7 +55,6 @@ $extra_js='
                             <div class="mb-3" id="staff-email">
 
                             </div>
-                            <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
                             <hr class="mt-4 mb-4">
 
                             <div class="fw-bold mb-1 fs-16px">Firmalar</div>
@@ -182,7 +181,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-approved-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-approved-text">
 
                                                         </div>
 
@@ -221,7 +220,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-completed-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-completed-text">
 
                                                         </div>
 
@@ -260,7 +259,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-continue-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-continue-text">
 
                                                         </div>
 
@@ -299,7 +298,7 @@ $extra_js='
                                                                 <h4 class="mb-0"></h4>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-opacity-80 text-truncate" id="monthly-cancelled-text">
+                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-cancelled-text">
 
                                                         </div>
 
@@ -463,7 +462,6 @@ $extra_js='
                                             <div class="list-group list-group-flush">
                                                 <div class="list-group-item fw-bold px-3 d-flex">
                                                     <span class="flex-fill">Bildirimler</span>
-                                                    <a href="#" id="mark-all-read-button" class="text-inverse text-opacity-50"><small>Tümünü Okundu Olarak İşaretle</small></a>
                                                 </div>
                                             </div>
                                             <div class="list-group list-group-flush" id="user-notifies">
