@@ -973,7 +973,7 @@ async function addCompanyPoint(){
     let returned = await servicePostAddCompanyPoint(formData);
     if (returned){
         $("#add_company_point_form").trigger("reset");
-        initCompanyPoints(staff_id);
+        initCompanyPoints(company_id);
     }else{
         alert("Hata Oluştu");
     }
