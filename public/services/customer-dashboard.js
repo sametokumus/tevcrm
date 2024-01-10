@@ -916,7 +916,6 @@ async function deleteDeliveryAddress(address_id){
 
 
 async function openAddCompanyPointModal(){
-    initCompanyPoints(staff_id);
     $("#addCompanyPointModal").modal('show');
 }
 
