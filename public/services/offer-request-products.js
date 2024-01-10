@@ -293,39 +293,6 @@ async function initOfferRequestProducts(){
 
         editor.on('preSubmit', async function(e, data, action) {
             if (action !== 'remove') {
-                // let id = editor.field('id').val();
-                // let quantity = editor.field('quantity').val();
-                // let pcs_price = editor.field('pcs_price').val();
-                // let total_price = editor.field('total_price').val();
-                // let discount_rate = editor.field('discount_rate').val();
-                // let discounted_price = editor.field('discounted_price').val();
-                // let currency = editor.field('currency').val();
-                // let lead_time = editor.field('lead_time').val();
-                //
-                // let formData = JSON.stringify({
-                //     "id": id,
-                //     "date_code": "",
-                //     "package_type": "",
-                //     "quantity": quantity,
-                //     "pcs_price": changePriceToDecimal(pcs_price),
-                //     "total_price": changePriceToDecimal(total_price),
-                //     "discount_rate": changePriceToDecimal(discount_rate),
-                //     "discounted_price": changePriceToDecimal(discounted_price),
-                //     "vat_rate": "",
-                //     "currency": currency,
-                //     "lead_time": lead_time
-                // });
-                //
-                // let offer_id = document.getElementById('offer-detail-modal-offer-id').value;
-                // let returned = await servicePostUpdateOfferProduct(formData, offer_id, id);
-                // if (returned){
-                //     await initOfferDetailModal(offer_id);
-                //     await initOffers();
-                // }else{
-                //     alert("Hata Oluştu");
-                // }
-
-                // Submit the edited row data
                 editor.submit();
             }
         });
@@ -339,7 +306,15 @@ async function initOfferRequestProducts(){
                 { data: "product_stock_code",title: "Firma Stok Kodu", className:  "row-edit" , defaultContent: ""},
                 { data: "customer_stock_code", title: "Müşteri Stok Kodu", className:  "row-edit" , defaultContent: ""},
                 { data: "ref_code", title: "Ref. Code", className:  "row-edit" , defaultContent: ""},
-                { data: "product_name", title: "Ürün Adı", className:  "row-edit" , defaultContent: ""},
+                {
+                    data: "product_name",
+                    title: "Ürün Adı",
+                    className: "row-edit",
+                    defaultContent: "",
+                    render: function (data, type, row) {
+                        return type === 'display' ? $('<div/>').text(data).html() : data;
+                    }
+                },
                 { data: "quantity", title: "Miktar", className:  "row-edit" , defaultContent: "1"},
                 { data: "measurement_name_tr", title: "Birim", className:  "row-edit", defaultContent: "" },
                 { data: "product_brand_name", title: "Marka", editable: false },
