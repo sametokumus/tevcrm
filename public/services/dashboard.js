@@ -972,6 +972,7 @@ async function getTotalProfitRate(){
 async function getDashboardStats(){
 
     let data = await serviceGetDashboardStats(dash_owner);
+    console.log(data)
     let offer_turning_rate = data.offer_turning_rate;
     let turnover_rate = data.turnover_rate;
     let total_request = data.total_request;
@@ -1299,7 +1300,6 @@ async function getBestSalesLastNinetyDays(){
 async function initSaleHistory(){
     let data = await serviceGetSaleHistoryActions();
     let actions = data.actions;
-    console.log(data)
 
     $('#sales-history-table').siblings('.spinners').remove();
     $('#sales-history-table tbody tr').remove();
