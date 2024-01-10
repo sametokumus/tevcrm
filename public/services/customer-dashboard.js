@@ -931,7 +931,7 @@ async function initCompanyPoints(company_id){
 
     $.each(data.points, function (i, point) {
         if (i == 0){
-            last_point = item;
+            last_point = point;
         }
 
         let item = '<tr>\n' +
