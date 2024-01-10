@@ -3813,12 +3813,15 @@ class DashboardController extends Controller
                 'offer_turning_rate' => $offer_turning_rate,
                 'turnover_rate' => $turnover_rate,
                 'total_request' => $total_request,
+                'previous_total_request' => $previous_total_request,
                 'year_total_request' => $year_total_request,
                 'total_request_icon' => $total_request_icon,
                 'total_sale' => $total_sale,
+                'previous_total_sale' => $previous_total_sale,
                 'year_total_sale' => $year_total_sale,
                 'total_sale_icon' => $total_sale_icon,
                 'total_activity' => $total_activity,
+                'previous_total_activity' => $previous_total_activity,
                 'year_total_activity' => $year_total_activity,
                 'total_activity_icon' => $total_activity_icon
             ]]);
