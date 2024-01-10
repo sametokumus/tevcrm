@@ -152,7 +152,7 @@ $extra_js="";
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </div>
-                <div id="nav-staff-dashboard" class="menu-item @if( Request::segment(1)== 'staff-dashboard' ) active @endif">
+                <div id="nav-staff-dashboard" class="d-none menu-item @if( Request::segment(1)== 'staff-dashboard' ) active @endif">
                     <a href="/staff-dashboard" class="menu-link">
                         <span class="menu-icon"><i class="bi bi-people-fill"></i></span>
                         <span class="menu-text">Personel Profilleri</span>
