@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Admin;
 use App\Models\City;
 use App\Models\Company;
+use App\Models\CompanyPoint;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\Expense;
