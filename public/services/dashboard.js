@@ -993,22 +993,22 @@ async function getDashboardStats(){
     $('#total-request-box .spinners').remove();
     $('#total-request-box h5').append(total_request + ' - ' + year_total_request);
     if(total_request_icon == '-'){
-        total_request_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
+        total_request_icon = '<img src="img/icons/icon-subtract.png">';
     }else if (total_request_icon == 'up'){
-        total_request_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
+        total_request_icon = '<img src="img/icons/icon-up.png">';
     }else if (total_request_icon == 'down'){
-        total_request_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+        total_request_icon = '<img src="img/icons/icon-down.png">';
     }
     $('#total-request-box-icon').append(total_request_icon);
 
     $('#total-sale-box .spinners').remove();
     $('#total-sale-box h5').append(total_sale + ' - ' + year_total_sale);
     if(total_sale_icon == '-'){
-        total_sale_icon = '<i class="fa fa-minus fa-3x text-default"></i>';
+        total_sale_icon = '<img src="img/icons/icon-subtract.png">';
     }else if (total_sale_icon == 'up'){
-        total_sale_icon = '<i class="fa fa-arrow-up fa-3x text-theme"></i>';
+        total_sale_icon = '<img src="img/icons/icon-up.png">';
     }else if (total_sale_icon == 'down'){
-        total_sale_icon = '<i class="fa fa-arrow-down fa-3x text-danger"></i>';
+        total_sale_icon = '<img src="img/icons/icon-down.png">';
     }
     $('#total-sale-box-icon').append(total_sale_icon);
 

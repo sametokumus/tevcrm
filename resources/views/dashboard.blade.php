@@ -263,7 +263,7 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon" id="total-request-box-icon">
+                    <div class="dash-icon" id="total-request-box-icon">
 
                     </div>
 
@@ -546,7 +546,7 @@ $extra_js='
                             </div>
                         </div>
                     </div>
-                    <div class="opacity-2 dash-icon" id="total-sale-box-icon">
+                    <div class="dash-icon" id="total-sale-box-icon">
 
                     </div>
 
