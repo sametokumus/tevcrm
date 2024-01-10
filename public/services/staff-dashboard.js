@@ -28,6 +28,8 @@
         let user_id = getPathVariable('staff-dashboard');
         console.log(user_id)
 
+        getAdminsAddSelectId('dash_staff');
+
         if (user_id != undefined) {
             initAdmin(user_id);
             initStaffTargets(user_id);

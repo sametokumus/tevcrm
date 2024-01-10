@@ -9,6 +9,31 @@ $extra_js='
 ?>
 
 <div id="content" class="app-content">
+    <div class="">
+
+        <div class="card bg-light-200 border-dark mb-3">
+
+            <div class="card-body p-3">
+
+                <div class="row">
+                    <div class="col-12">
+                        <select class="form-control" id="dash_staff" onchange="changeDashStaff();">
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="card">
         <div class="card-body p-0">
