@@ -1334,6 +1334,25 @@ async function serviceGetDeleteCompanyAddress(id) {
     }
 }
 
+async function serviceGetCompanyPointsByCompanyId(id) {
+    const data = await fetchDataGet('/admin/company/getCompanyPointsByCompanyId/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddCompanyPoint(formData) {
+    const data = await fetchDataPost('/admin/company/addCompanyPoint', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
 
 async function serviceGetOfferRequests() {
     const data = await fetchDataGet('/admin/offerRequest/getOfferRequests', 'application/json');

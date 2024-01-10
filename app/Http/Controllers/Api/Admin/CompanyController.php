@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Helpers\CustomerHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Admin;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\Country;
@@ -18,6 +19,7 @@ use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Sale;
 use App\Models\SaleOffer;
+use App\Models\StaffPoint;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -499,6 +501,50 @@ class CompanyController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['products' => $products]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getCompanyPointsByCompanyId($company_id)
+    {
+        try {
+            $points = CompanyPoint::query()
+                ->where('company_id', $company_id)
+                ->where('active', 1)
+                ->orderByDesc('id')
+                ->get();
+
+            foreach ($points as $point){
+                $user = Admin::query()->where('id', $point->user_id)->first();
+                $point['user_name'] = $user->name." ".$user->surname;
+            }
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['points' => $points]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addCompanyPoint(Request $request)
+    {
+        try {
+            $request->validate([
+                'company_id' => 'required',
+                'user_id' => 'required',
+                'point' => 'required',
+            ]);
+            CompanyPoint::query()->insert([
+                'company_id' => $request->company_id,
+                'user_id' => $request->user_id,
+                'point' => $request->point
+            ]);
+
+            return response(['message' => __('Hedef ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001', 'a' => $throwable->getMessage()]);
         }
     }
 }

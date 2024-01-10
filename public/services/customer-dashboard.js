@@ -96,6 +96,12 @@
            updateActivityNewTask();
         });
 
+
+        $('#add_company_point_form').submit(function (e){
+            e.preventDefault();
+            addCompanyPoint();
+        });
+
     });
 
     $(window).load( function() {
@@ -104,6 +110,7 @@
         checkRole();
         let company_id = getPathVariable('customer-dashboard');
         initSidebarInfo(company_id);
+        initCompanyPoints(company_id);
         initSaledProducts(company_id);
         initSales(company_id);
         initDeliveryAddresses(company_id);
@@ -902,5 +909,67 @@ async function deleteDeliveryAddress(address_id){
     if(returned){
         let company_id = getPathVariable('customer-dashboard');
         initDeliveryAddresses(company_id);
+    }
+}
+
+
+async function openAddCompanyPointModal(){
+    initCompanyPoints(staff_id);
+    $("#addCompanyPointModal").modal('show');
+}
+
+async function initCompanyPoints(company_id){
+    document.getElementById('add_point_company_id').value = company_id;
+
+    let data = await serviceGetCompanyPointsByCompanyId(company_id);
+    console.log(data)
+
+    $('#company-points-table tbody tr').remove();
+
+    let last_point;
+
+    $.each(data.points, function (i, point) {
+        if (i == 0){
+            last_point = item;
+        }
+
+        let item = '<tr>\n' +
+            '           <td>'+ formatDateAndTimeDESC2(point.created_at, '-') +'</td>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ point.user_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td>'+ point.point +'</td>\n' +
+            '       </tr>';
+
+        $('#company-points-table tbody').append(item);
+    });
+
+    $('#customer-point').text('Müşteri Puanı: '+ last_point.point);
+
+}
+
+async function addCompanyPoint(){
+    let company_id = document.getElementById('add_point_company_id').value;
+    let point = document.getElementById('add_point_point').value;
+    let user_id = localStorage.getItem('userId');
+
+
+    let formData = JSON.stringify({
+        "company_id": company_id,
+        "user_id": user_id,
+        "point": point
+    });
+
+    console.log(formData);
+
+    let returned = await servicePostAddCompanyPoint(formData);
+    if (returned){
+        $("#add_company_point_form").trigger("reset");
+        initCompanyPoints(staff_id);
+    }else{
+        alert("Hata Oluştu");
     }
 }
