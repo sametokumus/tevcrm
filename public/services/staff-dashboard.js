@@ -112,7 +112,7 @@ async function getLastMonthSales(user_id){
     let cancelled_data = sales.cancelled.cancelled_serie_try.map(parseFloat);
     let day_count = sales.day_count;
 
-    $('#monthly-approved-box h4').append(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
+    $('#monthly-approved-box h4').html(changeCommasToDecimal(sales.approved.try_sale) + ' TRY');
     let text1 = '<i class="fa fa-dollar-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.usd_sale) +'<br/>\n' +
         '       <i class="fa fa-euro-sign fa-fw me-1"></i> '+ changeCommasToDecimal(sales.approved.eur_sale);
     $('#monthly-approved-text').append(text1);
