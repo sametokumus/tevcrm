@@ -3,22 +3,6 @@
 
 	 $(document).ready(function() {
 
-         $('#update-profile-button').click(function (){
-             openUpdateProfileModal();
-         });
-
-         $('#update_account_form').submit(function (e){
-             e.preventDefault();
-             updateProfile();
-         });
-
-         $('#mark-all-read-button').click(function (e){
-             e.preventDefault();
-             markAsReadAllNotify();
-             $('#user-notifies .list-group-item').removeClass('bg-theme-100');
-             $('#user-notifies .list-group-item div.text-right').remove();
-         });
-
 	});
 
 	$(window).load(async function() {
@@ -28,9 +12,11 @@
         let user_id = getPathVariable('staff-dashboard');
         console.log(user_id)
 
-        getAdminsAddSelectId('dash_staff');
+        await getAdminsAddSelectId('dash_staff');
 
         if (user_id != undefined) {
+            document.getElementById('dash_staff').value = user_id;
+
             initAdmin(user_id);
             initStaffTargets(user_id);
             initStaffNotifies(user_id);
@@ -46,11 +32,20 @@
 	});
 
 })(window.jQuery);
-let staff_dash_currency;
-function changeDashCurrency(){
-    staff_dash_currency = document.getElementById('staff_dash_currency').value;
-    localStorage.setItem('staff_dash_currency', staff_dash_currency);
-    location.reload();
+let dash_staff;
+function changeDashStaff(){
+    dash_staff = document.getElementById('dash_staff').value;
+
+    initAdmin(dash_staff);
+    initStaffTargets(dash_staff);
+    initStaffNotifies(dash_staff);
+    initStaffCompanies(dash_staff);
+    initStaffStats(dash_staff);
+    getLastMonthSales(dash_staff);
+    getApprovedMonthlySales(dash_staff);
+    getCompletedMonthlySales(dash_staff);
+    getPotentialMonthlySales(dash_staff);
+    getCancelledMonthlySales(dash_staff);
 }
 
 async function initAdmin(user_id){
