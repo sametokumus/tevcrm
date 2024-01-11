@@ -2980,8 +2980,8 @@ class DashboardController extends Controller
                 })
                 ->where('s.active', '=', 1)
                 ->where('statuses.period', '=', 'approved')
-                ->whereYear('sh.created_at', '2024')
-                ->whereMonth('sh.created_at', '1');
+                ->whereYear('sh.created_at', $currentYear)
+                ->whereMonth('sh.created_at', $currentMonth);
 
             if ($owner_id != 0){
                 $this_month_sale_items = $this_month_sale_items
@@ -3058,8 +3058,8 @@ class DashboardController extends Controller
                 })
                 ->where('s.active', '=', 1)
                 ->where('statuses.period', '=', 'approved')
-                ->whereYear('sh.created_at', '2023')
-                ->whereMonth('sh.created_at', '12');
+                ->whereYear('sh.created_at', $previousYear)
+                ->whereMonth('sh.created_at', $previousMonth);
 
             if ($owner_id != 0){
                 $previous_month_sale_items = $previous_month_sale_items
