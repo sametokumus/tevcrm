@@ -2994,17 +2994,18 @@ class DashboardController extends Controller
             $this_month_sale_total = 0;
             $this_month_offer_total = 0;
             foreach ($this_month_sale_items as $sale){
+
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                 foreach ($sale_offers as $sale_offer){
                     if ($sale->currency == 'TRY'){
-                        $sale_total += $sale_offer->sale_price;
-                        $offer_total += $sale_offer->offer_price;
+                        $this_month_sale_total += $sale_offer->sale_price;
+                        $this_month_offer_total += $sale_offer->offer_price;
                     }else if ($sale->currency == 'USD'){
-                        $sale_total += $sale_offer->sale_price * $sale->usd_rate;
-                        $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                        $this_month_sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                        $this_month_offer_total += $sale_offer->offer_price * $sale->usd_rate;
                     }else if ($sale->currency == 'EUR'){
-                        $sale_total += $sale_offer->sale_price * $sale->eur_rate;
-                        $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        $this_month_sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                        $this_month_offer_total += $sale_offer->offer_price * $sale->eur_rate;
                     }
                 }
 
@@ -3012,7 +3013,7 @@ class DashboardController extends Controller
                 $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                 foreach ($expenses as $expense){
                     if ($expense->currency == $sale->currency){
-                        $sale_total += $expense->price;
+                        $this_month_sale_total += $expense->price;
                     }else{
                         if ($expense->currency == 'TRY') {
                             $sc = strtolower($sale->currency);
@@ -3031,13 +3032,18 @@ class DashboardController extends Controller
                                 }
                             }
                         }
-                        $sale_total += $expense_price;
+                        $this_month_sale_total += $expense_price;
                     }
                 }
 
 
             }
-            $this_month_profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+
+            if ($this_month_offer_total == 0 || $this_month_sale_total == 0) {
+                $this_month_profit_rate = 0;
+            }else {
+                $this_month_profit_rate = 100 * ($this_month_offer_total - $this_month_sale_total) / $this_month_sale_total;
+            }
 
 
 
@@ -3066,17 +3072,18 @@ class DashboardController extends Controller
             $previous_month_sale_total = 0;
             $previous_month_offer_total = 0;
             foreach ($previous_month_sale_items as $sale){
+
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                 foreach ($sale_offers as $sale_offer){
                     if ($sale->currency == 'TRY'){
-                        $sale_total += $sale_offer->sale_price;
-                        $offer_total += $sale_offer->offer_price;
+                        $previous_month_sale_total += $sale_offer->sale_price;
+                        $previous_month_offer_total += $sale_offer->offer_price;
                     }else if ($sale->currency == 'USD'){
-                        $sale_total += $sale_offer->sale_price * $sale->usd_rate;
-                        $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                        $previous_month_sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                        $previous_month_offer_total += $sale_offer->offer_price * $sale->usd_rate;
                     }else if ($sale->currency == 'EUR'){
-                        $sale_total += $sale_offer->sale_price * $sale->eur_rate;
-                        $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        $previous_month_sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                        $previous_month_offer_total += $sale_offer->offer_price * $sale->eur_rate;
                     }
                 }
 
@@ -3084,7 +3091,7 @@ class DashboardController extends Controller
                 $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
                 foreach ($expenses as $expense){
                     if ($expense->currency == $sale->currency){
-                        $sale_total += $expense->price;
+                        $previous_month_sale_total += $expense->price;
                     }else{
                         if ($expense->currency == 'TRY') {
                             $sc = strtolower($sale->currency);
@@ -3103,13 +3110,18 @@ class DashboardController extends Controller
                                 }
                             }
                         }
-                        $sale_total += $expense_price;
+                        $previous_month_sale_total += $expense_price;
                     }
                 }
 
 
             }
-            $previous_month_profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+
+            if ($previous_month_offer_total == 0 || $previous_month_sale_total == 0) {
+                $previous_month_profit_rate = 0;
+            }else {
+                $previous_month_profit_rate = 100 * ($previous_month_offer_total - $previous_month_sale_total) / $previous_month_sale_total;
+            }
 
             $profit_rate_icon = '';
             if ($this_month_profit_rate == $previous_month_profit_rate){
