@@ -3121,7 +3121,12 @@ class DashboardController extends Controller
             }
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate, 'profit_rate_icon' => $profit_rate_icon]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
+                'profit_rate' => $profit_rate,
+                'profit_rate_icon' => $profit_rate_icon,
+                'this_month_profit_rate' => $this_month_profit_rate,
+                'previous_month_profit_rate' => $previous_month_profit_rate
+            ]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }
