@@ -222,6 +222,8 @@ async function initNewOfferDetail(){
     let data = await serviceGetNewOffersByRequestId(request_id);
     console.log(data)
 
+    $('#new-offer-detail').siblings('.card-loading-row').remove();
+
     let products = data.products;
     let companies = data.companies;
     // $("#new-offer-detail").dataTable().fnDestroy();

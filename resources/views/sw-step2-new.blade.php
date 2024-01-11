@@ -171,7 +171,7 @@ $extra_js='
                 <div class="col-md-12">
                     <div class="card border-theme mb-3">
                         <div class="card-body p-3 overflow-auto">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center card-loading-row">
                                 <div class="col-12">
                                     <div class="d-block">
                                         <h6>Lütfen bekleyiniz. Tedarikçi teklifleri oluşturuluyor.</h6>
