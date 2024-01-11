@@ -1569,6 +1569,13 @@ class SaleController extends Controller
                     }
                     $offer['converted_price'] = number_format($c_price, 2, ".", "");
                 }
+
+                $offerr = Offer::query()
+                    ->where('request_id', $sale->request_id)
+                    ->where('supplier_id', $offer->supplier_id)
+                    ->where('active', 1)
+                    ->first();
+                $offer['po_url'] = $offerr->po_url;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offers' => $offers]]);

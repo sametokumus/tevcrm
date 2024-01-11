@@ -284,6 +284,11 @@ async function initSaleSuppliers(sale_id){
 
         $.each(offers, function (i, offer) {
 
+            let po_pdf = '';
+            if (offer.po_url != null){
+                po_pdf = '<a href="' + offer.po_url + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill text-danger"></i></a>';
+            }
+
             let item = '<tr>\n' +
                 '           <td>\n' +
                 '               <span class="d-flex align-items-center">\n' +
@@ -292,10 +297,10 @@ async function initSaleSuppliers(sale_id){
                 '               </span>\n' +
                 '           </td>\n' +
                 '           <td><small>' + offer.product_count + ' Ürün</small></td>\n' +
-                '           <td><small>' + changeCommasToDecimal(offer.total_price) + ' ' + offer.currency + '+KDV</small></td>\n' +
+                '           <td><small>' + changeCommasToDecimal(offer.total_price) + ' ' + offer.currency + '</small></td>\n' +
                 '           <td>\n' +
                 '               <a href="/customer-dashboard/' + offer.supplier_id + '" class="text-decoration-none text-dark"><i class="bi bi-search"></i></a>\n' +
-                '               <a href="/purchasing-order-print/' + sale_id + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill text-danger"></i></a>\n' +
+                '               '+ po_pdf +'\n' +
                 '           </td>\n' +
                 '       </tr>';
 
