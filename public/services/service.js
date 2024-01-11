@@ -1859,6 +1859,16 @@ async function serviceGetDeleteSaleExpense(expense_id) {
         return false;
     }
 }
+async function servicePostAddCustomerPONumber(formData) {
+    const data = await fetchDataPost('/admin/sale/addCustomerPONumber', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
 async function serviceGetAddSalePin(sale_id) {
     const data = await fetchDataGet('/admin/sale/addSalePin/' + sale_id, 'application/json');
     if (data.status == "success") {

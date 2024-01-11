@@ -38,6 +38,10 @@
             e.preventDefault();
             addShipmentPrice();
         });
+        $('#add_customer_po_form').submit(function (e){
+            e.preventDefault();
+            addCustomerPO();
+        });
 	});
 
 	$(window).load(async function() {
@@ -216,6 +220,9 @@ async function initSales(){
             if (role == 1 || role == 2 || role == 3){
                 btn_list += '<a href="purchasing-order-print/'+ sale.sale_id +'" class="btn btn-sm btn-green">Supp. PO PDF</a>\n';
             }
+            btn_list += '<button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openCustomerPOModal(\'' + sale.sale_id + '\')">\n' +
+                '           <span class="fe fe-refresh-cw"> Müşteri PO Numarası\n' +
+                '        </button>\n';
         }else if (sale.status.action == "inv"){
             // status_class = "border-indigo text-indigo";
             status_class = "bg-indigo border-none text-white shadow-xl";
@@ -500,6 +507,27 @@ async function addShipmentPrice() {
     if (returned){
         $('#addShipmentPriceModal').modal('hide');
         document.getElementById('add_shipment_sale_id').value = '';
+    }
+}
+
+async function openCustomerPOModal(sale_id){
+    $('#addCustomerPOModal').modal('show');
+    document.getElementById('add_customer_po_sale_id').value = sale_id;
+}
+async function addCustomerPO() {
+    let sale_id = document.getElementById('add_customer_po_sale_id').value;
+    let customer_po = document.getElementById('add_customer_po_number').value;
+
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "customer_po": customer_po
+    });
+    console.log(formData)
+
+    let returned = await servicePostAddCustomerPONumber(formData);
+    if (returned){
+        $('#addCustomerPOModal').modal('hide');
+        document.getElementById('add_customer_po_sale_id').value = '';
     }
 }
 

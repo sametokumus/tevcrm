@@ -2508,6 +2508,26 @@ class SaleController extends Controller
         }
     }
 
+    public function addCustomerPONumber(Request $request)
+    {
+        try {
+            $request->validate([
+                'sale_id' => 'required'
+            ]);
+            Sale::query()->where('sale_id', $request->sale_id)->update([
+                'customer_po' => $request->customer_po
+            ]);
+
+            return response(['message' => __('İşlem başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
     public function addSalePin($sale_id)
     {
         try {
