@@ -2958,7 +2958,160 @@ class DashboardController extends Controller
             $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
             $profit_rate = number_format($profit_rate, 2,",","");
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate]]);
+
+            $currentYear = date('Y');
+            $previousYear = $currentYear;
+            $currentMonth = date('n');
+            $previousMonth = date('n', strtotime('last month'));
+            if ($previousMonth == 12){
+                $previousYear = $currentYear - 1;
+            }
+
+
+
+            //Bu ay Karlılık
+            $this_month_sale_items = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.period as period')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                ->whereYear('sh.created_at', $currentYear)
+                ->whereMonth('sh.created_at', $currentMonth);
+
+            if ($owner_id != 0){
+                $this_month_sale_items = $this_month_sale_items
+                    ->where('sales.owner_id', $owner_id);
+            }
+
+            $this_month_sale_items = $this_month_sale_items
+                ->get();
+
+            $this_month_sale_total = 0;
+            $this_month_offer_total = 0;
+            foreach ($this_month_sale_items as $sale){
+                $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($sale_offers as $sale_offer){
+                    if ($sale->currency == 'TRY'){
+                        $sale_total += $sale_offer->sale_price;
+                        $offer_total += $sale_offer->offer_price;
+                    }else if ($sale->currency == 'USD'){
+                        $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                    }else if ($sale->currency == 'EUR'){
+                        $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }
+                }
+
+                //ek giderler
+                $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($expenses as $expense){
+                    if ($expense->currency == $sale->currency){
+                        $sale_total += $expense->price;
+                    }else{
+                        if ($expense->currency == 'TRY') {
+                            $sc = strtolower($sale->currency);
+                            $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        }else{
+                            if ($sale->currency == 'TRY') {
+                                $ec = strtolower($expense->currency);
+                                $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            }else{
+                                $ec = strtolower($expense->currency);
+                                $sc = strtolower($sale->currency);
+                                if ($sale->{$sc.'_rate'} != 0) {
+                                    $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                }else{
+                                    $expense_price = 0;
+                                }
+                            }
+                        }
+                        $sale_total += $expense_price;
+                    }
+                }
+
+
+            }
+            $this_month_profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+
+
+
+            //Önceki ay Karlılık
+            $previous_month_sale_items = Sale::query()
+                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
+                ->selectRaw('sales.*, statuses.period as period')
+                ->where('sales.active',1)
+                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+                ->whereYear('sh.created_at', $previousYear)
+                ->whereMonth('sh.created_at', $previousMonth);
+
+            if ($owner_id != 0){
+                $previous_month_sale_items = $previous_month_sale_items
+                    ->where('sales.owner_id', $owner_id);
+            }
+
+            $previous_month_sale_items = $previous_month_sale_items
+                ->get();
+
+            $previous_month_sale_total = 0;
+            $previous_month_offer_total = 0;
+            foreach ($previous_month_sale_items as $sale){
+                $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($sale_offers as $sale_offer){
+                    if ($sale->currency == 'TRY'){
+                        $sale_total += $sale_offer->sale_price;
+                        $offer_total += $sale_offer->offer_price;
+                    }else if ($sale->currency == 'USD'){
+                        $sale_total += $sale_offer->sale_price * $sale->usd_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->usd_rate;
+                    }else if ($sale->currency == 'EUR'){
+                        $sale_total += $sale_offer->sale_price * $sale->eur_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }
+                }
+
+                //ek giderler
+                $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+                foreach ($expenses as $expense){
+                    if ($expense->currency == $sale->currency){
+                        $sale_total += $expense->price;
+                    }else{
+                        if ($expense->currency == 'TRY') {
+                            $sc = strtolower($sale->currency);
+                            $expense_price = $expense->price / $sale->{$sc.'_rate'};
+                        }else{
+                            if ($sale->currency == 'TRY') {
+                                $ec = strtolower($expense->currency);
+                                $expense_price = $expense->price * $sale->{$ec.'_rate'};
+                            }else{
+                                $ec = strtolower($expense->currency);
+                                $sc = strtolower($sale->currency);
+                                if ($sale->{$sc.'_rate'} != 0) {
+                                    $expense_price = $expense->price * $sale->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                                }else{
+                                    $expense_price = 0;
+                                }
+                            }
+                        }
+                        $sale_total += $expense_price;
+                    }
+                }
+
+
+            }
+            $previous_month_profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+
+            $profit_rate_icon = '';
+            if ($this_month_profit_rate == $previous_month_profit_rate){
+                $profit_rate_icon = '';
+            }else if ($this_month_profit_rate > $previous_month_profit_rate){
+                $profit_rate_icon = 'up';
+            }else if ($this_month_profit_rate < $previous_month_profit_rate){
+                $profit_rate_icon = 'down';
+            }
+
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['profit_rate' => $profit_rate, 'profit_rate_icon' => $profit_rate_icon]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
         }

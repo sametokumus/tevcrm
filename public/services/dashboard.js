@@ -962,10 +962,19 @@ async function getTotalProfitRate(){
 
     let data = await serviceGetTotalProfitRate(dash_owner);
     let profit_rate = data.profit_rate;
+    let profit_rate_icon = data.profit_rate_icon;
 
     $('#total-profit-box .spinners').remove();
 
     $('#total-profit-box h5').append(profit_rate + '%');
+    if(profit_rate_icon == '-'){
+        profit_rate_icon = '<img src="img/icons/grayline.png">';
+    }else if (profit_rate_icon == 'up'){
+        profit_rate_icon = '<img src="img/icons/greenarrow.png">';
+    }else if (profit_rate_icon == 'down'){
+        profit_rate_icon = '<img src="img/icons/redarrow.png">';
+    }
+    $('#total-profit-box-icon').append('<abbr title="Karlılık oranının bir önceki aya göre durumu" class="initialism">' + profit_rate_icon + '</abbr>');
 
 }
 
