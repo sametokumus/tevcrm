@@ -1007,7 +1007,7 @@ async function getDashboardStats(){
     }else if (turnover_rate < 0){
         turnover_rate_icon = '<img src="img/icons/redarrow.png">';
     }
-    $('#turnover-box').append('<abbr title="Cironun bir önceki aya göre durumu" class="initialism">' + turnover_rate_icon + '</abbr>');
+    $('#turnover-box-icon').append('<abbr title="Cironun bir önceki aya göre durumu" class="initialism">' + turnover_rate_icon + '</abbr>');
 
     $('#total-request-box .spinners').remove();
     $('#total-request-box h5').append(total_request + ' - ' + year_total_request);
