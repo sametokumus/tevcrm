@@ -994,33 +994,33 @@ async function getDashboardStats(){
     $('#total-request-box .spinners').remove();
     $('#total-request-box h5').append(total_request + ' - ' + year_total_request);
     if(total_request_icon == '-'){
-        total_request_icon = '<img src="img/icons/icon-subtract.png">';
+        total_request_icon = '<img src="img/icons/grayline.png">';
     }else if (total_request_icon == 'up'){
-        total_request_icon = '<img src="img/icons/icon-up.png">';
+        total_request_icon = '<img src="img/icons/greenarrow.png">';
     }else if (total_request_icon == 'down'){
-        total_request_icon = '<img src="img/icons/icon-down.png">';
+        total_request_icon = '<img src="img/icons/redarrow.png">';
     }
     $('#total-request-box-icon').append(total_request_icon);
 
     $('#total-sale-box .spinners').remove();
     $('#total-sale-box h5').append(total_sale + ' - ' + year_total_sale);
     if(total_sale_icon == '-'){
-        total_sale_icon = '<img src="img/icons/icon-subtract.png">';
+        total_sale_icon = '<img src="img/icons/grayline.png">';
     }else if (total_sale_icon == 'up'){
-        total_sale_icon = '<img src="img/icons/icon-up.png">';
+        total_sale_icon = '<img src="img/icons/greenarrow.png">';
     }else if (total_sale_icon == 'down'){
-        total_sale_icon = '<img src="img/icons/icon-down.png">';
+        total_sale_icon = '<img src="img/icons/redarrow.png">';
     }
     $('#total-sale-box-icon').append(total_sale_icon);
 
     $('#total-activity-box .spinners').remove();
     $('#total-activity-box h5').append(total_activity + ' - ' + year_total_activity);
     if(total_activity_icon == '-'){
-        total_activity_icon = '<img src="img/icons/icon-subtract.png">';
+        total_activity_icon = '<img src="img/icons/grayline.png">';
     }else if (total_activity_icon == 'up'){
-        total_activity_icon = '<img src="img/icons/icon-up.png">';
+        total_activity_icon = '<img src="img/icons/greenarrow.png">';
     }else if (total_activity_icon == 'down'){
-        total_activity_icon = '<img src="img/icons/icon-down.png">';
+        total_activity_icon = '<img src="img/icons/redarrow.png">';
     }
     $('#total-activity-box-icon').append(total_activity_icon);
 
