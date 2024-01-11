@@ -2970,17 +2970,22 @@ class DashboardController extends Controller
 
 
             //Bu ay Karlılık
-            $this_month_sale_items = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+            $this_month_sale_items = DB::table('sales AS s')
+                ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->join('status_histories AS sh', function ($join) {
+                    $join->on('s.sale_id', '=', 'sh.sale_id')
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                })
+                ->where('s.active', '=', 1)
+                ->where('statuses.period', '=', 'approved')
                 ->whereYear('sh.created_at', $currentYear)
                 ->whereMonth('sh.created_at', $currentMonth);
 
             if ($owner_id != 0){
                 $this_month_sale_items = $this_month_sale_items
-                    ->where('sales.owner_id', $owner_id);
+                    ->where('s.owner_id', $owner_id);
             }
 
             $this_month_sale_items = $this_month_sale_items
@@ -3037,17 +3042,22 @@ class DashboardController extends Controller
 
 
             //Önceki ay Karlılık
-            $previous_month_sale_items = Sale::query()
-                ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
-                ->selectRaw('sales.*, statuses.period as period')
-                ->where('sales.active',1)
-                ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+            $previous_month_sale_items = DB::table('sales AS s')
+                ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+                ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+                ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+                ->join('status_histories AS sh', function ($join) {
+                    $join->on('s.sale_id', '=', 'sh.sale_id')
+                        ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+                })
+                ->where('s.active', '=', 1)
+                ->where('statuses.period', '=', 'approved')
                 ->whereYear('sh.created_at', $previousYear)
                 ->whereMonth('sh.created_at', $previousMonth);
 
             if ($owner_id != 0){
                 $previous_month_sale_items = $previous_month_sale_items
-                    ->where('sales.owner_id', $owner_id);
+                    ->where('s.owner_id', $owner_id);
             }
 
             $previous_month_sale_items = $previous_month_sale_items
