@@ -3809,8 +3809,28 @@ class DashboardController extends Controller
                 ->whereYear('start', $currentYear)
                 ->get()->count();
 
+
+
+
+
+
+            $previous_offer_turning_rate = number_format($previous_total_sale * 100 / $previous_total_request, 2,",","");
+
+
+            //aktivite ikon
+            if ($offer_turning_rate == $previous_offer_turning_rate){
+                $offer_turning_rate_icon = '-';
+            }else if ($offer_turning_rate > $previous_offer_turning_rate){
+                $offer_turning_rate_icon = 'up';
+            }else{
+                $offer_turning_rate_icon = 'down';
+            }
+
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
                 'offer_turning_rate' => $offer_turning_rate,
+                'previous_offer_turning_rate' => $previous_offer_turning_rate,
+                'offer_turning_rate_icon' => $offer_turning_rate_icon,
                 'turnover_rate' => $turnover_rate,
                 'total_request' => $total_request,
                 'previous_total_request' => $previous_total_request,

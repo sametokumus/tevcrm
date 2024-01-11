@@ -974,7 +974,9 @@ async function getDashboardStats(){
     let data = await serviceGetDashboardStats(dash_owner);
     console.log(data)
     let offer_turning_rate = data.offer_turning_rate;
+    let offer_turning_rate_icon = data.offer_turning_rate_icon;
     let turnover_rate = data.turnover_rate;
+    let turnover_rate_icon = '';
     let total_request = data.total_request;
     let year_total_request = data.year_total_request;
     let total_request_icon = data.total_request_icon;
@@ -987,9 +989,25 @@ async function getDashboardStats(){
 
     $('#offer-turning-box .spinners').remove();
     $('#offer-turning-box h5').append(offer_turning_rate + '%');
+    if(offer_turning_rate_icon == '-'){
+        offer_turning_rate_icon = '<img src="img/icons/grayline.png">';
+    }else if (offer_turning_rate_icon == 'up'){
+        offer_turning_rate_icon = '<img src="img/icons/greenarrow.png">';
+    }else if (offer_turning_rate_icon == 'down'){
+        offer_turning_rate_icon = '<img src="img/icons/redarrow.png">';
+    }
+    $('#offer-turning-box-icon').append('<abbr title="Toplam talep sayısının bir önceki aya göre durumu" class="initialism">' + offer_turning_rate_icon + '</abbr>');
 
     $('#turnover-box .spinners').remove();
     $('#turnover-box h5').append(turnover_rate + '%');
+    if(turnover_rate == '0,00'){
+        turnover_rate_icon = '<img src="img/icons/grayline.png">';
+    }else if (turnover_rate > 0){
+        turnover_rate_icon = '<img src="img/icons/greenarrow.png">';
+    }else if (turnover_rate < 0){
+        turnover_rate_icon = '<img src="img/icons/redarrow.png">';
+    }
+    $('#turnover-box').append('<abbr title="Cironun bir önceki aya göre durumu" class="initialism">' + turnover_rate_icon + '</abbr>');
 
     $('#total-request-box .spinners').remove();
     $('#total-request-box h5').append(total_request + ' - ' + year_total_request);
@@ -998,9 +1016,9 @@ async function getDashboardStats(){
     }else if (total_request_icon == 'up'){
         total_request_icon = '<img src="img/icons/greenarrow.png">';
     }else if (total_request_icon == 'down'){
-        total_request_icon = '<abbr title="HyperText Markup Language" class="initialism"><img src="img/icons/redarrow.png"></abbr>';
+        total_request_icon = '<img src="img/icons/redarrow.png">';
     }
-    $('#total-request-box-icon').append(total_request_icon);
+    $('#total-request-box-icon').append('<abbr title="Toplam talep sayısının bir önceki aya göre durumu" class="initialism">' + total_request_icon + '</abbr>');
 
     $('#total-sale-box .spinners').remove();
     $('#total-sale-box h5').append(total_sale + ' - ' + year_total_sale);
@@ -1011,7 +1029,7 @@ async function getDashboardStats(){
     }else if (total_sale_icon == 'down'){
         total_sale_icon = '<img src="img/icons/redarrow.png">';
     }
-    $('#total-sale-box-icon').append(total_sale_icon);
+    $('#total-sale-box-icon').append('<abbr title="Toplam sipariş sayısının bir önceki aya göre durumu" class="initialism">' + total_sale_icon + '</abbr>');
 
     $('#total-activity-box .spinners').remove();
     $('#total-activity-box h5').append(total_activity + ' - ' + year_total_activity);
@@ -1022,7 +1040,7 @@ async function getDashboardStats(){
     }else if (total_activity_icon == 'down'){
         total_activity_icon = '<img src="img/icons/redarrow.png">';
     }
-    $('#total-activity-box-icon').append(total_activity_icon);
+    $('#total-activity-box-icon').append('<abbr title="Toplam aktivite sayısının bir önceki aya göre durumu" class="initialism">' + total_activity_icon + '</abbr>');
 
 }
 
