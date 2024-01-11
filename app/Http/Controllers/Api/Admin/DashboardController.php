@@ -3646,12 +3646,16 @@ class DashboardController extends Controller
             }
 
             //ciro sonuç
+            $turnover_rate_icon = '';
             if ($this_month_price == $previous_month_price){
                 $turnover_rate = '0,00';
+                $turnover_rate_icon = '-';
             }else if ($this_month_price < $previous_month_price){
                 $turnover_rate = '-'.number_format(100 - ($this_month_price * 100 / $previous_month_price), 2,",","");
+                $turnover_rate_icon = 'down';
             }else if ($this_month_price > $previous_month_price){
                 $turnover_rate = '+'.number_format(($this_month_price * 100 / $previous_month_price) - 100, 2,",","");
+                $turnover_rate_icon = 'up';
             }
 
 
@@ -3832,6 +3836,7 @@ class DashboardController extends Controller
                 'previous_offer_turning_rate' => $previous_offer_turning_rate,
                 'offer_turning_rate_icon' => $offer_turning_rate_icon,
                 'turnover_rate' => $turnover_rate,
+                'turnover_rate_icon' => $turnover_rate_icon,
                 'total_request' => $total_request,
                 'previous_total_request' => $previous_total_request,
                 'year_total_request' => $year_total_request,

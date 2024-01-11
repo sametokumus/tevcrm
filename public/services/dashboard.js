@@ -976,7 +976,7 @@ async function getDashboardStats(){
     let offer_turning_rate = data.offer_turning_rate;
     let offer_turning_rate_icon = data.offer_turning_rate_icon;
     let turnover_rate = data.turnover_rate;
-    let turnover_rate_icon = '';
+    let turnover_rate_icon = data.turnover_rate_icon;
     let total_request = data.total_request;
     let year_total_request = data.year_total_request;
     let total_request_icon = data.total_request_icon;
@@ -1000,11 +1000,11 @@ async function getDashboardStats(){
 
     $('#turnover-box .spinners').remove();
     $('#turnover-box h5').append(turnover_rate + '%');
-    if(turnover_rate == '0,00'){
+    if(turnover_rate_icon == '-'){
         turnover_rate_icon = '<img src="img/icons/grayline.png">';
-    }else if (turnover_rate > 0){
+    }else if (turnover_rate_icon == 'up'){
         turnover_rate_icon = '<img src="img/icons/greenarrow.png">';
-    }else if (turnover_rate < 0){
+    }else if (turnover_rate_icon == 'down'){
         turnover_rate_icon = '<img src="img/icons/redarrow.png">';
     }
     $('#turnover-box-icon').append('<abbr title="Cironun bir önceki aya göre durumu" class="initialism">' + turnover_rate_icon + '</abbr>');
