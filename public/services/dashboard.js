@@ -998,7 +998,7 @@ async function getDashboardStats(){
     }else if (total_request_icon == 'up'){
         total_request_icon = '<img src="img/icons/greenarrow.png">';
     }else if (total_request_icon == 'down'){
-        total_request_icon = '<img src="img/icons/redarrow.png" title="this will be displayed as a tooltip">';
+        total_request_icon = '<abbr title="HyperText Markup Language" class="initialism"><img src="img/icons/redarrow.png"></abbr>';
     }
     $('#total-request-box-icon').append(total_request_icon);
 
