@@ -132,10 +132,10 @@ async function initOfferDetail(){
                 rowNo ++;
                 let cheap_fast = '';
                 if (product.cheapest){
-                    cheap_fast += '<span class="badge border border-warning text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
+                    cheap_fast += '<span class="badge border border-warning bg-warning text-dark-600 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
                 }
                 if (product.fastest){
-                    cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
+                    cheap_fast += '<span class="badge border border-lime bg-lime text-dark-600 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
                 }
 
                 let measurement_name = '';
@@ -275,10 +275,10 @@ async function initNewOfferDetail(){
             }else{
                 let cheap_fast = '';
                 if (company.offer_product.cheapest){
-                    cheap_fast += '<span class="badge border border-warning text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
+                    cheap_fast += '<span class="badge border border-warning bg-warning text-dark-600 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Ucuz</span>';
                 }
                 if (company.offer_product.fastest){
-                    cheap_fast += '<span class="badge border border-lime text-lime px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
+                    cheap_fast += '<span class="badge border border-lime bg-lime text-dark-600 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">En Hızlı</span>';
                 }
 
                 item += '   <td>\n' +
