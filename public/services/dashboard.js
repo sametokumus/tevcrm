@@ -996,7 +996,7 @@ async function getDashboardStats(){
     }else if (offer_turning_rate_icon == 'down'){
         offer_turning_rate_icon = '<img src="img/icons/redarrow.png">';
     }
-    $('#offer-turning-box-icon').append('<abbr title="Toplam talep sayısının bir önceki aya göre durumu" class="initialism">' + offer_turning_rate_icon + '</abbr>');
+    $('#offer-turning-box-icon').append('<abbr title="Teklif onaylanma oranının bir önceki aya göre durumu" class="initialism">' + offer_turning_rate_icon + '</abbr>');
 
     $('#turnover-box .spinners').remove();
     $('#turnover-box h5').append(turnover_rate + '%');
