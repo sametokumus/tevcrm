@@ -228,25 +228,25 @@ async function initNewOfferDetail(){
     $('#new-offer-detail tbody > tr').remove();
 
     let head_first = '<th rowspan="2" class="border-bottom-0 bg-dark-100">N#</th>\n' +
-        '             <th rowspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;">Ürün Adı</th>';
+        '             <th rowspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">Ürün Adı</th>';
     let head_second = '';
 
 
     let total_row = '<tr>';
-    total_row += '<td colspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
+    total_row += '<td colspan="2" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);"></td>\n';
     $.each(companies, function (i, company) {
-        head_first += '<th colspan="6" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;">'+ company.company_name +'</th>';
+        head_first += '<th colspan="6" class="border-bottom-0 bg-dark-100" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">'+ company.company_name +'</th>';
         head_second += '<th class="border-bottom-0"></th>\n' +
             '           <th class="border-bottom-0">Ucuz, Hızlı</th>\n' +
             '           <th class="border-bottom-0">Birim</th>\n' +
             '           <th class="border-bottom-0">Toplam</th>\n' +
             '           <th class="border-bottom-0">Miktar</th>\n' +
-            '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: #fff;">T. Süresi</th>';
+            '           <th class="border-bottom-0" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">T. Süresi</th>';
 
 
         let footer_text = '';
         footer_text += 'Tedarik Fiyatı: '+ changeDecimalToPrice(company.supply_price) + ' ' + sale_currency;
-        total_row += '<td colspan="6" class="border-bottom-0 fw-bold" style="border-right-width: 5px; border-right-color: #fff;">'+ footer_text +'</td>\n';
+        total_row += '<td colspan="6" class="border-bottom-0 fw-bold" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">'+ footer_text +'</td>\n';
     });
 
     let head = '<tr>\n' +
@@ -262,7 +262,7 @@ async function initNewOfferDetail(){
         let item = '<tr>';
 
         item += '   <td class="bg-dark-100">' + checkNull(product.sequence) + '</td>\n' +
-        '           <td class="bg-dark-100" style="border-right-width: 5px; border-right-color: #fff;">' + checkNull(product.product_name) + '</td>\n';
+        '           <td class="bg-dark-100" style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">' + checkNull(product.product_name) + '</td>\n';
 
         $.each(product.companies, function (i, company) {
             if (company.offer_product == null){
@@ -271,7 +271,7 @@ async function initNewOfferDetail(){
                     '       <td></td>\n' +
                     '       <td></td>\n' +
                     '       <td></td>\n' +
-                    '       <td style="border-right-width: 5px; border-right-color: #fff;"></td>\n';
+                    '       <td style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);"></td>\n';
             }else{
                 let cheap_fast = '';
                 if (company.offer_product.cheapest){
@@ -290,7 +290,7 @@ async function initNewOfferDetail(){
                     '       <td>' + changeCommasToDecimal(company.offer_product.pcs_price) + checkNull(company.offer_product.currency) + '</td>\n' +
                     '       <td>' + changeCommasToDecimal(company.offer_product.total_price) + checkNull(company.offer_product.currency) + ' (' + changeCommasToDecimal(company.offer_product.converted_price) + checkNull(company.offer_product.converted_currency) + ')</td>\n' +
                     '       <td>RQ:' + checkNull(product.request_quantity) + ' - OQ:' + checkNull(company.offer_product.quantity) + '</td>\n' +
-                    '       <td style="border-right-width: 5px; border-right-color: #fff;">' + checkNull(company.offer_product.lead_time) + '</td>\n';
+                    '       <td style="border-right-width: 5px; border-right-color: rgba(0, 0, 0, 0.6);">' + checkNull(company.offer_product.lead_time) + '</td>\n';
 
             }
         });
