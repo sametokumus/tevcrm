@@ -286,7 +286,7 @@ async function initSaleSuppliers(sale_id){
 
             let po_pdf = '';
             if (offer.po_url != null){
-                po_pdf = '<a href="' + offer.po_url + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill text-danger"></i></a>';
+                po_pdf = '<a href="' + offer.po_url + '" target="_blank" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill text-danger"></i></a>';
             }
 
             let item = '<tr>\n' +
