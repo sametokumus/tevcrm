@@ -295,7 +295,7 @@ async function initSaleSuppliers(sale_id){
                 '           <td><small>' + changeCommasToDecimal(offer.total_price) + ' ' + offer.currency + '+KDV</small></td>\n' +
                 '           <td>\n' +
                 '               <a href="/customer-dashboard/' + offer.supplier_id + '" class="text-decoration-none text-dark"><i class="bi bi-search"></i></a>\n' +
-                '               <a href="/purchasing-order-print/' + sale_id + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill"></i></a>\n' +
+                '               <a href="/purchasing-order-print/' + sale_id + '" class="text-decoration-none text-dark"><i class="bi bi-file-pdf-fill text-danger"></i></a>\n' +
                 '           </td>\n' +
                 '       </tr>';
 
