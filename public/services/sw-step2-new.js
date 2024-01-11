@@ -64,9 +64,9 @@ async function checkCurrencyLog(){
         let sale = data.sale;
         sale_currency = sale.currency;
         document.getElementById('update_currency_rate_currency').value = sale_currency;
-        document.getElementById('update_currency_rate_usd').value = sale.usd_rate;
-        document.getElementById('update_currency_rate_eur').value = sale.eur_rate;
-        document.getElementById('update_currency_rate_gbp').value = sale.gbp_rate;
+        document.getElementById('update_currency_rate_usd').value = changeCommasToDecimal(sale.usd_rate);
+        document.getElementById('update_currency_rate_eur').value = changeCommasToDecimal(sale.eur_rate);
+        document.getElementById('update_currency_rate_gbp').value = changeCommasToDecimal(sale.gbp_rate);
 
         await initNewOfferDetail();
         await initOfferDetail();
