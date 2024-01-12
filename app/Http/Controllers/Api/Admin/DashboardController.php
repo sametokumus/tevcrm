@@ -3517,7 +3517,7 @@ class DashboardController extends Controller
                     ->whereMonth('sh.created_at', $currentMonth['month']);
                 if ($owner_id != 0){
                     $total_sale = $total_sale
-                        ->where('sales.owner_id', $owner_id);
+                        ->where('s.owner_id', $owner_id);
                 }
                 $total_sale = $total_sale
                     ->get()->count();
@@ -3564,7 +3564,7 @@ class DashboardController extends Controller
                     ->whereMonth('sh.created_at', $currentMonth['month']);
                 if ($owner_id != 0){
                     $total_sale = $total_sale
-                        ->where('sales.owner_id', $owner_id);
+                        ->where('s.owner_id', $owner_id);
                 }
                 $total_sale = $total_sale
                     ->get()->count();
@@ -3586,7 +3586,7 @@ class DashboardController extends Controller
                 'previous_turning_rates' => $previous_turning_rates
             ]]);
         } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'a' => $queryException->getMessage()]);
         }
     }
 
