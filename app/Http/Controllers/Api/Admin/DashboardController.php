@@ -3916,7 +3916,7 @@ class DashboardController extends Controller
                 ->whereMonth('sh.created_at', $currentMonth);
             if ($owner_id != 0){
                 $total_sale = $total_sale
-                    ->where('sales.owner_id', $owner_id);
+                    ->where('s.owner_id', $owner_id);
             }
             $total_sale = $total_sale
                 ->get()->count();
@@ -3937,7 +3937,7 @@ class DashboardController extends Controller
                 ->whereMonth('sh.created_at', $previousMonth);
             if ($owner_id != 0){
                 $previous_total_sale = $previous_total_sale
-                    ->where('sales.owner_id', $owner_id);
+                    ->where('s.owner_id', $owner_id);
             }
             $previous_total_sale = $previous_total_sale
                 ->get()->count();
@@ -3966,7 +3966,7 @@ class DashboardController extends Controller
                 ->whereYear('sh.created_at', $currentYear);
             if ($owner_id != 0){
                 $year_total_sale = $year_total_sale
-                    ->where('sales.owner_id', $owner_id);
+                    ->where('s.owner_id', $owner_id);
             }
             $year_total_sale = $year_total_sale
                 ->get()->count();
