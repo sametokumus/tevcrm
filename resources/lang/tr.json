@@ -44,5 +44,6 @@
     "Day" : "Gün",
     "Insurance" : "Sigorta",
     "Request Code" : "Talep Kodu",
-    "Authorized" : "Yetkili"
+    "Authorized" : "Yetkili",
+    "CustomerPO" : "Müşteri PO No"
 }

@@ -87,6 +87,19 @@ class PdfController extends Controller
         $pdf->SetXY($x, $actual_height + 32);
         $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $contact->short_code.'-'.$pdf_key.'-'.$sale_id), '0', '0', '');
     }
+    private function addCustomerPO($pdf, $customer_po, $actual_height, $pageWidth){
+        if ($customer_po != null) {
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $x = $pageWidth - $pdf->GetStringWidth(__('CustomerPO') . ': ' . $customer_po) - 10;
+            $pdf->SetXY($x, $actual_height + 40);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('CustomerPO') . ': '), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $pageWidth - $pdf->GetStringWidth($customer_po) - 10;
+            $pdf->SetXY($x, $actual_height + 40);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $customer_po), '0', '0', '');
+        }
+    }
     private function addOwnerInfo($pdf, $contact){
         $x = 10;
         $y = 15;
@@ -864,6 +877,9 @@ class PdfController extends Controller
 
             //TARİH - KOD
             $this->addDateAndCode($pdf, $document_date, $contact, $actual_height, $sale->id, $pageWidth, 'OC');
+
+            //MÜŞTERİ PO NO
+            $this->addCustomerPO($pdf, $sale->customer_po, $actual_height, $pageWidth);
 
             //COMPANY INFO
             $y = $this->addOwnerInfo($pdf, $contact);
