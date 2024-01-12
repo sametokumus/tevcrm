@@ -2955,7 +2955,11 @@ class DashboardController extends Controller
 
 
             }
-            $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+            if ($offer_total == 0 || $sale_total == 0){
+                $profit_rate = 0;
+            }else {
+                $profit_rate = 100 * ($offer_total - $sale_total) / $sale_total;
+            }
             $profit_rate = number_format($profit_rate, 2,",","");
 
 
@@ -3714,7 +3718,12 @@ class DashboardController extends Controller
             }
             $total_sale = $total_sale
                 ->get()->count();
-            $offer_turning_rate = number_format($total_sale * 100 / $total_request, 2,",","");
+            if ($total_sale == 0 || $total_request == 0){
+                $offer_turning_rate = 0;
+            }else {
+                $offer_turning_rate = $total_sale * 100 / $total_request;
+            }
+            $offer_turning_rate = number_format($offer_turning_rate, 2,",","");
 
             //ciro oranı
             $currentYear = date('Y');
