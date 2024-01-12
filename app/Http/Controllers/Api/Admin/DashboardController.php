@@ -3718,12 +3718,12 @@ class DashboardController extends Controller
             }
             $total_sale = $total_sale
                 ->get()->count();
+
             if ($total_sale == 0 || $total_request == 0){
                 $offer_turning_rate = 0;
             }else {
                 $offer_turning_rate = $total_sale * 100 / $total_request;
             }
-            $offer_turning_rate = number_format($offer_turning_rate, 2,",","");
 
             //ciro oranı
             $currentYear = date('Y');
@@ -4007,10 +4007,14 @@ class DashboardController extends Controller
 
 
 
-            $previous_offer_turning_rate = number_format($previous_total_sale * 100 / $previous_total_request, 2,",","");
 
+            if ($total_sale == 0 || $total_request == 0){
+                $previous_offer_turning_rate = 0;
+            }else {
+                $previous_offer_turning_rate = $previous_total_sale * 100 / $previous_total_request;
+            }
 
-            //aktivite ikon
+            //teklif onaylanma ikon
             if ($offer_turning_rate == $previous_offer_turning_rate){
                 $offer_turning_rate_icon = '-';
             }else if ($offer_turning_rate > $previous_offer_turning_rate){
@@ -4018,6 +4022,10 @@ class DashboardController extends Controller
             }else{
                 $offer_turning_rate_icon = 'down';
             }
+
+            $offer_turning_rate = number_format($offer_turning_rate, 2,",","");
+            $previous_offer_turning_rate = number_format($previous_offer_turning_rate, 2,",","");
+
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => [
