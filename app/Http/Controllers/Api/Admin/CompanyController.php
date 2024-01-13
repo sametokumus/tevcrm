@@ -122,6 +122,12 @@ class CompanyController extends Controller
                 ]);
             }
 
+            Address::query()->insert([
+                'name' => 'Merkez',
+                'company_id' => $company_id,
+                'address' => $request->address,
+            ]);
+
             return response(['message' => __('Firma ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
