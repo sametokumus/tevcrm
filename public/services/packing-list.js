@@ -52,8 +52,8 @@ async function initOfferDetail(){
             let btn = '';
             let kalan = 0;
             if (offer.offer_quantity != offer.packing_count){
-                btn = '<button type="button" onclick="addPackingListTableProduct(this, ' + offer.id + ');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Listeye Ekle</span></button>';
                 kalan = offer.offer_quantity - offer.packing_count;
+                btn = '<button type="button" onclick="addPackingListTableProduct(this, ' + offer.id + ', '+ kalan +');" class="btn btn-sm btn-theme"><span class="fe fe-edit"> Listeye Ekle</span></button>';
             }
                 let item = '<tr id="productRow' + offer.id + '">\n' +
                     '           <td>' + offer.sequence + '</td>\n' +
@@ -124,7 +124,7 @@ async function addProductCountToTable(){
     $("#add_product_count_form").trigger('reset');
 }
 
-async function addPackingListTableProduct(el, id){
+async function addPackingListTableProduct(el, id, kalan){
     let tablePackingList = $("#packing-list-detail").DataTable();
     let tablePackingableList = $("#packingable-list-detail").DataTable();
     $(el).attr('onclick','removePackingListTableProduct(this,'+ id +');');
@@ -141,6 +141,7 @@ async function addPackingListTableProduct(el, id){
     $("#addProductCountModal").modal('show');
     $('.modal-backdrop').css('background-color', 'transparent');
     document.getElementById('add_product_id').value = id;
+    document.getElementById('add_product_count').value = kalan;
 }
 
 async function removePackingListTableProduct(el, id){
