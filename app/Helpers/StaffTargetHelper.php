@@ -92,7 +92,7 @@ class StaffTargetHelper
 
         $status = array();
         $status['price'] = number_format($target_total_price, 2, ".", "");
-        if ($target_total_price != 0) {
+        if ($target_total_price != 0 && $target->target != 0) {
             $rate = 100 * $target_total_price / $target->target;
         }else{
             $rate = 0;
@@ -198,7 +198,7 @@ class StaffTargetHelper
 
         $status = array();
         $status['price'] = number_format(($total_sale_price - $total_offer_price), 2, ".", "");
-        if ($total_sale_price != 0) {
+        if ($total_sale_price != 0 && $total_offer_price != 0 && $target->target) {
             $rate = 100 * ($total_sale_price - $total_offer_price) / $target->target;
         }else{
             $rate = 0;
@@ -315,12 +315,12 @@ class StaffTargetHelper
 
         $status = array();
         $status['price'] = number_format(($target_total_price - $target_offer_price), 2, ".", "");
-        if ($target_total_price != 0) {
+        if ($target_total_price != 0 && $target_offer_price != 0) {
             $sale_rate = 100 * ($target_total_price - $target_offer_price) / $target_total_price;
         }else{
             $sale_rate = 0;
         }
-        if ($target_total_price != 0) {
+        if ($sale_rate != 0 && $target->target != 0) {
             $rate = 100 * $sale_rate / $target->target;
         }else{
             $rate = 0;
