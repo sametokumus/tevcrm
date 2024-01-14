@@ -203,13 +203,13 @@ $extra_js='
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">DURUM GÜNCELLE</h5>
+                <h5 class="modal-title">ADRES EKLE</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="post" action="#" id="add_packing_address_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Durum :</label>
+                        <label class="col-md-3 form-label">Adres :</label>
                         <div class="col-md-9">
                             <input type="hidden" class="form-control" id="add_packing_address_packing_list_id" required>
                             <select name="add_packing_address_addresses" id="add_packing_address_addresses" class="form-control form-control-md" required>
@@ -230,13 +230,13 @@ $extra_js='
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">DURUM GÜNCELLE</h5>
+                <h5 class="modal-title">ADRES GÜNCELLE</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="post" action="#" id="update_packing_address_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Durum :</label>
+                        <label class="col-md-3 form-label">Adres :</label>
                         <div class="col-md-9">
                             <input type="hidden" class="form-control" id="update_packing_address_packing_list_id" required>
                             <select name="update_packing_address_addresses" id="update_packing_address_addresses" class="form-control form-control-md" required>
