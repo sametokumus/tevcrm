@@ -34,8 +34,8 @@
 
 async function initStaffs(){
     let data = await serviceGetAllStaffStatistics();
+    console.log(data)
     let staffs = data.staffs;
-    console.log(staffs)
 
     $('#content #staffs *').remove();
 
