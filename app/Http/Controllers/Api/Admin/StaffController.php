@@ -437,7 +437,7 @@ class StaffController extends Controller
         } catch (QueryException $queryException) {
             return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001', 'message' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
-            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getLine()]);
         }
     }
 
