@@ -858,6 +858,52 @@ class SaleController extends Controller
         }
     }
 
+    public function addPackingDeliveryAddress(Request $request)
+    {
+        try {
+            $request->validate([
+                'packing_list_id' => 'required',
+                'address_id' => 'required'
+            ]);
+            PackingList::query()->where('packing_list_id', $request->packing_list_id)->update([
+                'address_id' => $request->address_id
+            ]);
+
+
+
+            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updatePackingDeliveryAddress(Request $request)
+    {
+        try {
+            $request->validate([
+                'packing_list_id' => 'required',
+                'address_id' => 'required'
+            ]);
+            PackingList::query()->where('packing_list_id', $request->packing_list_id)->update([
+                'address_id' => $request->address_id
+            ]);
+
+
+
+            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
     public function addCancelSaleNote(Request $request)
     {
         try {
@@ -2173,6 +2219,7 @@ class SaleController extends Controller
             foreach ($packing_lists as $packing_list) {
                 $packing_list['count'] = PackingListProduct::query()->where('packing_list_id', $packing_list->packing_list_id)->count();
                 $packing_list['status'] = PackingStatus::query()->where('id', $packing_list->packing_status_id)->first();
+                $packing_list['company_id'] = Sale::query()->where('sale_id', $sale_id)->first()->customer_id;
             }
 
 

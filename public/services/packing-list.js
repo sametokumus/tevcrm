@@ -19,6 +19,14 @@
             e.preventDefault();
             updateStatus();
         });
+        $('#add_packing_address_form').submit(function (e){
+            e.preventDefault();
+            addPackingDeliveryAddress();
+        });
+        $('#update_packing_address_form').submit(function (e){
+            e.preventDefault();
+            updatePackingDeliveryAddress();
+        });
 	});
 
 	$(window).load(async function() {
@@ -214,11 +222,11 @@ async function initPackingLists(){
         let address_status = '';
         let address_btn = '';
         if (packing_list.address_id == null){
-            address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+            address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.customer_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
             address_btn = '';
         }else{
             address_status = '';
-            address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.address_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+            address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.customer_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
         }
 
         let item = '<tr>\n' +
@@ -292,4 +300,45 @@ async function initStatusModal(packing_list_id, packing_status_id){
         $('#update_packing_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +'</option>');
     });
     document.getElementById('update_packing_list_id').value = packing_list_id;
+}
+
+
+function openAddPackingDeliveryAddressModal(packing_list_id, customer_id){
+    $('#addPackingAddressModal').modal('show');
+    document.getElementById('add_packing_address_packing_list_id').value = packing_list_id;
+    getAddressesAddSelectId('add_packing_address_addresses', customer_id);
+}
+async function addPackingDeliveryAddress(){
+    let address_id = document.getElementById('add_packing_address_addresses').value;
+    let packing_list_id = document.getElementById('add_packing_address_packing_list_id').value;
+    let formData = JSON.stringify({
+        "packing_list_id": packing_list_id,
+        "address_id": address_id
+    });
+    let data = await servicePostAddPackingDeliveryAddress(formData);
+    if(data.status == "success"){
+        $("#add_packing_address_form").trigger("reset");
+        $('#addPackingAddressModal').modal('hide');
+        initPackingLists();
+    }
+}
+
+function openUpdatePackingDeliveryAddressModal(packing_list_id, customer_id){
+    $('#addPackingAddressModal').modal('show');
+    document.getElementById('update_packing_address_packing_list_id').value = packing_list_id;
+    getAddressesAddSelectId('update_packing_address_addresses', customer_id);
+}
+async function updatePackingDeliveryAddress(){
+    let address_id = document.getElementById('update_packing_address_addresses').value;
+    let packing_list_id = document.getElementById('update_packing_address_packing_list_id').value;
+    let formData = JSON.stringify({
+        "packing_list_id": packing_list_id,
+        "address_id": address_id
+    });
+    let data = await servicePostUpdatePackingDeliveryAddress(formData);
+    if(data.status == "success"){
+        $("#update_packing_address_form").trigger("reset");
+        $('#updatePackingAddressModal').modal('hide');
+        initPackingLists();
+    }
 }

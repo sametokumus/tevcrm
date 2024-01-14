@@ -535,6 +535,16 @@ async function getCompaniesAddSelectId(selectId){
     });
 }
 
+async function getAddressesAddSelectId(selectId, company_id){
+    let data = await serviceGetAddressesByCompanyId(company_id);
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Adres Seçiniz</option>');
+    $.each(data.addresses, function(i, address){
+        let optionRow = '<option value="'+address.id+'">'+address.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getSuppliersAddSelectId(selectId){
     let data = await serviceGetSuppliers();
     $('#'+selectId+' option').remove();
@@ -1772,6 +1782,28 @@ async function servicePostUpdateSaleStatus(formData) {
 
 async function servicePostUpdatePackingListStatus(formData) {
     const data = await fetchDataPost('/admin/sale/updatePackingListStatus', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostAddPackingDeliveryAddress(formData) {
+    const data = await fetchDataPost('/admin/sale/addPackingDeliveryAddress', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdatePackingDeliveryAddress(formData) {
+    const data = await fetchDataPost('/admin/sale/updatePackingDeliveryAddress', formData, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return data;
