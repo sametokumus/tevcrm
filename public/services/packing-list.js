@@ -211,13 +211,25 @@ async function initPackingLists(){
         let status_class = "border-theme text-theme";
         let status = '<span class="badge border '+ status_class +' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center" onclick="openStatusModal(\''+ packing_list.packing_list_id +'\', \''+ packing_list.packing_status_id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ packing_list.status.name +'</span>';
 
+        let address_status = '';
+        let address_btn = '';
+        if (packing_list.address_id == null){
+            address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+            address_btn = '';
+        }else{
+            address_status = '';
+            address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.address_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+        }
+
         let item = '<tr>\n' +
             '           <td>' + packing_list.packing_list_id + '</td>\n' +
             '           <td>' + packing_list.count + '</td>\n' +
             '           <td>' + status + '</td>\n' +
+            '           <td>' + address_status + '</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <a href="packing-list-print/'+ packing_list.packing_list_id +'" class="btn btn-sm btn-indigo">Packing List PDF</a>\n' +
+            '                      '+ address_btn +'\n' +
             '                      <button onclick="deletePackingList(\''+ packing_list.packing_list_id +'\')" class="btn btn-sm btn-danger">Sil</button>\n' +
             '                  </div>\n' +
             '              </td>\n' +

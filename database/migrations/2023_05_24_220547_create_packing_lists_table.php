@@ -17,6 +17,7 @@ class CreatePackingListsTable extends Migration
             $table->id();
             $table->string('packing_list_id');
             $table->string('sale_id');
+            $table->bigInteger('address_id')->nullable();
             $table->bigInteger('packing_status_id')->default(1);
             $table->text('note')->nullable();
             $table->tinyInteger('waybill')->default(0);

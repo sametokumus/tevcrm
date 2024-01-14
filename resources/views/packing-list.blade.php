@@ -31,6 +31,7 @@ $extra_js='
                                     <th class="border-bottom-0">ID</th>
                                     <th class="border-bottom-0">Ürün Kalemi</th>
                                     <th class="border-bottom-0">Durum</th>
+                                    <th class="border-bottom-0">Sevkiyat Adresi</th>
                                     <th class="border-bottom-0"></th>
                                 </tr>
                                 </thead>
