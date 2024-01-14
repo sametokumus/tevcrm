@@ -8,6 +8,7 @@ use App\Helpers\StatusHistoryHelper;
 use App\Helpers\StatusNotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Mail\StatusChangeMail;
+use App\Models\Address;
 use App\Models\Admin;
 use App\Models\AdminStatusRole;
 use App\Models\CancelNote;
@@ -2220,6 +2221,9 @@ class SaleController extends Controller
                 $packing_list['count'] = PackingListProduct::query()->where('packing_list_id', $packing_list->packing_list_id)->count();
                 $packing_list['status'] = PackingStatus::query()->where('id', $packing_list->packing_status_id)->first();
                 $packing_list['company_id'] = Sale::query()->where('sale_id', $sale_id)->first()->customer_id;
+                if($packing_list->address_id != null){
+                    $packing_list['address'] = Address::query()->where('id', $packing_list->address_id)->first()->address;
+                }
             }
 
 

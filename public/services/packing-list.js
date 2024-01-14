@@ -225,7 +225,7 @@ async function initPackingLists(){
             address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.company_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
             address_btn = '';
         }else{
-            address_status = '';
+            address_status = packing_list.address;
             address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.company_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
         }
 
