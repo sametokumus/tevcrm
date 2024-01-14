@@ -537,7 +537,6 @@ async function getCompaniesAddSelectId(selectId){
 
 async function getAddressesAddSelectId(selectId, company_id){
     let data = await serviceGetAddressesByCompanyId(company_id);
-    console.log(data)
     $('#'+selectId+' option').remove();
     $('#'+selectId).append('<option value="0">Adres Seçiniz</option>');
     $.each(data.addresses, function(i, address){

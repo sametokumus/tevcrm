@@ -222,11 +222,11 @@ async function initPackingLists(){
         let address_status = '';
         let address_btn = '';
         if (packing_list.address_id == null){
-            address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.customer_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+            address_status = '<button onclick="openAddPackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.company_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
             address_btn = '';
         }else{
             address_status = '';
-            address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.customer_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
+            address_btn = '<button onclick="openUpdatePackingDeliveryAddressModal(\''+ packing_list.packing_list_id +'\', '+ packing_list.company_id +')" class="btn btn-sm btn-theme">Sevkiyat Adresi Seç</button>';
         }
 
         let item = '<tr>\n' +
