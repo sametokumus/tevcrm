@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Contact;
@@ -218,6 +219,115 @@ class PdfController extends Controller
         $pdf->SetXY($x, $y);
 
         $address = $this->textConvert($company->address);
+        $address_width = $pdf->GetStringWidth($address);
+        $lines_needed = ceil($address_width / 100);
+        $line_height = 5;
+        $row_height = $lines_needed * $line_height;
+        $pdf->MultiCell(100, $line_height, $address, 0, 'L');
+
+        if ($employee == null) {
+
+            $y += $row_height + 3;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Phone') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->phone, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Email') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $company->email, '0', '0', '');
+
+        }else{
+
+            $y += $row_height + 3;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Authorized') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Authorized') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $this->textConvert($employee->name), '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Phone') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Phone') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->phone, '0', '0', '');
+
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, __('Email') . ': ', '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+            $x = $x + 2 + $pdf->GetStringWidth(__('Email') . ': ');
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, $employee->email, '0', '0', '');
+
+        }
+
+        return $y + 5;
+    }
+    private function addCompanyInfoPackingList($pdf, $lang, $company, $employee, $y, $packing_list){
+        $y += 10;
+        $x = 10;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Customer').': '), '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+        if ($lang == 'tr') {
+            $x = $x - 3 + $pdf->GetStringWidth(__('Customer') . ': ');
+        }else{
+            $x = $x+2 + $pdf->GetStringWidth(__('Customer') . ': ');
+        }
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $company->name), '0', '0', '');
+
+        $y += 5;
+        $x = 10;
+
+        $pdf->SetFont('ChakraPetch-Bold', '', 10);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Address').': '), '0', '0', '');
+
+        $pdf->SetFont('ChakraPetch-Regular', '', 10);
+
+        $y += 2;
+        $x = 10;
+        $pdf->SetXY($x, $y);
+
+        $address = $this->textConvert($company->address);
+        if ($packing_list->address_id != null){
+            $address_data = Address::query()->where('id', $packing_list->address_id)->first();
+            $address = $this->textConvert($address_data->address);
+        }
         $address_width = $pdf->GetStringWidth($address);
         $lines_needed = ceil($address_width / 100);
         $line_height = 5;
@@ -3522,7 +3632,7 @@ class PdfController extends Controller
             $y = $this->addPdfTitle($pdf, $this->textConvert(__('Packing List')), $y);
 
             //CUSTOMER INFO
-            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
+            $y = $this->addCompanyInfoPackingList($pdf, $lang, $company, $employee, $y, $packing_list);
 
 
 
