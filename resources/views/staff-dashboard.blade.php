@@ -9,7 +9,7 @@ $extra_js='
 ?>
 
 <div id="content" class="app-content">
-    <div class="">
+    <div class="row">
 
         <div class="card bg-light-200 border-dark mb-3">
 
@@ -35,452 +35,516 @@ $extra_js='
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body p-0">
+    <div class="row">
+        <div class="card">
+            <div class="card-body p-0">
 
-            <div class="profile">
+                <div class="profile">
 
-                <div class="profile-container">
+                    <div class="profile-container">
 
-                    <div class="profile-sidebar">
-                        <div class="desktop-sticky-top">
-                            <div class="profile-img">
-                                <img id="staff-image" src="" alt="">
-                            </div>
+                        <div class="profile-sidebar">
+                            <div class="desktop-sticky-top">
+                                <div class="profile-img">
+                                    <img id="staff-image" src="" alt="">
+                                </div>
 
-                            <h4 id="staff-name"></h4>
-                            <div class="mb-1" id="staff-phone">
+                                <h4 id="staff-name"></h4>
+                                <div class="mb-1" id="staff-phone">
 
-                            </div>
-                            <div class="mb-3" id="staff-email">
+                                </div>
+                                <div class="mb-3" id="staff-email">
 
-                            </div>
-                            <hr class="mt-4 mb-4">
+                                </div>
+                                <hr class="mt-4 mb-4">
 
-                            <div class="fw-bold mb-1 fs-16px">Firmalar</div>
-                            <div class="fw-bold mb-3 fs-16px">
-                                <form id="search-company-form">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="search-company-text" placeholder="Firma Arama..." oninput="filterCompanies()";>
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="staff-companies">
+                                <div class="fw-bold mb-1 fs-16px">Firmalar</div>
+                                <div class="fw-bold mb-3 fs-16px">
+                                    <form id="search-company-form">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="search-company-text" placeholder="Firma Arama..." oninput="filterCompanies()";>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="staff-companies">
 
+                                </div>
                             </div>
                         </div>
+
+
+                        <div class="profile-content">
+                            <ul class="profile-tab nav nav-tabs nav-tabs-v2" role="tablist">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Toplam Müşteri</div>
+                                        <div class="nav-value" id="stat-1"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Eklenen Müşteri</div>
+                                        <div class="nav-value" id="stat-2"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Yapılan Görüşme</div>
+                                        <div class="nav-value" id="stat-3"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Toplam Teklif</div>
+                                        <div class="nav-value" id="stat-4"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Toplam Sipariş</div>
+                                        <div class="nav-value" id="stat-5"></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" style="pointer-events:none;">
+                                        <div class="nav-field">Sıralama ve Puan</div>
+                                        <div class="nav-value" id="stat-6"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="profile-content-container">
+                                <div class="row gx-4">
+                                    <div class="col-xl-8">
+                                        <div class="p-0">
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">SATIŞ HEDEFLERİ</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+                                                            <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="border-bottom-0" data-priority="1">N#</th>
+                                                                    <th class="border-bottom-0">Tür</th>
+                                                                    <th class="border-bottom-0">Hedef</th>
+                                                                    <th class="border-bottom-0">Ay</th>
+                                                                    <th class="border-bottom-0">Yıl</th>
+                                                                    <th class="border-bottom-0">Durum</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row sparkboxes mt-0 mb-4">
+
+                                                <div class="col-xl-3 col-lg-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">BU AY ONAYLANAN</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+                                                            <div class="row align-items-center mb-2" id="monthly-approved-box">
+                                                                <div class="col-12">
+                                                                    <h4 class="mb-0"></h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-dark text-opacity-80 text-truncate" id="monthly-approved-text">
+
+                                                            </div>
+
+                                                            <div class="box box1">
+                                                                <div id="spark1"></div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-3 col-lg-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">BU AY TAMAMLANAN</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+                                                            <div class="row align-items-center mb-2" id="monthly-completed-box">
+                                                                <div class="col-12">
+                                                                    <h4 class="mb-0"></h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-dark text-opacity-80 text-truncate" id="monthly-completed-text">
+
+                                                            </div>
+
+                                                            <div class="box box2">
+                                                                <div id="spark2"></div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-3 col-lg-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">BU AY POTANSİYEL</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+                                                            <div class="row align-items-center mb-2" id="monthly-continue-box">
+                                                                <div class="col-12">
+                                                                    <h4 class="mb-0"></h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-dark text-opacity-80 text-truncate" id="monthly-continue-text">
+
+                                                            </div>
+
+                                                            <div class="box box3">
+                                                                <div id="spark3"></div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-3 col-lg-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">BU AY İPTAL EDİLEN</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+                                                            <div class="row align-items-center mb-2" id="monthly-cancelled-box">
+                                                                <div class="col-12">
+                                                                    <h4 class="mb-0"></h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-dark text-opacity-80 text-truncate" id="monthly-cancelled-text">
+
+                                                            </div>
+
+                                                            <div class="box box4">
+                                                                <div id="spark4"></div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-xl-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">ONAYLANAN SATIŞLAR</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+
+                                                            <div class="mb-3">
+                                                                <div id="chart-approved-monthly"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">TAMAMLANAN SATIŞLAR</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+
+                                                            <div class="mb-3">
+                                                                <div id="chart-completed-monthly"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">POTANSİYEL SATIŞLAR</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+
+                                                            <div class="mb-3">
+                                                                <div id="chart-potential-sales"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-xl-6">
+
+                                                    <div class="card mb-3">
+
+                                                        <div class="card-body">
+
+                                                            <div class="d-flex fw-bold small mb-3">
+                                                                <span class="flex-grow-1">İPTAL EDİLEN SATIŞLAR</span>
+                                                                <a href="#" data-toggle="card-expand"
+                                                                   class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+                                                            </div>
+
+
+                                                            <div class="mb-3">
+                                                                <div id="chart-cancelled-potential-sales"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <div class="desktop-sticky-top">
+                                            <div class="card mb-3">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item fw-bold px-3 d-flex">
+                                                        <span class="flex-fill">Bildirimler</span>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group list-group-flush" id="user-notifies">
+
+                                                </div>
+                                                <div class="list-group list-group-flush">
+                                                    <a href="#" class="d-none list-group-item list-group-action text-center">
+                                                        Show more
+                                                    </a>
+                                                </div>
+                                                <div class="card-arrow">
+                                                    <div class="card-arrow-top-left"></div>
+                                                    <div class="card-arrow-top-right"></div>
+                                                    <div class="card-arrow-bottom-left"></div>
+                                                    <div class="card-arrow-bottom-right"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
+                </div>
 
-                    <div class="profile-content">
-                        <ul class="profile-tab nav nav-tabs nav-tabs-v2" role="tablist">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Toplam Müşteri</div>
-                                    <div class="nav-value" id="stat-1"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Eklenen Müşteri</div>
-                                    <div class="nav-value" id="stat-2"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Yapılan Görüşme</div>
-                                    <div class="nav-value" id="stat-3"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Toplam Teklif</div>
-                                    <div class="nav-value" id="stat-4"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Toplam Sipariş</div>
-                                    <div class="nav-value" id="stat-5"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" style="pointer-events:none;">
-                                    <div class="nav-field">Sıralama ve Puan</div>
-                                    <div class="nav-value" id="stat-6"></div>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="profile-content-container">
-                            <div class="row gx-4">
-                                <div class="col-xl-8">
-                                    <div class="p-0">
+            </div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="card">
+            <div class="card-body p-0">
 
-                                        <div class="row">
-                                            <div class="col-md-12">
+                <div id="staffs" class="row">
 
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">SATIŞ HEDEFLERİ</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-                                                        <table id="targets-datatable" class="table table-bordered nowrap key-buttons border-bottom">
-                                                            <thead>
-                                                            <tr>
-                                                                <th class="border-bottom-0" data-priority="1">N#</th>
-                                                                <th class="border-bottom-0">Tür</th>
-                                                                <th class="border-bottom-0">Hedef</th>
-                                                                <th class="border-bottom-0">Ay</th>
-                                                                <th class="border-bottom-0">Yıl</th>
-                                                                <th class="border-bottom-0">Durum</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                            </tbody>
-                                                        </table>
-
-
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="m-1 bg-inverse bg-opacity-15">
+                                <div class="position-relative overflow-hidden" style="height: 165px">
+                                    <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />
+                                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">
+                                        <div class="my-2">
+                                            <img src="img/user/user-5.jpg" alt="" width="80" class="rounded-circle" />
                                         </div>
-
-                                        <div class="row sparkboxes mt-0 mb-4">
-
-                                            <div class="col-xl-3 col-lg-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">BU AY ONAYLANAN</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-                                                        <div class="row align-items-center mb-2" id="monthly-approved-box">
-                                                            <div class="col-12">
-                                                                <h4 class="mb-0"></h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-approved-text">
-
-                                                        </div>
-
-                                                        <div class="box box1">
-                                                            <div id="spark1"></div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-3 col-lg-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">BU AY TAMAMLANAN</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-                                                        <div class="row align-items-center mb-2" id="monthly-completed-box">
-                                                            <div class="col-12">
-                                                                <h4 class="mb-0"></h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-completed-text">
-
-                                                        </div>
-
-                                                        <div class="box box2">
-                                                            <div id="spark2"></div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-3 col-lg-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">BU AY POTANSİYEL</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-                                                        <div class="row align-items-center mb-2" id="monthly-continue-box">
-                                                            <div class="col-12">
-                                                                <h4 class="mb-0"></h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-continue-text">
-
-                                                        </div>
-
-                                                        <div class="box box3">
-                                                            <div id="spark3"></div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-3 col-lg-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">BU AY İPTAL EDİLEN</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-                                                        <div class="row align-items-center mb-2" id="monthly-cancelled-box">
-                                                            <div class="col-12">
-                                                                <h4 class="mb-0"></h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-dark text-opacity-80 text-truncate" id="monthly-cancelled-text">
-
-                                                        </div>
-
-                                                        <div class="box box4">
-                                                            <div id="spark4"></div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-xl-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">ONAYLANAN SATIŞLAR</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-
-                                                        <div class="mb-3">
-                                                            <div id="chart-approved-monthly"></div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">TAMAMLANAN SATIŞLAR</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-
-                                                        <div class="mb-3">
-                                                            <div id="chart-completed-monthly"></div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">POTANSİYEL SATIŞLAR</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-
-                                                        <div class="mb-3">
-                                                            <div id="chart-potential-sales"></div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xl-6">
-
-                                                <div class="card mb-3">
-
-                                                    <div class="card-body">
-
-                                                        <div class="d-flex fw-bold small mb-3">
-                                                            <span class="flex-grow-1">İPTAL EDİLEN SATIŞLAR</span>
-                                                            <a href="#" data-toggle="card-expand"
-                                                               class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
-                                                        </div>
-
-
-                                                        <div class="mb-3">
-                                                            <div id="chart-cancelled-potential-sales"></div>
-                                                        </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="card-arrow">
-                                                        <div class="card-arrow-top-left"></div>
-                                                        <div class="card-arrow-top-right"></div>
-                                                        <div class="card-arrow-bottom-left"></div>
-                                                        <div class="card-arrow-bottom-right"></div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="desktop-sticky-top">
-                                        <div class="card mb-3">
-                                            <div class="list-group list-group-flush">
-                                                <div class="list-group-item fw-bold px-3 d-flex">
-                                                    <span class="flex-fill">Bildirimler</span>
-                                                </div>
-                                            </div>
-                                            <div class="list-group list-group-flush" id="user-notifies">
-
-                                            </div>
-                                            <div class="list-group list-group-flush">
-                                                <a href="#" class="d-none list-group-item list-group-action text-center">
-                                                    Show more
-                                                </a>
-                                            </div>
-                                            <div class="card-arrow">
-                                                <div class="card-arrow-top-left"></div>
-                                                <div class="card-arrow-top-right"></div>
-                                                <div class="card-arrow-bottom-left"></div>
-                                                <div class="card-arrow-bottom-right"></div>
-                                            </div>
+                                        <div>
+                                            <div class="fw-bold">Maurice Patterson</div>
+                                            <div class="small">Never give up</div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-body py-2 px-3">
+                                    <div class="row text-center">
+                                        <div class="col-4">
+                                            <div class="fw-bold">415</div>
+                                            <div class="small lh-1">posts</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="fw-bold">140k</div>
+                                            <div class="small lh-1">followers</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="fw-bold">697</div>
+                                            <div class="small lh-1">following</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- card-arrow -->
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
                             </div>
                         </div>
                     </div>
@@ -488,16 +552,14 @@ $extra_js='
                 </div>
 
             </div>
-
-        </div>
-        <div class="card-arrow">
-            <div class="card-arrow-top-left"></div>
-            <div class="card-arrow-top-right"></div>
-            <div class="card-arrow-bottom-left"></div>
-            <div class="card-arrow-bottom-right"></div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
         </div>
     </div>
-
 
 
 </div>
