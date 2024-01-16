@@ -238,6 +238,7 @@ class StaffController extends Controller
 
             $total_company_count = Company::query()
                 ->where('active', 1)
+                ->where('is_customer', 1)
                 ->where('user_id', $staff_id)
                 ->count();
 
