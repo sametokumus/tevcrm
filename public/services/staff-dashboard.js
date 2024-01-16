@@ -27,6 +27,8 @@
             getCompletedMonthlySales(user_id);
             getPotentialMonthlySales(user_id);
             getCancelledMonthlySales(user_id);
+        }else{
+            initStaffs();
         }
 
 	});
@@ -830,4 +832,37 @@ async function initStaffStats(user_id){
     console.log(data2)
     $('#stat-6').html(data2.position + '. (' + data2.staff.staff_rate + ')');
 
+}
+
+async function initStaffs(){
+    let data = await serviceGetAdmins();
+    $.each(data.admins, function(i, admin){
+        let item = '<div class="col-sm-3">\n' +
+            '                        <div class="card mb-3">\n' +
+            '                            <a href="/staff-dashboard/'+ admin.id +'">\n' +
+            '                                <div class="m-1 bg-inverse bg-opacity-15">\n' +
+            '                                    <div class="position-relative overflow-hidden" style="height: 165px">\n' +
+            '                                        <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
+            '                                        <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
+            '                                            <div class="my-2">\n' +
+            '                                                <img src="'+ admin.profile_photo +'" alt="" width="80" class="rounded-circle" />\n' +
+            '                                            </div>\n' +
+            '                                            <div>\n' +
+            '                                                <div class="fw-bold">'+ admin.name +' '+ admin.surname +'</div>\n' +
+            '                                                <div class="small">'+ admin.email +'</div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                            </a>\n' +
+            '                            <div class="card-arrow">\n' +
+            '                                <div class="card-arrow-top-left"></div>\n' +
+            '                                <div class="card-arrow-top-right"></div>\n' +
+            '                                <div class="card-arrow-bottom-left"></div>\n' +
+            '                                <div class="card-arrow-bottom-right"></div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                    </div>';
+        $('#staffs').append(item);
+    });
 }
