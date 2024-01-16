@@ -211,7 +211,7 @@ class NotifyController extends Controller
                 ->where('receiver_id', $user_id)
                 ->where('is_read', 0)
                 ->where('active', 1)
-                ->whereRaw('type = 1 OR type = 3')
+                ->whereRaw('(type = 1 OR type = 3)')
                 ->toSql();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['count' => $count]]);
