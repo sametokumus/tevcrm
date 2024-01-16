@@ -262,10 +262,24 @@ class StaffHelper
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->count();
 
-        $sale_count = Sale::query()
-            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+//        $sale_count = Sale::query()
+//            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 'sales.request_id')
+//            ->where('offer_requests.authorized_personnel_id', $staff->id)
+//            ->whereBetween('sales.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+//            ->count();
+        $sale_count = DB::table('sales AS s')
+            ->select('s.*', 'sh.status_id AS last_status', 'sh.created_at AS last_status_created_at')
+            ->addSelect(DB::raw('YEAR(sh.created_at) AS year, MONTH(sh.created_at) AS month'))
+            ->leftJoin('offer_requests', 'offer_requests.request_id', '=', 's.request_id')
+            ->leftJoin('statuses', 'statuses.id', '=', 's.status_id')
+            ->join('status_histories AS sh', function ($join) {
+                $join->on('s.sale_id', '=', 'sh.sale_id')
+                    ->where('sh.created_at', '=', DB::raw('(SELECT MAX(created_at) FROM status_histories WHERE sale_id = s.sale_id AND status_id = 7)'));
+            })
             ->where('offer_requests.authorized_personnel_id', $staff->id)
-            ->whereBetween('sales.created_at', [now()->startOfMonth(), now()->endOfMonth()])
+            ->where('s.active', '=', 1)
+            ->whereRaw("(statuses.period = 'completed' OR statuses.period = 'approved')")
+            ->whereBetween('sh.created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->count();
 
 
