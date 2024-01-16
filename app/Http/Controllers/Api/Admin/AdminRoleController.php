@@ -21,7 +21,7 @@ class AdminRoleController extends Controller
                 ->leftJoin('admin_roles', 'admin_roles.id', '=', 'admins.admin_role_id')
                 ->where('admins.active', 1)
                 ->get(['admins.id', 'admins.admin_role_id', 'admins.name', 'admins.surname', 'admins.phone_number',
-                    'admins.email', 'admin_roles.name as admin_role_name']);
+                    'admins.email', 'admins.profile_photo', 'admin_roles.name as admin_role_name']);
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['admins' => $admins]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
