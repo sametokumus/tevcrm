@@ -899,3 +899,11 @@ table.dataTable{
 #staffs .nav.nav-tabs.nav-tabs-v2 > .nav-item.show > .nav-link {
     border: none;
 }
+
+.profile-card-img{
+    width: 80px;
+    height: 80px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

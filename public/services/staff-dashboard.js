@@ -842,10 +842,10 @@ async function initStaffs(){
             '                            <a href="/staff-dashboard/'+ admin.id +'">\n' +
             '                                <div class="m-1 bg-inverse bg-opacity-15">\n' +
             '                                    <div class="position-relative overflow-hidden" style="height: 165px">\n' +
-            '                                        <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
+            '                                        <div class="profile-card-img" sty></div>\n' +
             '                                        <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
             '                                            <div class="my-2">\n' +
-            '                                                <img src="'+ admin.profile_photo +'" alt="" width="80" class="rounded-circle" />\n' +
+            '                                               <div class="profile-card-img" style="background-image: url('+ admin.profile_photo +');"></div>\n' +
             '                                            </div>\n' +
             '                                            <div>\n' +
             '                                                <div class="fw-bold">'+ admin.name +' '+ admin.surname +'</div>\n' +
