@@ -55,7 +55,7 @@ class AuthController extends Controller
                 'password' => 'required'
             ]);
 
-            $admin = Admin::query()->where('email', $request->email)->first();
+            $admin = Admin::query()->where('email', $request->email)->where('active', 1)->first();
 
             if (!$admin || !Hash::check($request->password, $admin->password)) {
                 throw new \Exception('auth-001');
