@@ -906,4 +906,6 @@ table.dataTable{
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 100%;
 }

@@ -845,7 +845,7 @@ async function initStaffs(){
             '                                        <div class="profile-card-img" sty></div>\n' +
             '                                        <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
             '                                            <div class="my-2">\n' +
-            '                                               <div class="profile-card-img" style="background-image: url('+ admin.profile_photo +');"></div>\n' +
+            '                                               <div class="profile-card-img" style="background-image: url(\''+ admin.profile_photo +'\');"></div>\n' +
             '                                            </div>\n' +
             '                                            <div>\n' +
             '                                                <div class="fw-bold">'+ admin.name +' '+ admin.surname +'</div>\n' +
