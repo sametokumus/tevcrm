@@ -504,16 +504,16 @@ $extra_js='
         <div class="card">
             <div class="card-body p-0">
 
-                <div id="staffs" class="row">
+                <div id="staffs" class="row p-3">
 
                     <div class="col-sm-3">
-                        <div class="card">
+                        <div class="card mb-3">
                             <div class="m-1 bg-inverse bg-opacity-15">
                                 <div class="position-relative overflow-hidden" style="height: 165px">
                                     <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />
                                     <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">
                                         <div class="my-2">
-                                            <img src="img/user/user-5.jpg" alt="" width="80" class="rounded-circle" />
+                                            <img src="img/user/null-profile-picture.png" alt="" width="80" class="rounded-circle" />
                                         </div>
                                         <div>
                                             <div class="fw-bold">Maurice Patterson</div>
