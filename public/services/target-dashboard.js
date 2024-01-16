@@ -259,7 +259,7 @@ async function initStats(){
             }
         },
         stroke: { show: false },
-        colors: [ 'rgba('+ app.color.pinkRgb +', .75)',  'rgba('+ app.color.warningRgb +', .75)',  'rgba('+app.color.themeRgb +', .75)', 'rgba('+ app.color.bodyColorRgb + ', .5)',  'rgba('+app.color.indigoRgb +', .75)'],
+        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(249, 232, 13, .5)',  'rgba(92, 37, 255, .75)'],
         labels: yearlyLabelsArray,
         series: yearlySeriesArray,
         title: { text: '' },
@@ -303,7 +303,7 @@ async function initStats(){
             }
         },
         stroke: { show: false },
-        colors: [ 'rgba('+ app.color.pinkRgb +', .75)',  'rgba('+ app.color.warningRgb +', .75)',  'rgba('+app.color.themeRgb +', .75)', 'rgba('+ app.color.bodyColorRgb + ', .5)',  'rgba('+app.color.indigoRgb +', .75)'],
+        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(249, 232, 13, .5)',  'rgba(92, 37, 255, .75)'],
         labels: monthlyLabelsArray,
         series: monthlySeriesArray,
         title: { text: '' },
