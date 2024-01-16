@@ -284,6 +284,18 @@ class NotifyController extends Controller
                             'notify' => $notify,
                             'type' => 3
                         ]);
+                    }else if ($daysDifference == 0) {
+                        $notify_id = Uuid::uuid();
+                        $notify = '<b>' . $owner->short_code . '-' . $offer->global_id . '</b> numaralı siparişin tedarik sürecinin tamamlanmasının <b>son günü</b>.';
+                        StatusNotify::query()->insert([
+                            'notify_id' => $notify_id,
+                            'setting_id' => 1,
+                            'sale_id' => $offer->sale_id,
+                            'sender_id' => 0,
+                            'receiver_id' => $offer_request->purchasing_staff_id,
+                            'notify' => $notify,
+                            'type' => 3
+                        ]);
                     }
                 }
             }
@@ -325,7 +337,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 3) {
+                    if ($daysDifference >= 3) {
                         $notify_id = Uuid::uuid();
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>Tedarikçi teklifleri</b> henüz sisteme işlenmedi.';
                         StatusNotify::query()->insert([
@@ -506,7 +518,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 3) {
+                    if ($daysDifference >= 3) {
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteriye henüz <b>Teklif</b> iletilmedi.';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
@@ -573,7 +585,7 @@ class NotifyController extends Controller
                     $daysDifference = $now->diffInDays($last_action_date);
                     $sale['diff'] = $daysDifference;
 
-                    if ($daysDifference == 2) {
+                    if ($daysDifference >= 2) {
                         $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteri henüz <b>dönüş yapmadı.</b>';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
