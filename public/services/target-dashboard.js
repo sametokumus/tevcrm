@@ -259,7 +259,7 @@ async function initStats(){
             }
         },
         stroke: { show: false },
-        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(249, 232, 13, .5)',  'rgba(92, 37, 255, .75)'],
+        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(2, 113, 255, .5)',  'rgba(92, 37, 255, .75)'],
         labels: yearlyLabelsArray,
         series: yearlySeriesArray,
         title: { text: '' },
@@ -303,7 +303,7 @@ async function initStats(){
             }
         },
         stroke: { show: false },
-        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(249, 232, 13, .5)',  'rgba(92, 37, 255, .75)'],
+        colors: [ 'rgba(36, 157, 121, .75)',  'rgba(121, 142, 152, .75)',  'rgba(255, 159, 12, .75)', 'rgba(2, 113, 255, .5)',  'rgba(92, 37, 255, .75)'],
         labels: monthlyLabelsArray,
         series: monthlySeriesArray,
         title: { text: '' },
