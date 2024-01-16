@@ -35,7 +35,7 @@ $extra_js='
         </div>
     </div>
 
-    <div class="row">
+    <div class="row d-none" id="staff-dashboard-card">
         <div class="card">
             <div class="card-body p-0">
 
@@ -500,7 +500,7 @@ $extra_js='
         </div>
     </div>
 
-    <div class="row">
+    <div class="row d-none" id="staffs-card">
         <div class="card">
             <div class="card-body p-0">
 
