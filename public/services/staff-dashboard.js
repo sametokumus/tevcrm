@@ -10,7 +10,6 @@
 		checkLogin();
         staff_dash_currency = 'TRY';
         let user_id = getPathVariable('staff-dashboard');
-        console.log(user_id)
 
         await getAdminsAddSelectId('dash_staff');
 
@@ -56,7 +55,6 @@ function changeDashStaff(){
 async function initAdmin(user_id){
     let data = await serviceGetAdminById(user_id);
     let admin = data.admin;
-    console.log(admin)
     $('#staff-name').text(admin.name + ' ' + admin.surname);
     $('#staff-email').html('<i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i>' + admin.email);
     $('#staff-phone').html('<i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i>' + admin.phone_number);
@@ -231,9 +229,7 @@ async function getLastMonthSales(user_id){
 async function getApprovedMonthlySales(user_id){
 
     let data = await serviceGetApprovedMonthlySalesByAdmin(user_id);
-    console.log(data)
     let sales = data.sales.reverse();
-    console.log(sales)
 
     let xAxisArray = [];
     let yAxisArray = [];
@@ -249,8 +245,6 @@ async function getApprovedMonthlySales(user_id){
             yAxisArray.push(sale.eur_sale);
         }
     });
-    console.log(xAxisArray)
-    console.log(yAxisArray)
 
     let apexColumnChartOptions = {
         chart: {
@@ -686,7 +680,6 @@ async function initStaffTargets(user_id){
 
     let data = await serviceGetStaffTargetsByStaffId(user_id);
 
-    console.log(data)
     $("#targets-datatable").dataTable().fnDestroy();
     $('#targets-datatable tbody > tr').remove();
 
@@ -732,6 +725,7 @@ async function initStaffTargets(user_id){
 async function initStaffNotifies(user_id){
 
     let data = await serviceGetNotifiesByUserId(user_id);
+    console.log(data)
 
     $('#user-notifies .list-group-item').remove();
 
@@ -758,8 +752,6 @@ async function initStaffNotifies(user_id){
 async function initStaffCompanies(user_id){
 
     let data = await serviceGetCompaniesByStaffId(user_id);
-
-    console.log(data)
 
     $.each(data.companies, function (i, company) {
         let logo = 'img/user/null-profile-picture.png';
@@ -821,8 +813,6 @@ async function initStaffStats(user_id){
 
     let data = await serviceGetStaffStatistics(user_id);
 
-    console.log(data)
-
     $('#stat-1').html(data.total_company_count);
     $('#stat-2').html(data.add_this_month_company);
     $('#stat-3').html(data.activity_this_month);
@@ -831,7 +821,6 @@ async function initStaffStats(user_id){
 
     let data2 = await serviceGetStaffSituation(user_id);
 
-    console.log(data2)
     $('#stat-6').html(data2.position + '. (' + data2.staff.staff_rate + ')');
 
 }
