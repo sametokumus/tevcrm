@@ -194,7 +194,10 @@ class NotifyController extends Controller
     {
         try {
 
-            StatusNotify::query()->where('receiver_id', $user_id)->whereRaw('type = 1 OR type = 3')->update([
+            StatusNotify::query()
+                ->where('receiver_id', $user_id)
+                ->whereRaw('(type = 1 OR type = 3)')
+                ->update([
                 'is_read' => 1
             ]);
 
@@ -226,7 +229,7 @@ class NotifyController extends Controller
             $notifies = StatusNotify::query()
                 ->where('receiver_id', $user_id)
                 ->where('active', 1)
-                ->whereRaw('type = 1 OR type = 3')
+                ->whereRaw('(type = 1 OR type = 3)')
                 ->orderByDesc('id')
                 ->limit(30)
                 ->get();
