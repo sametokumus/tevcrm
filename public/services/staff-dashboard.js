@@ -729,7 +729,16 @@ async function initStaffNotifies(user_id){
 
     $('#user-notifies .list-group-item').remove();
 
+    let notify_date = '';
     $.each(data.notifies, function (i, notify) {
+        if (notify_date != formatDateAndTimeDESC2(notify.created_at, '-')){
+            notify_date = formatDateAndTimeDESC2(notify.created_at, '-');
+
+            let item = '<div class="list-group-item px-3 bg-dark-200" id="dash-notify-'+ notify.notify_id +'">\n' +
+                '                   <div class="fs-13px mb-1 text-center"><b>'+ notify_date +'</b></div>\n' +
+                '               </div>\n';
+            $('#user-notifies').append(item);
+        }
 
         let actions = "";
         let bg_color = "";

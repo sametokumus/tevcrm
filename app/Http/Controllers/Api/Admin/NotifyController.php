@@ -274,7 +274,7 @@ class NotifyController extends Controller
 
                     if ($daysDifference == 1) {
                         $notify_id = Uuid::uuid();
-                        $notify = '<b>' . $owner->short_code . '-' . $offer->global_id . '</b> numaralı siparişin tedarik sürecinin tamamlanmasına <b>1 gün</b> kaldı.';
+                        $notify = '<a href="/sale-detail/'.$offer->sale_id.'"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasına <b>1 gün</b> kaldı.';
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
                             'setting_id' => 1,
@@ -286,7 +286,7 @@ class NotifyController extends Controller
                         ]);
                     }else if ($daysDifference == 0) {
                         $notify_id = Uuid::uuid();
-                        $notify = '<b>' . $owner->short_code . '-' . $offer->global_id . '</b> numaralı siparişin tedarik sürecinin tamamlanmasının <b>son günü</b>.';
+                        $notify = '<a href="/sale-detail/'.$offer->sale_id.'"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasının <b>son günü</b>.';
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
                             'setting_id' => 1,
@@ -339,7 +339,7 @@ class NotifyController extends Controller
 
                     if ($daysDifference >= 3) {
                         $notify_id = Uuid::uuid();
-                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>Tedarikçi teklifleri</b> henüz sisteme işlenmedi.';
+                        $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı sipariş için <b>Tedarikçi teklifleri</b> henüz sisteme işlenmedi.';
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
                             'setting_id' => 3,
@@ -519,7 +519,7 @@ class NotifyController extends Controller
                     $sale['diff'] = $daysDifference;
 
                     if ($daysDifference >= 3) {
-                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteriye henüz <b>Teklif</b> iletilmedi.';
+                        $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı sipariş için müşteriye henüz <b>Teklif</b> iletilmedi.';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
@@ -586,7 +586,7 @@ class NotifyController extends Controller
                     $sale['diff'] = $daysDifference;
 
                     if ($daysDifference >= 2) {
-                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için müşteri henüz <b>dönüş yapmadı.</b>';
+                        $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı sipariş için müşteri henüz <b>dönüş yapmadı.</b>';
                         $notify_id = Uuid::uuid();
                         StatusNotify::query()->insert([
                             'notify_id' => $notify_id,
@@ -653,14 +653,14 @@ class NotifyController extends Controller
                             if ($now > $last_action_date) {
                                 $daysDifference = $now->diffInDays($last_action_date);
                                 if ($daysDifference == 2) {
-                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
+                                    $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı siparişin teslimatı için <b>son 2 gün.</b>';
                                     $send_notify = true;
                                 }
                                 $sale['diff'] = $daysDifference;
 
                                 if ($daysDifference == 0){
                                     $send_notify = true;
-                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                    $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
                                     $sale['diff'] = 0;
                                 }
 
@@ -678,21 +678,21 @@ class NotifyController extends Controller
                                     $daysDifference = $now->diffInDays($last_action_date);
 
                                     if ($daysDifference == 2) {
-                                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin <b>teslimat süresi geçti.</b>';
+                                        $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı siparişin <b>teslimat süresi geçti.</b>';
                                         $send_notify = true;
                                     }
                                     $sale['diff'] = $daysDifference;
 
                                     if ($daysDifference == 0){
                                         $send_notify = true;
-                                        $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                        $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
                                         $sale['diff'] = 0;
                                     }
 
                                 }
                             } else {
                                 $send_notify = true;
-                                $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
+                                $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı siparişin teslimatı için <b>bugün son gün.</b>';
                                 $sale['diff'] = 0;
                             }
 
@@ -768,7 +768,7 @@ class NotifyController extends Controller
                         $sale['diff'] = $daysDifference;
 
                         if ($daysDifference >= 1) {
-                            $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>fatura oluşturmanız gerekiyor.</b>';
+                            $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı sipariş için <b>fatura oluşturmanız gerekiyor.</b>';
 
                             $account_staffs = Admin::query()->where('admin_role_id', 5)->where('active', 1)->get();
 
@@ -848,7 +848,7 @@ class NotifyController extends Controller
                                 $transaction_payment['diff'] = $daysDifference;
 
                                 if ($daysDifference == 2) {
-                                    $notify = '<b>' . $owner->short_code . '-' . $sale->id . '</b> numaralı sipariş için <b>ödenmeyen fatura</b> bulunuyor.';
+                                    $notify = '<a href="/sale-detail/'.$sale->sale_id.'"><b>' . $owner->short_code . '-' . $sale->id . '</b></a> numaralı sipariş için <b>ödenmeyen fatura</b> bulunuyor.';
                                     $notify_id = Uuid::uuid();
                                     StatusNotify::query()->insert([
                                         'notify_id' => $notify_id,

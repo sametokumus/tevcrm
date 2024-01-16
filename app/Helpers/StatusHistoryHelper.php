@@ -46,7 +46,7 @@ class StatusHistoryHelper
                     $sender_id = $user_id;
                     $sender = Admin::query()->where('id', $user_id)->first();
                     $sender_name = $sender->name.' '.$sender->surname;
-                    $notify = '<b>'.$sender_name.'</b> tarafından <b>'.$short_code.'</b> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([
@@ -93,7 +93,7 @@ class StatusHistoryHelper
                     $sender_id = $user_id;
                     $sender = Admin::query()->where('id', $user_id)->first();
                     $sender_name = $sender->name.' '.$sender->surname;
-                    $notify = '<b>'.$sender_name.'</b> tarafından <b>'.$short_code.'</b> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([
