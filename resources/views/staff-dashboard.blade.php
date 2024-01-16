@@ -508,36 +508,22 @@ $extra_js='
 
                     <div class="col-sm-3">
                         <div class="card mb-3">
-                            <div class="m-1 bg-inverse bg-opacity-15">
-                                <div class="position-relative overflow-hidden" style="height: 165px">
-                                    <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />
-                                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">
-                                        <div class="my-2">
-                                            <img src="img/user/null-profile-picture.png" alt="" width="80" class="rounded-circle" />
-                                        </div>
-                                        <div>
-                                            <div class="fw-bold">Maurice Patterson</div>
-                                            <div class="small">Never give up</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body py-2 px-3">
-                                    <div class="row text-center">
-                                        <div class="col-4">
-                                            <div class="fw-bold">415</div>
-                                            <div class="small lh-1">posts</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="fw-bold">140k</div>
-                                            <div class="small lh-1">followers</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="fw-bold">697</div>
-                                            <div class="small lh-1">following</div>
+                            <a href="/staff-dashboard/1">
+                                <div class="m-1 bg-inverse bg-opacity-15">
+                                    <div class="position-relative overflow-hidden" style="height: 165px">
+                                        <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />
+                                        <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">
+                                            <div class="my-2">
+                                                <img src="img/user/null-profile-picture.png" alt="" width="80" class="rounded-circle" />
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">Süper Admin</div>
+                                                <div class="small">admin@test.com</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
 
                             <!-- card-arrow -->
                             <div class="card-arrow">
