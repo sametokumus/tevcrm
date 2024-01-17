@@ -932,6 +932,7 @@ async function getBestStaffs(){
 
     let data = await serviceGetBestStaff();
     let staffs = data.staffs;
+    console.log(staffs)
 
     $('#best-staffs-table').siblings('.spinners').remove();
 
