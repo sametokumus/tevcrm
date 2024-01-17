@@ -4008,7 +4008,7 @@ class DashboardController extends Controller
 
 
 
-            if ($total_sale == 0 || $total_request == 0){
+            if ($previous_total_sale == 0 || $previous_total_request == 0){
                 $previous_offer_turning_rate = 0;
             }else {
                 $previous_offer_turning_rate = $previous_total_sale * 100 / $previous_total_request;
