@@ -495,6 +495,7 @@ class StaffHelper
         $data['total_item_count'] = $total_item_count;
         $c3 = StaffHelper::get_sales_profit_rate($total_profit_rate, $total_item_count);
         $data['c3'] = $c3;
+        $data['c3_sales'] = $sale_items;
 
         $data['total_payment_point'] = $total_payment_point;
         $data['total_payment_count'] = $total_payment_count;
