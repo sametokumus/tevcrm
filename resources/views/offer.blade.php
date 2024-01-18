@@ -36,9 +36,9 @@ $extra_js='
                                 <tr>
                                     <th class="border-bottom-0">N#</th>
                                     <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Miktar</th>
                                     <th class="border-bottom-0">Birim</th>
+                                    <th class="border-bottom-0">Ürün Adı</th>
                                     <th class="border-bottom-0">Satın Alma Notu</th>
                                     <th class="border-bottom-0">Ref. Code</th>
                                     <th class="border-bottom-0 d-none">Product ID</th>
