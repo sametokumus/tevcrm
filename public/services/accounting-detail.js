@@ -121,9 +121,9 @@ async function initSaleStats(sale_id){
 
     let remaining_message = '';
     if (parseInt(sale.total_product_count) >= sale.packing_count) {
-        remaining_message = '<span class="text-danger"><b>Paketlenmeyen ürünler var.</b></span>';
-    } else {
         remaining_message = '<span class="text-theme"><b>Paketleme tamamlandı.</b></span>';
+    } else {
+        remaining_message = '<span class="text-danger"><b>Paketlenmeyen ürünler var.</b></span>';
     }
     $('#packing-message').html(remaining_message);
 
