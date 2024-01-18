@@ -1534,7 +1534,7 @@ class SaleController extends Controller
             $packing_lists = PackingList::query()->where('sale_id', $sale_id)->where('active', 1)->get();
             $packing_count = 0;
             foreach ($packing_lists as $packing_list){
-                $totalQuantity = DB::table('packing_list_products')
+                $totalQuantity = PackingListProduct::query()
                     ->where('packing_list_id', '=', $packing_list->packing_list_id)
                     ->where('active', 1)
                     ->sum('quantity');
