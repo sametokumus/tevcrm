@@ -354,7 +354,7 @@ class StaffHelper
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($item->currency);
-                            if ($item->{$sc.'_rate'} != 0) {
+                            if ($sale->{$sc.'_rate'} != 0) {
                                 $expense_price = $expense->price * $item->{$ec . '_rate'} / $sale->{$sc . '_rate'};
                             }else{
                                 $expense_price = 0;
