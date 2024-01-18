@@ -119,6 +119,13 @@ async function initSaleStats(sale_id){
     // $('#active-sale').text(stats.active_sale);
     // $('#total-product').text(stats.total_product);
 
+    let remaining_message = '';
+    if (sale.total_product_count >= sale.packing_count) {
+        remaining_message = '<span class="text-danger"><b>Paketlenmeyen ürünler var.</b></span>';
+    } else {
+        remaining_message = '<span class="text-theme"><b>Paketleme tamamlandı.</b></span>';
+    }
+    $('#remaining-message').html(remaining_message);
 
 }
 

@@ -87,7 +87,7 @@ $(".timepicker").timepicker({
                     <div class="flex-fill">
                         <span class="flex-grow-1 fw-600 fs-12px">Kalan Ödeme Tutarı</span>
                         <h3 id="remaining-price"></h3>
-                        <div>&nbsp;</div>
+                        <div id="packing-message">&nbsp;</div>
                         <div>&nbsp;</div>
                     </div>
                     <div class="opacity-5">
