@@ -125,7 +125,7 @@ async function initSaleStats(sale_id){
     } else {
         remaining_message = '<span class="text-theme"><b>Paketleme tamamlandı.</b></span>';
     }
-    $('#remaining-message').html(remaining_message);
+    $('#packing-message').html(remaining_message);
 
 }
 
