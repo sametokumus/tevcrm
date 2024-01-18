@@ -7,6 +7,7 @@ use App\Helpers\StatusHistoryHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\Offer;
@@ -516,8 +517,12 @@ class OfferController extends Controller
                 array_push($suppliers, $supplier);
             }
 
+            $sale = Sale::query()->where('request_id', $request_id)->first();
+            $owner = Contact::query()->where('id', $sale->owner_id)->first();
+            $global_id = $owner->short_code.'-RFQ-'.$sale->id;
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id, 'staff' => $staff]]);
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id, 'staff' => $staff, 'global_id' => $global_id]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }

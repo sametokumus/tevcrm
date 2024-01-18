@@ -685,10 +685,12 @@ async function initSendSupplierMailModal(request_id){
 
     let data = await serviceGetMailableSuppliersByRequestId(request_id);
     let suppliers = data.suppliers;
+    let staff = data.staff;
     console.log(data)
 
     document.getElementById('send_mail_request_id').value = request_id;
     document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
+    document.getElementById('send_mail_subject').value = staff.name + ' ' + staff.surname + ' | ' + data.global_id;
 
     $('#send_mail_to_address option').remove();
     $.each(suppliers, function (i, supplier) {
@@ -706,7 +708,7 @@ async function setMailLayout(){
     let layout = data.layout;
 
 
-    document.getElementById('send_mail_subject').value = layout.subject;
+    // document.getElementById('send_mail_subject').value = layout.subject;
     $('#send_mail_text').summernote('code', checkNull(layout.text));
 }
 
