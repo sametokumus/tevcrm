@@ -117,10 +117,10 @@ async function initOfferRequest(){
         }
         let item = '<tr id="productRow' + product.id + '" class="'+ classname +'">\n' +
             '           <td>' + product.sequence + '</td>\n' +
+            '           <td>' + product.id + '</td>\n' +
             '           <td>' + $('<div/>').text(product.product_name).html() + '</td>\n' +
             '           <td>' + product.quantity + '</td>\n' +
             '           <td>' + checkNull(measurement_name) + '</td>\n' +
-            '           <td>' + product.id + '</td>\n' +
             '              <td>\n' +
             '                  '+ note +'\n' +
             '              </td>\n' +
