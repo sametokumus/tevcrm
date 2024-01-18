@@ -120,10 +120,10 @@ async function initSaleStats(sale_id){
     // $('#total-product').text(stats.total_product);
 
     let remaining_message = '';
-    if (parseInt(sale.total_product_count) >= sale.packing_count) {
-        remaining_message = '<span class="text-theme"><b>Paketleme tamamlandı.</b></span>';
-    } else {
+    if (parseInt(sale.total_product_count) > sale.packing_count) {
         remaining_message = '<span class="text-danger"><b>Paketlenmeyen ürünler var.</b></span>';
+    } else {
+        remaining_message = '<span class="text-theme"><b>Paketleme tamamlandı.</b></span>';
     }
     $('#packing-message').html(remaining_message);
 
