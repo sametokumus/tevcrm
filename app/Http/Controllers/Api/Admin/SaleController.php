@@ -1530,6 +1530,18 @@ class SaleController extends Controller
             $sale['profit_rate'] = number_format($profit_rate, 2, ",", "");
             $sale['supplier_total'] = number_format($total_offer_price, 2, ".", "");
 
+
+            $packing_lists = PackingList::query()->where('sale_id', $sale_id)->where('active', 1)->get();
+            $packing_count = 0;
+            foreach ($packing_lists as $packing_list){
+                $totalQuantity = DB::table('packing_list_products')
+                    ->where('packing_list_id', '=', $packing_list->packing_list_id)
+                    ->where('active', 1)
+                    ->sum('quantity');
+                $packing_count += $totalQuantity;
+            }
+            $sale['packing_count'] = $packing_count;
+
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sale' => $sale]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
