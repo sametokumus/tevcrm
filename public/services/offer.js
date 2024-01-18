@@ -92,7 +92,6 @@ async function initOfferRequest(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOfferRequestById(request_id);
     let offer_request = data.offer_request;
-    console.log(offer_request)
 
     sale_id = offer_request.sale_id;
 
@@ -132,7 +131,7 @@ async function initOfferRequest(){
     });
 
     let productDatatable = $('#offer-request-products').DataTable({
-        responsive: true,
+        responsive: false,
         columnDefs: [
             { responsivePriority: 1, width: '40px', targets: 0 },
             { responsivePriority: 2, targets: -1 },
@@ -236,7 +235,6 @@ async function initOffers(){
     let request_id = getPathVariable('offer');
     let data = await serviceGetOffersByRequestId(request_id);
     let offers = data.offers;
-    console.log(offers)
 
     $("#offers").dataTable().fnDestroy();
     $('#offers tbody > tr').remove();
@@ -326,11 +324,9 @@ $('#offer-detail').on( 'click', 'tbody td.row-edit', function (e) {
 } );
 
 async function initOfferDetailModal(offer_id){
-    console.log(offer_id)
     document.getElementById('offer-detail-modal-offer-id').value = offer_id;
     let data = await serviceGetOfferById(offer_id);
     let offer = data.offer;
-    console.log(offer)
     document.getElementById('offer_detail_show_supplier_name').textContent = offer.company_name;
 
     $("#offer-detail").dataTable().fnDestroy();
@@ -463,7 +459,6 @@ async function initOfferDetailModal(offer_id){
         let discount_rate = editor.field('discount_rate').val();
         if (pcs_price != '' && total_price != '' && discount_rate != '' && discount_rate != '0,00'){
             let discounted_price = parseFloat(changePriceToDecimal(total_price)) - (parseFloat(changePriceToDecimal(total_price)) / 100 * parseFloat(changePriceToDecimal(discount_rate)));
-            console.log(parseFloat(changePriceToDecimal(total_price)), pcs_price, parseFloat(changePriceToDecimal(discount_rate)), discounted_price)
             document.getElementById('DTE_Field_discounted_price').value = changeCommasToDecimal(discounted_price);
         }
     });
@@ -560,8 +555,6 @@ async function updateOfferProduct(){
         "lead_time": lead_time
     });
 
-    console.log(formData);
-
     let returned = await servicePostUpdateOfferProduct(formData, offer_id, product_id);
     if (returned){
         $("#update_offer_product_form").trigger("reset");
@@ -605,8 +598,6 @@ async function addOfferProduct(){
         "currency": currency,
         "lead_time": lead_time
     });
-
-    console.log(formData);
 
     let returned = await servicePostAddOfferProduct(formData, offer_id);
     if (returned){
@@ -653,7 +644,6 @@ async function updateProductName(){
             "product_name": product_name
         });
 
-        console.log(formData);
         let returned = await servicePostUpdateProductName(formData, product_id);
         if (returned){
             $('#offer-request-products-body tr').removeClass('selected');

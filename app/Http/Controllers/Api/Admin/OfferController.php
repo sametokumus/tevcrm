@@ -504,6 +504,8 @@ class OfferController extends Controller
                 ->where('request_id', $request_id)
                 ->first();
 
+            $staff = Admin::query()->where('id', $request->purchasing_staff_id)->first();
+
             $suppliers = array();
 
             foreach ($offers as $offer) {
@@ -515,7 +517,7 @@ class OfferController extends Controller
             }
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id, 'staff' => $staff]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
