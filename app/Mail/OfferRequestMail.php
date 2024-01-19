@@ -13,14 +13,17 @@ class OfferRequestMail extends Mailable
 
     protected $receiver;
     protected $sender;
+    protected $staff_name;
     protected $subjects;
     protected $text;
+    protected $signature;
     protected $attachment_name;
     protected $attachment_url;
 
-    public function __construct($receiver, $sender, $subjects, $text, $signature, $attachment_name, $attachment_url) {
+    public function __construct($receiver, $sender, $staff_name, $subjects, $text, $signature, $attachment_name, $attachment_url) {
         $this->receiver = $receiver;
         $this->sender = $sender;
+        $this->staff_name = $staff_name;
         $this->subjects = $subjects;
         $this->text = $text;
         $this->signature = $signature;
@@ -32,7 +35,7 @@ class OfferRequestMail extends Mailable
         return $this
             ->subject($this->subjects)
             ->to($this->receiver)
-            ->from($this->sender)
+            ->from($this->sender, $this->staff_name)
             ->replyTo($this->sender)
             ->with(['text' => $this->text, 'signature' => $this->signature])
             ->attach($this->attachment_url, [

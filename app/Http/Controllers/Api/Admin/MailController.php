@@ -120,7 +120,7 @@ class MailController extends Controller
                 $attachment_name = $owner->short_code.'-RFQ-'.$sale->id.'.pdf';
                 $attachment_url = $offer->rfq_url;
 
-                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $request->subject, $request->text, $staff->profile_photo, $attachment_name, $attachment_url));
+                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $staff->name.' '.$staff->surname, $request->subject, $request->text, $staff->profile_photo, $attachment_name, $attachment_url));
 
             }
 
