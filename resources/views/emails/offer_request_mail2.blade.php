@@ -41,8 +41,8 @@
 
                 <!-- Email Body -->
                 <tr>
-                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style="">
-                        <table class="inner-body" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
+                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style="    background-color: #ffffff; border: none;">
+                        <table class="inner-body" align="left" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td class="footer" width="100%" cellpadding="0" cellspacing="0" style="">
-                        <table class="inner-body" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
+                        <table class="inner-body" align="left" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
