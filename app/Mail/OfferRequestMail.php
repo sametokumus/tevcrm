@@ -18,11 +18,12 @@ class OfferRequestMail extends Mailable
     protected $attachment_name;
     protected $attachment_url;
 
-    public function __construct($receiver, $sender, $subjects, $text, $attachment_name, $attachment_url) {
+    public function __construct($receiver, $sender, $subjects, $text, $signature, $attachment_name, $attachment_url) {
         $this->receiver = $receiver;
         $this->sender = $sender;
         $this->subjects = $subjects;
         $this->text = $text;
+        $this->signature = $signature;
         $this->attachment_name = $attachment_name;
         $this->attachment_url = $attachment_url;
     }
@@ -32,11 +33,12 @@ class OfferRequestMail extends Mailable
             ->subject($this->subjects)
             ->to($this->receiver)
             ->from($this->sender)
-            ->with(['text' => $this->text])
+            ->replyTo($this->sender)
+            ->with(['text' => $this->text, 'signature' => $this->signature])
             ->attach($this->attachment_url, [
                 'as' => $this->attachment_name, // Specify the name for the attachment
                 'mime' => 'application/pdf', // Specify the MIME type of the attachment
             ])
-            ->markdown('emails.offer_request_mail');
+            ->markdown('emails.offer_request_mail2');
     }
 }
