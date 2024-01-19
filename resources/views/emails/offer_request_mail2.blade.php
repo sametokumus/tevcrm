@@ -28,21 +28,21 @@
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
         <td align="center">
-            <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #2d1c45;">
+            <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff;">
 {{--                {{ $header ?? '' }}--}}
 
-                <tr>
-                    <td class="header">
-                        <a href="https://www.semytechnology.com/" target="_blank" style="display: inline-block;">
-                            <img src="https://crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">
-                        </a>
-                    </td>
-                </tr>
+{{--                <tr>--}}
+{{--                    <td class="header">--}}
+{{--                        <a href="https://www.semytechnology.com/" target="_blank" style="display: inline-block;">--}}
+{{--                            <img src="https://crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">--}}
+{{--                        </a>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
 
                 <!-- Email Body -->
                 <tr>
-                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style=""">
-                        <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff;">
+                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style="">
+                        <table class="inner-body" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
@@ -55,8 +55,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="header">
-                        <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 250px;" alt="">
+                    <td class="footer" width="100%" cellpadding="0" cellspacing="0" style="">
+                        <table class="inner-body" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
+                            <!-- Body content -->
+                            <tr>
+                                <td class="content-cell">
+
+                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 250px;" alt="">
+
+                                </td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
 
