@@ -41,7 +41,7 @@
 
                 <!-- Email Body -->
                 <tr>
-                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style="background-color: #2d1c45; border-color: #2d1c45;">
+                    <td class="body" width="100%" cellpadding="0" cellspacing="0" style=""">
                         <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff;">
                             <!-- Body content -->
                             <tr>
@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td class="header">
-                        <img src="https://crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">
+                        <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 250px;" alt="">
                     </td>
                 </tr>
 
