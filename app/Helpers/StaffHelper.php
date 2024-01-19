@@ -477,6 +477,7 @@ class StaffHelper
         $customer_count = Company::query()
             ->where('active', 1)
             ->where('user_id', $staff->id)
+            ->where('is_customer', 1)
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->count();
 
