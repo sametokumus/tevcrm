@@ -867,7 +867,7 @@ async function servicePostUpdateUser(id, formData) {
     await xhrDataPost('/admin/adminRole/updateUser/' + id, formData, updateProfileCallback);
 }
 
-async function servicePostUpdateMailSignature(id, formData) {
+async function servicePostUpdateMailSignature(formData) {
     await xhrDataPost('/admin/adminRole/updateMailSignature', formData, updateMailSignatureCallback);
 }
 

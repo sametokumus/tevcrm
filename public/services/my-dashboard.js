@@ -906,11 +906,11 @@ async function initUpdateMailSignatureModal(){
     getOwnersAddSelectId('update_mail_signature_contact');
 
     let user_id = localStorage.getItem('userId');
-
     let data = await serviceGetMailSignaturesByAdminId(user_id);
 
+    $('#current_mail_signatures .item').remove();
     $.each(data.signatures, function (i, signature) {
-        let item = '<div class="col-12 mb-3">\n' +
+        let item = '<div class="col-12 mb-3 item">\n' +
             '                  <h6>'+ signature.company.name +'</h6>\n' +
             '                  <img src="'+ signature.image +'" class="w-100">\n' +
             '              </div>';
@@ -922,21 +922,15 @@ async function updateMailSignatureCallback(xhttp){
     const obj = JSON.parse(jsonData);
     showAlert(obj.message);
     console.log(obj)
-    $("#update_account_form").trigger("reset");
-    $("#updateProfileModal").modal('hide');
-    let user_id = localStorage.getItem('userId');
-    initAdmin(user_id);
+    $("#update_mail_signature_form").trigger("reset");
+    $("#updateMailSignatureModal").modal('hide');
 }
-async function updateProfile(){
-    let formData = new FormData();
-    formData.append('email', document.getElementById('update_admin_email').value);
-    formData.append('name', document.getElementById('update_admin_name').value);
-    formData.append('surname', document.getElementById('update_admin_surname').value);
-    formData.append('phone_number', document.getElementById('update_admin_phone').value);
-    formData.append('password', document.getElementById('update_admin_password').value)
-    formData.append('profile_photo', document.getElementById('update_admin_profile_photo').files[0]);
-    console.log(formData);
-
+async function updateMailSignature(){
     let user_id = localStorage.getItem('userId');
-    await servicePostUpdateUser(user_id, formData);
+    let formData = new FormData();
+    formData.append('staff_id', user_id);
+    formData.append('contact_id', document.getElementById('update_mail_signature_contact').value);
+    formData.append('signature_image', document.getElementById('update_mail_signature_image').files[0]);
+
+    await servicePostUpdateMailSignature(formData);
 }
