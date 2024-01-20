@@ -7,7 +7,7 @@
              openUpdateProfileModal();
          });
 
-         $('#update-mail-sginature-button').click(function (){
+         $('#update-mail-signature-button').click(function (){
              openUpdateMailSignatureModal();
          });
 
