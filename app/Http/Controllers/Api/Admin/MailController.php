@@ -12,6 +12,7 @@ use App\Models\Employee;
 use App\Models\Note;
 use App\Models\Offer;
 use App\Models\Sale;
+use App\Models\StaffMailSignature;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -106,7 +107,15 @@ class MailController extends Controller
                 'text' => 'required',
             ]);
 
+            $owner_id = Sale::query()->where('request_id', $request->request_id)->first()->owner_id;
             $staff = Admin::query()->where('id', $request->staff_id)->first();
+            $staff_mail_signature = StaffMailSignature::query()->where('staff_id', $request->staff_id)->where('contact_id', $owner_id)->where('active', 1)->first();
+            if ($staff_mail_signature){
+                $signature = $staff_mail_signature->image;
+            }else{
+                $owner = Contact::query()->where('id', $owner_id)->first();
+                $signature = $owner->mail_signature;
+            }
             foreach ($request->receivers as $receiver_id) {
                 $receiver = Employee::query()->where('id', $receiver_id)->first();
                 $offer = Offer::query()
@@ -120,7 +129,7 @@ class MailController extends Controller
                 $attachment_name = $owner->short_code.'-RFQ-'.$sale->id.'.pdf';
                 $attachment_url = $offer->rfq_url;
 
-                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $staff->name.' '.$staff->surname, $request->subject, $request->text, $staff->profile_photo, $attachment_name, $attachment_url));
+                Mail::to($receiver->email)->send(new OfferRequestMail($receiver->email, $staff->email, $staff->name.' '.$staff->surname, $request->subject, $request->text, $signature, $attachment_name, $attachment_url));
 
             }
 
