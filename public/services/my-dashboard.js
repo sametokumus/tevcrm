@@ -911,7 +911,7 @@ async function initUpdateMailSignatureModal(){
     $('#current_mail_signatures .item').remove();
     $.each(data.signatures, function (i, signature) {
         let item = '<div class="col-12 mb-3 item">\n' +
-            '                  <h6>'+ signature.company.name +'</h6>\n' +
+            '                  <h6>'+ signature.contact.name +'</h6>\n' +
             '                  <img src="'+ signature.image +'" class="w-100">\n' +
             '              </div>';
         $('#current_mail_signatures').append(item);
