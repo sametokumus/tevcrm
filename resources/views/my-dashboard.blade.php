@@ -31,6 +31,7 @@ $extra_js='
 
                             </div>
                             <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
+                            <button type="button" id="update-mail-sginature-button" class="btn btn-sm btn-outline-theme fs-11px">Mail İmza Güncelle</button>
                             <hr class="mt-4 mb-4">
 
                             <div class="fw-bold mb-1 fs-16px">Firmalar</div>

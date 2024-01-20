@@ -7,6 +7,10 @@
              openUpdateProfileModal();
          });
 
+         $('#update-mail-sginature-button').click(function (){
+             openUpdateMailSignatureModal();
+         });
+
          $('#update_account_form').submit(function (e){
              e.preventDefault();
              updateProfile();
@@ -886,4 +890,21 @@ async function initStaffStats(user_id){
     console.log(data2)
     $('#stat-6').append(data2.position + '. (' + data2.staff.staff_rate + ')');
 
+}
+
+
+async function openUpdateMailSignatureModal(){
+    $("#updateMailSignatureModal").modal('show');
+    await initUpdateMailSignatureModal();
+}
+async function initUpdateMailSignatureModal(){
+    // let user_id = localStorage.getItem('userId');
+    // let data = await serviceGetAdminById(user_id);
+    // let admin = data.admin;
+    // document.getElementById('update_admin_email').value = admin.email;
+    // document.getElementById('update_admin_name').value = admin.name;
+    // document.getElementById('update_admin_surname').value = admin.surname;
+    // document.getElementById('update_admin_phone').value = admin.phone_number;
+    //
+    // $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
 }
