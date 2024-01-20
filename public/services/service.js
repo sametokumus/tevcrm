@@ -867,6 +867,10 @@ async function servicePostUpdateUser(id, formData) {
     await xhrDataPost('/admin/adminRole/updateUser/' + id, formData, updateProfileCallback);
 }
 
+async function servicePostUpdateMailSignature(id, formData) {
+    await xhrDataPost('/admin/adminRole/updateMailSignature', formData, updateMailSignatureCallback);
+}
+
 async function serviceGetDeleteAdmin(id) {
 	const data = await fetchDataGet('/admin/adminRole/deleteAdmin/' + id, 'application/json');
 	if (data.status == "success") {

@@ -7,6 +7,8 @@ use App\Models\Admin;
 use App\Models\AdminPermissionRole;
 use App\Models\AdminRole;
 use App\Models\AdminStatusRole;
+use App\Models\Contact;
+use App\Models\StaffMailSignature;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -330,6 +332,63 @@ class AdminRoleController extends Controller
             }else{
                 return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['permission' => false]]);
             }
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function updateMailSignature(Request $request){
+        try {
+            $request->validate([
+                'staff_id' => 'required',
+                'contact_id' => 'required',
+            ]);
+
+            $check = StaffMailSignature::query()->where('staff_id', $request->staff_id)->where('contact_id', $request->contact_id)->first();
+
+            if ($check){
+                if ($request->hasFile('signature_image')) {
+                    $rand = uniqid();
+                    $image = $request->file('signature_image');
+                    $image_name = $rand . "-" . $image->getClientOriginalName();
+                    $image->move(public_path('/img/user/'), $image_name);
+                    $image_path = "/img/user/" . $image_name;
+                    StaffMailSignature::query()->where('id',$check->id)->update([
+                        'image' => $image_path,
+                        'active' => 1
+                    ]);
+                }
+            }else{
+                if ($request->hasFile('signature_image')) {
+                    $rand = uniqid();
+                    $image = $request->file('signature_image');
+                    $image_name = $rand . "-" . $image->getClientOriginalName();
+                    $image->move(public_path('/img/user/'), $image_name);
+                    $image_path = "/img/user/" . $image_name;
+                    StaffMailSignature::query()->insert([
+                        'staff_id' => $request->staff_id,
+                        'contact_id' => $request->contact_id,
+                        'image' => $image_path,
+                        'active' => 1
+                    ]);
+                }
+            }
+
+            return response(['message' => __('Mail imza ekleme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => 'Hatalı sorgu.','status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => 'Hatalı işlem.','status' => 'error-001','e' => $throwable->getMessage()]);
+        }
+    }
+    public function getMailSignaturesByAdminId($id){
+        try {
+            $signatures = StaffMailSignature::query()->where('staff_id', $id)->where('active',1)->get();
+            foreach ($signatures as $signature){
+                $signature['contact'] = Contact::query()->where('id', $signature->contact_id)->first();
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['signatures' => $signatures]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
         }

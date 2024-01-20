@@ -485,11 +485,79 @@ $extra_js='
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">FİRMA GÜNCELLE</h5>
+                <h5 class="modal-title">HESAP GÜNCELLE</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="post" action="#" id="update_account_form">
                 <div class="modal-body">
+                    <div class="row mb-4">
+
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">E-posta :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_email" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Ad :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Soyad :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_surname" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Telefon :</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="update_admin_phone" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label class="col-md-3 form-label">Şifre :</label>
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" id="update_admin_password">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Profil fotoğrafını <a href="#" id="update_admin_current_profile_photo" target="_blank">görüntülemek için tıklayınız...</a></label>
+                                <input type="file" class="form-control" id="update_admin_profile_photo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-cover fade" id="updateMailSignatureModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">MAİL İMZA GÜNCELLE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="#" id="update_mail_signature_form">
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-12 mb-2">
+                            <h6>Akvia</h6>
+                            <img src="/img/user/adem-akvia.jpg">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <h6>Semy</h6>
+                            <img src="/img/user/adem-semy.jpg">
+                        </div>
+                    </div>
                     <div class="row mb-4">
 
                         <div class="row mb-4">

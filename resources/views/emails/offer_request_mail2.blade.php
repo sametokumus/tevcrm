@@ -59,7 +59,7 @@
                         <table class="inner-body" align="left" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
-                                <td class="content-cell">
+                                <td class="content-cell" style="text-align: left;">
 
                                     <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 250px;" alt="">
 

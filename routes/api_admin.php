@@ -78,6 +78,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('adminRole/updateAdmin/{id}', [AdminRoleController::class, 'updateAdmin']);
     Route::post('adminRole/updateUser/{id}', [AdminRoleController::class, 'updateUser']);
     Route::get('adminRole/deleteAdmin/{id}', [AdminRoleController::class, 'deleteAdmin']);
+    Route::get('adminRole/getMailSignaturesByAdminId/{id}', [AdminRoleController::class, 'getMailSignaturesByAdminId']);
+    Route::post('adminRole/updateMailSignature', [AdminRoleController::class, 'updateMailSignature']);
 
     Route::get('adminRole/getAdminRoles', [AdminRoleController::class, 'getAdminRoles']);
     Route::get('adminRole/getAdminRoleById/{id}', [AdminRoleController::class, 'getAdminRoleById']);
