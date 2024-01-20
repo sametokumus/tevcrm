@@ -16,6 +16,11 @@
              updateProfile();
          });
 
+         $('#update_mail_signature_form').submit(function (e){
+             e.preventDefault();
+             updateMailSignature();
+         });
+
          $('#mark-all-read-button').click(function (e){
              e.preventDefault();
              markAsReadAllNotify();
@@ -911,4 +916,27 @@ async function initUpdateMailSignatureModal(){
             '              </div>';
         $('#current_mail_signatures').append(item);
     });
+}
+async function updateMailSignatureCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#update_account_form").trigger("reset");
+    $("#updateProfileModal").modal('hide');
+    let user_id = localStorage.getItem('userId');
+    initAdmin(user_id);
+}
+async function updateProfile(){
+    let formData = new FormData();
+    formData.append('email', document.getElementById('update_admin_email').value);
+    formData.append('name', document.getElementById('update_admin_name').value);
+    formData.append('surname', document.getElementById('update_admin_surname').value);
+    formData.append('phone_number', document.getElementById('update_admin_phone').value);
+    formData.append('password', document.getElementById('update_admin_password').value)
+    formData.append('profile_photo', document.getElementById('update_admin_profile_photo').files[0]);
+    console.log(formData);
+
+    let user_id = localStorage.getItem('userId');
+    await servicePostUpdateUser(user_id, formData);
 }

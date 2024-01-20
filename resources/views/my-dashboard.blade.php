@@ -553,13 +553,13 @@ $extra_js='
 
                     </div>
                     <div class="row mb-4">
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Firma</label>
                             <select class="form-control" id="update_mail_signature_contact">
 
                             </select>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Mail İmza</label>
                             <input type="file" class="form-control" id="update_mail_signature_image" />
                         </div>
