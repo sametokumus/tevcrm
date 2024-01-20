@@ -882,6 +882,15 @@ async function serviceGetDeleteAdmin(id) {
 	}
 }
 
+async function serviceGetMailSignaturesByAdminId(id) {
+	const data = await fetchDataGet('/admin/adminRole/getMailSignaturesByAdminId/' + id, 'application/json');
+	if (data.status == "success") {
+        return data.object;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+
 async function serviceGetAdminRoles() {
 	const data = await fetchDataGet('/admin/adminRole/getAdminRoles', 'application/json');
 	if (data.status == "success") {

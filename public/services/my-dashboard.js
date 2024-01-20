@@ -898,13 +898,17 @@ async function openUpdateMailSignatureModal(){
     await initUpdateMailSignatureModal();
 }
 async function initUpdateMailSignatureModal(){
-    // let user_id = localStorage.getItem('userId');
-    // let data = await serviceGetAdminById(user_id);
-    // let admin = data.admin;
-    // document.getElementById('update_admin_email').value = admin.email;
-    // document.getElementById('update_admin_name').value = admin.name;
-    // document.getElementById('update_admin_surname').value = admin.surname;
-    // document.getElementById('update_admin_phone').value = admin.phone_number;
-    //
-    // $('#update_admin_current_profile_photo').attr('href', admin.profile_photo);
+    getOwnersAddSelectId('update_mail_signature_contact');
+
+    let user_id = localStorage.getItem('userId');
+
+    let data = await serviceGetMailSignaturesByAdminId(user_id);
+
+    $.each(data.signatures, function (i, signature) {
+        let item = '<div class="col-12 mb-3">\n' +
+            '                  <h6>'+ signature.company.name +'</h6>\n' +
+            '                  <img src="'+ signature.image +'" class="w-100">\n' +
+            '              </div>';
+        $('#current_mail_signatures').append(item);
+    });
 }

@@ -31,7 +31,7 @@ $extra_js='
 
                             </div>
                             <button type="button" id="update-profile-button" class="btn btn-sm btn-outline-theme fs-11px">Profili Güncelle</button>
-                            <button type="button" id="update-mail-sginature-button" class="btn btn-sm btn-outline-theme fs-11px">Mail İmza Güncelle</button>
+                            <button type="button" id="update-mail-signature-button" class="btn btn-sm btn-outline-theme fs-11px">Mail İmza Güncelle</button>
                             <hr class="mt-4 mb-4">
 
                             <div class="fw-bold mb-1 fs-16px">Firmalar</div>
@@ -549,53 +549,19 @@ $extra_js='
             </div>
             <form method="post" action="#" id="update_mail_signature_form">
                 <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-2">
-                            <h6>Akvia</h6>
-                            <img src="/img/user/adem-akvia.jpg">
-                        </div>
-                        <div class="col-12 mb-2">
-                            <h6>Semy</h6>
-                            <img src="/img/user/adem-semy.jpg">
-                        </div>
+                    <div class="row mb-3" id="current_mail_signatures">
+
                     </div>
                     <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label">Firma</label>
+                            <select class="form-control" id="update_mail_signature_contact">
 
-                        <div class="row mb-4">
-                            <label class="col-md-3 form-label">E-posta :</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="update_admin_email" required>
-                            </div>
+                            </select>
                         </div>
-                        <div class="row mb-4">
-                            <label class="col-md-3 form-label">Ad :</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="update_admin_name" required>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label class="col-md-3 form-label">Soyad :</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="update_admin_surname" required>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label class="col-md-3 form-label">Telefon :</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="update_admin_phone" required>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label class="col-md-3 form-label">Şifre :</label>
-                            <div class="col-md-9">
-                                <input type="password" class="form-control" id="update_admin_password">
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <label class="form-label">Profil fotoğrafını <a href="#" id="update_admin_current_profile_photo" target="_blank">görüntülemek için tıklayınız...</a></label>
-                                <input type="file" class="form-control" id="update_admin_profile_photo" />
-                            </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Mail İmza</label>
+                            <input type="file" class="form-control" id="update_mail_signature_image" />
                         </div>
                     </div>
                 </div>
