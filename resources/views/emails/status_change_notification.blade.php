@@ -14,13 +14,10 @@
 
     {{-- Action Button --}}
     @isset($actionText)
-        @component('mail::table')
-            |           |
-            |:---------:|
-            | [{{ $actionText }}]({{ $actionUrl }}) |
+        @component('mail::button', ['url' => $actionUrl, 'color' => 'primary'])
+            {{ $actionText }}
         @endcomponent
     @endisset
-
 
     {{-- Outro Lines --}}
     @foreach ($outroLines as $line)
