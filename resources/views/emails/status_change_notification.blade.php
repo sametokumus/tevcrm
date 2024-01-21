@@ -8,13 +8,13 @@
 
     {{-- Message --}}
 {{--    <p style="font-family: Roboto; font-size: 16px; color: #000000;">{!! $message !!}</p>--}}
+    {!! $message !!}
 
+{{--    --}}{{-- Intro Lines --}}
+{{--    @foreach ($introLines as $line)--}}
+{{--        {!! $line !!}--}}
 
-    {{-- Intro Lines --}}
-    @foreach ($introLines as $line)
-        {!! $line !!}
-
-    @endforeach
+{{--    @endforeach--}}
 
     {{-- Action Button --}}
     @isset($actionText)
