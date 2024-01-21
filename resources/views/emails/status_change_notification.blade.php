@@ -1,25 +1,25 @@
 @component('mail::message')
 
     {{-- Logo --}}
-    <img src="{{ $notify_logo }}" style="width: 250px;" alt="">
+    <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
 
     {{-- Title --}}
 {{--    # {{ $title }}--}}
 
     {{-- Message --}}
-    <p style="font-family: Roboto; font-size: 16px; color: #000000;">{!! $message !!}</p>
+{{--    <p style="font-family: Roboto; font-size: 16px; color: #000000;">{!! $message !!}</p>--}}
+
+
+    {{-- Intro Lines --}}
+    @foreach ($introLines as $line)
+        {{ $line }}
+
+    @endforeach
 
     {{-- Action Button --}}
     @isset($actionText)
             <?php
-            switch ($level) {
-                case 'success':
-                case 'error':
-                    $color = $level;
-                    break;
-                default:
-                    $color = 'primary';
-            }
+            $color = 'primary';
             ?>
         @component('mail::button', ['url' => $actionUrl, 'color' => $color])
             {{ $actionText }}

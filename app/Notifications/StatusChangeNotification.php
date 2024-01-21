@@ -31,8 +31,9 @@ class StatusChangeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject($this->title)
+            ->subject($this->message)
             ->from('mail-sender@sametokumus.com','CRM-X')
+            ->line($this->message)
             ->action('Satış Detayına Git', $this->action_link)
             ->markdown('emails.status_change_notification', [
                 'title' => $this->title,
