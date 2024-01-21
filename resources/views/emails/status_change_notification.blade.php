@@ -4,6 +4,9 @@
         # {{ $greeting }}
     @endif
 
+    {{-- Logo --}}
+    <img src="{{ $notify_logo }}" style="width: 250px;" alt="">
+
     {{-- Title --}}
     # {{ $title }}
 
