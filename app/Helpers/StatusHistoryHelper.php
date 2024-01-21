@@ -49,7 +49,7 @@ class StatusHistoryHelper
 //                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
                     $notify = '<a href="https://crm.semytechnology.com/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> '.$notify_setting->message;
                     $action_link = 'https://crm.semytechnology.com/sale-detail/'.$sale->sale_id;
-                    $notify_logo = $sale_owner->notification_logo;
+                    $notify_logo = 'https://crm.semytechnology.com'.$sale_owner->notification_logo;
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([
@@ -99,7 +99,7 @@ class StatusHistoryHelper
 //                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
                     $notify = '<a href="https://crm.semytechnology.com/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> '.$notify_setting->message;
                     $action_link = 'https://crm.semytechnology.com/sale-detail/'.$sale->sale_id;
-                    $notify_logo = $sale_owner->notification_logo;
+                    $notify_logo = 'https://crm.semytechnology.com'.$sale_owner->notification_logo;
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([

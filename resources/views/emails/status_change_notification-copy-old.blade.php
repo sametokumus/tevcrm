@@ -1,4 +1,8 @@
 @component('mail::message')
+    {{-- Greeting --}}
+    @if (! empty($greeting))
+        # {{ $greeting }}
+    @endif
 
     {{-- Logo --}}
     <img src="{{ $notify_logo }}" style="width: 250px;" alt="">
@@ -7,24 +11,25 @@
 {{--    # {{ $title }}--}}
 
     {{-- Message --}}
-    <p style="font-family: Roboto; font-size: 16px; color: #000000;">{!! $message !!}</p>
+    {!! $message !!}
 
-    {{-- Action Button --}}
-    @isset($actionText)
-            <?php
-            switch ($level) {
-                case 'success':
-                case 'error':
-                    $color = $level;
-                    break;
-                default:
-                    $color = 'primary';
-            }
-            ?>
-        @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-            {{ $actionText }}
-        @endcomponent
-    @endisset
+    {{-- Intro Lines --}}
+    @foreach ($introLines as $line)
+        {{ $line }}
+    @endforeach
+
+    {{-- Outro Lines --}}
+    @foreach ($outroLines as $line)
+        {{ $line }}
+    @endforeach
+
+    {{-- Salutation --}}
+    @if (! empty($salutation))
+        {{ $salutation }}
+    @else
+{{--        @lang('Regards'),<br>--}}
+    {{ config('app.name') }}
+    @endif
 
     {{-- Subcopy --}}
     @isset($actionText)
