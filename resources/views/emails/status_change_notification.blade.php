@@ -1,30 +1,29 @@
 @component('mail::message')
+    {{-- Greeting --}}
+    @if (! empty($greeting))
+        # {{ $greeting }}
+    @endif
 
     {{-- Logo --}}
     <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
 
-    {{-- Title --}}
-    # {{ $title }}
+    {{-- Intro Lines --}}
+    @foreach ($introLines as $line)
+        {{ $line }}
+    @endforeach
 
-    {{-- Message --}}
-{{--    <p style="font-family: Roboto; font-size: 16px; color: #000000;">{!! $message !!}</p>--}}
-{{--    {!! $message !!}--}}
+    {{-- Outro Lines --}}
+    @foreach ($outroLines as $line)
+        {{ $line }}
+    @endforeach
 
-{{--    --}}{{-- Intro Lines --}}
-{{--    @foreach ($introLines as $line)--}}
-{{--        {!! $line !!}--}}
-
-{{--    @endforeach--}}
-
-    {{-- Action Button --}}
-    @isset($actionText)
-            <?php
-            $color = 'primary';
-            ?>
-        @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-            {{ $actionText }}
-        @endcomponent
-    @endisset
+    {{-- Salutation --}}
+    @if (! empty($salutation))
+        {{ $salutation }}
+    @else
+        {{--        @lang('Regards'),<br>--}}
+        {{ config('app.name') }}
+    @endif
 
     {{-- Subcopy --}}
     @isset($actionText)
@@ -38,5 +37,4 @@
             ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
         @endslot
     @endisset
-
 @endcomponent
