@@ -61,7 +61,7 @@
                             <tr>
                                 <td class="content-cell" style="text-align: left; padding-left: 0px;">
 
-                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 500px;" alt="">
+                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 800px;" alt="">
 
                                 </td>
                             </tr>
