@@ -522,7 +522,7 @@ class OfferController extends Controller
             $global_id = $owner->short_code.'-RFQ-'.$sale->id;
 
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id, 'staff' => $staff, 'global_id' => $global_id]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['suppliers' => $suppliers, 'purchasing_staff_id' => $request->purchasing_staff_id, 'staff' => $staff, 'global_id' => $global_id, 'owner' => $owner]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }

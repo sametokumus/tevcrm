@@ -687,10 +687,11 @@ async function initSendSupplierMailModal(request_id){
     let suppliers = data.suppliers;
     let staff = data.staff;
     console.log(data)
+    let subject = data.owner.name + ' | ' + data.global_id;
 
     document.getElementById('send_mail_request_id').value = request_id;
     document.getElementById('send_mail_staff').value = data.purchasing_staff_id;
-    document.getElementById('send_mail_subject').value = staff.name + ' ' + staff.surname + ' | ' + data.global_id;
+    document.getElementById('send_mail_subject').value = subject;
 
     $('#send_mail_to_address option').remove();
     $.each(suppliers, function (i, supplier) {
