@@ -12,6 +12,13 @@
         {{ $line }}
     @endforeach
 
+    {{-- Action Button --}}
+    @isset($actionText)
+        @component('mail::button', ['url' => $actionUrl, 'color' => 'primary'])
+            {{ $actionText }}
+        @endcomponent
+    @endisset
+
     {{-- Outro Lines --}}
     @foreach ($outroLines as $line)
         {{ $line }}
@@ -25,15 +32,7 @@
         {{ config('app.name') }}
     @endif
 
-    {{-- Action Button --}}
-    @isset($actionText)
-            <?php
-            $color = 'primary';
-            ?>
-        @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-            {{ $actionText }}
-        @endcomponent
-    @endisset
+
 
     {{-- Subcopy --}}
     @isset($actionText)
