@@ -45,7 +45,7 @@
                         <table class="inner-body" align="left" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
-                                <td class="content-cell">
+                                <td class="content-cell" style="padding-left: 0px;">
 
                                     {!! $text !!}
 
@@ -59,9 +59,9 @@
                         <table class="inner-body" align="left" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; color: #000000;">
                             <!-- Body content -->
                             <tr>
-                                <td class="content-cell" style="text-align: left;">
+                                <td class="content-cell" style="text-align: left; padding-left: 0px;">
 
-                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 250px;" alt="">
+                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 500px;" alt="">
 
                                 </td>
                             </tr>
