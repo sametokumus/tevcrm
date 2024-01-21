@@ -37,6 +37,7 @@ class StatusChangeNotification extends Notification
             ->markdown('emails.status_change_notification', [
                 'title' => $this->title,
                 'message' => $this->message,
+                'notify_logo' => $this->notify_logo,
                 // Add other variables as needed
             ]);
 //            ->action('Şifrenizi değiştirmek için tıklayınız!', $url)
