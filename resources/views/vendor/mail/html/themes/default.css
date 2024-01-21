@@ -265,13 +265,13 @@ img {
 }
 
 .panel-content {
-    background-color: #2d1c45;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 16px;
 }
 
 .panel-content p {
-    color: #ffffff;
+    color: #000000;
 }
 
 .panel-item {
