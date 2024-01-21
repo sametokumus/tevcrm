@@ -46,7 +46,10 @@ class StatusHistoryHelper
                     $sender_id = $user_id;
                     $sender = Admin::query()->where('id', $user_id)->first();
                     $sender_name = $sender->name.' '.$sender->surname;
-                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+//                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+                    $notify = '<a href="https://crm.semytechnology.com/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> '.$notify_setting->message;
+                    $action_link = 'https://crm.semytechnology.com/sale-detail/'.$sale->sale_id;
+                    $notify_logo = $sale_owner->notification_logo;
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([
@@ -73,7 +76,7 @@ class StatusHistoryHelper
                             'type'=> 2
                         ]);
 
-                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $role_user);
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $role_user, $action_link, $notify_logo);
                     }
                 }
 
@@ -93,7 +96,10 @@ class StatusHistoryHelper
                     $sender_id = $user_id;
                     $sender = Admin::query()->where('id', $user_id)->first();
                     $sender_name = $sender->name.' '.$sender->surname;
-                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+//                    $notify = '<b>'.$sender_name.'</b> tarafından <a href="/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> numaralı siparişin durumu <b>"'.$new_status->name.'"</b> olarak güncellendi.';
+                    $notify = '<a href="https://crm.semytechnology.com/sale-detail/'.$sale->sale_id.'"><b>'.$short_code.'</b></a> '.$notify_setting->message;
+                    $action_link = 'https://crm.semytechnology.com/sale-detail/'.$sale->sale_id;
+                    $notify_logo = $sale_owner->notification_logo;
 
                     if ($notify_setting->is_notification == 1){
                         StatusNotify::query()->insert([
@@ -120,7 +126,7 @@ class StatusHistoryHelper
                             'type'=> 2
                         ]);
 
-                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $receiver);
+                        $check_send = StatusNotifyHelper::SendToMail($notify_id, $short_code, strip_tags($notify), $receiver, $action_link, $notify_logo);
                     }
                 }
 

@@ -23,12 +23,12 @@ class StatusNotifyHelper
             return false;
         }
     }
-    public static function SendToMail($id, $title, $message, $receiver)
+    public static function SendToMail($id, $title, $message, $receiver, $action_link, $notify_logo)
     {
         try {
 
 //            Mail::to($receiver->email)->send(new StatusChangeMail($receiver->email, $title, $message));
-            $receiver->notify(new StatusChangeNotification($title, $message));
+            $receiver->notify(new StatusChangeNotification($title, $message, $action_link, $notify_logo));
 
             return true;
         }catch (\Exception $e){

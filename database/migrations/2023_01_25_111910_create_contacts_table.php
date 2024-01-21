@@ -28,6 +28,7 @@ class CreateContactsTable extends Migration
             $table->string('registration_office')->nullable();
             $table->string('short_code')->nullable();
             $table->string('mail_signature')->nullable();
+            $table->string('notification_logo')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

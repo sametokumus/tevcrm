@@ -20,6 +20,7 @@ class CreateStatusNotifySettingsTable extends Migration
             $table->json('receivers')->nullable();
             $table->tinyInteger('is_notification')->default(0);
             $table->tinyInteger('is_mail')->default(0);
+            $table->text('message')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

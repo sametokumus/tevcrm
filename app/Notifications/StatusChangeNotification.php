@@ -12,11 +12,15 @@ class StatusChangeNotification extends Notification
 
     protected $title;
     protected $message;
+    protected $action_link;
+    protected $notify_logo;
 
-    public function __construct($title, $message)
+    public function __construct($title, $message, $action_link, $notify_logo)
     {
         $this->title = $title;
         $this->message = $message;
+        $this->action_link = $action_link;
+        $this->notify_logo = $notify_logo;
     }
 
     public function via($notifiable)
@@ -28,7 +32,8 @@ class StatusChangeNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->title)
-            ->from('mail-sender@sametokumus.com','SEMY BROTHERS')
+            ->from('mail-sender@sametokumus.com','CRM-X')
+            ->action('Satış Detayına Git', $this->action_link)
             ->markdown('emails.status_change_notification', [
                 'title' => $this->title,
                 'message' => $this->message,
