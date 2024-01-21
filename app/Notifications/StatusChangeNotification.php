@@ -35,7 +35,7 @@ class StatusChangeNotification extends Notification
             ->from('mail-sender@sametokumus.com','CRM-X')
             ->line($this->message)
             ->action('Satış Detayına Git', $this->action_link)
-            ->markdown('emails.status_change_notification', [
+            ->markdown('emails.status_change_notification-copy-old', [
                 'title' => $this->title,
                 'message' => $this->message,
                 'notify_logo' => $this->notify_logo,
