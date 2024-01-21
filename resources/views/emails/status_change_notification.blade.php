@@ -13,11 +13,7 @@
     @endforeach
 
     {{-- Action Button --}}
-    @isset($actionText)
-        @component('mail::button', ['url' => $actionUrl, 'color' => 'primary'])
-            {{ $actionText }}
-        @endcomponent
-    @endisset
+    <a href="https://crm.semytechnology.com/sale-detail/d2a853d1-12b5-3cf6-a4ce-64149e2925b9">Satış Detayına Git</a>
 
     {{-- Outro Lines --}}
     @foreach ($outroLines as $line)
