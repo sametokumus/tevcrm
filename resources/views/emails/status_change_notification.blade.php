@@ -25,6 +25,16 @@
         {{ config('app.name') }}
     @endif
 
+    {{-- Action Button --}}
+    @isset($actionText)
+            <?php
+            $color = 'primary';
+            ?>
+        @component('mail::button', ['url' => $actionUrl, 'color' => $color])
+            {{ $actionText }}
+        @endcomponent
+    @endisset
+
     {{-- Subcopy --}}
     @isset($actionText)
         @slot('subcopy')
