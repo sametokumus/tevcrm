@@ -506,7 +506,32 @@ $extra_js='
 
                 <div id="staffs" class="row p-3">
 
-
+                    <div class="col-sm-3">
+                        <div class="card mb-3">
+                            <a href="/staff-dashboard/1">
+                                <div class="m-1 bg-inverse bg-opacity-15">
+                                    <div class="position-relative overflow-hidden" style="height: 165px">
+                                        <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="">
+                                        <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">
+                                            <div class="my-2">
+                                                <div class="profile-card-img" style="background-image: url('/img/user/659fe86bf0a1f-f7274fd7-ccc0-40f9-bf19-42fe2ea5747d.jpg');"></div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">Süper Admin</div>
+                                                <div class="small">admin@test.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
