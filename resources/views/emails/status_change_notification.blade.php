@@ -8,7 +8,7 @@
     <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
 
 
-    <p style="font-weight: bold; color: #000000;">{!! $message !!}</p>
+    <p>{!! $message !!}</p>
 
     {{-- Action Button --}}
     @isset($actionText)
