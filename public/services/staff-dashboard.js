@@ -836,7 +836,6 @@ async function initStaffStats(user_id){
 
 async function initStaffs(){
     let data = await serviceGetAdmins();
-    console.log(data)
     $.each(data.admins, function(i, admin){
 
         let item = '<div class="col-sm-3">\n' +
@@ -854,7 +853,9 @@ async function initStaffs(){
             '                                          <div class="col-7">\n' +
             '                                              <div>\n' +
             '                                                  <div class="fw-bold">'+ admin.name +' '+ admin.surname +'</div>\n' +
+            '                                                  <div class="small">'+ admin.admin_role_name +'</div>\n' +
             '                                                  <div class="small">'+ admin.email +'</div>\n' +
+            '                                                  <div class="small">'+ admin.phone_number +'</div>\n' +
             '                                              </div>\n' +
             '                                          </div>\n' +
             '                                      </div>\n' +
