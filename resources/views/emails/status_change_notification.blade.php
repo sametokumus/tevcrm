@@ -6,12 +6,9 @@
 
     {{-- Logo --}}
     <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
-    <p>{!! $message !!}</p>
 
-    {{-- Intro Lines --}}
-    @foreach ($introLines as $line)
-       <p>{!! $line !!}</p>
-    @endforeach
+
+    <p style="font-weight: bold;">{!! $message !!}</p>
 
     {{-- Action Button --}}
     @isset($actionText)
