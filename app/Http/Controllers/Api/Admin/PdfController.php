@@ -3174,7 +3174,8 @@ class PdfController extends Controller
 
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
-            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Authorised Signature')), 0, 0, 'C');
+//            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', __('Authorised Signature')), 0, 0, 'C');
+            $pdf->Cell(70, 0, iconv('utf-8', 'iso-8859-9', $y), 0, 0, 'C');
             $x = 130;
             $pdf->SetXY($x, $y);
             $pdf->SetFont('ChakraPetch-Bold', '', 8);
