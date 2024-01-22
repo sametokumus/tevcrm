@@ -33,7 +33,6 @@
     @endif
 
 
-
     {{-- Subcopy --}}
     @isset($actionText)
         @slot('subcopy')
