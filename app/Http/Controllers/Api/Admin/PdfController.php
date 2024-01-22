@@ -3166,7 +3166,7 @@ class PdfController extends Controller
             $y = $pdf->getY() + 20;
             $x = 10;
 
-            if ($y > 250){
+            if ($y > 245){
                 $pdf->AddPage();
                 $pdf->SetXY(10, 20);
                 $y = 20;
