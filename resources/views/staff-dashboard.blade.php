@@ -511,15 +511,15 @@ $extra_js='
                             <a href="/staff-dashboard/1">
                                 <div class="m-1">
                                     <div class="position-relative overflow-hidden" style="height: 165px">
-                                        <div class="row">
-                                            <div class="col">
-                                                <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="">
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-img-overlay text-dark text-center">
+                                        <div class="card-img-overlay text-dark text-center">
+                                            <div class="row">
+                                                <div class="col">
                                                     <div class="my-2">
                                                         <div class="profile-card-img" style="background-image: url('/img/user/659fe86bf0a1f-f7274fd7-ccc0-40f9-bf19-42fe2ea5747d.jpg');"></div>
                                                     </div>
+{{--                                                <img src="img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="">--}}
+                                                </div>
+                                                <div class="col">
                                                     <div>
                                                         <div class="fw-bold">Süper Admin</div>
                                                         <div class="small">admin@test.com</div>
