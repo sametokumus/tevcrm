@@ -6,10 +6,11 @@
 
     {{-- Logo --}}
     <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
+    <p>{!! $message !!}</p>
 
     {{-- Intro Lines --}}
     @foreach ($introLines as $line)
-        {{ $line }}
+       <p>{!! $line !!}</p>
     @endforeach
 
     {{-- Action Button --}}
