@@ -6,8 +6,6 @@
 
     {{-- Logo --}}
     <img src="{{ $notify_logo }}" style="width: 150px; margin: auto;" alt="">
-
-
     <p>{!! $message !!}</p>
 
     {{-- Action Button --}}
