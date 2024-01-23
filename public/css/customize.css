@@ -908,3 +908,15 @@ table.dataTable{
     background-repeat: no-repeat;
     margin: auto;
 }
+
+.pipeman-container{
+    width: 0;
+    height: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+.pipeman-image{
+    display: none;
+}
