@@ -1,3 +1,7 @@
+<div class="pipeman-container">
+    <img src="/gifs/pipeman1.gif" id="pipeman-image" class="pipeman-image" >
+</div>
+
 <div class="toasts-container">
     <div class="toast" data-autohide="false">
         <div class="toast-header">

@@ -91,6 +91,9 @@ $extra_js="";
 
             </div>
             <div class="menu-item">
+                <button class="btn btn-theme btn-sm" type="button" onclick="triggerPipeman();"><span>Sipariş Özeti</span></button>
+            </div>
+            <div class="menu-item">
                 <a href="/my-dashboard" id="header-notify" data-bs-display="static" class="menu-link">
                     <div class="menu-icon"><i class="bi bi-bell nav-icon"></i></div>
                     <span class="badge bg-danger d-none"></span>

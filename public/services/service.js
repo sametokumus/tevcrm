@@ -127,6 +127,15 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 
 /* CUSTOM FUNCTIONS */
 
+function triggerPipeman(){
+	// $(".alert-container .alert").text(message);
+	// var alert = $(".alert-container");
+	// alert.show("slide", {direction: "right"}, 200);
+	// window.setTimeout(function() {
+	// 	alert.hide("slide", {direction: "right"}, 200);
+	// }, 3000);
+}
+
 function showAlert(message){
 	$(".alert-container .alert").text(message);
 	var alert = $(".alert-container");
