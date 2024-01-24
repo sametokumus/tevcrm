@@ -2401,6 +2401,7 @@ class SaleController extends Controller
                 $offer_hour = 0;
             }
 
+            $confirmed_counter = 0;
             $history2 = StatusHistory::query()->where('sale_id', $sale_id)->where('status_id', 7)->orderByDesc('id')->first();
             if ($history2){
                 $confirmed_date = $history2->created_at;
@@ -2412,6 +2413,7 @@ class SaleController extends Controller
 //                $confirmed_hour = 0;
 
 
+                $confirmed_counter = 1;
                 $confirmed_date = Carbon::now();
                 $confirmed_day = $confirmed_date->diffInDays($offer_date);
                 $confirmed_hour = $confirmed_date->diffInHours($offer_date);
@@ -2425,7 +2427,7 @@ class SaleController extends Controller
                 $completed_day = $completed_date->diffInDays($confirmed_date);
                 $completed_hour = $completed_date->diffInHours($confirmed_date);
             }else{
-                if ($confirmed_date == null) {
+                if ($confirmed_counter == 1) {
                     $completed_date = null;
                     $completed_day = 0;
                     $completed_hour = 0;
