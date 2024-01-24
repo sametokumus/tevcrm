@@ -134,7 +134,7 @@ function triggerPipeman(){
     imageContainer.style.transform = "scale(1)";
     window.setTimeout(function() {
         imageContainer.style.transform = "scale(0)";
-    }, 3000);
+    }, 10000);
 
 	// $(".alert-container .alert").text(message);
 	// var alert = $(".alert-container");
