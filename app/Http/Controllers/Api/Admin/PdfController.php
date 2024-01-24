@@ -1190,10 +1190,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->freight != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
@@ -1202,10 +1202,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->freight, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->vat != null && $sale->vat != '0.00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -1214,11 +1214,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->grand_total != null) {
                 if (($sale->vat != null && $sale->vat != '0.00') || $sale->freight != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -1227,7 +1227,6 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
@@ -1665,10 +1664,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $sub_total.' '.$target), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->freight != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
@@ -1678,10 +1677,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $freight.' '.$target), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->vat != null && $sale->vat != '0.00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -1691,11 +1690,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $vat.' '.$target), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->grand_total != null) {
                 if (($sale->vat != null && $sale->vat != '0.00') || $sale->freight != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -1705,11 +1704,11 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $grand_total. ' ' . $target), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
             if ($sale->shipping_price != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Shipping'))), 1, 0, 'R');
@@ -1719,11 +1718,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', $shipping_price.' '.$target), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->grand_total_with_shipping != null) {
                 if ($sale->shipping_price != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -1733,7 +1732,6 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9',$grand_total_with_shipping.' '.$target), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
@@ -2147,10 +2145,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->freight != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Freight'))), 1, 0, 'R');
@@ -2159,10 +2157,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->freight, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->vat != null && $sale->vat != '0.00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -2171,11 +2169,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->grand_total != null) {
                 if (($sale->vat != null && $sale->vat != '0.00') || $sale->freight != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -2184,11 +2182,11 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
             if ($sale->shipping_price != null) {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Shipping'))), 1, 0, 'R');
@@ -2197,11 +2195,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->shipping_price, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->grand_total_with_shipping != null) {
                 if ($sale->shipping_price != null) {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -2210,7 +2208,6 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->grand_total_with_shipping, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
@@ -2774,10 +2771,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->list_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($sale->list_grand_total == '0,00' && $sale->list_tax == '0,00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -2786,7 +2783,7 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->list_tax, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
+                $y = $pdf->GetY() + 10;
 
 
                 $pdf->SetXY($x, $y);
@@ -2797,9 +2794,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($sale->list_grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
+
+            $y = $pdf->GetY() + 10;
 
             //NOTE
             $pi_detail = ProformaInvoiceDetails::query()->where('sale_id', $sale_id)->first();
@@ -3110,10 +3108,10 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($offer_sub_total, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($offer_vat != null && $offer_vat != '0.00') {
+                $y = $pdf->GetY() + 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Bold', '', 10);
                 $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Vat'))), 1, 0, 'R');
@@ -3122,11 +3120,11 @@ class PdfController extends Controller
                 $pdf->SetFont('ChakraPetch-Regular', '', 10);
                 $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($offer_vat, 2,",",".").' '.$currency), 1, 0, 'C');
 
-                $y += 10;
             }
 
             if ($offer_grand_total != null) {
                 if ($offer_vat != null && $offer_vat != '0.00') {
+                    $y = $pdf->GetY() + 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Bold', '', 10);
                     $pdf->Cell(140, 10, iconv('utf-8', 'iso-8859-9', strtoupper(__('Grand Total'))), 1, 0, 'R');
@@ -3135,10 +3133,10 @@ class PdfController extends Controller
                     $pdf->SetFont('ChakraPetch-Regular', '', 10);
                     $pdf->Cell(50, 10, iconv('utf-8', 'iso-8859-9', number_format($offer_grand_total, 2,",",".") . ' ' . $currency), 1, 0, 'C');
 
-                    $y += 10;
                 }
             }
 
+            $y = $pdf->GetY() + 10;
 
             //NOTE
             $po_detail = PurchasingOrderDetails::query()->where('offer_id', $offer_id)->first();
