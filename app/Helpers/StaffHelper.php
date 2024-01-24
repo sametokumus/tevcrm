@@ -70,7 +70,7 @@ class StaffHelper
     //c3
     public static function get_sales_profit_rate($all_sales_price, $all_sales_expense)
     {
-        if ($all_sales_expense == 0){
+        if ($all_sales_expense == 0 && $all_sales_price > 0){
             return 10;
         }
         if ($all_sales_price == 0){
