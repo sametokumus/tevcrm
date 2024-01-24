@@ -375,7 +375,7 @@ class StaffHelper
             }else{
                 $profit_rate = 0;
             }
-            $item['profit_rate'] = $profit_rate;
+//            $item['profit_rate'] = $profit_rate;
 //            $total_profit_rate += $profit_rate;
             $total_item_count++;
             $all_sales_price += $total_price;
