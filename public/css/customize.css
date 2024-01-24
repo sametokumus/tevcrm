@@ -909,6 +909,10 @@ table.dataTable{
     margin: auto;
 }
 
+.dataTables_scrollHead{
+    padding-left: 1px;
+}
+
 .pipeman-container{
     width: 0;
     height: 0;
