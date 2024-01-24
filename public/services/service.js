@@ -129,7 +129,9 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 
 function triggerPipeman(){
     $('.pipeman-container').css('width', '300px').css('height', '300px');
-    $('.pipeman-image').css('display', 'block');
+    // $('.pipeman-image').css('display', 'block');
+    var imageContainer = document.getElementById("pipeman-image");
+    imageContainer.style.transform = "scale(1)";
 
 	// $(".alert-container .alert").text(message);
 	// var alert = $(".alert-container");

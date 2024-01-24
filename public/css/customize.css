@@ -918,5 +918,8 @@ table.dataTable{
     z-index: 9999;
 }
 .pipeman-image{
-    display: none;
+    /*display: none;*/
+    transform: scale(0);
+    transition: transform 1s ease-in-out;
+    transform-origin: 0 0;
 }
