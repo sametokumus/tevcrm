@@ -2456,7 +2456,11 @@ class SaleController extends Controller
             $process['confirmed_hour'] = $confirmed_hour;
             $process['completed_hour'] = $completed_hour;
             $process['is_completed'] = $is_completed;
-            $process['lead_time'] = $lead_time;
+            if ($confirmed_counter == 1) {
+                $process['lead_time'] = 0;
+            }else {
+                $process['lead_time'] = $lead_time;
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['process' => $process]]);
         } catch (QueryException $queryException) {
