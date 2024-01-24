@@ -132,6 +132,9 @@ function triggerPipeman(){
     // $('.pipeman-image').css('display', 'block');
     var imageContainer = document.getElementById("pipeman-image");
     imageContainer.style.transform = "scale(1)";
+    window.setTimeout(function() {
+        imageContainer.style.transform = "scale(0)";
+    }, 3000);
 
 	// $(".alert-container .alert").text(message);
 	// var alert = $(".alert-container");
