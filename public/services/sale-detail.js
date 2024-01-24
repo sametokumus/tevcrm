@@ -497,7 +497,7 @@ async function initSellingProcess(sale_id){
         processData.push(bar3);
     }
 
-    if (process.confirmed_date != null) {
+    if (process.confirmed_date != null && process.confirmed_counter == 0) {
         let date1 = formatDateDESC(process.confirmed_date, '-');
         let date2 = new Date(formatDateDESC(process.confirmed_date, '-'));
         date2.setDate(date2.getDate() + process.lead_time);

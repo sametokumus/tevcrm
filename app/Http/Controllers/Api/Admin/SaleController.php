@@ -2456,6 +2456,7 @@ class SaleController extends Controller
             $process['confirmed_hour'] = $confirmed_hour;
             $process['completed_hour'] = $completed_hour;
             $process['is_completed'] = $is_completed;
+            $process['confirmed_counter'] = $confirmed_counter;
             if ($confirmed_counter == 1) {
                 $process['lead_time'] = 0;
             }else {
