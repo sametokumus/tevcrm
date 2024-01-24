@@ -68,13 +68,15 @@ class StaffHelper
         }
     }
     //c3
-    public static function get_sales_profit_rate($total_profit_rate, $total_item_count)
+    public static function get_sales_profit_rate($all_sales_price, $all_sales_expense)
     {
-        if ($total_profit_rate == 0 || $total_item_count == 0){
-            return 0;
-        }else {
-            $rate = $total_profit_rate / $total_item_count;
+        if ($all_sales_expense == 0){
+            return 10;
         }
+        if ($all_sales_price == 0){
+            return 0;
+        }
+        $rate = 100 * ($all_sales_price - $all_sales_expense) / $all_sales_expense;
         if ($rate < 10){
             return 0;
         }else if ($rate >= 10 && $rate < 20){
@@ -307,6 +309,8 @@ class StaffHelper
         $total_item_count = 0;
         $total_payment_point = 0;
         $total_payment_count = 0;
+        $all_sales_price = 0;
+        $all_sales_expense = 0;
 
         foreach ($sale_items as $item){
 
@@ -371,9 +375,11 @@ class StaffHelper
             }else{
                 $profit_rate = 0;
             }
-
-            $total_profit_rate += $profit_rate;
+            $item['profit_rate'] = $profit_rate;
+//            $total_profit_rate += $profit_rate;
             $total_item_count++;
+            $all_sales_price += $total_price;
+            $all_sales_expense += $total_expense;
 
 
             //ödeme yöntemi
@@ -494,9 +500,11 @@ class StaffHelper
 
         $data['total_profit_rate'] = $total_profit_rate;
         $data['total_item_count'] = $total_item_count;
-        $c3 = StaffHelper::get_sales_profit_rate($total_profit_rate, $total_item_count);
+        $c3 = StaffHelper::get_sales_profit_rate($all_sales_price, $all_sales_expense);
         $data['c3'] = $c3;
         $data['c3_sales'] = $sale_items;
+        $data['all_sales_price'] = $all_sales_price;
+        $data['all_sales_expense'] = $all_sales_expense;
 
         $data['total_payment_point'] = $total_payment_point;
         $data['total_payment_count'] = $total_payment_count;
