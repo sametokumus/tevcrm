@@ -246,25 +246,46 @@ class StaffTargetHelper
         $target_total_price = 0;
         $target_offer_price = 0;
 
+        $usd_price = 0;
+        $total_profit_rate = 0;
+        $total_item_count = 0;
+        $total_payment_point = 0;
+        $total_payment_count = 0;
+        $all_sales_price = 0;
+        $all_sales_expense = 0;
+
         foreach ($sales as $sale){
 
-            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
-            $total_offer_price = 0;
-            foreach ($sale_offers as $sale_offer){
-                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
-                $sale_offer['offer_product'] = $offer_product;
-                $total_offer_price += $offer_product->converted_price;
+            //satış
+            $total_price = $sale->grand_total;
+            if ($sale->grand_total_with_shipping != null){
+                $total_price = $sale->grand_total_with_shipping;
             }
 
+            if ($sale->currency == 'TRY'){
+                $usd_price += $total_price / $sale->usd_rate;
+            }else if ($sale->currency == 'USD'){
+                $usd_price += $total_price;
+            }else if ($sale->currency == 'EUR'){
+                $usd_price += $total_price / $sale->usd_rate * $sale->eur_rate;
+            }
+
+            //satın alma
+            $sale_offers = SaleOffer::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
+            $total_offer_price = 0;
+            //tedarik gideri
+            foreach ($sale_offers as $sale_offer){
+                $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
+                $total_offer_price += $offer_product->converted_price;
+            }
             if ($total_offer_price != 0) {
                 $total_expense = $total_offer_price;
             }else{
                 $total_expense = 0;
             }
-
+            //ek giderler
             $expenses = Expense::query()->where('sale_id', $sale->sale_id)->where('active', 1)->get();
             foreach ($expenses as $expense){
-                $expense['category_name'] = ExpenseCategory::query()->where('id', $expense->category_id)->first()->name;
                 if ($expense->currency == $sale->currency){
                     $total_expense += $expense->price;
                     $expense['converted_price'] = $expense->price;
@@ -290,49 +311,25 @@ class StaffTargetHelper
                 }
             }
 
-            $target_offer_price = $total_expense;
-
-
-            $sale_total_price = $sale->grand_total;
-            if ($sale->grand_total_with_shipping != null){
-                $sale_total_price = $sale->grand_total_with_shipping;
-            }
-
-            $calculate_currency = 'TRY';
-            if ($calculate_currency == $sale->currency){
-                $target_total_price += $sale_total_price;
+            //kar oranı
+            if ($total_expense != 0) {
+                $profit_rate = 100 * ($total_price - $total_expense) / $total_expense;
             }else{
-                if ($calculate_currency == 'TRY') {
-                    $sc = strtolower($sale->currency);
-                    $converted_price = $sale_total_price * $sale->{$sc.'_rate'};
-                }else{
-                    if ($sale->currency == 'TRY') {
-                        $tc = strtolower($calculate_currency);
-                        if ($sale->{$tc.'_rate'} != 0) {
-                            $converted_price = $sale_total_price / $sale->{$tc.'_rate'};
-                        }else{
-                            $converted_price = 0;
-                        }
-                    }else{
-                        $tc = strtolower($calculate_currency);
-                        $sc = strtolower($sale->currency);
-                        if ($sale->{$sc.'_rate'} != 0) {
-                            $converted_price = $sale_total_price * $sale->{$tc . '_rate'} / $sale->{$sc . '_rate'};
-                        }else{
-                            $converted_price = 0;
-                        }
-                    }
-                }
-                $target_total_price += $converted_price;
+                $profit_rate = 0;
             }
+//            $sale['profit_rate'] = $profit_rate;
+//            $total_profit_rate += $profit_rate;
+            $total_item_count++;
+            $all_sales_price += $total_price;
+            $all_sales_expense += $total_expense;
 
 
         }
 
         $status = array();
-        $status['price'] = number_format(($target_total_price - $target_offer_price), 2, ".", "");
-        if ($target_total_price != 0 && $target_offer_price != 0) {
-            $sale_rate = 100 * ($target_total_price - $target_offer_price) / $target_total_price;
+        $status['price'] = number_format(($all_sales_price - $all_sales_expense), 2, ".", "");
+        if ($all_sales_price != 0 && $all_sales_expense != 0) {
+            $sale_rate = 100 * ($all_sales_price - $all_sales_expense) / $all_sales_price;
         }else{
             $sale_rate = 0;
         }
