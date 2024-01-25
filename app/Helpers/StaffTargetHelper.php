@@ -329,7 +329,7 @@ class StaffTargetHelper
         $status = array();
         $status['price'] = number_format(($all_sales_price - $all_sales_expense), 2, ".", "");
         if ($all_sales_price != 0 && $all_sales_expense != 0) {
-            $sale_rate = 100 * ($all_sales_price - $all_sales_expense) / $all_sales_price;
+            $sale_rate = 100 * ($all_sales_price - $all_sales_expense) / $all_sales_expense;
         }else{
             $sale_rate = 0;
         }
