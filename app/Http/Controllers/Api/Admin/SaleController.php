@@ -1612,8 +1612,9 @@ class SaleController extends Controller
                     $offer['converted_price'] = number_format($offer->total_price, 2, ".", "");
                 }else{
                     if ($offer_currency == 'TRY') {
-                        $oc = strtolower($offer_currency);
-                        $c_price = $offer->total_price / $sale->{$oc.'_rate'};
+//                        $oc = strtolower($offer_currency);
+                        $sc = strtolower($sale->currency);
+                        $c_price = $offer->total_price / $sale->{$sc.'_rate'};
                     }else if ($sale->currency == 'TRY') {
                         $oc = strtolower($offer_currency);
                         $c_price = $offer->total_price * $sale->{$oc.'_rate'};
