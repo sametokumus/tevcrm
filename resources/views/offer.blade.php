@@ -15,7 +15,7 @@ $extra_js='
             <div class="row">
                 <div class="col-md-8">
                     <h1 class="page-header">
-                        Talep
+                        Talep <span id="sale-global-id"></span>
                     </h1>
                 </div>
                 <div class="col-md-4">
