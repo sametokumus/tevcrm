@@ -10,19 +10,7 @@
 
 		$('.navbar-logout').click(function(event){
 			event.preventDefault();
-			fetchDataGet('/v1/logout', 'application/json').then(data=>{
-
-				if(data.status == "success"){
-
-					showAlert(data.message);
-					removeSession();
-					window.location.href = "/";
-
-				}else{
-					showAlert("İstek Başarısız.");
-				}
-
-			});
+			logout();
 
 		});
 
@@ -126,6 +114,18 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 
 
 /* CUSTOM FUNCTIONS */
+function logout(){
+    fetchDataGet('/v1/logout', 'application/json').then(data=>{
+
+        if(data.status == "success"){
+            removeSession();
+            window.location.href = "/";
+        }else{
+            showAlert("İstek Başarısız.");
+        }
+
+    });
+}
 
 function triggerPipeman(){
     $('.pipeman-container').css('width', '300px').css('height', '300px');
@@ -449,27 +449,37 @@ async function checkLogin () {
 		window.location.href = "login";
 	}else{
 		//verify bcrypt
-		var userRole = localStorage.getItem('userRole');
-		var userId = localStorage.getItem('userId');
-		var userEmail = localStorage.getItem('userEmail');
-		var userLogin = localStorage.getItem('userLogin');
-		var hash = userRole+userId+userEmail;
+		let userRole = localStorage.getItem('userRole');
+		let userId = localStorage.getItem('userId');
+		let userEmail = localStorage.getItem('userEmail');
+		let userLogin = localStorage.getItem('userLogin');
+
+        //user
+        let user = await serviceGetAdminById(userId);
+        console.log(user)
 
 
-		try{
-			checkpw(
-				hash,
-				userLogin,
-				function(res){
-					if(res == false){
-						window.location.href = "login";
-					}
-				},
-				function() {});
-		}catch(err){
-			//alert(err);
-			return;
-		}
+        let return_role = true;
+
+        let hash = userRole+userId+userEmail;
+
+        if (return_role) {
+            try {
+                checkpw(
+                    hash,
+                    userLogin,
+                    function (res) {
+                        if (res == false) {
+                            window.location.href = "login";
+                        }
+                    },
+                    function () {
+                    });
+            } catch (err) {
+                //alert(err);
+                return;
+            }
+        }
 	}
 }
 
