@@ -65,8 +65,18 @@ class OfferRequestController extends Controller
                 $count = OfferProduct::query()->where('request_product_id', $offer_request_product->id)->where('active', 1)->count();
                 if ($count > 0){
                     $offer_request_product['is_offered'] = 1;
+                    $priced_count = OfferProduct::query()
+                        ->where('request_product_id', $offer_request_product->id)
+                        ->where('total_price', '!=', null)
+                        ->where('active', 1)->count();
+                    if ($priced_count > 0){
+                        $offer_request_product['is_priced'] = 1;
+                    }else{
+                        $offer_request_product['is_priced'] = 0;
+                    }
                 }else{
                     $offer_request_product['is_offered'] = 0;
+                    $offer_request_product['is_priced'] = 0;
                 }
 
             }
