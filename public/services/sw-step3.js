@@ -314,6 +314,7 @@ async function addOfferBatchProcess(){
 
             // let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
             let offer_price = parseFloat(changePriceToDecimal(price));
+            console.log(offer_price);
             offer_price = offer_price + (offer_price / 100 * profit_rate);
 
             let formData = JSON.stringify({
