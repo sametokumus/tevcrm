@@ -455,11 +455,15 @@ async function checkLogin () {
 		let userLogin = localStorage.getItem('userLogin');
 
         //user
-        let user = await serviceGetAdminById(userId);
-        console.log(user)
+        let data = await serviceGetAdminById(userId);
+        let admin = data.admin;
 
-
-        let return_role = true;
+        let return_role = false;
+        if (admin.email == userEmail && admin.admin_role_id == userRole){
+            return_role = true;
+        }else{
+            logout();
+        }
 
         let hash = userRole+userId+userEmail;
 
