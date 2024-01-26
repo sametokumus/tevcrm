@@ -115,6 +115,9 @@ async function initOfferRequest(){
         if (product.is_offered == 1){
             classname= 'bg-success bg-opacity-50';
         }
+        if (product.is_priced == 1){
+            classname= 'bg-info bg-opacity-60';
+        }
         let item = '<tr id="productRow' + product.id + '" class="'+ classname +'">\n' +
             '           <td>' + product.sequence + '</td>\n' +
             '           <td>' + product.id + '</td>\n' +
