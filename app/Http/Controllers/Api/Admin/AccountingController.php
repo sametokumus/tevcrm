@@ -137,13 +137,21 @@ class AccountingController extends Controller
         try {
             $admin = Admin::query()->where('id', $user_id)->first();
 
-            $packing_lists = PackingList::query()
-                ->leftJoin('sale_transactions', 'sale_transactions.sale_id', '=', 'packing_lists.sale_id')
-                ->leftJoin('sale_transaction_payments', 'sale_transaction_payments.transaction_id', '=', 'sale_transactions.transaction_id')
-                ->whereRaw("(packing_lists.packing_list_id IN (SELECT packing_list_id FROM sale_transactions))")
-                ->where('packing_lists.active',1)
-                ->where('sale_transaction_payments.payment_status_id',1)
-                ->selectRaw('DISTINCT packing_lists.sale_id')
+//            $packing_lists = PackingList::query()
+//                ->leftJoin('sale_transactions', 'sale_transactions.sale_id', '=', 'packing_lists.sale_id')
+//                ->leftJoin('sale_transaction_payments', 'sale_transaction_payments.transaction_id', '=', 'sale_transactions.transaction_id')
+//                ->whereRaw("(packing_lists.packing_list_id IN (SELECT packing_list_id FROM sale_transactions))")
+//                ->where('packing_lists.active',1)
+//                ->where('sale_transaction_payments.payment_status_id',1)
+//                ->selectRaw('DISTINCT packing_lists.sale_id')
+//                ->groupBy('packing_lists.sale_id')
+//                ->get();
+            $packing_lists = SaleTransactionPayment::query()
+                ->select('packing_lists.sale_id')
+                ->leftJoin('sale_transactions', 'sale_transactions.transaction_id', '=', 'sale_transaction_payments.transaction_id')
+                ->leftJoin('packing_lists', 'packing_lists.packing_list_id', '=', 'sale_transactions.packing_list_id')
+                ->where('sale_transaction_payments.payment_status_id', 1)
+                ->where('packing_lists.active', 1)
                 ->groupBy('packing_lists.sale_id')
                 ->get();
 
