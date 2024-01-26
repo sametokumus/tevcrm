@@ -94,7 +94,7 @@ async function initOfferRequest(){
     let offer_request = data.offer_request;
 
     sale_id = offer_request.sale_id;
-    $('#sale-global-id').append(offer_request.owner.short_code + '-' + sale_id);
+    $('#sale-global-id').append(offer_request.owner.short_code + '-' + offer_request.global_id);
 
     $("#offer-request-products").dataTable().fnDestroy();
     $('#offer-request-products tbody > tr').remove();
