@@ -917,7 +917,7 @@ table.dataTable{
     width: 0;
     height: 0;
     position: fixed;
-    left: 0;
+    right: 0;
     bottom: 0;
     z-index: 9999;
 }
@@ -925,5 +925,5 @@ table.dataTable{
     /*display: none;*/
     transform: scale(0);
     transition: transform .3s ease-in-out;
-    transform-origin: left bottom;
+    transform-origin: right bottom;
 }
