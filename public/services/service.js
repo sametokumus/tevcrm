@@ -166,6 +166,11 @@ function removeSession () {
 	localStorage.removeItem('userId');
 	localStorage.removeItem('userEmail');
 	localStorage.removeItem('appToken');
+	localStorage.removeItem('userPhoto');
+	localStorage.removeItem('chatCount');
+	localStorage.removeItem('userName');
+	localStorage.removeItem('dash_currency');
+	localStorage.removeItem('dash_owner');
 }
 
 function getSession () {
