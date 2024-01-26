@@ -81,10 +81,14 @@ class AdminRoleController extends Controller
                 'email' => $request->email,
                 'name' => $request->name,
                 'surname' => $request->surname,
-                'phone_number' => $request->phone_number,
-                'password' => Hash::make($request->password)
-
+                'phone_number' => $request->phone_number
             ]);
+
+            if ($request->password != ''){
+                $admin = Admin::query()->where('id',$id)->update([
+                    'password' => Hash::make($request->password)
+                ]);
+            }
 
             return response(['message' => 'Admin güncelleme işlemi başarılı.','status' => 'success','object' => ['admin' => $admin]]);
         } catch (ValidationException $validationException) {

@@ -170,6 +170,12 @@ $extra_js='
                             </select>
                         </div>
                     </div>
+                    <div class="row mb-4">
+                        <label class="col-md-3 form-label">Şifre :</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="update_admin_password">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-theme">Kaydet</button>

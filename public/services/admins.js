@@ -37,12 +37,14 @@
 			 let surname = document.getElementById('update_admin_surname').value;
 			 let phone = document.getElementById('update_admin_phone').value;
 			 let role = document.getElementById('update_admin_role').value;
+             let password = document.getElementById('update_admin_password').value;
 			 let formData = JSON.stringify({
 				 "admin_role_id":role,
 				 "email":email,
 				 "name":name,
 				 "surname":surname,
-				 "phone_number":phone
+				 "phone_number":phone,
+				 "password":password
 			 });
 
 			 let returned = await servicePostUpdateAdmin(admin_id, formData);
