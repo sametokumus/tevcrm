@@ -332,7 +332,7 @@ class PdfController extends Controller
         $pdf->MultiCell(100, $line_height, $address, 0, 'L');
 
         if ($packing_list->address_id != null){
-            $y += 5;
+            $y = $pdf->getY() + 5;
             $x = 10;
 
             $pdf->SetFont('ChakraPetch-Bold', '', 10);
