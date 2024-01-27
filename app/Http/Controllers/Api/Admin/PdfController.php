@@ -3744,7 +3744,8 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = $this->textConvert($packing_list->note);
+//                $html = $this->textConvert($packing_list->note);
+                $html = $packing_list->note;
                 $html = str_replace('&nbsp;', " ", $html);
                 $pdf->writeHTML($html);
             }
