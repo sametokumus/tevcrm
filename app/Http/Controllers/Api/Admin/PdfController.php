@@ -861,7 +861,8 @@ class PdfController extends Controller
                 $x = 10;
                 $pdf->SetXY($x, $y);
                 $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                $html = $this->textConvert($quote->note);
+//                $html = $this->textConvert($quote->note);
+                $html = $quote->note;
                 $html = str_replace('&nbsp;', " ", $html);
                 $pdf->writeHTML($html);
             }
@@ -1266,7 +1267,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($oc_detail->note);
+//                    $html = $this->textConvert($oc_detail->note);
+                    $html = $oc_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -1771,7 +1773,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($pi_detail->note);
+//                    $html = $this->textConvert($pi_detail->note);
+                    $html = $pi_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -2247,7 +2250,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($pi_detail->note);
+//                    $html = $this->textConvert($pi_detail->note);
+                    $html = $pi_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -2834,7 +2838,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($pi_detail->note);
+//                    $html = $this->textConvert($pi_detail->note);
+                    $html = $pi_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -3173,7 +3178,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($po_detail->note);
+//                    $html = $this->textConvert($po_detail->note);
+                    $html = $po_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -3498,7 +3504,8 @@ class PdfController extends Controller
                     $x = 10;
                     $pdf->SetXY($x, $y);
                     $pdf->SetFont('ChakraPetch-Regular', '', 8);
-                    $html = $this->textConvert($rfq_detail->note);
+//                    $html = $this->textConvert($rfq_detail->note);
+                    $html = $rfq_detail->note;
                     $html = str_replace('&nbsp;', " ", $html);
                     $pdf->writeHTML($html);
                 }
@@ -3675,6 +3682,7 @@ class PdfController extends Controller
             $x = 10;
             $y += 12;
             $pdf->SetXY($x, $y);
+            $i = 1;
             foreach ($sale_offers as $sale_offer) {
                 if ($lang == 'tr'){
                     $measurement_name = $sale_offer->measurement_name_tr;
@@ -3718,7 +3726,8 @@ class PdfController extends Controller
 
                 $x = 10;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
+//                $pdf->Cell(10, $row_height, $sale_offer->sequence, 1, 0, 'C');
+                $pdf->Cell(10, $row_height, $i, 1, 0, 'C');
                 $pdf->Cell(30, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->product_ref_code), 1, 0, 'C');
 
                 $x = 150;
@@ -3728,6 +3737,7 @@ class PdfController extends Controller
                 $pdf->Ln();
 
                 $y += $row_height;
+                $i++;
 
             }
 
