@@ -138,7 +138,7 @@ $extra_js="";
             <div class="menu">
                 @if( Request::segment(1) != 'dashboard' )
                 <div class="p-3 d-flex align-items-center">
-                    <a href="javascript:window.history.back();" class="btn btn-outline-default text-nowrap px-3 rounded-pill"><i class="fa fa-arrow-left me-1 ms-n1"></i> Önceki Sayfa</a>
+                    <a href="javascript:window.history.back();" class="btn btn-warning btn-sm text-nowrap px-3 py-1"><i class="fa fa-arrow-left me-1 ms-n1"></i> Önceki Sayfa</a>
                 </div>
                 @endif
 
