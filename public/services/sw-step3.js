@@ -308,7 +308,7 @@ async function addOfferBatchProcess(){
             // let discounted_price = row.discounted_price;
 
             let price = changePriceToDecimal(row.sale_price);
-            console.log(price)
+            console.log(row.sale_price)
             // if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
             //     price = discounted_price;
             // }
