@@ -151,6 +151,7 @@ async function initStaffs(){
             }
             let progress = '';
             if (target.status.type_id == 3){
+                console.log(target.status.type_id)
                 progress = '<div class="progress">\n' +
                     '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.sale_rate +'%</span></div>\n' +
                     '       </div>\n';
