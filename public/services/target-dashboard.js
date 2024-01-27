@@ -149,6 +149,16 @@ async function initStaffs(){
                 actions = '<button type="button" class="btn btn-outline-secondary btn-sm" onclick="openUpdateStaffTargetModal(\''+ target.id +'\');">Düzenle</button>\n' +
                     '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
             }
+            let progress = '';
+            if (target.type_id == 3){
+                progress = '<div class="progress">\n' +
+                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
+                    '       </div>\n';
+            }else{
+                progress = '<div class="progress">\n' +
+                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.sale_rate +'%</span></div>\n' +
+                    '       </div>\n';
+            }
 
             item += '                                                       <tr>\n' +
                 '                                                                <td>'+ target.type_name +'</td>\n' +
@@ -156,9 +166,7 @@ async function initStaffs(){
                 '                                                                <td>'+ target.month_name +'</td>\n' +
                 '                                                                <td>'+ target.year +'</td>\n' +
                 '                                                                <td>\n' +
-                '                                                                    <div class="progress">\n' +
-                '                                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
-                '                                                                    </div>\n' +
+                '                                                                    '+ progress +
                 '                                                                </td>\n' +
                 '                                                                <td>'+ actions +'</td>\n' +
                 '                                                            </tr>\n';

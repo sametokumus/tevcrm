@@ -334,10 +334,10 @@ class StaffTargetHelper
             $sale_rate = 0;
         }
         $status['sale_rate'] = number_format($sale_rate, 2, ",", "");
-        if ($sale_rate != 0 && $target->target != 0) {
-            $rate = 100 * $sale_rate / $target->target;
+        if ($sale_rate > $target->target) {
+            $rate = 100;
         }else{
-            $rate = 0;
+            $rate = $sale_rate;
         }
         $status['rate'] = number_format($rate, 2, ",", "");
 
