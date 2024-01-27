@@ -150,13 +150,13 @@ async function initStaffs(){
                     '      <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteStaffTarget(\''+ target.id +'\');">Sil</button>\n';
             }
             let progress = '';
-            if (target.type_id == 3){
+            if (target.status.type_id == 3){
                 progress = '<div class="progress">\n' +
-                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
+                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.sale_rate +'%</span></div>\n' +
                     '       </div>\n';
             }else{
                 progress = '<div class="progress">\n' +
-                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.sale_rate +'%</span></div>\n' +
+                    '           <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: '+ parseInt(target.status.rate) +'%"><span>'+ target.status.rate +'%</span></div>\n' +
                     '       </div>\n';
             }
 
