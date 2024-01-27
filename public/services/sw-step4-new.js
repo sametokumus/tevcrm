@@ -42,6 +42,7 @@ async function initOfferDetail(){
     console.log(sale)
     initCustomer(sale.request.company, sale.request.company_employee);
 
+    $('#sale-global-id').append('(' + sale.owner.short_code + '-' + sale.id + ')');
     $('#offer-price').html('<b>Satış Fiyatı: </b>' + changeCommasToDecimal(sale.offer_price) + ' ' + sale.currency);
     $('#supply-price').html('<b>Tedarik Fiyatı: </b>' + changeCommasToDecimal(sale.supply_price) + ' ' + sale.currency);
     $('#profit-price').html('<b>Kar: </b>' + changeCommasToDecimal(sale.profit) + ' ' + sale.currency);

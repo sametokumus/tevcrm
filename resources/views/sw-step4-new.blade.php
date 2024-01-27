@@ -27,7 +27,8 @@ $extra_js='
                                                 <img id="customer-logo" src="" alt="">
                                             </div>
 
-                                            <h4 id="customer-name" class="mb-3"></h4>
+                                            <h4 id="customer-name" class="mb-1"></h4>
+                                            <h4 id="sale-global-id" class="mb-3"></h4>
 
                                             <div class="mb-1 text-inverse text-opacity-50 fw-bold mt-n2"> Yetkili</div>
                                             <div class="mb-1" id="employee-name">
