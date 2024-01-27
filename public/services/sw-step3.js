@@ -308,12 +308,13 @@ async function addOfferBatchProcess(){
             // let discounted_price = row.discounted_price;
 
             let price = changePriceToDecimal(row.sale_price);
+            console.log(price)
             // if (discounted_price != '' && discounted_price != null && discounted_price != '0,00'){
             //     price = discounted_price;
             // }
 
             // let offer_price = parseFloat(changePriceToDecimal(price)) * parseFloat(changePriceToDecimal(offer_currency_change));
-            let offer_price = parseFloat(changePriceToDecimal(price));
+            let offer_price = parseFloat(price);
             console.log(offer_price);
             offer_price = offer_price + (offer_price / 100 * profit_rate);
 
