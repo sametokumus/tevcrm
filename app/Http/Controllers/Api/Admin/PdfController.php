@@ -324,15 +324,36 @@ class PdfController extends Controller
         $pdf->SetXY($x, $y);
 
         $address = $this->textConvert($company->address);
-        if ($packing_list->address_id != null){
-            $address_data = Address::query()->where('id', $packing_list->address_id)->first();
-            $address = $this->textConvert($address_data->address);
-        }
+
         $address_width = $pdf->GetStringWidth($address);
         $lines_needed = ceil($address_width / 100);
         $line_height = 5;
         $row_height = $lines_needed * $line_height;
         $pdf->MultiCell(100, $line_height, $address, 0, 'L');
+
+        if ($packing_list->address_id != null){
+            $y += 5;
+            $x = 10;
+
+            $pdf->SetFont('ChakraPetch-Bold', '', 10);
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', __('Delivery Address').': '), '0', '0', '');
+
+            $pdf->SetFont('ChakraPetch-Regular', '', 10);
+
+            $y += 2;
+            $x = 10;
+            $pdf->SetXY($x, $y);
+
+            $address_data = Address::query()->where('id', $packing_list->address_id)->first();
+            $address = $this->textConvert($address_data->address);
+
+            $address_width = $pdf->GetStringWidth($address);
+            $lines_needed = ceil($address_width / 100);
+            $line_height = 5;
+            $row_height = $lines_needed * $line_height;
+            $pdf->MultiCell(100, $line_height, $address, 0, 'L');
+        }
 
         if ($employee == null) {
 

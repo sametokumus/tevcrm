@@ -85,6 +85,8 @@ class PDF extends FPDF
             $this->HREF = $attr['HREF'];
         if($tag=='BR')
             $this->Ln(5);
+        if($tag=='P')
+            $this->Ln(5);
     }
 
     function CloseTag($tag)
@@ -94,6 +96,10 @@ class PDF extends FPDF
             $this->SetStyle($tag,false);
         if($tag=='A')
             $this->HREF = '';
+        if($tag=='BR')
+            $this->Ln(1);
+        if($tag=='P')
+            $this->Ln(1);
     }
 
     function SetStyle($tag, $enable)
