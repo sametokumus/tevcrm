@@ -37,7 +37,7 @@ class ActivityController extends Controller
 //                $current_time->setTimezone('GMT+3');
                 $current_time_utc = Carbon::now('UTC');
 //                $current_time = $current_time_utc->setTimezone('Europe/Istanbul');
-                $current_time = $current_time_utc->copy()->setTimezone('Europe/Istanbul');
+                $current_time = Carbon::now('Europe/Istanbul');
 
                 $start_time = Carbon::parse($activity->start);
 
