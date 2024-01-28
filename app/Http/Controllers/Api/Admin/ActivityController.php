@@ -21,7 +21,7 @@ class ActivityController extends Controller
     {
         try {
             $activities = Activity::query()
-                ->where('end', '>=', now())
+                ->where('start', '>=', now())
                 ->where('active',1)
                 ->get();
             foreach ($activities as $activity){
@@ -36,7 +36,8 @@ class ActivityController extends Controller
 //                $current_time = Carbon::now();
 //                $current_time->setTimezone('GMT+3');
                 $current_time_utc = Carbon::now('UTC');
-                $current_time = $current_time_utc->setTimezone('Europe/Istanbul');
+//                $current_time = $current_time_utc->setTimezone('Europe/Istanbul');
+                $current_time = $current_time_utc->copy()->setTimezone('Europe/Istanbul');
 
                 $start_time = Carbon::parse($activity->start);
 
