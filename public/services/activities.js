@@ -142,7 +142,11 @@ async function initActivities(){
 
 async function openAddCompanyActivityModal(){
     getActivityTypesAddSelectId('add_activity_type_id');
+    getAdminsAddSelectId('add_activity_participants');
+    await getAdminsAddSelectId('add_activity_user_id');
     await getCompaniesAddSelectId('add_activity_company_id');
+    let user_id = localStorage.getItem('userId');
+    document.getElementById('add_activity_user_id').value = user_id;
     $("#addCompanyActivityModal").modal('show');
 }
 async function initActivityAddModalEmployee(){
@@ -155,7 +159,7 @@ async function initActivityAddModalEmployee(){
 }
 async function addActivity(){
     let company_id = document.getElementById('add_activity_company_id').value;
-    let user_id = localStorage.getItem('userId');
+    let user_id = document.getElementById('add_activity_user_id').value;
 
     let task_count = document.getElementById('add-activity-new-task-count').value;
     let tasks = [];
@@ -171,6 +175,12 @@ async function addActivity(){
         tasks.push(item);
     }
 
+    let participants = [];
+    let participants_objs = $('#add_activity_participants').find(':selected');
+    for (let i = 0; i < participants_objs.length; i++) {
+        participants.push(participants_objs[i].value);
+    }
+
     let start = formatDateDESC2(document.getElementById('add_activity_start_date').value, "-", "-") + " " + document.getElementById('add_activity_start_time').value + ":00";
     let end = formatDateDESC2(document.getElementById('add_activity_end_date').value, "-", "-")  + " " + document.getElementById('add_activity_end_time').value + ":00";
 
@@ -183,7 +193,8 @@ async function addActivity(){
         "employee_id": document.getElementById('add_activity_employee_id').value,
         "start": start,
         "end": end,
-        "tasks": tasks
+        "tasks": tasks,
+        "participants": participants
     });
 
     console.log(formData);

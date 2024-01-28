@@ -133,6 +133,7 @@ class ActivityController extends Controller
                 'employee_id' => $request->employee_id,
                 'start' => $request->start,
                 'end' => $request->end,
+                'participants' => json_encode($request->participants),
             ]);
 
             foreach ($request->tasks as $task){

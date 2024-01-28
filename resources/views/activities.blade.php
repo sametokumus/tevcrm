@@ -59,7 +59,7 @@ $(".timepicker").timepicker({
 <!--app-content close-->
 
 <div class="modal modal-cover fade" id="addCompanyActivityModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">AKTİVİTE EKLE</h5>
@@ -68,21 +68,21 @@ $(".timepicker").timepicker({
             <form method="post" action="#" id="add_activity_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Aktivite Türü</label>
+                            <select class="form-control" id="add_activity_type_id">
+
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <label class="form-label">Firma</label>
                             <select class="form-control" id="add_activity_company_id" onchange="initActivityAddModalEmployee();">
 
                             </select>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label class="form-label">Firma Yetkilisi</label>
                             <select class="form-control" id="add_activity_employee_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Aktivite Türü</label>
-                            <select class="form-control" id="add_activity_type_id">
 
                             </select>
                         </div>
@@ -90,16 +90,27 @@ $(".timepicker").timepicker({
                             <label class="form-label">Konu</label>
                             <input type="text" class="form-control" id="add_activity_title">
                         </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Aktivite Sorumlusu</label>
+                            <select class="form-control" id="add_activity_user_id">
+
+                            </select>
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label">Katılımcılar</label>
+                            <select name="add_activity_participants[]" class="form-control form-select select2" multiple="multiple" id="add_activity_participants">
+                            </select>
+                        </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Açıklama</label>
                             <textarea class="form-control" rows="3" id="add_activity_description"></textarea>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label class="form-label">Başlangıç</label>
                             <input type="text" class="form-control datepicker" id="add_activity_start_date" placeholder="dd-mm-yyyy" />
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Saat</label>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">&nbsp;</label>
                             <div class="input-group bootstrap-timepicker timepicker">
                                 <input type="text" class="form-control timepicker" id="add_activity_start_time" />
                                 <span class="input-group-addon input-group-text">
@@ -107,12 +118,12 @@ $(".timepicker").timepicker({
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label class="form-label">Bitiş</label>
                             <input type="text" class="form-control datepicker" id="add_activity_end_date" placeholder="dd-mm-yyyy" />
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Saat</label>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">&nbsp;</label>
                             <div class="input-group bootstrap-timepicker timepicker">
                                 <input type="text" class="form-control timepicker" id="add_activity_end_time" />
                                 <span class="input-group-addon input-group-text">

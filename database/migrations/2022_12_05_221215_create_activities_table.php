@@ -21,6 +21,7 @@ class CreateActivitiesTable extends Migration
             $table->text('description')->nullable();
             $table->bigInteger('company_id');
             $table->bigInteger('employee_id');
+            $table->json('participants')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->tinyInteger('active')->default(1);
