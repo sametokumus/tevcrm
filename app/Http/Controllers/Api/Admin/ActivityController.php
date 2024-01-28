@@ -45,6 +45,8 @@ class ActivityController extends Controller
                 $custom_diff = ($days > 0 ? $days . ' gün ' : '') . $time1 . ' saat ' . $time2 . ' dakika';
 
                 $activity['diff_end_day'] = $custom_diff;
+                $activity['current_time'] = $current_time;
+                $activity['start_time'] = $start_time;
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
