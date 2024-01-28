@@ -274,7 +274,7 @@ async function updateActivityCallback(xhttp){
 }
 async function updateActivity(){
     let company_id = document.getElementById('update_activity_company_id').value;
-    let user_id = localStorage.getItem('userId');
+    let user_id = document.getElementById('update_activity_user_id').value;
     let activity_id = document.getElementById('update_activity_id').value;
 
     let start = formatDateDESC2(document.getElementById('update_activity_start_date').value, "-", "-") + " " + document.getElementById('update_activity_start_time').value + ":00";
