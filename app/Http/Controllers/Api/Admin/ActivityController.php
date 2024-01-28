@@ -7,8 +7,10 @@ use App\Models\Activity;
 use App\Models\ActivityTask;
 use App\Models\ActivityType;
 use App\Models\Admin;
+use App\Models\AdminRole;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -70,6 +72,18 @@ class ActivityController extends Controller
                 $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
                 $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
+
+                $participants_names = '';
+                if ($activity->participants != '[]'){
+                    $participantsArray = json_decode($activity->participants, true);
+                    foreach ($participantsArray as $participantId) {
+                        $participant = Admin::query()->where('id', $participantId)->first();
+                        $participantName = $participant->name.' '.$participant->surname;
+                        $participants_names .= $participantName . ", ";
+                    }
+                }
+
+                $activity['participants_names'] = substr($participants_names, 0, -2);
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -90,6 +104,18 @@ class ActivityController extends Controller
                 $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
                 $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
+
+                $participants_names = '';
+                if ($activity->participants != '[]'){
+                    $participantsArray = json_decode($activity->participants, true);
+                    foreach ($participantsArray as $participantId) {
+                        $participant = Admin::query()->where('id', $participantId)->first();
+                        $participantName = $participant->name.' '.$participant->surname;
+                        $participants_names .= $participantName . ", ";
+                    }
+                }
+
+                $activity['participants_names'] = substr($participants_names, 0, -2);
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -108,6 +134,18 @@ class ActivityController extends Controller
             $activity['employee'] = Employee::query()->where('id', $activity->employee_id)->where('active', 1)->first();
             $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
             $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
+
+            $participants_names = '';
+            if ($activity->participants != '[]'){
+                $participantsArray = json_decode($activity->participants, true);
+                foreach ($participantsArray as $participantId) {
+                    $participant = Admin::query()->where('id', $participantId)->first();
+                    $participantName = $participant->name.' '.$participant->surname;
+                    $participants_names .= $participantName . ", ";
+                }
+            }
+
+            $activity['participants_names'] = substr($participants_names, 0, -2);
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activity' => $activity]]);
         } catch (QueryException $queryException) {

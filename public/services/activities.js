@@ -80,6 +80,7 @@ async function initActivities(){
             '           <td class="bg-dark-100">'+ activity.company.name +'</td>\n' +
             '           <td class="bg-dark-100">'+ activity.employee.name +'</td>\n' +
             '           <td class="bg-dark-100">'+ activity.user.name +' '+ activity.user.surname +'</td>\n' +
+            '           <td class="bg-dark-100">'+ activity.participants_names +'</td>\n' +
             '           <td>'+ activity.type.name +'</td>\n' +
             '           <td>'+ activity.title +'</td>\n' +
             '           <td>'+ formatDateAndTimeDESC(activity.start, "/") +'</td>\n' +
@@ -105,14 +106,14 @@ async function initActivities(){
             },
             {
                 type: 'date',
-                targets: 6,
+                targets: 7,
                 render: function(data, type, row) {
                     return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
             },
             {
                 type: 'date',
-                targets: 7,
+                targets: 8,
                 render: function(data, type, row) {
                     return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
