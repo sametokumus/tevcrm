@@ -9,7 +9,8 @@ $(".datepicker").datepicker({
 });
 $(".timepicker").timepicker({
     minuteStep: 15,
-    showMeridian: false
+    showMeridian: false,
+    template: false
 });
 </script>
 ';
