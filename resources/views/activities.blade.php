@@ -7,7 +7,10 @@ $(".datepicker").datepicker({
     autoclose: true,
     format: "dd-mm-yyyy"
 });
-
+$(".timepicker").timepicker({
+    minuteStep: 15,
+    showMeridian: false
+});
 </script>
 ';
 ?>
