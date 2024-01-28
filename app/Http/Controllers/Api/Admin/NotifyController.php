@@ -261,41 +261,43 @@ class NotifyController extends Controller
                         ->where('lead_time', '!=', null)
                         ->orderBy('lead_time')
                         ->first();
-                    $offer_request = OfferRequest::query()->where('request_id', $offer->request_id)->first();
-                    $owner = Contact::query()->where('id', $offer->owner_id)->first();
-                    $min_lead_time = $op->lead_time;
-                    $now = Carbon::now();
-                    $poDate = Carbon::parse($offer->po_date);
-                    $plusLeadTime = $poDate->addDays($min_lead_time);
-                    $plusLeadTimeFormatted = $plusLeadTime->format('Y-m-d');
+                    if ($op) {
+                        $offer_request = OfferRequest::query()->where('request_id', $offer->request_id)->first();
+                        $owner = Contact::query()->where('id', $offer->owner_id)->first();
+                        $min_lead_time = $op->lead_time;
+                        $now = Carbon::now();
+                        $poDate = Carbon::parse($offer->po_date);
+                        $plusLeadTime = $poDate->addDays($min_lead_time);
+                        $plusLeadTimeFormatted = $plusLeadTime->format('Y-m-d');
 
-                    $daysDifference = $now->diffInDays($plusLeadTime);
-                    $offer['diff'] = $daysDifference;
+                        $daysDifference = $now->diffInDays($plusLeadTime);
+                        $offer['diff'] = $daysDifference;
 
-                    if ($daysDifference == 1) {
-                        $notify_id = Uuid::uuid();
-                        $notify = '<a href="/sale-detail/'.$offer->sale_id.'"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasına <b>1 gün</b> kaldı.';
-                        StatusNotify::query()->insert([
-                            'notify_id' => $notify_id,
-                            'setting_id' => 1,
-                            'sale_id' => $offer->sale_id,
-                            'sender_id' => 0,
-                            'receiver_id' => $offer_request->purchasing_staff_id,
-                            'notify' => $notify,
-                            'type' => 3
-                        ]);
-                    }else if ($daysDifference == 0) {
-                        $notify_id = Uuid::uuid();
-                        $notify = '<a href="/sale-detail/'.$offer->sale_id.'"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasının <b>son günü</b>.';
-                        StatusNotify::query()->insert([
-                            'notify_id' => $notify_id,
-                            'setting_id' => 1,
-                            'sale_id' => $offer->sale_id,
-                            'sender_id' => 0,
-                            'receiver_id' => $offer_request->purchasing_staff_id,
-                            'notify' => $notify,
-                            'type' => 3
-                        ]);
+                        if ($daysDifference == 1) {
+                            $notify_id = Uuid::uuid();
+                            $notify = '<a href="/sale-detail/' . $offer->sale_id . '"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasına <b>1 gün</b> kaldı.';
+                            StatusNotify::query()->insert([
+                                'notify_id' => $notify_id,
+                                'setting_id' => 1,
+                                'sale_id' => $offer->sale_id,
+                                'sender_id' => 0,
+                                'receiver_id' => $offer_request->purchasing_staff_id,
+                                'notify' => $notify,
+                                'type' => 3
+                            ]);
+                        } else if ($daysDifference == 0) {
+                            $notify_id = Uuid::uuid();
+                            $notify = '<a href="/sale-detail/' . $offer->sale_id . '"><b>' . $owner->short_code . '-' . $offer->global_id . '</b></a> numaralı siparişin tedarik sürecinin tamamlanmasının <b>son günü</b>.';
+                            StatusNotify::query()->insert([
+                                'notify_id' => $notify_id,
+                                'setting_id' => 1,
+                                'sale_id' => $offer->sale_id,
+                                'sender_id' => 0,
+                                'receiver_id' => $offer_request->purchasing_staff_id,
+                                'notify' => $notify,
+                                'type' => 3
+                            ]);
+                        }
                     }
                 }
             }
