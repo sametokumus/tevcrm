@@ -35,6 +35,18 @@ class ActivityController extends Controller
                 $activity['task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('active', 1)->count();
                 $activity['completed_task_count'] = ActivityTask::query()->where('activity_id', $activity->id)->where('is_completed', 1)->where('active', 1)->count();
 
+                $participants_names = '';
+                if ($activity->participants != '[]'){
+                    $participantsArray = json_decode($activity->participants, true);
+                    foreach ($participantsArray as $participantId) {
+                        $participant = Admin::query()->where('id', $participantId)->first();
+                        $participantName = $participant->name.' '.$participant->surname;
+                        $participants_names .= $participantName . ", ";
+                    }
+                }
+
+                $activity['participants_names'] = substr($participants_names, 0, -2);
+
                 $current_time = Carbon::now();
                 $current_time = $current_time->addHours(3);
 
