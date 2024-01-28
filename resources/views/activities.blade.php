@@ -137,16 +137,12 @@ $(".timepicker").timepicker({
                                 <button type="button" class="btn btn-default btn-sm" id="add-activity-task-button">Ekle</button>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
                 </div>
         </div>
     </div>
