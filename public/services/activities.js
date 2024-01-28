@@ -136,7 +136,7 @@ async function initActivities(){
 		},
 		order: false,
         fixedColumns: {
-        left: 4
+        left: 5
         }
 	});
 }
