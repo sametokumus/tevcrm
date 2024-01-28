@@ -150,11 +150,11 @@ $(".timepicker").timepicker({
                         </div>
                     </div>
                 </div>
-            </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
                     <button type="submit" class="btn btn-outline-theme">Kaydet</button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
