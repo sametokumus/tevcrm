@@ -142,13 +142,13 @@ async function initActivities(){
 }
 
 async function openAddCompanyActivityModal(){
+    $("#addCompanyActivityModal").modal('show');
     getActivityTypesAddSelectId('add_activity_type_id');
     getAdminsAddSelectId('add_activity_participants');
     await getAdminsAddSelectId('add_activity_user_id');
     await getCompaniesAddSelectId('add_activity_company_id');
     let user_id = localStorage.getItem('userId');
     document.getElementById('add_activity_user_id').value = user_id;
-    $("#addCompanyActivityModal").modal('show');
 }
 async function initActivityAddModalEmployee(){
     let company_id = document.getElementById('add_activity_company_id').value;
@@ -210,9 +210,11 @@ async function addActivity(){
     }
 }
 async function openUpdateCompanyActivityModal(activity_id){
-    getActivityTypesAddSelectId('update_activity_type_id');
-    await getCompaniesAddSelectId('update_activity_company_id');
     $("#updateCompanyActivityModal").modal('show');
+    getActivityTypesAddSelectId('update_activity_type_id');
+    getAdminsAddSelectId('update_activity_participants');
+    await getAdminsAddSelectId('update_activity_user_id');
+    await getCompaniesAddSelectId('update_activity_company_id');
     initUpdateCompanyActivityModal(activity_id)
 }
 async function initActivityUpdateModalEmployee(){
@@ -229,6 +231,7 @@ async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_id').value = activity_id;
     let data = await serviceGetActivityById(activity_id);
     let activity = data.activity;
+    document.getElementById('update_activity_user_id').value = activity.user_id;
     document.getElementById('update_activity_type_id').value = activity.type_id;
     document.getElementById('update_activity_title').value = activity.title;
     document.getElementById('update_activity_description').value = activity.description;
@@ -239,6 +242,8 @@ async function initUpdateCompanyActivityModal(activity_id){
     document.getElementById('update_activity_company_id').value = activity.company_id;
     await getEmployeesAddSelectId(activity.company_id, 'update_activity_employee_id');
     document.getElementById('update_activity_employee_id').value = activity.employee_id;
+    let values = JSON.parse(activity.participants);
+    $("#update_activity_participants").val(values).trigger("change");
 
     let count = 0;
     $.each(activity.tasks, function (i, task) {
@@ -274,6 +279,13 @@ async function updateActivity(){
 
     let start = formatDateDESC2(document.getElementById('update_activity_start_date').value, "-", "-") + " " + document.getElementById('update_activity_start_time').value + ":00";
     let end = formatDateDESC2(document.getElementById('update_activity_end_date').value, "-", "-")  + " " + document.getElementById('update_activity_end_time').value + ":00";
+
+    let participants = [];
+    let participants_objs = $('#update_activity_participants').find(':selected');
+    for (let i = 0; i < participants_objs.length; i++) {
+        participants.push(participants_objs[i].value);
+    }
+
     let formData = JSON.stringify({
         "user_id": parseInt(user_id),
         "type_id": document.getElementById('update_activity_type_id').value,
@@ -282,7 +294,8 @@ async function updateActivity(){
         "company_id": company_id,
         "employee_id": document.getElementById('update_activity_employee_id').value,
         "start": start,
-        "end": end
+        "end": end,
+        "participants": participants
     });
     let returned = await servicePostUpdateActivity(formData, activity_id);
     if (returned){
