@@ -38,6 +38,7 @@ $(".timepicker").timepicker({
                     <th class="border-bottom-0 bg-dark-100">Firma</th>
                     <th class="border-bottom-0 bg-dark-100">Firma Yetkilisi</th>
                     <th class="border-bottom-0 bg-dark-100">Aktivite Sorumlusu</th>
+                    <th class="border-bottom-0 bg-dark-100">Katılımcılar</th>
                     <th class="border-bottom-0">Tür</th>
                     <th class="border-bottom-0">Konu</th>
                     <th class="border-bottom-0">Başlangıç</th>
