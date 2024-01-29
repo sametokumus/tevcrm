@@ -46,7 +46,8 @@ class NotifyController extends Controller
                 'role_id' => $role_id,
                 'receivers' => json_encode($request->receivers),
                 'is_notification' => $request->to_notification,
-                'is_mail' => $request->to_mail
+                'is_mail' => $request->to_mail,
+                'message' => $request->message
             ]);
             return response(['message' => 'Bildirim ekleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {
@@ -73,7 +74,8 @@ class NotifyController extends Controller
                 'role_id' => $role_id,
                 'receivers' => json_encode($request->receivers),
                 'is_notification' => $request->to_notification,
-                'is_mail' => $request->to_mail
+                'is_mail' => $request->to_mail,
+                'message' => $request->message
             ]);
             return response(['message' => 'Bildirim güncelleme işlemi başarılı.', 'status' => 'success']);
         } catch (ValidationException $validationException) {

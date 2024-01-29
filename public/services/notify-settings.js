@@ -67,6 +67,7 @@ async function initNotifySettings(){
             '           <td>'+ setting.status_name +'</td>\n' +
             '           <td>'+ setting.role_name +'</td>\n' +
             '           <td>'+ receiver_names +'</td>\n' +
+            '           <td>'+ setting.message +'</td>\n' +
             '           <td>'+ to_notification +'</td>\n' +
             '           <td>'+ to_mail +'</td>\n' +
             '           <td>'+ actions +'</td>\n' +
@@ -100,6 +101,7 @@ async function addNotifySetting(){
 
     let status_id = document.getElementById('add_notify_status_id').value;
     let role_id = document.getElementById('add_notify_role_id').value;
+    let message = document.getElementById('add_notify_message').value;
 
     let receivers = [];
     let receiver_objs = $('#add_notify_staff_id').find(':selected');
@@ -113,7 +115,8 @@ async function addNotifySetting(){
         "role_id": role_id,
         "receivers": receivers,
         "to_notification": to_notification,
-        "to_mail": to_mail
+        "to_mail": to_mail,
+        "message": message
     });
 
     console.log(formData);
@@ -143,6 +146,7 @@ async function initUpdateNotifySettingModal(setting_id){
     document.getElementById('update_notify_id').value = setting.id;
     document.getElementById('update_notify_status_id').value = setting.status_id;
     document.getElementById('update_notify_role_id').value = setting.role_id;
+    document.getElementById('update_notify_message').value = setting.message;
     let values = JSON.parse(setting.receivers);
     $("#update_notify_staff_id").val(values).trigger("change");
     if (setting.is_notification == 1){ document.getElementById('update_notify_to_notification').checked = true; }
@@ -161,6 +165,7 @@ async function updateNotifySetting(){
 
     let status_id = document.getElementById('update_notify_status_id').value;
     let role_id = document.getElementById('update_notify_role_id').value;
+    let message = document.getElementById('update_notify_message').value;
 
     let receivers = [];
     let receiver_objs = $('#update_notify_staff_id').find(':selected');
@@ -175,7 +180,8 @@ async function updateNotifySetting(){
         "role_id": role_id,
         "receivers": receivers,
         "to_notification": to_notification,
-        "to_mail": to_mail
+        "to_mail": to_mail,
+        "message": message
     });
     let returned = await servicePostUpdateNotificationSetting(formData);
     if (returned){

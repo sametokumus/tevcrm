@@ -55,6 +55,10 @@ $extra_js='
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
+                                        <label class="form-label">Bildirim Mesajı</label>
+                                        <input type="text" class="form-control" id="add_notify_message">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <button type="submit" class="btn btn-theme w-100">Kaydet</button>
                                     </div>
                                 </div>
@@ -86,6 +90,7 @@ $extra_js='
                     <th class="border-bottom-0">Sipariş Durumu</th>
                     <th class="border-bottom-0">Rol</th>
                     <th class="border-bottom-0">Personel</th>
+                    <th class="border-bottom-0">Bildirim Mesajı</th>
                     <th class="border-bottom-0">Bildirim</th>
                     <th class="border-bottom-0">Mail</th>
                     <th class="border-bottom-0" data-priority="2">İşlem</th>
@@ -139,6 +144,10 @@ $extra_js='
                                 <input class="form-check-input" type="checkbox" value="" id="update_notify_to_mail" />
                                 <label class="form-check-label" for="update_notify_to_mail">Mail</label>
                             </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Bildirim Mesajı</label>
+                            <input type="text" class="form-control" id="update_notify_message">
                         </div>
                     </div>
                 </div>
