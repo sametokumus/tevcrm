@@ -62,7 +62,7 @@ function checkRole(){
 
 async function initActivities(){
 
-    let data = await serviceGetActivities();
+    let data = await serviceGetPastActivities();
 
     console.log(data)
     $("#activities-datatable").dataTable().fnDestroy();
