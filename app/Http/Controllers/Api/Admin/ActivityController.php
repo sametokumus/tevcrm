@@ -43,9 +43,11 @@ class ActivityController extends Controller
                         $participantName = $participant->name.' '.$participant->surname;
                         $participants_names .= $participantName . ", ";
                     }
-                }
 
-                $activity['participants_names'] = substr($participants_names, 0, -2);
+                    $activity['participants_names'] = substr($participants_names, 0, -2);
+                }else{
+                    $activity['participants_names'] = '';
+                }
 
                 $current_time = Carbon::now();
                 $current_time = $current_time->addHours(3);
@@ -93,9 +95,11 @@ class ActivityController extends Controller
                         $participantName = $participant->name.' '.$participant->surname;
                         $participants_names .= $participantName . ", ";
                     }
-                }
 
-                $activity['participants_names'] = substr($participants_names, 0, -2);
+                    $activity['participants_names'] = substr($participants_names, 0, -2);
+                }else{
+                    $activity['participants_names'] = '';
+                }
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -125,9 +129,11 @@ class ActivityController extends Controller
                         $participantName = $participant->name.' '.$participant->surname;
                         $participants_names .= $participantName . ", ";
                     }
-                }
 
-                $activity['participants_names'] = substr($participants_names, 0, -2);
+                    $activity['participants_names'] = substr($participants_names, 0, -2);
+                }else{
+                    $activity['participants_names'] = '';
+                }
             }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activities' => $activities]]);
@@ -155,9 +161,11 @@ class ActivityController extends Controller
                     $participantName = $participant->name.' '.$participant->surname;
                     $participants_names .= $participantName . ", ";
                 }
-            }
 
-            $activity['participants_names'] = substr($participants_names, 0, -2);
+                $activity['participants_names'] = substr($participants_names, 0, -2);
+            }else{
+                $activity['participants_names'] = '';
+            }
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['activity' => $activity]]);
         } catch (QueryException $queryException) {
