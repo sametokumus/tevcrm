@@ -71,6 +71,7 @@ async function checkCurrencyLog(){
         await initNewOfferDetail();
         await initOfferDetail();
     }else{
+        alert('sdsad')
         await initEmptyTables();
     }
 }

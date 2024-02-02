@@ -174,7 +174,7 @@ $extra_js='
                             <div class="row justify-content-center card-loading-row">
                                 <div class="col-12">
                                     <div class="d-block">
-                                        <h6>Lütfen bekleyiniz. Tedarikçi teklifleri oluşturuluyor.</h6>
+                                        <h6 id="sw-2-message">Lütfen bekleyiniz. Tedarikçi teklifleri oluşturuluyor.</h6>
                                     </div>
                                     <div class="d-block">
                                         <div class="spinners">

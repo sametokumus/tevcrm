@@ -1872,8 +1872,31 @@ class SaleController extends Controller
     public function getCheckSaleCurrencyLog($request_id)
     {
         try {
+            $has_currency = true;
+
             $sale = Sale::query()->where('request_id', $request_id)->first();
-            if ($sale->usd_rate != null && $sale->eur_rate != null && $sale->gbp_rate != null && $sale->currency != null){
+            if ($sale->usd_rate == null || $sale->eur_rate == null || $sale->gbp_rate == null || $sale->currency == null){
+                $has_currency = false;
+            }
+
+            $check_offer_currency = OfferProduct::query()
+                ->selectRaw('offer_products.*')
+                ->leftJoin('offers', 'offers.offer_id', '=', 'offer_products.offer_id')
+                ->where('offers.request_id', $request_id)
+                ->where('offer_products.active', 1)
+                ->where('offers.active', 1)
+                ->where(function($query) {
+                    $query->whereNotNull('offer_products.converted_price')
+                        ->orWhere('offer_products.converted_price', '=', '');
+                })
+                ->count();
+
+            if ($check_offer_currency > 0){
+                $has_currency = false;
+            }
+
+
+            if ($has_currency){
                 return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => true, 'sale' => $sale]]);
             }else{
                 return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['has_currency' => false]]);
