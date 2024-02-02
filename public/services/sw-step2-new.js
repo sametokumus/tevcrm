@@ -71,7 +71,8 @@ async function checkCurrencyLog(){
         await initNewOfferDetail();
         await initOfferDetail();
     }else{
-        alert('sdsad')
+        $('#sw-2-message').html('');
+        $('#sw-2-message').append('<span class="text-danger">Lütfen öncelikle döviz kurunu onaylayınız.</span>');
         await initEmptyTables();
     }
 }
