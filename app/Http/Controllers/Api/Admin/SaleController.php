@@ -1886,8 +1886,8 @@ class SaleController extends Controller
                 ->where('offer_products.active', 1)
                 ->where('offers.active', 1)
                 ->where(function($query) {
-                    $query->whereNotNull('offer_products.converted_price')
-                        ->orWhere('offer_products.converted_price', '=', '');
+                    $query->whereNull('offer_products.converted_price')
+                        ->orWhere('offer_products.converted_price', '');
                 })
                 ->count();
 

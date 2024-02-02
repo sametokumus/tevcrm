@@ -125,8 +125,12 @@ async function initOfferDetail(){
 
         let offers = data.offers;
         console.log(offers)
-        $("#sales-detail").dataTable().fnDestroy();
-        $("#offer-detail").dataTable().fnDestroy();
+        if ($.fn.DataTable.isDataTable("#sales-detail")) {
+            $("#sales-detail").DataTable().destroy();
+        }
+        if ($.fn.DataTable.isDataTable("#offer-detail")) {
+            $("#offer-detail").DataTable().destroy();
+        }
         $('#offer-detail tbody > tr').remove();
         let rowNo = 0;
         $.each(offers, function (i, offer) {
