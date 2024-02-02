@@ -1015,13 +1015,23 @@ class SaleController extends Controller
             $offer_id = $sale_offer_detail->offer_id;
             $offer_product_id = $sale_offer_detail->offer_product_id;
 
+            $is_first_price_check = false;
+            $so = SaleOffer::query()->where('id', $request->id)->first();
+            if ($so->offer_price == null){
+                $is_first_price_check = true;
+            }
+
             SaleOffer::query()->where('id', $request->id)->update([
                 'offer_price' => $request->offer_price,
                 'offer_currency' => $request->offer_currency,
                 'offer_lead_time' => $request->offer_lead_time
             ]);
 
-            $offer_check = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->where('offer_price', null)->count();
+            $offer_check = SaleOffer::query()
+                ->where('sale_id', $sale_id)
+                ->where('active', 1)
+                ->where('offer_price', null)
+                ->count();
             if ($offer_check == 0) {
 
                 $sale_offers = SaleOffer::query()->where('sale_id', $sale_id)->where('active', 1)->get();
@@ -1050,7 +1060,9 @@ class SaleController extends Controller
                         'status_id' => 5
                     ]);
 
-                    StatusHistoryHelper::addStatusHistory($sale_id, 5, $request->user_id);
+                    if ($is_first_price_check) {
+                        StatusHistoryHelper::addStatusHistory($sale_id, 5, $request->user_id);
+                    }
 
                 }
             }
