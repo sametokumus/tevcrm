@@ -126,6 +126,8 @@ async function initCustomer(company, employee){
 }
 
 async function approveOffer() {
+    $('#approve-offer-btn').attr('disabled', 'disabled');
+
     let sale_id = getPathVariable('sw-4');
     if (sale_id == undefined){
         sale_id = getPathVariable('sw-4-rev');
