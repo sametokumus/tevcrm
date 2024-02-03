@@ -3,7 +3,7 @@
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
             {{--{{ config('app.name') }}--}}
-{{--            <img src="https://crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">--}}
+{{--            <img src="https://demo-crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">--}}
 {{--            <img src="{{ $notify_logo }}" style="width: 250px;" alt="">--}}
         @endcomponent
     @endslot

@@ -35,6 +35,7 @@ use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
 use App\Http\Controllers\Api\Admin\MailController;
+use App\Http\Controllers\Api\Admin\DemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -492,6 +493,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('mail/getLayoutById/{layout_id}', [MailController::class, 'getLayoutById']);
     Route::get('mail/getMailableSuppliersByRequestId/{request_id}', [OfferController::class, 'getMailableSuppliersByRequestId']);
     Route::post('mail/sendMailOfferToSupplier', [MailController::class, 'sendMailOfferToSupplier']);
+
+
+    Route::get('demo/deleteOwnerData/{owner_id}', [DemoController::class, 'deleteOwnerData']);
 
 });
 
