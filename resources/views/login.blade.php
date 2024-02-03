@@ -20,8 +20,9 @@
 
         <div class="login-content">
             <form method="post" action="#" id="login_form">
-                <h1 class="text-center">Giriş</h1>
-                <div class="mb-3"> Giriş için kimliğinizi doğrulamanız gerekmektedir.
+{{--                <h1 class="text-center">Giriş</h1>--}}
+                <div class="mb-50px w-50 mx-auto">
+                    <img src="/img/logo/x-logo-dark.png" alt="logo" class="w-100">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email Address <span class="text-danger">*</span></label>
