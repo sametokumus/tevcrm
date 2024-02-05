@@ -1492,7 +1492,9 @@ class SaleController extends Controller
             $total_offer_price = 0;
             foreach ($sale_offers as $sale_offer){
                 $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
-                $total_offer_price += $offer_product->converted_price;
+                if ($offer_product) {
+                    $total_offer_price += $offer_product->converted_price;
+                }
             }
 
 
