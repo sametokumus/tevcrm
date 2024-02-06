@@ -78,6 +78,12 @@ async function checkCurrencyLog(){
 }
 
 async function initEmptyTables(){
+    if ($.fn.DataTable.isDataTable("#sales-detail")) {
+        $("#sales-detail").DataTable().destroy();
+    }
+    if ($.fn.DataTable.isDataTable("#offer-detail")) {
+        $("#offer-detail").DataTable().destroy();
+    }
     $('#offer-detail').DataTable({
         responsive: false,
         columnDefs: [
