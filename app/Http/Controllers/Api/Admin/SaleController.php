@@ -1900,6 +1900,7 @@ class SaleController extends Controller
                 ->where('offer_products.active', 1)
                 ->where('offers.active', 1)
                 ->whereNotNull('offer_products.total_price')
+                ->where('offer_products.total_price', '!=', '0.00')
                 ->where(function($query) {
                     $query->whereNull('offer_products.converted_price')
                         ->orWhere('offer_products.converted_price', '');
