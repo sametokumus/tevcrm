@@ -139,8 +139,9 @@ class StaffTargetHelper
             foreach ($sale_offers as $sale_offer){
                 $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
                 $sale_offer['offer_product'] = $offer_product;
-                $offer_price = $offer_product->converted_price;
-
+                if ($offer_product) {
+                    $offer_price += $offer_product->converted_price;
+                }
 
                 if ($target->currency == $sale->currency){
                     $total_offer_price += $offer_price;
@@ -276,7 +277,9 @@ class StaffTargetHelper
             //tedarik gideri
             foreach ($sale_offers as $sale_offer){
                 $offer_product = OfferProduct::query()->where('id', $sale_offer->offer_product_id)->where('active', 1)->first();
-                $total_offer_price += $offer_product->converted_price;
+                if ($offer_product) {
+                    $total_offer_price += $offer_product->converted_price;
+                }
             }
             if ($total_offer_price != 0) {
                 $total_expense = $total_offer_price;
