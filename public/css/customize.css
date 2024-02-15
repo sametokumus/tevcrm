@@ -5,9 +5,19 @@ linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.99) 1
     --bs-body-bg-cover: url(images/cover-semy-2.jpg);
 }
 #header{
-    background: #1d2835f2;
+    background: #1a1a1a;
+    border-bottom: 10px solid #249d79;
+}
+.app-header .brand .brand-logo{
+    margin-top: 10px;
+}
+.app-header .menu-toggler{
+    margin-top: 15px;
 }
 .app-header .menu-toggler .bar{
+    background: #fff;
+}
+.app-header .menu-toggler:hover .bar{
     background: #fff;
 }
 .app-header .menu .menu-item .menu-link{
