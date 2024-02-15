@@ -81,7 +81,7 @@ $extra_js="";
 
         <div class="brand">
             <a href="/my-dashboard" class="brand-logo">
-                <img src="/img/logo/x-logo.png" class="img-responsive brand-img">
+                <img src="/img/logo/x-logo-bordered.png" class="img-responsive brand-img">
             </a>
         </div>
 
