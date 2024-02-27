@@ -31,13 +31,7 @@
             <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff;">
 {{--                {{ $header ?? '' }}--}}
 
-{{--                <tr>--}}
-{{--                    <td class="header">--}}
-{{--                        <a href="https://www.semytechnology.com/" target="_blank" style="display: inline-block;">--}}
-{{--                            <img src="https://crm.semytechnology.com/img/logo/semy-light2-mail.png" style="width: 250px;" alt="">--}}
-{{--                        </a>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
+
 
                 <!-- Email Body -->
                 <tr>
@@ -61,7 +55,7 @@
                             <tr>
                                 <td class="content-cell" style="text-align: left; padding-left: 0px;">
 
-                                    <img src="https://crm.semytechnology.com{{ $signature }}" style="width: 800px;" alt="">
+                                    <img src="{{ env('APP_URL') . $signature }}" style="width: 800px;" alt="">
 
                                 </td>
                             </tr>

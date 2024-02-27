@@ -245,7 +245,7 @@ class MobileController extends Controller
                                 if ($history){
                                     $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
                                     if ($document){
-                                        $item['offer_document'] = 'https://crm.semytechnology.com/'.$document->file_url;
+                                        $item['offer_document'] = env('APP_URL').'/'.$document->file_url;
                                     }else{
                                         $item['offer_document'] = '';
                                     }
@@ -367,7 +367,7 @@ class MobileController extends Controller
                                 if ($history) {
                                     $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
                                     if ($document) {
-                                        $item['offer_document'] = 'https://crm.semytechnology.com/' . $document->file_url;
+                                        $item['offer_document'] = env('APP_URL').'/' . $document->file_url;
                                     } else {
                                         $item['offer_document'] = '';
                                     }
@@ -471,7 +471,7 @@ class MobileController extends Controller
                             if ($history){
                                 $document = Document::query()->where('sale_id', $sale->sale_id)->where('document_type_id', 1)->where('active', 1)->first();
                                 if ($document){
-                                    $item['offer_document'] = 'https://crm.semytechnology.com/'.$document->file_url;
+                                    $item['offer_document'] = env('APP_URL').'/'.$document->file_url;
                                 }else{
                                     $item['offer_document'] = '';
                                 }
@@ -551,7 +551,7 @@ class MobileController extends Controller
             $documents = array();
             foreach ($datas as $data){
                 $key = $data['document_type_id'];
-                $value = 'https://crm.semytechnology.com'.$data['file_url'];
+                $value = env('APP_URL').$data['file_url'];
                 $documentArray = [$key => $value];
                 array_push($documents, $documentArray);
             }
