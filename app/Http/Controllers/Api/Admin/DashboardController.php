@@ -4457,6 +4457,9 @@ class DashboardController extends Controller
             if ($this_month_price == $previous_month_price){
                 $turnover_rate = '0,00';
                 $turnover_rate_icon = '-';
+            }else if ($previous_month_price == 0){
+                $turnover_rate = '100,00';
+                $turnover_rate_icon = 'up';
             }else if ($this_month_price < $previous_month_price){
                 $turnover_rate = '-'.number_format(100 - ($this_month_price * 100 / $previous_month_price), 2,",","");
                 $turnover_rate_icon = 'down';
