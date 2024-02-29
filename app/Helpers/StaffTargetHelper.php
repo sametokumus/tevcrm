@@ -269,6 +269,8 @@ class StaffTargetHelper
                 $usd_price += $total_price;
             }else if ($sale->currency == 'EUR'){
                 $usd_price += $total_price / $sale->usd_rate * $sale->eur_rate;
+            }else if ($sale->currency == 'GBP'){
+                $usd_price += $total_price / $sale->usd_rate * $sale->gbp_rate;
             }
 
             //satın alma

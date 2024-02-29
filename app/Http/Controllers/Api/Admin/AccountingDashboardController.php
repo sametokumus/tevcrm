@@ -36,6 +36,7 @@ class AccountingDashboardController extends Controller
             $total_try_price = 0;
             $total_usd_price = 0;
             $total_eur_price = 0;
+            $total_gbp_price = 0;
             $total_payment_tax = 0;
 
             foreach ($total_payments as $item){
@@ -52,16 +53,25 @@ class AccountingDashboardController extends Controller
                     $total_try_price += $item->payment_price;
                     $total_usd_price += $item->payment_price / $sale->usd_rate;
                     $total_eur_price += $item->payment_price / $sale->eur_rate;
+                    $total_gbp_price += $item->payment_price / $sale->gbp_rate;
                 }else if ($item->currency == 'USD'){
                     $total_payment_tax += $payment_tax * $sale->usd_rate;
                     $total_usd_price += $item->payment_price;
                     $total_try_price += $item->payment_price * $sale->usd_rate;
                     $total_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                    $total_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
                     $total_payment_tax += $payment_tax * $sale->eur_rate;
                     $total_eur_price += $item->payment_price;
                     $total_try_price += $item->payment_price * $sale->eur_rate;
                     $total_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                    $total_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->eur_rate;
+                }else if ($item->currency == 'GBP'){
+                    $total_payment_tax += $payment_tax * $sale->gbp_rate;
+                    $total_gbp_price += $item->payment_price;
+                    $total_try_price += $item->payment_price * $sale->gbp_rate;
+                    $total_eur_price += $item->payment_price / $sale->eur_rate * $sale->gbp_rate;
+                    $total_usd_price += $item->payment_price / $sale->usd_rate * $sale->gbp_rate;
                 }
 
 
@@ -71,6 +81,7 @@ class AccountingDashboardController extends Controller
             $total['try_sale'] = number_format($total_try_price, 2,".","");
             $total['usd_sale'] = number_format($total_usd_price, 2,".","");
             $total['eur_sale'] = number_format($total_eur_price, 2,".","");
+            $total['gbp_sale'] = number_format($total_gbp_price, 2,".","");
             $total['payment_tax'] = number_format($total_payment_tax, 2,".","");
             $total['payment_total'] = number_format($total_try_price + $total_payment_tax, 2,".","");
 
@@ -88,6 +99,7 @@ class AccountingDashboardController extends Controller
             $pending_try_price = 0;
             $pending_usd_price = 0;
             $pending_eur_price = 0;
+            $pending_gbp_price = 0;
             $pending_payment_tax = 0;
 
             foreach ($pending_payments as $item){
@@ -104,16 +116,25 @@ class AccountingDashboardController extends Controller
                     $pending_try_price += $item->payment_price;
                     $pending_usd_price += $item->payment_price / $sale->usd_rate;
                     $pending_eur_price += $item->payment_price / $sale->eur_rate;
+                    $pending_gbp_price += $item->payment_price / $sale->gbp_rate;
                 }else if ($item->currency == 'USD'){
                     $pending_payment_tax += $payment_tax * $sale->usd_rate;
                     $pending_usd_price += $item->payment_price;
                     $pending_try_price += $item->payment_price * $sale->usd_rate;
                     $pending_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                    $pending_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
                     $pending_payment_tax += $payment_tax * $sale->eur_rate;
                     $pending_eur_price += $item->payment_price;
                     $pending_try_price += $item->payment_price * $sale->eur_rate;
                     $pending_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                    $pending_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->eur_rate;
+                }else if ($item->currency == 'GBP'){
+                    $pending_payment_tax += $payment_tax * $sale->gbp_rate;
+                    $pending_gbp_price += $item->payment_price;
+                    $pending_try_price += $item->payment_price * $sale->gbp_rate;
+                    $pending_eur_price += $item->payment_price / $sale->eur_rate * $sale->gbp_rate;
+                    $pending_usd_price += $item->payment_price / $sale->usd_rate * $sale->gbp_rate;
                 }
 
             }
@@ -122,6 +143,7 @@ class AccountingDashboardController extends Controller
             $pending['try_sale'] = number_format($pending_try_price, 2,".","");
             $pending['usd_sale'] = number_format($pending_usd_price, 2,".","");
             $pending['eur_sale'] = number_format($pending_eur_price, 2,".","");
+            $pending['gbp_sale'] = number_format($pending_gbp_price, 2,".","");
             $pending['payment_tax'] = number_format($pending_payment_tax, 2,".","");
             $pending['payment_total'] = number_format($pending_try_price + $pending_payment_tax, 2,".","");
 
@@ -140,6 +162,7 @@ class AccountingDashboardController extends Controller
             $late_try_price = 0;
             $late_usd_price = 0;
             $late_eur_price = 0;
+            $late_gbp_price = 0;
             $late_payment_tax = 0;
 
             foreach ($late_payments as $item){
@@ -156,16 +179,25 @@ class AccountingDashboardController extends Controller
                     $late_try_price += $item->payment_price;
                     $late_usd_price += $item->payment_price / $sale->usd_rate;
                     $late_eur_price += $item->payment_price / $sale->eur_rate;
+                    $late_gbp_price += $item->payment_price / $sale->gbp_rate;
                 }else if ($item->currency == 'USD'){
                     $late_payment_tax += $payment_tax * $sale->usd_rate;
                     $late_usd_price += $item->payment_price;
                     $late_try_price += $item->payment_price * $sale->usd_rate;
                     $late_eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                    $late_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->usd_rate;
                 }else if ($item->currency == 'EUR'){
                     $late_payment_tax += $payment_tax * $sale->eur_rate;
                     $late_eur_price += $item->payment_price;
                     $late_try_price += $item->payment_price * $sale->eur_rate;
                     $late_usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                    $late_gbp_price += $item->payment_price / $sale->gbp_rate * $sale->eur_rate;
+                }else if ($item->currency == 'GBP'){
+                    $late_payment_tax += $payment_tax * $sale->gbp_rate;
+                    $late_gbp_price += $item->payment_price;
+                    $late_try_price += $item->payment_price * $sale->gbp_rate;
+                    $late_eur_price += $item->payment_price / $sale->eur_rate * $sale->gbp_rate;
+                    $late_usd_price += $item->payment_price / $sale->usd_rate * $sale->gbp_rate;
                 }
 
             }
@@ -174,6 +206,7 @@ class AccountingDashboardController extends Controller
             $late['try_sale'] = number_format($late_try_price, 2,".","");
             $late['usd_sale'] = number_format($late_usd_price, 2,".","");
             $late['eur_sale'] = number_format($late_eur_price, 2,".","");
+            $late['gbp_sale'] = number_format($late_gbp_price, 2,".","");
             $late['payment_tax'] = number_format($late_payment_tax, 2,".","");
             $late['payment_total'] = number_format($late_try_price + $late_payment_tax, 2,".","");
 
@@ -200,6 +233,9 @@ class AccountingDashboardController extends Controller
                     }else if ($sale->currency == 'EUR'){
                         $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }else if ($sale->currency == 'GBP'){
+                        $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                     }
                 }
 
@@ -280,6 +316,7 @@ class AccountingDashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($payments as $item){
                     $transaction = SaleTransaction::query()->where('transaction_id', $item->transaction_id)->first();
@@ -299,14 +336,22 @@ class AccountingDashboardController extends Controller
                         $try_price += $item->payment_price;
                         $usd_price += $item->payment_price / $sale->usd_rate;
                         $eur_price += $item->payment_price / $sale->eur_rate;
+                        $gbp_price += $item->payment_price / $sale->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->payment_price;
                         $try_price += $item->payment_price * $sale->usd_rate;
                         $eur_price += $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                        $gbp_price += $item->payment_price / $sale->gbp_rate * $sale->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->payment_price;
                         $try_price += $item->payment_price * $sale->eur_rate;
                         $usd_price += $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                        $gbp_price += $item->payment_price / $sale->gbp_rate * $sale->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->payment_price;
+                        $try_price += $item->payment_price * $sale->gbp_rate;
+                        $usd_price += $item->payment_price / $sale->usd_rate * $sale->gbp_rate;
+                        $eur_price += $item->payment_price / $sale->eur_rate * $sale->gbp_rate;
                     }
 
                 }
@@ -315,6 +360,7 @@ class AccountingDashboardController extends Controller
                 $price['try_sale'] = number_format($try_price, 2,".","");
                 $price['usd_sale'] = number_format($usd_price, 2,".","");
                 $price['eur_sale'] = number_format($eur_price, 2,".","");
+                $price['gbp_sale'] = number_format($gbp_price, 2,".","");
 
                 $month['prices'] = $price;
                 $month['payments'] = $payments;
@@ -383,20 +429,29 @@ class AccountingDashboardController extends Controller
                         $try_price = $item->payment_price;
                         $usd_price = $item->payment_price / $sale->usd_rate;
                         $eur_price = $item->payment_price / $sale->eur_rate;
+                        $gbp_price = $item->payment_price / $sale->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price = $item->payment_price;
                         $try_price = $item->payment_price * $sale->usd_rate;
                         $eur_price = $item->payment_price / $sale->eur_rate * $sale->usd_rate;
+                        $gbp_price = $item->payment_price / $sale->gbp_rate * $sale->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price = $item->payment_price;
                         $try_price = $item->payment_price * $sale->eur_rate;
                         $usd_price = $item->payment_price / $sale->usd_rate * $sale->eur_rate;
+                        $gbp_price = $item->payment_price / $sale->gbp_rate * $sale->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price = $item->payment_price;
+                        $try_price = $item->payment_price * $sale->gbp_rate;
+                        $usd_price = $item->payment_price / $sale->usd_rate * $sale->gbp_rate;
+                        $eur_price = $item->payment_price / $sale->eur_rate * $sale->gbp_rate;
                     }
 
                     $price = array();
                     $price['try_sale'] = number_format($try_price, 2,".","");
                     $price['usd_sale'] = number_format($usd_price, 2,".","");
                     $price['eur_sale'] = number_format($eur_price, 2,".","");
+                    $price['gbp_sale'] = number_format($gbp_price, 2,".","");
                     $item['prices'] = $price;
 
                 }

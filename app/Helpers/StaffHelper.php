@@ -326,6 +326,8 @@ class StaffHelper
                 $usd_price += $total_price;
             }else if ($item->currency == 'EUR'){
                 $usd_price += $total_price / $item->usd_rate * $item->eur_rate;
+            }else if ($item->currency == 'GBP'){
+                $usd_price += $total_price / $item->usd_rate * $item->gbp_rate;
             }
 
             //satın alma
@@ -360,8 +362,8 @@ class StaffHelper
                         }else{
                             $ec = strtolower($expense->currency);
                             $sc = strtolower($item->currency);
-                            if ($sale->{$sc.'_rate'} != 0) {
-                                $expense_price = $expense->price * $item->{$ec . '_rate'} / $sale->{$sc . '_rate'};
+                            if ($item->{$sc.'_rate'} != 0) {
+                                $expense_price = $expense->price * $item->{$ec . '_rate'} / $item->{$sc . '_rate'};
                             }else{
                                 $expense_price = 0;
                             }

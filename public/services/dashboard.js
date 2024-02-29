@@ -105,6 +105,11 @@ async function getTotalSales(){
         completed_sale = sales.completed.eur_sale;
         continue_sale = sales.continue.eur_sale;
         cancelled_sale = sales.cancelled.eur_sale;
+    }else if (dash_currency == 'GBP'){
+        approved_sale = sales.approved.gbp_sale;
+        completed_sale = sales.completed.gbp_sale;
+        continue_sale = sales.continue.gbp_sale;
+        cancelled_sale = sales.cancelled.gbp_sale;
     }
 
     $('#approved-box .spinners').remove();
@@ -147,6 +152,11 @@ async function getLastMonthSales(){
         completed_sale = sales.completed.eur_sale;
         continue_sale = sales.continue.eur_sale;
         cancelled_sale = sales.cancelled.eur_sale;
+    }else if (dash_currency == 'GBP'){
+        approved_sale = sales.approved.gbp_sale;
+        completed_sale = sales.completed.gbp_sale;
+        continue_sale = sales.continue.gbp_sale;
+        cancelled_sale = sales.cancelled.gbp_sale;
     }
 
     $('#monthly-approved-box .spinners').remove();
@@ -317,6 +327,8 @@ async function getApprovedMonthlySales(){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArray.push(sale.gbp_sale);
         }
     });
 
@@ -327,6 +339,8 @@ async function getApprovedMonthlySales(){
             yAxisArrayPrevious.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArrayPrevious.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArrayPrevious.push(sale.gbp_sale);
         }
     });
 
@@ -454,6 +468,8 @@ async function getCompletedMonthlySales(){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArray.push(sale.gbp_sale);
         }
     });
 
@@ -464,6 +480,8 @@ async function getCompletedMonthlySales(){
             yAxisArrayPrevious.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArrayPrevious.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArrayPrevious.push(sale.gbp_sale);
         }
     });
 
@@ -591,6 +609,8 @@ async function getPotentialMonthlySales(){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArray.push(sale.gbp_sale);
         }
     });
 
@@ -601,6 +621,8 @@ async function getPotentialMonthlySales(){
             yAxisArrayPrevious.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArrayPrevious.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArrayPrevious.push(sale.gbp_sale);
         }
     });
 
@@ -728,6 +750,8 @@ async function getCancelledMonthlySales(){
             yAxisArray.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArray.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArray.push(sale.gbp_sale);
         }
     });
 
@@ -738,6 +762,8 @@ async function getCancelledMonthlySales(){
             yAxisArrayPrevious.push(sale.usd_sale);
         }else if (dash_currency == 'EUR'){
             yAxisArrayPrevious.push(sale.eur_sale);
+        }else if (dash_currency == 'GBP'){
+            yAxisArrayPrevious.push(sale.gbp_sale);
         }
     });
 
@@ -861,6 +887,10 @@ async function getAdminsSales(){
             sale_price = admin.total_sales.usd_total;
         }else if (dash_currency == 'EUR'){
             sale_price = admin.total_sales.eur_total;
+        }else if (dash_currency == 'GBP'){
+            sale_price = admin.total_sales.eur_total;
+        }else if (dash_currency == 'GBP'){
+            sale_price = admin.total_sales.gbp_total;
         }
 
         let item = '<tr>\n' +

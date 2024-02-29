@@ -151,6 +151,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -158,14 +159,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -176,14 +185,22 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
@@ -197,6 +214,7 @@ class DashboardController extends Controller
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $currentMonth);
             }
 
@@ -226,6 +244,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -233,14 +252,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -251,14 +278,22 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
@@ -268,6 +303,7 @@ class DashboardController extends Controller
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($previous_sales, $currentMonth);
             }
 
@@ -331,6 +367,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -338,14 +375,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -356,22 +401,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $currentMonth);
             }
 
@@ -402,6 +457,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -409,14 +465,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -427,22 +491,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($previous_sales, $currentMonth);
             }
 
@@ -505,6 +579,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -512,14 +587,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -530,22 +613,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $currentMonth);
             }
 
@@ -575,6 +668,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -582,14 +676,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -600,22 +702,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($previous_sales, $currentMonth);
             }
 
@@ -679,6 +791,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -686,14 +799,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -704,22 +825,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $currentMonth);
             }
 
@@ -749,6 +880,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -756,14 +888,22 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
 
@@ -774,22 +914,32 @@ class DashboardController extends Controller
                             $try_price += $expense->price;
                             $usd_price += $expense->price / $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $usd_price += $expense->price;
                             $try_price += $expense->price * $item->usd_rate;
                             $eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $eur_price += $expense->price;
                             $try_price += $expense->price * $item->eur_rate;
                             $usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $gbp_price += $expense->price;
+                            $try_price += $expense->price * $item->gbp_rate;
+                            $usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
 
                     }
+
                 }
 
                 $currentMonth['try_sale'] = number_format($try_price, 2,".","");
                 $currentMonth['usd_sale'] = number_format($usd_price, 2,".","");
                 $currentMonth['eur_sale'] = number_format($eur_price, 2,".","");
+                $currentMonth['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($previous_sales, $currentMonth);
             }
 
@@ -820,6 +970,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
                 $sale_items = Sale::query()
                     ->leftJoin('statuses', 'statuses.id', '=', 'sales.status_id')
@@ -837,6 +988,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -844,20 +996,29 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'EUR'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
 
                 $sale = array();
@@ -866,12 +1027,14 @@ class DashboardController extends Controller
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -895,6 +1058,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -924,6 +1088,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -931,31 +1096,42 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales, 'l'=>$last_months]]);
@@ -1010,31 +1186,42 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales, 'l'=>$last_months]]);
@@ -1058,6 +1245,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1088,6 +1276,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1095,30 +1284,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1142,6 +1342,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1167,6 +1368,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1174,30 +1376,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1221,6 +1434,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1251,6 +1465,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1258,30 +1473,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1305,6 +1531,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1330,6 +1557,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1337,30 +1565,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1384,6 +1623,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1414,6 +1654,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1421,30 +1662,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1468,6 +1720,7 @@ class DashboardController extends Controller
             $try_total = 0;
             $usd_total = 0;
             $eur_total = 0;
+            $gbp_total = 0;
             foreach ($last_months as $last_month){
 
                 $sale_items = DB::table('sales AS s')
@@ -1493,6 +1746,7 @@ class DashboardController extends Controller
                 $try_price = 0;
                 $usd_price = 0;
                 $eur_price = 0;
+                $gbp_price = 0;
 
                 foreach ($sale_items as $item){
 
@@ -1500,30 +1754,41 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total;
                         $usd_price += $item->grand_total / $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $usd_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->usd_rate;
                         $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $eur_price += $item->grand_total;
                         $try_price += $item->grand_total * $item->eur_rate;
                         $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $gbp_price += $item->grand_total;
+                        $try_price += $item->grand_total * $item->gbp_rate;
+                        $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
                 }
 
                 $try_total += $try_price;
                 $usd_total += $usd_price;
                 $eur_total += $eur_price;
+                $gbp_total += $gbp_price;
 
                 $sale['try_sale'] = number_format($try_price, 2,".","");
                 $sale['usd_sale'] = number_format($usd_price, 2,".","");
                 $sale['eur_sale'] = number_format($eur_price, 2,".","");
+                $sale['gbp_sale'] = number_format($gbp_price, 2,".","");
                 array_push($sales, $sale);
             }
 
             $total_sales['try_total'] = number_format($try_total, 2,".","");
             $total_sales['usd_total'] = number_format($usd_total, 2,".","");
             $total_sales['eur_total'] = number_format($eur_total, 2,".","");
+            $total_sales['gbp_total'] = number_format($gbp_total, 2,".","");
 
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['sales' => $sales, 'total_sales' => $total_sales]]);
@@ -1555,15 +1820,19 @@ class DashboardController extends Controller
             $continue_try_price = 0;
             $continue_usd_price = 0;
             $continue_eur_price = 0;
+            $continue_gbp_price = 0;
             $approved_try_price = 0;
             $approved_usd_price = 0;
             $approved_eur_price = 0;
+            $approved_gbp_price = 0;
             $completed_try_price = 0;
             $completed_usd_price = 0;
             $completed_eur_price = 0;
+            $completed_gbp_price = 0;
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
+            $cancelled_gbp_price = 0;
 
             foreach ($sale_items as $item){
 
@@ -1576,14 +1845,22 @@ class DashboardController extends Controller
                         $continue_try_price += $item->grand_total;
                         $continue_usd_price += $item->grand_total / $item->usd_rate;
                         $continue_eur_price += $item->grand_total / $item->eur_rate;
+                        $continue_gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $continue_usd_price += $item->grand_total;
                         $continue_try_price += $item->grand_total * $item->usd_rate;
                         $continue_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $continue_gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $continue_eur_price += $item->grand_total;
                         $continue_try_price += $item->grand_total * $item->eur_rate;
                         $continue_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $continue_gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $continue_gbp_price += $item->grand_total;
+                        $continue_try_price += $item->grand_total * $item->gbp_rate;
+                        $continue_usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $continue_eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
                     foreach ($expenses as $expense){
@@ -1591,14 +1868,22 @@ class DashboardController extends Controller
                             $continue_try_price += $expense->price;
                             $continue_usd_price += $expense->price / $item->usd_rate;
                             $continue_eur_price += $expense->price / $item->eur_rate;
+                            $continue_gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $continue_usd_price += $expense->price;
                             $continue_try_price += $expense->price * $item->usd_rate;
                             $continue_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $continue_gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $continue_eur_price += $expense->price;
                             $continue_try_price += $expense->price * $item->eur_rate;
                             $continue_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $continue_gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $continue_gbp_price += $expense->price;
+                            $continue_try_price += $expense->price * $item->gbp_rate;
+                            $continue_usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $continue_eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
@@ -1608,14 +1893,22 @@ class DashboardController extends Controller
                         $approved_try_price += $item->grand_total;
                         $approved_usd_price += $item->grand_total / $item->usd_rate;
                         $approved_eur_price += $item->grand_total / $item->eur_rate;
+                        $approved_gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $approved_usd_price += $item->grand_total;
                         $approved_try_price += $item->grand_total * $item->usd_rate;
                         $approved_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $approved_gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $approved_eur_price += $item->grand_total;
                         $approved_try_price += $item->grand_total * $item->eur_rate;
                         $approved_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $approved_gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $approved_gbp_price += $item->grand_total;
+                        $approved_try_price += $item->grand_total * $item->gbp_rate;
+                        $approved_usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $approved_eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
                     foreach ($expenses as $expense){
@@ -1623,14 +1916,22 @@ class DashboardController extends Controller
                             $approved_try_price += $expense->price;
                             $approved_usd_price += $expense->price / $item->usd_rate;
                             $approved_eur_price += $expense->price / $item->eur_rate;
+                            $approved_gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $approved_usd_price += $expense->price;
                             $approved_try_price += $expense->price * $item->usd_rate;
                             $approved_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $approved_gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $approved_eur_price += $expense->price;
                             $approved_try_price += $expense->price * $item->eur_rate;
                             $approved_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $approved_gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $approved_gbp_price += $expense->price;
+                            $approved_try_price += $expense->price * $item->gbp_rate;
+                            $approved_usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $approved_eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
@@ -1640,14 +1941,22 @@ class DashboardController extends Controller
                         $completed_try_price += $item->grand_total;
                         $completed_usd_price += $item->grand_total / $item->usd_rate;
                         $completed_eur_price += $item->grand_total / $item->eur_rate;
+                        $completed_gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $completed_usd_price += $item->grand_total;
                         $completed_try_price += $item->grand_total * $item->usd_rate;
                         $completed_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $completed_gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $completed_eur_price += $item->grand_total;
                         $completed_try_price += $item->grand_total * $item->eur_rate;
                         $completed_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $completed_gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $completed_gbp_price += $item->grand_total;
+                        $completed_try_price += $item->grand_total * $item->gbp_rate;
+                        $completed_usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $completed_eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
                     foreach ($expenses as $expense){
@@ -1655,14 +1964,22 @@ class DashboardController extends Controller
                             $completed_try_price += $expense->price;
                             $completed_usd_price += $expense->price / $item->usd_rate;
                             $completed_eur_price += $expense->price / $item->eur_rate;
+                            $completed_gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $completed_usd_price += $expense->price;
                             $completed_try_price += $expense->price * $item->usd_rate;
                             $completed_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $completed_gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $completed_eur_price += $expense->price;
                             $completed_try_price += $expense->price * $item->eur_rate;
                             $completed_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $completed_gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $completed_gbp_price += $expense->price;
+                            $completed_try_price += $expense->price * $item->gbp_rate;
+                            $completed_usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $completed_eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
@@ -1672,14 +1989,22 @@ class DashboardController extends Controller
                         $cancelled_try_price += $item->grand_total;
                         $cancelled_usd_price += $item->grand_total / $item->usd_rate;
                         $cancelled_eur_price += $item->grand_total / $item->eur_rate;
+                        $cancelled_gbp_price += $item->grand_total / $item->gbp_rate;
                     }else if ($item->currency == 'USD'){
                         $cancelled_usd_price += $item->grand_total;
                         $cancelled_try_price += $item->grand_total * $item->usd_rate;
                         $cancelled_eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                        $cancelled_gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                     }else if ($item->currency == 'EUR'){
                         $cancelled_eur_price += $item->grand_total;
                         $cancelled_try_price += $item->grand_total * $item->eur_rate;
                         $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                        $cancelled_gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                    }else if ($item->currency == 'GBP'){
+                        $cancelled_gbp_price += $item->grand_total;
+                        $cancelled_try_price += $item->grand_total * $item->gbp_rate;
+                        $cancelled_usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                        $cancelled_eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                     }
 
                     foreach ($expenses as $expense){
@@ -1687,14 +2012,22 @@ class DashboardController extends Controller
                             $cancelled_try_price += $expense->price;
                             $cancelled_usd_price += $expense->price / $item->usd_rate;
                             $cancelled_eur_price += $expense->price / $item->eur_rate;
+                            $cancelled_gbp_price += $expense->price / $item->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $cancelled_usd_price += $expense->price;
                             $cancelled_try_price += $expense->price * $item->usd_rate;
                             $cancelled_eur_price += $expense->price / $item->eur_rate * $item->usd_rate;
+                            $cancelled_gbp_price += $expense->price / $item->gbp_rate * $item->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $cancelled_eur_price += $expense->price;
                             $cancelled_try_price += $expense->price * $item->eur_rate;
                             $cancelled_usd_price += $expense->price / $item->usd_rate * $item->eur_rate;
+                            $cancelled_gbp_price += $expense->price / $item->gbp_rate * $item->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $cancelled_gbp_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $item->gbp_rate;
+                            $cancelled_usd_price += $expense->price / $item->usd_rate * $item->gbp_rate;
+                            $cancelled_eur_price += $expense->price / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
@@ -1706,21 +2039,25 @@ class DashboardController extends Controller
             $continue['try_sale'] = number_format($continue_try_price, 2,".","");
             $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
             $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
+            $continue['gbp_sale'] = number_format($continue_gbp_price, 2,".","");
 
             $approved = array();
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+            $approved['gbp_sale'] = number_format($approved_gbp_price, 2,".","");
 
             $completed = array();
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
             $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
             $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
+            $completed['gbp_sale'] = number_format($completed_gbp_price, 2,".","");
 
             $cancelled = array();
             $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+            $cancelled['gbp_sale'] = number_format($cancelled_gbp_price, 2,".","");
 
 
 
@@ -1749,15 +2086,19 @@ class DashboardController extends Controller
             $continue_try_price = 0;
             $continue_usd_price = 0;
             $continue_eur_price = 0;
+            $continue_gbp_price = 0;
             $approved_try_price = 0;
             $approved_usd_price = 0;
             $approved_eur_price = 0;
+            $approved_gbp_price = 0;
             $completed_try_price = 0;
             $completed_usd_price = 0;
             $completed_eur_price = 0;
+            $completed_gbp_price = 0;
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
+            $cancelled_gbp_price = 0;
 
 
             $continue = array();
@@ -1802,6 +2143,7 @@ class DashboardController extends Controller
                 $daily_continue_try_price = 0;
                 $daily_continue_usd_price = 0;
                 $daily_continue_eur_price = 0;
+                $daily_continue_gbp_price = 0;
 
                 foreach ($daily_total_continue_sales as $sl){
 
@@ -1809,28 +2151,44 @@ class DashboardController extends Controller
                         $daily_continue_try_price += $sl->grand_total;
                         $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_continue_usd_price += $sl->grand_total;
                         $daily_continue_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_continue_eur_price += $sl->grand_total;
                         $daily_continue_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_continue_gbp_price += $sl->grand_total;
+                        $daily_continue_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $continue_try_price += $sl->grand_total;
                         $continue_usd_price += $sl->grand_total / $sl->usd_rate;
                         $continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $continue_usd_price += $sl->grand_total;
                         $continue_try_price += $sl->grand_total * $sl->usd_rate;
                         $continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $continue_eur_price += $sl->grand_total;
                         $continue_try_price += $sl->grand_total * $sl->eur_rate;
                         $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $continue_gbp_price += $sl->grand_total;
+                        $continue_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     //ek giderler
@@ -1840,26 +2198,42 @@ class DashboardController extends Controller
                             $daily_continue_try_price += $expense->price;
                             $daily_continue_usd_price += $expense->price / $sl->usd_rate;
                             $daily_continue_eur_price += $expense->price / $sl->eur_rate;
+                            $daily_continue_gbp_price += $expense->price / $sl->gbp_rate;
 
                             $continue_try_price += $expense->price;
                             $continue_usd_price += $expense->price / $sl->usd_rate;
                             $continue_eur_price += $expense->price / $sl->eur_rate;
+                            $continue_gbp_price += $expense->price / $sl->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $daily_continue_usd_price += $expense->price;
                             $daily_continue_try_price += $expense->price * $sl->usd_rate;
                             $daily_continue_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $daily_continue_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
 
                             $continue_usd_price += $expense->price;
                             $continue_try_price += $expense->price * $sl->usd_rate;
                             $continue_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $continue_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $daily_continue_eur_price += $expense->price;
                             $daily_continue_try_price += $expense->price * $sl->eur_rate;
                             $daily_continue_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $daily_continue_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
 
                             $continue_eur_price += $expense->price;
                             $continue_try_price += $expense->price * $sl->eur_rate;
                             $continue_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $continue_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $daily_continue_gbp_price += $expense->price;
+                            $daily_continue_try_price += $expense->price * $sl->gbp_rate;
+                            $daily_continue_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $daily_continue_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
+
+                            $continue_gbp_price += $expense->price;
+                            $continue_try_price += $expense->price * $sl->gbp_rate;
+                            $continue_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $continue_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
                         }
 
                     }
@@ -1873,6 +2247,7 @@ class DashboardController extends Controller
                 $continue_serie_this_day['try'] = number_format($daily_continue_try_price, 2,".","");
                 $continue_serie_this_day['usd'] = number_format($daily_continue_usd_price, 2,".","");
                 $continue_serie_this_day['eur'] = number_format($daily_continue_eur_price, 2,".","");
+                $continue_serie_this_day['gbp'] = number_format($daily_continue_gbp_price, 2,".","");
 
                 array_push($continue_serie, $continue_serie_this_day);
                 array_push($continue_serie_try, number_format($daily_continue_try_price, 2,".",""));
@@ -1913,6 +2288,7 @@ class DashboardController extends Controller
                 $daily_approved_try_price = 0;
                 $daily_approved_usd_price = 0;
                 $daily_approved_eur_price = 0;
+                $daily_approved_gbp_price = 0;
 
                 foreach ($daily_total_approved_sales as $sl){
 
@@ -1920,28 +2296,44 @@ class DashboardController extends Controller
                         $daily_approved_try_price += $sl->grand_total;
                         $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_approved_usd_price += $sl->grand_total;
                         $daily_approved_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_approved_eur_price += $sl->grand_total;
                         $daily_approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_approved_gbp_price += $sl->grand_total;
+                        $daily_approved_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $approved_try_price += $sl->grand_total;
                         $approved_usd_price += $sl->grand_total / $sl->usd_rate;
                         $approved_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $approved_usd_price += $sl->grand_total;
                         $approved_try_price += $sl->grand_total * $sl->usd_rate;
                         $approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $approved_eur_price += $sl->grand_total;
                         $approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $approved_gbp_price += $sl->grand_total;
+                        $approved_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     //ek giderler
@@ -1951,26 +2343,42 @@ class DashboardController extends Controller
                             $daily_approved_try_price += $expense->price;
                             $daily_approved_usd_price += $expense->price / $sl->usd_rate;
                             $daily_approved_eur_price += $expense->price / $sl->eur_rate;
+                            $daily_approved_gbp_price += $expense->price / $sl->gbp_rate;
 
                             $approved_try_price += $expense->price;
                             $approved_usd_price += $expense->price / $sl->usd_rate;
                             $approved_eur_price += $expense->price / $sl->eur_rate;
+                            $approved_gbp_price += $expense->price / $sl->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $daily_approved_usd_price += $expense->price;
                             $daily_approved_try_price += $expense->price * $sl->usd_rate;
                             $daily_approved_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $daily_approved_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
 
                             $approved_usd_price += $expense->price;
                             $approved_try_price += $expense->price * $sl->usd_rate;
                             $approved_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $approved_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $daily_approved_eur_price += $expense->price;
                             $daily_approved_try_price += $expense->price * $sl->eur_rate;
                             $daily_approved_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $daily_approved_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
 
                             $approved_eur_price += $expense->price;
                             $approved_try_price += $expense->price * $sl->eur_rate;
                             $approved_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $approved_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $daily_approved_gbp_price += $expense->price;
+                            $daily_approved_try_price += $expense->price * $sl->gbp_rate;
+                            $daily_approved_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $daily_approved_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
+
+                            $approved_gbp_price += $expense->price;
+                            $approved_try_price += $expense->price * $sl->gbp_rate;
+                            $approved_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $approved_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
                         }
 
                     }
@@ -1982,6 +2390,7 @@ class DashboardController extends Controller
                 $approved_serie_this_day['try'] = number_format($daily_approved_try_price, 2,".","");
                 $approved_serie_this_day['usd'] = number_format($daily_approved_usd_price, 2,".","");
                 $approved_serie_this_day['eur'] = number_format($daily_approved_eur_price, 2,".","");
+                $approved_serie_this_day['gbp'] = number_format($daily_approved_gbp_price, 2,".","");
 
                 array_push($approved_serie, $approved_serie_this_day);
                 array_push($approved_serie_try, number_format($daily_approved_try_price, 2,".",""));
@@ -2022,6 +2431,7 @@ class DashboardController extends Controller
                 $daily_completed_try_price = 0;
                 $daily_completed_usd_price = 0;
                 $daily_completed_eur_price = 0;
+                $daily_completed_gbp_price = 0;
 
                 foreach ($daily_total_completed_sales as $sl){
 
@@ -2029,28 +2439,44 @@ class DashboardController extends Controller
                         $daily_completed_try_price += $sl->grand_total;
                         $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_completed_usd_price += $sl->grand_total;
                         $daily_completed_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_completed_eur_price += $sl->grand_total;
                         $daily_completed_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_completed_gbp_price += $sl->grand_total;
+                        $daily_completed_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $completed_try_price += $sl->grand_total;
                         $completed_usd_price += $sl->grand_total / $sl->usd_rate;
                         $completed_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $completed_usd_price += $sl->grand_total;
                         $completed_try_price += $sl->grand_total * $sl->usd_rate;
                         $completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $completed_eur_price += $sl->grand_total;
                         $completed_try_price += $sl->grand_total * $sl->eur_rate;
                         $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $completed_gbp_price += $sl->grand_total;
+                        $completed_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     //ek giderler
@@ -2060,26 +2486,42 @@ class DashboardController extends Controller
                             $daily_completed_try_price += $expense->price;
                             $daily_completed_usd_price += $expense->price / $sl->usd_rate;
                             $daily_completed_eur_price += $expense->price / $sl->eur_rate;
+                            $daily_completed_gbp_price += $expense->price / $sl->gbp_rate;
 
                             $completed_try_price += $expense->price;
                             $completed_usd_price += $expense->price / $sl->usd_rate;
                             $completed_eur_price += $expense->price / $sl->eur_rate;
+                            $completed_gbp_price += $expense->price / $sl->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $daily_completed_usd_price += $expense->price;
                             $daily_completed_try_price += $expense->price * $sl->usd_rate;
                             $daily_completed_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $daily_completed_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
 
                             $completed_usd_price += $expense->price;
                             $completed_try_price += $expense->price * $sl->usd_rate;
                             $completed_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $completed_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $daily_completed_eur_price += $expense->price;
                             $daily_completed_try_price += $expense->price * $sl->eur_rate;
                             $daily_completed_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $daily_completed_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
 
                             $completed_eur_price += $expense->price;
                             $completed_try_price += $expense->price * $sl->eur_rate;
                             $completed_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $completed_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $daily_completed_gbp_price += $expense->price;
+                            $daily_completed_try_price += $expense->price * $sl->gbp_rate;
+                            $daily_completed_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $daily_completed_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
+
+                            $completed_gbp_price += $expense->price;
+                            $completed_try_price += $expense->price * $sl->gbp_rate;
+                            $completed_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $completed_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
                         }
 
                     }
@@ -2091,6 +2533,7 @@ class DashboardController extends Controller
                 $completed_serie_this_day['try'] = number_format($daily_completed_try_price, 2,".","");
                 $completed_serie_this_day['usd'] = number_format($daily_completed_usd_price, 2,".","");
                 $completed_serie_this_day['eur'] = number_format($daily_completed_eur_price, 2,".","");
+                $completed_serie_this_day['gbp'] = number_format($daily_completed_gbp_price, 2,".","");
 
                 array_push($completed_serie, $completed_serie_this_day);
                 array_push($completed_serie_try, number_format($daily_completed_try_price, 2,".",""));
@@ -2132,6 +2575,7 @@ class DashboardController extends Controller
                 $daily_cancelled_try_price = 0;
                 $daily_cancelled_usd_price = 0;
                 $daily_cancelled_eur_price = 0;
+                $daily_cancelled_gbp_price = 0;
 
                 foreach ($daily_total_cancelled_sales as $sl){
 
@@ -2139,28 +2583,44 @@ class DashboardController extends Controller
                         $daily_cancelled_try_price += $sl->grand_total;
                         $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_cancelled_usd_price += $sl->grand_total;
                         $daily_cancelled_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_cancelled_eur_price += $sl->grand_total;
                         $daily_cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_cancelled_gbp_price += $sl->grand_total;
+                        $daily_cancelled_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $cancelled_try_price += $sl->grand_total;
                         $cancelled_usd_price += $sl->grand_total / $sl->usd_rate;
                         $cancelled_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $cancelled_usd_price += $sl->grand_total;
                         $cancelled_try_price += $sl->grand_total * $sl->usd_rate;
                         $cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $cancelled_eur_price += $sl->grand_total;
                         $cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $cancelled_gbp_price += $sl->grand_total;
+                        $cancelled_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     //ek giderler
@@ -2170,26 +2630,42 @@ class DashboardController extends Controller
                             $daily_cancelled_try_price += $expense->price;
                             $daily_cancelled_usd_price += $expense->price / $sl->usd_rate;
                             $daily_cancelled_eur_price += $expense->price / $sl->eur_rate;
+                            $daily_cancelled_gbp_price += $expense->price / $sl->gbp_rate;
 
                             $cancelled_try_price += $expense->price;
                             $cancelled_usd_price += $expense->price / $sl->usd_rate;
                             $cancelled_eur_price += $expense->price / $sl->eur_rate;
+                            $cancelled_gbp_price += $expense->price / $sl->gbp_rate;
                         }else if ($expense->currency == 'USD'){
                             $daily_cancelled_usd_price += $expense->price;
                             $daily_cancelled_try_price += $expense->price * $sl->usd_rate;
                             $daily_cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $daily_cancelled_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
 
                             $cancelled_usd_price += $expense->price;
                             $cancelled_try_price += $expense->price * $sl->usd_rate;
                             $cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->usd_rate;
+                            $cancelled_gbp_price += $expense->price / $sl->gbp_rate * $sl->usd_rate;
                         }else if ($expense->currency == 'EUR'){
                             $daily_cancelled_eur_price += $expense->price;
                             $daily_cancelled_try_price += $expense->price * $sl->eur_rate;
                             $daily_cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $daily_cancelled_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
 
                             $cancelled_eur_price += $expense->price;
                             $cancelled_try_price += $expense->price * $sl->eur_rate;
                             $cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->eur_rate;
+                            $cancelled_gbp_price += $expense->price / $sl->gbp_rate * $sl->eur_rate;
+                        }else if ($expense->currency == 'GBP'){
+                            $daily_cancelled_gbp_price += $expense->price;
+                            $daily_cancelled_try_price += $expense->price * $sl->gbp_rate;
+                            $daily_cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $daily_cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
+
+                            $cancelled_gbp_price += $expense->price;
+                            $cancelled_try_price += $expense->price * $sl->gbp_rate;
+                            $cancelled_usd_price += $expense->price / $sl->usd_rate * $sl->gbp_rate;
+                            $cancelled_eur_price += $expense->price / $sl->eur_rate * $sl->gbp_rate;
                         }
 
                     }
@@ -2201,6 +2677,7 @@ class DashboardController extends Controller
                 $cancelled_serie_this_day['try'] = number_format($daily_cancelled_try_price, 2,".","");
                 $cancelled_serie_this_day['usd'] = number_format($daily_cancelled_usd_price, 2,".","");
                 $cancelled_serie_this_day['eur'] = number_format($daily_cancelled_eur_price, 2,".","");
+                $cancelled_serie_this_day['gbp'] = number_format($daily_cancelled_gbp_price, 2,".","");
 
                 array_push($cancelled_serie, $cancelled_serie_this_day);
                 array_push($cancelled_serie_try, number_format($daily_cancelled_try_price, 2,".",""));
@@ -2215,18 +2692,22 @@ class DashboardController extends Controller
             $continue['try_sale'] = number_format($continue_try_price, 2,".","");
             $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
             $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
+            $continue['gbp_sale'] = number_format($continue_gbp_price, 2,".","");
 
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+            $approved['gbp_sale'] = number_format($approved_gbp_price, 2,".","");
 
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
             $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
             $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
+            $completed['gbp_sale'] = number_format($completed_gbp_price, 2,".","");
 
             $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+            $cancelled['gbp_sale'] = number_format($cancelled_gbp_price, 2,".","");
 
 
             $sales['continue'] = $continue;
@@ -2253,15 +2734,19 @@ class DashboardController extends Controller
             $continue_try_price = 0;
             $continue_usd_price = 0;
             $continue_eur_price = 0;
+            $continue_gbp_price = 0;
             $approved_try_price = 0;
             $approved_usd_price = 0;
             $approved_eur_price = 0;
+            $approved_gbp_price = 0;
             $completed_try_price = 0;
             $completed_usd_price = 0;
             $completed_eur_price = 0;
+            $completed_gbp_price = 0;
             $cancelled_try_price = 0;
             $cancelled_usd_price = 0;
             $cancelled_eur_price = 0;
+            $cancelled_gbp_price = 0;
 
 
             $continue = array();
@@ -2301,6 +2786,7 @@ class DashboardController extends Controller
                 $daily_continue_try_price = 0;
                 $daily_continue_usd_price = 0;
                 $daily_continue_eur_price = 0;
+                $daily_continue_gbp_price = 0;
 
                 foreach ($daily_total_continue_sales as $sl){
 
@@ -2308,28 +2794,44 @@ class DashboardController extends Controller
                         $daily_continue_try_price += $sl->grand_total;
                         $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_continue_usd_price += $sl->grand_total;
                         $daily_continue_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_continue_eur_price += $sl->grand_total;
                         $daily_continue_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_continue_gbp_price += $sl->grand_total;
+                        $daily_continue_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $continue_try_price += $sl->grand_total;
                         $continue_usd_price += $sl->grand_total / $sl->usd_rate;
                         $continue_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $continue_usd_price += $sl->grand_total;
                         $continue_try_price += $sl->grand_total * $sl->usd_rate;
                         $continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $continue_eur_price += $sl->grand_total;
                         $continue_try_price += $sl->grand_total * $sl->eur_rate;
                         $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $continue_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $continue_gbp_price += $sl->grand_total;
+                        $continue_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $continue_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $continue_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                 }
@@ -2339,6 +2841,7 @@ class DashboardController extends Controller
                 $continue_serie_this_day['try'] = number_format($daily_continue_try_price, 2,".","");
                 $continue_serie_this_day['usd'] = number_format($daily_continue_usd_price, 2,".","");
                 $continue_serie_this_day['eur'] = number_format($daily_continue_eur_price, 2,".","");
+                $continue_serie_this_day['gbp'] = number_format($daily_continue_gbp_price, 2,".","");
 
                 array_push($continue_serie, $continue_serie_this_day);
                 array_push($continue_serie_try, number_format($daily_continue_try_price, 2,".",""));
@@ -2374,6 +2877,7 @@ class DashboardController extends Controller
                 $daily_approved_try_price = 0;
                 $daily_approved_usd_price = 0;
                 $daily_approved_eur_price = 0;
+                $daily_approved_gbp_price = 0;
 
                 foreach ($daily_total_approved_sales as $sl){
 
@@ -2381,28 +2885,44 @@ class DashboardController extends Controller
                         $daily_approved_try_price += $sl->grand_total;
                         $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_approved_usd_price += $sl->grand_total;
                         $daily_approved_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_approved_eur_price += $sl->grand_total;
                         $daily_approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_approved_gbp_price += $sl->grand_total;
+                        $daily_approved_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $approved_try_price += $sl->grand_total;
                         $approved_usd_price += $sl->grand_total / $sl->usd_rate;
                         $approved_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $approved_usd_price += $sl->grand_total;
                         $approved_try_price += $sl->grand_total * $sl->usd_rate;
                         $approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $approved_eur_price += $sl->grand_total;
                         $approved_try_price += $sl->grand_total * $sl->eur_rate;
                         $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $approved_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $approved_gbp_price += $sl->grand_total;
+                        $approved_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $approved_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $approved_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                 }
@@ -2412,6 +2932,7 @@ class DashboardController extends Controller
                 $approved_serie_this_day['try'] = number_format($daily_approved_try_price, 2,".","");
                 $approved_serie_this_day['usd'] = number_format($daily_approved_usd_price, 2,".","");
                 $approved_serie_this_day['eur'] = number_format($daily_approved_eur_price, 2,".","");
+                $approved_serie_this_day['gbp'] = number_format($daily_approved_gbp_price, 2,".","");
 
                 array_push($approved_serie, $approved_serie_this_day);
                 array_push($approved_serie_try, number_format($daily_approved_try_price, 2,".",""));
@@ -2447,6 +2968,7 @@ class DashboardController extends Controller
                 $daily_completed_try_price = 0;
                 $daily_completed_usd_price = 0;
                 $daily_completed_eur_price = 0;
+                $daily_completed_gbp_price = 0;
 
                 foreach ($daily_total_completed_sales as $sl){
 
@@ -2454,28 +2976,44 @@ class DashboardController extends Controller
                         $daily_completed_try_price += $sl->grand_total;
                         $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_completed_usd_price += $sl->grand_total;
                         $daily_completed_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_completed_eur_price += $sl->grand_total;
                         $daily_completed_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_completed_gbp_price += $sl->grand_total;
+                        $daily_completed_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $completed_try_price += $sl->grand_total;
                         $completed_usd_price += $sl->grand_total / $sl->usd_rate;
                         $completed_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $completed_usd_price += $sl->grand_total;
                         $completed_try_price += $sl->grand_total * $sl->usd_rate;
                         $completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $completed_eur_price += $sl->grand_total;
                         $completed_try_price += $sl->grand_total * $sl->eur_rate;
                         $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $completed_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $completed_gbp_price += $sl->grand_total;
+                        $completed_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $completed_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $completed_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                 }
@@ -2485,6 +3023,7 @@ class DashboardController extends Controller
                 $completed_serie_this_day['try'] = number_format($daily_completed_try_price, 2,".","");
                 $completed_serie_this_day['usd'] = number_format($daily_completed_usd_price, 2,".","");
                 $completed_serie_this_day['eur'] = number_format($daily_completed_eur_price, 2,".","");
+                $completed_serie_this_day['gbp'] = number_format($daily_completed_gbp_price, 2,".","");
 
                 array_push($completed_serie, $completed_serie_this_day);
                 array_push($completed_serie_try, number_format($daily_completed_try_price, 2,".",""));
@@ -2521,6 +3060,7 @@ class DashboardController extends Controller
                 $daily_cancelled_try_price = 0;
                 $daily_cancelled_usd_price = 0;
                 $daily_cancelled_eur_price = 0;
+                $daily_cancelled_gbp_price = 0;
 
                 foreach ($daily_total_cancelled_sales as $sl){
 
@@ -2528,28 +3068,44 @@ class DashboardController extends Controller
                         $daily_cancelled_try_price += $sl->grand_total;
                         $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate;
                         $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $daily_cancelled_usd_price += $sl->grand_total;
                         $daily_cancelled_try_price += $sl->grand_total * $sl->usd_rate;
                         $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $daily_cancelled_eur_price += $sl->grand_total;
                         $daily_cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $daily_cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $daily_cancelled_gbp_price += $sl->grand_total;
+                        $daily_cancelled_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $daily_cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $daily_cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                     if ($sl->currency == 'TRY'){
                         $cancelled_try_price += $sl->grand_total;
                         $cancelled_usd_price += $sl->grand_total / $sl->usd_rate;
                         $cancelled_eur_price += $sl->grand_total / $sl->eur_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate;
                     }else if ($sl->currency == 'USD'){
                         $cancelled_usd_price += $sl->grand_total;
                         $cancelled_try_price += $sl->grand_total * $sl->usd_rate;
                         $cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->usd_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->usd_rate;
                     }else if ($sl->currency == 'EUR'){
                         $cancelled_eur_price += $sl->grand_total;
                         $cancelled_try_price += $sl->grand_total * $sl->eur_rate;
                         $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->eur_rate;
+                        $cancelled_gbp_price += $sl->grand_total / $sl->gbp_rate * $sl->eur_rate;
+                    }else if ($sl->currency == 'GBP'){
+                        $cancelled_gbp_price += $sl->grand_total;
+                        $cancelled_try_price += $sl->grand_total * $sl->gbp_rate;
+                        $cancelled_usd_price += $sl->grand_total / $sl->usd_rate * $sl->gbp_rate;
+                        $cancelled_eur_price += $sl->grand_total / $sl->eur_rate * $sl->gbp_rate;
                     }
 
                 }
@@ -2559,6 +3115,7 @@ class DashboardController extends Controller
                 $cancelled_serie_this_day['try'] = number_format($daily_cancelled_try_price, 2,".","");
                 $cancelled_serie_this_day['usd'] = number_format($daily_cancelled_usd_price, 2,".","");
                 $cancelled_serie_this_day['eur'] = number_format($daily_cancelled_eur_price, 2,".","");
+                $cancelled_serie_this_day['gbp'] = number_format($daily_cancelled_gbp_price, 2,".","");
 
                 array_push($cancelled_serie, $cancelled_serie_this_day);
                 array_push($cancelled_serie_try, number_format($daily_cancelled_try_price, 2,".",""));
@@ -2573,18 +3130,22 @@ class DashboardController extends Controller
             $continue['try_sale'] = number_format($continue_try_price, 2,".","");
             $continue['usd_sale'] = number_format($continue_usd_price, 2,".","");
             $continue['eur_sale'] = number_format($continue_eur_price, 2,".","");
+            $continue['gbp_sale'] = number_format($continue_gbp_price, 2,".","");
 
             $approved['try_sale'] = number_format($approved_try_price, 2,".","");
             $approved['usd_sale'] = number_format($approved_usd_price, 2,".","");
             $approved['eur_sale'] = number_format($approved_eur_price, 2,".","");
+            $approved['gbp_sale'] = number_format($approved_gbp_price, 2,".","");
 
             $completed['try_sale'] = number_format($completed_try_price, 2,".","");
             $completed['usd_sale'] = number_format($completed_usd_price, 2,".","");
             $completed['eur_sale'] = number_format($completed_eur_price, 2,".","");
+            $completed['gbp_sale'] = number_format($completed_gbp_price, 2,".","");
 
             $cancelled['try_sale'] = number_format($cancelled_try_price, 2,".","");
             $cancelled['usd_sale'] = number_format($cancelled_usd_price, 2,".","");
             $cancelled['eur_sale'] = number_format($cancelled_eur_price, 2,".","");
+            $cancelled['gbp_sale'] = number_format($cancelled_gbp_price, 2,".","");
 
 
             $sales['continue'] = $continue;
@@ -2623,6 +3184,7 @@ class DashboardController extends Controller
                 $try_total = 0;
                 $usd_total = 0;
                 $eur_total = 0;
+                $gbp_total = 0;
                 $sale_count = 0;
 
                 foreach ($last_months as $last_month) {
@@ -2648,6 +3210,7 @@ class DashboardController extends Controller
                     $try_price = 0;
                     $usd_price = 0;
                     $eur_price = 0;
+                    $gbp_price = 0;
 
                     foreach ($sale_items as $item) {
                         $sale_count++;
@@ -2656,20 +3219,29 @@ class DashboardController extends Controller
                             $try_price += $item->grand_total;
                             $usd_price += $item->grand_total / $item->usd_rate;
                             $eur_price += $item->grand_total / $item->eur_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate;
                         } else if ($item->currency == 'USD') {
                             $usd_price += $item->grand_total;
                             $try_price += $item->grand_total * $item->usd_rate;
                             $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                         } else if ($item->currency == 'EUR') {
                             $eur_price += $item->grand_total;
                             $try_price += $item->grand_total * $item->eur_rate;
                             $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                        } else if ($item->currency == 'GBP') {
+                            $gbp_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->gbp_rate;
+                            $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
                     $try_total += $try_price;
                     $usd_total += $usd_price;
                     $eur_total += $eur_price;
+                    $gbp_total += $gbp_price;
 
 
                     $sale = array();
@@ -2678,12 +3250,14 @@ class DashboardController extends Controller
                     $sale['try_sale'] = number_format($try_price, 2, ".", "");
                     $sale['usd_sale'] = number_format($usd_price, 2, ".", "");
                     $sale['eur_sale'] = number_format($eur_price, 2, ".", "");
+                    $sale['gbp_sale'] = number_format($gbp_price, 2, ".", "");
                     array_push($sales, $sale);
                 }
 
                 $total_sales['try_total'] = number_format($try_total, 2, ".", "");
                 $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
                 $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
+                $total_sales['gbp_total'] = number_format($gbp_total, 2, ".", "");
                 $total_sales['sale_count'] = $sale_count;
 
 
@@ -2717,6 +3291,7 @@ class DashboardController extends Controller
                 $try_total = 0;
                 $usd_total = 0;
                 $eur_total = 0;
+                $gbp_total = 0;
 
                 foreach ($last_months as $last_month) {
                     $sale_items = Sale::query()
@@ -2737,6 +3312,7 @@ class DashboardController extends Controller
                     $try_price = 0;
                     $usd_price = 0;
                     $eur_price = 0;
+                    $gbp_price = 0;
 
                     foreach ($sale_items as $item) {
 
@@ -2744,20 +3320,29 @@ class DashboardController extends Controller
                             $try_price += $item->grand_total;
                             $usd_price += $item->grand_total / $item->usd_rate;
                             $eur_price += $item->grand_total / $item->eur_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate;
                         } else if ($item->currency == 'USD') {
                             $usd_price += $item->grand_total;
                             $try_price += $item->grand_total * $item->usd_rate;
                             $eur_price += $item->grand_total / $item->eur_rate * $item->usd_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate * $item->usd_rate;
                         } else if ($item->currency == 'EUR') {
                             $eur_price += $item->grand_total;
                             $try_price += $item->grand_total * $item->eur_rate;
                             $usd_price += $item->grand_total / $item->usd_rate * $item->eur_rate;
+                            $gbp_price += $item->grand_total / $item->gbp_rate * $item->eur_rate;
+                        } else if ($item->currency == 'GBP') {
+                            $gbp_price += $item->grand_total;
+                            $try_price += $item->grand_total * $item->gbp_rate;
+                            $usd_price += $item->grand_total / $item->usd_rate * $item->gbp_rate;
+                            $eur_price += $item->grand_total / $item->eur_rate * $item->gbp_rate;
                         }
                     }
 
                     $try_total += $try_price;
                     $usd_total += $usd_price;
                     $eur_total += $eur_price;
+                    $gbp_total += $gbp_price;
 
 
                     $sale = array();
@@ -2766,12 +3351,14 @@ class DashboardController extends Controller
                     $sale['try_sale'] = number_format($try_price, 2, ".", "");
                     $sale['usd_sale'] = number_format($usd_price, 2, ".", "");
                     $sale['eur_sale'] = number_format($eur_price, 2, ".", "");
+                    $sale['gbp_sale'] = number_format($gbp_price, 2, ".", "");
                     array_push($sales, $sale);
                 }
 
                 $total_sales['try_total'] = number_format($try_total, 2, ".", "");
                 $total_sales['usd_total'] = number_format($usd_total, 2, ".", "");
                 $total_sales['eur_total'] = number_format($eur_total, 2, ".", "");
+                $total_sales['gbp_total'] = number_format($gbp_total, 2, ".", "");
 
 
                 $admin['total_sales'] = $total_sales;
@@ -2819,6 +3406,8 @@ class DashboardController extends Controller
                         $try_price += $item->grand_total * $item->usd_rate;
                     } else if ($item->currency == 'EUR') {
                         $try_price += $item->grand_total * $item->eur_rate;
+                    } else if ($item->currency == 'GBP') {
+                        $try_price += $item->grand_total * $item->gbp_rate;
                     }
 
                     $sale_total += $try_price;
@@ -2923,6 +3512,9 @@ class DashboardController extends Controller
                     }else if ($sale->currency == 'EUR'){
                         $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }else if ($sale->currency == 'GBP'){
+                        $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                     }
                 }
 
@@ -3010,6 +3602,9 @@ class DashboardController extends Controller
                     }else if ($sale->currency == 'EUR'){
                         $this_month_sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $this_month_offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }else if ($sale->currency == 'GBP'){
+                        $this_month_sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                        $this_month_offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                     }
                 }
 
@@ -3088,6 +3683,9 @@ class DashboardController extends Controller
                     }else if ($sale->currency == 'EUR'){
                         $previous_month_sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $previous_month_offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }else if ($sale->currency == 'GBP'){
+                        $previous_month_sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                        $previous_month_offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                     }
                 }
 
@@ -3201,6 +3799,9 @@ class DashboardController extends Controller
                         }else if ($sale->currency == 'EUR'){
                             $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                             $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }else if ($sale->currency == 'GBP'){
+                            $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                         }
                     }
 
@@ -3319,6 +3920,9 @@ class DashboardController extends Controller
                         }else if ($sale->currency == 'EUR'){
                             $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                             $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }else if ($sale->currency == 'GBP'){
+                            $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                         }
                     }
 
@@ -3406,6 +4010,9 @@ class DashboardController extends Controller
                         }else if ($sale->currency == 'EUR'){
                             $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                             $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                        }else if ($sale->currency == 'GBP'){
+                            $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                            $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                         }
                     }
 
@@ -3632,6 +4239,9 @@ class DashboardController extends Controller
                     }else if ($sale->currency == 'EUR'){
                         $sale_total += $sale_offer->sale_price * $sale->eur_rate;
                         $offer_total += $sale_offer->offer_price * $sale->eur_rate;
+                    }else if ($sale->currency == 'GBP'){
+                        $sale_total += $sale_offer->sale_price * $sale->gbp_rate;
+                        $offer_total += $sale_offer->offer_price * $sale->gbp_rate;
                     }
                 }
 
@@ -3767,6 +4377,8 @@ class DashboardController extends Controller
                     $this_month_price += $item->grand_total * $item->usd_rate;
                 }else if ($item->currency == 'EUR'){
                     $this_month_price += $item->grand_total * $item->eur_rate;
+                }else if ($item->currency == 'GBP'){
+                    $this_month_price += $item->grand_total * $item->gbp_rate;
                 }
 
                 //ek giderler
@@ -3778,6 +4390,8 @@ class DashboardController extends Controller
                         $this_month_price += $expense->price * $item->usd_rate;
                     }else if ($expense->currency == 'EUR'){
                         $this_month_price += $expense->price * $item->eur_rate;
+                    }else if ($expense->currency == 'GBP'){
+                        $this_month_price += $expense->price * $item->gbp_rate;
                     }
 
                 }
@@ -3817,6 +4431,8 @@ class DashboardController extends Controller
                     $previous_month_price += $item->grand_total * $item->usd_rate;
                 }else if ($item->currency == 'EUR'){
                     $previous_month_price += $item->grand_total * $item->eur_rate;
+                }else if ($item->currency == 'GBP'){
+                    $previous_month_price += $item->grand_total * $item->gbp_rate;
                 }
 
                 //ek giderler
@@ -3828,6 +4444,8 @@ class DashboardController extends Controller
                         $previous_month_price += $expense->price * $item->usd_rate;
                     }else if ($expense->currency == 'EUR'){
                         $previous_month_price += $expense->price * $item->eur_rate;
+                    }else if ($expense->currency == 'GBP'){
+                        $previous_month_price += $expense->price * $item->gbp_rate;
                     }
 
                 }

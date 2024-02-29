@@ -26,6 +26,7 @@ $extra_js='
                             <option value="TRY">TRY</option>
                             <option value="USD">USD</option>
                             <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
                         </select>
                     </div>
                 </div>

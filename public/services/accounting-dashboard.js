@@ -139,6 +139,9 @@ async function getCashFlows(){
             if (payment.currency == 'EUR'){
                 price = parseFloat(price * payment.sale.eur_rate).toFixed(2);
             }
+            if (payment.currency == 'GBP'){
+                price = parseFloat(price * payment.sale.gbp_rate).toFixed(2);
+            }
             let tax = payment.payment_tax;
             if (tax == null){ tax = 0; }
             if (payment.currency == 'USD'){
@@ -146,6 +149,9 @@ async function getCashFlows(){
             }
             if (payment.currency == 'EUR'){
                 tax = parseFloat(tax * payment.sale.eur_rate).toFixed(2);
+            }
+            if (payment.currency == 'GBP'){
+                tax = parseFloat(tax * payment.sale.gbp_rate).toFixed(2);
             }
             let total = parseFloat(price) + parseFloat(tax);
             let data = {
