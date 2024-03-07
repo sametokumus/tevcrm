@@ -139,14 +139,15 @@ function triggerPipeman(){
 }
 
 function triggerPipeman2(){
+    var imageMain = document.getElementById("pipeman-container");
     var imageContainer = document.getElementById("pipeman-image");
     imageContainer.src = "/gifs/YerdekiKapak.gif";
     $('.pipeman-container').css('width', '300px').css('height', '300px');
     // $('.pipeman-image').css('display', 'block');
     window.setTimeout(function() {
-        imageContainer.style.transition = "transform 0 ease-in-out";
+        imageContainer.style.transition = "none";
         imageContainer.style.transform = "scale(.7)";
-        imageContainer.style.marginBottom = "15px";
+        imageMain.style.marginBottom = "15px";
         imageContainer.src = "/gifs/ScracthHead.gif";
     }, 1400);
     imageContainer.style.transform = "scale(1)";

@@ -1,4 +1,4 @@
-<div class="pipeman-container">
+<div id="pipeman-container" class="pipeman-container">
     <img src="" id="pipeman-image" class="pipeman-image" >
 </div>
 
