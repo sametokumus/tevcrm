@@ -147,7 +147,8 @@ function triggerPipeman2(){
     window.setTimeout(function() {
         imageContainer.style.transition = "none";
         imageContainer.style.transform = "scale(.7)";
-        imageMain.style.marginBottom = "15px";
+        imageMain.style.marginBottom = "40px";
+        imageMain.style.marginRight = "30px";
         imageContainer.src = "/gifs/ScracthHead.gif";
     }, 1400);
     imageContainer.style.transform = "scale(1)";
