@@ -144,6 +144,7 @@ function triggerPipeman2(){
     $('.pipeman-container').css('width', '300px').css('height', '300px');
     // $('.pipeman-image').css('display', 'block');
     window.setTimeout(function() {
+        imageContainer.style.transition = "transform 0 ease-in-out";
         imageContainer.style.transform = "scale(.7)";
         imageContainer.src = "/gifs/ScracthHead.gif";
     }, 1400);
