@@ -146,11 +146,11 @@ function triggerPipeman2(){
     window.setTimeout(function() {
         imageContainer.style.transform = "scale(.8)";
         imageContainer.src = "/gifs/ScracthHead.gif";
-    }, 1000);
+    }, 1200);
     imageContainer.style.transform = "scale(1)";
     window.setTimeout(function() {
         imageContainer.style.transform = "scale(0)";
-    }, 8000);
+    }, 5000);
 }
 
 function showAlert(message){
