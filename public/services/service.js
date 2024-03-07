@@ -128,20 +128,25 @@ function logout(){
 }
 
 function triggerPipeman(){
+    var imageContainer = document.getElementById("pipeman-image");
+    imageContainer.src = "/gifs/pipeman1.gif";
     $('.pipeman-container').css('width', '300px').css('height', '300px');
     // $('.pipeman-image').css('display', 'block');
-    var imageContainer = document.getElementById("pipeman-image");
     imageContainer.style.transform = "scale(1)";
     window.setTimeout(function() {
         imageContainer.style.transform = "scale(0)";
     }, 5000);
+}
 
-	// $(".alert-container .alert").text(message);
-	// var alert = $(".alert-container");
-	// alert.show("slide", {direction: "right"}, 200);
-	// window.setTimeout(function() {
-	// 	alert.hide("slide", {direction: "right"}, 200);
-	// }, 3000);
+function triggerPipeman2(){
+    var imageContainer = document.getElementById("pipeman-image");
+    imageContainer.src = "/gifs/ScracthHead.gif";
+    $('.pipeman-container').css('width', '300px').css('height', '300px');
+    // $('.pipeman-image').css('display', 'block');
+    imageContainer.style.transform = "scale(1)";
+    window.setTimeout(function() {
+        imageContainer.style.transform = "scale(0)";
+    }, 5000);
 }
 
 function showAlert(message){

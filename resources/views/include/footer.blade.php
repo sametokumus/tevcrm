@@ -1,5 +1,5 @@
 <div class="pipeman-container">
-    <img src="/gifs/pipeman1.gif" id="pipeman-image" class="pipeman-image" >
+    <img src="" id="pipeman-image" class="pipeman-image" >
 </div>
 
 <div class="toasts-container">
