@@ -4,38 +4,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\AdminRoleController;
 use App\Http\Controllers\Api\Admin\AdminPermissionController;
-use App\Http\Controllers\Api\Admin\OfferRequestController;
-use App\Http\Controllers\Api\Admin\OfferController;
-use App\Http\Controllers\Api\Admin\ImportController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\EmployeeController;
-use App\Http\Controllers\Api\Admin\ActivityController;
 use App\Http\Controllers\Api\Admin\NoteController;
 use App\Http\Controllers\Api\Admin\ContactController;
 use App\Http\Controllers\Api\Admin\SaleController;
 use App\Http\Controllers\Api\Admin\StatusController;
 use App\Http\Controllers\Api\Admin\OwnerController;
-use App\Http\Controllers\Api\Admin\NewsFeedController;
-use App\Http\Controllers\Api\Admin\MeasurementController;
 use App\Http\Controllers\Api\Admin\LanguageController;
-use App\Http\Controllers\Api\Admin\BrandController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SettingController;
-use App\Http\Controllers\Api\Admin\AccountingController;
-use App\Http\Controllers\Api\Admin\AccountingDashboardController;
 use App\Http\Controllers\Api\Admin\DashboardController;
-use App\Http\Controllers\Api\Admin\MobileController;
 use App\Http\Controllers\Api\Admin\PdfController;
-use App\Http\Controllers\Api\Admin\StaffController;
 use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
-use App\Http\Controllers\Api\Admin\MailController;
-use App\Http\Controllers\Api\Admin\DemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,31 +148,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('note/updateNote/{note_id}', [NoteController::class, 'updateNote']);
     Route::get('note/deleteNote/{note_id}', [NoteController::class, 'deleteNote']);
 
-
-    //OfferRequest
-    Route::get('offerRequest/getOfferRequests', [OfferRequestController::class, 'getOfferRequests']);
-    Route::get('offerRequest/getOfferRequestById/{offer_request_id}', [OfferRequestController::class, 'getOfferRequestById']);
-    Route::get('offerRequest/getOfferRequestProductsById/{offer_request_id}', [OfferRequestController::class, 'getOfferRequestProductsById']);
-    Route::post('offerRequest/offerRequestProducts/{request_id}', [OfferRequestController::class, 'offerRequestProducts']);
-    Route::post('offerRequest/createOfferRequest', [OfferRequestController::class, 'createOfferRequest']);
-    Route::post('offerRequest/addOfferRequest', [OfferRequestController::class, 'addOfferRequest']);
-    Route::post('offerRequest/updateOfferRequest/{request_id}', [OfferRequestController::class, 'updateOfferRequest']);
-    Route::post('offerRequest/addProductToOfferRequest/{request_id}', [OfferRequestController::class, 'addProductToOfferRequest']);
-    Route::get('offerRequest/deleteProductToOfferRequest/{request_product_id}', [OfferRequestController::class, 'deleteProductToOfferRequest']);
-    Route::get('offerRequest/getOfferRequestsByCompanyId/{company_id}', [OfferRequestController::class, 'getOfferRequestsByCompanyId']);
-
-
-    //Offer
-    Route::get('offer/getOffersByRequestId/{request_id}', [OfferController::class, 'getOffersByRequestId']);
-    Route::get('offer/getNewOffersByRequestId/{request_id}', [OfferController::class, 'getNewOffersByRequestId']);
-    Route::get('offer/getOfferById/{offer_id}', [OfferController::class, 'getOfferById']);
-    Route::post('offer/addOffer', [OfferController::class, 'addOffer']);
-    Route::get('offer/getOfferProductById/{offer_id}/{product_id}', [OfferController::class, 'getOfferProductById']);
-    Route::post('offer/addOfferProduct/{offer_id}', [OfferController::class, 'addOfferProduct']);
-    Route::post('offer/updateOfferProduct/{offer_id}/{product_id}', [OfferController::class, 'updateOfferProduct']);
-    Route::get('offer/deleteOffer/{offer_id}', [OfferController::class, 'deleteOffer']);
-
-
     //Sale
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
     Route::get('sale/getSalesByCompanyId/{company_id}', [SaleController::class, 'getSalesByCompanyId']);
@@ -273,16 +235,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     //Documents
     Route::get('sale/getDocuments/{sale_id}', [SaleController::class, 'getDocuments']);
 
-    //Expense
-    Route::get('sale/getExpenseCategories', [SaleController::class, 'getExpenseCategories']);
-    Route::get('sale/getSaleExpenseById/{sale_id}', [SaleController::class, 'getSaleExpenseById']);
-    Route::get('sale/getSaleExpenseByCategoryId/{sale_id}/{category_id}', [SaleController::class, 'getSaleExpenseByCategoryId']);
-    Route::post('sale/addSaleExpense', [SaleController::class, 'addSaleExpense']);
-    Route::get('sale/deleteSaleExpense/{expense_id}', [SaleController::class, 'deleteSaleExpense']);
-
-    //PO Number
-    Route::post('sale/addCustomerPONumber', [SaleController::class, 'addCustomerPONumber']);
-
     //Pinned
     Route::get('sale/addSalePin/{sale_id}', [SaleController::class, 'addSalePin']);
     Route::get('sale/deleteSalePin/{sale_id}', [SaleController::class, 'deleteSalePin']);
@@ -300,17 +252,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('status/getPackingStatuses', [StatusController::class, 'getPackingStatuses']);
     Route::get('status/getAuthorizeStatuses/{user_id}', [StatusController::class, 'getAuthorizeStatuses']);
 
-    //Measurement
-    Route::get('measurement/getMeasurements', [MeasurementController::class, 'getMeasurements']);
-    Route::get('measurement/getMeasurementById/{id}', [MeasurementController::class, 'getMeasurementById']);
-
-
-    //News Feed
-    Route::get('newsFeed/getSaleHistoryActions', [NewsFeedController::class, 'getSaleHistoryActions']);
-    Route::get('newsFeed/getTopRequestedProducts', [NewsFeedController::class, 'getTopRequestedProducts']);
-    Route::get('newsFeed/getTopSaledProducts/{owner_id}', [NewsFeedController::class, 'getTopSaledProducts']);
-    Route::get('newsFeed/getSaleStats', [NewsFeedController::class, 'getSaleStats']);
-
     //Product
     Route::get('product/getProducts', [ProductController::class, 'getProducts']);
     Route::get('product/getProductById/{id}', [ProductController::class, 'getProductById']);
@@ -319,13 +260,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
     Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
     Route::post('product/updateProductName/{id}', [ProductController::class, 'updateProductName']);
-
-    //Brand
-    Route::get('brand/getBrands', [BrandController::class, 'getBrands']);
-    Route::get('brand/getBrandById/{id}', [BrandController::class, 'getBrandById']);
-    Route::post('brand/addBrand', [BrandController::class, 'addBrand']);
-    Route::post('brand/updateBrand/{id}', [BrandController::class, 'updateBrand']);
-    Route::get('brand/deleteBrand/{id}', [BrandController::class, 'deleteBrand']);
 
     //Category
     Route::get('category/getCategory', [CategoryController::class, 'getCategory']);
@@ -350,25 +284,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('setting/addDeliveryTerm', [SettingController::class, 'addDeliveryTerm']);
     Route::post('setting/updateDeliveryTerm/{type_id}', [SettingController::class, 'updateDeliveryTerm']);
     Route::get('setting/deleteDeliveryTerm/{type_id}', [SettingController::class, 'deleteDeliveryTerm']);
-
-    //Accounting
-    Route::get('accounting/getPaymentTypes', [AccountingController::class, 'getPaymentTypes']);
-    Route::get('accounting/getPaymentMethods', [AccountingController::class, 'getPaymentMethods']);
-    Route::get('accounting/getPendingAccountingSales/{user_id}', [AccountingController::class, 'getPendingAccountingSales']);
-    Route::get('accounting/getOngoingAccountingSales/{user_id}', [AccountingController::class, 'getOngoingAccountingSales']);
-    Route::get('accounting/getCompletedAccountingSales/{user_id}', [AccountingController::class, 'getCompletedAccountingSales']);
-    Route::get('accounting/getAccountingPayments/{sale_id}', [AccountingController::class, 'getAccountingPayments']);
-    Route::get('accounting/getAccountingPaymentById/{payment_id}', [AccountingController::class, 'getAccountingPaymentById']);
-    Route::post('accounting/addAccountingPayment', [AccountingController::class, 'addAccountingPayment']);
-    Route::post('accounting/updateAccountingPayment', [AccountingController::class, 'updateAccountingPayment']);
-    Route::post('accounting/updateAccountingPaymentStatus', [AccountingController::class, 'updateAccountingPaymentStatus']);
-    Route::get('accounting/getAccountingPaymentType/{sale_id}', [AccountingController::class, 'getAccountingPaymentType']);
-    Route::post('accounting/updateAccountingWaybill', [AccountingController::class, 'updateAccountingWaybill']);
-
-    //Accounting Dashboard
-    Route::get('accounting-dashboard/getAccountingStats', [AccountingDashboardController::class, 'getAccountingStats']);
-    Route::get('accounting-dashboard/getCashFlows', [AccountingDashboardController::class, 'getCashFlows']);
-    Route::get('accounting-dashboard/getCashFlowPayments', [AccountingDashboardController::class, 'getCashFlowPayments']);
 
     //Dashboard
     Route::get('dashboard/getTotalSales/{owner_id}', [DashboardController::class, 'getTotalSales']);
@@ -421,28 +336,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
-
-    //StaffTarget
-    Route::get('staff/getStaffTargets', [StaffController::class, 'getStaffTargets']);
-    Route::get('staff/getStaffTargetsByStaffId/{staff_id}', [StaffController::class, 'getStaffTargetsByStaffId']);
-    Route::get('staff/getStaffTargetById/{target_id}', [StaffController::class, 'getStaffTargetById']);
-    Route::post('staff/addStaffTarget', [StaffController::class, 'addStaffTarget']);
-    Route::post('staff/updateStaffTarget', [StaffController::class, 'updateStaffTarget']);
-    Route::get('staff/deleteStaffTarget/{target_id}', [StaffController::class, 'deleteStaffTarget']);
-
-    Route::get('staff/getStaffTargetTypes', [StaffController::class, 'getStaffTargetTypes']);
-
-    Route::get('staff/getBestStaff', [StaffController::class, 'getBestStaff']);
-
-    Route::get('staff/getStaffStatistics/{staff_id}', [StaffController::class, 'getStaffStatistics']);
-    Route::get('staff/getStaffSituation/{staff_id}', [StaffController::class, 'getStaffSituation']);
-    Route::get('staff/getAllStaffStatistics', [StaffController::class, 'getAllStaffStatistics']);
-    Route::get('staff/getAllStaffStatisticsMonthly', [StaffController::class, 'getAllStaffStatisticsMonthly']);
-
-    Route::get('staff/getStaffPointsByStaffId/{staff_id}', [StaffController::class, 'getStaffPointsByStaffId']);
-    Route::post('staff/addStaffPoint', [StaffController::class, 'addStaffPoint']);
-
-
     //Notify
     Route::post('notify/addNotifySetting', [NotifyController::class, 'addNotifySetting']);
     Route::post('notify/updateNotifySetting', [NotifyController::class, 'updateNotifySetting']);
@@ -462,17 +355,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('/companyChat/getPublicChatMessages/{page}', [ChatController::class, 'getPublicChatMessages']);
 
 
-    //Email
-    Route::post('mail/addLayout', [MailController::class, 'addLayout']);
-    Route::post('mail/updateLayout/{layout_id}', [MailController::class, 'updateLayout']);
-    Route::get('mail/deleteLayout/{layout_id}', [MailController::class, 'deleteLayout']);
-    Route::get('mail/getLayouts', [MailController::class, 'getLayouts']);
-    Route::get('mail/getLayoutById/{layout_id}', [MailController::class, 'getLayoutById']);
-    Route::get('mail/getMailableSuppliersByRequestId/{request_id}', [OfferController::class, 'getMailableSuppliersByRequestId']);
-    Route::post('mail/sendMailOfferToSupplier', [MailController::class, 'sendMailOfferToSupplier']);
 
-
-    Route::get('demo/deleteOwnerData/{owner_id}', [DemoController::class, 'deleteOwnerData']);
 
 });
 
