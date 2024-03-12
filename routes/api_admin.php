@@ -153,29 +153,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('employee/updateEmployee/{employee_id}', [EmployeeController::class, 'updateEmployee']);
     Route::get('employee/deleteEmployee/{employee_id}', [EmployeeController::class, 'deleteEmployee']);
 
-    //Activity
-    Route::get('activity/getActivities', [ActivityController::class, 'getActivities']);
-    Route::get('activity/getPastActivities', [ActivityController::class, 'getPastActivities']);
-    Route::get('activity/getActivitiesByCompanyId/{company_id}', [ActivityController::class, 'getActivitiesByCompanyId']);
-    Route::get('activity/getActivityById/{activity_id}', [ActivityController::class, 'getActivityById']);
-    Route::post('activity/addActivity', [ActivityController::class, 'addActivity']);
-    Route::post('activity/updateActivity/{activity_id}', [ActivityController::class, 'updateActivity']);
-    Route::get('activity/deleteActivity/{activity_id}', [ActivityController::class, 'deleteActivity']);
-    //Activity Tasks
-    Route::get('activity/getActivityTasksByCompanyId/{company_id}', [ActivityController::class, 'getActivityTasksByCompanyId']);
-    Route::get('activity/getActivityTaskById/{task_id}', [ActivityController::class, 'getActivityTaskById']);
-    Route::post('activity/addActivityTask', [ActivityController::class, 'addActivityTask']);
-    Route::post('activity/updateActivityTask/{task_id}', [ActivityController::class, 'updateActivityTask']);
-    Route::get('activity/deleteActivityTask/{task_id}', [ActivityController::class, 'deleteActivityTask']);
-    Route::get('activity/completeActivityTask/{task_id}', [ActivityController::class, 'completeActivityTask']);
-    Route::get('activity/unCompleteActivityTask/{task_id}', [ActivityController::class, 'unCompleteActivityTask']);
-    //Activity Types
-    Route::get('activity/getActivityTypes', [ActivityController::class, 'getActivityTypes']);
-    Route::get('activity/getActivityTypeById/{type_id}', [ActivityController::class, 'getActivityTypeById']);
-    Route::post('activity/addActivityType', [ActivityController::class, 'addActivityType']);
-    Route::post('activity/updateActivityType/{type_id}', [ActivityController::class, 'updateActivityType']);
-    Route::get('activity/deleteActivityType/{type_id}', [ActivityController::class, 'deleteActivityType']);
-
     //Note
     Route::get('note/getNotes', [NoteController::class, 'getNotes']);
     Route::get('note/getNotesByCompanyId/{company_id}', [NoteController::class, 'getNotesByCompanyId']);
