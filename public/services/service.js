@@ -33,7 +33,7 @@
 
 })(window.jQuery);
 
-const api_url = 'http://127.0.0.1:8000';
+const api_url = 'http://tuv.sametokumus.com/';
 
 $(function() {
     // Listen for the language dropdown change event
