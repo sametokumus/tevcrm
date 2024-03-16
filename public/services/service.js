@@ -19,12 +19,12 @@
 
 	$(window).on('load',async function() {
 		// checkLogin();
-        $('#header_user_name').text(localStorage.getItem('userName'));
-        if (localStorage.getItem('userPhoto') != 'null') {
-            document.getElementById('header_user_image').src = localStorage.getItem('userPhoto');
-        }
-
-        createNavbar();
+        // $('#header_user_name').text(localStorage.getItem('userName'));
+        // if (localStorage.getItem('userPhoto') != 'null') {
+        //     document.getElementById('header_user_image').src = localStorage.getItem('userPhoto');
+        // }
+        //
+        // createNavbar();
 	});
 
 
@@ -33,7 +33,7 @@
 
 })(window.jQuery);
 
-const api_url = 'https://crm.semytechnology.com';
+const api_url = 'http://127.0.0.1:8000';
 
 $(function() {
     // Listen for the language dropdown change event
@@ -115,7 +115,7 @@ function xhrDataPost (apiURL, body, callBackFunction) {
 
 /* CUSTOM FUNCTIONS */
 function logout(){
-    fetchDataGet('/v1/logout', 'application/json').then(data=>{
+    fetchDataGet('/admin/logout', 'application/json').then(data=>{
 
         if(data.status == "success"){
             removeSession();
@@ -429,24 +429,24 @@ function changeDecimalToCommas(price) {
 	return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
 }
 
-// Select2
-$('.select2').select2({
-    minimumResultsForSearch: Infinity,
-    width: '100%'
-});
-
-// Select2 by showing the search
-$('.select2-show-search').select2({
-    minimumResultsForSearch: '',
-    width: '100%'
-});
-
-$('.select2').on('click', () => {
-    let selectField = document.querySelectorAll('.select2-search__field')
-    selectField.forEach((element, index) => {
-        element.focus();
-    })
-});
+// // Select2
+// $('.select2').select2({
+//     minimumResultsForSearch: Infinity,
+//     width: '100%'
+// });
+//
+// // Select2 by showing the search
+// $('.select2-show-search').select2({
+//     minimumResultsForSearch: '',
+//     width: '100%'
+// });
+//
+// $('.select2').on('click', () => {
+//     let selectField = document.querySelectorAll('.select2-search__field')
+//     selectField.forEach((element, index) => {
+//         element.focus();
+//     })
+// });
 
 /* SERVICE INIT DATA FUNCTIONS */
 
@@ -749,6 +749,7 @@ async function getExpenseCategoriesAddSelectId(selectId){
 
 async function getCountriesAddSelectId(selectId){
     let data = await serviceGetCountries();
+    console.log(data)
     $('#'+selectId+' option').remove();
     $.each(data.countries, function(i, country){
         let optionRow = '<option value="'+country.id+'">'+country.name+'</option>';
@@ -1064,56 +1065,47 @@ async function serviceGetAdminPermissions() {
 	}
 }
 
-async function serviceGetCompanies() {
-	const data = await fetchDataGet('/admin/company/getCompanies', 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
-}
-async function serviceGetPotentialCustomers() {
-    const data = await fetchDataGet('/admin/company/getPotentialCustomers', 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
 async function serviceGetCustomers() {
-	const data = await fetchDataGet('/admin/company/getCustomers', 'application/json');
+	const data = await fetchDataGet('/admin/customer/getCustomers', 'application/json');
 	if (data.status == "success") {
 		return data.object;
 	} else {
 		showAlert('İstek Başarısız.');
 	}
 }
-async function serviceGetSuppliers() {
-    const data = await fetchDataGet('/admin/company/getSuppliers', 'application/json');
+async function serviceGetCustomerById(id) {
+	const data = await fetchDataGet('/admin/customer/getCustomerById/' + id, 'application/json');
+	if (data.status == "success") {
+		return data.object;
+	} else {
+		showAlert('İstek Başarısız.');
+	}
+}
+
+async function servicePostAddCustomer(formData) {
+    const data = await fetchDataPost('/admin/customer/addCustomer', formData, 'application/json');
     if (data.status == "success") {
-        return data.object;
+        showAlert(data.message);
+        return true;
     } else {
         showAlert('İstek Başarısız.');
+        return false;
     }
 }
-async function serviceGetCompanyById(id) {
-	const data = await fetchDataGet('/admin/company/getCompanyById/' + id, 'application/json');
-	if (data.status == "success") {
-		return data.object;
-	} else {
-		showAlert('İstek Başarısız.');
-	}
+
+async function servicePostUpdateCustomer(id, formData) {
+    const data = await fetchDataPost('/admin/customer/updateCustomer/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
 }
 
-async function servicePostAddCompany(formData) {
-    await xhrDataPost('/admin/company/addCompany', formData, addCompanyCallback);
-}
-
-async function servicePostUpdateCompany(id, formData) {
-    await xhrDataPost('/admin/company/updateCompany/' + id, formData, updateCompanyCallback);
-}
-async function serviceGetDeleteCompany(id) {
-	const data = await fetchDataGet('/admin/company/deleteCompany/' + id, 'application/json');
+async function serviceGetDeleteCustomer(id) {
+	const data = await fetchDataGet('/admin/customer/deleteCustomer/' + id, 'application/json');
 	if (data.status == "success") {
 		showAlert(data.message);
 		return true;

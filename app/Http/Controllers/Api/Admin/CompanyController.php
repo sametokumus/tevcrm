@@ -28,7 +28,7 @@ use Nette\Schema\ValidationException;
 
 class CompanyController extends Controller
 {
-    public function getCompanies()
+    public function getCustomers()
     {
         try {
             $companies = Company::query()->where('active',1)->get();
@@ -39,51 +39,18 @@ class CompanyController extends Controller
         }
     }
 
-    public function getPotentialCustomers()
+    public function getCustomerById($customer_id)
     {
         try {
-            $companies = Company::query()->where('active',1)->where('is_potential_customer', 1)->get();
+            $customer = Company::query()->where('id', $customer_id)->where('active',1)->first();
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['customer' => $customer]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
 
-    public function getCustomers()
-    {
-        try {
-            $companies = Company::query()->where('active',1)->where('is_customer', 1)->get();
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
-        }
-    }
-
-    public function getSuppliers()
-    {
-        try {
-            $companies = Company::query()->where('active',1)->where('is_supplier', 1)->get();
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
-        }
-    }
-
-    public function getCompanyById($company_id)
-    {
-        try {
-            $company = Company::query()->where('id', $company_id)->where('active',1)->first();
-
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['company' => $company]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
-        }
-    }
-
-    public function addCompany(Request $request)
+    public function addCustomer(Request $request)
     {
         try {
             $request->validate([
@@ -91,7 +58,7 @@ class CompanyController extends Controller
                 'email' => 'required',
                 'phone' => 'required',
             ]);
-            $company_id = Company::query()->insertGetId([
+            Company::query()->insertGetId([
                 'name' => $request->name,
                 'website' => $request->website,
                 'email' => $request->email,
@@ -101,34 +68,10 @@ class CompanyController extends Controller
                 'country_id' => $request->country,
                 'tax_office' => $request->tax_office,
                 'tax_number' => $request->tax_number,
-                'is_potential_customer' => $request->is_potential_customer,
-                'is_customer' => $request->is_customer,
-                'is_supplier' => $request->is_supplier,
-                'linkedin' => $request->linkedin,
-                'skype' => $request->skype,
-                'online' => $request->online,
-                'registration_number' => $request->registration_number,
-                'payment_term' => $request->payment_term,
                 'user_id' => $request->user_id
             ]);
-            if ($request->hasFile('logo')) {
-                $rand = uniqid();
-                $image = $request->file('logo');
-                $image_name = $rand . "-" . $image->getClientOriginalName();
-                $image->move(public_path('/img/company/'), $image_name);
-                $image_path = "/img/company/" . $image_name;
-                Company::query()->where('id',$company_id)->update([
-                    'logo' => $image_path
-                ]);
-            }
 
-            Address::query()->insert([
-                'name' => 'Merkez',
-                'company_id' => $company_id,
-                'address' => $request->address,
-            ]);
-
-            return response(['message' => __('Firma ekleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Müşteri ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -138,14 +81,14 @@ class CompanyController extends Controller
         }
     }
 
-    public function updateCompany(Request $request,$company_id){
+    public function updateCustomer(Request $request, $customer_id){
         try {
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',
                 'phone' => 'required',
             ]);
-            Company::query()->where('id', $company_id)->update([
+            Company::query()->where('id', $customer_id)->update([
                 'name' => $request->name,
                 'website' => $request->website,
                 'email' => $request->email,
@@ -155,27 +98,10 @@ class CompanyController extends Controller
                 'country_id' => $request->country,
                 'tax_office' => $request->tax_office,
                 'tax_number' => $request->tax_number,
-                'is_potential_customer' => $request->is_potential_customer,
-                'is_customer' => $request->is_customer,
-                'is_supplier' => $request->is_supplier,
-                'linkedin' => $request->linkedin,
-                'skype' => $request->skype,
-                'online' => $request->online,
-                'registration_number' => $request->registration_number,
-                'payment_term' => $request->payment_term
+                'user_id' => $request->user_id
             ]);
-            if ($request->hasFile('logo')) {
-                $rand = uniqid();
-                $image = $request->file('logo');
-                $image_name = $rand . "-" . $image->getClientOriginalName();
-                $image->move(public_path('/img/company/'), $image_name);
-                $image_path = "/img/company/" . $image_name;
-                Company::query()->where('id',$company_id)->update([
-                    'logo' => $image_path
-                ]);
-            }
 
-            return response(['message' => __('Firma güncelleme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Müşteri güncelleme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -185,13 +111,13 @@ class CompanyController extends Controller
         }
     }
 
-    public function deleteCompany($company_id){
+    public function deleteCustomer($customer_id){
         try {
 
-            Company::query()->where('id',$company_id)->update([
+            Company::query()->where('id',$customer_id)->update([
                 'active' => 0,
             ]);
-            return response(['message' => __('Firma silme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Müşteri silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {

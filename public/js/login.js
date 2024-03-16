@@ -24,11 +24,11 @@ $(window).on('load', function () {
     /* change images based on time zones */
     var date = new Date;
     if (date.getHours() < 12 && date.getHours() >= 7) {
-        $('#image-daytime').parent().css('background-image', 'url("assets/img/bg-13.jpg")');
+        $('#image-daytime').parent().css('background-image', 'url("img/bg-13.jpg")');
     } else if (date.getHours() >= 12 && date.getHours() <= 19) {
-        $('#image-daytime').parent().css('background-image', 'url("assets/img/bg-3.jpg")');
+        $('#image-daytime').parent().css('background-image', 'url("img/bg-3.jpg")');
     } else {
-        $('#image-daytime').parent().css('background-image', 'url("assets/img/bg-12.jpg")');
+        $('#image-daytime').parent().css('background-image', 'url("img/bg-12.jpg")');
     }
 
     /* temperature data */
@@ -58,7 +58,7 @@ $(window).on('load', function () {
     function appendData(data) {
         $('#temperature').text(data.main.temp);
         $('#city').text(data.name);
-        $('#tempimage').attr('src', 'assets/img/openweather-icon/light/' + data.weather[0].icon + '@2x.png');
+        $('#tempimage').attr('src', 'img/openweather-icon/light/' + data.weather[0].icon + '@2x.png');
     }
 
     /* swiper sliders */
@@ -96,82 +96,75 @@ $(window).on('load', function () {
     }
 
     $('#submitbtn').on('click', function () {
-        if ($(this).closest('form').find('.check-valid').not('.is-valid').length > 0) {
-            $(this).closest('form').find('.global-alert').removeClass('d-none');
-            setTimeout(function () {
-                $('.global-alert').addClass('d-none');
-            }, 3000)
-        } else {
+        let valid_email = true;
+        let valid_pass = true;
+        if ($(this).closest('form').find('.validate-email').not('.is-valid').length > 0) {
+            valid_email = false;
+        }
+        if ($(this).closest('form').find('.validate-pass').not('.is-valid').length > 0) {
+            valid_pass = false;
+        }
+
+        if (valid_email && valid_pass){
+            let userEmail = document.getElementById('login_email').value;
+            let userPass = document.getElementById('login_password').value;
+
+            let formData = JSON.stringify({
+                "email": userEmail,
+                "password": userPass
+            });
+
+            fetchDataPost('/admin/login', formData, 'application/json').then(data=>{
+                if(data.status == "success"){
+                    let __userInfo = data.object.admin;
+
+                    localStorage.setItem('userRole',__userInfo.admin_role_id);
+                    localStorage.setItem('userId',__userInfo.id);
+                    localStorage.setItem('userEmail',__userInfo.email);
+                    localStorage.setItem('userName',__userInfo.name + ' ' + __userInfo.surname);
+                    localStorage.setItem('userPhoto',__userInfo.profile_photo);
+                    localStorage.setItem('appToken',__userInfo.token);
+
+                    try{
+                        var hash = __userInfo.admin_role_id.toString()+(__userInfo.id).toString()+__userInfo.email;
+                        var salt = gensalt(5);
+                        function result(newhash){
+                            localStorage.setItem('userLogin',newhash);
+
+                            var rel = getURLParam('rel');
+                            if(rel != null && rel=="xxx"){
+                                window.location.href = "xxx?id=";
+                            }else{
+                                window.location.href = "my-dashboard";
+                            }
+                        }
+                        hashpw(hash, salt, result, function() {});
+
+
+                    }catch(err){
+                        showAlert('err');
+                        return;
+                    }
+
+                }else{
+                    showAlert('data.message');
+                }
+            });
+
+
+
             $(this).closest('form').find('.global-success').removeClass('d-none');
             $(this).closest('form').find('.global-alert').addClass('d-none');
             setTimeout(function () {
                 window.location.replace("password.html");
-            }, 2000)
-        }
-    })
-
-    $('#submitpassbtn').on('click', function () {
-        window.location.replace("onboarding.html");
-        // if ($(this).closest('form').find('.check-valid').not('.is-valid').length > 0) {
-        //     $(this).closest('form').find('.global-alert').removeClass('d-none');
-        //     setTimeout(function () {
-        //         $('.global-alert').addClass('d-none');
-        //     }, 3000)
-        // } else {
-        //     $(this).closest('form').find('.global-success').removeClass('d-none');
-        //     $(this).closest('form').find('.global-alert').addClass('d-none');
-        //     setTimeout(function () {
-        //         window.location.replace("onboarding.html");
-        //     }, 2000)
-        // }
-    });
-
-    $('#submitforgetpassbtn').on('click', function () {
-        if ($(this).closest('form').find('.check-valid').not('.is-valid').length > 0) {
+            }, 2000);
+        }else{
             $(this).closest('form').find('.global-alert').removeClass('d-none');
             setTimeout(function () {
                 $('.global-alert').addClass('d-none');
-            }, 3000)
-        } else {
-            $(this).closest('form').find('.global-success').removeClass('d-none');
-            $(this).closest('form').find('.global-alert').addClass('d-none');
-            setTimeout(function () {
-                window.location.replace("reset-password.html");
-            }, 2000)
+            }, 3000);
         }
     })
-
-    $('#submitsignup').on('click', function () {
-        if ($(this).closest('form').find('.check-valid').not('.is-valid').length > 0) {
-            $(this).closest('form').addClass('was-validated').find('.global-alert').removeClass('d-none');
-            setTimeout(function () {
-                $('.global-alert').addClass('d-none');
-            }, 3000)
-        } else {
-
-            $(this).closest('form').find('.global-success').removeClass('d-none');
-            $(this).closest('form').find('.global-alert').addClass('d-none');
-            setTimeout(function () {
-                window.location.replace("verify.html");
-            }, 2000)
-        }
-    })
-
-    /* passsword strenght checker */
-    $('#password1').first().keyup(function () {
-        var fieldpass = $(this);
-        var fieldpasswrap = $(this).closest('.check-valid');
-        checkStrength(fieldpass.val(), fieldpasswrap);
-
-        if (this.value != '') {
-            $('#textpassword').html(checkStrength(fieldpass.val(), fieldpasswrap))
-            fieldpass.closest('.check-valid').next('.invalid-feedback').hide();
-            // $(this).closest('.check-valid').addClass('is-valid');
-        } else {
-            fieldpasswrap.removeClass('is-valid').next('.invalid-feedback').show().text("Please enter valid input")
-            $('#checksterngthdisplay').removeClass();
-        }
-    });
 
     $('#password').each(function () {
         $(this).on('focusout keyup', function () {
@@ -183,73 +176,7 @@ $(window).on('load', function () {
                 $(this).closest('form').addClass('was-validated');
             }
         });
-    })
-
-    $('#password2').on('focusout keyup', function () {
-        if ($('#password1').val() === $(this).val()) {
-            $(this).closest('.check-valid').addClass('is-valid').next('.invalid-feedback').text("Please enter valid input");
-            $(this).closest('form').addClass('was-validated');
-        } else {
-            if (this.value != '') {
-                $(this).closest('.check-valid').removeClass('is-valid').next('.invalid-feedback').text("Entered password doesn't match");
-            } else {
-                $(this).closest('.check-valid').removeClass('is-valid').next('.invalid-feedback').text("Please enter valid input");
-            }
-            $(this).closest('form').addClass('was-validated');
-        }
     });
-
-    function checkStrength(password, fieldpasswrap) {
-        var strength = 0;
-
-        if (password.length < 6) {
-            $('#checksterngthdisplay').removeClass().addClass('short check-strength');
-            $('#textpassword').removeClass().addClass('text-secondary small');
-            return 'Too short password'
-        }
-        if (password.length > 7) strength += 1
-        // If password contains both lower and uppercase characters, increase strength value.  
-        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
-        // If it has numbers and characters, increase strength value.  
-        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
-        // If it has one special character, increase strength value.  
-        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-        // If it has two special characters, increase strength value.  
-        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
-        // Calculated strength value, we can return messages  
-        // If value is less than 2  
-        if (strength < 2) {
-            $('#checksterngthdisplay').removeClass().addClass('weak check-strength');
-            $('#textpassword').removeClass().addClass('text-danger small');
-            fieldpasswrap.removeClass('is-valid');
-            return 'This is a weak';
-        } else if (strength == 2) {
-            $('#checksterngthdisplay').removeClass().addClass('good check-strength');
-            $('#textpassword').removeClass().addClass('text-warning small');
-            fieldpasswrap.removeClass('is-valid');
-            return 'This just a good';
-        } else {
-            $('#checksterngthdisplay').removeClass().addClass('strong check-strength');
-            $('#textpassword').removeClass().addClass('text-success small');
-            fieldpasswrap.addClass('is-valid');
-            return 'Woohoo! Its a strong';
-        }
-    }
-
-    $('#resetdone').on('click', function () {
-        if ($(this).closest('form').find('.check-valid').not('.is-valid').length > 0) {
-            $(this).closest('form').find('.global-alert').removeClass('d-none');
-            setTimeout(function () {
-                $('.global-alert').addClass('d-none');
-            }, 3000)
-        } else {
-            $(this).closest('form').find('.global-success').removeClass('d-none');
-            $(this).closest('form').find('.global-alert').addClass('d-none');
-            setTimeout(function () {
-                window.location.replace("thankyou1.html");
-            }, 2000)
-        }
-    })
 
     $('#viewpassword').on('click', function () {
         var passInput = $(this).closest('.form-group').find('.form-control');
@@ -259,63 +186,6 @@ $(window).on('load', function () {
         } else {
             $(this).find('i').attr('class', 'bi bi-eye');
             passInput.attr('type', 'password');
-        }
-    });
-    $('#viewpassword2').on('click', function () {
-        var passInput = $(this).closest('.form-group').find('.form-control');
-        if (passInput.attr('type') === 'password') {
-            $(this).find('i').attr('class', 'bi-eye-slash');
-            passInput.attr('type', 'text');
-        } else {
-            $(this).find('i').attr('class', 'bi bi-eye');
-            passInput.attr('type', 'password');
-        }
-    })
-
-    /* verify */
-    if ($('#timer').length > 0) {
-        $('#timer').innerHTML = '0' + ':' + '20';
-        startTimer();
-        function startTimer() {
-            var presentTime = $('#timer').html();
-            var timeArray = presentTime.split(/[:]+/);
-            var m = timeArray[0];
-            var s = checkSecond((timeArray[1] - 1));
-            if (s == 59) {
-                m = m - 1
-            }
-            if (m < 0) {
-                return
-            }
-
-            $('#timer').html(m + ":" + s);
-            setTimeout(startTimer, 1000);
-        }
-        function checkSecond(sec) {
-            if (sec < 10 && sec >= 0) {
-                sec = "0" + sec
-            }; // add zero in front of numbers < 10
-            if (sec < 0) {
-                sec = "59"
-            };
-            return sec;
-        }
-    }
-    $('#verifyBtn').on('click', function () {
-        var OTPvalue = $('#verify1').val() + $('#verify2').val() + $('#verify3').val() + $('#verify4').val();
-        console.log(OTPvalue)
-
-        if (OTPvalue != '3752') {
-            $(this).closest('form').find('.global-alert').removeClass('d-none');
-            setTimeout(function () {
-                $('.global-alert').addClass('d-none');
-            }, 3000)
-        } else {
-            $(this).closest('form').find('.global-success').removeClass('d-none');
-            $(this).closest('form').find('.global-alert').addClass('d-none');
-            setTimeout(function () {
-                window.location.replace("thankyou2.html");
-            }, 2000)
         }
     });
 

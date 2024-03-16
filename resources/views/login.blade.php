@@ -43,10 +43,10 @@
                 <div class="left-door"></div>
                 <div class="right-door"></div>
             </div>
-            <h5 class="mb-0">Thanks for the patience</h5>
-            <p class="text-secondary small">Amazing things coming from the <span class="text-dark">WinDOORS</span></p>
+            <h5 class="mb-0">Sayfa yükleniyor</h5>
+            <p class="text-secondary small">Anlayışınız için teşekkürler</p>
             <div class="spinner-border text-primary mt-3" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">Yükleniyor...</span>
             </div>
         </div>
     </div>
@@ -77,19 +77,11 @@
                                         <div class="col-auto"><img src="img/favicon48.png" class="mx-100"
                                                                    alt=""/></div>
                                         <div class="col ps-0 align-self-center">
-                                            <h5 class="fw-normal text-dark">WinDOORS</h5>
-                                            <p class="small text-secondary">Admin App UI</p>
+                                            <h5 class="fw-normal text-dark">CRM</h5>
+                                            <p class="small text-secondary">Technical Universal Verification</p>
                                         </div>
                                     </div>
                                 </a>
-                                <div>
-                                    <button type="button" class="btn btn-link text-secondary text-center"
-                                            id="addtohome"><i class="bi bi-cloud-download-fill me-0 me-lg-1"></i> <span
-                                            class="d-none d-lg-inline-block">Install</span></button>
-                                    <a href="signup.html" class="btn btn-link text-secondary text-center"><i
-                                            class="bi bi-person-circle me-0 me-lg-1"></i> <span
-                                            class="d-none d-lg-inline-block">Sign up</span></a>
-                                </div>
                             </div>
                         </nav>
                     </header>
@@ -98,25 +90,18 @@
                 <div class="col-12  align-self-center py-4">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-11 col-lg-10 col-xl-8 col-xxl-6">
-                            <h1 class="display-4">Welcome,</h1>
-                            <p class="h4 fw-light mb-4">WinDOORS because every home with windows needs a doors.</p>
-                            <p class="text-secondary small">
-                                We will open new doors for your business or enterprise application front-end UI design
-                                elements. Intuitive UI designs, User experienced Interfaces & ready to use flexible
-                                components.
-                            </p>
-                            <p class="text-secondary small mb-5">
-                                Feel like your own, create unlimited style & best for your brand design. You can always
-                                <b>create new account</b> <a href="signup.html" class="text-primary">Sign up!</a>
-                            </p>
-
-                            <p class="h4 fw-light mb-4">Start best experience now</p>
+                            <p class="h4 fw-light mb-4">Hoşgeldiniz</p>
 
                             <form class="mb-4">
                                 <!-- alert messages -->
                                 <div class="alert alert-danger fade show d-none mb-2 global-alert" role="alert">
                                     <div class="row">
-                                        <div class="col"><strong>Requierd!</strong> Please enter valid data.</div>
+                                        <div class="col"><strong>Zorunlu!</strong> Lütfen eposta adresinizi ve şifrenizi eksiksiz giriniz.</div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-danger fade show d-none mb-2 service-alert" role="alert">
+                                    <div class="row">
+                                        <div class="col" id="service-message"></div>
                                     </div>
                                 </div>
                                 <div class="alert alert-success fade show d-none mb-2 global-success" role="alert">
@@ -124,51 +109,44 @@
                                         <div class="col-auto align-self-center">
                                             <div class="spinner-border spinner-border-sm text-success me-2"
                                                  role="status">
-                                                <span class="visually-hidden">Loading...</span>
+                                                <span class="visually-hidden">Yükleniyor...</span>
                                             </div>
                                         </div>
                                         <div class="col ps-0">
-                                            <strong>Awesome!</strong> Taking you to the next page.
+                                            <strong>Giriş Başarılı!</strong> Uygulamaya yönlendiriliyorsunuz.
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Form elements -->
-                                <div class="form-group mb-2 position-relative check-valid">
+                                <div class="form-group mb-2 position-relative check-valid validate-email">
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text text-theme bg-white border-end-0"><i
                                                 class="bi bi-envelope"></i></span>
                                         <div class="form-floating">
-                                            <input type="email" placeholder="Email Address"
-                                                   value="guest@maxartkiller.com" required
-                                                   class="form-control border-start-0" autofocus id="email">
-                                            <label>Email Address</label>
+                                            <input type="email" placeholder="Email Address" required class="form-control border-start-0" id="email">
+                                            <label>Eposta Adresi</label>
                                         </div>
-                                        <!-- submit button -->
-                                        <button class="btn btn-lg btn-theme z-index-5 btn-square-lg" type="button"
-                                                id="submitbtn"><i class="bi bi-arrow-right"></i></button>
                                     </div>
                                 </div>
-                                <div class="invalid-feedback">Add .com at last to insert valid data</div>
+                                <div class="invalid-feedback mb-3">Eposta adresiniz .com veya benzer başka bir uzantı ile bitmeli.</div>
+
+
+
+                                <!-- Form elements -->
+                                <div class="form-group mb-2 position-relative check-valid validate-pass">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-key"></i></span>
+                                        <div class="form-floating">
+                                            <input type="password" placeholder="Enter Password" required class="form-control border-start-0" id="password">
+                                            <label for="password">Şifre</label>
+                                        </div>
+                                        <span class="input-group-text text-secondary bg-white border-end-0" id="viewpassword"><i class="bi bi-eye"></i></span>
+                                        <!-- submit button -->
+                                        <button class="btn btn-lg btn-theme top-0 end-0 z-index-5 btn-square-lg" type="button" id="submitbtn"><i class="bi bi-arrow-right"></i></button>
+                                    </div>
+                                </div>
                             </form>
 
-                            <!-- or continue with options -->
-                            <div class="row">
-                                <div class="col-auto">
-                                    <p class="text-secondary">Or you can<br>continue with</p>
-                                </div>
-                                <div class="col ps-0 align-self-center">
-                                    <ul class="nav">
-                                        <li class="nav-item"><a class="nav-link px-2" href="#"><img
-                                                    src="img/facebook.png" alt=""/></a></li>
-                                        <li class="nav-item"><a class="nav-link px-2" href="#"><img
-                                                    src="img/windows.png" alt=""/></a></li>
-                                        <li class="nav-item"><a class="nav-link px-2" href="#"><img
-                                                    src="img/google.png" alt=""/></a></li>
-                                        <li class="nav-item"><a class="nav-link px-2" href="#"><img
-                                                    src="img/twitter.png" alt=""/></a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,18 +154,7 @@
                     <!-- footer -->
                     <footer class="footer row">
                         <div class="col-12 col-md-12 col-lg py-2">
-                            <span class="text-secondary small">Copyright @2022, Creatively designed by <a
-                                    href="https://maxartkiller.com/" target="_blank">Maxartkiller</a> on Earth ❤️</span>
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-auto align-self-center">
-                            <ul class="nav small">
-                                <li class="nav-item"><a class="nav-link" href="help-center.html">Help</a></li>
-                                <li class="nav-item">|</li>
-                                <li class="nav-item"><a class="nav-link" href="terms-of-use.html">Terms of Use</a></li>
-                                <li class="nav-item">|</li>
-                                <li class="nav-item"><a class="nav-link" href="privacy-policy.html">Privacy Policy</a>
-                                </li>
-                            </ul>
+                            <span class="text-secondary small">Copyright @2024, Designed by <a href="#" target="_blank">Samet Okumuş</a></span>
                         </div>
                     </footer>
                     <!-- footer ends -->
@@ -215,14 +182,16 @@
                                 <span id="temperature">46</span><span class="h4 text-uppercase"> <sup>0</sup>C</span>
                             </p>
 
-                            <a href="javascript:void()" class="btn btn-link text-white dd-arrow-none dropdown-toggle"
+                            <a href="javascript:void('');" class="btn btn-link text-white dd-arrow-none dropdown-toggle"
                                id="selectCity" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="h5 fw-normal" id="city">New York</span> <i
+                                <span class="h5 fw-normal" id="city">Ankara</span> <i
                                     class="bi bi-pencil-square small fw-light"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="selectCity" id="citychange">
+                                <li class="dropdown-item active" data-value="Ankara">Ankara</li>
+                                <li class="dropdown-item" data-value="İstanbul">İstanbul</li>
                                 <li class="dropdown-item" data-value="New York">New York</li>
-                                <li class="dropdown-item active" data-value="London">London</li>
+                                <li class="dropdown-item" data-value="London">London</li>
                                 <li class="dropdown-item" data-value="Qatar">Qatar</li>
                                 <li class="dropdown-item" data-value="Delhi">Delhi</li>
                                 <li class="dropdown-item" data-value="Sydney">Sydney</li>
@@ -232,12 +201,6 @@
                     <!-- time and temperature ends -->
                 </div>
                 <div class="col-12 col-md-12 col-lg-7 col-xl-6 h-50 position-relative px-0">
-                    <div class="row position-absolute start-0 top-0 mx-0 z-index-9 py-4">
-                        <div class="col-auto">
-                            <img src="img/newsicon.png" alt=""/>
-                        </div>
-                        <div class="col align-self-center"></div>
-                    </div>
                     <!-- news swiper -->
                     <div class="swiper news-swiper h-100 w-100 text-white">
                         <div class="swiper-wrapper">
@@ -245,15 +208,7 @@
                                 <div class="overlay"></div>
                                 <div class="row h-100 position-relative mx-0 pb-5">
                                     <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                        <img src="img/bg-2.jpg" alt="" class="w-100"/>
-                                    </div>
-                                    <div class="col-12"></div>
-                                    <div class="col-12 mt-auto">
-                                        <h3 class="fw-normal mb-3">Wondering if there is any perfect things for business
-                                            applications template?</h3>
-                                        <p>You are at right place and at right time. Yes, that's very true, People
-                                            always looking or the feelings and emotions while working. We are here with
-                                            Interface which can feel as your own daily life essentials.</p>
+                                        <img src="img/login/1.jpg" alt="" class="w-100"/>
                                     </div>
                                 </div>
                             </div>
@@ -261,15 +216,7 @@
                                 <div class="overlay"></div>
                                 <div class="row h-100 position-relative mx-0 pb-5">
                                     <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                        <img src="img/news-4.jpg" alt="" class="w-100"/>
-                                    </div>
-                                    <div class="col-12"></div>
-                                    <div class="col-12 mt-auto">
-                                        <h3 class="fw-normal mb-3">Wondering if there is any perfect things for business
-                                            applications template?</h3>
-                                        <p>You are at right place and at right time. Yes, that's very true, People
-                                            always looking or the feelings and emotions while working. We are here with
-                                            Interface which can feel as your own daily life essentials.</p>
+                                        <img src="img/login/2.jpg" alt="" class="w-100"/>
                                     </div>
                                 </div>
                             </div>
@@ -277,15 +224,7 @@
                                 <div class="overlay"></div>
                                 <div class="row h-100 position-relative mx-0 pb-5">
                                     <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                        <img src="img/bg-10.jpg" alt=""/>
-                                    </div>
-                                    <div class="col-12"></div>
-                                    <div class="col-12 mt-auto">
-                                        <h3 class="fw-normal mb-3">Wondering if there is any perfect things for business
-                                            applications template?</h3>
-                                        <p>You are at right place and at right time. Yes, that's very true, People
-                                            always looking or the feelings and emotions while working. We are here with
-                                            Interface which can feel as your own daily life essentials.</p>
+                                        <img src="img/login/3.jpg" alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -300,17 +239,17 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                    <img src="img/bg-7.jpg" alt=""/>
+                                    <img src="img/login/5.jpg" alt=""/>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                    <img src="img/bg-8.jpg" alt=""/>
+                                    <img src="img/login/4.jpg" alt=""/>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="coverimg h-100 w-100 top-0 start-0 position-absolute">
-                                    <img src="img/bg-9.jpg" alt=""/>
+                                    <img src="img/login/6.jpg" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -355,8 +294,6 @@
 <script src="services/service.js"></script>
 <script src="services/login.js"></script>
 
-<!-- page level script -->
-<script src="js/login.js"></script>
 
 </body>
 

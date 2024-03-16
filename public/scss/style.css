@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*
 ==================================
-Table of content 
+Table of content
 ==================================
 
 1. variable
@@ -17,7 +17,7 @@ Table of content
 11. sidebar
 12. card
 13. swiper sliders
-14. list 
+14. list
 15. footer
 16. dark mode
 17. filter
@@ -10976,9 +10976,9 @@ textarea.form-control-lg {
   }
 }
 /*!
- getwindoors customize css starts here 
+ getwindoors customize css starts here
  * getwindoors v1.0.0 (https://getwindoors.com/)
- * Copyright 2022 Maxartkiller 
+ * Copyright 2022 Maxartkiller
  */
 /* 1. variables */
 :root {
@@ -14400,6 +14400,7 @@ body:not(.sidebar-filled-theme):not(.sidebar-filled) .header > .navbar:after {
 }
 .sidebar-wrap .sidebar .nav .nav-item .nav-link > .icon {
   margin-right: 5px;
+    font-size: 20px;
 }
 .sidebar-wrap .sidebar .nav .nav-item .nav-link figure.avatar {
   margin-top: -3px;

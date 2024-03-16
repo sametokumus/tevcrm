@@ -19,6 +19,10 @@ use \App\Http\Controllers\Api\Admin\BroadcastingController;
 Route::get('/', function () { return view('login'); });
 Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
+Route::get('/customers', function () { return view('customers'); });
+Route::get('/add-customer', function () { return view('add-customer'); });
+
+
 Route::get('/my-dashboard', function () { return view('my-dashboard'); });
 Route::get('/staff-dashboard', function () { return view('staff-dashboard'); });
 Route::get('/staff-dashboard/{staff_id}', function () { return view('staff-dashboard'); });
@@ -27,7 +31,6 @@ Route::get('/teams', function () { return view('admins'); });
 Route::get('/my-account', function () { return view('account'); });
 Route::get('/roles', function () { return view('roles'); });
 Route::get('/potential-customers', function () { return view('potential-customers'); });
-Route::get('/customers', function () { return view('customers'); });
 Route::get('/suppliers', function () { return view('suppliers'); });
 Route::get('/company-detail/{id}', function () { return view('company-detail'); });
 Route::get('/customer-dashboard/{id}', function () { return view('customer-dashboard'); });

@@ -7,6 +7,7 @@ $(window).on('load', function () {
     }
     if (getCookie('WinDOORSusername') != '') {
         $('#usernamedisplay, #usernamedisplay2 span, .username').html(getCookie('WinDOORSusername'));
+        console.log(getCookie('WinDOORSusername'))
     }
 
 
@@ -37,7 +38,7 @@ $(window).on('load', function () {
     function appendData(data) {
         $('#temperature').text(data.main.temp);
         $('#city').text(data.name);
-        $('#tempimage').attr('src', 'assets/img/openweather-icon/light/' + data.weather[0].icon + '@2x.png');
+        $('#tempimage').attr('src', 'img/openweather-icon/light/' + data.weather[0].icon + '@2x.png');
     }
 
     /* search result show */
