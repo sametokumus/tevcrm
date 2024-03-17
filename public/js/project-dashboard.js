@@ -8,7 +8,7 @@ $(window).on('load', function () {
             "enabled": true,
             "container": '#footable-pagination',
             "countFormat": "{CP} of {TP}",
-            "limit": 3,
+            "limit": 1,
             "position": "right",
             "size": 7
         },
