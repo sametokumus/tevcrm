@@ -10,7 +10,7 @@ $(window).on('load', function () {
             "countFormat": "{CP} of {TP}",
             "limit": 3,
             "position": "right",
-            "size": 5
+            "size": 7
         },
         "sorting": {
             "enabled": true
