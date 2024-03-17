@@ -3,6 +3,7 @@
 $extra_js='
 <script src="services/header-title.js"></script>
 <script src="services/customers.js"></script>
+<script src="js/project-dashboard.js"></script>
 ';
 ?>
 
@@ -69,7 +70,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-4.jpg" alt="" class="w-100"/>
+                                                        <img src="img/news-4.jpg" alt="" class="w-100"/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -118,7 +119,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/business-4.jpg" alt=""/>
+                                                        <img src="img/business-4.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -167,7 +168,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-5.jpg" alt=""/>
+                                                        <img src="img/news-5.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -216,7 +217,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/bg-10.jpg" alt=""/>
+                                                        <img src="img/bg-10.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -265,7 +266,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-5.jpg" alt=""/>
+                                                        <img src="img/news-5.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -314,7 +315,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/bg-10.jpg" alt=""/>
+                                                        <img src="img/bg-10.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -363,7 +364,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-3.jpg" alt=""/>
+                                                        <img src="img/news-3.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -412,7 +413,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-3.jpg" alt=""/>
+                                                        <img src="img/news-3.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -461,7 +462,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/news-4.jpg" alt="" class="w-100"/>
+                                                        <img src="img/news-4.jpg" alt="" class="w-100"/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
@@ -510,7 +511,7 @@ $extra_js='
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
                                                     <figure class="avatar avatar-50 border mb-0 coverimg rounded">
-                                                        <img src="assets/img/business-4.jpg" alt=""/>
+                                                        <img src="img/business-4.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <div class="col ps-0">
