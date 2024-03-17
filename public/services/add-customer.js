@@ -36,8 +36,7 @@ async function addCompany(){
         "address": document.getElementById('add_company_address').value,
         "tax_office": document.getElementById('add_company_tax_office').value,
         "tax_number": document.getElementById('add_company_tax_number').value,
-        "country": document.getElementById('add_company_country').value,
-        "user_id": localStorage.getItem('userId')
+        "country": document.getElementById('add_company_country').value
     });
     console.log(formData);
 
