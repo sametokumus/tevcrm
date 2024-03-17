@@ -41,7 +41,7 @@ async function addCompany(){
     });
     console.log(formData);
 
-    let returned = await servicePostAddCompany(formData);
+    let returned = await servicePostAddCustomer(formData);
     if (returned){
         $("#add_company_form").trigger("reset");
     }
