@@ -43,6 +43,6 @@ async function addCompany(){
 
     let returned = await servicePostAddCustomer(formData);
     if (returned){
-        $("#add_company_form").trigger("reset");
+        $("#add_customer_form").trigger("reset");
     }
 }

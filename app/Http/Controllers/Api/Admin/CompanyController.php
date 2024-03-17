@@ -23,6 +23,7 @@ use App\Models\SaleOffer;
 use App\Models\StaffPoint;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Nette\Schema\ValidationException;
 
@@ -58,6 +59,7 @@ class CompanyController extends Controller
                 'email' => 'required',
                 'phone' => 'required',
             ]);
+            $user = Auth::user();
             Company::query()->insertGetId([
                 'name' => $request->name,
                 'website' => $request->website,
@@ -68,7 +70,7 @@ class CompanyController extends Controller
                 'country_id' => $request->country,
                 'tax_office' => $request->tax_office,
                 'tax_number' => $request->tax_number,
-                'user_id' => $request->user_id
+                'user_id' => $user->id
             ]);
 
             return response(['message' => __('Müşteri ekleme işlemi başarılı.'), 'status' => 'success']);
@@ -88,6 +90,7 @@ class CompanyController extends Controller
                 'email' => 'required',
                 'phone' => 'required',
             ]);
+            $user = Auth::user();
             Company::query()->where('id', $customer_id)->update([
                 'name' => $request->name,
                 'website' => $request->website,
@@ -98,7 +101,7 @@ class CompanyController extends Controller
                 'country_id' => $request->country,
                 'tax_office' => $request->tax_office,
                 'tax_number' => $request->tax_number,
-                'user_id' => $request->user_id
+                'user_id' => $user->id
             ]);
 
             return response(['message' => __('Müşteri güncelleme işlemi başarılı.'),'status' => 'success']);
