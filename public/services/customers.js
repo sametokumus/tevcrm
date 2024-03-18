@@ -19,8 +19,8 @@ function checkRole(){
 }
 async function initCustomers(){
 	let data = await serviceGetCustomers();
-    // $("#customer-datatable").dataTable().fnDestroy();
-    // $('#customer-datatable tbody > tr').remove();
+    $("#customer-datatable").dataTable().fnDestroy();
+    $('#customer-datatable tbody > tr').remove();
 
     $.each(data.customers, function (i, customer) {
         let typeItem = '<tr>\n' +
@@ -74,7 +74,7 @@ async function initCustomers(){
             '                      </div>\n' +
             '                  </td>\n' +
             '              </tr>';
-        // $('#customer-datatable tbody').append(typeItem);
+        $('#customer-datatable tbody').append(item);
     });
 
     $('#customer-datatable').DataTable({
