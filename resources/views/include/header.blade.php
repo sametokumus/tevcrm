@@ -62,7 +62,16 @@ $extra_js="";
     <link rel="stylesheet" href="vendor/Product-Tour-Plugin-jQuery/lib.css">
 
     <!-- Footable table master css -->
-    <link rel="stylesheet" href="vendor/fooTable/css/footable.bootstrap.min.css">
+{{--    <link rel="stylesheet" href="vendor/fooTable/css/footable.bootstrap.min.css">--}}
+
+    <!-- datatable css -->
+    <link href="vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" />
+    <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
+    <link href="vendor/datatables.net/extensions/Editor/css/editor.dataTables.min.css" rel="stylesheet" />
 
     <!-- style css for this template -->
     <link href="scss/style.css" rel="stylesheet">

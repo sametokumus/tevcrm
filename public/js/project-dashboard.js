@@ -8,9 +8,9 @@ $(window).on('load', function () {
             "enabled": true,
             "container": '#footable-pagination',
             "countFormat": "{CP} of {TP}",
-            "limit": 1,
+            "limit": 3,
             "position": "right",
-            "size": 7
+            "size": 5
         },
         "sorting": {
             "enabled": true

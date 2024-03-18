@@ -2,62 +2,13 @@
     "use strict";
 
 	$(document).ready(function() {
-        $('#add_company_form').submit(function (e){
-            e.preventDefault();
-            let isPotential = false;
-            let isCustomer = false;
-            let isSupplier = false;
-            if(document.getElementById('add_company_is_potential_customer').checked){
-                isPotential = true;
-            }
-            if(document.getElementById('add_company_is_customer').checked){
-                isCustomer = true;
-            }
-            if(document.getElementById('add_company_is_supplier').checked){
-                isSupplier = true;
-            }
-            if (isPotential || isCustomer || isSupplier) {
-                addCompany();
-            }else{
-                alert('Firma türü seçimi zorunludur.')
-            }
-        });
-
-        $('#add_company_is_potential_customer').click(function (e){
-            if(document.getElementById('add_company_is_potential_customer').checked){
-                document.getElementById('add_company_is_customer').checked = false;
-            }
-        });
-
-        $('#add_company_is_customer').click(function (e){
-            if(document.getElementById('add_company_is_customer').checked){
-                document.getElementById('add_company_is_potential_customer').checked = false;
-            }
-        });
-
-        $('#update_company_form').submit(function (e){
-            e.preventDefault();
-            updateCompany();
-        });
-
-        $('#update_company_is_potential_customer').click(function (e){
-            if(document.getElementById('update_company_is_potential_customer').checked){
-                document.getElementById('update_company_is_customer').checked = false;
-            }
-        });
-
-        $('#update_company_is_customer').click(function (e){
-            if(document.getElementById('update_company_is_customer').checked){
-                document.getElementById('update_company_is_potential_customer').checked = false;
-            }
-        });
 	});
 
 	$(window).load( function() {
 
 		checkLogin();
 		checkRole();
-        initCompanies();
+        initCustomers();
 
 	});
 
@@ -66,10 +17,10 @@
 function checkRole(){
 	return true;
 }
-async function initCompanies(){
+async function initCustomers(){
 	let data = await serviceGetCustomers();
-    $("#company-datatable").dataTable().fnDestroy();
-    $('#company-datatable tbody > tr').remove();
+    $("#customer-datatable").dataTable().fnDestroy();
+    $('#customer-datatable tbody > tr').remove();
 
     $.each(data.companies, function (i, company) {
         let typeItem = '<tr>\n' +
@@ -92,10 +43,10 @@ async function initCompanies(){
             '                  </div>\n' +
             '              </td>\n' +
             '          </tr>';
-        $('#company-datatable tbody').append(typeItem);
+        $('#customer-datatable tbody').append(typeItem);
     });
 
-    $('#company-datatable').DataTable({
+    $('#customer-datatable').DataTable({
         responsive: true,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },

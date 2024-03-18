@@ -3,7 +3,6 @@
 $extra_js='
 <script src="services/header-title.js"></script>
 <script src="services/customers.js"></script>
-<script src="js/project-dashboard.js"></script>
 ';
 ?>
 
@@ -19,40 +18,8 @@ $extra_js='
                     <!-- timesheet -->
                     <div class="col-12 col-md-12 position-relative">
                         <div class="card border-0 mb-4">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <i class="bi bi-clock h5 avatar avatar-40 bg-light-theme rounded"></i>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <h6 class="fw-medium mb-0">Timesheet Submitted</h6>
-                                        <p class="text-secondary small">Logged time by user</p>
-                                    </div>
-                                    <div class="col-auto ms-auto">
-                                        <div class="input-group border">
-                                            <span class="input-group-text text-theme"><i class="bi bi-search"></i></span>
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto ps-0">
-                                        <div class="dropdown d-inline-block">
-                                            <a class="btn btn-sqaure btn-link text-secondary dd-arrow-none dropdown-toggle"
-                                               data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"
-                                               role="button">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>
-                                                <li><a class="dropdown-item" href="javascript:void(0)">Move</a></li>
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card-body p-0">
-                                <table class="table table-borderless footable" data-show-toggle="true">
+                                <table id="customer-datatable" class="table table-borderless" data-show-toggle="true">
                                     <thead>
                                     <tr class="text-muted">
                                         <th class="">Project</th>
