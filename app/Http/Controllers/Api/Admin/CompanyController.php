@@ -32,9 +32,9 @@ class CompanyController extends Controller
     public function getCustomers()
     {
         try {
-            $companies = Company::query()->where('active',1)->get();
+            $customers = Company::query()->where('active',1)->get();
 
-            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['companies' => $companies]]);
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['customers' => $customers]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }

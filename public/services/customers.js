@@ -19,31 +19,33 @@ function checkRole(){
 }
 async function initCustomers(){
 	let data = await serviceGetCustomers();
-    $("#customer-datatable").dataTable().fnDestroy();
-    $('#customer-datatable tbody > tr').remove();
+    // $("#customer-datatable").dataTable().fnDestroy();
+    // $('#customer-datatable tbody > tr').remove();
 
-    $.each(data.companies, function (i, company) {
+    $.each(data.customers, function (i, customer) {
         let typeItem = '<tr>\n' +
-            '              <td>'+ company.id +'</td>\n' +
-            '              <td>'+ company.name +'</td>\n' +
-            '              <td>'+ checkNull(company.email) +'</td>\n' +
-            '              <td>'+ checkNull(company.phone) +'</td>\n' +
-            '              <td>'+ checkNull(company.fax) +'</td>\n' +
+            '              <td>'+ customer.id +'</td>\n' +
+            '              <td>'+ customer.name +'</td>\n' +
+            '              <td>'+ checkNull(customer.email) +'</td>\n' +
+            '              <td>'+ checkNull(customer.phone) +'</td>\n' +
+            '              <td>'+ checkNull(customer.fax) +'</td>\n' +
             '              <td>\n' +
             '                  <div class="btn-list">\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateCompanyModal(\''+ company.id +'\')">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateCompanyModal(\''+ customer.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Hızlı Düzenle\n' +
             '                      </button>\n' +
-            '                      <a href="customer-dashboard/'+ company.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
+            '                      <a href="customer-dashboard/'+ customer.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
             '                          <span class="fe fe-search"> </span> Detaylı İncele\n' +
             '                      </a>\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCompany(\''+ company.id +'\')">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCompany(\''+ customer.id +'\')">\n' +
             '                          <span class="fe fe-edit"> </span> Sil\n' +
             '                      </button>\n' +
             '                  </div>\n' +
             '              </td>\n' +
             '          </tr>';
-        $('#customer-datatable tbody').append(typeItem);
+
+        let item = '';
+        // $('#customer-datatable tbody').append(typeItem);
     });
 
     $('#customer-datatable').DataTable({
