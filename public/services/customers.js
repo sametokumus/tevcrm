@@ -44,7 +44,36 @@ async function initCustomers(){
             '              </td>\n' +
             '          </tr>';
 
-        let item = '';
+        let item = '<tr>\n' +
+            '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(customer.name) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(customer.email) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(customer.phone) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(customer.fax) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(customer.address) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
+            '                      <div class="dropdown d-inline-block">\n' +
+            '                          <a class="text-secondary dd-arrow-none" data-bs-toggle="dropdown"\n' +
+            '                             aria-expanded="false" data-bs-display="static" role="button">\n' +
+            '                              <i class="bi bi-three-dots"></i>\n' +
+            '                          </a>\n' +
+            '                          <ul class="dropdown-menu dropdown-menu-end">\n' +
+            '                              <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>\n' +
+            '                              <li><a class="dropdown-item" href="javascript:void(0)">Move</a></li>\n' +
+            '                              <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>\n' +
+            '                          </ul>\n' +
+            '                      </div>\n' +
+            '                  </td>\n' +
+            '              </tr>';
         // $('#customer-datatable tbody').append(typeItem);
     });
 
