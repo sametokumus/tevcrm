@@ -17,125 +17,13 @@ $(".timepicker").timepicker({
 ?>
 
 <main class="main mainheight px-4">
-    <div class="container-fluid">
-        <div class="row align-items-center page-title">
-            <div class="col-12 col-md mb-2 mb-sm-0">
-                <h5 class="mb-0">Company Profile</h5>
-                <p class="text-secondary">All about company and its background</p>
-            </div>
-            <div class="col col-sm-auto">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control bg-none px-0" value="" id="titlecalendar"/>
-                    <span class="input-group-text text-secondary bg-none" id="titlecalandershow"><i
-                            class="bi bi-calendar-event"></i></span>
-                </div>
-            </div>
-            <div class="col-auto ps-0">
-                <div class="dropdown d-inline-block">
-                    <a class="btn btn-link btn-square text-secondary dd-arrow-none dropdown-toggle" href="#"
-                       role="button" id="filterintitle" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                       aria-expanded="false">
-                        <i class="bi bi-filter"></i>
-                    </a>
-                    <div class="dropdown-menu w-300" aria-labelledby="filterintitle">
-                        <div class="dropdown-item">
-                            <div class="input-group input-group-md border rounded">
-                                <span class="input-group-text text-theme"><i class="bi bi-box"></i></span>
-                                <select class="form-control" id="titltfilterlist" multiple>
-                                    <option value="San Francisco">San Francisco</option>
-                                    <option value="New York">New York</option>
-                                    <option value="London">London</option>
-                                    <option value="Chicago">Chicago</option>
-                                    <option value="India" selected>India</option>
-                                    <option value="Sydney">Sydney</option>
-                                    <option value="Seattle">Seattle</option>
-                                    <option value="Los Angeles">Los Angeles</option>
-                                    <option value="Indonesia">Indonesia</option>
-                                    <option value="Los Angeles">Los Angeles</option>
-                                    <option value="Chicago">Chicago</option>
-                                    <option value="India">India</option>
-                                </select>
-                            </div>
-                            <div class="invalid-feedback">You have already selected maximum option allowed. (This is
-                                Configurable)
-                            </div>
-                        </div>
-                        <div class="dropdown-item">
-                            <h6 class="mb-0">Orders:</h6>
-                            <p class="text-secondary small">1256 orders last week</p>
-                        </div>
-                        <ul class="list-group list-group-flush bg-none mb-2">
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col">Online Orders</div>
-                                    <div class="col-auto">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                   id="titleswitch1">
-                                            <label class="form-check-label" for="titleswitch1"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col">Offline Orders</div>
-                                    <div class="col-auto">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                   id="titleswitch2" checked="">
-                                            <label class="form-check-label" for="titleswitch2"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="dropdown-item">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-outline-secondary border">cancel</button>
-                                </div>
-                                <div class="col-auto">
-                                    <button class="btn btn-theme">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="help-center.html" class="btn btn-link btn-square text-secondary" data-bs-toggle="tooltip"
-                   data-bs-placement="top" title="Support">
-                    <i class="bi bi-life-preserver"></i>
-                </a>
-                <a href="personalization.html" class="btn btn-link btn-square text-secondary" data-bs-toggle="tooltip"
-                   data-bs-placement="top" title="Personalize">
-                    <i class="bi bi-palette"></i>
-                </a>
-                <a href="app-pricing.html" class="btn btn-link btn-square text-secondary" data-bs-toggle="tooltip"
-                   data-bs-placement="top" title="Buy this">
-                        <span class="bi bi-basket position-relative">
-                            <span class="position-absolute top-0 start-100 p-1 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span>
-                        </span>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <nav aria-label="breadcrumb" class="breadcrumb-theme">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="home.html">WinDOORS</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Company Profile</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
 
     <div class="w-100 pt-5 position-relative bg-theme  z-index-0">
         <div class="coverimg w-100 h-100 position-absolute top-0 start-0 opacity-3 z-index-0">
             <img src="img/bg-14.jpg" class="" alt=""/>
         </div>
-        <div class="container my-3 my-md-5 pt-0 py-lg-5 z-index-1 position-relative">
-            <div class="row mb-4 mb-lg-5 align-items-start">
+        <div class="container my-3 my-md-5 z-index-1 position-relative">
+            <div class="row mb-2 mb-lg-3 align-items-start">
                 <div class="col py-2">
                     <h2 class="mb-3" id="info-name"></h2>
                 </div>
@@ -169,24 +57,18 @@ $(".timepicker").timepicker({
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="overviewcompany-tab" data-bs-toggle="tab"
                                 data-bs-target="#overviewcompany" type="button" role="tab"
-                                aria-controls="overviewcompany" aria-selected="true">Overview
+                                aria-controls="overviewcompany" aria-selected="true">Bilgiler
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="authorizescompany-tab" data-bs-toggle="tab"
+                                data-bs-target="#authorizescompany" type="button" role="tab"
+                                aria-controls="authorizescompany" aria-selected="false">Yetkililer
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="teamcompany-tab" data-bs-toggle="tab" data-bs-target="#teamcompany"
-                                type="button" role="tab" aria-controls="teamcompany" aria-selected="false">Team
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="servicescompany-tab" data-bs-toggle="tab"
-                                data-bs-target="#servicescompany" type="button" role="tab"
-                                aria-controls="servicescompany" aria-selected="false">Services
-                        </button>
-                    </li>
-                    <li class="nav-item ms-auto" role="presentation">
-                        <button class="btn btn-theme" id="contactus-tab" data-bs-toggle="tab"
-                                data-bs-target="#contactus" type="button" role="tab" aria-controls="contactus"
-                                aria-selected="false">Get more info
+                                type="button" role="tab" aria-controls="teamcompany" aria-selected="false">Geçmiş
                         </button>
                     </li>
                 </ul>
@@ -199,121 +81,97 @@ $(".timepicker").timepicker({
                          aria-labelledby="overviewcompany-tab">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10">
-                                <div class="row mb-4 mb-lg-5 align-items-center justify-content-center">
-                                    <div class="col-12 col-md-7 py-2">
-                                        <h2 class="mb-3 mb-md-4">We design UX UI for <span class="text-gradient">Creative & Unique</span>
-                                            Digital Products</h2>
-                                        <p class="text-secondary">We create HTML templates for Enterprise applications,
-                                            Business applications, eCommerce application, Admin Dashboard Applications,
-                                            Mobile application, Mobile Websites, Micro websites, Cordova apps etc.
-                                            Technology you can choose from our latest builds Bootstrap 5 HTML template,
-                                            Framework7 templates, Angular 12 starter kits.</p>
-                                    </div>
-                                    <div class="col-12 col-md-5">
-                                        <div class="coverimg h-250 rounded overflow-hidden shadow">
-                                            <img src="img/bg-14.jpg" alt=""/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card border-0 text-center mb-4 mb-lg-5 rounded">
-                                    <div class="card-body p-4 p-md-5">
-                                        <h4 class="mb-2 mb-md-3">Our Goal and Vision</h4>
-                                        <p class="text-secondary">We believe to create best ethics practices around the
-                                            design corner. We always comes with futuristic approach to solve customers
-                                            problem.
-                                            We evaluate progress day by day and our vision is to make beautiful, usable,
-                                            creative and good user experienced design.</p>
-                                        <br>
-                                        <h4 class="text-gradient mb-3">Winners don't do different things,<br>they do
-                                            things differently</h4>
-                                        <p class="fw-light">Shiv Khera <cite title=" Source Title">You Can Win: A Step
-                                                by Step Tool for Top Achievers</cite>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-md-6 mb-4 text-center">
-                                        <i class="bi bi-bullseye h1 avatar avatar-80 bg-light-theme rounded-circle mb-3 mb-md-4"></i>
-                                        <h4 class="mb-2 mb-md-3">Our Mission</h4>
-                                        <p class="text-secondary">Our mission is to provide great UI UX design with
-                                            flexibility of development at the reliable cost. This will give you best by
-                                            saving time and money. So, for our customer its all about the Win Win
-                                            situation.</p>
-                                    </div>
-                                    <div class="col-12 col-md-6 mb-4 text-center ">
-                                        <i class="bi bi-window-stack h1 avatar avatar-80 bg-light-theme rounded-circle mb-3 mb-md-4"></i>
-                                        <h4 class="mb-2 mb-md-3">What we do</h4>
-                                        <p class="text-secondary">We do best creative and usable digital products for
-                                            web and mobile devices, website and universal app development. We create
-                                            HTML templates and starter kits with different technologies like Angular,
-                                            React, Laravel etc.</p>
-                                    </div>
-                                </div>
-                                <hr class="mb-4 mb-md-5 border-top">
-                                <div class="row mb-4 mb-md-5">
-                                    <div class="col-12 col-md-12 col-lg-6 mb-5 mb-xxl-0">
-                                        <h4 class="mb-4">Clean & Trending UI design with a great user experience</h4>
-                                        <p class="text-secondary">WinDOORS is creative and multipurpose template. You
-                                            can use it for CRM, Business application, Intranet Application, Portal
-                                            service and Many more.
-                                            It comes with unlimited possibilities and 10+ predefined styles which you
-                                            can also mix up and create new. <b>Do support and spread a word for us</b>.
-                                        </p>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-3">
-
-                                        <p class="mb-3"><b>Main office:</b></p>
-                                        <p class="mb-1"><a href="https://maxartkiller.com/" target="_blank">www.maxartkiller.com</a>
-                                        </p>
-                                        <p class="mb-4 text-secondary">Test data 103909 Witamer CR, Niagara Falls, NY
-                                            14305, United States</p>
-                                        <ul class="nav ">
-                                            <li class="nav-item">
-                                                <a class="nav-link text-secondary px-2"
-                                                   href="https://www.facebook.com/maxartkiller/" target="_blank">
-                                                    <i class="bi bi-facebook h5"></i>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-secondary px-2"
-                                                   href="https://twitter.com/maxartkiller" target="_blank">
-                                                    <i class="bi bi-twitter h5"></i>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-secondary px-2"
-                                                   href="https://linkedin.com/company/maxartkiller" target="_blank">
-                                                    <i class="bi bi-linkedin h5"></i>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-secondary px-2"
-                                                   href="https://www.instagram.com/maxartkiller/" target="_blank">
-                                                    <i class="bi bi-instagram h5"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-3">
-                                        <p class="mb-3"><b>Contact information:</b></p>
-                                        <div class="row align-items-center mb-3">
-                                            <div class="col-auto"><i class="bi bi-clock text-theme"></i></div>
-                                            <div class="col ps-0">0441-215-518625<br><span class="text-secondary">Mon-Sat, 9:00am - 10:00pm</span>
+                                <form method="post" action="#" id="update_company_form">
+                                    <div class="row mb-4">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_potential_customer" />
+                                                <label class="form-check-label" for="update_company_is_potential_customer">Potansiyel Müşteri</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_customer" />
+                                                <label class="form-check-label" for="update_company_is_customer">Müşteri</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_supplier" />
+                                                <label class="form-check-label" for="update_company_is_supplier">Tedarikçi</label>
                                             </div>
                                         </div>
-                                        <div class="row align-items-center mb-3">
-                                            <div class="col-auto"><i class="bi bi-telephone text-theme"></i></div>
-                                            <div class="col ps-0">+1-000 000 100000</div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Firma Adı</label>
+                                            <input type="text" class="form-control" id="update_company_name" placeholder="Firma Adı" required>
+                                            <input type="hidden" class="form-control" id="update_company_id" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Eposta</label>
+                                            <input type="text" class="form-control" id="update_company_email" placeholder="Eposta" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Website</label>
+                                            <input type="text" class="form-control" id="update_company_website" placeholder="Website">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Telefon</label>
+                                            <input type="text" class="form-control" id="update_company_phone" placeholder="Telefon" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Faks</label>
+                                            <input type="text" class="form-control" id="update_company_fax" placeholder="Faks">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Adres</label>
+                                            <input type="text" class="form-control" id="update_company_address" placeholder="Adres">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Ülke</label>
+                                            <select class="form-control" id="update_company_country">
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Registration Number</label>
+                                            <input type="text" class="form-control" id="update_company_registration_number" placeholder="Registration Number">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Vergi Dairesi</label>
+                                            <input type="text" class="form-control" id="update_company_tax_office" placeholder="Vergi Dairesi">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Vergi Numarası</label>
+                                            <input type="text" class="form-control" id="update_company_tax_number" placeholder="Vergi Numarası">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">LinkedIn</label>
+                                            <input type="text" class="form-control" id="update_company_linkedin" placeholder="LinkedIn">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Skype</label>
+                                            <input type="text" class="form-control" id="update_company_skype" placeholder="Skype">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Payment Term</label>
+                                            <select class="form-control" id="update_company_payment_term">
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Diğer</label>
+                                            <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Logo</label>
+                                            <input type="file" class="form-control" id="update_company_logo" />
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <button type="submit" class="btn btn-outline-theme float-end">Kaydet</button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="servicescompany" role="tabpanel"
-                         aria-labelledby="servicescompany-tab">
+                    <div class="tab-pane fade" id="authorizescompany" role="tabpanel"
+                         aria-labelledby="authorizescompany-tab">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10">
                                 <div class="row align-items-center justify-content-center">
@@ -367,292 +225,6 @@ $(".timepicker").timepicker({
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="teamcompany" role="tabpanel" aria-labelledby="teamcompany-tab">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-10">
-                                <h4 class="text-center">Meet our all set <span class="text-gradient">Team</span>.</h4>
-                                <p class="text-secondary text-center mb-4">We work hard, we do it creatively and we like
-                                    to see you here!</p>
-                                <div class="h-300 mb-4 position-relative text-center bg-theme rounded overflow-hidden">
-                                    <figure class="coverimg h-100 w-100 z-index-0 position-absolute top-0 start-0 m-0">
-                                        <img src="img/bg-15.jpg" alt=""/>
-                                    </figure>
-                                    <div class="row h-100 z-index-1 align-items-center justify-content-center">
-                                        <div class="col-12 col-md-8 col-lg-6">
-                                            <h2>Team build with Trust & Transparency</h2>
-                                            <p class="text-opac">We always prefer to have clear communication less
-                                                headache and only creative thoughts in mind. That is why we prefer to
-                                                have good working culture across the organization.</p>
-                                            <button class="btn btn-theme">Contact us for more</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <h4 class="text-center mb-4">Our great team is our<br> <span class="text-gradient">strength and source</span>
-                                    of growth.</h4>
-                                <div class="row mb-4">
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card border-0 text-center">
-                                            <div class="card-body">
-                                                <div class="h-250 overflow-hidden rounded mb-3">
-                                                    <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="img/bg-6.jpg" alt=""/>
-                                                    </figure>
-                                                </div>
-                                                <h5 class="text-truncate">Aditi Johnson</h5>
-                                                <p>London, UK</p>
-                                                <p class="text-secondary small">Founder</p>
-                                                <ul class="nav justify-content-center">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.facebook.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-facebook h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://twitter.com/maxartkiller" target="_blank">
-                                                            <i class="bi bi-twitter h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://linkedin.com/company/maxartkiller"
-                                                           target="_blank">
-                                                            <i class="bi bi-linkedin h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.instagram.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-instagram h5"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card border-0 text-center">
-                                            <div class="card-body">
-                                                <div class="h-250 overflow-hidden rounded mb-3">
-                                                    <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="img/user-4.jpg" alt=""/>
-                                                    </figure>
-                                                </div>
-                                                <h5 class="text-truncate">Steven Thomson</h5>
-                                                <p>New York, USA</p>
-                                                <p class="text-secondary small">CEO</p>
-                                                <ul class="nav justify-content-center">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.facebook.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-facebook h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://twitter.com/maxartkiller" target="_blank">
-                                                            <i class="bi bi-twitter h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://linkedin.com/company/maxartkiller"
-                                                           target="_blank">
-                                                            <i class="bi bi-linkedin h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.instagram.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-instagram h5"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card border-0 text-center">
-                                            <div class="card-body">
-                                                <div class="h-250 overflow-hidden rounded mb-3">
-                                                    <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="img/user-3.jpg" alt=""/>
-                                                    </figure>
-                                                </div>
-                                                <h5 class="text-truncate">Nicky Lambaa</h5>
-                                                <p>Wembley, UK</p>
-                                                <p class="text-secondary small">CTO</p>
-                                                <ul class="nav justify-content-center">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.facebook.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-facebook h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://twitter.com/maxartkiller" target="_blank">
-                                                            <i class="bi bi-twitter h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://linkedin.com/company/maxartkiller"
-                                                           target="_blank">
-                                                            <i class="bi bi-linkedin h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link text-secondary px-2"
-                                                           href="https://www.instagram.com/maxartkiller/"
-                                                           target="_blank">
-                                                            <i class="bi bi-instagram h5"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/user-2.jpg" alt=""/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Shrivally</h6>
-                                                        <p>Amsterdam, NL</p>
-                                                        <p class="text-secondary small">UI Designer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/user-1.jpg" alt=""/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Max Doe</h6>
-                                                        <p>London, UK</p>
-                                                        <p class="text-secondary small">UX Designer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/bg-8.jpg" alt=""/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Aditi Johnson</h6>
-                                                        <p>London, UK</p>
-                                                        <p class="text-secondary small">Product Designer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/bg-11.jpg" alt=""/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Aditi Johnson</h6>
-                                                        <p>London, UK</p>
-                                                        <p class="text-secondary small">Project Manager</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/bg-3.jpg" alt=""/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Preeti Dwivedi</h6>
-                                                        <p>Kashi, IN</p>
-                                                        <p class="text-secondary small">Head of Design</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                        <div class="card shadow-none">
-                                            <div class="card-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar avatar-80 overflow-hidden rounded">
-                                                            <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="img/bg-2.jpg" alt="" class="w-100"/>
-                                                            </figure>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="text-truncate mb-0">Aditi Johnson</h6>
-                                                        <p>London, UK</p>
-                                                        <p class="text-secondary small">Development Support</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <h4 class="text-center">Wanted to experience adventure? <span class="text-gradient">Join us</span>
-                                    now!.</h4>
-                                <p class="text-secondary text-center mb-4">We will be happy to make ou part of our
-                                    team. </p>
-                                <div class="text-center">
-                                    <button class="btn btn-theme">Apply now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="contactus" role="tabpanel" aria-labelledby="contactus-tab">...</div>
                 </div>
             </div>
         </div>
