@@ -87,7 +87,7 @@ async function initCustomers(){
         buttons: [
             {
                 text: 'Yeni Müşteri',
-                className: 'btn btn-theme',
+                className: 'btn btn-primary',
                 action: function ( e, dt, node, config ) {
                     window.location = '/add-customer';
                 }
