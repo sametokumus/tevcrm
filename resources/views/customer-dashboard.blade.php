@@ -295,20 +295,48 @@ $(".timepicker").timepicker({
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="add_employee_title" placeholder="Ünvanı" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="add_employee_title" placeholder="Ünvanı" >
+                                        <label for="add_employee_title">Ünvanı</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="add_employee_email" placeholder="Eposta" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="add_employee_email" placeholder="Eposta" >
+                                        <label for="add_employee_email">Eposta</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="add_employee_phone" placeholder="Telefon" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="add_employee_phone" placeholder="Telefon" >
+                                        <label for="add_employee_phone">Telefon</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="add_employee_mobile" placeholder="Cep Telefonu" >
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Fotoğraf</label>
-                            <input type="file" class="form-control" id="add_employee_photo" />
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="add_employee_mobile" placeholder="Cep Telefonu" >
+                                        <label for="add_employee_mobile">Cep Telefonu</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -325,418 +353,81 @@ $(".timepicker").timepicker({
     </div>
 </div>
 <div class="modal modal-cover fade" id="updateCompanyEmployeeModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">YETKİLİ GÜNCELLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
             <form method="post" action="#" id="update_employee_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <input type="text" class="form-control" id="update_employee_name" placeholder="Adı" required>
+                            <h6 class="title">Yetkili Güncelle</h6>
                             <input type="hidden" class="form-control" id="update_employee_id" required>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="update_employee_name" placeholder="Adı" required>
+                                        <label for="update_employee_name">Adı</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="update_employee_title" placeholder="Ünvanı" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="update_employee_title" placeholder="Ünvanı" >
+                                        <label for="update_employee_title">Ünvanı</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="update_employee_email" placeholder="Eposta" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="update_employee_email" placeholder="Eposta" >
+                                        <label for="update_employee_email">Eposta</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="update_employee_phone" placeholder="Telefon" >
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="update_employee_phone" placeholder="Telefon" >
+                                        <label for="update_employee_phone">Telefon</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" id="update_employee_mobile" placeholder="Cep Telefonu" >
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Fotoğraf <a href="#" id="update_employee_current_photo" target="_blank">'ı görüntülemek için tıklayınız...</a></label>
-                            <input type="file" class="form-control" id="update_employee_photo" />
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="update_employee_mobile" placeholder="Cep Telefonu" >
+                                        <label for="update_employee_mobile">Cep Telefonu</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-link text-danger" type="button" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-trash h4 me-2"></i> Vazgeç</button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-theme" type="submit"><i class="bi bi-send me-2"></i> Kaydet</button>
+                        </div>
+                    </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addCompanyNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">NOT EKLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_note_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Notunuz</label>
-                            <textarea class="form-control" rows="3" id="add_note_description" placeholder="Not" required></textarea>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Firma Yetkilisi</label>
-                            <select class="form-control" id="add_note_employee">
-
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Görsel</label>
-                            <input type="file" class="form-control" id="add_note_image" />
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal modal-cover fade" id="updateCompanyNoteModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">NOT GÜNCELLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_note_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Notunuz</label>
-                            <textarea class="form-control" rows="3" id="update_note_description" placeholder="Not" required></textarea>
-                            <input type="hidden" class="form-control" id="update_note_id" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Firma Yetkilisi</label>
-                            <select class="form-control" id="update_note_employee">
-
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Görsel <a href="#" id="update_note_current_image" target="_blank">'i görüntülemek için tıklayınız...</a></label>
-                            <input type="file" class="form-control" id="update_note_image" />
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addCompanyActivityModal">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">AKTİVİTE EKLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_activity_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Aktivite Türü</label>
-                            <select class="form-control" id="add_activity_type_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Firma</label>
-                            <select class="form-control" id="add_activity_company_id" onchange="initActivityAddModalEmployee();">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Firma Yetkilisi</label>
-                            <select class="form-control" id="add_activity_employee_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Aktivite Sorumlusu</label>
-                            <select class="form-control" id="add_activity_user_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-8 mb-3">
-                            <label class="form-label">Katılımcılar</label>
-                            <select name="add_activity_participants[]" class="form-control form-select select2" multiple="multiple" id="add_activity_participants">
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Konu</label>
-                            <input type="text" class="form-control" id="add_activity_title">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Açıklama</label>
-                            <textarea class="form-control" rows="3" id="add_activity_description"></textarea>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Başlangıç</label>
-                            <input type="text" class="form-control datepicker" id="add_activity_start_date" placeholder="dd-mm-yyyy" />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">&nbsp;</label>
-                            <div class="input-group bootstrap-timepicker timepicker">
-                                <input type="text" class="form-control timepicker" id="add_activity_start_time" />
-                                <span class="input-group-addon input-group-text">
-                                    <i class="fa fa-clock"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Bitiş</label>
-                            <input type="text" class="form-control datepicker" id="add_activity_end_date" placeholder="dd-mm-yyyy" />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">&nbsp;</label>
-                            <div class="input-group bootstrap-timepicker timepicker">
-                                <input type="text" class="form-control timepicker" id="add_activity_end_time" />
-                                <span class="input-group-addon input-group-text">
-                                    <i class="fa fa-clock"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3" id="add-activity-new-task-btn">Görev Ekle +</button></label>
-                        </div>
-                        <div id="add-activity-tasks-body" class="d-none mb-3">
-
-                        </div>
-                        <div id="add-activity-new-tasks-body" class="mb-3">
-                            <input type="hidden" id="add-activity-new-task-count" value="0">
-                        </div>
-                        <div class="row mb-3 d-none" id="add-activity-new-tasks-input">
-                            <div class="col-md-4 mb-3">
-                                <input type="text" class="form-control input-sm" id="add-activity-task" placeholder="Yeni Görev" />
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <button type="button" class="btn btn-default btn-sm" id="add-activity-task-button">Ekle</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal modal-cover fade" id="updateCompanyActivityModal">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">AKTİVİTE GÜNCELLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_activity_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Aktivite Türü</label>
-                            <select class="form-control" id="update_activity_type_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Firma</label>
-                            <select class="form-control" id="update_activity_company_id" onchange="initActivityUpdateModalEmployee();">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Firma Yetkilisi</label>
-                            <select class="form-control" id="update_activity_employee_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Aktivite Sorumlusu</label>
-                            <select class="form-control" id="update_activity_user_id">
-
-                            </select>
-                        </div>
-                        <div class="col-md-8 mb-3">
-                            <label class="form-label">Katılımcılar</label>
-                            <select name="update_activity_participants[]" class="form-control form-select select2" multiple="multiple" id="update_activity_participants">
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Konu</label>
-                            <input type="text" class="form-control" id="update_activity_title">
-                            <input type="hidden" class="form-control" id="update_activity_id" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Açıklama</label>
-                            <textarea class="form-control" rows="3" id="update_activity_description"></textarea>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Başlangıç</label>
-                            <input type="text" class="form-control datepicker" id="update_activity_start_date" placeholder="dd-mm-yyyy" />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">&nbsp;</label>
-                            <div class="input-group bootstrap-timepicker timepicker">
-                                <input type="text" class="form-control timepicker" id="update_activity_start_time" />
-                                <span class="input-group-addon input-group-text">
-                                    <i class="fa fa-clock"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Bitiş</label>
-                            <input type="text" class="form-control datepicker" id="update_activity_end_date" placeholder="dd-mm-yyyy" />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">&nbsp;</label>
-                            <div class="input-group bootstrap-timepicker timepicker">
-                                <input type="text" class="form-control timepicker" id="update_activity_end_time" />
-                                <span class="input-group-addon input-group-text">
-                                    <i class="fa fa-clock"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Görevler <button type="button" class="btn btn-default btn-sm mx-3" id="update-activity-new-task-btn">Görev Ekle +</button></label>
-                        </div>
-                        <div id="update-activity-tasks-body" class="mb-3">
-                            <input type="hidden" id="update-activity-task-count" value="0">
-
-                        </div>
-                        <div id="update-activity-new-tasks-body" class="d-none mb-3">
-                        </div>
-                        <div class="row mb-3 d-none" id="update-activity-new-tasks-input">
-                            <div class="col-md-4 mb-3">
-                                <input type="text" class="form-control input-sm" id="update-activity-task" placeholder="Yeni Görev" />
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <button type="button" class="btn btn-default btn-sm" id="update-activity-task-button">Ekle</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addDeliveryAddressModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">SEVK ADRESİ EKLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="add_delivery_address_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Adres Başlığı</label>
-                            <input type="text" class="form-control" id="add_delivery_address_name">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Adres</label>
-                            <input type="text" class="form-control" id="add_delivery_address">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal modal-cover fade" id="updateDeliveryAddressModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">SEVK ADRESİ GÜNCELLE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form method="post" action="#" id="update_delivery_address_form">
-                <div class="modal-body">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Adres Başlığı</label>
-                            <input type="text" class="form-control" id="update_delivery_address_name">
-                            <input type="hidden" class="form-control" id="update_delivery_address_id">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Adres</label>
-                            <input type="text" class="form-control" id="update_delivery_address">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-cover fade" id="addCompanyPointModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Müşteri Puanları</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-
-                <form method="post" action="#" id="add_company_point_form">
-                    <div class="row mb-4">
-                        <div class="col-md-12 mb-3">
-                            <input type="hidden" class="form-control" id="add_point_company_id" required>
-                            <label class="form-label">Yeni Puan Ekle</label>
-                            <input type="number" class="form-control" id="add_point_point" min="1" max="10" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <button type="submit" class="btn btn-outline-theme">Kaydet</button>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="row mb-3">
-                    <div class="table-responsive">
-                        <table id="company-points-table" class="table table-striped table-borderless mb-2px small">
-                            <thead>
-                            <tr>
-                                <th>Tarih</th>
-                                <th>Yönetici</th>
-                                <th>Puan</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Kapat</button>
-            </div>
         </div>
     </div>
 </div>

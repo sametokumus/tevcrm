@@ -1115,26 +1115,8 @@ async function serviceGetDeleteCustomer(id) {
 	}
 }
 
-async function serviceGetCompaniesByStaffId(id) {
-    const data = await fetchDataGet('/admin/company/getCompaniesByStaffId/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
 
-async function serviceGetSaledProductsByCompanyId(id) {
-    const data = await fetchDataGet('/admin/company/getSaledProductsByCompanyId/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-
-
-async function serviceGetEmployeesByCompanyId(id) {
+async function serviceGetEmployeesByCustomerId(id) {
     const data = await fetchDataGet('/admin/employee/getEmployeesByCompanyId/'+ id, 'application/json');
     if (data.status == "success") {
         return data.object;
@@ -1151,11 +1133,25 @@ async function serviceGetEmployeeById(id) {
     }
 }
 async function servicePostAddEmployee(formData) {
-    await xhrDataPost('/admin/employee/addEmployee', formData, addEmployeeCallback);
+    const data = await fetchDataPost('/admin/employee/addEmployee', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
 }
 
 async function servicePostUpdateEmployee(id, formData) {
-    await xhrDataPost('/admin/employee/updateEmployee/' + id, formData, updateEmployeeCallback);
+    const data = await fetchDataPost('/admin/employee/updateEmployee/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
 }
 async function serviceGetDeleteEmployee(id) {
     const data = await fetchDataGet('/admin/employee/deleteEmployee/' + id, 'application/json');
