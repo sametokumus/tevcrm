@@ -218,7 +218,7 @@ $(".timepicker").timepicker({
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <div class="card shadow-none">
                                     <div class="card-body">
-                                        <div class="row align-items-center">
+                                        <div class="row align-items-start">
                                             <div class="col">
                                                 <h6 class="text-truncate mb-0">Shrivally</h6>
                                                 <p>Amsterdam, NL</p>
