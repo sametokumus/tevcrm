@@ -280,7 +280,9 @@ $(".timepicker").timepicker({
             <form method="post" action="#" id="add_employee_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <h6 class="title">Yetkili Ekle</h6>
+                        <div class="col-md-12 mb-3">
+                            <h6 class="title">Yetkili Ekle</h6>
+                        </div>
                         <div class="col-md-12 mb-3">
                             <div class="form-group mb-3 position-relative">
                                 <div class="input-group input-group-lg">
