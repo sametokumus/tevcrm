@@ -132,13 +132,13 @@ $(".timepicker").timepicker({
 
     <div class="w-100 pt-5 position-relative bg-theme  z-index-0">
         <div class="coverimg w-100 h-100 position-absolute top-0 start-0 opacity-3 z-index-0">
-            <img src="assets/img/bg-14.jpg" class="" alt=""/>
+            <img src="img/bg-14.jpg" class="" alt=""/>
         </div>
         <div class="container my-3 my-md-5 pt-0 py-lg-5 z-index-1 position-relative">
             <div class="row mb-4 mb-lg-5 align-items-start">
                 <div class="col-auto position-relative">
                     <figure class="avatar avatar-140 coverimg rounded-10 shadow-md border-3 border-light bg-white">
-                        <img src="assets/img/maxartkiller.png" alt=""/>
+                        <img src="img/maxartkiller.png" alt=""/>
                     </figure>
                 </div>
                 <div class="col py-2">
@@ -232,7 +232,7 @@ $(".timepicker").timepicker({
                                     </div>
                                     <div class="col-12 col-md-5">
                                         <div class="coverimg h-250 rounded overflow-hidden shadow">
-                                            <img src="assets/img/bg-14.jpg" alt=""/>
+                                            <img src="img/bg-14.jpg" alt=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +340,7 @@ $(".timepicker").timepicker({
                                 <div class="row align-items-center justify-content-center">
                                     <div class="col-12 col-md-6">
                                         <div class="card border-0 mb-4">
-                                            <img src="assets/img/tour-guide-5.png" class="card-img-top" alt="...">
+                                            <img src="img/tour-guide-5.png" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h4>Creative UI Design</h4>
                                                 <p class="text-secondary">We create unique and creative user interfaces
@@ -350,7 +350,7 @@ $(".timepicker").timepicker({
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="card border-0 mb-4">
-                                            <img src="assets/img/tour-guide-1.png" class="card-img-top" alt="...">
+                                            <img src="img/tour-guide-1.png" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h4>Awesome UX flow</h4>
                                                 <p class="text-secondary">We keep everything on intuitive and simplest
@@ -364,7 +364,7 @@ $(".timepicker").timepicker({
                                 <div class="row align-items-center justify-content-center">
                                     <div class="col-12 col-md-6">
                                         <div class="card border-0 mb-4">
-                                            <img src="assets/img/tour-guide-2.png" class="card-img-top" alt="...">
+                                            <img src="img/tour-guide-2.png" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h4>Customization</h4>
                                                 <p class="text-secondary">To improve day by day customization for new
@@ -375,7 +375,7 @@ $(".timepicker").timepicker({
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="card border-0 mb-4">
-                                            <img src="assets/img/tour-guide-4.png" class="card-img-top" alt="...">
+                                            <img src="img/tour-guide-4.png" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h4>Multi-device Centric</h4>
                                                 <p class="text-secondary">Human in race of different medium to
@@ -396,7 +396,7 @@ $(".timepicker").timepicker({
                                     to see you here!</p>
                                 <div class="h-300 mb-4 position-relative text-center bg-theme rounded overflow-hidden">
                                     <figure class="coverimg h-100 w-100 z-index-0 position-absolute top-0 start-0 m-0">
-                                        <img src="assets/img/bg-15.jpg" alt=""/>
+                                        <img src="img/bg-15.jpg" alt=""/>
                                     </figure>
                                     <div class="row h-100 z-index-1 align-items-center justify-content-center">
                                         <div class="col-12 col-md-8 col-lg-6">
@@ -417,7 +417,7 @@ $(".timepicker").timepicker({
                                             <div class="card-body">
                                                 <div class="h-250 overflow-hidden rounded mb-3">
                                                     <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="assets/img/bg-6.jpg" alt=""/>
+                                                        <img src="img/bg-6.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <h5 class="text-truncate">Aditi Johnson</h5>
@@ -460,7 +460,7 @@ $(".timepicker").timepicker({
                                             <div class="card-body">
                                                 <div class="h-250 overflow-hidden rounded mb-3">
                                                     <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="assets/img/user-4.jpg" alt=""/>
+                                                        <img src="img/user-4.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <h5 class="text-truncate">Steven Thomson</h5>
@@ -503,7 +503,7 @@ $(".timepicker").timepicker({
                                             <div class="card-body">
                                                 <div class="h-250 overflow-hidden rounded mb-3">
                                                     <figure class="h-100 w-100 coverimg zoomout">
-                                                        <img src="assets/img/user-3.jpg" alt=""/>
+                                                        <img src="img/user-3.jpg" alt=""/>
                                                     </figure>
                                                 </div>
                                                 <h5 class="text-truncate">Nicky Lambaa</h5>
@@ -548,7 +548,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/user-2.jpg" alt=""/>
+                                                                <img src="img/user-2.jpg" alt=""/>
                                                             </figure>
                                                         </div>
                                                     </div>
@@ -568,7 +568,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/user-1.jpg" alt=""/>
+                                                                <img src="img/user-1.jpg" alt=""/>
                                                             </figure>
                                                         </div>
                                                     </div>
@@ -588,7 +588,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/bg-8.jpg" alt=""/>
+                                                                <img src="img/bg-8.jpg" alt=""/>
                                                             </figure>
                                                         </div>
                                                     </div>
@@ -608,7 +608,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/bg-11.jpg" alt=""/>
+                                                                <img src="img/bg-11.jpg" alt=""/>
                                                             </figure>
                                                         </div>
                                                     </div>
@@ -628,7 +628,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/bg-3.jpg" alt=""/>
+                                                                <img src="img/bg-3.jpg" alt=""/>
                                                             </figure>
                                                         </div>
                                                     </div>
@@ -648,7 +648,7 @@ $(".timepicker").timepicker({
                                                     <div class="col-auto">
                                                         <div class="avatar avatar-80 overflow-hidden rounded">
                                                             <figure class="h-100 w-100 coverimg zoomout">
-                                                                <img src="assets/img/bg-2.jpg" alt="" class="w-100"/>
+                                                                <img src="img/bg-2.jpg" alt="" class="w-100"/>
                                                             </figure>
                                                         </div>
                                                     </div>
