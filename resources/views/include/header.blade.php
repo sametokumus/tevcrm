@@ -28,6 +28,7 @@ $extra_js="";
     <meta name="current-locale" content="{{ app()->getLocale() }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Technical Universal Verification</title>
+    <base href="/">
 
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
