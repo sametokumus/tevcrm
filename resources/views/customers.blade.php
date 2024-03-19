@@ -12,7 +12,7 @@ $extra_js='
     <div class="container-fluid mt-4">
         <div class="row justify-content-center mb-2">
             <div class="col-12">
-                <h6 class="title">Müşteri Ekle</h6>
+                <h6 class="title">Müşteriler</h6>
 
                 <div class="row">
                     <!-- timesheet -->
