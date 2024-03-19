@@ -72,6 +72,17 @@ async function initCustomers(){
             '                              <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>\n' +
             '                          </ul>\n' +
             '                      </div>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateCompanyModal(\''+ customer.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Hızlı Düzenle\n' +
+            '                      </button>\n' +
+            '                      <a href="customer-dashboard/'+ customer.id +'" id="bDel" type="button" class="btn  btn-sm btn-warning">\n' +
+            '                          <span class="fe fe-search"> </span> Detaylı İncele\n' +
+            '                      </a>\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCompany(\''+ customer.id +'\')">\n' +
+            '                          <span class="fe fe-edit"> </span> Sil\n' +
+            '                      </button>\n' +
+            '                  </div>\n' +
             '                  </td>\n' +
             '              </tr>';
         $('#customer-datatable tbody').append(item);
