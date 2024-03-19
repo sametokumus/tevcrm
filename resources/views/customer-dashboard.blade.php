@@ -89,7 +89,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-buildings"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Firma Adı" id="add_company_name" required class="form-control border-start-0">
+                                                        <input type="text" placeholder="Firma Adı" id="update_company_name" required class="form-control border-start-0">
                                                         <label>Firma Adı</label>
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@ $(".timepicker").timepicker({
                                                 <div class="input-group input-group-lg">
                                                     <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Email address" id="add_company_email" required class="form-control border-start-0">
+                                                        <input type="text" placeholder="Email address" id="update_company_email" required class="form-control border-start-0">
                                                         <label>Eposta Adresi</label>
                                                     </div>
                                                 </div>
@@ -114,7 +114,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-globe"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Website" id="add_company_website" class="form-control border-start-0">
+                                                        <input type="text" placeholder="Website" id="update_company_website" class="form-control border-start-0">
                                                         <label>Website</label>
                                                     </div>
                                                 </div>
@@ -127,7 +127,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-telephone"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Telefon" id="add_company_phone" required class="form-control border-start-0">
+                                                        <input type="text" placeholder="Telefon" id="update_company_phone" required class="form-control border-start-0">
                                                         <label>Telefon</label>
                                                     </div>
                                                 </div>
@@ -140,7 +140,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-telephone-inbound"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Faks" id="add_company_fax" class="form-control border-start-0">
+                                                        <input type="text" placeholder="Faks" id="update_company_fax" class="form-control border-start-0">
                                                         <label>Faks</label>
                                                     </div>
                                                 </div>
@@ -152,7 +152,7 @@ $(".timepicker").timepicker({
                                                 <div class="input-group input-group-lg">
                                                     <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-geo-alt"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Adres" id="add_company_address" class="form-control border-start-0">
+                                                        <input type="text" placeholder="Adres" id="update_company_address" class="form-control border-start-0">
                                                         <label>Adres</label>
                                                     </div>
                                                 </div>
@@ -165,7 +165,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-person"></i></span>
                                                     <div class="form-floating">
-                                                        <select class="form-select border-0" id="add_company_country" required>
+                                                        <select class="form-select border-0" id="update_company_country" required>
                                                             <option value="">Seçiniz...</option>
                                                             <option>Türkiye</option>
                                                         </select>
@@ -181,7 +181,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-building"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Vergi Dairesi" id="add_company_tax_office" class="form-control border-start-0">
+                                                        <input type="text" placeholder="Vergi Dairesi" id="update_company_tax_office" class="form-control border-start-0">
                                                         <label>Vergi Dairesi</label>
                                                     </div>
                                                 </div>
@@ -194,7 +194,7 @@ $(".timepicker").timepicker({
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-upc"></i></span>
                                                     <div class="form-floating">
-                                                        <input type="text" placeholder="Vergi No" id="add_company_tax_number" class="form-control border-start-0">
+                                                        <input type="text" placeholder="Vergi No" id="update_company_tax_number" class="form-control border-start-0">
                                                         <label>Vergi No</label>
                                                     </div>
                                                 </div>

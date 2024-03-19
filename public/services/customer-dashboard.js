@@ -4,9 +4,9 @@
     $(document).ready(function() {
 
 
-        $('#update_company_form').submit(function (e){
+        $('#update_customer_form').submit(function (e){
             e.preventDefault();
-            updateCompany();
+            updateCustomer();
         });
 
         $('#update_company_is_potential_customer').click(function (e){
@@ -108,6 +108,7 @@
 
         checkLogin();
         checkRole();
+        getCountriesAddSelectId('update_company_country');
         let customer_id = getPathVariable('customer-dashboard');
         initInfo(customer_id);
         // initCompanyPoints(customer_id);
@@ -127,8 +128,6 @@ function checkRole(){
     return true;
 }
 async function initInfo(customer_id){
-    $('.profile-sidebar #sidebar-info *').remove();
-
     let data = await serviceGetCustomerById(customer_id);
     let customer = data.customer;
     console.log(customer)
@@ -138,80 +137,42 @@ async function initInfo(customer_id){
     $('#info-phone').html(customer.phone);
     $('#info-fax').html(customer.fax);
     $('#info-web').html(customer.web);
+
+    initCustomer(customer);
 }
 
-async function initCompany(company){
-    await getCountriesAddSelectId('update_company_country');
-    await getPaymentTermsAddSelectId('update_company_payment_term');
-
-    document.getElementById('update_company_form').reset();
-    document.getElementById('update_company_id').value = company.id;
-    document.getElementById('update_company_name').value = company.name;
-    document.getElementById('update_company_email').value = company.email;
-    document.getElementById('update_company_website').value = company.website;
-    document.getElementById('update_company_phone').value = company.phone;
-    document.getElementById('update_company_fax').value = company.fax;
-    document.getElementById('update_company_address').value = company.address;
-    document.getElementById('update_company_country').value = company.country_id;
-    document.getElementById('update_company_tax_office').value = company.tax_office;
-    document.getElementById('update_company_tax_number').value = company.tax_number;
-    document.getElementById('update_company_linkedin').value = company.linkedin;
-    document.getElementById('update_company_skype').value = company.skype;
-    document.getElementById('update_company_online').value = company.online;
-    document.getElementById('update_company_registration_number').value = company.registration_number;
-    document.getElementById('update_company_payment_term').value = company.payment_term;
-    if (company.is_customer == 1){ document.getElementById('update_company_is_customer').checked = true; }
-    if (company.is_potential_customer == 1){ document.getElementById('update_company_is_potential_customer').checked = true; }
-    if (company.is_supplier == 1){ document.getElementById('update_company_is_supplier').checked = true; }
+async function initCustomer(customer){
+    document.getElementById('update_customer_form').reset();
+    document.getElementById('update_company_name').value = customer.name;
+    document.getElementById('update_company_email').value = customer.email;
+    document.getElementById('update_company_website').value = customer.website;
+    document.getElementById('update_company_phone').value = customer.phone;
+    document.getElementById('update_company_fax').value = customer.fax;
+    document.getElementById('update_company_address').value = customer.address;
+    document.getElementById('update_company_tax_office').value = customer.tax_office;
+    document.getElementById('update_company_tax_number').value = customer.tax_number;
+    document.getElementById('update_company_country').value = customer.country_id;
 }
-async function updateCompanyCallback(xhttp){
-    let jsonData = await xhttp.responseText;
-    console.log(jsonData)
-    const obj = JSON.parse(jsonData);
-    showAlert(obj.message);
-    console.log(obj)
-    $("#update_company_form").trigger("reset");
-    let company_id = getPathVariable('customer-dashboard');
-    initSidebarInfo(company_id);
-}
-async function updateCompany(){
-    let isPotential = 0;
-    let isCustomer = 0;
-    let isSupplier = 0;
-    if(document.getElementById('update_company_is_potential_customer').checked){
-        isPotential = 1;
-    }
-    if(document.getElementById('update_company_is_customer').checked){
-        isCustomer = 1;
-    }
-    if(document.getElementById('update_company_is_supplier').checked){
-        isSupplier = 1;
-    }
-    let formData = new FormData();
-    formData.append('name', document.getElementById('update_company_name').value);
-    formData.append('website', document.getElementById('update_company_website').value);
-    formData.append('email', document.getElementById('update_company_email').value);
-    formData.append('phone', document.getElementById('update_company_phone').value);
-    formData.append('fax', document.getElementById('update_company_fax').value);
-    formData.append('address', document.getElementById('update_company_address').value);
-    formData.append('country', document.getElementById('update_company_country').value);
-    formData.append('tax_office', document.getElementById('update_company_tax_office').value);
-    formData.append('tax_number', document.getElementById('update_company_tax_number').value);
-    formData.append('is_potential_customer', isPotential);
-    formData.append('is_customer', isCustomer);
-    formData.append('is_supplier', isSupplier);
-    formData.append('linkedin', document.getElementById('update_company_linkedin').value);
-    formData.append('skype', document.getElementById('update_company_skype').value);
-    formData.append('online', document.getElementById('update_company_online').value);
-    formData.append('registration_number', document.getElementById('update_company_registration_number').value);
-    formData.append('payment_term', document.getElementById('update_company_payment_term').value);
-    formData.append('logo', document.getElementById('update_company_logo').files[0]);
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]);
-    }
+async function updateCustomer(){
+    let formData = JSON.stringify({
+        "name": document.getElementById('update_company_name').value,
+        "email": document.getElementById('update_company_email').value,
+        "website": document.getElementById('update_company_website').value,
+        "phone": document.getElementById('update_company_phone').value,
+        "fax": document.getElementById('update_company_fax').value,
+        "address": document.getElementById('update_company_address').value,
+        "tax_office": document.getElementById('update_company_tax_office').value,
+        "tax_number": document.getElementById('update_company_tax_number').value,
+        "country": document.getElementById('update_company_country').value
+    });
+    console.log(formData);
 
     let company_id = getPathVariable('customer-dashboard');
-    await servicePostUpdateCompany(company_id, formData);
+
+    let returned = await servicePostUpdateCustomer(company_id, formData);
+    if (returned){
+        initInfo(company_id);
+    }
 }
 
 async function initEmployees(employees){
