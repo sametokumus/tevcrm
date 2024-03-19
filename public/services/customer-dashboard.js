@@ -163,6 +163,7 @@ async function addEmployee(){
     let returned = await servicePostAddEmployee(formData);
     if (returned){
         initEmployees(customer_id);
+        $("#addCompanyEmployeeModal").modal('hide');
     }
 }
 
@@ -198,6 +199,7 @@ async function updateEmployee(){
     let returned = await servicePostUpdateEmployee(id, formData);
     if (returned){
         initEmployees(customer_id);
+        $("#updateCompanyEmployeeModal").modal('hide');
     }
 }
 
