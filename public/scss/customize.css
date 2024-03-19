@@ -47,3 +47,7 @@ div.dataTables_wrapper div.dt-buttons button {
 /*    background-color: #f9e80d !important;*/
 /*    border-color: #f9e80d !important;*/
 /*}*/
+
+.w-50px{
+    width: 50px !important;
+}
