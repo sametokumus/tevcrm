@@ -9,20 +9,6 @@
             updateCustomer();
         });
 
-        $('#update_company_is_potential_customer').click(function (e){
-            if(document.getElementById('update_company_is_potential_customer').checked){
-                document.getElementById('update_company_is_customer').checked = false;
-            }
-        });
-
-        $('#update_company_is_customer').click(function (e){
-            if(document.getElementById('update_company_is_customer').checked){
-                document.getElementById('update_company_is_potential_customer').checked = false;
-            }
-        });
-
-
-
         $('#add_employee_form').submit(function (e){
             e.preventDefault();
             addEmployee();
@@ -34,73 +20,6 @@
         });
 
 
-
-        $('#add_note_form').submit(function (e){
-            e.preventDefault();
-            addNote();
-        });
-        $('#update_note_form').submit(function (e){
-            e.preventDefault();
-            updateNote();
-        });
-
-
-
-        $('#add_delivery_address_form').submit(function (e){
-            e.preventDefault();
-            addDeliveryAddress();
-        });
-        $('#update_delivery_address_form').submit(function (e){
-            e.preventDefault();
-            updateDeliveryAddress();
-        });
-
-
-
-        $('#add_activity_form').submit(function (e){
-            e.preventDefault();
-            addActivity();
-        });
-        $('#update_activity_form').submit(function (e){
-            e.preventDefault();
-            updateActivity();
-        });
-
-        $('#add-activity-new-task-btn').click(function (){
-           $('#add-activity-new-tasks-input').removeClass('d-none');
-        });
-
-        $('#add-activity-task-button').click(function (){
-           let task = document.getElementById('add-activity-task').value;
-           if (task == ''){
-               alert('Lütfen görev için içerik ekleyiniz.')
-           }else{
-               let count = document.getElementById('add-activity-new-task-count').value;
-               count = parseInt(count) + 1;
-               document.getElementById('add-activity-new-task-count').value = count;
-               let checkInput = '<div class="form-check">\n' +
-                   '                 <input class="form-check-input" type="checkbox" value="1" data-task-id="0" id="add_activity_new_task_'+ count +'" />\n' +
-                   '                 <label class="form-check-label" for="add_activity_new_task_'+ count +'" id="add_activity_new_task_'+ count +'_label">'+ task +'</label>\n' +
-                   '             </div>';
-               $('#add-activity-new-tasks-body').append(checkInput);
-               document.getElementById('add-activity-task').value = '';
-               $('#add-activity-new-tasks-input').addClass('d-none');
-           }
-        });
-
-        $('#update-activity-new-task-btn').click(function (){
-           $('#update-activity-new-tasks-input').removeClass('d-none');
-        });
-
-        $('#update-activity-task-button').click(function (){
-           updateActivityNewTask();
-        });
-
-
-        $('#add_company_point_form').submit(function (e){
-            e.preventDefault();
-            addCompanyPoint();
-        });
 
     });
 
@@ -221,15 +140,9 @@ async function initEmployees(employees){
     });
 
 }
-async function addEmployeeCallback(xhttp){
-    let jsonData = await xhttp.responseText;
-    const obj = JSON.parse(jsonData);
-    showAlert(obj.message);
-    console.log(obj)
-    $("#add_employee_form").trigger("reset");
-    $("#addCompanyEmployeeModal").modal('hide');
-    let company_id = getPathVariable('customer-dashboard');
-    initSidebarInfo(company_id);
+async function openAddEmployeeModal(event){
+    event.preventDefault();
+    alert('sad')
 }
 async function addEmployee(){
     let company_id = getPathVariable('customer-dashboard');

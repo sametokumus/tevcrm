@@ -71,6 +71,10 @@ $(".timepicker").timepicker({
                                 type="button" role="tab" aria-controls="teamcompany" aria-selected="false">Geçmiş
                         </button>
                     </li>
+                    <li class="nav-item ms-auto" role="presentation">
+                        <button class="btn btn-theme theme-green" id="add-employee-btn" onclick="openAddEmployeeModal(event);" ><i class="bi bi-person-plus vm me-2"></i> Yetkili Ekle
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
