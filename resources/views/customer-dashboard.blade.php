@@ -166,8 +166,7 @@ $(".timepicker").timepicker({
                                         <div class="col-12 col-md-4 mb-2">
                                             <div class="form-group mb-3 position-relative check-valid">
                                                 <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-person"></i></span>
+                                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-flag"></i></span>
                                                     <div class="form-floating">
                                                         <select class="form-select border-0" id="update_company_country" required>
                                                             <option value="">Seçiniz...</option>
@@ -283,7 +282,15 @@ $(".timepicker").timepicker({
                     <div class="row mb-4">
                         <h6 class="title">Yetkili Ekle</h6>
                         <div class="col-md-12 mb-3">
-                            <input type="text" class="form-control" id="add_employee_name" placeholder="Adı" required>
+                            <div class="form-group mb-3 position-relative">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="add_employee_name" placeholder="Adı" required>
+                                        <label for="add_employee_name">Adı</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <input type="text" class="form-control" id="add_employee_title" placeholder="Ünvanı" >
