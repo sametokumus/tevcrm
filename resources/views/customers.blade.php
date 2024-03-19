@@ -18,7 +18,7 @@ $extra_js='
                     <!-- timesheet -->
                     <div class="col-12 col-md-12 position-relative">
                         <div class="card border-0 mb-4">
-                            <div class="card-body p-0">
+                            <div class="card-body p-4">
                                 <table id="customer-datatable" class="table table-borderless" data-show-toggle="true">
                                     <thead>
                                     <tr class="text-muted">

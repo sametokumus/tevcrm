@@ -75,6 +75,7 @@ $extra_js="";
 
     <!-- style css for this template -->
     <link href="scss/style.css" rel="stylesheet">
+    <link href="scss/customize.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100 sidebar-pushcontent" data-sidebarstyle="sidebar-pushcontent">
