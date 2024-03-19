@@ -142,7 +142,7 @@ async function initEmployees(employees){
 }
 async function openAddEmployeeModal(event){
     event.preventDefault();
-    alert('sad')
+    $("#addCompanyEmployeeModal").modal('show');
 }
 async function addEmployee(){
     let company_id = getPathVariable('customer-dashboard');
