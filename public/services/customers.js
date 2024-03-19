@@ -84,7 +84,15 @@ async function initCustomers(){
             { responsivePriority: 2, targets: -1 }
         ],
         dom: 'Bfrtip',
-        buttons: ['excel', 'pdf'],
+        buttons: [
+            {
+                text: 'Yeni Müşteri',
+                className: 'btn btn-theme',
+                action: function ( e, dt, node, config ) {
+                    window.location = '/add-customer';
+                }
+            }
+        ],
         pageLength : -1,
         language: {
             url: "services/Turkish.json"
