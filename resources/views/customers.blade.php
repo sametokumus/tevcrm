@@ -22,7 +22,7 @@ $extra_js='
                                 <table id="customer-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                                     <thead>
                                     <tr class="text-muted">
-                                        <th class="">Firma</th>
+                                        <th class="">Müşteri</th>
                                         <th data-breakpoints="xs md">Eposta</th>
                                         <th data-breakpoints="xs">Telefon</th>
                                         <th data-breakpoints="xs md">Faks</th>
