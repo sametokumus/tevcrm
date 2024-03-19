@@ -19,7 +19,7 @@ $extra_js='
                     <div class="col-12 col-md-12 position-relative">
                         <div class="card border-0 mb-4">
                             <div class="card-body p-4">
-                                <table id="customer-datatable" class="table table-borderless" data-show-toggle="true">
+                                <table id="customer-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                                     <thead>
                                     <tr class="text-muted">
                                         <th class="">Firma</th>
@@ -34,14 +34,6 @@ $extra_js='
 
                                     </tbody>
                                 </table>
-                                <div class="row align-items-center mx-0 mb-3">
-                                    <div class="col-6 ">
-                                    <span class="hide-if-no-paging">
-                                        Showing <span id="footablestot">1st</span> page
-                                    </span>
-                                    </div>
-                                    <div class="col-6" id="footable-pagination"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
