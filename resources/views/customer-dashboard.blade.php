@@ -81,89 +81,128 @@ $(".timepicker").timepicker({
                          aria-labelledby="overviewcompany-tab">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10">
-                                <form method="post" action="#" id="update_company_form">
-                                    <div class="row mb-4">
-                                        <div class="col-md-12 mb-3">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_potential_customer" />
-                                                <label class="form-check-label" for="update_company_is_potential_customer">Potansiyel Müşteri</label>
+                                <form id="update_customer_form">
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-buildings"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Firma Adı" id="add_company_name" required class="form-control border-start-0">
+                                                        <label>Firma Adı</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_customer" />
-                                                <label class="form-check-label" for="update_company_is_customer">Müşteri</label>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Email address" id="add_company_email" required class="form-control border-start-0">
+                                                        <label>Eposta Adresi</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="" id="update_company_is_supplier" />
-                                                <label class="form-check-label" for="update_company_is_supplier">Tedarikçi</label>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-globe"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Website" id="add_company_website" class="form-control border-start-0">
+                                                        <label>Website</label>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Firma Adı</label>
-                                            <input type="text" class="form-control" id="update_company_name" placeholder="Firma Adı" required>
-                                            <input type="hidden" class="form-control" id="update_company_id" required>
+                                        <div class="col-12 col-md-6 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-telephone"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Telefon" id="add_company_phone" required class="form-control border-start-0">
+                                                        <label>Telefon</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Eposta</label>
-                                            <input type="text" class="form-control" id="update_company_email" placeholder="Eposta" required>
+                                        <div class="col-12 col-md-6 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-telephone-inbound"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Faks" id="add_company_fax" class="form-control border-start-0">
+                                                        <label>Faks</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Website</label>
-                                            <input type="text" class="form-control" id="update_company_website" placeholder="Website">
+                                        <div class="col-12 col-md-12 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-geo-alt"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Adres" id="add_company_address" class="form-control border-start-0">
+                                                        <label>Adres</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Telefon</label>
-                                            <input type="text" class="form-control" id="update_company_phone" placeholder="Telefon" required>
+                                        <div class="col-12 col-md-4 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-person"></i></span>
+                                                    <div class="form-floating">
+                                                        <select class="form-select border-0" id="add_company_country" required>
+                                                            <option value="">Seçiniz...</option>
+                                                            <option>Türkiye</option>
+                                                        </select>
+                                                        <label for="country">Ülke</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Faks</label>
-                                            <input type="text" class="form-control" id="update_company_fax" placeholder="Faks">
+                                        <div class="col-12 col-md-4 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-building"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Vergi Dairesi" id="add_company_tax_office" class="form-control border-start-0">
+                                                        <label>Vergi Dairesi</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Adres</label>
-                                            <input type="text" class="form-control" id="update_company_address" placeholder="Adres">
+                                        <div class="col-12 col-md-4 mb-2">
+                                            <div class="form-group mb-3 position-relative check-valid">
+                                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-upc"></i></span>
+                                                    <div class="form-floating">
+                                                        <input type="text" placeholder="Vergi No" id="add_company_tax_number" class="form-control border-start-0">
+                                                        <label>Vergi No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback mb-3">Add valid data</div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Ülke</label>
-                                            <select class="form-control" id="update_company_country">
-
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Registration Number</label>
-                                            <input type="text" class="form-control" id="update_company_registration_number" placeholder="Registration Number">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Vergi Dairesi</label>
-                                            <input type="text" class="form-control" id="update_company_tax_office" placeholder="Vergi Dairesi">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Vergi Numarası</label>
-                                            <input type="text" class="form-control" id="update_company_tax_number" placeholder="Vergi Numarası">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">LinkedIn</label>
-                                            <input type="text" class="form-control" id="update_company_linkedin" placeholder="LinkedIn">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Skype</label>
-                                            <input type="text" class="form-control" id="update_company_skype" placeholder="Skype">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Payment Term</label>
-                                            <select class="form-control" id="update_company_payment_term">
-
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Diğer</label>
-                                            <input type="text" class="form-control" id="update_company_online" placeholder="Diğer">
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Logo</label>
-                                            <input type="file" class="form-control" id="update_company_logo" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <button type="submit" class="btn btn-outline-theme float-end">Kaydet</button>
+                                        <div class="col-12 col-md-4 mb-2">
+                                            <button type="submit" class="btn btn-theme">Kaydet</button>
                                         </div>
                                     </div>
                                 </form>
