@@ -100,49 +100,35 @@ async function initEmployees(customer_id){
     let employees = data.employees;
     console.log(employees)
 
-    // $('#employees-tab #employees-grid .grid-item').remove();
-    //
-    // $.each(employees, function (i, employee) {
-    //     let photo = "img/user/null-profile-picture.png";
-    //     if (employee.photo != null){photo = employee.photo;}
-    //
-    //     let item = '<div class="col-sm-6 grid-item">\n' +
-    //         '              <div class="card">\n' +
-    //         '                <div class="m-1 bg-inverse bg-opacity-15">\n' +
-    //         '                  <div class="position-relative overflow-hidden" style="height: 225px">\n' +
-    //         '                    <img src="/img/gallery/widget-cover-1.jpg" class="card-img rounded-0" alt="" />\n' +
-    //         '                    <div class="card-img-overlay text-white text-center bg-gray-600 bg-opacity-75">\n' +
-    //         '                      <div class="my-2">\n' +
-    //         '                        <img src="'+ photo +'" alt="" width="80" class="rounded-circle" />\n' +
-    //         '                      </div>\n' +
-    //         '                      <div>\n' +
-    //         '                        <div class="fw-bold">'+ employee.name +'</div>\n' +
-    //         '                        <div class="small">Ünvan/Pozisyon: '+ employee.title +'</div>\n' +
-    //         '                        <div class="small">Eposta: '+ employee.email +'</div>\n' +
-    //         '                        <div class="small">Telefon: '+ employee.phone +'</div>\n' +
-    //         '                        <div class="small">Cep Telefonu: '+ employee.mobile +'</div>\n' +
-    //         '                      </div>\n' +
-    //         '                    </div>\n' +
-    //         '                  </div>\n' +
-    //         '                  <div class="card-body py-2 px-3">\n' +
-    //         '                    <div class="row text-center">\n' +
-    //         '                      <div class="col-12">\n' +
-    //         '                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="openUpdateCompanyEmployeeModal(\''+ employee.id +'\');">Düzenle</button>\n' +
-    //         '                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="deleteEmployee(\''+ employee.id +'\');">Sil</button>\n' +
-    //         '                      </div>\n' +
-    //         '                    </div>\n' +
-    //         '                  </div>\n' +
-    //         '                </div>\n' +
-    //         '                <div class="card-arrow">\n' +
-    //         '                  <div class="card-arrow-top-left"></div>\n' +
-    //         '                  <div class="card-arrow-top-right"></div>\n' +
-    //         '                  <div class="card-arrow-bottom-left"></div>\n' +
-    //         '                  <div class="card-arrow-bottom-right"></div>\n' +
-    //         '                </div>\n' +
-    //         '              </div>\n' +
-    //         '              </div>';
-    //     $('#employees-tab #employees-grid').append(item);
-    // });
+    $('#table-employees .employee-item').remove();
+
+    $.each(employees, function (i, employee) {
+
+        let item = '<div class="col-12 col-md-6 col-lg-4 mb-3 employee-item">\n' +
+            '                  <div class="card shadow-none">\n' +
+            '                      <div class="card-body">\n' +
+            '                          <div class="row align-items-start">\n' +
+            '                              <div class="col">\n' +
+            '                                  <h6 class="text-truncate mb-0">'+ employee.name +'</h6>\n' +
+            '                                  <p class="text-secondary small">Ünvan/Pozisyon: '+ employee.title +'</p>\n' +
+            '                                  <p>Eposta: '+ employee.email +'</p>\n' +
+            '                                  <p>Telefon: '+ employee.phone +'</p>\n' +
+            '                                  <p>Cep Telefonu: '+ employee.mobile +'</p>\n' +
+            '                              </div>\n' +
+            '                              <div class="col-auto">\n' +
+            '                                  <button id="bEdit" type="button" class="btn btn-sm btn-light" onclick="openUpdateCustomerEmployeeModal(\''+ employee.id +'\')">\n' +
+            '                                      <span class="bi bi-pencil-square"></span>\n' +
+            '                                  </button>\n' +
+            '                                  <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteEmployee(\''+ employee.id +'\')">\n' +
+            '                                      <span class="bi bi-trash3"></span>\n' +
+            '                                  </button>\n' +
+            '                              </div>\n' +
+            '                          </div>\n' +
+            '                      </div>\n' +
+            '                  </div>\n' +
+            '              </div>';
+        $('#table-employees').append(item);
+    });
 
 }
 async function openAddEmployeeModal(event){

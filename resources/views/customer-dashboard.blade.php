@@ -214,25 +214,8 @@ $(".timepicker").timepicker({
                     </div>
                     <div class="tab-pane fade" id="authorizescompany" role="tabpanel"
                          aria-labelledby="authorizescompany-tab">
-                        <div class="row mb-4">
-                            <div class="col-12 col-md-6 col-lg-4 mb-3">
-                                <div class="card shadow-none">
-                                    <div class="card-body">
-                                        <div class="row align-items-start">
-                                            <div class="col">
-                                                <h6 class="text-truncate mb-0">Shrivally</h6>
-                                                <p>Amsterdam, NL</p>
-                                                <p class="text-secondary small">UI Designer</p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button id="bEdit" type="button" class="btn btn-sm btn-light" onclick="openUpdateCustomerEmployeeModal('1')">
-                                                    <span class="bi bi-pencil-square"></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row mb-4" id="table-employees">
+
                         </div>
                     </div>
                 </div>
