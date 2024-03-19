@@ -214,52 +214,22 @@ $(".timepicker").timepicker({
                     </div>
                     <div class="tab-pane fade" id="authorizescompany" role="tabpanel"
                          aria-labelledby="authorizescompany-tab">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-10">
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-0 mb-4">
-                                            <img src="img/tour-guide-5.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h4>Creative UI Design</h4>
-                                                <p class="text-secondary">We create unique and creative user interfaces
-                                                    for website and mobile applications.</p>
+                        <div class="row mb-4">
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <div class="avatar avatar-80 overflow-hidden rounded">
+                                                    <figure class="h-100 w-100 coverimg zoomout" style="background-image: url(&quot;img/user-2.jpg&quot;);">
+                                                        <img src="img/user-2.jpg" alt="" style="display: none;">
+                                                    </figure>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-0 mb-4">
-                                            <img src="img/tour-guide-1.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h4>Awesome UX flow</h4>
-                                                <p class="text-secondary">We keep everything on intuitive and simplest
-                                                    manner to make sure everything covered and easy to access.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h4 class="text-center mb-4 mt-3 mb-lg-5">You are at awesome space.<br>Just <span
-                                        class="text-gradient">create a difference</span>.</h4>
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-0 mb-4">
-                                            <img src="img/tour-guide-2.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h4>Customization</h4>
-                                                <p class="text-secondary">To improve day by day customization for new
-                                                    requirements. We follow best practices to make development flawless
-                                                    and elastic.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-0 mb-4">
-                                            <img src="img/tour-guide-4.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h4>Multi-device Centric</h4>
-                                                <p class="text-secondary">Human in race of different medium to
-                                                    communicate with each other and we also keep eye on different screen
-                                                    sizes and responsiveness</p>
+                                            <div class="col">
+                                                <h6 class="text-truncate mb-0">Shrivally</h6>
+                                                <p>Amsterdam, NL</p>
+                                                <p class="text-secondary small">UI Designer</p>
                                             </div>
                                         </div>
                                     </div>
