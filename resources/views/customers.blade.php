@@ -27,7 +27,7 @@ $extra_js='
                                         <th data-breakpoints="xs">Telefon</th>
                                         <th data-breakpoints="xs md">Faks</th>
                                         <th data-breakpoints="xs md">Adres</th>
-                                        <th class="w-50"></th>
+                                        <th class="w-auto"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
