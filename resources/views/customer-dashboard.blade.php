@@ -219,17 +219,15 @@ $(".timepicker").timepicker({
                                 <div class="card shadow-none">
                                     <div class="card-body">
                                         <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar avatar-80 overflow-hidden rounded">
-                                                    <figure class="h-100 w-100 coverimg zoomout" style="background-image: url(&quot;img/user-2.jpg&quot;);">
-                                                        <img src="img/user-2.jpg" alt="" style="display: none;">
-                                                    </figure>
-                                                </div>
-                                            </div>
                                             <div class="col">
                                                 <h6 class="text-truncate mb-0">Shrivally</h6>
                                                 <p>Amsterdam, NL</p>
                                                 <p class="text-secondary small">UI Designer</p>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button id="bEdit" type="button" class="btn btn-sm btn-light" onclick="openUpdateCustomerEmployeeModal('1')">
+                                                    <span class="bi bi-pencil-square"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
