@@ -53,7 +53,7 @@
         });
 	});
 
-	$(window).load( function() {
+	$(window).on('load', function () {
 
 		checkLogin();
 		checkRole();
