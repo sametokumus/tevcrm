@@ -151,13 +151,14 @@ async function openAddEmployeeModal(event){
 }
 async function addEmployee(){
     let customer_id = getPathVariable('customer-dashboard');
-    let formData = new FormData();
-    formData.append('customer_id', customer_id);
-    formData.append('name', document.getElementById('add_employee_name').value);
-    formData.append('title', document.getElementById('add_employee_title').value);
-    formData.append('email', document.getElementById('add_employee_email').value);
-    formData.append('phone', document.getElementById('add_employee_phone').value);
-    formData.append('mobile', document.getElementById('add_employee_mobile').value);
+    let formData = JSON.stringify({
+        "customer_id": customer_id,
+        "name": document.getElementById('add_employee_name').value,
+        "title": document.getElementById('add_employee_title').value,
+        "email": document.getElementById('add_employee_email').value,
+        "phone": document.getElementById('add_employee_phone').value,
+        "mobile": document.getElementById('add_employee_mobile').value
+    });
     console.log(formData);
     let returned = await servicePostAddEmployee(formData);
     if (returned){
@@ -184,13 +185,14 @@ async function initUpdateCustomerEmployeeModal(employee_id){
 async function updateEmployee(){
     let id = document.getElementById('update_employee_id').value;
     let customer_id = getPathVariable('customer-dashboard');
-    let formData = new FormData();
-    formData.append('customer_id', customer_id);
-    formData.append('name', document.getElementById('update_employee_name').value);
-    formData.append('title', document.getElementById('update_employee_title').value);
-    formData.append('email', document.getElementById('update_employee_email').value);
-    formData.append('phone', document.getElementById('update_employee_phone').value);
-    formData.append('mobile', document.getElementById('update_employee_mobile').value);
+    let formData = JSON.stringify({
+        "customer_id": customer_id,
+        "name": document.getElementById('update_employee_name').value,
+        "title": document.getElementById('update_employee_title').value,
+        "email": document.getElementById('update_employee_email').value,
+        "phone": document.getElementById('update_employee_phone').value,
+        "mobile": document.getElementById('update_employee_mobile').value
+    });
     console.log(formData);
 
     let returned = await servicePostUpdateEmployee(id, formData);

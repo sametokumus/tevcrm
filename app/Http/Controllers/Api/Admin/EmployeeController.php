@@ -56,10 +56,10 @@ class EmployeeController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'company_id' => 'required',
+                'customer_id' => 'required',
             ]);
             $employee_id = Employee::query()->insertGetId([
-                'company_id' => $request->company_id,
+                'company_id' => $request->customer_id,
                 'title' => $request->title,
                 'name' => $request->name,
                 'phone' => $request->phone,
@@ -81,11 +81,11 @@ class EmployeeController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'company_id' => 'required',
+                'company_id' => 'customer_id',
             ]);
 
             Employee::query()->where('id', $employee_id)->update([
-                'company_id' => $request->company_id,
+                'company_id' => $request->customer_id,
                 'title' => $request->title,
                 'name' => $request->name,
                 'phone' => $request->phone,
