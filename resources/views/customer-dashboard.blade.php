@@ -20,7 +20,7 @@ $(".timepicker").timepicker({
 
     <div class="w-100 pt-5 position-relative bg-theme  z-index-0">
         <div class="coverimg w-100 h-100 position-absolute top-0 start-0 opacity-3 z-index-0">
-            <img src="img/bg-14.jpg" class="" alt=""/>
+            <img src="img/login/3.jpg" class="" alt=""/>
         </div>
         <div class="container my-3 my-md-5 z-index-1 position-relative">
             <div class="row mb-2 mb-lg-3 align-items-start">
