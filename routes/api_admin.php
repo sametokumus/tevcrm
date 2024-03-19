@@ -107,16 +107,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('customer/updateCustomer/{company_id}', [CompanyController::class, 'updateCustomer']);
     Route::get('customer/deleteCustomer/{company_id}', [CompanyController::class, 'deleteCustomer']);
 
-    //CompanyAddress
-    Route::get('company/getAddressesByCompanyId/{company_id}', [CompanyController::class, 'getAddressesByCompanyId']);
-    Route::get('company/getAddressById/{address_id}', [CompanyController::class, 'getAddressById']);
-    Route::post('company/addCompanyAddress', [CompanyController::class, 'addCompanyAddress']);
-    Route::post('company/updateCompanyAddress', [CompanyController::class, 'updateCompanyAddress']);
-    Route::get('company/deleteCompanyAddress/{address_id}', [CompanyController::class, 'deleteCompanyAddress']);
-
-    Route::get('company/getCompanyPointsByCompanyId/{company_id}', [CompanyController::class, 'getCompanyPointsByCompanyId']);
-    Route::post('company/addCompanyPoint', [CompanyController::class, 'addCompanyPoint']);
-
     //Employee
     Route::get('employee/getEmployees', [EmployeeController::class, 'getEmployees']);
     Route::get('employee/getEmployeesByCompanyId/{company_id}', [EmployeeController::class, 'getEmployeesByCompanyId']);
@@ -124,14 +114,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('employee/addEmployee', [EmployeeController::class, 'addEmployee']);
     Route::post('employee/updateEmployee/{employee_id}', [EmployeeController::class, 'updateEmployee']);
     Route::get('employee/deleteEmployee/{employee_id}', [EmployeeController::class, 'deleteEmployee']);
-
-    //Note
-    Route::get('note/getNotes', [NoteController::class, 'getNotes']);
-    Route::get('note/getNotesByCompanyId/{company_id}', [NoteController::class, 'getNotesByCompanyId']);
-    Route::get('note/getNoteById/{note_id}', [NoteController::class, 'getNoteById']);
-    Route::post('note/addNote', [NoteController::class, 'addNote']);
-    Route::post('note/updateNote/{note_id}', [NoteController::class, 'updateNote']);
-    Route::get('note/deleteNote/{note_id}', [NoteController::class, 'deleteNote']);
 
     //Sale
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
