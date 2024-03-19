@@ -136,47 +136,26 @@ $(".timepicker").timepicker({
         </div>
         <div class="container my-3 my-md-5 pt-0 py-lg-5 z-index-1 position-relative">
             <div class="row mb-4 mb-lg-5 align-items-start">
-                <div class="col-auto position-relative">
-                    <figure class="avatar avatar-140 coverimg rounded-10 shadow-md border-3 border-light bg-white">
-                        <img src="img/maxartkiller.png" alt=""/>
-                    </figure>
-                </div>
                 <div class="col py-2">
-                    <h2 class="mb-3">Maxartkiller <span class="badge bg-green rounded vm fw-normal fs-12"><i
-                                class="bi bi-check-circle me-1 vm"></i>Active</span></h2>
-                    <p>The Best creative design company. Mostly product based and small size services based company. Its
-                        independent company running and providing creative solutions to the UI UX design domain.</p>
-                    <p>UI UX Design, IT services</p>
-                </div>
-                <div class="col-auto py-2">
-                    <div>
-                        <button class="btn btn-outline-light me-2"><i class="bi bi-plus vm me-2"></i> Follow</button>
-                        <button class="btn btn-theme theme-green"><i class="bi bi-person-plus vm me-2"></i> Connect
-                        </button>
-                    </div>
+                    <h2 class="mb-3" id="info-name"></h2>
                 </div>
             </div>
             <div class="row text-white gx-md-4 gx-lg-5">
                 <div class="col-6 col-md-auto py-2">
-                    <p class="text-muted small">Website</p>
-                    <p>https://maxartkiller.com</p>
+                    <p class="text-muted small">Eposta</p>
+                    <p id="info-email"></p>
                 </div>
                 <div class="col-6 col-md-auto py-2">
-                    <p class="text-muted small">Company Size</p>
-                    <p>1-5</p>
+                    <p class="text-muted small">Telefon</p>
+                    <p id="info-phone"></p>
                 </div>
                 <div class="col-12 col-md-auto py-2">
-                    <p class="text-muted small">Financial Stability</p>
-                    <p>
-                        <i class="bi bi-exclamation-triangle text-yellow vm"></i> Unstable
-                        <span class="mx-1 text-muted">|</span>
-                        <a href="#" class="text-white"><i class="bi bi-heart-fill text-red vm"></i> Need Support <i
-                                class="bi bi-box-arrow-up-right vm mx-1"></i></a>
-                    </p>
+                    <p class="text-muted small">Faks</p>
+                    <p id="info-fax"></p>
                 </div>
                 <div class="col-auto py-2">
-                    <p class="text-muted small">Business Domain</p>
-                    <p>UI UX Design</p>
+                    <p class="text-muted small">Website</p>
+                    <p id="info-web"></p>
                 </div>
             </div>
         </div>

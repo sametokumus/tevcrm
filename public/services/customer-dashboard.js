@@ -108,14 +108,14 @@
 
         checkLogin();
         checkRole();
-        let company_id = getPathVariable('customer-dashboard');
-        initSidebarInfo(company_id);
-        initCompanyPoints(company_id);
-        initSaledProducts(company_id);
-        initSales(company_id);
-        initDeliveryAddresses(company_id);
-        initNotes(company_id);
-        initActivities(company_id);
+        let customer_id = getPathVariable('customer-dashboard');
+        initInfo(customer_id);
+        // initCompanyPoints(customer_id);
+        // initSaledProducts(customer_id);
+        // initSales(customer_id);
+        // initDeliveryAddresses(customer_id);
+        // initNotes(customer_id);
+        // initActivities(customer_id);
 
     });
 
@@ -126,79 +126,18 @@
 function checkRole(){
     return true;
 }
-async function initSidebarInfo(company_id){
+async function initInfo(customer_id){
     $('.profile-sidebar #sidebar-info *').remove();
 
-    let data = await serviceGetCompanyById(company_id);
-    let company = data.company;
-    console.log(company)
+    let data = await serviceGetCustomerById(customer_id);
+    let customer = data.customer;
+    console.log(customer)
 
-    let logo = 'img/company/empty.jpg';
-    if (company.logo != null){
-        logo = company.logo;
-    }
-    let type = '';
-    if (company.is_supplier == 1){
-        type += ' Tedarikçi,';
-    }
-    if (company.is_customer == 1){
-        type += ' Müşteri,';
-    }
-    if (company.is_potential_customer == 1){
-        type += ' Potansiyel Müşteri,';
-    }
-    type = type.slice(0, -1);
-
-    let sidebar = '<div class="profile-img">\n' +
-        '              <img src="'+ logo +'" alt>\n' +
-        '          </div>\n' +
-        '          <h4>'+ company.name +'</h4>\n' +
-        '          <div class="mb-3 text-inverse text-opacity-50 fw-bold mt-n2">'+ type +'</div>\n' +
-        '          <div class="mb-1">\n' +
-        '              <i class="fa fa-map-marker-alt fa-fw text-inverse text-opacity-50"></i> '+ company.address +'\n' +
-        '          </div>\n' +
-        '          <div class="mb-1">\n' +
-        '              <i class="fa fa-envelope fa-fw text-inverse text-opacity-50"></i> '+ company.email +'\n' +
-        '          </div>\n' +
-        '          <div class="mb-1">\n' +
-        '              <i class="fa fa-phone fa-fw text-inverse text-opacity-50"></i> '+ company.phone +'\n' +
-        '          </div>\n' +
-        '          <div class="mb-1">\n' +
-        '              <i class="fa fa-fax fa-fw text-inverse text-opacity-50"></i> '+ company.fax +'\n' +
-        '          </div>\n' +
-        '          <div class="mb-3">\n' +
-        '              <i class="fa fa-link fa-fw text-inverse text-opacity-50"></i> '+ company.website +'\n' +
-        '          </div>\n' +
-        '          <hr class="mt-4 mb-4">\n' +
-        '          <button type="button" onclick="openAddCompanyPointModal();" class="btn btn-sm btn-outline-theme fs-11px">Müşteri Puanı Ekle</button>\n' +
-        '          <hr class="mt-4 mb-4">\n' +
-        '          <h6>Yetkililer</h6>\n';
-
-    $('.profile-sidebar #sidebar-info').append(sidebar);
-
-
-    let data2 = await serviceGetEmployeesByCompanyId(company_id);
-    let employees = data2.employees;
-    $.each(employees, function (i, employee) {
-        let photo = "img/user/null-profile-picture.png";
-        if (employee.photo != null){photo = employee.photo;}
-
-        let item = '<div>\n' +
-            '                  <a href="#" class="company-info d-flex align-items-center mb-3 text-decoration-none fs-12px pointer-event-none">\n' +
-            '                  <img src="'+ photo +'" alt="" width="30" class="rounded-circle">\n' +
-            '                  <div class="flex-fill px-3">\n' +
-            '                      <div class="fw-bold text-truncate w-100px company-name">'+ employee.name +'</div>\n' +
-            '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.email +'</div>\n' +
-            '                      <div class="fs-12px text-inverse text-opacity-50">'+ employee.mobile +'</div>\n' +
-            '                  </div>\n' +
-            '                  </a>\n' +
-            '              </div>\n';
-        $('.profile-sidebar #sidebar-info').append(item);
-    });
-
-
-    initCompany(company);
-    initEmployees(employees);
+    $('#info-name').html(customer.name);
+    $('#info-email').html(customer.email);
+    $('#info-phone').html(customer.phone);
+    $('#info-fax').html(customer.fax);
+    $('#info-web').html(customer.web);
 }
 
 async function initCompany(company){
