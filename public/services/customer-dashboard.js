@@ -105,15 +105,15 @@ async function initEmployees(customer_id){
     $.each(employees, function (i, employee) {
 
         let item = '<div class="col-12 col-md-6 col-lg-4 mb-3 employee-item">\n' +
-            '                  <div class="card shadow-none">\n' +
+            '                  <div class="card shadow-none p-2">\n' +
             '                      <div class="card-body">\n' +
             '                          <div class="row align-items-start">\n' +
             '                              <div class="col">\n' +
             '                                  <h6 class="text-truncate mb-0">'+ employee.name +'</h6>\n' +
-            '                                  <p class="text-secondary small">Ünvan/Pozisyon: '+ employee.title +'</p>\n' +
+            '                                  <p class="mb-1">Ünvan/Pozisyon: '+ employee.title +'</p>\n' +
             '                                  <p class="mb-1">Eposta: '+ employee.email +'</p>\n' +
-            '                                  <p>Telefon: '+ employee.phone +'</p>\n' +
-            '                                  <p>Cep Telefonu: '+ employee.mobile +'</p>\n' +
+            '                                  <p class="mb-1">Telefon: '+ employee.phone +'</p>\n' +
+            '                                  <p class="mb-1">Cep Telefonu: '+ employee.mobile +'</p>\n' +
             '                              </div>\n' +
             '                              <div class="col-auto">\n' +
             '                                  <button id="bEdit" type="button" class="btn btn-sm btn-light" onclick="openUpdateCustomerEmployeeModal(\''+ employee.id +'\')">\n' +
