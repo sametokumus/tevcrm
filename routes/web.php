@@ -21,6 +21,13 @@ Route::get('/login', function () { return view('login'); });
 Route::get('/dashboard', function () { return view('dashboard'); });
 Route::get('/customers', function () { return view('customers'); });
 Route::get('/add-customer', function () { return view('add-customer'); });
+Route::get('/customer-dashboard/{id}', function () { return view('customer-dashboard'); });
+
+Route::get('/tests', function () { return view('tests'); });
+Route::get('/add-test', function () { return view('add-test'); });
+Route::get('/update-test/{id}', function () { return view('update-test'); });
+
+
 
 
 Route::get('/my-dashboard', function () { return view('my-dashboard'); });
@@ -33,7 +40,6 @@ Route::get('/roles', function () { return view('roles'); });
 Route::get('/potential-customers', function () { return view('potential-customers'); });
 Route::get('/suppliers', function () { return view('suppliers'); });
 Route::get('/company-detail/{id}', function () { return view('company-detail'); });
-Route::get('/customer-dashboard/{id}', function () { return view('customer-dashboard'); });
 Route::get('/offer-requests', function () { return view('offer-requests'); });
 Route::get('/offer-request', function () { return view('add-offer-request'); });
 Route::get('/new-offer-request', function () { return view('new-offer-request'); });
