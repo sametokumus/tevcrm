@@ -26,8 +26,8 @@ function checkRole(){
 }
 async function initCategory(){
     let category_id = getPathVariable('update-category');
-    let category = await serviceGetCategoryById(category_id);
-    document.getElementById('update_category_name').value = category.name;
+    let data = await serviceGetCategoryById(category_id);
+    document.getElementById('update_category_name').value = data.category.name;
 }
 async function updateCategory(){
 
