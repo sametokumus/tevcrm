@@ -111,7 +111,7 @@ async function initEmployees(customer_id){
             '                              <div class="col">\n' +
             '                                  <h6 class="text-truncate mb-0">'+ employee.name +'</h6>\n' +
             '                                  <p class="text-secondary small">Ünvan/Pozisyon: '+ employee.title +'</p>\n' +
-            '                                  <p>Eposta: '+ employee.email +'</p>\n' +
+            '                                  <p class="mb-1">Eposta: '+ employee.email +'</p>\n' +
             '                                  <p>Telefon: '+ employee.phone +'</p>\n' +
             '                                  <p>Cep Telefonu: '+ employee.mobile +'</p>\n' +
             '                              </div>\n' +
