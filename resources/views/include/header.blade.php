@@ -881,18 +881,18 @@ $extra_js="";
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item nav-link" href="#">
-                                        <div class="avatar avatar-40 icon"><i class="bi bi-briefcase"></i>
+                                    <a class="dropdown-item nav-link" href="add-test">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-clipboard-plus"></i>
                                         </div>
-                                        <div class="col align-self-center">Sub 1</div>
+                                        <div class="col align-self-center">Test Ekle</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item nav-link" href="#">
-                                        <div class="avatar avatar-40 icon"><i class="bi bi-people"></i>
+                                    <a class="dropdown-item nav-link" href="tests">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-list-check"></i>
                                         </div>
-                                        <div class="col align-self-center">Sub 2</div>
+                                        <div class="col align-self-center">Tüm Testler</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                                     </a>
                                 </li>
