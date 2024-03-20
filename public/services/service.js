@@ -2380,15 +2380,6 @@ async function serviceGetCategoryById(category_id) {
     }
 }
 
-async function serviceGetCategoriesByParentId(parent_id) {
-    const data = await fetchDataGet('/admin/category/getCategoryByParentId/' + parent_id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-
 async function servicePostAddCategory(formData) {
     const data = await fetchDataPost('/admin/category/addCategory', formData, 'application/json');
     if (data.status == "success") {

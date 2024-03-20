@@ -896,6 +896,22 @@ $extra_js="";
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="add-category">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-tag"></i>
+                                        </div>
+                                        <div class="col align-self-center">Kategori Ekle</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="categories">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-tags"></i>
+                                        </div>
+                                        <div class="col align-self-center">Tüm Kategoriler</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

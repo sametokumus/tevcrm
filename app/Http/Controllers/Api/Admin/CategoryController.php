@@ -13,26 +13,7 @@ class CategoryController extends Controller
     public function getCategory()
     {
         try {
-            $categories = Category::query()->where('parent_id',0)->where('active',1)->get();
-            foreach ($categories as $category){
-                $sub_categories = Category::query()->where('parent_id',$category->id)->where('active',1)->get();
-
-                foreach ($sub_categories as $category2){
-                    $sub_categories2 = Category::query()->where('parent_id',$category2->id)->where('active',1)->get();
-                    $category2['sub_categories'] = $sub_categories2;
-                }
-
-                $category['sub_categories'] = $sub_categories;
-            }
-            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
-        } catch (QueryException $queryException) {
-            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
-        }
-    }
-    public function getCategoryByParentId($parent_id)
-    {
-        try {
-            $categories = Category::query()->where('parent_id',$parent_id)->where('active',1)->get();
+            $categories = Category::query()->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -51,11 +32,9 @@ class CategoryController extends Controller
     {
         try {
             $request->validate([
-                'parent_id' => 'required',
                 'name' => 'required'
             ]);
             Category::query()->insert([
-                'parent_id' => $request->parent_id,
                 'name' => $request->name
             ]);
             return response(['message' => 'Kategori ekleme işlemi başarılı.', 'status' => 'success']);
@@ -91,10 +70,10 @@ class CategoryController extends Controller
     public function deleteCategory($id){
         try {
 
-            $address = Category::query()->where('id',$id)->update([
-                'active' => 0,
+            Category::query()->where('id',$id)->update([
+                'active' => 0
             ]);
-            return response(['message' => 'Kategori silme işlemi başarılı.','status' => 'success','object' => ['address' => $address]]);
+            return response(['message' => 'Kategori silme işlemi başarılı.','status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => 'Lütfen girdiğiniz bilgileri kontrol ediniz.','status' => 'validation-001']);
         } catch (QueryException $queryException) {

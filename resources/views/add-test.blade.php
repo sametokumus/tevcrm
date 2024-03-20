@@ -13,79 +13,16 @@ $extra_js='
         <div class="row justify-content-center mb-2">
             <div class="col-12">
                 <h6 class="title">Test Ekle</h6>
-                <form id="add_customer_form">
+                <form id="add_test_form">
                     <div class="row">
-                        <div class="col-12 col-md-12 mb-2">
+                        <div class="col-12 col-md-6 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-buildings"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Firma Adı" id="add_company_name" required class="form-control border-start-0">
-                                        <label>Firma Adı</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="Email address" id="add_company_email" required class="form-control border-start-0">
-                                        <label>Eposta Adresi</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-globe"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="Website" id="add_company_website" class="form-control border-start-0">
-                                        <label>Website</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-telephone"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="Telefon" id="add_company_phone" required class="form-control border-start-0">
-                                        <label>Telefon</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-6 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-telephone-inbound"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="Faks" id="add_company_fax" class="form-control border-start-0">
-                                        <label>Faks</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-12 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-geo-alt"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="Adres" id="add_company_address" class="form-control border-start-0">
-                                        <label>Adres</label>
+                                        <input type="text" placeholder="Test Adı" id="add_test_name" required class="form-control border-start-0">
+                                        <label>Test Adı</label>
                                     </div>
                                 </div>
                             </div>
@@ -97,37 +34,61 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-person"></i></span>
                                     <div class="form-floating">
-                                        <select class="form-select border-0" id="add_company_country" required>
+                                        <select class="form-select border-0" id="add_test_category" required>
                                             <option value="">Seçiniz...</option>
-                                            <option>Türkiye</option>
                                         </select>
-                                        <label for="country">Ülke</label>
+                                        <label>Kategori</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
+                        <div class="col-12 col-md-6 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-building"></i></span>
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Vergi Dairesi" id="add_company_tax_office" class="form-control border-start-0">
-                                        <label>Vergi Dairesi</label>
+                                        <input type="text" placeholder="Numune Adedi" id="add_test_sample_count" required class="form-control border-start-0">
+                                        <label>Numune Adedi</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
+                        <div class="col-12 col-md-6 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-upc"></i></span>
+                                            class="bi bi-globe"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Vergi No" id="add_company_tax_number" class="form-control border-start-0">
-                                        <label>Vergi No</label>
+                                        <input type="text" placeholder="Website" id="add_test_sample_description" class="form-control border-start-0">
+                                        <label>Numune Açıklaması</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-telephone"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" placeholder="Test Süresi" id="add_test_total_day" required class="form-control border-start-0">
+                                        <label>Test Süresi</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-telephone-inbound"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" placeholder="Test Bedeli" id="add_test_price" class="form-control border-start-0">
+                                        <label>Test Bedeli</label>
                                     </div>
                                 </div>
                             </div>

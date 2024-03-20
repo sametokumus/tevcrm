@@ -27,6 +27,10 @@ Route::get('/tests', function () { return view('tests'); });
 Route::get('/add-test', function () { return view('add-test'); });
 Route::get('/update-test/{id}', function () { return view('update-test'); });
 
+Route::get('/categories', function () { return view('tests'); });
+Route::get('/add-category', function () { return view('add-category'); });
+Route::get('/update-category/{id}', function () { return view('update-category'); });
+
 
 
 

@@ -88,17 +88,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('cities/getCitiesByStateId/{state_id}', [CityController::class, 'getCitiesByStateId']);
 
 
-    Route::post('excel/productExcelImport', [ImportController::class, 'productExcelImport']);
-    Route::post('excel/priceExcelImport', [ImportController::class, 'priceExcelImport']);
-    Route::get('excel/addAllProduct', [ImportController::class, 'addAllProduct']);
-    Route::get('excel/addProductPrice', [ImportController::class, 'addProductPrice']);
-    Route::get('excel/productVariationUpdate', [ImportController::class, 'productVariationUpdate']);
-    Route::get('excel/setProductCategory', [ImportController::class, 'setProductCategory']);
-    Route::post('excel/newProduct', [ImportController::class, 'newProduct']);
-    Route::post('excel/postNewProducts', [ImportController::class, 'postNewProducts']);
-    Route::get('excel/updateProductNew', [ImportController::class, 'updateProductNew']);
-
-
 
     //Company
     Route::get('customer/getCustomers', [CompanyController::class, 'getCustomers']);
@@ -114,6 +103,30 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('employee/addEmployee', [EmployeeController::class, 'addEmployee']);
     Route::post('employee/updateEmployee/{employee_id}', [EmployeeController::class, 'updateEmployee']);
     Route::get('employee/deleteEmployee/{employee_id}', [EmployeeController::class, 'deleteEmployee']);
+
+    //Category
+    Route::get('category/getCategory', [CategoryController::class, 'getCategory']);
+    Route::get('category/getCategoryById/{id}', [CategoryController::class, 'getCategoryById']);
+    Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
+    Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
+    Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Sale
     Route::get('sale/getSales', [SaleController::class, 'getSales']);
@@ -227,14 +240,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('product/updateProduct/{id}', [ProductController::class, 'updateProduct']);
     Route::get('product/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);
     Route::post('product/updateProductName/{id}', [ProductController::class, 'updateProductName']);
-
-    //Category
-    Route::get('category/getCategory', [CategoryController::class, 'getCategory']);
-    Route::get('category/getCategoryById/{id}', [CategoryController::class, 'getCategoryById']);
-    Route::get('category/getCategoryByParentId/{parent_id}', [CategoryController::class, 'getCategoryByParentId']);
-    Route::post('category/addCategory', [CategoryController::class, 'addCategory']);
-    Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
-    Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
 
 
     //Payment Terms
