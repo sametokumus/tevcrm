@@ -25,13 +25,13 @@ function checkRole(){
 	return true;
 }
 async function initCategory(){
-    let category_id = getPathVariable('customer-dashboard');
+    let category_id = getPathVariable('update-category');
     let category = await serviceGetCategoryById(category_id);
     document.getElementById('update_category_name').value = category.name;
 }
 async function updateCategory(){
 
-    let category_id = getPathVariable('customer-dashboard');
+    let category_id = getPathVariable('update-category');
     let formData = JSON.stringify({
         "name": document.getElementById('update_category_name').value
     });
