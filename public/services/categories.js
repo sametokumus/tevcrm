@@ -18,7 +18,7 @@ function checkRole(){
 	return true;
 }
 async function initCategories(){
-	let data = await serviceGetCustomers();
+	let data = await serviceGetCategories();
     $("#category-datatable").dataTable().fnDestroy();
     $('#category-datatable tbody > tr').remove();
 
