@@ -40,6 +40,28 @@ async function initCategories(){
             '                  </td>\n' +
             '              </tr>';
         $('#category-datatable tbody').append(item);
+
+        $.each(category.sub_categories, function(i, category2){
+
+            let item = '<tr>\n' +
+                '                  <td>\n' +
+                '                      <p class="mb-0">'+ checkNull(category.name) +' -> '+ checkNull(category2.name) +'</p>\n' +
+                '                  </td>\n' +
+                '                  <td>\n' +
+                '                  <div class="btn-list">\n' +
+                '                      <a href="update-category/'+ category2.id +'" id="bDel" type="button" class="btn  btn-sm btn-theme">\n' +
+                '                          <span class="bi bi-pencil-square"></span>\n' +
+                '                      </a>\n' +
+                '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteCategory(\''+ category2.id +'\')">\n' +
+                '                          <span class="bi bi-trash3"></span>\n' +
+                '                      </button>\n' +
+                '                  </div>\n' +
+                '                  </td>\n' +
+                '              </tr>';
+            $('#category-datatable tbody').append(item);
+
+        });
+
     });
 
     $('#category-datatable').DataTable({
