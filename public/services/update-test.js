@@ -12,11 +12,11 @@
         });
 	});
 
-    $(window).on('load', function () {
+    $(window).on('load', async function () {
 
 		checkLogin();
 		checkRole();
-        getCategoriesAddSelectId('update_test_category');
+        await getCategoriesAddSelectId('update_test_category');
         initTest();
 
 	});
