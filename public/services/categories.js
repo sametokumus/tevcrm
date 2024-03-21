@@ -45,7 +45,7 @@ async function initCategories(){
 
             let item = '<tr>\n' +
                 '                  <td>\n' +
-                '                      <p class="mb-0">     '+ checkNull(category.name) +' -> '+ checkNull(category2.name) +'</p>\n' +
+                '                      <p class="mb-0">'+ checkNull(category.name) +' <i class="bi bi-arrow-right"></i>\n '+ checkNull(category2.name) +'</p>\n' +
                 '                  </td>\n' +
                 '                  <td>\n' +
                 '                  <div class="btn-list">\n' +
