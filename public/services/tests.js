@@ -41,7 +41,7 @@ async function initTests(){
             '                      <p class="mb-0">'+ checkNull(test.total_day) +' Gün</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ checkNull(test.price) +'</p>\n' +
+            '                      <p class="mb-0">'+ changeCommasToDecimal(test.price) +' ₺</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                  <div class="btn-list">\n' +
