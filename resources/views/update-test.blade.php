@@ -74,7 +74,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="number" placeholder="Test Süresi (Gün)" id="update_test_total_day" required class="form-control border-start-0">
+                                        <input type="number" placeholder="Test Süresi (Gün)" id="update_test_total_day" class="form-control border-start-0">
                                         <label>Test Süresi (Gün)</label>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ $extra_js='
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="text" placeholder="Test Bedeli" id="update_test_price" class="form-control border-start-0">
-                                        <label>Test Bedeli</label>
+                                        <label>Test Bedeli (₺)</label>
                                     </div>
                                 </div>
                             </div>
