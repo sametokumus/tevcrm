@@ -48,7 +48,7 @@ $extra_js='
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Numune Adedi" id="add_test_sample_count" required class="form-control border-start-0">
+                                        <input type="number" placeholder="Numune Adedi" id="add_test_sample_count" required class="form-control border-start-0">
                                         <label>Numune Adedi</label>
                                     </div>
                                 </div>
@@ -74,8 +74,8 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-telephone"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Test Süresi" id="add_test_total_day" required class="form-control border-start-0">
-                                        <label>Test Süresi</label>
+                                        <input type="number" placeholder="Test Süresi (Gün)" id="add_test_total_day" required class="form-control border-start-0">
+                                        <label>Test Süresi (Gün)</label>
                                     </div>
                                 </div>
                             </div>
