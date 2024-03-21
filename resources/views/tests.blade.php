@@ -2,7 +2,7 @@
 <?php
 $extra_js='
 <script src="services/header-title.js"></script>
-<script src="services/customers.js"></script>
+<script src="services/tests.js"></script>
 ';
 ?>
 
