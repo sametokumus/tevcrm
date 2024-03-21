@@ -17,7 +17,7 @@ class TestController extends Controller
             $tests = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
                 ->selectRaw('tests.*, categories.name as category_name')
-                ->where('active',1)->get();
+                ->where('tests.active',1)->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['tests' => $tests]]);
         } catch (QueryException $queryException) {
@@ -31,7 +31,8 @@ class TestController extends Controller
             $test = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
                 ->selectRaw('tests.*, categories.name as category_name')
-                ->where('id', $test_id)->where('active',1)->first();
+                ->where('tests.id', $test_id)
+                ->where('tests.active',1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['test' => $test]]);
         } catch (QueryException $queryException) {
