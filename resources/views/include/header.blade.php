@@ -711,7 +711,7 @@ $extra_js="";
                 <div class="collapse navbar-collapse" id="mainheaderNavbar">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-theme" href="#" role="button"><b>Proje Oluştur</b> <i class="bi bi-plus"></i></a>
+                            <a class="nav-link btn btn-theme" href="#" role="button"><b>Teklif Oluştur</b> <i class="bi bi-plus"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -801,6 +801,13 @@ $extra_js="";
                             <a class="nav-link" aria-current="page" href="dashboard">
                                 <div class="avatar avatar-40 icon"><i class="bi bi-bar-chart-steps"></i></div>
                                 <div class="col">Dashboard</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="offers">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-rocket-takeoff"></i></div>
+                                <div class="col">Teklifler</div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                             </a>
                         </li>
