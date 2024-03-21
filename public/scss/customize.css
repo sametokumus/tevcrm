@@ -51,3 +51,20 @@ div.dataTables_wrapper div.dt-buttons button {
 .w-50px{
     width: 50px !important;
 }
+
+.select2-container {
+    width: 100%;
+    height: calc(3.5rem + 2px);
+    line-height: 1.25;
+    background-color: #fff;
+}
+.select2-container--default .select2-selection--single {
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    height: calc(3.5rem + 2px);
+    line-height: 4;
+    padding-left: 10px;
+}
