@@ -19,7 +19,7 @@ $extra_js='
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-buildings"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="text" placeholder="Test Adı" id="add_test_name" required class="form-control border-start-0">
                                         <label>Test Adı</label>
@@ -32,7 +32,7 @@ $extra_js='
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-person"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <select class="form-select border-0" id="add_test_category" required>
                                             <option value="">Seçiniz...</option>
@@ -46,7 +46,7 @@ $extra_js='
                         <div class="col-12 col-md-6 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-envelope"></i></span>
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="number" placeholder="Numune Adedi" id="add_test_sample_count" required class="form-control border-start-0">
                                         <label>Numune Adedi</label>
@@ -72,7 +72,7 @@ $extra_js='
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-telephone"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="number" placeholder="Test Süresi (Gün)" id="add_test_total_day" required class="form-control border-start-0">
                                         <label>Test Süresi (Gün)</label>
@@ -85,7 +85,7 @@ $extra_js='
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-telephone-inbound"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="text" placeholder="Test Bedeli" id="add_test_price" class="form-control border-start-0">
                                         <label>Test Bedeli</label>
