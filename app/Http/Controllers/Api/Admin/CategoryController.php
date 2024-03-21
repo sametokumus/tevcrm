@@ -13,7 +13,26 @@ class CategoryController extends Controller
     public function getCategory()
     {
         try {
-            $categories = Category::query()->where('active',1)->get();
+            $categories = Category::query()->where('parent_id',0)->where('active',1)->get();
+            foreach ($categories as $category){
+                $sub_categories = Category::query()->where('parent_id',$category->id)->where('active',1)->get();
+
+                foreach ($sub_categories as $category2){
+                    $sub_categories2 = Category::query()->where('parent_id',$category2->id)->where('active',1)->get();
+                    $category2['sub_categories'] = $sub_categories2;
+                }
+
+                $category['sub_categories'] = $sub_categories;
+            }
+            return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
+        }
+    }
+    public function getCategoryByParentId($parent_id)
+    {
+        try {
+            $categories = Category::query()->where('parent_id',$parent_id)->where('active',1)->get();
             return response(['message' => 'İşlem Başarılı.', 'status' => 'success', 'object' => ['categories' => $categories]]);
         } catch (QueryException $queryException) {
             return response(['message' => 'Hatalı sorgu.', 'status' => 'query-001']);
@@ -32,9 +51,11 @@ class CategoryController extends Controller
     {
         try {
             $request->validate([
+                'parent_id' => 'required',
                 'name' => 'required'
             ]);
             Category::query()->insert([
+                'parent_id' => $request->parent_id,
                 'name' => $request->name
             ]);
             return response(['message' => 'Kategori ekleme işlemi başarılı.', 'status' => 'success']);
@@ -50,10 +71,12 @@ class CategoryController extends Controller
     public function updateCategory(Request $request,$id){
         try {
             $request->validate([
+                'parent_id' => 'required',
                 'name' => 'required'
             ]);
 
             $category = Category::query()->where('id',$id)->update([
+                'parent_id' => $request->parent_id,
                 'name' => $request->name
             ]);
 

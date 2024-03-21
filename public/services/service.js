@@ -677,7 +677,23 @@ async function getMeasurementsAddSelectId(selectId){
 async function getCategoriesAddSelectId(selectId){
     let data = await serviceGetCategories();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option>Kategori Seçiniz</option>');
+    var optionRow = '<option>Kategori Seçiniz</option>';
+    $('#'+selectId).append(optionRow);
+    $.each(data.categories, function(i, category){
+        var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
+        $('#'+selectId).append(optionRow);
+        $.each(category.sub_categories, function(i, category2){
+            var optionRow = '<option value="'+category2.id+'">'+category2.name+'</option>';
+            $('#'+selectId).append(optionRow);
+
+        });
+    });
+}
+
+async function getParentCategoriesAddSelectId(selectId){
+    let data = await serviceGetCategories();
+    $('#'+selectId+' option').remove();
+    $('#'+selectId).append('<option value="0">Ana Kategori Ekle</option>');
     $.each(data.categories, function(i, category){
         let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -2425,6 +2441,15 @@ async function serviceGetCategories() {
 
 async function serviceGetCategoryById(category_id) {
     const data = await fetchDataGet('/admin/category/getCategoryById/' + category_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
+async function serviceGetCategoriesByParentId(parent_id) {
+    const data = await fetchDataGet('/admin/category/getCategoryByParentId/' + parent_id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

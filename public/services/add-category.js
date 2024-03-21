@@ -7,7 +7,7 @@
 
         $('#add_category_form').submit(function (e){
             e.preventDefault();
-            addCategory()
+            addCategory();
         });
 	});
 
@@ -15,6 +15,7 @@
 
 		checkLogin();
 		checkRole();
+        getParentCategoriesAddSelectId('add_category_parent');
 
 	});
 
