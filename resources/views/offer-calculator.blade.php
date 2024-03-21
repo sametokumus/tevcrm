@@ -22,7 +22,7 @@ $extra_js='
                                 <h4 class="fw-medium mb-0">Teklif Tutarı</h4>
                             </div>
                             <div class="col-auto">
-                                <span id="view-offer-price">12.650,00 ₺</span>
+                                <h5 id="view-offer-price">12.650,00 ₺</h5>
                             </div>
                         </div>
                     </div>
