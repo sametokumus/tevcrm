@@ -61,7 +61,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-globe"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Website" id="add_test_sample_description" class="form-control border-start-0">
+                                        <input type="text" placeholder="Numune Açıklaması" id="add_test_sample_description" class="form-control border-start-0">
                                         <label>Numune Açıklaması</label>
                                     </div>
                                 </div>

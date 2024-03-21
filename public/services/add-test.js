@@ -33,7 +33,7 @@ async function addTest(){
         "sample_count": document.getElementById('add_test_sample_count').value,
         "sample_description": document.getElementById('add_test_sample_description').value,
         "total_day": document.getElementById('add_test_total_day').value,
-        "price": document.getElementById('add_test_price').value,
+        "price": changePriceToDecimal(document.getElementById('add_test_price').value),
     });
     console.log(formData);
 
