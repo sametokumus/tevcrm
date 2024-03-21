@@ -80,6 +80,7 @@ async function initCategories(){
                 }
             }
         ],
+        ordering: false,
         pageLength : -1,
         language: {
             url: "services/Turkish.json"
