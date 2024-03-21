@@ -52,6 +52,6 @@ async function updateTest(){
     let test_id = getPathVariable('update-test');
     let returned = await servicePostUpdateTest(test_id, formData);
     if (returned){
-        $("#update_test_form").trigger("reset");
+        window.location = "/tests";
     }
 }
