@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Admin\PdfController;
 use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
+use App\Http\Controllers\Api\Admin\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,13 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('category/updateCategory/{id}', [CategoryController::class, 'updateCategory']);
     Route::get('category/deleteCategory/{id}', [CategoryController::class, 'deleteCategory']);
 
+
+    //Test
+    Route::get('test/getTests', [TestController::class, 'getTests']);
+    Route::get('test/getTestById/{test_id}', [TestController::class, 'getTestById']);
+    Route::post('test/addTest', [TestController::class, 'addTest']);
+    Route::post('test/updateTest/{test_id}', [TestController::class, 'updateTest']);
+    Route::get('test/deleteTest/{test_id}', [TestController::class, 'deleteTest']);
 
 
 

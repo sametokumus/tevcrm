@@ -4,11 +4,11 @@
 	$(document).ready(function() {
 
         $(":input").inputmask();
-        $("#add_company_email").inputmask("email");
+        $("#add_test_price").maskMoney({thousands:'.', decimal:','});
 
-        $('#add_customer_form').submit(function (e){
+        $('#add_test_form').submit(function (e){
             e.preventDefault();
-            addCompany()
+            addTest()
         });
 	});
 
@@ -16,7 +16,7 @@
 
 		checkLogin();
 		checkRole();
-        getCountriesAddSelectId('add_company_country');
+        getCategoriesAddSelectId('add_test_category');
 
 	});
 
@@ -25,23 +25,20 @@
 function checkRole(){
 	return true;
 }
-async function addCompany(){
+async function addTest(){
 
     let formData = JSON.stringify({
-        "name": document.getElementById('add_company_name').value,
-        "email": document.getElementById('add_company_email').value,
-        "website": document.getElementById('add_company_website').value,
-        "phone": document.getElementById('add_company_phone').value,
-        "fax": document.getElementById('add_company_fax').value,
-        "address": document.getElementById('add_company_address').value,
-        "tax_office": document.getElementById('add_company_tax_office').value,
-        "tax_number": document.getElementById('add_company_tax_number').value,
-        "country": document.getElementById('add_company_country').value
+        "category_id": document.getElementById('add_test_category').value,
+        "name": document.getElementById('add_test_name').value,
+        "sample_count": document.getElementById('add_test_sample_count').value,
+        "sample_description": document.getElementById('add_test_sample_description').value,
+        "total_day": document.getElementById('add_test_total_day').value,
+        "price": document.getElementById('add_test_price').value,
     });
     console.log(formData);
 
-    let returned = await servicePostAddCustomer(formData);
+    let returned = await servicePostAddTest(formData);
     if (returned){
-        $("#add_customer_form").trigger("reset");
+        $("#add_test_form").trigger("reset");
     }
 }

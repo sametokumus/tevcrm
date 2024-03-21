@@ -28,7 +28,7 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
+                        <div class="col-12 col-md-6 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i

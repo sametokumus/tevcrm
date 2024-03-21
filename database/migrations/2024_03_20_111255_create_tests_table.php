@@ -15,6 +15,7 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('category_id');
             $table->string('name');
             $table->integer('sample_count');
             $table->string('sample_description')->nullable();

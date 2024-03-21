@@ -674,10 +674,10 @@ async function getMeasurementsAddSelectId(selectId){
     });
 }
 
-async function getParentCategoriesAddSelectId(selectId){
+async function getCategoriesAddSelectId(selectId){
     let data = await serviceGetCategories();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Kategori Seçiniz</option>');
+    $('#'+selectId).append('<option>Kategori Seçiniz</option>');
     $.each(data.categories, function(i, category){
         let optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
@@ -797,21 +797,6 @@ async function getBrandsAddSelectId(selectId){
     $.each(data.brands, function(i, brand){
         var optionRow = '<option value="'+brand.id+'">'+brand.name+'</option>';
         $('#'+selectId).append(optionRow);
-    });
-}
-async function getCategoriesAddSelectId(selectId){
-    let data = await serviceGetCategories();
-    $('#'+selectId+' option').remove();
-    var optionRow = '<option value="">Ürün Grubu Seçiniz</option>';
-    $('#'+selectId).append(optionRow);
-    $.each(data.categories, function(i, category){
-        var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
-        $('#'+selectId).append(optionRow);
-        $.each(category.sub_categories, function(i, category2){
-            var optionRow = '<option value="'+category2.id+'">'+category2.name+'</option>';
-            $('#'+selectId).append(optionRow);
-
-        });
     });
 }
 
@@ -1163,6 +1148,73 @@ async function serviceGetDeleteEmployee(id) {
         return false;
     }
 }
+
+
+
+
+
+async function serviceGetTests() {
+    const data = await fetchDataGet('/admin/test/getTests', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetTestById(id) {
+    const data = await fetchDataGet('/admin/test/getTestById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddTest(formData) {
+    const data = await fetchDataPost('/admin/test/addTest', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function servicePostUpdateTest(id, formData) {
+    const data = await fetchDataPost('/admin/test/updateTest/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetDeleteTest(id) {
+    const data = await fetchDataGet('/admin/test/deleteTest/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function serviceGetNotesByCompanyId(id) {
     const data = await fetchDataGet('/admin/note/getNotesByCompanyId/'+ id, 'application/json');
