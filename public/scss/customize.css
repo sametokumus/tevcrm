@@ -70,3 +70,11 @@ div.dataTables_wrapper div.dt-buttons button {
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: calc(3.5rem + 2px);
 }
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid rgba(170, 170, 170, .5);
+    line-height: 2;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border: 1px solid rgba(170, 170, 170, .5);
+    line-height: 2;
+}
