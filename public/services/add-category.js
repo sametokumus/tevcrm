@@ -27,6 +27,7 @@ function checkRole(){
 async function addCategory(){
 
     let formData = JSON.stringify({
+        "parent_id": document.getElementById('add_category_parent').value,
         "name": document.getElementById('add_category_name').value
     });
     console.log(formData);
