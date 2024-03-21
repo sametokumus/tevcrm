@@ -14,7 +14,10 @@ class TestController extends Controller
     public function getTests()
     {
         try {
-            $tests = Test::query()->where('active',1)->get();
+            $tests = Test::query()
+                ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
+                ->selectRaw('tests.*, categories.name as category_name')
+                ->where('active',1)->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['tests' => $tests]]);
         } catch (QueryException $queryException) {
@@ -25,7 +28,10 @@ class TestController extends Controller
     public function getTestById($test_id)
     {
         try {
-            $test = Test::query()->where('id', $test_id)->where('active',1)->first();
+            $test = Test::query()
+                ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
+                ->selectRaw('tests.*, categories.name as category_name')
+                ->where('id', $test_id)->where('active',1)->first();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['test' => $test]]);
         } catch (QueryException $queryException) {

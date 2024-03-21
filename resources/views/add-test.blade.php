@@ -59,7 +59,7 @@ $extra_js='
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-globe"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="text" placeholder="Numune Açıklaması" id="add_test_sample_description" class="form-control border-start-0">
                                         <label>Numune Açıklaması</label>
