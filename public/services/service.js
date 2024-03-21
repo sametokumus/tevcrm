@@ -683,7 +683,7 @@ async function getCategoriesAddSelectId(selectId){
         var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
         $.each(category.sub_categories, function(i, category2){
-            var optionRow = '<option value="'+category2.id+'">'+category.name+' <i class="bi bi-arrow-right"></i> '+category2.name+'</option>';
+            var optionRow = '<option value="'+category2.id+'">'+category.name+' >>> '+category2.name+'</option>';
             $('#'+selectId).append(optionRow);
 
         });
