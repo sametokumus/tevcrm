@@ -70,8 +70,6 @@ class TestController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
             ]);
             Test::query()->where('id', $test_id)->update([
                 'category_id' => $request->category_id,
