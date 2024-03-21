@@ -66,7 +66,7 @@
 <script src="https://cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.mini.min.js"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="vendor/jquery.toast.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
