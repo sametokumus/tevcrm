@@ -34,7 +34,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <select class="form-select border-0" id="add_test_category" required>
+                                        <select class="form-select border-0 select2" id="add_test_category" required>
                                             <option value="">Seçiniz...</option>
                                         </select>
                                         <label>Kategori</label>

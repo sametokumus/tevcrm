@@ -429,24 +429,24 @@ function changeDecimalToCommas(price) {
 	return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
 }
 
-// // Select2
-// $('.select2').select2({
-//     minimumResultsForSearch: Infinity,
-//     width: '100%'
-// });
-//
-// // Select2 by showing the search
-// $('.select2-show-search').select2({
-//     minimumResultsForSearch: '',
-//     width: '100%'
-// });
-//
-// $('.select2').on('click', () => {
-//     let selectField = document.querySelectorAll('.select2-search__field')
-//     selectField.forEach((element, index) => {
-//         element.focus();
-//     })
-// });
+// Select2
+$('.select2').select2({
+    minimumResultsForSearch: Infinity,
+    width: '100%'
+});
+
+// Select2 by showing the search
+$('.select2-show-search').select2({
+    minimumResultsForSearch: '',
+    width: '100%'
+});
+
+$('.select2').on('click', () => {
+    let selectField = document.querySelectorAll('.select2-search__field')
+    selectField.forEach((element, index) => {
+        element.focus();
+    })
+});
 
 /* SERVICE INIT DATA FUNCTIONS */
 
@@ -683,7 +683,7 @@ async function getCategoriesAddSelectId(selectId){
         var optionRow = '<option value="'+category.id+'">'+category.name+'</option>';
         $('#'+selectId).append(optionRow);
         $.each(category.sub_categories, function(i, category2){
-            var optionRow = '<option value="'+category2.id+'">'+category2.name+'</option>';
+            var optionRow = '<option value="'+category2.id+'">'+category.name+' <i class="bi bi-arrow-right"></i> '+category2.name+'</option>';
             $('#'+selectId).append(optionRow);
 
         });
