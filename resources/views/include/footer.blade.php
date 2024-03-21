@@ -69,6 +69,7 @@
 
 <script src="vendor/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="vendor/jquery.toast.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 {{--<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
 
