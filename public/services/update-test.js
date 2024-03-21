@@ -35,7 +35,7 @@ async function initTest(){
     document.getElementById('update_test_sample_count').value = test.sample_count;
     document.getElementById('update_test_sample_description').value = test.sample_description;
     document.getElementById('update_test_total_day').value = test.total_day;
-    document.getElementById('update_test_price').value = changePriceToDecimal(test.price);
+    document.getElementById('update_test_price').value = changeCommasToDecimal(test.price);
 }
 async function updateTest(){
 
