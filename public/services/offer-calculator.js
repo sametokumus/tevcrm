@@ -49,7 +49,7 @@ async function addTestToOffer(test_id){
         '                  <td>'+ test.sample_description +'</td>\n' +
         '                  <td>'+ test.total_day +'</td>\n' +
         '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
-        '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button></td>\n' +
+        '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn w-100">Tekliften Çıkar</button></td>\n' +
         '              </tr>';
 
     $('#tests-table tbody').append(item);

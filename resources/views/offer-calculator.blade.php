@@ -35,7 +35,7 @@ $extra_js='
                 <h6 class="title">Test Ekle</h6>
                 <form id="add_test_form">
                     <div class="row">
-                        <div class="col-12 col-md-6 mb-2">
+                        <div class="col-12 col-md-5 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
@@ -50,7 +50,7 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-6 mb-2">
+                        <div class="col-12 col-md-5 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
@@ -65,8 +65,8 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
-                            <button type="button" id="offer_test_btn" class="btn btn-theme">Teklife Ekle</button>
+                        <div class="col-12 col-md-2 mb-2">
+                            <button type="button" id="offer_test_btn" class="btn btn-theme w-100 h-60">Teklife Ekle</button>
                         </div>
                     </div>
                 </form>
@@ -75,11 +75,6 @@ $extra_js='
         <div class="row justify-content-center mb-2">
             <div class="col-12">
                 <h6 class="title">Testler</h6>
-                <div id="test-block">
-
-
-
-                </div>
                 <div class="card border-0 mb-4">
                     <div class="card-body p-4">
                         <table id="tests-table" class="table table-bordered nowrap key-buttons border-bottom">
@@ -90,7 +85,7 @@ $extra_js='
                                 <th>Numune Açıklama</th>
                                 <th>Test Süresi</th>
                                 <th>Test Bedeli</th>
-                                <th class="w-100px"></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
