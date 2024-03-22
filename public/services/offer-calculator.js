@@ -40,7 +40,7 @@ async function addTestToOffer(test_id){
     let test = data.test;
     console.log(test)
     let total_price = document.getElementById('offer_price').value;
-    total_price = total_price + test.price;
+    total_price = parseFloat(total_price) + parseFloat(test.price);
     document.getElementById('offer_price').value = total_price;
     $('#view-offer-price').html(changeCommasToDecimal(total_price) + ' ₺');
 
@@ -63,6 +63,8 @@ async function addTestToOffer(test_id){
         '                      </div>\n' +
         '                  </div>\n' +
         '              </div>';
+
+    $('#test-block').append(item);
 }
 async function addCategory(){
 
