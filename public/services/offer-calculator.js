@@ -44,10 +44,10 @@ async function addTestToOffer(test_id){
     $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
     let item = '<tr class="test-item">\n' +
-        '                  <td>'+ test.name +'</td>\n' +
-        '                  <td>'+ test.sample_count +'</td>\n' +
-        '                  <td>'+ test.sample_description +'</td>\n' +
-        '                  <td>'+ test.total_day +'</td>\n' +
+        '                  <td>'+ checkNull(test.name) +'</td>\n' +
+        '                  <td>'+ checkNull(test.sample_count) +'</td>\n' +
+        '                  <td>'+ checkNull(test.sample_description) +'</td>\n' +
+        '                  <td>'+ checkNull(test.total_day) +'</td>\n' +
         '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
         '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn w-100">Tekliften Çıkar</button></td>\n' +
         '              </tr>';
