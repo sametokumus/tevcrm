@@ -50,13 +50,13 @@ async function addTestToOffer(test_id){
         '                          <div class="col-12 mb-4 mb-lg-0">\n' +
         '                              <div class="row align-items-center">\n' +
         '                                  <div class="col">\n' +
-        '                                      <h5 class="fw-medium">'+ test.name +'</h5>\n' +
+        '                                      <h6 class="fw-medium">'+ test.name +'</h6>\n' +
         '                                  </div>\n' +
         '                                  <div class="col-auto">\n' +
-        '                                      <h5 class="fw-medium">'+ changeCommasToDecimal(test.price) +' ₺</h5>\n' +
+        '                                      <h6 class="fw-medium">'+ changeCommasToDecimal(test.price) +' ₺</h6>\n' +
         '                                  </div>\n' +
         '                                  <div class="col-auto">\n' +
-        '                                      <button type="button" class="btn btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
+        '                                      <button type="button" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
         '                                  </div>\n' +
         '                              </div>\n' +
         '                          </div>\n' +
