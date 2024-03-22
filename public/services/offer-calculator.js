@@ -56,7 +56,7 @@ async function addTestToOffer(test_id){
         '                                      <h6 class="fw-medium">'+ changeCommasToDecimal(test.price) +' ₺</h6>\n' +
         '                                  </div>\n' +
         '                                  <div class="col-auto">\n' +
-        '                                      <button type="button" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
+        '                                      <button type="button" onclick="removeTestItem(element, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
         '                                  </div>\n' +
         '                              </div>\n' +
         '                          </div>\n' +
@@ -66,16 +66,11 @@ async function addTestToOffer(test_id){
 
     $('#test-block').append(item);
 }
-async function addCategory(){
+async function removeTestItem(element, price){
+    let total_price = document.getElementById('offer_price').value;
+    total_price = parseFloat(total_price) - parseFloat(price);
+    document.getElementById('offer_price').value = total_price;
+    $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
-    let formData = JSON.stringify({
-        "parent_id": document.getElementById('add_category_parent').value,
-        "name": document.getElementById('add_category_name').value
-    });
-    console.log(formData);
-
-    let returned = await servicePostAddCategory(formData);
-    if (returned){
-        $("#add_category_form").trigger("reset");
-    }
+    console.log(element)
 }
