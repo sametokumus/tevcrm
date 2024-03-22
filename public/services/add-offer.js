@@ -5,14 +5,14 @@
 
         $(":input").inputmask();
 
-        $('#offer_category').on('change', function (e){
+        $('#offer_customer').on('change', function (e){
             e.preventDefault();
-            let category_id = document.getElementById('offer_category').value;
-            console.log(category_id)
-            if (category_id == 'Kategori Seçiniz'){
-                $('#offer_test option').remove();
+            let customer_id = document.getElementById('offer_category').value;
+            console.log(customer_id)
+            if (customer_id == '0'){
+                $('#offer_employee option').remove();
             }else{
-                getTestsByCategoryAddSelectId(category_id, 'offer_test');
+                getEmployeesAddSelectId(customer_id, 'offer_employee');
             }
         });
 
@@ -26,7 +26,9 @@
 
 		checkLogin();
 		checkRole();
-        getCategoriesAddSelectId('offer_category');
+        getCustomersAddSelectId('offer_customer');
+        getAdminsAddSelectId('offer_manager');
+        getAdminsAddSelectId('offer_lab_manager');
 
 	});
 

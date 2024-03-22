@@ -609,7 +609,7 @@ async function getSuppliersAddSelectId(selectId){
 async function getCustomersAddSelectId(selectId){
     let data = await serviceGetCustomers();
     $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
+    $('#'+selectId).append('<option value="0">Müşteri Seçiniz</option>');
     $.each(data.companies, function(i, company){
         let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
         $('#'+selectId).append(optionRow);
