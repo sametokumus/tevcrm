@@ -52,6 +52,10 @@ div.dataTables_wrapper div.dt-buttons button {
     width: 50px !important;
 }
 
+.w-100px{
+    width: 100px !important;
+}
+
 .select2-container {
     height: calc(3.5rem + 2px);
     line-height: 1.25;

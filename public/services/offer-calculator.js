@@ -38,33 +38,21 @@ function checkRole(){
 async function addTestToOffer(test_id){
     let data = await serviceGetTestById(test_id);
     let test = data.test;
-    console.log(test)
     let total_price = document.getElementById('offer_price').value;
     total_price = parseFloat(total_price) + parseFloat(test.price);
     document.getElementById('offer_price').value = total_price;
     $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
-    let item = '<div class="card border-0 mb-4 test-item">\n' +
-        '                  <div class="card-body">\n' +
-        '                      <div class="row">\n' +
-        '                          <div class="col-12 mb-4 mb-lg-0">\n' +
-        '                              <div class="row align-items-center">\n' +
-        '                                  <div class="col">\n' +
-        '                                      <h6 class="fw-medium">'+ test.name +'</h6>\n' +
-        '                                  </div>\n' +
-        '                                  <div class="col-auto">\n' +
-        '                                      <h6 class="fw-medium">'+ changeCommasToDecimal(test.price) +' ₺</h6>\n' +
-        '                                  </div>\n' +
-        '                                  <div class="col-auto">\n' +
-        '                                      <button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
-        '                                  </div>\n' +
-        '                              </div>\n' +
-        '                          </div>\n' +
-        '                      </div>\n' +
-        '                  </div>\n' +
-        '              </div>';
+    let item = '<tr class="test-item">\n' +
+        '                  <td>'+ test.name +'</td>\n' +
+        '                  <td>'+ test.sample_count +'</td>\n' +
+        '                  <td>'+ test.sample_description +'</td>\n' +
+        '                  <td>'+ test.total_day +'</td>\n' +
+        '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
+        '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button></td>\n' +
+        '              </tr>';
 
-    $('#test-block').append(item);
+    $('#tests-table tbody').append(item);
 }
 async function removeTestItem(element, price){
     let total_price = document.getElementById('offer_price').value;

@@ -15,7 +15,6 @@ $extra_js='
                 <h6 class="title">Testler</h6>
 
                 <div class="row">
-                    <!-- timesheet -->
                     <div class="col-12 col-md-12 position-relative">
                         <div class="card border-0 mb-4">
                             <div class="card-body p-4">
