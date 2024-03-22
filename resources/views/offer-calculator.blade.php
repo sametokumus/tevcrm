@@ -56,15 +56,17 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Kategori Adı" id="add_category_name" required class="form-control border-start-0">
-                                        <label>Kategori Adı</label>
+                                        <select class="form-select border-0" id="offer_test">
+                                            <option value="">Seçiniz...</option>
+                                        </select>
+                                        <label>Test</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-4 mb-2">
-                            <button type="submit" class="btn btn-theme">Kaydet</button>
+                            <button type="button" class="btn btn-theme">Kaydet</button>
                         </div>
                     </div>
                 </form>

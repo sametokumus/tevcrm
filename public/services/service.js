@@ -674,6 +674,15 @@ async function getMeasurementsAddSelectId(selectId){
     });
 }
 
+async function getTestsByCategoryAddSelectId(category_id, selectId){
+    let data = await serviceGetTestsByCategoryId(category_id);
+    $('#'+selectId+' option').remove();
+    $.each(data.tests, function(i, test){
+        var optionRow = '<option value="'+test.id+'">'+test.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getCategoriesAddSelectId(selectId){
     let data = await serviceGetCategories();
     $('#'+selectId+' option').remove();
@@ -1171,6 +1180,14 @@ async function serviceGetDeleteEmployee(id) {
 
 async function serviceGetTests() {
     const data = await fetchDataGet('/admin/test/getTests', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetTestsByCategoryId(id) {
+    const data = await fetchDataGet('/admin/test/getTestsByCategoryId/' + id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

@@ -17,7 +17,23 @@ class TestController extends Controller
             $tests = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
                 ->selectRaw('tests.*, categories.name as category_name')
-                ->where('tests.active',1)->get();
+                ->where('tests.active',1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['tests' => $tests]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
+    public function getTestsByCategoryId($category_id)
+    {
+        try {
+            $tests = Test::query()
+                ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
+                ->selectRaw('tests.*, categories.name as category_name')
+                ->where('tests.category_id',$category_id)
+                ->where('tests.active',1)
+                ->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['tests' => $tests]]);
         } catch (QueryException $queryException) {

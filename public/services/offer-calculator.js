@@ -9,6 +9,16 @@
             e.preventDefault();
             let category_id = document.getElementById('offer_category').value;
             console.log(category_id)
+            if (category_id == 'Kategori Seçiniz'){
+                $('#offer_test option').remove();
+            }else{
+                getTestsByCategoryAddSelectId(category_id, 'offer_test');
+            }
+        });
+
+        $('#offer_test_btn').on('click', function (e){
+            let test_id = document.getElementById('offer_test').value;
+            addTestToOffer(test_id);
         });
 	});
 
@@ -24,6 +34,11 @@
 
 function checkRole(){
 	return true;
+}
+async function addTestToOffer(test_id){
+    let data = await serviceGetTestById(test_id);
+    let test = data.test;
+    console.log(test)
 }
 async function addCategory(){
 

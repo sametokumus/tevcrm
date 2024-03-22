@@ -116,6 +116,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
     //Test
     Route::get('test/getTests', [TestController::class, 'getTests']);
+    Route::get('test/getTestsByCategoryId/{category_id}', [TestController::class, 'getTestsByCategoryId']);
     Route::get('test/getTestById/{test_id}', [TestController::class, 'getTestById']);
     Route::post('test/addTest', [TestController::class, 'addTest']);
     Route::post('test/updateTest/{test_id}', [TestController::class, 'updateTest']);
