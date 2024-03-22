@@ -711,7 +711,7 @@ $extra_js="";
                 <div class="collapse navbar-collapse" id="mainheaderNavbar">
                     <ul class="nav">
                         <li class="nav-item mx-1">
-                            <a class="nav-link btn btn-theme" href="#" role="button"><b>Teklif Oluştur</b> <i class="bi bi-plus"></i></a>
+                            <a class="nav-link btn btn-theme" href="add-offer" role="button"><b>Teklif Oluştur</b> <i class="bi bi-plus"></i></a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link btn btn-theme theme-green" href="offer-calculator" role="button"><b>Teklif Hesaplayıcı</b> <i class="bi bi-calculator"></i></a>
