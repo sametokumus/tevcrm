@@ -2,7 +2,7 @@
 <?php
 $extra_js='
 <script src="services/header-title.js"></script>
-<script src="services/add-category.js"></script>
+<script src="services/offer-calculator.js"></script>
 ';
 ?>
 
@@ -22,7 +22,8 @@ $extra_js='
                                 <h4 class="fw-medium mb-0">Teklif Tutarı</h4>
                             </div>
                             <div class="col-auto">
-                                <h5 id="view-offer-price">12.650,00 ₺</h5>
+                                <h5 id="view-offer-price">0,00 ₺</h5>
+                                <input type="hidden" id="offer_price" value="0.00">
                             </div>
                         </div>
                     </div>
@@ -40,10 +41,10 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <select class="form-select border-0" id="add_category_parent" required>
+                                        <select class="form-select border-0" id="offer_category">
                                             <option value="">Seçiniz...</option>
                                         </select>
-                                        <label>Ana Kategori</label>
+                                        <label>Kategori</label>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +72,7 @@ $extra_js='
         </div>
         <div class="row justify-content-center mb-2">
             <div class="col-12">
-                <h6 class="title">Test Ekle</h6>
+                <h6 class="title">Testler</h6>
                 <div id="test-block">
                     <div id="test-item">
 
