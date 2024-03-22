@@ -41,7 +41,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <select class="form-select border-0" id="offer_category">
+                                        <select class="form-select border-0 select2-show-search" id="offer_category">
                                             <option value="">Seçiniz...</option>
                                         </select>
                                         <label>Kategori</label>
@@ -56,7 +56,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <select class="form-select border-0" id="offer_test">
+                                        <select class="form-select border-0 select2-show-search" id="offer_test">
                                             <option value="">Seçiniz...</option>
                                         </select>
                                         <label>Test</label>
@@ -66,7 +66,7 @@ $extra_js='
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-4 mb-2">
-                            <button type="button" class="btn btn-theme">Kaydet</button>
+                            <button type="button" id="offer_test_btn" class="btn btn-theme">Teklife Ekle</button>
                         </div>
                     </div>
                 </form>
