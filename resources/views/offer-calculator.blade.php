@@ -89,7 +89,7 @@ $extra_js='
                                             <h5 class="fw-medium">1,00 ₺</h5>
                                         </div>
                                         <div class="col-auto">
-                                            <button type="button" class="offer_remove_test_btn" class="btn btn-theme">Tekliften Çıkar</button>
+                                            <button type="button" class="btn btn-theme offer_remove_test_btn">Tekliften Çıkar</button>
                                         </div>
                                     </div>
                                 </div>
