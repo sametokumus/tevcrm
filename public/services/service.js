@@ -596,16 +596,6 @@ async function getAddressesAddSelectId(selectId, company_id){
     });
 }
 
-async function getSuppliersAddSelectId(selectId){
-    let data = await serviceGetSuppliers();
-    $('#'+selectId+' option').remove();
-    // $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
-    $.each(data.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
 async function getCustomersAddSelectId(selectId){
     let data = await serviceGetCustomers();
     $('#'+selectId+' option').remove();
@@ -616,38 +606,8 @@ async function getCustomersAddSelectId(selectId){
     });
 }
 
-async function getCustomersAndPotentialsAddSelectId(selectId){
-    let data = await serviceGetCustomers();
-    let data2 = await serviceGetPotentialCustomers();
-    $('#'+selectId+' option').remove();
-    // $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
-    $.each(data.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-    $.each(data2.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getCustomersAndPotentialsAddSelectIdWithZero(selectId){
-    let data = await serviceGetCustomers();
-    let data2 = await serviceGetPotentialCustomers();
-    $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Müşteri Seçiniz</option>');
-    $.each(data.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-    $.each(data2.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getEmployeesAddSelectId(companyId, selectId){
-    let data = await serviceGetEmployeesByCompanyId(companyId);
+async function getEmployeesAddSelectId(customerId, selectId){
+    let data = await serviceGetEmployeesByCustomerId(customerId);
     $('#'+selectId+' option').remove();
     $.each(data.employees, function(i, employee){
         let optionRow = '<option value="'+employee.id+'">'+employee.name+'</option>';
