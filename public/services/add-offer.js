@@ -7,7 +7,7 @@
 
         $('#offer_customer').on('change', function (e){
             e.preventDefault();
-            let customer_id = document.getElementById('offer_category').value;
+            let customer_id = document.getElementById('offer_customer').value;
             console.log(customer_id)
             if (customer_id == '0'){
                 $('#offer_employee option').remove();
