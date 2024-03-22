@@ -56,7 +56,7 @@ async function addTestToOffer(test_id){
         '                                      <h6 class="fw-medium">'+ changeCommasToDecimal(test.price) +' ₺</h6>\n' +
         '                                  </div>\n' +
         '                                  <div class="col-auto">\n' +
-        '                                      <button type="button" onclick="removeTestItem(element, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
+        '                                      <button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn">Tekliften Çıkar</button>\n' +
         '                                  </div>\n' +
         '                              </div>\n' +
         '                          </div>\n' +
@@ -72,5 +72,5 @@ async function removeTestItem(element, price){
     document.getElementById('offer_price').value = total_price;
     $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
-    console.log(element)
+    $(element).closest('.test-item').remove();
 }
