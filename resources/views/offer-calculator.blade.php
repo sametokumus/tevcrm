@@ -76,9 +76,27 @@ $extra_js='
             <div class="col-12">
                 <h6 class="title">Testler</h6>
                 <div id="test-block">
-                    <div id="test-item">
 
+                    <div class="card border-0 mb-4 test-item">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 mb-4 mb-lg-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h5 class="fw-medium">test</h5>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h5 class="fw-medium">1,00 ₺</h5>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="offer_remove_test_btn" class="btn btn-theme">Tekliften Çıkar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
