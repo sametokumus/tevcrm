@@ -95,9 +95,6 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-2 mb-2">
-                            <button type="button" id="offer_test_btn" class="btn btn-theme w-100 h-60">Teklife Ekle</button>
-                        </div>
                     </div>
                 </form>
             </div>
