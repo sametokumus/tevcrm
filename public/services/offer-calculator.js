@@ -42,7 +42,7 @@ async function addTestToOffer(test_id){
     let total_price = document.getElementById('offer_price').value;
     total_price = parseFloat(total_price) + parseFloat(test.price);
     document.getElementById('offer_price').value = total_price;
-    $('#view-offer-price').html(changeCommasToDecimal(total_price) + ' ₺');
+    $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
     let item = '<div class="card border-0 mb-4 test-item">\n' +
         '                  <div class="card-body">\n' +
