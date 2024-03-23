@@ -126,12 +126,12 @@ async function removeTestItem(element, price){
 let editor;
 let table;
 // Activate an inline edit on click of a table cell
-$('#tests-table').on( 'click', 'tbody td.row-edit', function (e) {
-    editor.inline( table.cells(this.parentNode, '*').nodes(), {
-        submitTrigger: -1,
-        submitHtml: '<i class="bi bi-floppy"/>'
-    } );
-} );
+// $('#tests-table').on( 'click', 'tbody td.row-edit', function (e) {
+//     editor.inline( table.cells(this.parentNode, '*').nodes(), {
+//         submitTrigger: -1,
+//         submitHtml: '<i class="bi bi-floppy"/>'
+//     } );
+// } );
 let categoryOptions = [];
 async function setCategoryOptions (){
     let data = await serviceGetCategories();
@@ -246,13 +246,13 @@ async function initOfferTests(){
             { data: "sample_description", title: "Numune Açıklama", className:  "row-edit" , defaultContent: ""},
             { data: "total_day", title: "Test Süresi (Gün)", editable: false},
             { data: "price", title: "Test Bedeli (₺)", editable: false},
-            {
-                data: null,
-                title: "",
-                defaultContent: '<i class="bi bi-pencil-square"/>',
-                className: 'row-edit dt-center',
-                orderable: false
-            },
+            // {
+            //     data: null,
+            //     title: "",
+            //     defaultContent: '<i class="bi bi-pencil-square"/>',
+            //     className: 'row-edit dt-center',
+            //     orderable: false
+            // },
         ],
         createdRow: function(row, data, dataIndex) {
             $(row).find('td:eq(0)').html(dataIndex+1);
