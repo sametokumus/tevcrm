@@ -178,6 +178,7 @@ class OfferController extends Controller
         try {
             $test = Test::query()->where('id', $test_id)->first();
             OfferDetail::query()->insert([
+                'offer_id' => $offer_id,
                 'test_id' => $test_id,
                 'category_id' => $test->category_id,
                 'name' => $test->name,
