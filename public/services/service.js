@@ -1205,6 +1205,22 @@ async function servicePostUpdateOffer(formData) {
     const data = await fetchDataPost('/admin/offer/updateOffer', formData, 'application/json');
     return data;
 }
+async function serviceGetOfferById(id) {
+    const data = await fetchDataGet('/admin/offer/getOfferById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetOfferInfoById(id) {
+    const data = await fetchDataGet('/admin/offer/getOfferInfoById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 
 
@@ -1574,14 +1590,6 @@ async function serviceGetNewOffersByRequestId(id) {
 }
 async function serviceGetOffersByRequestId(id) {
     const data = await fetchDataGet('/admin/offer/getOffersByRequestId/' + id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function serviceGetOfferById(id) {
-    const data = await fetchDataGet('/admin/offer/getOfferById/' + id, 'application/json');
     if (data.status == "success") {
         return data.object;
     } else {

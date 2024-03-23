@@ -27,14 +27,14 @@
         });
 	});
 
-    $(window).on('load', function () {
+    $(window).on('load', async function () {
 
 		checkLogin();
 		checkRole();
-        getCustomersAddSelectId('offer_customer');
-        getAdminsAddSelectId('offer_manager');
-        getAdminsAddSelectId('offer_lab_manager');
-
+        await getCustomersAddSelectId('offer_customer');
+        await getAdminsAddSelectId('offer_manager');
+        await getAdminsAddSelectId('offer_lab_manager');
+        initOffer();
 	});
 
 })(window.jQuery);
@@ -59,6 +59,19 @@ async function updateOffer(){
     // if (data.status == "success"){
     //     window.location = "add-offer-tests/" + data.object.offer_id;
     // }
+}
+async function initOffer(){
+    let offer_id = getPathVariable('add-offer-tests');
+
+    let data = await serviceGetOfferInfoById(offer_id);
+    let offer = data.offer;
+
+    document.getElementById('offer_customer').value = offer.customer_id;
+    document.getElementById('offer_employee').value = offer.employee_id;
+    document.getElementById('offer_manager').value = offer.manager_id;
+    document.getElementById('offer_lab_manager').value = offer.lab_manager_id;
+    document.getElementById('offer_description').value = offer.description;
+
 }
 async function addTestToOffer(test_id){
     let data = await serviceGetTestById(test_id);
