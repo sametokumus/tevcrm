@@ -227,7 +227,7 @@ async function initOfferTests(){
         console.log(data)
         console.log(e)
         if (action !== 'remove') {
-            var rowData = editor.rows({ selected: true }).data().toArray();
+            var rowData = table.rows('.selected').data().toArray();
             console.log("Submitting row data:", rowData);
             editor.submit();
         }
