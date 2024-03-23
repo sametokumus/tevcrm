@@ -78,3 +78,7 @@ div.dataTables_wrapper div.dt-buttons button {
     border: 1px solid rgba(170, 170, 170, .5);
     line-height: 2;
 }
+
+table.dataTable {
+    min-width: 100%;
+}
