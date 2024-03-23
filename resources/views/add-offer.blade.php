@@ -88,7 +88,7 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-2 mb-2">
+                        <div class="col-12 col-md-12 mb-2">
                             <button type="button" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Oluştur</button>
                         </div>
                     </div>
