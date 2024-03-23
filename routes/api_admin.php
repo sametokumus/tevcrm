@@ -130,7 +130,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('offer/getOfferById/{offer_id}', [OfferController::class, 'getOfferById']);
     Route::get('offer/getOfferInfoById/{offer_id}', [OfferController::class, 'getOfferInfoById']);
     Route::get('offer/getOfferTestsById/{offer_id}', [OfferController::class, 'getOfferTestsById']);
-    Route::post('offer/addTestToOffer/{offer_id}/{test_id}', [OfferController::class, 'addTestToOffer']);
+    Route::get('offer/addTestToOffer/{offer_id}/{test_id}', [OfferController::class, 'addTestToOffer']);
     Route::post('offer/updateTestToOffer/{offer_id}', [OfferController::class, 'updateTestToOffer']);
 
     Route::get('offer/getOffersByRequestId/{request_id}', [OfferController::class, 'getOffersByRequestId']);
