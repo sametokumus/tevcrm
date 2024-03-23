@@ -20,7 +20,7 @@
             e.preventDefault();
             let category_id = document.getElementById('offer_category').value;
             console.log(category_id)
-            if (category_id == ''){
+            if (category_id == 'Kategori Seçiniz'){
                 $('#offer_test option').remove();
             }else{
                 getTestsByCategoryAddSelectId(category_id, 'offer_test');
