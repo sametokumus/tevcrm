@@ -220,6 +220,8 @@ async function initOfferTests(){
     } );
 
     editor.on('preSubmit', async function(e, data, action) {
+        console.log(action)
+        console.log(data)
         if (action !== 'remove') {
             editor.submit();
         }
