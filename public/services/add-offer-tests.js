@@ -16,6 +16,17 @@
             }
         });
 
+        $('#offer_category').on('change', function (e){
+            e.preventDefault();
+            let category_id = document.getElementById('offer_category').value;
+            console.log(category_id)
+            if (category_id == ''){
+                $('#offer_test option').remove();
+            }else{
+                getTestsByCategoryAddSelectId(category_id, 'offer_test');
+            }
+        });
+
         $('#offer_test_btn').on('click', function (e){
             let test_id = document.getElementById('offer_test').value;
             addTestToOffer(test_id);
@@ -32,6 +43,7 @@
 		checkLogin();
 		checkRole();
         initOffer();
+        getCategoriesAddSelectId('offer_category');
 	});
 
 })(window.jQuery);
