@@ -2,6 +2,25 @@
     "use strict";
 
 	$(document).ready(function() {
+
+        $(":input").inputmask();
+
+        $('#offer_customer').on('change', function (e){
+            e.preventDefault();
+            let customer_id = document.getElementById('offer_customer').value;
+            console.log(customer_id)
+            if (customer_id == '0'){
+                $('#offer_employee option').remove();
+            }else{
+                getEmployeesAddSelectId(customer_id, 'offer_employee');
+            }
+        });
+
+        $('#offer_test_btn').on('click', function (e){
+            let test_id = document.getElementById('offer_test').value;
+            addTestToOffer(test_id);
+        });
+
         $('#offer_info_form').submit(function (e){
             e.preventDefault();
             addOffer();
