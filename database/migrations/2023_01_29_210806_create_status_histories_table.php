@@ -15,7 +15,7 @@ class CreateStatusHistoriesTable extends Migration
     {
         Schema::create('status_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('sale_id');
+            $table->string('offer_id');
             $table->bigInteger('status_id');
             $table->bigInteger('user_id')->default(0);
             $table->tinyInteger('active')->default(1);
