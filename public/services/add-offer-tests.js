@@ -214,9 +214,7 @@ async function initOfferTests(){
             name: "price",
             attr: {
                 class: 'form-control'
-            },
-            type: "select",
-            options: categoryOptions
+            }
         }
         ]
     } );
@@ -238,12 +236,12 @@ async function initOfferTests(){
             { data: "name", title: "Test Adı", className:  "row-edit" , defaultContent: ""},
             { data: "sample_count", title: "Numune Sayısı", className:  "row-edit" , defaultContent: ""},
             { data: "sample_description", title: "Numune Açıklama", className:  "row-edit" , defaultContent: ""},
-            { data: "total_day", title: "Test Süresi (Gün)", editable: false , defaultContent: ""},
-            { data: "price", title: "Test Bedeli (₺)", editable: false , defaultContent: ""},
+            { data: "total_day", title: "Test Süresi (Gün)", editable: false},
+            { data: "price", title: "Test Bedeli (₺)", editable: false},
             {
                 data: null,
                 title: "",
-                defaultContent: '<i class="fas fa-lg fa-fw me-2 fa-edit"/>',
+                defaultContent: '<i class="bi bi-pencil-square"/>',
                 className: 'row-edit dt-center',
                 orderable: false
             },
