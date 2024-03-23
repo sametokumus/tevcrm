@@ -89,7 +89,7 @@ $extra_js='
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-12 mb-2">
-                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Oluştur</button>
+                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Bilgilerini Güncelle</button>
                         </div>
                     </div>
                 </form>
@@ -131,7 +131,7 @@ $extra_js='
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-2 mb-2">
-                            <button type="button" id="offer_test_btn" class="btn btn-theme w-100 h-60">Teklif Bilgilerini Güncelle</button>
+                            <button type="button" id="offer_test_btn" class="btn btn-theme w-100 h-60">Teklife Ekle</button>
                         </div>
                     </div>
                 </form>
@@ -143,17 +143,17 @@ $extra_js='
                 <div class="card border-0 mb-4">
                     <div class="card-body p-4">
                         <table id="tests-table" class="table table-bordered nowrap key-buttons border-bottom">
-                            <thead>
-                            <tr>
-                                <th>Test Yapılacak Ürün</th>
-                                <th>Test Adı</th>
-                                <th>Numune Sayısı</th>
-                                <th>Numune Açıklama</th>
-                                <th>Test Süresi</th>
-                                <th>Test Bedeli</th>
-                                <th></th>
-                            </tr>
-                            </thead>
+{{--                            <thead>--}}
+{{--                            <tr>--}}
+{{--                                <th>Test Yapılacak Ürün</th>--}}
+{{--                                <th>Test Adı</th>--}}
+{{--                                <th>Numune Sayısı</th>--}}
+{{--                                <th>Numune Açıklama</th>--}}
+{{--                                <th>Test Süresi</th>--}}
+{{--                                <th>Test Bedeli</th>--}}
+{{--                                <th></th>--}}
+{{--                            </tr>--}}
+{{--                            </thead>--}}
                             <tbody>
 
                             </tbody>
