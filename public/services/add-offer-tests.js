@@ -88,7 +88,8 @@ async function initOffer(){
 
 }
 async function addTestToOffer(test_id){
-    let returned = await servicePostAddTestToOffer(test_id);
+    let offer_id = getPathVariable('add-offer-tests');
+    let returned = await servicePostAddTestToOffer(offer_id, test_id);
     if (returned){
         initOfferTests();
     }
