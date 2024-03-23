@@ -129,7 +129,7 @@ let table;
 $('#tests-table').on( 'click', 'tbody td.row-edit', function (e) {
     editor.inline( table.cells(this.parentNode, '*').nodes(), {
         submitTrigger: -1,
-        submitHtml: '<i class="fas fa-lg fa-fw me-2 fa-save"/>'
+        submitHtml: '<i class="bi bi-floppy"/>'
     } );
 } );
 let categoryOptions = [];
@@ -225,6 +225,7 @@ async function initOfferTests(){
     editor.on('preSubmit', async function(e, data, action) {
         console.log(action)
         console.log(data)
+        console.log(e)
         if (action !== 'remove') {
             editor.submit();
         }
