@@ -44,6 +44,7 @@
 		checkRole();
         initOffer();
         getCategoriesAddSelectId('offer_category');
+        initOfferTests();
 	});
 
 })(window.jQuery);
