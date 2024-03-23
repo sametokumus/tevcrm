@@ -1201,6 +1201,10 @@ async function servicePostAddOffer(formData) {
     const data = await fetchDataPost('/admin/offer/addOffer', formData, 'application/json');
     return data;
 }
+async function servicePostUpdateOffer(formData) {
+    const data = await fetchDataPost('/admin/offer/updateOffer', formData, 'application/json');
+    return data;
+}
 
 
 

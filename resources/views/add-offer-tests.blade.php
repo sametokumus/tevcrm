@@ -75,18 +75,21 @@ $extra_js='
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
-                        <div class="col-12 col-md-6 mb-2">
+                        <div class="col-12 col-md-12 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-globe"></i></span>
+                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Website" id="offer_description" class="form-control border-start-0">
+                                        <input type="text" placeholder="Teklif Açıklaması" id="offer_description" class="form-control border-start-0">
                                         <label>Teklif Açıklaması</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-12 mb-2">
+                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Oluştur</button>
                         </div>
                     </div>
                 </form>

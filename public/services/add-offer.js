@@ -16,11 +16,6 @@
             }
         });
 
-        $('#offer_test_btn').on('click', function (e){
-            let test_id = document.getElementById('offer_test').value;
-            addTestToOffer(test_id);
-        });
-
         $('#offer_info_form').submit(function (e){
             e.preventDefault();
             addOffer();

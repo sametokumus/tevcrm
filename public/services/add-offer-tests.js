@@ -20,6 +20,11 @@
             let test_id = document.getElementById('offer_test').value;
             addTestToOffer(test_id);
         });
+
+        $('#offer_info_form').submit(function (e){
+            e.preventDefault();
+            updateOffer();
+        });
 	});
 
     $(window).on('load', function () {
@@ -36,6 +41,24 @@
 
 function checkRole(){
 	return true;
+}
+async function updateOffer(){
+    let offer_id = getPathVariable('add-offer-tests');
+
+    let formData = JSON.stringify({
+        "offer_id": offer_id,
+        "customer": document.getElementById('offer_customer').value,
+        "employee": document.getElementById('offer_employee').value,
+        "manager": document.getElementById('offer_manager').value,
+        "lab_manager": document.getElementById('offer_lab_manager').value,
+        "description": document.getElementById('offer_description').value
+    });
+    console.log(formData);
+
+    let data = await servicePostUpdateOffer(formData);
+    // if (data.status == "success"){
+    //     window.location = "add-offer-tests/" + data.object.offer_id;
+    // }
 }
 async function addTestToOffer(test_id){
     let data = await serviceGetTestById(test_id);

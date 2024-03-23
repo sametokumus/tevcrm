@@ -44,4 +44,27 @@ class OfferController extends Controller
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
+    public function updateOffer(Request $request)
+    {
+        try {
+            $request->validate([
+                'customer' => 'required'
+            ]);
+            Offer::query()->where('offer_id', $request->offer_id)->insertGetId([
+                'customer_id' => $request->customer,
+                'employee_id' => $request->employee,
+                'manager_id' => $request->manager,
+                'lab_manager_id' => $request->lab_manager,
+                'description' => $request->description
+            ]);
+
+            return response(['message' => __('Teklif güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
 }
