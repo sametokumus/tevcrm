@@ -1197,6 +1197,10 @@ async function serviceGetDeleteTest(id) {
 
 
 
+async function servicePostAddOffer(formData) {
+    const data = await fetchDataPost('/admin/offer/addOffer', formData, 'application/json');
+    return data;
+}
 
 
 
@@ -1578,16 +1582,6 @@ async function serviceGetOfferById(id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
-    }
-}
-async function servicePostAddOffer(formData) {
-    const data = await fetchDataPost('/admin/offer/addOffer', formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
     }
 }
 async function serviceGetOfferProductById(offer_id, product_id) {

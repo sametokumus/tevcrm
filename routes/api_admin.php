@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\Admin\ChatController;
 use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
 use App\Http\Controllers\Api\Admin\TestController;
+use App\Http\Controllers\Api\Admin\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,7 +124,15 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('test/deleteTest/{test_id}', [TestController::class, 'deleteTest']);
 
 
-
+    //Offer
+    Route::get('offer/getOffersByRequestId/{request_id}', [OfferController::class, 'getOffersByRequestId']);
+    Route::get('offer/getNewOffersByRequestId/{request_id}', [OfferController::class, 'getNewOffersByRequestId']);
+    Route::get('offer/getOfferById/{offer_id}', [OfferController::class, 'getOfferById']);
+    Route::post('offer/addOffer', [OfferController::class, 'addOffer']);
+    Route::get('offer/getOfferProductById/{offer_id}/{product_id}', [OfferController::class, 'getOfferProductById']);
+    Route::post('offer/addOfferProduct/{offer_id}', [OfferController::class, 'addOfferProduct']);
+    Route::post('offer/updateOfferProduct/{offer_id}/{product_id}', [OfferController::class, 'updateOfferProduct']);
+    Route::get('offer/deleteOffer/{offer_id}', [OfferController::class, 'deleteOffer']);
 
 
 

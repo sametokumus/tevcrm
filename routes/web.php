@@ -33,6 +33,7 @@ Route::get('/update-category/{id}', function () { return view('update-category')
 
 Route::get('/offer-calculator', function () { return view('offer-calculator'); });
 Route::get('/add-offer', function () { return view('add-offer'); });
+Route::get('/add-offer-tests/{id}', function () { return view('add-offer-tests'); });
 
 
 
