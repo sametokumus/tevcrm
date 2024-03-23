@@ -31,9 +31,6 @@
 
 		checkLogin();
 		checkRole();
-        await getCustomersAddSelectId('offer_customer');
-        await getAdminsAddSelectId('offer_manager');
-        await getAdminsAddSelectId('offer_lab_manager');
         initOffer();
 	});
 
@@ -66,13 +63,16 @@ async function initOffer(){
     let data = await serviceGetOfferInfoById(offer_id);
     let offer = data.offer;
 
+    await getCustomersAddSelectId('offer_customer');
     document.getElementById('offer_customer').value = offer.customer_id;
+    await getAdminsAddSelectId('offer_manager');
     document.getElementById('offer_manager').value = offer.manager_id;
+    await getAdminsAddSelectId('offer_lab_manager');
     document.getElementById('offer_lab_manager').value = offer.lab_manager_id;
-    document.getElementById('offer_description').value = offer.description;
-
     await getEmployeesAddSelectId(offer.customer_id, 'offer_employee');
     document.getElementById('offer_employee').value = offer.employee_id;
+
+    document.getElementById('offer_description').value = offer.description;
 
 }
 async function addTestToOffer(test_id){
