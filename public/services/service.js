@@ -1230,7 +1230,7 @@ async function serviceGetOfferTestsById(id) {
     }
 }
 async function servicePostAddTestToOffer(offer_id, test_id) {
-    const data = await fetchDataPost('/admin/offer/addTestToOffer/' + offer_id + '/' + test_id, formData, 'application/json');
+    const data = await fetchDataGet('/admin/offer/addTestToOffer/' + offer_id + '/' + test_id, 'application/json');
     if (data.status == "success") {
         return true;
     } else {
