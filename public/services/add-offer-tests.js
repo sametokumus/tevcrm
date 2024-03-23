@@ -67,10 +67,12 @@ async function initOffer(){
     let offer = data.offer;
 
     document.getElementById('offer_customer').value = offer.customer_id;
-    document.getElementById('offer_employee').value = offer.employee_id;
     document.getElementById('offer_manager').value = offer.manager_id;
     document.getElementById('offer_lab_manager').value = offer.lab_manager_id;
     document.getElementById('offer_description').value = offer.description;
+
+    await getEmployeesAddSelectId(offer.customer_id, 'offer_employee');
+    document.getElementById('offer_employee').value = offer.employee_id;
 
 }
 async function addTestToOffer(test_id){
