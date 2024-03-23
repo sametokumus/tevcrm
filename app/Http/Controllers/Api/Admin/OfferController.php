@@ -10,10 +10,12 @@ use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Measurement;
 use App\Models\Offer;
+use App\Models\OfferDetail;
 use App\Models\OfferProduct;
 use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Models\Test;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -155,6 +157,71 @@ class OfferController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer' => $offer]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function getOfferTestsById($offer_id)
+    {
+        try {
+            $offer_details = OfferDetail::query()
+                ->where('offer_id', $offer_id)
+                ->where('active',1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_details' => $offer_details]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addTestToOffer($offer_id, $test_id)
+    {
+        try {
+            $test = Test::query()->where('id', $test_id)->first();
+            OfferDetail::query()->insert([
+                'test_id' => $test_id,
+                'category_id' => $test->category_id,
+                'name' => $test->name,
+                'sample_count' => $test->sample_count,
+                'sample_description' => $test->sample_description,
+                'total_day' => $test->total_day,
+                'price' => $test->price
+            ]);
+            $accounting = Accounting::query()->where('offer_id', $offer_id)->where('active', 1)->first();
+            $test_total_price = $accounting->test_total + $test->price;
+            Accounting::query()->where('id', $accounting->id)->update([
+                'test_total' => $test_total_price
+            ]);
+
+            return response(['message' => __('Teklif ekleme işlemi başarılı.'), 'status' => 'success', 'object' => ['offer_id' => $offer_id]]);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function updateTestToOffer(Request $request)
+    {
+        try {
+            $request->validate([
+                'customer' => 'required'
+            ]);
+            Offer::query()->where('offer_id', $request->offer_id)->insertGetId([
+                'customer_id' => $request->customer,
+                'employee_id' => $request->employee,
+                'manager_id' => $request->manager,
+                'lab_manager_id' => $request->lab_manager,
+                'description' => $request->description
+            ]);
+
+            return response(['message' => __('Teklif güncelleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
 }

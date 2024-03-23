@@ -1221,6 +1221,30 @@ async function serviceGetOfferInfoById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function serviceGetOfferTestsById(id) {
+    const data = await fetchDataGet('/admin/offer/getOfferTestsById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddTestToOffer(offer_id, test_id) {
+    const data = await fetchDataPost('/admin/offer/addTestToOffer/' + offer_id + '/' + test_id, formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
+async function servicePostUpdateTestToOffer(offer_id) {
+    const data = await fetchDataPost('/admin/offer/updateTestToOffer/' + offer_id, formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 

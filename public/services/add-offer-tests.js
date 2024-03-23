@@ -88,24 +88,27 @@ async function initOffer(){
 
 }
 async function addTestToOffer(test_id){
-    let data = await serviceGetTestById(test_id);
-    let test = data.test;
-    let total_price = document.getElementById('offer_price').value;
-    total_price = parseFloat(total_price) + parseFloat(test.price);
-    document.getElementById('offer_price').value = total_price;
-    $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
-
-    let item = '<tr class="test-item">\n' +
-        '                  <td></td>\n' +
-        '                  <td>'+ checkNull(test.name) +'</td>\n' +
-        '                  <td>'+ checkNull(test.sample_count) +'</td>\n' +
-        '                  <td>'+ checkNull(test.sample_description) +'</td>\n' +
-        '                  <td>'+ checkNull(test.total_day) +' Gün</td>\n' +
-        '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
-        '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn w-100">Tekliften Çıkar</button></td>\n' +
-        '              </tr>';
-
-    $('#tests-table tbody').append(item);
+    let returned = await servicePostAddTestToOffer(test_id);
+    if (returned){
+        initOfferTests();
+    }
+    // let test = data.test;
+    // let total_price = document.getElementById('offer_price').value;
+    // total_price = parseFloat(total_price) + parseFloat(test.price);
+    // document.getElementById('offer_price').value = total_price;
+    // $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
+    //
+    // let item = '<tr class="test-item">\n' +
+    //     '                  <td></td>\n' +
+    //     '                  <td>'+ checkNull(test.name) +'</td>\n' +
+    //     '                  <td>'+ checkNull(test.sample_count) +'</td>\n' +
+    //     '                  <td>'+ checkNull(test.sample_description) +'</td>\n' +
+    //     '                  <td>'+ checkNull(test.total_day) +' Gün</td>\n' +
+    //     '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
+    //     '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn w-100">Tekliften Çıkar</button></td>\n' +
+    //     '              </tr>';
+    //
+    // $('#tests-table tbody').append(item);
 }
 async function removeTestItem(element, price){
     let total_price = document.getElementById('offer_price').value;
@@ -114,5 +117,186 @@ async function removeTestItem(element, price){
     $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
 
     $(element).closest('.test-item').remove();
+}
+
+
+let editor;
+let table;
+// Activate an inline edit on click of a table cell
+$('#tests-table').on( 'click', 'tbody td.row-edit', function (e) {
+    editor.inline( table.cells(this.parentNode, '*').nodes(), {
+        submitTrigger: -1,
+        submitHtml: '<i class="fas fa-lg fa-fw me-2 fa-save"/>'
+    } );
+} );
+let categoryOptions = [];
+async function setCategoryOptions (){
+    let data = await serviceGetCategories();
+    console.log(data)
+    let val = { value: "", label: "" };
+    categoryOptions.push(val);
+    $.each(data.categories, function(i, category){
+        let val = { value: category.id, label: category.name };
+        categoryOptions.push(val);
+        $.each(category.sub_categories, function(i, category2){
+            let val = { value: category2.id, label: category.name + " >>> " + category2.name };
+            categoryOptions.push(val);
+        });
+    });
+
+};
+async function initOfferTests(){
+
+    let offer_id = getPathVariable('add-offer-tests');
+    let data = await serviceGetOfferTestsById(offer_id);
+    let offer_details = data.offer_details;
+
+    editor = new $.fn.dataTable.Editor( {
+        data: offer_details,
+        table: "#tests-table",
+        idSrc: "id",
+        fields: [ {
+            label: "ID",
+            name: "id",
+            type: "readonly",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            label: "Test ID",
+            name: "test_id",
+            type: "readonly",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            label: "Ürün Adı",
+            name: "product_name",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            label: "Kategori",
+            name: "category_id",
+            attr: {
+                class: 'form-control'
+            },
+            type: "select",
+            options: categoryOptions
+        },{
+            label: "Test Adı",
+            name: "name",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            label: "Numune Sayısı",
+            name: "sample_count",
+            attr: {
+                class: 'form-control'
+            }
+        },{
+            label: "Numune Açıklama",
+            name: "sample_description",
+            attr: {
+                class: 'form-control'
+            }
+        }, {
+            label: "Test Süresi (Gün)",
+            name: "total_day",
+            attr: {
+                class: 'form-control'
+            }
+        }, {
+            label: "Test Bedeli (₺)",
+            name: "price",
+            attr: {
+                class: 'form-control'
+            },
+            type: "select",
+            options: categoryOptions
+        }
+        ]
+    } );
+
+    editor.on('preSubmit', async function(e, data, action) {
+        if (action !== 'remove') {
+            editor.submit();
+        }
+    });
+
+    table = $('#tests-table').DataTable( {
+        dom: "Bfrtip",
+        data: offer_details,
+        columns: [
+            { data: "id", title:"ID", editable: false },
+            { data: "test_id", title:"Test ID", editable: false },
+            { data: "product_name",title: "Ürün Adı", className:  "row-edit" , defaultContent: ""},
+            { data: "category_id", title: "Test Kategori", editable: false },
+            { data: "name", title: "Test Adı", className:  "row-edit" , defaultContent: ""},
+            { data: "sample_count", title: "Numune Sayısı", className:  "row-edit" , defaultContent: ""},
+            { data: "sample_description", title: "Numune Açıklama", className:  "row-edit" , defaultContent: ""},
+            { data: "total_day", title: "Test Süresi (Gün)", editable: false , defaultContent: ""},
+            { data: "price", title: "Test Bedeli (₺)", editable: false , defaultContent: ""},
+            {
+                data: null,
+                title: "",
+                defaultContent: '<i class="fas fa-lg fa-fw me-2 fa-edit"/>',
+                className: 'row-edit dt-center',
+                orderable: false
+            },
+        ],
+        createdRow: function(row, data, dataIndex) {
+            $(row).find('td:eq(0)').html(dataIndex+1);
+        },
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+        sortable: false,
+        scrollX: true,
+        paging: false,
+        buttons: [
+            {
+                extend: "create",
+                editor: editor,
+                text: "Yeni Ürün Ekle",
+                className: "btn btn-yellow"
+            },
+            { extend: "edit",   editor: editor, text: "Düzenle", className: "btn btn-warning" },
+            { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" },
+            {
+                text: 'Ürünleri Kaydet',
+                className: "btn btn-theme",
+                action: function ( e, dt, node, config ) {
+                    if (table.rows().count() === 0){
+                        alert("Öncelikle ürün girmeniz gerekmektedir.")
+                    }else {
+                    }
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                text: 'Excel olarak kaydet',
+                title: function() {
+                    return 'REQUEST-';
+                },
+                exportOptions: {
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                }
+            },
+            {
+                text: 'Ürünleri Excel\'den aktar',
+                action: function(){
+                    var fileSelector = document.getElementById('import_file');
+                    fileSelector.click();
+                    return false;
+                }
+            }
+        ],
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+        },
+    } );
 }
 

@@ -15,6 +15,7 @@ class CreateOfferDetailsTable extends Migration
     {
         Schema::create('offer_details', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('test_id');
             $table->string('product_name')->nullable();
             $table->bigInteger('category_id');
             $table->string('name');
