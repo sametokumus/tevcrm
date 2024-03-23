@@ -239,11 +239,11 @@ async function initOfferTests(){
         columns: [
             { data: "id", title:"ID", editable: false },
             { data: "test_id", title:"Test ID", editable: false },
-            { data: "product_name",title: "Ürün Adı", className:  "row-edit" , defaultContent: ""},
-            { data: "category_id", title: "Test Kategori", className:  "row-edit" },
-            { data: "name", title: "Test Adı", className:  "row-edit" , defaultContent: ""},
-            { data: "sample_count", title: "Numune Sayısı", className:  "row-edit" , defaultContent: ""},
-            { data: "sample_description", title: "Numune Açıklama", className:  "row-edit" , defaultContent: ""},
+            { data: "product_name",title: "Ürün Adı" , defaultContent: ""},
+            { data: "category_id", title: "Test Kategori" },
+            { data: "name", title: "Test Adı" , defaultContent: ""},
+            { data: "sample_count", title: "Numune Sayısı" , defaultContent: ""},
+            { data: "sample_description", title: "Numune Açıklama" , defaultContent: ""},
             { data: "total_day", title: "Test Süresi (Gün)", editable: false},
             { data: "price", title: "Test Bedeli (₺)", editable: false},
             // {
