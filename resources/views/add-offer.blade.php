@@ -11,26 +11,6 @@ $extra_js='
     <!-- content -->
     <div class="container-fluid mt-4">
         <div class="row justify-content-center mb-2">
-            <div class="col-12 col-lg-12 col-xl-12 col-xxl-12 mb-4 column-set">
-                <div class="card border-0">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <i class="bi bi-calculator h5 me-1 avatar avatar-40 bg-light-theme rounded me-2"></i>
-                            </div>
-                            <div class="col ps-0">
-                                <h4 class="fw-medium mb-0">Teklif Tutarı</h4>
-                            </div>
-                            <div class="col-auto">
-                                <h5 id="view-offer-price">0,00 ₺</h5>
-                                <input type="hidden" id="offer_price" value="0.00">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
             <div class="col-12">
                 <h6 class="title">Teklif Bilgileri</h6>
                 <form id="offer_info_form">
@@ -90,6 +70,19 @@ $extra_js='
                                             <option value="">Seçiniz...</option>
                                         </select>
                                         <label>Laboratuvar Sorumlusu</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-globe"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" placeholder="Website" id="offer_description" class="form-control border-start-0">
+                                        <label>Teklif Açıklaması</label>
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +154,26 @@ $extra_js='
 
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <div class="col-12 col-lg-12 col-xl-12 col-xxl-12 mb-4 column-set">
+                <div class="card border-0">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <i class="bi bi-calculator h5 me-1 avatar avatar-40 bg-light-theme rounded me-2"></i>
+                            </div>
+                            <div class="col ps-0">
+                                <h4 class="fw-medium mb-0">Teklif Tutarı</h4>
+                            </div>
+                            <div class="col-auto">
+                                <h5 id="view-offer-price">0,00 ₺</h5>
+                                <input type="hidden" id="offer_price" value="0.00">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
