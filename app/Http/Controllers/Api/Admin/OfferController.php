@@ -131,7 +131,7 @@ class OfferController extends Controller
     {
         try {
             $offer = Offer::query()
-                ->where('offers.offer_id',$offer_id)
+                ->where('offers.id',$offer_id)
                 ->where('offers.active',1)
                 ->first();
 
