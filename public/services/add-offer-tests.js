@@ -206,12 +206,14 @@ async function initOfferTests(){
         }, {
             label: "Test Süresi (Gün)",
             name: "total_day",
+            type: "readonly",
             attr: {
                 class: 'form-control'
             }
         }, {
             label: "Test Bedeli (₺)",
             name: "price",
+            type: "readonly",
             attr: {
                 class: 'form-control'
             }
