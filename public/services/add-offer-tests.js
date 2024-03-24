@@ -228,7 +228,7 @@ async function initOfferTests(){
         ]
     } );
 
-    editor.on('preRemove', async function(e, data) {
+    editor.on('remove', async function(e, data) {
         console.log(data)
         let item = data.data;
         const obj = Object.values(item)[0];
