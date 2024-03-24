@@ -229,28 +229,21 @@ async function initOfferTests(){
     } );
 
     editor.on('preSubmit', async function(e, data, action) {
-        // console.log(action)
-        console.log(data)
-        // console.log(e)
         if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
             console.log("Submitting row data:", rowData);
             editor.submit();
         }
         if (action === 'remove') {
-            console.log(data.data);
             let item = data.data;
-            for (const key in item) {
-                if (Object.hasOwnProperty.call(item, key)) {
-                    const obj = item[key];
-                    // Check if the object has the id field
-                    if (obj.hasOwnProperty("id")) {
-                        const idValue = obj.id;
-                        console.log(idValue); // Output: 3 (in this case)
-                        // You can use idValue here as needed
-                    }
-                }
+            const obj = Object.values(item)[0];
+            let returned = await serviceGetDeleteTestToOffer(obj.id);
+            if (returned){
+                showAlert('Silme işlemi başarılı.');
+            }else{
+                showAlert('Bir hata oluştu.');
             }
+            initOfferTests();
         }
     });
 

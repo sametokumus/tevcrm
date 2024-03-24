@@ -1245,6 +1245,14 @@ async function servicePostUpdateTestToOffer(offer_id) {
         return false;
     }
 }
+async function serviceGetDeleteTestToOffer(offer_detail_id) {
+    const data = await fetchDataGet('/admin/offer/deleteTestToOffer/' + offer_detail_id, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 
