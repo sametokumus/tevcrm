@@ -229,13 +229,16 @@ async function initOfferTests(){
     } );
 
     editor.on('preSubmit', async function(e, data, action) {
-        console.log(action)
-        console.log(data)
-        console.log(e)
-        if (action !== 'remove') {
+        // console.log(action)
+        // console.log(data)
+        // console.log(e)
+        if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
             console.log("Submitting row data:", rowData);
             editor.submit();
+        }
+        if (action === 'remove') {
+            console.log(data[0])
         }
     });
 
