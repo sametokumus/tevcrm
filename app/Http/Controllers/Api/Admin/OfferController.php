@@ -230,6 +230,12 @@ class OfferController extends Controller
     public function deleteTestToOffer($offer_detail_id)
     {
         try {
+            $offer_detail = OfferDetail::query()->where('id', $offer_detail_id)->first();
+            $accounting = Accounting::query()->where('offer_id', $offer_detail->offer_id)->where('active', 1)->first();
+            $test_total_price = $accounting->test_total - $offer_detail->price;
+            Accounting::query()->where('id', $accounting->id)->update([
+                'test_total' => $test_total_price
+            ]);
             OfferDetail::query()->where('id', $offer_detail_id)->update([
                 'active' => 0
             ]);
