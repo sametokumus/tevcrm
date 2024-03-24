@@ -255,6 +255,7 @@ async function initOfferTests(){
 
     table = $('#tests-table').DataTable( {
         dom: "Bfrtip",
+        retrieve: true,
         data: offer_details,
         columns: [
             { data: "id", title:"ID", editable: false },
