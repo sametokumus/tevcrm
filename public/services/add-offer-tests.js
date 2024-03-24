@@ -243,6 +243,7 @@ async function initOfferTests(){
                 editor.submit();
             }else{
                 showAlert('Bir hata oluştu.');
+                console.log('hata')
                 e.preventDefault();
             }
         }
