@@ -1248,7 +1248,7 @@ async function servicePostUpdateTestToOffer(offer_id) {
 async function serviceGetDeleteTestToOffer(offer_detail_id) {
     const data = await fetchDataGet('/admin/offer/deleteTestToOffer/' + offer_detail_id, 'application/json');
     if (data.status == "success") {
-        return false;
+        return true;
     } else {
         return false;
     }
