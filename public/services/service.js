@@ -1237,8 +1237,8 @@ async function servicePostAddTestToOffer(offer_id, test_id) {
         return false;
     }
 }
-async function servicePostUpdateTestToOffer(offer_id) {
-    const data = await fetchDataPost('/admin/offer/updateTestToOffer/' + offer_id, formData, 'application/json');
+async function servicePostUpdateTestToOffer(formData, offer_detail_id) {
+    const data = await fetchDataPost('/admin/offer/updateTestToOffer/' + offer_detail_id, formData, 'application/json');
     if (data.status == "success") {
         return true;
     } else {

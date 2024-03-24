@@ -204,18 +204,13 @@ class OfferController extends Controller
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
-    public function updateTestToOffer(Request $request)
+    public function updateTestToOffer(Request $request, $offer_detail_id)
     {
         try {
-            $request->validate([
-                'customer' => 'required'
-            ]);
-            Offer::query()->where('offer_id', $request->offer_id)->insertGetId([
-                'customer_id' => $request->customer,
-                'employee_id' => $request->employee,
-                'manager_id' => $request->manager,
-                'lab_manager_id' => $request->lab_manager,
-                'description' => $request->description
+            OfferDetail::query()->where('id', $offer_detail_id)->update([
+                'product_name' => $request->product_name,
+                'sample_count' => $request->sample_count,
+                'sample_description' => $request->sample_description,
             ]);
 
             return response(['message' => __('Teklif güncelleme işlemi başarılı.'), 'status' => 'success']);

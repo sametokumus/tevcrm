@@ -95,23 +95,6 @@ async function addTestToOffer(test_id){
     if (returned){
         initOfferTests();
     }
-    // let test = data.test;
-    // let total_price = document.getElementById('offer_price').value;
-    // total_price = parseFloat(total_price) + parseFloat(test.price);
-    // document.getElementById('offer_price').value = total_price;
-    // $('#view-offer-price').html(changeCommasToDecimal(parseFloat(total_price).toFixed(2)) + ' ₺');
-    //
-    // let item = '<tr class="test-item">\n' +
-    //     '                  <td></td>\n' +
-    //     '                  <td>'+ checkNull(test.name) +'</td>\n' +
-    //     '                  <td>'+ checkNull(test.sample_count) +'</td>\n' +
-    //     '                  <td>'+ checkNull(test.sample_description) +'</td>\n' +
-    //     '                  <td>'+ checkNull(test.total_day) +' Gün</td>\n' +
-    //     '                  <td>'+ changeCommasToDecimal(test.price) +' ₺</td>\n' +
-    //     '                  <td><button type="button" onclick="removeTestItem(this, '+test.price+')" class="btn btn-sm btn-theme offer_remove_test_btn w-100">Tekliften Çıkar</button></td>\n' +
-    //     '              </tr>';
-    //
-    // $('#tests-table tbody').append(item);
 }
 async function removeTestItem(element, price){
     let total_price = document.getElementById('offer_price').value;
@@ -229,12 +212,35 @@ async function initOfferTests(){
     } );
 
     let deletedRowData = null;
+    let originalRowData = null;
+
+    editor.on('preEdit', function(e, data, node, config) {
+        // Store the original data of the row being edited
+        originalRowData = $.extend(true, {}, data);
+    });
 
     editor.on('preSubmit', async function(e, data, action) {
         if (action === 'edit') {
-            var rowData = table.rows('.selected').data().toArray();
-            console.log("Submitting row data:", rowData);
-            editor.submit();
+            let item = data.data;
+            const obj = Object.values(item)[0];
+            let formData = JSON.stringify({
+                "product_name": obj.product_name,
+                "sample_count": obj.sample_count,
+                "sample_description": obj.sample_description
+            });
+            let returned = await servicePostUpdateTestToOffer(formData, obj.id);
+            if (returned) {
+                showAlert('Düzenleme işlemi başarılı.');
+                editor.submit();
+            } else {
+                showAlert('Düzenleme işlemi başarısız.');
+                console.log('hata');
+                // Revert the changes to the original row data
+                if (originalRowData) {
+                    data.data[0] = originalRowData;
+                    originalRowData = null;
+                }
+            }
         }
         if (action === 'remove') {
             let item = data.data;
