@@ -239,6 +239,9 @@ async function initOfferTests(){
             console.log("Submitting row data:", rowData);
             editor.submit();
         }
+        if (action === 'remove') {
+            console.log(3)
+        }
         // if (action === 'remove') {
         //     let item = data.data;
         //     const obj = Object.values(item)[0];
