@@ -150,6 +150,10 @@ async function setCategoryOptions (){
 };
 async function initOfferTests(){
 
+    if ($.fn.DataTable.isDataTable("#tests-table")) {
+        $("#tests-table").dataTable().fnDestroy();
+    }
+
     let offer_id = getPathVariable('add-offer-tests');
     let data = await serviceGetOfferTestsById(offer_id);
     let offer_details = data.offer_details;
