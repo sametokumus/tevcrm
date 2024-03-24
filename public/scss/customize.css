@@ -80,5 +80,6 @@ div.dataTables_wrapper div.dt-buttons button {
 }
 
 table.dataTable {
-    min-width: 100%;
+    min-width: 100% !important;
+    max-width: 100% !important;
 }
