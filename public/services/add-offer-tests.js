@@ -245,7 +245,8 @@ async function initOfferTests(){
             }else{
                 showAlert('Bir hata oluştu.');
                 console.log('hata')
-                initOfferTests();
+                table.destroy();
+                // initOfferTests();
             }
         }
     });
