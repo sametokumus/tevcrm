@@ -220,6 +220,7 @@ async function initOfferTests(){
     });
 
     editor.on('preSubmit', async function(e, data, action) {
+        console.log(data)
         if (action === 'edit') {
             let item = data.data;
             const obj = Object.values(item)[0];
