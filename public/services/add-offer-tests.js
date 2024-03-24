@@ -238,7 +238,19 @@ async function initOfferTests(){
             editor.submit();
         }
         if (action === 'remove') {
-            console.log(data.data)
+            console.log(data.data);
+            let item = data.data;
+            for (const key in item) {
+                if (Object.hasOwnProperty.call(item, key)) {
+                    const obj = item[key];
+                    // Check if the object has the id field
+                    if (obj.hasOwnProperty("id")) {
+                        const idValue = obj.id;
+                        console.log(idValue); // Output: 3 (in this case)
+                        // You can use idValue here as needed
+                    }
+                }
+            }
         }
     });
 
