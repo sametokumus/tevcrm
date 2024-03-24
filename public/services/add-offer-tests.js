@@ -228,34 +228,25 @@ async function initOfferTests(){
         ]
     } );
 
-    editor.on('preRemove', async function(e, data) {
-        console.log(1)
-    });
-
     editor.on('preSubmit', async function(e, data, action) {
-        console.log(2)
         if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
             console.log("Submitting row data:", rowData);
             editor.submit();
         }
         if (action === 'remove') {
-            console.log(3)
-            e.preventDefault();
+            let item = data.data;
+            const obj = Object.values(item)[0];
+            let returned = await serviceGetDeleteTestToOffer(obj.id);
+            if (returned){
+                showAlert('Silme işlemi başarılı.');
+                editor.submit();
+            }else{
+                showAlert('Bir hata oluştu.');
+                console.log('hata')
+                initOfferTests();
+            }
         }
-        // if (action === 'remove') {
-        //     let item = data.data;
-        //     const obj = Object.values(item)[0];
-        //     let returned = await serviceGetDeleteTestToOffer(obj.id);
-        //     if (returned){
-        //         showAlert('Silme işlemi başarılı.');
-        //         editor.submit();
-        //     }else{
-        //         showAlert('Bir hata oluştu.');
-        //         console.log('hata')
-        //         e.preventDefault();
-        //     }
-        // }
     });
 
     table = $('#tests-table').DataTable( {
