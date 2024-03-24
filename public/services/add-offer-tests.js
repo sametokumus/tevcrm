@@ -152,7 +152,7 @@ async function initOfferTests(){
 
     if ($.fn.DataTable.isDataTable("#tests-table")) {
         console.log(1)
-        table.destroy();
+        $("#tests-table").dataTable().fnDestroy();
     }
 
     let offer_id = getPathVariable('add-offer-tests');
@@ -245,8 +245,8 @@ async function initOfferTests(){
             }else{
                 showAlert('Bir hata oluştu.');
                 console.log('hata')
-                table.destroy();
-                // initOfferTests();
+                $("#tests-table").dataTable().fnDestroy();
+                initOfferTests();
             }
         }
     });
