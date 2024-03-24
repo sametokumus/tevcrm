@@ -241,6 +241,7 @@ async function initOfferTests(){
         }
         if (action === 'remove') {
             console.log(3)
+            e.preventDefault();
         }
         // if (action === 'remove') {
         //     let item = data.data;
