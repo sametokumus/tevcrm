@@ -231,6 +231,8 @@ async function initOfferTests(){
         ]
     } );
 
+    let deletedRowData = null;
+
     editor.on('preSubmit', async function(e, data, action) {
         if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
@@ -240,6 +242,8 @@ async function initOfferTests(){
         if (action === 'remove') {
             let item = data.data;
             const obj = Object.values(item)[0];
+
+            deletedRowData = obj;
             let returned = await serviceGetDeleteTestToOffer(obj.id);
             if (returned){
                 showAlert('Silme işlemi başarılı.');
@@ -247,8 +251,10 @@ async function initOfferTests(){
             }else{
                 showAlert('Bir hata oluştu.');
                 console.log('hata')
-                $("#tests-table").dataTable().fnDestroy();
-                initOfferTests();
+                if (deletedRowData) {
+                    table.row.add(deletedRowData).draw();
+                    deletedRowData = null;
+                }
             }
         }
     });
