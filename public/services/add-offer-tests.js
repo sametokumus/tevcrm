@@ -240,10 +240,11 @@ async function initOfferTests(){
             let returned = await serviceGetDeleteTestToOffer(obj.id);
             if (returned){
                 showAlert('Silme işlemi başarılı.');
+                editor.submit();
             }else{
                 showAlert('Bir hata oluştu.');
+                e.preventDefault();
             }
-            initOfferTests();
         }
     });
 
