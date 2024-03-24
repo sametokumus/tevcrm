@@ -153,6 +153,8 @@ async function initOfferTests(){
     if ($.fn.DataTable.isDataTable("#tests-table")) {
         console.log(1)
         $("#tests-table").dataTable().fnDestroy();
+    }else{
+        console.log(2)
     }
 
     let offer_id = getPathVariable('add-offer-tests');
