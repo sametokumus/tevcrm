@@ -238,7 +238,7 @@ async function initOfferTests(){
             editor.submit();
         }
         if (action === 'remove') {
-            console.log(data.data[0])
+            console.log(data.data)
         }
     });
 
