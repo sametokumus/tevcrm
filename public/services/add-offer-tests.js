@@ -228,20 +228,12 @@ async function initOfferTests(){
         ]
     } );
 
-    editor.on('remove', async function(e, data) {
-        console.log(data)
-        let item = data.data;
-        const obj = Object.values(item)[0];
-        let returned = await serviceGetDeleteTestToOffer(obj.id);
-        if (returned) {
-            showAlert('Silme işlemi başarılı.');
-        } else {
-            showAlert('Bir hata oluştu.');
-            e.preventDefault(); // Prevent the removal of the row
-        }
+    editor.on('preRemove', async function(e, data) {
+        console.log(1)
     });
 
     editor.on('preSubmit', async function(e, data, action) {
+        console.log(2)
         if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
             console.log("Submitting row data:", rowData);
