@@ -229,6 +229,7 @@ async function initOfferTests(){
     } );
 
     editor.on('preRemove', async function(e, data) {
+        console.log(data)
         let item = data.data;
         const obj = Object.values(item)[0];
         let returned = await serviceGetDeleteTestToOffer(obj.id);
