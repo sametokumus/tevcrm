@@ -180,15 +180,17 @@ async function initOfferTests(){
             }
         },{
             label: "Kategori",
-            name: "category_id",
+            name: "category_name",
+            type: "readonly",
             attr: {
                 class: 'form-control'
             },
-            type: "select",
-            options: categoryOptions
+            // type: "select",
+            // options: categoryOptions
         },{
             label: "Test Adı",
             name: "name",
+            type: "readonly",
             attr: {
                 class: 'form-control'
             }
@@ -240,67 +242,23 @@ async function initOfferTests(){
             { data: "id", title:"ID", editable: false },
             { data: "test_id", title:"Test ID", editable: false },
             { data: "product_name",title: "Ürün Adı" , defaultContent: ""},
-            { data: "category_id", title: "Test Kategori" },
-            { data: "name", title: "Test Adı" , defaultContent: ""},
+            { data: "category_name", title: "Test Kategori", editable: false },
+            { data: "name", title: "Test Adı" , defaultContent: "", editable: false},
             { data: "sample_count", title: "Numune Sayısı" , defaultContent: ""},
             { data: "sample_description", title: "Numune Açıklama" , defaultContent: ""},
             { data: "total_day", title: "Test Süresi (Gün)", editable: false},
             { data: "price", title: "Test Bedeli (₺)", editable: false},
-            // {
-            //     data: null,
-            //     title: "",
-            //     defaultContent: '<i class="bi bi-pencil-square"/>',
-            //     className: 'row-edit dt-center',
-            //     orderable: false
-            // },
         ],
-        createdRow: function(row, data, dataIndex) {
-            $(row).find('td:eq(0)').html(dataIndex+1);
-        },
         select: {
             style: 'os',
-            selector: 'td:first-child'
+            selector: 'tr'
         },
         sortable: false,
         scrollX: true,
         paging: false,
         buttons: [
-            {
-                extend: "create",
-                editor: editor,
-                text: "Yeni Ürün Ekle",
-                className: "btn btn-yellow"
-            },
             { extend: "edit",   editor: editor, text: "Düzenle", className: "btn btn-warning" },
-            { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" },
-            {
-                text: 'Ürünleri Kaydet',
-                className: "btn btn-theme",
-                action: function ( e, dt, node, config ) {
-                    if (table.rows().count() === 0){
-                        alert("Öncelikle ürün girmeniz gerekmektedir.")
-                    }else {
-                    }
-                }
-            },
-            {
-                extend: 'excelHtml5',
-                text: 'Excel olarak kaydet',
-                title: function() {
-                    return 'REQUEST-';
-                },
-                exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-                }
-            },
-            {
-                text: 'Ürünleri Excel\'den aktar',
-                action: function(){
-                    var fileSelector = document.getElementById('import_file');
-                    fileSelector.click();
-                    return false;
-                }
-            }
+            { extend: "remove", editor: editor, text: "Sil", className: "btn btn-danger" }
         ],
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"

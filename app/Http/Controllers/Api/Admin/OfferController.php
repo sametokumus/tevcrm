@@ -163,8 +163,10 @@ class OfferController extends Controller
     {
         try {
             $offer_details = OfferDetail::query()
-                ->where('offer_id', $offer_id)
-                ->where('active',1)
+                ->leftJoin('categories', 'categories.id', '=', 'offer_details.category_id')
+                ->selectRaw('offer_details.*, categories.name as category_name')
+                ->where('offer_details.offer_id', $offer_id)
+                ->where('offer_details.active',1)
                 ->get();
 
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['offer_details' => $offer_details]]);
