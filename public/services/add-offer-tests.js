@@ -216,6 +216,7 @@ async function initOfferTests(){
 
     editor.on('preEdit', function(e, data, node, config) {
         // Store the original data of the row being edited
+        console.log('org')
         originalRowData = $.extend(true, {}, data);
     });
 
