@@ -207,13 +207,13 @@ class OfferController extends Controller
     public function updateTestToOffer(Request $request, $offer_detail_id)
     {
         try {
-            OfferDetail::query()->where('id', $offer_detail_id)->update([
-                'product_name' => $request->product_name,
-                'sample_count' => $request->sample_count,
-                'sample_description' => $request->sample_description,
-            ]);
+//            OfferDetail::query()->where('id', $offer_detail_id)->update([
+//                'product_name' => $request->product_name,
+//                'sample_count' => $request->sample_count,
+//                'sample_description' => $request->sample_description,
+//            ]);
 
-            return response(['message' => __('Teklif güncelleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Teklif güncelleme işlemi başarılı.'), 'status' => 'successs']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
