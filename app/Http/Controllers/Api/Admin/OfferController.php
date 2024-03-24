@@ -237,10 +237,10 @@ class OfferController extends Controller
                 'test_total' => $test_total_price
             ]);
             OfferDetail::query()->where('id', $offer_detail_id)->update([
-                'active' => 1
+                'active' => 0
             ]);
 
-            return response(['message' => __('Test silme işlemi başarılı.'), 'status' => 'successs']);
+            return response(['message' => __('Test silme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {

@@ -151,10 +151,7 @@ async function setCategoryOptions (){
 async function initOfferTests(){
 
     if ($.fn.DataTable.isDataTable("#tests-table")) {
-        console.log(1)
         $("#tests-table").dataTable().fnDestroy();
-    }else{
-        console.log(2)
     }
 
     let offer_id = getPathVariable('add-offer-tests');
@@ -250,7 +247,6 @@ async function initOfferTests(){
                 editor.submit();
             }else{
                 showAlert('Bir hata oluştu.');
-                console.log('hata')
                 if (deletedRowData) {
                     table.row.add(deletedRowData).draw();
                     deletedRowData = null;
