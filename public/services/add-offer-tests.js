@@ -230,7 +230,7 @@ async function initOfferTests(){
 
     editor.on('preSubmit', async function(e, data, action) {
         // console.log(action)
-        // console.log(data)
+        console.log(data)
         // console.log(e)
         if (action === 'edit') {
             var rowData = table.rows('.selected').data().toArray();
