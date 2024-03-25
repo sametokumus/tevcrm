@@ -93,4 +93,7 @@ div.DTE button.btn, div.DTE div.DTE_Form_Buttons button{
     background-color: var(--WinDOORS-theme);
     color: var(--WinDOORS-theme-color);
     border-color: var(--WinDOORS-theme-darken);
+    background-image: none;
+    padding: .5em 2em;
+    line-height: 14px;
 }
