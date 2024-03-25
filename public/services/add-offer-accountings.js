@@ -4,6 +4,9 @@
 	$(document).ready(function() {
 
         $(":input").inputmask();
+        $("#offer_test_total").maskMoney({thousands:'.', decimal:','});
+        $("#offer_discount").maskMoney({thousands:'.', decimal:','});
+        $("#offer_vat_rate").maskMoney({thousands:'', decimal:'.'});
 
         $('#offer_summary_form').submit(function (e){
             e.preventDefault();

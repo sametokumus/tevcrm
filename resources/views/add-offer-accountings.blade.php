@@ -47,7 +47,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="number" placeholder="KDV Oranı" id="offer_vat_rate" class="form-control border-start-0">
+                                        <input type="text" placeholder="KDV Oranı" id="offer_vat_rate" class="form-control border-start-0">
                                         <label>KDV Oranı</label>
                                     </div>
                                 </div>
