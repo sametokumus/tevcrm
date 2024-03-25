@@ -212,13 +212,6 @@ async function initOfferTests(){
     } );
 
     let deletedRowData = null;
-    let originalRowData = null;
-
-    editor.on('preEdit', function(e, data, node, config) {
-        // Store the original data of the row being edited
-        console.log('org')
-        originalRowData = $.extend(true, {}, data);
-    });
 
     editor.on('preSubmit', async function(e, data, action) {
         console.log(data)
@@ -237,11 +230,6 @@ async function initOfferTests(){
             } else {
                 showAlert('Düzenleme işlemi başarısız.');
                 console.log('hata');
-                // Revert the changes to the original row data
-                if (originalRowData) {
-                    data.data[0] = originalRowData;
-                    originalRowData = null;
-                }
             }
         }
         if (action === 'remove') {
