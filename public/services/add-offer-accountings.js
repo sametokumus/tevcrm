@@ -56,6 +56,6 @@ async function initOfferSummary(){
     $('#summary_vat').html(checkNull(changeCommasToDecimal(summary.vat)));
     $('#summary_grand_total').html(checkNull(changeCommasToDecimal(summary.grand_total)));
 
-    document.getElementById('offer_test_total').value = changePriceToDecimal(summary.test_total);
+    document.getElementById('offer_test_total').value = changeCommasToDecimal(summary.test_total);
 }
 
