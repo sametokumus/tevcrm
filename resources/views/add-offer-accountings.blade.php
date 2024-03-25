@@ -100,50 +100,11 @@ $extra_js='
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <div class="avatar avatar-40 rounded bg-light-theme">
-                                    <i class="bi bi-send h5"></i>
+                                    <i class="bi bi-cash h5"></i>
                                 </div>
                             </div>
                             <div class="col">
-                                <h6 class="fw-medium mb-0">Send Money</h6>
-                                <p class="small text-secondary">Across the platform</p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="dropdown d-inline-block">
-                                    <a class="btn btn-link btn-square text-secondary dd-arrow-none dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                        <i class="bi bi-columns"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <div class="dropdown-item text-center">
-                                            <div class="row gx-3 mb-3">
-                                                <div class="col-6">
-                                                    <div class="row select-column-size gx-1">
-                                                        <div class="col-8" data-title="8"><span></span></div>
-                                                        <div class="col-4" data-title="4"><span></span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="row select-column-size gx-1">
-                                                        <div class="col-9" data-title="9"><span></span></div>
-                                                        <div class="col-3" data-title="3"><span></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row gx-3">
-                                                <div class="col-6">
-                                                    <div class="row select-column-size gx-1">
-                                                        <div class="col-6" data-title="6"><span></span></div>
-                                                        <div class="col-6" data-title="6"><span></span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="row select-column-size gx-1">
-                                                        <div class="col-12" data-title="12"><span></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="fw-medium mb-0">Teklif Özeti</h5>
                             </div>
                         </div>
                     </div>
@@ -152,28 +113,28 @@ $extra_js='
                             <div class="col-12 mb-2">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <p class="text-secondary small">Toplam Tutar: <span id="test_total">21321</span> <small>₺</small></p>
+                                        <h6 class="text-body">Toplam Tutar: <span id="summary_test_total"></span> <small>₺</small></h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-2">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <p class="text-secondary small">İskonto: <span id="test_total">21321</span> <small>₺</small></p>
+                                        <h6 class="text-body">İskonto: <span id="summary_discount"></span> <small>₺</small></h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-2">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <p class="text-secondary small">Ara Toplam: <span id="test_total">21321</span> <small>₺</small></p>
+                                        <h6 class="text-body">Ara Toplam: <span id="summary_sub_total"></span> <small>₺</small></h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-2">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <p class="text-secondary small">KDV: <span id="test_total">21321</span> <small>₺</small></p>
+                                        <h6 class="text-body">KDV: <span id="summary_vat"></span> <small>₺</small></h6>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +143,7 @@ $extra_js='
                     <div class="card-footer">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h5 class="mb-0"><span id="total_price">12322</span> <small class="h6">₺</small></h5>
+                                <h5 class="mb-0"><span id="summary_grand_total"></span> <small class="h6">₺</small></h5>
                                 <p class="small text-secondary">Genel Toplam (KDV Dahil)</p>
                             </div>
                         </div>

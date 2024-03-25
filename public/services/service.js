@@ -1253,6 +1253,14 @@ async function serviceGetDeleteTestToOffer(offer_detail_id) {
         return false;
     }
 }
+async function serviceGetOfferSummaryById(id) {
+    const data = await fetchDataGet('/admin/offer/getOfferSummaryById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 
 

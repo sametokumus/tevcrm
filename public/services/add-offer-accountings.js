@@ -26,9 +26,7 @@
 
 		checkLogin();
 		checkRole();
-        getCustomersAddSelectId('offer_customer');
-        getAdminsAddSelectId('offer_manager');
-        getAdminsAddSelectId('offer_lab_manager');
+        initOfferSummary();
 
 	});
 
@@ -52,5 +50,18 @@ async function addOffer(){
     if (data.status == "success"){
         window.location = "add-offer-tests/" + data.object.offer_id;
     }
+}
+async function initOfferSummary(){
+
+    let offer_id = getPathVariable('add-offer-accountings');
+
+    let data = await serviceGetOfferSummaryById(offer_id);
+    let summary = data.summary;
+
+    $('#summary_test_total').html(changeCommasToDecimal(summary.test_total));
+    $('#summary_discount').html(checkNull(changeCommasToDecimal(summary.discount)));
+    $('#summary_sub_total').html(checkNull(changeCommasToDecimal(summary.sub_total)));
+    $('#summary_vat').html(checkNull(changeCommasToDecimal(summary.vat)));
+    $('#summary_grand_total').html(checkNull(changeCommasToDecimal(summary.grand_total)));
 }
 

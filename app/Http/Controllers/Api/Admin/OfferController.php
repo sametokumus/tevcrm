@@ -244,4 +244,17 @@ class OfferController extends Controller
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
         }
     }
+    public function getOfferSummaryById($offer_id)
+    {
+        try {
+            $summary = Accounting::query()
+                ->where('offer_id',$offer_id)
+                ->where('active',1)
+                ->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['summary' => $summary]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 }
