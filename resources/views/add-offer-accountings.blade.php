@@ -11,7 +11,7 @@ $extra_js='
     <!-- content -->
     <div class="container-fluid mt-4">
         <div class="row justify-content-center mb-2">
-            <div class="col-12">
+            <div class="col-12 col-md-9">
                 <h6 class="title">Teklif Bilgileri</h6>
                 <form id="offer_info_form">
                     <div class="row">
@@ -93,6 +93,103 @@ $extra_js='
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card border-0 mb-4 theme-blue bg-gradient-theme-light">
+                    <div class="card-header ">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="avatar avatar-40 rounded bg-light-theme">
+                                    <i class="bi bi-send h5"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h6 class="fw-medium mb-0">Send Money</h6>
+                                <p class="small text-secondary">Across the platform</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown d-inline-block">
+                                    <a class="btn btn-link btn-square text-secondary dd-arrow-none dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                        <i class="bi bi-columns"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <div class="dropdown-item text-center">
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-6">
+                                                    <div class="row select-column-size gx-1">
+                                                        <div class="col-8" data-title="8"><span></span></div>
+                                                        <div class="col-4" data-title="4"><span></span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row select-column-size gx-1">
+                                                        <div class="col-9" data-title="9"><span></span></div>
+                                                        <div class="col-3" data-title="3"><span></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                                <div class="col-6">
+                                                    <div class="row select-column-size gx-1">
+                                                        <div class="col-6" data-title="6"><span></span></div>
+                                                        <div class="col-6" data-title="6"><span></span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row select-column-size gx-1">
+                                                        <div class="col-12" data-title="12"><span></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col text-center">
+                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                                    <div class="card-body">
+                                        <i class="bi bi-phone h5 avatar avatar-40 rounded text-theme mb-2"></i>
+                                        <p class="text-secondary small">Phone</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                                    <div class="card-body">
+                                        <i class="bi bi-bank h5 avatar avatar-40 rounded text-theme mb-2"></i>
+
+                                        <p class="text-secondary small">Account</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                                    <div class="card-body">
+                                        <i class="bi bi-at h4 avatar avatar-40 rounded text-theme mb-2"></i>
+                                        <p class="text-secondary small">UPI</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="circle-small">
+                                    <div id="circleprogressblue1"><svg viewBox="0 0 100 100" style="display: block; width: 100%;"><path d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="rgba(1, 94, 194, 0.1)" stroke-width="10" fill-opacity="0"></path><path d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="rgb(1,94,194)" stroke-width="10" fill-opacity="0" style="stroke-dasharray: 282.783, 282.783; stroke-dashoffset: 248.849;"></path></svg><div class="progressbar-text" style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(1, 94, 194);">12<small>%<small></small></small></div></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5 class="mb-0">1350 <small class="h6">USD</small></h5>
+                                <p class="small text-secondary">36.00 <span class="text-green"><i class="bi bi-arrow-up fs-10"></i>3.15%</span> spent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
