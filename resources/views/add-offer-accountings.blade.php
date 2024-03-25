@@ -149,29 +149,33 @@ $extra_js='
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                            <div class="col-12 mb-2">
+                                <div class="card border-0">
                                     <div class="card-body">
-                                        <p class="text-secondary small">Toplam Tutar: <span id="subtotal1">21321</span> <small>₺</small></p>
+                                        <p class="text-secondary small">Toplam Tutar: <span id="test_total">21321</span> <small>₺</small></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col text-center">
-                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                            <div class="col-12 mb-2">
+                                <div class="card border-0">
                                     <div class="card-body">
-                                        <i class="bi bi-bank h5 avatar avatar-40 rounded text-theme mb-2"></i>
-
-                                        <p class="text-secondary small">Account</p>
+                                        <p class="text-secondary small">İskonto: <span id="test_total">21321</span> <small>₺</small></p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                            <div class="col text-center">
-                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                            <div class="col-12 mb-2">
+                                <div class="card border-0">
                                     <div class="card-body">
-                                        <i class="bi bi-at h4 avatar avatar-40 rounded text-theme mb-2"></i>
-                                        <p class="text-secondary small">UPI</p>
+                                        <p class="text-secondary small">Ara Toplam: <span id="test_total">21321</span> <small>₺</small></p>
                                     </div>
-                                </a>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <p class="text-secondary small">KDV: <span id="test_total">21321</span> <small>₺</small></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
