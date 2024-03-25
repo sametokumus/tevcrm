@@ -149,13 +149,12 @@ $extra_js='
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col text-center">
-                                <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
+                            <div class="col-12">
+                                <div class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
                                     <div class="card-body">
-                                        <i class="bi bi-phone h5 avatar avatar-40 rounded text-theme mb-2"></i>
-                                        <p class="text-secondary small">Phone</p>
+                                        <p class="text-secondary small">Toplam Tutar: <span id="subtotal1">21321</span> <small>₺</small></p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                             <div class="col text-center">
                                 <a href="#" class="card border-0" data-bs-toggle="modal" data-bs-target="#sentmoney">
@@ -178,14 +177,9 @@ $extra_js='
                     </div>
                     <div class="card-footer">
                         <div class="row align-items-center">
-                            <div class="col-auto">
-                                <div class="circle-small">
-                                    <div id="circleprogressblue1"><svg viewBox="0 0 100 100" style="display: block; width: 100%;"><path d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="rgba(1, 94, 194, 0.1)" stroke-width="10" fill-opacity="0"></path><path d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="rgb(1,94,194)" stroke-width="10" fill-opacity="0" style="stroke-dasharray: 282.783, 282.783; stroke-dashoffset: 248.849;"></path></svg><div class="progressbar-text" style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(1, 94, 194);">12<small>%<small></small></small></div></div>
-                                </div>
-                            </div>
                             <div class="col">
-                                <h5 class="mb-0">1350 <small class="h6">USD</small></h5>
-                                <p class="small text-secondary">36.00 <span class="text-green"><i class="bi bi-arrow-up fs-10"></i>3.15%</span> spent</p>
+                                <h5 class="mb-0"><span id="total_price">12322</span> <small class="h6">₺</small></h5>
+                                <p class="small text-secondary">Genel Toplam (KDV Dahil)</p>
                             </div>
                         </div>
                     </div>
