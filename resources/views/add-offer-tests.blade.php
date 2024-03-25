@@ -153,7 +153,7 @@ $extra_js='
         </div>
         <div class="row justify-content-center mb-2">
             <div class="col-12 col-md-12 mb-2">
-                <a href="add-offer-accountings" id="save_offer_btn" class="btn btn-theme theme-green w-100">Muhasebe Detaylarını Gir </a>
+                <button type="button" id="add_accounting_btn" class="btn btn-theme theme-green w-100">Muhasebe Detaylarını Gir</button>
             </div>
         </div>
     </div>

@@ -27,6 +27,11 @@
             }
         });
 
+        $('#add_accounting_btn').on('click', function (e){
+            let offer_id = getPathVariable('add-offer-tests');
+            window.location = "add-offer-accountings/" + offer_id;
+        });
+
         $('#offer_test_btn').on('click', function (e){
             let test_id = document.getElementById('offer_test').value;
             addTestToOffer(test_id);
