@@ -163,28 +163,8 @@ $extra_js='
             </div>
         </div>
         <div class="row justify-content-center mb-2">
-            <div class="col-12 col-lg-12 col-xl-12 col-xxl-12 mb-4 column-set">
-                <div class="card border-0">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <i class="bi bi-calculator h5 me-1 avatar avatar-40 bg-light-theme rounded me-2"></i>
-                            </div>
-                            <div class="col ps-0">
-                                <h4 class="fw-medium mb-0">Teklif Tutarı</h4>
-                            </div>
-                            <div class="col-auto">
-                                <h5 id="view-offer-price">0,00 ₺</h5>
-                                <input type="hidden" id="offer_price" value="0.00">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
             <div class="col-12 col-md-2 mb-2">
-                <button type="button" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklifi Kaydet</button>
+                <a href="offers" id="save_offer_btn" class="btn btn-theme theme-green w-100 h-60">Teklifi Kaydet</a>
             </div>
         </div>
     </div>
