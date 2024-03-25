@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers\Api\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Test;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Nette\Schema\ValidationException;
+
+class LabController extends Controller
+{
+
+    public function addLab(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required'
+            ]);
+            $user = Auth::user();
+            Test::query()->insertGetId([
+                'category_id' => $request->category_id,
+                'name' => $request->name,
+                'sample_count' => $request->sample_count,
+                'sample_description' => $request->sample_description,
+                'total_day' => $request->total_day,
+                'price' => $request->price
+            ]);
+
+            return response(['message' => __('Test ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateLab(Request $request, $lab_id){
+        try {
+            $request->validate([
+                'name' => 'required',
+            ]);
+            Test::query()->where('id', $test_id)->update([
+                'category_id' => $request->category_id,
+                'name' => $request->name,
+                'sample_count' => $request->sample_count,
+                'sample_description' => $request->sample_description,
+                'total_day' => $request->total_day,
+                'price' => $request->price
+            ]);
+
+            return response(['message' => __('Test güncelleme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001','ar' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getTraceAsString()]);
+        }
+    }
+
+    public function deleteLab($lab_id){
+        try {
+
+            Test::query()->where('id',$test_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Test silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+}

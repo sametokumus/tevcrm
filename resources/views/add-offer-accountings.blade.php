@@ -2,7 +2,7 @@
 <?php
 $extra_js='
 <script src="services/header-title.js"></script>
-<script src="services/add-offer-tests.js"></script>
+<script src="services/add-offer-accountings.js"></script>
 ';
 ?>
 
@@ -89,71 +89,10 @@ $extra_js='
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-12 mb-2">
-                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Bilgilerini Güncelle</button>
+                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Oluştur</button>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
-            <div class="col-12">
-                <h6 class="title">Test Ekle</h6>
-                <form id="add_test_form">
-                    <div class="row">
-                        <div class="col-12 col-md-5 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-highlighter"></i></span>
-                                    <div class="form-floating">
-                                        <select class="form-select border-0 select2-show-search" id="offer_category">
-                                            <option value="">Seçiniz...</option>
-                                        </select>
-                                        <label>Kategori</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-5 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-highlighter"></i></span>
-                                    <div class="form-floating">
-                                        <select class="form-select border-0 select2-show-search" id="offer_test">
-                                            <option value="">Seçiniz...</option>
-                                        </select>
-                                        <label>Test</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-2 mb-2">
-                            <button type="button" id="offer_test_btn" class="btn btn-theme w-100 h-60">Teklife Ekle</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
-            <div class="col-12">
-                <h6 class="title">Testler</h6>
-                <div class="card border-0 mb-4">
-                    <div class="card-body p-4">
-                        <table id="tests-table" class="table table-bordered nowrap key-buttons border-bottom">
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
-            <div class="col-12 col-md-12 mb-2">
-                <a href="add-offer-accountings" id="save_offer_btn" class="btn btn-theme theme-green w-100">Muhasebe Detaylarını Gir </a>
             </div>
         </div>
     </div>
