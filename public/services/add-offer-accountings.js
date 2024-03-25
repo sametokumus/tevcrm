@@ -5,20 +5,9 @@
 
         $(":input").inputmask();
 
-        $('#offer_customer').on('change', function (e){
+        $('#offer_summary_form').submit(function (e){
             e.preventDefault();
-            let customer_id = document.getElementById('offer_customer').value;
-            console.log(customer_id)
-            if (customer_id == '0'){
-                $('#offer_employee option').remove();
-            }else{
-                getEmployeesAddSelectId(customer_id, 'offer_employee');
-            }
-        });
-
-        $('#offer_info_form').submit(function (e){
-            e.preventDefault();
-            addOffer();
+            updateOfferSummary();
         });
 	});
 
@@ -35,7 +24,7 @@
 function checkRole(){
 	return true;
 }
-async function addOffer(){
+async function updateOfferSummary(){
 
     let formData = JSON.stringify({
         "customer": document.getElementById('offer_customer').value,
@@ -63,5 +52,7 @@ async function initOfferSummary(){
     $('#summary_sub_total').html(checkNull(changeCommasToDecimal(summary.sub_total)));
     $('#summary_vat').html(checkNull(changeCommasToDecimal(summary.vat)));
     $('#summary_grand_total').html(checkNull(changeCommasToDecimal(summary.grand_total)));
+
+    document.getElementById('offer_test_total').value = changePriceToDecimal(summary.test_total);
 }
 
