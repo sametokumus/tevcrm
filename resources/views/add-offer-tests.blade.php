@@ -143,17 +143,6 @@ $extra_js='
                 <div class="card border-0 mb-4">
                     <div class="card-body p-4">
                         <table id="tests-table" class="table table-bordered nowrap key-buttons border-bottom">
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th>Test Yapılacak Ürün</th>--}}
-{{--                                <th>Test Adı</th>--}}
-{{--                                <th>Numune Sayısı</th>--}}
-{{--                                <th>Numune Açıklama</th>--}}
-{{--                                <th>Test Süresi</th>--}}
-{{--                                <th>Test Bedeli</th>--}}
-{{--                                <th></th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
                             <tbody>
 
                             </tbody>

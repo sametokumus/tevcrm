@@ -83,3 +83,14 @@ table.dataTable {
     min-width: 100% !important;
     max-width: 100% !important;
 }
+
+
+div.DTE div.DTE_Header,
+div.DTE div.DTE_Footer{
+    background-color: rgba(var(--WinDOORS-theme-rgb), .2);
+}
+div.DTE button.btn, div.DTE div.DTE_Form_Buttons button{
+    background-color: var(--WinDOORS-theme);
+    color: var(--WinDOORS-theme-color);
+    border-color: var(--WinDOORS-theme-darken);
+}
