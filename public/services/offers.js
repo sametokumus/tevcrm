@@ -2,6 +2,10 @@
     "use strict";
 
 	$(document).ready(function() {
+        $('#update_status_form').submit(function (e){
+            e.preventDefault();
+            updateStatus();
+        });
 
         $('#delete_offer_form').submit(function (e){
             e.preventDefault();
@@ -145,6 +149,47 @@ async function initOffers(){
         }
     });
 
+}
+
+function openStatusModal(offer_id, status_id){
+    $('#updateStatusModal').modal('show');
+    initStatusModal(offer_id, status_id);
+}
+async function initStatusModal(offer_id, status_id){
+    let data = await serviceGetChangeableStatuses();
+    let statuses = data.statuses;
+    $('#update_offer_status option').remove();
+    $.each(statuses, function (i, status){
+        let forced = '';
+        if (status.forced == 1){forced = '(*)';}
+        let selected = '';
+        if(status.id == status_id){selected = 'selected';}
+        $('#update_offer_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +' '+ forced +'</option>');
+    });
+    document.getElementById('update_offer_id').value = offer_id;
+}
+async function updateStatus(){
+    let status_id = document.getElementById('update_sale_status').value;
+    let sale_id = document.getElementById('update_sale_id').value;
+    let user_id = localStorage.getItem('userId');
+    let formData = JSON.stringify({
+        "sale_id": sale_id,
+        "status_id": status_id,
+        "user_id": user_id
+    });
+    let data = await servicePostUpdateSaleStatus(formData);
+    if(data.status == "success"){
+        if (data.object.period == "cancelled"){
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            $('#addCancelNoteModal').modal('show');
+            document.getElementById('cancel_sale_id').value = sale_id;
+        }else {
+            $("#update_status_form").trigger("reset");
+            $('#updateStatusModal').modal('hide');
+            initSales();
+        }
+    }
 }
 
 async function openDeleteOffer(offer_id){
