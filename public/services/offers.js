@@ -49,7 +49,7 @@ async function initOffers(){
             '                  <td class="bg-theme bg-opacity-50">\n' +
             '                      <p class="mb-0">'+ offer.global_id +'</p>\n' +
             '                  </td>\n' +
-            '                  <td class="bg-theme bg-opacity-50">\n' +
+            '                  <td class="bg-light-theme bg-opacity-50">\n' +
             '                      <p class="mb-0">'+ checkNull(offer.customer.name) +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
