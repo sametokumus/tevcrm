@@ -22,25 +22,25 @@ async function initOffers(){
     $("#offer-datatable").dataTable().fnDestroy();
     $('#offer-datatable tbody > tr').remove();
 
-    let employee = '';
-    if (offer.employee != null){
-        employee = offer.employee.name;
-    }
-
-    let manager = '';
-    if (offer.manager != null){
-        manager = offer.manager.name + ' ' + offer.manager.surname;
-    }
-
-    let price = offer.acccounting.test_total;
-    if (offer.acccounting.sub_total != null){
-        price = offer.acccounting.sub_total;
-    }
-    if(offer.acccounting.grand_total != null){
-        price = offer.acccounting.grand_total;
-    }
-
     $.each(data.offers, function (i, offer) {
+
+        let employee = '';
+        if (offer.employee != null){
+            employee = offer.employee.name;
+        }
+
+        let manager = '';
+        if (offer.manager != null){
+            manager = offer.manager.name + ' ' + offer.manager.surname;
+        }
+
+        let price = offer.acccounting.test_total;
+        if (offer.acccounting.sub_total != null){
+            price = offer.acccounting.sub_total;
+        }
+        if(offer.acccounting.grand_total != null){
+            price = offer.acccounting.grand_total;
+        }
 
         let item = '<tr>\n' +
             '                  <td class="bg-theme bg-opacity-50">\n' +
