@@ -36,13 +36,13 @@ $extra_js='
                                     <div class="form-floating bg-white">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio1" value="1" checked>
-                                            <label class="form-check-label">
+                                            <label class="form-check-label" for="discountRadio1">
                                                 Yüzdelik İndirim
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio2" value="2">
-                                            <label class="form-check-label">
+                                            <label class="form-check-label" for="discountRadio2">
                                                 Tam İndirim
                                             </label>
                                         </div>
