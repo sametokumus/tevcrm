@@ -65,6 +65,7 @@ async function initOfferSummary(){
     $('#summary_grand_total').html(checkNull(changeCommasToDecimal(summary.grand_total)));
 
     document.getElementById('offer_test_total').value = changeCommasToDecimal(summary.test_total);
+    document.getElementById('discountRadio2').checked = true;
     document.getElementById('offer_discount').value = changeCommasToDecimal(summary.discount);
     document.getElementById('offer_vat_rate').value = summary.vat_rate;
 }
