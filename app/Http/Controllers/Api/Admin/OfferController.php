@@ -284,7 +284,7 @@ class OfferController extends Controller
 
             if ($request->vat_rate != "") {
                 $vat = $price / 100 * $request->vat_rate;
-                $price = $price + $discount;
+                $price = $price + $vat;
                 Accounting::query()->where('id', $accounting->id)->update([
                     'vat' => $vat,
                     'vat_rate' => $request->vat_rate,
