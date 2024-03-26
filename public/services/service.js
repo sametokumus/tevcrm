@@ -1205,6 +1205,14 @@ async function servicePostUpdateOffer(formData) {
     const data = await fetchDataPost('/admin/offer/updateOffer', formData, 'application/json');
     return data;
 }
+async function serviceGetOffers() {
+    const data = await fetchDataGet('/admin/offer/getOffers', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 async function serviceGetOfferById(id) {
     const data = await fetchDataGet('/admin/offer/getOfferById/' + id, 'application/json');
     if (data.status == "success") {
