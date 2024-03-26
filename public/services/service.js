@@ -313,13 +313,13 @@ function formatDateAndTime2(dateString, slicer) {
 
 function formatDateAndTimeDESC(date, slicer) {
 	date = new Date(date);
-    console.log(date)
+
 	var day = ('0' + date.getDate()).slice(-2);
 	var month = ('0' + (date.getMonth() + 1)).slice(-2);
 	var year = date.getFullYear();
 	var hour = date.getHours();
 	var minute = ('0' + date.getMinutes()).slice(-2);
-    console.log(day + slicer + month + slicer + year + ' ' + hour + ':' + minute)
+
 	return day + slicer + month + slicer + year + ' ' + hour + ':' + minute;
 }
 
