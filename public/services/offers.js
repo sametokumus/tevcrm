@@ -41,12 +41,9 @@ async function initOffers(){
         if(offer.accounting.grand_total != null){
             price = offer.accounting.grand_total;
         }
-
+        console.log(price)
         let item = '<tr>\n' +
-            '                  <td class="bg-theme bg-opacity-50">\n' +
-            '                      <p class="mb-0">'+ offer.id +'</p>\n' +
-            '                  </td>\n' +
-            '                  <td class="bg-theme bg-opacity-50">\n' +
+            '                  <td class="bg-light-theme bg-opacity-50">\n' +
             '                      <p class="mb-0">'+ offer.global_id +'</p>\n' +
             '                  </td>\n' +
             '                  <td class="bg-light-theme bg-opacity-50">\n' +
@@ -82,24 +79,38 @@ async function initOffers(){
     });
 
     $('#offer-datatable').DataTable({
-        responsive: true,
+        responsive: false,
         columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
-        ],
-        dom: 'Bfrtip',
-        buttons: [
             {
-                text: 'Yeni Test',
-                className: 'btn btn-primary',
-                action: function ( e, dt, node, config ) {
-                    window.location = '/add-test';
+                targets: 1,
+                className: 'ellipsis',
+                render: function(data, type, row, meta) {
+                    return type === 'display' && data.length > 30 ?
+                        data.substr(0, 30) + '...' :
+                        data;
+                }
+            },
+            {
+                type: 'date',
+                targets: 5,
+                render: function(data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
             }
         ],
-        pageLength : -1,
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [
+            ],
+        scrollX: true,
         language: {
             url: "services/Turkish.json"
+        },
+        order: [
+            [0, 'desc']
+        ],
+        fixedColumns: {
+            left: 2
         }
     });
 

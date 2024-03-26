@@ -21,7 +21,6 @@ $extra_js='
                                 <table id="offer-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                                     <thead>
                                     <tr class="text-muted">
-                                        <th class="bg-theme bg-opacity-50">N#</th>
                                         <th class="bg-theme bg-opacity-50">Teklif Kodu</th>
                                         <th class="bg-theme bg-opacity-50">Müşteri</th>
                                         <th>Müşteri Yetkilisi</th>
