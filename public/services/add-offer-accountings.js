@@ -45,6 +45,7 @@ async function updateOfferSummary(){
     });
     console.log(formData);
 
+    let offer_id = getPathVariable('add-offer-accountings');
     let returned = await servicePostUpdateOfferSummary(formData, offer_id);
     if (returned){
         initOfferSummary();
