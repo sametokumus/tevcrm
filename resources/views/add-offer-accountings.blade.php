@@ -35,13 +35,13 @@ $extra_js='
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating bg-white">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio1" checked>
+                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio1" value="1" checked>
                                             <label class="form-check-label">
                                                 Yüzdelik İndirim
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio2">
+                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio2" value="2">
                                             <label class="form-check-label">
                                                 Tam İndirim
                                             </label>
