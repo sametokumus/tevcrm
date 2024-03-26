@@ -24,6 +24,41 @@ async function initOffers(){
 
     $.each(data.offers, function (i, offer) {
 
+        status_class = "badge badge-sm bg-info";
+        let btn_list = '<div class="btn-list">\n';
+
+        if (localStorage.getItem('userRole') == 1) {
+            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-outline-danger" onclick="openDeleteSale(\'' + offer.id + '\')">\n' +
+                '           <span class="fe fe-refresh-cw"> Sil\n' +
+                '        </button>\n';
+        }
+
+        if (offer.status.action == "send-customer"){
+            status_class = "badge badge-sm bg-info";
+            btn_list += '<a href="add-offer-tests/'+ offer.id +'" class="btn btn-sm btn-danger">Teklifi Görüntüle</a>\n';
+        }else if (offer.status.action == "accept-reject"){
+            status_class = "badge badge-sm bg-indigo";
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-info">Teklif Detayı</a>\n';
+            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-outline-danger" onclick="openDeleteSale(\'' + offer.id + '\')">\n' +
+                '           <span class="fe fe-refresh-cw"> Teklif Onaylandı\n' +
+                '        </button>\n';
+            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-outline-danger" onclick="openDeleteSale(\'' + offer.id + '\')">\n' +
+                '           <span class="fe fe-refresh-cw"> Teklif Reddedildi\n' +
+                '        </button>\n';
+        }else if (offer.status.action == "customer-approved"){
+            status_class = "badge badge-sm bg-green";
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-info">Teklif Detayı</a>\n';
+            btn_list += '<a href="send-test-laboratory/'+ offer.id +'" class="btn btn-sm btn-info">Testleri Laboratuvara Gönder</a>\n';
+        }else if (offer.status.action == "detail"){
+            status_class = "badge badge-sm bg-teal";
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-info">Teklif Detayı</a>\n';
+        }else if (offer.status.action == "laboratory"){
+            status_class = "badge badge-sm bg-blue";
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-info">Teklif Detayı</a>\n';
+        }
+
+        btn_list += '</div>';
+
         let employee = '';
         if (offer.employee != null){
             employee = offer.employee.name;
