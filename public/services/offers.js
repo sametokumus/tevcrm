@@ -95,10 +95,10 @@ async function initOffers(){
             '                      <p class="mb-0">'+ checkNull(manager) +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ changePriceToDecimal(price) +' ₺</p>\n' +
+            '                      <p class="mb-0">'+ changeCommasToDecimal(price) +' ₺</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
+            '                      <p class="mb-0">'+ formatDateAndTimeDESC(offer.created_at, "-") +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                      <p class="mb-0">'+ status +'</p>\n' +
