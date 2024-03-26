@@ -30,6 +30,23 @@ $extra_js='
                         </div>
                         <div class="col-12 col-md-12 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Default radio
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Default checked radio
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-12 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
