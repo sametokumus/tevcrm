@@ -43,10 +43,10 @@ async function initOffers(){
         }
         console.log(price)
         let item = '<tr>\n' +
-            '                  <td class="bg-light-theme bg-opacity-50">\n' +
+            '                  <td class="bg-light-green bg-opacity-50">\n' +
             '                      <p class="mb-0">'+ offer.global_id +'</p>\n' +
             '                  </td>\n' +
-            '                  <td class="bg-light-theme bg-opacity-50">\n' +
+            '                  <td class="bg-light-green bg-opacity-50">\n' +
             '                      <p class="mb-0">'+ checkNull(offer.customer.name) +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
@@ -62,7 +62,7 @@ async function initOffers(){
             '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ checkNull(offer.status.name) +' ₺</p>\n' +
+            '                      <p class="mb-0">'+ checkNull(offer.status.name) +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                  <div class="btn-list">\n' +
