@@ -30,53 +30,22 @@ $extra_js='
                         </div>
                         <div class="col-12 col-md-12 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Default radio
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Default checked radio
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-12 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating bg-white">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Default radio
+                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio1" checked>
+                                            <label class="form-check-label">
+                                                Yüzdelik İndirim
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Default checked radio
+                                            <input class="form-check-input" type="radio" name="discountRadio" id="discountRadio2">
+                                            <label class="form-check-label">
+                                                Tam İndirim
                                             </label>
                                         </div>
-                                        <label>İndirim</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mb-3">Add valid data</div>
-                        </div>
-                        <div class="col-12 col-md-12 mb-2">
-                            <div class="form-group mb-3 position-relative check-valid">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-highlighter"></i></span>
-                                    <div class="form-floating">
-                                        <input type="text" placeholder="İndirim" id="offer_discount" class="form-control border-start-0">
-                                        <label>İndirim</label>
                                     </div>
                                 </div>
                             </div>
