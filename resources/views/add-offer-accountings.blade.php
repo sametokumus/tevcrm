@@ -78,7 +78,7 @@ $extra_js='
                             <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                         <div class="col-12 col-md-12 mb-2">
-                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Teklif Oluştur</button>
+                            <button type="submit" id="save_offer_btn" class="btn btn-theme w-100 h-60">Bilgileri Güncelle</button>
                         </div>
                     </div>
                 </form>

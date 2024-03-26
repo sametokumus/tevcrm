@@ -29,19 +29,26 @@ function checkRole(){
 }
 async function updateOfferSummary(){
 
+    let radios = document.getElementsByName('discountRadio');
+    let discount_type;
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            discount_type = radios[i].value;
+            break;
+        }
+    }
+
     let formData = JSON.stringify({
-        "customer": document.getElementById('offer_customer').value,
-        "employee": document.getElementById('offer_employee').value,
-        "manager": document.getElementById('offer_manager').value,
-        "lab_manager": document.getElementById('offer_lab_manager').value,
-        "description": document.getElementById('offer_description').value
+        "discount_type": discount_type,
+        "discount": document.getElementById('offer_discount').value,
+        "vat_rate": document.getElementById('offer_vat_rate').value
     });
     console.log(formData);
 
-    let data = await servicePostAddOffer(formData);
-    if (data.status == "success"){
-        window.location = "add-offer-tests/" + data.object.offer_id;
-    }
+    // let data = await servicePostAddOffer(formData);
+    // if (data.status == "success"){
+    //     window.location = "add-offer-tests/" + data.object.offer_id;
+    // }
 }
 async function initOfferSummary(){
 
