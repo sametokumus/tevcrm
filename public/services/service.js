@@ -319,7 +319,7 @@ function formatDateAndTimeDESC(date, slicer) {
 	var year = date.getFullYear();
 	var hour = date.getHours();
 	var minute = ('0' + date.getMinutes()).slice(-2);
-
+    console.log(day + slicer + month + slicer + year + ' ' + hour + ':' + minute)
 	return day + slicer + month + slicer + year + ' ' + hour + ':' + minute;
 }
 
