@@ -34,12 +34,12 @@ async function initOffers(){
             manager = offer.manager.name + ' ' + offer.manager.surname;
         }
 
-        let price = offer.acccounting.test_total;
-        if (offer.acccounting.sub_total != null){
-            price = offer.acccounting.sub_total;
+        let price = offer.accounting.test_total;
+        if (offer.accounting.sub_total != null){
+            price = offer.accounting.sub_total;
         }
-        if(offer.acccounting.grand_total != null){
-            price = offer.acccounting.grand_total;
+        if(offer.accounting.grand_total != null){
+            price = offer.accounting.grand_total;
         }
 
         let item = '<tr>\n' +
