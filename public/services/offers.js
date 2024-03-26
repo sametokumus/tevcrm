@@ -98,7 +98,7 @@ async function initOffers(){
             '                      <p class="mb-0">'+ changeCommasToDecimal(price) +' ₺</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ offer.created_at +'</p>\n' +
+            '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                      <p class="mb-0">'+ status +'</p>\n' +
@@ -118,15 +118,8 @@ async function initOffers(){
                 className: 'ellipsis',
                 render: function(data, type, row, meta) {
                     return type === 'display' && data.length > 30 ?
-                        data.substr(0, 30) + '...' :
+                        data.substr(0, 50) + '...' :
                         data;
-                }
-            },
-            {
-                type: 'date',
-                targets: 5,
-                render: function(data, type, row) {
-                    return moment(data, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
                 }
             }
         ],
