@@ -20,7 +20,7 @@ $extra_js='
                             <div class="card-body p-4">
                                 <table id="offer-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                                     <thead>
-                                    <tr class="text-muted">
+                                    <tr>
                                         <th class="bg-green bg-opacity-50">Teklif Kodu</th>
                                         <th class="bg-green bg-opacity-50">Müşteri</th>
                                         <th>Müşteri Yetkilisi</th>
