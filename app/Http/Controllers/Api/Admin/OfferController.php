@@ -76,6 +76,26 @@ class OfferController extends Controller
         }
     }
 
+    public function deleteOffer($offer_id){
+        try {
+
+            Offer::query()->where('offer_id', $offer_id)->update([
+                'active' => 0,
+            ]);
+
+            OfferDetail::query()->where('offer_id', $offer_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Teklif silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
     public function getOffers()
     {
         try {
