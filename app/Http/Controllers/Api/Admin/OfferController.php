@@ -90,7 +90,7 @@ class OfferController extends Controller
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
-            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001','ar' => $throwable->getMessage()]);
         } catch (\Throwable $throwable) {
             return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
