@@ -24,7 +24,7 @@ async function initOffers(){
 
     $.each(data.offers, function (i, offer) {
 
-        status_class = "badge badge-sm bg-info";
+        let status_class = "badge badge-sm bg-info";
         let btn_list = '<div class="btn-list">\n';
 
         if (localStorage.getItem('userRole') == 1) {
@@ -58,6 +58,10 @@ async function initOffers(){
         }
 
         btn_list += '</div>';
+
+        let status = '<span class="'+ status_class +'" onclick="openStatusModal(\''+ offer.id +'\', \''+ offer.id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
+
+
 
         let employee = '';
         if (offer.employee != null){
@@ -97,17 +101,10 @@ async function initOffers(){
             '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ checkNull(offer.status.name) +'</p>\n' +
+            '                      <p class="mb-0">'+ status +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                  <div class="btn-list">\n' +
-            '                      <a href="update-offer/'+ offer.id +'" id="bDel" type="button" class="btn  btn-sm btn-theme">\n' +
-            '                          <span class="bi bi-pencil-square"></span>\n' +
-            '                      </a>\n' +
-            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteTest(\''+ offer.id +'\')">\n' +
-            '                          <span class="bi bi-trash3"></span>\n' +
-            '                      </button>\n' +
-            '                  </div>\n' +
+            '                  ' + btn_list + '\n' +
             '                  </td>\n' +
             '              </tr>';
         $('#offer-datatable tbody').append(item);
