@@ -79,7 +79,7 @@ class OfferController extends Controller
     public function deleteOffer($offer_id){
         try {
 
-            Offer::query()->where('offer_id', $offer_id)->update([
+            Offer::query()->where('id', $offer_id)->update([
                 'active' => 0,
             ]);
 
