@@ -47,6 +47,7 @@ async function updateOfferSummary(){
 
     let returned = await servicePostUpdateOfferSummary(formData, offer_id);
     if (returned){
+        initOfferSummary();
     }
 }
 async function initOfferSummary(){
