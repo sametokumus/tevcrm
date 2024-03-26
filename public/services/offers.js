@@ -89,25 +89,25 @@ async function initOffers(){
         console.log(price)
         let item = '<tr>\n' +
             '                  <td class="bg-light-green bg-opacity-50">\n' +
-            '                      <p class="mb-0">'+ offer.global_id +'</p>\n' +
+            '                      '+ offer.global_id +'\n' +
             '                  </td>\n' +
             '                  <td class="bg-light-green bg-opacity-50">\n' +
-            '                      <p class="mb-0">'+ checkNull(offer.customer.name) +'</p>\n' +
+            '                      '+ checkNull(offer.customer.name) +'\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ checkNull(employee) +'</p>\n' +
+            '                      '+ checkNull(employee) +'\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ checkNull(manager) +'</p>\n' +
+            '                      '+ checkNull(manager) +'\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ changeCommasToDecimal(price) +' ₺</p>\n' +
+            '                      '+ changeCommasToDecimal(price) +' ₺\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
+            '                      '+ formatDateAndTimeDESC2(offer.created_at, "-") +'\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ status +'</p>\n' +
+            '                      '+ status +'\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                  ' + btn_list + '\n' +
