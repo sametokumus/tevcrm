@@ -97,3 +97,11 @@ div.DTE button.btn, div.DTE div.DTE_Form_Buttons button{
     padding: .5em 2em;
     line-height: 14px;
 }
+
+.form-check.form-check-inline {
+    margin-left: 1rem;
+    line-height: 58px;
+}
+.form-check .form-check-input {
+    margin-top: 22px;
+}

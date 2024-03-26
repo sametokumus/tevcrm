@@ -50,7 +50,7 @@ $extra_js='
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
-                                    <div class="form-floating">
+                                    <div class="form-floating bg-white">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
