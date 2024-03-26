@@ -62,7 +62,7 @@ async function initOffers(){
             '                      <p class="mb-0">'+ changePriceToDecimal(price) +' ₺</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
-            '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.createt_at, "-") +' Gün</p>\n' +
+            '                      <p class="mb-0">'+ formatDateAndTimeDESC2(offer.created_at, "-") +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +
             '                      <p class="mb-0">'+ checkNull(offer.status.name) +' ₺</p>\n' +
