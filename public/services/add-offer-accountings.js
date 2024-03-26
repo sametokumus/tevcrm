@@ -40,15 +40,14 @@ async function updateOfferSummary(){
 
     let formData = JSON.stringify({
         "discount_type": discount_type,
-        "discount": document.getElementById('offer_discount').value,
+        "discount": changePriceToDecimal(document.getElementById('offer_discount').value),
         "vat_rate": document.getElementById('offer_vat_rate').value
     });
     console.log(formData);
 
-    // let data = await servicePostAddOffer(formData);
-    // if (data.status == "success"){
-    //     window.location = "add-offer-tests/" + data.object.offer_id;
-    // }
+    let returned = await servicePostUpdateOfferSummary(formData, offer_id);
+    if (returned){
+    }
 }
 async function initOfferSummary(){
 
@@ -63,6 +62,10 @@ async function initOfferSummary(){
     $('#summary_vat').html(checkNull(changeCommasToDecimal(summary.vat)));
     $('#summary_grand_total').html(checkNull(changeCommasToDecimal(summary.grand_total)));
 
-    document.getElementById('offer_test_total').value = changeCommasToDecimal(summary.test_total);
+    document.getElementById('summary_test_total').value = changeCommasToDecimal(summary.test_total);
+    document.getElementById('summary_discount').value = changeCommasToDecimal(summary.discount);
+    document.getElementById('summary_sub_total').value = changeCommasToDecimal(summary.sub_total);
+    document.getElementById('summary_vat').value = summary.vat;
+    document.getElementById('summary_grand_total').value = changeCommasToDecimal(summary.grand_total);
 }
 

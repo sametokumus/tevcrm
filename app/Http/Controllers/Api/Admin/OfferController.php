@@ -257,4 +257,52 @@ class OfferController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
         }
     }
+    public function updateOfferSummary(Request $request, $offer_id)
+    {
+        try {
+            $accounting = Accounting::query()->where('offer_id', $offer_id)->where('active', 1)->first();
+            $price = $accounting->test_total;
+
+            if ($request->discount != "") {
+                $discount = null;
+                if ($request->discount_type == 1){
+                    $discount = $price / 100 * $request->discount;
+                    $price = $price - $discount;
+                }else if ($request->discount_type == 2){
+                    $discount = $request->discount;
+                    $price = $price - $discount;
+                }
+                Accounting::query()->where('id', $accounting->id)->update([
+                    'discount' => $discount,
+                    'sub_total' => $price
+                ]);
+            }else{
+                Accounting::query()->where('id', $accounting->id)->update([
+                    'sub_total' => $price
+                ]);
+            }
+
+            if ($request->vat_rate != "") {
+                $vat = $price / 100 * $request->vat_rate;
+                $price = $price + $discount;
+                Accounting::query()->where('id', $accounting->id)->update([
+                    'vat' => $vat,
+                    'vat_rate' => $request->vat_rate,
+                    'grand_total' => $price
+                ]);
+            }else{
+                Accounting::query()->where('id', $accounting->id)->update([
+                    'grand_total' => $price
+                ]);
+            }
+
+            return response(['message' => __('Teklif muhasebe işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
 }

@@ -1261,6 +1261,14 @@ async function serviceGetOfferSummaryById(id) {
         showAlert('İstek Başarısız.');
     }
 }
+async function servicePostUpdateOfferSummary(formdata, offer_id) {
+    const data = await fetchDataPost('/admin/offer/updateOfferSummary/' + offer_id, formData, 'application/json');
+    if (data.status == "success") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 
