@@ -47,7 +47,7 @@ $extra_js='
 </main>
 
 <div class="modal modal-cover fade" id="updateStatusModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">DURUM GÜNCELLE</h5>
@@ -56,12 +56,20 @@ $extra_js='
             <form method="post" action="#" id="update_status_form">
                 <div class="modal-body">
                     <div class="row mb-4">
-                        <label class="col-md-3 form-label">Durum :</label>
-                        <div class="col-md-9">
-                            <input type="hidden" class="form-control" id="update_offer_id" required>
-                            <select name="update_offer_status" id="update_offer_status" class="form-control form-control-md" required>
-
-                            </select>
+                        <div class="col-12 col-md-6 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-highlighter"></i></span>
+                                    <div class="form-floating">
+                                        <select class="form-select border-0" id="update_offer_status" required>
+                                            <option value="">Seçiniz...</option>
+                                        </select>
+                                        <label>Durum</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
                         </div>
                     </div>
                 </div>
@@ -74,7 +82,7 @@ $extra_js='
 </div>
 
 <div class="modal modal-cover fade" id="deleteOfferModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">TEKLİF SİLME</h5>

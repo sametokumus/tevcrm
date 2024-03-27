@@ -86,6 +86,10 @@ class OfferController extends Controller
             OfferDetail::query()->where('offer_id', $offer_id)->update([
                 'active' => 0,
             ]);
+
+            Accounting::query()->where('offer_id', $offer_id)->update([
+                'active' => 0,
+            ]);
             return response(['message' => __('Teklif silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
