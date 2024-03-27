@@ -109,3 +109,7 @@ div.DTE button.btn, div.DTE div.DTE_Form_Buttons button{
 .nowrap{
     white-space: nowrap;
 }
+
+.table .badge {
+    cursor: pointer;
+}
