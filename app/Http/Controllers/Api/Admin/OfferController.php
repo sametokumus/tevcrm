@@ -8,6 +8,7 @@ use App\Models\Accounting;
 use App\Models\Admin;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Expense;
 use App\Models\Measurement;
 use App\Models\Offer;
 use App\Models\OfferDetail;
@@ -16,6 +17,7 @@ use App\Models\OfferRequestProduct;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Status;
+use App\Models\StatusHistory;
 use App\Models\Test;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
@@ -408,6 +410,72 @@ class OfferController extends Controller
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
         } catch (\Throwable $throwable) {
             return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function updateOfferStatus(Request $request)
+    {
+        try {
+            $request->validate([
+                'offer_id' => 'required',
+                'status_id' => 'required',
+                'user_id' => 'required',
+            ]);
+            $old_status_id = Offer::query()->where('id', $request->offer_id)->first()->status_id;
+            $old_status = Status::query()->where('id', $old_status_id)->first();
+            $new_status = Status::query()->where('id', $request->status_id)->first();
+            $last_forced = Status::query()
+                ->where('sequence', '<', $new_status->sequence)
+                ->where('forced', 1)
+                ->where('active', 1)
+                ->orderByDesc('sequence')
+                ->first();
+
+
+            if ($last_forced && $new_status->period != 'cancelled'){
+
+                $history_check = StatusHistory::query()
+                    ->where('status_id', $last_forced->id)
+                    ->where('offer_id', $request->offer_id)
+                    ->where('active', 1)
+                    ->orderByDesc('id')
+                    ->first();
+
+                if ($history_check){
+
+                    Offer::query()->where('id', $request->offer_id)->update([
+                        'status_id' => $request->status_id,
+                    ]);
+
+                    StatusHistoryHelper::addStatusHistory($request->offer_id, $request->status_id);
+
+                    $status = Status::query()->where('id', $request->status_id)->first();
+
+                }else{
+                    $message = '"'.$last_forced->name.'" teklif durumu zorunludur.';
+                    return response(['message' => $message, 'status' => 'status-001', 'a' => $history_check, 'b' => $last_forced, 'c' => $new_status]);
+
+                }
+
+            }else{
+
+                Offer::query()->where('id', $request->offer_id)->update([
+                    'status_id' => $request->status_id,
+                ]);
+
+                StatusHistoryHelper::addStatusHistory($request->offer_id, $request->status_id);
+
+                $status = Status::query()->where('id', $request->status_id)->first();
+
+            }
+
+
+            return response(['message' => __('Durum güncelleme işlemi başarılı.'), 'status' => 'success', 'object' => ['period' => $status->period]]);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage(), 'b'=>$throwable->getLine()]);
         }
     }
 }

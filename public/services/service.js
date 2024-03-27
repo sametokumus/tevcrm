@@ -1289,6 +1289,23 @@ async function servicePostUpdateOfferSummary(formData, offer_id) {
     }
 }
 
+async function servicePostUpdateOfferStatus(formData) {
+    const data = await fetchDataPost('/admin/offer/updateOfferStatus', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return data;
+    } else {
+        if (data.status == "status-001") {
+            showAlert(data.message);
+        }else if (data.status == "status-002") {
+            showAlert(data.message);
+        }else{
+            showAlert('İstek Başarısız.');
+        }
+        return false;
+    }
+}
+
 
 
 
@@ -1919,23 +1936,6 @@ async function servicePostUpdateRfqDetail(formData) {
         return true;
     } else {
         showAlert('İstek Başarısız.');
-        return false;
-    }
-}
-
-async function servicePostUpdateSaleStatus(formData) {
-    const data = await fetchDataPost('/admin/sale/updateSaleStatus', formData, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return data;
-    } else {
-        if (data.status == "status-001") {
-            showAlert(data.message);
-        }else if (data.status == "status-002") {
-            showAlert(data.message);
-        }else{
-            showAlert('İstek Başarısız.');
-        }
         return false;
     }
 }

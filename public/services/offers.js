@@ -169,26 +169,17 @@ async function initStatusModal(offer_id, status_id){
     document.getElementById('update_offer_id').value = offer_id;
 }
 async function updateStatus(){
-    let status_id = document.getElementById('update_sale_status').value;
-    let sale_id = document.getElementById('update_sale_id').value;
-    let user_id = localStorage.getItem('userId');
+    let status_id = document.getElementById('update_offer_status').value;
+    let offer_id = document.getElementById('update_offer_id').value;
     let formData = JSON.stringify({
-        "sale_id": sale_id,
-        "status_id": status_id,
-        "user_id": user_id
+        "offer_id": offer_id,
+        "status_id": status_id
     });
-    let data = await servicePostUpdateSaleStatus(formData);
+    let data = await servicePostUpdateOfferStatus(formData);
     if(data.status == "success"){
-        if (data.object.period == "cancelled"){
-            $("#update_status_form").trigger("reset");
-            $('#updateStatusModal').modal('hide');
-            $('#addCancelNoteModal').modal('show');
-            document.getElementById('cancel_sale_id').value = sale_id;
-        }else {
-            $("#update_status_form").trigger("reset");
-            $('#updateStatusModal').modal('hide');
-            initSales();
-        }
+        $("#update_status_form").trigger("reset");
+        $('#updateStatusModal').modal('hide');
+        initOffers();
     }
 }
 

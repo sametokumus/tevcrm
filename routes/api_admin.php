@@ -137,6 +137,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('offer/getOfferSummaryById/{offer_id}', [OfferController::class, 'getOfferSummaryById']);
     Route::post('offer/updateOfferSummary/{offer_id}', [OfferController::class, 'updateOfferSummary']);
     Route::get('offer/deleteOffer/{offer_id}', [OfferController::class, 'deleteOffer']);
+    Route::post('offer/updateOfferStatus', [OfferController::class, 'updateOfferStatus']);
+
+
 
     Route::get('offer/getOffersByRequestId/{request_id}', [OfferController::class, 'getOffersByRequestId']);
     Route::get('offer/getNewOffersByRequestId/{request_id}', [OfferController::class, 'getNewOffersByRequestId']);
@@ -171,7 +174,6 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('sale/getRejectOfferBySaleId/{sale_id}/{user_id}/{revize}', [SaleController::class, 'getRejectOfferBySaleId']);
     Route::post('sale/addSale', [SaleController::class, 'addSale']);
     Route::get('sale/deleteSale/{sale_id}', [SaleController::class, 'deleteSale']);
-    Route::post('sale/updateSaleStatus', [SaleController::class, 'updateSaleStatus']);
     Route::post('sale/updatePackingListStatus', [SaleController::class, 'updatePackingListStatus']);
     Route::post('sale/addPackingDeliveryAddress', [SaleController::class, 'addPackingDeliveryAddress']);
     Route::post('sale/updatePackingDeliveryAddress', [SaleController::class, 'updatePackingDeliveryAddress']);
