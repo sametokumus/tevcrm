@@ -56,6 +56,7 @@ $extra_js='
                             <h6 class="title">Durum Güncelle</h6>
                         </div>
                         <div class="col-12 col-md-12 mb-2">
+                            <input type="hidden" class="form-control" id="update_offer_id" required>
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
