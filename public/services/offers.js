@@ -69,7 +69,7 @@ async function initOffers(){
 
         btn_list += '</div>';
 
-        let status = '<span class="'+ status_class +'" onclick="openStatusModal(\''+ offer.id +'\', \''+ offer.id +'\')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
+        let status = '<span class="'+ status_class +'" onclick="openStatusModal('+ offer.id +', '+ offer.status_id +')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
 
 
 
