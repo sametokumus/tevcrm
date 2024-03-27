@@ -417,8 +417,7 @@ class OfferController extends Controller
         try {
             $request->validate([
                 'offer_id' => 'required',
-                'status_id' => 'required',
-                'user_id' => 'required',
+                'status_id' => 'required'
             ]);
             $old_status_id = Offer::query()->where('id', $request->offer_id)->first()->status_id;
             $old_status = Status::query()->where('id', $old_status_id)->first();
