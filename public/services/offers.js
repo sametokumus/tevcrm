@@ -45,26 +45,26 @@ async function initOffers(){
 
         if (offer.status.action == "send-customer"){
             status_class = "badge badge-sm bg-info";
-            btn_list += '<a href="add-offer-tests/'+ offer.id +'" class="btn btn-sm btn-warning">Teklifi Görüntüle</a>\n';
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
         }else if (offer.status.action == "accept-reject"){
             status_class = "badge badge-sm bg-indigo";
-            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-blue">Teklif Detayı</a>\n';
-            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="openDeleteSale(\'' + offer.id + '\')">\n' +
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
+            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-theme" onclick="acceptOffer(\'' + offer.id + '\')">\n' +
                 '           <span class="fe fe-refresh-cw"> Teklif Onaylandı\n' +
                 '        </button>\n';
-            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-danger" onclick="openDeleteSale(\'' + offer.id + '\')">\n' +
+            btn_list += '<button id="bDel" type="button" class="btn btn-sm btn-danger" onclick="rejectOffer(\'' + offer.id + '\')">\n' +
                 '           <span class="fe fe-refresh-cw"> Teklif Reddedildi\n' +
                 '        </button>\n';
         }else if (offer.status.action == "customer-approved"){
             status_class = "badge badge-sm bg-green";
-            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-blue">Teklif Detayı</a>\n';
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
             btn_list += '<a href="send-test-laboratory/'+ offer.id +'" class="btn btn-sm btn-info">Testleri Laboratuvara Gönder</a>\n';
         }else if (offer.status.action == "detail"){
             status_class = "badge badge-sm bg-teal";
-            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-blue">Teklif Detayı</a>\n';
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
         }else if (offer.status.action == "laboratory"){
             status_class = "badge badge-sm bg-blue";
-            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-blue">Teklif Detayı</a>\n';
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
         }
 
         btn_list += '</div>';
@@ -194,5 +194,27 @@ async function deleteOffer(){
     if(returned){
         $('#deleteOfferModal').modal('hide');
         await initOffers();
+    }
+}
+
+async function acceptOffer(offer_id) {
+    let formData = JSON.stringify({
+        "offer_id": offer_id,
+        "status_id": 3
+    });
+    let data = await servicePostUpdateOfferStatus(formData);
+    if(data.status == "success"){
+        initOffers();
+    }
+}
+
+async function rejectOffer(offer_id) {
+    let formData = JSON.stringify({
+        "offer_id": offer_id,
+        "status_id": 4
+    });
+    let data = await servicePostUpdateOfferStatus(formData);
+    if(data.status == "success"){
+        initOffers();
     }
 }
