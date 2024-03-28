@@ -65,6 +65,9 @@ async function initOffers(){
         }else if (offer.status.action == "laboratory"){
             status_class = "badge badge-sm bg-blue";
             btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
+        }else if (offer.status.action == "cancelled"){
+            status_class = "badge badge-sm bg-danger";
+            btn_list += '<a href="offer-detail/'+ offer.id +'" class="btn btn-sm btn-secondary">Teklif Detayı</a>\n';
         }
 
         btn_list += '</div>';
