@@ -36,6 +36,7 @@ Route::get('/add-offer', function () { return view('add-offer'); });
 Route::get('/add-offer-tests/{id}', function () { return view('add-offer-tests'); });
 Route::get('/add-offer-accountings/{id}', function () { return view('add-offer-accountings'); });
 Route::get('/offers', function () { return view('offers'); });
+Route::get('/offer-detail/{id}', function () { return view('offer-detail'); });
 
 
 
