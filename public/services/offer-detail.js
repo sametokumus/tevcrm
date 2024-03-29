@@ -46,7 +46,7 @@ async function initOfferDetail(){
     if (accounting.grand_total != null){
         price = accounting.grand_total;
     }
-    $('#offer-price').html(changePriceToDecimal(price));
+    $('#offer-price').html(changeCommasToDecimal(price) + ' ₺');
     $('#offer-test-count').html(offer_details.length);
 }
 
