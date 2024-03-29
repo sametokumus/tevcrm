@@ -35,7 +35,7 @@ $extra_js='
                                         <h5 class="fw-medium mb-0" id="employee"></h5>
                                     </div>
                                 </div>
-                                <div class="row align-items-center mb-3">
+                                <div class="row align-items-center mb-0">
                                     <div class="col-auto">
                                         <i class="bi bi-person h5 avatar avatar-40 bg-light-white rounded"></i>
                                     </div>
@@ -68,7 +68,7 @@ $extra_js='
                                         <h6 class="fw-medium mb-0" id="offer-test-count"></h6>
                                     </div>
                                 </div>
-                                <div class="row align-items-center mb-3">
+                                <div class="row align-items-center mb-0">
                                     <div class="col-auto">
                                         <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-white rounded"></i>
                                     </div>
