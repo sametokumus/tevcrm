@@ -68,17 +68,17 @@ async function initOfferHistory(){
         let item = '<tr>\n' +
             '           <td>\n' +
             '               <span class="d-flex align-items-center">\n' +
-            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-secondary me-2"></i>\n' +
             '                   '+ action.last_status.user_name +'\n' +
             '               </span>\n' +
             '           </td>\n' +
             '           <td><small>'+ last_time +'</small></td>\n' +
             '           <td class="text-right">\n' +
-            '               <span class="badge bg-theme text-theme-900 bg-opacity-50 rounded-0 pt-5px" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
+            '               <span class="badge bg-secondary" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
             '           </td>\n' +
             '           <td>\n' +
             '               <i class="bi bi-arrow-90deg-right"></i>\n' +
-            '               <span class="badge bg-theme text-white rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
+            '               <span class="badge bg-green text-white" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
             '           </td>\n' +
             '       </tr>';
 
