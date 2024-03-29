@@ -18,11 +18,10 @@ $extra_js='
                     <div class="card-header bg-none">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <i class="bi bi-folder h5 avatar avatar-40 bg-light-white rounded"></i>
+                                <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
                             </div>
                             <div class="col">
-                                <h6 class="fw-medium mb-0">Project Progress</h6>
-                                <p class="text-muted small">Currently</p>
+                                <h6 class="fw-medium mb-0" id="customer-name"></h6>
                             </div>
                         </div>
                     </div>
@@ -30,7 +29,7 @@ $extra_js='
                         <div class="row align-items-center mb-3">
                             <div class="col-auto">
                                     <span class="avatar avatar-50 rounded mb-0 coverimg">
-                                        <img src="assets/img/favicon152.png" alt="">
+                                        <img src="img/favicon152.png" alt="">
                                     </span>
                             </div>
                             <div class="col">
@@ -48,13 +47,13 @@ $extra_js='
                         <div class="row align-items-center gx-2 mb-2">
                             <div class="col-auto avatar-group">
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-2.jpg" alt="">
+                                    <img src="img/user-2.jpg" alt="">
                                 </div>
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-3.jpg" alt="">
+                                    <img src="img/user-3.jpg" alt="">
                                 </div>
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-4.jpg" alt="">
+                                    <img src="img/user-4.jpg" alt="">
                                 </div>
                             </div>
                             <div class="col">
@@ -157,7 +156,7 @@ $extra_js='
                         <div class="row align-items-center">
                             <div class="col-auto">
                                     <span class="avatar avatar-40 rounded mb-0 coverimg">
-                                        <img src="assets/img/favicon152.png" alt="">
+                                        <img src="img/favicon152.png" alt="">
                                     </span>
                             </div>
                             <div class="col">
@@ -180,13 +179,13 @@ $extra_js='
                         <div class="row align-items-center gx-2">
                             <div class="col-auto mb-2 avatar-group">
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-2.jpg" alt="">
+                                    <img src="img/user-2.jpg" alt="">
                                 </div>
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-3.jpg" alt="">
+                                    <img src="img/user-3.jpg" alt="">
                                 </div>
                                 <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="assets/img/user-4.jpg" alt="">
+                                    <img src="img/user-4.jpg" alt="">
                                 </div>
                             </div>
                             <div class="col mb-3">
