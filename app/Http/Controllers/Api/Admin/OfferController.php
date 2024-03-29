@@ -207,6 +207,10 @@ class OfferController extends Controller
                 ->where('companies.id', $offer->customer_id)
                 ->first();
 
+            $offer['status'] = Status::query()->where('id', $offer->status_id)->first();
+
+            $offer['global_id'] = "LB.".$offer->id;
+
             $offer_details = OfferDetail::query()
                 ->leftJoin('categories', 'categories.id', '=', 'offer_details.category_id')
                 ->selectRaw('offer_details.*, categories.name as category_name')

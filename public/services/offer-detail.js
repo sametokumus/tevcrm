@@ -36,6 +36,9 @@ async function initOfferDetail(){
     let accounting = data.accounting;
 
     $('#customer-name').html(offer.customer.name);
+    $('#global-id').html(offer.global_id);
+    $('#employee').html(offer.employee.name);
+    $('#manager').html(offer.manager.name + ' ' + offer.manager.surname);
 }
 
 

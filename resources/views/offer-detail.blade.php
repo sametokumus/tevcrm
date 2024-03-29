@@ -17,25 +17,26 @@ $extra_js='
                 <div class="card border-0 bg-radial-gradiant text-white h-100">
                     <div class="card-header bg-none">
                         <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="fw-medium mb-0" id="customer-name"></h5>
+                                <p class="text-muted small" id="global-id"></p>
+                            </div>
                             <div class="col-auto">
                                 <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
-                            </div>
-                            <div class="col">
-                                <h6 class="fw-medium mb-0" id="customer-name"></h6>
                             </div>
                         </div>
                     </div>
                     <div class="card-body bg-none">
                         <div class="row align-items-center mb-3">
-                            <div class="col-auto">
-                                    <span class="avatar avatar-50 rounded mb-0 coverimg">
-                                        <img src="img/favicon152.png" alt="">
-                                    </span>
-                            </div>
                             <div class="col">
-                                <p class="mb-1">getWinDOORS.com</p>
-                                <h5 class="fw-medium mb-0">2152 hrs <small class="fw-normal">(50.83%)</small></h5>
-                                <p class="small text-muted">Currently 6 developer, 1 Manager are working on this.</p>
+                                <p class="mb-1">Müşteri Yetkilisi</p>
+                                <h5 class="fw-medium mb-0" id="employee"></h5>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-3">
+                            <div class="col">
+                                <p class="mb-1">Proje Sorumlusu</p>
+                                <h5 class="fw-medium mb-0" id="manager"></h5>
                             </div>
                         </div>
                         <div class="row align-items-center mb-3">
