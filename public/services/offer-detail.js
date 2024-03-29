@@ -39,6 +39,7 @@ async function initOfferDetail(){
     $('#global-id').html(offer.global_id);
     $('#employee').html(offer.employee.name);
     $('#manager').html(offer.manager.name + ' ' + offer.manager.surname);
+    $('#offer-date').html(formatDateAndTimeDESC(offer.created_at, "-"));
 }
 
 
