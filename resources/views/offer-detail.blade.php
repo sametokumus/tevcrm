@@ -39,40 +39,6 @@ $extra_js='
                                 <h5 class="fw-medium mb-0" id="manager"></h5>
                             </div>
                         </div>
-                        <div class="row align-items-center mb-3">
-                            <div class="col-auto">
-                                <span class="btn btn-sm btn-link bg-red text-white">Mobile App</span>
-                                <span class="btn btn-sm btn-link bg-yellow text-white ms-1">High priority</span>
-                            </div>
-                        </div>
-                        <div class="row align-items-center gx-2 mb-2">
-                            <div class="col-auto avatar-group">
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-2.jpg" alt="">
-                                </div>
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-3.jpg" alt="">
-                                </div>
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-4.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <p class="text-muted small mb-0">5 more</p>
-                                <p class="small">Working</p>
-                            </div>
-                            <div class="col-auto">
-                                <button class="btn btn-square btn-outline-light">
-                                    <i class="bi bi-person-plus "></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="progress h-5 mb-2 bg-light-white">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                 aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="small text-muted mb-2">Project Status <span class="float-end">50%</span></p>
-                        <span class="btn btn-sm btn-link bg-light-white text-white">Due date: 22 March 2022</span>
                     </div>
                 </div>
             </div>
@@ -81,53 +47,13 @@ $extra_js='
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <p>Teklif Tarihi</p>
-                                <h6 class="fw-medium mb-0" id="offer-date">aa</h6>
+                                <p class="btn btn-sm btn-link bg-light-green text-green">Teklif Tarihi</p>
+                                <h6 class="fw-medium mb-0" id="offer-date"></h6>
                             </div>
                             <div class="col-auto">
-                                <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
+                                <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row align-items-center mb-3">
-                            <div class="col">
-                                <p class="mb-1">webgetdoors</p>
-                                <h5 class="fw-medium mb-0">2152 hrs <small class="fw-normal">(50.83%)</small></h5>
-                                <p class="small text-secondary">Currently 6 developer, 1 Manager are working on
-                                    this.</p>
-                                <span class="btn btn-sm btn-link bg-light-green text-green">Web App</span>
-                                <span class="btn btn-sm btn-link bg-light-yellow text-yellow ms-1">Medium priority</span>
-                            </div>
-                        </div>
-                        <div class="row align-items-center gx-2">
-                            <div class="col-auto mb-2 avatar-group">
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-2.jpg" alt="">
-                                </div>
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-3.jpg" alt="">
-                                </div>
-                                <div class="avatar avatar-40 coverimg rounded-circle">
-                                    <img src="img/user-4.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="col mb-3">
-                                <p class="text-secondary small mb-0">5 more</p>
-                                <p class="small">Working</p>
-                            </div>
-                            <div class="col-auto mb-3">
-                                <button class="btn btn-square btn-outline-theme">
-                                    <i class="bi bi-person-plus "></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="progress bg-light-theme h-5 mb-2">
-                            <div class="progress-bar bg-theme" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                 aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="small text-secondary mb-3">Project Status <span class="float-end">50%</span></p>
-                        <span class="btn btn-sm btn-link bg-light-theme">Due date: 22 March 2022</span>
                     </div>
                 </div>
             </div>
