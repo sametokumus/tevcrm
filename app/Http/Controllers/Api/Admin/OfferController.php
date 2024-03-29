@@ -484,7 +484,7 @@ class OfferController extends Controller
                 $last_status['status_name'] = Status::query()->where('id', $last_status->status_id)->first()->name;
                 $admin = Admin::query()->where('id', $last_status->user_id)->first();
                 $last_status['user_name'] = $admin->name." ".$admin->surname;
-                $offer = Offer::query()->where('offer_id', $action->offer_id)->first();
+                $offer = Offer::query()->where('id', $action->offer_id)->first();
                 $customer = Company::query()->where('id', $offer->customer_id)->first();
                 $offer['customer_name'] = $customer->name;
                 $previous_status = StatusHistory::query()->where('id', '<' ,$action->id)->where('offer_id', $action->offer_id)->orderByDesc('id')->first();
