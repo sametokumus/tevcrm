@@ -19,6 +19,7 @@
 		checkLogin();
 		checkRole();
         initOfferDetail();
+        initOfferHistory();
 
 	});
 
@@ -46,6 +47,43 @@ async function initOfferDetail(){
         price = accounting.grand_total;
     }
     $('#offer-price').html(changePriceToDecimal(price));
+    $('#offer-test-count').html(offer_details.length);
+}
+
+async function initOfferHistory(){
+    let offer_id = getPathVariable('offer-detail');
+    let data = await serviceGetOfferStatusHistory(offer_id);
+    let actions = data.actions;
+
+    $('#status-history-table tbody tr').remove();
+
+    $.each(actions, function (i, action) {
+        let last_time = formatDateAndTimeDESC(action.last_status.created_at, "/");
+
+        previous_status_name = action.previous_status.status_name;
+        if (action.previous_status == 0){
+            previous_status_name = '-';
+        }
+
+        let item = '<tr>\n' +
+            '           <td>\n' +
+            '               <span class="d-flex align-items-center">\n' +
+            '                   <i class="bi bi-circle-fill fs-6px text-theme me-2"></i>\n' +
+            '                   '+ action.last_status.user_name +'\n' +
+            '               </span>\n' +
+            '           </td>\n' +
+            '           <td><small>'+ last_time +'</small></td>\n' +
+            '           <td class="text-right">\n' +
+            '               <span class="badge bg-theme text-theme-900 bg-opacity-50 rounded-0 pt-5px" style="min-height: 18px">'+ previous_status_name +'</span>\n' +
+            '           </td>\n' +
+            '           <td>\n' +
+            '               <i class="bi bi-arrow-90deg-right"></i>\n' +
+            '               <span class="badge bg-theme text-white rounded-0 pt-5px" style="min-height: 18px">'+ action.last_status.status_name +'</span>\n' +
+            '           </td>\n' +
+            '       </tr>';
+
+        $('#status-history-table tbody').append(item);
+    });
 }
 
 

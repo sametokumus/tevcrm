@@ -52,28 +52,28 @@ $extra_js='
                             <div class="card-body bg-none">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                                        <i class="bi bi-cash h5 avatar avatar-40 bg-light-white rounded"></i>
                                     </div>
                                     <div class="col">
-                                        <p class="btn btn-sm btn-link bg-light-purple text-purple">Teklif Tutarı</p>
+                                        <p class="mb-1">Teklif Tutarı</p>
                                         <h6 class="fw-medium mb-0" id="offer-price"></h6>
                                     </div>
                                 </div>
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                                        <i class="bi bi-node-plus h5 avatar avatar-40 bg-light-white rounded"></i>
                                     </div>
                                     <div class="col">
-                                        <p class="btn btn-sm btn-link bg-light-purple text-purple">Test Adedi</p>
+                                        <p class="mb-1">Test Adedi</p>
                                         <h6 class="fw-medium mb-0" id="offer-test-count"></h6>
                                     </div>
                                 </div>
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                                        <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-white rounded"></i>
                                     </div>
                                     <div class="col">
-                                        <p class="btn btn-sm btn-link bg-light-purple text-purple">Teklif Tarihi</p>
+                                        <p class="mb-1">Teklif Tarihi</p>
                                         <h6 class="fw-medium mb-0" id="offer-date"></h6>
                                     </div>
                                 </div>
@@ -85,6 +85,36 @@ $extra_js='
 
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
+                    <div class="card border-0 theme-green">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class=" col-auto">
+                                    <i class="bi bi-list-task h5 avatar avatar-40 bg-light-theme rounded"></i>
+                                </div>
+                                <div class="col">
+                                    <h6 class="fw-medium mb-0">Teklif Durum Geçmişi</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="status-history-table" class="table table-striped table-borderless mb-2px small text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Kullanıcı</th>
+                                    <th>İşlem Tarihi</th>
+                                    <th class="text-right">Önceki Durum</th>
+                                    <th><i class="bi bi-arrow-90deg-right"></i> Güncel Durum</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
                     <div class="card border-0 theme-green">

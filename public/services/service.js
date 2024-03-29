@@ -1306,6 +1306,15 @@ async function servicePostUpdateOfferStatus(formData) {
     }
 }
 
+async function serviceGetOfferStatusHistory(offer_id) {
+    const data = await fetchDataGet('/admin/offer/getOfferStatusHistory/' + offer_id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+
 
 
 
