@@ -15,25 +15,29 @@ $extra_js='
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
                 <div class="card border-0 bg-radial-gradiant text-white h-100">
-                    <div class="card-header bg-none">
+                    <div class="card-body bg-none">
                         <div class="row align-items-center">
+                            <div class="col-auto">
+                                <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
+                            </div>
                             <div class="col">
                                 <h5 class="fw-medium mb-0" id="customer-name"></h5>
                                 <p id="global-id"></p>
                             </div>
-                            <div class="col-auto">
-                                <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
-                            </div>
                         </div>
-                    </div>
-                    <div class="card-body bg-none">
                         <div class="row align-items-center mb-3">
+                            <div class="col-auto">
+                                <i class="bi bi-person h5 avatar avatar-40 bg-light-white rounded"></i>
+                            </div>
                             <div class="col">
                                 <p class="mb-1">Müşteri Yetkilisi</p>
                                 <h5 class="fw-medium mb-0" id="employee"></h5>
                             </div>
                         </div>
                         <div class="row align-items-center mb-3">
+                            <div class="col-auto">
+                                <i class="bi bi-person h5 avatar avatar-40 bg-light-white rounded"></i>
+                            </div>
                             <div class="col">
                                 <p class="mb-1">Proje Sorumlusu</p>
                                 <h5 class="fw-medium mb-0" id="manager"></h5>
@@ -44,14 +48,44 @@ $extra_js='
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
                 <div class="card border-0 theme-purple h-100">
-                    <div class="card-header">
+                    <div class="card-body">
                         <div class="row align-items-center">
-                            <div class="col">
-                                <p class="btn btn-sm btn-link bg-light-green text-green">Teklif Tarihi</p>
-                                <h6 class="fw-medium mb-0" id="offer-date"></h6>
-                            </div>
                             <div class="col-auto">
                                 <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                            </div>
+                            <div class="col">
+                                <p class="btn btn-sm btn-link bg-light-purple text-purple">Teklif Tutarı</p>
+                                <h6 class="fw-medium mb-0" id="offer-price"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
+                <div class="card border-0 theme-purple h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                            </div>
+                            <div class="col">
+                                <p class="btn btn-sm btn-link bg-light-purple text-purple">Test Adedi</p>
+                                <h6 class="fw-medium mb-0" id="offer-test-count"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
+                <div class="card border-0 theme-purple h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <i class="bi bi-calendar-event h5 avatar avatar-40 bg-light-theme rounded"></i>
+                            </div>
+                            <div class="col">
+                                <p class="btn btn-sm btn-link bg-light-purple text-purple">Teklif Tarihi</p>
+                                <h6 class="fw-medium mb-0" id="offer-date"></h6>
                             </div>
                         </div>
                     </div>

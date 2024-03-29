@@ -40,6 +40,12 @@ async function initOfferDetail(){
     $('#employee').html(offer.employee.name);
     $('#manager').html(offer.manager.name + ' ' + offer.manager.surname);
     $('#offer-date').html(formatDateAndTimeDESC(offer.created_at, "-"));
+
+    let price = accounting.test_total;
+    if (accounting.grand_total != null){
+        price = accounting.grand_total;
+    }
+    $('#offer-price').html(changePriceToDecimal(price));
 }
 
 
