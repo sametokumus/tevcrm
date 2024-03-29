@@ -166,7 +166,6 @@ async function initOffers(){
             left: 2
         }
     });
-
 }
 
 function openStatusModal(offer_id, status_id){

@@ -19,7 +19,7 @@ $extra_js='
                         <div class="row align-items-center">
                             <div class="col">
                                 <h5 class="fw-medium mb-0" id="customer-name"></h5>
-                                <p class="text-muted small" id="global-id"></p>
+                                <p id="global-id"></p>
                             </div>
                             <div class="col-auto">
                                 <i class="bi bi-buildings h5 avatar avatar-40 bg-light-white rounded"></i>
