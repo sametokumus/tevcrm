@@ -39,7 +39,7 @@ async function initDocumentTypes(){
             '                  <td>\n' +
             '                  <div class="btn-list">\n' +
             '                      <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="openUpdateDocumentTypeModal(\''+ document_type.id +'\')">\n' +
-            '                          <span class="bi bi-trash3"></span>\n' +
+            '                          <span class="bi bi-pencil-square"></span>\n' +
             '                      </button>\n' +
             '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteDocumentType(\''+ document_type.id +'\')">\n' +
             '                          <span class="bi bi-trash3"></span>\n' +
@@ -107,7 +107,7 @@ async function initUpdateDocumentTypeModal(type_id){
 
 async function updateDocumentType(){
     let id = document.getElementById('update_document_type_id').value;
-    let name = document.getElementById('add_document_type_name').value;
+    let name = document.getElementById('update_document_type_name').value;
     let formData = JSON.stringify({
         "name": name
     });
