@@ -85,8 +85,8 @@ async function addDocumentType(){
     let formData = JSON.stringify({
         "name": name
     });
-    let data = await servicePostAddDocumentType(formData);
-    if(data.status == "success"){
+    let returned = await servicePostAddDocumentType(formData);
+    if(returned){
         $("#add_document_type_form").trigger("reset");
         $('#addDocumentTypeModal').modal('hide');
         initDocumentTypes();
@@ -111,8 +111,8 @@ async function updateDocumentType(){
     let formData = JSON.stringify({
         "name": name
     });
-    let data = await servicePostUpdateDocumentType(id, formData);
-    if(data.status == "success"){
+    let returned = await servicePostUpdateDocumentType(id, formData);
+    if(returned){
         $("#update_document_type_form").trigger("reset");
         $('#updateDocumentTypeModal').modal('hide');
         initDocumentTypes();
