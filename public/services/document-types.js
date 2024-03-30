@@ -2,6 +2,14 @@
     "use strict";
 
 	$(document).ready(function() {
+        $('#add_document_type_form').submit(function (e){
+            e.preventDefault();
+            addDocumentType();
+        });
+        $('#update_document_type_form').submit(function (e){
+            e.preventDefault();
+            updateDocumentType();
+        });
 	});
 
     $(window).on('load', function () {
@@ -52,7 +60,7 @@ async function initDocumentTypes(){
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Yeni Kategori',
+                text: 'Yeni Döküman Türü',
                 className: 'btn btn-primary',
                 action: function ( e, dt, node, config ) {
                     openAddDocumentTypeModal();
@@ -66,6 +74,49 @@ async function initDocumentTypes(){
         }
     });
 
+}
+
+async function openAddDocumentTypeModal(){
+    $('#addDocumentTypeModal').modal('show');
+}
+
+async function addDocumentType(){
+    let name = document.getElementById('add_document_type_name').value;
+    let formData = JSON.stringify({
+        "name": name
+    });
+    let data = await servicePostAddDocumentType(formData);
+    if(data.status == "success"){
+        $("#add_document_type_form").trigger("reset");
+        $('#addDocumentTypeModal').modal('hide');
+        initDocumentTypes();
+    }
+}
+
+async function openUpdateDocumentTypeModal(type_id){
+    $('#updateDocumentTypeModal').modal('show');
+    await initUpdateDocumentTypeModal(type_id);
+}
+
+async function initUpdateDocumentTypeModal(type_id){
+    let data = await serviceGetDocumentTypeById(type_id);
+    let document_type = data.document_type;
+    document.getElementById('update_document_type_id').value = document_type.id;
+    document.getElementById('update_document_type_name').value = document_type.name;
+}
+
+async function updateDocumentType(){
+    let id = document.getElementById('update_document_type_id').value;
+    let name = document.getElementById('add_document_type_name').value;
+    let formData = JSON.stringify({
+        "name": name
+    });
+    let data = await servicePostUpdateDocumentType(id, formData);
+    if(data.status == "success"){
+        $("#update_document_type_form").trigger("reset");
+        $('#updateDocumentTypeModal').modal('hide');
+        initDocumentTypes();
+    }
 }
 
 async function deleteDocumentType(type_id){
