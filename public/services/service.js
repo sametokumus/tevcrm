@@ -1317,6 +1317,71 @@ async function serviceGetOfferStatusHistory(offer_id) {
 
 
 
+//Document Type
+async function serviceGetDocumentTypes() {
+    const data = await fetchDataGet('/admin/setting/getDocumentTypes', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetDocumentTypeById(id) {
+    const data = await fetchDataGet('/admin/setting/getDocumentTypeById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddDocumentType(formData) {
+    const data = await fetchDataPost('/admin/setting/addDocumentType', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateDocumentType(id, formData) {
+    const data = await fetchDataPost('/admin/setting/updateDocumentType/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteDocumentType(id) {
+    const data = await fetchDataGet('/admin/setting/deleteDocumentType/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2803,7 +2868,6 @@ async function servicePostUpdatePaymentTerm(id, formData) {
         return false;
     }
 }
-
 async function serviceGetDeletePaymentTerm(id) {
     const data = await fetchDataGet('/admin/setting/deletePaymentTerm/' + id, 'application/json');
     if (data.status == "success") {

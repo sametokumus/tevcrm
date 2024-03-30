@@ -81,6 +81,24 @@ $extra_js='
                         </div>
                     </div>
 
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
+                        <div class="card border-0 theme-green">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class=" col-auto">
+                                        <i class="bi bi-list-task h5 avatar avatar-40 bg-light-theme rounded"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h6 class="fw-medium mb-0">Teklif Dökümanları</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

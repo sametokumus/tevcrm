@@ -965,6 +965,14 @@ $extra_js="";
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
+                                    <a class="dropdown-item nav-link" href="document-types">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-file-earmark-ruled"></i>
+                                        </div>
+                                        <div class="col align-self-center">Döküman Türleri</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item nav-link" href="#">
                                         <div class="avatar avatar-40 icon"><i class="bi bi-briefcase"></i>
                                         </div>

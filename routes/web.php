@@ -39,6 +39,21 @@ Route::get('/offers', function () { return view('offers'); });
 Route::get('/offer-detail/{id}', function () { return view('offer-detail'); });
 
 
+//Settings
+
+Route::get('/document-types', function () { return view('document-types'); });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/my-dashboard', function () { return view('my-dashboard'); });

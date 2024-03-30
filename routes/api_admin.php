@@ -151,7 +151,12 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
 
 
 
-
+    //Setting
+    Route::get('setting/getDocumentTypes', [SettingController::class, 'getDocumentTypes']);
+    Route::get('setting/getDocumentTypeById/{type_id}', [SettingController::class, 'getDocumentTypeById']);
+    Route::post('setting/addDocumentType', [SettingController::class, 'addDocumentType']);
+    Route::post('setting/updateDocumentType/{type_id}', [SettingController::class, 'updateDocumentType']);
+    Route::get('setting/deleteDocumentType/{type_id}', [SettingController::class, 'deleteDocumentType']);
 
 
 

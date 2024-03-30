@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityType;
 use App\Models\DeliveryTerm;
+use App\Models\DocumentType;
 use App\Models\PaymentTerm;
 use App\Models\PaymentType;
 use Illuminate\Database\QueryException;
@@ -13,6 +14,86 @@ use Nette\Schema\ValidationException;
 
 class SettingController extends Controller
 {
+    //Document Types
+    public function getDocumentTypes()
+    {
+        try {
+            $document_types = DocumentType::query()->where('active',1)->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['document_types' => $document_types]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function getDocumentTypeById($type_id)
+    {
+        try {
+            $document_type = DocumentType::query()->where('id', $type_id)->where('active',1)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['document_type' => $document_type]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+
+    public function addDocumentType(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+            ]);
+            DocumentType::query()->insertGetId([
+                'name' => $request->name
+            ]);
+
+            return response(['message' => __('Döküman türü ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+
+    public function updateDocumentType(Request $request, $type_id){
+        try {
+            $request->validate([
+                'name' => 'required',
+            ]);
+
+            DocumentType::query()->where('id', $type_id)->update([
+                'name' => $request->name
+            ]);
+
+            return response(['message' => __('Döküman türü güncelleme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+    public function deleteDocumentType($type_id){
+        try {
+
+            DocumentType::query()->where('id',$type_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Döküman türü silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
+        }
+    }
+
+
     //Payment Terms
     public function getPaymentTerms()
     {
