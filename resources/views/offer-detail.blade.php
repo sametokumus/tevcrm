@@ -98,7 +98,7 @@ $extra_js='
                                     <li class="list-group-item">
                                         <div class="row text-secondary">
                                             <div class="col-auto">1</div>
-                                            <div class="col"><s>Test Adı</s></div>
+                                            <div class="col">Test Adı</div>
                                             <div class="col">
                                                 <span class="badge badge-sm bg-warning p-2"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Beklemede</span>
                                             </div>
