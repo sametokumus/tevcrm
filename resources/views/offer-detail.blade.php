@@ -124,6 +124,9 @@ $extra_js='
                                 <div class="col">
                                     <h6 class="fw-medium mb-0">Teklif Durum Geçmişi</h6>
                                 </div>
+                                <div class="col-auto" id="update-status-col">
+
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">

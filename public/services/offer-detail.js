@@ -49,6 +49,23 @@ async function initOfferDetail(){
     }
     $('#offer-price').html(changeCommasToDecimal(price) + ' ₺');
     $('#offer-test-count').html(offer_details.length);
+
+    let status_class = "badge badge-sm bg-info";
+    if (offer.status.action == "send-customer"){
+        status_class = "badge badge-sm bg-info";
+    }else if (offer.status.action == "accept-reject"){
+        status_class = "badge badge-sm bg-indigo";
+    }else if (offer.status.action == "customer-approved"){
+        status_class = "badge badge-sm bg-green";
+    }else if (offer.status.action == "detail"){
+        status_class = "badge badge-sm bg-teal";
+    }else if (offer.status.action == "laboratory"){
+        status_class = "badge badge-sm bg-blue";
+    }else if (offer.status.action == "cancelled"){
+        status_class = "badge badge-sm bg-danger";
+    }
+    let status = '<span class="'+ status_class +'" onclick="openStatusModal('+ offer.id +', '+ offer.status_id +')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
+    $('#update-status-col').append(status);
 }
 
 async function initOfferHistory(){
@@ -147,7 +164,6 @@ async function addDocument(){
 
     await servicePostAddDocument(formData, offer_id);
 }
-
 async function addDocumentCallback(xhttp){
     let jsonData = await xhttp.responseText;
     const obj = JSON.parse(jsonData);
@@ -157,11 +173,43 @@ async function addDocumentCallback(xhttp){
     $("#addDocumentModal").modal('hide');
     initDocuments();
 }
-
 async function deleteDocument(document_id){
     let returned = await serviceGetDeleteDocument(document_id);
     if(returned){
         initDocuments();
+    }
+}
+
+
+function openStatusModal(offer_id, status_id){
+    $('#updateStatusModal').modal('show');
+    initStatusModal(offer_id, status_id);
+}
+async function initStatusModal(offer_id, status_id){
+    let data = await serviceGetChangeableStatuses();
+    let statuses = data.statuses;
+    $('#update_offer_status option').remove();
+    $.each(statuses, function (i, status){
+        let forced = '';
+        if (status.forced == 1){forced = '(*)';}
+        let selected = '';
+        if(status.id == status_id){selected = 'selected';}
+        $('#update_offer_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +' '+ forced +'</option>');
+    });
+    document.getElementById('update_offer_id').value = offer_id;
+}
+async function updateStatus(){
+    let status_id = document.getElementById('update_offer_status').value;
+    let offer_id = document.getElementById('update_offer_id').value;
+    let formData = JSON.stringify({
+        "offer_id": offer_id,
+        "status_id": status_id
+    });
+    let data = await servicePostUpdateOfferStatus(formData);
+    if(data.status == "success"){
+        $("#update_status_form").trigger("reset");
+        $('#updateStatusModal').modal('hide');
+        initOffers();
     }
 }
 
@@ -294,38 +342,6 @@ async function initOffers(){
             left: 2
         }
     });
-}
-
-function openStatusModal(offer_id, status_id){
-    $('#updateStatusModal').modal('show');
-    initStatusModal(offer_id, status_id);
-}
-async function initStatusModal(offer_id, status_id){
-    let data = await serviceGetChangeableStatuses();
-    let statuses = data.statuses;
-    $('#update_offer_status option').remove();
-    $.each(statuses, function (i, status){
-        let forced = '';
-        if (status.forced == 1){forced = '(*)';}
-        let selected = '';
-        if(status.id == status_id){selected = 'selected';}
-        $('#update_offer_status').append('<option value="'+ status.id +'" '+ selected +'>'+ status.name +' '+ forced +'</option>');
-    });
-    document.getElementById('update_offer_id').value = offer_id;
-}
-async function updateStatus(){
-    let status_id = document.getElementById('update_offer_status').value;
-    let offer_id = document.getElementById('update_offer_id').value;
-    let formData = JSON.stringify({
-        "offer_id": offer_id,
-        "status_id": status_id
-    });
-    let data = await servicePostUpdateOfferStatus(formData);
-    if(data.status == "success"){
-        $("#update_status_form").trigger("reset");
-        $('#updateStatusModal').modal('hide');
-        initOffers();
-    }
 }
 
 async function openDeleteOffer(offer_id){
