@@ -82,7 +82,7 @@ $extra_js='
                     </div>
 
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
-                        <div class="card border-0 theme-green">
+                        <div class="card border-0 theme-purple">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class=" col-auto">
