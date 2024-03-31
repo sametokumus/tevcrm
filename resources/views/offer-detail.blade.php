@@ -82,29 +82,77 @@ $extra_js='
                     </div>
 
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
-                        <div class="card border-0 theme-purple">
+                        <div class="card border-0 theme-green">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class=" col-auto">
                                         <i class="bi bi-list-task h5 avatar avatar-40 bg-light-theme rounded"></i>
                                     </div>
                                     <div class="col">
-                                        <h6 class="fw-medium mb-0">Teklif Dökümanları</h6>
+                                        <h6 class="fw-medium mb-0">Task list</h6>
+                                        <p class="text-secondary small">Do your best</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <table id="document-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
-                                    <thead>
-                                    <tr>
-                                        <th class="border-bottom-0">Döküman Türü</th>
-                                        <th class="border-bottom-0"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush bg-none">
+                                    <li class="list-group-item">
+                                        <div class="row text-secondary">
+                                            <div class="col-auto">01</div>
+                                            <div class="col"><s>Create UI design</s></div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..." checked></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row text-secondary">
+                                            <div class="col-auto">02</div>
+                                            <div class="col"><s>Create HTML Structure</s></div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..." checked></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-auto">03</div>
+                                            <div class="col">Start Development</div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..."></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-auto">04</div>
+                                            <div class="col">Customize 3rd parties</div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..."></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-auto">05</div>
+                                            <div class="col">Start reviewing</div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..."></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-auto">06</div>
+                                            <div class="col">Update Development</div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..."></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-auto">07</div>
+                                            <div class="col">Maintain project</div>
+                                            <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
+                                                                         aria-label="..."></div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -147,81 +195,35 @@ $extra_js='
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
-                    <div class="card border-0 theme-green">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
+                    <div class="card border-0 theme-purple">
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class=" col-auto">
                                     <i class="bi bi-list-task h5 avatar avatar-40 bg-light-theme rounded"></i>
                                 </div>
                                 <div class="col">
-                                    <h6 class="fw-medium mb-0">Task list</h6>
-                                    <p class="text-secondary small">Do your best</p>
+                                    <h6 class="fw-medium mb-0">Teklif Dökümanları</h6>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush bg-none">
-                                <li class="list-group-item">
-                                    <div class="row text-secondary">
-                                        <div class="col-auto">01</div>
-                                        <div class="col"><s>Create UI design</s></div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..." checked></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row text-secondary">
-                                        <div class="col-auto">02</div>
-                                        <div class="col"><s>Create HTML Structure</s></div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..." checked></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-auto">03</div>
-                                        <div class="col">Start Development</div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..."></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-auto">04</div>
-                                        <div class="col">Customize 3rd parties</div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..."></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-auto">05</div>
-                                        <div class="col">Start reviewing</div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..."></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-auto">06</div>
-                                        <div class="col">Update Development</div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..."></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-auto">07</div>
-                                        <div class="col">Maintain project</div>
-                                        <div class="col-auto"><input class="form-check-input" type="checkbox" value=""
-                                                                     aria-label="..."></div>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="card-body">
+                            <table id="document-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                <thead>
+                                <tr>
+                                    <th class="border-bottom-0">Döküman Türü</th>
+                                    <th class="border-bottom-0"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-4">
                     <div class="card border-0 theme-purple h-100">
                         <div class="card-header">
