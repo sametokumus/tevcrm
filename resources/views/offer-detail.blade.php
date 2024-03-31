@@ -332,11 +332,8 @@ $extra_js='
                         <div class="col-12 col-md-12 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-theme bg-white border-end-0"><i
-                                            class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
                                         <input type="file" class="form-control" id="add_document_file" />
-                                        <label>Döküman</label>
                                     </div>
                                 </div>
                             </div>
