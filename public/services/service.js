@@ -676,15 +676,6 @@ async function getDeliveryTermsAddSelectId(selectId){
         $('#'+selectId).append(optionRow);
     });
 }
-
-async function getDocumentTypesAddSelectId(selectId){
-    let data = await serviceGetMobileDocumentTypes();
-    $('#'+selectId+' option').remove();
-    $.each(data.document_types, function(i, document_type){
-        let optionRow = '<option value="'+document_type.id+'">'+document_type.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
 async function getExpenseCategoriesAddSelectId(selectId){
     let data = await serviceGetExpenseCategories();
     $('#'+selectId+' option').remove();
