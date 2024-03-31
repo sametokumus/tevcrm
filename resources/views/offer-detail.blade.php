@@ -82,7 +82,7 @@ $extra_js='
                     </div>
 
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
-                        <div class="card border-0 theme-green">
+                        <div class="card border-0 theme-primary">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class=" col-auto">
@@ -97,10 +97,10 @@ $extra_js='
                                 <ul class="list-group list-group-flush bg-none">
                                     <li class="list-group-item">
                                         <div class="row text-secondary">
-                                            <div class="col-auto">01</div>
-                                            <div class="col"><s>Create UI design</s></div>
-                                            <div class="col-auto">
-                                                <span class="badge badge-sm bg-warning"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Beklemede</span>
+                                            <div class="col-auto">1</div>
+                                            <div class="col"><s>Test Adı</s></div>
+                                            <div class="col">
+                                                <span class="badge badge-sm bg-warning p-2"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Beklemede</span>
                                             </div>
                                             <div class="col-auto">
                                                 <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="sendLab('1')">
