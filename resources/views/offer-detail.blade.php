@@ -308,7 +308,7 @@ $extra_js='
 <div class="modal modal-cover fade" id="addDocumentModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form method="post" action="#" id="update_status_form">
+            <form method="post" action="#" id="add_document_form">
                 <div class="modal-body">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
