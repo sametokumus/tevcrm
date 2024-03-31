@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounting;
 use App\Models\Admin;
 use App\Models\Company;
+use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Expense;
 use App\Models\Measurement;
@@ -504,6 +505,67 @@ class OfferController extends Controller
             return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['actions' => $actions]]);
         } catch (QueryException $queryException) {
             return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e'=>$queryException->getMessage()]);
+        }
+    }
+
+    public function getDocuments($offer_id)
+    {
+        try {
+            $documents = Document::query()
+                ->leftJoin('document_types', 'document_types.id', '=', 'documents.document_type_id')
+                ->selectRaw('documents.*, document_types.name as type_name')
+                ->where('documents.offer_id', $offer_id)
+                ->where('documents.active', 1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['documents' => $documents]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
+    public function addDocument(Request $request, $offer_id)
+    {
+        try {
+            $request->validate([
+                'document_type_id' => 'required',
+            ]);
+            $document_id = Document::query()->insertGetId([
+                'offer_id' => $offer_id,
+                'document_type_id' => $request->document_type_id
+            ]);
+            if ($request->hasFile('file')) {
+                $rand = uniqid();
+                $file = $request->file('file');
+                $file_name = $rand . "-" . $file->getClientOriginalName();
+                $file->move(public_path('/img/document/'), $file_name);
+                $file_path = "/img/document/" . $file_name;
+                Document::query()->where('id', $document_id)->update([
+                    'file_url' => $file_path
+                ]);
+            }
+
+            return response(['message' => __('Döküman ekleme işlemi başarılı.'), 'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001','a' => $queryException->getMessage()]);
+        } catch (\Throwable $throwable) {
+            return response(['message' => __('Hatalı işlem.'), 'status' => 'error-001','a' => $throwable->getMessage()]);
+        }
+    }
+    public function deleteDocument($document_id){
+        try {
+
+            Document::query()->where('id', $document_id)->update([
+                'active' => 0,
+            ]);
+            return response(['message' => __('Döküman silme işlemi başarılı.'),'status' => 'success']);
+        } catch (ValidationException $validationException) {
+            return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
+        } catch (QueryException $queryException) {
+            return  response(['message' => __('Hatalı sorgu.'),'status' => 'query-001']);
+        } catch (\Throwable $throwable) {
+            return  response(['message' => __('Hatalı işlem.'),'status' => 'error-001','ar' => $throwable->getMessage()]);
         }
     }
 }

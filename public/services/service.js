@@ -539,20 +539,11 @@ async function getStatusesAddSelectId(selectId){
     });
 }
 
-async function getSaleTypesAddSelectId(selectId){
-    let data = await serviceGetSaleTypes();
+async function getDocumentTypesAddSelectId(selectId){
+    let data = await serviceGetDocumentTypes();
     $('#'+selectId+' option').remove();
-    $.each(data.types, function(i, type){
+    $.each(data.document_types, function(i, type){
         let optionRow = '<option value="'+type.id+'">'+type.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getStaffTargetTypesAddSelectId(selectId){
-    let data = await serviceGetStaffTargetTypes();
-    $('#'+selectId+' option').remove();
-    $.each(data.target_types, function(i, target_type){
-        let optionRow = '<option value="'+target_type.id+'">'+target_type.name+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }
@@ -563,36 +554,6 @@ async function getOwnersAddSelectId(selectId){
     $('#'+selectId).append('<option value="0">Firma Seçiniz</option>');
     $.each(data.contacts, function(i, contact){
         let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getDashboardOwnersAddSelectId(selectId){
-    let data = await serviceGetContacts();
-    $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Tüm Firmalar</option>');
-    $.each(data.contacts, function(i, contact){
-        let optionRow = '<option value="'+contact.id+'">'+contact.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getCompaniesAddSelectId(selectId){
-    let data = await serviceGetCompanies();
-    $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Müşteri Seçiniz</option>');
-    $.each(data.companies, function(i, company){
-        let optionRow = '<option value="'+company.id+'">'+company.name+'</option>';
-        $('#'+selectId).append(optionRow);
-    });
-}
-
-async function getAddressesAddSelectId(selectId, company_id){
-    let data = await serviceGetAddressesByCompanyId(company_id);
-    $('#'+selectId+' option').remove();
-    $('#'+selectId).append('<option value="0">Adres Seçiniz</option>');
-    $.each(data.addresses, function(i, address){
-        let optionRow = '<option value="'+address.id+'">'+address.name+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }
@@ -1356,6 +1317,28 @@ async function servicePostUpdateDocumentType(id, formData) {
 }
 async function serviceGetDeleteDocumentType(id) {
     const data = await fetchDataGet('/admin/setting/deleteDocumentType/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+async function serviceGetDocuments(id) {
+    const data = await fetchDataGet('/admin/offer/getDocuments/'+ id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddDocument(formData, id) {
+    await xhrDataPost('/admin/offer/addDocument/'+id, formData, addDocumentCallback);
+}
+async function serviceGetDeleteDocument(id) {
+    const data = await fetchDataGet('/admin/offer/deleteDocument/' + id, 'application/json');
     if (data.status == "success") {
         showAlert(data.message);
         return true;
@@ -3177,45 +3160,6 @@ async function serviceGetMonthlyApprovedSalesLastTwelveMonthsByAdminId(id) {
         return data.object;
     } else {
         showAlert('İstek Başarısız.');
-    }
-}
-
-async function serviceGetDocuments(id) {
-    const data = await fetchDataGet('/admin/sale/getDocuments/'+ id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-
-async function serviceGetMobileDocuments(id) {
-    const data = await fetchDataGet('/admin/mobile/getDocuments/'+ id, 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function serviceGetMobileDocumentTypes() {
-    const data = await fetchDataGet('/admin/mobile/getDocumentTypes', 'application/json');
-    if (data.status == "success") {
-        return data.object;
-    } else {
-        showAlert('İstek Başarısız.');
-    }
-}
-async function servicePostAddMobileDocument(formData, id) {
-    await xhrDataPost('/admin/mobile/addDocument/'+id, formData, addMobileDocumentCallback);
-}
-async function serviceGetDeleteMobileDocument(id) {
-    const data = await fetchDataGet('/admin/mobile/deleteDocument/' + id, 'application/json');
-    if (data.status == "success") {
-        showAlert(data.message);
-        return true;
-    } else {
-        showAlert('İstek Başarısız.');
-        return false;
     }
 }
 

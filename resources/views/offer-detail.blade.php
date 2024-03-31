@@ -94,7 +94,17 @@ $extra_js='
                                 </div>
                             </div>
                             <div class="card-body">
+                                <table id="document-datatable" class="table table-bordered text-nowrap key-buttons border-bottom">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-bottom-0">Döküman Türü</th>
+                                        <th class="border-bottom-0"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -294,6 +304,58 @@ $extra_js='
     </div>
 
 </main>
+
+<div class="modal modal-cover fade" id="addDocumentModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" action="#" id="update_status_form">
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                        </div>
+                        <h6 class="title">Döküman Ekle</h6>
+                        <div class="col-12 col-md-12 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-highlighter"></i></span>
+                                    <div class="form-floating">
+                                        <select class="form-select border-0" id="add_document_type_id" required>
+                                            <option value="">Seçiniz...</option>
+                                        </select>
+                                        <label>Döküman Türü</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                        <div class="col-12 col-md-12 mb-2">
+                            <div class="form-group mb-3 position-relative check-valid">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text text-theme bg-white border-end-0"><i
+                                            class="bi bi-highlighter"></i></span>
+                                    <div class="form-floating">
+                                        <input type="file" class="form-control" id="add_document_file" />
+                                        <label>Döküman</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback mb-3">Add valid data</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-link text-danger" type="button" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-trash h4 me-2"></i> Vazgeç</button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-theme" type="submit"><i class="bi bi-send me-2"></i> Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @include('include.footer')

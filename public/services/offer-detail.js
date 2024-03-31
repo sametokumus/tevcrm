@@ -7,9 +7,9 @@
             updateStatus();
         });
 
-        $('#delete_offer_form').submit(function (e){
+        $('#add_document_form').submit(function (e){
             e.preventDefault();
-            deleteOffer();
+            addDocument();
         });
 
 	});
@@ -20,6 +20,7 @@
 		checkRole();
         initOfferDetail();
         initOfferHistory();
+        initDocuments();
 
 	});
 
@@ -85,6 +86,88 @@ async function initOfferHistory(){
         $('#status-history-table tbody').append(item);
     });
 }
+
+async function initDocuments(){
+    let offer_id = getPathVariable('offer-detail');
+    let data = await serviceGetDocuments(offer_id);
+    $("#document-datatable").dataTable().fnDestroy();
+    $('#document-datatable tbody > tr').remove();
+
+    $.each(data.documents, function (i, document) {
+        let item = '<tr>\n' +
+            '              <td>'+ document.type_name +'</td>\n' +
+            '              <td>\n' +
+            '                  <div class="btn-list">\n' +
+            '                      <a href="'+ api_url + document.file_url +'" target="_blank" id="bDel" type="button" class="btn  btn-sm btn-theme">\n' +
+            '                          <span class="bi bi-file-pdf"> </span> \n' +
+            '                      </a>\n' +
+            '                      <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="deleteDocument(\''+ document.id +'\')">\n' +
+            '                          <span class="bi bi-trash3"> </span> \n' +
+            '                      </button>\n' +
+            '                  </div>\n' +
+            '              </td>\n' +
+            '          </tr>';
+        $('#document-datatable tbody').append(item);
+    });
+
+    $('#document-datatable').DataTable({
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Döküman Ekle',
+                className: 'btn btn-theme',
+                action: function ( e, dt, node, config ) {
+                    openAddDocumentModal();
+                }
+            }
+        ],
+        pageLength : -1,
+        language: {
+            url: "services/Turkish.json"
+        }
+    });
+}
+
+async function openAddDocumentModal(){
+    $('#addDocumentModal').modal('show');
+    getDocumentTypesAddSelectId('add_document_type_id');
+}
+async function addDocument(){
+
+    let offer_id = getPathVariable('offer-detail');
+    let formData = new FormData();
+    formData.append('document_type_id', document.getElementById('add_document_type_id').value);
+    formData.append('file', document.getElementById('add_document_file').files[0]);
+    console.log(formData);
+
+    await servicePostAddDocument(formData, offer_id);
+}
+
+async function addDocumentCallback(xhttp){
+    let jsonData = await xhttp.responseText;
+    const obj = JSON.parse(jsonData);
+    showAlert(obj.message);
+    console.log(obj)
+    $("#add_document_form").trigger("reset");
+    $("#addDocumentModal").modal('hide');
+    initDocuments();
+}
+
+async function deleteDocument(document_id){
+    let returned = await serviceGetDeleteDocument(document_id);
+    if(returned){
+        initDocuments();
+    }
+}
+
+
+
+
 
 
 async function initOffers(){
