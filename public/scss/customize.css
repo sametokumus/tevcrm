@@ -117,3 +117,7 @@ div.DTE button.btn, div.DTE div.DTE_Form_Buttons button{
 .text-right {
     text-align: right !important;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

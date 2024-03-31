@@ -64,7 +64,7 @@ async function initOfferDetail(){
     }else if (offer.status.action == "cancelled"){
         status_class = "badge badge-sm bg-danger";
     }
-    let status = '<span class="'+ status_class +'" onclick="openStatusModal('+ offer.id +', '+ offer.status_id +')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
+    let status = '<span class="'+ status_class +' cursor-pointer" onclick="openStatusModal('+ offer.id +', '+ offer.status_id +')"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> '+ offer.status.name +'</span>';
     $('#update-status-col').append(status);
 }
 
