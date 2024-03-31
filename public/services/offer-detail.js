@@ -207,8 +207,6 @@ async function updateStatus(){
     });
     let data = await servicePostUpdateOfferStatus(formData);
     if(data.status == "success"){
-        $("#update_status_form").trigger("reset");
-        $('#updateStatusModal').modal('hide');
-        initOffers();
+        location.reload();
     }
 }
