@@ -103,8 +103,8 @@ $extra_js='
                                                 <span class="badge badge-sm bg-warning"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Beklemede</span>
                                             </div>
                                             <div class="col-auto">
-                                                <button id="bEdit" type="button" class="btn btn-sm btn-danger" onclick="sendLab('1')">
-                                                    <span class="bi bi-trash3"> </span>
+                                                <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="sendLab('1')">
+                                                    <span class="bi bi-node-plus-fill"> </span> Laboratuvara Gönder
                                                 </button>
                                             </div>
                                         </div>
