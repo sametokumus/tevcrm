@@ -84,7 +84,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Son İşlem" id="add_lab_last_no" required class="form-control border-start-0">
+                                        <input type="number" placeholder="Son İşlem" id="add_lab_last_no" required class="form-control border-start-0">
                                         <label>Son İşlem</label>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ $extra_js='
                         <div class="col-md-12 mb-3">
                             <h6 class="title">Laboratuvar Güncelle</h6>
                         </div>
-
+                        <input type="hidden" placeholder="Laboratuvar Id" id="update_lab_id" required class="form-control border-start-0">
                         <div class="col-12 col-md-12 mb-2">
                             <div class="form-group mb-3 position-relative check-valid">
                                 <div class="input-group input-group-lg">
@@ -148,7 +148,7 @@ $extra_js='
                                     <span class="input-group-text text-theme bg-white border-end-0"><i
                                             class="bi bi-highlighter"></i></span>
                                     <div class="form-floating">
-                                        <input type="text" placeholder="Son İşlem" id="update_lab_last_no" required class="form-control border-start-0">
+                                        <input type="number" placeholder="Son İşlem" id="update_lab_last_no" required class="form-control border-start-0">
                                         <label>Son İşlem</label>
                                     </div>
                                 </div>

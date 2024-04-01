@@ -66,7 +66,7 @@ async function initLabs(){
         dom: 'Bfrtip',
         buttons: [
             {
-                text: 'Yeni Döküman Türü',
+                text: 'Yeni Laboratuvar Ekle',
                 className: 'btn btn-primary',
                 action: function ( e, dt, node, config ) {
                     openAddLabModal();
