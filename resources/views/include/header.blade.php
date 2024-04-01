@@ -885,10 +885,10 @@ $extra_js="";
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="false"
                                data-bs-display="static" href="#" role="button" aria-expanded="false">
-                                <div class="avatar avatar-40 icon"><i class="bi bi-card-checklist"></i></div>
+                                <div class="avatar avatar-40 icon"><i class="fa fa-plus"></i></div>
                                 <div class="col">Laboratuvar Yönetimi</div>
                                 <div class="arrow"><i class="bi bi-chevron-down plus"></i> <i
-                                        class="fa fa-flask"></i>
+                                        class="bi bi-chevron-up minus"></i>
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
