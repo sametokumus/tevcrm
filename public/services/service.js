@@ -549,10 +549,10 @@ async function getDocumentTypesAddSelectId(selectId){
 }
 
 async function getLaboratoriesAddSelectId(selectId){
-    let data = await serviceGetDocumentTypes();
+    let data = await serviceGetLabs();
     $('#'+selectId+' option').remove();
-    $.each(data.document_types, function(i, type){
-        let optionRow = '<option value="'+type.id+'">'+type.name+'</option>';
+    $.each(data.labs, function(i, lab){
+        let optionRow = '<option value="'+lab.id+'">'+lab.name+'</option>';
         $('#'+selectId).append(optionRow);
     });
 }
@@ -1350,7 +1350,7 @@ async function serviceGetDeleteDocument(id) {
 
 
 
-//Document Type
+//Laboratuvar
 async function serviceGetLabs() {
     const data = await fetchDataGet('/admin/lab/getLabs', 'application/json');
     if (data.status == "success") {

@@ -16,6 +16,7 @@
 
 		checkLogin();
 		checkRole();
+        await getLaboratoriesAddSelectId('update_test_lab_id');
         await getCategoriesAddSelectId('update_test_category');
         initTest();
 
@@ -30,6 +31,7 @@ async function initTest(){
     let test_id = getPathVariable('update-test');
     let data = await serviceGetTestById(test_id);
     let test = data.test;
+    document.getElementById('update_test_lab_id').value = test.lab_id;
     document.getElementById('update_test_category').value = test.category_id;
     document.getElementById('update_test_name').value = test.name;
     document.getElementById('update_test_sample_count').value = test.sample_count;
@@ -40,6 +42,7 @@ async function initTest(){
 async function updateTest(){
 
     let formData = JSON.stringify({
+        "lab_id": document.getElementById('update_test_lab_id').value,
         "category_id": document.getElementById('update_test_category').value,
         "name": document.getElementById('update_test_name').value,
         "sample_count": document.getElementById('update_test_sample_count').value,

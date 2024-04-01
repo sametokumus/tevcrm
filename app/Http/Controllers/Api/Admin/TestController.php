@@ -16,7 +16,8 @@ class TestController extends Controller
         try {
             $tests = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
-                ->selectRaw('tests.*, categories.name as category_name')
+                ->leftJoin('laboratories', 'laboratories.id', '=', 'tests.lab_id')
+                ->selectRaw('tests.*, categories.name as category_name, laboratories.name as lab_name')
                 ->where('tests.active',1)
                 ->get();
 
@@ -30,7 +31,8 @@ class TestController extends Controller
         try {
             $tests = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
-                ->selectRaw('tests.*, categories.name as category_name')
+                ->leftJoin('laboratories', 'laboratories.id', '=', 'tests.lab_id')
+                ->selectRaw('tests.*, categories.name as category_name, laboratories.name as lab_name')
                 ->where('tests.category_id',$category_id)
                 ->where('tests.active',1)
                 ->get();
@@ -46,7 +48,8 @@ class TestController extends Controller
         try {
             $test = Test::query()
                 ->leftJoin('categories', 'categories.id', '=', 'tests.category_id')
-                ->selectRaw('tests.*, categories.name as category_name')
+                ->leftJoin('laboratories', 'laboratories.id', '=', 'tests.lab_id')
+                ->selectRaw('tests.*, categories.name as category_name, laboratories.name as lab_name')
                 ->where('tests.id', $test_id)
                 ->where('tests.active',1)->first();
 
@@ -64,6 +67,7 @@ class TestController extends Controller
             ]);
             $user = Auth::user();
             Test::query()->insertGetId([
+                'lab_id' => $request->lab_id,
                 'category_id' => $request->category_id,
                 'name' => $request->name,
                 'sample_count' => $request->sample_count,
@@ -88,6 +92,7 @@ class TestController extends Controller
                 'name' => 'required',
             ]);
             Test::query()->where('id', $test_id)->update([
+                'lab_id' => $request->lab_id,
                 'category_id' => $request->category_id,
                 'name' => $request->name,
                 'sample_count' => $request->sample_count,

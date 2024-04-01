@@ -16,6 +16,7 @@
 
 		checkLogin();
 		checkRole();
+        getLaboratoriesAddSelectId('add_test_lab_id');
         getCategoriesAddSelectId('add_test_category');
 
 	});
@@ -28,6 +29,7 @@ function checkRole(){
 async function addTest(){
 
     let formData = JSON.stringify({
+        "lab_id": document.getElementById('add_test_lab_id').value,
         "category_id": document.getElementById('add_test_category').value,
         "name": document.getElementById('add_test_name').value,
         "sample_count": document.getElementById('add_test_sample_count').value,

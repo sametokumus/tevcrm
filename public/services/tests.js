@@ -26,6 +26,9 @@ async function initTests(){
 
         let item = '<tr>\n' +
             '                  <td>\n' +
+            '                      <p class="mb-0">'+ checkNull(test.lab_name) +'</p>\n' +
+            '                  </td>\n' +
+            '                  <td>\n' +
             '                      <p class="mb-0">'+ checkNull(test.category_name) +'</p>\n' +
             '                  </td>\n' +
             '                  <td>\n' +

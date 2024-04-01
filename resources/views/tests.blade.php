@@ -21,6 +21,7 @@ $extra_js='
                                 <table id="test-datatable" class="table table-bordered nowrap key-buttons border-bottom">
                                     <thead>
                                     <tr class="text-muted">
+                                        <th class="">Laboratuvar</th>
                                         <th class="">Kategori</th>
                                         <th class="">Test Adı</th>
                                         <th data-breakpoints="xs md">Numune Sayısı</th>
