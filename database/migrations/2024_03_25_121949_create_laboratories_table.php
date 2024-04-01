@@ -17,7 +17,7 @@ class CreateLaboratoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('lab_code');
-            $table->integer('last_no')->default(0);
+            $table->bigInteger('last_no')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

@@ -548,6 +548,15 @@ async function getDocumentTypesAddSelectId(selectId){
     });
 }
 
+async function getLaboratoriesAddSelectId(selectId){
+    let data = await serviceGetDocumentTypes();
+    $('#'+selectId+' option').remove();
+    $.each(data.document_types, function(i, type){
+        let optionRow = '<option value="'+type.id+'">'+type.name+'</option>';
+        $('#'+selectId).append(optionRow);
+    });
+}
+
 async function getOwnersAddSelectId(selectId){
     let data = await serviceGetContacts();
     $('#'+selectId+' option').remove();

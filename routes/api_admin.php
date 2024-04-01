@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Admin\SocketsController;
 use App\Http\Controllers\Api\Admin\NotifyController;
 use App\Http\Controllers\Api\Admin\TestController;
 use App\Http\Controllers\Api\Admin\OfferController;
+use App\Http\Controllers\Api\Admin\LabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,6 +162,14 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::post('setting/updateDocumentType/{type_id}', [SettingController::class, 'updateDocumentType']);
     Route::get('setting/deleteDocumentType/{type_id}', [SettingController::class, 'deleteDocumentType']);
 
+
+
+    //Lab
+    Route::get('lab/getLabs', [LabController::class, 'getLabs']);
+    Route::get('lab/getLabById/{lab_id}', [LabController::class, 'getLabById']);
+    Route::post('lab/addLab', [LabController::class, 'addLab']);
+    Route::post('lab/updateLab/{lab_id}', [LabController::class, 'updateLab']);
+    Route::get('lab/deleteLab/{lab_id}', [LabController::class, 'deleteLab']);
 
 
 

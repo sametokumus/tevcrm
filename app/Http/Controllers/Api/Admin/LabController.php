@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Laboratory;
 use App\Models\Test;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -11,6 +12,30 @@ use Nette\Schema\ValidationException;
 
 class LabController extends Controller
 {
+    public function getLabs()
+    {
+        try {
+            $labs = Laboratory::query()
+                ->where('laboratories.active',1)
+                ->get();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['labs' => $labs]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001', 'e' => $queryException->getMessage()]);
+        }
+    }
+    public function getLabById($lab_id)
+    {
+        try {
+            $lab = Laboratory::query()
+                ->where('laboratories.id', $lab_id)
+                ->where('laboratories.active',1)->first();
+
+            return response(['message' => __('İşlem Başarılı.'), 'status' => 'success', 'object' => ['lab' => $lab]]);
+        } catch (QueryException $queryException) {
+            return response(['message' => __('Hatalı sorgu.'), 'status' => 'query-001']);
+        }
+    }
 
     public function addLab(Request $request)
     {
@@ -18,17 +43,13 @@ class LabController extends Controller
             $request->validate([
                 'name' => 'required'
             ]);
-            $user = Auth::user();
-            Test::query()->insertGetId([
-                'category_id' => $request->category_id,
+            Laboratory::query()->insert([
                 'name' => $request->name,
-                'sample_count' => $request->sample_count,
-                'sample_description' => $request->sample_description,
-                'total_day' => $request->total_day,
-                'price' => $request->price
+                'lab_code' => $request->lab_code,
+                'last_no' => $request->last_no
             ]);
 
-            return response(['message' => __('Test ekleme işlemi başarılı.'), 'status' => 'success']);
+            return response(['message' => __('Laboratuvar ekleme işlemi başarılı.'), 'status' => 'success']);
         } catch (ValidationException $validationException) {
             return response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'), 'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -43,16 +64,13 @@ class LabController extends Controller
             $request->validate([
                 'name' => 'required',
             ]);
-            Test::query()->where('id', $test_id)->update([
-                'category_id' => $request->category_id,
+            Laboratory::query()->where('id', $lab_id)->update([
                 'name' => $request->name,
-                'sample_count' => $request->sample_count,
-                'sample_description' => $request->sample_description,
-                'total_day' => $request->total_day,
-                'price' => $request->price
+                'lab_code' => $request->lab_code,
+                'last_no' => $request->last_no
             ]);
 
-            return response(['message' => __('Test güncelleme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Laboratuvar güncelleme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {
@@ -65,10 +83,10 @@ class LabController extends Controller
     public function deleteLab($lab_id){
         try {
 
-            Test::query()->where('id',$test_id)->update([
+            Laboratory::query()->where('id', $lab_id)->update([
                 'active' => 0,
             ]);
-            return response(['message' => __('Test silme işlemi başarılı.'),'status' => 'success']);
+            return response(['message' => __('Laboratuvar silme işlemi başarılı.'),'status' => 'success']);
         } catch (ValidationException $validationException) {
             return  response(['message' => __('Lütfen girdiğiniz bilgileri kontrol ediniz.'),'status' => 'validation-001']);
         } catch (QueryException $queryException) {

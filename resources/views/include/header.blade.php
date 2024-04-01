@@ -886,6 +886,50 @@ $extra_js="";
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="false"
                                data-bs-display="static" href="#" role="button" aria-expanded="false">
                                 <div class="avatar avatar-40 icon"><i class="bi bi-card-checklist"></i></div>
+                                <div class="col">Laboratuvar Yönetimi</div>
+                                <div class="arrow"><i class="bi bi-chevron-down plus"></i> <i
+                                        class="fa fa-flask"></i>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item nav-link" href="add-test">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-clipboard-plus"></i>
+                                        </div>
+                                        <div class="col align-self-center">Test Ekle</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="tests">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-list-check"></i>
+                                        </div>
+                                        <div class="col align-self-center">Tüm Testler</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="add-category">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-tag"></i>
+                                        </div>
+                                        <div class="col align-self-center">Kategori Ekle</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link" href="categories">
+                                        <div class="avatar avatar-40 icon"><i class="bi bi-tags"></i>
+                                        </div>
+                                        <div class="col align-self-center">Tüm Kategoriler</div>
+                                        <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="false"
+                               data-bs-display="static" href="#" role="button" aria-expanded="false">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-card-checklist"></i></div>
                                 <div class="col">Test Yönetimi</div>
                                 <div class="arrow"><i class="bi bi-chevron-down plus"></i> <i
                                         class="bi bi-chevron-up minus"></i>
