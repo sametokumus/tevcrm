@@ -1,8 +1,8 @@
 <!-- footer -->
 <footer class="footer mt-auto">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md col-lg py-2">
+        <div class="row justify-content-end">
+            <div class="col-auto py-2">
                 <span class="text-secondary small">Copyright @2024, Designed by <a href="#" target="_blank">Samet Okumuş</a></span>
             </div>
         </div>
