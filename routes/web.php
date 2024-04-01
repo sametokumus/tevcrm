@@ -39,6 +39,9 @@ Route::get('/offers', function () { return view('offers'); });
 Route::get('/offer-detail/{id}', function () { return view('offer-detail'); });
 
 
+Route::get('/labs', function () { return view('labs'); });
+
+
 //Settings
 
 Route::get('/document-types', function () { return view('document-types'); });

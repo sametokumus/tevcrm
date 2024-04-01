@@ -1350,6 +1350,56 @@ async function serviceGetDeleteDocument(id) {
 
 
 
+//Document Type
+async function serviceGetLabs() {
+    const data = await fetchDataGet('/admin/lab/getLabs', 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function serviceGetLabById(id) {
+    const data = await fetchDataGet('/admin/lab/getLabById/' + id, 'application/json');
+    if (data.status == "success") {
+        return data.object;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
+async function servicePostAddLab(formData) {
+    const data = await fetchDataPost('/admin/lab/addLab', formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function servicePostUpdateLab(id, formData) {
+    const data = await fetchDataPost('/admin/lab/updateLab/' + id, formData, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+async function serviceGetDeleteLab(id) {
+    const data = await fetchDataGet('/admin/lab/deleteLab/' + id, 'application/json');
+    if (data.status == "success") {
+        showAlert(data.message);
+        return true;
+    } else {
+        showAlert('İstek Başarısız.');
+        return false;
+    }
+}
+
+
+
 
 
 
