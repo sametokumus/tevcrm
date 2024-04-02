@@ -44,6 +44,13 @@ $extra_js='
                                         <h5 class="fw-medium mb-0" id="manager"></h5>
                                     </div>
                                 </div>
+                                <div class="row align-items-center mb-0">
+                                    <div class="col">
+                                        <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="generatePDF()">
+                                            <span class="bi bi-node-plus-fill"> </span>FR38
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

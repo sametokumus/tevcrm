@@ -1417,8 +1417,15 @@ async function serviceGetDeleteLab(id) {
 }
 
 
-
-
+//PDF
+async function serviceGetGenerateFR38PDF(offer_id) {
+    const data = await fetchDataGet('/admin/pdf/getGenerateFR38PDF/' + offer_id, 'application/json');
+    if (data.status == "success") {
+        return data;
+    } else {
+        showAlert('İstek Başarısız.');
+    }
+}
 
 
 

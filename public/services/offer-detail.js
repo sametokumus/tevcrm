@@ -30,6 +30,23 @@ function checkRole(){
 	return true;
 }
 
+async function generatePDF(){
+    let offer_id = getPathVariable('offer-detail');
+
+    // Fetch the PDF data
+    const pdfData = await serviceGetGenerateFR38PDF(offer_id);
+
+    // Create a link element to download the PDF
+    const link = document.createElement('a');
+    link.href = `${pdfData.object.file_url}`;
+    link.target = '_blank';
+    link.download = `${pdfData.object.file_name}`;
+    link.textContent = 'Download PDF';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 async function initOfferDetail(){
     let offer_id = getPathVariable('offer-detail');
     let data = await serviceGetOfferById(offer_id);
