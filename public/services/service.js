@@ -25,6 +25,7 @@
         // }
         //
         // createNavbar();
+        createNavbarLabs();
 	});
 
 
@@ -455,6 +456,23 @@ async function createNavbar(){
    let user_role = await localStorage.getItem('userRole');
     let data = await serviceGetAdminRolePermissions(user_role);
     $.each(data.role_permissions, function(i, role_permission){
+        $('#nav-'+role_permission.permission_key).removeClass('d-none');
+    });
+    $('.menu-item.d-none').remove();
+
+}
+
+async function createNavbarLabs(){
+    let user_role = await localStorage.getItem('userRole');
+    let data = await serviceGetLabs();
+    $.each(data.labs, function(i, lab){
+        let item = '<li class="nav-item">\n' +
+            '                   <a class="nav-link" aria-current="page" href="projects">\n' +
+            '                       <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>\n' +
+            '                       <div class="col">Devam Eden</div>\n' +
+            '                       <div class="arrow"><i class="bi bi-chevron-right"></i></div>\n' +
+            '                   </a>\n' +
+            '               </li>';
         $('#nav-'+role_permission.permission_key).removeClass('d-none');
     });
     $('.menu-item.d-none').remove();

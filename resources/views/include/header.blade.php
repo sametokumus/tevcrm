@@ -821,12 +821,12 @@ $extra_js="";
             <!-- applications -->
             <div class="row mb-2">
                 <div class="col align-self-center">
-                    <h6>Projeler</h6>
+                    <h6>Laboratuvarlar</h6>
                 </div>
             </div>
             <div class="row mb-4">
                 <div class="col-12 px-0">
-                    <ul class="nav nav-pills nav-iconic">
+                    <ul class="nav nav-pills nav-iconic" id="lab-navbar">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="projects">
                                 <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>
