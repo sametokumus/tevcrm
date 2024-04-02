@@ -521,10 +521,11 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
             $pdf->SetAutoPageBreak(true, 40);
 
-//            $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
-//            $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
             $pdf->SetFont('Arial', '', 9);
 
+
+            $pdf->SetXY(50, 150);
+            $pdf->Cell(0, 0, $offer['global_id'], '0', '0', '');
 
             // LOGO
 //            $pageWidth = $pdf->GetPageWidth();
