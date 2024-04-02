@@ -342,6 +342,9 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function (){
     Route::get('dashboard/getBestSalesLastNinetyDays/{owner_id}', [DashboardController::class, 'getBestSalesLastNinetyDays']);
 
 
+    Route::get('pdf/getGenerateFR38PDF/{offer_id}', [PdfController::class, 'getGenerateFR38PDF']);
+
+
     Route::get('pdf/getGeneratePDF/{owner_id}/{sale_id}', [PdfController::class, 'getGeneratePDF']);
     Route::get('pdf/getGenerateQuatotionPDF/{lang}/{owner_id}/{sale_id}', [PdfController::class, 'getGenerateQuatotionPDF']);
     Route::get('pdf/getGenerateOrderConfirmationPDF/{lang}/{owner_id}/{sale_id}/{bank_id}', [PdfController::class, 'getGenerateOrderConfirmationPDF']);
