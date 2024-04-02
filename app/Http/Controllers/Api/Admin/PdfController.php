@@ -512,7 +512,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new PDF();
+            $pdf = new Fpdi();
             $pdf->setSourceFile('layouts/FR-38-Layout.pdf');
             $pdf->AddPage();
             $templateId = $pdf->importPage(1);
