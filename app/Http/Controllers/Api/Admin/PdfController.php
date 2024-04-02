@@ -515,6 +515,8 @@ class PdfController extends Controller
             $pdf = new PDF();
             $pdf->setSourceFile('layouts/FR-38-Layout.pdf');
             $pdf->AddPage();
+            $templateId = $pdf->importPage(1);
+            $pdf->useTemplate($templateId);
 
             $pdf->SetMargins(20, 20, 20);
             $pdf->SetAutoPageBreak(true, 40);
