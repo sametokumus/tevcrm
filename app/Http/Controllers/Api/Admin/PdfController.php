@@ -524,7 +524,7 @@ class PdfController extends Controller
             $pdf->SetFont('Arial', '', 9);
 
 
-            $pdf->SetXY(50, 150);
+            $pdf->SetXY(50, 50);
             $pdf->Cell(0, 0, $offer['global_id'], '0', '0', '');
 
             // LOGO
