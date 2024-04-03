@@ -562,9 +562,9 @@ class PdfController extends Controller
 
             $numPages = $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
 
-//            for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
-//                $pdf->AddPage();
-//
+            for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
+                $pdf->AddPage();
+
 //                $width = 190;
 //                $imagePath = public_path($contact->footer);
 //                list($originalWidth, $originalHeight) = getimagesize($imagePath);
@@ -573,10 +573,10 @@ class PdfController extends Controller
 //                $y = 285 - $height;
 //                $x = 10;
 //                $pdf->Image($imagePath, $x, $y, $width, $height);
-//
-//                $tplIdx = $pdf->importPage($pageNo);
-//                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
-//            }
+
+                $tplIdx = $pdf->importPage($pageNo);
+                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+            }
 
             $filePath = public_path('documents/LB.' . $offer_id . '-FR.38.pdf');
             $pdf->Output($filePath, 'F');
