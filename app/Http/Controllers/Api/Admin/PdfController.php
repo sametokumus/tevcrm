@@ -513,7 +513,8 @@ class PdfController extends Controller
 
             // Create a new PDF instance
             $pdf = new Fpdi();
-            $pdf->setSourceFile('FR-38-Layout.pdf');
+            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
+//            $pdf->setSourceFile(public_path('Secme_Formu.pdf'));
             $templateId = $pdf->importPage(1);
             $pdf->AddPage();
             $pdf->useTemplate($templateId);
@@ -521,7 +522,8 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
             $pdf->SetAutoPageBreak(true, 40);
 
-            $pdf->SetFont('Arial', '', 9);
+//            $pdf->SetFont('Arial', '', 9);
+            $pdf->SetFont('Helvetica');
 
 
             $pdf->SetXY(50, 50);
