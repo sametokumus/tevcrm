@@ -527,7 +527,7 @@ class PdfController extends Controller
 
 
             $pdf->SetXY(50, 50);
-            $pdf->Cell(0, 0, $offer['global_id'], '0', '0', '');
+            $pdf->Cell(0, 0, "test", '0', '0', '');
 
             // LOGO
 //            $pageWidth = $pdf->GetPageWidth();
