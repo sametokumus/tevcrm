@@ -512,25 +512,21 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new PDF();
-//            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
-//            $templateId = $pdf->importPage(1);
+            $pdf = new Fpdi();
+            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
+            $templateId = $pdf->importPage(1);
             $pdf->AddPage();
-//            $pdf->useTemplate($templateId);
+            $pdf->useTemplate($templateId);
 
             $pdf->SetMargins(20, 20, 20);
             $pdf->SetAutoPageBreak(true, 40);
 
 //            $pdf->SetFont('Arial', '', 9);
-//            $pdf->SetFont('Helvetica');
+            $pdf->SetFont('Helvetica');
 
-
-            $pdf->AddFont('ChakraPetch-Regular', '', 'ChakraPetch-Regular.php');
-            $pdf->AddFont('ChakraPetch-Bold', '', 'ChakraPetch-Bold.php');
-            $pdf->SetFont('ChakraPetch-Bold', '', 12);
 
             $pdf->SetXY(50, 50);
-            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', "test"), '0', '0', '');
+            $pdf->Cell(0, 0, "test", '0', '0', '');
 
             // LOGO
 //            $pageWidth = $pdf->GetPageWidth();
