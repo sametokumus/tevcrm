@@ -513,8 +513,8 @@ class PdfController extends Controller
 
             // Create a new PDF instance
             $pdf = new Fpdi();
-            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
-//            $pdf->setSourceFile(public_path('Secme_Formu.pdf'));
+//            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
+            $pdf->setSourceFile(public_path('Secme_Formu.pdf'));
             $templateId = $pdf->importPage(1);
             $pdf->AddPage();
             $pdf->useTemplate($templateId);
