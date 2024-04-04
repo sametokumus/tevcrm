@@ -625,11 +625,11 @@ class PdfController extends Controller
                     $row_height = $new_y - 20;
                 }
 
-                $x = 7;
+                $x = 8;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(5, $row_height, $i, 1, 0, 'C');
+                $pdf->Cell(6, $row_height, $i, 1, 0, 'C');
 
-                $x = 105;
+                $x = 106;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
