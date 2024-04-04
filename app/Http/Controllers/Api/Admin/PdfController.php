@@ -35,6 +35,7 @@ use App\Models\SaleOffer;
 use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
 use App\Models\Status;
+use App\PDF\PDI;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -512,7 +513,7 @@ class PdfController extends Controller
 
 
             // Create a new PDF instance
-            $pdf = new Fpdi();
+            $pdf = new PDI();
             $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
             $templateId = $pdf->importPage(1);
             $pdf->AddPage();
@@ -651,6 +652,9 @@ class PdfController extends Controller
 
             $pdf->SetXY(10, 220);
             $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
+            $pdf->SetXY(10, 240);
+            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
+
             //FOOTER
 
             $pdfContent = $pdf->Output('created.pdf', 'S');
