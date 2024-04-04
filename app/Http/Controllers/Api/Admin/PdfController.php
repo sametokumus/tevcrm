@@ -585,7 +585,7 @@ class PdfController extends Controller
 
                 $x = 14;
                 $pdf->SetXY($x, $pdf->GetY());
-                $old_y = $pdf->getY();
+                $old_y = $y;
 
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
