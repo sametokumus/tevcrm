@@ -628,11 +628,11 @@ class PdfController extends Controller
                 }
 
                 $x = 8;
-                $pdf->SetXY($x, $y);
+                $pdf->SetXY($x, $old_y);
                 $pdf->Cell(6, $row_height, $test_count, 1, 0, 'C');
 
                 $x = 107;
-                $pdf->SetXY($x, $y);
+                $pdf->SetXY($x, $old_y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
