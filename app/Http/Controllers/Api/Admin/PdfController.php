@@ -602,7 +602,7 @@ class PdfController extends Controller
 
                 $pdf->SetXY(14.5, $old_y);
                 if ($lines_needed == $lines_needed1){
-                    $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
+                    $pdf->MultiCell(48, $line_height, $product_name, 0.5, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed1;
                     for ($i = 0; $i < $fark; $i++) {
