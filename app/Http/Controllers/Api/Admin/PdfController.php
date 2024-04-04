@@ -521,8 +521,8 @@ class PdfController extends Controller
             $pdf->SetMargins(20, 20, 20);
             $pdf->SetAutoPageBreak(true, 40);
 
-//            $pdf->SetFont('Arial', '', 9);
-            $pdf->SetFont('Helvetica');
+            $pdf->SetFont('Arial', '', 9);
+//            $pdf->SetFont('Helvetica');
 
 
             $pdf->SetXY(50, 50);
@@ -544,6 +544,7 @@ class PdfController extends Controller
 
             //CUSTOMER INFO
 //            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
+
 
 
 
