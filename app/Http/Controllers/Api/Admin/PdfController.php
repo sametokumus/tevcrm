@@ -596,6 +596,7 @@ class PdfController extends Controller
                     $old_y = $pdf->getY();
                 }
 
+                $pdf->SetXY(14, $old_y);
                 if ($lines_needed == $lines_needed1){
                     $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
                 }else{
