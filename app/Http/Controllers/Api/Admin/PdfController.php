@@ -613,13 +613,13 @@ class PdfController extends Controller
 
                 $pdf->SetXY(62, $old_y);
                 if ($lines_needed == $lines_needed2){
-                    $pdf->MultiCell(44.6, $line_height, $test_name, 1, 'L');
+                    $pdf->MultiCell(44.5, $line_height, $test_name, 1, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed2;
                     for ($i = 0; $i < $fark; $i++) {
                         $test_name .= "\n ";
                     }
-                    $pdf->MultiCell(44.6, $line_height, $test_name, 1, 'L');
+                    $pdf->MultiCell(44.5, $line_height, $test_name, 1, 'L');
                 }
 
 
@@ -634,7 +634,7 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(5.8, $row_height, $test_count, 1, 0, 'C');
 
-                $x = 106.8;
+                $x = 106.9;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y."-".$row_height), 1, 0, 'C');
