@@ -547,7 +547,7 @@ class PdfController extends Controller
 
             $y = 155;
             $pdf->SetXY(10, 155);
-            $i = 1;
+            $test_count = 1;
             foreach ($offer_details as $offer_detail) {
 
                 $pdf->SetFont('Arial', '', 9);
@@ -627,7 +627,7 @@ class PdfController extends Controller
 
                 $x = 8;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(6, $row_height, $i, 1, 0, 'C');
+                $pdf->Cell(6, $row_height, $test_count, 1, 0, 'C');
 
                 $x = 107;
                 $pdf->SetXY($x, $y);
@@ -638,7 +638,7 @@ class PdfController extends Controller
 //                $pdf->Cell(18, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');
 
                 $y += $row_height;
-                $i++;
+                $test_count++;
 
             }
 
