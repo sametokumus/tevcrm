@@ -640,7 +640,7 @@ class PdfController extends Controller
                 $x = 132;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(19.6, $row_height, iconv('utf-8', 'iso-8859-9', $y), 1, 0, 'C');
-                $x = 152.6;
+                $x = 152.2;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(22, $row_height, iconv('utf-8', 'iso-8859-9', $y), 1, 0, 'C');
                 $x = 180;
