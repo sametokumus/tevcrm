@@ -545,8 +545,9 @@ class PdfController extends Controller
 //            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
+            $x = 10;
             $y = 155;
-            $pdf->SetXY(10, 155);
+            $pdf->SetXY($x, $y);
             $test_count = 1;
             foreach ($offer_details as $offer_detail) {
 
@@ -584,62 +585,61 @@ class PdfController extends Controller
 
                 $x = 14;
                 $pdf->SetXY($x, $pdf->GetY());
+                $y = $pdf->getY();
                 $old_y = $pdf->getY();
 
                 $row_height = $lines_needed * $line_height;
                 $total_y = $pdf->getY() + $row_height;
+                $new_page = false;
                 if ($total_y > 270){
                     $pdf->AddPage();
                     $pdf->SetXY(14, 10);
                     $y = 10;
-                    $old_y = $pdf->getY();
+                    $old_y = 10;
+                    $new_page = true;
                 }
 
                 if ($lines_needed == $lines_needed1){
-                    $pdf->SetXY(14, $old_y);
                     $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed1;
                     for ($i = 0; $i < $fark; $i++) {
                         $product_name .= "\n ";
                     }
-                    $pdf->SetXY(14, $old_y);
                     $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
                 }
 
+                $pdf->SetXY(62, $old_y);
                 if ($lines_needed == $lines_needed2){
-                    $pdf->SetXY(62, $old_y);
                     $pdf->MultiCell(45, $line_height, $test_name, 1, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed2;
                     for ($i = 0; $i < $fark; $i++) {
                         $test_name .= "\n ";
                     }
-                    $pdf->SetXY(62, $old_y);
                     $pdf->MultiCell(45, $line_height, $test_name, 1, 'L');
                 }
 
 
                 $new_y = $pdf->getY();
-                if ($new_y > $old_y) {
+                if (!$new_page) {
                     $row_height = $new_y - $old_y;
                 }else{
                     $row_height = $new_y - 20;
                 }
 
                 $x = 8;
-                $pdf->SetXY($x, $old_y);
+                $pdf->SetXY($x, $y);
                 $pdf->Cell(6, $row_height, $test_count, 1, 0, 'C');
 
                 $x = 107;
-                $pdf->SetXY($x, $old_y);
+                $pdf->SetXY($x, $y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
 //                $pdf->Cell(18, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');
 
-                $y += $row_height;
                 $test_count++;
 
             }
