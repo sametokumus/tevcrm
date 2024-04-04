@@ -550,7 +550,7 @@ class PdfController extends Controller
 
 
             $x = 10;
-            $y = 153;
+            $y = 154;
             $pdf->SetXY($x, $y);
             $test_count = 1;
             foreach ($offer_details as $offer_detail) {
@@ -611,7 +611,7 @@ class PdfController extends Controller
                     $pdf->MultiCell(47, $line_height, $product_name, 1, 'L');
                 }
 
-                $pdf->SetXY(62, $old_y);
+                $pdf->SetXY(61.4, $old_y);
                 if ($lines_needed == $lines_needed2){
                     $pdf->MultiCell(45, $line_height, $test_name, 1, 'L');
                 }else{
