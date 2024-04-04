@@ -557,7 +557,7 @@ class PdfController extends Controller
                 $test_name = '';
 
                 if ($offer_detail->product_name != null && $offer_detail->product_name != '') {
-                    $product_name = $this->textConvert($offer_detail->product_name);
+                    $product_name = $offer_detail->product_name;
                     $product_name_width = $pdf->GetStringWidth($product_name);
                     $lines_needed1 = ceil($product_name_width / 42);
                 }else{
@@ -565,7 +565,7 @@ class PdfController extends Controller
                 }
 
                 if ($offer_detail->name != null && $offer_detail->name != '') {
-                    $test_name = $this->textConvert($offer_detail->name);
+                    $test_name = $offer_detail->name;
                     $test_name_width = $pdf->GetStringWidth($test_name);
                     $lines_needed2 = ceil($test_name_width / 39);
                 }else{
