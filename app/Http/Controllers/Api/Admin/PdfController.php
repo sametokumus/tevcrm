@@ -582,7 +582,7 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
 
-                $x = 20;
+                $x = 14;
                 $pdf->SetXY($x, $pdf->GetY());
                 $old_y = $pdf->getY();
 
@@ -590,31 +590,31 @@ class PdfController extends Controller
                 $total_y = $pdf->getY() + $row_height;
                 if ($total_y > 270){
                     $pdf->AddPage();
-                    $pdf->SetXY(10, 10);
+                    $pdf->SetXY(14, 10);
                     $y = 10;
                     $old_y = $pdf->getY();
                 }
 
                 if ($lines_needed == $lines_needed1){
-                    $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                    $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed1;
                     for ($i = 0; $i < $fark; $i++) {
                         $product_name .= "\n ";
                     }
-                    $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                    $pdf->MultiCell(48, $line_height, $product_name, 1, 'L');
                 }
 
                 if ($lines_needed == $lines_needed2){
-                    $pdf->SetXY(65, $old_y);
-                    $pdf->MultiCell(50, $line_height, $test_name, 1, 'L');
+                    $pdf->SetXY(62, $old_y);
+                    $pdf->MultiCell(45, $line_height, $test_name, 1, 'L');
                 }else{
                     $fark = $lines_needed - $lines_needed2;
                     for ($i = 0; $i < $fark; $i++) {
                         $test_name .= "\n ";
                     }
-                    $pdf->SetXY(65, $old_y);
-                    $pdf->MultiCell(50, $line_height, $test_name, 1, 'L');
+                    $pdf->SetXY(62, $old_y);
+                    $pdf->MultiCell(45, $line_height, $test_name, 1, 'L');
                 }
 
 
@@ -629,7 +629,7 @@ class PdfController extends Controller
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(6, $row_height, $i, 1, 0, 'C');
 
-                $x = 106;
+                $x = 107;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
