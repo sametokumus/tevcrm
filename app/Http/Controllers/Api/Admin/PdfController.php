@@ -632,7 +632,7 @@ class PdfController extends Controller
 
                 $x = 8;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(6, $row_height, $test_count, 1, 0, 'C');
+                $pdf->Cell(5.6, $row_height, $test_count, 1, 0, 'C');
 
                 $x = 107;
                 $pdf->SetXY($x, $y);
