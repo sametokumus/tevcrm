@@ -545,8 +545,8 @@ class PdfController extends Controller
 //            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
-            $y = 150;
-            $pdf->SetXY(10, 150);
+            $y = 155;
+            $pdf->SetXY(10, 155);
             $i = 1;
             foreach ($offer_details as $offer_detail) {
 
@@ -625,13 +625,13 @@ class PdfController extends Controller
                     $row_height = $new_y - 20;
                 }
 
-                $x = 10;
+                $x = 7;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(5, $row_height, $i, 1, 0, 'C');
 
-                $x = 115;
+                $x = 105;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
+                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
