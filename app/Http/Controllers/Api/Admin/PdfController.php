@@ -587,7 +587,7 @@ class PdfController extends Controller
                     $line_height = 5;
                 }
 
-                $x = 14.2;
+                $x = 14.3;
                 $pdf->SetXY($x, $pdf->GetY());
                 $old_y = $y;
 
@@ -595,12 +595,12 @@ class PdfController extends Controller
                 $total_y = $pdf->getY() + $row_height;
                 if ($total_y > 270){
                     $pdf->AddPage();
-                    $pdf->SetXY(14.2, 10);
+                    $pdf->SetXY(14.3, 10);
                     $y = 10;
                     $old_y = $pdf->getY();
                 }
 
-                $pdf->SetXY(14.2, $old_y);
+                $pdf->SetXY(14.3, $old_y);
                 if ($lines_needed == $lines_needed1){
                     $pdf->MultiCell(48, $line_height, $product_name, 0.5, 'L');
                 }else{
