@@ -635,6 +635,7 @@ class PdfController extends Controller
                 $x = 107;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
+                $pdf->Cell(25, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
@@ -646,6 +647,8 @@ class PdfController extends Controller
 
 
 
+            $pdf->SetXY(10, 220);
+            $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
             //FOOTER
 
             $pdfContent = $pdf->Output('created.pdf', 'S');
