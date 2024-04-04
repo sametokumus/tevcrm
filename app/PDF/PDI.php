@@ -1,7 +1,7 @@
 <?php
 namespace App\PDF;
 
-require_once(__DIR__ . '/../../vendor/setasign/fpdi/src/fpdi.php');
+require_once(__DIR__ . '/../../vendor/setasign/fpdi/src/Fpdi.php');
 
 use setasign\Fpdi\Fpdi;
 
