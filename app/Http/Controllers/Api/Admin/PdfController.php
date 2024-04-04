@@ -545,8 +545,8 @@ class PdfController extends Controller
 //            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
-            $y = 250;
-            $pdf->SetXY(10, 250);
+            $y = 150;
+            $pdf->SetXY(10, 150);
             $i = 1;
             foreach ($offer_details as $offer_detail) {
 
