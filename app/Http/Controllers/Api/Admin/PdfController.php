@@ -522,7 +522,6 @@ class PdfController extends Controller
             $pdf->SetAutoPageBreak(true, 40);
 
             $pdf->SetFont('Arial', '', 9);
-//            $pdf->SetFont('Helvetica');
 
 
             $pdf->SetXY(50, 50);
@@ -546,7 +545,101 @@ class PdfController extends Controller
 //            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
+            $pdf->SetXY(10, 250);
+            $i = 1;
+            foreach ($offer_details as $offer_detail) {
 
+                $pdf->SetFont('Arial', '', 9);
+
+                $product_name = '';
+                $test_name = '';
+
+                if ($offer_detail->product_name != null && $offer_detail->product_name != '') {
+                    $product_name = $this->textConvert($offer_detail->product_name);
+                    $product_name_width = $pdf->GetStringWidth($product_name);
+                    $lines_needed1 = ceil($product_name_width / 44);
+                }else{
+                    $lines_needed1 = 1;
+                }
+
+                if ($offer_detail->name != null && $offer_detail->name != '') {
+                    $test_name = $this->textConvert($offer_detail->name);
+                    $test_name_width = $pdf->GetStringWidth($test_name);
+                    $lines_needed2 = ceil($test_name_width / 44);
+                }else{
+                    $lines_needed2 = 1;
+                }
+
+                if ($lines_needed1 >= $lines_needed2){
+                    $lines_needed = $lines_needed1;
+                }else{
+                    $lines_needed = $lines_needed2;
+                }
+
+                $line_height = 8;
+                if ($lines_needed > 1){
+                    $line_height = 5;
+                }
+
+                $x = 20;
+                $pdf->SetXY($x, $pdf->GetY());
+                $old_y = $pdf->getY();
+
+                $row_height = $lines_needed * $line_height;
+                $total_y = $pdf->getY() + $row_height;
+                if ($total_y > 270){
+                    $pdf->AddPage();
+                    $pdf->SetXY(10, 10);
+                    $y = 10;
+                    $old_y = $pdf->getY();
+                }
+
+                if ($lines_needed == $lines_needed1){
+                    $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                }else{
+                    $fark = $lines_needed - $lines_needed1;
+                    for ($i = 0; $i < $fark; $i++) {
+                        $product_name .= "\n ";
+                    }
+                    $pdf->MultiCell(50, $line_height, $product_name, 1, 'L');
+                }
+
+                if ($lines_needed == $lines_needed2){
+                    $pdf->SetXY(65, $old_y);
+                    $pdf->MultiCell(50, $line_height, $test_name, 1, 'L');
+                }else{
+                    $fark = $lines_needed - $lines_needed2;
+                    for ($i = 0; $i < $fark; $i++) {
+                        $test_name .= "\n ";
+                    }
+                    $pdf->SetXY(65, $old_y);
+                    $pdf->MultiCell(50, $line_height, $test_name, 1, 'L');
+                }
+
+
+                $new_y = $pdf->getY();
+                if ($new_y > $old_y) {
+                    $row_height = $new_y - $old_y;
+                }else{
+                    $row_height = $new_y - 20;
+                }
+
+                $x = 10;
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(5, $row_height, $i, 1, 0, 'C');
+
+                $x = 115;
+                $pdf->SetXY($x, $y);
+                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
+//                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
+//                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
+//                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
+//                $pdf->Cell(18, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');
+
+                $y += $row_height;
+                $i++;
+
+            }
 
 
 
