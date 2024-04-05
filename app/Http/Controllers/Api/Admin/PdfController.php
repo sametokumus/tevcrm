@@ -692,7 +692,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
             //CONDITIONS
 
-            $pageCount = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
+            $pageCount = $pdf->setSourceFile(public_path('layouts/FR-38-Conditions.pdf'));
             for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++) {
                 $pdf->AddPage();
                 $templateId = $pdf->importPage($pageNum);
