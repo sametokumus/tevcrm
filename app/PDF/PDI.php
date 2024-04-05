@@ -151,9 +151,10 @@ class PDI extends Fpdi
     }
 
     function MultiCellWithFixedTotalHeight($w, $h, $txt, $border=0, $align='J', $fill=false) {
+
         // Calculate the maximum number of lines that can fit within the given height
         $lineHeight = 5; // Fixed line height
-        $maxLines = floor($h / $lineHeight);
+        $maxLines = floor(($h - 2 * $this->cMargin) / $lineHeight);
 
         // Explode text into lines
         $lines = explode("\n", $txt);
@@ -163,10 +164,14 @@ class PDI extends Fpdi
             $txt = implode("\n", array_slice($lines, 0, $maxLines));
         }
 
-        // Calculate the adjusted height based on the number of lines
-        $adjustedHeight = min(count($lines) * $lineHeight, $h);
+        // Calculate the total height of the text
+        $totalHeight = count($lines) * $lineHeight;
 
-        // Perform multicell with fixed total height
-        $this->MultiCell($w, $adjustedHeight, $txt, $border, $align, $fill);
+        // Calculate the vertical position to align text in the cell
+        $yPos = $this->GetY() + ($h - $totalHeight) / 2;
+
+        // Perform multicell with fixed total height and vertically aligned text
+        $this->SetXY($this->GetX(), $yPos);
+        $this->MultiCell($w, $totalHeight, $txt, $border, $align, $fill);
     }
 }
