@@ -668,15 +668,15 @@ class PdfController extends Controller
 
             $note_height = $pdf->getY() - $first_total_start;
             $pdf->SetXY(8, $first_total_start);
-            $pdf->MultiCellWithFixedTotalHeight(123.6, $note_height, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
+            $pdf->MultiCellWithFixedTotalHeight(123.6, 60, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
             $pdf->Ln();
 
 
-
-            $pdf->SetXY(10, 220);
-            $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
-            $pdf->SetXY(10, 240);
-            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
+//
+//            $pdf->SetXY(10, 220);
+//            $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
+//            $pdf->SetXY(10, 240);
+//            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
 
             //FOOTER
 
