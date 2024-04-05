@@ -690,23 +690,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $pdf->Line(7.1, $line_last, 202.7, $line_last);
 
 
-//
-//            $pdf->SetXY(10, 220);
-//            $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
-//            $pdf->SetXY(10, 240);
-//            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
-
             //CONDITIONS
-
-//            $pdf2 = new PDI();
-//            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-//            $numPages2 = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
-//
-//            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
-//                $pdf->AddPage();
-//                $tplIdx = $pdf->importPage($pageNo);
-//                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
-//            }
 
             $pageCount = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
             for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++) {
@@ -714,21 +698,6 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
                 $templateId = $pdf->importPage($pageNum);
                 $pdf->useTemplate($templateId);
             }
-
-//            $templateId2 = $pdf2->importPage(1);
-//            $pdf2->AddPage();
-//            $pdf2->useTemplate($templateId2);
-
-//            $pdf2 = new Fpdi();
-//            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-//            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-//
-//            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
-//                $pdf->AddPage();
-//
-//                $tplIdx = $pdf2->importPage($pageNo);
-//                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
-//            }
 
             //FOOTER
 
@@ -742,17 +711,11 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             for ($pageNo = 1; $pageNo <= $numPages; $pageNo++) {
                 $pdf->AddPage();
 
-//                $width = 190;
-//                $imagePath = public_path($contact->footer);
-//                list($originalWidth, $originalHeight) = getimagesize($imagePath);
-//                $aspectRatio = $originalWidth / $originalHeight;
-//                $height = $width / $aspectRatio;
-//                $y = 285 - $height;
-//                $x = 10;
-//                $pdf->Image($imagePath, $x, $y, $width, $height);
-
                 $tplIdx = $pdf->importPage($pageNo);
                 $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+
+                $pdf->SetXY(200, 30);
+                $pdf->Cell(0, 0, $pageNo."/".$numPages, '0', '0', '');
             }
 
             $filePath = public_path('documents/LB.' . $offer_id . '-FR.38.pdf');
