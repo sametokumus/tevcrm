@@ -674,8 +674,8 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $pdf->Ln();
 
             $line_last = $pdf->getY() + 0.4;
-            $this->SetLineWidth(3);
-            $this->Line(4, 153.5, 4, $line_last);
+            $pdf->SetLineWidth(3);
+            $pdf->Line(4, 153.5, 4, $line_last);
 
 
 //
