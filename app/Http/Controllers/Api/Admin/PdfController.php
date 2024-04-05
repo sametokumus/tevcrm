@@ -642,6 +642,27 @@ class PdfController extends Controller
             $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->discount)." TL"), 1, 0, 'C');
             $pdf->Ln();
 
+            $y = $pdf->getY() + 0.4;
+            $pdf->SetXY(132, $y);
+            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "Ara Toplam / Subtotal"), 1, 0, 'L');
+            $pdf->SetXY(175.1, $y);
+            $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->sub_total)." TL"), 1, 0, 'C');
+            $pdf->Ln();
+
+            $y = $pdf->getY() + 0.4;
+            $pdf->SetXY(132, $y);
+            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "KDV (%20) / VAT (%20)"), 1, 0, 'L');
+            $pdf->SetXY(175.1, $y);
+            $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->vat)." TL"), 1, 0, 'C');
+            $pdf->Ln();
+
+            $y = $pdf->getY() + 0.4;
+            $pdf->SetXY(132, $y);
+            $pdf->MultiCell(42.7, 5, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
+            $pdf->SetXY(175.1, $y);
+            $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->grand_total)." TL"), 1, 0, 'C');
+            $pdf->Ln();
+
 
 
             $pdf->SetXY(10, 220);
