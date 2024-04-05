@@ -676,7 +676,9 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $pdf->Ln();
 
             $pdf->SetLineWidth(1);
-            $pdf->Line(7, 153.6, 7, $line_last);
+            $pdf->Line(7.1, 153.6, 7.1, $line_last);
+            $pdf->Line(202.3, 153.6, 202.3, $line_last);
+            $pdf->Line(7.1, $line_last, 202.3, $line_last);
 
 
 //
