@@ -702,8 +702,8 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $pdf2->setSourceFile(public_path('CCC.pdf'));
 //            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
             $templateId2 = $pdf2->importPage(1);
-            $pdf->AddPage();
-            $pdf->useTemplate($templateId2);
+            $pdf2->AddPage();
+            $pdf2->useTemplate($templateId2);
 
 //            $pdf2 = new Fpdi();
 //            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
@@ -718,7 +718,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
             //FOOTER
 
-            $pdfContent = $pdf->Output('created.pdf', 'S');
+            $pdfContent = $pdf2->Output('created.pdf', 'S');
 
             $pdf = new PDI();
             $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
