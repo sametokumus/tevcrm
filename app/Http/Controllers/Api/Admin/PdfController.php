@@ -490,7 +490,7 @@ class PdfController extends Controller
 
             // Create a new PDF instance
             $pdf = new PDI();
-            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
+            $pdf->setSourceFile(public_path('layouts/FR-38-Layout.pdf'));
             $templateId = $pdf->importPage(1);
             $pdf->AddPage();
             $pdf->useTemplate($templateId);
@@ -713,6 +713,18 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 //            $pdf->Cell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
 //            $pdf->SetXY(10, 240);
 //            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
+
+            //CONDITIONS
+
+            $pdf2 = new Fpdi();
+            $numPages2 = $pdf2->setSourceFile(public_path('layouts/FR-38-Conditions.pdf'));
+
+            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
+                $pdf->AddPage();
+
+                $tplIdx = $pdf2->importPage($pageNo);
+                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+            }
 
             //FOOTER
 
