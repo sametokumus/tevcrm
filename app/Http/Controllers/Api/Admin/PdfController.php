@@ -441,32 +441,8 @@ class PdfController extends Controller
         }
         return $lead_time;
     }
-    private function convertPrice($price, $source, $target, $sale_id){
-        $sale = Sale::query()->where('sale_id', $sale_id)->first();
-//        $price = number_format($price, 2,".","");
-        $price = str_replace('.', '', $price);
-        $price = str_replace(',', '.', $price);
-        $source = strtolower($source);
-        $target = strtolower($target);
-        if($source == 'try'){
-
-            if ($target == 'try'){
-                $r_price = floatval($price);
-            }else{
-                $target_rate = $sale->{$target.'_rate'};
-                $r_price = floatval($price) / floatval($target_rate);
-            }
-        }else{
-            if ($target == 'try'){
-                $source_rate = $sale->{$source.'_rate'};
-                $r_price = floatval($price) * floatval($source_rate);
-            }else{
-                $target_rate = $sale->{$target.'_rate'};
-                $source_rate = $sale->{$source.'_rate'};
-                $r_price = floatval($price) * floatval($source_rate) / floatval($target_rate);
-            }
-        }
-        return number_format($r_price, 2,",",".");
+    private function convertPrice($price){
+        return number_format($price, 2,",",".");
     }
 
 
@@ -632,20 +608,20 @@ class PdfController extends Controller
 
                 $x = 8;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(5.8, $row_height, $test_count, 1, 0, 'C');
+                $pdf->Cell(5.8, $row_height, $test_count.".", 1, 0, 'C');
 
                 $x = 106.9;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(24.7, $row_height, iconv('utf-8', 'iso-8859-9', $offer_detail->sample_count), 1, 0, 'C');
                 $x = 132;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(19.6, $row_height, iconv('utf-8', 'iso-8859-9', $y), 1, 0, 'C');
+                $pdf->Cell(19.6, $row_height, iconv('utf-8', 'iso-8859-9', "1"), 1, 0, 'C');
                 $x = 152;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(22.7, $row_height, iconv('utf-8', 'iso-8859-9', $y), 1, 0, 'C');
+                $pdf->Cell(22.7, $row_height, iconv('utf-8', 'iso-8859-9', $this->convertPrice($offer_detail->price)." TL"), 1, 0, 'C');
                 $x = 175.1;
                 $pdf->SetXY($x, $y);
-                $pdf->Cell(26.8, $row_height, iconv('utf-8', 'iso-8859-9', $y), 1, 0, 'C');
+                $pdf->Cell(26.8, $row_height, iconv('utf-8', 'iso-8859-9', $this->convertPrice($offer_detail->price)." TL"), 1, 0, 'C');
 //                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
 //                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
@@ -655,6 +631,10 @@ class PdfController extends Controller
                 $test_count++;
 
             }
+
+            $y = $pdf->getY() + 0.4;
+            $pdf->SetXY(10, $y);
+            $pdf->Cell(52.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar/ Total Amount"), 1, 0, 'L');
 
 
 
