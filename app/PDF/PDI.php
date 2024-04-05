@@ -149,4 +149,14 @@ class PDI extends Fpdi
         // Move to the next line
         $this->SetXY($x + $w, $y);
     }
+
+    function MultiCellWithHeight($w, $h, $txt, $border=0, $align='J', $fill=false) {
+        // Estimate the height based on the text and width
+        $lineHeight = 5; // Adjust as needed
+        $lineCount = ceil($this->GetStringWidth($txt) / ($w - 2 * $this->cMargin));
+        $estimatedHeight = $lineCount * $lineHeight;
+
+        // Perform multicell with estimated height
+        $this->MultiCell($w, $estimatedHeight, $txt, $border, $align, $fill);
+    }
 }

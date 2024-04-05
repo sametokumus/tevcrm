@@ -668,7 +668,7 @@ class PdfController extends Controller
 
             $note_height = $pdf->getY() - $first_total_start;
             $pdf->SetXY(8, $first_total_start);
-            $pdf->MultiCell(123.6, $note_height, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
+            $pdf->MultiCellWithHeight(123.6, $note_height, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
             $pdf->Ln();
 
 
