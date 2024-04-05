@@ -699,11 +699,11 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             //CONDITIONS
 
             $pdf2 = new PDI();
-            $pdf2->setSourceFile(base_path('public/layouts/FR-38-Layout.pdf'));
-            $numPages2 = $pdf2->setSourceFile(base_path('public/layouts/FR-38-Layout.pdf'));
-            $templateId = $pdf2->importPage(1);
+            $pdf2->setSourceFile(public_path('layouts/FR-38-Layout.pdf'));
+            $numPages2 = $pdf2->setSourceFile(public_path('layouts/FR-38-Layout.pdf'));
+            $templateId2 = $pdf2->importPage(1);
             $pdf->AddPage();
-            $pdf->useTemplate($templateId);
+            $pdf->useTemplate($templateId2);
 
 //            $pdf2 = new Fpdi();
 //            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
