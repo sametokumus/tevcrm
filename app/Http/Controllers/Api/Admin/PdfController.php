@@ -634,7 +634,7 @@ class PdfController extends Controller
             $pdf->SetXY(175.1, $y);
             $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->test_total)." TL"), 1, 0, 'L');
 
-            $y = $pdf->getY() + $row_height + 0.4;
+            $y = $pdf->getY() + 0.4;
             $pdf->SetXY(132, $y);
             $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "İskonto / Discount"), 1, 0, 'L');
             $pdf->SetXY(175.1, $y);
