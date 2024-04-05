@@ -490,7 +490,7 @@ class PdfController extends Controller
 
             // Create a new PDF instance
             $pdf = new PDI();
-            $pdf->setSourceFile(public_path('layouts/FR-38-Layout.pdf'));
+            $pdf->setSourceFile(public_path('FR-38-Layout.pdf'));
             $templateId = $pdf->importPage(1);
             $pdf->AddPage();
             $pdf->useTemplate($templateId);
@@ -717,7 +717,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             //CONDITIONS
 
             $pdf2 = new Fpdi();
-            $numPages2 = $pdf2->setSourceFile(public_path('layouts/FR-38-Conditions.pdf'));
+            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
 
             for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
                 $pdf->AddPage();
