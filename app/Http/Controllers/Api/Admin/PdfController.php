@@ -700,13 +700,21 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
 //            $pdf2 = new PDI();
 //            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-            $numPages2 = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
+//            $numPages2 = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
+//
+//            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
+//                $pdf->AddPage();
+//                $tplIdx = $pdf->importPage($pageNo);
+//                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+//            }
 
-            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
+            $pageCount = $pdf->setSourceFile(public_path('FR-38-Conditions.pdf'));
+            for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++) {
                 $pdf->AddPage();
-                $tplIdx = $pdf->importPage($pageNo);
-                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+                $templateId = $pdf->importPage($pageNum);
+                $pdf->useTemplate($templateId);
             }
+
 //            $templateId2 = $pdf2->importPage(1);
 //            $pdf2->AddPage();
 //            $pdf2->useTemplate($templateId2);
