@@ -501,7 +501,7 @@ class PdfController extends Controller
             $pdf->AddFont('arial_tr', '', 'arial_tr.php');
             $pdf->AddFont('arial_tr', 'B', 'arial_tr_bold.php');
 
-            $pdf->SetFont('arial_tr', '', 8);
+            $pdf->SetFont('arial_tr', '', 9);
 
 
             $pdf->SetXY(50, 50);
@@ -539,7 +539,7 @@ class PdfController extends Controller
                 if ($offer_detail->product_name != null && $offer_detail->product_name != '') {
                     $product_name = $this->textConvert($offer_detail->product_name);
                     $product_name_width = $pdf->GetStringWidth($product_name);
-                    $lines_needed1 = ceil($product_name_width / 42);
+                    $lines_needed1 = ceil($product_name_width / 40);
                 }else{
                     $lines_needed1 = 1;
                 }
@@ -547,7 +547,7 @@ class PdfController extends Controller
                 if ($offer_detail->name != null && $offer_detail->name != '') {
                     $test_name = $this->textConvert($offer_detail->name);
                     $test_name_width = $pdf->GetStringWidth($test_name);
-                    $lines_needed2 = ceil($test_name_width / 39);
+                    $lines_needed2 = ceil($test_name_width / 37);
                 }else{
                     $lines_needed2 = 1;
                 }
