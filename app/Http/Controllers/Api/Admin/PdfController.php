@@ -717,9 +717,9 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
                 $pdf->AddFont('arial_tr', '', 'arial_tr.php');
                 $pdf->AddFont('arial_tr', 'B', 'arial_tr_bold.php');
 
-                $pdf->SetFont('arial_tr', '', 9);
+                $pdf->SetFont('arial_tr', 'B', 9);
 
-                $pdf->SetXY(200, 30);
+                $pdf->SetXY(180, 31);
                 $pdf->Cell(0, 0, $pageNo."/".$numPages, '0', '0', '');
             }
 
