@@ -515,11 +515,11 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $customer->name), 0, 0, '');
 
             $pdf->SetXY(65, 101);
-            $pdf->Cell(0, 0, $customer->address, '0', '0', '');
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $customer->address), 0, 0, '');
 
             if ($employee != null) {
                 $pdf->SetXY(65, 111);
-                $pdf->Cell(0, 0, $employee->name, '0', '0', '');
+                $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $employee->name), 0, 0, '');
             }
 
             $pdf->SetXY(65, 121);
@@ -532,24 +532,6 @@ class PdfController extends Controller
                 $pdf->SetXY(65, 130);
                 $pdf->Cell(0, 0, $customer->email, '0', '0', '');
             }
-
-
-            // LOGO
-//            $pageWidth = $pdf->GetPageWidth();
-//            $actual_height = $this->addOwnerLogo($pdf, $contact, $pageWidth);
-
-            //TARİH - KOD
-//            $this->addDateAndCode($pdf, $document_date, $contact, $actual_height, $sale->id, $pageWidth, 'OFR');
-
-            //COMPANY INFO
-//            $y = $this->addOwnerInfo($pdf, $contact);
-
-
-            //TITLE
-//            $y = $this->addPdfTitle($pdf, $this->textConvert(__('Offer')), $y);
-
-            //CUSTOMER INFO
-//            $y = $this->addCompanyInfo($pdf, $lang, $company, $employee, $y);
 
 
             $x = 10;
@@ -715,6 +697,13 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 //            $pdf->DoubleBorderCell(80, $row_height, iconv('utf-8', 'iso-8859-9', $y."-".$pdf->getY()."-".$old_y), 1, 0, 'C');
 
             //CONDITIONS
+
+            $pdf2 = new PDI();
+            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
+            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
+            $templateId = $pdf2->importPage(1);
+            $pdf->AddPage();
+            $pdf->useTemplate($templateId);
 
 //            $pdf2 = new Fpdi();
 //            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
