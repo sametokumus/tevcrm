@@ -703,9 +703,9 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
 
             for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
-                $pdf2->AddPage();
+                $pdf->AddPage();
                 $tplIdx = $pdf2->importPage($pageNo);
-                $pdf2->useTemplate($tplIdx, 0, 0, null, null, true);
+                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
             }
 //            $templateId2 = $pdf2->importPage(1);
 //            $pdf2->AddPage();
