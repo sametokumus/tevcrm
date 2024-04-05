@@ -634,7 +634,7 @@ class PdfController extends Controller
 
             $y = $pdf->getY() + $row_height + 0.4;
             $pdf->SetXY(132, $y);
-            $pdf->Cell(52.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar / Total Amount"), 1, 0, 'L');
+            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar / Total Amount"), 1, 0, 'L');
 
 
 
