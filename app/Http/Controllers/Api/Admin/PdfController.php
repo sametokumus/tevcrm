@@ -622,10 +622,6 @@ class PdfController extends Controller
                 $x = 175.1;
                 $pdf->SetXY($x, $y);
                 $pdf->Cell(26.8, $row_height, iconv('utf-8', 'iso-8859-9', $this->convertPrice($offer_detail->price)." TL"), 1, 0, 'C');
-//                $pdf->Cell(12, $row_height, iconv('utf-8', 'iso-8859-9', $measurement_name), 1, 0, 'C');
-//                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_pcs_price.' '.$currency), 1, 0, 'C');
-//                $pdf->Cell(24, $row_height, iconv('utf-8', 'iso-8859-9', $sale_offer->offer_price.' '.$currency), 1, 0, 'C');
-//                $pdf->Cell(18, $row_height, iconv('utf-8', 'iso-8859-9', $this->leadtime($sale_offer->offer_lead_time)), 1, 1, 'C');
 
                 $y += $row_height + 0.4;
                 $test_count++;
@@ -635,6 +631,14 @@ class PdfController extends Controller
             $y = $pdf->getY() + $row_height + 0.4;
             $pdf->SetXY(132, $y);
             $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar / Total Amount"), 1, 0, 'L');
+            $pdf->SetXY(175.1, $y);
+            $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->test_total)." TL"), 1, 0, 'L');
+
+            $y = $pdf->getY() + $row_height + 0.4;
+            $pdf->SetXY(132, $y);
+            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "İskonto / Discount"), 1, 0, 'L');
+            $pdf->SetXY(175.1, $y);
+            $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->discount)." TL"), 1, 0, 'L');
 
 
 
