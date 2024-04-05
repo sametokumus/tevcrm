@@ -459,7 +459,7 @@ class PdfController extends Controller
 
             $offer['manager'] = null;
             $offer['lab_manager'] = null;
-            $offer['employee'] = null;
+            $employee = null;
 
             if ($offer->manager_id != null) {
                 $offer['manager'] = Admin::query()->where('id', $offer->manager_id)->first();
@@ -468,9 +468,9 @@ class PdfController extends Controller
                 $offer['lab_manager'] = Admin::query()->where('id', $offer->lab_manager_id)->first();
             }
             if ($offer->employee_id != null) {
-                $offer['employee'] = Employee::query()->where('id', $offer->employee_id)->first();
+                $employee = Employee::query()->where('id', $offer->employee_id)->first();
             }
-            $offer['customer'] = Company::query()
+            $customer = Company::query()
                 ->where('companies.id', $offer->customer_id)
                 ->first();
 
@@ -504,8 +504,35 @@ class PdfController extends Controller
             $pdf->SetFont('arial_tr', '', 9);
 
             $offer_date = Carbon::parse($offer->created_at);
-            $pdf->SetXY(55, 51);
+            $pdf->SetXY(65, 51);
             $pdf->Cell(0, 0, $offer_date->format('d-m-Y'), '0', '0', '');
+
+            $pdf->SetXY(65, 60);
+            $pdf->Cell(0, 0, $offer['global_id'], '0', '0', '');
+
+
+            $pdf->SetXY(65, 80);
+            $pdf->Cell(0, 0, $customer->name, '0', '0', '');
+
+            $pdf->SetXY(65, 90);
+            $pdf->Cell(0, 0, $customer->address, '0', '0', '');
+
+            if ($employee != null) {
+                $pdf->SetXY(65, 100);
+                $pdf->Cell(0, 0, $employee->name, '0', '0', '');
+            }
+
+            $pdf->SetXY(65, 110);
+            $pdf->Cell(0, 0, $customer->phone, '0', '0', '');
+
+            if ($customer->website != null) {
+                $pdf->SetXY(65, 120);
+                $pdf->Cell(0, 0, $customer->website." & ".$customer->email, '0', '0', '');
+            }else{
+                $pdf->SetXY(65, 120);
+                $pdf->Cell(0, 0, $customer->email, '0', '0', '');
+            }
+
 
             // LOGO
 //            $pageWidth = $pdf->GetPageWidth();
