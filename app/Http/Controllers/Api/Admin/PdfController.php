@@ -716,16 +716,16 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
             //CONDITIONS
 
-            $pdf2 = new Fpdi();
-            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
-
-            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
-                $pdf->AddPage();
-
-                $tplIdx = $pdf2->importPage($pageNo);
-                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
-            }
+//            $pdf2 = new Fpdi();
+//            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
+//            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
+//
+//            for ($pageNo = 1; $pageNo <= $numPages2; $pageNo++) {
+//                $pdf->AddPage();
+//
+//                $tplIdx = $pdf2->importPage($pageNo);
+//                $pdf->useTemplate($tplIdx, 0, 0, null, null, true);
+//            }
 
             //FOOTER
 
