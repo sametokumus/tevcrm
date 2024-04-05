@@ -631,6 +631,7 @@ class PdfController extends Controller
             $pdf->SetFont('arial_tr', 'B', 8);
 
             $y = $pdf->getY() + $row_height + 0.4;
+            $first_total_start = $y;
             $pdf->SetXY(132, $y);
             $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar / Total Amount"), 1, 0, 'L');
             $pdf->SetXY(175.1, $y);
@@ -663,6 +664,11 @@ class PdfController extends Controller
             $pdf->MultiCell(42.7, 5, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
             $pdf->SetXY(175.1, $y);
             $pdf->Cell(26.8, 10, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->grand_total)." TL"), 1, 0, 'C');
+            $pdf->Ln();
+
+            $note_height = $pdf->getY() - $first_total_start;
+            $pdf->SetXY(8, $first_total_start);
+            $pdf->MultiCell(123.6, $note_height, iconv('utf-8', 'iso-8859-9', "Genel Toplam/ General total\n(KDV Dahil)/ VAT included"), 1, 'L');
             $pdf->Ln();
 
 
