@@ -724,7 +724,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
             //FOOTER
 
-            $pdfContent = $pdf2->Output('created.pdf', 'S');
+            $pdfContent = $pdf->Output('created.pdf', 'S');
 
             $pdf = new PDI();
             $pdf->setSourceFile('data:application/pdf;base64,' . base64_encode($pdfContent));
