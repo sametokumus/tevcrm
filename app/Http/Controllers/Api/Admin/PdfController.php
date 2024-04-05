@@ -719,7 +719,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
                 $pdf->SetFont('arial_tr', 'B', 9);
 
-                $pdf->SetXY(180, 31);
+                $pdf->SetXY(185, 30.5);
                 $pdf->Cell(0, 0, $pageNo."/".$numPages, '0', '0', '');
             }
 
