@@ -653,7 +653,7 @@ class PdfController extends Controller
 
             $y = $pdf->getY() + 0.4;
             $pdf->SetXY(132, $y);
-            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "KDV (%20) / VAT (%20)"), 1, 0, 'L');
+            $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "KDV (%".$accounting->vat_rate.") / VAT (%".$accounting->vat_rate.")"), 1, 0, 'L');
             $pdf->SetXY(175.1, $y);
             $pdf->Cell(26.8, 8, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->vat)." TL"), 1, 0, 'C');
             $pdf->Ln();
