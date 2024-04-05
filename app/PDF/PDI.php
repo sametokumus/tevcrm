@@ -150,9 +150,9 @@ class PDI extends Fpdi
         $this->SetXY($x + $w, $y);
     }
 
-    function MultiCellWithFixedHeight($w, $h, $txt, $border=0, $align='J', $fill=false) {
-        // Get the maximum number of lines that can fit in the given height
-        $lineHeight = 5; // Adjust as needed
+    function MultiCellWithFixedTotalHeight($w, $h, $txt, $border=0, $align='J', $fill=false) {
+        // Calculate the maximum number of lines that can fit within the given height
+        $lineHeight = 5; // Fixed line height
         $maxLines = floor($h / $lineHeight);
 
         // Explode text into lines
@@ -163,7 +163,10 @@ class PDI extends Fpdi
             $txt = implode("\n", array_slice($lines, 0, $maxLines));
         }
 
-        // Perform multicell with fixed height
-        $this->MultiCell($w, $h, $txt, $border, $align, $fill);
+        // Calculate the adjusted height based on the number of lines
+        $adjustedHeight = min(count($lines) * $lineHeight, $h);
+
+        // Perform multicell with fixed total height
+        $this->MultiCell($w, $adjustedHeight, $txt, $border, $align, $fill);
     }
 }
