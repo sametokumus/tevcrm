@@ -507,29 +507,29 @@ class PdfController extends Controller
             $pdf->SetXY(65, 51);
             $pdf->Cell(0, 0, $offer_date->format('d-m-Y'), '0', '0', '');
 
-            $pdf->SetXY(65, 60);
+            $pdf->SetXY(65, 62);
             $pdf->Cell(0, 0, $offer['global_id'], '0', '0', '');
 
 
-            $pdf->SetXY(65, 80);
-            $pdf->Cell(0, 0, $customer->name, '0', '0', '');
+            $pdf->SetXY(65, 92);
+            $pdf->Cell(0, 0, iconv('utf-8', 'iso-8859-9', $customer->name), 0, 0, '');
 
-            $pdf->SetXY(65, 90);
+            $pdf->SetXY(65, 100);
             $pdf->Cell(0, 0, $customer->address, '0', '0', '');
 
             if ($employee != null) {
-                $pdf->SetXY(65, 100);
+                $pdf->SetXY(65, 110);
                 $pdf->Cell(0, 0, $employee->name, '0', '0', '');
             }
 
-            $pdf->SetXY(65, 110);
+            $pdf->SetXY(65, 121);
             $pdf->Cell(0, 0, $customer->phone, '0', '0', '');
 
             if ($customer->website != null) {
-                $pdf->SetXY(65, 120);
+                $pdf->SetXY(65, 130);
                 $pdf->Cell(0, 0, $customer->website." & ".$customer->email, '0', '0', '');
             }else{
-                $pdf->SetXY(65, 120);
+                $pdf->SetXY(65, 130);
                 $pdf->Cell(0, 0, $customer->email, '0', '0', '');
             }
 
