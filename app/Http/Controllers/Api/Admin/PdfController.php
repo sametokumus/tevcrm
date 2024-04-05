@@ -668,9 +668,10 @@ class PdfController extends Controller
 
             $note_height = $pdf->getY() - $first_total_start;
             $pdf->SetXY(8, $first_total_start);
-            $pdf->MultiCell(123.6, 5, iconv('utf-8', 'iso-8859-9', "NOT: Test Teklif ve Sözleşme Formunun onaylanmış hali ve toplam test ücretinin yatırıldığına dair dekontun tarafımıza gönderilmesinden sonra testlere başlanacaktır. \n
+            $pdf->MultiCell(123.6, 5, iconv('utf-8', 'iso-8859-9', "\nNOT: Test Teklif ve Sözleşme Formunun onaylanmış hali ve toplam test ücretinin yatırıldığına dair dekontun tarafımıza gönderilmesinden sonra testlere başlanacaktır. \n
 NOTE: The tests will start after the approved version of the Test Offer and Contract Form and the receipt showing that the total test fee has been paid to us.
-"), 1, 'L');
+"), 0, 'L');
+            $this->Rect(8, $first_total_start, 123.6, 43.6);
             $pdf->Ln();
 
 
