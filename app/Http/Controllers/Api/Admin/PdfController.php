@@ -501,7 +501,7 @@ class PdfController extends Controller
             $pdf->AddFont('arial_tr', '', 'arial_tr.php');
             $pdf->AddFont('arial_tr', 'B', 'arial_tr_bold.php');
 
-            $pdf->SetFont('arial_tr', '', 9);
+            $pdf->SetFont('arial_tr', '', 8);
 
 
             $pdf->SetXY(50, 50);
@@ -531,7 +531,7 @@ class PdfController extends Controller
             $test_count = 1;
             foreach ($offer_details as $offer_detail) {
 
-                $pdf->SetFont('arial_tr', '', 9);
+                $pdf->SetFont('arial_tr', '', 8);
 
                 $product_name = '';
                 $test_name = '';
