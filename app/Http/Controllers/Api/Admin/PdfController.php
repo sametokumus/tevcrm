@@ -699,7 +699,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             //CONDITIONS
 
             $pdf2 = new PDI();
-            $pdf2->setSourceFile(public_path('CCC.pdf'));
+            $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
 //            $numPages2 = $pdf2->setSourceFile(public_path('FR-38-Conditions.pdf'));
             $templateId2 = $pdf2->importPage(1);
             $pdf2->AddPage();
