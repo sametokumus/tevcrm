@@ -628,6 +628,8 @@ class PdfController extends Controller
 
             }
 
+            $pdf->SetFont('arial_tr', 'B', 8);
+
             $y = $pdf->getY() + $row_height + 0.4;
             $pdf->SetXY(132, $y);
             $pdf->Cell(42.7, 8, iconv('utf-8', 'iso-8859-9', "Toplam Tutar / Total Amount"), 1, 0, 'L');
