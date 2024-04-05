@@ -666,7 +666,7 @@ class PdfController extends Controller
             $pdf->Cell(26.8, 10, iconv('utf-8', 'iso-8859-9', $this->convertPrice($accounting->grand_total)." TL"), 1, 0, 'C');
             $pdf->Ln();
 
-            $line_last = $pdf->getY() + 0.6;
+            $line_last = $pdf->getY() + 0.8;
 
             $pdf->SetXY(8, $first_total_start);
             $pdf->MultiCell(123.6, 5, iconv('utf-8', 'iso-8859-9', "\nNOT: Test Teklif ve Sözleşme Formunun onaylanmış hali ve toplam test ücretinin yatırıldığına dair dekontun tarafımıza gönderilmesinden sonra testlere başlanacaktır. \n
@@ -677,8 +677,8 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
 
             $pdf->SetLineWidth(1);
             $pdf->Line(7.1, 153.6, 7.1, $line_last);
-            $pdf->Line(202.6, 153.6, 202.6, $line_last);
-            $pdf->Line(7.1, $line_last, 202.6, $line_last);
+            $pdf->Line(202.7, 153.6, 202.7, $line_last);
+            $pdf->Line(7.1, $line_last, 202.7, $line_last);
 
 
 //
