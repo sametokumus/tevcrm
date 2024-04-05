@@ -36,6 +36,7 @@ use App\Models\SaleTransaction;
 use App\Models\SaleTransactionPayment;
 use App\Models\Status;
 use App\PDF\PDI;
+use Faker\Provider\DateTime;
 use Faker\Provider\Uuid;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -503,9 +504,9 @@ class PdfController extends Controller
 
             $pdf->SetFont('arial_tr', '', 9);
 
-
-            $pdf->SetXY(50, 50);
-            $pdf->Cell(0, 0, "test", '0', '0', '');
+            $offer_date = new DateTime($offer->created_at);
+            $pdf->SetXY(55, 51);
+            $pdf->Cell(0, 0, $offer_date->format('d-m-Y'), '0', '0', '');
 
             // LOGO
 //            $pageWidth = $pdf->GetPageWidth();
