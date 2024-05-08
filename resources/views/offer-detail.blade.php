@@ -11,7 +11,7 @@ $extra_js='
     <!-- content -->
     <div class="container-fluid mt-4">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+            <div class="col-12 mb-4">
 
                 <div class="row">
                     <div class="col-12 mb-4">
