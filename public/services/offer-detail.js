@@ -30,7 +30,7 @@ function checkRole(){
 	return true;
 }
 
-async function generatePDF(){
+async function generateFR38PDF(){
     let offer_id = getPathVariable('offer-detail');
 
     // Fetch the PDF data

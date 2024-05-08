@@ -15,12 +15,12 @@ $extra_js='
 
                 <div class="row">
                     <div class="col-12 mb-4">
-                        <div class="card border-0 bg-light text-white h-100">
+                        <div class="card border-0 bg-light-theme text-white h-100">
                             <div class="card-body bg-none">
                                 <div class="row align-items-center mb-0">
                                     <div class="col">
-                                        <button id="bEdit" type="button" class="btn btn-theme" onclick="generatePDF()">
-                                            <span class="bi bi-node-plus-fill"> </span>FR38
+                                        <button id="bEdit" type="button" class="btn btn-secondary mx-2 px-3" onclick="generateFR38PDF()">
+                                            <span class="bi bi-filetype-pdf"> </span> FR-38
                                         </button>
                                     </div>
                                 </div>
