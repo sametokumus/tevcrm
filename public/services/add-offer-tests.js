@@ -83,13 +83,13 @@ async function initOffer(){
     let offer = data.offer;
 
     await getCustomersAddSelectId('offer_customer');
-    document.getElementById('offer_customer').value = offer.customer_id;
+    $('#offer_customer').val(offer.customer_id).trigger('change');
     await getAdminsAddSelectId('offer_manager');
-    document.getElementById('offer_manager').value = offer.manager_id;
+    $('#offer_manager').val(offer.manager_id).trigger('change');
     await getAdminsAddSelectId('offer_lab_manager');
-    document.getElementById('offer_lab_manager').value = offer.lab_manager_id;
+    $('#offer_lab_manager').val(offer.lab_manager_id).trigger('change');
     await getEmployeesAddSelectId(offer.customer_id, 'offer_employee');
-    document.getElementById('offer_employee').value = offer.employee_id;
+    $('#offer_employee').val(offer.employee_id).trigger('change');
 
     document.getElementById('offer_description').value = offer.description;
 

@@ -729,9 +729,18 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $fileUrl = 'documents/LB.' . $offer_id . '-FR.38.pdf';
             $fileName = 'LB.' . $offer_id . '-FR.38.pdf';
 
-//            Document::query()->where('id', $document_id)->update([
-//                'file_url' => $fileUrl
-//            ]);
+            $document = Document::query()->where('offer_id', $offer_id)->where('document_type_id', 1)->where('active', 1)->first();
+            if ($document) {
+                Document::query()->where('id', $document->id)->update([
+                    'file_url' => $fileUrl
+                ]);
+            }else{
+                Document::query()->insert([
+                    'file_url' => $fileUrl,
+                    'offer_id' => $offer_id,
+                    'document_type_id' => 1
+                ]);
+            }
 
             return response([
                 'message' => __('İşlem Başarılı.'),

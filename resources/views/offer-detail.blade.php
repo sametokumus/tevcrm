@@ -14,6 +14,25 @@ $extra_js='
             <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4">
 
                 <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card border-0 bg-light text-white h-100">
+                            <div class="card-body bg-none">
+                                <div class="row align-items-center mb-0">
+                                    <div class="col">
+                                        <button id="bEdit" type="button" class="btn btn-theme" onclick="generatePDF()">
+                                            <span class="bi bi-node-plus-fill"> </span>FR38
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+
+                <div class="row">
                     <div class="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4">
                         <div class="card border-0 bg-radial-gradiant text-white h-100">
                             <div class="card-body bg-none">
@@ -42,13 +61,6 @@ $extra_js='
                                     <div class="col">
                                         <p class="mb-1">Proje Sorumlusu</p>
                                         <h5 class="fw-medium mb-0" id="manager"></h5>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center mb-0">
-                                    <div class="col">
-                                        <button id="bEdit" type="button" class="btn btn-sm btn-theme" onclick="generatePDF()">
-                                            <span class="bi bi-node-plus-fill"> </span>FR38
-                                        </button>
                                     </div>
                                 </div>
                             </div>
