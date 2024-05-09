@@ -45,6 +45,7 @@ async function generateFR38PDF(){
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    initDocuments();
 }
 
 async function initOfferDetail(){

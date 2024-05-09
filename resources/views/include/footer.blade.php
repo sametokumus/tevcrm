@@ -13,7 +13,7 @@
 <!-- Required jquery and libraries -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/popper.min.js"></script>
-<script src="vendor/bootstrap-5/dist/js/bootstrap.bundle.js"></script>
+<script src="vendor/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
 
 <!-- Customized jquery file  -->
 <script src="js/main.js"></script>
