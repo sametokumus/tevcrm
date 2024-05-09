@@ -726,7 +726,7 @@ NOTE: The tests will start after the approved version of the Test Offer and Cont
             $filePath = public_path('documents/LB.' . $offer_id . '-FR.38.pdf');
             $pdf->Output($filePath, 'F');
 
-            $fileUrl = 'documents/LB.' . $offer_id . '-FR.38.pdf';
+            $fileUrl = '/documents/LB.' . $offer_id . '-FR.38.pdf';
             $fileName = 'LB.' . $offer_id . '-FR.38.pdf';
 
             $document = Document::query()->where('offer_id', $offer_id)->where('document_type_id', 1)->where('active', 1)->first();
