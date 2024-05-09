@@ -467,8 +467,8 @@ async function createNavbarLabs(){
     let data = await serviceGetLabs();
     $.each(data.labs, function(i, lab){
         let item = '<li class="nav-item">\n' +
-            '                   <a class="nav-link" aria-current="page" href="projects">\n' +
-            '                       <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>\n' +
+            '                   <a class="nav-link" aria-current="page" href="lab/'+ lab.lab_code +'">\n' +
+            '                       <div class="avatar avatar-40 icon"><i class="bi bi-eyedropper"></i></div>\n' +
             '                       <div class="col">'+ lab.name +'</div>\n' +
             '                       <div class="arrow"><i class="bi bi-chevron-right"></i></div>\n' +
             '                   </a>\n' +

@@ -827,20 +827,6 @@ $extra_js="";
             <div class="row mb-4">
                 <div class="col-12 px-0">
                     <ul class="nav nav-pills nav-iconic" id="lab-navbar">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="projects">
-                                <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>
-                                <div class="col">Devam Eden</div>
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="past-projects">
-                                <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>
-                                <div class="col">Geçmiş</div>
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
