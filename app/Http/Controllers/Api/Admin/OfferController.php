@@ -537,8 +537,8 @@ class OfferController extends Controller
                 $rand = uniqid();
                 $file = $request->file('file');
                 $file_name = $rand . "-" . $file->getClientOriginalName();
-                $file->move(public_path('/img/document/'), $file_name);
-                $file_path = "/img/document/" . $file_name;
+                $file->move(public_path('/documents/'), $file_name);
+                $file_path = "/documents/" . $file_name;
                 Document::query()->where('id', $document_id)->update([
                     'file_url' => $file_path
                 ]);
